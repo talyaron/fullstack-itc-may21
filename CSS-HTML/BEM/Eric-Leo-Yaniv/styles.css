@@ -4,18 +4,17 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    width: 100vw%;
+    width: 100vw;
 }
 
-.menus__wrapper {
+.page__wrapper {
     width:80%;
+    margin:0;
 }
 
 .top-menu {
     background-color: #122536;
     color:white;
-    display: flex;
-    justify-content: center;
     width:100vw;
     height:3rem;
 }
@@ -24,6 +23,7 @@
     position:absolute;
     right:15%;
     height: 2.2rem;
+    width:5rem;
     margin: 2px;
 }
 
@@ -39,6 +39,7 @@
     display: flex;
     align-items: center;
     font-size: 1.5rem;
+    width: 1.5rem;
     background-color: white;
     border-radius: 25px;
 }
