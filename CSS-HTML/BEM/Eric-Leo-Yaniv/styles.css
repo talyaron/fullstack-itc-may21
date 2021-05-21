@@ -7,21 +7,14 @@
     width: 100vw;
 }
 
-.page__wrapper {
-    width:80%;
-    margin:0;
-}
-
 .top-menu {
+    width:80%;
     background-color: #122536;
     color:white;
-    width:100vw;
     height:3rem;
 }
 
 .top-menu__logo {
-    position:absolute;
-    right:15%;
     height: 2.2rem;
     width:5rem;
     margin: 2px;
@@ -29,9 +22,6 @@
 
 .top-menu_sm-button__wrapper {
     height: 1.5rem;
-    position: absolute;
-    top:0.8rem;
-    left:35%
 }
 
 .top-menu__sm-button {
@@ -54,7 +44,6 @@
     background-color: #DCE9ED;
     display: flex;
     justify-content: center;
-    width:100vw;
     z-index: 1;
 }
 
