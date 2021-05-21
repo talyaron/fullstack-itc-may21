@@ -1,0 +1,156 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color:red;
+}
+
+h4 {
+    font-weight: normal;
+    margin: 0;
+}
+
+.menu {
+    position: fixed;
+    top:0;
+    right:0;
+    left:0;
+    display: flex;
+    justify-content:flex-start;
+    align-items:center;
+    background-color: black;
+    height: 2rem;
+
+    a {
+        color:lightgray;
+    }
+
+    a:hover {
+        color:white;
+    }
+
+    &__item {
+        margin-left: 1rem;
+    }
+}
+
+.page-wrapper {
+    width:75vw;
+    margin: 2rem auto;
+}
+
+.articles {
+    display: flex;
+    justify-content: space-around;
+    margin:3rem auto;
+
+    &__category {
+        font-size: 1.2rem;
+        color: rgb(100, 100, 100);
+        background-color: lightgray;
+        margin:0 0.8rem;
+        padding: 0.3rem 0 0.3rem 0.6rem;
+    }
+
+    &__box {
+        flex:1;
+
+        &--double {
+            flex:2;
+        }
+    }
+
+    &__item {
+        border-top:1px solid lightgray;
+        padding: 0.8rem;
+
+        img {
+            width:100%;
+            height:100%;
+        }
+
+        &--first {
+            border-top:0;
+        }
+        
+        &--main {
+            h2 {
+                font-size: 3rem;
+                text-align: center;
+                margin:0;
+            }
+            
+            p {
+                font-weight: bold;
+            }
+        }
+
+        &--mini {
+            padding-top: 0;
+            display: flex;
+            justify-content: space-around;
+
+            .img-height {
+                height:5vw;
+            }
+
+        }
+
+        &--small {
+            padding-top: 0;
+            display: flex;
+            justify-content: space-around;
+
+            .img-height {
+                height:8vw;
+            }
+
+        }
+
+        &--medium {
+            padding-top: 0;
+
+            .img-height {
+                height:8.8vw;
+            }
+        }
+
+        &--big {
+            padding-top: 0;
+
+            .img-height {
+                height:20vw;
+            }
+        }
+    }
+
+    .small-article-flex {
+        &-1 {
+            flex:1;
+            margin-right: 0.5rem;
+        }
+        &-2 {
+            flex:2;
+        }
+    }
+
+    .mini-article-flex {
+        &-1 {
+            flex:1;
+            margin-right: 0.5rem;
+        }
+        &-3 {
+            flex:3;
+        }
+    }
+}
