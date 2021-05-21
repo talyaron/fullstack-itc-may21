@@ -4,12 +4,18 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    width: 80%;
+    width: 100vw%;
+}
+
+.menus__wrapper {
+    width:80%;
 }
 
 .top-menu {
     background-color: #122536;
     color:white;
+    display: flex;
+    justify-content: center;
     width:100vw;
     height:3rem;
 }
