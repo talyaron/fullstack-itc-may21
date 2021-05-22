@@ -19,8 +19,32 @@
         transform: rotate(360deg) scale(20) translateX(50px);
     }
 }
-  
-  @keyframes shake {
+
+@keyframes wave-text {
+    0% {
+        transform: translateY(0em);
+    }
+
+    60% {
+        transform: translateY(-0.1em);
+    }
+
+    100% {
+        transform: translateY(0em);
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shake {
     0% {
         transform: translate(1px, 1px) rotate(0deg);
     }
@@ -63,21 +87,6 @@
 
     100% {
         transform: translate(1px, -2px) rotate(-1deg);
-    }
-}
-
-
-@keyframes wave-text {
-    0% {
-        transform: translateY(0em);
-    }
-
-    60% {
-        transform: translateY(-0.1em);
-    }
-
-    100% {
-        transform: translateY(0em);
     }
 }
 
@@ -155,8 +164,7 @@ a:hover {
     color: red;
 }
 
-h4,
-p {
+h4,p {
     font-size: 1.1em;
     font-weight: normal;
     margin: 0;
@@ -173,11 +181,11 @@ p {
     background-color: black;
     height: 3rem;
     z-index: 1;
-
+    
     a {
         color: lightgray;
     }
-
+    
     a:hover {
         color: white;
     }
@@ -340,9 +348,6 @@ p {
                 font-weight: bold;
             }
 
-            img:hover {
-                
-            }
         }
 
         &--mini {
@@ -383,6 +388,10 @@ p {
             }
         }
     }
+
+    &__item:hover {
+        animation: zoom 0.5s ease-in-out forwards;
+      }
 
     .small-article-flex {
         &-1 {
@@ -432,7 +441,9 @@ p {
         }
 
         &--must {
-            padding: 20rem;
+            opacity: 0.8;
+            color:black;
+            background-color: gold;
             background-image: linear-gradient(to right,
                     transparent 0%,
                     rgba(255, 255, 255, 0.3) 50%,
@@ -448,5 +459,31 @@ p {
 }
 
 @media screen and (max-width: 1024px) {
+    .articles {
+        flex-direction: column;
 
+        &--big {
+            .img-height {
+                height: 35vw;
+            }
+        }
+
+        &--medium {
+            .img-height {
+                height: 35vw;
+            }
+        }
+
+        &--small {
+            .img-height {
+                height: 15vw;
+            }
+        }
+
+        &--mini {
+            .img-height {
+                height: 12vw;
+            }
+        }        
+    }
 }
