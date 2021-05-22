@@ -1,0 +1,37 @@
+/* block */
+.articles {
+    width: 500px;
+
+    h1{
+        background-color: blueviolet;
+    }
+
+    p{
+        font-style: italic;
+    }
+
+    /* elements */
+    &__item {
+        height: 100px;
+        width: 100%;
+    }
+
+    /* modifiers */
+
+    &--blue {
+        background-color: blue;
+    }
+    &--red {
+        background-color: red;
+    }
+
+    &--navy {
+        background-color: navy;
+    }
+}
+
+
+
+
+
+
