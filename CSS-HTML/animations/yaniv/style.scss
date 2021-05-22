@@ -1,4 +1,26 @@
-@keyframes shake {
+@mixin dots($count) {
+    $text-shadow: ();
+    @for $i from 0 through $count {
+        $text-shadow: $text-shadow,
+        (-.5+(random()) * 3) + em
+        (-.5+(random()) * 3) + em
+        2px
+        hsla(random() * 360, 100%, 50%,.9);
+    }
+    text-shadow: $text-shadow;
+}
+
+@keyframes sway {
+    from {
+        transform: rotate(0deg) scale(2) translateX(-50px);
+    }
+
+    to {
+        transform: rotate(360deg) scale(20) translateX(50px);
+    }
+}
+  
+  @keyframes shake {
     0% {
         transform: translate(1px, 1px) rotate(0deg);
     }
@@ -59,33 +81,23 @@
     }
 }
 
-@keyframes sway {
-    from {
-        transform: rotate(0deg) scale(2) translateX(-50px);
-    }
-
-    to {
-        transform: rotate(360deg) scale(20) translateX(50px);
-    }
-}
-
 @keyframes spin {
     from {
-        transform: rotate(0deg) scale(2);
+        transform: rotate(0deg) scale(1);
     }
 
     to {
-        transform: rotate(360deg) scale(20);
+        transform: rotate(360deg) scale(1.5);
     }
 }
 
 @keyframes shine {
     0% {
-        background-position: -100vw;
+        background-position: -10vw;
     }
 
     100% {
-        background-position: 100vw;
+        background-position: 10vw;
     }
 }
 
@@ -112,17 +124,17 @@ body::after {
 }
 
 
-// body::before {
-//     @include dots(40);
-//     animation-duration: 44s;
-//     animation-delay: -27s;
-// }
+body::before {
+    @include dots(40);
+    animation-duration: 44s;
+    animation-delay: -27s;
+}
 
-// body::after {
-//     @include dots(40);
-//     animation-duration: 43s;
-//     animation-delay: -32s;
-// }
+body::after {
+    @include dots(40);
+    animation-duration: 43s;
+    animation-delay: -32s;
+}
 
 h1 {
     color: white;
@@ -328,7 +340,9 @@ p {
                 font-weight: bold;
             }
 
-            img:hover {}
+            img:hover {
+                
+            }
         }
 
         &--mini {
@@ -414,7 +428,7 @@ p {
         }
 
         &--breaking:hover {
-            animation: spin 2s infinite;
+            animation: spin 1s alternate infinite;
         }
 
         &--must {
@@ -433,4 +447,6 @@ p {
     }
 }
 
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 1024px) {
+
+}
