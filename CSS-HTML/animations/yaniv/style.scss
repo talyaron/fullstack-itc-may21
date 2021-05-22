@@ -18,9 +18,19 @@
     100% {transform: translateY(0em);}
 }
 
-@keyframes move {
+@keyframes sway {
     from {transform: rotate(0deg) scale(2) translateX(-50px);}
     to {transform: rotate(360deg) scale(20) translateX(50px);}
+}
+
+@keyframes spin {
+    from {transform: rotate(0deg) scale(2);}
+    to {transform: rotate(360deg) scale(20);}
+}
+
+@keyframes shine {
+    0% {background-position: -100vw;}
+    100% {background-position: 100vw;}
 }
 
 * {
@@ -41,7 +51,7 @@ body::before, body::after {
     height: 3em;
     content: '~';
     mix-blend-mode:color;
-    animation: 44s -27s move infinite ease-in-out alternate;
+    animation: 44s -27s sway infinite ease-in-out alternate;
   }
   
   
@@ -115,6 +125,45 @@ h4,p {
 
 .img-height {
     position:relative;
+}
+
+.tag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    width:5vw;
+    padding: 0.5vw;
+    opacity: 0.9;
+    
+    &--exclusive {
+        background-color: darkslategrey;
+    }
+    &--exclusive:hover {
+        animation: shake 1s infinite;
+    }
+
+    &--breaking {
+        background-color: firebrick;
+    }
+    &--breaking:hover {
+        animation: shine 2s infinite;
+    }
+    
+    &--must {
+        padding: 20rem;
+        background-image: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(255,255,255,0.3) 50%,
+            transparent 100%
+        );
+        background-repeat: no-repeat;
+        background-position: -100vw;
+    }
+    &--must:hover {
+        animation: shine 2s infinite;
+    }
 }
 
 .articles {
@@ -256,45 +305,8 @@ h4,p {
         }
     }
 
-    .tag {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            color: white;
-            width:5vw;
-            padding: 0.5vw;
-            opacity: 0.9;
-
-            &--exclusive {
-                background-color: darkslategrey;
-            }
-            &--exclusive:hover {
-                animation: shake 1s;
-                animation-iteration-count: infinite;
-            }
-
-            &--breaking {
-
-            }
-
-            &--must {
-
-            }
-    }
 }
 
 @media screen and (max-width: 1024px) {
 
 }
-
-@mixin dots($count) {
-    $text-shadow: ();
-    @for $i from 0 through $count {
-      $text-shadow: $text-shadow,
-                   (-.5+(random()) * 3) + em
-                   (-.5+(random()) * 3) + em
-                   2px
-                   hsla(random() * 360, 100%, 50%,.9);
-    }
-    text-shadow: $text-shadow;
-  }
