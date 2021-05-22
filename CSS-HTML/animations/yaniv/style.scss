@@ -459,6 +459,9 @@ h4,p {
 }
 
 @media screen and (max-width: 1024px) {
+    h1 {
+        font-size: 1rem;
+    }
     .articles {
         flex-direction: column;
 
