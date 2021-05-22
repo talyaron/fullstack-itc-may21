@@ -140,14 +140,14 @@ h4,p {
         background-color: darkslategrey;
     }
     &--exclusive:hover {
-        animation: spin 1s infinite;
+        animation: shake 1s infinite;
     }
 
     &--breaking {
         background-color: firebrick;
     }
     &--breaking:hover {
-        animation: shine 2s infinite;
+        animation: spin 2s infinite;
     }
     
     &--must {
