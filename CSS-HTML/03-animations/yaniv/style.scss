@@ -211,6 +211,10 @@ h4,p {
     justify-content: space-around;
     margin: 4rem auto;
 
+    h1{
+        background-color: aliceblue;
+    }
+
     &__category {
         font-size: 1.2em;
         color: rgb(18, 221, 18);
