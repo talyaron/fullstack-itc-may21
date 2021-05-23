@@ -1,15 +1,16 @@
 * {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
 }
 
 
 .gallery {
-    margin: 10px 0;
     display: grid;
-    
     grid-template-columns: repeat(8);
     grid-template-rows: repeat(8);
-    gap:3px;
+    gap:5px;
+    background-color: black;
 
     &__img {
         width: 100%;
@@ -33,7 +34,7 @@
 
     &__item--3 {
         grid-column-start: 5;
-        grid-column-end: 9;
+        grid-column-end: 8;
         grid-row-start: 1;
         grid-row-end: 8;
    }
