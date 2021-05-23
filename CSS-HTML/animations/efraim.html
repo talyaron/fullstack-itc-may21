@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+.wrapper {
+   position: absolute;
+   top: 50%;
+   right: 50%;
+}
+.stick {
+    animation: name duration timing-function delay iteration-count direction fill-mode;
+    animation: animate 4s ease-in-out infinite;
+}
+@keyframes animate {
+            0% {
+                transform: translate(0, 0) 
+                  perspective(200px) 
+                  rotateX(0deg) 
+                  rotateY(0deg);
+            }
+            15%
+            {
+                transform: translate(0, -70%)
+                  perspective(200px) 
+                  rotateX(0deg) 
+                  rotateY(0deg);
+            }
+            30% {
+                transform: translate(0, 0) 
+                  perspective(200px) 
+                  rotateX(0deg) 
+                  rotateY(0deg);
+            }
+
+            45% {
+                transform: translate(0, -70%)
+                  perspective(200px) 
+                  rotateX(0deg) 
+                  rotateY(0deg);
+            }
+            60% {
+                transform: translate(0, 0) 
+                  perspective(200px) 
+                  rotateX(0deg) 
+                  rotateY(0deg);
+            }
+            75% {
+                transform: translate(-70%, -70%)
+                  perspective(200px) 
+                  rotateX(-180deg) 
+                  rotateY(0deg);
+            }
+            90% {
+
+            }
+            100% {
+                transform: translate(-70%, 70%)
+                  perspective(200px) 
+                  rotateX(-180deg)
+                  rotateY(0deg);
+            }
+        }
+    </style>
+<body>
+   <div class="wrapper">
+    <div class="stick">
+        <img style="height: 200px; width: 150px; position: relative; z-index: 1000;" src="Stick_Figure.svg.png">
+    </div>
+    <div class="bed">
+        <img style="height: 200px; width: 300px; position: absolute; top: 9rem; right: -4rem " src="bed.jpg">
+    </div>
+</div>
+   
+</body>
+</html>
