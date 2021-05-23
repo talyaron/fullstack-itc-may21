@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube</title>
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    html,
+    body {
+        font-size: 24px;
+        background-color: #f1f1f1;
+        margin-top: 0;
+    }
+
+    .nav__wrapper__wrapper {
+        background-color: #f9f9f9;
+    }
+
+    .nav__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        
+        border-bottom: 0.1px solid rgba(165, 160, 160, 0.466);
+    }
+
+    .burger__logo__wrapper {
+        width: 25vw;
+    }
+
+    .burger__logo__wrapper img {}
+
+
+    .searchbar__mic__wrapper {
+        width: 50vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .searchbar__mic__wrapper input {
+        height: 25px;
+        width: 20rem
+    }
+
+    .searchbar__mic__wrapper button {
+        padding: 6px;
+        margin-left: -7px;
+        margin-right: .5rem;
+    }
+
+    .fa-microphone {}
+
+
+
+    .nav__icons__profile__wrapper {
+        display: flex;
+        width: 20vw;
+        justify-content: space-around;
+        /*???*/
+        align-items: center;
+    }
+
+    .profile img {
+        border-radius: 100%;
+        height: 40px;
+        width: 40px;
+        margin-left: 40px;
+    }
+
+    .keyword__button__wrapper {
+        display: flex;
+        align-items: center;
+        height: 2.5rem;
+        border-bottom: 1px solid;
+        margin-left: 80px;
+    }
+
+    .button {
+        border-radius: 100px;
+        border-style: none;
+        padding: 10px 15px;
+        margin: 3px;
+    }
+
+    .button:hover {
+        cursor: pointer;
+    }
+
+    .button--1{
+        margin-left: 15px;
+    }
+
+    .button--2 {}
+
+    /*next button> */
+
+    .sidenav {
+        height: 100%;
+        width: 90px;
+        position: fixed;
+        z-index: 1;
+        top: 60px;
+        left: 0;
+        background-color: #f9f9f9;
+        padding-top: 0px;
+    }
+
+    .sidenav__item {
+        padding: 15px 10px 10px 10px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: flex-start;
+    }
+
+    .sidenav__item p {
+        font-size: 12px;
+    }
+
+
+    .sidenav__item:hover {
+        background-color: #6963630c;
+        cursor: pointer;
+    }
+
+    section {
+     margin-left: 95px;
+    }
+
+/* Videos section */
+
+    .video-block {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .video {
+        margin: 0.2rem;
+    }
+
+    .video:hover {
+        
+    }
+
+    .video__title {
+      color: #1A031A;
+      font-size: 0.6rem;  
+    }
+
+/* THIS IS THE KEBAB MENU */
+    .fa-ellipsis-v {
+        font-size: 0.65rem;   
+        color: gray;
+    }
+
+    .fa-ellipsis-v:hover {
+        color: black;
+    }
+
+    .video__title-wrapper {
+        display: flex;
+        align-items:baseline;
+        margin: 0;
+    }
+
+    .video__title-wrapper:hover {
+        cursor: pointer;
+    }
+
+    .video__icon {
+        border-radius: 50%;
+        margin: 0;
+    }
+
+    .video__icon:hover {
+        cursor: pointer;
+    }
+
+    .video__channel {
+        color: #676767;
+        margin: 0;
+    }
+
+    .video__channel:hover {
+        cursor: pointer;
+    }
+
+    .video__info {
+        color: #676767;
+        margin: 0;
+        font-size: 0.55rem;
+        word-spacing: 1.5px;
+    }
+
+
+</style>
+
+<body>
+
+    <div class="sidenav">
+        <div class="fas fa-home sidenav__item">
+            <p>Home</p>
+        </div>
+        <div class="fas fa-home sidenav__item">
+            <p>Explore</p>
+        </div>
+        <div class="fas fa-home sidenav__item">
+            <p>Subscriptions</p>
+        </div>
+        <div class="fas fa-home sidenav__item">
+            <p>Library</p>
+        </div>
+    </div>
+    <div class="nav__wrapper__wrapper">
+        <div class="nav__wrapper">
+            <div class="burger__logo__wrapper">
+                <div class="fas fa-bars"></div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
+                    height="20px">
+            </div>
+            <div class="searchbar__mic__wrapper">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+                <div class="fas fa-microphone"></div>
+            </div>
+            <div class="nav__icons__profile__wrapper">
+                <div class="fas fa-video"></div>
+                <div class="fas fa-th"></div>
+                <i class="fas fa-bell"></i>
+                <div class="profile">
+                    <img
+                        src="https://www.cnet.com/a/img/wub4Q7jiOP1L3pAfdNQx1FzSgWw=/940x528/2020/04/17/def1b267-b843-4adf-957f-631062cf5bd7/1800-flowers.jpg">
+                </div>
+            </div>
+
+        </div>
+        <div class="keyword__button__wrapper">
+            <button class="button button--1">Guided Meditations</button>
+            <button class="button">Nature</button>
+            <button class="button">Music</button>
+            <button class="button">Live</button>
+            <button class="button">Oceans</button>
+            <button class="button">Guitar</button>
+            <button class="button">Sports</button>
+            <button class="button">Animals</button>
+            <button class="button">Flying</button>
+            <button class="button">Circus</button>
+            <button class="button">Maps</button>
+            <button class="button">Coding</button>
+            <button class="button">Trending</button>
+        </div>
+    </div> 
+    <section class="video-block">
+      <div class="video">
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/y3cozkhxysQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video__title-wrapper">
+            <h4 class="video__title">【4K】THE WORLD as you have never seen before 2021</h4>
+            <i class="fas fa-ellipsis-v"></i>
+        </div>
+        <img src="https://yt3.ggpht.com/ytc/AAUvwnjf4V6MyCjRnv3SE6n7hHOWbyFRacFRVsGDdT4YNg=s48-c-k-c0x00ffffff-no-rj" alt="" class="video__icon">
+        <h5 class="video__channel">One Man Wolf Pack</h5>
+        <p class="video__info">274k views•Nov 29, 202</p>
+    </div>
+      <div class="video">
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/1wfeqDyMUx4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>          
+        <div class="video__title-wrapper">
+            <h4 class="video__title">Parallax Scrolling Website | How to Make Website using Html CSS & Javascript</h4>
+            <i class="fas fa-ellipsis-v"></i>
+        </div>
+        <img src="https://yt3.ggpht.com/ytc/AAUvwngFCKugZwen-81xq0K_0tSU6HQZsvjQ26xsQzO7zg=s48-c-k-c0x00ffffff-no-rj" alt="" class="video__icon">
+        <h5 class="video__channel">Online Tutorials</h5>
+        <p class="video__info">151k views•Apr 15, 2021
+        </p>
+      </div>
+      <div class="video">
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/zd8jBZjM8F4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video__title-wrapper">
+            <h4 class="video__title">Pink Floyd Comfortably Numb... But It's a 10 Minutes Acoustic Guitar Solo!</h4>
+            <i class="fas fa-ellipsis-v"></i>
+        </div>
+        <img src="https://yt3.ggpht.com/ytc/AAUvwng64eenZn3ZGPwsgsq9Oy8F6-bX_PP55IXscQ6ZRSs=s48-c-k-c0x00ffffff-no-rj" alt="" class="video__icon">
+        <h5 class="video__channel">Kfir Ochaion</h5>
+        <p class="video__info">436k views•Dec 25, 2020
+        </p>
+      </div>
+      <div class="video">
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/rhPSo4_Tgi0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video__title-wrapper">
+            <h4 class="video__title">How To Design A YouTube Clone With HTML/CSS</h4>
+            <i class="fas fa-ellipsis-v"></i>
+        </div>
+        <img src="https://yt3.ggpht.com/ytc/AAUvwnhIz_0Su6HhW6Ym50QCroJCAnF10X9xnnMDboN2=s48-c-k-c0x00ffffff-no-rj" alt="" class="video__icon">
+        <h5 class="video__channel">Web Dev Simplified</h5>
+        <p class="video__info">42k views•Oct 3, 2020
+        </p>
+      </div>
+    </section>
+    <section class="video-block">
+        <div class="video">
+          <iframe width="320" height="240" src="https://www.youtube.com/embed/krUc72SukAk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video__title-wrapper">
+              <h4 class="video__title">【4K】THE WORLD as you have never seen before 2021</h4>
+              <i class="fas fa-ellipsis-v"></i>
+          </div>
+          
+          <img src="https://yt3.ggpht.com/ytc/AAUvwnjf4V6MyCjRnv3SE6n7hHOWbyFRacFRVsGDdT4YNg=s48-c-k-c0x00ffffff-no-rj" alt="" class="video__icon">
+          <h5 class="video__channel">One Man Wolf Pack</h5>
+          <p class="video__info">274k views•Nov 29, 202</p>
+      </div>
+        <div class="video">
+          <iframe width="320" height="240" src="https://www.youtube.com/embed/vqUuH2ka-xk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>          
+          <div class="video__title-wrapper">
+              <h4 class="video__title">Parallax Scrolling Website | How to Make Website using Html CSS & Javascript</h4>
+              <i class="fas fa-ellipsis-v"></i>
+          </div>
+          <img src="https://yt3.ggpht.com/ytc/AAUvwngFCKugZwen-81xq0K_0tSU6HQZsvjQ26xsQzO7zg=s48-c-k-c0x00ffffff-no-rj" alt="" class="video__icon">
+          <h5 class="video__channel">Online Tutorials</h5>
+          <p class="video__info">151k views•Apr 15, 2021
+          </p>
+        </div>
+        <div class="video">
+          <iframe width="320" height="240" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video__title-wrapper">
+              <h4 class="video__title">Pink Floyd Comfortably Numb... But It's a 10 Minutes Acoustic Guitar Solo!</h4>
+              <i class="fas fa-ellipsis-v"></i>
+          </div>
+          <img src="https://yt3.ggpht.com/ytc/AAUvwng64eenZn3ZGPwsgsq9Oy8F6-bX_PP55IXscQ6ZRSs=s48-c-k-c0x00ffffff-no-rj" alt="" class="video__icon">
+          <h5 class="video__channel">Kfir Ochaion</h5>
+          <p class="video__info">436k views•Dec 25, 2020
+          </p>
+        </div>
+        <div class="video">
+          <iframe width="320" height="240" src="https://www.youtube.com/embed/kCaQdDkyLyQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video__title-wrapper">
+              <h4 class="video__title">How To Design A YouTube Clone With HTML/CSS</h4>
+              <i class="fas fa-ellipsis-v"></i>
+          </div>
+          <img src="https://yt3.ggpht.com/ytc/AAUvwnhIz_0Su6HhW6Ym50QCroJCAnF10X9xnnMDboN2=s48-c-k-c0x00ffffff-no-rj" alt="" class="video__icon">
+          <h5 class="video__channel">The News</h5>
+          <p class="video__info">42k views•Oct 3, 2020
+          </p>
+        </div>
+      </section>
+    </body>
+</html>
