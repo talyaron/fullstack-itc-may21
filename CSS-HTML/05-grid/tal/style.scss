@@ -1,0 +1,16 @@
+body{
+    margin: 0px;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: 100px 100px;
+    gap:6px;
+    
+
+    .item{
+        background-color: red;
+   
+    }
+}
