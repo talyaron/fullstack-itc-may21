@@ -1,0 +1,44 @@
+@keyframes zoom-first {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(2) translate(0, 50%);
+    }
+  }
+
+  @keyframes zoom-last {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(2) translate(0, -50%);
+    }
+  }
+
+body{
+    margin: 0px;
+}
+
+.container{
+    margin: 0 auto;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(6, 150px);
+    grid-template-rows: repeat(4, 150px);
+    gap:6px;
+    
+
+    &__item {
+        img {
+            height: 100%;
+            width: 100%;
+        }
+        &:nth-child(-n+12):hover {
+            animation: zoom-first 1s forwards;
+        }
+        &:nth-last-child(-n+12):hover {
+            animation: zoom-last 1s forwards;
+        }
+    }
+}
