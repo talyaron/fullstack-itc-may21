@@ -152,7 +152,7 @@
 
     &--logo {
         position: relative;
-        animation: vertical 30s infinite;
+        animation: vertical 15s ease-in-out forwards;
         top:2px;
         left:10px;
     }
@@ -234,9 +234,9 @@
 
     &--logo {
         position: relative;
-        animation: vertical 30s 13s infinite;
+        animation: vertical 13s 14s ease-in-out forwards;
         top:2px;
-        right: 19px;
+        right: 12px;
 
     }
 
