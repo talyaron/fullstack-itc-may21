@@ -2,18 +2,21 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    background: black;
 }
 
 h1 {
     color: black;
     background-color: red;
+    text-align: center;
 }
 
 .container {
+    
     display: grid;
     position: relative;
-    top:100px;
-    
+    top:50px;
+    justify-content: center;
     margin-bottom: 10px;
     grid-template-columns: repeat(3, 250px);
     grid-template-rows: 200px 200px;
