@@ -1,0 +1,125 @@
+body{
+    background-image: url(https://wallpapersplanet.net/sites/default/files/deportivo-lara-wallpapers-40019-4654388.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Bebas Neue', cursive;
+}
+
+.wrapper{
+    margin:auto;
+    width: 80%;
+    overflow: hidden;
+    h1{
+        color: white;
+        text-align: center;
+    }
+    .principal__title{
+        animation: title_animation 2s backwards;
+        position: relative;
+        font-size: 2.8rem;
+        @keyframes title_animation {
+            0%{
+                bottom: 160px;
+            }
+            100%{
+                bottom:0px;
+            }
+        }
+    }
+    .teams__items{
+        display: flex;
+        justify-content: center;
+        animation: title_animation 2s backwards;
+        position: relative;
+    }
+    .river{
+        animation: coloresRiver 4s alternate-reverse infinite;
+        color: black;
+        margin-right: 10px;
+        padding: 5px;
+        @keyframes coloresRiver {
+            0% {
+              background-color: red;
+            }
+            50%{
+                background-color: rgb(238, 116, 116);
+            }
+            100% {
+              background-color: white;
+            }
+          }
+    }
+    .boca{
+        animation: coloresBoca 4s alternate-reverse infinite;
+        color: black;
+        margin-left: 10px;
+        padding: 5px;
+        @keyframes coloresBoca {
+            0% {
+              background-color: rgb(66, 66, 168);
+            }
+            50%{
+                background-color: rgb(125, 167, 202);
+            }
+            100% {
+              background-color: rgb(201, 236, 0);
+            }
+          }
+    }
+}
+
+.slider{
+    margin:auto;
+    width: 80%;
+    overflow: hidden;
+    ul{
+        padding: 0;
+        display: flex;
+        width: 400%;
+        animation: slider 20s infinite;
+        animation-timing-function: ease-out;
+    }
+    .photos__items{
+        list-style: none;
+        width: 100%;
+        position: relative;
+
+    }
+    img{
+        width: 100%;
+        height: 550px;
+    }
+    .text_block{
+        position: absolute;
+        bottom: 5px;
+        font-size: 35px;
+        background: 0% 0%;
+        opacity: 0.85;
+        background-color: #003466;
+        text-align: center;
+        word-spacing: 0px;
+        padding: 7px 8px 9px 8px;
+        text-decoration: none solid rgb(255, 255, 255);
+        letter-spacing: 0.28px;
+        color: #ffffff;
+        font-weight: bolder;
+    }
+
+    @keyframes slider {
+        0%{margin-left: 0;}
+        20%{margin-left: 0;}
+
+        25%{margin-left: -100%;}
+        45%{margin-left: -100%;}
+
+        45%{margin-left: -100%;}
+        45%{margin-left: -100%;}
+       
+        50%{margin-left: -200%;}
+        70%{margin-left: -200%;}
+       
+        75%{margin-left: -300%;}
+        100%{margin-left: -300%;}
+    }
+}
+
