@@ -1,13 +1,357 @@
-nav {
-    display: flex;
-    justify-content: center;
-
-    &h6  {
-        
-    }
+@-webkit-keyframes "pulsate-fwd" {
+	0% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+	50% {
+		-webkit-transform: scale(1.1);
+		transform: scale(1.1);
+	}
+	100% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
 }
-
+@keyframes "pulsate-fwd" {
+	0% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+	50% {
+		-webkit-transform: scale(1.1);
+		transform: scale(1.1);
+	}
+	100% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+@-webkit-keyframes "colorchange" {
+	0% {
+		color: blue;
+	}
+	10% {
+		color: #8e44ad;
+	}
+	20% {
+		color: #1abc9c;
+	}
+	30% {
+		color: #d35400;
+	}
+	40% {
+		color: blue;
+	}
+	50% {
+		color: #34495e;
+	}
+	60% {
+		color: blue;
+	}
+	70% {
+		color: #2980b9;
+	}
+	80% {
+		color: #f1c40f;
+	}
+	90% {
+		color: #2980b9;
+	}
+	100% {
+		color: pink;
+	}
+}
+@-webkit-keyframes "kenburns-top-right" {
+	0% {
+		-webkit-transform: scale(1) translate(0, 0);
+		transform: scale(1) translate(0, 0);
+		-webkit-transform-origin: 84% 16%;
+		transform-origin: 84% 16%;
+	}
+	100% {
+		-webkit-transform: scale(1.25) translate(20px, -15px);
+		transform: scale(1.25) translate(20px, -15px);
+		-webkit-transform-origin: right top;
+		transform-origin: right top;
+	}
+}
+@keyframes "kenburns-top-right" {
+	0% {
+		-webkit-transform: scale(1) translate(0, 0);
+		transform: scale(1) translate(0, 0);
+		-webkit-transform-origin: 84% 16%;
+		transform-origin: 84% 16%;
+	}
+	100% {
+		-webkit-transform: scale(1.25) translate(20px, -15px);
+		transform: scale(1.25) translate(20px, -15px);
+		-webkit-transform-origin: right top;
+		transform-origin: right top;
+	}
+}
+@-webkit-keyframes "text-blur-out" {
+	0% {
+		-webkit-filter: blur(.01);
+		filter: blur(.01);
+	}
+	100% {
+		-webkit-filter: blur(12px) opacity(0);
+		filter: blur(12px) opacity(0);
+	}
+}
+@keyframes "text-blur-out" {
+	0% {
+		-webkit-filter: blur(.01);
+		filter: blur(.01);
+	}
+	100% {
+		-webkit-filter: blur(12px) opacity(0);
+		filter: blur(12px) opacity(0);
+	}
+}
+/* Country flags: */
+html {
+	scroll-behavior: smooth;
+}
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+#body-wrapper {
+	width: 80vw;
+	margin: 7rem auto;
+}
+iframe {
+	object-fit: contain;
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+nav {
+	display: flex;
+	justify-content: space-around;
+	background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+	width: 100%;
+	padding: 0.5rem;
+	position: fixed;
+	top: 0;
+	z-index: 1;
+}
+.nav__button {
+	border: 1px solid rgba(128, 128, 128, 0.719);
+	border-radius: 50px;
+	padding: 0.8rem 1rem;
+	width: 10%;
+	background: linear-gradient(#f69c3c88, #ebf8e1, #3f87a685);
+	font-size: 1.2rem;
+	text-decoration: none;
+	color: #303030;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&:hover {
+		background: linear-gradient(#3f87a6, #ebf8e1, #f69d3c);
+		-webkit-animation: pulsate-fwd 1s ease-in-out infinite both;
+		animation: pulsate-fwd 1s ease-in-out infinite both;
+	}
+	&:active {
+		box-shadow: 0 3px 0 #f69d3c;
+		top: 3px;
+	}
+}
+#main-headline {
+	color: #4e4eff;
+	text-align: center;
+	background-color: #E7F5E0;
+	box-shadow: gray 1px 1px;
+	width: 35%;
+	margin: auto;
+	padding: 0.4rem;
+	border-radius: 50%;
+	transition: all 0.2s ease-in-out;
+	&:hover {
+		transform: scale(1.1);
+		cursor: pointer;
+	}
+}
 .region {
-    border: 1px solid red;
-    color: ;
+	margin: 1.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-flow: row wrap;
+	height: 20rem;
+	border-radius: 3%;
+}
+.region__headline {
+	color: #3f87a6;
+	border-left: brown 4px solid;
+	border-radius: 15%;
+	font-style: italic;
+	padding: 0.2rem;
+	background-color: #f7bd7f;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+	display: none;
+	&:hover {
+		transform: translateX(-3px);
+		box-shadow: 1px 1px #53a7ea, 2px 2px #53a7ea, 3px 3px #53a7ea;
+	}
+}
+.region__country {
+	color: #f69c3c;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	height: 6rem;
+	width: 8rem;
+	margin: 1rem;
+	font-size: 1.1rem;
+	border-radius: 10%;
+	box-shadow: gray 1px 1px;
+	font-weight: bold;
+	opacity: 0.8;
+	transition: all 0.3s ease-in-out;
+	animation-name: colorchange;
+	animation-duration: 20s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease;
+	&:hover {
+		opacity: 1;
+		cursor: pointer;
+	}
+}
+.footer {
+	font-size: 1.3rem;
+	color: #1b6d14;
+	text-align: center;
+	background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+	padding: 1rem 0;
+}
+.footer__headline {
+	text-shadow: aliceblue 1px 1px;
+	border-bottom: 1px solid grey;
+	-webkit-transition: border linear;
+	-moz-transition: border linear;
+	-o-transition: border linear;
+	transition: border linear;
+	&:hover {
+		border: 2px solid brown;
+	}
+}
+.footer__topic {
+	list-style-type: none;
+	font-size: 1rem;
+	text-shadow: greenyellow 1px 1px;
+	animation: text-blur-out 3s ease-in-out infinite alternate both;
+	animation: text-blur-out 3s ease-in-out infinite alternate both;
+}
+#usa {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/us.svg");
+	background-size: 100%;
+}
+#canada {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/fr.svg");
+	background-size: 100%;
+}
+#mexico {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/mx.svg");
+	background-size: 100%;
+}
+#germany {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/de.svg");
+	background-size: 100%;
+}
+#france {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/fr.svg");
+	background-size: 100%;
+}
+#uk {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg");
+	background-size: 100%;
+}
+#italy {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/it.svg");
+	background-size: 100%;
+}
+#romania {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/ro.svg");
+	background-size: 100%;
+}
+#montenegro {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/me.svg");
+	background-size: 100%;
+}
+#hungary {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/hu.svg");
+	background-size: 100%;
+}
+#czech-republic {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/cz.svg");
+	background-size: 100%;
+}
+#poland {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/pl.svg");
+	background-size: 100%;
+}
+#bulgaria {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/bg.svg");
+	background-size: 100%;
+}
+#austria {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/at.svg");
+	background-size: 100%;
+}
+#india {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/in.svg");
+	background-size: 100%;
+}
+#nepal {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/np.svg");
+	background-size: 100%;
+}
+#thailand {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/th.svg");
+	background-size: 100%;
+}
+#philippines {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/ph.svg");
+	background-size: 100%;
+}
+#laos {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/la.svg");
+	background-size: 100%;
+}
+#cambodia {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/kh.svg");
+	background-size: 100%;
+}
+#turkey {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/tr.svg");
+	background-size: 100%;
+}
+#jordan {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/jo.svg");
+	background-size: 100%;
+}
+#egypt {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/eg.svg");
+	background-size: 100%;
+}
+#ecuador {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/ec.svg");
+	background-size: 100%;
+}
+#chile {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/cl.svg");
+	background-size: 100%;
+}
+#panama {
+	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/pa.svg");
+	background-size: 100%;
 }
