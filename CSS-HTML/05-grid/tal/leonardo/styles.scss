@@ -79,6 +79,12 @@ h1 {
         }
 }
 
+    .item:hover {
+        animation-name: itemRotate;
+        animation-duration: 5s;
+        animation-direction: alternate;
+    }
+
 @keyframes items {
     from {
         border: 2px solid black;
@@ -99,5 +105,15 @@ h1 {
 
     to{
         left: 100px;
+    }
+}
+
+@keyframes itemRotate {
+    from {
+        transform: rotate(5deg);
+    }
+
+    to{
+        transform: rotate(360deg);
     }
 }
