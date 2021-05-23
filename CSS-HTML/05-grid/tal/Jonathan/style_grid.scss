@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: black;
+    background-color: red;
+}
+
+.container {
+    display: grid;
+    position: relative;
+    top:100px;
+    
+    margin-bottom: 10px;
+    grid-template-columns: repeat(3, 250px);
+    grid-template-rows: 200px 200px;
+    gap:6px;
+
+    &__item--a{
+        background-image: url('https://www.humanesociety.org/sites/default/files/styles/1240x698/public/2018/08/puppy-410265.jpg?h=0c7c9985&itok=ZQixcJRY');
+        background-size: 100% 100%;
+    }
+
+    &__item--b{
+        background-image: url('https://media.nature.com/lw800/magazine-assets/d41586-020-01430-5/d41586-020-01430-5_17977552.jpg');
+        background-size: 100% 100%;
+    }
+
+    &__item--c{
+        background-image: url('https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg');
+        background-size: 100% 100%;
+    }
+
+    &__item--d{
+        background-image: url('https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg');
+        background-size: 100% 100%;
+    }
+
+    &__item--e{
+        background-image: url('https://www.essentialliving.co.uk/wp-content/uploads/2021/02/Where-to-Adopt-a-Dog-in-London_Dog3.png');
+        background-size: 100% 100%;
+    }
+
+    &__item--f{
+        background-image: url('https://im-media.voltron.voanews.com/Drupal/01live-166/styles/sourced/s3/2021-03/2021-03-09T140505Z_29221023_RC2Q7M9LZAAA_RTRMADP_3_USA-BIDEN-FIRST-DOGS.JPG?itok=fyWtLvMm');
+        background-size: 100% 100%;
+    }   
+
+}

@@ -1,0 +1,56 @@
+.body {
+    margin: 0px;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 350px 350px 350px;
+    background-color: #2a4861;
+    padding:20px;
+    justify-content: center;
+    gap: 20px;
+
+    .item{
+       
+    }
+    img{
+        width: 300px;
+        height: 300px;
+        margin: 0;
+    }
+    @media only screen and (max-width: 600px) {
+        body {
+            grid-template-columns: 350px;
+        }
+      }
+}
+
+.container2{
+    display: grid;
+    width:100%;
+    grid-template-columns: 350px 350px 350px;
+    background-color: #9aa5ad;
+    padding:20px;
+    justify-content: center;
+   
+    
+   
+  
+    gap: 20px;
+    .item2{
+        background-color: aqua;
+        height: 100px;
+        width: 100px;
+        text-align: center;
+        padding: 40px;
+        font-size: 70px;
+       
+     
+    }
+}
+
+
+/*img {
+    width: ;
+}*/
+
