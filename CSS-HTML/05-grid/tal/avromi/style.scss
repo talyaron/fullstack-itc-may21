@@ -1,6 +1,5 @@
 .body {
-    width: 100%;
-    margin: 0;
+    margin: 0px;
 }
 
 .container{
@@ -19,6 +18,11 @@
         height: 300px;
         margin: 0;
     }
+    @media only screen and (max-width: 600px) {
+        body {
+            grid-template-columns: 350px;
+        }
+      }
 }
 
 .container2{
