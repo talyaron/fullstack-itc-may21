@@ -4,13 +4,31 @@ body{
 
 .container{
     display: grid;
-    grid-template-columns: repeat(10, 40px);
-    grid-template-rows: 100px 100px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 200px);
     gap:6px;
+    grid-template-areas: 
+    "main main . ."
+    "main main . ."
+    ". . . . "
+    ". adv333 . ."
+    ". adv333 . ."
+    ". . . ."
+    ;
     
 
     .item{
         background-color: red;
-   
+        
+    }
+    .header{
+        grid-area: main;
+        background-color: orange;
+    }
+
+    .advertise{
+        grid-area: adv333;
+        background-color: blue;
+        color:white;
     }
 }
