@@ -1,0 +1,44 @@
+body{
+    margin: 0px;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    gap:6px;
+    grid-template-areas: 
+    "main main main main main main small small small small small small"
+    "main main main main main main small small small small small small"
+    "main main main main main main small small small small small small"
+    "main main main main main main small small small small small small"
+    "category category category category category category category category category category category category"
+    "medium medium medium medium medium medium medium medium medium medium medium medium"
+    "medium medium medium medium medium medium medium medium medium medium medium medium"
+    "medium medium medium medium medium medium medium medium medium medium medium medium"
+    "category category category category category category category category category category category category"
+    "medium medium medium medium medium medium medium medium medium medium medium medium"
+    "medium medium medium medium medium medium medium medium medium medium medium medium"
+    "medium medium medium medium medium medium medium medium medium medium medium medium"
+    ;
+    
+    &__item{
+
+
+        &--main {
+            
+        }
+
+        &--small {
+            
+        }
+
+        &--category {
+            
+        }
+
+        &--medium {
+            
+        }     
+    }
+}
