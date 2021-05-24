@@ -1,6 +1,5 @@
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -12,11 +11,9 @@
   text-align: center;
   background-color: black;
 }
-
 .site-header__navbody li {
   display: inline-block;
 }
-
 .site-header__navbody a {
   display: block;
   padding: 0.5rem 3rem;
@@ -27,11 +24,9 @@
   color: white;
   text-decoration: none;
 }
-
 .site-header__navbody a:visited {
   color: red;
 }
-
 .site-header__navbody a:hover {
   background-color: gray;
   color: black;
@@ -43,7 +38,6 @@
   text-align: center;
   position: relative;
 }
-
 .title::before {
   content: " ";
   position: absolute;
@@ -56,222 +50,148 @@
   background-position: top center;
   opacity: 0.25;
 }
-
 .title__content {
   overflow: hidden;
   padding: 10px;
 }
-
 .title--word {
   position: relative;
   font-weight: bold;
   font-size: 30px;
-  -webkit-animation: animate 2s backwards;
-          animation: animate 2s backwards;
+  animation: animate 2s backwards;
 }
 
 .first--chat {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -ms-flex-wrap: row nowrap;
-      flex-wrap: row nowrap;
+  justify-content: space-between;
+  flex-wrap: row nowrap;
   margin: 20px 20px 50px 20px;
   background-color: lightgreen;
   height: 180px;
 }
-
 .first--chat__america {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
 .first--chat__america--img {
   margin-right: 10px;
 }
-
 .first--chat__america--words {
   display: inline-block;
 }
-
 .first--chat__america--words p {
   margin-top: 30px;
   margin-bottom: 20px;
 }
-
 .first--chat__america--words--america1 {
   opacity: 0;
   /* animation: name duration timing-function delay iteration-count direction fill-mode; */
-  -webkit-animation: words1 1s 1s forwards;
-          animation: words1 1s 1s forwards;
+  animation: words1 1s 1s forwards;
   font-weight: normal;
 }
-
 .first--chat__america--words--america2 {
   opacity: 0;
-  -webkit-animation: words2 1s 5s forwards;
-          animation: words2 1s 5s forwards;
+  animation: words2 1s 5s forwards;
 }
-
 .first--chat__america--words--america3 {
   opacity: 0;
-  -webkit-animation: words3 1s 9s forwards;
-          animation: words3 1s 9s forwards;
+  animation: words3 1s 9s forwards;
 }
-
 .first--chat__falcon {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
 .first--chat__falcon--img {
   margin-left: 8px;
 }
-
 .first--chat__falcon--words {
   display: inline-block;
 }
-
 .first--chat__falcon--words--falcon1 {
   opacity: 0;
-  -webkit-animation: words4 1s 3s forwards;
-          animation: words4 1s 3s forwards;
+  animation: words4 1s 3s forwards;
 }
-
 .first--chat__falcon--words--falcon2 {
   opacity: 0;
-  -webkit-animation: words5 1s 7s forwards;
-          animation: words5 1s 7s forwards;
+  animation: words5 1s 7s forwards;
 }
-
 .first--chat__falcon--words--falcon3 {
   opacity: 0;
-  -webkit-animation: words6 1s 11s forwards;
-          animation: words6 1s 11s forwards;
+  animation: words6 1s 11s forwards;
 }
-
 .first--chat__falcon p {
   margin-top: 30px;
   margin-bottom: 20px;
 }
-
 .first--chat--logo {
   position: relative;
-  -webkit-animation: vertical 15s ease-in-out forwards;
-          animation: vertical 15s ease-in-out forwards;
+  animation: vertical 15s ease-in-out forwards;
   top: 2px;
   left: 10px;
 }
 
 .second--chat {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -ms-flex-wrap: row nowrap;
-      flex-wrap: row nowrap;
+  justify-content: space-between;
+  flex-wrap: row nowrap;
   margin: 20px 20px 50px 20px;
   background-color: lightblue;
   height: 180px;
 }
-
 .second--chat__america {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
 .second--chat__america--img {
   margin-right: 10px;
 }
-
 .second--chat__america--words {
   display: inline-block;
 }
-
 .second--chat__america--words p {
   margin-top: 30px;
   margin-bottom: 20px;
 }
-
 .second--chat__america--words--america1 {
   opacity: 0;
   /* animation: name duration timing-function delay iteration-count direction fill-mode; */
-  -webkit-animation: words7 1s 13s forwards;
-          animation: words7 1s 13s forwards;
+  animation: words7 1s 13s forwards;
 }
-
 .second--chat__america--words--america2 {
   opacity: 0;
-  -webkit-animation: words8 1s 17s forwards;
-          animation: words8 1s 17s forwards;
+  animation: words8 1s 17s forwards;
 }
-
 .second--chat__america--words--america3 {
   opacity: 0;
-  -webkit-animation: words9 1s 21s forwards;
-          animation: words9 1s 21s forwards;
+  animation: words9 1s 21s forwards;
 }
-
 .second--chat__spiderman {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
 .second--chat__spiderman--img {
   margin-left: 90px;
 }
-
 .second--chat__spiderman--words {
   display: inline-block;
 }
-
 .second--chat__spiderman--words--spiderman1 {
   opacity: 0;
-  -webkit-animation: words10 1s 15s forwards;
-          animation: words10 1s 15s forwards;
+  animation: words10 1s 15s forwards;
 }
-
 .second--chat__spiderman--words--spiderman2 {
   opacity: 0;
-  -webkit-animation: words11 1s 19s forwards;
-          animation: words11 1s 19s forwards;
+  animation: words11 1s 19s forwards;
 }
-
 .second--chat__spiderman--words--spiderman3 {
   opacity: 0;
-  -webkit-animation: words12 1s 23s forwards;
-          animation: words12 1s 23s forwards;
+  animation: words12 1s 23s forwards;
 }
-
 .second--chat__spiderman p {
   margin-top: 30px;
   margin-bottom: 20px;
 }
-
 .second--chat--logo {
   position: relative;
-  -webkit-animation: vertical 13s 14s ease-in-out forwards;
-          animation: vertical 13s 14s ease-in-out forwards;
+  animation: vertical 13s 14s ease-in-out forwards;
   top: 2px;
   right: 12px;
-}
-
-@-webkit-keyframes animate {
-  0% {
-    bottom: -100px;
-  }
-  100% {
-    bottom: 0px;
-  }
 }
 
 @keyframes animate {
@@ -282,16 +202,6 @@
     bottom: 0px;
   }
 }
-
-@-webkit-keyframes vertical {
-  0% {
-    top: 5px;
-  }
-  100% {
-    top: 130px;
-  }
-}
-
 @keyframes vertical {
   0% {
     top: 5px;
@@ -300,20 +210,6 @@
     top: 130px;
   }
 }
-
-@-webkit-keyframes words1 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words1 {
   from {
     font-weight: bold;
@@ -326,20 +222,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words2 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words2 {
   from {
     font-weight: bold;
@@ -352,20 +234,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words3 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words3 {
   from {
     font-weight: bold;
@@ -378,20 +246,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words4 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words4 {
   from {
     font-weight: bold;
@@ -404,20 +258,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words5 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words5 {
   from {
     font-weight: bold;
@@ -430,20 +270,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words6 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words6 {
   from {
     font-weight: bold;
@@ -456,20 +282,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words7 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words7 {
   from {
     font-weight: bold;
@@ -482,20 +294,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words8 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words8 {
   from {
     font-weight: bold;
@@ -508,20 +306,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words9 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words9 {
   from {
     font-weight: bold;
@@ -534,20 +318,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words10 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words10 {
   from {
     font-weight: bold;
@@ -560,20 +330,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words11 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words11 {
   from {
     font-weight: bold;
@@ -586,20 +342,6 @@
     font-weight: normal;
   }
 }
-
-@-webkit-keyframes words12 {
-  from {
-    font-weight: bold;
-  }
-  50% {
-    font-weight: bold;
-  }
-  to {
-    opacity: 1;
-    font-weight: normal;
-  }
-}
-
 @keyframes words12 {
   from {
     font-weight: bold;
@@ -612,4 +354,3 @@
     font-weight: normal;
   }
 }
-/*# sourceMappingURL=style.css.map */
