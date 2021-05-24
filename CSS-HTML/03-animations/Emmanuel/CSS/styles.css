@@ -1,0 +1,27 @@
+.background {
+  background-image: URL("https://media.istockphoto.com/photos/panoramic-empty-desert-background-picture-id1097799500?k=6&m=1097799500&s=170667a&w=0&h=O6QoYjxqZ6sSt_g37H44gSdAE0i_xwJxpPOLR57bRs4=");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 340px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.car {
+  width: 130px;
+  height: 100px;
+  position: relative;
+  background-image: URL(../images/car.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: carMovement 6s linear 1s infinite normal forwards;
+}
+
+@keyframes carMovement {
+  from {
+    left: 0vw;
+  }
+  to {
+    left: 100vw;
+  }
+}
