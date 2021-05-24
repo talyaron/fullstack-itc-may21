@@ -7,13 +7,14 @@
   grid-template-columns: 10% auto auto auto;
   align-items: center;
   justify-items: center;
+  padding: .3rem 0;
 
   &_nav {
     @include grid(9, 2rem);
     
 
     a {
-        
+       
       color: #ffffff;
     }
   }

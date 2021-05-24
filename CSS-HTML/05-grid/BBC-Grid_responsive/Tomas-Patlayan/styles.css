@@ -380,7 +380,6 @@ h1, h2, h3 {
   font-family: "Arial, Helvetica, sans-serif";
   margin: 0 0 2.5rem 0;
   font-weight: 900;
-  text-align: center;
 }
 
 h1 {
@@ -393,7 +392,6 @@ h2 {
 
 h3 {
   font-size: 3rem;
-  text-align: center;
 }
 
 /*Layout*/
@@ -410,18 +408,18 @@ h3 {
       -ms-flex-align: center;
           align-items: center;
   justify-items: center;
+  padding: .3rem 0;
 }
 
 .bar_nav {
   display: -ms-grid;
   display: grid;
   gap: 2rem;
-  
+  -ms-grid-columns: (1fr)[9];
       grid-template-columns: repeat(9, 1fr);
 }
 
 .bar_nav a {
-  border-right: 1px solid white;
   color: #ffffff;
 }
 
@@ -442,5 +440,105 @@ h3 {
 .bar_img img {
   width: 10rem;
   height: 3.2rem;
+}
+
+.welcome-sentense {
+  display: -ms-grid;
+  display: grid;
+  gap: 90rem;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+}
+
+.top-news {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[6];
+      grid-template-columns: repeat(6, 1fr);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.top-news .new1 {
+  width: 616px;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-column: 1/4;
+  background-image: url("images/news1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #ffffff;
+}
+
+.top-news .small-news {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  margin-left: 65rem;
+  gap: 1rem;
+  color: #ffffff;
+}
+
+.top-news .new2 {
+  background-image: url("images/plane.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 300px;
+  height: 168px;
+}
+
+.top-news .new2 h2 {
+  font-size: 3rem;
+}
+
+.top-news .new3 {
+  background-image: url("images/black lives.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 300px;
+  height: 168px;
+}
+
+.top-news .new3 h2 {
+  font-size: 3rem;
+}
+
+.top-news .new4 {
+  background-image: url("images/food.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 300px;
+  height: 168px;
+}
+
+.top-news .new4 h2 {
+  font-size: 3rem;
+}
+
+.top-news .new5 {
+  background-image: url("images/girl.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 300px;
+  height: 168px;
+}
+
+.top-news .new5 h2 {
+  font-size: 3rem;
+}
+
+section h2 {
+  margin-top: 4rem;
+  border-left: 10px solid yellow;
+}
+
+.section-news {
+  display: -ms-grid;
+  display: grid;
+  gap: 1rem;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
 }
 /*# sourceMappingURL=styles.css.map */
