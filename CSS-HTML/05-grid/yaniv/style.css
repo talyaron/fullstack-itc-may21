@@ -1,0 +1,185 @@
+@-webkit-keyframes zoom-move-right-down {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(50%) translateY(50%);
+            transform: scale(2) translateX(50%) translateY(50%);
+  }
+}
+
+@keyframes zoom-move-right-down {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(50%) translateY(50%);
+            transform: scale(2) translateX(50%) translateY(50%);
+  }
+}
+
+@-webkit-keyframes zoom-move-left-up {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(-50%) translateY(-50%);
+            transform: scale(2) translateX(-50%) translateY(-50%);
+  }
+}
+
+@keyframes zoom-move-left-up {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(-50%) translateY(-50%);
+            transform: scale(2) translateX(-50%) translateY(-50%);
+  }
+}
+
+@-webkit-keyframes zoom-move-right {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(50%);
+            transform: scale(2) translateX(50%);
+  }
+}
+
+@keyframes zoom-move-right {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(50%);
+            transform: scale(2) translateX(50%);
+  }
+}
+
+@-webkit-keyframes zoom-move-left {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(-50%);
+            transform: scale(2) translateX(-50%);
+  }
+}
+
+@keyframes zoom-move-left {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(-50%);
+            transform: scale(2) translateX(-50%);
+  }
+}
+
+@-webkit-keyframes zoom-move-right-up {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(50%) translateY(-50%);
+            transform: scale(2) translateX(50%) translateY(-50%);
+  }
+}
+
+@keyframes zoom-move-right-up {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(50%) translateY(-50%);
+            transform: scale(2) translateX(50%) translateY(-50%);
+  }
+}
+
+@-webkit-keyframes zoom-move-left-down {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(-50%) translateY(50%);
+            transform: scale(2) translateX(-50%) translateY(50%);
+  }
+}
+
+@keyframes zoom-move-left-down {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(2) translateX(-50%) translateY(50%);
+            transform: scale(2) translateX(-50%) translateY(50%);
+  }
+}
+
+body {
+  margin: 0px;
+}
+
+.container {
+  margin: 0 auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (150px)[6];
+      grid-template-columns: repeat(6, 150px);
+  -ms-grid-rows: (150px)[4];
+      grid-template-rows: repeat(4, 150px);
+  gap: 6px;
+}
+
+.container__item img {
+  height: 100%;
+  width: 100%;
+}
+
+.container__item--to-right:hover {
+  -webkit-animation: zoom-move-right 1s forwards;
+          animation: zoom-move-right 1s forwards;
+}
+
+.container__item--to-left:hover {
+  -webkit-animation: zoom-move-left 1s forwards;
+          animation: zoom-move-left 1s forwards;
+}
+
+.container__item--to-right-up:hover {
+  -webkit-animation: zoom-move-right-up 1s forwards;
+          animation: zoom-move-right-up 1s forwards;
+}
+
+.container__item--to-left-up:hover {
+  -webkit-animation: zoom-move-left-up 1s forwards;
+          animation: zoom-move-left-up 1s forwards;
+}
+
+.container__item--to-right-down:hover {
+  -webkit-animation: zoom-move-right-down 1s forwards;
+          animation: zoom-move-right-down 1s forwards;
+}
+
+.container__item--to-left-down:hover {
+  -webkit-animation: zoom-move-left-down 1s forwards;
+          animation: zoom-move-left-down 1s forwards;
+}
+/*# sourceMappingURL=style.css.map */

@@ -3,11 +3,18 @@ body {
 }
 
 .big_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -17,9 +24,21 @@ body {
 
 .container__article--recife {
   height: 400px;
-  animation-duration: 2s;
-  animation-name: border--recife;
-  animation-iteration-count: infinite;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-name: border--recife;
+          animation-name: border--recife;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes border--recife {
+  from {
+    border: 10px solid green;
+  }
+  to {
+    border: 10px solid yellow;
+  }
 }
 
 @keyframes border--recife {
@@ -33,9 +52,21 @@ body {
 
 .container__article--london {
   height: 400px;
-  animation-duration: 2s;
-  animation-name: border--london;
-  animation-iteration-count: infinite;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-name: border--london;
+          animation-name: border--london;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes border--london {
+  from {
+    border: 10px solid red;
+  }
+  to {
+    border: 10px solid blue;
+  }
 }
 
 @keyframes border--london {
@@ -49,9 +80,21 @@ body {
 
 .container__article--zichron {
   height: 400px;
-  animation-duration: 2s;
-  animation-name: border--zichron;
-  animation-iteration-count: infinite;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-name: border--zichron;
+          animation-name: border--zichron;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes border--zichron {
+  from {
+    border: 10px solid white;
+  }
+  to {
+    border: 10px solid blue;
+  }
 }
 
 @keyframes border--zichron {
@@ -66,18 +109,31 @@ body {
 .container__article--me {
   border: 3px solid black;
   height: 400px;
+  -webkit-transition: 3s ease-in-out;
   transition: 3s ease-in-out;
 }
 
 .container__article--me:hover {
-  transform: scale(1.2, 1.2);
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
 }
 
 .container__article--tsa {
   height: 400px;
   position: relative;
-  animation: move--tsa 5s infinite;
-  animation-timing-function: linear;
+  -webkit-animation: move--tsa 5s infinite;
+          animation: move--tsa 5s infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+@-webkit-keyframes move--tsa {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 300px;
+  }
 }
 
 @keyframes move--tsa {
@@ -92,8 +148,19 @@ body {
 .container__article--rl {
   height: 400px;
   position: relative;
-  animation: move--tsa 5s infinite;
-  animation-timing-function: linear;
+  -webkit-animation: move--tsa 5s infinite;
+          animation: move--tsa 5s infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+@-webkit-keyframes move--rl {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 300px;
+  }
 }
 
 @keyframes move--rl {
@@ -108,8 +175,19 @@ body {
 .container__article--cm {
   height: 400px;
   position: relative;
-  animation: move--cm 5s infinite;
-  animation-timing-function: linear;
+  -webkit-animation: move--cm 5s infinite;
+          animation: move--cm 5s infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+@-webkit-keyframes move--cm {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 300px;
+  }
 }
 
 @keyframes move--cm {
@@ -124,9 +202,12 @@ body {
 .container__article--itc {
   border: 3px solid black;
   height: 400px;
+  -webkit-transition: 3s ease-in-out;
   transition: 3s ease-in-out;
 }
 
 .container__article--itc:hover {
-  transform: scale(1.2, 1.2);
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
 }
+/*# sourceMappingURL=styles.css.map */
