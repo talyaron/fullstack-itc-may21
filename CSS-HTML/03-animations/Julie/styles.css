@@ -9,15 +9,17 @@ body {
 
 .container {
   display: flex;
-  &__article {
-    padding: 20px;
-    &--recife {
-      height: 400px;
-      animation-duration: 2s;
-      animation-name: border--recife;
-      animation-iteration-count: infinite;
-    }
-  }
+}
+
+.container__article {
+  padding: 20px;
+}
+
+.container__article--recife {
+  height: 400px;
+  animation-duration: 2s;
+  animation-name: border--recife;
+  animation-iteration-count: infinite;
 }
 
 @keyframes border--recife {
