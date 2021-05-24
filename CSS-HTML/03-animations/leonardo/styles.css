@@ -11,10 +11,23 @@ body {
   margin: auto;
   background-color: peru;
   margin-top: 10px;
-  animation-name: animWrapper;
-  animation-duration: 5s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  -webkit-animation-name: animWrapper;
+          animation-name: animWrapper;
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes animWrapper {
+  from {
+    border-radius: 5%;
+  }
+  to {
+    border-radius: 50%;
+  }
 }
 
 @keyframes animWrapper {
@@ -25,20 +38,44 @@ body {
     border-radius: 50%;
   }
 }
+
 header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-size: 48px;
   margin: 0 20px 40px 20px;
   background-color: black;
   border-radius: 100px;
   border: 4px solid white;
-  animation-name: headerWrapper;
-  animation-duration: 5s;
+  -webkit-animation-name: headerWrapper;
+          animation-name: headerWrapper;
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s;
 }
+
 header h1 {
   margin: 10px;
   color: white;
+}
+
+@-webkit-keyframes headerWrapper {
+  from {
+    margin-bottom: 100%;
+    width: 300%;
+  }
+  75% {
+    font-size: 300%;
+    margin-bottom: 25%;
+    width: 150%;
+  }
+  to {
+    margin-bottom: 8%;
+    width: 100%;
+  }
 }
 
 @keyframes headerWrapper {
@@ -56,43 +93,72 @@ header h1 {
     width: 100%;
   }
 }
+
 .card {
   width: 20%;
   text-align: center;
   margin-left: 10px;
   border-radius: 40px;
 }
+
 .card--first {
   background-color: black;
   color: white;
   border: 4px solid white;
-  animation: firstCard 10s linear 0s infinite alternate forwards;
+  -webkit-animation: firstCard 10s linear 0s infinite alternate forwards;
+          animation: firstCard 10s linear 0s infinite alternate forwards;
 }
+
 .card--second {
   background-color: white;
   color: black;
   border: 4px solid black;
   position: relative;
-  animation: secondCard 10s linear 0s infinite alternate forwards;
+  -webkit-animation: secondCard 10s linear 0s infinite alternate forwards;
+          animation: secondCard 10s linear 0s infinite alternate forwards;
 }
+
 .card--third {
   background-color: white;
   color: black;
   border: 4px solid black;
   position: relative;
-  animation: thirdCard 10s linear 0s infinite alternate forwards;
+  -webkit-animation: thirdCard 10s linear 0s infinite alternate forwards;
+          animation: thirdCard 10s linear 0s infinite alternate forwards;
 }
+
 .card--fourth {
   background-color: white;
   color: black;
   border: 4px solid black;
   position: relative;
-  animation: fourthCard 10s linear 0s infinite alternate forwards;
+  -webkit-animation: fourthCard 10s linear 0s infinite alternate forwards;
+          animation: fourthCard 10s linear 0s infinite alternate forwards;
 }
+
 .card__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@-webkit-keyframes firstCard {
+  from {
+    background-color: white;
+    color: black;
+    border: 4px solid black;
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
 }
 
 @keyframes firstCard {
@@ -100,12 +166,27 @@ header h1 {
     background-color: white;
     color: black;
     border: 4px solid black;
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
   to {
-    transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
   }
 }
+
+@-webkit-keyframes secondCard {
+  from {
+    background-color: black;
+    color: white;
+    border: 4px solid white;
+    top: 0;
+  }
+  to {
+    top: 230px;
+  }
+}
+
 @keyframes secondCard {
   from {
     background-color: black;
@@ -117,6 +198,16 @@ header h1 {
     top: 230px;
   }
 }
+
+@-webkit-keyframes thirdCard {
+  from {
+    font-size: 24px;
+  }
+  to {
+    font-size: 12px;
+  }
+}
+
 @keyframes thirdCard {
   from {
     font-size: 24px;
@@ -125,19 +216,39 @@ header h1 {
     font-size: 12px;
   }
 }
-@keyframes fourthCard {
+
+@-webkit-keyframes fourthCard {
   0% {
     color: red;
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
   50% {
     color: blue;
   }
   100% {
     color: black;
-    transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
   }
 }
+
+@keyframes fourthCard {
+  0% {
+    color: red;
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    color: blue;
+  }
+  100% {
+    color: black;
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+  }
+}
+
 .name {
   color: #aaa;
   font-size: 12px;
@@ -160,8 +271,12 @@ header h1 {
 }
 
 .left {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .perspective {
@@ -190,27 +305,47 @@ header h1 {
   -webkit-transform-origin: 50% 50%;
   transform: rotateX(-20deg) rotateY(-30deg);
   -webkit-transform: rotateX(-20deg) rotateY(-30deg);
-  animation-name: spin;
-  animation-duration: 5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  -webkit-animation-name: spin;
+          animation-name: spin;
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+            transform: rotateX(0deg) rotateY(0deg);
+    top: -720px;
+  }
+  to {
+    -webkit-transform: rotateX(-60deg) rotateY(180deg);
+            transform: rotateX(-60deg) rotateY(180deg);
+    top: 0px;
+  }
 }
 
 @keyframes spin {
   from {
-    transform: rotateX(0deg) rotateY(0deg);
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+            transform: rotateX(0deg) rotateY(0deg);
     top: -720px;
   }
   to {
-    transform: rotateX(-60deg) rotateY(180deg);
+    -webkit-transform: rotateX(-60deg) rotateY(180deg);
+            transform: rotateX(-60deg) rotateY(180deg);
     top: 0px;
   }
 }
+
 /*
-#
-# Begin details
-#
-*/
+  #
+  # Begin details
+  #
+  */
 .tardis .side {
   position: absolute;
   top: 0px;
@@ -218,7 +353,8 @@ header h1 {
   width: 200px;
   height: 360px;
   background-color: #3f577d;
-  box-shadow: inset 1px 0 0 #313d49, inset -1px 0 0 #313d49, inset 0 1px 0 #313d49, inset 0 -1px 0 #313d49;
+  -webkit-box-shadow: inset 1px 0 0 #313d49, inset -1px 0 0 #313d49, inset 0 1px 0 #313d49, inset 0 -1px 0 #313d49;
+          box-shadow: inset 1px 0 0 #313d49, inset -1px 0 0 #313d49, inset 0 1px 0 #313d49, inset 0 -1px 0 #313d49;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
   z-index: 1;
@@ -285,7 +421,8 @@ header h1 {
   width: 220px;
   height: 10px;
   background-color: #3f577d;
-  box-shadow: inset 1px 0 0 #313d49, inset -1px 0 0 #313d49, inset 0 1px 0 #313d49, inset 0 -1px 0 #313d49;
+  -webkit-box-shadow: inset 1px 0 0 #313d49, inset -1px 0 0 #313d49, inset 0 1px 0 #313d49, inset 0 -1px 0 #313d49;
+          box-shadow: inset 1px 0 0 #313d49, inset -1px 0 0 #313d49, inset 0 1px 0 #313d49, inset 0 -1px 0 #313d49;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
 }
@@ -311,16 +448,17 @@ header h1 {
 }
 
 /*
-#
-# Top sign
-#
-*/
+  #
+  # Top sign
+  #
+  */
 .side .top-sign {
   width: 180px;
   height: 28px;
   background-color: #445d84;
   border: solid 1px #54749f;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
   border-radius: 2px;
   position: absolute;
   top: 10px;
@@ -339,7 +477,8 @@ header h1 {
   font-size: 12px;
   line-height: 20px;
   padding: 0px 5px;
-  box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.4);
+          box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.4);
   position: relative;
   text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.6);
 }
@@ -355,10 +494,10 @@ header h1 {
 }
 
 /*
-#
-# Door frame
-#
-*/
+  #
+  # Door frame
+  #
+  */
 .side .door-frame {
   position: absolute;
   width: 160px;
@@ -368,7 +507,8 @@ header h1 {
   background-image: url("https://th.bing.com/th/id/R019b088768cc18120ebf287d0c8549ce?rik=gCrJTYCgohsVxA&pid=ImgRaw");
   background-size: cover;
   background-position: 50%;
-  box-shadow: inset 0px 2px 8px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: inset 0px 2px 8px rgba(0, 0, 0, 0.5);
+          box-shadow: inset 0px 2px 8px rgba(0, 0, 0, 0.5);
   z-index: 5;
 }
 
@@ -377,7 +517,8 @@ header h1 {
   top: 0px;
   bottom: 0px;
   width: 77px;
-  box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.7);
+          box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.7);
 }
 
 .door.door-left {
@@ -395,7 +536,8 @@ header h1 {
   bottom: 10px;
   width: 55px;
   height: 65px;
-  box-shadow: inset 0px 0.5px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: inset 0px 0.5px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: inset 0px 0.5px 5px rgba(0, 0, 0, 0.5);
 }
 
 .door-inset:nth-of-type(2) {
@@ -414,7 +556,8 @@ header h1 {
   width: 45px;
   height: 55px;
   background-color: #d5e4f6;
-  box-shadow: inset 1px 0 0 #313d49, inset -1px 0 0 #313d49, inset 0 1px 0 #313d49, inset 0 -1px 0 #313d49;
+  -webkit-box-shadow: inset 1px 0 0 #313d49, inset -1px 0 0 #313d49, inset 0 1px 0 #313d49, inset 0 -1px 0 #313d49;
+          box-shadow: inset 1px 0 0 #313d49, inset -1px 0 0 #313d49, inset 0 1px 0 #313d49, inset 0 -1px 0 #313d49;
 }
 
 /* Window */
@@ -433,7 +576,8 @@ header h1 {
   background-color: #dfe7fc;
   float: left;
   margin: 2px;
-  box-shadow: inset 0px 0px 10px #fff;
+  -webkit-box-shadow: inset 0px 0px 10px #fff;
+          box-shadow: inset 0px 0px 10px #fff;
 }
 
 .pane.a {
@@ -452,10 +596,20 @@ header h1 {
   margin: auto;
   background-image: url("https://cdn.rawgit.com/ManzDev/cursos-assets/gh-pages/css3/bernard-sprite.png");
   background-repeat: repeat-x;
-  animation: walk 1s steps(6) infinite;
+  -webkit-animation: walk 1s steps(6) infinite;
+          animation: walk 1s steps(6) infinite;
   position: relative;
   bottom: 150px;
   left: 400px;
+}
+
+@-webkit-keyframes walk {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -672px;
+  }
 }
 
 @keyframes walk {
@@ -466,3 +620,4 @@ header h1 {
     background-position: -672px;
   }
 }
+/*# sourceMappingURL=styles.css.map */

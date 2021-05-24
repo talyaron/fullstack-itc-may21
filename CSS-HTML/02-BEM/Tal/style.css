@@ -1,0 +1,32 @@
+/* block */
+.articles {
+  width: 500px;
+  /* elements */
+  /* modifiers */
+}
+
+.articles h1 {
+  background-color: blueviolet;
+}
+
+.articles p {
+  font-style: italic;
+}
+
+.articles__item {
+  height: 100px;
+  width: 100%;
+}
+
+.articles--blue {
+  background-color: blue;
+}
+
+.articles--red {
+  background-color: red;
+}
+
+.articles--navy {
+  background-color: navy;
+}
+/*# sourceMappingURL=style.css.map */
