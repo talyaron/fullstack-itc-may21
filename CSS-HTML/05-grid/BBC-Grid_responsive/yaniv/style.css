@@ -1,0 +1,15 @@
+body {
+  margin: 0px;
+}
+
+.container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[12];
+      grid-template-columns: repeat(12, 1fr);
+  -ms-grid-rows: (1fr)[12];
+      grid-template-rows: repeat(12, 1fr);
+  gap: 6px;
+      grid-template-areas: "main main main main main main small small small small small small" "main main main main main main small small small small small small" "main main main main main main small small small small small small" "main main main main main main small small small small small small" "category category category category category category category category category category category category" "medium medium medium medium medium medium medium medium medium medium medium medium" "medium medium medium medium medium medium medium medium medium medium medium medium" "medium medium medium medium medium medium medium medium medium medium medium medium" "category category category category category category category category category category category category" "medium medium medium medium medium medium medium medium medium medium medium medium" "medium medium medium medium medium medium medium medium medium medium medium medium" "medium medium medium medium medium medium medium medium medium medium medium medium";
+}
+/*# sourceMappingURL=style.css.map */

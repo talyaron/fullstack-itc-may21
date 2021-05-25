@@ -42,6 +42,17 @@ img {
     position: absolute;
     left: 28%;
 }
+@media only screen and (max-width: 800px) {
+  .wrapper {
+    grid-template-columns: 150px 150px 150px;
+    grid-template-rows: auto;
+  }
+  @media only screen and (max-width: 600px) {
+  .wrapper {
+    grid-template-columns: 200px 200px;
+    grid-template-rows: auto;
+  }}
+}
 .item-a {
   grid-column-start: 2;
   grid-column-end: 4;

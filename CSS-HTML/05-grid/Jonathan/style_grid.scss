@@ -2,20 +2,24 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    background: black;
 }
 
 h1 {
     color: black;
     background-color: red;
+    text-align: center;
 }
 
 .container {
-    display: grid;
-    position: relative;
-    top:100px;
     
+    display: grid;
+    margin: auto;
+    position: relative;
+    top:75px;
+    width: 75%;
     margin-bottom: 10px;
-    grid-template-columns: repeat(3, 250px);
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 200px 200px;
     gap:6px;
 
