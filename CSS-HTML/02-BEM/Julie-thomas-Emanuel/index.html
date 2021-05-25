@@ -10,6 +10,7 @@
    <body>
       <div class="nav">
          <div class="logo"><img src="img/logo.jpg" alt="" srcset=""></div>
+         <!-- YS: This is the only place where BEM was used -->
          <div class="menu">
             <div class="menu__elements"><a href="">U.S.</a></div>
             <div class="menu__elements"><a href="">Politics</a></div>
@@ -186,3 +187,7 @@
       </section>
    </body>
 </html>
+
+
+<!-- YS: You did a good job with the CSS but unfortunately your HTML elements are not named according to BEM (only the part I commented on is). Remeber that for bem you need two underscores: __ 
+as well as having a heirarchy. For example the parent div's classname is "parent" so its child will be called parent__child and parent__child's child will be called parent___child__grandchild. Like you did from line 14 - 27  -->

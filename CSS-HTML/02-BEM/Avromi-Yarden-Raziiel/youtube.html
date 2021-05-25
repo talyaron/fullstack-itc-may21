@@ -8,6 +8,8 @@
     <title>YouTube</title>
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
 </head>
+
+<!-- YS: It is better practice to keep your CSS and JS files separated -->
 <style>
     html,
     body {
@@ -33,6 +35,7 @@
         width: 25vw;
     }
 
+    /* YS: Please dont leave CSS elements empty - either remove or add styling */
     .burger__logo__wrapper img {}
 
 
@@ -54,6 +57,7 @@
         margin-right: .5rem;
     }
 
+    /* YS: Please dont leave CSS elements empty - either remove or add styling */
     .fa-microphone {}
 
 
@@ -62,6 +66,7 @@
         display: flex;
         width: 20vw;
         justify-content: space-around;
+        /* YS: Please remove unecessary comments*/
         /*???*/
         align-items: center;
     }
@@ -96,6 +101,7 @@
         margin-left: 15px;
     }
 
+    /* YS: Please dont leave CSS elements empty - either remove or add styling */
     .button--2 {}
 
     /*next button> */
@@ -151,6 +157,7 @@
         margin: 0.2rem;
     }
 
+    /* YS: Please dont leave CSS elements empty - either remove or add styling */
     .video:hover {
         
     }
@@ -205,6 +212,7 @@
         word-spacing: 1.5px;
     }
 
+    /* Good use of flex */ 
 
 </style>
 
@@ -224,13 +232,16 @@
             <p>Library</p>
         </div>
     </div>
+    <!-- YS: This is not according to BEM. The first div should be nav, its child nav__wrapper and if you want to include the burger logo as well so it should be something like nav__wrapper__burger -->
     <div class="nav__wrapper__wrapper">
         <div class="nav__wrapper">
             <div class="burger__logo__wrapper">
                 <div class="fas fa-bars"></div>
+                <!-- YS: Be careful with image formats - it should either ends in .svg or .png but not both   -->
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
                     height="20px">
             </div>
+             <!-- YS: The same idea here: the parent should be searchbar, then the child searchbar__mic or searchbar__wrapper -->
             <div class="searchbar__mic__wrapper">
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
@@ -247,6 +258,7 @@
             </div>
 
         </div>
+        <!-- YS: Parent: class=keyword; Children(buttons): class=keyword__button -->
         <div class="keyword__button__wrapper">
             <button class="button button--1">Guided Meditations</button>
             <button class="button">Nature</button>
@@ -264,6 +276,7 @@
         </div>
     </div> 
     <section class="video-block">
+            <!-- YS: Good job, this is a better implementation of BEM.  parent = video, child = video__title -->
       <div class="video">
         <iframe width="320" height="240" src="https://www.youtube.com/embed/y3cozkhxysQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div class="video__title-wrapper">
@@ -356,3 +369,5 @@
       </section>
     </body>
 </html>
+
+<!-- Good work! -->
