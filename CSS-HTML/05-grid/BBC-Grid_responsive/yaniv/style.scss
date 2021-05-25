@@ -1,44 +1,341 @@
-body{
-    margin: 0px;
+@keyframes bright {
+    from {
+        filter: brightness(100%);
+    }
+
+    to {
+        filter: brightness(115%);
+    }
 }
 
-.container{
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(12, 1fr);
-    gap:6px;
-    grid-template-areas: 
-    "main main main main main main small small small small small small"
-    "main main main main main main small small small small small small"
-    "main main main main main main small small small small small small"
-    "main main main main main main small small small small small small"
-    "category category category category category category category category category category category category"
-    "medium medium medium medium medium medium medium medium medium medium medium medium"
-    "medium medium medium medium medium medium medium medium medium medium medium medium"
-    "medium medium medium medium medium medium medium medium medium medium medium medium"
-    "category category category category category category category category category category category category"
-    "medium medium medium medium medium medium medium medium medium medium medium medium"
-    "medium medium medium medium medium medium medium medium medium medium medium medium"
-    "medium medium medium medium medium medium medium medium medium medium medium medium"
-    ;
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html,body {
+    margin:0;
+}
+
+.top {
+    display: flex;
+    background-color: black;
+}
+
+.menu {
+    width:100vw;
+    color: white;
+    font-size: 0.7em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
     
-    &__item{
+    &__item {
+        display: flex;
+        vertical-align: baseline;
+        height: 100%;
+        border-left:1px solid gray;
+        padding: 0 1vw;
+    }
+}
 
-
-        &--main {
-            
+.logo {
+    color: black;
+    display: flex;
+    align-items: center;
+    height: 35px;
+    top:0;
+    left:0;
+    padding-left: 2vw;
+    
+    &__item {
+        
+        &--box {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            margin:2px;
+            height: 22px;
+            width: 22px;
+            background-color: white;
+            font-size: 1.3em;
+            font-weight: bold;
         }
-
-        &--small {
-            
+        
+        &--name {
+            color:white;
+            font-weight: bold;
         }
+    }
+}
 
-        &--category {
-            
+.page-wrapper {
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin-left:2%;
+    font-size: 1.3em;
+    color:darkslategray;
+}
+
+span {
+    color: gray;
+    font-weight: normal;
+    position: absolute;
+    right:6%;
+}
+
+h2,
+h3,
+p,
+h4 {
+    font-weight: normal;
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.8em;
+}
+
+h3 {
+    font-size: 1.1em;
+}
+
+p {
+    font-size: 0.9em;
+}
+
+a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.tag {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    color: silver;
+    padding-left: 8px;
+
+    &:hover {
+        color: white;
+    }
+
+    &--news {
+        border-left: 1px solid red;
+    }
+
+    &--sport {
+        border-left: 1px solid yellow;
+    }
+
+    &--did-you-miss {
+        border-left: 1px solid seagreen;
+    }
+}
+
+.grid {
+    margin: 0 2%;
+
+    &--1 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 9.5em);
+        gap: 8px 14px;
+        grid-template-areas:
+            "main main . ."
+            "main main . ."
+        ;
+
+        &__item {
+            cursor: pointer;
+            position: relative;
+            color: white;
+
+            &:hover {
+                // animation: name duration timing-function delay iteration-count direction         fill-mode;
+                // animation: name duration ease-in-out	    delay iteration-count alternate-reverse forwards;                
+                animation: bright 0.5s ease-in-out forwards;
+            }
+
+            img,
+            .shadow {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+
+            .shadow {
+                box-shadow: inset 0 -8rem 1rem 0px #000000aa;
+            }
+
+            h3,
+            p,
+            .tag {
+                position: absolute;
+                left: 4%;
+            }
+
+            h3 {
+                bottom: 20%;
+            }
+
+            p {
+                color: silver;
+            }
+
+            .tag {
+                bottom: 5%;
+            }
+
+            &--main {
+                grid-area: main;
+
+                h3,
+                p,
+                .tag {
+                    left: 2.5%;
+                }
+
+                h3 {
+                    font-size: 1.8em;
+                    bottom: 25%;
+                }
+
+                p {
+                    bottom: 12%;
+                }
+
+                .tag {
+                    bottom: 4%;
+                }
+            }
+
+            &--small {
+                .shadow {
+                    box-shadow: inset 0 -4rem 1rem 0px #000000aa;
+                }
+            }
         }
+    }
+}
 
-        &--medium {
-            
-        }     
+@media screen and (max-width: 1125px) {
+
+    h2,
+    h3,
+    p,
+    h4 {
+        font-weight: bold;
+    }
+
+    h3 {
+        font-size: 1em;
+    }
+
+    p {
+        font-size: 0.8em;
+    }
+
+    .tag {
+        font-size: 0.7em;
+    }
+
+    .grid {
+
+        &--1 {
+            grid-template-rows: repeat(2, 13vw);
+
+            &__item {
+                &--main {
+                    h3 {
+                        font-size: 1.6em;
+                    }
+
+                    .tag {
+                        font-size: 0.8em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 908px) {
+    h2 {
+        font-size: 1.8em;
+    }
+    
+    h3 {
+        font-size: 1.1em;
+    }
+    
+    p {
+        font-size: 0.9em;
+    }
+    
+    .grid {
+
+        &--1 {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(4, 26vw);
+            gap: 14px 14px;
+            grid-template-areas:
+                "main main"
+                "main main"
+                ". ."
+                ". ."
+            ;
+
+            &__item {
+                h3,
+                p,
+                .tag {
+                    left: 2%;
+                }
+
+                h3 {
+                    bottom: 14%;
+                }
+
+                p {
+                    color: silver;
+                }
+
+                .tag {
+                    bottom: 3%;
+                }
+
+                &--main {
+                    grid-area: main;
+
+                    h3,
+                    p,
+                    .tag {
+                        left: 2%;
+                    }
+
+                    h3 {
+                        font-size: 1.8em;
+                        bottom: 12%;
+                    }
+
+                    p {
+                        bottom: 7%;
+                        font-weight: normal;
+                    }
+
+                    .tag {
+                        font-size: 0.8em;
+                        bottom: 2%;
+                    }
+                }
+            }
+        }
     }
 }
