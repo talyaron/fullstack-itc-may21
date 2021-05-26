@@ -1,0 +1,220 @@
+.bigWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.bigGrid {
+  display: grid;
+  grid-template-columns: 20vw 20vw 20vw 20vw;
+  grid-template-rows: 20px 25px 25px 190px 190px 40px 50px;
+  grid-gap: 5px;
+  grid-template-areas:
+    "navBar navBar navBar navBar"
+    ". . . ."
+    "header1 header1 header1 header1"
+    "large1 large1 small1 small2"
+    "large1 large1 small3 small4"
+    ". . . ."
+    "smallGrid smallGrid smallGrid smallGrid ";
+  /* "header2 header2 header2 header2"
+    "medium1 medium2 medium3 medium4"; */
+}
+
+.smallGrid {
+  display: grid;
+  grid-area: smallGrid;
+  grid-template-columns: 27vw 27vw 27vw;
+  grid-template-rows: 25px 260px 40px 25px 260px;
+  grid-gap: 7px;
+  grid-template-areas:
+    "header2 header2 header2"
+    "medium1 medium2 medium3"
+    ". . ."
+    "header3 header3 header3"
+    "medium4 medium5 medium6";
+}
+
+.url1 {
+  grid-area: large1;
+  background-image: URL("https://cf.bstatic.com/xdata/images/hotel/max1024x768/255041826.jpg?k=91da93edc76c3f6850663e1fe7183d8f0f729cf7765e53d36db3df7aa48caa71&o=");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.url2 {
+  grid-area: small1;
+  background-image: URL("https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/TIBERIAS_-_GALILEE_%287723477802%29.jpg/800px-TIBERIAS_-_GALILEE_%287723477802%29.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.url3 {
+  grid-area: small2;
+  background-image: URL("https://media.timeout.com/images/103955496/750/422/image.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.url4 {
+  grid-area: small3;
+  background-image: URL("https://upload.wikimedia.org/wikipedia/commons/3/32/Hebron_Cave_of_the_Patriarchs.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.url5 {
+  grid-area: small4;
+  background-image: URL("https://upload.wikimedia.org/wikipedia/commons/8/86/Jewish_Quarter_of_the_Old_City_of_Jerusalem.JPG");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.url6 {
+  grid-area: medium1;
+  background-image: URL("https://images-na.ssl-images-amazon.com/images/I/71LkML0SXML.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.url7 {
+  grid-area: medium2;
+  background-image: URL("https://upload.wikimedia.org/wikipedia/commons/3/3e/Tennis_Racket_and_Balls.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.url8 {
+  grid-area: medium3;
+  background-image: URL("https://israel-extreme.com/wp-content/uploads/2016/06/contact-image.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.url9 {
+  grid-area: medium4;
+  background-image: URL("http://www.theyeshivaworld.com/wp-content/uploads/2015/03/Vertical.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.url10 {
+  grid-area: medium5;
+  background-image: URL("https://upload.wikimedia.org/wikipedia/commons/b/b8/Lots_of_math_symbols_and_numbers.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.url11 {
+  grid-area: medium6;
+  background-image: URL("https://miro.medium.com/max/1400/1*FVfdYFOkVlf2lPswre6iXg.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.header1 {
+  grid-area: header1;
+}
+
+.header2 {
+  grid-area: header2;
+}
+
+.header3 {
+  grid-area: header3;
+}
+
+.navBar {
+  grid-area: navBar;
+  display: flex;
+  width: 90vw;
+  justify-content: flex-start;
+  background-color: rgb(105, 152, 190);
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+.navBarLogo {
+  display: flex;
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+  margin: 1px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.titlePlaces {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.descriptionBig {
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+}
+
+.description {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.descriptionMe1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navy {
+  color: navy;
+  font-weight: bold;
+}
+/* 
+@media only screen and (max-width: 1400px) {
+  .bigGrid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 150px);
+  }
+}
+@media only screen and (max-width: 900px) {
+  .bigGrid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 800px;
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .bigGrid {
+    grid-template-columns: repeat(1, 1fr);
+    width: 90vw;
+    font-size: 1.3rem;
+  }
+} */

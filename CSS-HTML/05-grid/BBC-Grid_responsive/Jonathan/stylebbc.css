@@ -9,8 +9,8 @@
 .main {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 500px 250px 250px;
-      grid-template-columns: 500px 250px 250px;
+  -ms-grid-columns: 600px 300px 300px;
+      grid-template-columns: 600px 300px 300px;
   -ms-grid-rows: 170px 170px;
       grid-template-rows: 170px 170px;
   grid-row-gap: 7px;
@@ -58,7 +58,7 @@
 
 .main__bigimage__textblock {
   position: relative;
-  bottom: 150px;
+  bottom: 120px;
   left: 9px;
 }
 
