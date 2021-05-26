@@ -610,6 +610,11 @@ section h2 {
     width: 736px;
     height: 414px;
   }
+  .top-news .new1 h2, .top-news .new1 p {
+    position: relative;
+    top: 25rem;
+    left: 0;
+  }
   .top-news .small-news {
     display: -ms-grid;
     display: grid;
@@ -636,6 +641,11 @@ section h2 {
     background-position: center center;
     background-repeat: no-repeat;
     margin-top: 2rem;
+  }
+  .top-news .new1 h2, .top-news .new1 p {
+    position: relative;
+    top: 0;
+    left: 0;
   }
   .top-news .small-news {
     display: none;

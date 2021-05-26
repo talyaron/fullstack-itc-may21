@@ -127,6 +127,49 @@ header {
   height: 40px;
   background-color: black;
   padding-left: 1%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.navbar {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  color: white;
+  text-decoration: none;
+  margin-left: 350px;
+}
+
+.navbar__item {
+  background-color: black;
+  color: white;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+  padding: 10px;
+  text-align: center;
+  list-style: none;
+}
+
+.navbar__item--home:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+.navbar__item--main:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+.navbar__item--stadium:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+.navbar__item--champions:hover {
+  background-color: gray;
+  cursor: pointer;
 }
 
 .logo-box {
@@ -136,9 +179,6 @@ header {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: space-around;
-      -ms-flex-align: space-around;
-          align-items: space-around;
   margin: 2px;
   height: 25px;
   width: 25px;
@@ -156,8 +196,9 @@ h1 {
   font-weight: 700;
 }
 
-.title-stadium {
-  margin: 50px 0px 0px 15px;
+.title-stadium,
+.title-champions {
+  margin: 60px 0px 30px 15px;
   color: #4a4a4a;
   font-size: 22px;
   font-family: Arial, Helvetica, sans-serif;
@@ -279,7 +320,119 @@ h1 {
   margin-top: 70px;
 }
 
-@media only screen and (max-width: 768px) and (min-width: 400px) {
+.champions {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (261px)[3];
+      grid-template-columns: repeat(3, 261px);
+  -ms-grid-rows: 200px 50px 100px 50px;
+      grid-template-rows: 200px 50px 100px 50px;
+  grid-row-gap: 7px;
+  grid-column-gap: 12px;
+  margin-left: 15px;
+  margin-top: 30px;
+  margin-bottom: 60px;
+      grid-template-areas: "portugal_img esp2012_img esp2008_img" "portugal_h3  esp2012_h3 esp2008_h3" "portugal_p  esp2012_p esp2008_p" "portugal_span esp2012_span esp2008_span";
+}
+
+.champions__portugal_img {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: portugal_img;
+}
+
+.champions__portugal_h3 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: portugal_h3;
+}
+
+.champions__portugal_p {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: portugal_p;
+}
+
+.champions__portugal_span {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: portugal_span;
+}
+
+.champions__esp2012_img {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: esp2012_img;
+}
+
+.champions__esp2012_h3 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: esp2012_h3;
+}
+
+.champions__esp2012_p {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: esp2012_p;
+}
+
+.champions__esp2012_span {
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: esp2012_span;
+}
+
+.champions__esp2008_img {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: esp2008_img;
+}
+
+.champions__esp2008_h3 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: esp2008_h3;
+}
+
+.champions__esp2008_p {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  grid-area: esp2008_p;
+}
+
+.champions__esp2008_span {
+  -ms-grid-row: 4;
+  -ms-grid-column: 3;
+  grid-area: esp2008_span;
+}
+
+.champions h3 {
+  color: #212121;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  margin: 5px 0 10px 0;
+}
+
+.champions p {
+  color: #212121;
+  font-size: 14px;
+  text-align: left;
+}
+
+.champions span {
+  border-left: 2px solid red;
+  display: block;
+  padding-left: 4px;
+  font-size: 10px;
+  color: black;
+  font-weight: bold;
+  margin-top: 70px;
+}
+
+@media screen and (max-width: 1200px) {
   header {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -287,6 +440,56 @@ h1 {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    width: 1300px;
+    height: 40px;
+    background-color: black;
+    padding-left: 1%;
+  }
+  .navbar {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+    color: white;
+    text-decoration: none;
+    margin-left: px;
+  }
+  .navbar__item {
+    background-color: black;
+    color: white;
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+    padding: 10px;
+    text-align: center;
+    list-style: none;
+  }
+  .navbar__item--home:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+  .navbar__item--main:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+  .navbar__item--stadium:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+  .navbar__item--champions:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 768px;
     height: 40px;
     background-color: black;
     padding-left: 1%;
@@ -358,7 +561,8 @@ h1 {
     top: 60px;
     left: 8px;
   }
-  .title-stadium {
+  .title-stadium,
+  .title-champions {
     margin: 50px 0px 10px 300px;
     color: #4a4a4a;
     font-size: 22px;
@@ -456,6 +660,128 @@ h1 {
     font-weight: bold;
     margin-top: 12px;
   }
+  .champions {
+    -ms-grid-columns: 400px;
+        grid-template-columns: 400px;
+    margin: 0 0 0 175px;
+    grid-row-gap: 7px;
+        grid-template-areas: "portugal_img" "portugal_h3" "portugal_p" "portugal_span" "esp2012_img" "esp2012_h3" "esp2012_p" "esp2012_span" "esp2008_img" "esp2008_h3" "esp2008_p" "esp2008_span";
+  }
+  .champions__portugal_img {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: portugal_img;
+  }
+  .champions__portugal_h3 {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: portugal_h3;
+  }
+  .champions__portugal_p {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    grid-area: portugal_p;
+  }
+  .champions__portugal_span {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+    grid-area: portugal_span;
+  }
+  .champions__esp2012_img {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    grid-area: esp2012_img;
+  }
+  .champions__esp2012_h3 {
+    -ms-grid-row: 6;
+    -ms-grid-column: 1;
+    grid-area: esp2012_h3;
+  }
+  .champions__esp2012_p {
+    -ms-grid-row: 7;
+    -ms-grid-column: 1;
+    grid-area: esp2012_p;
+  }
+  .champions__esp2012_span {
+    -ms-grid-row: 8;
+    -ms-grid-column: 1;
+    grid-area: esp2012_span;
+  }
+  .champions__esp2008_img {
+    -ms-grid-row: 9;
+    -ms-grid-column: 1;
+    grid-area: esp2008_img;
+  }
+  .champions__esp2008_h3 {
+    -ms-grid-row: 10;
+    -ms-grid-column: 1;
+    grid-area: esp2008_h3;
+  }
+  .champions__esp2008_p {
+    -ms-grid-row: 11;
+    -ms-grid-column: 1;
+    grid-area: esp2008_p;
+  }
+  .champions__esp2008_span {
+    -ms-grid-row: 12;
+    -ms-grid-column: 1;
+    grid-area: esp2008_span;
+  }
+  .champions h3 {
+    color: #212121;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: left;
+  }
+  .champions p {
+    color: #212121;
+    font-size: 14px;
+    text-align: left;
+  }
+  .champions span {
+    border-left: 2px solid red;
+    display: block;
+    padding-left: 4px;
+    font-size: 10px;
+    color: black;
+    font-weight: bold;
+    margin-top: 12px;
+  }
+  .navbar {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+    color: white;
+    text-decoration: none;
+    margin-left: 100px;
+  }
+  .navbar__item {
+    background-color: black;
+    color: white;
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+    padding: 10px;
+    text-align: center;
+    list-style: none;
+  }
+  .navbar__item--home:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+  .navbar__item--main:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+  .navbar__item--stadium:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+  .navbar__item--champions:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
 }
 
 @media only screen and (max-width: 400px) {
@@ -466,7 +792,7 @@ h1 {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    width: 420px;
+    width: 400px;
     height: 40px;
     background-color: black;
     padding-left: 1%;
@@ -539,7 +865,8 @@ h1 {
     top: 60px;
     left: 8px;
   }
-  .title-stadium {
+  .title-stadium,
+  .title-champions {
     margin: 50px 0px 10px 5px;
     color: #4a4a4a;
     font-size: 22px;
@@ -637,16 +964,127 @@ h1 {
     font-weight: bold;
     margin-top: 12px;
   }
-}
-
-.title-lastwinners {
-  margin: 250px 0px 0px 15px;
-  color: #4a4a4a;
-  font-size: 22px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  border-left: 5px solid yellowgreen;
-  padding-left: 4px;
-  line-height: 20px;
+  .champions {
+    -ms-grid-columns: 400px;
+        grid-template-columns: 400px;
+    margin: 0 0 0 5px;
+    grid-row-gap: 7px;
+        grid-template-areas: "portugal_img" "portugal_h3" "portugal_p" "portugal_span" "esp2012_img" "esp2012_h3" "esp2012_p" "esp2012_span" "esp2008_img" "esp2008_h3" "esp2008_p" "esp2008_span";
+  }
+  .champions__portugal_img {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: portugal_img;
+  }
+  .champions__portugal_h3 {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: portugal_h3;
+  }
+  .champions__portugal_p {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    grid-area: portugal_p;
+  }
+  .champions__portugal_span {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+    grid-area: portugal_span;
+  }
+  .champions__esp2012_img {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    grid-area: esp2012_img;
+  }
+  .champions__esp2012_h3 {
+    -ms-grid-row: 6;
+    -ms-grid-column: 1;
+    grid-area: esp2012_h3;
+  }
+  .champions__esp2012_p {
+    -ms-grid-row: 7;
+    -ms-grid-column: 1;
+    grid-area: esp2012_p;
+  }
+  .champions__esp2012_span {
+    -ms-grid-row: 8;
+    -ms-grid-column: 1;
+    grid-area: esp2012_span;
+  }
+  .champions__esp2008_img {
+    -ms-grid-row: 9;
+    -ms-grid-column: 1;
+    grid-area: esp2008_img;
+  }
+  .champions__esp2008_h3 {
+    -ms-grid-row: 10;
+    -ms-grid-column: 1;
+    grid-area: esp2008_h3;
+  }
+  .champions__esp2008_p {
+    -ms-grid-row: 11;
+    -ms-grid-column: 1;
+    grid-area: esp2008_p;
+  }
+  .champions__esp2008_span {
+    -ms-grid-row: 12;
+    -ms-grid-column: 1;
+    grid-area: esp2008_span;
+  }
+  .champions h3 {
+    color: #212121;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: left;
+  }
+  .champions p {
+    color: #212121;
+    font-size: 14px;
+    text-align: left;
+  }
+  .champions span {
+    border-left: 2px solid red;
+    display: block;
+    padding-left: 4px;
+    font-size: 10px;
+    color: black;
+    font-weight: bold;
+    margin-top: 12px;
+  }
+  .navbar {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+    color: white;
+    text-decoration: none;
+    margin-left: 45px;
+  }
+  .navbar__item {
+    background-color: black;
+    color: white;
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+    padding: 10px;
+    text-align: center;
+    list-style: none;
+  }
+  .navbar__item--home:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+  .navbar__item--main:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+  .navbar__item--stadium:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+  .navbar__item--champions:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
 }
 /*# sourceMappingURL=stylebbc.css.map */
