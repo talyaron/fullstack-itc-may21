@@ -111,6 +111,12 @@ section {
     .new1 {
       width: 736px;
       height: 414px;
+      h2,p {
+        position: relative;
+        top: 25rem;
+        left: 0;
+      
+      }
     }
 
     .small-news {
@@ -122,6 +128,7 @@ section {
       .new5 {
         width: 360px;
         height: 202px;
+     
       }
     }
   }
@@ -141,6 +148,12 @@ section {
       background-position: center center;
       background-repeat: no-repeat;
       margin-top: 2rem;
+      h2,p {
+        position: relative;
+        top: 0;
+        left: 0;
+      
+      }
     }
     .small-news {
       display: none;
