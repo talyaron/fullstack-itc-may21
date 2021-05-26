@@ -229,16 +229,22 @@ h6 {
 @media (max-width: 600px) {
   .welcome__interface {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    /* grid-template-rows: repeat(3, 1fr); */
   }
-}
-@media (max-width: 600px) {
   .news__interface {
     grid-template-columns: repeat(3, 1fr);
   }
-}
-@media (max-width: 600px) {
   .sport__interface {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+/* @media (max-width: 600px) {
+  .news__interface {
+    grid-template-columns: repeat(3, 1fr);
+  } */
+/* }
+@media (max-width: 600px) {
+  .sport__interface {
+    grid-template-columns: repeat(3, 1fr);
+  }
+} */
