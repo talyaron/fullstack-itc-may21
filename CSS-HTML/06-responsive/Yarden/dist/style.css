@@ -1,0 +1,191 @@
+@media only screen and (max-width: 600px) {
+  .navbar {
+    grid-template-columns: repeat(10, 10%);
+  }
+}
+@media only screen and (max-width: 900px) {
+  .navbar {
+    grid-template-columns: repeat(10, 10%);
+  }
+}
+@media only screen and (max-width: 1400px) {
+  .navbar {
+    grid-template-columns: repeat(10, 10%);
+  }
+}
+body {
+  font-family: Arial, Helvetica, freesans, sans-serif;
+  margin: 0;
+}
+
+.body-wrapper {
+  padding: 2rem 5rem;
+}
+
+.navbar {
+  background-color: black;
+  margin: -0.7rem;
+  display: grid;
+  grid-template-columns: repeat(10, 9%);
+  align-items: center;
+  padding-top: 0.3rem;
+}
+
+.nav {
+  display: inline-block;
+  font-weight: 700;
+  width: 4.5rem;
+  color: white;
+  border-left: 1px solid #666666;
+  font-size: 13px;
+  text-align: center;
+  padding: 0.6rem;
+}
+
+#logo {
+  padding-bottom: 8.2px;
+  width: 5.25rem;
+  height: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  list-style-type: none;
+}
+
+.logo-letter {
+  margin: 1px 2px;
+  background-color: white;
+  color: black;
+  font-weight: 550;
+  font-size: 1.5rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.headline {
+  margin: 2rem 0;
+  color: #4A4A5B;
+}
+
+#time {
+  display: inline;
+  margin-left: 48rem;
+  color: #8c8c8c;
+  font-weight: normal;
+}
+
+#header-headline {
+  display: inline;
+}
+
+.sub-wrapper {
+  display: grid;
+  grid-template-columns: 50% 12.5% 12.5% 12.5% 12.5%;
+  margin: auto;
+}
+
+h3 {
+  margin: auto;
+  font-weight: bold;
+  width: 300px;
+  height: 180px;
+  color: #a1a1a1;
+  text-shadow: 1px 1px black;
+}
+
+.sub-wrapper2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.footer {
+  background-color: #4C4C4C;
+  height: 15rem;
+  margin: 2rem 0 0 0;
+}
+.footer__headline {
+  border: none;
+  margin: 2rem 0 2rem 4rem;
+  color: white;
+  font-size: 1.5rem;
+}
+.footer__list {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  margin: 0 10%;
+}
+.footer__list__item {
+  color: white;
+  cursor: pointer;
+  border-right: grey solid 1px;
+}
+.footer__disclaimer {
+  color: white;
+  margin: 3rem 0 0 1rem;
+  font-size: 0.9rem;
+}
+
+#footer-list-wrapper {
+  border-bottom: grey solid 1px;
+  padding-bottom: 1rem;
+  margin: auto;
+}
+
+#pic-itc {
+  height: 23rem;
+  width: 38.125rem;
+  background-size: contain;
+  background-image: url("https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190916094546/5-Most-Difficult-Programming-Languages-of-the-World.png");
+}
+
+#pic-haifa {
+  background-size: cover;
+  background-image: url("https://laurenonlocation.com/wp-content/uploads/2020/03/image10.png");
+}
+
+#pic-mexico {
+  background-size: cover;
+  background-image: url("https://www.atlanticcouncil.org/wp-content/uploads/2020/04/Mexico-US-border-covid-large.jpg");
+}
+
+#pic-feverBaby {
+  background-size: cover;
+  background-image: url("https://hxmi.com/wp-content/uploads/2020/04/baby-thermometer-sick.jpg");
+}
+
+#pic-hummus {
+  background-size: cover;
+  background-image: url("http://d340eiag32bpum.cloudfront.net/img/post/spot/395/39413-ekrPnmxfzGvzfcTKhsav_lrg_re.jpg");
+}
+
+#pic-translation {
+  background-size: contain;
+  background-image: url("https://viame.ae/wp-content/uploads/2019/09/Language-Barriers-in-the-Courier-Business-1-915x664.png");
+}
+
+#pic-digitalN {
+  background-size: contain;
+  background-image: url("https://www.travelinglifestyle.net/wp-content/uploads/2020/06/How-To-Become-a-Digital-Nomad.jpg");
+}
+
+#pic-bacIR {
+  background-size: cover;
+  background-image: url("https://knightoutoftime.files.wordpress.com/2016/01/zorndorf.jpg?w=1000");
+}
+
+#pic-MMA {
+  background-size: cover;
+  background-image: url("https://filmthreat.com/wp-content/uploads/2021/04/REVIEW-Mortal-Kombat-1995-1.jpg");
+}
+
+#pic-boarding {
+  background-size: contain;
+  background-image: url("https://s1.cdn.autoevolution.com/images/news/gallery/hipster-parents-gather-round-you-can-now-take-your-kids-on-longboarding-trips_2.jpg");
+}
+
+#pic-strength {
+  background-size: contain;
+  background-image: url("https://uproxx.com/wp-content/uploads/2018/02/hulk.jpg");
+}
