@@ -1,0 +1,36 @@
+.wrapper {
+  width: 900px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.album {
+  position: relative;
+}
+
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  grid-template-rows: 200px 200px 200px;
+  gap: 20px;
+  top: 6px;
+}
+
+.pics {
+  display: flex;
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  max-width: 100%;
+  height: inherit;
+  border-radius: 50%;
+  border: 5px solid gray;
+}

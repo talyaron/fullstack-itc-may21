@@ -1,6 +1,7 @@
 body {
 
   margin: auto;
+  background-color: lightblue;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -67,7 +68,7 @@ body {
 
 
   &__container {
-
+    color: white;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 5px;
@@ -111,15 +112,24 @@ body {
 
 
   &__items {
-    height: 150px;
+    h1{ font-size: 1rem;}
+    p{ font-size: .8rem;}
+    display: flex;
+    align-items: flex-end;
+    height: 10rem;
     background-color: rgb(70, 70, 57);
 
     &--main {
+      p{ font-size: 1.2rem;}
+      display: flex;
+      align-items: flex-end;
       background-color: rgb(121, 236, 27);
-      margin-right: 8px;
+      margin-right: .5rem;
       grid-area: main;
 
-      &--2 {}
+      &--2 {
+        
+      }
     }
 
   }
@@ -128,18 +138,22 @@ body {
 .hero {
   background-image: -webkit-radial-gradient(blue, green, purple);
 
-  &__header {
-    display: flex;
 
-    .a {
-      flex: 1;
-      text-align: left;
+
+  &__article {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 2;
+    grid-template-areas: 
+    "main main ."
+    ". . .";
+    gap:2rem;
+    padding: 2rem;
+    h1{
+      color:white
     }
-
-    .b {
-      position: relative;
-      right: 1rem;
-      top: 1.5rem
+    p {
+      color:white
     }
 
     button {
@@ -147,18 +161,13 @@ body {
       color: white;
       border-radius: 50px;
       border-style: groove;
-      padding: .5rem 1rem;
-
-
-
+      padding: 1rem 2rem;
+      margin: 2rem 0rem 0 10rem;
+      &:hover{
+        background-color: grayscale($color: #5f5b5b48);
+      }
     }
-  }
-
-  &__article {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:2rem;
-    padding: 2rem;
+   
     .article__item {
       
       width: 100%;
@@ -174,22 +183,51 @@ body {
 
 }
 
-
-
-@media only screen and (max-width: 1400px) {
-  body {
-    background-color: rgb(106, 176, 199);
-  }
+.main{
+  grid-area: main;
 }
+
+
 
 @media only screen and (max-width: 900px) {
   body {
     background-color: rgb(124, 44, 118);
+  
+  }
+  .article__container--2{
+    grid-template-columns: 1fr;
+  }
+  .article__container{
+    grid-template-columns: 1fr;
   }
 }
+
+
 
 @media only screen and (max-width: 600px) {
   body {
     background-color: rgb(181, 221, 36);
+    }
+    .hero__article{
+      background-color: lightcoral;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+      "main";
+    }
+    .article__container--2{
+      grid-template-columns: 1fr;
+    }
+    .article__container{
+    
+      background-color: lightblue;
+      grid-template-areas:
+       "main"
+     ;
+     .article__items--main{
+       margin: 0;
+       height: 10rem;
+     }
+   
+ 
   }
 }

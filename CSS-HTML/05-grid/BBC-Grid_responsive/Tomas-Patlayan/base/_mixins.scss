@@ -6,18 +6,14 @@
 }
 
 @mixin tablet {
-    @media (min-width: #{$tablet}) {
+    @media (max-width: #{$tablet}) {
         @content;
     }
 }
   
-@mixin desktop {
-    @media (min-width: #{$desktop}) {
-        @content;
-    }
-}
-@mixin grid($columnas, $espaciado ) {
+
+@mixin grid($column, $space ) {
     display: grid;
-    gap: $espaciado;
-    grid-template-columns: repeat($columnas, 1fr);
+    gap: $space;
+    grid-template-columns: repeat($column, 1fr);
 }
