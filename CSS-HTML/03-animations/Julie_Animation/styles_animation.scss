@@ -1,0 +1,123 @@
+body {
+  background-color: bisque;
+}
+
+.big_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  &__article {
+    padding: 20px;
+    &--recife {
+      height: 400px;
+      animation-duration: 2s;
+      animation-name: border--recife;
+      animation-iteration-count: infinite;
+    }
+    &--london {
+      height: 400px;
+      animation-duration: 2s;
+      animation-name: border--london;
+      animation-iteration-count: infinite;
+    }
+    &--zichron {
+      height: 400px;
+      animation-duration: 2s;
+      animation-name: border--zichron;
+      animation-iteration-count: infinite;
+    }
+    &--me {
+      border: 3px solid black;
+      height: 400px;
+      transition: 3s ease-in-out;
+    }
+    &:hover {
+      transform: scale(1.2, 1.2);
+    }
+    &--rl {
+      height: 400px;
+      position: relative;
+      animation: move--tsa 5s infinite;
+      animation-timing-function: linear;
+    }
+    &--cm {
+      height: 400px;
+      position: relative;
+      animation: move--cm 5s infinite;
+      animation-timing-function: linear;
+    }
+    &--tsa {
+      height: 400px;
+      position: relative;
+      animation: move--tsa 5s infinite;
+      animation-timing-function: linear;
+    }
+    &--itc {
+      border: 3px solid black;
+      height: 400px;
+      transition: 3s ease-in-out;
+    }
+    &:hover {
+      transform: scale(1.2, 1.2);
+    }
+  }
+}
+
+@keyframes border--recife {
+  from {
+    border: 10px solid green;
+  }
+  to {
+    border: 10px solid yellow;
+  }
+}
+
+@keyframes border--london {
+  from {
+    border: 10px solid red;
+  }
+  to {
+    border: 10px solid blue;
+  }
+}
+
+@keyframes border--zichron {
+  from {
+    border: 10px solid white;
+  }
+  to {
+    border: 10px solid blue;
+  }
+}
+
+@keyframes move--tsa {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 300px;
+  }
+}
+
+@keyframes move--rl {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 300px;
+  }
+}
+
+@keyframes move--cm {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 300px;
+  }
+}
+
+// YS: Good work!
