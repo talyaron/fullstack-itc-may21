@@ -8,9 +8,9 @@ function sayHello(name) {
     return 'hello ' + name + '!';
 }
 
-const myName = 'Yaniv';
+const myName1 = 'Yaniv';
 
-console.log(sayHello(myName));
+console.log(sayHello(myName1));
 
 
 let sayHey = function (name) {
@@ -42,6 +42,6 @@ function factorial(num) {
     return result;
 }
 
-let toFactorial = 7;
+let toFactorial = 8;
 
 console.log('the factorial of ' + toFactorial + ' is ' + factorial(toFactorial) + '!');

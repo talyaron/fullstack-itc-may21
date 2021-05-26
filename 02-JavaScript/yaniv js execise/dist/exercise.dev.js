@@ -8,8 +8,8 @@ function sayHello(name) {
   return 'hello ' + name + '!';
 }
 
-var myName = 'Yaniv';
-console.log(sayHello(myName));
+var myName1 = 'Yaniv';
+console.log(sayHello(myName1));
 
 var sayHey = function sayHey(name) {
   return 'hello ' + name + '!';
@@ -35,5 +35,5 @@ function factorial(num) {
   return result;
 }
 
-var toFactorial = 7;
+var toFactorial = 8;
 console.log('the factorial of ' + toFactorial + ' is ' + factorial(toFactorial) + '!');
