@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
 </head>
 
+<!-- YS: Good implementation of BEM -->
 <body>
     <nav class="top-menu">
         <img class="top-menu__logo" src="https://img.mako.co.il/2021/05/03/MAKOFIRST.png">
@@ -27,6 +28,7 @@
         </div>
     </nav>
     <nav class="secondary-menu">
+        <!-- YS: Good implementation of a modifier (--first) -->
         <a href="" class="secondary-menu__element secondary-menu__element--first">N12</a>
         <a href="" class="secondary-menu__element">LIVE12</a>
         <a href="" class="secondary-menu__element">makoTV</a>
@@ -50,8 +52,10 @@
             <p class="text1">Shomer Chomot Operation</p>
         </div>
         <div class="justify">
+            <!-- YS: Since 'sectionheader--bigimage' is a child of 'justify', following BEM it should be: justify___sectionheader--bigimage -->
             <div class="sectionheader--bigimage">
                 <img src="https://img.mako.co.il/2021/05/20/tiltiuul_autoOrient_x6.jpg">
+                <!-- YS: Since 'textblock' is a child of 'sectionheader--bigimage', following BEM it should be: justify___sectionheader--bigimage__textblock -->
                 <div class="textblock">
                     <p>Heavy barrages to the envelope: An anti-tank missile was fired at Zikim, a fighter was lightly
                         wounded</p>
@@ -91,6 +95,7 @@
             <img class="suggestions__logo" src="logoMako.png" alt="">
             <div class="suggestion">
                 <div>
+                <!-- YS: If element-before, element-main and element-sub are used as modifiers, they should have two dashes(--) for example suggestion_element--before  -->
                     <p class="suggestion__element-before">Cannabis</p>
                     <p class="suggestion__element-main">You will not believe how blak pepper</p>
                     <p class="suggestion__element-sub">Reading time: 1 min</p>
@@ -201,6 +206,7 @@
                             alt="">
                     </div>
                     <div class="news__content">
+                        <!-- YS: since titles is not something that modifies this div (like color) then it would be better to name it news__content__titles -->
                         <div class="news__content--titles">
                             <p class="suggestion__element-main">Is it possible to close a presidential deal in</p>
                             <p class="suggestion__element-sub">Reading time: 8 min | 11:15 20/5/21</p>
@@ -268,3 +274,6 @@
 </body>
 
 </html>
+
+
+<!-- YS: Very nice! Keep up the good work-->

@@ -6,7 +6,7 @@ body{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 200px);
-    gap:6px;
+    gap: 10px;
     grid-template-areas: 
     "main main . ."
     "main main . ."
