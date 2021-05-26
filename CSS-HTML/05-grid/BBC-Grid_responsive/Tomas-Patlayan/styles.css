@@ -408,10 +408,10 @@ h3 {
       -ms-flex-align: center;
           align-items: center;
   justify-items: center;
-  padding: .3rem 0;
+  padding: 0.3rem 0;
 }
 
-.bar_nav {
+.bar__nav {
   display: -ms-grid;
   display: grid;
   gap: 2rem;
@@ -419,7 +419,7 @@ h3 {
       grid-template-columns: repeat(9, 1fr);
 }
 
-.bar_nav a {
+.bar__nav a {
   color: #ffffff;
 }
 
@@ -490,7 +490,11 @@ h3 {
 }
 
 .top-news .new2 h2 {
-  font-size: 3rem;
+  position: relative;
+  top: 12rem;
+  left: 0;
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 .top-news .new3 {
@@ -502,7 +506,11 @@ h3 {
 }
 
 .top-news .new3 h2 {
-  font-size: 3rem;
+  position: relative;
+  top: 12rem;
+  left: 0;
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 .top-news .new4 {
@@ -514,7 +522,11 @@ h3 {
 }
 
 .top-news .new4 h2 {
-  font-size: 3rem;
+  position: relative;
+  top: 12rem;
+  left: 0;
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 .top-news .new5 {
@@ -526,7 +538,11 @@ h3 {
 }
 
 .top-news .new5 h2 {
-  font-size: 3rem;
+  position: relative;
+  top: 12rem;
+  left: 0;
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 section h2 {
