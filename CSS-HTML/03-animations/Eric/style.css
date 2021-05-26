@@ -105,6 +105,7 @@ body {
   }
 }
 
+/* YS: Nice animation */
 @keyframes animate {
   0% {
     -webkit-transform: scale(0) translateY(0) rotate(0);
@@ -134,7 +135,7 @@ body {
   -webkit-animation: title 6s infinite;
           animation: title 6s infinite;
 }
-
+/* // Good */
 @-webkit-keyframes title {
   0% {
     left: 0px;
@@ -298,6 +299,8 @@ body {
     background: url(https://www.seti.org/sites/default/files/2020-10/earth-view-from-moon-perspective-footprints-1400px.jpg);
   }
 }
+
+/* YS: Remove unecessary comments */
 
 /* block 
 .articles {

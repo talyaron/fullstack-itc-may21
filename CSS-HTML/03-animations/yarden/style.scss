@@ -1,4 +1,4 @@
-@-webkit-keyframes "pulsate-fwd" {
+@-webkit-keyframes pulsate-fwd {
 	0% {
 		-webkit-transform: scale(1);
 		transform: scale(1);
@@ -12,7 +12,7 @@
 		transform: scale(1);
 	}
 }
-@keyframes "pulsate-fwd" {
+@keyframes pulsate-fwd {
 	0% {
 		-webkit-transform: scale(1);
 		transform: scale(1);
@@ -26,7 +26,7 @@
 		transform: scale(1);
 	}
 }
-@-webkit-keyframes "colorchange" {
+@-webkit-keyframes colorchange {
 	0% {
 		color: blue;
 	}
@@ -61,7 +61,7 @@
 		color: pink;
 	}
 }
-@-webkit-keyframes "kenburns-top-right" {
+@-webkit-keyframes kenburns-top-right {
 	0% {
 		-webkit-transform: scale(1) translate(0, 0);
 		transform: scale(1) translate(0, 0);
@@ -75,7 +75,7 @@
 		transform-origin: right top;
 	}
 }
-@keyframes "kenburns-top-right" {
+@keyframes kenburns-top-right {
 	0% {
 		-webkit-transform: scale(1) translate(0, 0);
 		transform: scale(1) translate(0, 0);
@@ -89,7 +89,7 @@
 		transform-origin: right top;
 	}
 }
-@-webkit-keyframes "text-blur-out" {
+@-webkit-keyframes text-blur-out {
 	0% {
 		-webkit-filter: blur(.01);
 		filter: blur(.01);
@@ -99,7 +99,7 @@
 		filter: blur(12px) opacity(0);
 	}
 }
-@keyframes "text-blur-out" {
+@keyframes text-blur-out {
 	0% {
 		-webkit-filter: blur(.01);
 		filter: blur(.01);
@@ -132,16 +132,6 @@ iframe {
 	z-index: -1;
 }
 nav {
-<<<<<<< HEAD:CSS-HTML/03-animations/yarden/style.scss
-    display: flex;
-    justify-content: center;
-
-    h6  {
-        
-    }
-}
-
-=======
 	display: flex;
 	justify-content: space-around;
 	background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
@@ -189,7 +179,6 @@ nav {
 		cursor: pointer;
 	}
 }
->>>>>>> main:CSS-HTML/animations/yarden/style.scss
 .region {
 	margin: 1.5rem;
 	display: flex;
@@ -366,3 +355,5 @@ nav {
 	background-image: url("https://lipis.github.io/flag-icon-css/flags/4x3/pa.svg");
 	background-size: 100%;
 }
+
+//Good animations, good naming of elements. Nice work!  
