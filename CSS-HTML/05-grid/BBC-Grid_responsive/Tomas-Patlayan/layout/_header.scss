@@ -1,20 +1,51 @@
 .header-content {
   background-color: #000000;
 }
+.menu-btn {
+  position: absolute;
+  cursor: pointer;
+  top: 15px;
+  right: 30px;
+  z-index: 1000;
+  font-size: 1.5rem;
+  display: none;
+}
+@include phone {
+  .menu-btn {
+    display: block;
+  }
+
+  .bar {
+    &__nav {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #3f3640;
+      height: 100%;
+      padding: 30px;
+      opacity: 0.9;
+      transform: translateX(-400px);
+      transition: transform 0.5s ease-in-out;
+      z-index: 555  ;
+    }
+    .bar__nav.bar__show{
+      transform: translateX(-20px);
+    }
+  }
+}
 
 .bar {
   display: grid;
   grid-template-columns: 10% auto auto auto;
   align-items: center;
   justify-items: center;
-  padding: .3rem 0;
+  padding: 0.3rem 0;
 
   &_nav {
     @include grid(9, 2rem);
-    
 
     a {
-       
       color: #ffffff;
     }
   }
