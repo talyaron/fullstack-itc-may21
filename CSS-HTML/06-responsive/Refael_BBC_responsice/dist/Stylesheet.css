@@ -59,7 +59,7 @@ h6 {
 }
 
 .wrapper {
-  width: 1200px;
+  width: 90vw;
   margin: auto;
 }
 
@@ -109,19 +109,12 @@ h6 {
 }
 
 .welcome__interface {
-  /* position: relative; */
-  top: 10px;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
   row-gap: 20px;
   column-gap: 10px;
-  width: auto;
-  height: 466px;
   grid-template-areas: "header . ." "header . .";
-}
-
-.welcome__interface--item {
-  display: grid;
 }
 
 .item_2 {
@@ -152,99 +145,72 @@ h6 {
 
 .item_7 {
   background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item6.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position-x: center;
+  background-size: cover;
 }
 
 .item_8 {
   background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item7.jpg);
-  background-size: 124%;
-  background-repeat: no-repeat;
-  background-position-x: center;
+  background-size: cover;
 }
 
 .item_9 {
   background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item8.jpg);
-  background-size: 133%;
-  background-repeat: no-repeat;
-  background-position-x: center;
+  background-size: cover;
 }
 
 .item_10 {
   background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item9.jpg);
-  background-size: 133%;
-  background-repeat: no-repeat;
-  background-position-x: center;
+  background-size: cover;
 }
 
 .item_11 {
   background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item10.jpg);
-  background-size: 133%;
-  background-repeat: no-repeat;
-  background-position-x: center;
+  background-size: cover;
 }
 
 .item_12 {
   background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item11.jpg);
-  background-size: 113%;
-  background-repeat: no-repeat;
-  background-position-x: center;
+  background-size: cover;
 }
 
 .news__interface {
-  position: relative;
   display: grid;
-  /* grid-template-rows: 1fr; */
   grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(1, 1fr);
   column-gap: 10px;
-  height: 658px;
-}
-
-.news__interface--item {
-  display: grid;
+  row-gap: 20px;
 }
 
 .sport__interface {
-  position: relative;
-  /* top: 20px; */
   display: grid;
-  /* grid-template-rows: 1fr; */
   grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(1, 1fr);
   column-gap: 10px;
-  height: 634px;
+  row-gap: 20px;
 }
 
-.sport__interface--item {
-  display: grid;
-}
-
-.items__flex {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 10px;
-}
-
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .welcome__interface {
-    grid-template-columns: repeat(3, 1fr);
-    /* grid-template-rows: repeat(3, 1fr); */
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas: "header" "." "." "." ".";
   }
+
   .news__interface {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "." "." ".";
   }
+  .news__interface--item h1, .news__interface--item h2, .news__interface--item h3 {
+    position: relative;
+  }
+
   .sport__interface {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "." "." ".";
+  }
+  .sport__interface--item h1, .sport__interface--item h2, .sport__interface--item h3 {
+    position: relative;
   }
 }
-/* @media (max-width: 600px) {
-  .news__interface {
-    grid-template-columns: repeat(3, 1fr);
-  } */
-/* }
-@media (max-width: 600px) {
-  .sport__interface {
-    grid-template-columns: repeat(3, 1fr);
-  }
-} */
