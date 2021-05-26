@@ -120,12 +120,54 @@ header {
     height: 40px;
     background-color: black;
     padding-left: 1%;
+    position: sticky;
+    top: 0;
+}
+
+.navbar{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    color: white;
+    text-decoration: none;
+    margin-left: 350px;
+
+    &__item{
+        background-color: black;
+        color: white;
+        border-right: 1px solid white;
+        border-left: 1px solid white;
+        padding: 10px;
+        text-align: center;
+        list-style: none;
+
+        &--home:hover {
+            background-color: gray;
+            cursor: pointer;
+        }
+
+        &--main:hover {
+            background-color: gray;
+            cursor: pointer;
+        }
+        
+        &--stadium:hover {
+            background-color:  gray;
+            cursor: pointer;
+        }
+        
+        &--champions:hover {
+            background-color: gray;
+            cursor: pointer;
+        }
+        
+    }
+
+    
 }
 
 .logo-box {
     display: flex;
     justify-content: center;
-    align-items: space-around;
     margin: 2px;
     height: 25px;
     width: 25px;
@@ -133,6 +175,8 @@ header {
     font-size: 1.5rem;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+
+    
 }
 
 h1 {
@@ -360,7 +404,58 @@ h1 {
     }
 }
 
+@media screen and (max-width: 1200px) {
 
+    header {
+        display: flex;
+        align-items: center;
+        width: 1300px;
+        height: 40px;
+        background-color: black;
+        padding-left: 1%;
+    }
+    .navbar{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        color: white;
+        text-decoration: none;
+        margin-left: px;
+    
+        &__item{
+            background-color: black;
+            color: white;
+            border-right: 1px solid white;
+            border-left: 1px solid white;
+            padding: 10px;
+            text-align: center;
+            list-style: none;
+    
+            &--home:hover {
+                background-color: gray;
+                cursor: pointer;
+            }
+    
+            &--main:hover {
+                background-color: gray;
+                cursor: pointer;
+            }
+            
+            &--stadium:hover {
+                background-color:  gray;
+                cursor: pointer;
+            }
+            
+            &--champions:hover {
+                background-color: gray;
+                cursor: pointer;
+            }
+            
+        }
+    
+        
+    }
+
+}
 
 @media screen and (max-width: 768px) {
 
@@ -677,6 +772,46 @@ h1 {
             margin-top: 12px;
         }
     }
+    .navbar{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        color: white;
+        text-decoration: none;
+        margin-left: 100px;
+    
+        &__item{
+            background-color: black;
+            color: white;
+            border-right: 1px solid white;
+            border-left: 1px solid white;
+            padding: 10px;
+            text-align: center;
+            list-style: none;
+    
+            &--home:hover {
+                background-color: gray;
+                cursor: pointer;
+            }
+    
+            &--main:hover {
+                background-color: gray;
+                cursor: pointer;
+            }
+            
+            &--stadium:hover {
+                background-color:  gray;
+                cursor: pointer;
+            }
+            
+            &--champions:hover {
+                background-color: gray;
+                cursor: pointer;
+            }
+            
+        }
+    
+        
+    }
 }
 
 
@@ -778,7 +913,7 @@ h1 {
 
         }
 
-
+        
 
     }
 
@@ -998,6 +1133,46 @@ h1 {
             font-weight: bold;
             margin-top: 12px;
         }
+    }
+    .navbar{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        color: white;
+        text-decoration: none;
+        margin-left: 45px;
+    
+        &__item{
+            background-color: black;
+            color: white;
+            border-right: 1px solid white;
+            border-left: 1px solid white;
+            padding: 10px;
+            text-align: center;
+            list-style: none;
+    
+            &--home:hover {
+                background-color: gray;
+                cursor: pointer;
+            }
+    
+            &--main:hover {
+                background-color: gray;
+                cursor: pointer;
+            }
+            
+            &--stadium:hover {
+                background-color:  gray;
+                cursor: pointer;
+            }
+            
+            &--champions:hover {
+                background-color: gray;
+                cursor: pointer;
+            }
+            
+        }
+    
+        
     }
 }
 
