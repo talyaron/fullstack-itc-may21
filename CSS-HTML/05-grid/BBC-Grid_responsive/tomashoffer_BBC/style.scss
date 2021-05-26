@@ -1,0 +1,375 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+  margin: 0;
+  padding: 0;
+
+}
+
+.navbar{
+    background: black;
+    color: white;
+    font-size: 30px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0.3fr 0.1fr 0.1fr 0.1fr 0.1fr;
+    .nav-item{
+        font-size: 26px;
+    }
+    .logo{
+        margin-left: 20px;
+    }
+
+}
+
+h1{
+    border-left: rgb(128, 4, 4) solid 5px;
+    padding-left: 5px;
+}
+
+#footer{
+    background-color: black;
+    height: 60px;
+    display: flex;
+    font-size: 30px;
+    justify-content: center;
+    a, i{
+        height: 30px;
+        width: auto;
+        color: white;
+        margin: 10px;
+    
+    }
+}
+
+.container{
+    width: 80%;
+    margin: auto;
+    justify-content: center;
+    .wrapper-principal{
+        margin-bottom: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 150px 150px;
+        grid-gap: 10px;
+        grid-template-areas: "principal-article principal-article article-item-1 article-item-2"
+                             "principal-article principal-article article-item-3 article-item-4";
+            .article{
+                background: red;
+            }
+            .principal-article{
+                grid-area: principal-article;
+                width: 100%;
+                position: relative;
+                background-image: url(https://ichef.bbci.co.uk/news/976/cpsprodpb/AF39/production/_118675844_mediaitem118673786.jpg);
+                background-size: 100% 100%;
+                h3{
+                    font-size: 30px;
+                }
+            }
+            .textblock{
+                position: absolute;
+                bottom: 1px;
+                font-size: 16px;
+                background: 0% 0%;
+                background-color: transparent;
+                word-spacing: 0px;
+                padding: 7px 8px 9px 8px;
+                text-decoration: none solid rgb(255, 255, 255);
+                letter-spacing: 0.28px;
+                color: #ffffff;
+            }
+            .article-item-1{
+                grid-area: article-item-1;
+                background-image: url(https://ichef.bbci.co.uk/news/976/cpsprodpb/14AD9/production/_118679648_whiteboard1.jpg);
+                background-size: 100% 100%;
+                width: 100%;
+                position: relative;
+            }
+            .article-item-2{
+                grid-area: article-item-2; 
+                background-image: url(https://ichef.bbci.co.uk/onesport/cps/800/cpsprodpb/482B/production/_118657481_gettyimages-1319846337.jpg);
+                background-size: 100% 100%;
+                width: 100%;
+                position: relative;
+            }
+            .article-item-3{
+                grid-area: article-item-3;
+                background-image: url(https://ychef.files.bbci.co.uk/1600x900/p09jl18g.webp);
+                background-size: 100% 100%;
+                width: 100%;
+                position: relative;
+            }
+            .article-item-4{
+                grid-area: article-item-4;
+                background-image: url(https://ychef.files.bbci.co.uk/1600x900/p09jl3bw.webp);
+                background-size: 100% 100%;
+                width: 100%;
+                position: relative;
+            }
+    } 
+        .wrapper-articles-news{
+            display: grid;
+            grid-template-columns: repeat(3, 2fr);
+            grid-template-rows: 200px 200px; 
+            grid-gap: 20px;
+            grid-template-areas: "article-item-5 article-item-6 article-item-7"
+                                 "text-1 text-2 text-3";
+                                 
+            .article{
+                background: red;
+            }
+            .article-item-5{
+                grid-area: article-item-5;
+                background-image: url(https://www.redaccionmedica.com/images/destacados/una-bacteria-del-agua-del-mar-podria-ser-la-clave-para-tratar-el-melanoma-2097.jpg);
+                background-size: 436px 200px;
+            }
+            .article-item-6{
+                grid-area: article-item-6;
+                background-image: url(http://c.files.bbci.co.uk/B35D/production/_116571954_bidenreuters.jpg);
+                background-size: 436px 200px;
+            }
+            .article-item-7{
+                grid-area: article-item-7;
+                background-image: url(https://ichef.bbci.co.uk/news/1024/branded_news/EE21/production/_118516906_hi065852341.jpg);
+                background-size: 436px 200px;
+            }
+           
+            .text-1{
+                grid-area: text-1;
+                font-size: 18px;
+            }
+            .text-2{
+                grid-area: text-2;
+                font-size: 18px;
+            }
+            .text-3{
+                grid-area: text-3;
+                font-size: 18px;
+            }
+
+    }
+
+    .wrapper-articles-sports{
+        display: grid;
+        grid-template-columns: repeat(3, 2fr);
+        grid-template-rows: 200px 200px; 
+        grid-gap: 20px;
+        grid-template-areas: "article-item-8 article-item-9 article-item-10"
+                              "text-4 text-5 text-6";
+        .article{
+                background: red;
+            }
+            .article-item-8{
+                grid-area: article-item-8;
+                background-image: url(https://as01.epimg.net/colombia/imagenes/2021/04/29/futbol/1619661813_548636_1619662013_noticia_normal_recorte1.jpg);
+                background-size: 436px 200px;
+            }
+            .article-item-9{
+                grid-area: article-item-9;
+                background-image: url(https://phantom-marca.unidadeditorial.es/c187da56c8d6f76d4fc45bf8f6c2e990/resize/1320/f/jpg/assets/multimedia/imagenes/2021/05/15/16210851579134.jpg);
+                background-size: 436px 200px;
+            }
+            .article-item-10{
+                grid-area: article-item-10;
+                background-image: url(https://phantom-marca.unidadeditorial.es/2c14d9b3eebfed04b5968007826bb8dc/crop/0x64/1022x638/resize/1320/f/jpg/assets/multimedia/imagenes/2021/05/02/16199709989552.jpg);
+                background-size: 436px 200px;
+            }
+            .text-4{
+                grid-area: text-4;
+                font-size: 18px;
+            }
+            .text-5{
+                grid-area: text-5;
+                font-size: 18px;
+            }
+            .text-6{
+                grid-area: text-6;
+                font-size: 18px;
+            }
+    }
+
+
+}
+
+@media only screen and (max-width: 800px){
+    h1{
+        border-left: rgb(128, 4, 4) solid 5px;
+        padding-left: 5px;
+        font-size: 1.8rem;
+    }
+    .navbar{
+        font-size: 26px;
+        width: 100%;
+        height: 40px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        margin-bottom: 30px;
+        .nav-item{
+            font-size: 26px;
+            padding-top: 5px;
+        }
+        .logo{
+            margin-left: 20px;
+            padding-top: 5px;
+        }
+    
+    }
+    #footer{
+        display: flex;
+        font-size: 26px;
+        justify-content: center;
+        padding-top: 20px;
+        margin-top: -50px;
+        a, i{
+            height: 100%;
+            width: auto;
+            color: white;
+            margin: 0px;
+            margin-left: 10px;
+        
+        }
+    }
+    .container{
+        width: 95%;
+        margin: auto;
+        justify-content: center;
+        .wrapper-principal{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: auto;
+            grid-template-areas: ". principal-article ."
+                                 "article-item-1 article-item-2"
+                                 "article-item-3 article-item-4";
+            .principal-article{
+                
+                h3{
+                    font-size: 1rem;
+                }
+                p{
+                display: none;
+              }
+            }
+                
+         }
+
+         .wrapper-articles-news{
+            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(1, 0.6fr);
+            grid-auto-rows: 200px;
+            grid-template-areas:
+                                 "article-item-5"
+                                 "text-1"
+                                 "article-item-6"
+                                 "text-2"
+                                 "article-item-7"
+                                 "text-3";
+    }
+    .wrapper-articles-sports{
+        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(1, 0.6fr);
+        grid-auto-rows: 200px;
+        grid-template-areas:
+                             "article-item-8"
+                             "text-4"
+                             "article-item-9"
+                             "text-5"
+                             "article-item-10"
+                             "text-6";
+        }
+    }
+}
+
+@media only screen and (max-width: 400px){
+    h1{
+        border-left: rgb(128, 4, 4) solid 5px;
+        padding-left: 5px;
+        font-size: 1.5rem;
+    }
+    .navbar{
+        font-size: 20px;
+        width: 100%;
+        height: 40px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        margin-bottom: 30px;
+        .nav-item{
+            font-size: 20px;
+            padding-top: 5px;
+        }
+        .logo{
+            margin-left: 20px;
+            padding-top: 5px;
+        }
+    
+    }
+    #footer{
+        display: flex;
+        font-size: 15px;
+        justify-content: center;
+        padding-top: 20px;
+        margin-top: -50px;
+        a, i{
+            height: 100%;
+            width: auto;
+            color: white;
+            margin: 0px;
+            margin-left: 10px;
+            justify-content: center;
+        
+        }
+    }
+    .container{
+        width: 80%;
+        margin: auto;
+        justify-content: center;
+        .wrapper-principal{
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-auto-rows: 200px;
+            grid-template-areas: "principal-article"
+                                 "article-item-1"
+                                 "article-item-2"
+                                 "article-item-3" 
+                                 "article-item-4";
+            .principal-article{
+                h3{
+                    font-size: 1rem;
+                }
+                p{
+                display: none;
+              }
+            }
+                
+         }
+
+         .wrapper-articles-news{
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-auto-rows: 200px;
+            grid-template-areas:
+                                 "article-item-5"
+                                 "text-1"
+                                 "article-item-6"
+                                 "text-2"
+                                 "article-item-7"
+                                 "text-3";
+    }
+    .wrapper-articles-sports{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: 200px;
+        grid-template-areas:
+                             "article-item-8"
+                             "text-4"
+                             "article-item-9"
+                             "text-5"
+                             "article-item-10"
+                             "text-6";
+        }
+    }
+}
+

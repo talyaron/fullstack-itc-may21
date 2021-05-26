@@ -1,6 +1,6 @@
 /** Media Queries **/
-@mixin phone {
-    @media (max-width: #{$phone}) {
+@mixin telefono {
+    @media (min-width: #{$phone}) {
         @content;
     }
 }
