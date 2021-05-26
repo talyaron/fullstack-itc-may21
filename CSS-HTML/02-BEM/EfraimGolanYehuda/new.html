@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NPR music</title>
 </head>
+
+  <!-- YS: It is better practice to keep your CSS and JS files separated -->
 <style>
+        /* YS: Good use of flex */
       body {
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         width: 870px;
@@ -55,6 +58,7 @@
     }
 
     /*Golan starts here*/
+    /* YS: Good use of flex */
 
      h1 {
         font-size: 1.5rem;
@@ -193,6 +197,7 @@
 } 
 
     /*Efraim starts here*/
+    /* YS: Good use of flex */
 
     .videos {
         background-color: #19262f;
@@ -430,7 +435,6 @@
         height: 100%;
     }   
 
-
 h5 {
     color: grey;
     font-size: 1rem;
@@ -451,6 +455,7 @@ li {
 <!-- Golan starts here-->
 <body>
     <div style="background-image: url('https://tse3.explicit.bing.net/th?id=OIP.PmiBQasQ0HzUtB2J677ifgHaEo&pid=Api&P=0&w=262&h=164');">N P R 50 HEAR EVERY VOICE</div>
+    <!-- YS: Excellent BEM -->
     <div class="menu">
         <div class="menu__button">NEWS</div>
         <div class="menu__button">ARTS & LIFE</div>
@@ -472,6 +477,7 @@ li {
                      EVERY
                      VOICE
         </div>
+        <!-- YS: Why not use BEM?   -->
         <div class="article__wrapperfirst">
             <article class="article--inline">
                 <h1 class="yehuda--h1">NEWS & STORIES</h1>
@@ -487,6 +493,7 @@ li {
             </article>
             <h1 class="yehuda--h1">LISTEN LIVE</h1>
             <H2 class="yehuda--h2">public radio music streams</H2>
+            <!-- YS: Good!  -->
             <div class="menu">
                 <div class="menu__button">LOCAL</div>
                 <div class="menu__button">ROCK</div>
@@ -499,8 +506,11 @@ li {
             
         </div>
     </section>
+    <!-- YS: Why not use BEM? It should be heirarchical:  -->
     <div class="golansection">
+         <!-- YS: According to BEM, this should be golansection__section__top:  -->
         <div class="section__top">
+              <!-- YS: According to BEM, this should be golansection__section__top__section__icon:  -->
             <div class="section__icon">
                 <img src="./npr_playlists.png">
             </div>
@@ -625,7 +635,7 @@ li {
         </div>
     </div>
     <!-- Efraim starts here-->
-
+  <!-- YS: Good use of BEM  -->
     <div class="videos">
         <h2 class="videos__h1">VIDEOS</h2>
         <p class="videos__p">watch live concerts, studio sessions and music documentaries</p> 
@@ -663,7 +673,6 @@ li {
         
     </div>
 <!-- Ef starts here-->
-    
     <section class="vidseries__section">
         <div class="vidseries__section__wrapper__wrappers"> 
             <div class="vidseries__section__wrapper"> 
@@ -682,6 +691,7 @@ li {
                 <article class= "vidseries__section__wrapper__text__article">
                     <h4 class="vidseries__section__wrapper__text__article__h4">POPULAR VIDEOS</h4>
                     <p class="vidseries--greytext">TINY DESK</p>
+                      <!-- YS: Be careful with giving incorrect names to classes: videseries, vidseries  -->
                     <p class="videseries--bluetext">Erykah Badu: Tiny Desk Concert</p>
                     <p class="vidseries--greytext">JAZZ NIGHT IN AMERICA</p>
                     <p class="videseries--bluetext">A Melodic Drumming Demo</p>
@@ -693,6 +703,7 @@ li {
     </section>
 
     <section>
+          <!-- YS: Good use of BEM  -->
         <div class="program">
             <h2 class="program__h2">PROGRAMS</h2>
             <p class="program__p">Public radio music shows</p>
@@ -766,6 +777,7 @@ li {
 
     <section>
         <div class= "final">
+              <!-- YS: According to BEM, this should be: final__article--inlinenew1 (line 777)  -->
             <article class="article--inlinenew1">
                     <article  class="article--inline2">
                         <h5>READ & LISTEN</h5>
@@ -818,3 +830,5 @@ li {
 
 </body>
 </html>
+
+<!-- YS: Good job!  -->
