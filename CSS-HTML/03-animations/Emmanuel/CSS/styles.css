@@ -14,6 +14,7 @@
   background-image: URL(../images/car.jpg);
   background-size: contain;
   background-repeat: no-repeat;
+  /* YS: Good naming convention for variable! (carMovement) */
   animation: carMovement 6s linear 1s infinite normal forwards;
 }
 
