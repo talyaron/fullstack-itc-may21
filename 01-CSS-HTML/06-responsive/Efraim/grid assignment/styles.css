@@ -155,6 +155,19 @@ body {
     position: absolute;
     bottom: 0;    
 }
+.AFL--WCE {
+    grid-area: WCE;
+}
+.AFL--MEL {
+    grid-area: MEL;
+}
+.AFL--ESS {
+    grid-area: ESS;
+}
+.AFL--WBD {
+    grid-area: WBD;
+}
+
 
 @media only screen and (max-width: 800px) {
     .AFL__wrappers {
@@ -180,7 +193,7 @@ body {
     }
 
 
-@media only screen and (max-width: 415px) {
+    @media only screen and (max-width: 415px) {
     .AFL {
         font-size: 1.5rem;
         margin: 2rem;
