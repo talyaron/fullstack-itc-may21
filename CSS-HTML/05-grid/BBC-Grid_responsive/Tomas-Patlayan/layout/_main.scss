@@ -14,6 +14,12 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: #ffffff;
+    h2,p {
+      position: relative;
+      top: 18rem;
+      left: 0;
+    
+    }
   }
   .small-news {
     display: grid;
@@ -32,11 +38,10 @@
     height: 168px;
     h2 {
       position: relative;
-      top:12rem;
+      top: 12rem;
       left: 0;
       font-size: 2rem;
       font-weight: 400;
-      
     }
   }
   .new3 {
@@ -47,11 +52,10 @@
     height: 168px;
     h2 {
       position: relative;
-      top:12rem;
+      top: 12rem;
       left: 0;
       font-size: 2rem;
       font-weight: 400;
-      
     }
   }
   .new4 {
@@ -62,11 +66,10 @@
     height: 168px;
     h2 {
       position: relative;
-      top:12rem;
+      top: 12rem;
       left: 0;
       font-size: 2rem;
       font-weight: 400;
-      
     }
   }
   .new5 {
@@ -77,11 +80,10 @@
     height: 168px;
     h2 {
       position: relative;
-      top:12rem;
+      top: 12rem;
       left: 0;
       font-size: 2rem;
       font-weight: 400;
-      
     }
   }
 }
@@ -96,4 +98,56 @@ section {
 
 .section-news {
   @include grid(3, 1rem);
+}
+
+@include tablet {
+  .welcome-sentense {
+    display: none;
+  }
+  .top-news {
+    display: block;
+    margin-top: 4rem;
+    align-self: center;
+    .new1 {
+      width: 736px;
+      height: 414px;
+    }
+
+    .small-news {
+      display: grid;
+      margin: 0;
+      .new2,
+      .new3,
+      .new4,
+      .new5 {
+        width: 360px;
+        height: 202px;
+      }
+    }
+  }
+}
+
+@include phone {
+  .welcome-sentense {
+    display: none;
+  }
+
+  .top-news {
+    .new1 {
+      display: block;
+      width: 343px;
+      height: 192px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      margin-top: 2rem;
+    }
+    .small-news {
+      display: none;
+    }
+  }
+
+  .section-news {
+    display: block;
+  }
 }
