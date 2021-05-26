@@ -586,65 +586,6 @@ h1 {
             "wembley_p"
             "wembley_span";
 
-        &__baku_img {
-            grid-area: baku_img;
-
-        }
-
-        &__baku_h3 {
-            grid-area: baku_h3;
-
-        }
-
-        &__baku_p {
-            grid-area: baku_p;
-
-        }
-
-        &__baku_span {
-            grid-area: baku_span;
-
-        }
-
-        &__sevilla_img {
-            grid-area: sevilla_img;
-
-        }
-
-        &__sevilla_h3 {
-            grid-area: sevilla_h3;
-
-        }
-
-        &__sevilla_p {
-            grid-area: sevilla_p;
-
-        }
-
-        &__sevilla_span {
-            grid-area: sevilla_span;
-
-        }
-
-        &__wembley_img {
-            grid-area: wembley_img;
-
-        }
-
-        &__wembley_h3 {
-            grid-area: wembley_h3;
-
-        }
-
-        &__wembley_p {
-            grid-area: wembley_p;
-
-        }
-
-        &__wembley_span {
-            grid-area: wembley_span;
-
-        }
 
         h3 {
             color: #212121;
@@ -688,65 +629,6 @@ h1 {
             "esp2008_p"
             "esp2008_span";
 
-        &__portugal_img {
-            grid-area: portugal_img;
-
-        }
-
-        &__portugal_h3 {
-            grid-area: portugal_h3;
-
-        }
-
-        &__portugal_p {
-            grid-area: portugal_p;
-
-        }
-
-        &__portugal_span {
-            grid-area: portugal_span;
-
-        }
-
-        &__esp2012_img {
-            grid-area: esp2012_img;
-
-        }
-
-        &__esp2012_h3 {
-            grid-area: esp2012_h3;
-
-        }
-
-        &__esp2012_p {
-            grid-area: esp2012_p;
-
-        }
-
-        &__esp2012_span {
-            grid-area: esp2012_span;
-
-        }
-
-        &__esp2008_img {
-            grid-area: esp2008_img;
-
-        }
-
-        &__esp2008_h3 {
-            grid-area: esp2008_h3;
-
-        }
-
-        &__esp2008_p {
-            grid-area: esp2008_p;
-
-        }
-
-        &__esp2008_span {
-            grid-area: esp2008_span;
-
-        }
 
         h3 {
             color: #212121;
@@ -788,25 +670,6 @@ h1 {
             text-align: center;
             list-style: none;
     
-            &--home:hover {
-                background-color: gray;
-                cursor: pointer;
-            }
-    
-            &--main:hover {
-                background-color: gray;
-                cursor: pointer;
-            }
-            
-            &--stadium:hover {
-                background-color:  gray;
-                cursor: pointer;
-            }
-            
-            &--champions:hover {
-                background-color: gray;
-                cursor: pointer;
-            }
             
         }
     
@@ -947,66 +810,6 @@ h1 {
             "wembley_p"
             "wembley_span";
 
-        &__baku_img {
-            grid-area: baku_img;
-
-        }
-
-        &__baku_h3 {
-            grid-area: baku_h3;
-
-        }
-
-        &__baku_p {
-            grid-area: baku_p;
-
-        }
-
-        &__baku_span {
-            grid-area: baku_span;
-
-        }
-
-        &__sevilla_img {
-            grid-area: sevilla_img;
-
-        }
-
-        &__sevilla_h3 {
-            grid-area: sevilla_h3;
-
-        }
-
-        &__sevilla_p {
-            grid-area: sevilla_p;
-
-        }
-
-        &__sevilla_span {
-            grid-area: sevilla_span;
-
-        }
-
-        &__wembley_img {
-            grid-area: wembley_img;
-
-        }
-
-        &__wembley_h3 {
-            grid-area: wembley_h3;
-
-        }
-
-        &__wembley_p {
-            grid-area: wembley_p;
-
-        }
-
-        &__wembley_span {
-            grid-area: wembley_span;
-
-        }
-
         h3 {
             color: #212121;
             font-size: 20px;
@@ -1050,65 +853,6 @@ h1 {
             "esp2008_p"
             "esp2008_span";
 
-        &__portugal_img {
-            grid-area: portugal_img;
-
-        }
-
-        &__portugal_h3 {
-            grid-area: portugal_h3;
-
-        }
-
-        &__portugal_p {
-            grid-area: portugal_p;
-
-        }
-
-        &__portugal_span {
-            grid-area: portugal_span;
-
-        }
-
-        &__esp2012_img {
-            grid-area: esp2012_img;
-
-        }
-
-        &__esp2012_h3 {
-            grid-area: esp2012_h3;
-
-        }
-
-        &__esp2012_p {
-            grid-area: esp2012_p;
-
-        }
-
-        &__esp2012_span {
-            grid-area: esp2012_span;
-
-        }
-
-        &__esp2008_img {
-            grid-area: esp2008_img;
-
-        }
-
-        &__esp2008_h3 {
-            grid-area: esp2008_h3;
-
-        }
-
-        &__esp2008_p {
-            grid-area: esp2008_p;
-
-        }
-
-        &__esp2008_span {
-            grid-area: esp2008_span;
-
-        }
 
         h3 {
             color: #212121;
@@ -1150,26 +894,6 @@ h1 {
             text-align: center;
             list-style: none;
     
-            &--home:hover {
-                background-color: gray;
-                cursor: pointer;
-            }
-    
-            &--main:hover {
-                background-color: gray;
-                cursor: pointer;
-            }
-            
-            &--stadium:hover {
-                background-color:  gray;
-                cursor: pointer;
-            }
-            
-            &--champions:hover {
-                background-color: gray;
-                cursor: pointer;
-            }
-            
         }
     
         
