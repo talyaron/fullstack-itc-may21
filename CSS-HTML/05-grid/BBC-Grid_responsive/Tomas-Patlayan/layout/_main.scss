@@ -14,6 +14,12 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: #ffffff;
+    h2,p {
+      position: relative;
+      top: 18rem;
+      left: 0;
+    
+    }
   }
   .small-news {
     display: grid;
@@ -31,7 +37,11 @@
     width: 300px;
     height: 168px;
     h2 {
-      font-size: 3rem;
+      position: relative;
+      top: 12rem;
+      left: 0;
+      font-size: 2rem;
+      font-weight: 400;
     }
   }
   .new3 {
@@ -41,7 +51,11 @@
     width: 300px;
     height: 168px;
     h2 {
-      font-size: 3rem;
+      position: relative;
+      top: 12rem;
+      left: 0;
+      font-size: 2rem;
+      font-weight: 400;
     }
   }
   .new4 {
@@ -51,7 +65,11 @@
     width: 300px;
     height: 168px;
     h2 {
-      font-size: 3rem;
+      position: relative;
+      top: 12rem;
+      left: 0;
+      font-size: 2rem;
+      font-weight: 400;
     }
   }
   .new5 {
@@ -61,7 +79,11 @@
     width: 300px;
     height: 168px;
     h2 {
-      font-size: 3rem;
+      position: relative;
+      top: 12rem;
+      left: 0;
+      font-size: 2rem;
+      font-weight: 400;
     }
   }
 }
@@ -76,4 +98,69 @@ section {
 
 .section-news {
   @include grid(3, 1rem);
+}
+
+@include tablet {
+  .welcome-sentense {
+    display: none;
+  }
+  .top-news {
+    display: block;
+    margin-top: 4rem;
+    align-self: center;
+    .new1 {
+      width: 736px;
+      height: 414px;
+      h2,p {
+        position: relative;
+        top: 25rem;
+        left: 0;
+      
+      }
+    }
+
+    .small-news {
+      display: grid;
+      margin: 0;
+      .new2,
+      .new3,
+      .new4,
+      .new5 {
+        width: 360px;
+        height: 202px;
+     
+      }
+    }
+  }
+}
+
+@include phone {
+  .welcome-sentense {
+    display: none;
+  }
+
+  .top-news {
+    .new1 {
+      display: block;
+      width: 343px;
+      height: 192px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      margin-top: 2rem;
+      h2,p {
+        position: relative;
+        top: 0;
+        left: 0;
+      
+      }
+    }
+    .small-news {
+      display: none;
+    }
+  }
+
+  .section-news {
+    display: block;
+  }
 }
