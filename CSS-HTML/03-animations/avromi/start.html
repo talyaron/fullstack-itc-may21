@@ -8,6 +8,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="dist/style.css">
 </head>
+
+<!-- YS: It is better practice to keep your CSS and HTML files separate.    
+I see that you actually do have a separate CSS file but its not in use. If you need help linking them let me know -->
 <style>
     body {
         background-color: rgb(171, 205, 238);
@@ -48,6 +51,7 @@
     .boy {
         position: relative;
         font-size: 3rem;
+        /* YS: Try to have more meaningful names, instead of "example2" you can use boyAnimation or something like that */
         animation: example2 11s linear 1s infinite normal forwards;
         
     }
@@ -60,6 +64,7 @@
         margin-top: -120px;
         position: absolute;
         font-size: 2rem;
+        /* YS: Try to have a more meaningful name instead of example3 */
         animation: example3 3s cubic-bezier(1,-0.13,1,1) 0s infinite normal forwards;
     }
 
@@ -69,6 +74,7 @@
         font-size: 6rem;
         color: azure;
         position: relative;
+        /* YS: Remove Unecessary Comments */
 
         /* animation: name duration timing-function delay iteration-count direction fill-mode; */
         animation: example 21s linear 1s infinite alternate forwards;
@@ -117,6 +123,9 @@
             left: 0vw;
         }
     }
+
+    /* YS: Remove Unecessary Comments */
+
     /*.goal{
         font-size: 10rem;
         color:red;
@@ -151,6 +160,9 @@
     <div class="ball">
          <P>⚽</P>
     </div>
+
+    <!-- YS: Remove Unecessary Comments -->
+
     <!--<div class="goal">
         <P>🏳</P>
    </div>-->

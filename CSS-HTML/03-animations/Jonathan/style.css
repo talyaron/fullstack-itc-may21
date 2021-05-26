@@ -265,6 +265,7 @@
   right: 12px;
 }
 
+/* //Nice animations! */
 @-webkit-keyframes animate {
   0% {
     bottom: -100px;
@@ -612,4 +613,7 @@
     font-weight: normal;
   }
 }
+
+/* // YS: Excellent work!  */
+
 /*# sourceMappingURL=style.css.map */
