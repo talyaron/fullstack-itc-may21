@@ -226,10 +226,10 @@ h6 {
   padding: 10px;
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .welcome__interface {
-    grid-template-columns: repeat(3, 1fr);
-    /* grid-template-rows: repeat(3, 1fr); */
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
   }
   .news__interface {
     grid-template-columns: repeat(3, 1fr);
