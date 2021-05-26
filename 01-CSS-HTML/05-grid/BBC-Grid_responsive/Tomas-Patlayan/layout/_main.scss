@@ -1,0 +1,166 @@
+.welcome-sentense {
+  @include grid(2, 90rem);
+}
+
+.top-news {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-content: center;
+
+  .new1 {
+    width: 616px;
+    grid-column: 1/4;
+    background-image: url("images/news1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #ffffff;
+    h2,p {
+      position: relative;
+      top: 18rem;
+      left: 0;
+    
+    }
+  }
+  .small-news {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    margin-left: 65rem;
+    gap: 1rem;
+    color: #ffffff;
+  }
+
+  .new2 {
+    background-image: url("images/plane.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 300px;
+    height: 168px;
+    h2 {
+      position: relative;
+      top: 12rem;
+      left: 0;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+  }
+  .new3 {
+    background-image: url("images/black lives.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 300px;
+    height: 168px;
+    h2 {
+      position: relative;
+      top: 12rem;
+      left: 0;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+  }
+  .new4 {
+    background-image: url("images/food.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 300px;
+    height: 168px;
+    h2 {
+      position: relative;
+      top: 12rem;
+      left: 0;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+  }
+  .new5 {
+    background-image: url("images/girl.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 300px;
+    height: 168px;
+    h2 {
+      position: relative;
+      top: 12rem;
+      left: 0;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+  }
+}
+
+section {
+  h2 {
+    margin-top: 4rem;
+
+    border-left: 10px solid yellow;
+  }
+}
+
+.section-news {
+  @include grid(3, 1rem);
+}
+
+@include tablet {
+  .welcome-sentense {
+    display: none;
+  }
+  .top-news {
+    display: block;
+    margin-top: 4rem;
+    align-self: center;
+    .new1 {
+      width: 736px;
+      height: 414px;
+      h2,p {
+        position: relative;
+        top: 25rem;
+        left: 0;
+      
+      }
+    }
+
+    .small-news {
+      display: grid;
+      margin: 0;
+      .new2,
+      .new3,
+      .new4,
+      .new5 {
+        width: 360px;
+        height: 202px;
+     
+      }
+    }
+  }
+}
+
+@include phone {
+  .welcome-sentense {
+    display: none;
+  }
+
+  .top-news {
+    .new1 {
+      display: block;
+      width: 343px;
+      height: 192px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      margin-top: 2rem;
+      h2,p {
+        position: relative;
+        top: 0;
+        left: 0;
+      
+      }
+    }
+    .small-news {
+      display: none;
+    }
+  }
+
+  .section-news {
+    display: block;
+  }
+}

@@ -1,0 +1,68 @@
+.header-content {
+  background-color: #000000;
+}
+
+.bar {
+  display: grid;
+  grid-template-columns: 10% auto auto auto;
+  align-items: center;
+  justify-items: center;
+  padding: 0.3rem 0;
+  .bar__menu-responsive {
+    display: none;
+  }
+
+  &__nav {
+    @include grid(9, 2rem);
+
+    a {
+      color: #ffffff;
+    }
+  }
+
+  &_sign-in {
+    justify-self: start;
+    span {
+      color: white;
+
+      margin-left: 0.5rem;
+    }
+    i {
+      color: white;
+    }
+  }
+
+  &_img img {
+    width: 10rem;
+    height: 3.2rem;
+  }
+}
+
+@include tablet {
+  .bar {
+    &__nav {
+      @include grid(6, 2rem);
+      align-content: center;
+      a:nth-child(6) {
+        display: none;
+      }
+      a:nth-child(7) {
+        display: none;
+      }
+      a:nth-child(8) {
+        display: none;
+      }
+      
+    }
+  }
+ 
+ 
+}
+
+@include phone {
+  .bar {
+    &__nav {
+      display: none;
+    }
+  }
+}
