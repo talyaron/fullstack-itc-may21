@@ -1,6 +1,7 @@
 "use strict";
 
 //Answers to exercise 1 and 2:
+var namePureFunction = document.getElementById("typeNamePure");
 var nameArrowFunction = document.getElementById("typeNameArrow");
 var nameAnonymusFunction = document.getElementById("typeNameAnonymus");
 var userName = prompt("Please enter your name...");
