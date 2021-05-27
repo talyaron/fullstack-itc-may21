@@ -36,7 +36,7 @@ function factorial(num) {
     let result = 1;
 
     for (let i = 2; i <= num; i++) {
-        console.log('Step ' + (i - 1) + ': ' + result + ' x ' + i + ' = ' + result*i);
+        console.log('Step ' + (i - 1) + ': ' + result + ' x ' + i + ' = ' + (result * i));
         result *= i;
     }
 
