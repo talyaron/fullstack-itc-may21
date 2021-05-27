@@ -210,6 +210,12 @@ body {
     grid-template-columns: repeat(1, max-content);
     grid-template-rows: repeat(3, max-content);
   }
+
+  .AFL--text {
+    width: fit-content;
+    height: 50px;
+    font-size: 0.6rem;
+  }
 }
 @media only screen and (max-width: 550px) {
   .AFL {
@@ -245,7 +251,7 @@ body {
   .AFL--text {
     width: fit-content;
     height: 50px;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
 }
 @media only screen and (max-width: 415px) {

@@ -5,21 +5,21 @@
 // 3) write n! function (https://www.britannica.com/science/factorial);
 // 1) + 2)
 function sayHello(name) {
-  return 'Hello ' + name + '! This is a classic function';
+  return 'hello ' + name + '!';
 }
 
 var myName1 = 'Yaniv';
 console.log(sayHello(myName1));
 
 var sayHey = function sayHey(name) {
-  return 'Hello ' + name + '! This is a anonymous function';
+  return 'hello ' + name + '!';
 };
 
 var myName2 = 'Yanivvv';
 console.log(sayHey(myName2));
 
 var greet = function greet(firstName) {
-  return 'Hello ' + firstName + '! This is an arrow function';
+  return 'hello ' + firstName;
 };
 
 var myName3 = 'Yaniiiiiv';
@@ -29,12 +29,11 @@ function factorial(num) {
   var result = 1;
 
   for (var i = 2; i <= num; i++) {
-    console.log('Step ' + (i - 1) + ': ' + result + ' x ' + i + ' = ' + result * i);
     result *= i;
   }
 
-  return 'Final result: The factorial of ' + num + ' is ' + result + '!';
+  return result;
 }
 
 var toFactorial = 8;
-console.log(factorial(toFactorial));
+console.log('the factorial of ' + toFactorial + ' is ' + factorial(toFactorial) + '!');

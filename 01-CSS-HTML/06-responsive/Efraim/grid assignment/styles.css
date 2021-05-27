@@ -191,6 +191,7 @@ body {
             "WCE MEL"
             "ESS WBD";
     }
+  
     .newmusic {
         height: max-content;
     }
@@ -226,16 +227,23 @@ body {
         grid-template-columns: repeat(1, max-content);
         grid-template-rows: repeat(3, max-content);
     }
+    .AFL--text {
+        width: fit-content;
+        height: 50px;
+        font-size: 0.75rem;
+    }
 }
 
 @media only screen and (max-width: 550px) {
     .AFL {
         font-size: 1.5rem;
         margin: 2rem;
+        margin-top: 2rem;
     }
 
     .AFL__wrappers {
         height: 100vh;
+        margin-bottom: 25rem;
         display: grid;
         gap: 5px;
         grid-template-columns: repeat(1, 1fr);
@@ -260,9 +268,7 @@ body {
         background-size: cover;
     }
 
-    .stocks__wrapper {
-        margin-top: 15rem;
-    }
+   
     .AFL--text {
         width: fit-content;
         height: 50px;
@@ -321,7 +327,7 @@ body {
         gap: 5px;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(3, 1fr);
-        margin-top: 15rem;
+    
     }
 
     .newmusic__wrapper {

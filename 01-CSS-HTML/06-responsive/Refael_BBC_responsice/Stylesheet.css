@@ -64,63 +64,98 @@ h6 {
 }
 
 .nav-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   background-color: black;
   height: 40px;
   width: 1200px;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .nav-bar-letters {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .letters {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   color: black;
   background-color: white;
   font-style: oblique;
   border: 2px solid black;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 20px;
 }
 
 .nav-interface {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 1200px;
 }
 
 .interface {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   color: white;
   font-style: oblique;
   border-left: 1px solid white;
   border-right: 1px solid white;
-  align-items: flex-end;
-  justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 237px;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-content: stretch;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
 }
 
 .welcome__interface {
   /* position: relative; */
   top: 10px;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  -ms-grid-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr;
   row-gap: 20px;
-  column-gap: 10px;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
   width: auto;
   height: 466px;
-  grid-template-areas: "header . ." "header . .";
+      grid-template-areas: "header . ." "header . .";
 }
 
 .welcome__interface--item {
+  display: -ms-grid;
   display: grid;
 }
 
@@ -135,6 +170,9 @@ h6 {
 }
 
 .item_4 {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
   grid-area: header;
   background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item1.jpg);
   background-size: cover;
@@ -194,51 +232,73 @@ h6 {
 
 .news__interface {
   position: relative;
+  display: -ms-grid;
   display: grid;
   /* grid-template-rows: 1fr; */
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 10px;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
   height: 658px;
 }
 
 .news__interface--item {
+  display: -ms-grid;
   display: grid;
 }
 
 .sport__interface {
   position: relative;
   /* top: 20px; */
+  display: -ms-grid;
   display: grid;
   /* grid-template-rows: 1fr; */
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 10px;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
   height: 634px;
 }
 
 .sport__interface--item {
+  display: -ms-grid;
   display: grid;
 }
 
 .items__flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   padding: 10px;
 }
 
 @media (max-width: 600px) {
   .welcome__interface {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+    -ms-grid-rows: (1fr)[3];
+        grid-template-rows: repeat(3, 1fr);
   }
 }
+
 @media (max-width: 600px) {
   .news__interface {
-    grid-template-columns: repeat(3, 1fr);
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
   }
 }
+
 @media (max-width: 600px) {
   .sport__interface {
-    grid-template-columns: repeat(3, 1fr);
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
   }
 }
+/*# sourceMappingURL=Stylesheet.css.map */
