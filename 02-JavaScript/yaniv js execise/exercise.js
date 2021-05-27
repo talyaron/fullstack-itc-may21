@@ -42,6 +42,6 @@ function factorial(num) {
     return result;
 }
 
-let toFactorial = 8;
+const toFactorial = 8;
 
 console.log('the factorial of ' + toFactorial + ' is ' + factorial(toFactorial) + '!');
