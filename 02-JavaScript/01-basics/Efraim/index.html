@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    //simple function
+    function hello(firstName, secondName){
+        return "hello " + firstName + " " + secondName + "!";    
+        }
+
+    console.log(hello("Efraim", "Dimbleby"));
+
+    //anonymous function
+    let hello2 = function(firstName2, secondName2){
+        return "hello " + firstName2 + " " + secondName2 + "!";
+        }
+
+        console.log(hello2("efraim", "dimbleby"));
+
+    //arrow function
+    let hello3 = (firstName3, secondName3) => {
+        return "hello " + firstName3 + " " + secondName3 + "!";
+        }
+
+        x = hello3("Efraim", "Dimbleby");
+        console.log(x);
+
+
+
+
+    //Factorial Function
+function factorial(n){
+            var result = n;
+                if(n<0){
+                    return null;
+                        }
+                if(n===1||n===0){
+                    return 1;
+                        } 
+                else {
+                    while(n>=2){
+                    result = result * (n-1); 
+                    n--;
+                    }
+                return result;
+                    }
+                    }
+console.log(factorial(8));
+
+    
+
+
+
+        
+    </script>
+<body>
+    
+</body>
+</html>
