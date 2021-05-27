@@ -5,6 +5,100 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+header {
+    height: 40px;
+    background-color: black;
+    padding-left: 1%;
+    position: sticky;
+    top: 0;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: 0.4fr 0.1fr 0.1fr 0.1fr 0.1fr;
+    align-content: center;
+
+    width: 100%;
+
+    .menu__logo {
+       display: grid;
+       grid-template-columns: 0.11fr 0.11fr 0.11fr;
+
+
+        &--box {
+            display: grid;
+            justify-items: center;
+            margin: 5px;
+            height: 25px;
+            width: 25px;
+            background-color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+
+    }
+
+    .navbar {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        color: white;
+        text-decoration: none;
+
+        ul {
+           display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+
+        }
+
+        &__item {
+            background-color: black;
+            color: white;
+            border-right: 1px solid white;
+            border-left: 1px solid white;
+            padding: 10px;
+            text-align: center;
+            list-style: none;
+
+
+            &--home:hover {
+                border-bottom: 2px solid lightskyblue;
+                cursor: pointer;
+            }
+
+            &--main:hover {
+                border-bottom: 2px solid red;
+                cursor: pointer;
+            }
+
+            &--stadium:hover {
+
+                border-bottom: 2px solid green;
+                cursor: pointer;
+            }
+
+            &--champions:hover {
+                border-bottom: 2px solid yellow;
+                cursor: pointer;
+            }
+
+        }
+
+
+    }
+}
+
+
+h1 {
+    margin: 25px 0px 0px 15px;
+    color: #4a4a4a;
+    font-size: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+
 .main {
     display: grid;
     grid-template-columns: 600px 300px 300px;
@@ -114,78 +208,7 @@
 
 }
 
-header {
-    display: flex;
-    align-items: center;
-    height: 40px;
-    background-color: black;
-    padding-left: 1%;
-    position: sticky;
-    top: 0;
-}
 
-.navbar{
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    color: white;
-    text-decoration: none;
-    margin-left: 350px;
-
-    &__item{
-        background-color: black;
-        color: white;
-        border-right: 1px solid white;
-        border-left: 1px solid white;
-        padding: 10px;
-        text-align: center;
-        list-style: none;
-
-        &--home:hover {
-            background-color: gray;
-            cursor: pointer;
-        }
-
-        &--main:hover {
-            background-color: gray;
-            cursor: pointer;
-        }
-        
-        &--stadium:hover {
-            background-color:  gray;
-            cursor: pointer;
-        }
-        
-        &--champions:hover {
-            background-color: gray;
-            cursor: pointer;
-        }
-        
-    }
-
-    
-}
-
-.logo-box {
-    display: flex;
-    justify-content: center;
-    margin: 2px;
-    height: 25px;
-    width: 25px;
-    background-color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-
-    
-}
-
-h1 {
-    margin: 25px 0px 0px 15px;
-    color: #4a4a4a;
-    font-size: 22px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
-}
 
 .title-stadium,
 .title-champions {
@@ -404,76 +427,44 @@ h1 {
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1400px) {
 
     header {
-        display: flex;
-        align-items: center;
-        width: 1300px;
-        height: 40px;
-        background-color: black;
-        padding-left: 1%;
-    }
-    .navbar{
-        display: grid;
-        grid-template-columns: repeat(4,1fr);
-        color: white;
-        text-decoration: none;
-        margin-left: px;
-    
-        &__item{
-            background-color: black;
-            color: white;
-            border-right: 1px solid white;
-            border-left: 1px solid white;
-            padding: 10px;
-            text-align: center;
-            list-style: none;
-    
-            &--home:hover {
-                background-color: gray;
-                cursor: pointer;
-            }
-    
-            &--main:hover {
-                background-color: gray;
-                cursor: pointer;
-            }
-            
-            &--stadium:hover {
-                background-color:  gray;
-                cursor: pointer;
-            }
-            
-            &--champions:hover {
-                background-color: gray;
-                cursor: pointer;
-            }
-            
-        }
-    
-        
-    }
+        width: 1400px;
 
+        
+    .menu {
+       
+        grid-template-columns: 500px 0.2fr 0.2fr 0.2fr 0.2fr;
+
+        .menu__logo {
+            display: grid;
+            grid-template-columns: 0.05fr 0.05fr 0.05fr;
+        }
+    }
+}
 }
 
 @media screen and (max-width: 768px) {
 
     header {
-        display: flex;
-        align-items: center;
         width: 768px;
-        height: 40px;
-        background-color: black;
-        padding-left: 1%;
+
+        
+    .menu {
+       
+        grid-template-columns: 230px 0.2fr 0.2fr 0.2fr 0.2fr;
+
+        .menu__logo {
+            display: grid;
+            grid-template-columns: 0.01fr 0.01fr 0.01fr;
+        }
     }
+}
 
     h1 {
         margin: 25px 0px 0px 70px;
-        color: #4a4a4a;
-        font-size: 12px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: 700;
+        font-size: 20px;
     }
 
     .main {
@@ -489,11 +480,11 @@ h1 {
 
         &__bigimage__textblock {
             position: relative;
-            bottom: 75px;
+            bottom: 85px;
             left: 9px;
 
             h2 {
-                font-size: 15px;
+                font-size: 20px;
                 margin-bottom: 10px;
                 font-weight: bold;
                 margin-left: -5px;
@@ -501,15 +492,15 @@ h1 {
 
             p {
 
-                font-size: 10px;
-                margin-bottom: 18px;
+                font-size: 15px;
+                margin-bottom: 8px;
             }
 
             span {
                 border-left: 2px solid red;
                 display: block;
                 padding-left: 5px;
-                font-size: 8px;
+                font-size: 12px;
             }
 
         }
@@ -558,14 +549,10 @@ h1 {
 
     .title-stadium,
     .title-champions {
-        margin: 50px 0px 10px 300px;
-        color: #4a4a4a;
-        font-size: 22px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: 700;
-        border-left: 5px solid blue;
-        padding-left: 4px;
-        line-height: 20px;
+        margin: 50px 0px 25px 200px;
+        font-size: 20px;
+        text-align: left;
+
     }
 
     .stadium {
@@ -588,29 +575,22 @@ h1 {
 
 
         h3 {
-            color: #212121;
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 24px;
-            text-align: left;
+            font-size: 30px;
         }
 
         p {
-            color: #212121;
             font-size: 14px;
             text-align: left;
         }
 
         span {
-            border-left: 2px solid red;
-            display: block;
             padding-left: 4px;
             font-size: 10px;
-            color: black;
             font-weight: bold;
             margin-top: 12px;
         }
     }
+
     .champions {
         grid-template-columns: 400px;
         margin: 0 0 0 175px;
@@ -631,50 +611,26 @@ h1 {
 
 
         h3 {
-            color: #212121;
+
             font-size: 20px;
-            font-weight: 700;
-            line-height: 24px;
             text-align: left;
         }
 
         p {
-            color: #212121;
             font-size: 14px;
             text-align: left;
         }
 
         span {
-            border-left: 2px solid red;
-            display: block;
+
             padding-left: 4px;
             font-size: 10px;
-            color: black;
             font-weight: bold;
-            margin-top: 12px;
+            margin-top: 10px;
         }
     }
-    .navbar{
-        display: grid;
-        grid-template-columns: repeat(4,1fr);
-        color: white;
-        text-decoration: none;
-        margin-left: 100px;
-    
-        &__item{
-            background-color: black;
-            color: white;
-            border-right: 1px solid white;
-            border-left: 1px solid white;
-            padding: 10px;
-            text-align: center;
-            list-style: none;
-    
-            
-        }
-    
-        
-    }
+
+
 }
 
 
@@ -682,20 +638,27 @@ h1 {
 @media only screen and (max-width: 400px) {
 
     header {
-        display: flex;
-        align-items: center;
         width: 400px;
-        height: 40px;
-        background-color: black;
-        padding-left: 1%;
+        .menu {
+       
+            grid-template-columns: 120px 0.2fr 0.2fr 0.2fr 0.2fr;
+    
+            .menu__logo {
+                display: grid;
+                grid-template-columns: 0.01fr 0.01fr 0.01fr;
+                margin-left: -10px;
+            }
+        
+        }
     }
 
+   
+    
+
+
     h1 {
-        margin: 25px 0px 0px 5px;
-        color: #4a4a4a;
-        font-size: 12px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: 700;
+        margin: 25px 0px 5px 5px;
+        font-size: 15px;
     }
 
     .main {
@@ -719,7 +682,6 @@ h1 {
             h2 {
                 font-size: 15px;
                 margin-bottom: 10px;
-                font-weight: bold;
                 margin-left: -5px;
             }
 
@@ -731,8 +693,6 @@ h1 {
 
             span {
                 border-left: 2px solid red;
-                display: block;
-                padding-left: 5px;
                 font-size: 8px;
             }
 
@@ -747,7 +707,6 @@ h1 {
                 font-size: 16px;
                 margin-bottom: 2px;
                 font-weight: bold;
-                color: black;
                 left: 8px;
                 top: 8px;
             }
@@ -758,16 +717,12 @@ h1 {
                 top: 40px;
                 margin-bottom: 7px;
                 left: 8px;
-                color: black;
             }
 
             span {
                 position: absolute;
-                border-left: 2px solid red;
-                display: block;
                 padding-left: 5px;
                 font-size: 8px;
-                color: black;
                 font-weight: bold;
                 top: 60px;
                 left: 8px;
@@ -776,20 +731,16 @@ h1 {
 
         }
 
-        
+
 
     }
 
     .title-stadium,
     .title-champions {
         margin: 50px 0px 10px 5px;
-        color: #4a4a4a;
         font-size: 22px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: 700;
-        border-left: 5px solid blue;
         padding-left: 4px;
-        line-height: 20px;
+
     }
 
     .stadium {
@@ -825,11 +776,7 @@ h1 {
         }
 
         span {
-            border-left: 2px solid red;
-            display: block;
-            padding-left: 4px;
             font-size: 10px;
-            color: black;
             font-weight: bold;
             margin-top: 12px;
         }
@@ -853,59 +800,13 @@ h1 {
             "esp2008_p"
             "esp2008_span";
 
-
-        h3 {
-            color: #212121;
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 24px;
-            text-align: left;
-        }
-
-        p {
-            color: #212121;
-            font-size: 14px;
-            text-align: left;
-        }
-
-        span {
-            border-left: 2px solid red;
-            display: block;
-            padding-left: 4px;
-            font-size: 10px;
-            color: black;
-            font-weight: bold;
-            margin-top: 12px;
-        }
     }
-    .navbar{
-        display: grid;
-        grid-template-columns: repeat(4,1fr);
-        color: white;
-        text-decoration: none;
-        margin-left: 45px;
-    
-        &__item{
-            background-color: black;
-            color: white;
-            border-right: 1px solid white;
-            border-left: 1px solid white;
-            padding: 10px;
-            text-align: center;
-            list-style: none;
-    
-        }
-    
-        
-    }
+
+
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-

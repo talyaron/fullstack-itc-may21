@@ -17,7 +17,8 @@
   grid-column-gap: 12px;
   margin-left: 15px;
   margin-bottom: 20px;
-      grid-template-areas: "main ball anfitriones" "main teams groups";
+      grid-template-areas: "main ball anfitriones"
+ "main teams groups";
 }
 
 .main--imagesize {
@@ -171,7 +172,7 @@ header {
   background-color: gray;
   cursor: pointer;
 }
-
+menu__logo--box
 .logo-box {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -220,7 +221,10 @@ h1 {
   margin-left: 15px;
   margin-top: 30px;
   margin-bottom: 20px;
-      grid-template-areas: "baku_img sevilla_img wembley_img" "baku_h3  sevilla_h3 wembley_h3" "baku_p  sevilla_p wembley_p" "baku_span sevilla_span wembley_span";
+      grid-template-areas: "baku_img sevilla_img wembley_img"
+ "baku_h3  sevilla_h3 wembley_h3"
+ "baku_p  sevilla_p wembley_p"
+ "baku_span sevilla_span wembley_span";
 }
 
 .stadium__baku_img {
@@ -332,7 +336,10 @@ h1 {
   margin-left: 15px;
   margin-top: 30px;
   margin-bottom: 60px;
-      grid-template-areas: "portugal_img esp2012_img esp2008_img" "portugal_h3  esp2012_h3 esp2008_h3" "portugal_p  esp2012_p esp2008_p" "portugal_span esp2012_span esp2008_span";
+      grid-template-areas: "portugal_img esp2012_img esp2008_img"
+ "portugal_h3  esp2012_h3 esp2008_h3"
+ "portugal_p  esp2012_p esp2008_p"
+ "portugal_span esp2012_span esp2008_span";
 }
 
 .champions__portugal_img {
@@ -506,7 +513,9 @@ h1 {
         grid-template-columns: 300px 300px;
     grid-row-gap: 7px;
     margin: 0 0 0 70px;
-        grid-template-areas: "main main" "ball anfitriones" "teams groups";
+        grid-template-areas: "main main"
+ "ball anfitriones"
+ "teams groups";
   }
   .main__bigimage__textblock {
     position: relative;
@@ -577,7 +586,18 @@ h1 {
         grid-template-columns: 400px;
     margin: 0 0 0 175px;
     grid-row-gap: 7px;
-        grid-template-areas: "baku_img" "baku_h3" "baku_p" "baku_span" "sevilla_img" "sevilla_h3" "sevilla_p" "sevilla_span" "wembley_img" "wembley_h3" "wembley_p" "wembley_span";
+        grid-template-areas: "baku_img"
+ "baku_h3"
+ "baku_p"
+ "baku_span"
+ "sevilla_img"
+ "sevilla_h3"
+ "sevilla_p"
+ "sevilla_span"
+ "wembley_img"
+ "wembley_h3"
+ "wembley_p"
+ "wembley_span";
   }
   .stadium__baku_img {
     -ms-grid-row: 1;
@@ -665,7 +685,18 @@ h1 {
         grid-template-columns: 400px;
     margin: 0 0 0 175px;
     grid-row-gap: 7px;
-        grid-template-areas: "portugal_img" "portugal_h3" "portugal_p" "portugal_span" "esp2012_img" "esp2012_h3" "esp2012_p" "esp2012_span" "esp2008_img" "esp2008_h3" "esp2008_p" "esp2008_span";
+        grid-template-areas: "portugal_img"
+ "portugal_h3"
+ "portugal_p"
+ "portugal_span"
+ "esp2012_img"
+ "esp2012_h3"
+ "esp2012_p"
+ "esp2012_span"
+ "esp2008_img"
+ "esp2008_h3"
+ "esp2008_p"
+ "esp2008_span";
   }
   .champions__portugal_img {
     -ms-grid-row: 1;
@@ -810,7 +841,11 @@ h1 {
     grid-row-gap: 7px;
     width: 400px;
     margin: 0 0 0 5px;
-        grid-template-areas: "main" "ball" "anfitriones" "teams" "groups";
+        grid-template-areas: "main"
+ "ball"
+ "anfitriones"
+ "teams"
+ "groups";
   }
   .main__bigimage__textblock {
     position: relative;
@@ -881,7 +916,18 @@ h1 {
         grid-template-columns: 400px;
     margin: 0 0 0 5px;
     grid-row-gap: 7px;
-        grid-template-areas: "baku_img" "baku_h3" "baku_p" "baku_span" "sevilla_img" "sevilla_h3" "sevilla_p" "sevilla_span" "wembley_img" "wembley_h3" "wembley_p" "wembley_span";
+        grid-template-areas: "baku_img"
+ "baku_h3"
+ "baku_p"
+ "baku_span"
+ "sevilla_img"
+ "sevilla_h3"
+ "sevilla_p"
+ "sevilla_span"
+ "wembley_img"
+ "wembley_h3"
+ "wembley_p"
+ "wembley_span";
   }
   .stadium__baku_img {
     -ms-grid-row: 1;
@@ -969,7 +1015,18 @@ h1 {
         grid-template-columns: 400px;
     margin: 0 0 0 5px;
     grid-row-gap: 7px;
-        grid-template-areas: "portugal_img" "portugal_h3" "portugal_p" "portugal_span" "esp2012_img" "esp2012_h3" "esp2012_p" "esp2012_span" "esp2008_img" "esp2008_h3" "esp2008_p" "esp2008_span";
+        grid-template-areas: "portugal_img"
+ "portugal_h3"
+ "portugal_p"
+ "portugal_span"
+ "esp2012_img"
+ "esp2012_h3"
+ "esp2012_p"
+ "esp2012_span"
+ "esp2008_img"
+ "esp2008_h3"
+ "esp2008_p"
+ "esp2008_span";
   }
   .champions__portugal_img {
     -ms-grid-row: 1;
