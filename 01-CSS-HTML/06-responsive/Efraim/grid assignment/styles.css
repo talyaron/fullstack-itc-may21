@@ -1,4 +1,5 @@
 body {
+<<<<<<< HEAD
     background-color: white;
     font-family: sans-serif;
     font-size: 16px;
@@ -356,3 +357,391 @@ body {
 
 
 
+=======
+  background-color: white;
+  font-family: sans-serif;
+  font-size: 16px;
+  height: 100vh;
+  margin: 0;
+  width: 100vw;
+}
+
+.BBC__wrapper {
+  position: fixed;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 2rem 2rem 2rem;
+      grid-template-columns: 2rem 2rem 2rem;
+  position: relative;
+}
+
+.BBC__wrapper__letters {
+  font-size: 1.5rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  border: 3px solid black;
+  font-style: bold;
+  text-align: center;
+  background-color: white;
+}
+
+.BBC__nav {
+  display: block;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  /* Full width */
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  margin-bottom: 3rem;
+  background-color: black;
+  position: absolute;
+}
+
+.BBC__nav__wrapper {
+  list-style-type: none;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-decoration: none;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (max-content)[6];
+      grid-template-columns: repeat(6, -webkit-max-content);
+      grid-template-columns: repeat(6, max-content);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.BBC__nav__wrapper__blocks {
+  color: white;
+  font-family: sans-serif;
+  text-decoration: none;
+  display: block;
+  padding: 0.5rem 1rem;
+  border-right: 2px solid #5a4e4e;
+}
+
+.AFL {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  margin-left: 8rem;
+  margin-top: 5rem;
+}
+
+.AFL__wrappers {
+  margin: auto;
+  width: 80vw;
+  height: 40vh;
+  display: -ms-grid;
+  display: grid;
+  gap: 5px;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  -ms-grid-rows: (1fr)[2];
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-areas: "big big WCE MEL" "big big ESS WBD";
+}
+
+.AFL__wrappers__big {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: big;
+  background-image: -webkit-gradient(linear, left top, right bottom, from(white), to(lightgray));
+  background-image: linear-gradient(to bottom right, white, lightgray);
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 4px 40px 0px black;
+  box-shadow: 4px 4px 40px 0px black;
+  color: white;
+  position: relative;
+}
+
+.AFL__wrappers__small {
+  background-image: -webkit-gradient(linear, left top, right bottom, from(white), to(lightgray));
+  background-image: linear-gradient(to bottom right, white, lightgray);
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 4px 40px 0px black;
+  box-shadow: 4px 4px 40px 0px black;
+  font-size: 0.8rem;
+  position: relative;
+}
+
+.stocks__wrapper {
+  margin: auto;
+  width: 80vw;
+  height: 50vh;
+  display: -ms-grid;
+  display: grid;
+  gap: 5px;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  -ms-grid-rows: (1fr)[2];
+      grid-template-rows: repeat(2, 1fr);
+}
+
+.stocks__wrapper__box {
+  background-image: -webkit-gradient(linear, left top, right bottom, from(white), to(lightgray));
+  background-image: linear-gradient(to bottom right, white, lightgray);
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 4px 40px 0px black;
+  box-shadow: 4px 4px 40px 0px black;
+  color: white;
+  border-radius: 10px;
+  position: relative;
+}
+
+.newmusic {
+  width: 100%;
+  height: 30rem;
+  background-image: url(https://i.ytimg.com/vi/yrTP-k26e94/maxresdefault.jpg);
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.newmusic__wrapper {
+  display: -ms-grid;
+  display: grid;
+  gap: 10px;
+  -ms-grid-columns: (max-content)[3];
+      grid-template-columns: repeat(3, -webkit-max-content);
+      grid-template-columns: repeat(3, max-content);
+  -ms-grid-rows: (max-content)[1];
+      grid-template-rows: repeat(1, -webkit-max-content);
+      grid-template-rows: repeat(1, max-content);
+}
+
+.newmusic__wrapper__box {
+  background-image: -webkit-gradient(linear, left top, right bottom, from(white), to(lightgray));
+  background-image: linear-gradient(to bottom right, white, lightgray);
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 4px 40px 0px black;
+  box-shadow: 4px 4px 40px 0px black;
+  width: 400px;
+  height: 250px;
+}
+
+.AFL--text {
+  padding: 1rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+}
+
+.AFL--WCE {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: WCE;
+}
+
+.AFL--MEL {
+  -ms-grid-row: 1;
+  -ms-grid-column: 4;
+  grid-area: MEL;
+}
+
+.AFL--ESS {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: ESS;
+}
+
+.AFL--WBD {
+  -ms-grid-row: 2;
+  -ms-grid-column: 4;
+  grid-area: WBD;
+}
+
+@media only screen and (max-width: 1050px) {
+  .AFL__wrappers {
+    height: 100vh;
+    display: -ms-grid;
+    display: grid;
+    gap: 5px;
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+    -ms-grid-rows: (1fr)[4];
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-areas: "big big " "big big " "WCE MEL" "ESS WBD";
+  }
+  .newmusic {
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+  }
+  .newmusic__wrapper {
+    display: -ms-grid;
+    display: grid;
+    gap: 10px;
+    -ms-grid-columns: (max-content)[1];
+        grid-template-columns: repeat(1, -webkit-max-content);
+        grid-template-columns: repeat(1, max-content);
+    -ms-grid-rows: (max-content)[3];
+        grid-template-rows: repeat(3, -webkit-max-content);
+        grid-template-rows: repeat(3, max-content);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .AFL__wrappers {
+    height: 100vh;
+    display: -ms-grid;
+    display: grid;
+    gap: 5px;
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+    -ms-grid-rows: (1fr)[4];
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-areas: "big big " "big big " "WCE MEL" "ESS WBD";
+  }
+  .newmusic {
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+  }
+  .newmusic__wrapper {
+    display: -ms-grid;
+    display: grid;
+    gap: 10px;
+    -ms-grid-columns: (max-content)[1];
+        grid-template-columns: repeat(1, -webkit-max-content);
+        grid-template-columns: repeat(1, max-content);
+    -ms-grid-rows: (max-content)[3];
+        grid-template-rows: repeat(3, -webkit-max-content);
+        grid-template-rows: repeat(3, max-content);
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .AFL {
+    font-size: 1.5rem;
+    margin: 2rem;
+  }
+  .AFL__wrappers {
+    height: 100vh;
+    display: -ms-grid;
+    display: grid;
+    gap: 5px;
+    -ms-grid-columns: (1fr)[1];
+        grid-template-columns: repeat(1, 1fr);
+    -ms-grid-rows: (1fr)[5];
+        grid-template-rows: repeat(5, 1fr);
+        grid-template-areas: "big" "WCE" "MEL" "ESS" "WBD";
+  }
+  .AFL__wrappers__big {
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+  }
+  .AFL__wrappers__small {
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+  }
+  .stocks__wrapper {
+    margin-top: 15rem;
+  }
+  .AFL--text {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: 50px;
+    font-size: 0.65rem;
+  }
+}
+
+@media only screen and (max-width: 415px) {
+  .AFL {
+    font-size: 1.5rem;
+    margin: 2rem;
+  }
+  .BBC {
+    width: 300px;
+  }
+  .BBC__nav__wrapper__blocks {
+    font-size: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .BBC__wrapper__letters {
+    font-size: 1rem;
+  }
+  .AFL__wrappers {
+    height: 100vh;
+    display: -ms-grid;
+    display: grid;
+    gap: 5px;
+    -ms-grid-columns: (1fr)[1];
+        grid-template-columns: repeat(1, 1fr);
+    -ms-grid-rows: (1fr)[5];
+        grid-template-rows: repeat(5, 1fr);
+        grid-template-areas: "big" "WCE" "MEL" "ESS" "WBD";
+  }
+  .AFL__wrappers__big {
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+  }
+  .AFL__wrappers__small {
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+  }
+  .stocks__wrapper {
+    display: -ms-grid;
+    display: grid;
+    gap: 5px;
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+    -ms-grid-rows: (1fr)[3];
+        grid-template-rows: repeat(3, 1fr);
+    margin-top: 15rem;
+  }
+  .newmusic__wrapper {
+    -ms-grid-columns: (250px)[1];
+        grid-template-columns: repeat(1, 250px);
+    -ms-grid-rows: (250px)[3];
+        grid-template-rows: repeat(3, 250px);
+  }
+  .AFL--text {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: 50px;
+    font-size: 0.6rem;
+  }
+  .newmusic__wrapper__box {
+    width: 300px;
+    height: 150px;
+  }
+  .newmusic__wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+/*# sourceMappingURL=styles.css.map */
+>>>>>>> 504b6b55a9be0cc744ab654722c473ab52d12f91
