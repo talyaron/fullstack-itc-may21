@@ -125,68 +125,68 @@ h6 {
 }
 
 .item_2 {
-  background-image: url(../images/item2.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item2.jpg);
   background-size: cover;
 }
 
 .item_3 {
-  background-image: url(../images/item3.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item3.jpg);
   background-size: cover;
 }
 
 .item_4 {
   grid-area: header;
-  background-image: url(../images/item1.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item1.jpg);
   background-size: cover;
 }
 
 .item_5 {
-  background-image: url(../images/item4.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item4.jpg);
   background-size: cover;
 }
 
 .item_6 {
-  background-image: url(../images/item5.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item5.jpg);
   background-size: cover;
 }
 
 .item_7 {
-  background-image: url(../images/item6.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item6.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
   background-position-x: center;
 }
 
 .item_8 {
-  background-image: url(../images/item7.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item7.jpg);
   background-size: 124%;
   background-repeat: no-repeat;
   background-position-x: center;
 }
 
 .item_9 {
-  background-image: url(../images/item8.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item8.jpg);
   background-size: 133%;
   background-repeat: no-repeat;
   background-position-x: center;
 }
 
 .item_10 {
-  background-image: url(../images/item9.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item9.jpg);
   background-size: 133%;
   background-repeat: no-repeat;
   background-position-x: center;
 }
 
 .item_11 {
-  background-image: url(../images/item10.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item10.jpg);
   background-size: 133%;
   background-repeat: no-repeat;
   background-position-x: center;
 }
 
 .item_12 {
-  background-image: url(../images/item11.jpg);
+  background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item11.jpg);
   background-size: 113%;
   background-repeat: no-repeat;
   background-position-x: center;
@@ -226,43 +226,25 @@ h6 {
   padding: 10px;
 }
 
-@media only screen and (max-width: 600px) {
+@media screen and (max-width: 375px) {
   .welcome__interface {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
   }
-
-  .item_7 {
-    background-image: none;
-  }
-
-  .item_8 {
-    background-image: none;
-  }
-
-  .item_9 {
-    background-image: none;
-  }
-
-  .item_10 {
-    background-image: none;
-  }
-
-  .item_11 {
-    background-image: none;
-  }
-
-  .item_12 {
-    background-image: none;
-  }
-
   .news__interface {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
-
   .sport__interface {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(3, 2fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
+/* @media (max-width: 600px) {
+  .news__interface {
+    grid-template-columns: repeat(3, 1fr);
+  } */
+/* }
+@media (max-width: 600px) {
+  .sport__interface {
+    grid-template-columns: repeat(3, 1fr);
+  }
+} */

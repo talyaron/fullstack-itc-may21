@@ -1,0 +1,261 @@
+
+
+  body {
+    font-family: "Inter", sans-serif;
+    padding:0;
+    box-sizing: border-box;
+}
+nav{
+    display: flex;
+    background-color: black;
+    justify-content: center;
+}
+.bbc{
+    display: flex;
+    align-items: center;
+}
+.logo-box {
+    justify-content: center;
+    text-align: center;
+    align-items: space-around;
+    margin: 4px;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#logo-name {
+    color: black;
+    font-weight: bold;
+}
+ nav li{
+    margin-right: 50px;
+ }
+nav ul{
+    display: flex;
+    list-style-type: none;
+}
+nav a{
+    text-decoration: none;
+    color: white;
+}
+nav a:hover{
+text-decoration: underline;    
+}
+  nav {
+    grid-area: nav;
+  }
+  
+
+.container {
+    
+    
+.gallery{
+    display: grid;
+    height: 100vh;
+    grid-template-columns: repeat(4,1fr);
+    grid-auto-rows: minmax(130px,auto);
+    margin:0 auto;
+    grid-template-areas:
+      "content--17 content--18 content--18 content--18"
+      "content--main content--main content--1 content--2"
+      "content--main content--main content--3 content--4"
+      "content--19 content--20 content--20 content--20"
+      "content--5 content--6 content--7 content--sidebar"
+      "content--8 content--9 content--10 content--sidebar"
+      "content--21 content--22 content--22 content--sidebar"
+      "content--11 content--12 content--13 content--sidebar"
+      "content--14 content--15 content--16 content--sidebar";
+    column-gap: 0.8rem;
+    row-gap: 0.4rem;
+    text-align: left;
+    font-size:12px;
+}    
+.gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gallery__img:hover{
+    opacity: 0.8;
+}
+
+  .class{
+    text-align: left;
+    border-left: 2px solid red;
+    color: gray;
+    font-size: 12px;
+    margin:0;
+}
+.class2{
+    text-align: left;
+    border-left: 2px solid yellow;
+    color: gray;
+    font-size: 12px;
+    margin:0;
+}
+.text{
+    text-align: left;
+    font-size: 11px;
+}
+#hov:hover{
+    opacity: 0.8;
+}
+  
+ 
+  .gallery__content--main {
+    grid-area: content--main;
+  }
+  .gallery__content--sidebar {
+    background-color: grey;
+    grid-area: content--sidebar;
+  }
+  
+  .gallery__content--1 {
+    grid-area: content--1;
+  }
+  
+  .gallery__content--2 {
+    grid-area: content--2;
+  }
+  
+  .gallery__content--3 {
+    grid-area: content--3;
+  }
+  
+  .gallery__content--4 {
+    grid-area: content--4;
+  }
+  
+  .gallery__content--5 {
+    grid-area: content--5;
+
+  }
+  .gallery__content--6 {
+    grid-area: content--6;
+  }
+  .gallery__content--7 {
+    grid-area: content--7;
+  }
+  .gallery__content--8 {
+    grid-area: content--8;
+    text-align:left;
+  }
+  .gallery__content--9 {
+    grid-area: content--9;
+  }
+  .gallery__content--10 {
+    grid-area: content--10;
+  }
+  .gallery__content--11 {
+    background: #6fffd2;
+    grid-area: content--11;
+  }
+  .gallery__content--12 {
+    grid-area: content--12;
+  }
+  .gallery__content--13 {
+    grid-area: content--13;
+  }
+  .gallery__content--14 {
+    grid-area: content--14;
+  }
+  .gallery__content--15 {
+    grid-area: content--15;
+  }
+  .gallery__content--16 {
+    grid-area: content--16;
+  }
+  .gallery__content--17 {
+    grid-area: content--17;
+  }
+  .text3{
+    color: #4a4a4a;
+    margin-left: 5px;
+    text-align:left;  
+  }
+  .gallery__content--18 {
+    grid-area: content--18;
+  }
+  .gallery__content--19 {
+    grid-area: content--19;
+  }
+  .text1{
+    text-align:left;
+    margin-left: 5px;
+    border-left: 4px solid red;
+    color: grey;
+  }
+  .text2{
+    text-align:left;
+    margin-left: 5px;
+    border-left: 4px solid yellow;
+    color: grey;
+  }
+  .gallery__content--20 {
+    grid-area: content--20;
+  }
+  .gallery__content--21 {
+    grid-area: content--21;
+  }
+  .gallery__content--22 {
+    grid-area: content--22;
+  }
+
+  @media screen and (max-width:760px){
+    .gallery {
+        display: grid;
+        height: 130vh;
+        grid-template-columns: 100%;
+        grid-auto-rows: minmax(130px,auto);
+        
+        grid-template-areas:
+          "content--17"
+          "content--main"
+          "content--main"
+          "content--1"
+          "content--2"
+          "content--3"
+          "content--4"
+          "content--19"
+          "content--5"
+          "content--8"
+          "content--6"
+          "content--9"
+          "content--7"
+          "content--10"
+          "content--21"
+          "content--11"
+          "content--14"
+          "content--12"
+          "content--15"
+          "content--13"
+          "content--16"
+         
+          
+          
+         ;
+       
+        row-gap: 0.4rem;
+        font-size:12px;
+        text-align:left;
+    }
+  }
+
+
+}
+
+  @media screen and (max-width:760px){
+    nav{
+        font-size:8px;
+    }
+    .bbc{
+        margin-left:35px;
+    }
+}
+ 
+

@@ -599,66 +599,6 @@ h1 {
  "wembley_p"
  "wembley_span";
   }
-  .stadium__baku_img {
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-    grid-area: baku_img;
-  }
-  .stadium__baku_h3 {
-    -ms-grid-row: 2;
-    -ms-grid-column: 1;
-    grid-area: baku_h3;
-  }
-  .stadium__baku_p {
-    -ms-grid-row: 3;
-    -ms-grid-column: 1;
-    grid-area: baku_p;
-  }
-  .stadium__baku_span {
-    -ms-grid-row: 4;
-    -ms-grid-column: 1;
-    grid-area: baku_span;
-  }
-  .stadium__sevilla_img {
-    -ms-grid-row: 5;
-    -ms-grid-column: 1;
-    grid-area: sevilla_img;
-  }
-  .stadium__sevilla_h3 {
-    -ms-grid-row: 6;
-    -ms-grid-column: 1;
-    grid-area: sevilla_h3;
-  }
-  .stadium__sevilla_p {
-    -ms-grid-row: 7;
-    -ms-grid-column: 1;
-    grid-area: sevilla_p;
-  }
-  .stadium__sevilla_span {
-    -ms-grid-row: 8;
-    -ms-grid-column: 1;
-    grid-area: sevilla_span;
-  }
-  .stadium__wembley_img {
-    -ms-grid-row: 9;
-    -ms-grid-column: 1;
-    grid-area: wembley_img;
-  }
-  .stadium__wembley_h3 {
-    -ms-grid-row: 10;
-    -ms-grid-column: 1;
-    grid-area: wembley_h3;
-  }
-  .stadium__wembley_p {
-    -ms-grid-row: 11;
-    -ms-grid-column: 1;
-    grid-area: wembley_p;
-  }
-  .stadium__wembley_span {
-    -ms-grid-row: 12;
-    -ms-grid-column: 1;
-    grid-area: wembley_span;
-  }
   .stadium h3 {
     color: #212121;
     font-size: 20px;
@@ -698,66 +638,6 @@ h1 {
  "esp2008_p"
  "esp2008_span";
   }
-  .champions__portugal_img {
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-    grid-area: portugal_img;
-  }
-  .champions__portugal_h3 {
-    -ms-grid-row: 2;
-    -ms-grid-column: 1;
-    grid-area: portugal_h3;
-  }
-  .champions__portugal_p {
-    -ms-grid-row: 3;
-    -ms-grid-column: 1;
-    grid-area: portugal_p;
-  }
-  .champions__portugal_span {
-    -ms-grid-row: 4;
-    -ms-grid-column: 1;
-    grid-area: portugal_span;
-  }
-  .champions__esp2012_img {
-    -ms-grid-row: 5;
-    -ms-grid-column: 1;
-    grid-area: esp2012_img;
-  }
-  .champions__esp2012_h3 {
-    -ms-grid-row: 6;
-    -ms-grid-column: 1;
-    grid-area: esp2012_h3;
-  }
-  .champions__esp2012_p {
-    -ms-grid-row: 7;
-    -ms-grid-column: 1;
-    grid-area: esp2012_p;
-  }
-  .champions__esp2012_span {
-    -ms-grid-row: 8;
-    -ms-grid-column: 1;
-    grid-area: esp2012_span;
-  }
-  .champions__esp2008_img {
-    -ms-grid-row: 9;
-    -ms-grid-column: 1;
-    grid-area: esp2008_img;
-  }
-  .champions__esp2008_h3 {
-    -ms-grid-row: 10;
-    -ms-grid-column: 1;
-    grid-area: esp2008_h3;
-  }
-  .champions__esp2008_p {
-    -ms-grid-row: 11;
-    -ms-grid-column: 1;
-    grid-area: esp2008_p;
-  }
-  .champions__esp2008_span {
-    -ms-grid-row: 12;
-    -ms-grid-column: 1;
-    grid-area: esp2008_span;
-  }
   .champions h3 {
     color: #212121;
     font-size: 20px;
@@ -796,22 +676,6 @@ h1 {
     padding: 10px;
     text-align: center;
     list-style: none;
-  }
-  .navbar__item--home:hover {
-    background-color: gray;
-    cursor: pointer;
-  }
-  .navbar__item--main:hover {
-    background-color: gray;
-    cursor: pointer;
-  }
-  .navbar__item--stadium:hover {
-    background-color: gray;
-    cursor: pointer;
-  }
-  .navbar__item--champions:hover {
-    background-color: gray;
-    cursor: pointer;
   }
 }
 
@@ -929,66 +793,6 @@ h1 {
  "wembley_p"
  "wembley_span";
   }
-  .stadium__baku_img {
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-    grid-area: baku_img;
-  }
-  .stadium__baku_h3 {
-    -ms-grid-row: 2;
-    -ms-grid-column: 1;
-    grid-area: baku_h3;
-  }
-  .stadium__baku_p {
-    -ms-grid-row: 3;
-    -ms-grid-column: 1;
-    grid-area: baku_p;
-  }
-  .stadium__baku_span {
-    -ms-grid-row: 4;
-    -ms-grid-column: 1;
-    grid-area: baku_span;
-  }
-  .stadium__sevilla_img {
-    -ms-grid-row: 5;
-    -ms-grid-column: 1;
-    grid-area: sevilla_img;
-  }
-  .stadium__sevilla_h3 {
-    -ms-grid-row: 6;
-    -ms-grid-column: 1;
-    grid-area: sevilla_h3;
-  }
-  .stadium__sevilla_p {
-    -ms-grid-row: 7;
-    -ms-grid-column: 1;
-    grid-area: sevilla_p;
-  }
-  .stadium__sevilla_span {
-    -ms-grid-row: 8;
-    -ms-grid-column: 1;
-    grid-area: sevilla_span;
-  }
-  .stadium__wembley_img {
-    -ms-grid-row: 9;
-    -ms-grid-column: 1;
-    grid-area: wembley_img;
-  }
-  .stadium__wembley_h3 {
-    -ms-grid-row: 10;
-    -ms-grid-column: 1;
-    grid-area: wembley_h3;
-  }
-  .stadium__wembley_p {
-    -ms-grid-row: 11;
-    -ms-grid-column: 1;
-    grid-area: wembley_p;
-  }
-  .stadium__wembley_span {
-    -ms-grid-row: 12;
-    -ms-grid-column: 1;
-    grid-area: wembley_span;
-  }
   .stadium h3 {
     color: #212121;
     font-size: 20px;
@@ -1028,66 +832,6 @@ h1 {
  "esp2008_p"
  "esp2008_span";
   }
-  .champions__portugal_img {
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-    grid-area: portugal_img;
-  }
-  .champions__portugal_h3 {
-    -ms-grid-row: 2;
-    -ms-grid-column: 1;
-    grid-area: portugal_h3;
-  }
-  .champions__portugal_p {
-    -ms-grid-row: 3;
-    -ms-grid-column: 1;
-    grid-area: portugal_p;
-  }
-  .champions__portugal_span {
-    -ms-grid-row: 4;
-    -ms-grid-column: 1;
-    grid-area: portugal_span;
-  }
-  .champions__esp2012_img {
-    -ms-grid-row: 5;
-    -ms-grid-column: 1;
-    grid-area: esp2012_img;
-  }
-  .champions__esp2012_h3 {
-    -ms-grid-row: 6;
-    -ms-grid-column: 1;
-    grid-area: esp2012_h3;
-  }
-  .champions__esp2012_p {
-    -ms-grid-row: 7;
-    -ms-grid-column: 1;
-    grid-area: esp2012_p;
-  }
-  .champions__esp2012_span {
-    -ms-grid-row: 8;
-    -ms-grid-column: 1;
-    grid-area: esp2012_span;
-  }
-  .champions__esp2008_img {
-    -ms-grid-row: 9;
-    -ms-grid-column: 1;
-    grid-area: esp2008_img;
-  }
-  .champions__esp2008_h3 {
-    -ms-grid-row: 10;
-    -ms-grid-column: 1;
-    grid-area: esp2008_h3;
-  }
-  .champions__esp2008_p {
-    -ms-grid-row: 11;
-    -ms-grid-column: 1;
-    grid-area: esp2008_p;
-  }
-  .champions__esp2008_span {
-    -ms-grid-row: 12;
-    -ms-grid-column: 1;
-    grid-area: esp2008_span;
-  }
   .champions h3 {
     color: #212121;
     font-size: 20px;
@@ -1126,22 +870,6 @@ h1 {
     padding: 10px;
     text-align: center;
     list-style: none;
-  }
-  .navbar__item--home:hover {
-    background-color: gray;
-    cursor: pointer;
-  }
-  .navbar__item--main:hover {
-    background-color: gray;
-    cursor: pointer;
-  }
-  .navbar__item--stadium:hover {
-    background-color: gray;
-    cursor: pointer;
-  }
-  .navbar__item--champions:hover {
-    background-color: gray;
-    cursor: pointer;
   }
 }
 /*# sourceMappingURL=stylebbc.css.map */
