@@ -5,15 +5,16 @@ body {
     height: 100vh;
     margin: 0;
     width: 100vw;
-  }
+}
 
 
 .BBC__wrapper {
-    position: fixed;
-    display: grid;
-    grid-template-columns: 2rem 2rem 2rem;
-    position: relative; 
-}
+        position: fixed;
+        display: grid;
+        grid-template-columns: 2rem 2rem 2rem;
+        position: relative;
+    }
+
 
 .BBC__wrapper__letters {
     font-size: 1.5rem;
@@ -22,18 +23,20 @@ body {
     font-style: bold;
     text-align: center;
     background-color: white;
-    }
+}
+
 
 .BBC__nav {
-    display: block;  
+    display: block;
     top: 0;
     z-index: -1;
-    width: 100%; /* Full width */
+    width: 100%;
+    /* Full width */
     height: max-content;
-    margin-bottom: 3rem;  
+    margin-bottom: 3rem;
     background-color: black;
     position: absolute;
-    }
+}
 
 .BBC__nav__wrapper {
     list-style-type: none;
@@ -45,7 +48,7 @@ body {
     display: grid;
     grid-template-columns: repeat(6, max-content);
     justify-content: center;
-    }
+}
 
 .BBC__nav__wrapper__blocks {
     color: white;
@@ -54,7 +57,7 @@ body {
     display: block;
     padding: 0.5rem 1rem;
     border-right: 2px solid rgb(90, 78, 78);
-    }
+}
 
 .AFL {
     font-size: 2.5rem;
@@ -62,6 +65,7 @@ body {
     margin-left: 8rem;
     margin-top: 5rem;
 }
+
 .AFL__wrappers {
     margin: auto;
     width: 80vw;
@@ -70,9 +74,9 @@ body {
     gap: 5px;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-template-areas: 
-    "big big WCE MEL"
-    "big big ESS WBD";
+    grid-template-areas:
+        "big big WCE MEL"
+        "big big ESS WBD";
 
 }
 
@@ -85,7 +89,7 @@ body {
     box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
     color: white;
     position: relative;
-        
+
 }
 
 .AFL__wrappers__small {
@@ -94,19 +98,20 @@ body {
     -webkit-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
     -moz-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
     box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
-    font-size: 0.8rem;  
-    position: relative; 
+    font-size: 0.8rem;
+    position: relative;
 }
 
 .stocks__wrapper {
-        margin: auto;
-        width: 80vw;
-        height: 50vh;
-        display: grid;
-        gap: 5px;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 1fr);
+    margin: auto;
+    width: 80vw;
+    height: 50vh;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
+
 .stocks__wrapper__box {
     background-image: linear-gradient(to bottom right, white, lightgray);
     border-radius: 10px;
@@ -115,7 +120,7 @@ body {
     box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
     color: white;
     border-radius: 10px;
-    position: relative;       
+    position: relative;
 }
 
 .newmusic {
@@ -126,14 +131,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-   
+
 }
+
 .newmusic__wrapper {
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(3, max-content);
     grid-template-rows: repeat(1, max-content);
-    
+
 }
 
 .newmusic__wrapper__box {
@@ -151,87 +157,165 @@ body {
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     color: rgb(255, 255, 255);
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
-    bottom: 0;    
+    bottom: 0;
 }
+
 .AFL--WCE {
     grid-area: WCE;
 }
+
 .AFL--MEL {
     grid-area: MEL;
 }
+
 .AFL--ESS {
     grid-area: ESS;
 }
+
 .AFL--WBD {
     grid-area: WBD;
 }
 
-
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1050px) {
     .AFL__wrappers {
+        height: 100vh;
         display: grid;
         gap: 5px;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(4, 1fr);
-        grid-template-areas: 
-        "big big "
-        "big big "
-        "WCE MEL"
-        "ESS WBD";
+        grid-template-areas:
+            "big big "
+            "big big "
+            "WCE MEL"
+            "ESS WBD";
     }
     .newmusic {
         height: max-content;
     }
+
     .newmusic__wrapper {
         display: grid;
         gap: 10px;
         grid-template-columns: repeat(1, max-content);
-        grid-template-rows: repeat(3, max-content); 
+        grid-template-rows: repeat(3, max-content);
     }
+}
+@media only screen and (max-width: 800px) {
+    .AFL__wrappers {
+        height: 100vh;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-areas:
+            "big big "
+            "big big "
+            "WCE MEL"
+            "ESS WBD";
+    }
+  
+    .newmusic {
+        height: max-content;
     }
 
+    .newmusic__wrapper {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(1, max-content);
+        grid-template-rows: repeat(3, max-content);
+    }
+}
 
-    @media only screen and (max-width: 415px) {
+@media only screen and (max-width: 550px) {
     .AFL {
         font-size: 1.5rem;
         margin: 2rem;
     }
-    .BBC {
-        width: 300px;
-    }
-    .BBC__nav__wrapper__blocks {
-        font-size: 0.5rem;
-        padding-left: 0;
-        padding-right: 0;
-    }
-    .BBC__wrapper__letters {
-        font-size: 1rem;
-    }
+
     .AFL__wrappers {
         height: 100vh;
         display: grid;
         gap: 5px;
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(5, 1fr);
-        grid-template-areas: 
-        "big"
-        "WCE"
-        "MEL"
-        "ESS"
-        "WBD";
+        grid-template-areas:
+            "big"
+            "WCE"
+            "MEL"
+            "ESS"
+            "WBD";
     }
+
     .AFL__wrappers__big {
         width: 300px;
         height: 200px;
-        background-size: cover;       
+        background-size: cover;
     }
+
     .AFL__wrappers__small {
         width: 300px;
         height: 200px;
         background-size: cover;
     }
+
+    .stocks__wrapper {
+        margin-top: 15rem;
+    }
+    .AFL--text {
+        width: fit-content;
+        height: 50px;
+        font-size: 0.65rem;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .AFL {
+        font-size: 1.5rem;
+        margin: 2rem;
+    }
+
+    .BBC {
+        width: 300px;
+    }
+
+    .BBC__nav__wrapper__blocks {
+        font-size: 0.5rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .BBC__wrapper__letters {
+        font-size: 1rem;
+    }
+
+    .AFL__wrappers {
+        height: 100vh;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        grid-template-areas:
+            "big"
+            "WCE"
+            "MEL"
+            "ESS"
+            "WBD";
+    }
+
+    .AFL__wrappers__big {
+        width: 300px;
+        height: 200px;
+        background-size: cover;
+    }
+
+    .AFL__wrappers__small {
+        width: 300px;
+        height: 200px;
+        background-size: cover;
+    }
+
     .stocks__wrapper {
         display: grid;
         gap: 5px;
@@ -239,80 +323,30 @@ body {
         grid-template-rows: repeat(3, 1fr);
         margin-top: 15rem;
     }
+
     .newmusic__wrapper {
         grid-template-columns: repeat(1, 250px);
-        grid-template-rows: repeat(3, 250px);    
+        grid-template-rows: repeat(3, 250px);
     }
+
     .AFL--text {
         width: fit-content;
         height: 50px;
-        font-size: 0.6rem;    
+        font-size: 0.6rem;
     }
+
     .newmusic__wrapper__box {
         width: 300px;
         height: 150px;
     }
+
     .newmusic__wrapper {
         display: flex;
         flex-direction: column;
-        justify-content: center;    
+        justify-content: center;
     }
-    }
-@media only screen and (max-width: 550px) {
-    .AFL {
-        font-size: 1.5rem;
-        margin: 2rem;
-        }
-    .AFL__wrappers {
-        height: 100vh;
-        display: grid;
-        gap: 5px;
-        grid-template-columns: repeat(1, 1fr);
-        grid-template-rows: repeat(5, 1fr);
-        grid-template-areas: 
-            "big"
-            "WCE"
-            "MEL"
-            "ESS"
-            "WBD";
-        }
-        .AFL__wrappers__big {
-            width: 300px;
-            height: 200px;
-            background-size: cover;       
-        }
-        .AFL__wrappers__small {
-            width: 300px;
-            height: 200px;
-            background-size: cover;
-        }
-        .stocks__wrapper {
-            margin-top: 15rem;
-        }
-        }
-        @media only screen and (max-width: 1050px) {
-                .AFL__wrappers {
-                    display: grid;
-                    gap: 5px;
-                    grid-template-columns: repeat(2, 1fr);
-                    grid-template-rows: repeat(4, 1fr);
-                    grid-template-areas: 
-                    "big big "
-                    "big big "
-                    "WCE MEL"
-                    "ESS WBD";
-                }
-                .newmusic {
-                    height: max-content;
-                }
-                .newmusic__wrapper {
-                    display: grid;
-                    gap: 10px;
-                    grid-template-columns: repeat(1, max-content);
-                    grid-template-rows: repeat(3, max-content); 
-                }
-                }
-        
+}
+
 
 
 

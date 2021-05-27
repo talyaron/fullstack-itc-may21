@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        //pure function
+        //simple function
         function add(arg1=0,arg2=0, arg3=0){
             console.log(arg3)
             return arg1 +arg2 +arg3;
@@ -22,13 +22,19 @@
             return arg1+arg2;
         }
 
+        x = add2(5,7);
+        console.log(x);
+
         //arrow function
         let add3 = (arg1, arg2) => {
             return arg1+arg2;
         }
 
-        x = add2(5,7);
+        x = add3(5,7);
         console.log(x);
+      
+
+
 
         // -------------- Hoisting
 
