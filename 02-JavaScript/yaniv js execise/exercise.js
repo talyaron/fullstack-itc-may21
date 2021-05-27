@@ -5,7 +5,7 @@
 // 1) + 2)
 
 function sayHello(name) {
-    return 'hello ' + name + '!';
+    return 'Hello ' + name + '! This is a classic function';
 }
 
 const myName1 = 'Yaniv';
@@ -14,7 +14,7 @@ console.log(sayHello(myName1));
 
 
 let sayHey = function (name) {
-    return 'hello ' + name + '!';
+    return 'Hello ' + name + '! This is a anonymous function';
 }
 
 const myName2 = 'Yanivvv';
@@ -23,7 +23,7 @@ console.log(sayHey(myName2));
 
 
 let greet = (firstName)=>{
-    return 'hello ' + firstName;
+    return 'Hello ' + firstName + '! This is an arrow function';
 }
 
 const myName3 = 'Yaniiiiiv';
@@ -36,12 +36,13 @@ function factorial(num) {
     let result = 1;
 
     for (let i = 2; i <= num; i++) {
+        console.log('Step ' + (i - 1) + ': ' + result + ' x ' + i + ' = ' + result*i);
         result *= i;
     }
 
-    return result;
+    return 'Final result: The factorial of ' + num + ' is ' + result + '!';
 }
 
 const toFactorial = 8;
 
-console.log('the factorial of ' + toFactorial + ' is ' + factorial(toFactorial) + '!');
+console.log(factorial(toFactorial));
