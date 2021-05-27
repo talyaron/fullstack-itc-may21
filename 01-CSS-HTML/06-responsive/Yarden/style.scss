@@ -1,61 +1,13 @@
-// Responsive section:
-
-@media only screen and (max-width: 600px) {
-    .navbar {
-        grid-template-columns: repeat(10, 10%);
-
-    }
-    .sub-wrapper {
-
-    }
-
-    .footer {
-
-    }
-    
-}
-
-@media only screen and (max-width: 900px) {
-
-    .navbar {
-        grid-template-columns: repeat(10, 10%);
-
-    }
-    .sub-wrapper {
-
-    }
-
-    .footer {
-        
-    }
-    
-}
-
-
-@media only screen and (max-width: 1400px) {
-
-    .navbar {
-        grid-template-columns: repeat(10, 10%);
-
-    }
-    .sub-wrapper {
-
-    }
-
-    .footer {
-        
-    }
-    
-}
-
-
-
 body {
 	font-family: Arial,Helvetica,freesans,sans-serif;
     margin: 0;
 }
 .body-wrapper {
-	padding: 2rem 5rem;
+	padding: 2rem 5rem;    
+
+    @media only screen and (max-width: 600px) {
+    padding: 1rem;
+    }
 }
 
 //Navbar styling:
@@ -67,34 +19,53 @@ body {
     grid-template-columns: repeat(10, 9%);
     align-items: center;
 	padding-top: 0.3rem;
+
+    &__item {
+        display: inline-block;
+        font-weight: 700;
+        width: 4.5rem;
+        color: white;
+        border-left: 1px solid #666666;
+        font-size: 13px;
+        text-align: center;
+        padding: 0.6rem;
+        
+        @media only screen and (max-width: 768px) {
+        display: none;
+        border: none;
+        }
+
+        &--burger {
+            color: white;
+            display: none;
+
+            @media only screen and (max-width: 768px) {
+            display:contents;
+            font-size: 1.1rem;
+            }
+        }
+
+    }
 }
-.nav {
-	display: inline-block;
-	font-weight: 700;
-	width: 4.5rem;
-	color: white;
-	border-left: 1px solid #666666;
-	font-size: 13px;
-	text-align: center;
-	padding: 0.6rem;
-}
+
 #logo {
 	padding-bottom: 8.2px;
 	width: 5.25rem;
 	height: 1.5rem;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 	list-style-type: none;
-}
-
-.logo-letter {
+    align-items: center;
+    
+.logo__letter {
 	margin: 1px 2px;
 	background-color: white;
 	color: black;
 	font-weight: 550;
 	font-size: 1.5rem;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
 }
+
 
 //Headline and time styling
 
@@ -104,12 +75,21 @@ body {
 }
 #time {
 	display: inline;
-	margin-left: 48rem;
+	margin-left: 50vw;
 	color: #8c8c8c;
 	font-weight: normal;
+
+    @media only screen and (max-width: 1270px) {
+        display:block;
+        margin-left: 0vw;
+    }
 }
 #header-headline {
 	display: inline;
+
+    @media only screen and (max-width: 1270px) {
+        display:block;
+    }
 }
 
 //News section styling
@@ -118,21 +98,36 @@ body {
     display: grid;
     grid-template-columns: 50% 12.5% 12.5% 12.5% 12.5%;
     margin: auto;
+
+    // @media only screen and (max-width: 1024px) {
+    //     grid-template-columns: repeat(1, 0.5fr);
+
+    // }
+
+    h3 {
+        margin: auto;
+        font-weight: bold;
+        width: 18.75rem;
+        height: 11.25rem;
+        color: rgb(161, 161, 161);
+        text-shadow: 1px 1px black;
+    }
+
+    .sub-wrapper2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+    @media only screen and (max-width: 600px) {
+
+    }
+    @media only screen and (max-width: 768px) {
+        grid-template-columns: repeat(1, 1fr);
+        
+    }
 }
-h3 {
-	margin: auto;
-	font-weight: bold;
-	width: 300px;
-	height: 180px;
-	color: rgb(161, 161, 161);
-	text-shadow: 1px 1px black;
-}
-.sub-wrapper2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 0.5rem;
-}
+
 
 // Footer section styling. HERE I FINALLY UNDERSTOOD HOW TO USE SCSS. IT'S LIKE MAGIC!
 
@@ -155,6 +150,13 @@ h3 {
         gap: 1rem;
         margin: 0 10%;
 
+        
+    @media only screen and (max-width: 600px) {
+        grid-template-columns: repeat(4, 1fr); 
+        font-size: 0.8rem;
+    }
+
+
         &__item {
             color: white;
             cursor: pointer;
@@ -166,6 +168,9 @@ h3 {
         color: white;
         margin: 3rem 0 0 1rem;
         font-size: 0.9rem;
+        
+        // @media only screen and (max-width: 600px) {
+        font-size: 00.6rem;
     }
 }
 
@@ -183,6 +188,7 @@ h3 {
 	width: 38.125rem;
 	background-size: contain;
 	background-image: url("https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190916094546/5-Most-Difficult-Programming-Languages-of-the-World.png");
+
 }
 #pic-haifa {
 	background-size: cover;
