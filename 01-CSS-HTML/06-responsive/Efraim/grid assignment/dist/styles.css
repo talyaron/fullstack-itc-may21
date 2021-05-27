@@ -171,6 +171,7 @@ body {
 
 @media only screen and (max-width: 1050px) {
   .AFL__wrappers {
+    height: 100vh;
     display: grid;
     gap: 5px;
     grid-template-columns: repeat(2, 1fr);
@@ -191,6 +192,7 @@ body {
 }
 @media only screen and (max-width: 800px) {
   .AFL__wrappers {
+    height: 100vh;
     display: grid;
     gap: 5px;
     grid-template-columns: repeat(2, 1fr);
@@ -238,6 +240,12 @@ body {
 
   .stocks__wrapper {
     margin-top: 15rem;
+  }
+
+  .AFL--text {
+    width: fit-content;
+    height: 50px;
+    font-size: 0.65rem;
   }
 }
 @media only screen and (max-width: 415px) {
