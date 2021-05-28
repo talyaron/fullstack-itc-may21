@@ -49,7 +49,8 @@ body {
   border-left: solid red 0.5rem;
 }
 .article__container {
-  color: white;
+  color: #fdfdfd;
+  font-weight: bolder;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;
@@ -97,6 +98,11 @@ body {
 .article__items--main p {
   font-size: 1.2rem;
 }
+img {
+  object-fit: cover;
+  object-position: top;
+}
+
 .hero {
   background-image: -webkit-radial-gradient(blue, green, purple);
 }
@@ -142,16 +148,33 @@ body {
 }
 
 @media only screen and (max-width: 900px) {
+  .nav {
+    grid-template-columns: 25vw 25vw 25vw 25vw;
+    justify-content: center;
+  }
+
   body {
     background-color: #7c2c76;
   }
 
-  .article__container--2 {
+  .hero__article {
+    background-image: radial-gradient(black, silver, gray);
     grid-template-columns: 1fr;
+    grid-template-areas: "main";
+  }
+
+  .article__container--2 {
+    grid-template-columns: 1fr 1fr;
   }
 
   .article__container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "main main";
+  }
+
+  .article__items--main {
+    margin: 0;
+    height: 10rem;
   }
 }
 @media only screen and (max-width: 600px) {
@@ -160,7 +183,7 @@ body {
   }
 
   .hero__article {
-    background-color: lightcoral;
+    background-image: radial-gradient(yellow, orange, red);
     grid-template-columns: 1fr;
     grid-template-areas: "main";
   }
@@ -170,7 +193,7 @@ body {
   }
 
   .article__container {
-    background-color: lightblue;
+    grid-template-columns: 1fr;
     grid-template-areas: "main";
   }
   .article__container .article__items--main {
