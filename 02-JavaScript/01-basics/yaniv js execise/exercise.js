@@ -22,7 +22,7 @@ const myName2 = 'Yanivvv';
 console.log(sayHey(myName2));
 
 
-let greet = (firstName)=>{
+let greet = (firstName) => {
     return 'Hello ' + firstName + '! This is an arrow function';
 }
 
@@ -33,16 +33,30 @@ console.log(greet(myName3));
 // 3)
 
 function factorial(num) {
-    let result = 1;
+    try {
+        if (isNaN(num)) {
+            throw new Error('Please enter a number!');
+        } else if (num < 0) {
+            throw new Error('Please enter a positive, whole number!');
+        }
+        let result = 1;
 
-    for (let i = 2; i <= num; i++) {
-        console.log('Step ' + (i - 1) + ': ' + result + ' x ' + i + ' = ' + (result * i));
-        result *= i;
+        for (let i = 2; i <= num; i++) {
+            console.log('Step ' + (i - 1) + ': ' + result + ' x ' + i + ' = ' + (result * i));
+            result *= i;
+        }
+
+        return 'Final result: The factorial of ' + num + ' is ' + result + '!';
+    } catch(error) {
+        return error;
     }
-
-    return 'Final result: The factorial of ' + num + ' is ' + result + '!';
 }
 
-const toFactorial = 8;
+let toFactorial = 8;
+console.log(factorial(toFactorial));
 
+toFactorial = -1;
+console.log(factorial(toFactorial));
+
+toFactorial = 'Hello';
 console.log(factorial(toFactorial));

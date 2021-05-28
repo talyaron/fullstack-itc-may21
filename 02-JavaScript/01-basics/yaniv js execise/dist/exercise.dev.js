@@ -26,15 +26,29 @@ var myName3 = 'Yaniiiiiv';
 console.log(greet(myName3)); // 3)
 
 function factorial(num) {
-  var result = 1;
+  try {
+    if (isNaN(num)) {
+      throw new Error('Please enter a number!');
+    } else if (num < 0) {
+      throw new Error('Please enter a positive, whole number!');
+    }
 
-  for (var i = 2; i <= num; i++) {
-    console.log('Step ' + (i - 1) + ': ' + result + ' x ' + i + ' = ' + result * i);
-    result *= i;
+    var result = 1;
+
+    for (var i = 2; i <= num; i++) {
+      console.log('Step ' + (i - 1) + ': ' + result + ' x ' + i + ' = ' + result * i);
+      result *= i;
+    }
+
+    return 'Final result: The factorial of ' + num + ' is ' + result + '!';
+  } catch (error) {
+    return error;
   }
-
-  return 'Final result: The factorial of ' + num + ' is ' + result + '!';
 }
 
 var toFactorial = 8;
+console.log(factorial(toFactorial));
+toFactorial = -1;
+console.log(factorial(toFactorial));
+toFactorial = 'Hello';
 console.log(factorial(toFactorial));
