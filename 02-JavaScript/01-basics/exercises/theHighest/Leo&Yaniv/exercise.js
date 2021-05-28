@@ -125,31 +125,31 @@ let highestInArrow = (array) => {
 }
 
 let arrayToCheck = [8, -1, 4, 200, 'a'];
-console.log(theHighest(arrayToCheck));
-console.log(highestNum(arrayToCheck));
-console.log(highestInArrow(arrayToCheck));
+console.log('classic: ' + theHighest(arrayToCheck));
+console.log('anonymous: ' + highestNum(arrayToCheck));
+console.log('arrow: ' + highestInArrow(arrayToCheck));
 
 arrayToCheck = -1;
-console.log(theHighest(arrayToCheck));
-console.log(highestNum(arrayToCheck));
-console.log(highestInArrow(arrayToCheck));
+console.log('classic: ' + theHighest(arrayToCheck));
+console.log('anonymous: ' + highestNum(arrayToCheck));
+console.log('arrow: ' + highestInArrow(arrayToCheck));
 
 arrayToCheck = 'This is a string';
-console.log(theHighest(arrayToCheck));
-console.log(highestNum(arrayToCheck));
-console.log(highestInArrow(arrayToCheck));
+console.log('classic: ' + theHighest(arrayToCheck));
+console.log('anonymous: ' + highestNum(arrayToCheck));
+console.log('arrow: ' + highestInArrow(arrayToCheck));
 
 arrayToCheck = {string:'This is a string',arr:[1,2,3],boolean:false};
-console.log(theHighest(arrayToCheck));
-console.log(highestNum(arrayToCheck));
-console.log(highestInArrow(arrayToCheck));
+console.log('classic: ' + theHighest(arrayToCheck));
+console.log('anonymous: ' + highestNum(arrayToCheck));
+console.log('arrow: ' + highestInArrow(arrayToCheck));
 
 arrayToCheck = ['Hello', 'Leo', 'Yaniv'];
-console.log(theHighest(arrayToCheck));
-console.log(highestNum(arrayToCheck));
-console.log(highestInArrow(arrayToCheck));
+console.log('classic: ' + theHighest(arrayToCheck));
+console.log('anonymous: ' + highestNum(arrayToCheck));
+console.log('arrow: ' + highestInArrow(arrayToCheck));
 
 arrayToCheck = [-1,-1,-1,-1,-1];
-console.log(theHighest(arrayToCheck));
-console.log(highestNum(arrayToCheck));
-console.log(highestInArrow(arrayToCheck));
+console.log('classic: ' + theHighest(arrayToCheck));
+console.log('anonymous: ' + highestNum(arrayToCheck));
+console.log('arrow: ' + highestInArrow(arrayToCheck));
