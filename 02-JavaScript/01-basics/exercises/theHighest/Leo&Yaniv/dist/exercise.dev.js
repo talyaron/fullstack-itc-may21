@@ -114,6 +114,7 @@ var highestInArrow = function highestInArrow(array) {
           isAllEqual = true;
         } else {
           isAllEqual = false;
+          break;
         }
       }
 

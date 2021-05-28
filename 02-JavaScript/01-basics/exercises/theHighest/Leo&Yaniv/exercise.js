@@ -99,6 +99,7 @@ let highestInArrow = (array) => {
                 }
                 else {
                     isAllEqual = false;
+                    break;
                 }
             }
             if (notNumbersCounter == array.length) {
