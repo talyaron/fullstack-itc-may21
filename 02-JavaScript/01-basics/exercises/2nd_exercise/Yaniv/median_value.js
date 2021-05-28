@@ -26,6 +26,7 @@ function orderArr(array) {
     }
 }
 
+// simple
 function findMedSimple(array) {
     try {
         // debugger;
@@ -61,6 +62,7 @@ function findMedSimple(array) {
     }
 }
 
+// anonymous
 let findMedAnonymous = function (array) {
     try {
         // debugger;
@@ -96,6 +98,7 @@ let findMedAnonymous = function (array) {
     }
 }
 
+// arrow
 let findMedArrow = (array) => {
     try {
         // debugger;
@@ -131,23 +134,110 @@ let findMedArrow = (array) => {
     }
 }
 
+// valid input
 let arrayToCheck = [6, 5, 4, 1, 2, 58];
 console.log('simple: ' + findMedSimple(arrayToCheck));
 console.log('anonymous: ' + findMedAnonymous(arrayToCheck));
 console.log('arrow: ' + findMedArrow(arrayToCheck));
 
+// invalid check 1
 arrayToCheck = [6, 5, 'a', 1, 2, 58];
 console.log('simple: ' + findMedSimple(arrayToCheck));
 console.log('anonymous: ' + findMedAnonymous(arrayToCheck));
 console.log('arrow: ' + findMedArrow(arrayToCheck));
 
+// invalid check 2
 arrayToCheck = [6];
 console.log('simple: ' + findMedSimple(arrayToCheck));
 console.log('anonymous: ' + findMedAnonymous(arrayToCheck));
 console.log('arrow: ' + findMedArrow(arrayToCheck));
 
-
+// invalid check 3
 arrayToCheck = 23;
 console.log('simple: ' + findMedSimple(arrayToCheck));
 console.log('anonymous: ' + findMedAnonymous(arrayToCheck));
 console.log('arrow: ' + findMedArrow(arrayToCheck));
+
+
+// 2)
+
+// simple
+function objToArrSimple(object) {
+    try {
+        if (typeof object != 'object') {
+            throw new Error ('Please enter an object!');
+        }
+        let array = [];
+        let key;
+        for (key in object) {
+            array.push(object[key]);
+        }
+
+        return array;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+// anonymous
+let objToArrAnonymous = function(object) {
+    try {
+        if (typeof object != 'object') {
+            throw new Error ('Please enter an object!');
+        }
+        let array = [];
+        let key;
+        for (key in object) {
+            array.push(object[key]);
+        }
+
+        return array;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+// arrow
+let objToArrArrow = (object) => {
+    try {
+        if (typeof object != 'object') {
+            throw new Error ('Please enter an object!');
+        }
+        let array = [];
+        let key;
+        for (key in object) {
+            array.push(object[key]);
+        }
+
+        return array;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+// valid input
+let objectToCheck = {
+    num: 4,
+    str: 'hi',
+    arr: [1,2,3],
+    bln: false,
+    udf: undefined,
+    nll: null,
+    obj: {
+        1: 'yo',
+        2: 42
+    }
+}
+console.log('simple: ' + objToArrSimple(objectToCheck));
+console.log('anonymous: ' + objToArrAnonymous(objectToCheck));
+console.log('arrow: ' + objToArrArrow(objectToCheck));
+
+// invalid input check
+objectToCheck = "Guess what - I'm not an object! Muhahaha!!";
+console.log('simple: ' + objToArrSimple(objectToCheck));
+console.log('anonymous: ' + objToArrAnonymous(objectToCheck));
+console.log('arrow: ' + objToArrArrow(objectToCheck));
+
