@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Factorial calculator</h1>
+    <p>Please select a whole number:</p>
+    <input type="number" class="factorial" min="1">
+    <button class="submit">"Submit"</button>
+    <p class="demo">Factorial: </p>
+
+    <script>
+
+//function
+function nameGreet(name) {
+    return "Hello " + name + ".";
+}
+console.log(nameGreet("Yarden"));
+
+//anonnymous function
+let nameGreet2 = function(name) {
+    return "Hello " + name + "."; 
+}
+console.log(nameGreet2("Yarden 2nd time"));
+
+//arrow function
+let nameGreet3 = (name) => {
+    return "Hello " + name + "."; 
+}
+myName = nameGreet3('Yarden 3rd time')
+console.log(myName);
+
+
+// Factorial function
+
+let factorial = (chosenNumber) => {
+  if (chosenNumber === 1) {
+    return 1;
+  }
+  return chosenNumber * factorial(chosenNumber - 1);
+}
+
+console.log(factorial(7));
+
+let num = document.getElementsByClassName("factorial")
+document.getElementById("submit").addEventListener("click", function() {
+    document.write("<p>factorial(num)</p>")
+})
+    
+    </script>
+</body>
+</html>
