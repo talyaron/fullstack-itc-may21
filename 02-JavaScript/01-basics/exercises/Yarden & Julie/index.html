@@ -14,18 +14,18 @@ let myArray = [1, 4, 6, 5, 7]
         function getHighest(array) {
 
             let maxNumber
-            for (let index = 0; index <=maxNumber; index++) {
+            for (let index = 0; index <= maxNumber; index++) {
                 // const element = array[index];
                 if(array[index]>maxNumber) {
                 maxNumber = array[index] 
                 }
-            } 
-            
+            return maxNumber
+            }
         }
 
-
-        console.log(getHighest([2,5,6,7,8]));
-
+    x = getHighest(myArray)
+    
+    console.log(x);
     </script>
 </body>
 </html>
