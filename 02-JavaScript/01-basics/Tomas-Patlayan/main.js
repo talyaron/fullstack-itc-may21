@@ -29,7 +29,6 @@ function Factorial3(number){
     return number * Factorial3(number - 1)    
 }
 
-console.log("The factorial of " + number + " is " + Factorial3(number))
 
 
 
@@ -37,4 +36,7 @@ console.log("The factorial of " + number + " is " + Factorial3(number))
 
 nombre();
 nombre2();
-nombre3()
+nombre3();
+
+
+console.log("The factorial of " + number + " is " + Factorial3(number))
