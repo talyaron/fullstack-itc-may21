@@ -33,11 +33,12 @@ console.log(greet(myName3));
 // 3)
 
 function factorial(num) {
-    if (isNaN(num)) {
-        return 'Please enter a number!';
-    } else if (num < 0) {
-        return 'Please enter a positive, whole number!';
-    } else {
+    try {
+        if (isNaN(num)) {
+            throw new Error('Please enter a number!');
+        } else if (num < 0) {
+            throw new Error('Please enter a positive, whole number!');
+        }
         let result = 1;
 
         for (let i = 2; i <= num; i++) {
@@ -46,14 +47,16 @@ function factorial(num) {
         }
 
         return 'Final result: The factorial of ' + num + ' is ' + result + '!';
+    } catch(error) {
+        return error;
     }
 }
 
 let toFactorial = 8;
 console.log(factorial(toFactorial));
 
-let toFactorial = -1;
+toFactorial = -1;
 console.log(factorial(toFactorial));
 
-let toFactorial = 'Hello';
+toFactorial = 'Hello';
 console.log(factorial(toFactorial));
