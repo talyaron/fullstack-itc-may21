@@ -1,4 +1,4 @@
-let highestArray = ["pepe",12,100,2]
+let highestArray = [12,100,122,123,2]
 
 
 //First Method
@@ -6,6 +6,8 @@ let highestArray = ["pepe",12,100,2]
 function numberHighest(array2){
 
     try{
+
+        if(!Array.isArray(array2)) throw new Error('is not an object')
 
         for (let i=0; i<array2.length; i++){
             if (typeof array2[i] !== "number"){
@@ -29,6 +31,8 @@ console.log(numberHighest(highestArray))
 let secondMethod = function(array2){
 
     try{
+
+        if(!Array.isArray(array2)) throw new Error('is not an object')
 
         for (let i=0; i<array2.length; i++){
             if (typeof array2[i] !== "number"){
@@ -54,6 +58,8 @@ let thirdMethod = (array2)=>{
 
     try{
 
+        if(!Array.isArray(array2)) throw new Error('is not an object')
+        
         for (let i=0; i<array2.length; i++){
             if (typeof array2[i] !== "number"){
                 throw new Error("Some elements is not a number")

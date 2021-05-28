@@ -1,9 +1,11 @@
 "use strict";
 
-var highestArray = ["pepe", 12, 100, 2]; //First Method
+var highestArray = [12, 100, 122, 123, 2]; //First Method
 
 function numberHighest(array2) {
   try {
+    if (!Array.isArray(array2)) throw new Error('is not an object');
+
     for (var i = 0; i < array2.length; i++) {
       if (typeof array2[i] !== "number") {
         throw new Error("Some elements is not a number");
@@ -21,6 +23,8 @@ console.log(numberHighest(highestArray)); //Second Method
 
 var secondMethod = function secondMethod(array2) {
   try {
+    if (!Array.isArray(array2)) throw new Error('is not an object');
+
     for (var i = 0; i < array2.length; i++) {
       if (typeof array2[i] !== "number") {
         throw new Error("Some elements is not a number");
@@ -39,6 +43,8 @@ console.log(x); //Third Method
 
 var thirdMethod = function thirdMethod(array2) {
   try {
+    if (!Array.isArray(array2)) throw new Error('is not an object');
+
     for (var i = 0; i < array2.length; i++) {
       if (typeof array2[i] !== "number") {
         throw new Error("Some elements is not a number");
