@@ -9,6 +9,13 @@
 <body>
     <script> 
 // function
+
+const name = `avromi`;
+const greetingsSir = `hello`
+const sentence = `${greetingsSir} ${name}`;
+console.log(sentence);
+
+
 function greet(name) {
   console.log("Hello, " + name + "!");
 }
@@ -23,24 +30,24 @@ console.log (greeting("Avromi", "Hi"));
 
 //anonymous
 
-let greeting2= function(name, greeting){
+let greeting2 = function(name, greeting){
     return `${name} ${greeting}`;
 }
-console.log (greeting2("Avromi", "You're Awesome!!"))
+console.log (greeting2("Avromi", "You're Awesome!!"));
 
  //arrow function 
 
  let greeting3 = (prefix, person)=>{
-     return `${prefix} ${person}`
+     return `${prefix} ${person}`;
  }
 
- console.log(greeting3("Good day", "Mate"))
+ console.log (greeting3("Good day", "Mate"));
 
 //n!
 
 someValue = 5
 fact = 1
-while(someValue > 1){
+while (someValue > 1){
    fact = fact * someValue 
    someValue = someValue - 1
   
