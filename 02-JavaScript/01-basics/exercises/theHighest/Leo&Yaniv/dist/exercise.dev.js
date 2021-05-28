@@ -53,5 +53,7 @@ arrayToCheck = -1;
 console.log(theHighest(arrayToCheck));
 arrayToCheck = ['Hello', 'Leo', 'Yaniv'];
 console.log(theHighest(arrayToCheck));
+arrayToCheck = 'This is a string';
+console.log(theHighest(arrayToCheck));
 arrayToCheck = [-1, -1, -1, -1, -1];
 console.log(theHighest(arrayToCheck));
