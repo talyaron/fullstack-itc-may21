@@ -234,6 +234,22 @@ body {
     }
 }
 
+@media only screen and (max-width: 600px) {
+    .BBC {
+        width: 300px;
+    }
+
+    .BBC__nav__wrapper__blocks {
+        font-size: 0.8rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .BBC__wrapper__letters {
+        font-size: 1rem;
+    }
+}
+
 @media only screen and (max-width: 550px) {
     .AFL {
         font-size: 1.5rem;
@@ -352,7 +368,3 @@ body {
         justify-content: center;
     }
 }
-
-
-
-
