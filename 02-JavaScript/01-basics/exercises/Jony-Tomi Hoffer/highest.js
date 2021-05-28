@@ -1,4 +1,4 @@
-let highestArray = [12,100,122,123,2]
+let highestArray = [-12,'pepe',-122,-123,-2]
 
 
 //First Method
@@ -9,8 +9,8 @@ function numberHighest(array2){
 
         if(!Array.isArray(array2)) throw new Error('is not an object')
 
-        for (let i=0; i<array2.length; i++){
-            if (typeof array2[i] !== "number"){
+        for (let el in array2){
+            if (typeof el !== "number"){
                 throw new Error("Some elements is not a number")
             }
         }
