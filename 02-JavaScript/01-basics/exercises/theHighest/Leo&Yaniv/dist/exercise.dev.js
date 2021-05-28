@@ -6,15 +6,26 @@ function theHighest(array) {
       throw new Error('Please enter an array!');
     } else {
       notNumbersCounter = 0;
+      isAllEqual = false;
 
       for (var i = 0; i < array.length; i++) {
         if (isNaN(array[i])) {
           notNumbersCounter++;
         }
+
+        if (i > 1 && array[i] == array[i - 1]) {
+          isAllEqual = true;
+        } else {
+          isAllEqual = false;
+        }
       }
 
       if (notNumbersCounter == array.length) {
         throw new Error('Your array contains no numbers!');
+      }
+
+      if (isAllEqual == true) {
+        throw new Error('Your array elements are all equal!');
       }
     }
 
