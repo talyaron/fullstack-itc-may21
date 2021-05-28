@@ -25,6 +25,7 @@
                
                 //define  a variable which sums the number
                 let runningTotal = 0;
+               
                 for (let el of arr) {
 
                     if(typeof el !== 'number') throw new Error('an element is not a number')
@@ -35,6 +36,7 @@
                 return avg;
 
             } catch (e) {
+                
                 console.error(e)
                 return false
             }
