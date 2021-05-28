@@ -5,14 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: gray;
+            font-size: 1.5rem;
+        }
+    </style>
 </head>
 <body>
-
+    <h4>View page source for function exercise!</h3>
     <h1>Factorial calculator</h1>
     <p>Please select a whole number:</p>
     <input type="number" class="factorial" min="1">
     <button class="submit">"Submit"</button>
-    <p class="demo">Factorial: </p>
+    <p class="result">Your factorial number: </p>
 
     <script>
 
@@ -36,7 +43,8 @@ myName = nameGreet3('Yarden 3rd time')
 console.log(myName);
 
 
-// Factorial function
+
+// Factorial function. Would like to learn how to display result on the page!
 
 let factorial = (chosenNumber) => {
   if (chosenNumber === 1) {
@@ -46,11 +54,6 @@ let factorial = (chosenNumber) => {
 }
 
 console.log(factorial(7));
-
-let num = document.getElementsByClassName("factorial")
-document.getElementById("submit").addEventListener("click", function() {
-    document.write("<p>factorial(num)</p>")
-})
     
     </script>
 </body>
