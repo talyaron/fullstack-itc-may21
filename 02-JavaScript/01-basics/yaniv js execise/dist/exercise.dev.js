@@ -12,7 +12,7 @@ var myName1 = 'Yaniv';
 console.log(sayHello(myName1));
 
 var sayHey = function sayHey(name) {
-  return 'Hello ' + name + '! This is a anonymous function';
+  return 'Hello ' + name + '! This is an anonymous function';
 };
 
 var myName2 = 'Yanivvv';

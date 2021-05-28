@@ -14,7 +14,7 @@ console.log(sayHello(myName1));
 
 
 let sayHey = function (name) {
-    return 'Hello ' + name + '! This is a anonymous function';
+    return 'Hello ' + name + '! This is an anonymous function';
 }
 
 const myName2 = 'Yanivvv';
@@ -36,7 +36,7 @@ function factorial(num) {
     let result = 1;
 
     for (let i = 2; i <= num; i++) {
-        console.log('Step ' + (i - 1) + ': ' + result + ' x ' + i + ' = ' + result*i);
+        console.log('Step ' + (i - 1) + ': ' + result + ' x ' + i + ' = ' + (result * i));
         result *= i;
     }
 

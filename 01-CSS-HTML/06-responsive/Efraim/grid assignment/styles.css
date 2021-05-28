@@ -1,0 +1,370 @@
+body {
+    background-color: white;
+    font-family: sans-serif;
+    font-size: 16px;
+    height: 100vh;
+    margin: 0;
+    width: 100vw;
+}
+
+
+.BBC__wrapper {
+        position: fixed;
+        display: grid;
+        grid-template-columns: 2rem 2rem 2rem;
+        position: relative;
+    }
+
+
+.BBC__wrapper__letters {
+    font-size: 1.5rem;
+    height: max-content;
+    border: 3px solid black;
+    font-style: bold;
+    text-align: center;
+    background-color: white;
+}
+
+
+.BBC__nav {
+    display: block;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    /* Full width */
+    height: max-content;
+    margin-bottom: 3rem;
+    background-color: black;
+    position: absolute;
+}
+
+.BBC__nav__wrapper {
+    list-style-type: none;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: repeat(6, max-content);
+    justify-content: center;
+}
+
+.BBC__nav__wrapper__blocks {
+    color: white;
+    font-family: sans-serif;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 1rem;
+    border-right: 2px solid rgb(90, 78, 78);
+}
+
+.AFL {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    margin-left: 8rem;
+    margin-top: 5rem;
+}
+
+.AFL__wrappers {
+    margin: auto;
+    width: 80vw;
+    height: 40vh;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+        "big big WCE MEL"
+        "big big ESS WBD";
+
+}
+
+.AFL__wrappers__big {
+    grid-area: big;
+    background-image: linear-gradient(to bottom right, white, lightgray);
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    color: white;
+    position: relative;
+
+}
+
+.AFL__wrappers__small {
+    background-image: linear-gradient(to bottom right, white, lightgray);
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    font-size: 0.8rem;
+    position: relative;
+}
+
+.stocks__wrapper {
+    margin: auto;
+    width: 80vw;
+    height: 50vh;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.stocks__wrapper__box {
+    background-image: linear-gradient(to bottom right, white, lightgray);
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    color: white;
+    border-radius: 10px;
+    position: relative;
+}
+
+.newmusic {
+    width: 100%;
+    height: 30rem;
+    background-image: url(https://i.ytimg.com/vi/yrTP-k26e94/maxresdefault.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.newmusic__wrapper {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, max-content);
+    grid-template-rows: repeat(1, max-content);
+
+}
+
+.newmusic__wrapper__box {
+    background-image: linear-gradient(to bottom right, white, lightgray);
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    width: 400px;
+    height: 250px;
+}
+
+.AFL--text {
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0;
+}
+
+.AFL--WCE {
+    grid-area: WCE;
+}
+
+.AFL--MEL {
+    grid-area: MEL;
+}
+
+.AFL--ESS {
+    grid-area: ESS;
+}
+
+.AFL--WBD {
+    grid-area: WBD;
+}
+
+@media only screen and (max-width: 1050px) {
+    .AFL__wrappers {
+        height: 100vh;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-areas:
+            "big big "
+            "big big "
+            "WCE MEL"
+            "ESS WBD";
+    }
+  
+    .newmusic {
+        height: max-content;
+    }
+
+    .newmusic__wrapper {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(1, max-content);
+        grid-template-rows: repeat(3, max-content);
+    }
+}
+@media only screen and (max-width: 800px) {
+    .AFL__wrappers {
+        height: 100vh;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-areas:
+            "big big "
+            "big big "
+            "WCE MEL"
+            "ESS WBD";
+    }
+  
+    .newmusic {
+        height: max-content;
+    }
+
+    .newmusic__wrapper {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(1, max-content);
+        grid-template-rows: repeat(3, max-content);
+    }
+    .AFL--text {
+        width: fit-content;
+        height: 50px;
+        font-size: 0.75rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .BBC {
+        width: 300px;
+    }
+
+    .BBC__nav__wrapper__blocks {
+        font-size: 0.8rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .BBC__wrapper__letters {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .AFL {
+        font-size: 1.5rem;
+        margin: 2rem;
+        margin-top: 2rem;
+    }
+
+    .AFL__wrappers {
+        height: 100vh;
+        margin-bottom: 25rem;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        grid-template-areas:
+            "big"
+            "WCE"
+            "MEL"
+            "ESS"
+            "WBD";
+    }
+
+    .AFL__wrappers__big {
+        width: 300px;
+        height: 200px;
+        background-size: cover;
+    }
+
+    .AFL__wrappers__small {
+        width: 300px;
+        height: 200px;
+        background-size: cover;
+    }
+
+   
+    .AFL--text {
+        width: fit-content;
+        height: 50px;
+        font-size: 0.65rem;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .AFL {
+        font-size: 1.5rem;
+        margin: 2rem;
+    }
+
+    .BBC {
+        width: 300px;
+    }
+
+    .BBC__nav__wrapper__blocks {
+        font-size: 0.5rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .BBC__wrapper__letters {
+        font-size: 1rem;
+    }
+
+    .AFL__wrappers {
+        height: 100vh;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        grid-template-areas:
+            "big"
+            "WCE"
+            "MEL"
+            "ESS"
+            "WBD";
+    }
+
+    .AFL__wrappers__big {
+        width: 300px;
+        height: 200px;
+        background-size: cover;
+    }
+
+    .AFL__wrappers__small {
+        width: 300px;
+        height: 200px;
+        background-size: cover;
+    }
+
+    .stocks__wrapper {
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    
+    }
+
+    .newmusic__wrapper {
+        grid-template-columns: repeat(1, 250px);
+        grid-template-rows: repeat(3, 250px);
+    }
+
+    .AFL--text {
+        width: fit-content;
+        height: 50px;
+        font-size: 0.6rem;
+    }
+
+    .newmusic__wrapper__box {
+        width: 300px;
+        height: 150px;
+    }
+
+    .newmusic__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
