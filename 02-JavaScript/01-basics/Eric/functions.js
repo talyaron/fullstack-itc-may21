@@ -56,12 +56,3 @@ console.log(factorial(n));
 
 
 
-
-
-
-
-
-
-
-
-
