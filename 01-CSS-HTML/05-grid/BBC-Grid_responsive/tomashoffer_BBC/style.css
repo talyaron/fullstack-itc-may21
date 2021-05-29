@@ -22,6 +22,10 @@ body {
   font-size: 26px;
 }
 
+.navbar .nav-item a {
+  color: white;
+}
+
 .navbar .logo {
   margin-left: 20px;
 }
