@@ -7,7 +7,7 @@
 
 .main {
   display: grid;
-  grid-template-columns: 600px 300px 300px;
+  grid-template-columns: 50% 20% 20%;
   grid-template-rows: 170px 170px;
   grid-row-gap: 7px;
   grid-column-gap: 12px;

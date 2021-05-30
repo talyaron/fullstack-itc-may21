@@ -11,7 +11,8 @@ function userNamePure(user) {
   return user;
 }
 
-var a = userNamePure(userName);
+var a = userNamePure(userName); //YS: Use const for functions. 
+
 console.log("Hello ".concat(a, " (pure function)"));
 namePureFunction.addEventListener("click", function pureName() {
   var textToAdd = document.createElement('marquee');
@@ -22,6 +23,7 @@ namePureFunction.addEventListener("click", function pureName() {
 }); //------------------- arrow function-----------------------------------//
 
 var userNameArrow = function userNameArrow(user) {
+  //YS: Use const for functions 
   return user;
 };
 
@@ -68,4 +70,4 @@ function factorialize(num) {
 
     return num;
   }
-}
+} //YS: Excellent work!
