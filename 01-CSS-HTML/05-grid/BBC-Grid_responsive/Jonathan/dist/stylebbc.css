@@ -509,6 +509,7 @@ h1 {
     list-style: none;
   }
 }
+/* YS: At this screen resolution, all of your elements should be more centered: justify-content, justify-items, text-align etc */
 @media only screen and (max-width: 400px) {
   header {
     display: flex;
@@ -533,6 +534,7 @@ h1 {
     width: 400px;
     margin: 0 0 0 5px;
     grid-template-areas: "main" "ball" "anfitriones" "teams" "groups";
+    /* YS: Mind the gaps between code blocks */
   }
   .main__bigimage__textblock {
     position: relative;
@@ -600,6 +602,7 @@ h1 {
     line-height: 20px;
   }
 
+  /* YS: Why not center? */
   .stadium {
     grid-template-columns: 400px;
     margin: 0 0 0 5px;
@@ -612,6 +615,7 @@ h1 {
     font-weight: 700;
     line-height: 24px;
     text-align: left;
+    /* YS: Why not center? */
   }
   .stadium p {
     color: #212121;

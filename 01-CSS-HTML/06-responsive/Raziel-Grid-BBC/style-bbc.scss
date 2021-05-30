@@ -4,7 +4,7 @@ body{
     margin: 0;
 }
 
-
+// YS: Too much space between code blocks
 
 .top {
     background-color: black;
@@ -12,13 +12,14 @@ body{
 
 .top-container {
     height: 40px;
-    display: flex;
+    display: flex; // YS: Why flex and not grid?
     justify-content: space-around;
     width: 100%;
     margin: 0 auto;
     
 }
 
+// YS: Too much space between code blocks
 
 .logo {
     color: black;
@@ -104,7 +105,7 @@ h1,
 }
 
 h1 {
-    font-size: 1.5rem;
+    font-size: 1.5rem; // YS: This should be centered in mobile/tabled view.
 }
 
 
@@ -222,7 +223,7 @@ section {
             }
 
             h3 {
-                font-size: 2rem;
+                font-size: 2rem;  // YS: Too large in mobile view
                 bottom: 100px;
             }
 

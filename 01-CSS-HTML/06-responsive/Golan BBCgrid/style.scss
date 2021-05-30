@@ -9,8 +9,8 @@ nav {
     background-color: black;
     display: flex;
     align-items: center;
-    height: 2.2vw;
-    width: 100%;
+    height: 2.2vw;  // YS: Height is VH not VW
+    width: 100%;     // YS: If you are using VH for height, use VW for witdth. 
     padding-left: 10rem;
 
     .nav__logoletter {
@@ -57,7 +57,7 @@ nav {
     padding-right: 10rem;
     padding-top: 1rem;
     display: grid;
-    -ms-grid-columns: (1fr)(4);
+    -ms-grid-columns: (1fr)(4);     // YS: why are you using Microsoft extension? 
     grid-template-columns: repeat(4, 1fr);
     -ms-grid-rows: (200px)(4);
     grid-template-rows: repeat(4, 200px);
@@ -128,7 +128,8 @@ nav {
     opacity: 0.7;
 
 }
-
+// YS: Good breakpoint but it would be better to add another breakpoint at around 1000px because 400px is mobile and you are missing 
+// responsive design for a "tablet" resolution from 400px - around 1000px. 
 @media only screen and (max-width: 400px) {
     * {
         width: 100%;
@@ -155,9 +156,8 @@ nav {
             font-size: 20px;
 
         }
-
         .nav__rest {
-            padding-top: 10rem;
+            padding-top: 10rem;    // YS: This should be centered and fit the screen size
             margin-top: 0rem;
 
 
@@ -189,7 +189,7 @@ nav {
         padding-left: 1rem;
         padding-right: 1rem;
         margin-top: 50vw;
-        display: -ms-grid;
+        display: -ms-grid;      // YS: Why miscrosoft extension? 
         display: inline;
         -ms-grid-columns: (1fr)(1);
 
