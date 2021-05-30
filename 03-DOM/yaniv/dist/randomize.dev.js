@@ -1,15 +1,17 @@
 "use strict";
 
-boxesNum();
+setInterval(function () {
+  boxesNum();
+}, 5000);
 
 function boxesNum() {
   try {
     var body = document.querySelector("body");
-    var bodyHtmlCode = '';
     var howManyBoxes = Math.ceil(Math.random() * 10);
+    var bodyHtmlCode = "<div class='container'><h1>Number of boxes: ".concat(howManyBoxes, "</h1></div>");
 
-    for (var i = 1; i < howManyBoxes; i++) {
-      bodyHtmlCode += "<div style='".concat(boxSize() + boxColor() + boxPosition(), "'></div>");
+    for (var i = 1; i <= howManyBoxes; i++) {
+      bodyHtmlCode += "<div style='".concat(boxSize() + boxColor() + boxPosition(), "'><p>").concat(i, "</p></div>");
     }
 
     body.innerHTML = bodyHtmlCode;
@@ -30,7 +32,7 @@ function boxColor() {
 }
 
 function boxPosition() {
-  var boxHeight = "".concat(Math.ceil(Math.random() * 100), "%");
-  var boxWidth = "".concat(Math.ceil(Math.random() * 100), "%");
-  return "background-color:".concat(boxPosition, ";");
-}
+  var boxTop = "".concat(Math.ceil(Math.random() * 90), "vh");
+  var boxLeft = "".concat(Math.ceil(Math.random() * 90), "vw");
+  return "top:".concat(boxTop, ";left:").concat(boxLeft, ";");
+} // I don't really see which errors can occure here..
