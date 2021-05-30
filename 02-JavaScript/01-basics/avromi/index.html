@@ -24,6 +24,16 @@ function greet(name) {
 
 greet("Avromi");
 
+function greetSomeoneElse(name){
+    console.log(`Hello `+ name);
+}
+greetSomeoneElse(`Sarah`);
+
+function greetAThirdPerson(name){
+    console.log(`hi there` +` `+ name);
+}
+
+greetAThirdPerson(`dad`);
 //or 
 function greeting(name, message){
     return `${message} ${name}!`;
@@ -39,11 +49,26 @@ console.log (greeting2("Avromi", "You're Awesome!!"));
 
  //arrow function 
 
- let greeting3 = (prefix, person) => {
+
+ let greeting3 = (prefix, person)=>{
      return `${prefix} ${person}`;
  }
 
  console.log (greeting3("Good day", "Mate"));
+
+ let newGreeting = (greetingNew, nameNew)=>{
+     return nameNew + ` ` + greetingNew;
+ }
+ console.log(newGreeting(`solute` , `avromi`))
+
+ //or ??
+ let greetExampleName = (exampleName)=>{
+     console.log(`heelloo`+ ` ` + exampleName)
+ }
+
+ greetExampleName(`here is an Example NAME`)
+
+
 
 //n!
 
@@ -59,10 +84,21 @@ someValue = 7
 fact = 1
 while (someValue > 1){
    fact = fact * someValue 
-   someValue = someValue - 1          //YS:  Good job, if you have time, try to convert this to a function. 
+   someValue = someValue - 1
 }
 
 console.log(fact)
+
+// get the factorial of a value 
+
+theValue = 4
+theFact = 1
+while (theValue > 1){
+    theFact = theFact * theValue
+    theValue = theValue - 1
+}
+console.log(theFact)
+
 
 
     </script>

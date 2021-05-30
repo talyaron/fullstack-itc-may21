@@ -6,41 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <script>
-
-    let myName = "Julie";
-    const sentence = "Hello, " + myName + "!";
-    console.log(sentence); let greeting = "Hello";
-
-    //pure function function
-
-     buildSentence(greeting, myName) {   // YS: You are missing the 'function' keyword at the beginning: function buildSentence(greeting, myName). This throws an error.
-      return greeting + myName + "!"; }  
-
-    //anonymous function
-
-    let buildSentence1 = function (greeting, myName) {  //YS: use const for functions, dont use the same name for a function 
-      return     //YS: return greeting + myName   ( should be on the same line)
-    greeting + myName; };
-
-    //arrow function
-
-    let buildSentence2 = (greeting, myName)   
-    => { return greeting + myName; };
-
-    let showFactorial = (num) => {      //YS: This doesnt work :( 
-      for (i = 0; i<= num; i++) {
-        factorial = i * i; 
-      } 
-      return factorial; };
-
-// const factorial = (fact) => {
-//   for (let i = fact - 1; i >= 1; i--) {    
-//     fact = fact * i; 
-//   }
-//   return fact;
-// }
-
-  </script>
   <body></body>
+  <script>
+    let myName = "Julie";
+
+    const sentence = "Hello, " + myName + "!";
+    console.log(sentence);
+
+    //pure
+
+    function buildSentence(aName) {
+      return "Hello, " + aName + "!";
+    }
+
+    console.log(buildSentence(myName));
+
+    //anonymous
+
+    let buildSentence2 = function (aName) {
+      return "Hello, " + aName + "!";
+    };
+
+    console.log(buildSentence2(myName));
+
+    //arrow
+
+    let buildSentence3 = (aName) => {
+      return "Hello, " + aName + "!";
+    };
+
+    console.log(buildSentence3(myName));
+
+    let showFactorial = (num) => {
+      let result = num;
+      if (num < 0) {
+        return "Can't do a factorial of zero or a negative number";
+      } else if (num === 0) {
+        return "Perhaps surprisingly, the factorial of zero is 1.";
+      } else if (num === 1) {
+        return "The factorial of 1 is 1, although that is not surprising.";
+      } else
+        while (num >= 2) {
+          num--;
+          result = result * num;
+        }
+      return result;
+    };
+
+    console.log(showFactorial(-1));
+    console.log(showFactorial(0));
+    console.log(showFactorial(1));
+    console.log(showFactorial(5));
+  </script>
 </html>

@@ -1,8 +1,6 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+.logo {
+  display: flex;
+  background-color: black;
 }
 
 nav {
@@ -24,9 +22,6 @@ nav .nav__logoletter {
   height: 24px;
   width: 24px;
   font-size: 24px;
-}
-nav .nav__rest {
-  padding-left: 5rem;
 }
 nav .nav__rest .nav__rest--element {
   text-decoration: none;
@@ -101,20 +96,13 @@ nav .nav__rest .nav__rest--element {
   opacity: 0.7;
 }
 
-@media only screen and (max-width: 400px) {
-  * {
-    width: 100%;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    margin-left: 0;
-  }
-
+@media only screen and (max-width: 600px) {
   nav {
     display: flex;
-    height: 8vw;
-    padding-left: 0rem;
+    flex-direction: column;
+    margin-top: 20px;
   }
-  nav .nav__logoletter {
+  nav__logoletter {
     display: flex;
     justify-content: center;
     align-items: space-around;
@@ -126,11 +114,11 @@ nav .nav__rest .nav__rest--element {
     width: 20px;
     font-size: 20px;
   }
-  nav .nav__rest {
+  nav__rest {
     padding-top: 10rem;
     margin-top: 0rem;
   }
-  nav .nav__rest .nav__rest--element {
+  nav__rest--element {
     text-decoration: none;
     color: black;
     margin-top: 2vw;
