@@ -7,15 +7,15 @@
 
 //annonymous function
 
-const Name = 'Eric';
+const Name = 'Eric';          //YS: Variables are usually lower-case: name
 const sentence = function (name){
-    return 'Hello ' + name
+    return 'Hello ' + name          //YS: Try to use template literals instead: `Hello ${name}`
 }
 console.log(sentence(Name));
 
 //common function
 
-const names = 'Ericc';
+const names = 'Ericc';   //YS: If you will use the same variable, use let instead of const, so you dont have to change the Name --> names --> namees  
 function sentences (names){
     return 'Hello ' + names;
 }
@@ -24,7 +24,7 @@ console.log(sentences(names));
 //arrow function
 
 const namees = 'Erickobrinsky';
-const othername = (name1) =>{
+const othername = (name1) =>{  
     return 'Hello ' + name1;
 }
 console.log(othername(namees));

@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- // It is better practice to keep JS and CSS files separated -->
     <script> 
 // function
 
@@ -18,7 +19,7 @@ console.log(sentence);
 
 
 function greet(name) {
-  console.log("Hello, " + name + "!");
+  console.log("Hello, " + name + "!"); //Why not use template literals here like you did in line 16? `Hello ${name}!`
 }
 
 greet("Avromi");
@@ -31,14 +32,14 @@ console.log (greeting("Avromi", "Hi"));
 
 //anonymous
 
-let greeting2 = function(name, greeting){
+let greeting2 = function(name, greeting){   // use const instaed of let for functions. 
     return `${name} ${greeting}`;
 }
 console.log (greeting2("Avromi", "You're Awesome!!"));
 
  //arrow function 
 
- let greeting3 = (prefix, person)=>{
+ let greeting3 = (prefix, person) => {
      return `${prefix} ${person}`;
  }
 
@@ -46,28 +47,22 @@ console.log (greeting2("Avromi", "You're Awesome!!"));
 
 //n!
 
-someValue = 5
+// const factorial = (fact) => {
+//   for (let i = fact - 1; i >= 1; i--) {   
+//     fact = fact * i; 
+//   }
+//   return fact;
+// }
+
+
+someValue = 7
 fact = 1
 while (someValue > 1){
    fact = fact * someValue 
-   someValue = someValue - 1
-  
+   someValue = someValue - 1          //YS:  Good job, if you have time, try to convert this to a function. 
 }
 
 console.log(fact)
-
-
-
-// currentValue = 5
-// factorial = 1
-
-// while (currentValue > 1){
-//     factorial = factorial * currentValue
-//     currentValue = currentValue - 1}
-
-//     console.log(factorial)
-
-
 
 
     </script>

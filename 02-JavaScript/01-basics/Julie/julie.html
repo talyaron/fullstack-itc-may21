@@ -14,22 +14,33 @@
 
     //pure function function
 
-    buildSentence(greeting, myName) {
-      return greeting + myName + "!"; }
+     buildSentence(greeting, myName) {   // YS: You are missing the 'function' keyword at the beginning: function buildSentence(greeting, myName). This throws an error.
+      return greeting + myName + "!"; }  
 
     //anonymous function
 
-    let buildSentence = function (greeting, myName) {
-      return
+    let buildSentence1 = function (greeting, myName) {  //YS: use const for functions, dont use the same name for a function 
+      return     //YS: return greeting + myName   ( should be on the same line)
     greeting + myName; };
 
     //arrow function
 
-    let buildSentence = (greeting, myName)
+    let buildSentence2 = (greeting, myName)   
     => { return greeting + myName; };
 
-    let showFactorial = (num) => { for (i = 0; i
-    <= num; i++) { factorial = i * i; } return factorial; };
+    let showFactorial = (num) => {      //YS: This doesnt work :( 
+      for (i = 0; i<= num; i++) {
+        factorial = i * i; 
+      } 
+      return factorial; };
+
+// const factorial = (fact) => {
+//   for (let i = fact - 1; i >= 1; i--) {    
+//     fact = fact * i; 
+//   }
+//   return fact;
+// }
+
   </script>
   <body></body>
 </html>

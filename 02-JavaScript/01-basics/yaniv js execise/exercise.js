@@ -8,13 +8,16 @@ function sayHello(name) {
     return 'Hello ' + name + '! This is a classic function';
 }
 
-const myName1 = 'Yaniv';
+const myName1 = 'Yaniv'; //YS: If you want to use the same variable, use let instead of const. 
+// let myName = 'Yaniv';
+// myName = 'Yonatan';
+// myName = 'Mike'; 
 
 console.log(sayHello(myName1));
 
 
-let sayHey = function (name) {
-    return 'Hello ' + name + '! This is an anonymous function';
+let sayHey = function (name) {    //YS: Use const instead of let for functions. 
+    return 'Hello ' + name + '! This is an anonymous function'; //YS: Try to use template literals instead of string concatenation: `Hello ${name} This is an anonymous function'
 }
 
 const myName2 = 'Yanivvv';

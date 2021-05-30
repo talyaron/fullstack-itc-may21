@@ -5,15 +5,15 @@
 // 3) write n! function (https://www.britannica.com/science/factorial);
 // 1 and 2
 //annonymous function
-var Name = 'Eric';
+var Name = 'Eric'; //YS: Variables are usually lower-case: name
 
 var sentence = function sentence(name) {
-  return 'Hello ' + name;
+  return 'Hello ' + name; //YS: Try to use template literals instead: `Hello ${name}`
 };
 
 console.log(sentence(Name)); //common function
 
-var names = 'Ericc';
+var names = 'Ericc'; //YS: If you will use the same variable, use let instead of const, so you dont have to change the Name --> names --> namees  
 
 function sentences(names) {
   return 'Hello ' + names;
