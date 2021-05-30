@@ -54,6 +54,7 @@ text-decoration: underline;
     
     
 .gallery{
+  // YS: Very good use of grid
     display: grid;
     height: 100vh;
     grid-template-columns: repeat(4,1fr);
@@ -210,9 +211,9 @@ text-decoration: underline;
   @media screen and (max-width:760px){
     .gallery {
         display: grid;
-        height: 130vh;
+        height: 130vh;   // YS: Should be more than 100vh
         grid-template-columns: 100%;
-        grid-auto-rows: minmax(130px,auto);
+        grid-auto-rows: minmax(130px,auto);   // YS: Nice!
         
         grid-template-areas:
           "content--17"
@@ -242,14 +243,22 @@ text-decoration: underline;
          ;
        
         row-gap: 0.4rem;
-        font-size:12px;
-        text-align:left;
+        font-size:12px;   // YS: Add space after :  (font-size: 12px)
+        text-align:left;  
     }
+
+    // nav{
+    //   font-size:8px;
+    // }                          This should go here since it is part of the same breakpoint (760px)
+    // .bbc{
+    //   margin-left:35px;
+    // }
   }
 
 
 }
 
+// THis should not be a separate media query, see my comment above. 
   @media screen and (max-width:760px){
     nav{
         font-size:8px;

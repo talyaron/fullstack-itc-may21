@@ -1,3 +1,4 @@
+/* YS: Why flex and not grid? */
 .bigWrapper {
   display: flex;
   justify-content: center;
@@ -5,7 +6,8 @@
 
 .bigGrid {
   display: grid;
-  grid-template-columns: 20vw 20vw 20vw 20vw;
+  grid-template-columns: 20vw 20vw 20vw 20vw; /* YS: Instead of writing 20vw 4 times you can write: repeat(4, 20vw) */
+
   grid-template-rows: 20px 25px 25px 190px 190px 40px 50px;
   grid-gap: 5px;
   grid-template-areas:
@@ -19,16 +21,15 @@
   /* "header2 header2 header2 header2"
     "medium1 medium2 medium3 medium4"; */
 }
-
 .smallGrid {
   display: grid;
   grid-area: smallGrid;
-  grid-template-columns: 27vw 27vw 27vw;
+  grid-template-columns: 27vw 27vw 27vw; /* YS: Instead of writing 27vw 3 times you can write: repeat(3, 27vw) */
   grid-template-rows: 25px 260px 40px 25px 260px;
   grid-gap: 7px;
   grid-template-areas:
     "header2 header2 header2"
-    "medium1 medium2 medium3"
+    "medium1 medium2 medium3"     /* YS: Good! */
     ". . ."
     "header3 header3 header3"
     "medium4 medium5 medium6";
@@ -197,6 +198,9 @@
   color: navy;
   font-weight: bold;
 }
+
+/* YS: What happened with the responsive part? */
+
 /* 
 @media only screen and (max-width: 1400px) {
   .bigGrid {
