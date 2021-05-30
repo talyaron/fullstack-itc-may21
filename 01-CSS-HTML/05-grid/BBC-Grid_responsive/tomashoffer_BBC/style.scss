@@ -16,6 +16,9 @@ body{
     grid-template-columns: 0.3fr 0.1fr 0.1fr 0.1fr 0.1fr;
     .nav-item{
         font-size: 26px;
+        a{
+            color: white;
+        }
     }
     .logo{
         margin-left: 20px;

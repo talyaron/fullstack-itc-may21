@@ -13,7 +13,7 @@
       //unhoisted
       function add(arg1 = 0, arg2 = 0, arg3 = 0) {
           console.log(arg3)
-          return add.;
+          return add;
       }
 
       let x = add(3, 6);
@@ -55,15 +55,19 @@
 
           try {
 
-              if(typeof a !== 'number' || typeof b !== 'number') { throw new Error( 'a or b are not numbers')} //Error = constructor
+              if(typeof a !== 'number' || typeof b !== 'number') 
+              { throw new Error( 'a or b are not numbers')
+            } //Error = constructor
 
               return a * b;
 
-          } catch (error) {
+          } 
+          catch (error) {
 
               console.error(error);
               return 0;
-          } finally{
+          } 
+          finally {
               //do something at the end
           }
       }
