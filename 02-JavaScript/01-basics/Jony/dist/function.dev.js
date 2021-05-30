@@ -13,15 +13,15 @@ var secondMethod = function secondMethod(name) {
   return "My name is " + name;
 };
 
-x = secondMethod(name);
+var x = secondMethod(name);
 console.log(x); //
 
 var thirdMethod = function thirdMethod(name) {
   return "My name is " + name;
 };
 
-x = thirdMethod(name);
-console.log(x); // Point 3 -- three method's
+var y = thirdMethod(name);
+console.log(y); // Point 3 -- three method's
 
 var number = 3;
 

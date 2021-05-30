@@ -16,7 +16,7 @@ let secondMethod = function (name){
     return "My name is " + name;
 }
 
-x = secondMethod(name);
+let x = secondMethod(name);
 console.log(x);
 
 //
@@ -25,8 +25,8 @@ let thirdMethod = (name) =>{
     return "My name is " + name;
 }
 
-x = thirdMethod(name);
-console.log(x);
+let y = thirdMethod(name);
+console.log(y);
 
 
 
