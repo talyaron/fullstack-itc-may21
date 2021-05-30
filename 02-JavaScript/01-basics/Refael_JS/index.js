@@ -1,12 +1,12 @@
 // Simple function
-function Name1(arg1 = "", arg2 = "", arg3 = "") {
+function Name1(arg1 = "", arg2 = "", arg3 = "") {  //YS: Dont start a function with capital letter. 
   return arg1 + arg2 + arg3;
 }
 const x = Name1("Hello", " , ", "Refael!");
 console.log(x);
 
 // anonymous function
-let Name2 = function (arg1, arg2, arg3) {
+let Name2 = function (arg1, arg2, arg3) { //YS: Use const for functions. Also instead of including a comma as an arg, you can include it in the return statement instead (replace it with arg2) 
   return arg1 + arg2 + arg3;
 };
 
@@ -28,5 +28,5 @@ const factor = (num) => {
   }
   return num;
 };
-factor();
+factor(); //YS: I didnt undestand why you called it here without any parameters. 
 console.log(factor(7));

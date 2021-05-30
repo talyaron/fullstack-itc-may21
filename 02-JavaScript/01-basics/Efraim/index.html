@@ -6,24 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+    <!-- // It is better practice to keep JS and CSS files separated -->
 <script>
     //simple function
     function hello(firstName, secondName){
-        return "hello " + firstName + " " + secondName + "!";    
+        return "hello " + firstName + " " + secondName + "!";   //YS: Try to use template literals instead: `Hello ${firstName} ${secondName}!`
         }
 
     console.log(hello("Efraim", "Dimbleby"));
 
     //anonymous function
-    let hello2 = function(firstName2, secondName2){
-        return "hello " + firstName2 + " " + secondName2 + "!";
+    let hello2 = function(firstName2, secondName2){   //YS: Use const intead of let for functions. 
+        return "hello " + firstName2 + " " + secondName2 + "!"; //YS: Template literals
         }
 
         console.log(hello2("efraim", "dimbleby"));
 
     //arrow function
     let hello3 = (firstName3, secondName3) => {
-        return "hello " + firstName3 + " " + secondName3 + "!";
+        return "hello " + firstName3 + " " + secondName3 + "!"; //TS: Template literals
         }
 
         x = hello3("Efraim", "Dimbleby");
@@ -36,7 +37,7 @@
 function factorial(n){
             var result = n;
                 if(n<0){
-                    return null;
+                    return null;            //YS: Please format your code. 
                         }
                 else if(n===1||n===0){
                     return 1;

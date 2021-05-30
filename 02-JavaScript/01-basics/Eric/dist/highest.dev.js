@@ -60,4 +60,4 @@ var maxx = function maxx(numbers) {
   }
 };
 
-console.log(maxx(maxnumberinarray));
+console.log(maxx(maxnumberinarray)); // Very nice!!
