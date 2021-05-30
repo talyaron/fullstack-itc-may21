@@ -1,8 +1,11 @@
 *{
     font-family: Arial, Helvetica, sans-serif;
+    // margin: 0;
+    // padding: 0;
+    // box-sizing: boder-box;
 }
 body{
-  margin: 0;
+  margin: 0;               //You dont need this if you add what I wrote above. 
   padding: 0;
 
 }
@@ -16,6 +19,9 @@ body{
     grid-template-columns: 0.3fr 0.1fr 0.1fr 0.1fr 0.1fr;
     .nav-item{
         font-size: 26px;
+        a{
+            color: white;
+        }
     }
     .logo{
         margin-left: 20px;
@@ -31,7 +37,7 @@ h1{
 #footer{
     background-color: black;
     height: 60px;
-    display: flex;
+    display: flex;  //Why not grid? 
     font-size: 30px;
     justify-content: center;
     a, i{
@@ -43,6 +49,7 @@ h1{
     }
 }
 
+//Very nice! 
 .container{
     width: 80%;
     margin: auto;
@@ -61,7 +68,7 @@ h1{
             .principal-article{
                 grid-area: principal-article;
                 width: 100%;
-                position: relative;
+                position: relative;  //Good! 
                 background-image: url(https://ichef.bbci.co.uk/news/976/cpsprodpb/AF39/production/_118675844_mediaitem118673786.jpg);
                 background-size: 100% 100%;
                 h3{
@@ -69,7 +76,7 @@ h1{
                 }
             }
             .textblock{
-                position: absolute;
+                position: absolute; 
                 bottom: 1px;
                 font-size: 16px;
                 background: 0% 0%;
@@ -373,3 +380,4 @@ h1{
     }
 }
 
+// Great job! Organized code, nice styling, good responsive design. 

@@ -5,6 +5,8 @@ function theHighest(array) {
   try {
     if (!Array.isArray(array)) {
       throw new Error('Please enter an array!');
+    } else if (array.length == 1) {
+      throw new Error('Your array only has one element...');
     }
 
     var firstNum = null;
@@ -58,6 +60,8 @@ var highestNum = function highestNum(array) {
   try {
     if (!Array.isArray(array)) {
       throw new Error('Please enter an array!');
+    } else if (array.length == 1) {
+      throw new Error('Your array only has one element...');
     }
 
     var firstNum = null;
@@ -111,6 +115,8 @@ var highestInArrow = function highestInArrow(array) {
   try {
     if (!Array.isArray(array)) {
       throw new Error('Please enter an array!');
+    } else if (array.length == 1) {
+      throw new Error('Your array only has one element...');
     }
 
     var firstNum = null;

@@ -9,13 +9,15 @@ body {
 .nav {
   background-color: black;
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto; // YS: You can write: repeat(12, auto); 
 
 
+// YS: Good naming conventions! ; 
   &__logo {
 
     display: grid;
-    grid-template-columns: 35px 35px 35px;
+    grid-template-columns: 35px 35px 35px; // YS: You can write: repeat(3, 35px); 
+
 
 
     &__item {
@@ -67,7 +69,7 @@ body {
 
 
 
-
+ // YS: Good! Although it would look better if you add some margins to the sides - the pictures are on the edge of the screen; 
   &__container {
     color: rgb(253, 253, 253);
     font-weight: bolder;
@@ -117,7 +119,7 @@ body {
   &__items {
     h1{ font-size: 1rem;}
     p{ font-size: .8rem;}
-    display: flex;
+    display: flex;   // YS: Why flex and not grid?; 
     align-items: flex-end;
     height: 10rem;
     background-color: rgb(70, 70, 57);
@@ -130,7 +132,7 @@ body {
       margin-right: .5rem;
       grid-area: main;
     
-
+// YS: Please don't leave a field empty - either delete or fill;
       &--2 {
     
       }
@@ -195,11 +197,12 @@ img{ object-fit: cover;
 }
 
 
+// YS: Good breakpoint;
 
 @media only screen and (max-width: 900px) {
 
   .nav { 
-    grid-template-columns: 25vw 25vw 25vw 25vw;
+    grid-template-columns: 25vw 25vw 25vw 25vw; // YS: repeat(4, 25vw);
     justify-content: center;
   }
   body {
@@ -217,7 +220,7 @@ img{ object-fit: cover;
   .article__container{
   
     
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; // YS: repeat(2, 1fr)
     grid-template-areas:
      "main main"
     
@@ -244,7 +247,7 @@ img{ object-fit: cover;
       "main";
     }
     .article__container--2{
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr;  
     }
     .article__container{
     

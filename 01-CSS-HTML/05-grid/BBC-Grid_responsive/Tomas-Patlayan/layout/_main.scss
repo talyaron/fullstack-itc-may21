@@ -25,7 +25,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
-    margin-left: 65rem;
+    margin-left: 65rem; // YS: This is way too much - usually goes up to 3rem max
     gap: 1rem;
     color: #ffffff;
   }
