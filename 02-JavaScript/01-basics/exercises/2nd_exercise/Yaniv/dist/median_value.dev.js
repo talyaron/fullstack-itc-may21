@@ -199,7 +199,8 @@ var objToArrAnonymous = function objToArrAnonymous(object) {
 
     for (key in object) {
       array.push(object[key]);
-    }
+    } // array = Object.values(object); // can replace lines 195-198
+
 
     return array;
   } catch (error) {

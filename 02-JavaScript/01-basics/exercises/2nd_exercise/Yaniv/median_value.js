@@ -197,7 +197,10 @@ let objToArrAnonymous = function (object) {
             array.push(object[key]);
         }
 
+        // array = Object.values(object); // can replace lines 195-198
+
         return array;
+
 
     } catch (error) {
         return error;
