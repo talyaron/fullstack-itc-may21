@@ -1,6 +1,6 @@
 //1) create a function for finding the median in an array. (https://www.mathsisfun.com/median.html)
 
-let arr = [7,2,23,5,123,52,123,2]
+let arr = [1,2]
 
 //order the list first
 
@@ -20,6 +20,7 @@ try {
 
             let sumi = 0;
 
+            if ( arr.length === 1) throw new Error('you have only one argument in the array')
             //odd situation
             if (arr.length % 2 !== 0) {
                 for (let i = 0; i < arr.length; i++) {
@@ -74,6 +75,7 @@ try {
         try {
 
             let sumi = 0;
+            if ( arr.length === 1) throw new Error('you have only one argument in the array')
 
             //odd situation
             if (arr.length % 2 !== 0) {
@@ -128,7 +130,7 @@ try {
         try {
 
             //let sumi = 0;
-
+            if ( arr.length === 1) throw new Error('you have only one argument in the array')
             //odd situation
             if (arr.length % 2 !== 0) {
                 for (let i = 0; i < arr.length; i++) {

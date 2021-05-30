@@ -3,7 +3,7 @@
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 //1) create a function for finding the median in an array. (https://www.mathsisfun.com/median.html)
-var arr = [7, 2, 23, 5, 123, 52, 123, 2]; //order the list first
+var arr = [1, 2]; //order the list first
 
 try {
   if (!Array.isArray(arr)) throw new Error('the argument is not an array');
@@ -13,7 +13,8 @@ try {
 
   var getMedianbyFirst = function getMedianbyFirst(arr) {
     try {
-      var sumi = 0; //odd situation
+      var sumi = 0;
+      if (arr.length === 1) throw new Error('you have only one argument in the array'); //odd situation
 
       if (arr.length % 2 !== 0) {
         for (var i = 0; i < arr.length; i++) {
@@ -62,7 +63,8 @@ try {
 
   var getMedianbySecond = function getMedianbySecond(arr) {
     try {
-      var sumi = 0; //odd situation
+      var sumi = 0;
+      if (arr.length === 1) throw new Error('you have only one argument in the array'); //odd situation
 
       if (arr.length % 2 !== 0) {
         for (var i = 0; i < arr.length; i++) {
@@ -106,7 +108,8 @@ try {
   var getMedianbyThird = function getMedianbyThird(arr) {
     try {
       //let sumi = 0;
-      //odd situation
+      if (arr.length === 1) throw new Error('you have only one argument in the array'); //odd situation
+
       if (arr.length % 2 !== 0) {
         for (var i = 0; i < arr.length; i++) {
           if (typeof arr[i] !== 'number') throw new Error('an element is not a number');
