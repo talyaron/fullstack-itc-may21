@@ -1,5 +1,5 @@
 //random number of boxes
-let num = Math.floor(Math.random() * 10);
+let num = Math.floor(Math.random() * 10)+1;
 let size = Math.floor(Math.random() * (200-40)+40);
 
 createContainer(num,size);
