@@ -16,7 +16,7 @@ let secondMethod = function (name){
     return "My name is " + name;
 }
 
-x = secondMethod(name);  //YS:  Where is x defined? Use const/let or just console.log(secondMethod(name)) 
+let x = secondMethod(name);
 console.log(x);
 
 //
@@ -25,8 +25,8 @@ let thirdMethod = (name) =>{  //YS: Use const for functions.
     return "My name is " + name;
 }
 
-x = thirdMethod(name); //YS: Incorrect use of variable. Need let/const/var before (80% of the time use const)
-console.log(x);
+let y = thirdMethod(name);
+console.log(y);
 
 
 

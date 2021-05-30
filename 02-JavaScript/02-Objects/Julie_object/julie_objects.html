@@ -8,14 +8,14 @@
   </head>
   <body>
     <button id="aButton">A Button</button>
-    <p id="root paragraph"></p>
   </body>
   <script>
     let showElement = () => {
-      let x = document.activeElement.tagName;
+      const x = document.activeElement.tagName;
       document.getElementById("aButton").innerHTML = x;
       console.log(x);
     };
+
     showElement();
   </script>
 </html>
