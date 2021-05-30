@@ -42,8 +42,12 @@ function factorial(n){
 const n=7
 console.log(factorial(n));
 
+//average
+const arr = [3, 7, 2, 6, 5, 4, 9];
+const sum = arr.reduce((sum, val) => (sum += val));
+const len = arr.length;
 
-
+console.log("average: ", sum / len);
 
 
 
