@@ -1,6 +1,6 @@
 //1) create a function for finding the median in an array. (https://www.mathsisfun.com/median.html)
 
-let arr = [4,3,2,1,5]
+let arr = [7,2,23,5,123,52,123,2]
 
 //order the list first
 
@@ -24,6 +24,7 @@ try {
             if (arr.length % 2 !== 0) {
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
+                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
                     sumi += i;
                 }
                 const count = arr.length;
@@ -34,6 +35,7 @@ try {
                 //even situation  
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
+                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
                     sumi += i;
                 }
                 const count = arr.length;
@@ -77,6 +79,7 @@ try {
             if (arr.length % 2 !== 0) {
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
+                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
                     sumi += i;
                 }
                 const count = arr.length;
@@ -87,6 +90,7 @@ try {
                 //even situation  
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
+                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
                     sumi += i;
                 }
                 const count = arr.length;
@@ -123,26 +127,29 @@ try {
 
         try {
 
-            let sumi = 0;
+            //let sumi = 0;
 
             //odd situation
             if (arr.length % 2 !== 0) {
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
-                    sumi += i;
+                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
+                    //sumi += i;
                 }
                 const count = arr.length;
-                const medium = arr[sumi / count]
+                //const medium = arr[sumi / count]
+                const medium = arr[(count-1)/2];
                 return medium;
 
             } else {
                 //even situation  
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
-                    sumi += i;
+                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
+                    //sumi += i;
                 }
                 const count = arr.length;
-                const medium = (arr[Math.round(sumi / count) - 1] + arr[Math.round(sumi / count)]) / 2
+                const medium = (arr[(count)/2] + arr[[(count)/2]-1]) / 2
                 return medium;
             }
         }
