@@ -96,8 +96,10 @@ body {
 
 .sub-wrapper {
     display: grid;
-    grid-template-columns: 50% 12.5% 12.5% 12.5% 12.5%;
+    grid-template-columns: 50% 12.5% 12.5% 12.5% 12.5%;  /* YS: This causes a lot of overlap between sub-wrapper-1 and sub-wrapper-2*/
     margin: auto;
+
+     /* YS: Please dont leave comments */
 
     // @media only screen and (max-width: 1024px) {
     //     grid-template-columns: repeat(1, 0.5fr);
@@ -120,7 +122,7 @@ body {
         gap: 0.5rem;
     }
     @media only screen and (max-width: 600px) {
-
+      /* YS: Please dont leave code empty */
     }
     @media only screen and (max-width: 768px) {
         grid-template-columns: repeat(1, 1fr);
@@ -130,6 +132,8 @@ body {
 
 
 // Footer section styling. HERE I FINALLY UNDERSTOOD HOW TO USE SCSS. IT'S LIKE MAGIC!
+
+ /* YS: Very good! Well done. */
 
 .footer {
     background-color: #4C4C4C;

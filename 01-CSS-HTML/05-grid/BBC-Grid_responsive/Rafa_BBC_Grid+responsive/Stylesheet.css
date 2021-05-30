@@ -151,7 +151,8 @@ h6 {
           column-gap: 10px;
   width: auto;
   height: 466px;
-      grid-template-areas: "header . ." "header . .";
+      grid-template-areas: "header . ."
+ "header . .";
 }
 
 .welcome__interface--item {

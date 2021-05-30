@@ -151,7 +151,8 @@ h6 {
           column-gap: 10px;
   width: auto;
   height: 466px;
-      grid-template-areas: "header . ." "header . .";
+      grid-template-areas: "header . ."
+ "header . .";
 }
 
 .welcome__interface--item {
@@ -159,6 +160,7 @@ h6 {
   display: grid;
 }
 
+/* YS: THere is a problem with your image import - I was not able to see the images */
 .item_2 {
   background-image: url(/CSS-HTML/05-grid/BBC-Grid_responsive/Rafa_BBC_Grid+responsive/images/item2.jpg);
   background-size: cover;
@@ -235,9 +237,9 @@ h6 {
   display: -ms-grid;
   display: grid;
   /* grid-template-rows: 1fr; */
-  -ms-grid-columns: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
-  -webkit-column-gap: 10px;
+  -ms-grid-columns: 1fr 1fr 1fr;   /* YS: You can also write: repeat(3, 1fr) */
+      grid-template-columns: 1fr 1fr 1fr;  /* YS: You can also write: repeat(3, 1fr) */
+  -webkit-column-gap: 10px; 
           column-gap: 10px;
   height: 658px;
 }
@@ -253,25 +255,25 @@ h6 {
   display: -ms-grid;
   display: grid;
   /* grid-template-rows: 1fr; */
-  -ms-grid-columns: 1fr 1fr 1fr;
+  -ms-grid-columns: 1fr 1fr 1fr;   
       grid-template-columns: 1fr 1fr 1fr;
-  -webkit-column-gap: 10px;
+  -webkit-column-gap: 10px; 
           column-gap: 10px;
   height: 634px;
 }
 
 .sport__interface--item {
-  display: -ms-grid;
+  display: -ms-grid;  /* YS: Why are you using Microsoft webkit? */
   display: grid;
 }
-
+/* YS: Mind the margins - all the css should start on the same column*/
 .items__flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
+  display: -webkit-box; /* YS: Why are you using Microsoft webkit? */
+  display: -ms-flexbox; /* YS: Why are you using Microsoft webkit? */
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
+      -ms-flex-direction: column;  
           flex-direction: column;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
@@ -293,12 +295,19 @@ h6 {
     -ms-grid-columns: (1fr)[3];
         grid-template-columns: repeat(3, 1fr);
   }
+
+  /* .sport__interface {
+    -ms-grid-columns: (1fr)[3];                          Should be here instead of separate since its the same breakpoint (600px) 
+        grid-template-columns: repeat(3, 1fr); 
+  } */
+
+  
 }
 
 @media (max-width: 600px) {
   .sport__interface {
-    -ms-grid-columns: (1fr)[3];
-        grid-template-columns: repeat(3, 1fr);
+    -ms-grid-columns: (1fr)[3];  /* YS: Why are you using Microsoft webkit? */
+        grid-template-columns: repeat(3, 1fr); /* YS: This should have less columns than on desktop screen.  */
   }
 }
 /*# sourceMappingURL=Stylesheet.css.map */
