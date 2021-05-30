@@ -3,7 +3,7 @@
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 //1) create a function for finding the median in an array. (https://www.mathsisfun.com/median.html)
-var arr = [4, 3, 2, 1, 5]; //order the list first
+var arr = [1, 2]; //order the list first
 
 try {
   if (!Array.isArray(arr)) throw new Error('the argument is not an array');
@@ -13,11 +13,13 @@ try {
 
   var getMedianbyFirst = function getMedianbyFirst(arr) {
     try {
-      var sumi = 0; //odd situation
+      var sumi = 0;
+      if (arr.length === 1) throw new Error('you have only one argument in the array'); //odd situation
 
       if (arr.length % 2 !== 0) {
         for (var i = 0; i < arr.length; i++) {
           if (typeof arr[i] !== 'number') throw new Error('an element is not a number');
+          if (arr[i] < 0) throw new Error('an element is a negative number');
           sumi += i;
         }
 
@@ -28,6 +30,7 @@ try {
         //even situation  
         for (var _i = 0; _i < arr.length; _i++) {
           if (typeof arr[_i] !== 'number') throw new Error('an element is not a number');
+          if (arr[_i] < 0) throw new Error('an element is a negative number');
           sumi += _i;
         }
 
@@ -60,11 +63,13 @@ try {
 
   var getMedianbySecond = function getMedianbySecond(arr) {
     try {
-      var sumi = 0; //odd situation
+      var sumi = 0;
+      if (arr.length === 1) throw new Error('you have only one argument in the array'); //odd situation
 
       if (arr.length % 2 !== 0) {
         for (var i = 0; i < arr.length; i++) {
           if (typeof arr[i] !== 'number') throw new Error('an element is not a number');
+          if (arr[i] < 0) throw new Error('an element is a negative number');
           sumi += i;
         }
 
@@ -75,6 +80,7 @@ try {
         //even situation  
         for (var _i2 = 0; _i2 < arr.length; _i2++) {
           if (typeof arr[_i2] !== 'number') throw new Error('an element is not a number');
+          if (arr[_i2] < 0) throw new Error('an element is a negative number');
           sumi += _i2;
         }
 
@@ -101,27 +107,29 @@ try {
   //function getMedium // ArrowMethod
   var getMedianbyThird = function getMedianbyThird(arr) {
     try {
-      var sumi = 0; //odd situation
+      //let sumi = 0;
+      if (arr.length === 1) throw new Error('you have only one argument in the array'); //odd situation
 
       if (arr.length % 2 !== 0) {
         for (var i = 0; i < arr.length; i++) {
           if (typeof arr[i] !== 'number') throw new Error('an element is not a number');
-          sumi += i;
+          if (arr[i] < 0) throw new Error('an element is a negative number'); //sumi += i;
         }
 
-        var count = arr.length;
-        var medium = arr[sumi / count];
+        var count = arr.length; //const medium = arr[sumi / count]
+
+        var medium = arr[(count - 1) / 2];
         return medium;
       } else {
         //even situation  
         for (var _i3 = 0; _i3 < arr.length; _i3++) {
           if (typeof arr[_i3] !== 'number') throw new Error('an element is not a number');
-          sumi += _i3;
+          if (arr[_i3] < 0) throw new Error('an element is a negative number'); //sumi += i;
         }
 
         var _count3 = arr.length;
 
-        var _medium3 = (arr[Math.round(sumi / _count3) - 1] + arr[Math.round(sumi / _count3)]) / 2;
+        var _medium3 = (arr[_count3 / 2] + arr[[_count3 / 2] - 1]) / 2;
 
         return _medium3;
       }
