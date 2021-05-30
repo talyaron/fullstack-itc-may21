@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h1>A function that returns the average on eleemnts in an array</h1>
+    <h1>A function that returns the average of elements in an array</h1>
     <script>
         //create an array for testing
         let arr1 = [1, 2, 3] //we should get 2
@@ -22,9 +22,13 @@
             //the solution is for loopp that scroll each elelemnt in the array, then get the total. add to the running total
             try {
                 if(!Array.isArray(arr)) throw new Error('the argument is not an array')
-               
+               debugger;
                 //define  a variable which sums the number
                 let runningTotal = 0;
+
+                (()=>{
+                    alert("hi")
+                })()
                
                 for (let el of arr) {
 

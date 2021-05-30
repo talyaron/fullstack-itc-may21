@@ -35,25 +35,30 @@ function findMedSimple(array) {
       throw new Error('Please enter an array!');
     }
 
-    if (array.length == 1) {
+    if (array.length === 1) {
       throw new Error('Your array only has one element...');
     }
 
     var firstNum = null;
     var i = 0;
 
-    while (i < array.length && typeof array[i] == 'number') {
+    while (i < array.length && typeof array[i] === 'number') {
       i++;
     }
 
     if (i != array.length) {
       throw new Error('Your array has elements which are not numbers!');
-    }
+    } // const orderedArr = array;
+    // orderedArr.sort(function (a, b) { // this way the orderArr function is redundant
+    //     return a - b;
+    // });
+
 
     var orderedArr = orderArr(array);
     var median;
 
     if (Number.isInteger(orderedArr.length / 2)) {
+      // if (orderedArr % 2 == 0) {
       median = (orderedArr[orderedArr.length / 2 - 1] + orderedArr[orderedArr.length / 2]) / 2;
     } else {
       median = orderedArr[orderedArr.length / 2 - 0.5];
@@ -73,14 +78,14 @@ var findMedAnonymous = function findMedAnonymous(array) {
       throw new Error('Please enter an array!');
     }
 
-    if (array.length == 1) {
+    if (array.length === 1) {
       throw new Error('Your array only has one element...');
     }
 
     var firstNum = null;
     var i = 0;
 
-    while (i < array.length && typeof array[i] == 'number') {
+    while (i < array.length && typeof array[i] === 'number') {
       i++;
     }
 
@@ -111,14 +116,14 @@ var findMedArrow = function findMedArrow(array) {
       throw new Error('Please enter an array!');
     }
 
-    if (array.length == 1) {
+    if (array.length === 1) {
       throw new Error('Your array only has one element...');
     }
 
     var firstNum = null;
     var i = 0;
 
-    while (i < array.length && typeof array[i] == 'number') {
+    while (i < array.length && typeof array[i] === 'number') {
       i++;
     }
 
@@ -165,7 +170,7 @@ console.log('arrow: ' + findMedArrow(arrayToCheck)); // 2)
 
 function objToArrSimple(object) {
   try {
-    if (_typeof(object) != 'object') {
+    if (_typeof(object) !== 'object') {
       throw new Error('Please enter an object!');
     }
 
@@ -185,7 +190,7 @@ function objToArrSimple(object) {
 
 var objToArrAnonymous = function objToArrAnonymous(object) {
   try {
-    if (_typeof(object) != 'object') {
+    if (_typeof(object) !== 'object') {
       throw new Error('Please enter an object!');
     }
 
@@ -194,7 +199,8 @@ var objToArrAnonymous = function objToArrAnonymous(object) {
 
     for (key in object) {
       array.push(object[key]);
-    }
+    } // array = Object.values(object); // can replace lines 195-198
+
 
     return array;
   } catch (error) {
@@ -205,7 +211,7 @@ var objToArrAnonymous = function objToArrAnonymous(object) {
 
 var objToArrArrow = function objToArrArrow(object) {
   try {
-    if (_typeof(object) != 'object') {
+    if (_typeof(object) !== 'object') {
       throw new Error('Please enter an object!');
     }
 

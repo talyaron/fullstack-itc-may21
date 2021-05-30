@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //MEDIAN FUNCTION
+
+        //simple function      
+
+        array = [3, 2, 5, 20, 10, 6]; //odd number of elelemnts
+
+        function median(arr) {
+            try {
+                arr.sort(function (a, b) {
+                    return a - b;
+                });
+
+               
+                
+                let arrLength = (arr.length - 1) / 2;
+                // if(Number.isInteger(arr.length/2) )
+                
+                if (arr.length % 2 !== 0) {
+                   //if length is odd
+                    return arr[arrLength];
+                } else {
+                    // if length is even
+                    let upper = Math.ceil(arrLength); // arrLength = 2.5 ->3
+                    let bottom = Math.floor(arrLength); // arrLength = 2.5 ->2
+                    upper = arr[upper];
+                    bottom = arr[bottom];
+                    return (upper + bottom)/2
+                }
+
+              
+               
+            } catch (e) {
+                console.erro(e);
+                return false
+            }
+        }
+
+        console.log(median(array))
+
+
+        //anonymous function
+        let media2 = function (arr) {
+            arr.sort(function (a, b) {
+                return a - b;
+            });
+            arrLength = (arr.length - 1) / 2;
+            result = arr[arrLength];
+            return result;
+        }
+        console.log(media2(array))
+
+        //arrow function
+        let media3 = (arr) => {
+            arr.sort(function (a, b) {
+                return a - b;
+            });
+            arrLength = (arr.length - 1) / 2;
+            result = arr[arrLength];
+            return result;
+        }
+        console.log(media2(array))
+        // OBJECT TO ARRAY
+        //simple function      
+
+        const object = {
+            a: 'somestring',
+            b: 42,
+            c: false
+        };
+
+
+        function objToArray(obj) {
+            resultado = Object.values(obj);
+            return resultado
+        }
+
+        console.log(objToArray(object))
+
+
+        //anonymous function
+        let objToArray2 = function objToArray(obj) {
+            resultado = Object.values(obj);
+            return resultado
+        }
+        console.log(objToArray2(object))
+
+        //arrow function
+        let objToArray3 = (obj) => {
+            resultado = Object.values(obj);
+            return resultado
+        }
+        console.log(objToArray3(object))
+
+    </script>
+</body>
+
+</html>
