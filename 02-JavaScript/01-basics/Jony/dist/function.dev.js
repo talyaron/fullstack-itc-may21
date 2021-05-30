@@ -4,7 +4,7 @@
 var name = "Jonathan";
 
 function firstMethod(name) {
-  return "My name is " + name;
+  return "My name is " + name; //YS: Try to use template literals instead: `My name is ${name}`
 }
 
 console.log(firstMethod(name)); //Point 2. First method above.
@@ -13,19 +13,22 @@ var secondMethod = function secondMethod(name) {
   return "My name is " + name;
 };
 
-x = secondMethod(name);
+x = secondMethod(name); //YS:  Where is x defined? Use const/let or just console.log(secondMethod(name)) 
 console.log(x); //
 
 var thirdMethod = function thirdMethod(name) {
+  //YS: Use const for functions. 
   return "My name is " + name;
 };
 
-x = thirdMethod(name);
+x = thirdMethod(name); //YS: Incorrect use of variable. Need let/const/var before (80% of the time use const)
+
 console.log(x); // Point 3 -- three method's
 
 var number = 3;
 
 function Factorial(number) {
+  //YS: The function name should not start with a capital. 
   var result = 1;
 
   for (var i = 1; i < number; i++) {

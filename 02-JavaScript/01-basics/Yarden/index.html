@@ -25,12 +25,12 @@
 
 //function
 function nameGreet(name) {
-    return "Hello " + name + ".";
+    return "Hello " + name + ".";  //YS: Use string literals instead: `Hello ${name}.`
 }
 console.log(nameGreet("Yarden"));
 
 //anonnymous function
-let nameGreet2 = function(name) {
+let nameGreet2 = function(name) {   //YS: Use const for functions. 
     return "Hello " + name + "."; 
 }
 console.log(nameGreet2("Yarden 2nd time"));
@@ -46,7 +46,7 @@ console.log(myName);
 
 // Factorial function. Would like to learn how to display result on the page!
 
-let factorial = (chosenNumber) => {
+let factorial = (chosenNumber) => {          //YS: Good, try doing it with a loop for extra practice. 
   if (chosenNumber === 1) {
     return 1;
   }
