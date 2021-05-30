@@ -9,7 +9,7 @@ function boxesNum() {
     var howManyBoxes = Math.ceil(Math.random() * 10);
 
     for (var i = 1; i < howManyBoxes; i++) {
-      bodyHtmlCode += "<div style='".concat(boxSize() + boxColor(), "'></div>");
+      bodyHtmlCode += "<div style='".concat(boxSize() + boxColor() + boxPosition(), "'></div>");
     }
 
     body.innerHTML = bodyHtmlCode;
@@ -19,12 +19,18 @@ function boxesNum() {
 }
 
 function boxSize() {
-  var boxHeight = Math.ceil(Math.random() * 160) + 40;
-  var boxWidth = Math.ceil(Math.random() * 160) + 40;
-  return "height:".concat(boxHeight, "px; width:").concat(boxWidth, "px;");
+  var boxHeight = "".concat(Math.ceil(Math.random() * 160) + 40, "px");
+  var boxWidth = "".concat(Math.ceil(Math.random() * 160) + 40, "px");
+  return "height:".concat(boxHeight, "; width:").concat(boxWidth, ";");
 }
 
 function boxColor() {
-  var boxColor = "rgb(".concat(Math.ceil(Math.random() * 255), ",").concat(Math.ceil(Math.random() * 255), ",").concat(Math.ceil(Math.random() * 255), ")");
-  return "background-color:".concat(boxColor, ";");
+  var boxBg = "rgb(".concat(Math.ceil(Math.random() * 255), ",").concat(Math.ceil(Math.random() * 255), ",").concat(Math.ceil(Math.random() * 255), ")");
+  return "background-color:".concat(boxBg, ";");
+}
+
+function boxPosition() {
+  var boxHeight = "".concat(Math.ceil(Math.random() * 100), "%");
+  var boxWidth = "".concat(Math.ceil(Math.random() * 100), "%");
+  return "background-color:".concat(boxPosition, ";");
 }
