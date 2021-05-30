@@ -33,13 +33,13 @@ function findMedSimple(array) {
         if (!Array.isArray(array)) {
             throw new Error('Please enter an array!');
         }
-        if (array.length == 1) {
+        if (array.length === 1) {
             throw new Error('Your array only has one element...');
         }
 
         let firstNum = null;
         let i = 0;
-        while ((i < array.length) && (typeof array[i] == 'number')) {
+        while ((i < array.length) && (typeof array[i] === 'number')) {
             i++;
         }
 
@@ -47,12 +47,17 @@ function findMedSimple(array) {
             throw new Error('Your array has elements which are not numbers!');
         }
 
+        // const orderedArr = array;
+        // orderedArr.sort(function (a, b) { // this way the orderArr function is redundant
+        //     return a - b;
+        // });
         const orderedArr = orderArr(array);
         let median;
-        if (Number.isInteger(orderedArr.length/2)) {
-            median = (orderedArr[(orderedArr.length/2 - 1)] + orderedArr[(orderedArr.length/2)])/2;
+        if (Number.isInteger(orderedArr.length / 2)) {
+        // if (orderedArr % 2 == 0) {
+            median = (orderedArr[(orderedArr.length / 2 - 1)] + orderedArr[(orderedArr.length / 2)]) / 2;
         } else {
-            median = orderedArr[(orderedArr.length/2 - 0.5)];
+            median = orderedArr[(orderedArr.length / 2 - 0.5)];
         }
 
         return median;
@@ -69,13 +74,13 @@ let findMedAnonymous = function (array) {
         if (!Array.isArray(array)) {
             throw new Error('Please enter an array!');
         }
-        if (array.length == 1) {
+        if (array.length === 1) {
             throw new Error('Your array only has one element...');
         }
 
         let firstNum = null;
         let i = 0;
-        while ((i < array.length) && (typeof array[i] == 'number')) {
+        while ((i < array.length) && (typeof array[i] === 'number')) {
             i++;
         }
 
@@ -85,10 +90,10 @@ let findMedAnonymous = function (array) {
 
         const orderedArr = orderArr(array);
         let median;
-        if (Number.isInteger(orderedArr.length/2)) {
-            median = (orderedArr[(orderedArr.length/2 - 1)] + orderedArr[(orderedArr.length/2)])/2;
+        if (Number.isInteger(orderedArr.length / 2)) {
+            median = (orderedArr[(orderedArr.length / 2 - 1)] + orderedArr[(orderedArr.length / 2)]) / 2;
         } else {
-            median = orderedArr[(orderedArr.length/2 - 0.5)];
+            median = orderedArr[(orderedArr.length / 2 - 0.5)];
         }
 
         return median;
@@ -105,13 +110,13 @@ let findMedArrow = (array) => {
         if (!Array.isArray(array)) {
             throw new Error('Please enter an array!');
         }
-        if (array.length == 1) {
+        if (array.length === 1) {
             throw new Error('Your array only has one element...');
         }
 
         let firstNum = null;
         let i = 0;
-        while ((i < array.length) && (typeof array[i] == 'number')) {
+        while ((i < array.length) && (typeof array[i] === 'number')) {
             i++;
         }
 
@@ -121,10 +126,10 @@ let findMedArrow = (array) => {
 
         const orderedArr = orderArr(array);
         let median;
-        if (Number.isInteger(orderedArr.length/2)) {
-            median = (orderedArr[(orderedArr.length/2 - 1)] + orderedArr[(orderedArr.length/2)])/2;
+        if (Number.isInteger(orderedArr.length / 2)) {
+            median = (orderedArr[(orderedArr.length / 2 - 1)] + orderedArr[(orderedArr.length / 2)]) / 2;
         } else {
-            median = orderedArr[(orderedArr.length/2 - 0.5)];
+            median = orderedArr[(orderedArr.length / 2 - 0.5)];
         }
 
         return median;
@@ -164,8 +169,8 @@ console.log('arrow: ' + findMedArrow(arrayToCheck));
 // simple
 function objToArrSimple(object) {
     try {
-        if (typeof object != 'object') {
-            throw new Error ('Please enter an object!');
+        if (typeof object !== 'object') {
+            throw new Error('Please enter an object!');
         }
         let array = [];
         let key;
@@ -181,10 +186,10 @@ function objToArrSimple(object) {
 }
 
 // anonymous
-let objToArrAnonymous = function(object) {
+let objToArrAnonymous = function (object) {
     try {
-        if (typeof object != 'object') {
-            throw new Error ('Please enter an object!');
+        if (typeof object !== 'object') {
+            throw new Error('Please enter an object!');
         }
         let array = [];
         let key;
@@ -202,8 +207,8 @@ let objToArrAnonymous = function(object) {
 // arrow
 let objToArrArrow = (object) => {
     try {
-        if (typeof object != 'object') {
-            throw new Error ('Please enter an object!');
+        if (typeof object !== 'object') {
+            throw new Error('Please enter an object!');
         }
         let array = [];
         let key;
@@ -222,7 +227,7 @@ let objToArrArrow = (object) => {
 let objectToCheck = {
     num: 4,
     str: 'hi',
-    arr: [1,2,3],
+    arr: [1, 2, 3],
     bln: false,
     udf: undefined,
     nll: null,
@@ -240,4 +245,3 @@ objectToCheck = "Guess what - I'm not an object! Muhahaha!!";
 console.log('simple: ' + objToArrSimple(objectToCheck));
 console.log('anonymous: ' + objToArrAnonymous(objectToCheck));
 console.log('arrow: ' + objToArrArrow(objectToCheck));
-
