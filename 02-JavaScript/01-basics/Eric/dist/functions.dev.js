@@ -38,4 +38,11 @@ function factorial(n) {
 }
 
 var n = 7;
-console.log(factorial(n));
+console.log(factorial(n)); //average
+
+var arr = [3, 7, 2, 6, 5, 4, 9];
+var sum = arr.reduce(function (sum, val) {
+  return sum += val;
+});
+var len = arr.length;
+console.log("average: ", sum / len);

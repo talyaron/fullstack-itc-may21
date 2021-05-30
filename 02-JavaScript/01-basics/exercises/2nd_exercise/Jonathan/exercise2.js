@@ -1,12 +1,12 @@
 //1) create a function for finding the median in an array. (https://www.mathsisfun.com/median.html)
 
-let arr = [1,2]
+let arr = [1, 2]
 
 //order the list first
 
 try {
 
-    if (!Array.isArray(arr))  throw new Error('the argument is not an array')
+    if (!Array.isArray(arr)) throw new Error('the argument is not an array')
 
     let sortedArr = arr.sort((a, b) => {
         return a - b;
@@ -20,12 +20,12 @@ try {
 
             let sumi = 0;
 
-            if ( arr.length === 1) throw new Error('you have only one argument in the array')
+            if (arr.length === 1) throw new Error('you have only one argument in the array')
             //odd situation
             if (arr.length % 2 !== 0) {
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
-                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
+                    if (arr[i] < 0) throw new Error('an element is a negative number')
                     sumi += i;
                 }
                 const count = arr.length;
@@ -36,7 +36,7 @@ try {
                 //even situation  
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
-                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
+                    if (arr[i] < 0) throw new Error('an element is a negative number')
                     sumi += i;
                 }
                 const count = arr.length;
@@ -53,7 +53,7 @@ try {
     median = getMedianbyFirst(sortedArr)
     console.log(`The median is ${median}`);
 
-} catch(error) {
+} catch (error) {
     console.log(error);
 }
 
@@ -62,7 +62,7 @@ try {
 
 try {
 
-    if (!Array.isArray(arr))  throw new Error('the argument is not an array')
+    if (!Array.isArray(arr)) throw new Error('the argument is not an array')
 
     let sortedArr = arr.sort((a, b) => {
         return a - b;
@@ -70,18 +70,18 @@ try {
 
     //function getMedium // ArrowMethod
 
-    let getMedianbySecond = function(arr){
+    let getMedianbySecond = function (arr) {
 
         try {
 
             let sumi = 0;
-            if ( arr.length === 1) throw new Error('you have only one argument in the array')
+            if (arr.length === 1) throw new Error('you have only one argument in the array')
 
             //odd situation
             if (arr.length % 2 !== 0) {
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
-                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
+                    if (arr[i] < 0) throw new Error('an element is a negative number')
                     sumi += i;
                 }
                 const count = arr.length;
@@ -92,7 +92,7 @@ try {
                 //even situation  
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
-                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
+                    if (arr[i] < 0) throw new Error('an element is a negative number')
                     sumi += i;
                 }
                 const count = arr.length;
@@ -109,7 +109,7 @@ try {
     median = getMedianbySecond(sortedArr)
     console.log(`The median is ${median}`);
 
-} catch(error) {
+} catch (error) {
     console.log(error);
 }
 
@@ -117,7 +117,7 @@ try {
 
 try {
 
-    if (!Array.isArray(arr))  throw new Error('the argument is not an array')
+    if (!Array.isArray(arr)) throw new Error('the argument is not an array')
 
     let sortedArr = arr.sort((a, b) => {
         return a - b;
@@ -125,33 +125,33 @@ try {
 
     //function getMedium // ArrowMethod
 
-    function getMedianbyThird(arr){
+    function getMedianbyThird(arr) {
 
         try {
 
             //let sumi = 0;
-            if ( arr.length === 1) throw new Error('you have only one argument in the array')
+            if (arr.length === 1) throw new Error('you have only one argument in the array')
             //odd situation
             if (arr.length % 2 !== 0) {
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
-                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
+                    if (arr[i] < 0) throw new Error('an element is a negative number')
                     //sumi += i;
                 }
                 const count = arr.length;
                 //const medium = arr[sumi / count]
-                const medium = arr[(count-1)/2];
+                const medium = arr[(count - 1) / 2];
                 return medium;
 
             } else {
                 //even situation  
                 for (let i = 0; i < arr.length; i++) {
                     if (typeof arr[i] !== 'number') throw new Error('an element is not a number')
-                    if ( arr[i] <0 ) throw new Error('an element is a negative number')
+                    if (arr[i] < 0) throw new Error('an element is a negative number')
                     //sumi += i;
                 }
                 const count = arr.length;
-                const medium = (arr[(count)/2] + arr[[(count)/2]-1]) / 2
+                const medium = (arr[(count) / 2] + arr[[(count) / 2] - 1]) / 2
                 return medium;
             }
         }
@@ -161,9 +161,9 @@ try {
         }
     }
 
-    console.log("The median is " +  getMedianbyThird(sortedArr));
+    console.log("The median is " + getMedianbyThird(sortedArr));
 
-} catch(error) {
+} catch (error) {
     console.log(error);
 }
 
@@ -227,7 +227,7 @@ console.log(x)
 
 //Simple
 
-function thirdArray (obj){
+function thirdArray(obj) {
 
     try {
 
