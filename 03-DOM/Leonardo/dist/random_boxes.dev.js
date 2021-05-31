@@ -41,4 +41,4 @@ function createBoxes() {
   } catch (e) {
     console.error();
   }
-}
+} //It was difficult to add try and catch because I didn´t know what error the application could have, because the user almost not interact with the page
