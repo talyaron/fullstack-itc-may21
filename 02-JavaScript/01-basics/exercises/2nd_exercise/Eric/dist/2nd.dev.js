@@ -1,5 +1,15 @@
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //1) create a function for finding the Median in an array. (https://www.mathsisfun.com/median.html)
 //2) create a function that take an object and return an array with the values of the object in an array.
 //generate them in the three ways (simple, anonymous, arrow)
@@ -50,11 +60,26 @@ var object = {
   b: 42,
   c: false
 };
-var arraynew = [1, 2, 3];
 
 function values(object) {
-  arraynew.push(Object.values(object));
-  return arraynew;
+  try {
+    if (_typeof(object) !== "object") throw new Error('the argument is not an object');
+    if (Array.isArray(object)) throw new Error('the argument is an array and not an object');
+    var arraynew = [1, 2, 3];
+
+    var _values = Object.values(object); //object.values() returns an array with the values corresponding to the enumerable properties of an object
+
+
+    return [].concat(arraynew, _toConsumableArray(_values)); //
+  } catch (error) {
+    console.log(error);
+    return 0;
+  }
 }
 
-console.log(values(object));
+console.log(values(object)); //console.dir(document)
+//alert(() =>{
+//  arguments: (arrSort);
+//length: 0;
+//name: "alert";
+// });
