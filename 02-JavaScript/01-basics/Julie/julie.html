@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- YS: Try to always add a title to the document instead of 'Document' (you can see this in the tab window on your browser) -->
     <title>Document</title>
   </head>
   <body></body>
@@ -15,30 +16,30 @@
 
     //pure
 
-    function buildSentence(aName) {
-      return "Hello, " + aName + "!";
+    function buildSentence(aName) {     //YS: Good function naming! 
+      return "Hello, " + aName + "!";   //YS: Good, try to  use template literals (backticks), its faster and easier once you get used to it and later on it will become necessary: `Hello ${aName}!`
     }
 
     console.log(buildSentence(myName));
 
     //anonymous
 
-    let buildSentence2 = function (aName) {
-      return "Hello, " + aName + "!";
+    let buildSentence2 = function (aName) {   //YS: Use const for functions.  
+      return "Hello, " + aName + "!";         //YS: Template literals
     };
 
     console.log(buildSentence2(myName));
 
     //arrow
 
-    let buildSentence3 = (aName) => {
+    let buildSentence3 = (aName) => {      
       return "Hello, " + aName + "!";
     };
 
     console.log(buildSentence3(myName));
 
     let showFactorial = (num) => {
-      let result = num;
+      let result = num;  
       if (num < 0) {
         return "Can't do a factorial of zero or a negative number";
       } else if (num === 0) {
@@ -46,9 +47,9 @@
       } else if (num === 1) {
         return "The factorial of 1 is 1, although that is not surprising.";
       } else
-        while (num >= 2) {
-          num--;
-          result = result * num;
+        while (num >= 2) {             //YS: Very nice!! 
+          num--; 
+          result = result * num;     //YS: You can also write: result *= num;  
         }
       return result;
     };
