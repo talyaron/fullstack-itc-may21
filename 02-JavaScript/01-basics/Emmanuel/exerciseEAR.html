@@ -12,7 +12,8 @@
 
       const name = "Emmanuel";
 
-      function buildSentence(arg1 = 0, arg2 = 0) {  //YS: Why did you give them a default value? arg1 = 0, arg2 = 0? 
+      function buildSentence(arg1 = 0, arg2 = 0) {
+        //YS: Why did you give them a default value? arg1 = 0, arg2 = 0?
         // console.log(arg1);    //YS: Please dont leave commented console.logs
         return arg1 + "" + arg2;
       }
@@ -22,7 +23,8 @@
 
       //anonymous function
 
-      let buildSentence2 = function (arg1, arg2) { //YS: Use const instead of let for functions. 
+      let buildSentence2 = function (arg1, arg2) {
+        //YS: Use const instead of let for functions.
         // console.log(arg1); Why is this logged only after line31 is in place?
         return arg1 + arg2;
       };
@@ -32,7 +34,8 @@
 
       //arrow function
 
-      let buildSentence3 = (arg1, arg2) => {   //YS: Const instead of let. 
+      let buildSentence3 = (arg1, arg2) => {
+        //YS: Const instead of let.
         return arg1 + arg2;
       };
 
@@ -55,7 +58,7 @@
       let n = 4;
       answer = factorial(n); //YS: This variable 'answer' is not the same as the variable 'answer' inside of your factiorial function. This variable should be called something else to not confuse you, and use a const/let to declare it. See example
       // const myAnswer = factorial(n)
-      console.log("The factorial of " + n + " is " + answer) //myAnswer;
+      console.log("The factorial of " + n + " is " + answer); //myAnswer;
     </script>
   </body>
 </html>
