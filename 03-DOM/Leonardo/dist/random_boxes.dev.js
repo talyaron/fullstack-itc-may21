@@ -22,6 +22,9 @@ function createBoxes() {
   try {
     var num = randomNumber();
     var container = document.getElementById("container");
+    /* If I leave the following line uncommented it will remove the old boxes and replace them. If it´s commented it will continue adding boxes:
+    
+    container.innerHTML = ''; */
 
     for (var i = 0; i < num; i++) {
       var element = document.createElement("div");
@@ -32,42 +35,10 @@ function createBoxes() {
       element.style.position = randomPosition();
       element.style.border = randomBorder();
       element.style.borderRadius = randomRadius();
-      document.body.style.backgroundColor = randomColor();
     }
+
+    document.body.style.backgroundColor = randomColor();
   } catch (e) {
     console.error();
   }
-} //Functions to get random values:
-
-
-function randomNumber() {
-  return Math.floor(Math.random() * 10) + 1;
-}
-
-function randomColor() {
-  return "rgb(".concat(Math.floor(Math.random() * 255), ", ").concat(Math.floor(Math.random() * 255), ",").concat(Math.floor(Math.random() * 255), ")");
-}
-
-function randomSize() {
-  var size = Math.floor(Math.random() * (200 - 40) + 40);
-  return "".concat(size, "px");
-}
-
-function randomPosition() {
-  var position = ["static", "absolute", "fixed", "relative", "sticky", "initial", "inherit"];
-  var randomPosition = Math.floor(Math.random() * position.length);
-  return position[randomPosition];
-}
-
-function randomBorder() {
-  var border = ["none", "hidden", "dashed", "dotted", "double", "groove", "inset", "outset", "ridge", "solid"];
-  var randomValue = Math.floor(Math.random() * border.length);
-  var num = randomNumber();
-  var color = randomColor();
-  return "".concat(num, "px ").concat(border[randomValue], " ").concat(color);
-}
-
-function randomRadius() {
-  var radius = Math.floor(Math.random() * 100) + 1;
-  return "".concat(radius, "%");
 }
