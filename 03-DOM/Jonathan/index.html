@@ -33,8 +33,10 @@
         
             let color = randomColor();
             let size = randomSize();
+            let position = randomPoisition();
 
-            document.body.innerHTML += `<div class='item' style="background-color:${color}; width:${size}px; height:${size}px"></div>`
+            document.body.innerHTML += `<div class='item' style="background-color:${color}; width:${size}px; height:${size}px;
+                                        position:relative; top:${position}"></div>`
         }
 
     }
