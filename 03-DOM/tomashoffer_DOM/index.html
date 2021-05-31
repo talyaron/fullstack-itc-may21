@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Boxes</title>
+</head>
+<body> 
+   <div id="container">
+
+   </div>
+</body>
+
+<script>
+
+function randomColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return "rgb(" + r + "," + g + "," + b + ")";
+}
+
+function randomWidth(){
+    return width= Math.floor((Math.random()*200)+40);
+}
+function randomHeight(){
+    return width= Math.floor((Math.random()*200)+40);
+}
+
+function randomBoxes(){
+
+let container = document.querySelector("#container");
+let randomNum = Math.floor((Math.random()*10)+1);
+ 
+try{
+for (let i = 0; i < randomNum; i++) {
+    let box = document.createElement("div");
+    container.appendChild(box);
+    let colors = randomColor();
+    let hgt = randomHeight();
+    let wth = randomWidth();
+    box.style.backgroundColor = colors;
+    box.style.height = `${hgt}px`;
+    box.style.width = `${wth}px`;
+
+        }
+    } catch(err){
+        console.log("Error has ocurred " + err.stack);
+    }    
+}
+
+randomBoxes();
+setInterval('window.location.reload()', 5000);
+
+</script>
+</html>
+

@@ -13,7 +13,7 @@ var secondMethod = function secondMethod(name) {
   return "My name is " + name;
 };
 
-x = secondMethod(name); //YS:  Where is x defined? Use const/let or just console.log(secondMethod(name)) 
+var x = secondMethod(name);
 console.log(x); //
 
 var thirdMethod = function thirdMethod(name) {
@@ -21,9 +21,8 @@ var thirdMethod = function thirdMethod(name) {
   return "My name is " + name;
 };
 
-x = thirdMethod(name); //YS: Incorrect use of variable. Need let/const/var before (80% of the time use const)
-
-console.log(x); // Point 3 -- three method's
+var y = thirdMethod(name);
+console.log(y); // Point 3 -- three method's
 
 var number = 3;
 

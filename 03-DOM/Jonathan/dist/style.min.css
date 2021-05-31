@@ -1,0 +1,1 @@
+*{margin:0;padding:0;box-sizing:border-box}body{width:90%}h1{text-align:center}div{display:flex;justify-content:space-between;margin-top:10vw;margin-right:10px}p{margin:auto;color:beige}@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
