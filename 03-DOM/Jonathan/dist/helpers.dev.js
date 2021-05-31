@@ -33,6 +33,6 @@ function randomFontsize() {
 }
 
 function randomSpin() {
-  var spin = Math.floor(Math.random() * 4000);
+  var spin = Math.floor(Math.random() * 8000);
   return spin;
 }

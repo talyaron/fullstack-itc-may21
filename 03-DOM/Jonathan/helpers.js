@@ -30,6 +30,6 @@ function randomFontsize(){
 }
 
 function randomSpin(){
-    let spin = Math.floor(Math.random() * 4000)
+    let spin = Math.floor(Math.random() * 8000)
     return spin;
 }
