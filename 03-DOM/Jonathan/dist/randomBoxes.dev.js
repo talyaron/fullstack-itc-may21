@@ -26,7 +26,7 @@ function randomBoxes() {
     var container = document.createElement("div");
     container.className = "container";
     document.body.appendChild(container);
-    if (!document.querySelector('.container')) throw new Error('The container does not exist'); //clean container
+    if (!container) throw new Error('The container does not exist'); //clean container
     //container.innerHTML = " ";
     //create divs and changes their style
 

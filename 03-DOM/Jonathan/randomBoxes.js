@@ -35,7 +35,7 @@ function randomBoxes() {
         container.className = "container";
         document.body.appendChild(container);
    
-        if(!document.querySelector('.container')) throw new Error('The container does not exist');
+        if(!container) throw new Error('The container does not exist');
         
         //clean container
         //container.innerHTML = " ";
