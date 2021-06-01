@@ -15,6 +15,7 @@ setInterval(function(){createbox();;}, 5000);
 
 function createbox(){
     let number = randomNumber();
+    
     //let h1 = document.body.createElement("h1");
     //h1.innerText= `The number is: ${number}`;
     //document.body.appendChild(h1);

@@ -16,8 +16,9 @@ function randomBoxes() {
     document.body.style.background = "".concat(colorBody); //h1
 
     var colorh1 = randomHColor();
-    var h1 = document.querySelector('.myh1id');
+    var h1 = document.createElement('H1');
     h1.innerHTML = "Number of boxes: ".concat(boxes);
+    document.body.appendChild(h1);
     var fontsize = randomFontsize();
     h1.style.color = "".concat(colorh1);
     h1.style.fontSize = "".concat(fontsize, "px"); //container
