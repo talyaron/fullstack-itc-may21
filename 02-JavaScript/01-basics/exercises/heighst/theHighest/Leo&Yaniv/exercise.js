@@ -3,43 +3,44 @@ function theHighest(array) {
     try {
         if (!Array.isArray(array)) {
             throw new Error('Please enter an array!');
-        } else {
-            notNumbersCounter = 0;
-            for (let i = 0; i < array.length; i++) {
-                if (isNaN(array[i])) {
-                    notNumbersCounter++;
-                }
-            }
-            if (notNumbersCounter == array.length) {
-                throw new Error('Your array contains no numbers!');
-            } else {
-                i = 1;
-                while ((i < array.length) && (array[i] == array[i - 1])) {
-                    i++;
-                }
-                if (i == array.length) {
-                    throw new Error('Your array elements are all equal!');
-                }
-            }
+        } else if (array.length == 1) {
+            throw new Error('Your array only has one element...');
         }
 
-        let firstNum;
+        let firstNum = null;
+        let i = 0;
+        while ((i < array.length) && (typeof array[i] != 'number')) {
+            i++;
+        }
 
-        for (let i = 1; i < array.length; i++) {
-            if (typeof array[i] === 'number') {
-                firstNum = array[i];
-                break;
-            }
+        if (i == array.length) {
+            throw new Error('Your array contains no numbers!');
+        }
+
+        firstNum = array[i];
+
+        let j;
+        if (i == 0) {
+            j = 1;
+        } else {
+            j = i;
+        }
+
+        while ((j < array.length) && (array[j] == array[j - 1])) {
+            j++;
+        }
+        if (j == array.length) {
+            throw new Error('Your array elements are all equal!');
         }
 
         let highest = firstNum;
 
-        for (let i = 1; i < array.length; i++) {
-            if (isNaN(array[i])) {
-                i++;
+        for (let k = i; k < array.length; k++) {
+            if (isNaN(array[k])) {
+                k++;
             } else {
-                if (array[i] > highest) {
-                    highest = array[i];
+                if (array[k] > highest) {
+                    highest = array[k];
                 }
             }
         }
@@ -55,43 +56,44 @@ let highestNum = function (array) {
     try {
         if (!Array.isArray(array)) {
             throw new Error('Please enter an array!');
-        } else {
-            notNumbersCounter = 0;
-            for (let i = 0; i < array.length; i++) {
-                if (isNaN(array[i])) {
-                    notNumbersCounter++;
-                }
-            }
-            if (notNumbersCounter == array.length) {
-                throw new Error('Your array contains no numbers!');
-            } else {
-                i = 1;
-                while ((i < array.length) && (array[i] == array[i - 1])) {
-                    i++;
-                }
-                if (i == array.length) {
-                    throw new Error('Your array elements are all equal!');
-                }
-            }
+        } else if (array.length == 1) {
+            throw new Error('Your array only has one element...');
         }
 
-        let firstNum;
+        let firstNum = null;
+        let i = 0;
+        while ((i < array.length) && (typeof array[i] != 'number')) {
+            i++;
+        }
 
-        for (let i = 1; i < array.length; i++) {
-            if (typeof array[i] === 'number') {
-                firstNum = array[i];
-                break;
-            }
+        if (i == array.length) {
+            throw new Error('Your array contains no numbers!');
+        }
+
+        firstNum = array[i];
+
+        let j;
+        if (i == 0) {
+            j = 1;
+        } else {
+            j = i;
+        }
+
+        while ((j < array.length) && (array[j] == array[j - 1])) {
+            j++;
+        }
+        if (j == array.length) {
+            throw new Error('Your array elements are all equal!');
         }
 
         let highest = firstNum;
 
-        for (let i = 1; i < array.length; i++) {
-            if (isNaN(array[i])) {
-                i++;
+        for (let k = i; k < array.length; k++) {
+            if (isNaN(array[k])) {
+                k++;
             } else {
-                if (array[i] > highest) {
-                    highest = array[i];
+                if (array[k] > highest) {
+                    highest = array[k];
                 }
             }
         }
@@ -107,43 +109,44 @@ let highestInArrow = (array) => {
     try {
         if (!Array.isArray(array)) {
             throw new Error('Please enter an array!');
-        } else {
-            notNumbersCounter = 0;
-            for (let i = 0; i < array.length; i++) {
-                if (isNaN(array[i])) {
-                    notNumbersCounter++;
-                }
-            }
-            if (notNumbersCounter == array.length) {
-                throw new Error('Your array contains no numbers!');
-            } else {
-                i = 1;
-                while ((i < array.length) && (array[i] == array[i - 1])) {
-                    i++;
-                }
-                if (i == array.length) {
-                    throw new Error('Your array elements are all equal!');
-                }
-            }
+        } else if (array.length == 1) {
+            throw new Error('Your array only has one element...');
         }
 
-        let firstNum;
+        let firstNum = null;
+        let i = 0;
+        while ((i < array.length) && (typeof array[i] != 'number')) {
+            i++;
+        }
 
-        for (let i = 1; i < array.length; i++) {
-            if (typeof array[i] === 'number') {
-                firstNum = array[i];
-                break;
-            }
+        if (i == array.length) {
+            throw new Error('Your array contains no numbers!');
+        }
+
+        firstNum = array[i];
+
+        let j;
+        if (i == 0) {
+            j = 1;
+        } else {
+            j = i;
+        }
+
+        while ((j < array.length) && (array[j] == array[j - 1])) {
+            j++;
+        }
+        if (j == array.length) {
+            throw new Error('Your array elements are all equal!');
         }
 
         let highest = firstNum;
 
-        for (let i = 1; i < array.length; i++) {
-            if (isNaN(array[i])) {
-                i++;
+        for (let k = i; k < array.length; k++) {
+            if (isNaN(array[k])) {
+                k++;
             } else {
-                if (array[i] > highest) {
-                    highest = array[i];
+                if (array[k] > highest) {
+                    highest = array[k];
                 }
             }
         }

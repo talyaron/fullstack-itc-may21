@@ -95,7 +95,9 @@ body {
 .sub-wrapper {
   display: grid;
   grid-template-columns: 50% 12.5% 12.5% 12.5% 12.5%;
+  /* YS: This causes a lot of overlap between sub-wrapper-1 and sub-wrapper-2*/
   margin: auto;
+  /* YS: Please dont leave comments */
 }
 .sub-wrapper h3 {
   margin: auto;
@@ -111,12 +113,18 @@ body {
   grid-template-rows: repeat(2, 1fr);
   gap: 0.5rem;
 }
+@media only screen and (max-width: 600px) {
+  .sub-wrapper {
+    /* YS: Please dont leave code empty */
+  }
+}
 @media only screen and (max-width: 768px) {
   .sub-wrapper {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 
+/* YS: Very good! Well done. */
 .footer {
   background-color: #4C4C4C;
   height: 15rem;

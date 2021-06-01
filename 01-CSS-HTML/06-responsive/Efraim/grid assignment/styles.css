@@ -37,7 +37,7 @@ body {
     background-color: black;
     position: absolute;
 }
-
+ /* YS: Good centering of elements!*/
 .BBC__nav__wrapper {
     list-style-type: none;
     text-align: center;
@@ -137,7 +137,7 @@ body {
 .newmusic__wrapper {
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(3, max-content);
+    grid-template-columns: repeat(3, max-content); 
     grid-template-rows: repeat(1, max-content);
 
 }
@@ -177,10 +177,10 @@ body {
 .AFL--WBD {
     grid-area: WBD;
 }
-
+/* YS: Good breakpoint */
 @media only screen and (max-width: 1050px) {
     .AFL__wrappers {
-        height: 100vh;
+        height: 100vh; /* YS: Good breakpoint */
         display: grid;
         gap: 5px;
         grid-template-columns: repeat(2, 1fr);
@@ -199,7 +199,7 @@ body {
     .newmusic__wrapper {
         display: grid;
         gap: 10px;
-        grid-template-columns: repeat(1, max-content);
+        grid-template-columns: repeat(1, max-content);  /* YS: Seems to be causing your videos to leave the borders */
         grid-template-rows: repeat(3, max-content);
     }
 }
@@ -363,7 +363,7 @@ body {
     }
 
     .newmusic__wrapper {
-        display: flex;
+        display: flex;  /* YS: Why flex and not grid? */
         flex-direction: column;
         justify-content: center;
     }

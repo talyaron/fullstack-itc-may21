@@ -1,0 +1,23 @@
+body {
+  margin: 0px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 200px);
+  gap: 10px;
+  grid-template-areas: "main main . ." "main main . ." ". . . . " ". adv333 . ." ". adv333 . ." ". . . .";
+}
+.container .item {
+  background-color: red;
+}
+.container .header {
+  grid-area: main;
+  background-color: orange;
+}
+.container .advertise {
+  grid-area: adv333;
+  background-color: blue;
+  color: white;
+}

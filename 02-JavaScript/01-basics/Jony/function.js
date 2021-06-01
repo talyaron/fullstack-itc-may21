@@ -4,7 +4,7 @@ let name = "Jonathan"
 
 
 function firstMethod(name){
-    return "My name is " + name;
+    return "My name is " + name;   //YS: Try to use template literals instead: `My name is ${name}`
 }
 
 console.log(firstMethod(name))
@@ -16,17 +16,17 @@ let secondMethod = function (name){
     return "My name is " + name;
 }
 
-x = secondMethod(name);
+let x = secondMethod(name);
 console.log(x);
 
 //
 
-let thirdMethod = (name) =>{
+let thirdMethod = (name) =>{  //YS: Use const for functions. 
     return "My name is " + name;
 }
 
-x = thirdMethod(name);
-console.log(x);
+let y = thirdMethod(name);
+console.log(y);
 
 
 
@@ -34,7 +34,7 @@ console.log(x);
 
 const number = 3;
 
-function Factorial(number){
+function Factorial(number){   //YS: The function name should not start with a capital. 
     let result = 1;
     
     for (let i = 1; i<number; i++){

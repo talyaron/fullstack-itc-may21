@@ -5,47 +5,46 @@ function theHighest(array) {
   try {
     if (!Array.isArray(array)) {
       throw new Error('Please enter an array!');
-    } else {
-      notNumbersCounter = 0;
-
-      for (var _i = 0; _i < array.length; _i++) {
-        if (isNaN(array[_i])) {
-          notNumbersCounter++;
-        }
-      }
-
-      if (notNumbersCounter == array.length) {
-        throw new Error('Your array contains no numbers!');
-      } else {
-        i = 1;
-
-        while (i < array.length && array[i] == array[i - 1]) {
-          i++;
-        }
-
-        if (i == array.length) {
-          throw new Error('Your array elements are all equal!');
-        }
-      }
+    } else if (array.length == 1) {
+      throw new Error('Your array only has one element...');
     }
 
-    var firstNum;
+    var firstNum = null;
+    var i = 0;
 
-    for (var _i2 = 1; _i2 < array.length; _i2++) {
-      if (typeof array[_i2] === 'number') {
-        firstNum = array[_i2];
-        break;
-      }
+    while (i < array.length && typeof array[i] != 'number') {
+      i++;
+    }
+
+    if (i == array.length) {
+      throw new Error('Your array contains no numbers!');
+    }
+
+    firstNum = array[i];
+    var j;
+
+    if (i == 0) {
+      j = 1;
+    } else {
+      j = i;
+    }
+
+    while (j < array.length && array[j] == array[j - 1]) {
+      j++;
+    }
+
+    if (j == array.length) {
+      throw new Error('Your array elements are all equal!');
     }
 
     var highest = firstNum;
 
-    for (var _i3 = 1; _i3 < array.length; _i3++) {
-      if (isNaN(array[_i3])) {
-        _i3++;
+    for (var k = i; k < array.length; k++) {
+      if (isNaN(array[k])) {
+        k++;
       } else {
-        if (array[_i3] > highest) {
-          highest = array[_i3];
+        if (array[k] > highest) {
+          highest = array[k];
         }
       }
     }
@@ -61,47 +60,46 @@ var highestNum = function highestNum(array) {
   try {
     if (!Array.isArray(array)) {
       throw new Error('Please enter an array!');
-    } else {
-      notNumbersCounter = 0;
-
-      for (var _i4 = 0; _i4 < array.length; _i4++) {
-        if (isNaN(array[_i4])) {
-          notNumbersCounter++;
-        }
-      }
-
-      if (notNumbersCounter == array.length) {
-        throw new Error('Your array contains no numbers!');
-      } else {
-        i = 1;
-
-        while (i < array.length && array[i] == array[i - 1]) {
-          i++;
-        }
-
-        if (i == array.length) {
-          throw new Error('Your array elements are all equal!');
-        }
-      }
+    } else if (array.length == 1) {
+      throw new Error('Your array only has one element...');
     }
 
-    var firstNum;
+    var firstNum = null;
+    var i = 0;
 
-    for (var _i5 = 1; _i5 < array.length; _i5++) {
-      if (typeof array[_i5] === 'number') {
-        firstNum = array[_i5];
-        break;
-      }
+    while (i < array.length && typeof array[i] != 'number') {
+      i++;
+    }
+
+    if (i == array.length) {
+      throw new Error('Your array contains no numbers!');
+    }
+
+    firstNum = array[i];
+    var j;
+
+    if (i == 0) {
+      j = 1;
+    } else {
+      j = i;
+    }
+
+    while (j < array.length && array[j] == array[j - 1]) {
+      j++;
+    }
+
+    if (j == array.length) {
+      throw new Error('Your array elements are all equal!');
     }
 
     var highest = firstNum;
 
-    for (var _i6 = 1; _i6 < array.length; _i6++) {
-      if (isNaN(array[_i6])) {
-        _i6++;
+    for (var k = i; k < array.length; k++) {
+      if (isNaN(array[k])) {
+        k++;
       } else {
-        if (array[_i6] > highest) {
-          highest = array[_i6];
+        if (array[k] > highest) {
+          highest = array[k];
         }
       }
     }
@@ -117,47 +115,46 @@ var highestInArrow = function highestInArrow(array) {
   try {
     if (!Array.isArray(array)) {
       throw new Error('Please enter an array!');
-    } else {
-      notNumbersCounter = 0;
-
-      for (var _i7 = 0; _i7 < array.length; _i7++) {
-        if (isNaN(array[_i7])) {
-          notNumbersCounter++;
-        }
-      }
-
-      if (notNumbersCounter == array.length) {
-        throw new Error('Your array contains no numbers!');
-      } else {
-        i = 1;
-
-        while (i < array.length && array[i] == array[i - 1]) {
-          i++;
-        }
-
-        if (i == array.length) {
-          throw new Error('Your array elements are all equal!');
-        }
-      }
+    } else if (array.length == 1) {
+      throw new Error('Your array only has one element...');
     }
 
-    var firstNum;
+    var firstNum = null;
+    var i = 0;
 
-    for (var _i8 = 1; _i8 < array.length; _i8++) {
-      if (typeof array[_i8] === 'number') {
-        firstNum = array[_i8];
-        break;
-      }
+    while (i < array.length && typeof array[i] != 'number') {
+      i++;
+    }
+
+    if (i == array.length) {
+      throw new Error('Your array contains no numbers!');
+    }
+
+    firstNum = array[i];
+    var j;
+
+    if (i == 0) {
+      j = 1;
+    } else {
+      j = i;
+    }
+
+    while (j < array.length && array[j] == array[j - 1]) {
+      j++;
+    }
+
+    if (j == array.length) {
+      throw new Error('Your array elements are all equal!');
     }
 
     var highest = firstNum;
 
-    for (var _i9 = 1; _i9 < array.length; _i9++) {
-      if (isNaN(array[_i9])) {
-        _i9++;
+    for (var k = i; k < array.length; k++) {
+      if (isNaN(array[k])) {
+        k++;
       } else {
-        if (array[_i9] > highest) {
-          highest = array[_i9];
+        if (array[k] > highest) {
+          highest = array[k];
         }
       }
     }
