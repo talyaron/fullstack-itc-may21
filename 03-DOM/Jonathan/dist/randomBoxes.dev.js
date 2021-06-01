@@ -8,7 +8,7 @@ setInterval(function () {
 
 function randomBoxes() {
   try {
-    boxes = Math.floor(Math.random() * 10 + 1); //body
+    var boxes = randomNumber(); //body
 
     var colorBody = randomColor();
     document.body.style.background = "".concat(colorBody); //h1
@@ -31,7 +31,7 @@ function randomBoxes() {
       var top = randomPositionTop();
       var left = randomPositionLeft();
       var spin = randomSpin();
-      container.innerHTML += "<div style=\"background-color:".concat(color, "; width:").concat(size, "px; height:").concat(size, "px;\n                                        position:relative; top:").concat(top, "px; left:").concat(left, "px; \n                                        margin:0 auto; border:5px solid ").concat(borderColor, "; animation: spin ").concat(spin, "ms \n                                        infinite linear\">\n                                        <p>Box ").concat(i + 1, "</p></div>");
+      container.innerHTML += "<div class=\"container__item\" style=\"background-color:".concat(color, "; width:").concat(size, "px; height:").concat(size, "px;\n                                        position:relative; top:").concat(top, "px; left:").concat(left, "px; \n                                        margin:0 auto; border:5px solid ").concat(borderColor, "; animation: spin ").concat(spin, "ms \n                                        infinite linear\">\n                                        <p>Box ").concat(i + 1, "</p></div>");
     }
   } catch (e) {
     console.log(e);

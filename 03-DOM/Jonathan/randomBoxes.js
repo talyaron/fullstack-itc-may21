@@ -6,7 +6,7 @@ function randomBoxes() {
 
     try {
 
-        boxes = Math.floor(Math.random() * 10 + 1)
+        let boxes = randomNumber();
         
         //body
         let colorBody = randomColor();
@@ -36,7 +36,7 @@ function randomBoxes() {
             let left = randomPositionLeft();
             let spin = randomSpin();
 
-            container.innerHTML += `<div style="background-color:${color}; width:${size}px; height:${size}px;
+            container.innerHTML += `<div class="container__item" style="background-color:${color}; width:${size}px; height:${size}px;
                                         position:relative; top:${top}px; left:${left}px; 
                                         margin:0 auto; border:5px solid ${borderColor}; animation: spin ${spin}ms 
                                         infinite linear">

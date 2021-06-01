@@ -33,3 +33,8 @@ function randomSpin(){
     let spin = Math.floor(Math.random() * 8000)
     return spin;
 }
+
+function randomNumber(){
+    let number = Math.floor(Math.random() * 10 + 1);
+    return number;
+}

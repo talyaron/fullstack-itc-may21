@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     width: 90%;
 }
 
@@ -13,23 +13,31 @@ h1 {
 }
 
 
-div{
+.container {
     display: flex;
     justify-content: space-between;
     margin-top: 10vw;
-    margin-right: 10px;
-    
-}
 
-p{
-    margin: auto auto;
-    color: beige;
-}
+    &__item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-@keyframes spin { 
-    from { 
-        transform: rotate(0deg); 
-    } to { 
-        transform: rotate(360deg); 
+        p {
+            color: beige;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+        
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
     }
 }
+
+
