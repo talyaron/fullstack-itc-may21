@@ -40,7 +40,7 @@ function randomBoxes() {
       container.innerHTML += "<div class=\"container__item\" style=\"background-color:".concat(color, "; width:").concat(size, "px; height:").concat(size, "px;position:relative; top:").concat(top, "px; left:").concat(left, "px; border:5px solid ").concat(borderColor, "; animation: spin ").concat(spin, "ms infinite linear\"><p>Box ").concat(i + 1, "</p></div>");
     }
 
-    if (!document.querySelector('.container__item')) throw new Error('The container does not exist');
+    if (!document.querySelector('.container__item')) throw new Error('The boxes does not exist');
   } catch (e) {
     console.log(e);
   }

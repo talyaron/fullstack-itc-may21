@@ -53,7 +53,7 @@ function randomBoxes() {
             
         }
         
-        if(!document.querySelector('.container__item')) throw new Error('The container does not exist');
+        if(!document.querySelector('.container__item')) throw new Error('The boxes does not exist');
         
         
     } catch (e) {
