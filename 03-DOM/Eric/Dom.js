@@ -1,11 +1,13 @@
 //1) create on the dom a     (1-10).
-//2) create them in random colors and random sizes (40px - 200px);
+//2) create them in random colors and random sizes (40px - 200px); and random positions
 //3) using setInterval, recrete everything every 5 seconds.
 //4) do everthing as functions.
 //5) don't forget to use try-catch and try to think beforhand on the places the functions can fail.
 
 //change boxes
 
+
+createbox();
 setInterval(function(){createbox();;}, 5000);
 
     
@@ -13,25 +15,32 @@ setInterval(function(){createbox();;}, 5000);
 
 function createbox(){
     let number = randomNumber();
+    //let h1 = document.body.createElement("h1");
+    //h1.innerText= `The number is: ${number}`;
+    //document.body.appendChild(h1);
+
+    let h1 = document.querySelector(".total")
+    h1.innerText= `The number is ${number}`;
+
     let container = document.querySelector('.container');
+
     container.innerHTML="";
+
     for (let i=0;i<number; i++){
     let element = document.createElement("div");
-    console.log(element);
+    
     container.appendChild(element);
     let color = randomColor();
     let size = randomSize();
+    let position = randomPosition();
     element.style.backgroundColor = color;
     element.style.width = `${size}px`;
     element.style.height = `${size}px`;
+    element.style.position = "relative";
+    element.style.left = `${position}px`;
+    element.style.top = `${position}px`;
     }
-    
-
-
 }    
-
-
-//function randomSize(){}
 
 function randomColor(){
     return `rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`
@@ -42,9 +51,15 @@ function randomNumber(){
 }
 
 function randomSize(){
-    return Math.floor((Math.random() * 160)+ 40);
-  
+    let size = Math.floor((Math.random() *200)+ 40);
+    return size;
 }
+function randomPosition() {
+    let randomPosition = Math.floor(Math.random() *400+ 80);
+    return randomPosition;
+}
+
+
 
 
 
