@@ -20,7 +20,7 @@ function randomPositionTop(){
 }
 
 function randomPositionLeft(){
-    let position = Math.floor(Math.random() * 10 + Math.random()*100)
+    let position = Math.floor(Math.random() * 20 + Math.random()*100)
     return position;
 }
 
