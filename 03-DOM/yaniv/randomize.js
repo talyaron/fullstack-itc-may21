@@ -47,7 +47,7 @@ function boxesNum2() {
         let newBox;
         for (let i = 1; i <= howManyBoxes; i++) {
             newBox = document.createElement(`div`);
-            newBox.setAttribute(`id`,`box${i}`);
+            // newBox.setAttribute(`id`,`box${i}`); // not possible to change css file from what I saw. Hence - redundant.
             newBox.style.height = boxHeigt2();
             newBox.style.width = boxWidth2();
             newBox.style.backgroundColor = boxColor2();
