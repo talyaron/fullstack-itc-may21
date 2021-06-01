@@ -18,13 +18,13 @@ function randomSize() {
 }
 
 function randomPositionTop() {
-  var position = Math.floor(Math.random() * 10 + Math.random() * 100);
-  return position;
+  var top = Math.floor(Math.random() * 10 + Math.random() * 100);
+  return top;
 }
 
 function randomPositionLeft() {
-  var position = Math.floor(Math.random() * 10 + Math.random() * 100);
-  return position;
+  var left = Math.floor(Math.random() * 50 + Math.random() * 90);
+  return left;
 }
 
 function randomFontsize() {
