@@ -23,7 +23,7 @@ function randomPositionTop() {
 }
 
 function randomPositionLeft() {
-  var position = Math.floor(Math.random() * 10 + Math.random() * 100);
+  var position = Math.floor(Math.random() * 20 + Math.random() * 100);
   return position;
 }
 
