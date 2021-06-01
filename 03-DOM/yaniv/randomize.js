@@ -3,6 +3,9 @@ setInterval(function(){boxesNum();}, 5000);
 function boxesNum() {
     try {
         const body = document.querySelector(`body`);
+        if (body === undefinded) {
+            throw new Error(`What kind of a HTML document doe'st have a body?!`);
+        }
         const howManyBoxes = Math.ceil(Math.random() * 10);
         let bodyHtmlCode = `<div class='container'><h1>Number of boxes: ${howManyBoxes}</h1></div>`;
         for (let i = 1; i <= howManyBoxes; i++) {

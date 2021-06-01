@@ -7,6 +7,11 @@ setInterval(function () {
 function boxesNum() {
   try {
     var body = document.querySelector("body");
+
+    if (body === undefinded) {
+      throw new Error("What kind of a HTML document doe'st have a body?!");
+    }
+
     var howManyBoxes = Math.ceil(Math.random() * 10);
     var bodyHtmlCode = "<div class='container'><h1>Number of boxes: ".concat(howManyBoxes, "</h1></div>");
 
