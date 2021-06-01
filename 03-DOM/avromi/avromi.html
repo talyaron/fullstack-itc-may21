@@ -62,22 +62,30 @@
         //     myFriends++
         // }
         // console.log(myFriends)
-
+            
         let myLoop = [];
         for (i = 0; i <= x(); i++) {
+            try {
+      
             myLoop.push(i);
+                      
+        } catch (error) {
+                
+            }
         }
+
+   
 
         console.log(myLoop)
 
         // const array1 = [myLoop];
         // console.log(array1)
-        try {
+        try{
             let div = ``;
             const randomBoxes = document.querySelector(`#randomBoxes`)
             myLoop.forEach(anyThing => {
                 div += `<div style= "position:absolute; ${randomTop()};${randomLeft()}; ${randomHeight()}; ${randomWidth()};${randomColor()};"></div>`;
-                randomBoxes.innerHTML = div
+                randomBoxes.innerHTML = div;
             });
         } catch (error) {
             console.error(error);
@@ -92,6 +100,15 @@
         } catch (error) {
 
         }
+
+        try {
+  nonExistentFunction(); throw new Error (`jump in the lake`)
+
+} catch (error) {
+  console.error(error);
+ 
+}
+
 
 // let html =``;
 // // array1.forEach(element => {
