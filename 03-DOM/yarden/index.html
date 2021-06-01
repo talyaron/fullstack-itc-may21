@@ -44,12 +44,12 @@
             for (let div = 1; div <= divNumber; div++) {
                 docText += `<div style='${generateColor()}; ${generateSize()}; ${generatePosition()};></div>`
                 box.innerHTML = docText
-                setInterval(() => {main()}, 5000);
                 }
             }
-    
+ 
     main()
-
+    setInterval(() => {main()}, 5000);   
+    
     </script>
     
 </body>
