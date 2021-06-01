@@ -9,6 +9,7 @@ let arr=[1,1,2,2,,14,13,14,190,22,222,222,222,222,222,222,222,222,22,9,5,6,1,3,8
 
 
 let arrSort = arr.sort((a, b) => {
+    
     return a - b; //sort an array, this function help to fixe a ASCII code, else some arrays could not sorted
 });
   
@@ -58,11 +59,33 @@ let object = {
     a: 'Eric',
     b: 42,
     c: false
-  };
-  let arraynew =[1,2,3];
+};
 
-function values(object){
-    arraynew.push(Object.values(object))
-return arraynew;
+
+
+function values(object) {
+    try {
+
+        if (typeof (object) !== "object") throw new Error('the argument is not an object')
+
+        if (Array.isArray(object)) throw new Error('the argument is an array and not an object')
+        
+        let arraynew = [1, 2, 3];
+    const values = Object.values(object); //object.values() returns an array with the values corresponding to the enumerable properties of an object
+    return [...arraynew, ...values]; //
+} catch (error) {
+        console.log(error);
+        return 0;
+    }
 }
 console.log(values(object));
+
+
+
+//console.dir(document)
+//alert(() =>{
+  //  arguments: (arrSort);
+
+    //length: 0;
+    //name: "alert";
+    // });
