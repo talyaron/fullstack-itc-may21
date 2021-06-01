@@ -8,23 +8,22 @@
 
 
 createbox();
-setInterval(function(){createbox();;}, 5000);
 
-    
+setInterval(function () { location.reload();}, 5000)
 
 
 function createbox(){
     let number = randomNumber();
-    //let h1 = document.body.createElement("h1");
-    //h1.innerText= `The number is: ${number}`;
-    //document.body.appendChild(h1);
+    let h1 = document.createElement("H1");
+    
+    h1.innerText= `The number is: ${number}`;
+    document.body.appendChild(h1);
 
-    let h1 = document.querySelector(".total")
-    h1.innerText= `The number is ${number}`;
 
-    let container = document.querySelector('.container');
+    let container = document.createElement("div");
+    container.className = 'container'
+    document.body.appendChild(container);
 
-    container.innerHTML="";
 
     for (let i=0;i<number; i++){
     let element = document.createElement("div");
@@ -55,7 +54,7 @@ function randomSize(){
     return size;
 }
 function randomPosition() {
-    let randomPosition = Math.floor(Math.random() *400+ 80);
+    let randomPosition = Math.floor(Math.random() *50+ 80);
     return randomPosition;
 }
 

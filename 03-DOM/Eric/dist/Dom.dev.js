@@ -8,19 +8,17 @@
 //change boxes
 createbox();
 setInterval(function () {
-  createbox();
-  ;
+  location.reload();
 }, 5000);
 
 function createbox() {
-  var number = randomNumber(); //let h1 = document.body.createElement("h1");
-  //h1.innerText= `The number is: ${number}`;
-  //document.body.appendChild(h1);
-
-  var h1 = document.querySelector(".total");
-  h1.innerText = "The number is ".concat(number);
-  var container = document.querySelector('.container');
-  container.innerHTML = "";
+  var number = randomNumber();
+  var h1 = document.createElement("H1");
+  h1.innerText = "The number is: ".concat(number);
+  document.body.appendChild(h1);
+  var container = document.createElement("div");
+  container.className = 'container';
+  document.body.appendChild(container);
 
   for (var i = 0; i < number; i++) {
     var element = document.createElement("div");
@@ -51,6 +49,6 @@ function randomSize() {
 }
 
 function randomPosition() {
-  var randomPosition = Math.floor(Math.random() * 400 + 80);
+  var randomPosition = Math.floor(Math.random() * 50 + 80);
   return randomPosition;
 }
