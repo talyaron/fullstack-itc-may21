@@ -7,12 +7,14 @@
     <title>Random Boxes</title>
 </head>
 <body> 
-   <div id="container">
+
+   <div id="container" style="display: flex; width: 100%;">
 
    </div>
 </body>
 
 <script>
+
 
 function randomColor() {
   const r = Math.floor(Math.random() * 256);
@@ -27,7 +29,10 @@ function randomWidth(){
 function randomHeight(){
     return width= Math.floor((Math.random()*200)+40);
 }
-
+function randomPos() {
+    let randomPosition = Math.floor(Math.random() *50+ 80);
+    return randomPosition;
+}
 function randomBoxes(){
 
 let container = document.querySelector("#container");
@@ -40,9 +45,13 @@ for (let i = 0; i < randomNum; i++) {
     let colors = randomColor();
     let hgt = randomHeight();
     let wth = randomWidth();
+    let position = randomPos();
     box.style.backgroundColor = colors;
     box.style.height = `${hgt}px`;
     box.style.width = `${wth}px`;
+    box.style.position = "relative";
+    box.style.left = `${position}px`;
+    box.style.top = `${position}px`;
 
         }
     } catch(err){

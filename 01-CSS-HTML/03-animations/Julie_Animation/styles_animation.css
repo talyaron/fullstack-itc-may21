@@ -32,6 +32,77 @@ body {
           animation-iteration-count: infinite;
 }
 
+.container__article--london {
+  height: 400px;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-name: border--london;
+          animation-name: border--london;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.container__article--zichron {
+  height: 400px;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-name: border--zichron;
+          animation-name: border--zichron;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.container__article--me {
+  border: 3px solid black;
+  height: 400px;
+  -webkit-transition: 3s ease-in-out;
+  transition: 3s ease-in-out;
+}
+
+.container__article:hover {
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+}
+
+.container__article--rl {
+  height: 400px;
+  position: relative;
+  -webkit-animation: move--tsa 5s infinite;
+          animation: move--tsa 5s infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+.container__article--cm {
+  height: 400px;
+  position: relative;
+  -webkit-animation: move--cm 5s infinite;
+          animation: move--cm 5s infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+.container__article--tsa {
+  height: 400px;
+  position: relative;
+  -webkit-animation: move--tsa 5s infinite;
+          animation: move--tsa 5s infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+.container__article--itc {
+  border: 3px solid black;
+  height: 400px;
+  -webkit-transition: 3s ease-in-out;
+  transition: 3s ease-in-out;
+}
+
+.container__article:hover {
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+}
+
 @-webkit-keyframes border--recife {
   from {
     border: 10px solid green;
@@ -48,16 +119,6 @@ body {
   to {
     border: 10px solid yellow;
   }
-}
-
-.container__article--london {
-  height: 400px;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-name: border--london;
-          animation-name: border--london;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes border--london {
@@ -78,16 +139,6 @@ body {
   }
 }
 
-.container__article--zichron {
-  height: 400px;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-name: border--zichron;
-          animation-name: border--zichron;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-}
-
 @-webkit-keyframes border--zichron {
   from {
     border: 10px solid white;
@@ -104,27 +155,6 @@ body {
   to {
     border: 10px solid blue;
   }
-}
-
-.container__article--me {
-  border: 3px solid black;
-  height: 400px;
-  -webkit-transition: 3s ease-in-out;
-  transition: 3s ease-in-out;
-}
-
-.container__article--me:hover {
-  -webkit-transform: scale(1.2, 1.2);
-          transform: scale(1.2, 1.2);
-}
-
-.container__article--tsa {
-  height: 400px;
-  position: relative;
-  -webkit-animation: move--tsa 5s infinite;
-          animation: move--tsa 5s infinite;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
 }
 
 @-webkit-keyframes move--tsa {
@@ -145,15 +175,6 @@ body {
   }
 }
 
-.container__article--rl {
-  height: 400px;
-  position: relative;
-  -webkit-animation: move--tsa 5s infinite;
-          animation: move--tsa 5s infinite;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
-}
-
 @-webkit-keyframes move--rl {
   from {
     left: 0px;
@@ -170,15 +191,6 @@ body {
   to {
     left: 300px;
   }
-}
-
-.container__article--cm {
-  height: 400px;
-  position: relative;
-  -webkit-animation: move--cm 5s infinite;
-          animation: move--cm 5s infinite;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
 }
 
 @-webkit-keyframes move--cm {
@@ -198,16 +210,4 @@ body {
     left: 300px;
   }
 }
-
-.container__article--itc {
-  border: 3px solid black;
-  height: 400px;
-  -webkit-transition: 3s ease-in-out;
-  transition: 3s ease-in-out;
-}
-
-.container__article--itc:hover {
-  -webkit-transform: scale(1.2, 1.2);
-          transform: scale(1.2, 1.2);
-}
-/*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=styles_animation.css.map */
