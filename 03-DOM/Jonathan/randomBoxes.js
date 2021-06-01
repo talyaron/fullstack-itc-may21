@@ -8,7 +8,6 @@ setInterval(function () { location.reload();}, 5000)
 //randomBoxes();
 function randomBoxes() {
     
-    
     try {
 
         let boxes = randomNumber();
