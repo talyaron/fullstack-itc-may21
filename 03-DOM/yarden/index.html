@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random box generator</title>
+    <style>
+        body {
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+
+    <script>
+ //Preparatory functions:
+
+    // Function to create a random color
+        const generateColor = () => {
+            const divColor = `rgb(${Math.ceil(Math.random()*255)},${Math.ceil(Math.random()*255)},${Math.ceil(Math.random()*255)})`
+            return `background-color:${divColor};`
+        }
+    // Function to give random size
+        const generateSize = () => {
+            const divWidth = `${Math.ceil(Math.random() * 300) + 50}px`
+            const divHeight = `${Math.ceil(Math.random() * 150) + 50}px`
+            return `width:${divWidth}; height:${divHeight};`
+        }
+    // Function to give random position
+        const generatePosition = () => {
+            const divPosition = `transform: translate(${Math.ceil(Math.random() * 1000)}px, ${Math.ceil(Math.random() * 80)}px);`
+            return divPosition
+        }
+
+        
+    // Main function
+        const main = () => {
+            const box = document.querySelector('.box')
+            const divNumber = Math.ceil(Math.random() * 10 + 1)
+            let docText = '<div></div>'
+            for (let div = 1; div <= divNumber; div++) {
+                docText += `<div style='${generateColor()}; ${generateSize()}; ${generatePosition()};></div>`
+                box.innerHTML = docText
+                setInterval(() => {main()}, 5000);
+                }
+            }
+    
+    main()
+
+    </script>
+    
+</body>
+</html>
