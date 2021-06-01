@@ -1,38 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <div id="randomBoxes">
-    
+    <h1 style="color:green;">hello world</h1>
+    <div style=" background-color: rgb(209, 209, 226);  width:100%;" id="randomBoxes">
+        <!--being overwritten by js-->
+        <div style="height:200px; width:100px; background-color: rgb(39, 173, 73);"> div 2 here </div>
     </div>
     <script>
-       let randomBoxes = document.querySelector(`#randomBoxes`)
-       randomBoxes.innerHTML = boxFunction;
 
-       let height = 
+        //Helpers - olor , hieght, width 
 
-       //create a function to make boxes i.e hieght / width
-       // create function to make random color
-       let boxFunction = function(){
+        setInterval('window.location.reload()', 5000);
 
-       }
+        function randomColor() {
+            return `background-color:rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`
+        }
 
-     let num =  function(){Math.floor(Math.random()*255)
-           return num
-       }
+        console.log(randomColor())
 
-       
+        function randomHeight() {
+            return `height:${Math.floor(Math.random() * 160) + 40}px`;
+        }
+
+        console.log(randomHeight())
+
+        function randomWidth() {
+            return `width:${Math.floor(Math.random() * 160) + 40}px`;
+        }
+
+        console.log(randomWidth())
+
+        function randomLeft() {
+            return `left:${(Math.random() * 1100) + 40}px`;
+        }
+
+        console.log(randomLeft())
+
+        function randomTop() {
+            return `top:${(Math.random() * 1) + 10}px`;
+        }
+
+        console.log(randomTop())
+
+        //loop between 1-10
+
+        let x = () => {
+            return Math.floor(Math.random() * 11)
+        }
+        console.log(`x:` + x())
+
+        // let myFriends=[];
+        // for (i=0;i<x();i++){
+        //     myFriends++
+        // }
+        // console.log(myFriends)
+            
+        let myLoop = [];
+        for (i = 0; i <= x(); i++) {
+            try {
+      
+            myLoop.push(i);
+                      
+        } catch (error) {
+                
+            }
+        }
+
+   
+
+        console.log(myLoop)
+
+        // const array1 = [myLoop];
+        // console.log(array1)
+        try{
+            let div = ``;
+            const randomBoxes = document.querySelector(`#randomBoxes`)
+            myLoop.forEach(anyThing => {
+                div += `<div style= "position:absolute; ${randomTop()};${randomLeft()}; ${randomHeight()}; ${randomWidth()};${randomColor()};"></div>`;
+                randomBoxes.innerHTML = div;
+            });
+        } catch (error) {
+            console.error(error);
+            // Note 
+        }
+
+        try {
+            let x = () => {
+                return Math.floor(Math.random() * 11)
+            }
+            console.log(`x in try can be redefined:` + x())
+        } catch (error) {
+
+        }
+
+        try {
+  nonExistentFunction(); throw new Error (`jump in the lake`)
+
+} catch (error) {
+  console.error(error);
+ 
+}
+
+
+// let html =``;
+// // array1.forEach(element => {
+// //     const randomBoxes = document.querySelector(`#randomBoxes`)
+// //     randomBoxes.innerHTML = `<div style= position:absolute; ${randomTop};${randomLeft}; ${randomHieght}; ${randomWidth};${randomColor}></div>`
+
+// // });
+
+
+
+
+//let div = document.createElement('div');
+
+
+    //    const randomBoxes = document.querySelector(`#randomBoxes`)
+    //    randomBoxes.innerHTML = boxFunction;
+
+    //    let height = 
+
+    //    //create a function to make boxes i.e hieght / width
+    //    // create function to make random color
+    //    let boxFunction = function(){
+
+    //    }
+
+    //  let num =  function(){Math.floor(Math.random()*255)
+    //        return num
+    //    }
+
+
     //    boxColor.forEach(boxFunction {
     //        let color = randomColor();
     //    })
-        
+
 
 
     </script>
 </body>
+
 </html>
