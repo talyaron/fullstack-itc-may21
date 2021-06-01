@@ -1,12 +1,13 @@
-
 //First call and then setInterval 5 seconds
+
 randomBoxes();
 
 //Recreate everything every 5 seconds
-setInterval(function () { randomBoxes();; }, 5000);
+setInterval(function () { location.reload();}, 5000)
 
 //randomBoxes();
 function randomBoxes() {
+    
     
     try {
 
@@ -18,6 +19,7 @@ function randomBoxes() {
         let colorBody = randomColor();
         document.body.style.background = `${colorBody}`
         
+        
         //h1
         let colorh1 = randomHColor();
         let h1 = document.querySelector('.myh1id')
@@ -25,12 +27,18 @@ function randomBoxes() {
         let fontsize = randomFontsize();
         h1.style.color = `${colorh1}`;
         h1.style.fontSize = `${fontsize}px`;
-
+        
         //container
-        let container = document.querySelector('.container');
+        //let container = document.querySelector('.container');
+        
+        let container = document.createElement("div");
+        container.className = "container";
+        document.body.appendChild(container);
+   
+        if(!document.querySelector('.container')) throw new Error('The container does not exist');
         
         //clean container
-        container.innerHTML = " ";
+        //container.innerHTML = " ";
 
         //create divs and changes their style
         for (let i = 0; i < boxes; i++) {
@@ -43,8 +51,15 @@ function randomBoxes() {
             let spin = randomSpin();
 
             container.innerHTML += `<div class="container__item" style="background-color:${color}; width:${size}px; height:${size}px;position:relative; top:${top}px; left:${left}px; border:5px solid ${borderColor}; animation: spin ${spin}ms infinite linear"><p>Box ${i+1}</p></div>`
-        }                               
+            
+        }
+        
+        if(!document.querySelector('.container__item')) throw new Error('The container does not exist');
+        
+        
     } catch (e) {
         console.log(e);
     }
+    
 }
+
