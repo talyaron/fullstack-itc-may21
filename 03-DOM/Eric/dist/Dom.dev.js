@@ -14,8 +14,11 @@ setInterval(function () {
 function createbox() {
   var number = randomNumber();
   var h1 = document.createElement("H1");
-  h1.innerText = "The number is: ".concat(number);
-  document.body.appendChild(h1);
+  h1.innerText = "The boxes are: ".concat(number);
+  document.body.appendChild(h1); //let h1 = document.body.createElement("h1");
+  //h1.innerText= `The number is: ${number}`;
+  //document.body.appendChild(h1);
+
   var container = document.createElement("div");
   container.className = 'container';
   document.body.appendChild(container);

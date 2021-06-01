@@ -17,7 +17,7 @@ function createbox(){
 
     let h1 = document.createElement("H1");
     
-    h1.innerText= `The number is: ${number}`;
+    h1.innerText= `The boxes are: ${number}`;
     document.body.appendChild(h1);
 
     
