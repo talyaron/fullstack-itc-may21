@@ -1,13 +1,19 @@
+
+//First call and then setInterval 5 seconds
+randomBoxes();
+
 //Recreate everything every 5 seconds
 setInterval(function () { randomBoxes();; }, 5000);
 
 //randomBoxes();
 function randomBoxes() {
-
+    
     try {
 
         let boxes = randomNumber();
-        
+
+        if (boxes === 11) throw new Error('This program only allows from 1 to 10')
+
         //body
         let colorBody = randomColor();
         document.body.style.background = `${colorBody}`
@@ -36,11 +42,7 @@ function randomBoxes() {
             let left = randomPositionLeft();
             let spin = randomSpin();
 
-            container.innerHTML += `<div class="container__item" style="background-color:${color}; width:${size}px; height:${size}px;
-                                        position:relative; top:${top}px; left:${left}px; 
-                                        margin:0 auto; border:5px solid ${borderColor}; animation: spin ${spin}ms 
-                                        infinite linear">
-                                        <p>Box ${i+1}</p></div>`
+            container.innerHTML += `<div class="container__item" style="background-color:${color}; width:${size}px; height:${size}px;position:relative; top:${top}px; left:${left}px; border:5px solid ${borderColor}; animation: spin ${spin}ms infinite linear"><p>Box ${i+1}</p></div>`
         }                               
     } catch (e) {
         console.log(e);

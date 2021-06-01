@@ -25,12 +25,12 @@ function randomPositionLeft(){
 }
 
 function randomFontsize(){
-    let fontsize = Math.floor(Math.random() * 100)
+    let fontsize = Math.floor(Math.random() * 50 + 50)
     return fontsize;
 }
 
 function randomSpin(){
-    let spin = Math.floor(Math.random() * 8000)
+    let spin = Math.floor(Math.random() * 8000 + 1000)
     return spin;
 }
 

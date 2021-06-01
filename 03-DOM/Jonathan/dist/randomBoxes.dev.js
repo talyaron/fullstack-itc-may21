@@ -1,6 +1,8 @@
 "use strict";
 
-//Recreate everything every 5 seconds
+//First call and then setInterval 5 seconds
+randomBoxes(); //Recreate everything every 5 seconds
+
 setInterval(function () {
   randomBoxes();
   ;
@@ -8,7 +10,8 @@ setInterval(function () {
 
 function randomBoxes() {
   try {
-    var boxes = randomNumber(); //body
+    var boxes = randomNumber();
+    if (boxes === 11) throw new Error('This program only allows from 1 to 10'); //body
 
     var colorBody = randomColor();
     document.body.style.background = "".concat(colorBody); //h1
@@ -31,7 +34,7 @@ function randomBoxes() {
       var top = randomPositionTop();
       var left = randomPositionLeft();
       var spin = randomSpin();
-      container.innerHTML += "<div class=\"container__item\" style=\"background-color:".concat(color, "; width:").concat(size, "px; height:").concat(size, "px;\n                                        position:relative; top:").concat(top, "px; left:").concat(left, "px; \n                                        margin:0 auto; border:5px solid ").concat(borderColor, "; animation: spin ").concat(spin, "ms \n                                        infinite linear\">\n                                        <p>Box ").concat(i + 1, "</p></div>");
+      container.innerHTML += "<div class=\"container__item\" style=\"background-color:".concat(color, "; width:").concat(size, "px; height:").concat(size, "px;position:relative; top:").concat(top, "px; left:").concat(left, "px; border:5px solid ").concat(borderColor, "; animation: spin ").concat(spin, "ms infinite linear\"><p>Box ").concat(i + 1, "</p></div>");
     }
   } catch (e) {
     console.log(e);
