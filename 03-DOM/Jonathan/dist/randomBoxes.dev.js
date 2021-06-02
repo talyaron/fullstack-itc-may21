@@ -4,8 +4,7 @@
 randomBoxes(); //Recreate everything every 5 seconds
 
 setInterval(function () {
-  randomBoxes();
-  ;
+  location.reload();
 }, 5000); //randomBoxes();
 
 function randomBoxes() {
@@ -17,15 +16,20 @@ function randomBoxes() {
     document.body.style.background = "".concat(colorBody); //h1
 
     var colorh1 = randomHColor();
-    var h1 = document.querySelector('.myh1id');
+    var h1 = document.createElement('H1');
     h1.innerHTML = "Number of boxes: ".concat(boxes);
+    document.body.appendChild(h1);
     var fontsize = randomFontsize();
     h1.style.color = "".concat(colorh1);
     h1.style.fontSize = "".concat(fontsize, "px"); //container
+    //let container = document.querySelector('.container');
 
-    var container = document.querySelector('.container'); //clean container
-
-    container.innerHTML = " "; //create divs and changes their style
+    var container = document.createElement("div");
+    container.className = "container";
+    document.body.appendChild(container);
+    if (!container) throw new Error('The container does not exist'); //clean container
+    //container.innerHTML = " ";
+    //create divs and changes their style
 
     for (var i = 0; i < boxes; i++) {
       var color = randomColor();
@@ -36,6 +40,8 @@ function randomBoxes() {
       var spin = randomSpin();
       container.innerHTML += "<div class=\"container__item\" style=\"background-color:".concat(color, "; width:").concat(size, "px; height:").concat(size, "px;position:relative; top:").concat(top, "px; left:").concat(left, "px; border:5px solid ").concat(borderColor, "; animation: spin ").concat(spin, "ms infinite linear\"><p>Box ").concat(i + 1, "</p></div>");
     }
+
+    if (!document.querySelector('.container__item')) throw new Error('The boxes does not exist');
   } catch (e) {
     console.log(e);
   }

@@ -1,73 +1,50 @@
-// const boxes = () => {
-//     let container = document.getElementById(container);
+function randomsNumber() {
+  return Math.floor(Math.random() * 10 + 1);
+}
 
-//     for (let i = 0; i < 10; i++) {
-//         let box = document.createElement("div");
-//         container.appendChild(box);
-//         let colors = random_bg_color();
-//         box.style.backgroundColor = colors;
-//         let width = randomWidth();
-//         box.style.wSize=width;
-//         let height = randomHeigh();
-//         box.style.hSize=height;
+function randomsColor() {
+  return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(
+    Math.random() * 255
+  )},${Math.floor(Math.random() * 255)})`;
+}
+function randomsSize() {
+  return Math.floor(Math.random() * 160 + 40);
+}
 
-//     }
-// }
+function randomsPosition() {
+  let randomPosition = Math.floor(Math.random() *50+ 80);
+  return randomPosition;
+}
 
+function boxGenerator() {
+  try {
+    let numbers = randomsNumber();
+    let container = document.getElementById("container");
+    if (numbers === 11) throw new Error("");
 
+    container.innerHTML = "";
 
-// function random_bg_color(){
-//     let x = Math.floor(Math.random() * 256);
-//     let y = Math.floor(Math.random() * 256);
-//     let z = Math.floor(Math.random() * 256);
-//     let bgColor = "rgb(" + x + "," + y + "," + z + ")";
-//     return bgColor;
-// }
+    let accountant = document.querySelector(".accountant");
+    accountant.innerHTML = ` Accountant: ${numbers}`;
+    for (let i = 0; i < numbers; i++) {
+      let elements = document.createElement("DIV");
+      container.appendChild(elements);
+      let colors = randomsColor();
+      let sizes = randomsSize();
+      let positions = randomsPosition();
 
-// function randomWidth(){
-//     let a = Math.floor(Math.random() * 200);
-//     let b = Math.floor(Math.random() * 200);
-//     let c = Math.floor(Math.random() * 200);
-//     let withSize = `width: ${a},${b},${c}`;
-//     let heightSize = `width: ${a},${b},${c}`;
-//     return withSize;
-   
-// }
-
-// function randomHeight(){
-//     let d = Math.floor(Math.random() * 200);
-//     let f = Math.floor(Math.random() * 200);
-//     let g = Math.floor(Math.random() * 200);
-//     let heightSize = `height: ${d},${f},${g}`;
-   
-//     return heightSize;
-// }
-
-// boxes();
-
-
-function setup(){
-
-    const container = document.getElementById("container");
-
-    for (let i = 0; i < 10; i++) {
-        let box = document.createElement("div");
-        container.appendChild(box);
-        let colors = random_bg_color();
-        box.style.backgroundColor = colors;
-      
-
+      elements.style.backgroundColor = colors;
+      elements.style.width = `${sizes}px`;
+      elements.style.height = `${sizes}px`;
+      elements.style.position = "relative";
+      elements.style.left = `${positions}px`;
+      elements.style.top = `${positions}px`;
     }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function random_bg_color(){
-    let x = Math.floor(Math.random() * 256);
-    let y = Math.floor(Math.random() * 256);
-    let z = Math.floor(Math.random() * 256);
-    let bgColor = "rgb(" + x + "," + y + "," + z + ")";
-    return bgColor;
-}
-
-
-
-setup()
+setInterval(function () {
+  boxGenerator();
+}, 5000);
