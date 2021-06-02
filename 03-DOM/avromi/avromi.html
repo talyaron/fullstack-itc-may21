@@ -58,7 +58,7 @@
         console.log(`x:` + x())
 
         // let myFriends=[];
-        // for (i=0;i<x();i++){
+        // for (i=0;i<x();i++){                      //YS: Please remove commented code. 
         //     myFriends++
         // }
         // console.log(myFriends)
@@ -82,7 +82,8 @@
         // console.log(array1)
         try{
             let div = ``;
-            const randomBoxes = document.querySelector(`#randomBoxes`)
+            const randomBoxes = document.querySelector(`#randomBoxes`)   //YS: Good error handling, you were missing the 'throw new Error part'. 
+            // YS: if (!randomBoxes) throw new Error('Random boxes not found')
             myLoop.forEach(anyThing => {
                 div += `<div style= "position:absolute; ${randomTop()};${randomLeft()}; ${randomHeight()}; ${randomWidth()};${randomColor()};"></div>`;
                 randomBoxes.innerHTML = div;
@@ -92,7 +93,8 @@
             // Note 
         }
 
-        try {
+        try {                                          /*YS: This part does not need a try catch, also, x shouldnt be a function, it can be a variable: 
+                                                        const x = Math.floor(Math.random() * 11)      */
             let x = () => {
                 return Math.floor(Math.random() * 11)
             }
@@ -102,7 +104,7 @@
         }
 
         try {
-  nonExistentFunction(); throw new Error (`jump in the lake`)
+  nonExistentFunction(); throw new Error (`jump in the lake`)  //YS: This part doesnt need try catch. What is the purpose of this? 
 
 } catch (error) {
   console.error(error);

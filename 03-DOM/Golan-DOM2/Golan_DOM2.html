@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Document</title> <!-- YS: Try to always add a title to your work -->
 </head>
 <style>
   #container>div {
@@ -13,14 +12,15 @@
     height: 100px;
   }
 </style>
-
+<!-- YS: Try to always keep your CSS, JS or HTML files separated -->
 <body>
   <div id="container">
   </div>
 
   <script>
     function setup() {
-
+      // YS: Use const instead of let.  
+      // YS: You could use try/catch here. 
       let container = document.getElementById("container");
 
       for (let i = 0; i < 10; i++) {
@@ -42,6 +42,8 @@
 
     setup()
     //couldn't figure out how to make function randNum affect function randomColor
+
+    //YS: I am not sure what you mean by this, but you can use the result of randNum() inside randomColor() or in your loop. Let me know
     function randNum(min, max) {
       min = Math.ceil(min);
       max = Math.floor(max);
