@@ -12,8 +12,11 @@ box.addEventListener('mouseover', ev => {
     target.style.bottom = randomNumber() + "px";
     target.style.left = randomNumber() + "px";
     target.style.right = randomNumber() + "px";
+    box.style.background = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
+    document.body.style.background = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
+
 })
 
 function randomNumber() {
-    return Math.floor(Math.random() * 400) + 1;
+    return Math.floor(Math.random() * 500) + 1;
 }
