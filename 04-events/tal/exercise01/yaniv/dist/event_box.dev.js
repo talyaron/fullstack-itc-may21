@@ -4,7 +4,6 @@
 // every time an event on the object (of your chosing happen), move it to a new random place on the screen.
 // https://www.w3schools.com/jsref/dom_obj_event.asp
 var box = document.querySelector('.box');
-console.log(box);
 box.addEventListener('mouseenter', function (event) {
   var myBox = event.target;
 
