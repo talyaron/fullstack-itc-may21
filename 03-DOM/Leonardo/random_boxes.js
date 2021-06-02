@@ -23,7 +23,10 @@ buttonStop.addEventListener('click', function () {
 function createBoxes() {
     try {
         let num = randomNumber();
-        let container = document.getElementById("container");
+        let container = document.getElementById("container");   /*YS: The error might come from here, 
+                                                                if container is not found (might happen because
+                                                                the JS loads faster than the HTML, due to a humman error (for example container is written incorrectly) 
+                                                                or other reasons which you will learn*/     
 
         /* If I leave the following line uncommented it will remove the old boxes and replace them. If it´s commented it will continue adding boxes:
         
@@ -31,12 +34,13 @@ function createBoxes() {
 
         for (let i = 0; i < num; i++) {
             let element = document.createElement("div");
-            container.appendChild(element);
+            container.appendChild(element); //YS: You can throw an error after this since we know that container.appendChild() might cause an error if container does not exist. if (!container) throw new Error()
 
-            element.style.backgroundColor = randomColor();
+            element.style.backgroundColor = randomColor();                          /*YS: Very nice job in separating your helper functions. It is better practice to import the functions   
+                                                                                    than to link both JS files in the HTML. Please look up importing functions in ES6 */
             element.style.width = randomSize();
             element.style.height = randomSize();
-            element.style.position = randomPosition();
+            element.style.position = randomPosition();                                 
             element.style.border = randomBorder();
             element.style.borderRadius = randomRadius();
         }
@@ -47,3 +51,6 @@ function createBoxes() {
 }
 
 //It was difficult to add try and catch because I didn´t know what error the application could have, because the user almost not interact with the page
+
+
+//YS: You were in the right direction with the try / catch. You just had to throw some errors.  Good job. 

@@ -11,13 +11,14 @@ createbox();
 
 setInterval(function () { location.reload();}, 5000)
 
-
+//YS: Try to use const more than let.
 function createbox(){
+    //YS: You can use try/catch here
     let number = randomNumber();
 
     let h1 = document.createElement("H1");
     
-    h1.innerText= `The number is: ${number}`;
+    h1.innerText= `The boxes are: ${number}`;
     document.body.appendChild(h1);
 
     
@@ -30,7 +31,7 @@ function createbox(){
     container.className = 'container'
     document.body.appendChild(container);
 
-
+    try{
     for (let i=0;i<number; i++){
     let element = document.createElement("div");
     
@@ -44,6 +45,9 @@ function createbox(){
     element.style.position = "relative";
     element.style.left = `${position}px`;
     element.style.top = `${position}px`;
+    }
+    }catch(err){
+        console.log(err.stack);
     }
 }    
 
