@@ -16,28 +16,43 @@
     </style>
    
     <div class="box"></div>
+
+
     <script>
-      
+      const box = document.querySelector('.box');
  
         function randomPosition(){
-     let position=Math.floor(Math.random() * 10 + Math.random()*100);
+     let position=Math.floor(Math.random() * 10 + Math.random()*500);
      return position;
+
         }
+        
      function BoxAppear(){
 
-        let box = document.querySelector('.box');
-        box.innerHTML = " ";
+        
         let top = randomPosition();
-         let left = randomPosition();
+         let left = randomPosition(); 
        box.style.position="relative";
        box.style.left=`${left}px`;
        box.style.top=`${top}px`;
 
 
      }
+
+
+
+box.addEventListener('click', ev => {
+    const target = ev.target;
+
+    target.style.top = randomPosition() + "px";
+    target.style.bottom = randomPosition() + "px";
+    target.style.left = randomPosition() + "px";
+    target.style.right = randomPosition() + "px";
+    
+
+})
+
 BoxAppear();
-
-
  
     </script>
 </body>
