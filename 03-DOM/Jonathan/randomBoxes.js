@@ -1,5 +1,15 @@
-//First call and then setInterval 5 seconds
+//import function from helpers.js
 
+/* import { randomNumber } from 'helpers.js';
+import { randomHColor } from 'helpers.js';
+import { randomFontsize } from 'helpers.js';
+import { randomBorderColor } from 'helpers.js';
+import { randomSize } from 'helpers.js';
+import { randomPositionTop } from 'helpers.js';
+import { randomPositionLeft } from 'helpers.js';
+import { randomSpin } from 'helpers.js'; */
+ 
+//First call and then setInterval 5 seconds
 randomBoxes();
 
 //Recreate everything every 5 seconds
@@ -44,7 +54,8 @@ function randomBoxes() {
         for (let i = 0; i < boxes; i++) {
 
             let color = randomColor();
-            let borderColor = randomBorderColor();
+            let borderColor = randomBorderColor();   /*YS: Very nice job in separating your helper functions. It is better practice to import functions   
+                                                    than to link both JS files in the HTML. Please look up importing functions in ES6 */
             let size = randomSize();
             let top = randomPositionTop();
             let left = randomPositionLeft();
@@ -63,3 +74,4 @@ function randomBoxes() {
     
 }
 
+//YS: Excellent error handling! Good job! 

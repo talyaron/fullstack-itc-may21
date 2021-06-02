@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random box generator</title>
+    <title>Random box generator</title> <!-- YS: Good! -->
     <style>
         body {
             background-color: cadetblue;
         }
     </style>
 </head>
-
+<!-- YS: Please separate your JS, CSS & HTML  -->
 <body>
     <div class="box"></div>
 
@@ -38,14 +38,17 @@
         
     // Main function
         const main = () => {
-            const box = document.querySelector('.box')
+            const box = document.querySelector('.box')     /*YS: Use try/catch here. The error might come from here, 
+                                                            if box is not found (might happen because
+                                                            the JS loads faster than the HTML, due to a humman error (
+                                                            for example box is written incorrectly) or other reasons*/
             const divNumber = Math.ceil(Math.random() * 10 + 1)
-            let docText = '<div></div>'
+            let docText = '<div></div>'  
             for (let div = 1; div <= divNumber; div++) {
                 docText += `<div style='${generateColor()}; ${generateSize()}; ${generatePosition()};></div>`
-                box.innerHTML = docText
+                box.innerHTML = docText   //YS: You might get an error here bacause box.innerHtml might not exist if there was an error on line 41.  So you can throw an error here: if(!box) throw new Error('Element not found')
                 }
-            }
+            } 
  
     main()
     setInterval(() => {main()}, 5000);   

@@ -19,13 +19,16 @@ function randomsPosition() {
 function boxGenerator() {
   try {
     let numbers = randomsNumber();
-    let container = document.getElementById("container");
+    let container = document.getElementById("container");   /*YS: The error might come from here, 
+                                                              if #container is not found (might happen because
+                                                              the JS loads faster than the HTML, due to a humman error (
+                                                              for example container is written incorrectly) or other reasons*/
     if (numbers === 11) throw new Error("");
 
-    container.innerHTML = "";
+    container.innerHTML = "";   //YS: Try to throw an error after since we know that container might not exist so container.innerHTML might cause an error. if (!container) throw new Error
 
-    let accountant = document.querySelector(".accountant");
-    accountant.innerHTML = ` Accountant: ${numbers}`;
+    let accountant = document.querySelector(".accountant"); //YS: Same here, accountant might not be found. Throw an error after this line if(!accountant) throw new Error('Accounatnt not found)
+    accountant.innerHTML = ` Accountant: ${numbers}`; //YS: You can throw an error after this since we know that accountant might not exist so accountant.innerHTML might cause an error
     for (let i = 0; i < numbers; i++) {
       let elements = document.createElement("DIV");
       container.appendChild(elements);
@@ -41,7 +44,7 @@ function boxGenerator() {
       elements.style.top = `${positions}px`;
     }
   } catch (error) {
-    console.log(error);
+    console.log(error);  //YS: Try to be more explicit with the error. In this case the error would be something like 'Element not found'
   }
 }
 

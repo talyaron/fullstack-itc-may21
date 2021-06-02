@@ -11,8 +11,9 @@ createbox();
 
 setInterval(function () { location.reload();}, 5000)
 
-
+//YS: Try to use const more than let.
 function createbox(){
+    //YS: You can use try/catch here
     let number = randomNumber();
 
     let h1 = document.createElement("H1");
