@@ -8,8 +8,11 @@ div {
     align-items: center;
     justify-content: center;
     text-align: center;
+    transition: all 0.5s;
 }
 
 p {
-    background-color: white;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
 }

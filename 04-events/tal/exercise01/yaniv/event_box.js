@@ -4,7 +4,7 @@
 
 
 const box = document.querySelector('.box');
-console.log(box);
+
 box.addEventListener('mouseenter', event => {
     const myBox = event.target;
     try {
