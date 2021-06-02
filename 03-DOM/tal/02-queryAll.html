@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    p {
+        font-size: 2rem;
+    }
+
+    .italic {
+        font-style: italic;
+    }
+</style>
+
+<body>
+    <div id="root"></div>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi, quia quam. A, voluptate pariatur distinctio
+        omnis dolore repudiandae error cum velit deleniti nam labore alias impedit praesentium consequatur, provident
+        voluptates?</p>
+    <p class="bold italic">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi, quia quam. A, voluptate
+        pariatur distinctio
+        omnis dolore repudiandae error cum velit deleniti nam labore alias impedit praesentium consequatur, provident
+        voluptates?</p>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi, quia quam. A, voluptate pariatur distinctio
+        omnis dolore repudiandae error cum velit deleniti nam labore alias impedit praesentium consequatur, provident
+        voluptates?</p>
+    <p class="bold italic">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi, quia quam. A, voluptate
+        pariatur distinctio
+        omnis dolore repudiandae error cum velit deleniti nam labore alias impedit praesentium consequatur, provident
+        voluptates?</p>
+    <p class="bold">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi, quia quam. A, voluptate
+        pariatur distinctio
+        omnis dolore repudiandae error cum velit deleniti nam labore alias impedit praesentium consequatur, provident
+        voluptates?</p>
+</body>
+<script>
+    //catch one
+    const root = document.querySelector('#root');
+    console.dir(root)
+
+    //catch many
+    const ps = document.querySelectorAll('p');
+    console.dir(ps);
+
+    // ps.style.color = 'red';
+    ps.forEach(p => {
+        p.style.color = 'red'
+    })
+
+    const boldElements = document.querySelectorAll('.bold');
+
+    boldElements[0].style.background = 'gold'
+
+    boldElements.forEach(bold => {
+        bold.style.fontWeight = 'bold';
+        bold.style.fontSize = '1.2rem';
+
+    })
+
+
+    altranteClass(boldElements, "italic");
+
+    function altranteClass(elements, cls) {
+
+        try {
+            //assertion
+            if (typeof cls !== 'string') throw new Error('cls is not a string');
+            if (typeof elements !== 'object') throw new Error('elements should be an object');
+            ;
+            let isBold = true;
+
+            setInterval(() => {
+
+                if (isBold) {
+                    // remove class
+                    elements.forEach(el => {
+                        el.classList.remove(cls);
+                    })
+                    //callback
+
+                } else {
+                    //add class bold
+                    elements.forEach(el => {
+                        el.classList.add(cls);
+                    })
+                }
+                //isBold = true
+                isBold = !isBold;
+
+
+            }, 1000)
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+
+</script>
+
+</html>

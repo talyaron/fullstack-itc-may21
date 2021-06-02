@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- <div id="container"></div> -->
+    <div id="boxes"></div>
+
+    <script>
+      function createBoxes() {
+        let boxes = document.getElementById("boxes");
+        let html = "";
+        function createBoxHTML() {
+          function randomColor() {
+            return `background-color:rgb(${Math.floor(
+              Math.random() * 255
+            )},${Math.floor(Math.random() * 255)},${Math.floor(
+              Math.random() * 255
+            )})`;
+          }
+          let color = randomColor();
+          function randomSize() {
+            return `height:${
+              Math.floor(Math.random() * (200 - 40 + 1)) + 40
+            }px; width:${Math.floor(Math.random() * (200 - 40 + 1)) + 40}px`;
+          }
+          let size = randomSize();
+          function randomPosition() {
+            return `position: absolute;
+          left: ${Math.floor(Math.random() * 101)}vw;
+          top: ${Math.floor(Math.random() * 101)}vh`;
+          }
+          let position = randomPosition();
+          let boxHTML = `<div style="${color}; ${size}; ${position}"></div>`;
+          return boxHTML;
+        }
+        function randomBoxNumber() {
+          return Math.floor(Math.random() * 101);
+        }
+        for (let i = 0; i <= randomBoxNumber(); i++) {
+          html += createBoxHTML();
+        }
+        boxes.innerHTML = html;
+      }
+
+      createBoxes();
+      setInterval(function () {
+        createBoxes();
+      }, 5000);
+    </script>
+  </body>
+</html>

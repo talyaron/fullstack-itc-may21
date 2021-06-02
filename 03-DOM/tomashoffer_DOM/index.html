@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Boxes</title>
+    <title>Random Boxes</title> <!-- YS: Good -->
 </head>
 <body> 
 
@@ -13,11 +13,12 @@
    </div>
 </body>
 
+<!-- YS: Please keep your JS, CSS and HTML in separate files -->
 <script>
 
 
 function randomColor() {
-  const r = Math.floor(Math.random() * 256);
+  const r = Math.floor(Math.random() * 256);   //YS: Good job using const. 
   const g = Math.floor(Math.random() * 256);
   const b = Math.floor(Math.random() * 256);
   return "rgb(" + r + "," + g + "," + b + ")";
@@ -35,18 +36,22 @@ function randomPos() {
 }
 function randomBoxes(){
 
-let container = document.querySelector("#container");
+let container = document.querySelector("#container");     /*YS: The error might come from here, 
+                                                            if #container is not found (might happen because
+                                                            the JS loads faster than the HTML, due to a humman error (
+                                                            for example container is written incorrectly) or other reasons*/
+
 let randomNum = Math.floor((Math.random()*10)+1);
  
 try{
 for (let i = 0; i < randomNum; i++) {
     let box = document.createElement("div");
-    container.appendChild(box);
+    container.appendChild(box);   //YS: You can throw an error if no container if(!container) {throw new Error('Container not found')}. Since we know that container might not exist, an error couuld occur when doing container.appendChild(). 
     let colors = randomColor();
     let hgt = randomHeight();
     let wth = randomWidth();
     let position = randomPos();
-    box.style.backgroundColor = colors;
+    box.style.backgroundColor = colors; //YS: You can throw an error if no box if(!box) {throw new Error('box not found')}. Since we know that box might not exist, an error couuld occur when doing box.appendChild(). 
     box.style.height = `${hgt}px`;
     box.style.width = `${wth}px`;
     box.style.position = "relative";
@@ -55,7 +60,9 @@ for (let i = 0; i < randomNum; i++) {
 
         }
     } catch(err){
-        console.log("Error has ocurred " + err.stack);
+        console.log("Error has ocurred " + err.stack);  /*YS: When catching an error, the developer usually knows
+                                                         what the error might be, so a more explicit message is needed
+                                                         for example: "Error, element not found" */
     }    
 }
 
