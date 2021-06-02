@@ -6,7 +6,7 @@ function pacmanGame() {
   try {
     var pacman = document.querySelector("#pacman");
 
-    if (pacman === undefined) {
+    if (pacman === null) {
       throw new Error('No Pacman!');
     }
 
@@ -14,13 +14,11 @@ function pacmanGame() {
     pacman.style.top = "".concat(window.innerHeight / 2 - 40, "px");
     pacman.addEventListener('mouseenter', function (ev) {
       pacPac = ev.target;
-      pacPac.src = 'https://cran.r-project.org/web/packages/ggpacman/readme/man/figures/README-blinky-plot-animated-1.gif';
-      pacPac.style.height = '160px';
+      pacPac.src = 'https://art.pixilart.com/37f719b8a62f06d.gif';
     });
     pacman.addEventListener('mouseleave', function (ev) {
       pacPac = ev.target;
       pacPac.src = 'https://i.gifer.com/l3K.gif';
-      pacPac.style.height = '80px';
     });
     document.addEventListener('keydown', function (ev) {
       try {
