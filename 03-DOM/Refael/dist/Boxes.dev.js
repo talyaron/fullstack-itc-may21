@@ -9,7 +9,6 @@ var Boxes = function Boxes() {
   var random = Math.floor(Math.random() * (10 - 1)) + 1;
 
   for (var i = 0; i < random; i++) {
-    var randomColor = "rgb(".concat(Math.floor(Math.random() * 256), ", ").concat(Math.floor(Math.random() * 256), ",").concat(Math.floor(Math.random() * 256), ")");
     filling.fillStyle = randomColor;
     filling.fillRect(Math.random() * window.innerWidth, Math.random() * window.innerHeight, Math.random() * 100 + 20, Math.random() * 100 + 20);
   }
