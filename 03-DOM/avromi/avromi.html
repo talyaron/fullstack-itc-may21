@@ -38,9 +38,16 @@
 
         console.log(randomWidth())
 
+
         function randomLeft() {
             return `left:${(Math.random() * 1100) + 40}px`;
         }
+
+        function myFunction() {
+            myVar = setInterval(randomLeft, 300);
+        } //not sure why this wont work 2.6.2021
+
+
 
         console.log(randomLeft())
 
@@ -62,25 +69,25 @@
         //     myFriends++
         // }
         // console.log(myFriends)
-            
+
         let myLoop = [];
         for (i = 0; i <= x(); i++) {
             try {
-      
-            myLoop.push(i);
-                      
-        } catch (error) {
-                
+
+                myLoop.push(i);
+
+            } catch (error) {
+
             }
         }
 
-   
+
 
         console.log(myLoop)
 
         // const array1 = [myLoop];
         // console.log(array1)
-        try{
+        try {
             let div = ``;
             const randomBoxes = document.querySelector(`#randomBoxes`)   //YS: Good error handling, you were missing the 'throw new Error part'. 
             // YS: if (!randomBoxes) throw new Error('Random boxes not found')
@@ -104,12 +111,16 @@
         }
 
         try {
+<<<<<<< HEAD
+            nonExistentFunction(); throw new Error(`jump in the lake`)
+=======
   nonExistentFunction(); throw new Error (`jump in the lake`)  //YS: This part doesnt need try catch. What is the purpose of this? 
+>>>>>>> d349a04ccc6f7218698a72a34e8ed95fd3b75220
 
-} catch (error) {
-  console.error(error);
- 
-}
+        } catch (error) {
+            console.error(error);
+
+        }
 
 
 // let html =``;
