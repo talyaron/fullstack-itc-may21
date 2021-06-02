@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: coral;
+            display: flex;
+
+        }
+    </style>
+   
+    <div class="box"></div>
+
+
+    <script>
+      const box = document.querySelector('.box');
+ 
+        function randomPosition(){
+     let position=Math.floor(Math.random() * 10 + Math.random()*500);
+     return position;
+
+        }
+        
+     function BoxAppear(){
+
+        
+        let top = randomPosition();
+         let left = randomPosition(); 
+       box.style.position="relative";
+       box.style.left=`${left}vh`;
+       box.style.top=`${top}wh`;
+
+
+     }
+
+
+
+box.addEventListener('click', ev => {
+    const target = ev.target;
+
+    target.style.top = randomPosition() + "px";
+    target.style.bottom = randomPosition() + "px";
+    target.style.left = randomPosition() + "px";
+    target.style.right = randomPosition() + "px";
+    
+
+})
+
+BoxAppear();
+ 
+    </script>
+</body>
+</html>
