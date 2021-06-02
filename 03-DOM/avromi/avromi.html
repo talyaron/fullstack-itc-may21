@@ -38,9 +38,16 @@
 
         console.log(randomWidth())
 
+
         function randomLeft() {
             return `left:${(Math.random() * 1100) + 40}px`;
         }
+
+        function myFunction() {
+            myVar = setInterval(randomLeft, 300);
+        } //not sure why this wont work 2.6.2021
+
+
 
         console.log(randomLeft())
 
@@ -62,25 +69,25 @@
         //     myFriends++
         // }
         // console.log(myFriends)
-            
+
         let myLoop = [];
         for (i = 0; i <= x(); i++) {
             try {
-      
-            myLoop.push(i);
-                      
-        } catch (error) {
-                
+
+                myLoop.push(i);
+
+            } catch (error) {
+
             }
         }
 
-   
+
 
         console.log(myLoop)
 
         // const array1 = [myLoop];
         // console.log(array1)
-        try{
+        try {
             let div = ``;
             const randomBoxes = document.querySelector(`#randomBoxes`)
             myLoop.forEach(anyThing => {
@@ -102,12 +109,12 @@
         }
 
         try {
-  nonExistentFunction(); throw new Error (`jump in the lake`)
+            nonExistentFunction(); throw new Error(`jump in the lake`)
 
-} catch (error) {
-  console.error(error);
- 
-}
+        } catch (error) {
+            console.error(error);
+
+        }
 
 
 // let html =``;
