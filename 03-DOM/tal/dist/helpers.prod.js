@@ -1,0 +1,1 @@
+"use strict";function randomColor(){return"color:rgb(".concat(Math.floor(255*Math.random()),", ").concat(Math.floor(255*Math.random()),",").concat(Math.floor(255*Math.random()),")")}

@@ -9,8 +9,8 @@
 .main {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 600px 300px 300px;
-      grid-template-columns: 600px 300px 300px;
+  -ms-grid-columns: 50% 20% 20%;
+      grid-template-columns: 50% 20% 20%;
   -ms-grid-rows: 170px 170px;
       grid-template-rows: 170px 170px;
   grid-row-gap: 7px;
@@ -648,6 +648,7 @@ h1 {
   }
 }
 
+/* YS: At this screen resolution, all of your elements should be more centered: justify-content, justify-items, text-align etc */
 @media only screen and (max-width: 400px) {
   header {
     display: -webkit-box;
@@ -675,6 +676,7 @@ h1 {
     width: 400px;
     margin: 0 0 0 5px;
         grid-template-areas: "main" "ball" "anfitriones" "teams" "groups";
+    /* YS: Mind the gaps between code blocks */
   }
   .main__bigimage__textblock {
     position: relative;
@@ -740,6 +742,7 @@ h1 {
     padding-left: 4px;
     line-height: 20px;
   }
+  /* YS: Why not center? */
   .stadium {
     -ms-grid-columns: 400px;
         grid-template-columns: 400px;
@@ -753,6 +756,7 @@ h1 {
     font-weight: 700;
     line-height: 24px;
     text-align: left;
+    /* YS: Why not center? */
   }
   .stadium p {
     color: #212121;

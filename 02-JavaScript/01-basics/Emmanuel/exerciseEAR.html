@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //function
+
+      const name = "Emmanuel";
+
+      function buildSentence(arg1 = 0, arg2 = 0) {
+        //YS: Why did you give them a default value? arg1 = 0, arg2 = 0?
+        // console.log(arg1);    //YS: Please dont leave commented console.logs
+        return arg1 + "" + arg2;
+      }
+
+      let x = buildSentence("Hello ", name);
+      console.log(x);
+
+      //anonymous function
+
+      let buildSentence2 = function (arg1, arg2) {
+        //YS: Use const instead of let for functions.
+        // console.log(arg1); Why is this logged only after line31 is in place?
+        return arg1 + arg2;
+      };
+
+      x = buildSentence2("Hello ", name);
+      console.log(x);
+
+      //arrow function
+
+      let buildSentence3 = (arg1, arg2) => {
+        //YS: Const instead of let.
+        return arg1 + arg2;
+      };
+
+      x = buildSentence2("Hello ", name);
+      console.log(x);
+
+      // n! function
+
+      function factorial(n) {
+        let answer = 1;
+        if (n == 0 || n == 1) {
+          return answer;
+        } else {
+          for (let i = n; i >= 1; i--) {
+            answer = answer * i;
+          }
+          return answer;
+        }
+      }
+      let n = 4;
+      answer = factorial(n); //YS: This variable 'answer' is not the same as the variable 'answer' inside of your factiorial function. This variable should be called something else to not confuse you, and use a const/let to declare it. See example
+      // const myAnswer = factorial(n)
+      console.log("The factorial of " + n + " is " + answer); //myAnswer;
+    </script>
+  </body>
+</html>
