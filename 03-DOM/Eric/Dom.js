@@ -31,7 +31,7 @@ function createbox(){
     container.className = 'container'
     document.body.appendChild(container);
 
-
+    try{
     for (let i=0;i<number; i++){
     let element = document.createElement("div");
     
@@ -45,6 +45,9 @@ function createbox(){
     element.style.position = "relative";
     element.style.left = `${position}px`;
     element.style.top = `${position}px`;
+    }
+    }catch(err){
+        console.log(err.stack);
     }
 }    
 

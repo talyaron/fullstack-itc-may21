@@ -11,10 +11,10 @@ function randomsSize() {
   return Math.floor(Math.random() * 160 + 40);
 }
 
-// function randomsPosition() {
-//     let randomPosition = Math.floor(Math.random() *400+ 80);        //YS: Why did you leave this commented?
-//     return randomPosition;
-// }
+function randomsPosition() {
+  let randomPosition = Math.floor(Math.random() *50+ 80);
+  return randomPosition;
+}
 
 function boxGenerator() {
   try {
@@ -34,13 +34,14 @@ function boxGenerator() {
       container.appendChild(elements);
       let colors = randomsColor();
       let sizes = randomsSize();
-    //   let positions = randomsPositions();
+      let positions = randomsPosition();
+
       elements.style.backgroundColor = colors;
       elements.style.width = `${sizes}px`;
       elements.style.height = `${sizes}px`;
-    //   elements.style.positions = "relative";
-    //   element.style.left = `${positions}px`;
-    //   element.style.top = `${positions}px`;
+      elements.style.position = "relative";
+      elements.style.left = `${positions}px`;
+      elements.style.top = `${positions}px`;
     }
   } catch (error) {
     console.log(error);  //YS: Try to be more explicit with the error. In this case the error would be something like 'Element not found'
