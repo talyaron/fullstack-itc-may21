@@ -23,18 +23,22 @@ function createbox() {
   container.className = 'container';
   document.body.appendChild(container);
 
-  for (var i = 0; i < number; i++) {
-    var element = document.createElement("div");
-    container.appendChild(element);
-    var color = randomColor();
-    var size = randomSize();
-    var position = randomPosition();
-    element.style.backgroundColor = color;
-    element.style.width = "".concat(size, "px");
-    element.style.height = "".concat(size, "px");
-    element.style.position = "relative";
-    element.style.left = "".concat(position, "px");
-    element.style.top = "".concat(position, "px");
+  try {
+    for (var i = 0; i < number; i++) {
+      var element = document.createElement("div");
+      container.appendChild(element);
+      var color = randomColor();
+      var size = randomSize();
+      var position = randomPosition();
+      element.style.backgroundColor = color;
+      element.style.width = "".concat(size, "px");
+      element.style.height = "".concat(size, "px");
+      element.style.position = "relative";
+      element.style.left = "".concat(position, "px");
+      element.style.top = "".concat(position, "px");
+    }
+  } catch (err) {
+    console.log(err.stack);
   }
 }
 

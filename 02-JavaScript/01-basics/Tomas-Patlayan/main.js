@@ -26,7 +26,7 @@ function Factorial3(number) {
 function nombre2(){
    
 
-    console.log('Hello '+ name);
+console.log('Hello '+ name);
 }
 
 
