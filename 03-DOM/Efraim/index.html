@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Document</title> <!-- YS: Please add a title to your work -->
 </head>
 <style>
 </style>
@@ -13,7 +12,7 @@
 <body>
     <div class="box"></div>
 </body>
-
+<!-- YS: Please keep your JS, CSS and HTML files separated-->
 <script>
     function randomColor() {
         return `background-color:rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`
@@ -41,12 +40,12 @@
                 }
                 try {
                     let boxes = document.querySelector(".box");
-                    if (!boxes) {throw new Error('no boxes found')}
+                    if (!boxes) {throw new Error('no boxes found')}  //YS: Great error handling!! 
                         boxes.innerHTML = html;
                     } catch (error) {
 
                         console.error(error);
-                        clearInterval(myInterval);
+                        clearInterval(myInterval); //Very nice! 
                         return 0;
                     }
                 }, 5000);

@@ -7,7 +7,11 @@ setInterval(function () {
 
 function boxesNum1() {
   try {
-    var body = document.querySelector("body"); // debugger;
+    var body = document.querySelector("body");
+    /*YS: Good error handling! There are a couple of reasons why the body might not be found (doesnt mean that it doesnt have a body). 
+    For example if the Javascripts loads before the HTML, it will not find the body. There are also human errors for example 'body' might
+    be spelled incorrectly. */
+    // debugger;
     // if (body === undefinded) { // not really possible - if not in HTML - the <body> tag is added automatically by the browser
     //     throw new Error(`What kind of a HTML document doe'st have a body?!`);
     // }
@@ -51,8 +55,9 @@ function boxesNum2() {
     var newBox;
 
     for (var i = 1; i <= howManyBoxes; i++) {
-      newBox = document.createElement("div");
-      newBox.setAttribute("id", "box".concat(i));
+      newBox = document.createElement("div"); //YS: What do you mean not possible to change CSS file? Here you are changing the HTML by adding an ID, it should be possible.
+      // newBox.setAttribute(`id`,`box${i}`); // not possible to change css file from what I saw. Hence - redundant.
+
       newBox.style.height = boxHeigt2();
       newBox.style.width = boxWidth2();
       newBox.style.backgroundColor = boxColor2();
@@ -62,7 +67,7 @@ function boxesNum2() {
       body.appendChild(newBox);
     }
   } catch (e) {
-    return e;
+    return e; //YS: Try to be more explicit on what the error will be. console.log('Element does not exist')
   }
 }
 

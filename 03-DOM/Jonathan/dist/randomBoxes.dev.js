@@ -1,5 +1,15 @@
 "use strict";
 
+//import function from helpers.js
+
+/* import { randomNumber } from 'helpers.js';
+import { randomHColor } from 'helpers.js';
+import { randomFontsize } from 'helpers.js';
+import { randomBorderColor } from 'helpers.js';
+import { randomSize } from 'helpers.js';
+import { randomPositionTop } from 'helpers.js';
+import { randomPositionLeft } from 'helpers.js';
+import { randomSpin } from 'helpers.js'; */
 //First call and then setInterval 5 seconds
 randomBoxes(); //Recreate everything every 5 seconds
 
