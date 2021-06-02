@@ -11,9 +11,6 @@ const Boxes = () => {  //YS: Good job using const but a function should not be c
 
   let random = Math.floor(Math.random() * (10 - 1)) + 1;
   for (let i = 0; i < random; i++) {
-    const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
-      Math.random() * 256
-    )},${Math.floor(Math.random() * 256)})`;
     filling.fillStyle = randomColor;
 
     filling.fillRect(
