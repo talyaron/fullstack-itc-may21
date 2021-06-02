@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+    
+    <!--create a box, and put it in a random place on the screen.
+every time an event on the object (of your chosing happen), move it to a new random place on the screen.
+
+https://www.w3schools.com/jsref/dom_obj_event.asp
+-->
+<style>
+    #box{
+        width: 400px;
+        height: 100px;
+        background:blue;
+    }
+</style>
+<body>
+    <div id="box"></div>
+    
+    <script>
+box = document.getElementById('box');
+
+
+function randomPosition() {
+    let randomPosition = Math.floor(Math.random() *100+ 80);
+    return randomPosition;
+}
+document.getElementById("box").addEventListener("mouseenter", mouseEnter);
+document.getElementById("box").addEventListener("mouseleave", mouseLeave);
+
+function mouseEnter() {
+  document.getElementById("box").style.color = "red";
+}
+
+function mouseLeave() {
+  document.getElementById("box").style.color = "black";
+}
+
+ function moveBox() {
+    let position = randomPosition();
+    box.style.position = "relative";
+    box.style.top = `${position}px`;
+    box.style.left = `${position}px`;
+
+}
+box.addEventListener("mouseenter", moveBox);
+window.addEventListener("load", moveBox);
+    </script>
+</body>
+</html>

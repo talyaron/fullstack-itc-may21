@@ -7,19 +7,19 @@
 //change boxes
 
 
-createbox();
+//createbox();
 
-setInterval(function () { location.reload();}, 5000)
+setInterval(function () { location.reload();}, 1000)
 
 //YS: Try to use const more than let.
 function createbox(){
     //YS: You can use try/catch here
-    let number = randomNumber();
+    //let number = randomNumber();
 
-    let h1 = document.createElement("H1");
+    //let h1 = document.createElement("H1");
     
-    h1.innerText= `The boxes are: ${number}`;
-    document.body.appendChild(h1);
+    //h1.innerText= `The boxes are: ${number}`;
+    //document.body.appendChild(h1);
 
     
     //let h1 = document.body.createElement("h1");
@@ -31,38 +31,38 @@ function createbox(){
     container.className = 'container'
     document.body.appendChild(container);
 
-    try{
-    for (let i=0;i<number; i++){
-    let element = document.createElement("div");
+   // try{
+    //for (let i=0;i<number; i++){
+    //let element = document.createElement("div");
     
-    container.appendChild(element);
+    //container.appendChild(element);
     let color = randomColor();
-    let size = randomSize();
+    //let size = randomSize();
     let position = randomPosition();
     element.style.backgroundColor = color;
-    element.style.width = `${size}px`;
-    element.style.height = `${size}px`;
+    //element.style.width = `${size}px`;
+    //element.style.height = `${size}px`;
     element.style.position = "relative";
     element.style.left = `${position}px`;
     element.style.top = `${position}px`;
     }
-    }catch(err){
-        console.log(err.stack);
-    }
-}    
+   // }catch(err){
+     //   console.log(err.stack);
+    //}
+//}    
 
 function randomColor(){
-    return `rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`
+  return `rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`
 }
 
-function randomNumber(){
-    return Math.floor((Math.random() * 10)+ 1);
-}
+//function randomNumber(){
+  //  return Math.floor((Math.random() * 10)+ 1);
+//}
 
-function randomSize(){
-    let size = Math.floor((Math.random() *200)+ 40);
-    return size;
-}
+//function randomSize(){
+  //  let size = Math.floor((Math.random() *200)+ 40);
+   // return size;
+//}
 function randomPosition() {
     let randomPosition = Math.floor(Math.random() *50+ 80);
     return randomPosition;
