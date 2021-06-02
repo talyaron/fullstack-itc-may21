@@ -1,0 +1,18 @@
+div {
+  position: fixed;
+  height: 100px;
+  width: 100px;
+  background-color: chocolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: 0.5s;
+}
+
+p {
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
