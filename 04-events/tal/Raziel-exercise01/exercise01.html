@@ -15,5 +15,31 @@
         }
     </style>
     <div class="box"></div>
+    <script>
+      
+      setInterval(function () {
+        boxAppear();;
+}, 5000);
+        function randomPosition(){
+     let position=Math.floor(Math.random() * 10 + Math.random()*100);
+     return position;
+
+     function boxAppear(){
+         try {
+
+            let box=document.querySelector('.box');
+            box.innerHTML=' ';
+            let top = randomPosition();
+            let left = randomPosition();
+            box.innerHTML += `<  position:relative; top:${top}px; left:${left}px">`;
+                                      
+             
+         } catch (e) {
+             console.log(e);
+             
+         }
+     }
+ }
+    </script>
 </body>
 </html>
