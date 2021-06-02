@@ -5,7 +5,7 @@
 
 const box = document.querySelector('.box');
 console.log(box);
-box.addEventListener('mouseenter',event=>{
+box.addEventListener('mouseenter', event => {
     const myBox = event.target;
     try {
         myBox.style.top = boxTop();
@@ -14,13 +14,13 @@ box.addEventListener('mouseenter',event=>{
         return e;
     }
 });
-    
-    function boxTop() {
-        const boxTop = `${Math.ceil(Math.random() * 90)}vh`;
-        return boxTop;
-    }
-    
-    function boxLeft() {
-        const boxLeft = `${Math.ceil(Math.random() * 90)}vw`;
-        return boxLeft;
-    }
+
+function boxTop() {
+    const boxTop = `${Math.ceil(Math.random() * 90)}vh`;
+    return boxTop;
+}
+
+function boxLeft() {
+    const boxLeft = `${Math.ceil(Math.random() * 90)}vw`;
+    return boxLeft;
+}
