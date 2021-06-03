@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      width: 150px;
+      height: 150px;
+      background-color: blue;
+      position: absolute;
+    }
+  </style>
+  <body>
+    <div id="box" class="box"></div>
+
+    <script>
+      const box = document.querySelector("#box");
+
+      function randomPlace() {
+        function leftPosition() {
+          return `${Math.floor(Math.random() * 101)}vw`;
+        }
+        function topPosition() {
+          return `${Math.floor(Math.random() * 101)}vh`;
+        }
+
+        box.style.top = leftPosition();
+        box.style.left = topPosition();
+      }
+
+      randomPlace();
+      box.addEventListener("mouseover", function () {
+        randomPlace();
+      });
+    </script>
+  </body>
+</html>

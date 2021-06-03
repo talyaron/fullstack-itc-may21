@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body{
+        background-color: black;
+    }
+
+    .box1 {
+        background-color: red;
+        margin: 0 auto;
+    }
+
+    h1 {
+        text-align: center;
+        color:wheat;
+        text-decoration: underline;
+    }
+</style>
+
+<body>
+    <h1>Catch the box to change the background color 😊</marquee>
+</body>
+
+<script src="helpers.js"></script>
+<script>
+
+    //create the box element
+    let box1 = document.createElement("div");
+    box1.className = "box1";
+    document.body.appendChild(box1);
+
+    //import the function from helpers.js
+    let topPosition = randomPositionTop();
+    let leftPosition = randomPositionLeft();
+    let size = randomSize();
+
+    //change styles of the box
+    box1.style.position = "relative";
+    box1.style.top = `${topPosition}px`;
+    box1.style.left = `${leftPosition}px`;
+    box1.style.width = `${size}px`
+    box1.style.height = `${size}px`
+    box1.style.transition = "all 1.5s"
+
+    //change the color and position if you catch the box
+    box1.addEventListener('mouseover', ev => {
+
+        const target = ev.target;
+
+        let topEvent = randomPositionTop();
+        let leftEvent = randomPositionLeft();
+        let size = randomSize();
+
+        target.style.top = `${topEvent}px`;
+        target.style.left = `${leftEvent}px`;
+        target.style.background = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`
+        target.style.width = `${size}px`
+        target.style.height = `${size}px`
+        box1.style.transition = "all 3s"
+    })
+
+    //mantain the color if you catch the box
+    box1.addEventListener('mouseout', ev => {
+        const target = ev.target;
+        target.style.background = "red";
+
+    })
+
+</script>
+
+</html>
