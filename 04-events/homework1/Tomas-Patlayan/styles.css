@@ -4,9 +4,12 @@
   left: 50%;
   width: 100px;
   height: 100px;
-  background-color: black;
-  background-image: url(/04-events/homework1/Tomas-Patlayan/AmericanPitBullTerrierMoniqueRodriguez-be4b597e914e46f084adbe5f0a2a9ccc.jpg);
   background-size: cover;
   background-position: center center;
+}
+
+.box img {
+  width: 100%;
+  height: 100%;
 }
 /*# sourceMappingURL=styles.css.map */
