@@ -5,10 +5,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="img">
-        
+    <div id="dog">
+        <img src="https://i.pinimg.com/originals/c8/50/02/c85002dfcfab65b3dc86304ab65017ec.gif" alt="" srcset="">
+
     </div>
+    <script>
+    const dog = document.getElementById("dog");
+    let mLeft = 0;
+    let mTop = 0;
+    let move = 10;
+
+    document.onkeydown = function(event) {
+    switch (event.keyCode) {
+       case 37:
+        dog.classList.remove('dogUp')
+        dog.classList.remove('dogRight');
+        dog.classList.remove('dogDown');
+        dog.classList.add('dogLeft');
+        mLeft -= move;
+        dog.style.marginLeft = `${mLeft}px`;
+          break;
+       case 38:
+        dog.classList.remove('dogLeft');
+        dog.classList.remove('dogRight');
+        dog.classList.remove('dogDown');
+        dog.classList.add('dogUp');
+        mTop -= move;
+        dog.style.marginTop = `${mTop}px`;
+          break;
+       case 39:
+        dog.classList.remove('dogLeft');
+        dog.classList.remove('dogDown');
+        dog.classList.remove('dogUp')
+        dog.classList.add('dogRight');
+        mLeft += move;
+        dog.style.marginLeft = `${mLeft}px`;
+          break;
+       case 40:
+        dog.classList.remove('dogLeft');
+        dog.classList.remove('dogUp')
+        dog.classList.remove('dogRight');
+        dog.classList.add('dogDown');
+        mTop += move;
+        dog.style.marginTop = `${mTop}px`;
+          break;
+    }
+};
+
+dog.addEventListener('mouseout', e => {
+    dogBack = e.target;
+    dogBack.src = "https://i.pinimg.com/originals/c8/50/02/c85002dfcfab65b3dc86304ab65017ec.gif";
+} )
+dog.addEventListener("mouseover", function(event){
+    dogChange = event.target;
+    dogChange.src = "https://i.pinimg.com/originals/bf/85/a6/bf85a6e1e9c59c3f0345d9263cd254f9.gif";
+} )
+
+    </script>
 </body>
 </html>
