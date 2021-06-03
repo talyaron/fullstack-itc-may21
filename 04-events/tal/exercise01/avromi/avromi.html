@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root" style = "position:relative; width:200px; height: 200px; background: ::-moz-list-bullet;"></div>
+    <script>
+        // create a box, and put it in a random place on the screen.
+        // every time an event on the object(of your chosing happen), 
+        // move it to a new random place on the screen.
+        //  https://www.w3schools.com/jsref/dom_obj_event.asp
+       
+        const rootDiv = document.querySelector('#root')
+        console.dir(rootDiv)
+
+
+        function randomColor() {
+            return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`
+        }
+
+        rootDiv.style.background = `${randomColor()}`; //this is strange to me 
+
+        rootDiv.addEventListener(`mouseover` ,event =>{
+          const target = event.target;
+          target.style.left = `${Math.random()*2000}px`;
+          target.style.top = `${Math.random()*2000}px`;
+        // rootDiv.style.top = `${Math.random()*200}px`
+        // console.dir(rootDiv.style.top)
+
+    })
+
+    function randomLeft() {
+        
+    }
+        
+
+    </script>
+</body>
+
+</html>
