@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Julie's Yoda Game</title>
+  </head>
+
+  <body>
+    <img
+      id="yoda"
+      src="https://static.wikia.nocookie.net/starwars/images/c/c3/Yoda_TPM_RotS.png/revision/latest?cb=20130810185858"
+      alt="Yoda"
+      style="position: absolute; left: 0; top: 0; width: 200px"
+    />
+  </body>
+  <script>
+    // Each function specifies the position of the element "yoda". It returns a string, hence the need for parseInt, which returns the integer version of the string (Brian Holt explained this in the calculator exercise, Frontendmasters Bootcamp). Style.tranform rotates the element. I played around with the numbers until I got the right ones for each direction.
+
+    function left() {
+      const element = document.getElementById("yoda");
+      element.style.left = parseInt(element.style.left) - 5 + "px";
+      element.style.transform = "rotate(270deg)";
+    }
+
+    function right() {
+      const element = document.getElementById("yoda");
+      element.style.left = parseInt(element.style.left) + 5 + "px";
+      element.style.transform = "rotate(90deg)";
+    }
+
+    function up() {
+      const element = document.getElementById("yoda");
+      element.style.top = parseInt(element.style.top) - 5 + "px";
+      element.style.transform = "rotate(360deg)";
+    }
+
+    function down() {
+      const element = document.getElementById("yoda");
+      element.style.top = parseInt(element.style.top) + 5 + "px";
+      element.style.transform = "rotate(180deg)";
+    }
+
+    // The switch operation switches the value in different cases (up, down, left, right). After each case, you have to break. (Brian HOlt also taught the switch operation in the calculator exercise/ Frontendmasters Bootcamp. This switch operation says, if the value is this, do that. Here, the switch operation takes in the event.keycode, which is: arrow up: 38, arrow down: 40, left is 39 and right is 37. Keycode info for future reference: https://keycode.info/
+
+    function moveYoda(evt) {
+      switch (evt.keyCode) {
+        case 37:
+          left();
+          break;
+        case 39:
+          right();
+          break;
+        case 38:
+          up();
+          break;
+        case 40:
+          down();
+          break;
+      }
+    }
+
+    function pressAndMove() {
+      window.addEventListener("keydown", moveYoda);
+    }
+
+    // Need a function to activate the moveYoda function when the arrow is pressed. The Event Listerer takes in an event of "keydown" and calls the function moveYoda. Finally, need to make it so that pressAndMove function is called when the page loads, so used window.onload, as in previous exercise.
+
+    window.onload = pressAndMove;
+  </script>
+</html>
