@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    
+    </style>
+    
+    <div id="boardGame"></div>
+    <script>
+        class GameFigure{
+
+            constructor(figureId,charWidth,charHieght,backColor){
+                this.figureId=figureId;
+               this.charWidth=charWidth;
+               this.charHieght=charHieght;
+               this.backColor=backColor;
+               this.boardGamed = document.querySelector('#boardGame');
+                                                                                      
+               this.createPeice();
+            }
+         createPeice(){
+            this.piece = document.createElement('div');
+          this.piece.setAttribute('width', this.charWidth);
+          this.piece.setAttribute('height', this.charHieght);
+          this.piece.setAttribute('background-color', this.backColor);
+          this.boardGamed.appendChild(this.piece);
+
+
+         }
+         attackSpeach(){
+             console.log("ATTTTACKKKKKKKKKK");
+         }
+            
+        }
+        let figureOne= new GameFigure("#warrior",'10px','15px','red');
+         console.log(figureOne);
+         figureOne.attackSpeach();
+
+    </script>
+    <style>
+    
+    </style>
+</body>
+</html>
