@@ -10,16 +10,18 @@
     <script>
         class GameFigure{
 
-            constructor(figureId){
+            constructor(figureId,powerlev,attackSpeed){
                 this.figureId=figureId;
-                this.figureId.name="Warrior";
-                this.figureId.style.color="red";
-                this.figureId.style.border="2px solid blue";
+               this.powerlev=powerlev;
+               this.attackSpeed=attackSpeed;
+            
 
             }
 
             
         }
+       let figureOne= new GameFigure("warrior","10","15");
+         console.log(figureOne);
     </script>
 </body>
 </html>
