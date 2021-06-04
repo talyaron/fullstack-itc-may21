@@ -7,38 +7,40 @@
     <title>Document</title>
 </head>
 <body>
- <div id="warrior" class="class"></div>
- <div id="archer" class="class"></div>
+    <div id="boardGame"></div>
     <script>
         class GameFigure{
 
-            constructor(figureId,powerlev,attackSpeed){
+            constructor(figureId,charWidth,charHieght,backColor){
                 this.figureId=figureId;
-               this.powerlev=powerlev;
-               this.attackSpeed=attackSpeed;
+               this.charWidth=charWidth;
+               this.charHieght=charHieght;
+               this.backColor=backColor;
+               this.boardGamed = document.querySelector('#boardGame');
                                                                                       
                this.createPeice();
             }
          createPeice(){
-          this.piece=document.querySelector(this.figureId); //the element in the dome
+            this.piece = document.createElement('div');
+          this.piece.setAttribute('width', this.charWidth);
+          this.piece.setAttribute('height', this.charHieght);
+          this.piece.setAttribute('background-color', this.backColor);
+          this.boardGamed.appendChild(this.piece);
+
+
          }
          attackSpeach(){
              console.log("ATTTTACKKKKKKKKKK");
          }
             
         }
-       let figureOne= new GameFigure("#warrior","10","15");
+        let figureOne= new GameFigure("#warrior","10px","15px","red");
          console.log(figureOne);
-         let figureTwo= new GameFigure("#archer","5","30");
-         console.log(figureTwo);
          figureOne.attackSpeach();
+
     </script>
     <style>
-        .class{
-            width: 10px;
-            height: 10px;
-            background-color: red;
-        }
+    
     </style>
 </body>
 </html>
