@@ -32,6 +32,7 @@ try {
     }
   });
   tiger.addEventListener('mouseover', function () {
+    tiger.setAttribute('src', 'https://scx2.b-cdn.net/gfx/news/2019/thesundarban.jpg');
     tiger.animate([{
       transform: 'rotateZ(360deg)'
     }], {
