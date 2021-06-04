@@ -1,31 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <div id="boardGame"></div>
 </body>
 <script>
     class Tiger {
-        height
-  constructor(height, width, position, top, left) {
-    this.height = height;
-    this.width = width;
-    this.position = position;
-    this.top = top;
-    this.left = left;
-  }
-  
-}
-let tiger = new Tiger('150px', '200px', 'relative', '40vh','40vw');
-console.log(tiger);
+        constructor(height, width, position, top, left, imageUrl) {
+            this.height = height;
+            this.width = width;
+            this.position = position;
+            this.top = top;
+            this.left = left;
+            this.imageUrl = imageUrl;
+
+            this.boardGamed = document.querySelector('#boardGame');
+            this.createPeice();
+        }
+
+        createPeice() {
+            try {
+                this.piece = document.createElement('img');
+                this.piece.setAttribute('src', this.imageUrl);
+                this.piece.setAttribute('width', this.width);
+                this.piece.setAttribute('height', this.height);
+                this.piece.setAttribute('position', this.position);
+                this.piece.style.top = this.top;
+                this.piece.style.left = this.left;
+                this.boardGamed.appendChild(this.piece);
+            } catch (e) {
+                console.error(e)
+            }
+        }
+        hello() {
+            console.log("hello, I am a tiger");
+        };
 
 
+    }
 
+    let tiger = new Tiger('150px', '200px', 'absolute', '40%', '40%',
+        'https://images.newscientist.com/wp-content/uploads/2020/07/28154040/29-july_world-tiger-day.jpg');
+    console.log(tiger);
+    tiger.hello();
+</script>
 
-    </script>
 </html>

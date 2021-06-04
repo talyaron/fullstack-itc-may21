@@ -63,17 +63,17 @@ function pikachuMove() {
             }
         })
             //Mouseover
-            pikachu.addEventListener('mouseover', ev => {
-                if(!ev) throw new Error ("the event mouseover does not work");
-                const target = ev.target;
+            pikachu.addEventListener('mouseover', () => {
+                if(!pikachu) throw new Error ("the event mouseover does not work");
+                //const target = ev.target;
                 pikachu.setAttribute('src', 'img/pilove.gif')
             });
 
             //MouseOut
 
-            pikachu.addEventListener('mouseout', ev => {
-                if(!ev) throw new Error ("the event mouseout does not work");
-                const target = ev.target;
+            pikachu.addEventListener('mouseout', () => {
+                if(!pikachu) throw new Error ("the event mouseout does not work");
+                //const target = ev.target;
                 pikachu.setAttribute('src', 'img/piran.gif')
             });
 

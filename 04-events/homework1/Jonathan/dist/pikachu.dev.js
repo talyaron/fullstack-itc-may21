@@ -60,15 +60,15 @@ function pikachuMove() {
       }
     }); //Mouseover
 
-    pikachu.addEventListener('mouseover', function (ev) {
-      if (!ev) throw new Error("the event mouseover does not work");
-      var target = ev.target;
+    pikachu.addEventListener('mouseover', function () {
+      if (!pikachu) throw new Error("the event mouseover does not work"); //const target = ev.target;
+
       pikachu.setAttribute('src', 'img/pilove.gif');
     }); //MouseOut
 
-    pikachu.addEventListener('mouseout', function (ev) {
-      if (!ev) throw new Error("the event mouseout does not work");
-      var target = ev.target;
+    pikachu.addEventListener('mouseout', function () {
+      if (!pikachu) throw new Error("the event mouseout does not work"); //const target = ev.target;
+
       pikachu.setAttribute('src', 'img/piran.gif');
     });
   } catch (e) {
