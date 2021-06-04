@@ -1,0 +1,20 @@
+#dog{
+left: 40%;
+top: 40%;
+position: absolute;
+}
+
+.dogUp{
+    transform: rotate(268deg);
+}
+.dogDown{
+    transform: rotate(
+94deg
+)
+}
+.dogRight{
+    transform: rotate(360deg);
+}
+.dogLeft{
+    transform: rotate(180deg);
+}

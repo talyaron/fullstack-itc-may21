@@ -9,9 +9,10 @@
 createbox();
 setInterval(function () {
   location.reload();
-}, 5000);
+}, 1000); //YS: Try to use const more than let.
 
 function createbox() {
+  //YS: You can use try/catch here
   var number = randomNumber();
   var h1 = document.createElement("H1");
   h1.innerText = "The boxes are: ".concat(number);

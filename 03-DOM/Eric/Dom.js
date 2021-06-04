@@ -9,7 +9,7 @@
 
 createbox();
 
-setInterval(function () { location.reload();}, 5000)
+setInterval(function () { location.reload();}, 1000)
 
 //YS: Try to use const more than let.
 function createbox(){
@@ -32,35 +32,35 @@ function createbox(){
     document.body.appendChild(container);
 
     try{
-    for (let i=0;i<number; i++){
-    let element = document.createElement("div");
+   for (let i=0;i<number; i++){
+   let element = document.createElement("div");
     
-    container.appendChild(element);
+   container.appendChild(element);
     let color = randomColor();
-    let size = randomSize();
+  let size = randomSize();
     let position = randomPosition();
     element.style.backgroundColor = color;
-    element.style.width = `${size}px`;
-    element.style.height = `${size}px`;
+  element.style.width = `${size}px`;
+  element.style.height = `${size}px`;
     element.style.position = "relative";
     element.style.left = `${position}px`;
     element.style.top = `${position}px`;
     }
-    }catch(err){
-        console.log(err.stack);
-    }
+   }catch(err){
+   console.log(err.stack);
+}
 }    
 
 function randomColor(){
-    return `rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`
+  return `rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`
 }
 
 function randomNumber(){
-    return Math.floor((Math.random() * 10)+ 1);
+   return Math.floor((Math.random() * 10)+ 1);
 }
 
 function randomSize(){
-    let size = Math.floor((Math.random() *200)+ 40);
+   let size = Math.floor((Math.random() *200)+ 40);
     return size;
 }
 function randomPosition() {
