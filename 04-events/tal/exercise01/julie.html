@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      background-color: blue;
+    }
+  </style>
+  <body>
+    <div class="box"></div>
+  </body>
+  <script>
+    const box = document.querySelector(".box");
+
+    box.addEventListener("mouseover", placeBox);
+    // <!-- DOM style left property: returns left position of a positioned element. Position relative, so it was positioned according to its normal position.  -->
+    function placeBox() {
+      box.style.left = getRandom(0, 100) + "vw";
+      box.style.top = getRandom(0, 100) + "vh";
+    }
+
+    // the function getRandom takes in zero as its minimum value and 100% view width/height as the maximum.
+
+    const getRandom = (min, max) =>
+      Math.floor(Math.random() * (max - min + 1) + min);
+    //   Math floor returns the largest integer less than or equal to a given number.
+  </script>
+</html>
+
+<!-- create a box, and put it in a random place on the screen.
+every time an event on the object (of your chosing happen), move it to a new random place on the screen. -->
