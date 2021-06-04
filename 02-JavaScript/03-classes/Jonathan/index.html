@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+</head>
+<body>
+    
+    <h1 class = "h1">
+
+    </h1>
+    <script>
+        class Rectangle {
+            constructor(RectangleId, width, height, color){
+                this.RectangleId = RectangleId;
+                this.width = width;
+                this.height = height;
+                this.color = color; //this.age = age;
+            }
+            calcArea(){
+                return this.width * this.height;
+            }
+        }
+
+    
+
+        let rectangle = new Rectangle('#Rectangle', '4','2','red')
+        
+        console.log(rectangle);
+        
+        let h1 = document.querySelector('.h1')
+        h1.innerText = `The Area is: ${rectangle.calcArea()}`;
+
+
+    </script>
+
+</body>
+</html>
