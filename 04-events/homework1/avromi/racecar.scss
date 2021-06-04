@@ -1,0 +1,26 @@
+body {
+    font-size: 36px;
+    
+}
+.banner{
+    background-color: black;
+}
+h1 {
+    text-align: center;
+    color: rgb(255, 8, 8);
+    margin: 0;
+}
+img {
+    height: 20vh;
+    width: 10vw;
+    border: dashed red 3px;
+    border-radius: 70px;
+ 
+}
+.game{
+    border: dashed 1vw black;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
