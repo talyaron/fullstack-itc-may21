@@ -6,7 +6,7 @@ function pikachuMove() {
     try {
         const pikachu = document.querySelector('.pikachu');
 
-        let flagX = 1; // whenever pikachu up or down, it's different the movement between left and right movement
+        let isRight = 1; // whenever pikachu up or down, it's different the movement between left and right movement
 
         if(!pikachu) throw new Error ("The image pikachu running can not uploaded");
  
@@ -32,7 +32,7 @@ function pikachuMove() {
                 positionY = parseInt(pikachu.style.top);
                 //pikachu.style.transform = "rotate(90deg)"
 
-                if (flagX == 1){
+                if (isRight == 1){
                     pikachu.style.transform = "rotate(90deg) scaleY(1)"
                     if (positionY >= 400) {
                         positionY = 400;
@@ -51,7 +51,7 @@ function pikachuMove() {
                 positionY = parseInt(pikachu.style.top);
                 //pikachu.style.transform = "rotate(270deg)" //scaleY(-1)
 
-                if (flagX == 1){
+                if (isRight == 1){
                     pikachu.style.transform = " rotate(270deg) scaleY(1)"
                     if (positionY <= 15) {
                         positionY = 15;
@@ -70,22 +70,22 @@ function pikachuMove() {
                 positionX = parseInt(pikachu.style.left);
                 //pikachu.style.transform = "rotate(180deg)"
                 pikachu.style.transform = "scaleX(-1)"
-                flagX = 0;
+                isRight = 0;
                 if (positionX <= 15) {
                     positionX = 15;
                     pikachu.style.transform = "scaleX(1)"
-                    flagX = 1;
+                    isRight = 1;
                 }
                 
             } else if (ev.key == "ArrowRight") {
                 pikachu.style.left = `${positionX + speed}px`
                 positionX = parseInt(pikachu.style.left);
                 pikachu.style.transform = "scaleX(1)"
-                flagX = 1;
+                isRight = 1;
                 if (positionX >= 1150) {
                     positionX = 1150;
                     pikachu.style.transform = "scaleX(-1)"
-                    flagX = 0;
+                    isRight = 0;
                 }
                 
             }
