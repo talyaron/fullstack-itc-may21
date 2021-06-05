@@ -6,6 +6,7 @@ console.log(container);
 var boxes = function boxes() {
   try {
     if (randomNum === 0 || randomNum > 10) throw new Error("Number of boxes is incorrect!");
+    if (randomSize < 40 || randomSize > 200) throw new Error("Width & Height are incorrect!");
     var random = randomNum();
 
     for (var i = 0; i < random; i++) {
@@ -22,9 +23,9 @@ var boxes = function boxes() {
   } catch (error) {
     console.log(error);
   }
-};
+}; // setInterval(function () {
+//   document.location.reload();
+// }, 5000);
 
-setInterval(function () {
-  document.location.reload();
-}, 5000);
+
 boxes();

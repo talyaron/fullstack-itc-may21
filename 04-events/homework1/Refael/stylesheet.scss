@@ -1,0 +1,41 @@
+.dot {
+  position: relative;
+  content: url(/04-events/homework1/Refael/images/download.png);
+
+  &:hover {
+    position: relative;
+    content: url(/04-events/homework1/Refael/images/init__hover.png);
+  }
+  &__left {
+    position: relative;
+    content: url(/04-events/homework1/Refael/images/dot__left.png);
+    &:hover {
+      position: relative;
+      content: url(/04-events/homework1/Refael/images/dot__left-hover.png);
+    }
+  }
+  &__right {
+    position: relative;
+    content: url(/04-events/homework1/Refael/images/dot__right.png);
+    &:hover {
+      position: relative;
+      content: url(/04-events/homework1/Refael/images/dot__right-hover.png);
+    }
+  }
+  &__up {
+    position: relative;
+    content: url(/04-events/homework1/Refael/images/dot__up.png);
+    &:hover {
+      position: relative;
+      content: url(/04-events/homework1/Refael/images/dot__up-hover.png);
+    }
+  }
+  &__down {
+    position: relative;
+    content: url(/04-events/homework1/Refael/images/dot__down.png);
+    &:hover {
+      position: relative;
+      content: url(/04-events/homework1/Refael/images/dot__down-hover.png);
+    }
+  }
+}
