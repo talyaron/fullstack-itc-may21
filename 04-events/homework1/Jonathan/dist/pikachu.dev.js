@@ -5,7 +5,7 @@ pikachuMove();
 function pikachuMove() {
   try {
     var pikachu = document.querySelector('.pikachu');
-    var flagX = 1; // whenever pikachu up, it's different the movement between left and right movement
+    var flagX = 1; // whenever pikachu up or down, it's different the movement between left and right movement
 
     if (!pikachu) throw new Error("The image pikachu running can not uploaded"); //Position Pikachu
 
