@@ -31,38 +31,37 @@ function pikachuMove() {
                 pikachu.style.top = `${positionY + speed}px`
                 positionY = parseInt(pikachu.style.top);
                 //pikachu.style.transform = "rotate(90deg)"
-                
+
                 if (flagX == 1){
-                    pikachu.style.transform = "rotateZ(90deg) scaleY(1)"
+                    pikachu.style.transform = "rotate(90deg) scaleY(1)"
                     if (positionY >= 400) {
                         positionY = 400;
                         pikachu.style.transform = "rotate(270deg) scaleY(1)"
                     }
                 } else {
-                    pikachu.style.transform = "rotateZ(90deg) scaleY(-1)"
+                    pikachu.style.transform = "rotate(90deg) scaleY(-1)"
                     if (positionY >= 400) {
                         positionY = 400;
                         pikachu.style.transform = "rotate(270deg) scaleY(-1)"
                     }
                 }
   
-
             } else if (ev.key == "ArrowUp") {
                 pikachu.style.top = `${positionY - speed}px`
                 positionY = parseInt(pikachu.style.top);
                 //pikachu.style.transform = "rotate(270deg)" //scaleY(-1)
-                
+
                 if (flagX == 1){
                     pikachu.style.transform = " rotate(270deg) scaleY(1)"
                     if (positionY <= 15) {
                         positionY = 15;
-                        pikachu.style.transform = "rotateZ(90deg) scaleY(1)"
+                        pikachu.style.transform = "rotate(90deg) scaleY(1)"
                     }
                 } else {
                     pikachu.style.transform = " rotate(270deg) scaleY(-1)"
                     if (positionY <= 15) {
                         positionY = 15;
-                        pikachu.style.transform = "rotateZ(90deg) scaleY(-1)"
+                        pikachu.style.transform = "rotate(90deg) scaleY(-1)"
                     }
                 }
 
@@ -95,7 +94,9 @@ function pikachuMove() {
             pikachu.addEventListener('mouseover', () => {
                 if(!pikachu) throw new Error ("the event mouseover does not work");
                 //const target = ev.target;
-                pikachu.setAttribute('src', 'img/pilove.gif')
+                pikachu.setAttribute('src', 'img/pihappy.gif')
+                pikachu.style.transform = "rotate(0deg) scaleY(1)"
+                
             });
 
             //MouseOut
@@ -104,7 +105,9 @@ function pikachuMove() {
                 if(!pikachu) throw new Error ("the event mouseout does not work");
                 //const target = ev.target;
                 pikachu.setAttribute('src', 'img/piran.gif')
+
             });
+            
 
         
     } catch (e) {
