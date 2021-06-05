@@ -8,30 +8,41 @@
 </head>
 <body>
     
-    <h1 class = "h1">
+    <h1 class = "h1"></h1>
+    <div id="board"></div>
 
-    </h1>
     <script>
         class Rectangle {
-            constructor(RectangleId, width, height, color){
-                this.RectangleId = RectangleId;
+            constructor(width, height, color){
                 this.width = width;
                 this.height = height;
-                this.color = color; //this.age = age;
+                this.color = color; 
+
+                //initialize
+                this.board = document.querySelector('#board');
+                this.createRect();
             }
+
+            createRect(){
+                this.rectangle = document.createElement('div');
+                this.rectangle.style.backgroundColor = this.color;
+                this.rectangle.style.width = `${this.width}px`;
+                this.rectangle.style.height = `${this.height}px`;
+                this.board.appendChild(this.rectangle);
+            }
+
             calcArea(){
                 return this.width * this.height;
             }
         }
 
-    
 
-        let rectangle = new Rectangle('#Rectangle', '4','2','red')
+        let rectangle = new Rectangle('100','100','red')
         
         console.log(rectangle);
         
         let h1 = document.querySelector('.h1')
-        h1.innerText = `The Area is: ${rectangle.calcArea()}`;
+        h1.innerText = `The Area of the rectangle is: ${rectangle.calcArea()}`;
 
 
     </script>

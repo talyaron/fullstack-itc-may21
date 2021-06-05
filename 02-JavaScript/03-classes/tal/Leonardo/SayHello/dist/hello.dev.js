@@ -6,30 +6,31 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Player =
+var Person =
 /*#__PURE__*/
 function () {
-  function Player(playerID, playerName, playerColor, playerShapeClass) {
-    _classCallCheck(this, Player);
+  function Person(name) {
+    _classCallCheck(this, Person);
 
-    this.playerID = playerID;
-    this.playerName = playerName;
-    this.playerColor = playerColor;
-    this.playerShapeClass = playerShapeClass;
-    this.playerDesc();
+    this.name = name;
   }
 
-  _createClass(Player, [{
-    key: "playerDesc",
-    value: function playerDesc() {
-      console.log("Player Name: ".concat(this.playerName, "; Player Color: ").concat(this.playerColor, "; Player Shape: ").concat(this.playerShapeClass));
+  _createClass(Person, [{
+    key: "sayHello",
+    value: function sayHello() {
+      console.log("Hola mi nombre es ".concat(this.name));
+    }
+  }, {
+    key: "sayBye",
+    value: function sayBye() {
+      console.log("Mi nombre es ".concat(this.name, " y me despido"));
     }
   }]);
 
-  return Player;
+  return Person;
 }();
 
-var player1 = new Player('player1', 'Yaniv', 'blue', 'circle');
-console.log(player1);
-var player2 = new Player('player2', 'Tal', 'green', 'rectangualr');
-console.log(player2);
+var person1 = new Person("Carlos");
+person1.sayHello();
+var person2 = new Person("Juan");
+person2.sayBye();

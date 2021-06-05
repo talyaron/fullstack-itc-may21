@@ -36,7 +36,7 @@
 
             //a method
 
-             //lets create an element on the dom with that id.
+            //lets create an element on the dom with that id.
             createPeice() {
                 try {
                     this.piece = document.createElement('img');
@@ -48,15 +48,17 @@
                 }
             }
 
-        
+
             //let create a method for moving left
-            moveLeft(){
+            moveLeft() {
 
             }
 
-            strike(){
+            strike() {
                 console.log("I am striking")
             };
+
+
 
         }
 
@@ -64,6 +66,7 @@
 
         console.log(pacman);
         pacman.strike();
+
 
         //create ghost
         let ghost = new GamePiece('#ghost', 'https://art.pixilart.com/37f719b8a62f06d.gif', '70px');
