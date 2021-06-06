@@ -12,7 +12,7 @@
   <script>
     setInterval(function () {
       document.location.reload();
-    }, 30000);
+    }, 4000);
     // This function makes the window reload every 5 seconds (5000 miliseconds). Lifted from my first attempt.
 
     window.onload = makeBox;
@@ -47,8 +47,8 @@
         let dimension = randomDimension();
         wrapper.innerHTML += `<div class=""
         style="background-color:${colour};
-        height:${dimension}px; width=${dimension}px;
-        position:relative; top:${getRandom(0, 100)}vh; right:${getRandom(
+        height:${dimension}px; width:${dimension}px;
+        position:absolute; top:${getRandom(0, 100)}vh; right:${getRandom(
           0,
           100
         )}vw"></div>`;
