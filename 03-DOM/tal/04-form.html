@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forms</title>
 </head>
+
 <body>
-    <form>
-        <input type="datetime-local" />
-        <input type='text' placeholder="enter your name" />
-        
+    <form onsubmit="handleSubmit(event)">
+        <input type="datetime-local" name='date' />
+        <input type='text' placeholder="enter your name" name='name' />
+        <input type='range' name='size' />
+        <input type="color" name='color' />
+        <input type="submit" value="Submit Me">
     </form>
+    <script>
+        function handleSubmit(ev) {
+            ev.preventDefault();
+            console.dir(ev.target.children)
+            let date = ev.target.children.date.value;
+            let name = ev.target.children.name.value;
+            let size = ev.target.children.size.value;
+            let color = ev.target.children.color.value;
+            console.log(date, name, size, color);
+            ev.target.reset();
+
+        }
+    </script>
 </body>
+
 </html>
