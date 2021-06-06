@@ -1,22 +1,48 @@
-class Player {
-
-    constructor(playerID,playerName,playerColor,playerShapeClass) {
-        this.playerID = playerID;
-        this.playerName = playerName;
-        this.playerColor = playerColor;
-        this.playerShapeClass = playerShapeClass;
-        this.playerDesc();
+class Car {
+    constructor(brand, model, price, amountOfCars) {
+        try {
+            if (typeof brand !== 'string') throw new Error('Brand should be a string!');
+            if (typeof model !== 'string') throw new Error('Model should be a string!');
+            if (!Number.isInteger(price)) throw new Error('Price should be an integer!');
+            if (!Number.isInteger(amountOfCars)) throw new Error('Amount of cars should be an integer!');
+            this.brand = brand;
+            this.model = model;
+            this.price = price;
+            this.amountOfCars = amountOfCars;
+            this.totalPrice();
+            this.brandNModel();
+        } catch (e) {
+            console.error(e);
+        }
     }
 
-    playerDesc() {
-        console.log(`Player Name: ${this.playerName}; Player Color: ${this.playerColor}; Player Shape: ${this.playerShapeClass}`);
+    totalPrice() {
+        const result = this.price * this.amountOfCars;
+        return `The total price of ${this.amountOfCars} ${this.brand} ${this.model}'s is: ${result}`;
+    }
+
+    brandNModel(brand, model) {
+        console.log(`Brand: ${this.brand}; Model: ${this.model}`);
     }
 }
 
-const player1 = new Player('player1','Yaniv','blue','circle');
+const car1 = new Car('Toyota', 'Yaris', 80000, 4);
 
-console.log(player1);
+console.log(car1);
+console.log(car1.totalPrice());
 
-const player2 = new Player('player2','Tal','green','rectangualr');
+const car2 = new Car('Kia', 'Ceed', 60000, 10);
 
-console.log(player2);
+console.log(car2);
+console.log(car2.totalPrice());
+
+const car3 = new Car('Audi', 'TT', 190000, 2);
+
+console.log(car3);
+console.log(car3.totalPrice());
+
+const car4 = new Car(['Audi'], 'TT', 190000, 2);
+const car5 = new Car('Audi', 300, 190000, 2);
+const car6 = new Car('Audi', 'TT', {price:190000}, 2);
+const car7 = new Car('Audi', 'TT', 190000, '2');
+const car8 = new Car('Audi', 'TT', 190000, -22);
