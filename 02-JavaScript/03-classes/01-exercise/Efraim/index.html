@@ -14,32 +14,27 @@
 <script>
     class Car {
         constructor(brand, model, price, amountOfCars) {
-        this.brand = brand;
-        this.model = model;
-        this.price = price;
-        this.amountOfCars = amountOfCars;
-    }
-    priceTotal(){
-        return console.log("$" + (this.price * this.amountOfCars));
-    }
-    brandModel(){
-        return console.log(`${this.brand}, ${this.model}`)
-    }
-    
+            this.brand = brand;
+            this.model = model;
+            this.price = price;
+            this.amountOfCars = amountOfCars;
+            this.priceTotal();
+            this.brandModel();
+            
+        }
+        priceTotal() {
+            return console.log("$" + (this.price * this.amountOfCars));
+        }
+        brandModel() {
+            return console.log(`${this.brand}, ${this.model}`)
+        }
+
     }
     const mercedese = new Car('Mercedese', 'Sedan', '20000', '100000');
-    
+
     const volkswagen = new Car('Volkswagon', 'Golf', '25000', '50000');
 
-    const toyota= new Car('Toyota', 'Corolla', '30000', '200000');
-   
-    toyota.priceTotal();
-    toyota.brandModel();
-    mercedese.priceTotal();
-    mercedese.brandModel();
-    volkswagen.priceTotal();
-    volkswagen.brandModel();
-
+    const toyota = new Car('Toyota', 'Corolla', '30000', '200000');
 </script>
 
 </html>
