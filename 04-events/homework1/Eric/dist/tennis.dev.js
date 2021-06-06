@@ -6,22 +6,65 @@
 //if you move it up, the image should look up, etc...
 //extra: if the cursor moves over the image a surprise image appear
 //image and extra
-window.onload = function () {
-  var img2 = document.getElementById("fedd");
-  img2.addEventListener('mouseout', imageStart);
-  img2.addEventListener('mouseover', changeImage);
-  img2.width = "300";
-  img2.height = "200";
-  img2.style.align = "center";
-  img2.style.display = "flex";
-  img2.style.marginTop = "200px";
-  img2.style.marginLeft = "450px";
+//arrow keyword
+var tennis = document.getElementById("tennis");
+var img2 = document.getElementById("ball");
+tennis.addEventListener('mouseout', function (e) {
+  tennisBack = e.target;
+  tennisBack.src = "ball.jpg";
+});
+tennis.addEventListener("mouseover", function (event) {
+  tennisChange = event.target;
+  tennisChange.src = "https://media1.giphy.com/media/26u49A1sQ3IVBMHK0/giphy.gif?cid=ecf05e47f4aj8gj2t9j82o086x6icy7ea0eq711231jcufvy&rid=giphy.gif&ct=g";
+});
+var move = 10;
+var Top = 0;
+var Left = 0;
 
-  function changeImage() {
-    this.setAttribute('src', 'fed.jpg');
-  }
+document.onkeydown = function (event) {
+  try {
+    if (img2 === null) {
+      throw new Error('No ball!');
+    }
 
-  function imageStart() {
-    this.setAttribute('src', "ball.jpg");
+    switch (event.keyCode) {
+      case 37:
+        tennis.classList.remove('tennisUp');
+        tennis.classList.remove('tennisRight');
+        tennis.classList.remove('tennisDown');
+        tennis.classList.add('tennisLeft');
+        Left -= move;
+        tennis.style.marginLeft = "".concat(Left, "px");
+        break;
+
+      case 38:
+        tennis.classList.remove('tennisLeft');
+        tennis.classList.remove('tennisRight');
+        tennis.classList.remove('tennisDown');
+        tennis.classList.add('tennisUp');
+        Top -= move;
+        tennis.style.marginTop = "".concat(Top, "px");
+        break;
+
+      case 39:
+        tennis.classList.remove('tennisLeft');
+        tennis.classList.remove('tennisDown');
+        tennis.classList.remove('tennisUp');
+        tennis.classList.add('tennisRight');
+        Left += move;
+        tennis.style.marginLeft = "".concat(Left, "px");
+        break;
+
+      case 40:
+        tennis.classList.remove('tennisLeft');
+        tennis.classList.remove('tennisUp');
+        tennis.classList.remove('tennisRight');
+        tennis.classList.add('tennisDown');
+        Top += move;
+        tennis.style.marginTop = "".concat(Top, "px");
+        break;
+    }
+  } catch (e) {
+    return e;
   }
-}; //arrow keyword
+};

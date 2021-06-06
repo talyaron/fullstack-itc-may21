@@ -15,7 +15,9 @@
     }, 4000);
     // This function makes the window reload every 5 seconds (5000 miliseconds). Lifted from my first attempt.
 
-    window.onload = makeBox;
+    /* YS: This is set to 30 seconds, not 5 */
+
+    window.onload = makeBox;         //YS: Good! 
     // This calls the makeBox function (defined below) when the window loads, which will be every 5 seconds as set above.
 
     let wrapper = document.querySelector("#wrapper");
@@ -41,11 +43,11 @@
     }
 
     function makeBox() {
-      console.log(wrapper);
+      console.log(wrapper);  /*YS: Dont leave console.logs */
       for (let i = 0; i <= randomBoxNumber(); i++) {
-        let colour = randomBoxColor();
-        let dimension = randomDimension();
-        wrapper.innerHTML += `<div class=""
+        let colour = randomBoxColor();                  
+        let dimension = randomDimension();         
+        wrapper.innerHTML += `<div class=""                    
         style="background-color:${colour};
         height:${dimension}px; width:${dimension}px;
         position:absolute; top:${getRandom(0, 100)}vh; right:${getRandom(
@@ -54,8 +56,19 @@
         )}vw"></div>`;
       }
     }
-    // The divs get made by the function (inc. for loop) rather than being defined outside of it.
 
-    makeBox();
+    
+    /*
+      setInterval(function () {
+        wrapper.innerHTML = '';
+        makeBox()
+     }, 5000);
+
+    */
+    
+
+     makeBox(); /*YS: this should be inside the setInterval */
+
+    // Don't forgot to call the function at the end.
   </script>
 </html>

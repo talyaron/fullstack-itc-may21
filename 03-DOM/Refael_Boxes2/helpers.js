@@ -3,13 +3,14 @@ function randomNum() {
   return num;
 }
 function randomColor() {
-  let color = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(
+  let color = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(         /*YS: Good job in separating your code into functions. Use const - everytime the function is called, 
+                                                                              the the variables inside are like 'new' variables so you can use const. */
     Math.random() * 255
   )},${Math.floor(Math.random() * 255)})`;
   return color;
 }
 function randomSize() {
-  let size = Math.floor(Math.random() * (200 - 40)) + 40 + "px";
+  let size = Math.floor(Math.random() * (200 - 40)) + 40 + "px";    //YS: Why not template literals? `${Math.floor(Math.random() * (200 - 40)) + 40}px`
   return size;
 }
 function randomPositionTop() {
