@@ -11,25 +11,32 @@
         border: 2px solid black;
         width: fit-content;
         height: fit-content;
-      margin: 100px 100px;
+        margin: 100px 100px;
     }
 </style>
 <body>
-    <form class="box">
+    <form class="box" onsubmit="handleSubmit(event)">
          <p>Sign Up</p>
-        <input type="text" placeholder="First Name">
-        <input type="text" placeholder="Last Name">
+        <input type="text" placeholder="First Name" name="firstName">
+        <input type="text" placeholder="Last Name" name="LastName">
         <p>Please Choose you Gender</p>
-        <input type="radio" id="male" name="male">
+        <input type="radio"  name="male">
         <label for="male">Male</label><br>
-        <input type="radio" id="female" name="female">
+        <input type="radio"  name="female">
         <label for="female">Female</label><br>
-        <input type="radio" id="other" name="other">
+        <input type="radio" name="other">
         <label for="male">Other</label><br>
         <input type="radio" id="itc" name="itc">
         <label for="itc">ITC Student</label><br>
         <input type="submit" value="Submit">
         
     </form>
+    <script>
+        function handleSubmit(ev){
+            ev.preventDefault();
+            console.dir(ev);
+
+        }
+    </script>
 </body>
 </html>
