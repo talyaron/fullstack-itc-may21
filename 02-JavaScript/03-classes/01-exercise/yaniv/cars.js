@@ -5,6 +5,8 @@ class Car {
             if (typeof model !== 'string') throw new Error('Model should be a string!');
             if (!Number.isInteger(price)) throw new Error('Price should be an integer!');
             if (!Number.isInteger(amountOfCars)) throw new Error('Amount of cars should be an integer!');
+            if (price<0) throw new Error('Price should be larger than 0!');
+            if (amountOfCars<0) throw new Error('Amount of cars should be larger than 0!');
             this.brand = brand;
             this.model = model;
             this.price = price;
