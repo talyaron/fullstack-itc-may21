@@ -1,0 +1,58 @@
+// https://sass-lang.com/guide
+
+@use 'nav';
+
+$font-dark:green;
+$font-light:white;
+
+body{
+    margin: 0px;
+}
+
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+  }
+
+
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: cadetblue;
+    @include transform(rotate(30deg));
+}
+
+
+%message-shared {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: $font-light;
+}
+
+// This CSS won't print because %equal-heights is never extended.
+%equal-heights {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.message {
+  @extend %message-shared;
+  background-color: lighten($color: #000000, $amount: 30%)
+}
+
+.success {
+  @extend %message-shared;
+  background-color: green;
+}
+
+.error {
+  @extend %message-shared;
+  background-color: red;
+}
+
+.warning {
+  @extend %message-shared;
+  border-color: yellow;
+}
+

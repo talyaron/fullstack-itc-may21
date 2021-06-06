@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=script, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Character {
+        constructor(name, birthdate, height) {
+          this.name = name;
+          this.birthdate = birthdate;
+          this.height = height;
+        }
+        ask(question) {
+          console.log(this.name, question);
+        }
+      }
+
+      let yoda = new Character("Yoda", "896BBY", "66cm");
+      console.log(yoda);
+      let luke = new Character("Luke", "19BBY", "1.7m");
+      console.log(luke);
+
+      yoda.ask(", do you wish you were taller?");
+      luke.ask(", do you wish you were as powerful as Yoda?");
+    </script>
+  </body>
+</html>

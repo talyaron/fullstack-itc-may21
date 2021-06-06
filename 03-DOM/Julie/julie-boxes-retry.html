@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Boxes Retry</title>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+  </body>
+  <script>
+    setInterval(function () {
+      document.location.reload();
+    }, 4000);
+    // This function makes the window reload every 5 seconds (5000 miliseconds). Lifted from my first attempt.
+
+    /* YS: This is set to 30 seconds, not 5 */
+
+    window.onload = makeBox;         //YS: Good! 
+    // This calls the makeBox function (defined below) when the window loads, which will be every 5 seconds as set above.
+
+    let wrapper = document.querySelector("#wrapper");
+
+    function getRandom(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    // Randomise other stuff:
+
+    function randomBoxColor() {
+      return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
+        Math.random() * 256
+      )},${Math.floor(Math.random() * 256)})`;
+    }
+
+    function randomBoxNumber() {
+      return Math.floor(Math.random() * (10 - 1)) + 1;
+    }
+
+    function randomDimension() {
+      return Math.floor(Math.random() * (200 - 40) + 40);
+    }
+
+    function makeBox() {
+      console.log(wrapper);  /*YS: Dont leave console.logs */
+      for (let i = 0; i <= randomBoxNumber(); i++) {
+        let colour = randomBoxColor();                  
+        let dimension = randomDimension();         
+        wrapper.innerHTML += `<div class=""                    
+        style="background-color:${colour};
+        height:${dimension}px; width:${dimension}px;
+        position:absolute; top:${getRandom(0, 100)}vh; right:${getRandom(
+          0,
+          100
+        )}vw"></div>`;
+      }
+    }
+
+    
+    /*
+      setInterval(function () {
+        wrapper.innerHTML = '';
+        makeBox()
+     }, 5000);
+
+    */
+    
+
+     makeBox(); /*YS: this should be inside the setInterval */
+
+    // Don't forgot to call the function at the end.
+  </script>
+</html>
