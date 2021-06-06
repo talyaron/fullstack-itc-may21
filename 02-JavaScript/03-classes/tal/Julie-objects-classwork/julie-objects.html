@@ -8,29 +8,24 @@
   </head>
   <body>
     <script>
-            class Character {
-              constructor(name, birthdate, height) {
-                this.name = name;
-                this.birthdate = birthdate;
-                this.height = height;
-                this.sayHello();
-              }
-
-      createCharacter() {
-      this.guy = document.createElement("img");
-      this.guy = setAttribute ("src"= URL);
-      this.body.appendChild(this.guy)
+      class Character {
+        constructor(name, birthdate, height) {
+          this.name = name;
+          this.birthdate = birthdate;
+          this.height = height;
+        }
+        ask(question) {
+          console.log(this.name, question);
+        }
       }
 
-      sayHello() {
-      return this.guy.innerText = `Hello, my name is ${name}`;
-              }
-            }
+      let yoda = new Character("Yoda", "896BBY", "66cm");
+      console.log(yoda);
+      let luke = new Character("Luke", "19BBY", "1.7m");
+      console.log(luke);
 
-            let yoda = new Character("yoda", "896BC", "2ft");
-            console.log(yoda);
-            let luke = new Character("Luke", "1989", "6ft");
-            console.log(luke);
+      yoda.ask(", do you wish you were taller?");
+      luke.ask(", do you wish you were as powerful as Yoda?");
     </script>
   </body>
 </html>
