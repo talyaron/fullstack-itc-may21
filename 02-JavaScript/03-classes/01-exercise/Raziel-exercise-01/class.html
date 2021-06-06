@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         class CarShop{
+          
+            constructor(brand, model, price , amountOfCars){
+              this.brand=brand;
+              this.model=model;
+              this.price=price;
+              this.amountofCars=amountOfCars;
+              //--------functions------
+           
+            }
+
+          totalPrice(){
+             return console.log((this.price*this.amountofCars));
+          }
+          carModel(){
+             return console.log("The car brand is:"+" "+this.brand+" "+"and the model is:"+" "+this.model);
+          }
+
+
+         }
+
+         let mazda=  new CarShop("mazda",'lantis','25000','20');
+         
+         let bmw= new CarShop("bmw",'i8','1000000','3');
+
+         let tesla=new CarShop('tesla','x','160000','10');
+        
+         mazda.totalPrice();
+         mazda.carModel();
+         bmw.totalPrice();
+         bmw.carModel();
+         tesla.totalPrice();
+         tesla.carModel();
+    </script>
+</body>
+</html>
