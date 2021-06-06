@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    class Car {
+        constructor(brand, model, price, amountOfCars) {
+            this.brand = brand;
+            this.model = model;
+            this.price = price;
+            this.amountOfCars = amountOfCars;
+            this.priceTotal();
+            this.brandModel();
+            
+        }
+        priceTotal() {
+            return console.log("$" + (this.price * this.amountOfCars));
+        }
+        brandModel() {
+            return console.log(`${this.brand}, ${this.model}`)
+        }
+
+    }
+    const mercedese = new Car('Mercedese', 'Sedan', '20000', '100000');
+
+    const volkswagen = new Car('Volkswagon', 'Golf', '25000', '50000');
+
+    const toyota = new Car('Toyota', 'Corolla', '30000', '200000');
+</script>
+
+</html>
