@@ -9,6 +9,7 @@
 <body>
     
     <h1 class = "h1"></h1>
+    <h1 class = "h11"></h1>
     <div id="board"></div>
 
     <script>
@@ -37,12 +38,16 @@
         }
 
 
-        let rectangle = new Rectangle('100','100','red')
+        let rectangle1 = new Rectangle('100','100','red')
+        let rectangle2 = new Rectangle('50','50','blue')
         
-        console.log(rectangle);
+        console.log(rectangle1);
         
         let h1 = document.querySelector('.h1')
-        h1.innerText = `The Area of the rectangle is: ${rectangle.calcArea()}`;
+        h1.innerText = `The Area of the rectangle is: ${rectangle1.calcArea()}`;
+
+        let h11 = document.querySelector('.h11')
+        h11.innerText = `The Area of the rectangle is: ${rectangle2.calcArea()}`;
 
 
     </script>
