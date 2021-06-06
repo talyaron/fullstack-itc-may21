@@ -7,30 +7,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    .piece {
+        width: 100px;
+        height: 100px;
+        background-color: teal;
+    }
+</style>
 
 <body>
+    <menu></menu>
+    <div id="boardGame"></div>
+    <!-- One source of truth -->
     <script>
-
+        // const piece = '42'
         class GamePiece {
 
-            constructor(pieceId) {
+            //help to create the unique properties of the object
+            constructor(pieceId, imageUrl, width = "50px") {
+                this.width = width
                 this.pieceId = pieceId;
+                this.imageUrl = imageUrl;
+
+                //initilizing
+                this.boardGamed = document.querySelector('#boardGame');
+                this.createPeice();
             }
 
-            //lets create a element on the dom with that id.
+            //a method
 
-            
+            //lets create an element on the dom with that id.
+            createPeice() {
+                try {
+                    this.piece = document.createElement('img');
+                    this.piece.setAttribute('src', this.imageUrl);
+                    this.piece.setAttribute('width', this.width);
+                    this.boardGamed.appendChild(this.piece);
+                } catch (e) {
+                    console.error(e)
+                }
+            }
+
+
             //let create a method for moving left
+            moveLeft() {
+
+            }
+
+            strike() {
+                console.log("I am striking")
+            };
+
+
 
         }
 
-        let pacman = new GamePiece('#pacman');
+        let pacman = new GamePiece('#pacman', 'https://i.gifer.com/l3K.gif', '100px');
 
         console.log(pacman);
+        pacman.strike();
+
 
         //create ghost
-        let ghost = new GamePiece('#ghost');
+        let ghost = new GamePiece('#ghost', 'https://art.pixilart.com/37f719b8a62f06d.gif', '70px');
         console.log(ghost);
+
+
 
     </script>
 </body>

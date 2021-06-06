@@ -1,5 +1,9 @@
 //import function from helpers.js
 
+//import {randomBorderColor,randomColor,randomFontsize,randomHColor,randomNumber,randomPositionLeft,randomPositionTop,randomSize,randomSpin} from 'helpers.js';
+
+//alljobs 
+
 /* import { randomNumber } from 'helpers.js';
 import { randomHColor } from 'helpers.js';
 import { randomFontsize } from 'helpers.js';
@@ -17,6 +21,7 @@ setInterval(function () { location.reload();}, 5000)
 
 //randomBoxes();
 function randomBoxes() {
+    
     
     try {
 
