@@ -5,17 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!-- YS: Please add a title to your work -->
   </head>
-
+  <!-- YS: Please keep your JS and HTML in separate files -->
   <body>
     <!-- <div id="container"></div> -->
     <div id="boxes"></div>
 
     <script>
       function createBoxes() {
-        let boxes = document.getElementById("boxes");
-        let html = "";
+        //YS: Missing try/catch
         function createBoxHTML() {
+          //YS: It would be better to keep functions separated.
           function randomColor() {
             return `background-color:rgb(${Math.floor(
               Math.random() * 255
@@ -23,26 +24,31 @@
               Math.random() * 255
             )})`;
           }
-          let color = randomColor();
-          function randomSize() {
-            return `height:${
-              Math.floor(Math.random() * (200 - 40 + 1)) + 40
-            }px; width:${Math.floor(Math.random() * (200 - 40 + 1)) + 40}px`;
-          }
-          let size = randomSize();
           function randomPosition() {
             return `position: absolute;
           left: ${Math.floor(Math.random() * 101)}vw;
           top: ${Math.floor(Math.random() * 101)}vh`;
           }
+
+          function randomSize() {
+            return `height:${
+              Math.floor(Math.random() * (200 - 40 + 1)) + 40
+            }px; width:${Math.floor(Math.random() * (200 - 40 + 1)) + 40}px`; //YS: Why 200 - 40 + 1?
+          }
+          let boxes = document.getElementById("boxes");
+          let html = "";
+          let size = randomSize();
+          let color = randomColor();
           let position = randomPosition();
-          let boxHTML = `<div style="${color}; ${size}; ${position}"></div>`;
+          let boxHTML = `<div style="${color}; ${size}; ${position}"></div>`; //YS: Good
           return boxHTML;
         }
         function randomBoxNumber() {
           return Math.floor(Math.random() * 101);
         }
+
         for (let i = 0; i <= randomBoxNumber(); i++) {
+          //YS: Good!
           html += createBoxHTML();
         }
         boxes.innerHTML = html;
@@ -50,6 +56,7 @@
 
       createBoxes();
       setInterval(function () {
+        //YS: createBoxes shouldnt be called twice
         createBoxes();
       }, 5000);
     </script>

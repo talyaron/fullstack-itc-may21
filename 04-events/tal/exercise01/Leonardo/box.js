@@ -1,4 +1,5 @@
 const box = document.querySelector('.box');
+const marquee = document.querySelector('marquee');
 
 box.style.top = randomNumber() + "px";
 box.style.bottom = randomNumber() + "px";
@@ -12,8 +13,16 @@ box.addEventListener('mouseover', ev => {
     target.style.bottom = randomNumber() + "px";
     target.style.left = randomNumber() + "px";
     target.style.right = randomNumber() + "px";
+    box.style.background = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`;
+    document.body.style.background = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`;
+
 })
 
+marquee.addEventListener("dblclick", ev => {
+    const target = ev.target;
+    target.style.color = "green";
+});
+
 function randomNumber() {
-    return Math.floor(Math.random() * 400) + 1;
+    return Math.floor(Math.random() * 500) + 1;
 }
