@@ -13,10 +13,10 @@ class Player {
     }
 }
 
-let player1 = new Player('player1','Yaniv','blue','circle');
+const player1 = new Player('player1','Yaniv','blue','circle');
 
 console.log(player1);
 
-let player2 = new Player('player2','Tal','green','rectangualr');
+const player2 = new Player('player2','Tal','green','rectangualr');
 
 console.log(player2);

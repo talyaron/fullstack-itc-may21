@@ -1,5 +1,9 @@
 //import function from helpers.js
 
+//import {randomBorderColor,randomColor,randomFontsize,randomHColor,randomNumber,randomPositionLeft,randomPositionTop,randomSize,randomSpin} from 'helpers.js';
+
+//alljobs 
+
 /* import { randomNumber } from 'helpers.js';
 import { randomHColor } from 'helpers.js';
 import { randomFontsize } from 'helpers.js';
@@ -17,6 +21,7 @@ setInterval(function () { location.reload();}, 5000)
 
 //randomBoxes();
 function randomBoxes() {
+    
     
     try {
 
@@ -55,7 +60,7 @@ function randomBoxes() {
 
             let color = randomColor();
             let borderColor = randomBorderColor();   /*YS: Very nice job in separating your helper functions. It is better practice to import functions   
-                                                    than to link both JS files in the HTML. Please look up importing functions in ES6 */
+                                                        than to link both JS files in the HTML. Please look up importing functions in ES6 */
             let size = randomSize();
             let top = randomPositionTop();
             let left = randomPositionLeft();

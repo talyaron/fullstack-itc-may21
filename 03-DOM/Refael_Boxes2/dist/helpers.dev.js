@@ -6,12 +6,16 @@ function randomNum() {
 }
 
 function randomColor() {
-  var color = "rgb(".concat(Math.floor(Math.random() * 255), ", ").concat(Math.floor(Math.random() * 255), ",").concat(Math.floor(Math.random() * 255), ")");
+  var color = "rgb(".concat(Math.floor(Math.random() * 255), ", ").concat(Math.floor(
+  /*YS: Good job in separating your code into functions. Use const - everytime the function is called, 
+   the the variables inside are like 'new' variables so you can use const. */
+  Math.random() * 255), ",").concat(Math.floor(Math.random() * 255), ")");
   return color;
 }
 
 function randomSize() {
-  var size = Math.floor(Math.random() * (200 - 40)) + 40 + "px";
+  var size = Math.floor(Math.random() * (200 - 40)) + 40 + "px"; //YS: Why not template literals? `${Math.floor(Math.random() * (200 - 40)) + 40}px`
+
   return size;
 }
 
