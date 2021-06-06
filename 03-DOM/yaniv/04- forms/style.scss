@@ -1,0 +1,12 @@
+.myForm {
+    width:50vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    
+    &__input {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+    }
+}
