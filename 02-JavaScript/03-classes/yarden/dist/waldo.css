@@ -1,8 +1,11 @@
 body {
   background-image: url("https://s3.amazonaws.com/vice_asset_uploader/files/1423499166vude6in.gif?crop=1xw:0.9780718701700154xh;center,center&resize=500:*");
+  padding: 0;
+  margin: 0;
 }
 
 .waldo {
   height: 90px;
   width: 70px;
+  position: absolute;
 }

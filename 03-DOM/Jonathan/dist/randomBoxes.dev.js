@@ -47,7 +47,7 @@ function randomBoxes() {
       var color = randomColor();
       var borderColor = randomBorderColor();
       /*YS: Very nice job in separating your helper functions. It is better practice to import functions   
-      than to link both JS files in the HTML. Please look up importing functions in ES6 */
+         than to link both JS files in the HTML. Please look up importing functions in ES6 */
 
       var size = randomSize();
       var top = randomPositionTop();
