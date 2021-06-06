@@ -10,15 +10,10 @@
     <div id="wrapper"></div>
   </body>
   <script>
-     setInterval(function () {
-       document.location.reload();              /*YS: This is a workaround and should be at the end of your code. It is usually not the ideal solution to refresh the page. The part that you were missing 
-                                                 was clearing the wrapper of your previous boxes before appending the new boxes. When you do  
-                                                 <element.innerHTML=> it replaces the HTML inside. When you do <element.innerHTML+=> (like you did) it appends it. In most real world cases you wont want to replace the HTML inside but append it like you did,
-                                                 but for this assignment specifically it was necessary to clear it. You first had to clear the container
-                                                 by doing <wrapper.innerHTML=''> (the inner HTML of the container is equal to empty/blank);  Then you can append your random boxes to it. <wrapper.innerHTML+=>.  Also
-                                                  */
-     }, 30000);
-    // This function makes the window reload every 5 seconds (5000 miliseconds). Lifted from my first attempt. 
+    setInterval(function () {
+      document.location.reload();
+    }, 4000);
+    // This function makes the window reload every 5 seconds (5000 miliseconds). Lifted from my first attempt.
 
     /* YS: This is set to 30 seconds, not 5 */
 
@@ -54,8 +49,8 @@
         let dimension = randomDimension();         
         wrapper.innerHTML += `<div class=""                    
         style="background-color:${colour};
-        height:${dimension}px; width=${dimension}px;
-        position:relative; top:${getRandom(0, 100)}vh; right:${getRandom(
+        height:${dimension}px; width:${dimension}px;
+        position:absolute; top:${getRandom(0, 100)}vh; right:${getRandom(
           0,
           100
         )}vw"></div>`;
