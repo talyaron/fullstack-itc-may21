@@ -36,7 +36,7 @@ function () {
     }
   }, {
     key: "brandNModel",
-    value: function brandNModel(brand, model) {
+    value: function brandNModel() {
       console.log("Brand: ".concat(this.brand, "; Model: ").concat(this.model));
     }
   }]);

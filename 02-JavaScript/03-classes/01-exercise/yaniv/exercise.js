@@ -21,7 +21,7 @@ class Car {
         return `The total price of ${this.amountOfCars} ${this.brand} ${this.model}'s is: ${result}`;
     }
 
-    brandNModel(brand, model) {
+    brandNModel() {
         console.log(`Brand: ${this.brand}; Model: ${this.model}`);
     }
 }
