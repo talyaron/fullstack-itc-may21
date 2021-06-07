@@ -1,10 +1,11 @@
 "use strict";
 
 for (var i = 0; i < 5; i++) {
-  var a = 5;
+  var _a = 5;
 }
 
-console.log(a);
+console.log(a); // will give an undefined error 
+
 x = 2; //error
 
 var x = 4;
