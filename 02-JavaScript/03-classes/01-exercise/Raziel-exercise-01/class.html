@@ -16,12 +16,11 @@
               this.price=price;
               this.amountofCars=amountOfCars;
               //--------functions------
-              this.totalPrice();
-             this.carModel();
+           
             }
 
           totalPrice(){
-             return console.log(this.price*this.amountofCars);
+             return console.log((this.price*this.amountofCars));
           }
           carModel(){
              return console.log("The car brand is:"+" "+this.brand+" "+"and the model is:"+" "+this.model);
@@ -31,13 +30,17 @@
          }
 
          let mazda=  new CarShop("mazda",'lantis','25000','20');
-         mazda.totalPrice();
-         mazda.carModel();
-
+         
          let bmw= new CarShop("bmw",'i8','1000000','3');
 
          let tesla=new CarShop('tesla','x','160000','10');
-      
+        
+         mazda.totalPrice();
+         mazda.carModel();
+         bmw.totalPrice();
+         bmw.carModel();
+         tesla.totalPrice();
+         tesla.carModel();
     </script>
 </body>
 </html>
