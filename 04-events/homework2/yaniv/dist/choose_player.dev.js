@@ -95,7 +95,7 @@ function () {
       this.addPlayer();
       this.change = 1; // if (this.modal.style.display === `none`) {
 
-      document.addEventListener('keyup', function (ev) {
+      document.addEventListener('keydown', function (ev) {
         if (_this.player.classList.contains('gameBoard__item--team1')) {
           switch (ev.key) {
             case "a":
