@@ -23,9 +23,13 @@ create 3 instance and run the methods, for each of them. -->
         this.price = price;
         this.amountOfCars = amountOfCars;
       }
-      addupCars() {
-        let totalPrice = this.price * this.amountOfCars;
-        return totalPrice;
+      addupCarsPrice() {
+        return this.price * this.amountOfCars;
+      }
+      giveCarDetails() {
+        console.log(
+          `The brand is ${this.brand} and the model is ${this.model}`
+        );
       }
     }
 
@@ -40,8 +44,12 @@ create 3 instance and run the methods, for each of them. -->
     let Audi = new Car("Audi", "A3", 5000, 7);
     console.log(Audi);
 
-    Audi.addupCars();
-    Wolkswagen.addupCars();
-    Ford.addupCars();
+    console.log(Audi.addupCarsPrice());
+    console.log(Volkswagen.addupCarsPrice());
+    console.log(Ford.addupCarsPrice());
+
+    Audi.giveCarDetails();
+    Volkswagen.giveCarDetails();
+    Ford.giveCarDetails();
   </script>
 </html>
