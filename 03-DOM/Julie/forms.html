@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <input type="date" placeholder="Enter the Date" />
+      <input type="file" placeholder="Upload your File" />
+      <input type="name" placeholder="Name" />
+      <input type="password" placeholder="Password" />
+      <input type="submit" placeholder="Submit" />
+    </form>
+    <script>
+      function handleSubmit(ev) {
+        ev.preventDefault();
+        console.dir(event.target.children)
+        let date = ev.target.children.date.value;
+        let file = ev.target.children.file.value;
+        let file = ev.target.children.name.value;
+        let file = ev.target.children.password.value;
+        console.log(date, file, name, password)
+        event.target.reset();
+    </script>
+  </body>
+  password
+</html>

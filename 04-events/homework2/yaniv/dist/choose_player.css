@@ -1,0 +1,185 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  background-color: green;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  border: 0;
+}
+button:hover {
+  background-color: greenyellow;
+  color: black;
+}
+button:active {
+  background-color: #7eb827;
+}
+
+body {
+  position: relative;
+  width: 90vw;
+  height: 100%;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  margin: 5px;
+}
+
+.teamsWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: space-between;
+  z-index: 1;
+  width: 100%;
+  height: 75%;
+}
+.teamsWrapper .team {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-items: flex-start;
+  align-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 50%;
+  margin: 5px;
+}
+.teamsWrapper .team h2 {
+  margin: 5px;
+}
+
+.gameBoard {
+  position: relative;
+  background-image: url("https://i.pinimg.com/originals/5f/2b/20/5f2b208bcf9151cf725695f000e74646.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 5px 5px white inset;
+  width: 90vw;
+  height: 75vh;
+}
+.gameBoard__item--player {
+  position: absolute;
+  width: 75px;
+  height: 90px;
+  transition: all 0.5s;
+}
+
+.modalWrapper {
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalBox__item {
+  display: flex;
+  align-items: center;
+  overflow: auto;
+  width: 40vw;
+  min-width: 350px;
+  padding: 5px;
+}
+.modalBox__item--title {
+  border-radius: 10px 10px 0 0;
+  justify-content: space-between;
+  height: 20px;
+  color: white;
+  font-weight: bold;
+}
+.modalBox__item--title .close {
+  cursor: pointer;
+}
+.modalBox__item--title--team1 {
+  background-color: lightseagreen;
+}
+.modalBox__item--title--team1 .close:hover {
+  color: #115f5b;
+}
+.modalBox__item--title--team2 {
+  background-color: royalblue;
+}
+.modalBox__item--title--team2 .close:hover {
+  color: #26408f;
+}
+.modalBox__item--content {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  background-color: white;
+  height: 75vh;
+  max-height: 350px;
+  border-radius: 0 0 10px 10px;
+}
+.modalBox__item--content .choosePlayerForm {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: [grid-start] 1fr [grid-middle1] 90px [grid-middle2] 45px [grid-middle3] 45px [grid-end];
+  gap: 12px;
+  grid-template-areas: ". . . ." "pName pName pName pName" "posX posX posY posY" "submit submit submit submit";
+}
+.modalBox__item--content .choosePlayerForm__item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.modalBox__item--content .choosePlayerForm__item p {
+  margin: 5px;
+}
+.modalBox__item--content .choosePlayerForm__item img {
+  width: 75px;
+  height: 90px;
+}
+.modalBox__item--content .choosePlayerForm__item--team2 img {
+  transform: scaleX(-1);
+}
+.modalBox__item--content .choosePlayerForm__item--name {
+  grid-area: pName;
+}
+.modalBox__item--content .choosePlayerForm__item--posX {
+  grid-area: posX;
+}
+.modalBox__item--content .choosePlayerForm__item--posY {
+  grid-area: posY;
+}
+.modalBox__item--content .choosePlayerForm__item--submit {
+  grid-area: submit;
+  background-color: darkgoldenrod;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 20px;
+  border: 0;
+}
+.modalBox__item--content .choosePlayerForm__item--submit:hover {
+  background-color: #f3b823;
+}
+.modalBox__item--content .choosePlayerForm__item--submit:active {
+  background-color: gold;
+}
+.modalBox--team1 {
+  display: none;
+}
+.modalBox--team2 {
+  display: none;
+}
