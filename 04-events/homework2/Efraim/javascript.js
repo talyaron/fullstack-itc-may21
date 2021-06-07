@@ -2,11 +2,21 @@ function handleSubmit(ev) {
     ev.preventDefault();
     console.dir(ev.target.children)
     let playerName = ev.target.children.id.value;
-    let playerImage = ev.target.children.image.value;
+    const imageSelect = document.querySelectorAll('.image-select');
+    const imageChosen = document.querySelectorAll(".image-chosen");
+    let playerImage;
+    for (let i = 0; i < imageSelect.length; i++) {
+        if (imageSelect[i].checked) {
+            playerImage = imageChosen[i].src;
+        }
+    }
+    if (playerImage === undefined) {
+        throw new Error('No player selected!')
+    }
     let posx = ev.target.children.posix.value;
     let posy = ev.target.children.posiy.value;
     console.log(playerName, playerImage, posx, posy);
-    const newPiece = new GamePiece(`#${playerName}`, `https://www.denofgeek.com/wp-content/uploads/2021/03/Super-Mario.png?fit=4000%2C2068`, '50px', '38px', {
+    const newPiece = new GamePiece(`#${playerName}`, `${playerImage}`, '50px', '38px', {
         x: `${posx}`,
         y: `${posy}`
 
