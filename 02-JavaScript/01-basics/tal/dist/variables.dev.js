@@ -1,10 +1,17 @@
 "use strict";
 
+for (var i = 0; i < 5; i++) {
+  var a = 5;
+}
+
+console.log(a);
+x = 2; //error
+
 var x = 4;
-var y = 7;
 console.log(x);
 x = 'hello';
 console.log(x);
+var y = 7;
 x = [1, 5, 'ff', '23', y]; //array
 
 console.log(x);
