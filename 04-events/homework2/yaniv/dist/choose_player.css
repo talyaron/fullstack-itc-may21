@@ -1,3 +1,22 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  background-color: green;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  border: 0;
+}
+button:hover {
+  background-color: greenyellow;
+  color: black;
+}
+button:active {
+  background-color: #7eb827;
+}
+
 body {
   position: relative;
   width: 90vw;
@@ -49,6 +68,7 @@ h1 {
   position: absolute;
   width: 75px;
   height: 90px;
+  transition: all 0.5s;
 }
 
 .modalWrapper {
@@ -144,6 +164,18 @@ h1 {
 }
 .modalBox__item--content .choosePlayerForm__item--submit {
   grid-area: submit;
+  background-color: darkgoldenrod;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 20px;
+  border: 0;
+}
+.modalBox__item--content .choosePlayerForm__item--submit:hover {
+  background-color: #f3b823;
+}
+.modalBox__item--content .choosePlayerForm__item--submit:active {
+  background-color: gold;
 }
 .modalBox--team1 {
   display: none;

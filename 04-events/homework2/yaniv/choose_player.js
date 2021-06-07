@@ -55,17 +55,18 @@ function handleSubmit(ev) {
         position.x = data.querySelector('[name="xPos"').value;
         position.y = data.querySelector('[name="yPos"').value;
 
-        const player = new Player(imageURL, position, id);
-
         const modal = document.querySelector(`.modalWrapper`);
         const modalTeam1 = document.querySelector(`.modalBox--team1`);
         const modalTeam2 = document.querySelector(`.modalBox--team2`);
-
+        
         modal.style.display = `none`;
         modalTeam1.style.display = `none`;
         modalTeam2.style.display = `none`;
 
+        const player = new Player(imageURL, position, id);
+
         data.reset();
+
     } catch (er) {
         alert(er);
         console.error(er);
@@ -81,42 +82,45 @@ class Player {
             this.position.x = position.x;
             this.position.y = position.y;
             this.id = id;
-            this.board = document.querySelector('.gameBoard')
+            this.board = document.querySelector('.gameBoard');
+            this.modal = document.querySelector(`.modalWrapper`);
             this.addPlayer();
-            this.change = 2;
-            // document.addEventListener('keyup', ev => {
-            //     if (this.player.classList.contains('gameBoard__item--team1')) {
-            //         switch (ev.key) {
-            //             case "a":
-            //                 this.player.moveLeft();
-            //                 break;
-            //             case "d":
-            //                 this.player.moveRight();
-            //                 break;
-            //             case "w":
-            //                 this.player.moveUp();
-            //                 break;
-            //             case "s":
-            //                 this.player.moveDown();
-            //                 break;
-            //         }
-            //     } else {
-            //         switch (ev.key) {
-            //             case "ArrowLeft":
-            //                 this.player.moveLeft();
-            //                 break;
-            //             case "ArrowRight":
-            //                 this.player.moveRight();
-            //                 break;
-            //             case "ArrowUp":
-            //                 this.player.moveUp();
-            //                 break;
-            //             case "ArrowDown":
-            //                 this.player.moveDown();
-            //                 break;
-            //         }
-            //     }
-            // });
+            this.change = 1;
+            // if (this.modal.style.display === `none`) {
+                document.addEventListener('keyup', ev => {
+                    if (this.player.classList.contains('gameBoard__item--team1')) {
+                        switch (ev.key) {
+                            case "a":
+                                this.moveLeft();
+                                break;
+                            case "d":
+                                this.moveRight();
+                                break;
+                            case "w":
+                                this.moveUp();
+                                break;
+                            case "s":
+                                this.moveDown();
+                                break;
+                        }
+                    } else {
+                        switch (ev.key) {
+                            case "ArrowLeft":
+                                this.moveLeft();
+                                break;
+                            case "ArrowRight":
+                                this.moveRight();
+                                break;
+                            case "ArrowUp":
+                                this.moveUp();
+                                break;
+                            case "ArrowDown":
+                                this.moveDown();
+                                break;
+                        }
+                    }
+                });
+            // }
 
         } catch (er) {
             console.error(er);
@@ -147,31 +151,31 @@ class Player {
         }
     }
 
-    // moveRight() {
-    //     if (this.position.x + this.change < 100) {
-    //         this.position.x += this.change;
-    //         this.player.style.left = `${this.position.x}%`;
-    //     }
-    // }
-    
-    // moveLeft() {
-    //     if (this.position.x - this.change > 1) {
-    //         this.position.x -= this.change;
-    //         this.player.style.left = `${this.position.x}%`;
-    //     }
-    // }
-    
-    // moveDown() {
-    //     if (this.position.y + this.change < 60) {
-    //         this.position.y += this.change;
-    //         this.player.style.top = `${this.position.y}%`;
-    //     }
-    // }
-    
-    // moveUp() {
-    //     if (this.position.y - this.change > 20) {
-    //         this.position.y -= this.change;
-    //         this.player.style.top = `${this.position.y}%`;
-    //     }
-    // }
+    moveRight() {
+        if ((this.position.x + this.change) <= 100) {
+            this.position.x += this.change;
+            this.player.style.left = `${this.position.x}%`;
+        }
+    }
+
+    moveLeft() {
+        if ((this.position.x - this.change) >= 1) {
+            this.position.x -= this.change;
+            this.player.style.left = `${this.position.x}%`;
+        }
+    }
+
+    moveDown() {
+        if ((this.position.y + this.change) <= 60) {
+            this.position.y += this.change;
+            this.player.style.top = `${this.position.y}%`;
+        }
+    }
+
+    moveUp() {
+        if ((this.position.y - this.change) >= 20) {
+            this.position.y -= this.change;
+            this.player.style.top = `${this.position.y}%`;
+        }
+    }
 }
