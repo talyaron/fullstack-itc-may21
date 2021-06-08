@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/style.css">
+</head>
+<body>
+    <form class="form" method="POST">
+        <h1 class="form__headline">Add a character!</h1>
+        <div>
+            <label for="name">Name:</label>
+            <input name="name" class="form__input" type="text" placeholder="Name" required autofocus>
+            <label for="image">Image URL:</label>
+            <input name="image" class="form__input" type="text" value="https://i.pinimg.com/originals/1a/9a/dc/1a9adcb460987f1a2bfb824d1fc86d35.gif" required>
+        <div>
+            <label for="size">Position (horizontal)</label>
+            <input name="size" class="form__input" type="range" min="1" max="1250">
+            <label for="size">Position (vertical)</label>
+            <input name="size" class="form__input" type="range" min="1" max="70">
+        </div>
+        <div>
+            <input class="form__input form__input--submit" type="submit" value="Generate character">
+        </div>
+    </form>
+
+    <img class="waldo" src="./pics/PinClipart.com_goodbye-clip-art_3791728.png" alt="Waldo" hidden>
+
+    <script src="./waldo2.js"></script>
+</body>
+</html>
