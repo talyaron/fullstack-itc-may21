@@ -1,0 +1,11 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.waldo {
+  height: 90px;
+  width: 70px;
+  position: absolute;
+}
+/*# sourceMappingURL=waldo.css.map */

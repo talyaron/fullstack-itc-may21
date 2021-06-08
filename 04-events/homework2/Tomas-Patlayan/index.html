@@ -1,14 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./dist/styles.css" />
     <title>Document</title>
-</head>
-<body>
-    
+  </head>
+  <body>
+    <form action="" onsubmit="handlerSumbit(event)">
+      <div class="form-container">
+        <div class="form-style__characters">
+          <label>Choose a Character</label>
+          <label>
+            <input type="radio" name="character" value="peter" checked />
+            <img
+              src="images/a1810a48d74ee9b50b938b36f72b0069.jpg"
+              class="wrapper__input--img"
+            />
+          </label>
+          <label>
+            <input type="radio" name="character" value="lois" />
+            <img
+              src="images/3042045-lois griffin.png"
+              class="wrapper__input--img"
+            />
+          </label>
+          <label>
+            <input type="radio" name="character" value="meg" />
+            <img
+              src="images/19525e759c8d691e5124ca9a3d43364c.jpg"
+              class="wrapper__input--img"
+            />
+          </label>
+          <label>
+            <input type="radio" name="character" value="chris" />
+            <img src="images/brian_griffin_1.jpg" class="wrapper__input--img" />
+          </label>
+          <label>
+            <input type="radio" name="character" value="brian" />
+            <img
+              src="images/p-family-guy-seth-green.jpg"
+              class="wrapper__input--img"
+            />
+          </label>
+          <label>
+            <input type="radio" name="character" value="stwie" />
+            <img src="images/download (5).jpg" class="wrapper__input--img" />
+          </label>
+        </div>
+        <div class="form-style__positions">
+          <label for="startx">Position X</label>
+          <input
+            type="number"
+            id="startx"
+            name="startx"
+            min="0"
+            max="88"
+            value="0"
+          />
+        </div>
+        <div class="form-style__positions">
+          <label for="starty">Position Y</label>
+          <input
+            type="number"
+            id="starty"
+            name="starty"
+            min="0"
+            max="75"
+            value="0"
+          />
+        </div>
+        <div class="form-style__id">
+          <legend>Put the Character ID</legend>
+          <input type="text" />
+        </div>
+        <div class="sumbit wrapper__input">
+          <button class="submit">Sumbit</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="family-character"></div>
 
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
