@@ -50,27 +50,27 @@ class GamePlayer{
     moveRight() {
         if (this.step + this.position.x < 96) {
             this.position.x += this.step;
-            this.piece.style.left = `${this.position.x}%`;
+            this.player.style.left = `${this.position.x}%`;
         }
     }
 
     moveLeft() {
         if (this.position.x - this.step > -1) {
             this.position.x -= this.step;
-            this.piece.style.left = `${this.position.x}%`;
+            this.player.style.left = `${this.position.x}%`;
         }
     }
     moveDown() {
         if (this.position.y + this.step < 95) {
             this.position.y += this.step;
-            this.piece.style.top = `${this.position.y}%`;
+            this.player.style.top = `${this.position.y}%`;
         }
     }
 
     moveUp() {
         if (this.position.y - this.step > -2) {
             this.position.y -= this.step;
-            this.piece.style.top = `${this.position.y}%`;
+            this.player.style.top = `${this.position.y}%`;
         }
     }
 }

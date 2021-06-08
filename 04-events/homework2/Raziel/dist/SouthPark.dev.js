@@ -58,7 +58,7 @@ function () {
     value: function moveRight() {
       if (this.step + this.position.x < 96) {
         this.position.x += this.step;
-        this.piece.style.left = "".concat(this.position.x, "%");
+        this.player.style.left = "".concat(this.position.x, "%");
       }
     }
   }, {
@@ -66,7 +66,7 @@ function () {
     value: function moveLeft() {
       if (this.position.x - this.step > -1) {
         this.position.x -= this.step;
-        this.piece.style.left = "".concat(this.position.x, "%");
+        this.player.style.left = "".concat(this.position.x, "%");
       }
     }
   }, {
@@ -74,7 +74,7 @@ function () {
     value: function moveDown() {
       if (this.position.y + this.step < 95) {
         this.position.y += this.step;
-        this.piece.style.top = "".concat(this.position.y, "%");
+        this.player.style.top = "".concat(this.position.y, "%");
       }
     }
   }, {
@@ -82,7 +82,7 @@ function () {
     value: function moveUp() {
       if (this.position.y - this.step > -2) {
         this.position.y -= this.step;
-        this.piece.style.top = "".concat(this.position.y, "%");
+        this.player.style.top = "".concat(this.position.y, "%");
       }
     }
   }]);
