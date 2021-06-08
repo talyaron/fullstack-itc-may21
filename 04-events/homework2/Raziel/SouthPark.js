@@ -1,10 +1,10 @@
-document.querySelector('.button').addEventListener('click',function(){
-    document.querySelector('.form_modal').style.display='flex';
-    });
+//document.querySelector('.button').addEventListener('click',function(){
+    //document.querySelector('.form_modal').style.display='flex';
+    //});
     
-    document.querySelector('.close').addEventListener('click',function(){
-        document.querySelector('.form_modal').style.display='none';
-    });
+  //  document.querySelector('.close').addEventListener('click',function(){
+        //document.querySelector('.form_modal').style.display='none';
+    //});
     
 class GamePlayer{
     constructor(playerId,playerImg,position){
@@ -50,27 +50,27 @@ class GamePlayer{
     moveRight() {
         if (this.step + this.position.x < 96) {
             this.position.x += this.step;
-            this.piece.style.left = `${this.position.x}%`;
+            this.player.style.left = `${this.position.x}%`;
         }
     }
 
     moveLeft() {
         if (this.position.x - this.step > -1) {
             this.position.x -= this.step;
-            this.piece.style.left = `${this.position.x}%`;
+            this.player.style.left = `${this.position.x}%`;
         }
     }
     moveDown() {
         if (this.position.y + this.step < 95) {
             this.position.y += this.step;
-            this.piece.style.top = `${this.position.y}%`;
+            this.player.style.top = `${this.position.y}%`;
         }
     }
 
     moveUp() {
         if (this.position.y - this.step > -2) {
             this.position.y -= this.step;
-            this.piece.style.top = `${this.position.y}%`;
+            this.player.style.top = `${this.position.y}%`;
         }
     }
 }
@@ -79,12 +79,12 @@ function handleSubmit(ev){
     ev.preventDefault();
    const inputName= document.querySelector('#charName');
    const  radioInput=document.querySelectorAll('.charImg')
-   const posX= document.querySelector("[name='posix']");
+   const posX= document.querySelector( "[name='posix']");
    const posY= document.querySelector("[name='posiy']");
 try {
     let charName=inputName.value;
     if (charName === "") throw new Error('The name is empty, please add a name');
-    let charPosX=posX.vale;
+    let charPosX=posX.value;
     if (!charPosX) throw new Error('error of position X');
     let charPosY=posY.value;
     if (!charPosY) throw new Error('error of position Y');
@@ -94,10 +94,10 @@ try {
             charpic = radioInput[i].value
         }
     }
-    console.log(charName, charpic, charPosX, charPosXY);
+    //console.log(charName, charpic, charPosX, charPosY);
     const newSouthPark = new GamePlayer(`#${charName}`, `${charpic}`, {
-        x: `${charPosX}`,
-        y: `${charPosY}`
+        x: parseInt(charPosX),
+        y: parseInt(charPosY)
     });
 
     document.addEventListener('keyup', ev => {

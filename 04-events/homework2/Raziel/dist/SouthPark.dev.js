@@ -8,13 +8,12 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-document.querySelector('.button').addEventListener('click', function () {
-  document.querySelector('.form_modal').style.display = 'flex';
-});
-document.querySelector('.close').addEventListener('click', function () {
-  document.querySelector('.form_modal').style.display = 'none';
-});
-
+//document.querySelector('.button').addEventListener('click',function(){
+//document.querySelector('.form_modal').style.display='flex';
+//});
+//  document.querySelector('.close').addEventListener('click',function(){
+//document.querySelector('.form_modal').style.display='none';
+//});
 var GamePlayer =
 /*#__PURE__*/
 function () {
@@ -59,7 +58,7 @@ function () {
     value: function moveRight() {
       if (this.step + this.position.x < 96) {
         this.position.x += this.step;
-        this.piece.style.left = "".concat(this.position.x, "%");
+        this.player.style.left = "".concat(this.position.x, "%");
       }
     }
   }, {
@@ -67,7 +66,7 @@ function () {
     value: function moveLeft() {
       if (this.position.x - this.step > -1) {
         this.position.x -= this.step;
-        this.piece.style.left = "".concat(this.position.x, "%");
+        this.player.style.left = "".concat(this.position.x, "%");
       }
     }
   }, {
@@ -75,7 +74,7 @@ function () {
     value: function moveDown() {
       if (this.position.y + this.step < 95) {
         this.position.y += this.step;
-        this.piece.style.top = "".concat(this.position.y, "%");
+        this.player.style.top = "".concat(this.position.y, "%");
       }
     }
   }, {
@@ -83,7 +82,7 @@ function () {
     value: function moveUp() {
       if (this.position.y - this.step > -2) {
         this.position.y -= this.step;
-        this.piece.style.top = "".concat(this.position.y, "%");
+        this.player.style.top = "".concat(this.position.y, "%");
       }
     }
   }]);
@@ -101,7 +100,7 @@ function handleSubmit(ev) {
   try {
     var charName = inputName.value;
     if (charName === "") throw new Error('The name is empty, please add a name');
-    var charPosX = posX.vale;
+    var charPosX = posX.value;
     if (!charPosX) throw new Error('error of position X');
     var charPosY = posY.value;
     if (!charPosY) throw new Error('error of position Y');
@@ -111,12 +110,12 @@ function handleSubmit(ev) {
       if (radioInput[i].checked) {
         charpic = radioInput[i].value;
       }
-    }
+    } //console.log(charName, charpic, charPosX, charPosY);
 
-    console.log(charName, charpic, charPosX, charPosXY);
+
     var newSouthPark = new GamePlayer("#".concat(charName), "".concat(charpic), {
-      x: "".concat(charPosX),
-      y: "".concat(charPosY)
+      x: parseInt(charPosX),
+      y: parseInt(charPosY)
     });
     document.addEventListener('keyup', function (ev) {
       console.log(ev.key);
