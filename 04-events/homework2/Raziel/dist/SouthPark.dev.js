@@ -8,12 +8,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-//document.querySelector('.button').addEventListener('click',function(){
-//document.querySelector('.form_modal').style.display='flex';
-//});
-//  document.querySelector('.close').addEventListener('click',function(){
-//document.querySelector('.form_modal').style.display='none';
-//});
 var GamePlayer =
 /*#__PURE__*/
 function () {
@@ -43,7 +37,7 @@ function () {
       try {
         this.player = document.createElement('img');
         this.player.setAttribute('src', this.playerImg);
-        this.player.style.position = "absolute";
+        this.player.style.position = "relative";
         this.player.style.width = "100px";
         this.player.style.height = "100px";
         this.player.style.left = "".concat(this.position.x, "%");
@@ -113,7 +107,7 @@ function handleSubmit(ev) {
     } //console.log(charName, charpic, charPosX, charPosY);
 
 
-    var newSouthPark = new GamePlayer("#".concat(charName), "".concat(charpic), {
+    var newSouthPark = new GamePlayer("#".concat(charName), charpic, {
       x: parseInt(charPosX),
       y: parseInt(charPosY)
     });

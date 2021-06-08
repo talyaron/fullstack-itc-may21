@@ -1,10 +1,4 @@
-//document.querySelector('.button').addEventListener('click',function(){
-    //document.querySelector('.form_modal').style.display='flex';
-    //});
-    
-  //  document.querySelector('.close').addEventListener('click',function(){
-        //document.querySelector('.form_modal').style.display='none';
-    //});
+
     
 class GamePlayer{
     constructor(playerId,playerImg,position){
@@ -35,7 +29,7 @@ class GamePlayer{
         try {
             this.player=document.createElement('img');
             this.player.setAttribute('src',this.playerImg);
-            this.player.style.position="absolute";
+            this.player.style.position="relative";
             this.player.style.width = "100px";
             this.player.style.height = "100px";
             this.player.style.left = `${this.position.x}%`;
@@ -78,7 +72,7 @@ class GamePlayer{
 function handleSubmit(ev){
     ev.preventDefault();
    const inputName= document.querySelector('#charName');
-   const  radioInput=document.querySelectorAll('.charImg')
+   const radioInput=document.querySelectorAll('.charImg');
    const posX= document.querySelector( "[name='posix']");
    const posY= document.querySelector("[name='posiy']");
 try {
@@ -95,7 +89,7 @@ try {
         }
     }
     //console.log(charName, charpic, charPosX, charPosY);
-    const newSouthPark = new GamePlayer(`#${charName}`, `${charpic}`, {
+    const newSouthPark = new GamePlayer(`#${charName}`, charpic, {
         x: parseInt(charPosX),
         y: parseInt(charPosY)
     });
