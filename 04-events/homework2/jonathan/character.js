@@ -19,6 +19,7 @@ class Character {
 
             this.createCharacter();
             this.step = 2;
+            this.isRight = 1;
 
         } catch (e) {
             console.log(e);
@@ -42,6 +43,7 @@ class Character {
         }
 
     }
+   
 
     moveRight() {
 
@@ -92,11 +94,7 @@ class Character {
 }
 
 
-let form = document.getElementsByTagName("form")[0];
-const input = document.querySelector('#id-name');
-const radio = document.getElementsByName("pokemon");
-const posX = form.querySelector("[name='startx']");
-const posY = form.querySelector("[name='starty']");
+
 
 
 
@@ -106,15 +104,28 @@ function handlerSumbit(event) {
 
     event.preventDefault();
 
-    let characterId = input.value;
-    let characterPosX = posX.value;
-    let characterPosY = posY.value;
+    let form = document.getElementsByTagName("form")[0];
+const input = document.querySelector('#id-name');
+const radio = document.getElementsByName("pokemon");
+const posX = form.querySelector("[name='startx']");
+const posY = form.querySelector("[name='starty']");
 
+    try {
+    let characterId = input.value;
+    console.log(characterId);
+    if (characterId === "") throw new Error('The id is empty, please write an id')
+    let characterPosX = posX.value;
+    if (!characterPosX) throw new Error('Any error for PosX')
+    let characterPosY = posY.value;
+    if (!characterPosY) throw new Error('Any error for Posy')
     for (var i = 0, length = radio.length; i < length; i++) {
         if (radio[i].checked) {
             charChoosen = radio[i].value
         }
     }
+    if (!charChoosen) throw new Error('Error Image')
+
+
 
     console.log(`The ID: ${characterId}, Character Image: ${charChoosen}, Position X: ${characterPosX}, Position Y: ${characterPosY}`)
 
@@ -133,6 +144,11 @@ function handlerSumbit(event) {
             break;
         default:
     }
+    
+}catch(e){
+    console.log(e)
+}
+
 
 }
 

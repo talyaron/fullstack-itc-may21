@@ -27,6 +27,7 @@ function () {
       if (!this.boardGamed) throw new Error('The boardGame was not created');
       this.createCharacter();
       this.step = 2;
+      this.isRight = 1;
     } catch (e) {
       console.log(e);
     }
@@ -98,57 +99,67 @@ function () {
   return Character;
 }();
 
-var form = document.getElementsByTagName("form")[0];
-var input = document.querySelector('#id-name');
-var radio = document.getElementsByName("pokemon");
-var posX = form.querySelector("[name='startx']");
-var posY = form.querySelector("[name='starty']");
 var character;
 
 function handlerSumbit(event) {
   event.preventDefault();
-  var characterId = input.value;
-  var characterPosX = posX.value;
-  var characterPosY = posY.value;
+  var form = document.getElementsByTagName("form")[0];
+  var input = document.querySelector('#id-name');
+  var radio = document.getElementsByName("pokemon");
+  var posX = form.querySelector("[name='startx']");
+  var posY = form.querySelector("[name='starty']");
 
-  for (var i = 0, length = radio.length; i < length; i++) {
-    if (radio[i].checked) {
-      charChoosen = radio[i].value;
+  try {
+    var characterId = input.value;
+    console.log(characterId);
+    if (characterId === "") throw new Error('The id is empty, please write an id');
+    var characterPosX = posX.value;
+    if (!characterPosX) throw new Error('Any error for PosX');
+    var characterPosY = posY.value;
+    if (!characterPosY) throw new Error('Any error for Posy');
+
+    for (var i = 0, length = radio.length; i < length; i++) {
+      if (radio[i].checked) {
+        charChoosen = radio[i].value;
+      }
     }
-  }
 
-  console.log("The ID: ".concat(characterId, ", Character Image: ").concat(charChoosen, ", Position X: ").concat(characterPosX, ", Position Y: ").concat(characterPosY));
+    if (!charChoosen) throw new Error('Error Image');
+    console.log("The ID: ".concat(characterId, ", Character Image: ").concat(charChoosen, ", Position X: ").concat(characterPosX, ", Position Y: ").concat(characterPosY));
 
-  switch (charChoosen) {
-    case 'pika':
-      character = new Character(characterId, 'img/piran.gif', {
-        x: parseInt(characterPosX),
-        y: parseInt(characterPosY)
-      });
-      break;
+    switch (charChoosen) {
+      case 'pika':
+        character = new Character(characterId, 'img/piran.gif', {
+          x: parseInt(characterPosX),
+          y: parseInt(characterPosY)
+        });
+        break;
 
-    case 'char':
-      character = new Character(characterId, 'img/charmander.gif', {
-        x: parseInt(characterPosX),
-        y: parseInt(characterPosY)
-      });
-      break;
+      case 'char':
+        character = new Character(characterId, 'img/charmander.gif', {
+          x: parseInt(characterPosX),
+          y: parseInt(characterPosY)
+        });
+        break;
 
-    case 'bulba':
-      character = new Character(characterId, 'img/bulba.gif', {
-        x: parseInt(characterPosX),
-        y: parseInt(characterPosY)
-      });
-      break;
+      case 'bulba':
+        character = new Character(characterId, 'img/bulba.gif', {
+          x: parseInt(characterPosX),
+          y: parseInt(characterPosY)
+        });
+        break;
 
-    case 'squirtle':
-      character = new Character(characterId, 'img/squirtle.gif', {
-        x: parseInt(characterPosX),
-        y: parseInt(characterPosY)
-      });
-      break;
+      case 'squirtle':
+        character = new Character(characterId, 'img/squirtle.gif', {
+          x: parseInt(characterPosX),
+          y: parseInt(characterPosY)
+        });
+        break;
 
-    default:
+      default:
+    }
+  } catch (e) {
+    console.log(e);
   }
 } // Yonathan. I was trying to remove child, the image of the current character on board after choosing another character but I failed. Can you explain me how to do that?
 //And I dont know if the instances are ok inside the sumbit function, is better to create an empty instance first and then pass the inputs, ratio, etc?
