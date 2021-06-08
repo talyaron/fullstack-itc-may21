@@ -14,7 +14,13 @@ function handleSubmit(ev) {
         throw new Error('No player selected!')
     }
     let posx = ev.target.children.posix.value;
+    if (posx > 96) {
+        posx = 96;
+    }
     let posy = ev.target.children.posiy.value;
+    if (posy > 95) {
+        posy = 95;
+    }
     console.log(playerName, playerImage, posx, posy);
     const newPiece = new GamePiece(`#${playerName}`, `${playerImage}`, '50px', '38px', {
         x: `${posx}`,
@@ -93,7 +99,7 @@ class GamePiece {
 
     //let create a method for moving left
     moveRight() {
-        if (this.step + this.position.x < 102) {
+        if (this.step + this.position.x < 96) {
             this.position.x += this.step;
             this.piece.style.left = `${this.position.x}%`;
         }
@@ -106,7 +112,7 @@ class GamePiece {
         }
     }
     moveDown() {
-        if (this.position.y + this.step < 101) {
+        if (this.position.y + this.step < 95) {
             this.position.y += this.step;
             this.piece.style.top = `${this.position.y}%`;
         }

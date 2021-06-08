@@ -27,7 +27,17 @@ function handleSubmit(ev) {
   }
 
   var posx = ev.target.children.posix.value;
+
+  if (posx > 96) {
+    posx = 96;
+  }
+
   var posy = ev.target.children.posiy.value;
+
+  if (posy > 95) {
+    posy = 95;
+  }
+
   console.log(playerName, playerImage, posx, posy);
   var newPiece = new GamePiece("#".concat(playerName), "".concat(playerImage), '50px', '38px', {
     x: "".concat(posx),
@@ -103,7 +113,7 @@ function () {
   }, {
     key: "moveRight",
     value: function moveRight() {
-      if (this.step + this.position.x < 102) {
+      if (this.step + this.position.x < 96) {
         this.position.x += this.step;
         this.piece.style.left = "".concat(this.position.x, "%");
       }
@@ -119,7 +129,7 @@ function () {
   }, {
     key: "moveDown",
     value: function moveDown() {
-      if (this.position.y + this.step < 101) {
+      if (this.position.y + this.step < 95) {
         this.position.y += this.step;
         this.piece.style.top = "".concat(this.position.y, "%");
       }
