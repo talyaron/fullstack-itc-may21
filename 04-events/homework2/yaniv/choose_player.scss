@@ -1,5 +1,5 @@
 * {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'ZCOOL KuaiLe', cursive;
 }
 
 button {
@@ -24,11 +24,13 @@ body {
     width: 90vw;
     height: 100%;
     margin: auto;
+    background-color: darkkhaki;
 }
 
 h1 {
     text-align: center;
     margin: 5px;
+    font-size: 3rem;
 }
 
 .teamsWrapper {
@@ -64,7 +66,7 @@ h1 {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 0 5px 5px white inset;
+    box-shadow: 0 0 5px 5px darkkhaki inset;
     width: 90vw;
     height: 75vh;
 
@@ -72,8 +74,8 @@ h1 {
 
         &--player {
             position: absolute;
-            width: 75px;
-            height: 90px;
+            width: 110px;
+            height: 100px;
             transition: all 0.5s;
         }
     }
@@ -103,7 +105,7 @@ h1 {
         align-items: center;
         overflow: auto;
         width: 40vw;
-        min-width: 350px;
+        min-width: 550px;
         padding: 5px;
 
         &--title {
@@ -174,8 +176,8 @@ h1 {
                     }
 
                     img {
-                        width: 75px;
-                        height: 90px;
+                        width: 110px;
+                        height: 100px;
                     }
 
                     &--team2 {

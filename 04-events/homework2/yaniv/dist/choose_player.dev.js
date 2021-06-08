@@ -6,8 +6,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-openModal();
-closeModal();
+var isModalOpenT1 = false;
+var isModalOpenT2 = false;
 
 function openModal() {
   var addToTeam1 = document.querySelector(".team__addPlayers--team1");
@@ -16,10 +16,12 @@ function openModal() {
   var modalTeam1 = document.querySelector(".modalBox--team1");
   var modalTeam2 = document.querySelector(".modalBox--team2");
   addToTeam1.addEventListener("click", function (ev) {
+    isModalOpenT1 = true;
     modal.style.display = "flex";
     modalTeam1.style.display = "unset";
   });
   addToTeam2.addEventListener("click", function (ev) {
+    isModalOpenT2 = true;
     modal.style.display = "flex";
     modalTeam2.style.display = "unset";
   });
@@ -32,6 +34,8 @@ function closeModal() {
   var modalTeam2 = document.querySelector(".modalBox--team2");
   close.forEach(function (el) {
     el.addEventListener("click", function (ev) {
+      isModalOpenT1 = false;
+      isModalOpenT2 = false;
       modal.style.display = "none";
       modalTeam1.style.display = "none";
       modalTeam2.style.display = "none";
@@ -59,11 +63,13 @@ function handleSubmit(ev) {
 
     var id = data.querySelector('[name="playerName"').value;
     var position = {};
-    position.x = data.querySelector('[name="xPos"').value;
-    position.y = data.querySelector('[name="yPos"').value;
+    position.x = Number(data.querySelector('[name="xPos"').value);
+    position.y = Number(data.querySelector('[name="yPos"').value);
     var modal = document.querySelector(".modalWrapper");
     var modalTeam1 = document.querySelector(".modalBox--team1");
     var modalTeam2 = document.querySelector(".modalBox--team2");
+    isModalOpenT1 = false;
+    isModalOpenT2 = false;
     modal.style.display = "none";
     modalTeam1.style.display = "none";
     modalTeam2.style.display = "none";
@@ -93,8 +99,7 @@ function () {
       this.board = document.querySelector('.gameBoard');
       this.modal = document.querySelector(".modalWrapper");
       this.addPlayer();
-      this.change = 1; // if (this.modal.style.display === `none`) {
-
+      this.change = 1;
       document.addEventListener('keydown', function (ev) {
         if (_this.player.classList.contains('gameBoard__item--team1')) {
           switch (ev.key) {
@@ -141,7 +146,7 @@ function () {
               break;
           }
         }
-      }); // }
+      });
     } catch (er) {
       console.error(er);
     }
@@ -175,7 +180,7 @@ function () {
   }, {
     key: "moveRight",
     value: function moveRight() {
-      if (this.position.x + this.change <= 100) {
+      if (!isModalOpenT1 && !isModalOpenT2 && this.position.x + this.change <= 90) {
         this.position.x += this.change;
         this.player.style.left = "".concat(this.position.x, "%");
       }
@@ -183,7 +188,7 @@ function () {
   }, {
     key: "moveLeft",
     value: function moveLeft() {
-      if (this.position.x - this.change >= 1) {
+      if (!isModalOpenT1 && !isModalOpenT2 && this.position.x - this.change >= 1) {
         this.position.x -= this.change;
         this.player.style.left = "".concat(this.position.x, "%");
       }
@@ -191,7 +196,7 @@ function () {
   }, {
     key: "moveDown",
     value: function moveDown() {
-      if (this.position.y + this.change <= 60) {
+      if (!isModalOpenT1 && !isModalOpenT2 && this.position.y + this.change <= 60) {
         this.position.y += this.change;
         this.player.style.top = "".concat(this.position.y, "%");
       }
@@ -199,7 +204,7 @@ function () {
   }, {
     key: "moveUp",
     value: function moveUp() {
-      if (this.position.y - this.change >= 20) {
+      if (!isModalOpenT1 && !isModalOpenT2 && this.position.y - this.change >= 20) {
         this.position.y -= this.change;
         this.player.style.top = "".concat(this.position.y, "%");
       }
@@ -208,3 +213,6 @@ function () {
 
   return Player;
 }();
+
+openModal();
+closeModal();
