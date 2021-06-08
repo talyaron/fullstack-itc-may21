@@ -29,7 +29,6 @@ class Character {
 
     createCharacter() {
         try {
-
             this.pokemon = document.createElement('img');
             this.pokemon.setAttribute('src', this.imageURl);
             this.pokemon.style.width = "100px";
@@ -45,7 +44,7 @@ class Character {
 
     }
 
-
+    
     moveRight() {
 
         if (this.step + this.position.x <= 85) {
