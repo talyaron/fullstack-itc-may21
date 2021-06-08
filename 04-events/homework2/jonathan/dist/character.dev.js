@@ -27,7 +27,6 @@ function () {
       if (!this.boardGamed) throw new Error('The boardGame was not created');
       this.createCharacter();
       this.step = 2;
-      this.isRight = 1;
     } catch (e) {
       console.log(e);
     }

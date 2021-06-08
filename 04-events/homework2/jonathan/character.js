@@ -19,7 +19,8 @@ class Character {
 
             this.createCharacter();
             this.step = 2;
-            this.isRight = 1;
+            
+            
 
         } catch (e) {
             console.log(e);
@@ -89,6 +90,7 @@ class Character {
             this.pokemon.style.transform = "rotate(270deg)"
         }
     }
+
 
 
 }
