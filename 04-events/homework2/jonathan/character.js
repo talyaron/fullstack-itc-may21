@@ -29,10 +29,16 @@ class Character {
 
     createCharacter() {
         try {
+
+            if(this.boardGamed.hasChildNodes()){
+                this.boardGamed.removeChild(document.querySelector('.image'));
+            }
+
             this.pokemon = document.createElement('img');
             this.pokemon.setAttribute('src', this.imageURl);
             this.pokemon.style.width = "100px";
             this.pokemon.style.height = "100px";
+            this.pokemon.classList.add('image');
             this.pokemon.style.position = "absolute";
             this.pokemon.style.left = `${this.position.x}%`;
             this.pokemon.style.top = `${this.position.y}%`;
@@ -44,7 +50,7 @@ class Character {
 
     }
 
-    
+
     moveRight() {
 
         if (this.step + this.position.x <= 85) {
@@ -108,7 +114,6 @@ function handlerSumbit(event) {
 
     try {
         let characterId = input.value;
-        console.log(characterId);
         if (characterId === "") throw new Error('The id is empty, please write an id')
         let characterPosX = posX.value;
         if (!characterPosX) throw new Error('Any error for PosX')
@@ -149,8 +154,5 @@ function handlerSumbit(event) {
 }
 
 
-// Yonathan. I was trying to remove child, the image of the current character on board after choosing another character but I failed. Can you explain me how to do that?
-
-//And I dont know if the instances are ok inside the sumbit function, is better to create an empty instance first and then pass the inputs, ratio, etc?
 
 
