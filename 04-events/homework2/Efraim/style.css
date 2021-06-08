@@ -1,6 +1,8 @@
 body {
     display: flex;
     justify-content: center;
+    background-color: black;
+    overflow: hidden
 }
 div {
     display: flex;
@@ -8,6 +10,8 @@ div {
 img {
     width: 40px;
     height: 30px;
+    border-radius: 100%;
+    margin-bottom: 1rem;
 }
 .piece {
 
@@ -15,22 +19,42 @@ img {
     transition: all 200ms;
 }
 
+label {
+    font-family: fantasy;
+    color: whitesmoke;
+    mix-blend-mode: difference;
+    font-size: larger;
+}
+.submit-button {
+    font-size: 2rem;
+    border-radius: 100%;
+    font-family: fantasy;
+    background-color:firebrick;
+    color: floralwhite;
+    width: 100px;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
 #boardGame {
-    width: 80vw;
-    height: 80vh;
-    background-color: rgb(187, 255, 255);
+    width: 100vw;
+    height: 100vh;
+    background-image: url(Battlefield3ds.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
-    border-bottom: 37px solid  rgb(187, 255, 255);
-    border-right: 50px solid  rgb(187, 255, 255);
 
 }
 
 form {
     width: fit-content;
-    height: fit-content;
+    height: 91.5vh;
     border: 2px solid black;
     border-radius: 5px;
     padding: 30px;
+    background-image: url(bowser.jpeg);
+    background-repeat: repeat-y;
+    background-size: contain;
 }
 
 input {

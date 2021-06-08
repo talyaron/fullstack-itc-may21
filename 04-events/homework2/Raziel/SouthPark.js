@@ -1,132 +1,129 @@
-
-
- 
-function handleSubmit(ev) {
-    ev.preventDefault();
-    console.dir(ev.target.children)
-    let playerName = document.querySelector('#charName').value;
+//document.querySelector('.button').addEventListener('click',function(){
+    //document.querySelector('.form_modal').style.display='flex';
+    //});
     
-    const imageSelect = document.querySelectorAll('#charImg');
-   
-    let playerImage;
-    for (let i = 0; i < imageSelect.length; i++) {
-        if (imageSelect[i].checked) {
-            playerImage = imageChosen[i].src;
+  //  document.querySelector('.close').addEventListener('click',function(){
+        //document.querySelector('.form_modal').style.display='none';
+    //});
+    
+class GamePlayer{
+    constructor(playerId,playerImg,position){
+
+       try {
+        if (typeof position !== "object") throw new Error('position is not an object')
+        if (!("x" in position) || !("y" in position)) throw new Error(
+            'starting point should have this format {x:0, y:0}')
+
+      this.playerId=playerId;
+      this.playerImg=playerImg;
+    
+      this.position={};
+      this.position.x = position.x;
+      this.position.y = position.y;
+      ///----------------------
+
+      this.boardArea=document.querySelector('#gameBoard');
+      this.createPLayer();
+      this.step=2;
+
+       } catch (e) {
+           console.log(e);
+       } 
+    }
+
+    createPLayer(){
+        try {
+            this.player=document.createElement('img');
+            this.player.setAttribute('src',this.playerImg);
+            this.player.style.position="absolute";
+            this.player.style.width = "100px";
+            this.player.style.height = "100px";
+            this.player.style.left = `${this.position.x}%`;
+            this.player.style.top = `${this.position.y}%`;
+            this.boardArea.appendChild(this.player);
+
+        } catch (e) {
+            console.log(e);
+            
         }
     }
-    if (playerImage === undefined) {
-        throw new Error('No player selected!')
+    moveRight() {
+        if (this.step + this.position.x < 96) {
+            this.position.x += this.step;
+            this.player.style.left = `${this.position.x}%`;
+        }
     }
-    let posx = document.querySelector('#posix').value;
-    let posy = document.querySelector('#posiy').value;
-    console.log(playerName, playerImage, posx, posy);
-    const newPiece = new GamePiece(`#${playerName}`, `${playerImage}`, '50px', '50px', {
-        x: `${posx}`,
-       y: `${posy}`
-  
-   });
-   
+
+    moveLeft() {
+        if (this.position.x - this.step > -1) {
+            this.position.x -= this.step;
+            this.player.style.left = `${this.position.x}%`;
+        }
+    }
+    moveDown() {
+        if (this.position.y + this.step < 95) {
+            this.position.y += this.step;
+            this.player.style.top = `${this.position.y}%`;
+        }
+    }
+
+    moveUp() {
+        if (this.position.y - this.step > -2) {
+            this.position.y -= this.step;
+            this.player.style.top = `${this.position.y}%`;
+        }
+    }
+}
+
+function handleSubmit(ev){
+    ev.preventDefault();
+   const inputName= document.querySelector('#charName');
+   const  radioInput=document.querySelectorAll('.charImg')
+   const posX= document.querySelector( "[name='posix']");
+   const posY= document.querySelector("[name='posiy']");
+try {
+    let charName=inputName.value;
+    if (charName === "") throw new Error('The name is empty, please add a name');
+    let charPosX=posX.value;
+    if (!charPosX) throw new Error('error of position X');
+    let charPosY=posY.value;
+    if (!charPosY) throw new Error('error of position Y');
+    let charpic;
+    for (var i = 0, length = radioInput.length; i < length; i++) {
+        if (radioInput[i].checked) {
+            charpic = radioInput[i].value
+        }
+    }
+    //console.log(charName, charpic, charPosX, charPosY);
+    const newSouthPark = new GamePlayer(`#${charName}`, `${charpic}`, {
+        x: parseInt(charPosX),
+        y: parseInt(charPosY)
+    });
+
     document.addEventListener('keyup', ev => {
         console.log(ev.key)
         switch (ev.key) {
             case "ArrowLeft":
-                newPiece.moveLeft();
+                newSouthPark.moveLeft();
                 break;
             case "ArrowRight":
-                newPiece.moveRight();
+                newSouthPark.moveRight();
                 break;
             case "ArrowDown":
-                newPiece.moveDown();
+                newSouthPark.moveDown();
                 break;
             case "ArrowUp":
-                newPiece.moveUp();
+                newSouthPark.moveUp();
                 break;
-  
+           
         }
     })
-    ev.target.reset();
-  
-  
-  }
-  
-  class GamePiece {
-  
-  
-    constructor(pieceId, imagePhoto, width, height, position) {
-        try {
-  
-            if (typeof position !== "object") throw new Error('position is not an object')
-            if (!("x" in position) || !("y" in position)) throw new Error(
-                'starting point should have this format {x:0, y:0}')
-  
-            this.height = height;
-            this.width = width;
-            this.pieceId = pieceId;
-            this.imagePhoto = imagePhoto;
-  
-            //inner position
-            this.position = {};
-            this.position.x = position.x;
-            this.position.y = position.y;
-  
-            //initilizing
-            this.boardGamed = document.querySelector('#gameBoard');
-            this.createPeice();
-            this.step = 2;
-  
-        } catch (e) {
-            console.error(e)
-        }
-  
-    }
-  
-    createPeice() {
-        try {
-            this.piece = document.createElement('img');
-            this.piece.setAttribute('src', this.imagePhoto);
-            this.piece.setAttribute('width', this.width);
-            this.piece.setAttribute('height', this.height);
-            this.piece.classList.add("piece");
-            this.piece.style.left = `${this.position.x}%`;
-            this.piece.style.top = `${this.position.y}%`;
-            this.boardGamed.appendChild(this.piece);
-        } catch (e) {
-            console.error(e)
-        }
-    }
-  
-  
-    //let create a method for moving left
-    moveRight() {
-        if (this.step + this.position.x < 102) {
-            this.position.x += this.step;
-            this.piece.style.left = `${this.position.x}%`;
-        }
-    }
-  
-    moveLeft() {
-        if (this.position.x - this.step > -1) {
-            this.position.x -= this.step;
-            this.piece.style.left = `${this.position.x}%`;
-        }
-    }
-    moveDown() {
-        if (this.position.y + this.step < 101) {
-            this.position.y += this.step;
-            this.piece.style.top = `${this.position.y}%`;
-        }
-    }
-  
-    moveUp() {
-        if (this.position.y - this.step > -2) {
-            this.position.y -= this.step;
-            this.piece.style.top = `${this.position.y}%`;
-        }
-    }
-  }
-  document.querySelector('.button').addEventListener('click', function () {
-    document.querySelector('.form_modal').style.display = 'flex';
-  });
-  document.querySelector('.close').addEventListener('click', function () {
-    document.querySelector('.form_modal').style.display = 'none';
-  });
+    
+} catch (e) {
+    
+    console.log(e)
+}
+
+
+}
+

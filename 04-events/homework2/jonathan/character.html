@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/ed/a7/89/eda7894277f3820de80ebb7cb691b9d5.png" />
+    <link rel="stylesheet" href="dist/character.min.css">
+
+    <title>Pokemon</title>
+</head>
+
+<body style="background-image: url('./img/ballpoke.jpg');">
+    <div class="wrapper">
+        <section class = "wrapper__section1">
+            <h1>Character Move</h1>
+            <form onsubmit="handlerSumbit(event)">
+                <fieldset>
+                    <legend>Choose a pokemon to move on the field</legend>
+                    <div class="wrapper__input">
+                        <label for="id-name">Enter an ID</label>
+                        <input type="text" id="id-name" name="name" minlength="4" maxlength="8" size="10">
+                    </div>
+                    <div class="wrapper__input">
+                        <label>Choose a Character</label>
+                        <label>
+                            <input type="radio" name="pokemon" value="pika" checked>
+                            <img src="img/pifoto.png" class="wrapper__input--img">
+                        </label>
+                        <label>
+                            <input type="radio" name="pokemon" value="char">
+                            <img src="img/charmander.png" class="wrapper__input--img">
+                        </label>
+                        <label>
+                            <input type="radio" name="pokemon" value="bulba">
+                            <img src="img/Bulbasaur.png" class="wrapper__input--img">
+                        </label>
+                        <label>
+                            <input type="radio" name="pokemon" value="squirtle">
+                            <img src="img/squirtle.png" class="wrapper__input--img">
+                        </label>
+                    </div>
+                    <div class="wrapper__input">
+                        <label for="startx">Position X</label>
+                        <input type="number" id="startx" name="startx" min="0" max="88" value="0">
+                    </div>
+                    <div class="wrapper__input">
+                        <label for="starty">Position Y</label>
+                        <input type="number" id="starty" name="starty" min="0" max="75" value="0">
+                    </div>
+                    <div class="sumbit wrapper__input">
+                        <button class="submit">Sumbit</button>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+        <section class = "wrapper__section2">
+            <div id="boardGame"></div>
+        </section>
+    </div>
+
+    <script src="listener.js"></script>
+    <script src="character.js"></script>
+
+</body>
+
+</html>
