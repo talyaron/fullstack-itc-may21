@@ -7,28 +7,36 @@
     <title>Document</title>
   </head>
   <body>
-    <form>
-      <input type="button" />
-      <input type="checkbox" />
+    <form onsubmit="handleSubmit(ev)">
+      <input type="button" name="button" />
+      <input type="checkbox" name="checkbox" />
       <input type="color" />
       <input type="date" />
       <input type="datetime-local" />
       <input type="date" />
       <input type="datetime" />
-      <input type="email" />
+      <input type="email" placeholder="Gmail" />
       <input type="file" />
       <input type="hidden" />
       <input type="image" />
-      <input type="password" />
+      <input type="password" placeholder="your password" />
       <input type="range" />
       <input type="reset" />
-      <input type="search" />
+      <input type="search" placeholder="press to search" />
       <input type="submit" />
-      <input type="url" />
+      <input type="url" placeholder="example - Https//:Www.facebush.com" />
       <input type="week" />
-      <input type="tel" />
-      <input type="text" />
+      <input type="tel" placeholder="example - +927-5625214523" />
+      <input type="text" placeholder="what do you want?" />
       <input type="radio" />
     </form>
+    <script>
+      function handleSubmit(ev) {
+        ev.preventDefault();
+        let date = ev.target.children.date.value;
+        console.log(date);
+      }
+    </script>
   </body>
 </html>
+<!-- put types: text, search, url, tel, email, and password. -->
