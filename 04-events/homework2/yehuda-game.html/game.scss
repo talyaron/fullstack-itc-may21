@@ -1,0 +1,26 @@
+
+    .piece {
+
+        position: absolute;
+        transition: all 200ms;
+        
+    }
+
+    #boardGame {
+        width: 100vw;
+        height: 100vh;
+        background-color:blue;
+        position: absolute;
+        align-content: center;
+    }
+
+    h1 { color: blue;
+        text-align: center;
+        border-style: dashed;
+        border-color: darkblue;
+        padding: 50px;
+        background-color: pink;
+        
+        
+
+}
