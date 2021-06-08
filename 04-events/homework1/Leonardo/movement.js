@@ -10,21 +10,22 @@ try {
     lionImage.style.left = `35%`;
     lionImage.style.top = `35%`;
     if (!lionImage) {
-        throw new Error('The element "lionImage" could not be found')
+        throw new Error('The element "lionImage" could not be found')    /* YS: This should be in the line after you define lionImage and before you do lionImage.something 
+                                                                            so that if you do lionImage.something and it doesnt exist, your error wil be caught */
     }
 
     //Events to play with the monkey with arrow keys
-    document.addEventListener('keydown', ev => {
+    document.addEventListener('keydown', ev => {  /*Try to use a callback instead of writing the whole function when doing document.addEventlistener: document.addEventListener('mouseover', moveMonkey) */
         if (ev.key.includes('ArrowLeft')) {
             if (parseInt(lionImage.style.left) > 0) {
                 let newPositionLeft = parseInt(lionImage.style.left) - 1;
-                lionImage.style.left = `${newPositionLeft}%`;
+                lionImage.style.left = `${newPositionLeft}%`;                               /*YS: DRY */
                 lionImage.style.transform = `rotateY(180deg)`;
             };
 
         } else if (ev.key.includes('ArrowRight')) {
             if (parseInt(lionImage.style.left) < 64) {
-                let newPositionRight = parseInt(lionImage.style.left) + 1;
+                let newPositionRight = parseInt(lionImage.style.left) + 1;                   /*YS: DRY */ 
                 lionImage.style.left = `${newPositionRight}%`;
                 lionImage.style.transform = `rotateY(0deg)`;
             };
@@ -32,11 +33,11 @@ try {
         } else if (ev.key.includes('ArrowUp')) {
             if (parseInt(lionImage.style.top) > 0) {
                 let newPositionTop = parseInt(lionImage.style.top) - 1;
-                lionImage.style.top = `${newPositionTop}%`;
+                lionImage.style.top = `${newPositionTop}%`;                                  /*YS: DRY */
                 lionImage.style.transform = `rotateX(180deg)`;
             };
 
-        } else if (ev.key.includes('ArrowDown')) {
+        } else if (ev.key.includes('ArrowDown')) {                                           /*YS: DRY */
             if (parseInt(lionImage.style.top) < 57) {
                 let newPositionBottom = parseInt(lionImage.style.top) + 1;
                 lionImage.style.top = `${newPositionBottom}%`;
@@ -45,7 +46,9 @@ try {
         };
     });
 
-    //Event when the mouse is over the monkey:
+
+    // YS: This should be another try/catch instead of part of the first one. 
+    //Event when the mouse is over the monkey:                         
     lionImage.addEventListener('mouseover', () => {
         const song = document.querySelector('audio');
         const movieTitle = document.querySelector('.title__image');
@@ -54,10 +57,11 @@ try {
         lionImage.style.filter = `brightness(140%)`;
         movieTitle.style.display = `inline`;
         if (!song || !movieTitle) {
-            throw new Error(`Cant find the element "Audio" or "Title Image"`)
+            throw new Error(`Cant find the element "Audio" or "Title Image"`)  //YS: Same as lionKing
         }
     });
 
+    //YS: Another try/catch
     //Get rid of the event when the mouse leaves the monkey:
     lionImage.addEventListener('mouseout', () => {
         const song = document.querySelector('audio');
@@ -66,7 +70,7 @@ try {
         lionImage.style.filter = `none`;
         movieTitle.style.display = `none`;
         if (!song || !movieTitle) {
-            throw new Error(`Cant find the element "Audio" or "Title Image"`)
+            throw new Error(`Cant find the element "Audio" or "Title Image"`)   //YS: Same as the lionking, this should be after defining song, so that if it doesnt exist and you write song.something it catches the error before. 
         }
     });
 } catch (error) {

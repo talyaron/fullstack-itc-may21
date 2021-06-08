@@ -9,7 +9,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // Selecting Waldo:
 var waldo = document.querySelector('.waldo');
 waldo.style.top = '295px';
-waldo.style.left = '560px'; //Create class in case more characters will be added in the future:
+waldo.style.left = '560px'; //Create class in case more characters will be added in the future:                         *YS: This class is not doing anything, you can remove it.   */
 
 var Character =
 /*#__PURE__*/
@@ -29,7 +29,7 @@ function () {
     value: function createCaharacter() {
       try {
         this.character = document.createElement('img');
-        this.character.setAttribute('src', this.imageUrl);
+        this.character.setAttribute('src', this.imageUrl); //YS: Remember to throw errors in you try:  <if(!character) throw new Error("No Character")>
       } catch (e) {
         console.error(e);
       }
@@ -41,6 +41,7 @@ function () {
 
 
 window.addEventListener('keydown', function (event) {
+  //YS: Nice use of switch. Missing try/catch
   var positionChange = 5;
 
   switch (event.key) {
@@ -63,6 +64,7 @@ window.addEventListener('keydown', function (event) {
 }); // Mouseover:
 
 waldo.addEventListener('mouseover', function (event) {
-  waldo.style.display = 'none';
+  waldo.style.display = 'none'; //YS: After you accept the alert waldo dissappears and there is no way to bring him back. 
+
   alert('Did you look for me?');
 });
