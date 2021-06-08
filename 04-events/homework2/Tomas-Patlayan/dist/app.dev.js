@@ -6,73 +6,97 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Family =
+var Player =
 /*#__PURE__*/
 function () {
-  function Family(imgUrl) {
-    _classCallCheck(this, Family);
+  function Player(imgUrl, pos) {
+    _classCallCheck(this, Player);
 
-    this.imgUrl = imgUrl; //    this.charid = charid;
-    //    this.position = {};
-    //    this.position.x = position.x;
-    //    this.position.y = position.y;
-
-    this.family = document.querySelector("family-character");
-    this.createFamily(); //    this.step = 4;
+    this.imgUrl = imgUrl;
+    this.board = document.querySelector(".container-board");
+    this.pos = {};
+    this.pos.x = pos.x;
+    this.pos.y = pos.y;
+    this.characterFamily();
   }
 
-  _createClass(Family, [{
-    key: "createFamily",
-    value: function createFamily() {
-      this.character = document.createElement("img");
-      this.character.setAttribute("src", this.imgUrl);
-      this.family.appendChild(this.character);
-      this.character.style.width = "400px";
-      this.character.style.height = "400px"; //    this.character.style.position = "absolute";
-      //    this.character.style.left = `${this.position.x}%`;
-      //    this.character.style.top = `${this.position.y}%`;
-      //    this.character.style.transform = "scaleX(-1)"
+  _createClass(Player, [{
+    key: "characterFamily",
+    value: function characterFamily() {
+      this.fmg = document.createElement("img");
+      this.fmg.setAttribute("src", this.imgUrl);
+      this.fmg.style.width = "400px";
+      this.fmg.style.height = "400px";
+      this.fmg.style.position = "absolute";
+      this.fmg.style.left = "".concat(this.pos.x, "%");
+      this.fmg.style.top = "".concat(this.pos.y, "%");
+      this.fmg.style.transform = "scaleX(-1)";
+      this.board.appendChild(this.fmg);
     }
   }]);
 
-  return Family;
+  return Player;
 }();
 
-var radio = document.querySelectorAll('[name="character"]');
-var person;
-
-var handlerSumbit = function handlerSumbit(event) {
+function handlerSumbit(event) {
   event.preventDefault();
+  var form = document.getElementsByTagName("form")[0];
+  var circle = document.getElementsByName("character");
+  var characterY = form.querySelector("[name= 'positiony']");
+  var characterX = form.querySelector("[name= 'positionx']");
 
-  for (var i = 0; i < radio.length; i++) {
-    if (radio[i].checked) {
-      selectCharacter = radio[i].value;
+  for (var i = 0; i < circle.length; i++) {
+    if (circle[i].checked) {
+      chooseCharater = circle[i].value;
     }
   }
 
-  switch (selectCharacter) {
+  var familyY = characterY.value;
+  var familyX = characterX.value;
+
+  switch (chooseCharater) {
     case "peter":
-      person = new Family("https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg");
+      character = new Player('./images/peter.png', {
+        y: parseInt(familyY),
+        x: parseInt(familyX)
+      });
       break;
 
     case "lois":
-      person = new Family("https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg");
+      character = new Player("./images/lois.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX)
+      });
       break;
 
     case "meg":
-      person = new Family("https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg");
+      character = new Player("./images/meg.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX)
+      });
       break;
 
     case "chris":
-      person = new Family("https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg");
+      character = new Player("./images/chris.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX)
+      });
       break;
 
     case "brian":
-      person = new Family("https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg");
+      character = new Player("./images/brian.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX)
+      });
       break;
 
     case "stwie":
-      person = new Family("https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg");
+      character = new Player("./images/Stewie.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX)
+      });
       break;
+
+    default:
   }
-};
+}

@@ -1,45 +1,42 @@
-
-body{
-    background-image: url('https://static.wikia.nocookie.net/familyguyfanon/images/3/3c/The_Griffin_House.png/revision/latest?cb=20180405011745');
-    background-position: center;
-    background-size: cover;
-
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
 }
 
-.form-container {
-  width: 18vw;
-  background-color: aquamarine;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
-.form-style__characters {
+img {
+  max-width: 100%;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+}
 
+form {
+  width: 20%;
+}
+
+
+.container-inputs {
   display: flex;
   flex-direction: column;
+  gap:1rem;
 
-  label {
-  
+  &__input {
     img {
       width: 50px;
     }
   }
-
-  input[type="radio"] {
-     display: flex;
-     align-items: center;
-    width: auto;
-
-    margin: auto;
 }
+.container-board {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('https://static.wikia.nocookie.net/familyguyfanon/images/3/3c/The_Griffin_House.png/revision/latest?cb=20180405011745');
 }
-
-.form-style__positions {
-
-    input{width: 100px;}
-    
-}
-.form-style__id {
-
-    input{width: 100px;}
-    
-}
-
