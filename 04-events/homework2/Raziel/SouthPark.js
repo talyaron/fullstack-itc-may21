@@ -5,9 +5,6 @@ function handleSubmit(ev) {
     ev.preventDefault();
     console.dir(ev.target.children)
     let playerName = document.querySelector('#charName').value;
-    console.log(playerName)
-
-
     
     const imageSelect = document.querySelectorAll('#charImg');
    
@@ -23,11 +20,11 @@ function handleSubmit(ev) {
     let posx = document.querySelector('#posix').value;
     let posy = document.querySelector('#posiy').value;
     console.log(playerName, playerImage, posx, posy);
-    //const newPiece = new GamePiece(`#${playerName}`, `${playerImage}`, '50px', '50px', {
-       // x: `${posx}`,
-       // y: `${posy}`
+    const newPiece = new GamePiece(`#${playerName}`, `${playerImage}`, '50px', '50px', {
+        x: `${posx}`,
+       y: `${posy}`
   
-   // });
+   });
    
     document.addEventListener('keyup', ev => {
         console.log(ev.key)
