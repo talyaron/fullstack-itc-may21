@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <h2>PUT AN IMAGE URL AND PLAY WITH ARROWS</h2>
+        <form onsubmit="handleSubmit(event)">
+ 
+            <label class="form_inputs" for="name">Name:</label>
+            <input class="form_inputs" name="name" type="text">
+
+            <label class="form_inputs" for="">Image Url:</label>
+            <input class="form_inputs" id="url" name="url" type="url">
+        
+
+            <label class="form_inputs" for="posicionX">Select X Position:</label>
+            <input class="form_inputs" type="number" min="0" max="85" name="posx" id="posx" placeholder="">
+
+            <label class="form_inputs" for="posicionY">Select Y Position:</label>
+            <input class="form_inputs" type="number" min="0" max="65" name="posy" id="posy">
+
+            <input class="form_inputs boton" style="margin-top: 10px;" type="submit">
+        </form>
+    </div>
+    <div id="boardGame">
+        <img class="personajeOff" id="personaje" src="" style="height: 100px; width: 100px;" alt="">
+    </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

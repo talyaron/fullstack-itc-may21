@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Game</title>
+    <link rel="stylesheet" href="dist/choose_player.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Most awsome game ever</h1>
+    <div class="modalWrapper">
+        <div class="modalBox modalBox--team1">
+            <div class="modalBox__item modalBox__item--title modalBox__item--title--team1">
+                <span>Team 1 - Choose Player</span>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modalBox__item modalBox__item--content">
+                <form class="choosePlayerForm" onsubmit="handleSubmit(event)" id="team1Form">
+                    <div class="choosePlayerForm__item">
+                        <label for="playerImg1T1">
+                            <img
+                                src="https://s3.amazonaws.com/gameartpartnersimagehost/wp-content/uploads/edd/2015/08/Featured-Image24.png">
+                        </label>
+                        <input type="radio" name="playerImg" id="playerImg1T1" />
+                    </div>
+                    <div class="choosePlayerForm__item">
+                        <label for="playerImg2T1">
+                            <img
+                                src="https://s3.amazonaws.com/gameartpartnersimagehost/wp-content/uploads/edd/2015/08/Featured-Image23.png">
+                        </label>
+                        <input type="radio" name="playerImg" id="playerImg2T1" />
+                    </div>
+                    <div class="choosePlayerForm__item">
+                        <label for="playerImg3T1">
+                            <img src="https://i.dlpng.com/static/png/6489044_preview.png">
+                        </label>
+                        <input type="radio" name="playerImg" id="playerImg3T1" />
+                    </div>
+                    <div class="choosePlayerForm__item">
+                        <label for="playerImg4T1">
+                            <img src="http://www.clipartbest.com/cliparts/4i9/L44/4i9L44AkT.png">
+                        </label>
+                        <input type="radio" name="playerImg" id="playerImg4T1" />
+                    </div>
+                    <div class="choosePlayerForm__item choosePlayerForm__item--name">
+                        <label for="playerNameT1">Name</label>
+                        <input type="text" minlength="1" maxlength="20" name="playerName" required id="playerNameT1" />
+                    </div>
+                    <div class="choosePlayerForm__item choosePlayerForm__item--posX">
+                        <label for="posXT1">Board Horizontal Shift</label>
+                        <input type="number" min="1" max="50" name="xPos" required id="posXT1" />
+                        <p>(1-50%)</p>
+                    </div>
+                    <div class="choosePlayerForm__item choosePlayerForm__item--posY">
+                        <label for="posYT1">Board Vertical Shift</label>
+                        <input type="number" min="20" max="60" name="yPos" required id="posYT1" />
+                        <p>(20-60%)</p>
+                    </div>
+                    <input class="choosePlayerForm__item choosePlayerForm__item--submit" type="submit" name="submit"
+                        value="Let's play!" />
+                </form>
+            </div>
+        </div>
+        <div class="modalBox modalBox--team2">
+            <div class="modalBox__item modalBox__item--title modalBox__item--title--team2">
+                <span>Team 2 - Choose Player</span>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modalBox__item modalBox__item--content">
+                <form class="choosePlayerForm" onsubmit="handleSubmit(event)">
+                    <div class="choosePlayerForm__item choosePlayerForm__item--team2">
+                        <label for="playerImg1T2">
+                            <img
+                                src="https://www.nicepng.com/png/full/106-1067251_2d-game-character-png-download-2d-robot-png.png">
+                        </label>
+                        <input type="radio" name="playerImg" id="playerImg1T2" />
+                    </div>
+                    <div class="choosePlayerForm__item choosePlayerForm__item--team2">
+                        <label for="playerImg2T2">
+                            <img src="https://i.pinimg.com/originals/80/25/23/802523384fedff9c4fb8b63eee2ca311.png">
+                        </label>
+                        <input type="radio" name="playerImg" id="playerImg2T2" />
+                    </div>
+                    <div class="choosePlayerForm__item choosePlayerForm__item--team2">
+                        <label for="playerImg3T2">
+                            <img src="https://pngimage.net/wp-content/uploads/2018/06/2d-character-png-4.png">
+                        </label>
+                        <input type="radio" name="playerImg" id="playerImg3T2" />
+                    </div>
+                    <div class="choosePlayerForm__item choosePlayerForm__item--team2">
+                        <label for="playerImg4T2">
+                            <img src="https://i.pinimg.com/originals/63/91/03/639103eff63de2e26c5e1ecd0365712f.png">
+                        </label>
+                        <input type="radio" name="playerImg" id="playerImg4T2" />
+                    </div>
+                    <div class="choosePlayerForm__item choosePlayerForm__item--name">
+                        <label for="playerNameT2">Name</label>
+                        <input type="text" minlength="1" maxlength="20" required name="playerName" id="playerNameT2" />
+                    </div>
+                    <div class="choosePlayerForm__item choosePlayerForm__item--posX">
+                        <label for="posXT2">Board Horizontal Shift:</label>
+                        <input type="number" min="51" max="100" name="xPos" required id="posXT2" />
+                        <p>(51-100%)</p>
+                    </div>
+                    <div class="choosePlayerForm__item choosePlayerForm__item--posY">
+                        <label for="posYT2">Board Vertical Shift:</label>
+                        <input type="number" min="20" max="60" name="yPos" required id="posYT2" />
+                        <p>(20-60%)</p>
+                    </div>
+                    <input class="choosePlayerForm__item choosePlayerForm__item--submit" type="submit" name="submit"
+                        value="Let's play!" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="teamsWrapper">
+        <section class="team">
+            <h2>Team 1</h2>
+            <button class="team__addPlayers team__addPlayers--team1">Add Player!</button>
+        </section>
+        <section class="team">
+            <h2>Team 2</h2>
+            <button class="team__addPlayers team__addPlayers--team2">Add Player!</button>
+        </section>
+    </div>
+
+    <div class="gameBoard">
+    </div>
+    <script src="choose_player.js"></script>
+</body>
+
+</html>

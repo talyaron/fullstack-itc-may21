@@ -1,6 +1,6 @@
 "use strict";
 
-pikachuMove();
+pikachuMove(); ///YS: It is better practice to call your function after you define it. This should be at the end. 
 
 function pikachuMove() {
   try {
@@ -13,7 +13,8 @@ function pikachuMove() {
     pikachu.style.left = "500px";
     pikachu.style.top = "200px"; //Get Position X and Y
 
-    var positionX = parseInt(pikachu.style.left);
+    var positionX = parseInt(pikachu.style.left); //YS: Good 
+
     var positionY = parseInt(pikachu.style.top); //Get speed of moving
 
     var speed = 10; //Movement with the keyboard
@@ -23,7 +24,7 @@ function pikachuMove() {
 
       if (ev.key == "ArrowDown") {
         pikachu.style.top = "".concat(positionY + speed, "px");
-        positionY = parseInt(pikachu.style.top); //pikachu.style.transform = "rotate(90deg)"
+        positionY = parseInt(pikachu.style.top); //pikachu.style.transform = "rotate(90deg)"     //YS: Please don't leave commented code in your work (you can leave comments but not commented code).
 
         if (isRight == 1) {
           pikachu.style.transform = "rotate(90deg) scaleY(1)";
@@ -38,6 +39,14 @@ function pikachuMove() {
           if (positionY >= 400) {
             positionY = 400;
             pikachu.style.transform = "rotate(270deg) scaleY(-1)";
+            /*YS: This is a very large function and if you notice you are 
+              repeating yourself a lot, remember DRY (dont repeat yourself). It would've been a lot cleaner to 
+              separate this large function into smaller functions ex. turnRight();
+              rotate(); And pass your values as parameters. Your code should be 
+              like a story.  pickachuMove(), turnRight(), surprise() etc. Also, instead of writing
+              the function in the addEventListener, add a callback.  document.addEventListener('keydown', pickachuMove),
+              and define your pickachuMove somewhere else. it looks cleaner. 
+            */
           }
         }
       } else if (ev.key == "ArrowUp") {
