@@ -1,0 +1,128 @@
+class Character {
+    constructor(pokeID, imageURl, position) {
+        this.pokeID = pokeID;
+        this.imageURl = imageURl
+
+        this.position = {};
+        this.position.x = position.x;
+        this.position.y = position.y;
+
+
+        //initilizing
+        this.boardGamed = document.querySelector('#boardGame');
+        this.createCharacter();
+        this.step = 2;
+
+    }
+
+    createCharacter() {
+        try {
+            this.pokemon = document.createElement('img');
+            this.pokemon.setAttribute('src', this.imageURl);
+            this.pokemon.style.width = "100px";
+            this.pokemon.style.height = "100px";
+            this.pokemon.style.position = "absolute";
+            this.pokemon.style.left = `${this.position.x}%`;
+            this.pokemon.style.top = `${this.position.y}%`;
+            this.pokemon.style.transform = "scaleX(-1)"
+            this.boardGamed.appendChild(this.pokemon);
+        } catch (e) {
+            console.error(e)
+        }
+
+    }
+
+    moveRight() {
+
+        if (this.step + this.position.x <= 89) {
+            this.position.x += this.step;
+            this.pokemon.style.left = `${this.position.x}%`;
+            this.pokemon.style.transform = "scaleX(-1)";
+        }else {
+            this.pokemon.style.transform = "scaleX(1)"
+        }
+    }
+
+    moveLeft() {
+
+        if (this.position.x - this.step > 0) {
+            this.position.x -= this.step;
+            this.pokemon.style.left = `${this.position.x}%`;
+            this.pokemon.style.transform = "scaleX(1)";
+        }else {
+            this.pokemon.style.transform = "scaleX(-1)"
+        }
+
+
+    }
+    moveDown() {
+
+        if (this.position.y + this.step <= 75) {
+            this.position.y += this.step;
+            this.pokemon.style.top = `${this.position.y}%`;
+            this.pokemon.style.transform = "rotate(270deg)"
+        }else {
+            this.pokemon.style.transform = "rotate(90deg)"
+        }
+    }
+
+    moveUp() {
+
+        if (this.position.y - this.step > 0) {
+            this.position.y -= this.step;
+            this.pokemon.style.top = `${this.position.y}%`;
+            this.pokemon.style.transform = "rotate(90deg)"
+        } else {
+            this.pokemon.style.transform = "rotate(270deg)"
+        }
+    }
+
+
+}
+
+
+let form = document.getElementsByTagName("form")[0];
+const input = document.querySelector('#id-name');
+const radio = document.getElementsByName("pokemon");
+const posX = form.querySelector("[name='startx']");
+const posY = form.querySelector("[name='starty']");
+
+
+
+let character;
+
+function handlerEvent(event) {
+    event.preventDefault();
+
+    let characterId = input.value;
+    let characterPosX = posX.value;
+    let characterPosY = posY.value;
+
+    for (var i = 0, length = radio.length; i < length; i++) {
+        if (radio[i].checked) {
+            character = radio[i].value
+        }
+    }
+
+
+    switch (character) {
+        case 'pika':
+            character = new Character(characterId, 'img/piran.gif', { x: parseInt(characterPosX), y: parseInt(characterPosY) });
+            break;
+        case 'char':
+            character = new Character(characterId, 'img/charmander.gif', { x: parseInt(characterPosX), y: parseInt(characterPosY) });
+            break;
+        case 'bulba':
+            character = new Character(characterId, 'img/bulba.gif', { x: parseInt(characterPosX), y: parseInt(characterPosY) });
+            break;
+        case 'squirtle':
+            character = new Character(characterId, 'img/squirtle.gif', { x: parseInt(characterPosX), y: parseInt(characterPosY) });
+            break;
+        default:
+    }
+}
+
+
+
+
+
