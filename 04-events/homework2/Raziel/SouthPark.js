@@ -5,6 +5,10 @@ function handleSubmit(ev) {
     ev.preventDefault();
     console.dir(ev.target.children)
     let playerName = document.querySelector('#charName').value;
+    console.log(playerName)
+
+
+    
     const imageSelect = document.querySelectorAll('#charImg');
    
     let playerImage;

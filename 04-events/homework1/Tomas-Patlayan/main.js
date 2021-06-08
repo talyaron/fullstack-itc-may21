@@ -38,7 +38,9 @@ box.addEventListener("mouseover",(e) => {
 
 const moveRight = () => {
   mLeft += move;
-  box.style.marginLeft = `${mLeft}px`;
+  box.style.marginLeft = `${mLeft}px`;                                            /*YS: Very nice job of splitting your code into functions. Remeber DRY (dont repeat yourself) - all of these code-blocks are very similar, so it would
+                                                                                  be better to create another function that accepts different parameters: const moveDog = (move, direction, rotate) = {} 
+                                                                                  and call that function 4 times.*/
   box.style.transform =`rotate(${rotateRight}deg)`;
 };
 
