@@ -79,12 +79,12 @@ function handleSubmit(ev){
     ev.preventDefault();
    const inputName= document.querySelector('#charName');
    const  radioInput=document.querySelectorAll('.charImg')
-   const posX= document.querySelector("[name='posix']");
+   const posX= document.querySelector( "[name='posix']");
    const posY= document.querySelector("[name='posiy']");
 try {
     let charName=inputName.value;
     if (charName === "") throw new Error('The name is empty, please add a name');
-    let charPosX=posX.vale;
+    let charPosX=posX.value;
     if (!charPosX) throw new Error('error of position X');
     let charPosY=posY.value;
     if (!charPosY) throw new Error('error of position Y');
@@ -94,10 +94,10 @@ try {
             charpic = radioInput[i].value
         }
     }
-    console.log(charName, charpic, charPosX, charPosXY);
+    console.log(charName, charpic, charPosX, charPosY);
     const newSouthPark = new GamePlayer(`#${charName}`, `${charpic}`, {
-        x: `${charPosX}`,
-        y: `${charPosY}`
+        x: parseInt(charPosX),
+        y: parseInt(charPosY)
     });
 
     document.addEventListener('keyup', ev => {

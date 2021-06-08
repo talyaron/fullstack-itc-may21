@@ -101,7 +101,7 @@ function handleSubmit(ev) {
   try {
     var charName = inputName.value;
     if (charName === "") throw new Error('The name is empty, please add a name');
-    var charPosX = posX.vale;
+    var charPosX = posX.value;
     if (!charPosX) throw new Error('error of position X');
     var charPosY = posY.value;
     if (!charPosY) throw new Error('error of position Y');
@@ -113,10 +113,10 @@ function handleSubmit(ev) {
       }
     }
 
-    console.log(charName, charpic, charPosX, charPosXY);
+    console.log(charName, charpic, charPosX, charPosY);
     var newSouthPark = new GamePlayer("#".concat(charName), "".concat(charpic), {
-      x: "".concat(charPosX),
-      y: "".concat(charPosY)
+      x: parseInt(charPosX),
+      y: parseInt(charPosY)
     });
     document.addEventListener('keyup', function (ev) {
       console.log(ev.key);
