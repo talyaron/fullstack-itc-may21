@@ -15,7 +15,7 @@ function () {
     _classCallCheck(this, Character);
 
     try {
-      if (_typeof(position) !== "object") throw new Error('Postion is not an object');
+      if (_typeof(position) !== "object") throw new Error('Position is not an object');
       if (!("x" in position) || !("y" in position)) throw new Error('Starting point should have this format {x:0, y:0}');
       this.pokeID = pokeID;
       this.imageURl = imageURl;
@@ -52,7 +52,7 @@ function () {
   }, {
     key: "moveRight",
     value: function moveRight() {
-      if (this.step + this.position.x <= 89) {
+      if (this.step + this.position.x <= 85) {
         this.position.x += this.step;
         this.pokemon.style.left = "".concat(this.position.x, "%");
         this.pokemon.style.transform = "scaleX(-1)";
@@ -74,7 +74,7 @@ function () {
   }, {
     key: "moveDown",
     value: function moveDown() {
-      if (this.position.y + this.step <= 75) {
+      if (this.position.y + this.step <= 77) {
         this.position.y += this.step;
         this.pokemon.style.top = "".concat(this.position.y, "%");
         this.pokemon.style.transform = "rotate(270deg)";
@@ -117,7 +117,7 @@ function handlerSumbit(event) {
     }
   }
 
-  console.log("The ID: ".concat(characterId, ",\n                      Character Image: ").concat(charChoosen, ",\n                      Position X: ").concat(characterPosX, ",\n                      Position Y: ").concat(characterPosY));
+  console.log("The ID: ".concat(characterId, ", Character Image: ").concat(charChoosen, ", Position X: ").concat(characterPosX, ", Position Y: ").concat(characterPosY));
 
   switch (charChoosen) {
     case 'pika':
@@ -150,5 +150,5 @@ function handlerSumbit(event) {
 
     default:
   }
-} // Yonathan. I was trying to remove child (to remove the current character on board) after choosing another character
-// but I failed. Can you explain me how to do that?
+} // Yonathan. I was trying to remove child, the image of the current character on board after choosing another character but I failed. Can you explain me how to do that?
+//And I dont know if the instances are ok inside the sumbit function, is better to create an empty instance first and then pass the inputs, ratio, etc?

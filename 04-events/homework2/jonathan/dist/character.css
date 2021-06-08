@@ -6,8 +6,8 @@
 
 .wrapper {
   width: 79vw;
-  margin: 0 auto;
   padding: 1em;
+  display: flex;
 }
 .wrapper h1 {
   text-align: center;
@@ -22,6 +22,7 @@
   margin-bottom: 2rem;
   text-align: center;
   background-color: lightblue;
+  margin-right: 10px;
 }
 .wrapper fieldset legend {
   font-weight: bold;
@@ -77,7 +78,7 @@
 }
 
 #boardGame {
-  width: 76vw;
+  width: 55vw;
   height: 80vh;
   background-image: url("https://64.media.tumblr.com/6ce02ebfc16f4f1d59e9374e9ff7d542/tumblr_pkmfw5ba5U1wzh093o1_1280.jpg");
   background-repeat: no-repeat;
