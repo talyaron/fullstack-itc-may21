@@ -7,11 +7,11 @@
 
 try {
     const car = document.querySelector(`#car`);
-    throw new Error(`Item Doesn't Exist`)
+   /*if(!car) */ throw new Error(`Item Doesn't Exist`)     //YS: Missing the conditional statement: if(!car) throw new Error(`Item Doesn't Exist`)
 } catch (error) {
-    console.error(`caught`);
+    console.error(`caught`);     ///YS: console.log(error.message) instead of console.log("caught")
 }
-console.dir(car)
+console.dir(car)   
 
 
 car.addEventListener("mouseover", eve => {
@@ -40,13 +40,13 @@ window.addEventListener(`load`, () =>{
  car.style.transform = `rotate(0deg)`
 });
 
-window.addEventListener(`keydown`, (e) =>{
-    switch(e.key){
+window.addEventListener(`keydown`, (e) =>{        //YS: Why not also change the car's direction ( look up <transform: tranlsate> in CSS) 
+    switch(e.key){                   
         case `ArrowLeft`:
         car.style.left = parseInt(car.style.left) - moveBy + `px`;
         break;
         case `ArrowRight`:
-        car.style.left = parseInt(car.style.left) + moveBy + `px`;
+        car.style.left = parseInt(car.style.left) + moveBy + `px`;                     
         break;
         case `ArrowUp`:
         car.style.top = parseInt(car.style.top) - moveBy + `px`;
@@ -57,12 +57,12 @@ window.addEventListener(`keydown`, (e) =>{
     }
    });
 
+//YS: Nice work! 
 
 
 
 
-
-const plusTwenty = function () {
+const plusTwenty = function () {    //YS: Please dont leave practice code in your work. 
     return +20
 }
 console.log(plusTwenty)

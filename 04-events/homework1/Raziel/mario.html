@@ -8,6 +8,7 @@
     <title>Mario World</title>
 
 </head>
+<!-- YS: Please keep your CSS, HTML and JS in separate files -->
 <style>
     .body_image {
         background-repeat: no-repeat;
@@ -28,17 +29,17 @@
 <body class="body_image">
     <img class="mario" src="https://i.gifer.com/33HU.gif" alt="mario">
     <script>
-        moveMario();
+        moveMario();   //YS: You should call your function after you define it. THis should be at the end of your code.  
 
         function moveMario() {
-            const mario = document.querySelector('.mario');
+            const mario = document.querySelector('.mario');   //YS: Why do you define the same thing twice? There is no need.(const mario = document.querySelector('.mario'); )
             try {
                 const mario = document.querySelector('.mario');
 
-                if (mario == null) {
+                if (mario == null) {            //YS: Good attempt! Instead of (mario = null) you can write (!mario)  which means if there is no mario.                           
                     throw new Error('Mario is dead!');
                 }
-                mario.style.top = '35%';
+                mario.style.top = '35%';   //YS:  Here you are using % and in line 59 and 64 you are using px -> which causes your mario to jump. 
                 mario.style.left = '35%';
 
                 mario.addEventListener('mouseenter', ev => {
@@ -46,14 +47,14 @@
                     marioOne.src = 'https://i.gifer.com/3vIN.gif';
                 });
                 mario.addEventListener('mouseleave', ev => {
-                    marioOne = ev.target;
-                    marioOne.src = 'https://i.gifer.com/33HU.gif';
+                    marioOne = ev.target; 
+                    marioOne.src = 'https://i.gifer.com/33HU.gif';                 //YS: Nice 
                 });
                 document.addEventListener('keydown', mov => {
-                    if(!mov) throw new Error ("the event keydown does not work");
+                    if(!mov) throw new Error ("the event keydown does not work");  //YS: Good! 
                     let moveBy = 5;
                  
-                    switch (mov.key) {
+                    switch (mov.key) {   //YS: Nice use of switch! 
                         case 'ArrowLeft':
                             mario.style.left = parseInt(mario.style.left) - moveBy + 'px';
                             mario.style.transform = "scaleX(-1)";
@@ -78,7 +79,7 @@
 
 
             } catch (e) {
-                return e;
+                return e;  //YS: Better to console.log(e) than to return it. 
 
             }
 
