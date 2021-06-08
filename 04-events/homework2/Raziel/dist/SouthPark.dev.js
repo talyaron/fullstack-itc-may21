@@ -27,11 +27,11 @@ function handleSubmit(ev) {
 
   var posx = document.querySelector('#posix').value;
   var posy = document.querySelector('#posiy').value;
-  console.log(playerName, playerImage, posx, posy); //const newPiece = new GamePiece(`#${playerName}`, `${playerImage}`, '50px', '50px', {
-  // x: `${posx}`,
-  // y: `${posy}`
-  // });
-
+  console.log(playerName, playerImage, posx, posy);
+  var newPiece = new GamePiece("#".concat(playerName), "".concat(playerImage), '50px', '50px', {
+    x: "".concat(posx),
+    y: "".concat(posy)
+  });
   document.addEventListener('keyup', function (ev) {
     console.log(ev.key);
 
