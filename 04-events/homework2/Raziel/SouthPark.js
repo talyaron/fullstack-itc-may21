@@ -74,3 +74,56 @@ class GamePlayer{
         }
     }
 }
+
+function handleSubmit(ev){
+    ev.preventDefault();
+   const inputName= document.querySelector('#charName');
+   const  radioInput=document.querySelectorAll('.charImg')
+   const posX= document.querySelector("[name='posix']");
+   const posY= document.querySelector("[name='posiy']");
+try {
+    let charName=inputName.value;
+    if (charName === "") throw new Error('The name is empty, please add a name');
+    let charPosX=posX.vale;
+    if (!charPosX) throw new Error('error of position X');
+    let charPosY=posY.value;
+    if (!charPosY) throw new Error('error of position Y');
+    let charpic;
+    for (var i = 0, length = radioInput.length; i < length; i++) {
+        if (radioInput[i].checked) {
+            charpic = radioInput[i].value
+        }
+    }
+    console.log(charName, charpic, charPosX, charPosXY);
+    const newSouthPark = new GamePlayer(`#${charName}`, `${charpic}`, {
+        x: `${charPosX}`,
+        y: `${charPosY}`
+    });
+
+    document.addEventListener('keyup', ev => {
+        console.log(ev.key)
+        switch (ev.key) {
+            case "ArrowLeft":
+                newSouthPark.moveLeft();
+                break;
+            case "ArrowRight":
+                newSouthPark.moveRight();
+                break;
+            case "ArrowDown":
+                newSouthPark.moveDown();
+                break;
+            case "ArrowUp":
+                newSouthPark.moveUp();
+                break;
+           
+        }
+    })
+    
+} catch (e) {
+    
+    console.log(e)
+}
+
+
+}
+
