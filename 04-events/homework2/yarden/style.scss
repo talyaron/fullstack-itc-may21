@@ -1,0 +1,47 @@
+body {
+    background-image:url('https://s3.amazonaws.com/vice_asset_uploader/files/1423499166vude6in.gif?crop=1xw:0.9780718701700154xh;center,center&resize=500:*');
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+.waldo {
+height: 90px;
+width: 70px;
+position: absolute;
+display: none;
+}
+
+.form {
+    width: 50%;
+    height: 10%;
+    margin: 0.5% auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    opacity: 80%;
+    border: 1px solid black;
+    text-align: center;
+    
+    &__headline {
+        font-size: 3rem;
+        background-color: white;
+    }
+    &__input {
+        background-color: white;
+        margin: 1.8em;
+        padding: 1em;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        width: 80%;}
+        
+        &__input--submit {
+            padding: 0.5em;
+            font-size: 2rem;
+            cursor: pointer;
+    }
+}

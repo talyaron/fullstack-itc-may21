@@ -1,5 +1,5 @@
-openModal();
-closeModal();
+let isModalOpenT1 = false;
+let isModalOpenT2 = false;
 
 function openModal() {
     const addToTeam1 = document.querySelector(`.team__addPlayers--team1`);
@@ -9,11 +9,13 @@ function openModal() {
     const modalTeam2 = document.querySelector(`.modalBox--team2`);
 
     addToTeam1.addEventListener(`click`, ev => {
+        isModalOpenT1 = true;
         modal.style.display = `flex`;
         modalTeam1.style.display = `unset`;
     });
 
     addToTeam2.addEventListener(`click`, ev => {
+        isModalOpenT2 = true;
         modal.style.display = `flex`;
         modalTeam2.style.display = `unset`;
     });
@@ -27,6 +29,8 @@ function closeModal() {
 
     close.forEach(el => {
         el.addEventListener(`click`, ev => {
+            isModalOpenT1 = false;
+            isModalOpenT2 = false;
             modal.style.display = `none`;
             modalTeam1.style.display = `none`;
             modalTeam2.style.display = `none`;
@@ -52,13 +56,15 @@ function handleSubmit(ev) {
         }
         const id = data.querySelector('[name="playerName"').value;
         let position = {};
-        position.x = data.querySelector('[name="xPos"').value;
-        position.y = data.querySelector('[name="yPos"').value;
+        position.x = Number(data.querySelector('[name="xPos"').value);
+        position.y = Number(data.querySelector('[name="yPos"').value);
 
         const modal = document.querySelector(`.modalWrapper`);
         const modalTeam1 = document.querySelector(`.modalBox--team1`);
         const modalTeam2 = document.querySelector(`.modalBox--team2`);
-        
+
+        isModalOpenT1 = false;
+        isModalOpenT2 = false;
         modal.style.display = `none`;
         modalTeam1.style.display = `none`;
         modalTeam2.style.display = `none`;
@@ -86,41 +92,39 @@ class Player {
             this.modal = document.querySelector(`.modalWrapper`);
             this.addPlayer();
             this.change = 1;
-            // if (this.modal.style.display === `none`) {
-                document.addEventListener('keyup', ev => {
-                    if (this.player.classList.contains('gameBoard__item--team1')) {
-                        switch (ev.key) {
-                            case "a":
-                                this.moveLeft();
-                                break;
-                            case "d":
-                                this.moveRight();
-                                break;
-                            case "w":
-                                this.moveUp();
-                                break;
-                            case "s":
-                                this.moveDown();
-                                break;
-                        }
-                    } else {
-                        switch (ev.key) {
-                            case "ArrowLeft":
-                                this.moveLeft();
-                                break;
-                            case "ArrowRight":
-                                this.moveRight();
-                                break;
-                            case "ArrowUp":
-                                this.moveUp();
-                                break;
-                            case "ArrowDown":
-                                this.moveDown();
-                                break;
-                        }
+            document.addEventListener('keydown', ev => {
+                if (this.player.classList.contains('gameBoard__item--team1')) {
+                    switch (ev.key) {
+                        case "a":
+                            this.moveLeft();
+                            break;
+                        case "d":
+                            this.moveRight();
+                            break;
+                        case "w":
+                            this.moveUp();
+                            break;
+                        case "s":
+                            this.moveDown();
+                            break;
                     }
-                });
-            // }
+                } else {
+                    switch (ev.key) {
+                        case "ArrowLeft":
+                            this.moveLeft();
+                            break;
+                        case "ArrowRight":
+                            this.moveRight();
+                            break;
+                        case "ArrowUp":
+                            this.moveUp();
+                            break;
+                        case "ArrowDown":
+                            this.moveDown();
+                            break;
+                    }
+                }
+            });
 
         } catch (er) {
             console.error(er);
@@ -152,30 +156,33 @@ class Player {
     }
 
     moveRight() {
-        if ((this.position.x + this.change) <= 100) {
+        if (!isModalOpenT1 && !isModalOpenT2 && ((this.position.x + this.change) <= 90)) {
             this.position.x += this.change;
             this.player.style.left = `${this.position.x}%`;
         }
     }
 
     moveLeft() {
-        if ((this.position.x - this.change) >= 1) {
+        if (!isModalOpenT1 && !isModalOpenT2 && ((this.position.x - this.change) >= 1)) {
             this.position.x -= this.change;
             this.player.style.left = `${this.position.x}%`;
         }
     }
 
     moveDown() {
-        if ((this.position.y + this.change) <= 60) {
+        if (!isModalOpenT1 && !isModalOpenT2 && ((this.position.y + this.change) <= 60)) {
             this.position.y += this.change;
             this.player.style.top = `${this.position.y}%`;
         }
     }
 
     moveUp() {
-        if ((this.position.y - this.change) >= 20) {
+        if (!isModalOpenT1 && !isModalOpenT2 && ((this.position.y - this.change) >= 20)) {
             this.position.y -= this.change;
             this.player.style.top = `${this.position.y}%`;
         }
     }
 }
+
+openModal();
+closeModal();

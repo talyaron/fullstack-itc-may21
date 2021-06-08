@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Cars{
+            constructor(brand, model, price, amountOfCars){
+                this.brand = brand;
+                this.model = model;
+                this.price = price;
+                this.amountOfCars = amountOfCars;
+            }
+            priceCars(){
+                this.priceCar = `${this.price}`;
+                this.amountCar = `${this.amountOfCars}`;
+                let suma = this.priceCar * this.amountCar;
+                console.log(`The total price is $${suma}`);
+            }
+            brandModel(){
+                this.brandCar = `${this.brand}`;
+                this.modelCar = `${this.model}`;
+                console.log(`The brand of this car is ${this.brandCar} and the model is ${this.modelCar}`)
+            }
+        }
+
+        let auto = new Cars('Chevrolet', 'Corsa', '50000', '100');
+        let auto2 = new Cars('Wolkwagen', 'Golf', '150000', '120');
+        auto.priceCars();
+        auto2.priceCars();
+        auto.brandModel();
+        auto2.brandModel();
+</script>
+</body>
+</html>
+
+<!--create a class of Car
+in the costructor, set brand, model, price, amountOfCars,
+and there will be two methods.
+1) return the price of the total cars
+2) console.log the brand and the model of the car;
+
+create 3 instance and run the methods, for each of them.-->

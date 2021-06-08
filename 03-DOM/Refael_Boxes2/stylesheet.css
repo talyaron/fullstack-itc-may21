@@ -1,0 +1,13 @@
+.box {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+}
+
+.container {
+  position: absolute;
+  width: 900px;
+  height: auto;
+}
+/*# sourceMappingURL=stylesheet.css.map */
