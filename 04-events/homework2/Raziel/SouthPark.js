@@ -1,10 +1,10 @@
-document.querySelector('.button').addEventListener('click',function(){
-    document.querySelector('.form_modal').style.display='flex';
-    });
+//document.querySelector('.button').addEventListener('click',function(){
+    //document.querySelector('.form_modal').style.display='flex';
+    //});
     
-    document.querySelector('.close').addEventListener('click',function(){
-        document.querySelector('.form_modal').style.display='none';
-    });
+  //  document.querySelector('.close').addEventListener('click',function(){
+        //document.querySelector('.form_modal').style.display='none';
+    //});
     
 class GamePlayer{
     constructor(playerId,playerImg,position){
@@ -94,7 +94,7 @@ try {
             charpic = radioInput[i].value
         }
     }
-    console.log(charName, charpic, charPosX, charPosY);
+    //console.log(charName, charpic, charPosX, charPosY);
     const newSouthPark = new GamePlayer(`#${charName}`, `${charpic}`, {
         x: parseInt(charPosX),
         y: parseInt(charPosY)
