@@ -8,101 +8,56 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function handleSubmit(ev) {
-  ev.preventDefault();
-  console.dir(ev.target.children);
-  var playerName = document.querySelector('#charName').value;
-  var imageSelect = document.querySelectorAll('#charImg');
-  var playerImage;
+document.querySelector('.button').addEventListener('click', function () {
+  document.querySelector('.form_modal').style.display = 'flex';
+});
+document.querySelector('.close').addEventListener('click', function () {
+  document.querySelector('.form_modal').style.display = 'none';
+});
 
-  for (var i = 0; i < imageSelect.length; i++) {
-    if (imageSelect[i].checked) {
-      playerImage = imageChosen[i].src;
-    }
-  }
-
-  if (playerImage === undefined) {
-    throw new Error('No player selected!');
-  }
-
-  var posx = document.querySelector('#posix').value;
-  var posy = document.querySelector('#posiy').value;
-  console.log(playerName, playerImage, posx, posy);
-  var newPiece = new GamePiece("#".concat(playerName), "".concat(playerImage), '50px', '50px', {
-    x: "".concat(posx),
-    y: "".concat(posy)
-  });
-  document.addEventListener('keyup', function (ev) {
-    console.log(ev.key);
-
-    switch (ev.key) {
-      case "ArrowLeft":
-        newPiece.moveLeft();
-        break;
-
-      case "ArrowRight":
-        newPiece.moveRight();
-        break;
-
-      case "ArrowDown":
-        newPiece.moveDown();
-        break;
-
-      case "ArrowUp":
-        newPiece.moveUp();
-        break;
-    }
-  });
-  ev.target.reset();
-}
-
-var GamePiece =
+var GamePlayer =
 /*#__PURE__*/
 function () {
-  function GamePiece(pieceId, imagePhoto, width, height, position) {
-    _classCallCheck(this, GamePiece);
+  function GamePlayer(playerId, playerImg, position) {
+    _classCallCheck(this, GamePlayer);
 
     try {
       if (_typeof(position) !== "object") throw new Error('position is not an object');
       if (!("x" in position) || !("y" in position)) throw new Error('starting point should have this format {x:0, y:0}');
-      this.height = height;
-      this.width = width;
-      this.pieceId = pieceId;
-      this.imagePhoto = imagePhoto; //inner position
-
+      this.playerId = playerId;
+      this.playerImg = playerImg;
       this.position = {};
       this.position.x = position.x;
-      this.position.y = position.y; //initilizing
+      this.position.y = position.y; ///----------------------
 
-      this.boardGamed = document.querySelector('#gameBoard');
-      this.createPeice();
+      this.boardArea = document.querySelector('#gameBoard');
+      this.createPLayer();
       this.step = 2;
     } catch (e) {
-      console.error(e);
+      console.log(e);
     }
   }
 
-  _createClass(GamePiece, [{
-    key: "createPeice",
-    value: function createPeice() {
+  _createClass(GamePlayer, [{
+    key: "createPLayer",
+    value: function createPLayer() {
       try {
-        this.piece = document.createElement('img');
-        this.piece.setAttribute('src', this.imagePhoto);
-        this.piece.setAttribute('width', this.width);
-        this.piece.setAttribute('height', this.height);
-        this.piece.classList.add("piece");
-        this.piece.style.left = "".concat(this.position.x, "%");
-        this.piece.style.top = "".concat(this.position.y, "%");
-        this.boardGamed.appendChild(this.piece);
+        this.player = document.createElement('img');
+        this.player.setAttribute('src', this.playerImg);
+        this.player.style.position = "absolute";
+        this.player.style.width = "100px";
+        this.player.style.height = "100px";
+        this.player.style.left = "".concat(this.position.x, "%");
+        this.player.style.top = "".concat(this.position.y, "%");
+        this.boardArea.appendChild(this.player);
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
-    } //let create a method for moving left
-
+    }
   }, {
     key: "moveRight",
     value: function moveRight() {
-      if (this.step + this.position.x < 102) {
+      if (this.step + this.position.x < 96) {
         this.position.x += this.step;
         this.piece.style.left = "".concat(this.position.x, "%");
       }
@@ -118,7 +73,7 @@ function () {
   }, {
     key: "moveDown",
     value: function moveDown() {
-      if (this.position.y + this.step < 101) {
+      if (this.position.y + this.step < 95) {
         this.position.y += this.step;
         this.piece.style.top = "".concat(this.position.y, "%");
       }
@@ -133,12 +88,5 @@ function () {
     }
   }]);
 
-  return GamePiece;
+  return GamePlayer;
 }();
-
-document.querySelector('.button').addEventListener('click', function () {
-  document.querySelector('.form_modal').style.display = 'flex';
-});
-document.querySelector('.close').addEventListener('click', function () {
-  document.querySelector('.form_modal').style.display = 'none';
-});
