@@ -1,19 +1,31 @@
-// Selecting Waldo:
 const waldo = document.querySelector('.waldo')
 waldo.style.top = '295px'
 waldo.style.left = '560px'
 
-//Make form disappear, Waldo appear on clicking submit:
-const form = document.querySelector('.form')
-const submitButton = document.querySelector('.form__input--submit')
-myForm.addEventListener('click', event => {
-    form.style.display = 'none'
-    waldo.style.hidden = 'false'
-})
+const myForm = document.querySelector('.form')
+myForm.onsubmit = function(event) {
+    event.preventDefault()
+    
+    const submittedImage = myForm.elements['image'].value
+    const submittedName = myForm.elements['name'].value
+    const submittedX = myForm.elements['x'].value
+    const submittedY = myForm.elements['y'].value
+
+    console.log(submittedName);
+    console.log(submittedImage);
+    console.log(submittedX);
+    console.log(submittedY);
+
+    let odlaw = new Character (submittedName, submittedImage, {x:submittedX, y:submittedY})
+    odlaw.createCaharacter()
+    document.body.appendChild.character
+    
+    myForm.style.display = 'none'
+    waldo.style.display='block'
+}
 
 //Create the character class:
 class Character {
-
     constructor(characterId, imageUrl, startingPosition) {
         
         this.imageUrl = imageUrl
@@ -24,21 +36,17 @@ class Character {
         this.startingPosition.y = startingPosition.y;
         
         this.whereIsWaldo = document.querySelector('.waldo')
-        this.createCaharacter
+        this.createCaharacter = this.createCaharacter.bind(this)
     }
         createCaharacter() {
-            try {
-                if(!character) throw new Error("No Character")
 
                 this.character = document.createElement('img')
                 this.character.setAttribute ('src', this.imageUrl)
-                
-            } catch(e) {
-                console.error(e)
-            }
+                this.character.style.left = `${this.startingPosition.x}%`;
+                this.character.style.top = `${this.startingPosition.y}%`;
+
         }
 }
-
 
 // Movement:
 window.addEventListener('keydown', (event) => {
@@ -71,10 +79,7 @@ window.addEventListener('keydown', (event) => {
     }
     });
 
+
 // Mouseover:
 //  When clicked, user gets control of the character ?
 
-function handleSubmit(event) {
-    event.preventDefault()
-
-}
