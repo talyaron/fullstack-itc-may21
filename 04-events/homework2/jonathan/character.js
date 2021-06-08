@@ -20,7 +20,6 @@ class Character {
             this.createCharacter();
             this.step = 2;
             
-            
 
         } catch (e) {
             console.log(e);
