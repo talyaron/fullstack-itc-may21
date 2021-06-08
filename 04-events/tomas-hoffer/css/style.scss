@@ -1,0 +1,50 @@
+body{
+    background-color: rgb(138, 138, 138);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Staatliches', cursive;
+}
+.container{
+        width: 80%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    h2{
+        text-align: center;
+        }
+   
+        .personajeOff{
+            display: none;
+        }
+        #boardGame{
+            position: relative;
+            background-color: black;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 0 5px 5px white inset;
+            width: 100%;
+            height: 100%;
+            top: 5rem;
+            .imgNew{
+           position: absolute;
+           height: 80px;
+           width: 80px;
+            }
+        }
+        
+        form{
+            .form_inputs{
+                display: block;
+            }
+            .boton{
+                background-color: black;
+                color: white;
+                padding: 5px;
+                font-weight: bold;
+                border-radius: 50px;
+            }
+        }
+    }
+
+    

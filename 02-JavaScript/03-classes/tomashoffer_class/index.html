@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="names"></h1>
+    <script>
+
+class SayHello {
+    constructor(name){
+        //property
+        this.name = name;
+
+        //initialize
+        this.names = document.getElementById("names");
+        this.namePrint();
+    }
+    namePrint(){
+        this.yourName = document.createElement("h1");
+        this.yourName.innerHTML = `Hola mi nombre es ${this.name}`;
+        this.names.appendChild(this.yourName);
+      
+        
+    }
+}
+let resultado = new SayHello("tomas");
+let resultado2 = new SayHello("martin")
+SayHello();
+    </script>
+</body>
+</html>
