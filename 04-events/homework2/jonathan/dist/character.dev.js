@@ -1,5 +1,7 @@
 "use strict";
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -12,15 +14,22 @@ function () {
   function Character(pokeID, imageURl, position) {
     _classCallCheck(this, Character);
 
-    this.pokeID = pokeID;
-    this.imageURl = imageURl;
-    this.position = {};
-    this.position.x = position.x;
-    this.position.y = position.y; //initilizing
+    try {
+      if (_typeof(position) !== "object") throw new Error('Postion is not an object');
+      if (!("x" in position) || !("y" in position)) throw new Error('Starting point should have this format {x:0, y:0}');
+      this.pokeID = pokeID;
+      this.imageURl = imageURl;
+      this.position = {};
+      this.position.x = position.x;
+      this.position.y = position.y; //initilizing
 
-    this.boardGamed = document.querySelector('#boardGame');
-    this.createCharacter();
-    this.step = 2;
+      this.boardGamed = document.querySelector('#boardGame');
+      if (!this.boardGamed) throw new Error('The boardGame was not created');
+      this.createCharacter();
+      this.step = 2;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   _createClass(Character, [{
@@ -96,7 +105,7 @@ var posX = form.querySelector("[name='startx']");
 var posY = form.querySelector("[name='starty']");
 var character;
 
-function handlerEvent(event) {
+function handlerSumbit(event) {
   event.preventDefault();
   var characterId = input.value;
   var characterPosX = posX.value;
@@ -104,11 +113,13 @@ function handlerEvent(event) {
 
   for (var i = 0, length = radio.length; i < length; i++) {
     if (radio[i].checked) {
-      character = radio[i].value;
+      charChoosen = radio[i].value;
     }
   }
 
-  switch (character) {
+  console.log("The ID: ".concat(characterId, ",\n                      Character Image: ").concat(charChoosen, ",\n                      Position X: ").concat(characterPosX, ",\n                      Position Y: ").concat(characterPosY));
+
+  switch (charChoosen) {
     case 'pika':
       character = new Character(characterId, 'img/piran.gif', {
         x: parseInt(characterPosX),
@@ -139,4 +150,5 @@ function handlerEvent(event) {
 
     default:
   }
-}
+} // Yonathan. I was trying to remove child (to remove the current character on board) after choosing another character
+// but I failed. Can you explain me how to do that?
