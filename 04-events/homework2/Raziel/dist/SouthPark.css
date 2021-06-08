@@ -3,27 +3,16 @@
   text-decoration: none;
 }
 
-.form_modal {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: none;
-}
-
 .modal_content {
-  width: 600px;
-  height: 600px;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
   background-color: white;
   border-radius: 4px;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px solid red;
 }
 
 img {
@@ -38,13 +27,8 @@ input {
   text-align: center;
 }
 
-.close {
-  position: absolute;
-  top: 0;
-  right: 14px;
-  font-size: 50px;
-  transform: rotate(45deg);
-  cursor: pointer;
+h1 {
+  text-align: center;
 }
 
 .box {
@@ -56,13 +40,9 @@ input {
 #gameBoard {
   background-image: url("https://cutewallpaper.org/21/southpark-backgrounds/South-Park-Background-Wallperio.com.png");
   background-repeat: no-repeat;
+  position: relative;
   background-size: cover;
   margin: 0 auto;
-  width: 90vw;
-  height: 75vh;
-}
-
-.piece {
-  position: relative;
-  transition: all 200ms;
+  width: 60vw;
+  height: 60vh;
 }
