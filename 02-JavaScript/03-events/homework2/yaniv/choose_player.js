@@ -2,40 +2,52 @@ let isModalOpenT1 = false;
 let isModalOpenT2 = false;
 
 function openModal() {
-    const addToTeam1 = document.querySelector(`.team__addPlayers--team1`);
-    const addToTeam2 = document.querySelector(`.team__addPlayers--team2`);
-    const modal = document.querySelector(`.modalWrapper`);
-    const modalTeam1 = document.querySelector(`.modalBox--team1`);
-    const modalTeam2 = document.querySelector(`.modalBox--team2`);
+    try {
+        const addToTeam1 = document.querySelector(`.team__addPlayers--team1`);
+        const addToTeam2 = document.querySelector(`.team__addPlayers--team2`);
+        const modal = document.querySelector(`.modalWrapper`);
+        const modalTeam1 = document.querySelector(`.modalBox--team1`);
+        const modalTeam2 = document.querySelector(`.modalBox--team2`);
 
-    addToTeam1.addEventListener(`click`, ev => {
-        isModalOpenT1 = true;
-        modal.style.display = `flex`;
-        modalTeam1.style.display = `unset`;
-    });
+        addToTeam1.addEventListener(`click`, ev => {
+            isModalOpenT1 = true;
+            modal.style.display = `flex`;
+            modalTeam1.style.display = `unset`;
+        });
 
-    addToTeam2.addEventListener(`click`, ev => {
-        isModalOpenT2 = true;
-        modal.style.display = `flex`;
-        modalTeam2.style.display = `unset`;
-    });
+        addToTeam2.addEventListener(`click`, ev => {
+            isModalOpenT2 = true;
+            modal.style.display = `flex`;
+            modalTeam2.style.display = `unset`;
+        });
+
+    } catch (er) {
+        alert(er);
+        console.error(er);
+    }
 }
 
 function closeModal() {
-    const close = document.querySelectorAll(`.close`);
-    const modal = document.querySelector(`.modalWrapper`);
-    const modalTeam1 = document.querySelector(`.modalBox--team1`);
-    const modalTeam2 = document.querySelector(`.modalBox--team2`);
+    try {
+        const close = document.querySelectorAll(`.close`);
+        const modal = document.querySelector(`.modalWrapper`);
+        const modalTeam1 = document.querySelector(`.modalBox--team1`);
+        const modalTeam2 = document.querySelector(`.modalBox--team2`);
 
-    close.forEach(el => {
-        el.addEventListener(`click`, ev => {
-            isModalOpenT1 = false;
-            isModalOpenT2 = false;
-            modal.style.display = `none`;
-            modalTeam1.style.display = `none`;
-            modalTeam2.style.display = `none`;
+        close.forEach(el => {
+            el.addEventListener(`click`, ev => {
+                isModalOpenT1 = false;
+                isModalOpenT2 = false;
+                modal.style.display = `none`;
+                modalTeam1.style.display = `none`;
+                modalTeam2.style.display = `none`;
+            });
         });
-    });
+
+    } catch (er) {
+        alert(er);
+        console.error(er);
+    }
 
 }
 

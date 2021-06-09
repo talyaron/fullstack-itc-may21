@@ -78,7 +78,7 @@ function handleSubmit(ev) {
 
     return let piece1 = new GamePiece(
         `${myPieceId}`,
-       "${myPiece}",
+       "${myPiece},
         "70px",
         {
             x: 10,
