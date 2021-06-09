@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Person</title>
+</head>
+<body>
+       
+    <script>
+        class Person{
+            constructor(name,state, city, street, homeNumber){
+                
+                this.name = name;
+                this.state = state;
+                this.city = city;
+                this.street = street;
+                this.homeNumber = homeNumber;
+            }
+
+            getAddress(){
+                return `${this.state}, ${this.city} ,${this.street}, ${this.homeNumber}`
+            }
+
+            getName(){
+                return `${this.name}`
+            }
+        }
+
+        const Jonathan = new Person("Jonathan","Israel","Beer Sheva","David Ben Gurion",2313);
+
+        console.log(`The address of ${Jonathan.getName()} is ${Jonathan.getAddress()}`)
+
+        const Eric = new Person("Eric","Israel","Beer Sheva","Some Random Street",1233);
+
+        console.log(`The address of ${Eric.getName()} is ${Eric.getAddress()}`)
+
+
+    </script>
+</body>
+</html>
