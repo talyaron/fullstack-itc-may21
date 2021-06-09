@@ -10,37 +10,47 @@ var isModalOpenT1 = false;
 var isModalOpenT2 = false;
 
 function openModal() {
-  var addToTeam1 = document.querySelector(".team__addPlayers--team1");
-  var addToTeam2 = document.querySelector(".team__addPlayers--team2");
-  var modal = document.querySelector(".modalWrapper");
-  var modalTeam1 = document.querySelector(".modalBox--team1");
-  var modalTeam2 = document.querySelector(".modalBox--team2");
-  addToTeam1.addEventListener("click", function (ev) {
-    isModalOpenT1 = true;
-    modal.style.display = "flex";
-    modalTeam1.style.display = "unset";
-  });
-  addToTeam2.addEventListener("click", function (ev) {
-    isModalOpenT2 = true;
-    modal.style.display = "flex";
-    modalTeam2.style.display = "unset";
-  });
+  try {
+    var addToTeam1 = document.querySelector(".team__addPlayers--team1");
+    var addToTeam2 = document.querySelector(".team__addPlayers--team2");
+    var modal = document.querySelector(".modalWrapper");
+    var modalTeam1 = document.querySelector(".modalBox--team1");
+    var modalTeam2 = document.querySelector(".modalBox--team2");
+    addToTeam1.addEventListener("click", function (ev) {
+      isModalOpenT1 = true;
+      modal.style.display = "flex";
+      modalTeam1.style.display = "unset";
+    });
+    addToTeam2.addEventListener("click", function (ev) {
+      isModalOpenT2 = true;
+      modal.style.display = "flex";
+      modalTeam2.style.display = "unset";
+    });
+  } catch (er) {
+    alert(er);
+    console.error(er);
+  }
 }
 
 function closeModal() {
-  var close = document.querySelectorAll(".close");
-  var modal = document.querySelector(".modalWrapper");
-  var modalTeam1 = document.querySelector(".modalBox--team1");
-  var modalTeam2 = document.querySelector(".modalBox--team2");
-  close.forEach(function (el) {
-    el.addEventListener("click", function (ev) {
-      isModalOpenT1 = false;
-      isModalOpenT2 = false;
-      modal.style.display = "none";
-      modalTeam1.style.display = "none";
-      modalTeam2.style.display = "none";
+  try {
+    var close = document.querySelectorAll(".close");
+    var modal = document.querySelector(".modalWrapper");
+    var modalTeam1 = document.querySelector(".modalBox--team1");
+    var modalTeam2 = document.querySelector(".modalBox--team2");
+    close.forEach(function (el) {
+      el.addEventListener("click", function (ev) {
+        isModalOpenT1 = false;
+        isModalOpenT2 = false;
+        modal.style.display = "none";
+        modalTeam1.style.display = "none";
+        modalTeam2.style.display = "none";
+      });
     });
-  });
+  } catch (er) {
+    alert(er);
+    console.error(er);
+  }
 }
 
 function handleSubmit(ev) {
