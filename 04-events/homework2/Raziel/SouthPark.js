@@ -83,7 +83,7 @@ try {
     let charPosY=posY.value;
     if (!charPosY) throw new Error('error of position Y');
     let charpic;
-    for (var i = 0, length = radioInput.length; i < length; i++) {
+    for (let i = 0, length = radioInput.length; i < length; i++) {
         if (radioInput[i].checked) {
             charpic = radioInput[i].value
         }
