@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //simple function
+    //unhoisted
+    function add(a, b) {
+      return a + b;
+    }
+
+    //anonymous function
+    let add2 = function (a, b) {
+      return a + b;
+    }
+
+    //arrow function
+    let add3 = (a, b) => {
+      return a + b;
+    }
+
+
+    function sayHello() {
+      console.log('hello')
+    }
+
+
+    // -------------- Hoisting
+
+
+    let z = 44;
+    console.log(z);
+
+    let rs = multi(2, 5);
+    multi(100, 10);
+    console.log(rs);
+
+    console.log(multi(3, 5))
+
+    //functions are unhoisted!!!!
+    function multi(a, b) {
+      return a * b;
+    }
+
+
+
+
+
+
+      // console.log(divide(3, 6));
+
+      // let divide = (a, b) => {
+      //     return a / b;
+      // }
+  </script>
+</body>
+
+</html>
