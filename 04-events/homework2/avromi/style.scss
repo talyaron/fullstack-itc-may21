@@ -1,0 +1,14 @@
+body {
+font-size: 24px;
+}
+.piece{
+    position: absolute;
+    transition: all 1s;
+}
+
+#gameboard {
+    width: 90vw;
+    height: 90vh;
+    background-color: rgb(102, 94, 94);
+    position: relative;
+}
