@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/style.css">
+    <title>Homework2</title>
+</head>
+
+<body>
+
+
+
+    <body>
+       <div class="gridd">
+        <div>
+        <form onsubmit="handleSubmit(event)">
+            <label for="name" class="form_inputs">Insert your name</label>
+            <input type="text" id="idName" class="form_inputs" name="name" required />
+            <label for="image" class="form_inputs">Insert your image URL:</label>
+            <input type="url" id="urlImage" name="url" class="form_inputs" required />
+            <label for="Xpos" class="form_inputs">Insert position X:</label>
+            <input type="number" id="xpos" name="xpos" required class="form_inputs" />
+            <label for="Ypos" class="form_inputs">Insert position Y:</label>
+            <input type="number" id="ypos" name="ypos" required class="form_inputs" />
+            <input type="submit" value="Submit" class="form_inputs">
+        </form>
+        </div>
+        <div class="boardGame"></div>
+    </div>
+        <script src="form.js"></script>
+
+    </body>
+
+</html>

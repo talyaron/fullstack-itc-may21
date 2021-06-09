@@ -1,72 +1,124 @@
-class Family {
-  constructor(imgUrl) {
+class Player {
+  constructor(imgUrl, pos, familyID) {
     this.imgUrl = imgUrl;
-    //    this.charid = charid;
+    this.board = document.querySelector(".container-board");
+    this.pos = {};
+    this.pos.x = pos.x;
+    this.pos.y = pos.y;
+    this.familyID = familyID;
 
-    //    this.position = {};
-    //    this.position.x = position.x;
-    //    this.position.y = position.y;
+    this.step = 5;
 
-    this.family = document.querySelector("family-character");
-    this.createFamily();
-    //    this.step = 4;
+    this.characterFamily();
+  }
+  characterFamily() {
+    this.fmg = document.createElement("img");
+    this.fmg.setAttribute("src", this.imgUrl);
+    this.fmg.style.width = "400px";
+    this.fmg.style.height = "400px";
+    this.fmg.style.position = "absolute";
+    this.fmg.style.left = `${this.pos.x}%`;
+    this.fmg.style.top = `${this.pos.y}%`;
+    this.fmg.style.transform = "scaleX(-1)";
+    this.board.appendChild(this.fmg);
   }
 
-  createFamily() {
-    this.character = document.createElement("img");
-    this.character.setAttribute("src", this.imgUrl);
-    this.family.appendChild(this.character);
-    this.character.style.width = "400px";
-    this.character.style.height = "400px";
-    //    this.character.style.position = "absolute";
-    //    this.character.style.left = `${this.position.x}%`;
-    //    this.character.style.top = `${this.position.y}%`;
-    //    this.character.style.transform = "scaleX(-1)"
-  }
-}
-
-const radio = document.querySelectorAll('[name="character"]');
-let person;
-
-const handlerSumbit = (event) => {
-  event.preventDefault();
-
-  for (let i = 0; i < radio.length; i++) {
-    if (radio[i].checked) {
-      selectCharacter = radio[i].value;
+  top() {
+    if (this.pos.y - this.step > 0) {
+      this.pos.y -= this.step;
+      this.fmg.style.top = `${this.pos.y}%`;
+      this.fmg.style.transform = "rotate(90deg)";
+    } else {
+      this.fmg.style.transform = "rotate(90deg)";
     }
   }
 
-  switch (selectCharacter) {
+  bottom() {
+    if (this.pos.y + this.step <= 77) {
+      this.pos.y += this.step;
+      this.fmg.style.top = `${this.pos.y}%`;
+      this.fmg.style.transform = "rotate(270deg)";
+    } else {
+      this.fmg.style.transform = "rotate(90deg)";
+    }
+  }
+
+  right() {
+    if (this.step + this.pos.x <= 85) {
+      this.pos.x += this.step;
+      this.fmg.style.left = `${this.pos.x}%`;
+      this.fmg.style.transform = "scaleX(-1)";
+    } else {
+      this.fmg.style.transform = "scaleX(1)";
+    }
+  }
+
+  left() {
+    if (this.pos.x - this.step > 0) {
+      this.pos.x -= this.step;
+      this.fmg.style.left = `${this.pos.x}%`;
+      this.fmg.style.transform = "scaleX(1)";
+    } else {
+      this.fmg.style.transform = "scaleX(-1)";
+    }
+  }
+}
+
+function handlerSumbit(event) {
+  event.preventDefault();
+
+  let form = document.getElementsByTagName("form")[0];
+  const circle = document.getElementsByName("character");
+  const characterY = form.querySelector("[name= 'positiony']");
+  const characterX = form.querySelector("[name= 'positionx']");
+
+  for (let i = 0; i < circle.length; i++) {
+    if (circle[i].checked) {
+      chooseCharater = circle[i].value;
+    }
+  }
+  let familyY = characterY.value;
+  let familyX = characterX.value;
+
+  switch (chooseCharater) {
     case "peter":
-      person = new Family(
-        "https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg"
-      );
+      character = new Player("./images/peter.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX),
+      });
       break;
     case "lois":
-      person = new Family(
-        "https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg"
-      );
+      character = new Player("./images/lois.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX),
+      });
       break;
     case "meg":
-      person = new Family(
-        "https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg"
-      );
+      character = new Player("./images/meg.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX),
+      });
       break;
     case "chris":
-      person = new Family(
-        "https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg"
-      );
+      character = new Player("./images/chris.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX),
+      });
       break;
+
     case "brian":
-      person = new Family(
-        "https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg"
-      );
+      character = new Player("./images/brian.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX),
+      });
       break;
     case "stwie":
-      person = new Family(
-        "https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842images/a1810a48d74ee9b50b938b36f72b0069.jpg"
-      );
+      character = new Player("./images/Stewie.png", {
+        y: parseInt(familyY),
+        x: parseInt(familyX),
+      });
       break;
+
+    default:
   }
-};
+}
