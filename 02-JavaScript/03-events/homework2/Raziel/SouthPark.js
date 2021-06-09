@@ -88,6 +88,7 @@ try {
             charpic = radioInput[i].value
         }
     }
+    console.log(charpic);
     //console.log(charName, charpic, charPosX, charPosY);
     const newSouthPark = new GamePlayer(`#${charName}`, charpic, {
         x: parseInt(charPosX),
