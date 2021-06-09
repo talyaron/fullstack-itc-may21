@@ -40,12 +40,6 @@ function pikachuMove() {
             positionY = 400;
             pikachu.style.transform = "rotate(270deg) scaleY(-1)";
             /*YS: This is a very large function and if you notice you are 
-              repeating yourself a lot, remember DRY (dont repeat yourself). It would've been a lot cleaner to 
-              separate this large function into smaller functions ex. turnRight();
-              rotate(); And pass your values as parameters. Your code should be 
-              like a story.  pickachuMove(), turnRight(), surprise() etc. Also, instead of writing
-              the function in the addEventListener, add a callback.  document.addEventListener('keydown', pickachuMove),
-              and define your pickachuMove somewhere else. it looks cleaner. 
             */
           }
         }

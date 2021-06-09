@@ -27,24 +27,10 @@ function handleSubmit(ev) {
         y: `${posy}`
 
     });
-    document.addEventListener('keyup', ev => {
-        console.log(ev.key)
-        switch (ev.key) {
-            case "ArrowLeft":
-                newPiece.moveLeft();
-                break;
-            case "ArrowRight":
-                newPiece.moveRight();
-                break;
-            case "ArrowDown":
-                newPiece.moveDown();
-                break;
-            case "ArrowUp":
-                newPiece.moveUp();
-                break;
+    // document.addEventListener('keyup', ev => {
+    //     console.log(ev.key)
 
-        }
-    })
+    // })
     ev.target.reset();
 
 
@@ -78,6 +64,8 @@ class GamePiece {
         } catch (e) {
             console.error(e)
         }
+
+        document.addEventListener('keyup', (ev) => this.listener(ev))
 
     }
 
@@ -122,6 +110,23 @@ class GamePiece {
         if (this.position.y - this.step > -2) {
             this.position.y -= this.step;
             this.piece.style.top = `${this.position.y}%`;
+        }
+    }
+    listener(ev) {
+        switch (ev.key) {
+            case "ArrowLeft":
+                this.moveLeft();
+                break;
+            case "ArrowRight":
+                this.moveRight();
+                break;
+            case "ArrowDown":
+                this.moveDown();
+                break;
+            case "ArrowUp":
+                this.moveUp();
+                break;
+
         }
     }
 }
