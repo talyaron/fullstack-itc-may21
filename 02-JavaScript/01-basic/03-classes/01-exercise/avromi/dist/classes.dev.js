@@ -22,25 +22,30 @@ function () {
     this.model = model;
     this.price = price;
     this.qntyOH = qntyOH;
-    this.total();
   }
 
   _createClass(Car, [{
-    key: "total",
-    value: function total() {
-      try {
-        Car.total;
-        this.price * this.qntyOH;
-      } catch (error) {
-        console.error(error);
-      }
+    key: "totalCost",
+    value: function totalCost() {
+      var cost = this.price * this.qntyOH;
+      return "-->The total of ".concat(this.qntyOH, " ").concat(this.make, " ").concat(this.model, "'s = ").concat(cost);
+    }
+  }, {
+    key: "makeModel",
+    value: function makeModel() {
+      console.log("".concat(this.make, " ").concat(this.model));
     }
   }]);
 
   return Car;
 }();
 
-var ford = new Car("ford", "mustang", "$60,000", "13");
-var chevy = new Car("chevy", "corvette", "$85,000", "6");
-var dodge = new Car("dodge", "viper", "$105,000", "17");
-console.log(total(ford));
+var ford = new Car("ford", "mustang", 60000, 13);
+var chevy = new Car("chevy", "corvette", 85000, 6);
+var dodge = new Car("dodge", "viper", 105000, 17);
+ford.makeModel();
+console.log(ford.totalCost());
+chevy.makeModel();
+console.log(chevy.totalCost());
+dodge.makeModel();
+console.log(dodge.totalCost());

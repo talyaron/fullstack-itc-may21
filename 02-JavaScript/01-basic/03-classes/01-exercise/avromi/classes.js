@@ -14,18 +14,15 @@ class Car {
         this.model = model;
         this.price = price;
         this.qntyOH = qntyOH;
-
-
-        this.total();
     }
 
-    total() {
-        try {
-            Car.total;  this.price * this.qntyOH;
+   totalCost() {
+      const cost =  this.price * this.qntyOH;
+      return `-->The total of ${this.qntyOH} ${this.make} ${this.model}'s = ${cost}`
+    }
 
-        } catch (error) {
-            console.error(error)
-        }
+    makeModel() {
+        console.log(`${this.make} ${this.model}`)
     }
 }
 
@@ -33,8 +30,13 @@ class Car {
 
 
 
-let ford = new Car(`ford`, `mustang`, `$60,000`, `13`);
-let chevy = new Car(`chevy`, `corvette`, `$85,000`, `6`);
-let dodge = new Car(`dodge`, `viper`, `$105,000`, `17`);
+let ford = new Car(`ford`, `mustang`, 60000, 13);
+let chevy = new Car(`chevy`, `corvette`, 85000, 6);
+let dodge = new Car(`dodge`, `viper`, 105000, 17);
 
-console.log(total(ford));
+ford.makeModel();
+console.log(ford.totalCost());
+chevy.makeModel();
+console.log(chevy.totalCost());
+dodge.makeModel();
+console.log(dodge.totalCost());

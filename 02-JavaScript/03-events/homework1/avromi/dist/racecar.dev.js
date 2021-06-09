@@ -8,12 +8,10 @@
 // if the cursor moves over the image a surprise image appear
 try {
   var _car = document.querySelector("#car");
-  /*if(!car) throw new Error() */
 
-
-  throw new Error("Item Doesn't Exist"); //YS: Missing the conditional statement: if(!car) throw new Error(`Item Doesn't Exist`)
+  if (!_car) throw new Error("Item Doesn't Exist"); //YS: Missing the conditional statement: if(!car) throw new Error(`Item Doesn't Exist`)
 } catch (error) {
-  console.error("caught"); ///YS: console.log(error.message) instead of console.log("caught")
+  console.error(error.message); ///YS: console.log(error.message) instead of console.log("caught")
 }
 
 console.dir(car);
@@ -29,33 +27,6 @@ banner.addEventListener("mouseover", function (eve) {
 });
 banner.addEventListener("mouseout", function (eve) {
   banner.style.background = "black";
-});
-var moveBy = 10;
-window.addEventListener("load", function () {
-  car.style.position = "relative";
-  car.style.left = 0;
-  car.style.top = 0;
-  car.style.transform = "rotate(0deg)";
-});
-window.addEventListener("keydown", function (e) {
-  //YS: Why not also change the car's direction ( look up <transform: tranlsate> in CSS) 
-  switch (e.key) {
-    case "ArrowLeft":
-      car.style.left = parseInt(car.style.left) - moveBy + "px";
-      break;
-
-    case "ArrowRight":
-      car.style.left = parseInt(car.style.left) + moveBy + "px";
-      break;
-
-    case "ArrowUp":
-      car.style.top = parseInt(car.style.top) - moveBy + "px";
-      break;
-
-    case "ArrowDown":
-      car.style.top = parseInt(car.style.top) + moveBy + "px";
-      break;
-  }
 }); //YS: Nice work! 
 
 var plusTwenty = function plusTwenty() {
