@@ -1,37 +1,0 @@
-body {
-  margin: 0px;
-}
-
-.container {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
-  -ms-grid-rows: (200px)[6];
-      grid-template-rows: repeat(6, 200px);
-  gap: 6px;
-      grid-template-areas: "main main . ." "main main . ." ". . . . " ". adv333 . ." ". adv333 . ." ". . . .";
-}
-
-.container .item {
-  background-color: red;
-}
-
-.container .header {
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 2;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 2;
-  grid-area: main;
-  background-color: orange;
-}
-
-.container .advertise {
-  -ms-grid-row: 4;
-  -ms-grid-row-span: 2;
-  -ms-grid-column: 2;
-  grid-area: adv333;
-  background-color: blue;
-  color: white;
-}
-/*# sourceMappingURL=style.css.map */

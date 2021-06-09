@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stonned Dotty</title>
+    <link
+      rel="stylesheet"
+      href="/04-events/homework1/Refael/dist/stylesheet.css"
+    />
+    <link
+      rel="icon"
+      href="https://hubpng.com/download/9NYDhxtaOz8CNYzCJhN8GWrCtY3wCMK7EGE3YshfAdxjnMf6j6qeTOZCsDPzm4f1svbYCVxCyXh9oL9IBkWUDtLD3CMIzIKfQqLaJe61yvySvO2jvHLavErJKp8s340UH8DZgEAYUemgBU0hioIXJOqfuXSfnXUPrWbnEYuXsBoKbgzfvmWsjSvTSShzKgrD7ylOwf1Y/large"
+    />
+  </head>
+  <body>
+    <div class="game__intro">
+      <h1>Welcome to Stonner game!</h1>
+      <h2>Use the above inputs in order to create a new player</h2>
+      <h3>Use 'WASD' in order to play your new character</h3>
+    </div>
+    <img class="dot" src="" />
+    <div id="boardGame"></div>
+    <form onsubmit="formGetData(event)">
+      <input type="text" name="name" placeholder="Your character name:" />
+      <input type="url" name="image" placeholder="paste your character's PNG" />
+      <input
+        type="text"
+        name="posx"
+        placeholder="Put your desired X position"
+      />
+      <input
+        type="text"
+        name="posy"
+        placeholder="Put your desired Y position"
+      />
+      <input type="submit" value="Create your character!" />
+    </form>
+    <script src="/04-events/homework1/Refael/Script.js"></script>
+  </body>
+</html>

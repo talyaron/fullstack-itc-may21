@@ -1,0 +1,109 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.wrapper {
+	width: 79vw;
+	padding: 1em;
+    display: flex;
+
+
+    h1{
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+        color:white;
+        text-decoration: underline;
+    }
+
+    fieldset{
+        border: 1px solid black;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        text-align: center;
+        background-color: lightblue;
+        margin-right: 10px;
+
+        legend{
+            font-weight: bold;
+            font-size:1.7rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            
+        }
+
+        .wrapper__input{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 12px;
+            margin-left: 5px;
+
+            label {
+                margin-right: 5px;
+                font-weight: bold;
+
+                .wrapper__input--img {
+                    width: 100px;
+                    height: 100px;
+                    
+                }
+
+                [type=radio] {
+                    opacity: 0;
+                    /* hidden point */
+                }
+                
+                /* IMAGE STYLES */
+                [type=radio]+img {
+                    cursor: pointer;
+                }
+                
+                /* type ratio and image */
+                
+                /* CHECKED STYLES */
+                [type=radio]:checked+img {
+                    outline: 2px dotted black;
+                }
+            
+            
+            }
+
+            button{
+                text-decoration: none;
+                padding: 5px;
+                font-family: arial;
+                text-transform: uppercase;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-weight: 800;
+                font-size: 15px;
+                color: black;
+                background-color: salmon;
+            }
+            
+            button:hover{
+                color: #9b0e0e;
+                background-color: #bc6355;
+                text-decoration: none;
+              }
+        }
+    }
+   
+}
+
+
+#boardGame {
+    width: 55vw;
+    height: 80vh;
+    background-image: url("https://64.media.tumblr.com/6ce02ebfc16f4f1d59e9374e9ff7d542/tumblr_pkmfw5ba5U1wzh093o1_1280.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;    
+    position: relative;
+
+}
+

@@ -1,0 +1,70 @@
+.dot {
+  position: relative;
+  content: url(/04-events/homework1/Refael/images/download.png);
+
+  &:hover {
+    position: relative;
+    content: url(/04-events/homework1/Refael/images/init__hover.png);
+  }
+  &__left {
+    position: relative;
+    content: url(/04-events/homework1/Refael/images/dot__left.png);
+    &:hover {
+      position: relative;
+      content: url(/04-events/homework1/Refael/images/dot__left-hover.png);
+    }
+  }
+  &__right {
+    position: relative;
+    content: url(/04-events/homework1/Refael/images/dot__right.png);
+    &:hover {
+      position: relative;
+      content: url(/04-events/homework1/Refael/images/dot__right-hover.png);
+    }
+  }
+  &__up {
+    position: relative;
+    content: url(/04-events/homework1/Refael/images/dot__up.png);
+    &:hover {
+      position: relative;
+      content: url(/04-events/homework1/Refael/images/dot__up-hover.png);
+    }
+  }
+  &__down {
+    position: relative;
+    content: url(/04-events/homework1/Refael/images/dot__down.png);
+    &:hover {
+      position: relative;
+      content: url(/04-events/homework1/Refael/images/dot__down-hover.png);
+    }
+  }
+}
+
+#boardGame {
+  position: relative;
+}
+.piece {
+  position: relative;
+}
+
+form {
+  position: fixed;
+  top: 20px;
+}
+h1,
+h2,
+h3 {
+  margin: 0%;
+  color: #fe0000cf;
+}
+.game__intro {
+  position: relative;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  top: 35px;
+}
+img {
+  width: 300px;
+  height: 250px;
+  top: 33px;
+  z-index: -1;
+}

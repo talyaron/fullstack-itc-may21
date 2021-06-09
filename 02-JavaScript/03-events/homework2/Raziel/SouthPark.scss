@@ -1,0 +1,53 @@
+
+
+
+.button {
+    background-color: blue;
+    text-decoration: none;
+    
+}
+
+
+.modal_content{
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid red;
+}
+
+img{
+    width: 50px;
+    height: 50px;
+}
+input{
+    width: 300px;
+    display: block;
+    margin: 15px auto;
+    text-align: center;
+}
+h1{
+    text-align: center;
+}
+
+.box{
+  
+    display: flex;
+    width:400px;
+    justify-content: center;
+    
+}
+#gameBoard {
+   
+    background-image: url('https://cutewallpaper.org/21/southpark-backgrounds/South-Park-Background-Wallperio.com.png');
+    background-repeat: no-repeat;
+    position: relative;
+    background-size: cover;
+    margin: 0 auto;
+    width: 60vw;
+    height: 60vh;
+}
