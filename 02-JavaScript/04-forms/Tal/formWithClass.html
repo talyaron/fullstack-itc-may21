@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form onsubmit='handleSubmit(event)'>
+        <div>
+            <input type="text" name="name" placeholder="name">
+        </div>
+        <input type="text" name="state" placeholder="state">
+        <input type="text" name="city" placeholder="city">
+        <input type="text" name="street" placeholder="street">
+        <input type="number" name="homeNumber" placeholder=" home number">
+        <label for="Male">Male</label>
+        <input type="radio" name='gender' value="Male">
+        <label for="Female">Female</label>
+        <input type="radio" name='gender' value="Female">
+        <input type="submit" value="Submit">
+    </form>
+    <div id="board">
+
+    </div>
+    <script>
+        class Adrress {
+            constructor(name, state, street, city, homeNumber) {
+                try {
+                    if (typeof state !== "string") throw new Error("state isnt a string!");
+                    if (typeof street !== "string") throw new Error("street isnt a string!");
+                    if (typeof city !== "string") throw new Error("city isnt a string!");
+                    if (typeof homeNumber !== "number") throw new Error("Home number isnt a number!");
+
+                    this.name = name;
+                    this.state = state;
+                    this.street = street;
+                    this.city = city;
+                    this.homeNumber = homeNumber;
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            info() {
+                const Personinfo = `personal adrress is: ${this.state},${this.street},${this.city},${this.homeNumber}`;
+                console.log(Personinfo);
+            }
+
+            addPersonAddressToDOM(domElement) {
+                try {
+                    if (!domElement) throw new Error('YOU MUST PROViED DOM elemnt');
+
+                    domElement.innerHTML += `<p>${this.name} is living at  ${this.state},${this.street},${this.city},${this.homeNumber}`
+                } catch (error) {
+                    console.error(error)
+                }
+
+            }
+
+        }
+        const person1 = new Adrress("Moshe", "israel", "menashe", "modiin", 3);
+        const person2 = new Adrress("Eliana", "usa", "meldovitch", "miami", 58);
+
+        const board = document.querySelector("#board");
+        person1.addPersonAddressToDOM(board);
+        person2.addPersonAddressToDOM(board);
+
+        const persons = []
+
+        function handleSubmit(ev) {
+            ev.preventDefault()
+            console.dir(ev.target)
+            const name = ev.target.elements.name.value;
+            const state = ev.target.elements.state.value;
+            const city = ev.target.elements.city.value;
+            const street = ev.target.elements.street.value;
+            const homeNumber = ev.target.elements.homeNumber.valueAsNumber;
+            const gender = ev.target.elements.gender.value;
+            console.log(gender)
+
+            persons.push(new Adrress(name, state, street, city, homeNumber));
+
+            console.log(persons)
+
+            const board = document.querySelector("#board");
+            console.log(board.id)
+            persons[persons.length - 1].addPersonAddressToDOM(board);
+
+            ev.target.reset();
+        }
+
+    </script>
+</body>
+
+</html>
