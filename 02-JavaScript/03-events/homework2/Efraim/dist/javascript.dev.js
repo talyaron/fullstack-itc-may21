@@ -42,28 +42,10 @@ function handleSubmit(ev) {
   var newPiece = new GamePiece("#".concat(playerName), "".concat(playerImage), '50px', '38px', {
     x: "".concat(posx),
     y: "".concat(posy)
-  });
-  document.addEventListener('keyup', function (ev) {
-    console.log(ev.key);
+  }); // document.addEventListener('keyup', ev => {
+  //     console.log(ev.key)
+  // })
 
-    switch (ev.key) {
-      case "ArrowLeft":
-        newPiece.moveLeft();
-        break;
-
-      case "ArrowRight":
-        newPiece.moveRight();
-        break;
-
-      case "ArrowDown":
-        newPiece.moveDown();
-        break;
-
-      case "ArrowUp":
-        newPiece.moveUp();
-        break;
-    }
-  });
   ev.target.reset();
 }
 
@@ -71,6 +53,8 @@ var GamePiece =
 /*#__PURE__*/
 function () {
   function GamePiece(pieceId, imagePhoto, width, height, position) {
+    var _this = this;
+
     _classCallCheck(this, GamePiece);
 
     try {
@@ -91,6 +75,10 @@ function () {
     } catch (e) {
       console.error(e);
     }
+
+    document.addEventListener('keyup', function (ev) {
+      return _this.listener(ev);
+    });
   }
 
   _createClass(GamePiece, [{
@@ -140,6 +128,27 @@ function () {
       if (this.position.y - this.step > -2) {
         this.position.y -= this.step;
         this.piece.style.top = "".concat(this.position.y, "%");
+      }
+    }
+  }, {
+    key: "listener",
+    value: function listener(ev) {
+      switch (ev.key) {
+        case "ArrowLeft":
+          this.moveLeft();
+          break;
+
+        case "ArrowRight":
+          this.moveRight();
+          break;
+
+        case "ArrowDown":
+          this.moveDown();
+          break;
+
+        case "ArrowUp":
+          this.moveUp();
+          break;
       }
     }
   }]);

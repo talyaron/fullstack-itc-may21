@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    background-color: rgb(138, 201, 119);
+
+}
+
+
+.boardGame{
+    height: 40vw;
+    width: 150vh;
+    margin-right: 30px;
+    margin-top: 40px;
+    position: relative;
+    background-image: url('https://hips.hearstapps.com/ghk.h-cdn.co/assets/cm/15/11/480x262/55000af330cc9-apple-facts-orig-master-1.jpg?resize=480:*');
+}
+
+.piece {
+    position: absolute;
+    width: 10%;
+}
+
+form {
+    padding: 50px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.gridd {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+ 
+    }
