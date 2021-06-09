@@ -1,5 +1,4 @@
 class Game {
-<<<<<<< Updated upstream
   constructor(marioClass, width, height, marioURl) {
     this.marioClass = marioClass;
     this.width = width;
@@ -37,7 +36,7 @@ class Chat {
         this.
     }
 }
-=======
+
  constructor(marioClass,width,height,marioURl){
      this.marioClass = marioClass;
      this.width = width;
@@ -63,7 +62,6 @@ createPj() {
 
 
 
-}
 
 let mario = new Game('.mario', '100px','100px', 'https://www.semana.com/resizer/j42cYUvr34aLn13_CqxlysNH4fM=/1200x675/filters:format(jpg):quality(70)//cloudfront-us-east-1.images.arcpublishing.com/semana/V3EVP6ZUEZFY7AIGESM76I43GE.jpg')
->>>>>>> Stashed changes
+

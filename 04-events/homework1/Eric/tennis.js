@@ -22,13 +22,13 @@ tennis.addEventListener("mouseover", function (event) {
 
 
 let move = 10;
-let Top = 0;
+let Top = 0;    //YS: Dont capitalize variable names. We use camelCase. 
 let Left = 0;
 
 
-document.onkeydown = function (event) {
+document.onkeydown = function (event) {              //YS: Better practice to write: document.body.addEventListener('keydown', function(event) {...})
     try {
-        if (img2 === null) {
+        if (img2 === null) {                         //YS: You can also write < if(!img2) >   and you are missing another error:  < if(!tennis) throw new Error()   >
             throw new Error('No ball!');
         }
         switch (event.keyCode) {
@@ -63,9 +63,13 @@ document.onkeydown = function (event) {
                 tennis.classList.add('tennisDown');
                 Top += move;
                 tennis.style.marginTop = `${Top}px`;
-                break;
+                break;                                                                          /*YS: Nice work! Very clear and organized code. Good use of switch statements, const/let
+                                                                                                Also good use of playing with different CSS classNames. The only problem I had with your code
+                                                                                                is that it is too repetitve. Remember DRY(dont repeat yourself). YOu are doing very similar things
+                                                                                                in all of the switch cases, so it would've been much better to create one or two functions and just
+                                                                                                and just pass different parameters each time.      */
         }
-    } catch (e) {
+    } catch (e) { 
         return e;
     }
 };

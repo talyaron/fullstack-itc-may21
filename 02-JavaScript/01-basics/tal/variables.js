@@ -1,8 +1,19 @@
+for (let i=0; i<5;i++){
+var a = 5;
+}
+console.log(a)
+
+
+
+x=2; //error
+
 let x = 4;
-const y = 7;
-console.log(x)
+
+console.log(x);
 x = 'hello';
-console.log(x)
+console.log(x);
+
+const y = 7;
 
 
 x = [1,5,'ff','23',y]; //array

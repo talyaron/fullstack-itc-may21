@@ -20,7 +20,7 @@
 
     const element = document.getElementById("yoda");
     // I defined this variable in the global scope so it would also be available to the event listener.
-
+                                                                                                  /*YS: Wheres your error handling (try/catch)? */
     function left() {
       element.style.left = parseInt(element.style.left) - 5 + "px";
       element.style.transform = "rotate(270deg)";
@@ -30,6 +30,11 @@
       element.style.left = parseInt(element.style.left) + 5 + "px";
       element.style.transform = "rotate(90deg)";
     }
+
+                                                                                                  /*YS: If you notice, the only diference between the functions is the minus/plus
+                                                                                                    and the rotate. So you can split this further into two functions: moveLeftUp and
+                                                                                                    moveRightDown and pass in the parameter of rotate: moveLeftUp("rotate(270deg)").
+                                                                                                    Remember DRY: (Dont Repeat Yourself)  */
 
     function up() {
       element.style.top = parseInt(element.style.top) - 5 + "px";
@@ -57,7 +62,7 @@
 
     // The switch operation switches the value in different cases (up, down, left, right). After each case, you have to break. (Brian HOlt also taught the switch operation in the calculator exercise/ Frontendmasters Bootcamp. This switch operation says, if the value is this, do that. Here, the switch operation takes in the event.keycode, which is: arrow up: 38, arrow down: 40, left is 39 and right is 37. Keycode info for future reference: https://keycode.info/
 
-    function moveYoda(evt) {
+    function moveYoda(evt) {                 //YS: Nice switch!
       switch (evt.keyCode) {
         case 37:
           left();
