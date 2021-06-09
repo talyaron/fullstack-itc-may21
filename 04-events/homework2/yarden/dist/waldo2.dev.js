@@ -6,17 +6,31 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// Selecting Waldo:
 var waldo = document.querySelector('.waldo');
 waldo.style.top = '295px';
-waldo.style.left = '560px'; //Make form disappear, Waldo appear on clicking submit:
+waldo.style.left = '560px';
+var myForm = document.querySelector('.form');
 
-var form = document.querySelector('.form');
-var submitButton = document.querySelector('.form__input--submit');
-myForm.addEventListener('click', function (event) {
-  form.style.display = 'none';
-  waldo.style.hidden = 'false';
-}); //Create the character class:
+myForm.onsubmit = function (event) {
+  event.preventDefault();
+  var submittedImage = myForm.elements['image'].value;
+  var submittedName = myForm.elements['name'].value;
+  var submittedX = myForm.elements['x'].value;
+  var submittedY = myForm.elements['y'].value;
+  console.log(submittedName);
+  console.log(submittedImage);
+  console.log(submittedX);
+  console.log(submittedY);
+  var odlaw = new Character(submittedName, submittedImage, {
+    x: submittedX,
+    y: submittedY
+  });
+  odlaw.createCaharacter();
+  document.body.appendChild.character;
+  myForm.style.display = 'none';
+  waldo.style.display = 'block';
+}; //Create the character class:
+
 
 var Character =
 /*#__PURE__*/
@@ -30,19 +44,16 @@ function () {
     this.startingPosition.x = startingPosition.x;
     this.startingPosition.y = startingPosition.y;
     this.whereIsWaldo = document.querySelector('.waldo');
-    this.createCaharacter;
+    this.createCaharacter = this.createCaharacter.bind(this);
   }
 
   _createClass(Character, [{
     key: "createCaharacter",
     value: function createCaharacter() {
-      try {
-        if (!character) throw new Error("No Character");
-        this.character = document.createElement('img');
-        this.character.setAttribute('src', this.imageUrl);
-      } catch (e) {
-        console.error(e);
-      }
+      this.character = document.createElement('img');
+      this.character.setAttribute('src', this.imageUrl);
+      this.character.style.left = "".concat(this.startingPosition.x, "%");
+      this.character.style.top = "".concat(this.startingPosition.y, "%");
     }
   }]);
 
@@ -94,7 +105,3 @@ window.addEventListener('keydown', function (event) {
   }
 }); // Mouseover:
 //  When clicked, user gets control of the character ?
-
-function handleSubmit(event) {
-  event.preventDefault();
-}

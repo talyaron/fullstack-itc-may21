@@ -10,6 +10,7 @@ body {
   height: 90px;
   width: 70px;
   position: absolute;
+  display: none;
 }
 
 .form {

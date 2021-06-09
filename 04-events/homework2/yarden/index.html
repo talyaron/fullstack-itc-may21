@@ -12,21 +12,21 @@
         <h1 class="form__headline">Add a character!</h1>
         <div>
             <label for="name">Name:</label>
-            <input name="name" class="form__input" type="text" placeholder="Name" required autofocus>
+            <input name="name" class="form__input" type="text" placeholder="Name" required>
             <label for="image">Image URL:</label>
             <input name="image" class="form__input" type="text" value="https://i.pinimg.com/originals/1a/9a/dc/1a9adcb460987f1a2bfb824d1fc86d35.gif" required>
         <div>
             <label for="size">Position (horizontal)</label>
-            <input name="size" class="form__input" type="range" min="1" max="1250">
+            <input name="x" class="form__input" type="range" min="1" max="1250">
             <label for="size">Position (vertical)</label>
-            <input name="size" class="form__input" type="range" min="1" max="70">
+            <input name="y" class="form__input" type="range" min="1" max="700">
         </div>
         <div>
             <input class="form__input form__input--submit" type="submit" value="Generate character">
         </div>
     </form>
 
-    <img class="waldo" src="./pics/PinClipart.com_goodbye-clip-art_3791728.png" alt="Waldo" hidden>
+    <img class="waldo" src="./pics/PinClipart.com_goodbye-clip-art_3791728.png" alt="Waldo">
 
     <script src="./waldo2.js"></script>
 </body>
