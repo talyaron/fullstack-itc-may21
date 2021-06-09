@@ -19,18 +19,19 @@
                 this.homeNumber = homeNumber
 
             }
-         printAddress() {
-                let address = `${name}
+            printAddress() {
+               const address = `${name}
              ${homeNumber} ${street}
              ${city} ${state}`
-                return address
+                return address;
+                console.log(address);
             }
         }
 
 
-        const one = new Person(`Avromi`, `Il`, `Chicago`, `Rush`, `3555`)
+        const one = new Person(`Avromi`, `Il`, `Chicago`, `Rush`, 3555)
         console.log(one)
-        const two = new Person(`Sam`, `GA`, `Atlanta`, `Shields`, `2729`)
+        const two = new Person(`Sam`, `GA`, `Atlanta`, `Shields`, 2729)
 
         console.log(printAddress(one))
         console.log(printAddress(two))
