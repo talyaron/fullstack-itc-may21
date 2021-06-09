@@ -9,7 +9,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Player =
 /*#__PURE__*/
 function () {
-  function Player(imgUrl, pos) {
+  function Player(imgUrl, pos, familyID) {
     _classCallCheck(this, Player);
 
     this.imgUrl = imgUrl;
@@ -17,6 +17,8 @@ function () {
     this.pos = {};
     this.pos.x = pos.x;
     this.pos.y = pos.y;
+    this.familyID = familyID;
+    this.step = 5;
     this.characterFamily();
   }
 
@@ -32,6 +34,50 @@ function () {
       this.fmg.style.top = "".concat(this.pos.y, "%");
       this.fmg.style.transform = "scaleX(-1)";
       this.board.appendChild(this.fmg);
+    }
+  }, {
+    key: "top",
+    value: function top() {
+      if (this.pos.y - this.step > 0) {
+        this.pos.y -= this.step;
+        this.fmg.style.top = "".concat(this.pos.y, "%");
+        this.fmg.style.transform = "rotate(90deg)";
+      } else {
+        this.fmg.style.transform = "rotate(90deg)";
+      }
+    }
+  }, {
+    key: "bottom",
+    value: function bottom() {
+      if (this.pos.y + this.step <= 77) {
+        this.pos.y += this.step;
+        this.fmg.style.top = "".concat(this.pos.y, "%");
+        this.fmg.style.transform = "rotate(270deg)";
+      } else {
+        this.fmg.style.transform = "rotate(90deg)";
+      }
+    }
+  }, {
+    key: "right",
+    value: function right() {
+      if (this.step + this.pos.x <= 85) {
+        this.pos.x += this.step;
+        this.fmg.style.left = "".concat(this.pos.x, "%");
+        this.fmg.style.transform = "scaleX(-1)";
+      } else {
+        this.fmg.style.transform = "scaleX(1)";
+      }
+    }
+  }, {
+    key: "left",
+    value: function left() {
+      if (this.pos.x - this.step > 0) {
+        this.pos.x -= this.step;
+        this.fmg.style.left = "".concat(this.pos.x, "%");
+        this.fmg.style.transform = "scaleX(1)";
+      } else {
+        this.fmg.style.transform = "scaleX(-1)";
+      }
     }
   }]);
 
@@ -56,7 +102,7 @@ function handlerSumbit(event) {
 
   switch (chooseCharater) {
     case "peter":
-      character = new Player('./images/peter.png', {
+      character = new Player("./images/peter.png", {
         y: parseInt(familyY),
         x: parseInt(familyX)
       });
