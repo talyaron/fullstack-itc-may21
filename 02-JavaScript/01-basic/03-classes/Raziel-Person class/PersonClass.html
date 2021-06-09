@@ -11,20 +11,44 @@
 
 class Person{
 
-constructor(name,city,street,phoneNumber)}{
+constructor(name,city,street,phoneNumber){
 
     try {
-        if(typeof name!==="string") throw new Error("name is not a string");
-        if(typeof city!==="string") throw new Error("city is not a string");
-        if(typeof street!==="string") throw new Error("street is not a string");
+        if(typeof name!=='string') throw new Error("not valid name");
+        if(typeof city!=='string') throw new Error("not valid city");
+        if(typeof street!=='string') throw new Error("not valid street");
+        
+       this.name=name;
+       this.city=city;
+       this.street=street;
+       this.phoneNumber=phoneNumber;
+
+
+
     } catch (e) {
         console.log(e);
     }
-}
+
+sayAdres()
+{
+    console.log(`Hello my name is: ${this.name} and i live in the city: ${this.city} on the street:${this.street} and my phone number is:${this.phoneNumber}`)
+};
+  
+
+
+};
 
 }
+const personOne= new Person('Raziel','Rishon Lezaion','Shulamit Aloni 11','0528080069');
 
+console.dir(personONe);
+        rose.sayAdres();
+         
+        const personTwo= new Person('Daniel','Holon','Sokolov 18','0528185867');
 
+console.dir(personTwo);
+        rose.sayAdres();
+        
     </script>
 </body>
 </html>
