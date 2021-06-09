@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Copy me</p>
+    <input type="text" placeholder="enter a text" onkeyup="handleInput(event)" />
+    <!-- list of events -->
+    <!-- https://developer.mozilla.org/en-US/docs/Web/Events -->
+
+    <div onclick="handleDivClick(event)">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, cupiditate. Eveniet quod ut aperiam odit et
+            fugit rem vero molestias exercitationem impedit cupiditate numquam iste voluptatem, maxime aliquid. Officia,
+            veniam? <span>BOOOOOO</span></p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, cupiditate. Eveniet quod ut aperiam odit et
+            fugit rem vero molestias exercitationem impedit cupiditate numquam iste voluptatem, maxime aliquid. Officia,
+            veniam?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, cupiditate. Eveniet quod ut aperiam odit et
+            fugit rem vero molestias exercitationem impedit cupiditate numquam iste voluptatem, maxime aliquid. Officia,
+            veniam?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, cupiditate. Eveniet quod ut aperiam odit et
+            fugit rem vero molestias exercitationem impedit cupiditate numquam iste voluptatem, maxime aliquid. Officia,
+            veniam?</p>
+    </div>
+    <script>
+        document.addEventListener('paste', (event) => {
+            console.log('paste action initiated')
+            console.log(event)
+        });
+        window.onload = function () { console.log("loaded") };
+        window.ononline = () => { console.log("going online") };
+        window.onoffline = () => { console.log("going offline"); alert("You are no offline!") }
+
+
+        const p = document.querySelector('p');
+        p.addEventListener('mouseover', (ev) => {
+            p.innerText = "Mouse over me!!!!!!!!!!!!!"
+            console.log(ev.target)
+            const pElm = ev.target;
+
+            console.dir(pElm)
+        })
+
+        p.addEventListener('mouseout', () => {
+            p.innerText = 'Copy me'
+        })
+
+
+
+        // target
+        function handleInput(e) {
+            console.log(e.target);
+        }
+
+        function handleDivClick(ev){
+            console.dir(ev)
+        }
+    </script>
+</body>
+
+</html>
