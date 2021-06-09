@@ -104,8 +104,9 @@ function handleSubmit(ev) {
       if (radioInput[i].checked) {
         charpic = radioInput[i].value;
       }
-    } //console.log(charName, charpic, charPosX, charPosY);
+    }
 
+    console.log(charpic); //console.log(charName, charpic, charPosX, charPosY);
 
     var newSouthPark = new GamePlayer("#".concat(charName), charpic, {
       x: parseInt(charPosX),
