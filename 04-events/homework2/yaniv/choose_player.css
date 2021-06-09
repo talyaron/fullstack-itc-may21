@@ -1,0 +1,281 @@
+* {
+  font-family: 'ZCOOL KuaiLe', cursive;
+}
+
+button {
+  background-color: green;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  border: 0;
+}
+
+button:hover {
+  background-color: greenyellow;
+  color: black;
+}
+
+button:active {
+  background-color: #7eb827;
+}
+
+body {
+  position: relative;
+  width: 90vw;
+  height: 100%;
+  margin: auto;
+  background-color: darkkhaki;
+}
+
+h1 {
+  text-align: center;
+  margin: 5px;
+  font-size: 3rem;
+}
+
+.teamsWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  z-index: 1;
+  width: 100%;
+  height: 75%;
+}
+
+.teamsWrapper .team {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: flex-start;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+  margin: 5px;
+}
+
+.teamsWrapper .team h2 {
+  margin: 5px;
+}
+
+.gameBoard {
+  position: relative;
+  background-image: url("https://i.pinimg.com/originals/5f/2b/20/5f2b208bcf9151cf725695f000e74646.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  -webkit-box-shadow: 0 0 5px 5px darkkhaki inset;
+          box-shadow: 0 0 5px 5px darkkhaki inset;
+  width: 90vw;
+  height: 75vh;
+}
+
+.gameBoard__item--player {
+  position: absolute;
+  width: 110px;
+  height: 100px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.modalWrapper {
+  position: fixed;
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalBox__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: auto;
+  width: 40vw;
+  min-width: 550px;
+  padding: 5px;
+}
+
+.modalBox__item--title {
+  border-radius: 10px 10px 0 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.modalBox__item--title .close {
+  cursor: pointer;
+}
+
+.modalBox__item--title--team1 {
+  background-color: lightseagreen;
+}
+
+.modalBox__item--title--team1 .close:hover {
+  color: #115f5b;
+}
+
+.modalBox__item--title--team2 {
+  background-color: royalblue;
+}
+
+.modalBox__item--title--team2 .close:hover {
+  color: #26408f;
+}
+
+.modalBox__item--content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: white;
+  height: 75vh;
+  max-height: 350px;
+  border-radius: 0 0 10px 10px;
+}
+
+.modalBox__item--content .choosePlayerForm {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  -ms-grid-rows: [grid-start] 1fr [grid-middle1] 90px [grid-middle2] 45px [grid-middle3] 45px [grid-end];
+      grid-template-rows: [grid-start] 1fr [grid-middle1] 90px [grid-middle2] 45px [grid-middle3] 45px [grid-end];
+  gap: 12px;
+      grid-template-areas: ". . . ." "pName pName pName pName" "posX posX posY posY" "submit submit submit submit";
+}
+
+.modalBox__item--content .choosePlayerForm__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modalBox__item--content .choosePlayerForm__item p {
+  margin: 5px;
+}
+
+.modalBox__item--content .choosePlayerForm__item img {
+  width: 110px;
+  height: 100px;
+}
+
+.modalBox__item--content .choosePlayerForm__item--team2 img {
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+
+.modalBox__item--content .choosePlayerForm__item--name {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-area: pName;
+}
+
+.modalBox__item--content .choosePlayerForm__item--posX {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: posX;
+}
+
+.modalBox__item--content .choosePlayerForm__item--posY {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 2;
+  grid-area: posY;
+}
+
+.modalBox__item--content .choosePlayerForm__item--submit {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-area: submit;
+  background-color: darkgoldenrod;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 20px;
+  border: 0;
+}
+
+.modalBox__item--content .choosePlayerForm__item--submit:hover {
+  background-color: #f3b823;
+}
+
+.modalBox__item--content .choosePlayerForm__item--submit:active {
+  background-color: gold;
+}
+
+.modalBox--team1 {
+  display: none;
+}
+
+.modalBox--team2 {
+  display: none;
+}
+/*# sourceMappingURL=choose_player.css.map */

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY FIRST GAME</title>
+    <link rel="stylesheet" href="dist/game.css" >
+</head>
+<body>
+    
+    <h1>MY FIRST GAME</h1>
+    <div id="boardGame"></div>
+    
+
+    <script>
+        
+        class GamePiece {
+
+             
+            constructor(pieceId, imageUrl, width = "50px", postion) {
+                try {
+
+                    if(typeof postion !== "object") throw new Error('postion is not an object')
+                    if (!("x" in postion) || !("y" in postion)) throw new Error('starting point should have this format {x:0, y:0}')
+
+                    
+
+                    this.width = width
+                    this.pieceId = pieceId;
+                    this.imageUrl = imageUrl;
+                    
+                    
+                    this.postion = {};
+                    this.postion.x = postion.x;
+                    this.postion.y = postion.y;
+
+                   
+                    this.boardGamed = document.querySelector('#boardGame');
+                    this.createPeice();
+                    this.step = 2;
+                } catch (e) {
+                    console.error(e)
+                }
+
+            }
+
+            
+            createPeice() {
+                try {
+                    this.piece = document.createElement('img');
+                    this.piece.setAttribute('src', this.imageUrl);
+                    this.piece.setAttribute('width', this.width);
+                    this.piece.classList.add("piece");
+                    this.piece.style.left = `${this.postion.x}%`;
+                    this.piece.style.top =`${this.postion.y}%`;
+                    this.boardGamed.appendChild(this.piece);
+                } catch (e) {
+                    console.error(e)
+                }
+            }
+
+
+            
+            moveRight() {
+               
+                if (this.step + this.postion.x < 100) {
+                    this.postion.x += this.step;
+                    this.piece.style.left = `${this.postion.x}%`;
+                }
+            }
+
+            moveLeft() {
+                
+                if ( this.postion.x - this.step > 0) {
+                    this.postion.x -= this.step;
+                    this.piece.style.left = `${this.postion.x}%`;
+                }
+            }
+            moveDown() {
+              
+                if ( this.postion.y + this.step <100) {
+                    this.postion.y += this.step;
+                    this.piece.style.top = `${this.postion.y}%`;
+                }
+            }
+
+            moveUp() {
+                
+
+                if ( this.postion.y - this.step >0) {
+                    this.postion.y -= this.step;
+                    this.piece.style.top = `${this.postion.y}%`;
+                }
+            }
+
+            strike() {
+                console.log("I am striking")
+            };
+
+
+
+        }
+
+        
+        const pig = new GamePiece('#pig)', 'https://media.giphy.com/media/139eZBmH1HTyRa/giphy.gif', '100px', { x: 50, y: 50 });
+
+        console.log(pig);
+        pig.strike();
+
+
+        
+        const rainbow = new GamePiece('#rainbow', 'https://media.giphy.com/media/zCq3TyuABrRrG/giphy.gif', '70px', { x: 10, y: 10 });
+        console.log(rainbow);
+
+
+
+
+
+    </script>
+    <script src='game.js'></script>
+</body>
+
+</html>

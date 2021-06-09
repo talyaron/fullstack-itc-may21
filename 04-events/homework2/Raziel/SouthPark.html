@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SouthPark</title>
+    <link rel="stylesheet" href="dist/SouthPark.css">
+</head>
+<body>
+    <h1>SouthPark</h1>
+
+<div class="modal_content">
+   
+    <form  onsubmit="handleSubmit(event)">
+        <input type="text" name="charName" id="charName" required placeholder="Enter your  name..">
+        <input type='number' name='posix'  id= posix min="20" max="100" required placeholder="Select Starting Position x" />
+        <input type='number' name='posiy'id=posiy min="20" max="100" required placeholder="Select Starting Position y" />
+        <h1>Select your character</h1>
+        <div class="box">
+                <input type="radio" name="charImg" id="charImg" /> 
+                <img src="https://i.pinimg.com/originals/61/f3/d0/61f3d0b914f3a71f22c2c208ea875c98.png">
+                <input type="radio" name="charImg" id="charImg" /> 
+                <img src="https://i.pinimg.com/564x/83/40/50/83405084256c0ffcfb181dbc273d6f6b.jpg">
+                <input type="radio" name="charImg" id="charImg" /> 
+                <img src="https://i.pinimg.com/564x/64/f6/b0/64f6b000a214ac2df36f156aa9483edc.jpg">
+    </div>
+        <input type="submit" value="Play Now">
+    </form>
+</div>
+
+
+<div id="gameBoard"> </div>
+
+<script src="SouthPark.js"></script>
+</body>
+</html>
