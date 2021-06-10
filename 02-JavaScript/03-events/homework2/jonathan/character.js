@@ -125,6 +125,7 @@ function handlerSumbit(event) {
         }
         if (!charChoosen) throw new Error('Error Image')
 
+        
 
 
         console.log(`The ID: ${characterId}, Character Image: ${charChoosen}, Position X: ${characterPosX}, Position Y: ${characterPosY}`)
