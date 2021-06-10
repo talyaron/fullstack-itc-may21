@@ -107,19 +107,16 @@ var character;
 
 function handlerSumbit(event) {
   event.preventDefault();
-  var form = document.getElementsByTagName("form")[0];
-  var input = document.querySelector('#id-name');
-  var radio = document.getElementsByName("pokemon");
-  var posX = form.querySelector("[name='startx']");
-  var posY = form.querySelector("[name='starty']");
+  var input = event.target.querySelector('#id-name');
+  var radio = event.target.querySelectorAll("[name='pokemon']");
+  var posX = event.target.querySelector("[name='startx']");
+  var posY = event.target.querySelector("[name='starty']");
 
   try {
     var characterId = input.value;
     if (characterId === "") throw new Error('The id is empty, please write an id');
-    var characterPosX = posX.value;
-    if (!characterPosX) throw new Error('Any error for PosX');
-    var characterPosY = posY.value;
-    if (!characterPosY) throw new Error('Any error for Posy');
+    var characterPosX = posX.valueAsNumber;
+    var characterPosY = posY.valueAsNumber;
 
     for (var i = 0, length = radio.length; i < length; i++) {
       if (radio[i].checked) {
@@ -127,35 +124,34 @@ function handlerSumbit(event) {
       }
     }
 
-    if (!charChoosen) throw new Error('Error Image');
     console.log("The ID: ".concat(characterId, ", Character Image: ").concat(charChoosen, ", Position X: ").concat(characterPosX, ", Position Y: ").concat(characterPosY));
 
     switch (charChoosen) {
       case 'pika':
         character = new Character(characterId, 'img/piran.gif', {
-          x: parseInt(characterPosX),
-          y: parseInt(characterPosY)
+          x: characterPosX,
+          y: characterPosY
         });
         break;
 
       case 'char':
         character = new Character(characterId, 'img/charmander.gif', {
-          x: parseInt(characterPosX),
-          y: parseInt(characterPosY)
+          x: characterPosX,
+          y: characterPosY
         });
         break;
 
       case 'bulba':
         character = new Character(characterId, 'img/bulba.gif', {
-          x: parseInt(characterPosX),
-          y: parseInt(characterPosY)
+          x: characterPosX,
+          y: characterPosY
         });
         break;
 
       case 'squirtle':
         character = new Character(characterId, 'img/squirtle.gif', {
-          x: parseInt(characterPosX),
-          y: parseInt(characterPosY)
+          x: characterPosX,
+          y: characterPosY
         });
         break;
 
