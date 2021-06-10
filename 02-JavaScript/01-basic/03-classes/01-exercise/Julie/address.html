@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Address Class Exercise</title>
+  </head>
+
+  <body></body>
+
+  <!-- create a class for a person and add her address (state, city, street, homeNumber)
+create a class that says the person's full address
+ -->
+  <script>
+    class Address {
+      constructor(state, city, street, number) {
+        this.state = state;
+        this.city = city;
+        this.street = street;
+        this.number = number;
+      }
+      sayAddress() {
+        return `The address is ${this.number}, ${this.street}, ${this.city}, ${this.state}`;
+      }
+    }
+
+    let Joe = new Address("Michigan", "Ann Arbor", "Rosewood", "33");
+
+    console.log(Joe.sayAddress());
+  </script>
+</html>
