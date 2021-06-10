@@ -105,19 +105,19 @@ function handlerSumbit(event) {
 
     event.preventDefault();
 
-    const input = event.target.querySelector('#id-name');
+    const characterId = event.target.querySelector('#id-name').value;
     const radio = event.target.querySelectorAll("[name='pokemon']");
-    const posX = event.target.querySelector("#startx");
-    const posY = event.target.querySelector("#starty");
+    const characterPosX = event.target.querySelector("#startx").valueAsNumber;
+    const characterPosY = event.target.querySelector("#starty").valueAsNumber;
 
 
     try {
 
-        let characterId = input.value;
+      //  let characterId = input.value;
         if (characterId === "") throw new Error('The id is empty, please write an id')
-        let characterPosX = posX.valueAsNumber;
+       // let characterPosX = posX.valueAsNumber;
   
-        let characterPosY = posY.valueAsNumber;
+       // let characterPosY = posY.valueAsNumber;
 
         for (var i = 0, length = radio.length; i < length; i++) {
             if (radio[i].checked) {
