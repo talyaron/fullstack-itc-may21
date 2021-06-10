@@ -22,9 +22,9 @@
 
             }
              printAddress() {
-               const address = (personName, state, city, street, homeNumber)
-                return address;
-                console.log(address);
+              return  `${this.personName},${this.state}, this.city, this.street, this.homeNumber`
+               
+                console.log(printAddress());
             }
          
         }
@@ -34,8 +34,8 @@
         console.log(one)
         const two = new Person(`Sam`, `GA`, `Atlanta`, `Shields`, 2729)
      
-        console.log(printAddress(one))
-        console.log(printAddress(two))
+        console.log(printAddress())
+        console.log(one.printAddress())
 
 
 
