@@ -113,12 +113,9 @@ function handlerSumbit(event) {
 
     try {
 
-      //  let characterId = input.value;
         if (characterId === "") throw new Error('The id is empty, please write an id')
-       // let characterPosX = posX.valueAsNumber;
+ 
   
-       // let characterPosY = posY.valueAsNumber;
-
         for (var i = 0, length = radio.length; i < length; i++) {
             if (radio[i].checked) {
                 charChoosen = radio[i].value
