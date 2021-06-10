@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            constructor(personName, state, city, street, homeNumber) {
+                this.name = name;
+                this.state = state;
+                this.city = city;
+                this.street = street;
+                this.homeNumber = homeNumber;
+
+              
+
+            }
+             printAddress() {
+              return  `${this.personName},${this.state}, this.city, this.street, this.homeNumber`
+               
+                console.log(printAddress());
+            }
+         
+        }
+
+
+        const one = new Person(`Avromi`, `Il`, `Chicago`, `Rush`, 3555)
+        console.log(one)
+        const two = new Person(`Sam`, `GA`, `Atlanta`, `Shields`, 2729)
+     
+        console.log(printAddress())
+        console.log(one.printAddress())
+
+
+
+
+    </script>
+</body>
+
+</html>
