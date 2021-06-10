@@ -7,6 +7,47 @@
 
 function handleSubmit(ev) {
     ev.preventDefault()
-    console.log(ev.target)
-    console.dir(ev)
+   const imgUrl = ev.target.elements.piece.value;
+   const position = ev.target.elements.position.value;
+   const pieceId = ev.target.elements.pieceId.value;
+//    const id = ev.target.elements.piece.id;
+    console.log(imgUrl);
+    console.log(position);
+    console.log(pieceId);
+    const myPiece = new GamePiece(imgUrl, position, pieceId);
+    reset(ev.target);
 }
+
+class GamePiece {
+    constructor(imgSrc, positionXY, id){
+        this.imgSrc = imgSrc;
+        this.id = id;
+        
+
+        this.positionXY = {};
+        this.positionXY.x = positionXY.x;
+        this.positionXY.y = positionXY.y;
+
+        this.gameBoard= document.querySelector("#gameBoard");
+        this.createPeice();
+    }
+
+    createPeice() {
+        try {
+          this.piece = document.createElement("img");
+          this.piece.setAttribute("src", this.imgSrc);
+          this.piece.classList.add("piece");
+          this.piece.style.left = `${this.positionXY.x}%`;
+          this.piece.style.top = `${this.positionXY.y}%`;
+          this.gameBoard.appendChild(this.piece);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      
+ 
+
+}
+
+

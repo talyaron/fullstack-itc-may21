@@ -11,21 +11,40 @@
 
 <body>
     <form onsubmit="handleSubmit(event)">
-
+        <label>Rook</label>
         <input type="radio" name="piece" id="rook"
             value="https://toppng.com/uploads/preview/awn-chess-piece-pawn-chess-piece-transparent-11563391176oxnhiiocwr.png">
+        <label>Knight</label>
         <input type="radio" name="piece" id="knight"
             value="https://toppng.com/uploads/preview/knight-chess-piece-single-chess-pieces-transparent-11563052385g1ueawbhff.png">
+        <label>Queen</label>
         <input type="radio" name="piece" id="queen"
             value="https://www.pngfind.com/pngs/m/527-5272120_chess-piece-queen-bishop-king-queen-chess-piece.png">
+        <br>
+        Position
+        <label>1</label>
+        <input type="radio" name="position" value="{x: 10 y:10}">
+        <label>2</label>
+        <input type="radio" name="position" value="{x: 30 y:30}">
+        <label>3</label>
+        <input type="radio" name="position" value="{x: 50 y:50}">
+        <br>
+        <label>Rook</label>
+        <input type="radio" name="pieceId" value="#rook">
+        <label>Knight</label>
+        <input type="radio" name="pieceId" value="#knight">
+        <label>Queen</label>
+        <input type="radio" name="pieceId" value="#queen">
+        Choose the id for the piece you selected
 
-    
-            <!--Radio button with id-->
+        <!--Radio button with id-->
 
-            <input type="submit" value="Create My Piece">
+
+
+        <input type="submit" value="Create My Piece">
 
     </form>
-    <div id="gameboard"></div>
+    <div id="gameBoard"></div>
     <script src="./script.js"></script>
 </body>
 
