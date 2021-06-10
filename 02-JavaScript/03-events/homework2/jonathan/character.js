@@ -107,8 +107,8 @@ function handlerSumbit(event) {
 
     const input = event.target.querySelector('#id-name');
     const radio = event.target.querySelectorAll("[name='pokemon']");
-    const posX = event.target.querySelector("[name='startx']");
-    const posY = event.target.querySelector("[name='starty']");
+    const posX = event.target.querySelector("#startx");
+    const posY = event.target.querySelector("#starty");
 
 
     try {
