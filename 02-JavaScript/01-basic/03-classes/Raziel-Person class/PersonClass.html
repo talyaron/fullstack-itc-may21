@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+class Person{
+
+constructor(name,city,street,phoneNumber){
+
+    try {
+        if(typeof name!=='string') throw new Error("not valid name");
+        if(typeof city!=='string') throw new Error("not valid city");
+        if(typeof street!=='string') throw new Error("not valid street");
+        
+       this.name=name;
+       this.city=city;
+       this.street=street;
+       this.phoneNumber=phoneNumber;
+
+
+
+    } catch (e) {
+        console.log(e);
+    }
+
+sayAdres()
+{
+    console.log(`Hello my name is: ${this.name} and i live in the city: ${this.city} on the street:${this.street} and my phone number is:${this.phoneNumber}`)
+};
+  
+
+
+};
+
+}
+const personOne= new Person('Raziel','Rishon Lezaion','Shulamit Aloni 11','0528080069');
+
+console.dir(personONe);
+        rose.sayAdres();
+         
+        const personTwo= new Person('Daniel','Holon','Sokolov 18','0528185867');
+
+console.dir(personTwo);
+        rose.sayAdres();
+        
+    </script>
+</body>
+</html>
