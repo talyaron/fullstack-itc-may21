@@ -40,10 +40,7 @@ function handleSubmit(ev) {
   var newPiece = new GamePiece("#".concat(playerName), "".concat(playerImage), '50px', '38px', {
     x: posx,
     y: posy
-  }); // document.addEventListener('keyup', ev => {
-  //     console.log(ev.key)
-  // })
-
+  });
   ev.target.reset();
 }
 

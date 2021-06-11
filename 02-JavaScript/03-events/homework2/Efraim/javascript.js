@@ -26,10 +26,6 @@ function handleSubmit(ev) {
         y: posy
 
     });
-    // document.addEventListener('keyup', ev => {
-    //     console.log(ev.key)
-
-    // })
     ev.target.reset();
 
 
