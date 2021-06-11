@@ -1,0 +1,10 @@
+.container {
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  content: url(./images/download.png);
+  top: 190px;
+  left: 500px;
+}

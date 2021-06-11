@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Person</title>
 </head>
 
 <body>
+    <div class="addressBar"></div>
     <script>
         class Person {
             constructor(name, state, city, street, homeNumber) {
@@ -16,26 +17,50 @@
                 this.state = state;
                 this.city = city;
                 this.street = street;
-                this.homeNumber = homeNumber
+                this.homeNumber = homeNumber;
+
+              
 
             }
-            printAddress() {
-               const address = `${name}
-             ${homeNumber} ${street}
-             ${city} ${state}`
-                return address;
-                console.log(address);
+             printAddress() {
+              return `${this.name} ${this.state} ${this.city} ${this.street} ${this.homeNumber}<br>`
             }
+            
+            addToDom() {
+              const addressBar =  document.querySelector(`.addressBar`);
+              addressBar.innerHTML += this.printAddress();
+            }
+
+        
         }
 
+       
 
+        
         const one = new Person(`Avromi`, `Il`, `Chicago`, `Rush`, 3555)
         console.log(one)
         const two = new Person(`Sam`, `GA`, `Atlanta`, `Shields`, 2729)
+        two.addToDom();
+        one.addToDom();
+        console.log(one.printAddress())
 
-        console.log(printAddress(one))
-        console.log(printAddress(two))
 
+        class Homes {
+            constructor(address, street, city, state, zip){
+                this.address = address;
+                this.street = street;
+                this.city = city;
+                this.state = state;
+                this.zip = zip;
+            }
+            homeOpps() {
+            return `${this.address}, ${this.street}, this.city`
+            }
+        }
+
+        const home1 = new Homes(6464 , `rush`, `chicag`, `il` , 60605) 
+
+        console.log(home1.homeOpps())
 
 
 
