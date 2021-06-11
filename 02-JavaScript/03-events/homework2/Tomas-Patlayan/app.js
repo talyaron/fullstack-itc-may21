@@ -67,82 +67,84 @@ class Player {
 
 function handlerSumbit(event) {
   try {
-  event.preventDefault();
+    event.preventDefault();
 
+    const chooseCharater = event.target.elements.character.value;
+    const familyY = event.target.elements.positiony.value;
+    const familyX = event.target.elements.positionx.value;
+    if (familyX === "" || familyY === "")
+      throw new Error("Add  Position X and Position Y");
+    const familyID = event.target.elements.id.value;
+    if (familyID === "") throw new Error("Put an ID");
+    if (familyID < 1 || familyID > 6)
+      throw new Error("Put an ID between 6 and 1");
 
-  // if(familyY === '')throw new Error('Add a Position Y');
+    switch (chooseCharater) {
+      case "peter":
+        character = new Player(
+          "./images/peter.png",
+          {
+            y: parseInt(familyY),
+            x: parseInt(familyX),
+          },
+          familyID
+        );
+        break;
+      case "lois":
+        character = new Player(
+          "./images/lois.png",
+          {
+            y: parseInt(familyY),
+            x: parseInt(familyX),
+          },
+          familyID
+        );
+        break;
+      case "meg":
+        character = new Player(
+          "./images/meg.png",
+          {
+            y: parseInt(familyY),
+            x: parseInt(familyX),
+          },
+          familyID
+        );
+        break;
+      case "chris":
+        character = new Player(
+          "./images/chris.png",
+          {
+            y: parseInt(familyY),
+            x: parseInt(familyX),
+          },
+          familyID
+        );
+        break;
 
-  
+      case "brian":
+        character = new Player(
+          "./images/brian.png",
+          {
+            y: parseInt(familyY),
+            x: parseInt(familyX),
+          },
+          familyID
+        );
+        break;
+      case "stwie":
+        character = new Player(
+          "./images/Stewie.png",
+          {
+            y: parseInt(familyY),
+            x: parseInt(familyX),
+          },
+          familyID
+        );
+        break;
 
-
-
-  const chooseCharater = event.target.elements.character.value;
-  const familyY = event.target.elements.positiony.value;
-  const familyX = event.target.elements.positionx.value;
-  if(familyX === '' || familyY === '')throw new Error('Add  Position X and Position Y');
-  const familyID = event.target.elements.id.value;
-  if(familyID === '' ) throw new Error('Put an ID');
-  if(familyID< 1 || familyID > 6)throw new Error('Put an ID between 6 and 1');
-
- 
- 
-  
-   
-  
-
-
-  //for (let i = 0; i < circle.length; i++) {
-    //if (circle[i].checked) {
-     // chooseCharater = circle[i].value;
-   // }
-  //}
-  //let familyY = characterY.value;
-  //let familyX = characterX.value;
-  
-
-  switch (chooseCharater) {
-    case "peter":
-      character = new Player("./images/peter.png", {
-        y: parseInt(familyY),
-        x: parseInt(familyX),
-      }, familyID);
-      break;
-    case "lois":
-      character = new Player("./images/lois.png", {
-        y: parseInt(familyY),
-        x: parseInt(familyX),
-      },familyID);
-      break;
-    case "meg":
-      character = new Player("./images/meg.png", {
-        y: parseInt(familyY),
-        x: parseInt(familyX),
-      },familyID);
-      break;
-    case "chris":
-      character = new Player("./images/chris.png", {
-        y: parseInt(familyY),
-        x: parseInt(familyX),
-      },familyID);
-      break;
-
-    case "brian":
-      character = new Player("./images/brian.png", {
-        y: parseInt(familyY),
-        x: parseInt(familyX),
-      },familyID);
-      break;
-    case "stwie":
-      character = new Player("./images/Stewie.png", {
-        y: parseInt(familyY),
-        x: parseInt(familyX),
-      },familyID);
-      break;
-
-    default:
+      default:
+    }
+  } catch (error) {
+    console.log(error);
   }
-}
-catch (error) {
-  console.log(error);
-}
 }
