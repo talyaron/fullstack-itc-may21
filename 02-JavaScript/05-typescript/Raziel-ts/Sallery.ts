@@ -1,9 +1,9 @@
 
 
-var month:number=12;
+
 
 function Avrg(x:number):string{
-var avrgMonth=x/month;
+var avrgMonth=x/12;
 var avrgString= avrgMonth.toString();
 return `Your avrage for month is:${avrgString} `
 }
