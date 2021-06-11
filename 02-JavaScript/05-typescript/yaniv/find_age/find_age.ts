@@ -1,10 +1,30 @@
-// create a function in typescript that gets the sallery as an anual sallery (number), and return a string saying "your avarage monthly sallery is:x";
+// create 3 persons with their B-days (in object {name, year-of-birth})
+// calculate how old are they.
 
 // export {}
-var monthlySalary = (anualSalary : number) : number => {
-    const monthly : number = anualSalary/12;
-    return monthly;
+
+class Person {
+    constructor(name : string, birthYear : number) {
+        this.name = name;
+        this.birthYear = birthYear;
+    }
 }
 
-const yearly = 12000;
-console.log(`Your avarage monthly sallery is ${monthlySalary(yearly)}`);
+interface perType {
+    name: string,
+    birthYear: number
+}
+
+var findAge = (person : perType) : number => {
+    const currentYear: number = new Date().getFullYear();
+    const age : number = currentYear - person.birthYear;
+    return age;
+}
+
+const per1 = new Person('Yaniv',1988);
+const per2 = new Person('Tal',1980);
+const per3 = new Person('Metushelach',-2000);
+
+console.log(`${per1.name}, You are ${findAge(per1)} years old!`);
+console.log(`${per2.name}, You are ${findAge(per2)} years old!`);
+console.log(`${per3.name}, You are ${findAge(per3)} years old!`);
