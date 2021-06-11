@@ -27,9 +27,8 @@ var person3 = {
     bday: new Date("2005-05-12")
 };
 var calculateDate = function (persona) {
-    var actualDate = new Date();
+    var actualDate = new Date().getFullYear();
     var person = persona.bday.getFullYear();
-    var years = actualDate.getFullYear();
-    console.log("The age of " + persona.name + " is " + (years - person));
+    console.log("The age of " + persona.name + " is " + (actualDate - person));
 };
 calculateDate(person3);
