@@ -1,6 +1,5 @@
 function handleSubmit(ev) {
     ev.preventDefault();
-    console.dir(ev.target.children)
     let playerName = ev.target.children.id.value;
     const imageSelect = document.querySelectorAll('.image-select');
     const imageChosen = document.querySelectorAll(".image-chosen");
@@ -13,18 +12,18 @@ function handleSubmit(ev) {
     if (playerImage === undefined) {
         throw new Error('No player selected!')
     }
-    let posx = ev.target.children.posix.value;
+    let posx = parseInt(ev.target.children.posix.value);
     if (posx > 96) {
         posx = 96;
     }
-    let posy = ev.target.children.posiy.value;
+    let posy = parseInt(ev.target.children.posiy.value);
     if (posy > 95) {
         posy = 95;
     }
-    console.log(playerName, playerImage, posx, posy);
+    
     const newPiece = new GamePiece(`#${playerName}`, `${playerImage}`, '50px', '38px', {
-        x: `${posx}`,
-        y: `${posy}`
+        x: posx,
+        y: posy
 
     });
     // document.addEventListener('keyup', ev => {
@@ -84,7 +83,7 @@ class GamePiece {
         }
     }
 
-
+ 
     //let create a method for moving left
     moveRight() {
         if (this.step + this.position.x < 96) {
