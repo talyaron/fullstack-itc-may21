@@ -17,8 +17,8 @@ function handleSubmit(ev) {
         posx = 96;
     }
     let posy = parseInt(ev.target.children.posiy.value);
-    if (posy > 95) {
-        posy = 95;
+    if (posy > 94) {
+        posy = 94;
     }
     
     const newPiece = new GamePiece(`#${playerName}`, `${playerImage}`, '50px', '38px', {
@@ -86,7 +86,7 @@ class GamePiece {
  
     //let create a method for moving left
     moveRight() {
-        if (this.step + this.position.x < 96) {
+        if (this.step + this.position.x < 98) {
             this.position.x += this.step;
             this.piece.style.left = `${this.position.x}%`;
         }
@@ -99,14 +99,14 @@ class GamePiece {
         }
     }
     moveDown() {
-        if (this.position.y + this.step < 95) {
+        if (this.position.y + this.step < 94) {
             this.position.y += this.step;
             this.piece.style.top = `${this.position.y}%`;
         }
     }
 
     moveUp() {
-        if (this.position.y - this.step > -2) {
+        if (this.position.y - this.step > -1) {
             this.position.y -= this.step;
             this.piece.style.top = `${this.position.y}%`;
         }
