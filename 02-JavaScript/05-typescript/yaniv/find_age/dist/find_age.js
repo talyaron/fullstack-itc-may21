@@ -1,6 +1,6 @@
 // create 3 persons with their B-years (in object {name, year-of-birth})
 // calculate how old are they.
-// export {}
+//  export {}
 var Person = /** @class */ (function () {
     function Person(name, birthYear) {
         this.name = name;

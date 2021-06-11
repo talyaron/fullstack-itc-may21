@@ -1,7 +1,7 @@
 // create 3 persons with their B-years (in object {name, year-of-birth})
 // calculate how old are they.
 
-// export {}
+//  export {}
 
 class Person {
     name : string;
