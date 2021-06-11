@@ -33,17 +33,14 @@ function handleSubmit(ev) {
 
   var posy = parseInt(ev.target.children.posiy.value);
 
-  if (posy > 95) {
-    posy = 95;
+  if (posy > 94) {
+    posy = 94;
   }
 
   var newPiece = new GamePiece("#".concat(playerName), "".concat(playerImage), '50px', '38px', {
     x: posx,
     y: posy
-  }); // document.addEventListener('keyup', ev => {
-  //     console.log(ev.key)
-  // })
-
+  });
   ev.target.reset();
 }
 
@@ -99,7 +96,7 @@ function () {
   }, {
     key: "moveRight",
     value: function moveRight() {
-      if (this.step + this.position.x < 96) {
+      if (this.step + this.position.x < 98) {
         this.position.x += this.step;
         this.piece.style.left = "".concat(this.position.x, "%");
       }
@@ -115,7 +112,7 @@ function () {
   }, {
     key: "moveDown",
     value: function moveDown() {
-      if (this.position.y + this.step < 95) {
+      if (this.position.y + this.step < 94) {
         this.position.y += this.step;
         this.piece.style.top = "".concat(this.position.y, "%");
       }
@@ -123,7 +120,7 @@ function () {
   }, {
     key: "moveUp",
     value: function moveUp() {
-      if (this.position.y - this.step > -2) {
+      if (this.position.y - this.step > -1) {
         this.position.y -= this.step;
         this.piece.style.top = "".concat(this.position.y, "%");
       }
