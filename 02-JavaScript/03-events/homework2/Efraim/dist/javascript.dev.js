@@ -10,7 +10,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function handleSubmit(ev) {
   ev.preventDefault();
-  console.dir(ev.target.children);
   var playerName = ev.target.children.id.value;
   var imageSelect = document.querySelectorAll('.image-select');
   var imageChosen = document.querySelectorAll(".image-chosen");
@@ -26,22 +25,21 @@ function handleSubmit(ev) {
     throw new Error('No player selected!');
   }
 
-  var posx = ev.target.children.posix.value;
+  var posx = parseInt(ev.target.children.posix.value);
 
   if (posx > 96) {
     posx = 96;
   }
 
-  var posy = ev.target.children.posiy.value;
+  var posy = parseInt(ev.target.children.posiy.value);
 
   if (posy > 95) {
     posy = 95;
   }
 
-  console.log(playerName, playerImage, posx, posy);
   var newPiece = new GamePiece("#".concat(playerName), "".concat(playerImage), '50px', '38px', {
-    x: "".concat(posx),
-    y: "".concat(posy)
+    x: posx,
+    y: posy
   }); // document.addEventListener('keyup', ev => {
   //     console.log(ev.key)
   // })
