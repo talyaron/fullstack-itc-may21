@@ -1,4 +1,4 @@
-// create 3 persons with their B-days (in object {name, year-of-birth})
+// create 3 persons with their B-years (in object {name, year-of-birth})
 // calculate how old are they.
 // export {}
 var Person = /** @class */ (function () {
