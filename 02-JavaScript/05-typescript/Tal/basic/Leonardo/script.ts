@@ -42,10 +42,10 @@ const person3: People = {
     bday: new Date("2005-05-12")
 };
 
-const calculateDate = (persona: People): void => {
-    let actualDate: number = new Date().getFullYear();
-    let person: number = persona.bday.getFullYear();
-    console.log(`The age of ${persona.name} is ${actualDate - person}`)
+const calculateDate = (persona: People): string => {
+    const actualDate: number = new Date().getFullYear();
+    const person: number = persona.bday.getFullYear();
+    return `The age of ${persona.name} is ${actualDate - person}`;
 };
 
-calculateDate(person3);
+console.log(calculateDate(person2));
