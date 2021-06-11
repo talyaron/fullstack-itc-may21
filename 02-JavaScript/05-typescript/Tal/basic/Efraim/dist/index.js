@@ -7,8 +7,8 @@ var personB = {
     b: new Date(1980, 8, 3)
 };
 var age = function (person) {
-    var currentDate = new Date().getFullYear();
-    var answer = person.a + " is currently " + (currentDate - person.b.getFullYear());
+    var currentYear = new Date().getFullYear();
+    var answer = person.a + " is currently " + (currentYear - person.b.getFullYear());
     console.log(answer);
 };
 age(personA);
