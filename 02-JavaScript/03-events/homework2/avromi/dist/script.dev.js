@@ -6,6 +6,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 // 1) create a form to insert a apiece in a game (image, starting position (x,y), id);
 // 2) get all the inforamation from your form;
 // 3) create a new instance of the piece on the board (with a class constructore);
@@ -14,27 +16,35 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function handleSubmit(ev) {
   ev.preventDefault();
   var imgUrl = ev.target.elements.piece.value;
-  var position = ev.target.elements.position.value;
+  var position = document.querySelectorAll('.position');
+  var positionX;
+  var positionY;
+  position.forEach(function (pos) {
+    if (pos.checked) {
+      console.log(pos);
+      positionX = Number(pos.getAttribute("positionX"));
+      positionY = Number(pos.getAttribute("positionY"));
+      console.log(_typeof(positionX));
+      console.log(_typeof(positionY));
+      console.log("1" + "1");
+    }
+  });
   var pieceId = ev.target.elements.pieceId.value; //    const id = ev.target.elements.piece.id;
 
-  console.log(imgUrl);
-  console.log(position);
-  console.log(pieceId);
-  var myPiece = new GamePiece(imgUrl, position, pieceId);
+  var myPiece = new GamePiece(imgUrl, positionX, positionY, pieceId);
   reset(ev.target);
 }
 
 var GamePiece =
 /*#__PURE__*/
 function () {
-  function GamePiece(imgSrc, positionXY, id) {
+  function GamePiece(imgSrc, positionX, positionY, id) {
     _classCallCheck(this, GamePiece);
 
     this.imgSrc = imgSrc;
     this.id = id;
-    this.positionXY = {};
-    this.positionXY.x = positionXY.x;
-    this.positionXY.y = positionXY.y;
+    this.positionX = positionX;
+    this.positionY = positionY;
     this.gameBoard = document.querySelector("#gameBoard");
     this.createPeice();
   }
@@ -46,8 +56,8 @@ function () {
         this.piece = document.createElement("img");
         this.piece.setAttribute("src", this.imgSrc);
         this.piece.classList.add("piece");
-        this.piece.style.left = "".concat(this.positionXY.x, "%");
-        this.piece.style.top = "".concat(this.positionXY.y, "%");
+        this.piece.style.left = "".concat(this.positionX, "%");
+        this.piece.style.top = "".concat(this.positionY, "%");
         this.gameBoard.appendChild(this.piece);
       } catch (e) {
         console.error(e);
