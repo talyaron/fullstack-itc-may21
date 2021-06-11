@@ -15,10 +15,11 @@ var personB: People = {
 
 
 var age = (person: People): void => {
- var currentDate = new Date().getFullYear();
- var answer = `${person.a} is currently ${currentDate - person.b.getFullYear()}`
+ var currentYear: number = new Date().getFullYear();
+ var answer: string = `${person.a} is currently ${currentYear - person.b.getFullYear()}`;
  console.log(answer);
 }
+
 age(personA);
 age(personB);
 
