@@ -28,7 +28,7 @@ var person2: Person={
         bDay: 875
         }
 
-    var getAge=(Person:any):number=>{
+    var getAge=(Person:Person):number=>{
         var currentDate:number = new Date().getFullYear();
         var currentYear:number = Person.bDay;
        let differnce:number=currentDate-currentYear;
@@ -38,3 +38,4 @@ var person2: Person={
 console.log( person1.name,getAge(person1));
 console.log( person2.name,getAge(person2));
 console.log( person3.name,getAge(person3));
+
