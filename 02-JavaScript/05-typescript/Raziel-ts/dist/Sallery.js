@@ -6,10 +6,22 @@ function Avrg(x) {
 console.log(Avrg(156000));
 var person1 = {
     name: 'Raziel',
-    bDay: new Date(1993, 6, 5)
+    bDay: 1993
 };
 var person2 = {
     name: 'Dan',
-    bDay: new Date(1947, 4, 20)
+    bDay: 1947
 };
-console.log(person1.name);
+var person3 = {
+    name: 'Moshe',
+    bDay: 875
+};
+var getAge = function (Person) {
+    var currentDate = new Date().getFullYear();
+    var currentYear = Person.bDay;
+    var differnce = currentDate - currentYear;
+    return differnce;
+};
+console.log(person1.name, getAge(person1));
+console.log(person2.name, getAge(person2));
+console.log(person3.name, getAge(person3));
