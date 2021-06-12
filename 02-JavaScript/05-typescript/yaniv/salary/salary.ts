@@ -1,6 +1,6 @@
 // create a function in typescript that gets the sallery as an anual sallery (number), and return a string saying "your avarage monthly sallery is:x";
 
-// export {}
+//  export {}
 var monthlySalary = (anualSalary : number) : number => {
     const monthly : number = anualSalary/12;
     return monthly;
