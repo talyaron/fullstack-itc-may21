@@ -10,6 +10,7 @@
     .piece {
       position: absolute;
       width: 50px;
+      height: 50px;
     }
 
     #board {
@@ -29,55 +30,81 @@
   <body>
     <div class="form-wrapper">
       <h1>Please Add a Character</h1>
-      <form>
-        <input id="name" type="text" placeholder="Name of piece" />
+      <form onsubmit="handleSubmit(event)">
+        <!-- Onsubmit is an event handler that makes the submit-event fire when a user submits a form. The name attribute of the inputs below is necessary, server side, for the form to be processed. -->
+        <input id="name" type="text" name="name" placeholder="Name of piece" />
 
-        <input id="url" type="url" placeholder="Upload the URL for the image" />
+        <input
+          id="url"
+          type="text"
+          name="url"
+          placeholder="Upload the URL for the image"
+        />
 
         <input
           id="positionX"
           type="text"
+          name="positionX"
           placeholder="starting position x coordinate"
         />
 
         <input
           id="positionY"
           type="text"
+          name="positionY"
           placeholder="starting position y coordinate"
         />
 
         <input id="submit" type="submit" />
       </form>
+
+      <!-- Put options for different characters in the form. When you grab the elements in handleSubmit You will also grab the name of the selected character. Use "if" to choose different charcatetrs. If name is Yoda, then these charcteristics. Try catch: good idea to use it to find errors when grabbing elements from the DOM. If(!name) throw new Error: (no name)   -->
     </div>
     <div id="board"></div>
   </body>
 
   <script>
-    // Get by id all the 5 form inputs
-    const name = document.getElementById("name");
-    const url = document.getElementById("url");
-    const positionX = document.getElementById("positionX");
-    const positionY = document.getElementById("positionY");
-    const submitButton = document.getElementById("submit");
+    let newPiece;
 
-    // Add an event liostener to the submit button so when it's clicked it logs whatever was put in the inputs. It will call a function called "logPiece."
-
-    submitButton.addEventListener("click", logPiece);
-
-    let newpiece;
-    // Piece is defined in the global scope
-
-    function logPiece() {
-      console.log(name.id, name.value);
-      console.log(url.id, url.value);
-      console.log(positionX.id, positionX.value);
-      console.log(positionY.id, positionY.value);
+    function handleSubmit(ev) {
+      try {
+        ev.preventDefault();
+        let name = document.querySelector("#name");
+        if (!name) throw new Error("no name");
+        let url = document.querySelector("#url");
+        let positionX = document.querySelector("#positionX");
+        let positionY = document.querySelector("#positionY");
+        let submit = document.querySelector("#submit");
+        let board = document.querySelector("#board");
+        name = name.value;
+        url = url.value;
+        positionX = Number(positionX.value);
+        positionY = Number(positionY.value);
+        console.log(name, url, positionX, positionY);
+        newPiece = new Piece(name, url, positionX, positionY);
+      } catch (er) {
+        console.log(er.message);
+      }
     }
-    // Good. It is console.logging these.
 
-    //    Now I have to get this information to put the character on the board. I must write a function that takes these inputs and makes them into an instance of the class "Piece."
+    document.addEventListener("keydown", movePiece);
 
-    // The variables defined above, name, url etc. are in the global scope and should be availebl to the createPiece method of the Piece class.
+    function movePiece(evt) {
+      switch (evt.keyCode) {
+        case 37:
+          newPiece.left();
+          break;
+        case 39:
+          newPiece.right();
+          break;
+        case 38:
+          newPiece.up();
+          break;
+        case 40:
+          newPiece.down();
+          break;
+      }
+    }
 
     class Piece {
       constructor(name, url, positionX, positionY) {
@@ -86,84 +113,39 @@
         this.positionX = positionX;
         this.positionY = positionY;
         this.board = document.querySelector("#board");
-        // This defines all the attributes that a Piece will have
-        document
-          .querySelector("#board")
-          .addEventListener("keydown", () => this.keydown());
-
-        this.createPiece();
-        this.movePiece();
-      }
-      createPiece() {
-        this.piece.setAttribute("name", this.name);
-        this.piece = document.createElement("img");
-        this.piece.setAttribute("src", this.url);
-        this.piece.style.left = `${this.position.positionX}%`;
-        this.piece.style.top = `${this.position.positionY}%`;
-        this.piece.classList.add("piece");
-        this.board.appendChild(this.piece);
+        this.addNewPieceToDom();
       }
 
-      //   Creat the piece by setting th atribute of name, creating an image html element to house the new piece, giving the attribute of whatever url we choose, give it a left and right position that is a percentage, and append it to the board.
-
-      // All pieces need to move in the same way, so movePIece should be a method of the Piece class.
-
-      //   movePIece takes in an event of keycode and calls the left, right, up and dopwn functions below, which tell it to move 5 pixels in the required direction.
-
-      movePiece(evt) {
-        switch (evt.keyCode) {
-          case 37:
-            piece.left();
-            break;
-          case 39:
-            piece.right();
-            break;
-          case 38:
-            piece.up();
-            break;
-          case 40:
-            piece.down();
-            break;
-        }
+      addNewPieceToDom() {
+        this.dude = document.createElement("img");
+        this.dude.setAttribute("name", this.name);
+        this.dude.setAttribute("src", this.url);
+        this.dude.style.left = `${this.positionX}%`;
+        this.dude.style.top = `${this.positionY}%`;
+        this.dude.classList.add("piece");
+        this.board.appendChild(this.dude);
       }
 
       left() {
-        this.piece = document.querySelector(".piece");
-        this.piece.style.left = parseInt(this.positionY) - 5 + "px";
+        this.positionX -= 5;
+        this.dude.style.left = this.positionX + "%";
       }
 
       right() {
-        this.piece = document.querySelector(".piece");
-        this.piece.style.left = parseInt(this.positionY) + 5 + "px";
+        this.positionX += 5;
+        this.dude.style.left = this.positionX + "%";
       }
 
       up() {
-        this.piece = document.querySelector(".piece");
-        this.piece.style.top = parseInt(this.positionX) - 5 + "px";
+        this.positionY -= 5;
+        this.dude.style.top = this.positionY + "%";
       }
 
       down() {
-        this.piece = document.querySelector(".piece");
-        this.piece.style.top = parseInt(this.positionX) + 5 + "px";
+        this.positionY += 5;
+        this.dude.style.top = this.positionY + "%";
       }
-
-      pressAndMove() {
-        window.addEventListener("keydown", movePiece);
-      }
-
-      // Need a function to activate the movePiece function when the arrow is pressed. The Event Listerer takes in an event of "keydown" and calls the function movePiece. Finally, need to make it so that pressAndMove function is called when the page loads, so used window.onload, as in previous exercise.
     }
-
-    window.onload = pressAndMove;
-
-    const yoda = new Piece(
-      "yoda",
-      "https://static.wikia.nocookie.net/starwars/images/c/c3/Yoda_TPM_RotS.png/revision/latest?cb=20130810185858",
-      50,
-      50
-    );
-
-    console.log(yoda);
   </script>
 </html>
 
