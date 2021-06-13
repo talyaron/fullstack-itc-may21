@@ -19,10 +19,9 @@ class Article {
 }
 
 class ArticleArray {
-    articles: [Article];
+    articles: Array<Article> = [];
 
-    constructor(articles: [Article]){
-        this.articles = articles;
+    constructor(){
     }
 
     add(){
