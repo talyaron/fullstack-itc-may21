@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The most exciting form EVER</title>
+</head>
+<link href="dist/style.css" rel="stylesheet" />
+<body>
+    <div class="formContainer">
+        <h1>Ready to play?</h1>
+        <p class="contact">Gotta catch 'em all!</p>
+        <form class="form-inline" onsubmit='handleSubmit(event)'>
+            <fieldset>
+                <legend>Player 1</legend>
+                <label for="name">Name: </label>
+                <input type="text" id="name" name="name" autofocus placeholder="Ash Ketchum*" required>
+                <label for="x_pos">X position: </label>
+                <input type="text" id="x_pos" name="x_pos" autofocus placeholder="Min -50, Max 50*">
+                <label for="y_pos">Y position:</label>
+                <input type="text" id="y_pos" name="y_pos" placeholder="Min -50, Max 50*" required>
+            </fieldset>
+            <fieldset>
+                <!-- should be logged as input #4 and #5 on .dir -->
+                <label for="url">Your unique avatar's URL:</label>
+                <textarea id="url" name="url" placeholder="https://pikachu.net/pikachu.jpeg"></textarea>
+                <p>Or choose an avatar here:</p>
+                <label>
+                    <input id= "radio" type="radio" name="type" value="squirtle" checked> Squirtle
+                    <img src="https://www.seekpng.com/png/full/147-1474793_squirtle-pokemon-squirtle.png" height="50rem" width="60rem">
+                </label>
+                <label>
+                    <input type="radio" name="type" value="charmander"> Charmander <img src="https://img.pokemondb.net/artwork/charmander.jpg" height="50rem" width="45rem" >
+                </label>
+                <label>
+                    <input type="radio" name="type" value="bulbasaur"> Bulbasaur                     <img src="https://img.pokemondb.net/artwork/bulbasaur.jpg" height="50rem" width="60rem">
+                </label>
+                <div class="button">
+                <button type="submit" class="submit">Submit</button>
+            
+            </div>
+            
+            </fieldset>
+    </div>
+    <div id="gameBoard">
+        <h1>test</h1>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
