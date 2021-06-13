@@ -49,7 +49,7 @@ function handlerSumbit(event) {
     
     event.preventDefault();
 
-    var root: HTMLElement = document.querySelector('#boardProject');
+    var root: HTMLElement = document.querySelector('.div');
 
     var inputURL = event.target.elements.imageURL.value;
     var description = event.target.elements.description.value;
@@ -59,11 +59,10 @@ function handlerSumbit(event) {
     article.style.width = "100px";
     article.style.height = "100px";
     article.style.backgroundColor = "red";
-    container.appendChild(article);
     
-    var container = document.createElement('div');
-    container.className = "container" 
-    root.appendChild(container)
+    var container = document.createElement('.container');
+
+    container.appendChild(container);
 
 
 

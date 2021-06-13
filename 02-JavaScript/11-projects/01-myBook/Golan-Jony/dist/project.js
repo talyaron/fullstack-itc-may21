@@ -26,7 +26,7 @@ var ArticleArray = /** @class */ (function () {
 }());
 function handlerSumbit(event) {
     event.preventDefault();
-    var root = document.querySelector('#boardProject');
+    var root = document.querySelector('.div');
     var inputURL = event.target.elements.imageURL.value;
     var description = event.target.elements.description.value;
     var article = document.createElement('div');
@@ -34,8 +34,6 @@ function handlerSumbit(event) {
     article.style.width = "100px";
     article.style.height = "100px";
     article.style.backgroundColor = "red";
-    container.appendChild(article);
-    var container = document.createElement('div');
-    container.className = "container";
-    root.appendChild(container);
+    var container = document.createElement('.container');
+    container.appendChild(container);
 }
