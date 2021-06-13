@@ -1,6 +1,6 @@
-img {
-  height: 50px;
-  width: 75px;
+.lamb {
+  height: 150px;
+  width: 200px;
   object-fit: contain;
   position: absolute;
 }
