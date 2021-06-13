@@ -10,11 +10,11 @@ body {
   height: 90px;
   width: 70px;
   position: absolute;
-  display: none;
 }
 
 .form {
-  width: 50%;
+  width: 35%;
+  min-width: 500px;
   height: 10%;
   margin: 0.5% auto;
   display: flex;
