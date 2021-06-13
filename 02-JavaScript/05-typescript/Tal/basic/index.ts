@@ -1,10 +1,10 @@
+var x: string | boolean = false;
 
-var x: string = 'a';
 x = 'by';
 var arr: Array<number | string> = [1, 2, 3, 'a', 4]
 console.log(x);
 
-var add = (a: number, b: number): number => { return a + b; };
+var add = (a: number, b: number): number => { return a + b ; };
 
 // var obj:object = {}
 interface Adds {
@@ -20,6 +20,7 @@ var w: Adds = {
     a: 45,
     b: 100
 }
+var f:number = 23;
 
 console.log(add(z.a, z.b));
 
@@ -32,11 +33,20 @@ var addToDOM = (htmlElement: HTMLElement, adds: Adds): void => {
 }
 addToDOM(root, w);
 
-var getDayInYear = (date: Date) => {
-    let now:Date = date;
-    let start:Date = new Date(now.getFullYear(), 0, 0);
-    let diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
-    let oneDay = 1000 * 60 * 60 * 24;
-    let  day = Math.floor(diff / oneDay);
-    return + day;
+class Person{
+    name:string;
+
+    constructor(name:string){
+        this.name = name;
+    }
+
+    sayName():string{
+        return this.name
+    }
 }
+
+
+let Raziel = new Person("2");
+
+console.log(Raziel)
+
