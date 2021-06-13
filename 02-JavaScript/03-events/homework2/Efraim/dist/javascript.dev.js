@@ -10,7 +10,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function handleSubmit(ev) {
   ev.preventDefault();
-  console.dir(ev.target.children);
   var playerName = ev.target.children.id.value;
   var imageSelect = document.querySelectorAll('.image-select');
   var imageChosen = document.querySelectorAll(".image-chosen");
@@ -26,26 +25,22 @@ function handleSubmit(ev) {
     throw new Error('No player selected!');
   }
 
-  var posx = ev.target.children.posix.value;
+  var posx = parseInt(ev.target.children.posix.value);
 
   if (posx > 96) {
     posx = 96;
   }
 
-  var posy = ev.target.children.posiy.value;
+  var posy = parseInt(ev.target.children.posiy.value);
 
-  if (posy > 95) {
-    posy = 95;
+  if (posy > 94) {
+    posy = 94;
   }
 
-  console.log(playerName, playerImage, posx, posy);
   var newPiece = new GamePiece("#".concat(playerName), "".concat(playerImage), '50px', '38px', {
-    x: "".concat(posx),
-    y: "".concat(posy)
-  }); // document.addEventListener('keyup', ev => {
-  //     console.log(ev.key)
-  // })
-
+    x: posx,
+    y: posy
+  });
   ev.target.reset();
 }
 
@@ -101,7 +96,7 @@ function () {
   }, {
     key: "moveRight",
     value: function moveRight() {
-      if (this.step + this.position.x < 96) {
+      if (this.step + this.position.x < 98) {
         this.position.x += this.step;
         this.piece.style.left = "".concat(this.position.x, "%");
       }
@@ -117,7 +112,7 @@ function () {
   }, {
     key: "moveDown",
     value: function moveDown() {
-      if (this.position.y + this.step < 95) {
+      if (this.position.y + this.step < 94) {
         this.position.y += this.step;
         this.piece.style.top = "".concat(this.position.y, "%");
       }
@@ -125,7 +120,7 @@ function () {
   }, {
     key: "moveUp",
     value: function moveUp() {
-      if (this.position.y - this.step > -2) {
+      if (this.position.y - this.step > -1) {
         this.position.y -= this.step;
         this.piece.style.top = "".concat(this.position.y, "%");
       }

@@ -1,1 +1,1 @@
-body{font-size:24px}.piece{position:absolute;transition:all 1s}#gameboard{width:90vw;height:90vh;background-color:#665e5e;position:relative}
+body{font-size:24px}.piece{position:absolute;transition:all 1s;height:50px;width:50px;border:2px solid #000}#gameBoard{width:90vw;height:90vh;background-color:#665e5e;position:relative}

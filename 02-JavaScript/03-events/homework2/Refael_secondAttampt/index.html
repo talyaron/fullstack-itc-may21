@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stonner Dotty</title>
+    <link rel="stylesheet" href="./dist/stylesheet.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="game__intro">
+        <h1>Welcome to Stonner game!</h1>
+        <h2>Use the above inputs in order to create a new player</h2>
+        <h3>Use 'WASD' in order to play your new character</h3>
+      </div>
+      <img class="dot" src="" />
+    </div>
+
+    <form onsubmit="formGetData(event)">
+      <input type="text" name="name" placeholder="Your character name:" />
+      <input type="url" name="image" placeholder="paste your character's PNG" />
+      <input
+        type="text"
+        name="posx"
+        placeholder="Put your desired X position"
+      />
+      <input
+        type="text"
+        name="posy"
+        placeholder="Put your desired Y position"
+      />
+      <input type="submit" value="Create your character!" />
+    </form>
+    <script src="./script.js"></script>
+  </body>
+</html>

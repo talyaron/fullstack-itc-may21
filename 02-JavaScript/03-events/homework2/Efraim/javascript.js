@@ -1,6 +1,5 @@
 function handleSubmit(ev) {
     ev.preventDefault();
-    console.dir(ev.target.children)
     let playerName = ev.target.children.id.value;
     const imageSelect = document.querySelectorAll('.image-select');
     const imageChosen = document.querySelectorAll(".image-chosen");
@@ -13,24 +12,20 @@ function handleSubmit(ev) {
     if (playerImage === undefined) {
         throw new Error('No player selected!')
     }
-    let posx = ev.target.children.posix.value;
+    let posx = parseInt(ev.target.children.posix.value);
     if (posx > 96) {
         posx = 96;
     }
-    let posy = ev.target.children.posiy.value;
-    if (posy > 95) {
-        posy = 95;
+    let posy = parseInt(ev.target.children.posiy.value);
+    if (posy > 94) {
+        posy = 94;
     }
-    console.log(playerName, playerImage, posx, posy);
+    
     const newPiece = new GamePiece(`#${playerName}`, `${playerImage}`, '50px', '38px', {
-        x: `${posx}`,
-        y: `${posy}`
+        x: posx,
+        y: posy
 
     });
-    // document.addEventListener('keyup', ev => {
-    //     console.log(ev.key)
-
-    // })
     ev.target.reset();
 
 
@@ -84,10 +79,10 @@ class GamePiece {
         }
     }
 
-
+ 
     //let create a method for moving left
     moveRight() {
-        if (this.step + this.position.x < 96) {
+        if (this.step + this.position.x < 98) {
             this.position.x += this.step;
             this.piece.style.left = `${this.position.x}%`;
         }
@@ -100,14 +95,14 @@ class GamePiece {
         }
     }
     moveDown() {
-        if (this.position.y + this.step < 95) {
+        if (this.position.y + this.step < 94) {
             this.position.y += this.step;
             this.piece.style.top = `${this.position.y}%`;
         }
     }
 
     moveUp() {
-        if (this.position.y - this.step > -2) {
+        if (this.position.y - this.step > -1) {
             this.position.y -= this.step;
             this.piece.style.top = `${this.position.y}%`;
         }
