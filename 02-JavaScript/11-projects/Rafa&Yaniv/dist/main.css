@@ -1,0 +1,27 @@
+html {
+  width: 90vw;
+  margin: auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.form__item {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 15px;
+  resize: none;
+}
+.form__item--add {
+  background-color: darkcyan;
+  border: 0;
+  font-weight: bold;
+}
+.form__item--add:hover {
+  background-color: #03bdbd;
+}
+.form__item--add:active {
+  background-color: #006b6b;
+  color: white;
+}
