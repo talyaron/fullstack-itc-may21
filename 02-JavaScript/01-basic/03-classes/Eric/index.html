@@ -15,7 +15,7 @@ create 3 instance and run the methods, for each of them.-->
 </head>
 <body>
     <script>
-        class car {
+       /* class car {
             constructor(brand, model, price, amountOfCars) {
                 this.brand = brand;
                 this.price = price;
@@ -48,13 +48,21 @@ create 3 instance and run the methods, for each of them.-->
          auto1.sayConsole()
          console.log(auto3.getTotalPrice())
          auto1.sayConsole()
+*/
 
-
-
-       
-
-
-    
+        class Address {
+            constructor (city, street, state, homeNumber){
+                this.city=city;
+                this.street=street;
+                this.state=state;
+                this.homeNumber=homeNumber;
+            }
+            AddAddress(){
+                console.log(`The address is ${this.city}`)
+            };
+        }
+  const addres = new Address('etsyon ahahah')
+          addres.AddAddress();
     </script>
 </body>
 </html>
