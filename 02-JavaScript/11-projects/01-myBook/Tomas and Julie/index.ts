@@ -7,17 +7,21 @@ function handleSubmit(ev) {
 }
 
 class Article {
-  name: string;
+  desc: string;
   url: string;
   id: number;
-  constructor(name: string, url: string, id: number) {
-    this.name = name;
+  constructor(desc: string, url: string, id: number) {
+    this.desc = desc;
     this.url = url;
     this.id = id;
   }
-  changeDesc() {}
+  changeDesc() {
+    this.desc =  
+  }
   changeImageUrl() {}
 }
+
+
 
 class articleArray {
   constructor() {}
