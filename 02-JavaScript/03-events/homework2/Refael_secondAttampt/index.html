@@ -9,8 +9,29 @@
   </head>
   <body>
     <div class="container">
-      <img class="dot" src="" width="300px" height="250px" />
+      <div class="game__intro">
+        <h1>Welcome to Stonner game!</h1>
+        <h2>Use the above inputs in order to create a new player</h2>
+        <h3>Use 'WASD' in order to play your new character</h3>
+      </div>
+      <img class="dot" src="" />
     </div>
+
+    <form onsubmit="formGetData(event)">
+      <input type="text" name="name" placeholder="Your character name:" />
+      <input type="url" name="image" placeholder="paste your character's PNG" />
+      <input
+        type="text"
+        name="posx"
+        placeholder="Put your desired X position"
+      />
+      <input
+        type="text"
+        name="posy"
+        placeholder="Put your desired Y position"
+      />
+      <input type="submit" value="Create your character!" />
+    </form>
     <script src="./script.js"></script>
   </body>
 </html>

@@ -1,9 +1,41 @@
+// html {
+//   background-color: blue;
+// }
+img {
+  width: 300px;
+  height: 250px;
+}
 .container {
   position: relative;
+  width: 1332px;
+  height: 637px;
+  border: 2px solid black;
 }
 .dot {
   position: absolute;
-  content: url(./images/download.png);
-  top: 190px;
-  left: 500px;
+  content: url(/02-JavaScript/03-events/homework2/Refael_secondAttampt/images/download.png);
+}
+
+#boardGame {
+  position: relative;
+}
+.piece {
+  position: relative;
+}
+
+form {
+  position: fixed;
+  top: 20px;
+}
+h1,
+h2,
+h3 {
+  margin: 0%;
+  color: #fe0000cf;
+}
+.game__intro {
+  position: relative;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  top: 35px;
+  z-index: 1;
 }

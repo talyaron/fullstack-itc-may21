@@ -1,0 +1,6 @@
+.lamb {
+  height: 150px;
+  width: 200px;
+  object-fit: contain;
+  position: absolute;
+}
