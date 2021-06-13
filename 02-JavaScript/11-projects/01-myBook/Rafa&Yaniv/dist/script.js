@@ -7,21 +7,23 @@ var Article = /** @class */ (function () {
     return Article;
 }());
 var ArticleArray = /** @class */ (function () {
-    function ArticleArray(atricles) {
-        this.atricles = articles;
+    function ArticleArray() {
     }
+    ArticleArray.prototype.add = function (article) {
+        this.atricles.push(article);
+    };
+    ArticleArray.prototype.render = function () {
+        var articlesSection = document.querySelector(".articles");
+    };
     return ArticleArray;
 }());
-var articles;
-var allArticles = new ArticleArray(articles);
+var articles = new ArticleArray();
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var imgUrl = ev.target.elements.imgUrl.value;
     var desc = ev.target.elements.desc.value;
     var article = new Article(imgUrl, desc);
-    articles.push(article);
-    var articlesSection = document.querySelector(".articles");
-    articles[articles.length - 1].addArticleToDOM(articlesSection);
+    articles.add(article);
     ev.target.reset();
 };
 // ArticleArray {

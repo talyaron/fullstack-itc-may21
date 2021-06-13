@@ -14,26 +14,25 @@ class Article {
 class ArticleArray {
     atricles:Array<Article>;
 
-    constructor (atricles : Array<Article>) {
-        this.atricles = articles; 
-        
+    add(article : Article) {
+        this.atricles.push(article);
+    }
+
+    render() {
+        const articlesSection = document.querySelector(".articles");
     }
 }
 
-let articles : Array<Article>;
-let allArticles = new ArticleArray(articles);
+const articles = new ArticleArray();
 
-let handleSubmit = (ev : any) => {
+let handleSubmit = (ev : any) : void => {
     ev.preventDefault();
     const imgUrl : string = ev.target.elements.imgUrl.value;
     const desc : string = ev.target.elements.desc.value;
 
     const article = new Article(imgUrl, desc);
     
-    articles.push(article);
-
-    const articlesSection = document.querySelector(".articles");
-    articles[articles.length - 1].addArticleToDOM(articlesSection);
+    articles.add(article);
 
     ev.target.reset();
 }
