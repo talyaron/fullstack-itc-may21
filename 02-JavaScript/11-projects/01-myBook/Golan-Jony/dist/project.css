@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.form__input {
+  margin-bottom: 10px;
+}
+
+.add {
+  width: 12%;
+}
