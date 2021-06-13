@@ -9,18 +9,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var GamePiece =
 /*#__PURE__*/
 function () {
-  function GamePiece(name, xpos, ypos, avatar) {
+  function GamePiece(name, xpos, ypos, url, radio) {
     _classCallCheck(this, GamePiece);
 
     try {
-      if (typeof name !== "string") throw new Error("name isn't a string!");
-      if (typeof xpos !== "number") throw new Error("xpos isn't a number!");
-      if (typeof ypos !== "number") throw new Error("ypos isn't a number!");
-      if (typeof avatar !== "url") throw new Error("avatar isnt a url!");
+      if (typeof name !== "string") throw new Error("name isn't a string!"); // if (typeof xpos !== "number") throw new Error("xpos isn't a number!");
+      // if (typeof ypos !== "number") throw new Error("ypos isn't a number!");
+      //     if (typeof avatar !== "url") throw new Error("avatar isnt a url!");
+
       this.name = name;
       this.xpos = xpos;
       this.ypos = ypos;
-      this.avatar = avatar; //this.url? (how to differentiate url and radio selection?)
+      this.url = url;
+      this.radio = radio;
     } catch (error) {
       console.error(error);
     }
@@ -30,14 +31,14 @@ function () {
   _createClass(GamePiece, [{
     key: "info",
     value: function info() {
-      var userInfo = "You submitted: ".concat(this.name, ", ").concat(this.xpos, ", ").concat(this.ypos, ", ").concat(this.avatar);
+      var userInfo = "You submitted: ".concat(this.name, ", ").concat(this.xpos, ", ").concat(this.ypos, ", ").concat(this.url, ", ").concat(this.radio);
       console.log(userInfo);
     } //declare info to be injected to DOM after the user submits
 
   }, {
     key: "addInfoToDOM",
     value: function addInfoToDOM(domElement) {
-      domElement.innerHTML += "<p>".concat(this.name, " submitted  ").concat(this.xpos, ",").concat(this.ypos, ",").concat(this.avatar);
+      domElement.innerHTML += "<p>".concat(this.name, " submitted  ").concat(this.xpos, ",").concat(this.ypos, ",").concat(this.url, ", ").concat(this.radio);
     }
   }]);
 
@@ -59,17 +60,19 @@ function handleSubmit(event) {
   event.preventDefault();
   console.dir(event.target);
   var name = event.target.elements.name.value;
-  var xpos = event.target.elements.xpos.valueAsNumber;
-  var ypos = event.target.elements.ypos.valueAsNumber;
+  var xpos = Number(event.target.elements.xpos.value);
+  var ypos = Number(event.target.elements.ypos.value);
   var url = event.target.elements.url.value;
-  var radio = event.target.elements.radio.value; // } catch (error) {
+  var radio = event.target.elements.radio.value; //code should be if radio value is on, grab the source img linked to the radio button  
+  // } catch (error) {
   //     console.error(error)
   // }
 
+  console.log(name, xpos, ypos, url, radio);
   users.push(new GamePiece(name, xpos, ypos, url, radio));
   console.log(users);
   var gameBoard = document.querySelector("#gameBoard");
   console.log(gameBoard.id);
   users[users.length - 1].addInfoToDOM(gameBoard);
   event.target.reset();
-}
+} // https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Pok%C3%A9mon_Pikachu_art.png/220px-Pok%C3%A9mon_Pikachu_art.png
