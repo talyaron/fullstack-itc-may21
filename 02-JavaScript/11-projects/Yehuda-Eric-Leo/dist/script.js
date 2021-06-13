@@ -12,10 +12,11 @@ var Article = /** @class */ (function () {
 }());
 var ArticleArray = /** @class */ (function () {
     function ArticleArray(articles) {
+        this.articles = [];
         this.articles = articles;
     }
-    ArticleArray.prototype.add = function () {
-        this.piece = document.createElement('img');
+    ArticleArray.prototype.add = function (articles) {
+        this.articles = document.createElement('img');
         this.piece.setAttribute('src', this.articles);
         this.piece.classList.add("piece");
         this.boardGamed.appendChild(this.piece);
