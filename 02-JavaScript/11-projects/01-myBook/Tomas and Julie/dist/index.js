@@ -6,12 +6,15 @@ function handleSubmit(ev) {
     articleArray.add;
 }
 var Article = /** @class */ (function () {
-    function Article(name, url, id) {
-        this.name = name;
+    function Article(desc, url, id) {
+        this.desc = desc;
         this.url = url;
         this.id = id;
     }
-    Article.prototype.changeDesc = function () { };
+    Article.prototype.changeDesc = function () {
+        this.desc =
+        ;
+    };
     Article.prototype.changeImageUrl = function () { };
     return Article;
 }());
