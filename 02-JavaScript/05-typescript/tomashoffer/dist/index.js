@@ -1,6 +1,20 @@
-var yearsalary = 10000;
-function monthSalary(a) {
-    var resultado = a / 12;
-    console.log("The monthly salary is " + resultado);
+// var yearsalary:number = 10000;  
+var tomas = {
+    name: 'tomas',
+    date: 1980
+};
+var matias = {
+    name: 'matias',
+    date: 1984
+};
+var eric = {
+    name: 'eric',
+    date: 1989
+};
+var currentYear = new Date().getFullYear();
+function old(persons) {
+    console.log(persons.name + " is " + (currentYear - persons.date) + " years old");
 }
-monthSalary(yearsalary);
+old(tomas);
+old(matias);
+old(eric);
