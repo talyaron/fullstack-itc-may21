@@ -1,3 +1,9 @@
+// .board {
+//     // width: 100vw;
+//     // height: 100vh;
+//     position: relative;
+// }
+
 body {
     background-image:url('https://s3.amazonaws.com/vice_asset_uploader/files/1423499166vude6in.gif?crop=1xw:0.9780718701700154xh;center,center&resize=500:*');
     padding: 0;
@@ -10,11 +16,11 @@ body {
 height: 90px;
 width: 70px;
 position: absolute;
-display: none;
 }
 
 .form {
-    width: 50%;
+    width: 35%;
+    min-width: 500px;
     height: 10%;
     margin: 0.5% auto;
     display: flex;
