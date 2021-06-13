@@ -26,14 +26,11 @@ var ArticleArray = /** @class */ (function () {
 }());
 function handlerSumbit(event) {
     event.preventDefault();
-    var root = document.querySelector('.div');
+    var root = document.querySelector('.inputDiv');
     var inputURL = event.target.elements.imageURL.value;
     var description = event.target.elements.description.value;
-    var article = document.createElement('div');
-    article.className = "divArt";
-    article.style.width = "100px";
-    article.style.height = "100px";
-    article.style.backgroundColor = "red";
-    var container = document.createElement('.container');
-    container.appendChild(container);
+    var container = document.querySelector(".container");
+    container.style.width = "100px";
+    container.style.height = "100px";
+    container.style.backgroundColor = "red";
 }
