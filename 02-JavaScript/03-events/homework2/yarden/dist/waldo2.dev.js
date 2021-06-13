@@ -7,30 +7,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var waldo = document.querySelector('.waldo');
-waldo.style.top = '295px';
-waldo.style.left = '560px';
-var myForm = document.querySelector('.form');
-
-myForm.onsubmit = function (event) {
-  event.preventDefault();
-  var submittedImage = myForm.elements['image'].value;
-  var submittedName = myForm.elements['name'].value;
-  var submittedX = myForm.elements['x'].value;
-  var submittedY = myForm.elements['y'].value;
-  console.log(submittedName);
-  console.log(submittedImage);
-  console.log(submittedX);
-  console.log(submittedY);
-  var odlaw = new Character(submittedName, submittedImage, {
-    x: submittedX,
-    y: submittedY
-  });
-  odlaw.createCaharacter();
-  document.body.appendChild.character;
-  myForm.style.display = 'none';
-  waldo.style.display = 'block';
-}; //Create the character class:
-
+waldo.style.display = 'none'; //Create the character class:
 
 var Character =
 /*#__PURE__*/
@@ -38,22 +15,27 @@ function () {
   function Character(characterId, imageUrl, startingPosition) {
     _classCallCheck(this, Character);
 
-    this.imageUrl = imageUrl;
-    this.characterId = characterId;
-    this.startingPosition = {};
-    this.startingPosition.x = startingPosition.x;
-    this.startingPosition.y = startingPosition.y;
-    this.whereIsWaldo = document.querySelector('.waldo');
-    this.createCaharacter = this.createCaharacter.bind(this);
+    try {
+      if (imageUrl === null) throw new Error('No image!');
+      this.imageUrl = imageUrl;
+      this.characterId = characterId;
+      this.startingPosition = {};
+      this.startingPosition.x = startingPosition.x;
+      this.startingPosition.y = startingPosition.y;
+      this.whereIsWaldo = document.querySelector('.waldo'); // this.createCharacter = this.createCharacter.bind(this)
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   _createClass(Character, [{
-    key: "createCaharacter",
-    value: function createCaharacter() {
-      this.character = document.createElement('img');
-      this.character.setAttribute('src', this.imageUrl);
-      this.character.style.left = "".concat(this.startingPosition.x, "%");
-      this.character.style.top = "".concat(this.startingPosition.y, "%");
+    key: "createCharacter",
+    value: function createCharacter() {
+      var character = document.createElement('img');
+      character.setAttribute('src', this.imageUrl);
+      character.style.left = "".concat(this.startingPosition.x, "px");
+      character.style.top = "".concat(this.startingPosition.y, "px");
+      return character;
     }
   }]);
 
@@ -61,13 +43,12 @@ function () {
 }(); // Movement:
 
 
-window.addEventListener('keydown', function (event) {
+window.addEventListener('keyup', function (ev) {
   try {
-    var allowedKeys = ['ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft', 'w', 's', 'd', 'a'];
-    if (!event.key in allowedKeys) throw new Error('Not a valid key!');
+    if (Character === null) throw new Error('No characters!');
     var positionChange = 5;
 
-    switch (event.key) {
+    switch (ev.key) {
       case 'ArrowUp':
         waldo.style.top = "".concat(parseInt(waldo.style.top) - positionChange, "px");
         break;
@@ -100,8 +81,36 @@ window.addEventListener('keydown', function (event) {
         waldo.style.left = "".concat(parseInt(waldo.style.left) - positionChange, "px");
         break;
     }
-  } catch (e) {
-    console.error(e);
-  }
-}); // Mouseover:
-//  When clicked, user gets control of the character ?
+  } catch (error) {}
+}); //Func for form submission:
+
+var myForm = document.querySelector('.form');
+
+myForm.onsubmit = function (event) {
+  try {
+    if (myForm === null) throw new Error('No form!');
+    event.preventDefault();
+    var submittedImage = myForm.elements['image'].value;
+    var submittedName = myForm.elements['name'].value;
+    var submittedX = myForm.elements['x'].value;
+    var submittedY = myForm.elements['y'].value; // Log user input to console:
+
+    console.log(submittedName);
+    console.log(submittedImage);
+    console.log(submittedX);
+    console.log(submittedY); // Create character 2 (Odlaw):
+
+    var board = document.querySelector('.board');
+    var odlaw = new Character(submittedName, submittedImage, {
+      x: submittedX,
+      y: submittedY
+    });
+    odlaw.createCharacter();
+    board.appendChild(odlaw.createCharacter());
+    console.log(odlaw);
+    myForm.style.display = 'none';
+    waldo.style.display = 'block';
+    waldo.style.top = '295px';
+    waldo.style.left = '560px';
+  } catch (error) {}
+};
