@@ -11,11 +11,11 @@ var Article = /** @class */ (function () {
     return Article;
 }());
 var ArticleArray = /** @class */ (function () {
-    function ArticleArray(articles) {
-        this.articles = articles;
+    function ArticleArray() {
+        this.articles = [];
     }
-    ArticleArray.prototype.add = function () {
-        this.piece = document.createElement('img');
+    ArticleArray.prototype.add = function (articles) {
+        this.articles = document.createElement('img');
         this.piece.setAttribute('src', this.articles);
         this.piece.classList.add("piece");
         this.boardGamed.appendChild(this.piece);

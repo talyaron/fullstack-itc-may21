@@ -22,8 +22,10 @@ function handleSubmit(ev) {
     console.log(name, url, xpos, ypos);
 
     newImg = new GamePiece(`${name}`, url, { x: parseInt(xpos), y: parseInt(ypos) });
+    ev.target.reset()
 } catch (error) {
         console.error(error)
+        
     }
 }
 
