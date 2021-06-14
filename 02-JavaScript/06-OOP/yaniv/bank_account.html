@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyBank - DON'T trust us with your money...</title>
     <link rel="stylesheet" href="dist/bank_account.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3d6c8f810b.js" crossorigin="anonymous"></script>
 </head>
 
@@ -33,11 +35,13 @@
                 <form class="addTransactionForm" onsubmit="handleSubmit(event)">
                     <div class="addTransactionForm__item">
                         <label for="trans_amount_form">Transaction Amount</label>
-                        <input type="number" name="transAmount" placeholder="- Expenses ; + Incomes" required id="trans_amount_form" />
+                        <input type="number" name="transAmount" placeholder="- Expenses ; + Incomes" required
+                            id="trans_amount_form" />
                     </div>
                     <div class="addTransactionForm__item">
                         <label for="trans_business_form">Transaction Business</label>
-                        <input type="text" minlength="1" maxlength="15" name="transBiz" placeholder="Up to 15 characters" required id="trans_business_form" />
+                        <input type="text" minlength="1" maxlength="15" name="transBiz"
+                            placeholder="Up to 15 characters" required id="trans_business_form" />
                     </div>
                     <input class="addTransactionForm__item addTransactionForm__item--submit" type="submit" name="submit"
                         value="Add Transaction" />

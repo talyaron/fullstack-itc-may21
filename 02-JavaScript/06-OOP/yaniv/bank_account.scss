@@ -1,3 +1,7 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
 html {
     width: 100vw;
     margin: 0 auto;
@@ -67,15 +71,15 @@ body {
         &--heading {}
 
         &--add {
-            background-color: green;
-            color: white;
+            background-color: greenyellow;
+            color: black;
             border-radius: 20px;
             padding: 5px;
             border: 0;
 
             &:hover {
-                background-color: greenyellow;
-                color: black;
+                background-color: green;
+                color: white;
             }
 
             &:active {
@@ -173,7 +177,7 @@ body {
             align-items: baseline;
             justify-content: center;
             background-color: white;
-            height: 100px;
+            height: 110px;
             border-radius: 0 0 10px 10px;
 
             .addTransactionForm {
