@@ -12,20 +12,50 @@
 
 <body>
     <header class="summary">
-        <h3 class="summary__item">Customer Name</h3>
+        <h3 class="summary__item summary__item--heading">Customer Name</h3>
         <div class="summary__item summary__item--total">
-            <img src="" id="profile_image" alt="profile_image">
+            <img src="https://freesvg.org/img/winkboy.png" id="profile_image" alt="profile image">
             <h1 id="total_amount">Total Amount</h1>
-            <div id="total-date">For Date: </div>
+            <div id="total_date">For Date: </div>
         </div>
     </header>
     <main class="transactions">
         <h2 class="transactions__item transactions__item--heading">Account Transactions</h2>
+        <button class="transactions__item transactions__item--add">Add Transaction</button>
         <div class="transactions__item transactions__item--action">
-            <i id="sign">+</i>
-            <p id="trans_amount">₪1000</p>
+            <i id="sign" class="fas fa-2x fa-plus-circle"></i>
+            <div id="trans_amount">₪1000</div>
+            <div id="trans_date">date here</div>
+            <div id="trans_business">business here</div>
+            <div id="trans_id">id here</div>
         </div>
     </main>
+    <div class="modalWrapper">
+        <div class="modalBox">
+            <div class="modalBox__item modalBox__item--title">
+                <span>New Transaction</span>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modalBox__item modalBox__item--content">
+                <form class="addTransactionForm" onsubmit="handleSubmit(ev)" id="team1Form">
+                    <div class="addTransactionForm__item">
+                        <label for="trans_amount_form">Transaction Amount</label>
+                        <input type="number" name="transAmount" required id="trans_amount_form" />
+                    </div>
+                    <div class="addTransactionForm__item">
+                        <label for="trans_date_form">Transaction Date</label>
+                        <input type="date" name="transDate" required id="trans_date_form" />
+                    </div>
+                    <div class="addTransactionForm__item">
+                        <label for="trans_business_form">Transaction Business</label>
+                        <input type="text" minlength="1" maxlength="15" name="transBiz" required id="trans_business_form" />
+                    </div>
+                    <input class="addTransactionForm__item addTransactionForm__item--submit" type="submit" name="submit"
+                        value="Add Transaction" />
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script src="dist/bank_account.js"></script>
 </body>
