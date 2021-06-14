@@ -22,13 +22,6 @@
     <main class="transactions">
         <h2 class="transactions__item transactions__item--heading">Account Transactions</h2>
         <button class="transactions__item transactions__item--add">Add Transaction</button>
-        <div class="transactions__item transactions__item--action">
-            <i id="sign" class="fas fa-2x fa-plus-circle"></i>
-            <div id="trans_amount">₪1000</div>
-            <div id="trans_date">date here</div>
-            <div id="trans_business">business here</div>
-            <div id="trans_id">id here</div>
-        </div>
     </main>
     <div class="modalWrapper">
         <div class="modalBox">
@@ -37,18 +30,14 @@
                 <span class="close">&times;</span>
             </div>
             <div class="modalBox__item modalBox__item--content">
-                <form class="addTransactionForm" onsubmit="handleSubmit(ev)" id="team1Form">
+                <form class="addTransactionForm" onsubmit="handleSubmit(event)">
                     <div class="addTransactionForm__item">
                         <label for="trans_amount_form">Transaction Amount</label>
-                        <input type="number" name="transAmount" required id="trans_amount_form" />
-                    </div>
-                    <div class="addTransactionForm__item">
-                        <label for="trans_date_form">Transaction Date</label>
-                        <input type="date" name="transDate" required id="trans_date_form" />
+                        <input type="number" name="transAmount" placeholder="- Expenses ; + Incomes" required id="trans_amount_form" />
                     </div>
                     <div class="addTransactionForm__item">
                         <label for="trans_business_form">Transaction Business</label>
-                        <input type="text" minlength="1" maxlength="15" name="transBiz" required id="trans_business_form" />
+                        <input type="text" minlength="1" maxlength="15" name="transBiz" placeholder="Up to 15 characters" required id="trans_business_form" />
                     </div>
                     <input class="addTransactionForm__item addTransactionForm__item--submit" type="submit" name="submit"
                         value="Add Transaction" />
