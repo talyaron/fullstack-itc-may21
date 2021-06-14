@@ -19,14 +19,13 @@ class Article {
 }
 
 class ArticleArray {
-    articles: [Article];
+    articles: Array<Article> = [];
 
-    constructor(articles: [Article]){
-        this.articles = articles;
+    constructor(){
     }
 
-    add(){
-        this.piece = document.createElement('img');
+    add(articles:any){
+        this.articles = document.createElement('img');
         this.piece.setAttribute('src', this.articles);
         this.piece.classList.add("piece");
         this.boardGamed.appendChild(this.piece);
