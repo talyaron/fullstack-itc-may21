@@ -1,16 +1,10 @@
-function handleSubmit(ev) {
-    ev.preventDefault();
-    let enterURL = ev.target.children.enterURL.value;
-    let imageDescription = ev.target.children.description.value;
-    const newArticle = new Article(`${enterURL}`, `${imageDescription}`, `ID`, '200px', '200px');
-    ev.target.reset();
-}
+
 
 class Article {
     constructor(imageURL, description, articleID, width, height){
         this.imageURL = imageURL;
         this.description = description;
-        this.articleID = articleID;
+        this.articleID = "id" + Math.random().toString(16).slice(2);;
         this.width = width;
         this.height = height;
         this.boardGamed = document.querySelector('#boardGame');
@@ -21,6 +15,7 @@ class Article {
     creatImage() {
         try {
             this.box = document.createElement('img');
+            this.box.setAttribute('ID', this.articleID);
             this.box.setAttribute('src', this.imageURL);
             this.box.setAttribute('width', this.width);
             this.box.setAttribute('height', this.height);
@@ -39,16 +34,34 @@ class Article {
         this.boardGamed.appendChild(this.box2);
 
     }
-    changeImageURL(){
+  
+}
+class ArticlesList {
+    articles = [];
+
+
+    add(article) {
+        this.articles.push(article);
+    }
+
+
+    removeArticle(articleId){
 
     }
-    changeDescription(){
+
+    updateArticle(articleId){
 
     }
+
+   
 }
-class ArticleArray{
-    constructor(imageURLArray, descriptionArray) {
-    this.imageURLArray = imageURLArray;
-    this.descriptionArray = descriptionArray;
-}
+const articles = new ArticlesList();
+function handleSubmit(ev) {
+    ev.preventDefault();
+    let enterURL = ev.target.children.enterURL.value;
+    let imageDescription = ev.target.children.description.value;
+    const newArticle = new Article(`${enterURL}`, `${imageDescription}`, `${this.articleID}`, '200px', '200px');
+    articles.add(article);
+    console.log(articles);
+    ev.target.reset();
 }

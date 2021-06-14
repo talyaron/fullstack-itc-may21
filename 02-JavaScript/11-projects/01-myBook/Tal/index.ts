@@ -21,6 +21,9 @@ class ArticlesList {
 
     removeArticle(articleId:string){
 
+        this.articles = this.articles.filter(art=>art.articleId !== articleId);
+        console.log(this.articles)
+        this.renderArticles();
     }
 
     updateArticle(articleId:string){
@@ -35,7 +38,7 @@ class ArticlesList {
         let html:string='';
         this.articles.forEach(article=>{
             html += `<div><img src='${article.imageUrl}' alt='${article.description}' />`+
-            `<p>${article.description}</p></div>`
+            `<p>${article.description}</p><button onclick='handleDelete("${article.articleId}")'>DELETE</button></div>`
         });
         console.log(html);
         articlesRoot.innerHTML = html;
@@ -44,7 +47,7 @@ class ArticlesList {
 }
 const articles = new ArticlesList();
 
-var handleSubmit = (ev: any) => {
+const handleSubmit = (ev: any):void => {
     ev.preventDefault();
 
     const imageUrl: string = ev.target.elements.imageUrl.value;
@@ -58,4 +61,8 @@ var handleSubmit = (ev: any) => {
 
     console.log(articles)
 
+}
+
+const handleDelete = (articleId:string):void=>{
+    articles.removeArticle(articleId);
 }
