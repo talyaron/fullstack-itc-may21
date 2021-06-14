@@ -11,10 +11,9 @@ var Article = /** @class */ (function () {
     return Article;
 }());
 var ArticleArray = /** @class */ (function () {
-    function ArticleArray(articles) {
-        this.articles = articles;
+    function ArticleArray() {
     }
-    ArticleArray.prototype.Add = function () {
+    ArticleArray.prototype.Add = function (article) {
     };
     ArticleArray.prototype.Remove = function () {
     };
