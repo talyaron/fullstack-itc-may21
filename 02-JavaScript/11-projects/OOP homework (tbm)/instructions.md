@@ -3,4 +3,4 @@
 3. Have a total method.
 4. Write all transactions in the order they occurred, with the last line: total.
 
-TypeScript. scss;
+Use TypeScript, SCSS, BEM etc.
