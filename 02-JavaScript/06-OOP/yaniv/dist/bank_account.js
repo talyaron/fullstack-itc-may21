@@ -39,12 +39,20 @@ var Account = /** @class */ (function () {
         newTrans.appendChild(newTransSign);
         var newTransAmount = document.createElement("div");
         newTransAmount.id = "trans_amount";
-        newTransAmount.innerText = "\u20AA" + transaction.transAmount;
+        newTransAmount.innerText = "\u20AA" + Math.abs(transaction.transAmount);
+        if (transaction.transAmount >= 0) {
+            newTransAmount.style.color = 'green';
+        }
+        else {
+            newTransAmount.style.color = 'red';
+        }
         newTrans.appendChild(newTransAmount);
         var newTransDate = document.createElement("div");
         newTransDate.id = "trans_date";
         newTransDate.innerText = transaction.transDate.getDate() + "-" + (transaction.transDate.getMonth() + 1) + "-" + transaction.transDate.getFullYear();
         newTrans.appendChild(newTransDate);
+        var totalDate = document.querySelector("#total_date");
+        totalDate.innerText = "For Date: " + newTransDate.innerText;
         var newTransBiz = document.createElement("div");
         newTransBiz.id = "trans_business";
         newTransBiz.innerText = "" + transaction.transBiz;
@@ -61,6 +69,12 @@ var Account = /** @class */ (function () {
     Account.prototype.updateDOMTotal = function (totalAmount) {
         var domTotal = document.querySelector("#total_amount");
         domTotal.innerText = "\u20AA" + totalAmount;
+        if (totalAmount >= 0) {
+            domTotal.style.color = 'green';
+        }
+        else {
+            domTotal.style.color = 'red';
+        }
     };
     return Account;
 }());

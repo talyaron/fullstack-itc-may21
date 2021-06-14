@@ -22,7 +22,7 @@ body {
   width: 50%;
   margin: auto;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 2fr 1fr;
   grid-template-areas: "total img" "date img";
 }
@@ -78,15 +78,19 @@ body {
 }
 .transactions__item--action #trans_amount {
   grid-area: amount;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 .transactions__item--action #trans_date {
   grid-area: date;
 }
 .transactions__item--action #trans_business {
   grid-area: biz;
+  color: lightseagreen;
 }
 .transactions__item--action #trans_id {
   grid-area: id;
+  color: gray;
 }
 
 .modalWrapper {

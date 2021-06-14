@@ -48,7 +48,9 @@ class Account {
     newTrans.appendChild(newTransSign);
     const newTransAmount: HTMLElement = document.createElement(`div`);
     newTransAmount.id = "trans_amount";
-    newTransAmount.innerText = `₪${transaction.transAmount}`;
+    newTransAmount.innerText = `₪${Math.abs(transaction.transAmount)}`;
+    if (transaction.transAmount >= 0) {newTransAmount.style.color = 'green';}
+    else {newTransAmount.style.color = 'red';}
     newTrans.appendChild(newTransAmount);
     const newTransDate: HTMLElement = document.createElement(`div`);
     newTransDate.id = "trans_date";
@@ -56,6 +58,8 @@ class Account {
       transaction.transDate.getMonth() + 1
     }-${transaction.transDate.getFullYear()}`;
     newTrans.appendChild(newTransDate);
+    const totalDate: HTMLElement = document.querySelector("#total_date");
+    totalDate.innerText = `For Date: ${newTransDate.innerText}`
     const newTransBiz: HTMLElement = document.createElement(`div`);
     newTransBiz.id = "trans_business";
     newTransBiz.innerText = `${transaction.transBiz}`;
@@ -74,6 +78,8 @@ class Account {
   updateDOMTotal(totalAmount: number) {
     const domTotal: HTMLElement = document.querySelector("#total_amount");
     domTotal.innerText = `₪${totalAmount}`;
+    if (totalAmount >= 0) {domTotal.style.color = 'green';}
+    else {domTotal.style.color = 'red';}
   }
 }
 
