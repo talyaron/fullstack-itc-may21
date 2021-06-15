@@ -33,7 +33,7 @@ class Account {
     }
 
     //Every time that I add a transaction I will use this method, this add a new transaction to the array   
-    addTransaction(transaction: Transaction) {
+    addTransaction(transaction: Transaction): void {
         try {
             if (!transaction) throw new Error('The transaction it doesn´t exist!')
             this.transactions.push(transaction);
@@ -45,9 +45,9 @@ class Account {
     }
 
     //To Show the transaction in the page
-    renderTransaction() {
+    renderTransaction(): void {
         try {
-            const showTransaction = document.querySelector('#transactions');
+            const showTransaction: HTMLElement = document.querySelector('#transactions');
             if (!showTransaction) throw new Error('The element where to show the transactions doesn´t exist!')
             //Doing a loop to show the transaction
             let html: string = '';
@@ -65,9 +65,9 @@ class Account {
         }
     }
 
-    total(transaction) {
+    total(transaction): void {
         try {
-            const totalAmount = document.querySelector('#transactions--total');
+            const totalAmount: HTMLElement = document.querySelector('#transactions--total');
             if (!totalAmount) throw new Error('The element where to show the balance doesn´t exist!')
             if (transaction.movement === 'deposit') {
                 allTransactions.balance += transaction.amount;
