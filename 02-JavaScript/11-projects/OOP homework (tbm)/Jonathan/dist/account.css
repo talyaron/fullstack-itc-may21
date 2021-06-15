@@ -30,9 +30,9 @@ h1 .img-bank {
   flex-direction: column;
 }
 .square__item--description {
-  background-color: #4169E1;
+  background-color: #210401;
   border-radius: 10px;
-  padding: 3rem;
+  padding: 3em;
 }
 .square__item--description p {
   color: white;
@@ -47,7 +47,7 @@ h1 .img-bank {
 .square__item--deposit {
   background-color: #363958;
   border-radius: 10px;
-  padding: 3rem;
+  padding: 3em;
 }
 .square__item--deposit p {
   color: white;
@@ -62,7 +62,7 @@ h1 .img-bank {
 .square__item--withdraw {
   background-color: #FFA07A;
   border-radius: 10px;
-  padding: 3rem;
+  padding: 3em;
 }
 .square__item--withdraw p {
   color: white;
@@ -75,9 +75,9 @@ h1 .img-bank {
   color: white;
 }
 .square__item--total {
-  background-color: lightblue;
+  background-color: #434343;
   border-radius: 10px;
-  padding: 3rem;
+  padding: 3em;
 }
 .square__item--total p {
   color: white;
@@ -89,10 +89,10 @@ h1 .img-bank {
   margin-top: 10px;
 }
 .square__item--total span .green_text {
-  color: green;
+  color: #77dd77;
 }
 .square__item--total span .red_text {
-  color: red;
+  color: #FE0000;
 }
 
 .container-forms {
