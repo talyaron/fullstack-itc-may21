@@ -21,11 +21,11 @@ class TransactionList {
 
     getTotal(count: number) {
 
-        let acumular: number = 0;
+        let sum: number = 0;
         for (let i: number = 0; i < count; i++) {
-            acumular += this.transaction[i]['amount'];
+            sum += this.transaction[i]['amount'];
         }
-        return acumular
+        return sum;
 
     }
 

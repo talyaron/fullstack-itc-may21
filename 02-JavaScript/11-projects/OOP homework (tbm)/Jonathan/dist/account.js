@@ -14,11 +14,11 @@ var TransactionList = /** @class */ (function () {
         this.transaction.push(account);
     };
     TransactionList.prototype.getTotal = function (count) {
-        var acumular = 0;
+        var sum = 0;
         for (var i = 0; i < count; i++) {
-            acumular += this.transaction[i]['amount'];
+            sum += this.transaction[i]['amount'];
         }
-        return acumular;
+        return sum;
     };
     TransactionList.prototype.getDeleteAll = function () {
     };
