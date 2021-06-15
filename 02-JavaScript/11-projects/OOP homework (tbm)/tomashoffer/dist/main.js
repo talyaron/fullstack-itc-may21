@@ -48,12 +48,13 @@ var newTrans = new TransactionList();
 var button1 = document.getElementById('deposit_check');
 var button2 = document.getElementById('withdraw_check');
 var amount = document.getElementById('amount');
-if (button1.checked = true) {
+if (button1.checked) {
     amount.removeAttribute("max");
     amount.setAttribute("min", "0");
 }
-else if (button1.checked = false) {
+else {
+    button1.checked = false;
     amount.removeAttribute("min");
-    amount.setAttribute("max", "-1000");
+    amount.setAttribute("max", "0");
 }
-console.dir(amount);
+console.dir(button1);
