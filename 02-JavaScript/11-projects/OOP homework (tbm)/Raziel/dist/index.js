@@ -23,9 +23,10 @@ var AddDep = /** @class */ (function () {
     AddDep.prototype.totalAmount = function () {
         var totalScreen = document.querySelector('#totalScreen');
         var sumHtml = '';
-        var sum = this.addMoney.map(function (ev) { return ev.deposit; }).reduce(function (a, b) { return a + b; });
-        sumHtml += "<p>Total:" + sum + "</p>";
+        var sum = this.addMoney.reduce(function (a, b) { return a + b.deposit; }, 0);
+        sumHtml = "<p>Total:" + sum + "</p>";
         totalScreen.innerHTML = sumHtml;
+        console.log(sum);
     };
     return AddDep;
 }());
@@ -38,5 +39,5 @@ var handleDeposit = function (ev) {
     console.log(newAction);
     addDeposit.addDep(newAction);
     addDeposit.renderDeposit();
+    addDeposit.totalAmount();
 };
-addDeposit.totalAmount();

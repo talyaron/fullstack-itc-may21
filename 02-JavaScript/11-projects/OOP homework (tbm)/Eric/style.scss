@@ -1,4 +1,5 @@
 body {
+    margin-top: 50px;
     color: #484848;
     font-family: 'Lato', sans-serif;
     padding: 1rem;
@@ -7,19 +8,8 @@ body {
   .container {
     background: #fdfdfd;
     display: flex;
-    flex-wrap:wrap;
     justify-content: center;
-    align-items:center;
-    margin: 0 auto;
-    border-radius:5px;
-}
-
-  .transaction {
-    display: flex;
-    flex-direction:column;
-    justify-content: center;
-}
- 
+} 
   
 .total{
 
@@ -36,28 +26,36 @@ body {
 
 &__1{
     border: 2px solid #dcdcdc;
+    border-radius: 6px;
     margin-right: 1em;  
 }
 
-&__btn{
+&__btn1{
     font-size: .85em;
     padding: .65em 1em;
     border-radius: .3em;
     outline: 0;
     color: white;
-    background: #508abc;
+    background: green;
     border: solid 1px;
     border-color: rgba(0, 0, 0, .1);
     cursor: pointer;
     width: 8em;
 }
+&__btn1:hover {
+    opacity: 0.5;
 }
-#accountRoot{
+
+}
+
+#acctBalance{
+    display: flex;
+    justify-content: space-between
+}
+
+h1{
     text-align: center;
 }
-
-
-
 
   
 

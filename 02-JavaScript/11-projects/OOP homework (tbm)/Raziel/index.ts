@@ -29,9 +29,10 @@ class AddDep{
      totalAmount(){
         const totalScreen:HTMLElement=document.querySelector('#totalScreen');
        let sumHtml:string='';
-        let sum=this.addMoney.map(ev=>ev.deposit).reduce((a,b)=>{return a+b});
-       sumHtml+=`<p>Total:${sum}</p>`;
+        let sum=this.addMoney.reduce((a,b)=>a+b.deposit,0);
+       sumHtml=`<p>Total:${sum}</p>`;
        totalScreen.innerHTML=sumHtml;
+       console.log(sum);
      }
 
 }
@@ -47,7 +48,7 @@ const addDeposit= new AddDep();
      console.log(newAction);
     addDeposit.addDep(newAction);
     addDeposit.renderDeposit();
-    
+    addDeposit.totalAmount();
 
  }
- addDeposit.totalAmount();
+ 
