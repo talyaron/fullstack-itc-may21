@@ -1,0 +1,51 @@
+body {
+  color: #484848;
+  font-family: "Lato", sans-serif;
+  padding: 1rem;
+}
+
+.container {
+  background: #fdfdfd;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.transaction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.total__title1 {
+  font-size: 3em;
+  margin: 0;
+  margin-top: 0.3em;
+}
+
+.inputs {
+  padding: 10px;
+}
+.inputs__1 {
+  border: 2px solid #dcdcdc;
+  margin-right: 1em;
+}
+.inputs__btn {
+  font-size: 0.85em;
+  padding: 0.65em 1em;
+  border-radius: 0.3em;
+  outline: 0;
+  color: white;
+  background: #508abc;
+  border: solid 1px;
+  border-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  width: 8em;
+}
+
+#accountRoot {
+  text-align: center;
+}
