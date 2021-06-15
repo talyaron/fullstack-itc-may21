@@ -1,5 +1,5 @@
 class Account {
-
+    
     totalAmount: number;
     transactionList:Array<Transaction> = []
 
@@ -38,7 +38,7 @@ class Transaction {
 
     addWithdrawal = () => { 
         const withdrawButton = document.querySelector('#withdrawButton')
-        let withdrawSum = document.querySelector('.withdrawSum')
+        let withdrawSum = document.querySelector('#withdrawSum')        
         withdrawButton.addEventListener('click', () => {
             return Account.total += withdrawSum
             

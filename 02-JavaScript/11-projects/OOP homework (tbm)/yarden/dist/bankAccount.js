@@ -26,7 +26,7 @@ var Transaction = /** @class */ (function () {
         };
         this.addWithdrawal = function () {
             var withdrawButton = document.querySelector('#withdrawButton');
-            var withdrawSum = document.querySelector('.withdrawSum');
+            var withdrawSum = document.querySelector('#withdrawSum');
             withdrawButton.addEventListener('click', function () {
                 return Account.total += withdrawSum;
             });
