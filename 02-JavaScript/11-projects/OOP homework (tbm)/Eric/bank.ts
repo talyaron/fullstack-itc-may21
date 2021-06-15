@@ -7,72 +7,64 @@ Use TypeScript, SCSS, BEM etc.
 */
 
 
-
-class Account{
+class Movements{
     description:string;
     deposit:number;
-    withdraw:number;
+    //withdraw:number;
 
-    constructor(deposit: number, withdraw: number, description:string) {
+    constructor(description:string, deposit: number /*, withdraw: number*/ ) {
         this.description = description;
         this.deposit = deposit;
-        this.withdraw= withdraw;
+        //this.withdraw= withdraw;
     }
-    
-
-
 }
-
 
 
 
 class AccountList {
-    accountUsers: Array<Account> = [];
-
-
-    add(accountUser: Account) {
+    amount: number;
+    accountUsers: Array<Movements> = [];
+  
+    constructor (amount:number)  {  
+this.amount=amount;
+}
+    add(accountUser: Movements) {
         this.accountUsers.push(accountUser);
+        this.total(accountUser);
+        
+      
     
     }
-    renderAccount(){
-        const accountRoot:HTMLElement = document.querySelector('#accountRoot');
-
-
+    renderMovements(){
+        const balance:HTMLElement = document.querySelector('#balance');
 
         let html:string='';
-        this.accountUsers.forEach(accountUser=>{
-            html += `<p>${accountUser.description}  ${accountUser.deposit}</p>`
+            this.accountUsers.forEach(accountUser=>{
+            html += `<p>${accountUser.description}  ${accountUser.deposit} ${accountUsers.amount} </p>`
             
         });
-        accountRoot.innerHTML = html;
+        balance.innerHTML = html;
     }
-
-    getTotal(){
-        //let totalAccount = 44;
-       // totalAccount += this.accountUsers[0]['deposit']
-        //console.log(totalAccount)
-        
+   total(accountUser){
+     accountUsers.amount += accountUser.deposit;
+  
+    console.log(accountUsers.amount)
     }
+  
 }
 
 
-const accountUsers = new AccountList();
+const accountUsers = new AccountList(0);
 
 const handleSubmit = (ev: any):void => {
     ev.preventDefault();
 
     const description: string = ev.target.elements.description.value;
-    const deposit = ev.target.elements.deposit.value;
-    const withdraw:number = ev.target.elements.withdraw.value;
+    const deposit = ev.target.elements.deposit.valueAsNumber;
+    //const withdraw:number = ev.target.elements.withdraw.value;
 
-    console.log(deposit)
-    const accountUser = new Account(parseInt(deposit),withdraw, description);
+    const accountUser = new Movements(description , deposit /*,withdraw*/);
 
    accountUsers.add(accountUser);
-   accountUsers.renderAccount();
-   //accountUsers.getTotal()
-//const userDeposit = document.getElementById("userDeposit");
-//let totalAccount = 0;
-//totalAccount+=(Number(userDeposit.value));
+   accountUsers.renderMovements();
 }
-
