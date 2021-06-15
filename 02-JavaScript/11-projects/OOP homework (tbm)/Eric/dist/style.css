@@ -1,0 +1,51 @@
+body {
+  margin-top: 50px;
+  color: #484848;
+  font-family: "Lato", sans-serif;
+  padding: 1rem;
+}
+
+.container {
+  background: #fdfdfd;
+  display: flex;
+  justify-content: center;
+}
+
+.total__title1 {
+  font-size: 3em;
+  margin: 0;
+  margin-top: 0.3em;
+}
+
+.inputs {
+  padding: 10px;
+}
+.inputs__1 {
+  border: 2px solid #dcdcdc;
+  border-radius: 6px;
+  margin-right: 1em;
+}
+.inputs__btn1 {
+  font-size: 0.85em;
+  padding: 0.65em 1em;
+  border-radius: 0.3em;
+  outline: 0;
+  color: white;
+  background: green;
+  border: solid 1px;
+  border-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  width: 8em;
+}
+.inputs__btn1:hover {
+  opacity: 0.5;
+}
+
+#acctBalance {
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  text-align: center;
+}
