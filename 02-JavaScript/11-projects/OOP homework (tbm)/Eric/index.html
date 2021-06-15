@@ -21,9 +21,9 @@ Use TypeScript, SCSS, BEM etc.
           <div id="inputs" class="inputs">
             <form onsubmit="handleSubmit(event)">
               <label for="description" class="inputs__title">Description</label>
-              <input type="text" name="description" id="userDescription" class="inputs__1">
+              <input type="text" name="description" id="userDescription" class="inputs__1" required>
               <label for="deposit" class="inputs__title">Amount</label>
-              <input type="number" name="deposit"  id="userDeposit" class="inputs__1" min="-100000" max="100000" >
+              <input type="number" name="deposit"  id="userDeposit" class="inputs__1" min="-100000" max="100000" required >
               <button id="btnDeposit" class="inputs__btn1">Deposit</button>
             </form>
             <br>
