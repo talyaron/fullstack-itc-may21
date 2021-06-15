@@ -16,8 +16,8 @@ class Transact {
     this.total = total;
   }
 
-  add(transact: Account2): void {
-    this.transacts.push(transact);
+  add(trans: Account2): void {
+    this.transacts.push(trans);
   }
 
   totalAmount(transact): void {
@@ -50,4 +50,5 @@ ev.preventDefault();
 
 
     Movements.add(pepe)
+    console.log(amount, movement)
 }
