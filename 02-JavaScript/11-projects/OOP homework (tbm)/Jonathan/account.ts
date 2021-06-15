@@ -33,10 +33,10 @@ class TransactionList {
 
     }
 
-    
+
     renderTransaction() {
 
-        
+
         const descriptionRoot: HTMLElement = document.querySelector('#square__item--description--value');
 
         const depositRoot: HTMLElement = document.querySelector('#square__item--deposit--value');
@@ -45,51 +45,61 @@ class TransactionList {
 
         const totalRoot: HTMLElement = document.querySelector('#square__item--total--value');
 
-        let description: string = '';
-        let deposit: string = '';
-        let withdraw: string = '';
-        let total: string = '';
+        try {
 
-        let count: number = 1;
-
-        this.transaction.forEach(account => {
+            if (!descriptionRoot) throw new Error('Description Root Not Founded')
+            if (!depositRoot) throw new Error('Description Root Not Founded')
+            if (!withdrawRoot) throw new Error('Description Root Not Founded')
+            if (!totalRoot) throw new Error('Description Root Not Founded')
 
 
-            if (account.amount < 0) {
-                description += `<span>${account.description}</span><br>`;
-                withdraw += `<span>₪ ${account.amount.toFixed(2)}</span><br>`;
-                deposit += `<span>₪ 0.00</span><br>`;
+            let description: string = '';
+            let deposit: string = '';
+            let withdraw: string = '';
+            let total: string = '';
 
-                if (this.getTotal(count) < 0) {
-                    total += `<span class ="red_text">₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
+            let count: number = 1;
+
+            this.transaction.forEach(account => {
+
+
+                if (account.amount < 0) {
+                    description += `<span>${count}- ${account.description}</span><br>`;
+                    withdraw += `<span>₪ ${account.amount.toFixed(2)}</span><br>`;
+                    deposit += `<span>₪ 0.00</span><br>`;
+
+                    if (this.getTotal(count) < 0) {
+                        total += `<span class ="red_text">${count}- ₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
+                    } else {
+                        total += `<span class ="green_text">${count}- ₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
+                    }
+
+                    count++;
                 } else {
-                    total += `<span class ="green_text">₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
+                    description += `<span>${count}- ${account.description}</span><br>`
+                    deposit += `<span>₪ ${account.amount.toFixed(2)}</span><br>`
+                    withdraw += `<span>₪ 0.00</span><br>`;
+
+
+                    if (this.getTotal(count) < 0) {
+                        total += `<span class ="red_text">${count}- ₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
+                    } else {
+                        total += `<span class ="green_text">${count}- ₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
+                    }
+                    
+                    count++;
                 }
 
-                count++;
-            } else {
-                description += `<span>${account.description}</span><br>`
-                deposit += `<span>₪ ${account.amount.toFixed(2)}</span><br>`
-                withdraw += `<span>₪ 0.00</span><br>`;
+            });
 
+            descriptionRoot.innerHTML = description;
+            depositRoot.innerHTML = deposit;
+            withdrawRoot.innerHTML = withdraw;
+            totalRoot.innerHTML = total;
 
-                if (this.getTotal(count) < 0) {
-                    total += `<span class ="red_text">₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
-                } else {
-                    total += `<span class ="green_text">₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
-                }
-
-                count++;
-            }
-
-
-        });
-
-
-        descriptionRoot.innerHTML = description;
-        depositRoot.innerHTML = deposit;
-        withdrawRoot.innerHTML = withdraw;
-        totalRoot.innerHTML = total;
+        } catch (e) {
+            console.log(e);
+        }
 
     }
 }
@@ -103,13 +113,13 @@ function handleSumbitDeposit(event: any): void {
     const description: string = event.target.elements.description_deposit.value;
     const amount: number = parseFloat(event.target.elements.amount_deposit.value);
 
-    if(amount <=0){
+    if (amount <= 0) {
         alert('Please enter a positive number')
-    }else{
+    } else {
         const account = new Account(description, amount);
 
         transaction.getTransaction(account);
-    
+
         transaction.renderTransaction();
     }
 
