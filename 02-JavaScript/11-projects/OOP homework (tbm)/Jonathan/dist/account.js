@@ -24,7 +24,6 @@ var TransactionList = /** @class */ (function () {
     };
     TransactionList.prototype.renderTransaction = function () {
         var _this = this;
-        var transactionRoot = document.querySelector('#transactionRoot');
         var descriptionRoot = document.querySelector('#square__item--description--value');
         var depositRoot = document.querySelector('#square__item--deposit--value');
         var withdrawRoot = document.querySelector('#square__item--withdraw--value');
@@ -37,25 +36,25 @@ var TransactionList = /** @class */ (function () {
         this.transaction.forEach(function (account) {
             if (account.amount < 0) {
                 description += "<span>" + account.description + "</span><br>";
-                withdraw += "<span>\u20AA " + Number(account.amount).toFixed(2) + "</span><br>";
+                withdraw += "<span>\u20AA " + account.amount.toFixed(2) + "</span><br>";
                 deposit += "<span>\u20AA 0.00</span><br>";
                 if (_this.getTotal(count) < 0) {
-                    total += "<span class =\"red_text\">\u20AA " + Number(_this.getTotal(count)).toFixed(2) + "</span><br>";
+                    total += "<span class =\"red_text\">\u20AA " + _this.getTotal(count).toFixed(2) + "</span><br>";
                 }
                 else {
-                    total += "<span class =\"green_text\">\u20AA " + Number(_this.getTotal(count)).toFixed(2) + "</span><br>";
+                    total += "<span class =\"green_text\">\u20AA " + _this.getTotal(count).toFixed(2) + "</span><br>";
                 }
                 count++;
             }
             else {
                 description += "<span>" + account.description + "</span><br>";
-                deposit += "<span>\u20AA " + Number(account.amount).toFixed(2) + "</span><br>";
+                deposit += "<span>\u20AA " + account.amount.toFixed(2) + "</span><br>";
                 withdraw += "<span>\u20AA 0.00</span><br>";
                 if (_this.getTotal(count) < 0) {
-                    total += "<span class =\"red_text\">\u20AA " + Number(_this.getTotal(count)).toFixed(2) + "</span><br>";
+                    total += "<span class =\"red_text\">\u20AA " + _this.getTotal(count).toFixed(2) + "</span><br>";
                 }
                 else {
-                    total += "<span class =\"green_text\">\u20AA " + Number(_this.getTotal(count)).toFixed(2) + "</span><br>";
+                    total += "<span class =\"green_text\">\u20AA " + _this.getTotal(count).toFixed(2) + "</span><br>";
                 }
                 count++;
             }
@@ -80,6 +79,7 @@ function handleSumbitDeposit(event) {
         transaction.getTransaction(account);
         transaction.renderTransaction();
     }
+    event.reset();
 }
 function handleSumbitWithdraw(event) {
     event.preventDefault();
@@ -93,8 +93,10 @@ function handleSumbitWithdraw(event) {
         transaction.getTransaction(account);
         transaction.renderTransaction();
     }
+    event.reset();
 }
 function handleDelete(event) {
     event.preventDefault();
     transaction.getDeleteAll();
+    event.reset();
 }

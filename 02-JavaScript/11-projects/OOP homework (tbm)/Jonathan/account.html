@@ -13,25 +13,7 @@
 
 <body style="background-color: lightslategray ; height: 100vh;" >
     <h1>Welcome to your Bank Account <img src="bank_78392.svg" class="img-bank"></h1>
-    <div class="square">
-        <div class="square__item square__item--description">
-            <p>Description</p>
-            <span id="square__item--description--value"></span>
-        </div>
-        <div class="square__item square__item--deposit">
-            <p>Deposit</p>
-            <span id="square__item--deposit--value">₪ 0.00</span>
-        </div>
-        <div class="square__item square__item--withdraw">
-            <p>Withdraw</p>
-            <span id="square__item--withdraw--value">₪ 0.00</span>
-        </div>
-        <div class="square__item square__item--total">
-            <p>Total</p>
-            <span id="square__item--total--value">₪ 0.00</span>
-        </div>
-    </div>
-    
+
     <div class="container-forms">
         
             <form onSubmit="handleSumbitDeposit(event)">
@@ -61,7 +43,6 @@
                 </fieldset>
             </form>
         
-        
             <form onSumbit="handleDelete(event)">
                 <fieldset class = "form-delete">
                     <legend>Delete Movements</legend>
@@ -71,6 +52,25 @@
                 </fieldset>
             </form>
         
+    </div>
+
+    <div class="square">
+        <div class="square__item square__item--description">
+            <p>Description</p>
+            <span id="square__item--description--value"></span>
+        </div>
+        <div class="square__item square__item--deposit">
+            <p>Deposit</p>
+            <span id="square__item--deposit--value">₪ 0.00</span>
+        </div>
+        <div class="square__item square__item--withdraw">
+            <p>Withdraw</p>
+            <span id="square__item--withdraw--value">₪ 0.00</span>
+        </div>
+        <div class="square__item square__item--total">
+            <p>Total</p>
+            <span id="square__item--total--value">₪ 0.00</span>
+        </div>
     </div>
 
 

@@ -33,11 +33,10 @@ class TransactionList {
 
     }
 
-
+    
     renderTransaction() {
 
-        const transactionRoot: HTMLElement = document.querySelector('#transactionRoot');
-
+        
         const descriptionRoot: HTMLElement = document.querySelector('#square__item--description--value');
 
         const depositRoot: HTMLElement = document.querySelector('#square__item--deposit--value');
@@ -58,26 +57,26 @@ class TransactionList {
 
             if (account.amount < 0) {
                 description += `<span>${account.description}</span><br>`;
-                withdraw += `<span>₪ ${Number(account.amount).toFixed(2)}</span><br>`;
+                withdraw += `<span>₪ ${account.amount.toFixed(2)}</span><br>`;
                 deposit += `<span>₪ 0.00</span><br>`;
 
                 if (this.getTotal(count) < 0) {
-                    total += `<span class ="red_text">₪ ${Number(this.getTotal(count)).toFixed(2)}</span><br>`;
+                    total += `<span class ="red_text">₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
                 } else {
-                    total += `<span class ="green_text">₪ ${Number(this.getTotal(count)).toFixed(2)}</span><br>`;
+                    total += `<span class ="green_text">₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
                 }
 
                 count++;
             } else {
                 description += `<span>${account.description}</span><br>`
-                deposit += `<span>₪ ${Number(account.amount).toFixed(2)}</span><br>`
+                deposit += `<span>₪ ${account.amount.toFixed(2)}</span><br>`
                 withdraw += `<span>₪ 0.00</span><br>`;
 
 
                 if (this.getTotal(count) < 0) {
-                    total += `<span class ="red_text">₪ ${Number(this.getTotal(count)).toFixed(2)}</span><br>`;
+                    total += `<span class ="red_text">₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
                 } else {
-                    total += `<span class ="green_text">₪ ${Number(this.getTotal(count)).toFixed(2)}</span><br>`;
+                    total += `<span class ="green_text">₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
                 }
 
                 count++;
@@ -114,6 +113,7 @@ function handleSumbitDeposit(event: any): void {
         transaction.renderTransaction();
     }
 
+    event.reset();
 
 }
 
@@ -136,7 +136,7 @@ function handleSumbitWithdraw(event: any): void {
         transaction.renderTransaction();
     }
 
-
+    event.reset();
 }
 
 function handleDelete(event: any): void {
@@ -144,6 +144,8 @@ function handleDelete(event: any): void {
     event.preventDefault();
 
     transaction.getDeleteAll();
+
+    event.reset();
 
 }
 
