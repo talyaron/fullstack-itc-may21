@@ -1,19 +1,19 @@
 var Transaction = /** @class */ (function () {
     function Transaction(transAmount, transBiz) {
         this.transDate = new Date();
-        this.transId = "id" + Math.random().toString(16).slice(2);
+        this.transId = 'id' + Math.random().toString(16).slice(2);
         this.transBiz = transBiz;
         this.transAmount = transAmount;
     }
     return Transaction;
 }());
-document.querySelector("#total_amount").innerHTML = "₪0";
+document.querySelector('#total_amount').innerHTML = '₪0';
 var Account = /** @class */ (function () {
     function Account() {
         this.allTransactions = [];
-        this.totalAmount = Number(document.querySelector("#total_amount").innerHTML.replace("₪", ""));
+        this.totalAmount = Number(document.querySelector('#total_amount').innerHTML.replace('₪', ''));
     }
-    // constructor (profImageUrl : string) {
+    // constructor (profImageUrl : string) { // YA: out of scope for this task
     //     this.profImageUrl = profImageUrl;
     // }
     Account.prototype.addTrans = function (transaction) {
@@ -22,58 +22,71 @@ var Account = /** @class */ (function () {
         this.refreshTotal(transaction.transAmount);
     };
     Account.prototype.addTransToDOM = function (transaction) {
-        var transContainer = document.querySelector(".transactions");
-        var newTrans = document.createElement("div");
-        newTrans.classList.add("transactions__item", "transactions__item--action");
-        transContainer.appendChild(newTrans);
-        var newTransSign = document.createElement("i");
-        newTransSign.id = "sign";
-        if (transaction.transAmount > 0) {
-            newTransSign.classList.add("fas", "fa-2x", "fa-plus-circle");
-            newTransSign.style.color = "green";
+        try {
+            var transContainer = document.querySelector('.transactions');
+            var newTrans = document.createElement("div");
+            newTrans.classList.add('transactions__item', 'transactions__item--action');
+            transContainer.appendChild(newTrans);
+            var newTransSign = document.createElement("i");
+            newTransSign.id = 'sign';
+            newTransSign.classList.add('fas', 'fa-2x');
+            if (transaction.transAmount > 0) {
+                newTransSign.classList.add('fa-plus-circle');
+                newTransSign.style.color = 'green';
+                newTransSign.title = 'Income';
+            }
+            else {
+                newTransSign.classList.add('fa-minus-circle');
+                newTransSign.style.color = 'red';
+                newTransSign.title = 'Expense';
+            }
+            newTrans.appendChild(newTransSign);
+            var newTransAmount = document.createElement("div");
+            newTransAmount.id = 'trans_amount';
+            newTransAmount.innerText = "\u20AA" + Math.abs(transaction.transAmount);
+            if (transaction.transAmount >= 0) {
+                newTransAmount.style.color = 'green';
+            }
+            else {
+                newTransAmount.style.color = 'red';
+            }
+            newTrans.appendChild(newTransAmount);
+            var newTransDate = document.createElement("div");
+            newTransDate.id = 'trans_date';
+            newTransDate.innerText = transaction.transDate.getDate() + "-" + (transaction.transDate.getMonth() + 1) + "-" + transaction.transDate.getFullYear();
+            newTrans.appendChild(newTransDate);
+            var totalDate = document.querySelector('#total_date');
+            totalDate.innerText = "For Date: " + newTransDate.innerText;
+            var newTransBiz = document.createElement("div");
+            newTransBiz.id = 'trans_business';
+            newTransBiz.innerText = "" + transaction.transBiz;
+            newTrans.appendChild(newTransBiz);
+            var newTransId = document.createElement("div");
+            newTransId.id = 'trans_id';
+            newTransId.innerText = "" + transaction.transId;
+            newTrans.appendChild(newTransId);
         }
-        else {
-            newTransSign.classList.add("fas", "fa-2x", "fa-minus-circle");
-            newTransSign.style.color = "red";
+        catch (er) {
+            console.error(er);
         }
-        newTrans.appendChild(newTransSign);
-        var newTransAmount = document.createElement("div");
-        newTransAmount.id = "trans_amount";
-        newTransAmount.innerText = "\u20AA" + Math.abs(transaction.transAmount);
-        if (transaction.transAmount >= 0) {
-            newTransAmount.style.color = 'green';
-        }
-        else {
-            newTransAmount.style.color = 'red';
-        }
-        newTrans.appendChild(newTransAmount);
-        var newTransDate = document.createElement("div");
-        newTransDate.id = "trans_date";
-        newTransDate.innerText = transaction.transDate.getDate() + "-" + (transaction.transDate.getMonth() + 1) + "-" + transaction.transDate.getFullYear();
-        newTrans.appendChild(newTransDate);
-        var totalDate = document.querySelector("#total_date");
-        totalDate.innerText = "For Date: " + newTransDate.innerText;
-        var newTransBiz = document.createElement("div");
-        newTransBiz.id = "trans_business";
-        newTransBiz.innerText = "" + transaction.transBiz;
-        newTrans.appendChild(newTransBiz);
-        var newTransId = document.createElement("div");
-        newTransId.id = "trans_id";
-        newTransId.innerText = "" + transaction.transId;
-        newTrans.appendChild(newTransId);
     };
     Account.prototype.refreshTotal = function (transAmount) {
         this.totalAmount += transAmount;
         this.updateDOMTotal(this.totalAmount);
     };
     Account.prototype.updateDOMTotal = function (totalAmount) {
-        var domTotal = document.querySelector("#total_amount");
-        domTotal.innerText = "\u20AA" + totalAmount;
-        if (totalAmount >= 0) {
-            domTotal.style.color = 'green';
+        try {
+            var domTotal = document.querySelector('#total_amount');
+            domTotal.innerText = "\u20AA" + totalAmount;
+            if (totalAmount >= 0) {
+                domTotal.style.color = 'green';
+            }
+            else {
+                domTotal.style.color = 'red';
+            }
         }
-        else {
-            domTotal.style.color = 'red';
+        catch (er) {
+            console.error(er);
         }
     };
     return Account;

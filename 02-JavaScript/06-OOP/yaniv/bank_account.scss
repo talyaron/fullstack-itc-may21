@@ -14,7 +14,7 @@ body {
 .summary {
     width: 100%;
     height: 150px;
-    background-image: linear-gradient(to bottom, goldenrod, gold);
+    background-image: linear-gradient(to bottom, gold, yellowgreen);
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -41,7 +41,7 @@ body {
                 height: 80px;
                 margin: auto;
                 border-radius: 80px;
-                border: 3px solid tomato;
+                border: 3px solid black;
             }
 
             #total_amount {
@@ -71,19 +71,19 @@ body {
         &--heading {}
 
         &--add {
-            background-color: greenyellow;
+            background-color: turquoise;
             color: black;
             border-radius: 20px;
             padding: 5px;
             border: 0;
 
             &:hover {
-                background-color: green;
-                color: white;
+                background-color: rgb(71, 255, 237);
             }
 
             &:active {
-                background-color: rgb(126, 184, 39);
+                background-color: rgb(47, 172, 159);
+                color: white;
             }
         }
 
@@ -158,13 +158,15 @@ body {
         &--title {
             border-radius: 10px 10px 0 0;
             justify-content: space-between;
-            height: 20px;
-            color: white;
+            height: 25px;
+            color: black;
             font-weight: bold;
-            background-color: green;
+            background-color: greenyellow;
 
             .close {
                 cursor: pointer;
+                font-size: 20px;
+                margin: 0 5px;
 
                 &:hover {
                     color: rgb(17, 95, 91);
@@ -183,7 +185,7 @@ body {
             .addTransactionForm {
                 display: flex;
                 flex-direction: column;
-                
+
                 &__item {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
@@ -202,19 +204,21 @@ body {
                     }
 
                     &--submit {
-                        background-color: darkgoldenrod;
-                        color: white;
-                        font-size: 1.3rem;
+                        background-color: turquoise;
+                        color: black;
+                        height: 30px;
+                        font-size: 1.2rem;
                         font-weight: bold;
                         border-radius: 20px;
                         border: 0;
 
                         &:hover {
-                            background-color: rgb(243, 184, 35);
+                            background-color: rgb(71, 255, 237);
                         }
 
                         &:active {
-                            background-color: gold;
+                            background-color: rgb(47, 172, 159);
+                            color: white;
                         }
                     }
                 }
