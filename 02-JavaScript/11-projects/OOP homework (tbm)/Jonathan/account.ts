@@ -67,12 +67,13 @@ class TransactionList {
                     total += `<span class ="green_text">₪ ${Number(this.getTotal(count)).toFixed(2)}</span><br>`;
                 }
 
-
                 count++;
             } else {
                 description += `<span>${account.description}</span><br>`
                 deposit += `<span>₪ ${Number(account.amount).toFixed(2)}</span><br>`
                 withdraw += `<span>₪ 0.00</span><br>`;
+
+
                 if (this.getTotal(count) < 0) {
                     total += `<span class ="red_text">₪ ${Number(this.getTotal(count)).toFixed(2)}</span><br>`;
                 } else {
@@ -90,9 +91,6 @@ class TransactionList {
         depositRoot.innerHTML = deposit;
         withdrawRoot.innerHTML = withdraw;
         totalRoot.innerHTML = total;
-
-
-
 
     }
 }
@@ -116,7 +114,6 @@ function handleSumbitDeposit(event: any): void {
         transaction.renderTransaction();
     }
 
-   
 
 }
 
@@ -138,9 +135,6 @@ function handleSumbitWithdraw(event: any): void {
 
         transaction.renderTransaction();
     }
-
-
-
 
 
 }
