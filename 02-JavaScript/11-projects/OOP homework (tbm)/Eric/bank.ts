@@ -36,18 +36,20 @@ this.amount=amount;
     
     }
     renderMovements(){
-        const balance:HTMLElement = document.querySelector('#balance');
+        const deposit:HTMLElement = document.querySelector('#deposit');
 
         let html:string='';
             this.accountUsers.forEach(accountUser=>{
-            html += `<p>${accountUser.description}  ${accountUser.deposit} ${accountUsers.amount} </p>`
+            html += `<p>${accountUser.description}  ${accountUser.deposit}  </p>`
             
         });
-        balance.innerHTML = html;
+        deposit.innerHTML = html;
     }
    total(accountUser){
+    const totalAmount: HTMLElement = document.querySelector('#balance');
      accountUsers.amount += accountUser.deposit;
-  
+     let total = `<div>Final balance: $${accountUsers.amount}</div>`;
+            totalAmount.innerHTML = total
     console.log(accountUsers.amount)
     }
   
