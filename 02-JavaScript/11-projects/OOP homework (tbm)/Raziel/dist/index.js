@@ -26,7 +26,6 @@ var Transaction = /** @class */ (function () {
         var totalValue = document.querySelector('#totalValue');
         var description = '';
         var deposit = '';
-        var withdraw = '';
         var total = '';
         var count = 1;
         this.transaction.forEach(function (acc) {

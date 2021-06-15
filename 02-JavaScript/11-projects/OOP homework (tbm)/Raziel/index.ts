@@ -36,9 +36,7 @@ const totalValue:HTMLElement=document.querySelector('#totalValue');
 
             let description: string = '';
             let deposit: string = '';
-            let withdraw: string = '';
             let total: string = '';
-
             let count: number = 1;
 
 this.transaction.forEach(acc=>{
