@@ -1,0 +1,134 @@
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+div {
+    text-align: center;
+}
+
+input {
+    display: block;
+    padding: 10px;
+    margin: 10px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.account {
+    display: flex;
+    justify-content: center;
+
+    &__income-wrapper {
+
+        &__income {
+            width: fit-content;
+            height: fit-content;
+            border: 1px black solid;
+            text-align: center;
+            padding: 0.5rem;
+            padding-bottom: 0;
+            font-weight: bold;
+
+
+            &__incomes {
+                color: green;
+                width: auto;
+                border-top: 1px solid black;
+                border-bottom: 0;
+                margin: 0 -0.5rem;
+                font-weight: lighter;
+                padding: 0.2rem;
+                padding-bottom: 0;
+            }
+
+            &__description-income {
+                width: auto;
+                border-bottom: 1px solid black;
+                border-bottom: 0;
+                margin: 0 -0.5rem;
+                font-weight: normal;
+                font-style: italic;
+                font-size: small;
+                padding: 0.2rem;
+            }
+        }
+
+        &__nametotalincome {
+            width: auto;
+            border: 1px solid black;
+            border-bottom: 0;
+            border-top: 0;
+            font-size: smaller;
+        }
+
+        &__totalincome {
+            width: auto;
+            border: 1px solid black;
+            border-top: 0;
+            color: green;
+        }
+    }
+
+    &__expense-wrapper {
+        &__expense {
+            width: fit-content;
+            height: fit-content;
+            border: 1px black solid;
+            text-align: center;
+            padding: 0.5rem;
+            padding-bottom: 0;
+            font-weight: bold;
+
+
+            &__expenses {
+                color: red;
+                width: auto;
+                border-top: 1px solid black;
+                border-bottom: 0;
+                margin: 0 -0.5rem;
+                font-weight: lighter;
+                padding: 0.2rem;
+                padding-bottom: 0;
+            }
+
+            &__description-expense {
+                width: auto;
+                border-bottom: 1px solid black;
+                border-bottom: 0;
+                margin: 0 -0.5rem;
+                font-weight: normal;
+                font-style: italic;
+                font-size: small;
+                padding: 0.2rem;
+            }
+        }
+
+        &__nametotalexpense {
+            width: auto;
+            border: 1px solid black;
+            border-bottom: 0;
+            border-top: 0;
+            font-size: smaller;
+        }
+
+        &__totalexpense {
+            width: auto;
+            border: 1px solid black;
+            border-top: 0;
+            color: red;
+        }
+    }
+}
+
+.final-total-wrapper {
+    &--green {
+        color: green;
+    }
+
+    &--red {
+        color: red;
+    }
+}
