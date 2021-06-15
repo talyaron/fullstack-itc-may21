@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(143, 168, 214);
+    font-size: 1.3rem;
+}
+
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    border: black solid 1px;
+    height: 100vh;
+}
+
+.actions-wrapper {
+    background-color: cornflowerblue;
+    width: 35%;
+    border: black solid 1px;
+    &__deposit-wrapper {
+        margin-bottom: 1rem;
+    }
+    &__page-headline {
+        font-size: 2.5rem;
+        padding-bottom: 15rem;
+}
+
+}
+
+.overview-wrapper {
+    width: 50%;
+    border: black solid 1px;
+    background-color: cornflowerblue;
+    &__total-balance {
+        background-color: cornflowerblue;
+        border-bottom: black solid 1px;
+    }
+    &__total-headline {
+        font-weight: 800;
+    }
+}
