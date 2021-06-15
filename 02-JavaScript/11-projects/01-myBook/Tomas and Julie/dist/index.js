@@ -16,6 +16,13 @@ var Article = /** @class */ (function () {
         ;
     };
     Article.prototype.changeImageUrl = function () { };
+    Article.prototype.changeDesc = function () { };
+    Article.prototype.changeImageUrl = function () {
+        if (i <= articleArray.length) {
+            i++;
+        }
+        imageGallery.src = articleArray[i];
+    };
     return Article;
 }());
 var articleArray = /** @class */ (function () {

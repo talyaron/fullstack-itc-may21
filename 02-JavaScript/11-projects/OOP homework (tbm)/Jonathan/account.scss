@@ -1,0 +1,212 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+h1 {
+    text-align: center;
+    color: white;
+    background-color: black;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .img-bank {
+        margin-left: 10px;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+
+.square {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+
+    &__item {
+
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+ 
+
+
+        &--description {
+
+            background-color: #210401;
+            border-radius: 10px;
+            padding: 3em;
+
+
+            p {
+                color: white;
+                font-weight: bold;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                text-transform: uppercase;
+            }
+
+            span {
+                margin-top: 10px;
+                color: white;
+            }
+
+
+        }
+        
+        &--deposit {
+
+            background-color: #363958;
+            border-radius: 10px;
+            padding: 3em;
+
+            p {
+                color: white;
+                font-weight: bold;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                text-transform: uppercase;
+            }
+
+            span {
+                margin-top: 10px;
+                color: white;
+            }
+        }
+
+        &--withdraw {
+
+            background-color: #FFA07A;
+            border-radius: 10px;
+            padding: 3em;
+
+            p {
+                color: white;
+                font-weight: bold;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                text-transform: uppercase;
+            }
+
+            span {
+                margin-top: 10px;
+                color: white;
+            }
+        }
+        &--total {
+
+            background-color: #434343;
+            border-radius: 10px;
+            padding: 3em;
+
+            p {
+                color: white;
+                font-weight: bold;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                text-transform: uppercase;
+            }
+
+            span {
+                margin-top: 10px;
+
+                .green_text{
+                    color: #77dd77;
+                }
+                
+                .red_text{
+                    color:#FE0000;
+                }
+            }
+        }
+
+    }
+
+}
+
+.container-forms{
+    display: flex;
+    justify-content: space-around;
+    margin-left: -20px;
+    margin-top:1rem;
+
+
+    fieldset{
+        border-radius: 10px;
+        background-color: #0073E6;
+
+        legend{
+            text-align:center;
+            color:white;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 1.3rem;
+        }
+        
+        label{
+            display: block;
+            margin: 12px;
+            padding:1rem;
+            color:white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            input{
+                padding: 0.3rem;
+
+                
+            }
+
+            #description__deposit{
+                position: relative;
+                left:5%;
+            }
+            
+            #description__withdraw{
+                position: relative;
+                left:9%;
+            }
+            
+        }
+
+        .btn{
+            position: relative;
+            left:35%;
+            background-color:#28A745;
+            color:white;
+            margin-bottom: 10px;
+            padding:0.5rem;
+           font-family: 'Roboto Slab', serif;
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+    
+      
+        }
+    
+        .btn:hover{
+            background-color: #0e813c;
+            cursor: pointer;
+        }
+    
+        .btn-delete{
+            margin-left: -25px;
+        }
+    }
+    
+
+   
+
+
+ 
+}
+
+.form-delete{
+    padding: 1.5rem;
+}
+
+
+
+
+
