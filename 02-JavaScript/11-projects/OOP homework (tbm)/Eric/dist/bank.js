@@ -27,7 +27,7 @@ var AccountList = /** @class */ (function () {
         var deposit = document.querySelector('#deposit');
         var html = '';
         this.accountUsers.forEach(function (accountUser) {
-            html += "<p>" + accountUser.description + "  " + accountUser.deposit + "  </p>";
+            html += "<p>" + accountUser.description + "  $" + accountUser.deposit + "  </p>";
         });
         deposit.innerHTML = html;
     };

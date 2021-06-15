@@ -17,15 +17,7 @@ Use TypeScript, SCSS, BEM etc.
 <body>
     <div class="container">
         <div class="transaction">
-          <div id="acctBalance" class="total">
-            <div class="tot"> 
-            <h1 class="total__title1">Total</h1>
-            </div>  
-            <div id="deposit">
-              </div>
-              <div id="balance">
-            </div>
-          </div>
+          
           <div id="inputs" class="inputs">
             <form onsubmit="handleSubmit(event)">
               <label for="description" class="inputs__title">Description</label>
@@ -34,6 +26,15 @@ Use TypeScript, SCSS, BEM etc.
               <input type="number" name="deposit"  id="userDeposit" class="inputs__1" >
               <button id="btnDeposit" class="inputs__btn1">Deposit</button>
             </form>
+            <div id="acctBalance" class="total">
+                <div class="tot"> 
+                <h1 class="total__title1">Total</h1>
+                </div>  
+                <div id="deposit">
+                  </div>
+                  <div id="balance">
+                </div>
+              </div>
            <!-- <br>
            <form onsubmit="handleSubmit(event)">
                 <label for="description" class="inputs__title">Description</label>

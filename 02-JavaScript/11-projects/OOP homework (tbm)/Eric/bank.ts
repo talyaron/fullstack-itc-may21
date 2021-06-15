@@ -40,7 +40,7 @@ this.amount=amount;
 
         let html:string='';
             this.accountUsers.forEach(accountUser=>{
-            html += `<p>${accountUser.description}  ${accountUser.deposit}  </p>`
+            html += `<p>${accountUser.description}  $${accountUser.deposit}  </p>`
             
         });
         deposit.innerHTML = html;
