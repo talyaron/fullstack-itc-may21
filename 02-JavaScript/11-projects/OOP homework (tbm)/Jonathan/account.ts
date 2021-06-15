@@ -19,7 +19,7 @@ class TransactionList {
 
     }
 
-    getTotal(count: number) {
+    getTotal(count: number):number {
 
         let sum: number = 0;
         for (let i: number = 0; i < count; i++) {
@@ -86,7 +86,7 @@ class TransactionList {
                     } else {
                         total += `<span class ="green_text">${count}- ₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
                     }
-                    
+
                     count++;
                 }
 
