@@ -61,10 +61,12 @@ let button1= document.getElementById('deposit_check');
 let button2= document.getElementById('withdraw_check');
 let amount =  document.getElementById('amount');
 
-if (button1.checked){
+if (button1.checked = true){
     amount.removeAttribute("max");
     amount.setAttribute("min","0");
-}else (button2.checked){
+}else if (button1.checked = false){
     amount.removeAttribute("min");
-    amount.setAttribute("max","0");
+    amount.setAttribute("max","-1000");
 }
+
+console.dir(amount);

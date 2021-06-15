@@ -10,8 +10,8 @@ var Transact = /** @class */ (function () {
         this.transacts = [];
         this.total = total;
     }
-    Transact.prototype.add = function (transact) {
-        this.transacts.push(transact);
+    Transact.prototype.add = function (trans) {
+        this.transacts.push(trans);
     };
     Transact.prototype.totalAmount = function (transact) {
         var allTotal = document.querySelector(".total");
@@ -33,4 +33,5 @@ var nowSubmit = function (ev) {
     var movement = ev.target.elements.movement.value;
     var pepe = new Account2(amount, movement);
     Movements.add(pepe);
+    console.log(amount, movement);
 };
