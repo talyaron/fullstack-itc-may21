@@ -5,19 +5,28 @@
 
 // Use TypeScript, SCSS, BEM etc.
 
+const button1= <HTMLInputElement> document.getElementById('deposit_check');
+const button2= <HTMLInputElement> document.getElementById('withdraw_check');
+const amount_total =  document.getElementById('amount');
+
+// Funcion para tomar info de formulario
 const handleSubmit = (ev: any):void => {
     ev.preventDefault();
-
-    const trans: string= ev.target.elements.trans.value;
-    const amount: number = ev.target.elements.transaction_amount.valueAsNumber;
-    const description:string = ev.target.elements.transaction_description.value;
-    const newTrasaction = new Transaction(trans, amount, description);
     
+    const trans: string= ev.target.elements.trans.value;
+    let amount: number = ev.target.elements.transaction_amount.valueAsNumber;
+    const description:string = ev.target.elements.transaction_description.value;
+    
+
+     if(button2.checked){
+       amount = -amount; 
+    }
+    // Esto debe ir debajo del if para que tome los Withdraws negativos (-)
+    const newTrasaction = new Transaction(trans, amount, description);
+
     newTrans.addTrans(newTrasaction);
     newTrans.renderTrans();
-   
-    console.log(trans, amount, description)
-
+    alert('YOU HAD MADE A NEW TRANSACTION!')
 }
 
 class Transaction{
@@ -40,7 +49,7 @@ class TransactionList{
         
         const transRoot:HTMLElement = document.querySelector('#acount_transactions__print');
         const TotalRoot:HTMLElement = document.querySelector('#acount_total__print');
-        //loop over deposit
+        //loop over transactions
 
         let htmlTrans:string='';
         let htmlTotal: number = 0;
@@ -57,17 +66,5 @@ class TransactionList{
 
 const newTrans = new TransactionList();
 
-let button1= <HTMLInputElement> document.getElementById('deposit_check');
-let button2= <HTMLInputElement> document.getElementById('withdraw_check');
-let amount =  document.getElementById('amount');
 
-if (button1.checked){
-    amount.removeAttribute("max");
-    amount.setAttribute("min","0");
-}else {
-    button1.checked = false;
-    amount.removeAttribute("min");
-    amount.setAttribute("max","0");
-}
 
-console.dir(button1);

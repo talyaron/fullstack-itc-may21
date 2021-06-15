@@ -13,6 +13,7 @@
 /* GLOBALES */
 html {
   box-sizing: border-box;
+  background-color: #bdbdbd;
 }
 
 *, *:before, *:after {
@@ -23,6 +24,15 @@ body {
   font-family: var(--fuenteParrafos);
   line-height: 1.2;
   font-size: 62, 5%;
+}
+
+h1 {
+  background-color: var(--negro);
+  color: var(--gris);
+}
+
+h1:hover {
+  background-color: #3f3d3d;
 }
 
 /* UTILIDADES */
@@ -58,6 +68,8 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
+  border: solid black 2px;
+  padding: 1rem;
 }
 .form .form__radio__container {
   display: flex;
@@ -74,6 +86,9 @@ body {
   color: white;
   padding: 0.5em 0.5rem;
   border-radius: 50px;
+}
+.form__submit:hover {
+  background-color: blue;
 }
 .form .radio__flex {
   display: flex;
@@ -99,4 +114,10 @@ body {
   justify-content: center;
   align-content: center;
   border: solid 1px var(--negro);
+}
+.acount__total #acount_total__print {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
 }

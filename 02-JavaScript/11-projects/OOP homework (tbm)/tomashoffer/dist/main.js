@@ -3,15 +3,23 @@
 // 3. Have a total method.
 // 4. Write all transactions in the order they occurred, with the last line: total.
 // Use TypeScript, SCSS, BEM etc.
+var button1 = document.getElementById('deposit_check');
+var button2 = document.getElementById('withdraw_check');
+var amount_total = document.getElementById('amount');
+// Funcion para tomar info de formulario
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var trans = ev.target.elements.trans.value;
     var amount = ev.target.elements.transaction_amount.valueAsNumber;
     var description = ev.target.elements.transaction_description.value;
+    if (button2.checked) {
+        amount = -amount;
+    }
+    // Esto debe ir debajo del if para que tome los Withdraws negativos (-)
     var newTrasaction = new Transaction(trans, amount, description);
     newTrans.addTrans(newTrasaction);
     newTrans.renderTrans();
-    console.log(trans, amount, description);
+    alert('YOU HAD MADE A NEW TRANSACTION!');
 };
 var Transaction = /** @class */ (function () {
     function Transaction(trans, amount, description) {
@@ -31,7 +39,7 @@ var TransactionList = /** @class */ (function () {
     TransactionList.prototype.renderTrans = function () {
         var transRoot = document.querySelector('#acount_transactions__print');
         var TotalRoot = document.querySelector('#acount_total__print');
-        //loop over deposit
+        //loop over transactions
         var htmlTrans = '';
         var htmlTotal = 0;
         this.transaction.forEach(function (trans) {
@@ -45,16 +53,3 @@ var TransactionList = /** @class */ (function () {
     return TransactionList;
 }());
 var newTrans = new TransactionList();
-var button1 = document.getElementById('deposit_check');
-var button2 = document.getElementById('withdraw_check');
-var amount = document.getElementById('amount');
-if (button1.checked) {
-    amount.removeAttribute("max");
-    amount.setAttribute("min", "0");
-}
-else {
-    button1.checked = false;
-    amount.removeAttribute("min");
-    amount.setAttribute("max", "0");
-}
-console.dir(button1);
