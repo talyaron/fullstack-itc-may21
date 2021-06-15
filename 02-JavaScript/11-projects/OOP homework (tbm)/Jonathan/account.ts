@@ -11,6 +11,8 @@ class Account {
 
 class TransactionList {
     transaction: Array<Account> = []; //array account
+    balance: number;
+
 
     getTransaction(account: Account) {
         //add transaction
@@ -19,7 +21,7 @@ class TransactionList {
 
     }
 
-    getTotal(count: number):number {
+    getTotal(count: number): number {
 
         let sum: number = 0;
         for (let i: number = 0; i < count; i++) {
@@ -68,11 +70,9 @@ class TransactionList {
                     withdraw += `<span>₪ ${account.amount.toFixed(2)}</span><br>`;
                     deposit += `<span>₪ 0.00</span><br>`;
 
-                    if (this.getTotal(count) < 0) {
-                        total += `<span class ="red_text">${count}- ₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
-                    } else {
-                        total += `<span class ="green_text">${count}- ₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
-                    }
+                    total += `<span class ="green_text"><img src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-error-icon.png" class = "img-no-ok">₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
+                    this.balance = this.getTotal(count);
+
 
                     count++;
                 } else {
@@ -80,12 +80,9 @@ class TransactionList {
                     deposit += `<span>₪ ${account.amount.toFixed(2)}</span><br>`
                     withdraw += `<span>₪ 0.00</span><br>`;
 
+                    total += `<span class ="green_text"><img src="https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png" class = "img-ok">₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
+                    this.balance = this.getTotal(count);
 
-                    if (this.getTotal(count) < 0) {
-                        total += `<span class ="red_text">${count}- ₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
-                    } else {
-                        total += `<span class ="green_text">${count}- ₪ ${this.getTotal(count).toFixed(2)}</span><br>`;
-                    }
 
                     count++;
                 }
@@ -123,7 +120,7 @@ function handleSumbitDeposit(event: any): void {
         transaction.renderTransaction();
     }
 
-    event.reset();
+
 
 }
 
@@ -138,15 +135,19 @@ function handleSumbitWithdraw(event: any): void {
     if (amount >= 0) {
         alert('Is negative the number you want to enter')
     }
-    else {
+    else if (transaction.balance <= 0) {
+        alert('You cant withdraw')
+    } else {
         const account = new Account(description, amount);
 
         transaction.getTransaction(account);
 
         transaction.renderTransaction();
+
     }
 
-    event.reset();
+    console.log(transaction.balance)
+
 }
 
 function handleDelete(event: any): void {
@@ -155,7 +156,6 @@ function handleDelete(event: any): void {
 
     transaction.getDeleteAll();
 
-    event.reset();
 
 }
 

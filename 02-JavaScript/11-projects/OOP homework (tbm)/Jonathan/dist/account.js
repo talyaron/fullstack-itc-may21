@@ -47,24 +47,16 @@ var TransactionList = /** @class */ (function () {
                     description_1 += "<span>" + count_1 + "- " + account.description + "</span><br>";
                     withdraw_1 += "<span>\u20AA " + account.amount.toFixed(2) + "</span><br>";
                     deposit_1 += "<span>\u20AA 0.00</span><br>";
-                    if (_this.getTotal(count_1) < 0) {
-                        total_1 += "<span class =\"red_text\">" + count_1 + "- \u20AA " + _this.getTotal(count_1).toFixed(2) + "</span><br>";
-                    }
-                    else {
-                        total_1 += "<span class =\"green_text\">" + count_1 + "- \u20AA " + _this.getTotal(count_1).toFixed(2) + "</span><br>";
-                    }
+                    total_1 += "<span class =\"green_text\"><img src=\"https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-error-icon.png\" class = \"img-no-ok\">\u20AA " + _this.getTotal(count_1).toFixed(2) + "</span><br>";
+                    _this.balance = _this.getTotal(count_1);
                     count_1++;
                 }
                 else {
                     description_1 += "<span>" + count_1 + "- " + account.description + "</span><br>";
                     deposit_1 += "<span>\u20AA " + account.amount.toFixed(2) + "</span><br>";
                     withdraw_1 += "<span>\u20AA 0.00</span><br>";
-                    if (_this.getTotal(count_1) < 0) {
-                        total_1 += "<span class =\"red_text\">" + count_1 + "- \u20AA " + _this.getTotal(count_1).toFixed(2) + "</span><br>";
-                    }
-                    else {
-                        total_1 += "<span class =\"green_text\">" + count_1 + "- \u20AA " + _this.getTotal(count_1).toFixed(2) + "</span><br>";
-                    }
+                    total_1 += "<span class =\"green_text\"><img src=\"https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png\" class = \"img-ok\">\u20AA " + _this.getTotal(count_1).toFixed(2) + "</span><br>";
+                    _this.balance = _this.getTotal(count_1);
                     count_1++;
                 }
             });
@@ -92,7 +84,6 @@ function handleSumbitDeposit(event) {
         transaction.getTransaction(account);
         transaction.renderTransaction();
     }
-    event.reset();
 }
 function handleSumbitWithdraw(event) {
     event.preventDefault();
@@ -101,15 +92,17 @@ function handleSumbitWithdraw(event) {
     if (amount >= 0) {
         alert('Is negative the number you want to enter');
     }
+    else if (transaction.balance <= 0) {
+        alert('You cant withdraw');
+    }
     else {
         var account = new Account(description, amount);
         transaction.getTransaction(account);
         transaction.renderTransaction();
     }
-    event.reset();
+    console.log(transaction.balance);
 }
 function handleDelete(event) {
     event.preventDefault();
     transaction.getDeleteAll();
-    event.reset();
 }
