@@ -8,6 +8,7 @@
     --gris: #e1e1e1;
     --green: #28CB04;
     --red: #F33721; 
+    --blue: #565ADE;
 }
   /* GLOBALES */
 html {
@@ -45,70 +46,52 @@ html {
     align-content: center;
   }
   .form{
-         display: flex;
-         justify-content: center;
-         text-align: center;
-         margin-bottom: 2rem;
-      
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    .form__radio__container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
       &__input{
           width: 10rem;
-          margin-left: 1rem;
+          margin-bottom: 1rem;
       }
       &__submit{
-          margin-left: 1rem;
-          width: 10rem;    
+          width: 10rem;
+          background-color: var(--blue);
+          color: white;    
+          padding: 0.5em 0.5rem;
+          border-radius: 50px;
       }
-      &__submit--deposit{
-          background-color: var(--green);
-          color: white;
-      }
-      &__submit--withdraw{
-          background-color: var(--red);
-          color: white;
-      }
-  }
-  .acount{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      &__transactions{
-          display: flex;
-          justify-content: center;
-          align-content: center;
-          border: 1px solid black;
-          .transactions{
-           display: grid;
-           grid-template-rows: 1fr;
-           row-gap: 1rem;
-           .transactions__deposits__title{
-              #deposit{
-                .dep{
-                  border: solid 1px black;
-                  padding: 0 1rem;
-                }
-              }
-           }
-           .transactions__withdraws__title{
-             #withdraw{
-               .with{
-                  border: solid 1px black;
-                  padding: 0 1rem;
-               }
-             }
-           }
-        }
-        
-      }
-     
-      &__total{
+      .radio__flex{
         display: flex;
-        justify-content: center;
-        align-content: center;
-        border: 1px solid black;
-        &__total__title{
-
-        }
-        &__total__number{
-            
+        .form__label{
+          margin-right: 1rem;
+          margin-left: 1rem;
+          margin-bottom: 1rem;
         }
       }
+
   }
+ .acount{
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   &__transactions{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border: solid 1px var(--negro);
+   }
+   &__total{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border: solid 1px var(--negro);
+   }
+ }
+

@@ -15,18 +15,24 @@
           <div class="container-inputs">
             <div class="container-inputs__input">
               <label> Deposit</label>
-              <input type="radio" name="typemovement" value="deposit" checked />
+              <input type="radio" name="movement" value="deposit" checked />
             </div>
             <div class="container-inputs__input">
               <label> Withdraw</label>
-              <input type="radio" name="typemovement" value="withdraw" />
+              <input type="radio" name="movement" value="withdraw" />
+            </div>
+
+
+            <div class="container-inputs__input">
+              <label> Amount</label>
+              <input type="number" name="amount" required>
             </div>
             <div class="sumbit container-inputs__input">
               <button class="submit">Send</button>
             </div>
           </div>
 
-          <input type="number" name="amount">
+          
         </fieldset>
       </form>
 
@@ -74,6 +80,6 @@
      </from>
       </div>
     </div>  -->
-    <script src="app.js"></script>
+    <script src="./dist/app.js"></script>
   </body>
 </html>
