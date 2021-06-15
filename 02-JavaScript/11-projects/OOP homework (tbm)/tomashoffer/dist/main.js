@@ -3,115 +3,53 @@
 // 3. Have a total method.
 // 4. Write all transactions in the order they occurred, with the last line: total.
 // Use TypeScript, SCSS, BEM etc.
-var depositSubmit = function (ev) {
+var button1 = document.getElementById('deposit_check');
+var button2 = document.getElementById('withdraw_check');
+var amount_total = document.getElementById('amount');
+// Funcion para tomar info de formulario
+var handleSubmit = function (ev) {
     ev.preventDefault();
-    var deposit = ev.target.elements.deposit.value;
-    var deposit__description = ev.target.elements.deposit__description.value;
-    var newDeposit = new Deposit(deposit, deposit__description);
-    newDep.addDep(newDeposit);
-    newDep.renderDeposit();
+    var trans = ev.target.elements.trans.value;
+    var amount = ev.target.elements.transaction_amount.valueAsNumber;
+    var description = ev.target.elements.transaction_description.value;
+    if (button2.checked) {
+        amount = -amount;
+    }
+    // Esto debe ir debajo del if para que tome los Withdraws negativos (-)
+    var newTrasaction = new Transaction(trans, amount, description);
+    newTrans.addTrans(newTrasaction);
+    newTrans.renderTrans();
+    alert('YOU HAD MADE A NEW TRANSACTION!');
 };
-var withdrawSubmit = function (ev) {
-    ev.preventDefault();
-    var withdraw = ev.target.elements.withdraw.value;
-    var withdraw__description = ev.target.elements.withdraw__description.value;
-    var newWithdraw = new Withdraw(withdraw, withdraw__description);
-    newWith.addWith(newWithdraw);
-    newWith.renderWithdraw();
-};
-var Deposit = /** @class */ (function () {
-    function Deposit(deposit, deposit__description) {
-        this.deposit = deposit;
-        this.deposit__description = deposit__description;
+var Transaction = /** @class */ (function () {
+    function Transaction(trans, amount, description) {
+        this.trans = trans;
+        this.amount = amount;
+        this.description = description;
     }
-    return Deposit;
+    return Transaction;
 }());
-var AddDeposit = /** @class */ (function () {
-    function AddDeposit() {
-        this.deposits = [];
+var TransactionList = /** @class */ (function () {
+    function TransactionList() {
+        this.transaction = [];
     }
-    AddDeposit.prototype.addDep = function (dep) {
-        this.deposits.push(dep);
+    TransactionList.prototype.addTrans = function (trans) {
+        this.transaction.push(trans);
     };
-    AddDeposit.prototype.renderDeposit = function () {
-        var depositRoot = document.querySelector('#deposit');
-        //loop over deposit
-        var htmlDeposit = '';
-        this.deposits.forEach(function (dep) {
-            htmlDeposit += "<div class=\"dep\"><p>Amount: $" + dep.deposit + "</p><p>Description: " + dep.deposit__description + "</p></div>";
+    TransactionList.prototype.renderTrans = function () {
+        var transRoot = document.querySelector('#acount_transactions__print');
+        var TotalRoot = document.querySelector('#acount_total__print');
+        //loop over transactions
+        var htmlTrans = '';
+        var htmlTotal = 0;
+        this.transaction.forEach(function (trans) {
+            htmlTrans += "<div class=\"trans\"><li>" + trans.trans + ": $" + trans.amount + " - Description: " + trans.description + "</li></div>";
+            htmlTotal += trans.amount;
         });
-        console.log(htmlDeposit);
-        depositRoot.innerHTML = htmlDeposit;
+        console.log(htmlTrans);
+        transRoot.innerHTML = htmlTrans;
+        TotalRoot.innerHTML = "$" + htmlTotal;
     };
-    return AddDeposit;
+    return TransactionList;
 }());
-var Withdraw = /** @class */ (function () {
-    function Withdraw(withdraw, withdraw__description) {
-        this.withdraw = withdraw;
-        this.withdraw__description = withdraw__description;
-    }
-    return Withdraw;
-}());
-var AddWithdraw = /** @class */ (function () {
-    function AddWithdraw() {
-        this.withdraws = [];
-    }
-    AddWithdraw.prototype.addWith = function (withd) {
-        this.withdraws.push(withd);
-    };
-    AddWithdraw.prototype.renderWithdraw = function () {
-        var withdrawRoot = document.querySelector('#withdraw');
-        //loop over withdraw
-        var htmlWithdraw = '';
-        this.withdraws.forEach(function (withd) {
-            htmlWithdraw += "<div class=\"with\"><p>Amount: $" + withd.withdraw + "</p><p>Description: " + withd.withdraw__description + "</p></div>";
-        });
-        console.log(htmlWithdraw);
-        withdrawRoot.innerHTML = htmlWithdraw;
-    };
-    return AddWithdraw;
-}());
-var newWith = new AddWithdraw();
-var newDep = new AddDeposit();
-// class Transaction{
-//     withdraw: number;
-//     resultado:number = 0;
-//     constructor(deposit:number, withdraw:number, resultado:number = 0){
-//         this.deposit = deposit;
-//         this.withdraw = withdraw;
-//         this.resultado = resultado;
-//     }
-//     suma(deposit:number, withdraw:number, resultado:number){
-//         resultado = 0;
-//         resultado += deposit + withdraw;
-//         console.log(resultado);
-//     }
-//     renderResultado(){
-//         const sumaTotal:HTMLElement = document.querySelector('#total');
-//         let htmlTotal:string='';
-//         htmlTotal = `$${this.resultado}`;
-//         sumaTotal.innerHTML = htmlTotal;
-//     }
-// }
-// const sumaDep = new Transaction(Deposit[0], Withdraw[0]);
-var SumaTotal = /** @class */ (function () {
-    function SumaTotal() {
-        this.deposits = [];
-        this.withdraws = [];
-    }
-    SumaTotal.prototype.SumaTot = function () {
-        var resultadoWith = 0;
-        this.withdraws.forEach(function (withd) {
-            resultadoWith += withd[0];
-        });
-        var resultadoDep = 0;
-        this.deposits.forEach(function (deps) {
-            resultadoDep += deps[0];
-        });
-        var resultado = 0;
-        resultado += resultadoDep + resultadoWith;
-        console.log("El resultado es " + resultado);
-    };
-    return SumaTotal;
-}());
-var sumaTot = new SumaTotal();
+var newTrans = new TransactionList();

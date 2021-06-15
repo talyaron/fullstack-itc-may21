@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Pepe-Bank-Account</title>
+  </head>
+  <body>
+    <div class="container">
+      <form onsubmit="handleSubmit(event)">
+        <fieldset>
+          <legend>Choose a Method</legend>
+          <div class="container-inputs">
+            <div class="container-inputs__input">
+              <label> Deposit</label>
+              <input type="radio" name="movement" value="deposit" checked />
+            </div>
+            <div class="container-inputs__input">
+              <label> Withdraw</label>
+              <input type="radio" name="movement" value="withdraw" />
+            </div>
+
+
+            <div class="container-inputs__input">
+              <label> Amount</label>
+              <input type="number" name="amount" required>
+            </div>
+            <div class="sumbit container-inputs__input">
+              <button class="submit">Send</button>
+            </div>
+          </div>
+
+          
+        </fieldset>
+      </form>
+
+
+      <div class="total">
+
+      </div>
+    </div>
+    <!-- 
+
+    
+
+    <h1>Pepe Bank</h1> 
+
+     <div class="container">
+      <div class="bank-account">
+        <div class="bank-account__profile-photo">
+          <img src="/753aadc3-d9fd-4cc6-8b92-a8ef6f689217_x365.jpg" alt="" />
+
+          <h3>FullName:</h3>
+          <span>Rana Rene</span>
+          <h3>Age:</h3>
+          <span>60</span>
+        </div>
+        <div class="bank-account__total">
+          <h2>Total</h2>
+
+          <div class="totalAccount"></div>
+        </div>
+
+        <from onsubmit="handleSubmit(event)" class="bank-account__form">
+          <div class="form__input">
+            <label> Deposit</label>
+            <input type="number" name="deposit" />
+
+            <button type="submit">Deposit</button>
+          </div>
+       
+
+           <div onsubmit="onWithdraw(event)" class="form__input">
+            <label> Withdraw </label>
+            <input type="number" name="withdraw" value="withdraw" />
+            <button id="withdrawBtn">Withdraw</button>
+          </div> 
+     </from>
+      </div>
+    </div>  -->
+    <script src="./dist/app.js"></script>
+  </body>
+</html>

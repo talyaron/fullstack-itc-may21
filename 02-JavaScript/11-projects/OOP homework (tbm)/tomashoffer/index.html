@@ -10,37 +10,33 @@
    </head>
    <body>
       <div class="container">
-         <div class="header centrar-texto">
-            <h1>Bank Account</h1>
-            <form class="form" action="" onsubmit="depositSubmit(event)">
-               <input class="form__input" type="number" min="0" value="deposit" name="deposit" placeholder="Amount">
-               <input class="form__input" type="text" name="deposit__description" placeholder="Description">
-               <input class="form__submit form__submit--deposit" type="submit" value="Deposit">
-            </form>
-            <form class="form" action="" onsubmit="withdrawSubmit(event)">
-               <input class="form__input" type="number" max="0" value="withdraw" name="withdraw" placeholder="Amount">
-               <input class="form__input" type="text"  name="withdraw__description" placeholder="Description">
-               <input class="form__submit form__submit--withdraw" type="submit" value="Withdraw">
-            </form>
-         </div>
-         <div class="acount">
-            <div class="acount__transactions">
-               <div class="transactions">
-                  <div class="transactions__deposits__title">
-                     <h4>Deposits:</h4>
-                     <div id="deposit">
-                     </div>
-                  </div>
-                  <div class="transactions__withdraws__title">
-                     <h4>Withdraws:</h4>
-                     <div id="withdraw">
-                     </div>
-                  </div>
+      <div class="header centrar-texto">
+         <h1>Bank Account</h1>
+         <form class="form" action="" onsubmit="handleSubmit(event)">
+            <div class="form__radio__container">
+               <div class="radio__flex">
+                  <label class="form__label" for="deposit">Deposit:</label>
+                  <input class="form__radio" id="deposit_check" type="radio" name="trans" checked value="Deposit">
+               </div>
+               <div class="radio__flex">
+                  <label class="form__label" for="">Withdraw:</label>
+                  <input class="form__radio" id="withdraw_check" type="radio" name="trans" value="Withdraw">
                </div>
             </div>
-            <div class="acount__total">
-               <h3 class="acount__total__title">Your total:</h3>
-               <div id="total"></div>
+            <input class="form__input" type="number"  name="transaction_amount" id="amount" placeholder="Transaction Amount">
+            <input class="form__input" type="text" name="transaction_description" placeholder="Description">
+            <input class="form__submit" type="submit" value="Do Transaction">
+         </form>
+      </div>
+      <div class="acount">
+         <div class="acount__transactions">
+            <h3 class="acount__transactions__title">Transactions:</h3>
+            <ul id="acount_transactions__print">
+            </ul>
+         </div>
+         <div class="acount__total">
+            <h3 class="acount__total__title">Total:</h3>
+            <div id="acount_total__print">
             </div>
          </div>
       </div>

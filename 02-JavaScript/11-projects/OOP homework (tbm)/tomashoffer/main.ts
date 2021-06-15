@@ -4,140 +4,67 @@
 // 4. Write all transactions in the order they occurred, with the last line: total.
 
 // Use TypeScript, SCSS, BEM etc.
-const depositSubmit = (ev: any):void => {
+
+const button1= <HTMLInputElement> document.getElementById('deposit_check');
+const button2= <HTMLInputElement> document.getElementById('withdraw_check');
+const amount_total =  document.getElementById('amount');
+
+// Funcion para tomar info de formulario
+const handleSubmit = (ev: any):void => {
     ev.preventDefault();
-
-    const deposit: number = ev.target.elements.deposit.value;
-    const deposit__description: string = ev.target.elements.deposit__description.value;
-
-
-    const newDeposit = new Deposit(deposit, deposit__description);
-
-    newDep.addDep(newDeposit);
-    newDep.renderDeposit();
+    
+    const trans: string= ev.target.elements.trans.value;
+    let amount: number = ev.target.elements.transaction_amount.valueAsNumber;
+    const description:string = ev.target.elements.transaction_description.value;
     
 
+     if(button2.checked){
+       amount = -amount; 
+    }
+    // Esto debe ir debajo del if para que tome los Withdraws negativos (-)
+    const newTrasaction = new Transaction(trans, amount, description);
+
+    newTrans.addTrans(newTrasaction);
+    newTrans.renderTrans();
+    alert('YOU HAD MADE A NEW TRANSACTION!')
 }
 
-const withdrawSubmit = (ev: any):void => {
-    ev.preventDefault();
-
-    const withdraw: number = ev.target.elements.withdraw.value;
-    const withdraw__description: string = ev.target.elements.withdraw__description.value;
-
-
-    const newWithdraw = new Withdraw(withdraw, withdraw__description);
-
-    newWith.addWith(newWithdraw);
-    newWith.renderWithdraw();
-
-
-}
-
-class Deposit{
-    deposit: number;
-    deposit__description: string;
-    constructor(deposit: number, deposit__description: string){
-        this.deposit = deposit;
-        this.deposit__description = deposit__description;
+class Transaction{
+    trans: string;
+    amount: number;
+    description: string;
+    constructor(trans: string, amount: number, description: string){
+        this.trans = trans;
+        this.amount = amount;
+        this.description = description;
     } 
 }
-
-class AddDeposit{
-    deposits: Array<Deposit> = [];
-    addDep(dep: Deposit) {
-        this.deposits.push(dep);
+ 
+class TransactionList{
+    transaction: Array<Transaction> = [];
+    addTrans(trans: Transaction) {
+        this.transaction.push(trans);
     }
-    renderDeposit(){
-        const depositRoot:HTMLElement = document.querySelector('#deposit');
-
-        //loop over deposit
-
-        let htmlDeposit:string='';
-        this.deposits.forEach(dep=>{
-            htmlDeposit += `<div class="dep"><p>Amount: $${dep.deposit}</p><p>Description: ${dep.deposit__description}</p></div>`
-        });
-        console.log(htmlDeposit);
-        depositRoot.innerHTML = htmlDeposit;
+    renderTrans(){
         
+        const transRoot:HTMLElement = document.querySelector('#acount_transactions__print');
+        const TotalRoot:HTMLElement = document.querySelector('#acount_total__print');
+        //loop over transactions
 
+        let htmlTrans:string='';
+        let htmlTotal: number = 0;
+        this.transaction.forEach(trans=>{
+            htmlTrans += `<div class="trans"><li>${trans.trans}: $${trans.amount} - Description: ${trans.description}</li></div>`
+            htmlTotal += trans.amount; 
+        });
+        console.log(htmlTrans);
+        transRoot.innerHTML = htmlTrans;
+        TotalRoot.innerHTML = `$` + htmlTotal;
+        
     }
 }
 
-class Withdraw{
-    withdraw: number;
-    withdraw__description: string;
-    constructor(withdraw: number, withdraw__description: string){
-        this.withdraw = withdraw;
-        this.withdraw__description = withdraw__description;
-    }
-} 
-
-class AddWithdraw{
-    withdraws: Array<Withdraw> = [];
-    addWith(withd: Withdraw) {
-        this.withdraws.push(withd);
-    }
-    renderWithdraw(){
-        const withdrawRoot:HTMLElement = document.querySelector('#withdraw');
-
-        //loop over withdraw
-
-        let htmlWithdraw:string='';
-        this.withdraws.forEach(withd=>{
-            htmlWithdraw += `<div class="with"><p>Amount: $${withd.withdraw}</p><p>Description: ${withd.withdraw__description}</p></div>`
-        });
-        console.log(htmlWithdraw);
-        withdrawRoot.innerHTML = htmlWithdraw;
-
-    }
-}
+const newTrans = new TransactionList();
 
 
-const newWith = new AddWithdraw();
-const newDep = new AddDeposit();
 
-// class Transaction{
-//     withdraw: number;
-//     resultado:number = 0;
-//     constructor(deposit:number, withdraw:number, resultado:number = 0){
-//         this.deposit = deposit;
-//         this.withdraw = withdraw;
-//         this.resultado = resultado;
-//     }
-//     suma(deposit:number, withdraw:number, resultado:number){
-//         resultado = 0;
-//         resultado += deposit + withdraw;
-//         console.log(resultado);
-//     }
-//     renderResultado(){
-//         const sumaTotal:HTMLElement = document.querySelector('#total');
-//         let htmlTotal:string='';
-//         htmlTotal = `$${this.resultado}`;
-//         sumaTotal.innerHTML = htmlTotal;
-//     }
-  
-// }
-// const sumaDep = new Transaction(Deposit[0], Withdraw[0]);
-
-
-class SumaTotal{
-    deposits: Array<Deposit> = [];
-    withdraws: Array<Withdraw> = [];
-
-    SumaTot(){
-        let resultadoWith = 0;
-        this.withdraws.forEach(withd=>{
-            resultadoWith += withd[0];
-        });
-        let resultadoDep = 0;
-        this.deposits.forEach(deps=>{
-            resultadoDep += deps[0];
-        });
-        let resultado = 0;
-        resultado += resultadoDep+resultadoWith;
-        console.log(`El resultado es ${resultado}`);
-    }
-
-}
-const sumaTot= new SumaTotal();

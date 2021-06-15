@@ -5,48 +5,48 @@
 
 Use TypeScript, SCSS, BEM etc.
 */
-var Account = /** @class */ (function () {
-    function Account(deposit, withdraw, description) {
+var Movements = /** @class */ (function () {
+    //withdraw:number;
+    function Movements(description, deposit /*, withdraw: number*/) {
         this.description = description;
         this.deposit = deposit;
-        this.withdraw = withdraw;
+        //this.withdraw= withdraw;
     }
-    return Account;
+    return Movements;
 }());
 var AccountList = /** @class */ (function () {
-    function AccountList() {
+    function AccountList(amount) {
         this.accountUsers = [];
+        this.amount = amount;
     }
     AccountList.prototype.add = function (accountUser) {
         this.accountUsers.push(accountUser);
+        this.total(accountUser);
     };
-    AccountList.prototype.renderAccount = function () {
-        var accountRoot = document.querySelector('#accountRoot');
+    AccountList.prototype.renderMovements = function () {
+        var deposit = document.querySelector('#deposit');
         var html = '';
         this.accountUsers.forEach(function (accountUser) {
-            html += "<p>" + accountUser.description + "  " + accountUser.deposit + "</p>";
+            html += "<p>" + accountUser.description + "  $" + accountUser.deposit + "  </p>";
         });
-        accountRoot.innerHTML = html;
+        deposit.innerHTML = html;
     };
-    AccountList.prototype.getTotal = function () {
-        //let totalAccount = 44;
-        // totalAccount += this.accountUsers[0]['deposit']
-        //console.log(totalAccount)
+    AccountList.prototype.total = function (accountUser) {
+        var totalAmount = document.querySelector('#balance');
+        accountUsers.amount += accountUser.deposit;
+        var total = "<div>Final balance: $" + accountUsers.amount + "</div>";
+        totalAmount.innerHTML = total;
+        console.log(accountUsers.amount);
     };
     return AccountList;
 }());
-var accountUsers = new AccountList();
+var accountUsers = new AccountList(0);
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var description = ev.target.elements.description.value;
-    var deposit = ev.target.elements.deposit.value;
-    var withdraw = ev.target.elements.withdraw.value;
-    console.log(deposit);
-    var accountUser = new Account(parseInt(deposit), withdraw, description);
+    var deposit = ev.target.elements.deposit.valueAsNumber;
+    //const withdraw:number = ev.target.elements.withdraw.value;
+    var accountUser = new Movements(description, deposit /*,withdraw*/);
     accountUsers.add(accountUser);
-    accountUsers.renderAccount();
-    //accountUsers.getTotal()
-    //const userDeposit = document.getElementById("userDeposit");
-    //let totalAccount = 0;
-    //totalAccount+=(Number(userDeposit.value));
+    accountUsers.renderMovements();
 };
