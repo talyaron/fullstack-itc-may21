@@ -25,6 +25,15 @@ class AddDep{
          })
          depositScreen.innerHTML=addToDiv;
      }
+
+     totalAmount(){
+
+        let sum=this.addMoney['deposit'].reduce(function(a, b){
+            return a + b;
+        }, 0);
+       console.log(sum);
+     }
+
 }
 
 
@@ -38,4 +47,5 @@ const addDeposit= new AddDep();
      console.log(newAction);
     addDeposit.addDep(newAction);
 addDeposit.renderDeposit();
+
  }

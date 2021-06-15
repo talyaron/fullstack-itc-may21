@@ -20,6 +20,12 @@ var AddDep = /** @class */ (function () {
         });
         depositScreen.innerHTML = addToDiv;
     };
+    AddDep.prototype.totalAmount = function () {
+        var sum = this.addMoney['deposit'].reduce(function (a, b) {
+            return a + b;
+        }, 0);
+        console.log(sum);
+    };
     return AddDep;
 }());
 var addDeposit = new AddDep();
