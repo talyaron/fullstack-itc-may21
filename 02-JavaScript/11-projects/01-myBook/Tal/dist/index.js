@@ -18,15 +18,15 @@ var ArticlesList = /** @class */ (function () {
         console.log(this.articles);
         this.renderArticles();
     };
-    ArticlesList.prototype.updateArticle = function (articleId) {
-    };
+    ArticlesList.prototype.updateArticle = function (articleId) { };
     ArticlesList.prototype.renderArticles = function () {
-        var articlesRoot = document.querySelector('#articlesRoot');
+        var articlesRoot = document.querySelector("#articlesRoot");
         //loop over articles
-        var html = '';
+        var html = "";
         this.articles.forEach(function (article) {
-            html += "<div><img src='" + article.imageUrl + "' alt='" + article.description + "' />" +
-                ("<p>" + article.description + "</p><button onclick='handleDelete(\"" + article.articleId + "\")'>DELETE</button></div>");
+            html +=
+                "<div><img src='" + article.imageUrl + "' alt='" + article.description + "' />" +
+                    ("<p>" + article.description + "</p><button onclick='handleDelete(\"" + article.articleId + "\")'>DELETE</button></div>");
         });
         console.log(html);
         articlesRoot.innerHTML = html;

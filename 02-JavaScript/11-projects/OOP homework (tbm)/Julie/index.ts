@@ -1,64 +1,56 @@
-// create a bank account for a customer (let it be a class "account"), which will hold all the transactions.
-
-// add transaction method ({description, amount (+/-)})
-
-// for advance developers, the transaction should be a class; use a form to add transactions. have a total method. write all transactions in the order they occurred, with the last line: total. Typescript. scss;
+let runningTotal: number = 0;
 
 
-interface person {
-    name: string,
-    age: number
+const userName: string = document.querySelector("#userName");
+const depositString: string = document.querySelector("#deposit");
+const withdrawalString: string = document.querySelector("#withdrawal");
+const submitButton: any = document.querySelector("#submit");
+
+submitButton.addEventListener("click", inputChecker);
+
+function inputChecker ():void {
+    if (userName.value === "" && depositString.value === "" && withdrawalString.value === "") 
+        window.alert("You must fill in a name and either a deposit or a withdrawal");
+        else if
+        (userName.value === "" && (depositString.value !== "" || withdrawalString.value !== ""))
+        window.alert("You must give a username");
+        else if (userName.value !== "" && depositString.value !== "" && withdrawalString.value !== "") 
+    window.alert("You can only submit either a deposit or a withdrawal");
+        else 
+    handleSubmit(); 
 }
 
-const obj: person = {
-    name: 'Julie',
-    age: 25
+function handleSubmit(ev: any): void {
+  const intDeposit = parseInt(depositString);
+  const intWithdrawal = parseInt(withdrawalString);
+let newAccount = new Account(userName, intDeposit, intWithdrawal);
+newAccount.depositMoney;
+newAccount.withdrawMoney;
+newAccount.giveAccountDetails;
 }
 
-function handleTransation(ev) {
-    ev.preventDefault();
-    let name = document.querySelector("#name");
-    let deposit = Number(document.querySelector("#deposit"));
-    // Do thi for the other one
-    let withdrawal = document.querySelector("#withdrawal");
-    console.log(typeof name.value)
-    name = name.value;
-    deposit = deposit.value;
-    withdrawal = withdrawal.value;
-    newAccount = new Account (name, deposit, withdrawal);
-  } 
-};
-
-// Apply typescript to this, above, but focus on types of strings and numbers, and object (below). Look into interfaces for objects. 
+// This is the class for the account. It has three methods: depositmoney, withdrawMoney, and giveAccountdetails. I'm defining all the inputs as integers
 
 class Account {
-  constructor(name, deposit, withdrawal) {
-    this.name = name;
-    this.dep = 
-    this.totalAmount = 0;
+  userName: string;
+  intDeposit: number;
+  intWithdrawal: number;
+  constructor(userName: string, intDeposit: number, intWithdrawal: number) {
+    this.userName = userName;
+    this.intDeposit = intDeposit;
+    this.intWithdrawal = intWithdrawal;
   }
-
-//   Dont forget to to give type to the thises and to the parameters
-
-  depositMoney(deposit) {
-    return (this.totalAmount += deposit);
+  depositMoney(intDeposit: number) {
+    runningTotal =+ this.intDeposit;
   }
-  withdrawMoney(withdrawal) {
-    return (this.totalAmount -= withdrawal);
+  withdrawMoney(intWithdrawal: number) {
+    
+    runningTotal =- this.intWithdrawal;
   }
   giveAccountDetails() {
-    console.log(`The amount of money in your account is ${this.totalAmount}`);
+    console.log(
+      `The amount of money in your account is $${runningTotal}`
+    );
   }
-}
-
-let newAccount = new Account("Julie", 1000);
-console.log(newAccount);
-
-console.log(newAccount.depositMoney(500));
-console.log(newAccount.withdrawMoney(400));
-
-newAccount.giveAccountDetails();
-
-
 
 
