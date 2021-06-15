@@ -134,7 +134,7 @@ h1 .img-bank {
 .container-forms fieldset .btn {
   position: relative;
   left: 35%;
-  background-color: #28A745;
+  background-color: #3da728ce;
   color: white;
   margin-bottom: 10px;
   padding: 0.5rem;
@@ -144,7 +144,7 @@ h1 .img-bank {
   text-transform: uppercase;
 }
 .container-forms fieldset .btn:hover {
-  background-color: #0e813c;
+  background-color: #32810ed2;
   cursor: pointer;
 }
 .container-forms fieldset .btn-delete {
