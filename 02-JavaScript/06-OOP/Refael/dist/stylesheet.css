@@ -1,0 +1,38 @@
+body {
+  width: 1000px;
+  margin: auto;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+}
+.form__item {
+  color: blue;
+}
+
+.div {
+  display: flex;
+  justify-content: center;
+}
+.div__dom {
+  border: 3px solid black;
+  padding: 2px;
+  margin: 2px;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+}
+.div__total {
+  display: flex;
+  justify-content: center;
+  border: 3px solid black;
+  padding: 2px;
+  margin: 2px;
+}
+
+h1 {
+  color: brown;
+  font-size: xx-large;
+}
