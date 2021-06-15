@@ -21,10 +21,11 @@ var AddDep = /** @class */ (function () {
         depositScreen.innerHTML = addToDiv;
     };
     AddDep.prototype.totalAmount = function () {
-        var sum = this.addMoney['deposit'].reduce(function (a, b) {
-            return a + b;
-        }, 0);
-        console.log(sum);
+        var totalScreen = document.querySelector('#totalScreen');
+        var sumHtml = '';
+        var sum = this.addMoney.map(function (ev) { return ev.deposit; }).reduce(function (a, b) { return a + b; });
+        sumHtml += "<p>Total:" + sum + "</p>";
+        totalScreen.innerHTML = sumHtml;
     };
     return AddDep;
 }());
@@ -38,3 +39,4 @@ var handleDeposit = function (ev) {
     addDeposit.addDep(newAction);
     addDeposit.renderDeposit();
 };
+addDeposit.totalAmount();

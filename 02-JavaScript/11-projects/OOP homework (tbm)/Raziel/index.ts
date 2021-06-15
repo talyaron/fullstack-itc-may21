@@ -27,11 +27,11 @@ class AddDep{
      }
 
      totalAmount(){
-
-        let sum=this.addMoney['deposit'].reduce(function(a, b){
-            return a + b;
-        }, 0);
-       console.log(sum);
+        const totalScreen:HTMLElement=document.querySelector('#totalScreen');
+       let sumHtml:string='';
+        let sum=this.addMoney.map(ev=>ev.deposit).reduce((a,b)=>{return a+b});
+       sumHtml+=`<p>Total:${sum}</p>`;
+       totalScreen.innerHTML=sumHtml;
      }
 
 }
@@ -46,6 +46,8 @@ const addDeposit= new AddDep();
      const newAction=new DepoSit(deposit,`${transaction}`);
      console.log(newAction);
     addDeposit.addDep(newAction);
-addDeposit.renderDeposit();
+    addDeposit.renderDeposit();
+    
 
  }
+ addDeposit.totalAmount();
