@@ -1,0 +1,63 @@
+html {
+  width: 1000px;
+  margin: auto;
+  background-color: white;
+}
+
+body {
+  background-color: #FFC90E;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+form {
+  padding: 20px;
+  width: 25%;
+  background-color: wheat;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+form input {
+  margin: 20px;
+  padding: 5px;
+}
+
+.form--submit {
+  background-color: black;
+  color: white;
+}
+.form--submit:hover {
+  background-color: green;
+  cursor: pointer;
+}
+
+#transactions {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 24px;
+}
+#transactions--total {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.deposit {
+  color: green;
+  border-bottom: 2px solid green;
+  display: inline-block;
+}
+
+.transfer {
+  color: red;
+  border-bottom: 2px solid red;
+  display: inline-block;
+}
