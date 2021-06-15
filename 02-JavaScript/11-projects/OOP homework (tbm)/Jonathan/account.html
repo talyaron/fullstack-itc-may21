@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/account.min.css">
+    <link rel="shortcut icon" href="bank_78392.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;900&display=swap" rel="stylesheet">
+    <title>Bank Account</title>
+</head>
+
+<body style="background-color: lightslategray ; height: 100vh;" >
+    <h1>Welcome to your Bank Account <img src="bank_78392.svg" class="img-bank"></h1>
+    <div class="square">
+        <div class="square__item square__item--description">
+            <p>Description</p>
+            <span id="square__item--description--value"></span>
+        </div>
+        <div class="square__item square__item--deposit">
+            <p>Deposit</p>
+            <span id="square__item--deposit--value">₪ 0.00</span>
+        </div>
+        <div class="square__item square__item--withdraw">
+            <p>Withdraw</p>
+            <span id="square__item--withdraw--value">₪ 0.00</span>
+        </div>
+        <div class="square__item square__item--total">
+            <p>Total</p>
+            <span id="square__item--total--value">₪ 0.00</span>
+        </div>
+    </div>
+    
+    <div class="container-forms">
+        
+            <form onSubmit="handleSumbitDeposit(event)">
+                <fieldset>
+                    <legend>Deposit</legend>
+                    <label for="description_deposit">Enter a Description:
+                        <input type="text" name="description_deposit" id="description__deposit">
+                    </label>
+                    <label for="amount_deposit">Enter deposit amount:
+                        <input type="text" name="amount_deposit" id="amount">
+                    </label>
+                    <button class="btn btn-green">Deposit</button>
+                </fieldset>
+            </form>
+        
+        
+            <form onSubmit="handleSumbitWithdraw(event)">
+                <fieldset>
+                    <legend>Withdraw</legend>
+                    <label for="description_withdraw">Enter a Description:    
+                        <input type="text" name="description_withdraw" id="description__withdraw">
+                    </label>
+                    <label for="amount_withdraw">Enter withdraw amount:
+                        <input type="text" name="amount_withdraw" id="amountw">
+                    </label>
+                    <button class="btn btn-green">Withdraw</button>
+                </fieldset>
+            </form>
+        
+        
+            <form onSumbit="handleDelete(event)">
+                <fieldset class = "form-delete">
+                    <legend>Delete Movements</legend>
+                    <label>
+                    <button class="btn btn-delete">DELETE</button>
+                </label>
+                </fieldset>
+            </form>
+        
+    </div>
+
+
+    <script src="dist/account.js"></script>
+
+</body>
+
+</html>
