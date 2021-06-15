@@ -1,4 +1,5 @@
 body {
+  margin-top: 50px;
   color: #484848;
   font-family: "Lato", sans-serif;
   padding: 1rem;
@@ -7,11 +8,7 @@ body {
 .container {
   background: #fdfdfd;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  border-radius: 5px;
 }
 
 .total__title1 {
@@ -25,6 +22,7 @@ body {
 }
 .inputs__1 {
   border: 2px solid #dcdcdc;
+  border-radius: 6px;
   margin-right: 1em;
 }
 .inputs__btn1 {
@@ -38,6 +36,9 @@ body {
   border-color: rgba(0, 0, 0, 0.1);
   cursor: pointer;
   width: 8em;
+}
+.inputs__btn1:hover {
+  opacity: 0.5;
 }
 
 #acctBalance {
