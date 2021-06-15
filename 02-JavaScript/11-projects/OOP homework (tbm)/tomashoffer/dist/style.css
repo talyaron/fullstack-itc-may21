@@ -7,6 +7,7 @@
   --gris: #e1e1e1;
   --green: #28CB04;
   --red: #F33721;
+  --blue: #565ADE;
 }
 
 /* GLOBALES */
@@ -51,54 +52,51 @@ body {
 }
 
 .form {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.form .form__radio__container {
   display: flex;
   justify-content: center;
-  text-align: center;
-  margin-bottom: 2rem;
+  align-items: center;
 }
 .form__input {
   width: 10rem;
-  margin-left: 1rem;
+  margin-bottom: 1rem;
 }
 .form__submit {
-  margin-left: 1rem;
   width: 10rem;
-}
-.form__submit--deposit {
-  background-color: var(--green);
+  background-color: var(--blue);
   color: white;
+  padding: 0.5em 0.5rem;
+  border-radius: 50px;
 }
-.form__submit--withdraw {
-  background-color: var(--red);
-  color: white;
+.form .radio__flex {
+  display: flex;
+}
+.form .radio__flex .form__label {
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
 }
 
 .acount {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
 }
 .acount__transactions {
   display: flex;
   justify-content: center;
   align-content: center;
-  border: 1px solid black;
-}
-.acount__transactions .transactions {
-  display: grid;
-  grid-template-rows: 1fr;
-  row-gap: 1rem;
-}
-.acount__transactions .transactions .transactions__deposits__title #deposit .dep {
-  border: solid 1px black;
-  padding: 0 1rem;
-}
-.acount__transactions .transactions .transactions__withdraws__title #withdraw .with {
-  border: solid 1px black;
-  padding: 0 1rem;
+  border: solid 1px var(--negro);
 }
 .acount__total {
   display: flex;
   justify-content: center;
   align-content: center;
-  border: 1px solid black;
+  border: solid 1px var(--negro);
 }
