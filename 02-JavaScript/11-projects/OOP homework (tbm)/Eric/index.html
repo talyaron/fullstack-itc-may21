@@ -21,14 +21,16 @@ Use TypeScript, SCSS, BEM etc.
             <div class="tot"> 
             <h1 class="total__title1">Total</h1>
             </div>  
-            <div id="balance">
+            <div id="deposit">
               </div>
+              <div id="balance">
+            </div>
           </div>
           <div id="inputs" class="inputs">
             <form onsubmit="handleSubmit(event)">
               <label for="description" class="inputs__title">Description</label>
               <input type="text" name="description" id="userDescription" class="inputs__1">
-              <label for="deposit" class="inputs__title">Deposit</label>
+              <label for="deposit" class="inputs__title">Amount</label>
               <input type="number" name="deposit"  id="userDeposit" class="inputs__1" >
               <button id="btnDeposit" class="inputs__btn1">Deposit</button>
             </form>

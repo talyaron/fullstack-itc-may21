@@ -24,15 +24,18 @@ var AccountList = /** @class */ (function () {
         this.total(accountUser);
     };
     AccountList.prototype.renderMovements = function () {
-        var balance = document.querySelector('#balance');
+        var deposit = document.querySelector('#deposit');
         var html = '';
         this.accountUsers.forEach(function (accountUser) {
-            html += "<p>" + accountUser.description + "  " + accountUser.deposit + " " + accountUsers.amount + " </p>";
+            html += "<p>" + accountUser.description + "  " + accountUser.deposit + "  </p>";
         });
-        balance.innerHTML = html;
+        deposit.innerHTML = html;
     };
     AccountList.prototype.total = function (accountUser) {
+        var totalAmount = document.querySelector('#balance');
         accountUsers.amount += accountUser.deposit;
+        var total = "<div>Final balance: $" + accountUsers.amount + "</div>";
+        totalAmount.innerHTML = total;
         console.log(accountUsers.amount);
     };
     return AccountList;
