@@ -16,8 +16,8 @@ var Movements = /** @class */ (function () {
 }());
 var AccountList = /** @class */ (function () {
     function AccountList(amount) {
-        this.accountUsers = []; //YS: This should be in your constructor: <this.accountUsers = []>
         this.amount = amount;
+        this.accountUsers = [];
     }
     AccountList.prototype.add = function (accountUser) {
         this.accountUsers.push(accountUser);
@@ -32,11 +32,18 @@ var AccountList = /** @class */ (function () {
         deposit.innerHTML = html;
     };
     AccountList.prototype.total = function (accountUser) {
-        var totalAmount = document.querySelector('#balance'); //YS: Try/catch
-        accountUsers.amount += accountUser.deposit;
-        var total = "<div>Final balance: $" + accountUsers.amount + "</div>";
-        totalAmount.innerHTML = total;
-        console.log(accountUsers.amount);
+        try {
+            var totalAmount = document.querySelector('#balance');
+            //const deposit: HTMLElement = document.querySelector('[name="deposit"]').value; //YS: Try/catch
+            //if(!deposit) throw new Error('The element where to show the balance doesn´t exist!')
+            accountUsers.amount += accountUser.deposit;
+            var total = "<div>Final balance: $" + accountUsers.amount + "</div>";
+            totalAmount.innerHTML = total;
+            console.log(accountUsers.amount);
+        }
+        catch (error) {
+            console.error(error);
+        }
     };
     return AccountList;
 }());
