@@ -134,9 +134,8 @@ function handleSumbitWithdraw(event: any): void {
 
     if (amount >= 0) {
         alert('Is negative the number you want to enter')
-    }
-    else if (transaction.balance <= 0 || transaction.balance < -amount) {
-        alert('You cant withdraw')
+
+
     } else {
         const account = new Account(description, amount);
 

@@ -35,7 +35,7 @@ h1 {
         margin: 20px;
         display: flex;
         flex-direction: column;
- 
+
 
 
         &--description {
@@ -59,7 +59,7 @@ h1 {
 
 
         }
-        
+
         &--deposit {
 
             background-color: #363958;
@@ -97,6 +97,7 @@ h1 {
                 color: white;
             }
         }
+
         &--total {
 
             background-color: #434343;
@@ -113,16 +114,17 @@ h1 {
             span {
                 margin-top: 10px;
 
-                .green_text{
+                .green_text {
                     color: #77dd77;
                 }
 
-                .img-no-ok,.img-ok{
+                .img-no-ok,
+                .img-ok {
                     width: 14px;
                     height: 14px;
                     margin-right: 2px;
                 }
-                
+
             }
         }
 
@@ -130,86 +132,81 @@ h1 {
 
 }
 
-.container-forms{
+.container-forms {
     display: flex;
     justify-content: space-around;
     margin-left: -20px;
-    margin-top:1rem;
+    margin-top: 1rem;
 
 
-    fieldset{
+    fieldset {
         border-radius: 10px;
         background-color: #0073E6;
 
-        legend{
-            text-align:center;
-            color:white;
-            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        legend {
+            text-align: center;
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 1.3rem;
         }
-        
-        label{
+
+        label {
             display: block;
             margin: 12px;
-            padding:1rem;
-            color:white;
+            padding: 1rem;
+            color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-            input{
+            input {
                 padding: 0.3rem;
 
-                
+
             }
 
-            #description__deposit{
+            #description__deposit {
                 position: relative;
-                left:5%;
+                left: 5%;
             }
-            
-            #description__withdraw{
+
+            #description__withdraw {
                 position: relative;
-                left:9%;
+                left: 9%;
             }
-            
+
         }
 
-        .btn{
+        .btn {
             position: relative;
-            left:35%;
-            background-color:#3da728ce;
-            color:white;
+            left: 35%;
+            background-color: #3da728ce;
+            color: white;
             margin-bottom: 10px;
-            padding:0.5rem;
-           font-family: 'Roboto Slab', serif;
+            padding: 0.5rem;
+            font-family: 'Roboto Slab', serif;
             font-weight: bold;
             letter-spacing: 0.1rem;
             text-transform: uppercase;
-    
-      
+
+
         }
-    
-        .btn:hover{
+
+        .btn:hover {
             background-color: #32810ed2;
             cursor: pointer;
         }
-    
-        .btn-delete{
+
+        .btn-delete {
             margin-left: -25px;
         }
     }
-    
-
-   
 
 
- 
+
+
+
+
 }
 
-.form-delete{
+.form-delete {
     padding: 1.5rem;
 }
-
-
-
-
-

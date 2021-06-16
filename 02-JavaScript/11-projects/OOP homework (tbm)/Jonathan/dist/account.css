@@ -91,7 +91,8 @@ h1 .img-bank {
 .square__item--total span .green_text {
   color: #77dd77;
 }
-.square__item--total span .img-no-ok, .square__item--total span .img-ok {
+.square__item--total span .img-no-ok,
+.square__item--total span .img-ok {
   width: 14px;
   height: 14px;
   margin-right: 2px;
