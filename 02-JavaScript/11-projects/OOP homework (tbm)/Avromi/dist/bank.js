@@ -33,8 +33,13 @@ var AllTransactions = /** @class */ (function () {
         });
         transactionsDiv.innerHTML = html;
     };
-    AllTransactions.prototype.runningTotal = function (amount, totalAmount) {
-        total = totalAmount += amount;
+    AllTransactions.prototype.runningTotal = function () {
+        // var arr = this.transactions
+        // var total = 0;
+        // for (var i in arr) { total += arr[i]; }
+        //     let result[] = this.transactions.map(a => a.amount);
+        //     console.log(result)
+        //    total = [result].reduce((a, b) => a + b)
         var totalDiv = document.querySelector(".total");
         totalDiv.innerHTML = "<p>Running Total:" + total + " </p>";
     };
