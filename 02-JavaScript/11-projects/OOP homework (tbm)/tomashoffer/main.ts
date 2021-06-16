@@ -5,66 +5,64 @@
 
 // Use TypeScript, SCSS, BEM etc.
 
-const button1= <HTMLInputElement> document.getElementById('deposit_check');
-const button2= <HTMLInputElement> document.getElementById('withdraw_check');
-const amount_total =  document.getElementById('amount');
+const button1 = <HTMLInputElement>document.getElementById("deposit_check");
+const button2 = <HTMLInputElement>document.getElementById("withdraw_check");
+const amount_total = document.getElementById("amount");
 
 // Funcion para tomar info de formulario
-const handleSubmit = (ev: any):void => {
-    ev.preventDefault();
-    
-    const trans: string= ev.target.elements.trans.value;
-    let amount: number = ev.target.elements.transaction_amount.valueAsNumber;
-    const description:string = ev.target.elements.transaction_description.value;
-    
+const handleSubmit = (ev: any): void => {
+  ev.preventDefault();
 
-     if(button2.checked){
-       amount = -amount; 
-    }
-    // Esto debe ir debajo del if para que tome los Withdraws negativos (-)
-    const newTrasaction = new Transaction(trans, amount, description);
+  const trans: string = ev.target.elements.trans.value;
+  let amount: number = ev.target.elements.transaction_amount.valueAsNumber;
+  const description: string = ev.target.elements.transaction_description.value;
 
-    newTrans.addTrans(newTrasaction);
-    newTrans.renderTrans();
-    alert('YOU HAD MADE A NEW TRANSACTION!')
+  if (button2.checked) {
+    amount = -amount;
+  }
+  // Esto debe ir debajo del if para que tome los Withdraws negativos (-)
+  const newTrasaction = new Transaction(trans, amount, description);
+
+  newTrans.addTrans(newTrasaction);
+  newTrans.renderTrans();
+  alert("YOU HAD MADE A NEW TRANSACTION!");
+};
+
+class Transaction {
+  trans: string;
+  amount: number;
+  description: string;
+  constructor(trans: string, amount: number, description: string) {
+    this.trans = trans;
+    this.amount = amount;
+    this.description = description;
+  }
 }
 
-class Transaction{
-    trans: string;
-    amount: number;
-    description: string;
-    constructor(trans: string, amount: number, description: string){
-        this.trans = trans;
-        this.amount = amount;
-        this.description = description;
-    } 
-}
- 
-class TransactionList{
-    transaction: Array<Transaction> = [];
-    addTrans(trans: Transaction) {
-        this.transaction.push(trans);
-    }
-    renderTrans(){
-        
-        const transRoot:HTMLElement = document.querySelector('#acount_transactions__print');
-        const TotalRoot:HTMLElement = document.querySelector('#acount_total__print');
-        //loop over transactions
+class TransactionList {
+  transaction: Array<Transaction> = [];
+  addTrans(trans: Transaction) {
+    this.transaction.push(trans);
+  }
+  renderTrans() {
+    const transRoot: HTMLElement = document.querySelector(
+      "#acount_transactions__print"
+    );
+    const TotalRoot: HTMLElement = document.querySelector(
+      "#acount_total__print"
+    );
+    //loop over transactions
 
-        let htmlTrans:string='';
-        let htmlTotal: number = 0;
-        this.transaction.forEach(trans=>{
-            htmlTrans += `<div class="trans"><li>${trans.trans}: $${trans.amount} - Description: ${trans.description}</li></div>`
-            htmlTotal += trans.amount; 
-        });
-        console.log(htmlTrans);
-        transRoot.innerHTML = htmlTrans;
-        TotalRoot.innerHTML = `$` + htmlTotal;
-        
-    }
+    let htmlTrans: string = "";
+    let htmlTotal: number = 0;
+    this.transaction.forEach((trans) => {
+      htmlTrans += `<div class="trans"><li>${trans.trans}: $${trans.amount} - Description: ${trans.description}</li></div>`;
+      htmlTotal += trans.amount;
+    });
+    console.log(htmlTrans);
+    transRoot.innerHTML = htmlTrans;
+    TotalRoot.innerHTML = `$` + htmlTotal;
+  }
 }
 
 const newTrans = new TransactionList();
-
-
-
