@@ -1,0 +1,142 @@
+html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+div {
+  text-align: center;
+}
+
+input {
+  display: block;
+  padding: 10px;
+  margin: 10px;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.account {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.account__income-wrapper__income {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: 1px black solid;
+  text-align: center;
+  padding: 0.5rem;
+  padding-bottom: 0;
+  font-weight: bold;
+}
+
+.account__income-wrapper__income__incomes {
+  color: green;
+  width: auto;
+  border-top: 1px solid black;
+  border-bottom: 0;
+  margin: 0 -0.5rem;
+  font-weight: lighter;
+  padding: 0.2rem;
+  padding-bottom: 0;
+}
+
+.account__income-wrapper__income__description-income {
+  width: auto;
+  border-bottom: 1px solid black;
+  border-bottom: 0;
+  margin: 0 -0.5rem;
+  font-weight: normal;
+  font-style: italic;
+  font-size: small;
+  padding: 0.2rem;
+}
+
+.account__income-wrapper__nametotalincome {
+  width: auto;
+  border: 1px solid black;
+  border-bottom: 0;
+  border-top: 0;
+  font-size: smaller;
+}
+
+.account__income-wrapper__totalincome {
+  width: auto;
+  border: 1px solid black;
+  border-top: 0;
+  color: green;
+}
+
+.account__expense-wrapper__expense {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: 1px black solid;
+  text-align: center;
+  padding: 0.5rem;
+  padding-bottom: 0;
+  font-weight: bold;
+}
+
+.account__expense-wrapper__expense__expenses {
+  color: red;
+  width: auto;
+  border-top: 1px solid black;
+  border-bottom: 0;
+  margin: 0 -0.5rem;
+  font-weight: lighter;
+  padding: 0.2rem;
+  padding-bottom: 0;
+}
+
+.account__expense-wrapper__expense__description-expense {
+  width: auto;
+  border-bottom: 1px solid black;
+  border-bottom: 0;
+  margin: 0 -0.5rem;
+  font-weight: normal;
+  font-style: italic;
+  font-size: small;
+  padding: 0.2rem;
+}
+
+.account__expense-wrapper__nametotalexpense {
+  width: auto;
+  border: 1px solid black;
+  border-bottom: 0;
+  border-top: 0;
+  font-size: smaller;
+}
+
+.account__expense-wrapper__totalexpense {
+  width: auto;
+  border: 1px solid black;
+  border-top: 0;
+  color: red;
+}
+
+.final-total-wrapper--green {
+  color: green;
+}
+
+.final-total-wrapper--red {
+  color: red;
+}
+/*# sourceMappingURL=styles.css.map */

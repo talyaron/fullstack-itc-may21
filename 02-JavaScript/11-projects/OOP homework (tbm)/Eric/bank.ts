@@ -7,15 +7,14 @@ Use TypeScript, SCSS, BEM etc.
 */
 
 
-class Movements{
+class Movements{                    
     description:string;
     deposit:number;
     //withdraw:number;
-
     constructor(description:string, deposit: number /*, withdraw: number*/ ) {
         this.description = description;
         this.deposit = deposit;
-        //this.withdraw= withdraw;
+        //this.withdraw= withdraw;       //YS: Please dont leave commented code
     }
 }
 
@@ -23,7 +22,7 @@ class Movements{
 
 class AccountList {
     amount: number;
-    accountUsers: Array<Movements> = [];
+    accountUsers: Array<Movements> = [];   //YS: This should be in your constructor: <this.accountUsers = []>
   
     constructor (amount:number)  {  
 this.amount=amount;
@@ -38,15 +37,15 @@ this.amount=amount;
     renderMovements(){
         const deposit:HTMLElement = document.querySelector('#deposit');
 
-        let html:string='';
+        let html:string='';   
             this.accountUsers.forEach(accountUser=>{
-            html += `<p>${accountUser.description}  ${accountUser.deposit}  </p>`
+            html += `<p>${accountUser.description}  $${accountUser.deposit}  </p>`   //YS: Nice
             
         });
         deposit.innerHTML = html;
     }
    total(accountUser){
-    const totalAmount: HTMLElement = document.querySelector('#balance');
+    const totalAmount: HTMLElement = document.querySelector('#balance');  //YS: Try/catch
      accountUsers.amount += accountUser.deposit;
      let total = `<div>Final balance: $${accountUsers.amount}</div>`;
             totalAmount.innerHTML = total
@@ -70,3 +69,5 @@ const handleSubmit = (ev: any):void => {
    accountUsers.add(accountUser);
    accountUsers.renderMovements();
 }
+
+//YS: Please format your code before turning it in. 

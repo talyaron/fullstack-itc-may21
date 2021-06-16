@@ -5,20 +5,30 @@
 
 // Use TypeScript, SCSS, BEM etc.
 
-const handleSubmit = (ev: any):void => {
+const button1= <HTMLInputElement> document.getElementById('deposit_check');  //YS: Use more descriptive names: depositButton instead of button1. 
+const button2= <HTMLInputElement> document.getElementById('withdraw_check');
+const amount_total =  document.getElementById('amount');
+
+// Funcion para tomar info de formulario
+const handleSubmit = (ev: any):void => {        //YS: I did not see any try/catch
     ev.preventDefault();
-
-    const trans: string= ev.target.elements.trans.value;
-    const amount: number = ev.target.elements.transaction_amount.valueAsNumber;
-    const description:string = ev.target.elements.transaction_description.value;
-    const newTrasaction = new Transaction(trans, amount, description);
     
-    newTrans.addTrans(newTrasaction);
-    newTrans.renderTrans();
-   
-    console.log(trans, amount, description)
+    const trans: string= ev.target.elements.trans.value;
+    let amount: number = ev.target.elements.transaction_amount.valueAsNumber;
+    const description:string = ev.target.elements.transaction_description.value;
+    
 
-}
+     if(button2.checked){    
+       amount = -amount; 
+    }
+    // Esto debe ir debajo del if para que tome los Withdraws negativos (-)
+    const newTrasaction = new Transaction(trans, amount, description);
+
+  if (button2.checked) {
+    amount = -amount;
+  }
+  // Esto debe ir debajo del if para que tome los Withdraws negativos (-)
+  const newTrasaction = new Transaction(trans, amount, description);
 
 class Transaction{
     trans: string;
@@ -32,15 +42,15 @@ class Transaction{
 }
  
 class TransactionList{
-    transaction: Array<Transaction> = [];
-    addTrans(trans: Transaction) {
+    transaction: Array<Transaction> = [];         //YS: Nice! 
+    addTrans(trans: Transaction) {                //YS: I did not see any try/catch
         this.transaction.push(trans);
     }
     renderTrans(){
         
-        const transRoot:HTMLElement = document.querySelector('#acount_transactions__print');
+        const transRoot:HTMLElement = document.querySelector('#acount_transactions__print'); //YS: Try to always put your DOM elements together, at the beginning of your code and in global scope.
         const TotalRoot:HTMLElement = document.querySelector('#acount_total__print');
-        //loop over deposit
+        //loop over transactions
 
         let htmlTrans:string='';
         let htmlTotal: number = 0;
@@ -48,26 +58,37 @@ class TransactionList{
             htmlTrans += `<div class="trans"><li>${trans.trans}: $${trans.amount} - Description: ${trans.description}</li></div>`
             htmlTotal += trans.amount; 
         });
-        console.log(htmlTrans);
-        transRoot.innerHTML = htmlTrans;
+        console.log(htmlTrans);  //YS: Dont leave console logs.  
+        transRoot.innerHTML = htmlTrans;  //YS: Whenever you have a DOM element followed by a .  (transRoot.innerHTML) you need a try/catch 
         TotalRoot.innerHTML = `$` + htmlTotal;
         
     }
 }
 
-const newTrans = new TransactionList();
+class TransactionList {
+  transaction: Array<Transaction> = [];
+  addTrans(trans: Transaction) {
+    this.transaction.push(trans);
+  }
+  renderTrans() {
+    const transRoot: HTMLElement = document.querySelector(
+      "#acount_transactions__print"
+    );
+    const TotalRoot: HTMLElement = document.querySelector(
+      "#acount_total__print"
+    );
+    //loop over transactions
 
-let button1= <HTMLInputElement> document.getElementById('deposit_check');
-let button2= <HTMLInputElement> document.getElementById('withdraw_check');
-let amount =  document.getElementById('amount');
-
-if (button1.checked){
-    amount.removeAttribute("max");
-    amount.setAttribute("min","0");
-}else {
-    button1.checked = false;
-    amount.removeAttribute("min");
-    amount.setAttribute("max","0");
+    let htmlTrans: string = "";
+    let htmlTotal: number = 0;
+    this.transaction.forEach((trans) => {
+      htmlTrans += `<div class="trans"><li>${trans.trans}: $${trans.amount} - Description: ${trans.description}</li></div>`;
+      htmlTotal += trans.amount;
+    });
+    console.log(htmlTrans);
+    transRoot.innerHTML = htmlTrans;
+    TotalRoot.innerHTML = `$` + htmlTotal;
+  }
 }
 
-console.dir(button1);
+const newTrans = new TransactionList();

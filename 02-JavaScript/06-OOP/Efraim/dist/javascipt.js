@@ -9,7 +9,7 @@ var Income = /** @class */ (function () {
             this.account1 = document.querySelector('.account__income-wrapper__income');
             if (!this.account1) {
                 throw new Error('no income box found');
-            }
+            } //YS: Good
         }
         catch (error) {
             console.error(error);
@@ -20,7 +20,7 @@ var Income = /** @class */ (function () {
     }
     Income.prototype.createIncome = function () {
         try {
-            this.box2 = document.createElement('div');
+            this.box2 = document.createElement('div'); //YS: Give your elements more descriptive names: incomeValue
             this.box2.classList.add("account__income-wrapper__income__incomes");
             this.account1.appendChild(this.box2);
             this.box2.innerHTML = this.income;
@@ -125,13 +125,13 @@ var handleSubmit1 = function (ev) {
     ev.preventDefault();
     var incomeBefore = ev.target.elements.income.value;
     var incomedescription = ev.target.elements.incomedescription.value;
-    var incomeAfter = new Income("" + incomeBefore, "" + incomedescription);
+    var incomeAfter = new Income("" + incomeBefore, "" + incomedescription); //YS: why not: new Income(incomeBefore, incomedescription)? You dont need the ``
     ev.target.reset();
 };
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var expenseBefore = ev.target.elements.expense.value;
     var expenseDescription = ev.target.elements.expensedescription.value;
-    var expenseAfter = new Expense("" + expenseBefore, "" + expenseDescription);
+    var expenseAfter = new Expense("" + expenseBefore, "" + expenseDescription); //YS: why not: new Expense(expenseBefore, expenseDescription)? You dont need the ``
     ev.target.reset();
 };

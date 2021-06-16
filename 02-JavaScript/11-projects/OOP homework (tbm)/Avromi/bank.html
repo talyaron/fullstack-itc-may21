@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Budget</title>
+    <link rel="stylesheet" href="./dist/bank.min.css">
+</head>
+<body>
+    <form onsubmit="handleSubmit(event)" class="form">
+        <input type="number" name="amount" placeholder="Enter Amount">
+        <br>
+        <input type="text" name="description" placeholder="Description">
+        <br>
+        <input type="submit" value="Submit" class="button">
+    </form>
+    <div class="transactions-div">
+    </div>
+    <div class="total"></div>
+    <script src="./dist/bank.js"></script>
+</body>
+</html>

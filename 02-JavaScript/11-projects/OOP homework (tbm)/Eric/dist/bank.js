@@ -10,13 +10,13 @@ var Movements = /** @class */ (function () {
     function Movements(description, deposit /*, withdraw: number*/) {
         this.description = description;
         this.deposit = deposit;
-        //this.withdraw= withdraw;
+        //this.withdraw= withdraw;       //YS: Please dont leave commented code
     }
     return Movements;
 }());
 var AccountList = /** @class */ (function () {
     function AccountList(amount) {
-        this.accountUsers = [];
+        this.accountUsers = []; //YS: This should be in your constructor: <this.accountUsers = []>
         this.amount = amount;
     }
     AccountList.prototype.add = function (accountUser) {
@@ -27,12 +27,12 @@ var AccountList = /** @class */ (function () {
         var deposit = document.querySelector('#deposit');
         var html = '';
         this.accountUsers.forEach(function (accountUser) {
-            html += "<p>" + accountUser.description + "  " + accountUser.deposit + "  </p>";
+            html += "<p>" + accountUser.description + "  $" + accountUser.deposit + "  </p>"; //YS: Nice
         });
         deposit.innerHTML = html;
     };
     AccountList.prototype.total = function (accountUser) {
-        var totalAmount = document.querySelector('#balance');
+        var totalAmount = document.querySelector('#balance'); //YS: Try/catch
         accountUsers.amount += accountUser.deposit;
         var total = "<div>Final balance: $" + accountUsers.amount + "</div>";
         totalAmount.innerHTML = total;
@@ -50,3 +50,4 @@ var handleSubmit = function (ev) {
     accountUsers.add(accountUser);
     accountUsers.renderMovements();
 };
+//YS: Please format your code before turning it in. 

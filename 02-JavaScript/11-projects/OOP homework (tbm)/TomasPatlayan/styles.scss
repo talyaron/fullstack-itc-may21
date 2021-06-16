@@ -20,35 +20,36 @@ p {
   margin: 0 auto;
 }
 
-a {
-  text-decoration: none;
-}
 
 img {
   max-width: 100%;
 }
 
-h1 {
-  font-size: 4rem;
-}
 h2 {
   font-size: 3.6rem;
-}
-h3 {
-  font-size: 3rem;
 }
 
 /*LAYOUT*/
 
-.bank-account {
+.show-movements {
+  text-align: center;
+  &__transactions {
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+  }
+}
+
+.form {
   display: flex;
   justify-content: space-between;
 
-  &__profile-photo {
-    width: 10%;
-  }
+  .img-profile-account {
+    display: flex;
+    flex-direction: column;
 
-  &__form {
-    align-self: flex-end;
+    img {
+      width: 60%;
+    }
   }
 }
