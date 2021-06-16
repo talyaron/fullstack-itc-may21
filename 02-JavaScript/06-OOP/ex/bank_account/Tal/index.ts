@@ -14,7 +14,7 @@ class Transaction {
 
 
 class Account{
-    account:Array<Transaction>;
+    account:Array<Transaction>=[];
 
     addNewTransaction(amount: number, date: Date, place: string, description: string):void{
         this.account.push(new Transaction(amount, date, place, description))

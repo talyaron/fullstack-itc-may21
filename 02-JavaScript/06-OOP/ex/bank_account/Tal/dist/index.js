@@ -9,6 +9,7 @@ var Transaction = /** @class */ (function () {
 }());
 var Account = /** @class */ (function () {
     function Account() {
+        this.account = [];
     }
     Account.prototype.addNewTransaction = function (amount, date, place, description) {
         this.account.push(new Transaction(amount, date, place, description));
