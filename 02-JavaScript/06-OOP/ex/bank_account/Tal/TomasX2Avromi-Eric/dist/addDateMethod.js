@@ -44,3 +44,19 @@ console.log(account.calculateSum());
 console.log(JSON.stringify(account));
 account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
 console.log(account);
+var startDate = new Date("2015-08-04");
+var endDate = new Date("2015-08-12");
+var resultProductData = product_data.filter(function (a) {
+    var hitDates = a.ProductHits || {};
+    // extract all date strings
+    hitDates = Object.keys(hitDates);
+    // improvement: use some. this is an improment because .map()
+    // and .filter() are walking through all elements.
+    // .some() stops this process if one item is found that returns true in the callback function and returns true for the whole expression
+    hitDateMatchExists = hitDates.some(function (dateStr) {
+        var date = new Date(dateStr);
+        return date >= startDate && date <= endDate;
+    });
+    return hitDateMatchExists;
+});
+console.log(resultProductData);
