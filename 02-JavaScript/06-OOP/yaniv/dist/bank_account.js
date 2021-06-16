@@ -24,47 +24,13 @@ var Account = /** @class */ (function () {
     Account.prototype.addTransToDOM = function (transaction) {
         try {
             var transContainer = document.querySelector(".transactions");
-            var newTrans = document.createElement("div");
-            newTrans.classList.add("transactions__item", "transactions__item--action");
-            transContainer.appendChild(newTrans);
-            var newTransSign = document.createElement("i");
-            newTransSign.id = "sign";
-            newTransSign.classList.add("fas", "fa-2x");
-            if (transaction.transAmount > 0) {
-                newTransSign.classList.add("fa-plus-circle");
-                newTransSign.style.color = "green";
-                newTransSign.title = "Income";
-            }
-            else {
-                newTransSign.classList.add("fa-minus-circle");
-                newTransSign.style.color = "red";
-                newTransSign.title = "Expense";
-            }
-            newTrans.appendChild(newTransSign);
-            var newTransAmount = document.createElement("div");
-            newTransAmount.id = "trans_amount";
-            newTransAmount.innerText = "\u20AA" + Math.abs(transaction.transAmount);
-            if (transaction.transAmount >= 0) {
-                newTransAmount.style.color = "green";
-            }
-            else {
-                newTransAmount.style.color = "red";
-            }
-            newTrans.appendChild(newTransAmount);
-            var newTransDate = document.createElement("div");
-            newTransDate.id = "trans_date";
-            newTransDate.innerText = transaction.transDate.getDate() + "-" + (transaction.transDate.getMonth() + 1) + "-" + transaction.transDate.getFullYear();
-            newTrans.appendChild(newTransDate);
+            var signFAClass = transaction.transAmount >= 0 ? "plus" : "minus";
+            var signTitle = transaction.transAmount >= 0 ? "Income" : "Expense";
+            var transColor = transaction.transAmount >= 0 ? "green" : "red";
+            var transFormatedDate = transaction.transDate.getDate() + "-" + (transaction.transDate.getMonth() + 1) + "-" + transaction.transDate.getFullYear();
+            transContainer.innerHTML += "<div class=\"transactions__item transactions__item--action\">\n          <i id=\"sign\" class=\"fas fa-2x fa-" + signFAClass + "-circle\" title=\"" + signTitle + "\" style=\"color: " + transColor + ";\"></i>\n          <div id=\"trans_amount\" style=\"color: " + transColor + ";\">\n            \u20AA" + Math.abs(transaction.transAmount) + "\n          </div>\n          <div id=\"trans_date\">" + transFormatedDate + "</div>\n          <div id=\"trans_business\">" + transaction.transBiz + "</div>\n          <div id=\"trans_id\">" + transaction.transId + "</div>\n        </div>";
             var totalDate = document.querySelector("#total_date");
-            totalDate.innerText = "For Date: " + newTransDate.innerText;
-            var newTransBiz = document.createElement("div");
-            newTransBiz.id = "trans_business";
-            newTransBiz.innerText = "" + transaction.transBiz;
-            newTrans.appendChild(newTransBiz);
-            var newTransId = document.createElement("div");
-            newTransId.id = "trans_id";
-            newTransId.innerText = "" + transaction.transId;
-            newTrans.appendChild(newTransId);
+            totalDate.innerText = "For Date: " + transFormatedDate;
         }
         catch (er) {
             console.error(er);
@@ -114,6 +80,7 @@ var closeModal = function () {
         var modalBox_2 = document.querySelector(".modalBox");
         close.addEventListener("click", function (ev) {
             isModalOpen = false;
+            console.log('hi');
             modal_2.style.display = "none";
             modalBox_2.style.display = "none";
         });
