@@ -21,6 +21,6 @@ class Article{
 
 class ArticleArray{
     article:Article[]
-    constructor(){
+    constructor(){}
        
 }
