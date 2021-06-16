@@ -7,11 +7,11 @@ Use TypeScript, SCSS, BEM etc.
 */
 
 
-class Movements{                    
-    description:string;
-    deposit:number;
+class Movements {
+    description: string;
+    deposit: number;
     //withdraw:number;
-    constructor(description:string, deposit: number /*, withdraw: number*/ ) {
+    constructor(description: string, deposit: number /*, withdraw: number*/) {
         this.description = description;
         this.deposit = deposit;
         //this.withdraw= withdraw;       //YS: Please dont leave commented code
@@ -22,52 +22,59 @@ class Movements{
 
 class AccountList {
     amount: number;
-    accountUsers: Array<Movements> = [];   //YS: This should be in your constructor: <this.accountUsers = []>
-  
-    constructor (amount:number)  {  
-this.amount=amount;
-}
+    accountUsers: Array<Movements>;   //YS: This should be in your constructor: <this.accountUsers = []>
+
+    constructor(amount: number) {
+        this.amount = amount;
+        this.accountUsers = []
+    }
     add(accountUser: Movements) {
         this.accountUsers.push(accountUser);
         this.total(accountUser);
-        
-      
-    
-    }
-    renderMovements(){
-        const deposit:HTMLElement = document.querySelector('#deposit');
 
-        let html:string='';   
-            this.accountUsers.forEach(accountUser=>{
+
+
+    }
+    renderMovements() {
+        const deposit: HTMLElement = document.querySelector('#deposit');
+
+        let html: string = '';
+        this.accountUsers.forEach(accountUser => {
             html += `<p>${accountUser.description}  $${accountUser.deposit}  </p>`   //YS: Nice
-            
+
         });
         deposit.innerHTML = html;
     }
-   total(accountUser){
-    const totalAmount: HTMLElement = document.querySelector('#balance');  //YS: Try/catch
-     accountUsers.amount += accountUser.deposit;
-     let total = `<div>Final balance: $${accountUsers.amount}</div>`;
-            totalAmount.innerHTML = total
-    console.log(accountUsers.amount)
-    }
-  
+    
+    total(accountUser) {
+        try{
+        const totalAmount: HTMLElement = document.querySelector('#balance'); 
+        //const deposit: HTMLElement = document.querySelector('[name="deposit"]').value; //YS: Try/catch
+        //if(!deposit) throw new Error('The element where to show the balance doesn´t exist!')
+        accountUsers.amount += accountUser.deposit;
+        let total = `<div>Final balance: $${accountUsers.amount}</div>`;
+        totalAmount.innerHTML = total
+        console.log(accountUsers.amount)
+        }
+    catch (error) {
+        console.error(error);
+    }}
 }
 
 
 const accountUsers = new AccountList(0);
 
-const handleSubmit = (ev: any):void => {
+const handleSubmit = (ev: any): void => {
     ev.preventDefault();
 
     const description: string = ev.target.elements.description.value;
     const deposit = ev.target.elements.deposit.valueAsNumber;
     //const withdraw:number = ev.target.elements.withdraw.value;
 
-    const accountUser = new Movements(description , deposit /*,withdraw*/);
+    const accountUser = new Movements(description, deposit /*,withdraw*/);
 
-   accountUsers.add(accountUser);
-   accountUsers.renderMovements();
+    accountUsers.add(accountUser);
+    accountUsers.renderMovements();
 }
 
 //YS: Please format your code before turning it in. 
