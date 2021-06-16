@@ -133,6 +133,8 @@ h1 .img-bank {
   left: 9%;
 }
 .container-forms fieldset .btn {
+  position: relative;
+  left: 35%;
   background-color: #3da728ce;
   color: white;
   margin-bottom: 10px;
