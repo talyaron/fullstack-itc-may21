@@ -1,3 +1,4 @@
+//YS: Please format your document before turning it in! 
 var BankAccount = /** @class */ (function () {
     function BankAccount(description, amount) {
         this.amount = amount;
@@ -21,7 +22,7 @@ var Transaction = /** @class */ (function () {
     };
     Transaction.prototype.renderTransaction = function () {
         var _this = this;
-        var descriptionValue = document.querySelector('#descriptionValue');
+        var descriptionValue = document.querySelector('#descriptionValue'); //YSL Where is try/catch? (error handling)
         var depositVale = document.querySelector('#depositValue');
         var totalValue = document.querySelector('#totalValue');
         var description = '';
@@ -33,7 +34,7 @@ var Transaction = /** @class */ (function () {
             deposit += "<span> " + acc.amount.toFixed(2) + " \u20AA</span><br>";
             total += "<span > " + _this.getTotalAmount(count).toFixed(2) + " \u20AA</span><br>";
             _this.balance = _this.getTotalAmount(count);
-            count++;
+            count++; //YS: Nice
         });
         descriptionValue.innerHTML = description;
         depositVale.innerHTML = deposit;
@@ -49,5 +50,5 @@ function handleSubmit(ev) {
     var newAccount = new BankAccount(description, deposit);
     transactionOne.getTransaction(newAccount);
     transactionOne.renderTransaction();
-    console.log(transactionOne.balance);
+    console.log(transactionOne.balance); //YS: Dont leave console logs in your work.
 }

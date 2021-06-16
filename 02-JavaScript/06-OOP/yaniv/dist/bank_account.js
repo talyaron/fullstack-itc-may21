@@ -1,7 +1,7 @@
 var Transaction = /** @class */ (function () {
     function Transaction(transAmount, transBiz) {
         this.transDate = new Date();
-        this.transId = "id" + Math.random().toString(16).slice(2);
+        this.transId = "id" + Math.random().toString(16).slice(2); //YS: Why are these variables defined here and not in the constructor?
         this.transBiz = transBiz;
         this.transAmount = transAmount;
     }
@@ -22,6 +22,14 @@ var Account = /** @class */ (function () {
         this.refreshTotal(transaction.transAmount);
     };
     Account.prototype.addTransToDOM = function (transaction) {
+        /*YS: Good, if you wanted to make it shorter as you mention you could have created the HTML as a string (using template literals) and then make it equal or append to the innerHTML (innerHTML= or innerHTML+=):
+        <div class="transactions__item transactions__item--action">
+            <i id="sign" class="fas fa-2x fa-plus-circle" title="Income" aria-hidden="true" style="color: green;"></i>
+            <span class="sr-only">Income</span>
+            <div id="trans_amount" style="color: green;">₪20</div>
+            <div id="trans_date">16-6-2021</div><div id="trans_business">asfasf</div>
+            <div id="trans_id">idbd7eb6f648f0a</div>
+        </div>*/
         try {
             var transContainer = document.querySelector(".transactions");
             var signFAClass = transaction.transAmount >= 0 ? "plus" : "minus";
@@ -59,9 +67,9 @@ var Account = /** @class */ (function () {
     return Account;
 }());
 var isModalOpen = false;
+var addTransBtn = document.querySelector(".transactions__item--add");
 var openModal = function () {
     try {
-        var addTransBtn = document.querySelector(".transactions__item--add");
         var modal_1 = document.querySelector(".modalWrapper");
         var modalBox_1 = document.querySelector(".modalBox");
         addTransBtn.addEventListener("click", function (ev) {
@@ -81,7 +89,6 @@ var closeModal = function () {
         var modalBox_2 = document.querySelector(".modalBox");
         close.addEventListener("click", function (ev) {
             isModalOpen = false;
-            console.log('hi');
             modal_2.style.display = "none";
             modalBox_2.style.display = "none";
         });
