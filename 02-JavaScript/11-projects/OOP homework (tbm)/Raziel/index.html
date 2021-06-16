@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dist/index.css">
+</head>
+<body>
+<div class="wrapper-form">
+    <div class="wrapper-form__submmit">
+        <form onsubmit="handleSubmit(event)">
+        <label for="description">Enter a Description:
+            <input type="text" name="description" id="description" required>
+        </label>
+        <label for="deposit">Enter Deposit:
+            <input type="text" name="deposit" id="deposit" required>
+        </label>
+        <button class="button">Deposit</button>
+        </form>
+    </div>
+</div>
+
+<div class="blocks">
+    <div class="blocks__item blocks__item--description">
+        <p>Description</p>
+        <span id="descriptionValue"></span>
+    </div>
+    <div class="blocks__item  blocks__item--deposit">
+        <p>Deposit</p>
+        <span id="depositValue"></span>
+    </div>
+    <div class="blocks__item blocks__item--total">
+        <p>Total</p>
+        <span id="totalValue"></span>
+    </div>
+    </div>
+   <script src="dist/index.js"></script>
+</body>
+</html>

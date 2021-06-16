@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dist/styles.min.css">
+</head>
+
+<body>
+    <div class="wrapper">
+    <div>
+    <form onsubmit="handleSubmit1(event)">
+        <label>Income</label>
+        <input type="number" name="income" placeholder="income">
+        <input type="text" name="incomedescription" placeholder="description">
+        <input type="submit" value="ADD">
+    </form>
+    <form onsubmit="handleSubmit(event)">
+        <label>Expense</label>
+        <input type="number" name="expense" placeholder="expense">
+        <input type="text" name="expensedescription" placeholder="description">
+        <input type="submit" value="ADD">
+    </form>
+    </div>
+    <div>
+    <div class="account">
+        <div class="account__income-wrapper">
+            <div class="account__income-wrapper__income">Income</div>
+            <div class="account__income-wrapper__nametotalincome">Total<br>Income</div>
+            <div class="account__income-wrapper__totalincome"></div>
+        </div>
+        <div class="account__expense-wrapper">
+            <div class="account__expense-wrapper__expense">Expense</div>
+            <div class="account__expense-wrapper__nametotalexpense">Total<br>Expense</div>
+            <div class="account__expense-wrapper__totalexpense"></div>
+        </div>
+    </div>
+    <div class="final-total-wrapper">Final<br>Total
+        <div class="final-total-wrapper__finaltotal"></div>
+    </div>
+    </div>
+    </div>
+
+</body>
+<script src="dist/javascipt.js"></script>
+
+</html>

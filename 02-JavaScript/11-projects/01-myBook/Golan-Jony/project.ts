@@ -20,14 +20,13 @@ class Article {
 
 class ArticleArray{
 
-    articles:Array<string>
+    articles:Array<Article>
 
-    constructor(articles:Array<string>){
-        this.articles = articles;
+    constructor(){
 
     }
 
-    Add(){
+    Add(article:Article){
 
     }
 
@@ -51,10 +50,11 @@ function handlerSumbit(event) {
 
     var root: HTMLElement = document.querySelector('.div');
 
+
     var inputURL = event.target.elements.imageURL.value;
     var description = event.target.elements.description.value;
 
-    var article = document.createElement('div'); 
+    var article:HTMLElement = document.createElement('div'); 
     article.className = "divArt";
     article.style.width = "100px";
     article.style.height = "100px";
