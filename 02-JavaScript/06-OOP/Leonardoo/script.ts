@@ -35,7 +35,7 @@ class Account {
     //Every time that I add a transaction I will use this method, this add a new transaction to the array   
     addTransaction(transaction: Transaction): void {
         try {
-            if (!transaction) throw new Error('The transaction it doesn´t exist!')
+            if (!transaction) throw new Error('The transaction it doesn´t exist!')       //YS: Very nice.  
             this.transactions.push(transaction);
             this.renderTransaction();
             this.total(transaction);
@@ -54,7 +54,7 @@ class Account {
             this.transactions.forEach(element => {
                 if (element.movement === 'deposit') {
                     html += `<div class="deposit">Description: "${element.description}"; Amount: $${element.amount}; Type: ${element.movement}; Date: ${element.date.toLocaleDateString()}</div>`
-                }
+                }   //YS: You could have styled these elements a bit better. 
                 else if (element.movement === 'transfer') {
                     html += `<div class="transfer">Description: "${element.description}"; Amount: $${element.amount}; Type: ${element.movement}; Date: ${element.date.toLocaleDateString()}</div>`
                 }
@@ -95,7 +95,7 @@ const doingSubmit = (ev: any): void => {
 
         const transaction = new Transaction(description, amount, movement);
         if (!transaction) throw new Error('The transaction doesn´t exist!')
-        if (transaction.movement === 'transfer' && transaction.amount > allTransactions.balance) {
+        if (transaction.movement === 'transfer' && transaction.amount > allTransactions.balance) {   //YS: Why? I would have liked to see how you deal with negative numbers - an account could be in minus. 
             alert("It is imposible to do the transaction, you don´t have enough money!")
         } else {
             allTransactions.addTransaction(transaction);

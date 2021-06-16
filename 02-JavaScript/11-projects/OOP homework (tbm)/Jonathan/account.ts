@@ -10,7 +10,12 @@ class Account {
 }
 
 class TransactionList {
-    transaction: Array<Account> = []; //array account
+    transaction: Array<Account> = []; //array account     
+    /* YS: This should be in your constructor:  
+        constructor(description: string, amount: number) {
+        this.transaction = []
+        }
+    */
     balance: number;
 
 
@@ -24,14 +29,14 @@ class TransactionList {
     getTotal(count: number): number {
 
         let sum: number = 0;
-        for (let i: number = 0; i < count; i++) {
+        for (let i: number = 0; i < count; i++) {   //YS: Nice.
             sum += this.transaction[i]['amount'];
         }
         return sum;
 
     }
 
-    getDeleteAll() {
+    getDeleteAll() {     //YS: Why do you leave an empty method? 
 
     }
 
@@ -39,7 +44,7 @@ class TransactionList {
     renderTransaction() {
 
 
-        const descriptionRoot: HTMLElement = document.querySelector('#square__item--description--value');
+        const descriptionRoot: HTMLElement = document.querySelector('#square__item--description--value');    //YS: These HTML elements should be in the global scope. Also format your code. There shouldn't be so much space between variables.  
 
         const depositRoot: HTMLElement = document.querySelector('#square__item--deposit--value');
 
@@ -49,7 +54,7 @@ class TransactionList {
 
         try {
 
-            if (!descriptionRoot) throw new Error('Description Root Not Founded')
+            if (!descriptionRoot) throw new Error('Description Root Not Founded')   //YS: Nice! 
             if (!depositRoot) throw new Error('Description Root Not Founded')
             if (!withdrawRoot) throw new Error('Description Root Not Founded')
             if (!totalRoot) throw new Error('Description Root Not Founded')
@@ -111,7 +116,7 @@ function handleSumbitDeposit(event: any): void {
     const amount: number = parseFloat(event.target.elements.amount_deposit.value);
 
     if (amount <= 0) {
-        alert('Please enter a positive number')
+        alert('Please enter a positive number')          //YS: Why cant you transfer more than you have, in a real bank account you can be in negative. 
     } else {
         const account = new Account(description, amount);
 
@@ -134,9 +139,8 @@ function handleSumbitWithdraw(event: any): void {
 
     if (amount >= 0) {
         alert('Is negative the number you want to enter')
-    }
-    else if (transaction.balance <= 0 || transaction.balance < -amount) {
-        alert('You cant withdraw')
+
+
     } else {
         const account = new Account(description, amount);
 

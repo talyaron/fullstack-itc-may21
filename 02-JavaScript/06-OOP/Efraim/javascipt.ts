@@ -7,14 +7,12 @@ let finalTotal: number = 0;
 class Income {
     income: number;
     descriptionIncome: string;
-
-
     constructor(income: number, descriptionIncome: string) {
         this.income = income;
         this.descriptionIncome = descriptionIncome;
         try {
         this.account1 = document.querySelector('.account__income-wrapper__income');
-        if (!this.account1) {throw new Error('no income box found')}
+        if (!this.account1) {throw new Error('no income box found')}    //YS: Good
         } catch (error) {
             console.error(error);   
         }
@@ -24,7 +22,7 @@ class Income {
     }
     createIncome() {
         try {
-            this.box2 = document.createElement('div');
+            this.box2 = document.createElement('div');  //YS: Give your elements more descriptive names: incomeValue
             this.box2.classList.add("account__income-wrapper__income__incomes");
             this.account1.appendChild(this.box2);
             this.box2.innerHTML = this.income;
@@ -43,6 +41,7 @@ class Income {
             console.error(e)
         }
     }
+    
     totalIncome() {
         try {
             incomeTotal += parseInt(this.income);
@@ -100,10 +99,13 @@ class Expense {
             console.error(e)
         }
     }
-    totalExpense() {
+    totalExpense() {            /* YS: I know that you told me that you made a class for income and a class for expense but I would have liked to see more concise code. It would
+                                    have been better to use only one class. Remember DRY(dont repeat yourself). These two classes are practically the same (Income and Expense), only
+                                    that your operators are different (+ -) */
+
         try {
             expenseTotal += parseInt(this.expense);
-            document.querySelector(".account__expense-wrapper__totalexpense").innerHTML = expenseTotal;
+            document.querySelector(".account__expense-wrapper__totalexpense").innerHTML = expenseTotal;   
             finalTotal -= parseInt(this.expense);
             document.querySelector(".final-total-wrapper__finaltotal").innerHTML = finalTotal;
             if(finalTotal >= 0) {
@@ -130,7 +132,7 @@ const handleSubmit1 = (ev: any): void => {
     const incomeBefore: number = ev.target.elements.income.value;
     const incomedescription: string = ev.target.elements.incomedescription.value;
 
-    const incomeAfter:any = new Income(`${incomeBefore}`, `${incomedescription}`);
+    const incomeAfter:any = new Income(`${incomeBefore}`, `${incomedescription}`);   //YS: why not: new Income(incomeBefore, incomedescription)? You dont need the ``
 
 
     ev.target.reset();
@@ -142,7 +144,7 @@ const handleSubmit = (ev: any): void => {
     const expenseBefore: number = ev.target.elements.expense.value;
     const expenseDescription: string = ev.target.elements.expensedescription.value;
 
-    const expenseAfter:any = new Expense(`${expenseBefore}`, `${expenseDescription}`);
+    const expenseAfter:any = new Expense(`${expenseBefore}`, `${expenseDescription}`); //YS: why not: new Expense(expenseBefore, expenseDescription)? You dont need the ``
 
     ev.target.reset();
 }

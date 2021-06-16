@@ -2,7 +2,7 @@ class Transaction {
   transAmount: number;
   transDate: Date = new Date();
   transBiz: string;
-  transId: string = "id" + Math.random().toString(16).slice(2);
+  transId: string = "id" + Math.random().toString(16).slice(2); //YS: Why are these variables defined here and not in the constructor?
 
   constructor(transAmount: number, transBiz: string) {
     this.transBiz = transBiz;
@@ -31,6 +31,15 @@ class Account {
   }
 
   addTransToDOM(transaction: Transaction) {
+    /*YS: Good, if you wanted to make it shorter as you mention you could have created the HTML as a string (using template literals) and then make it equal or append to the innerHTML (innerHTML= or innerHTML+=): 
+    <div class="transactions__item transactions__item--action">
+        <i id="sign" class="fas fa-2x fa-plus-circle" title="Income" aria-hidden="true" style="color: green;"></i>
+        <span class="sr-only">Income</span>
+        <div id="trans_amount" style="color: green;">₪20</div>
+        <div id="trans_date">16-6-2021</div><div id="trans_business">asfasf</div>
+        <div id="trans_id">idbd7eb6f648f0a</div>
+    </div>*/
+
     try {
       const transContainer: HTMLElement =
         document.querySelector(".transactions");
@@ -83,12 +92,13 @@ class Account {
 }
 
 let isModalOpen: boolean = false;
+const addTransBtn: HTMLElement = document.querySelector(
+  `.transactions__item--add`
+);
 
-const openModal = (): void => {
+const openModal = (): void => {            //YS: Very nice modal!
   try {
-    const addTransBtn: HTMLElement = document.querySelector(
-      `.transactions__item--add`
-    );
+
     const modal: HTMLElement = document.querySelector(`.modalWrapper`);
     const modalBox: HTMLElement = document.querySelector(`.modalBox`);
     addTransBtn.addEventListener(`click`, (ev) => {
@@ -109,7 +119,6 @@ const closeModal = (): void => {
 
     close.addEventListener(`click`, (ev) => {
       isModalOpen = false;
-      console.log('hi');
       modal.style.display = `none`;
       modalBox.style.display = `none`;
     });
@@ -139,7 +148,6 @@ const handleSubmit = (ev: any) => {
     modalBox.style.display = `none`;
 
     ev.target.reset();
-
   } catch (er) {
     console.error(er);
   }
