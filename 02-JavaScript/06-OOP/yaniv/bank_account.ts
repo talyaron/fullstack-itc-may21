@@ -34,51 +34,26 @@ class Account {
     try {
       const transContainer: HTMLElement =
         document.querySelector(".transactions");
-
-      const newTrans: HTMLElement = document.createElement(`div`);
-      newTrans.classList.add(
-        "transactions__item",
-        "transactions__item--action"
-      );
-      transContainer.appendChild(newTrans);
-      const newTransSign: HTMLElement = document.createElement(`i`);
-      newTransSign.id = "sign";
-      newTransSign.classList.add("fas", "fa-2x");
-      if (transaction.transAmount > 0) {
-        newTransSign.classList.add("fa-plus-circle");
-        newTransSign.style.color = "green";
-        newTransSign.title = "Income";
-      } else {
-        newTransSign.classList.add("fa-minus-circle");
-        newTransSign.style.color = "red";
-        newTransSign.title = "Expense";
-      }
-      newTrans.appendChild(newTransSign);
-      const newTransAmount: HTMLElement = document.createElement(`div`);
-      newTransAmount.id = "trans_amount";
-      newTransAmount.innerText = `₪${Math.abs(transaction.transAmount)}`;
-      if (transaction.transAmount >= 0) {
-        newTransAmount.style.color = "green";
-      } else {
-        newTransAmount.style.color = "red";
-      }
-      newTrans.appendChild(newTransAmount);
-      const newTransDate: HTMLElement = document.createElement(`div`);
-      newTransDate.id = "trans_date";
-      newTransDate.innerText = `${transaction.transDate.getDate()}-${
+      const signFAClass = transaction.transAmount >= 0 ? "plus" : "minus";
+      const signTitle = transaction.transAmount >= 0 ? "Income" : "Expense";
+      const transColor = transaction.transAmount >= 0 ? "green" : "red";
+      const transFormatedDate = `${transaction.transDate.getDate()}-${
         transaction.transDate.getMonth() + 1
       }-${transaction.transDate.getFullYear()}`;
-      newTrans.appendChild(newTransDate);
+      const transHTML = `<div class="transactions__item transactions__item--action">
+      <i id="sign" class="fas fa-2x fa-${signFAClass}-circle" title="${signTitle}" style="color: ${transColor};"></i>
+      <div id="trans_amount" style="color: ${transColor};">
+        ₪${Math.abs(transaction.transAmount)}
+      </div>
+      <div id="trans_date">${transFormatedDate}</div>
+      <div id="trans_business">${transaction.transBiz}</div>
+      <div id="trans_id">${transaction.transId}</div>
+    </div>`;
+
+      transContainer.insertAdjacentHTML('beforeend',transHTML);
+
       const totalDate: HTMLElement = document.querySelector("#total_date");
-      totalDate.innerText = `For Date: ${newTransDate.innerText}`;
-      const newTransBiz: HTMLElement = document.createElement(`div`);
-      newTransBiz.id = "trans_business";
-      newTransBiz.innerText = `${transaction.transBiz}`;
-      newTrans.appendChild(newTransBiz);
-      const newTransId: HTMLElement = document.createElement(`div`);
-      newTransId.id = "trans_id";
-      newTransId.innerText = `${transaction.transId}`;
-      newTrans.appendChild(newTransId);
+      totalDate.innerText = `For Date: ${transFormatedDate}`;
     } catch (er) {
       console.error(er);
     }
@@ -113,7 +88,6 @@ const openModal = (): void => {
     );
     const modal: HTMLElement = document.querySelector(`.modalWrapper`);
     const modalBox: HTMLElement = document.querySelector(`.modalBox`);
-
     addTransBtn.addEventListener(`click`, (ev) => {
       isModalOpen = true;
       modal.style.display = `flex`;
@@ -132,6 +106,7 @@ const closeModal = (): void => {
 
     close.addEventListener(`click`, (ev) => {
       isModalOpen = false;
+      console.log('hi');
       modal.style.display = `none`;
       modalBox.style.display = `none`;
     });
@@ -161,6 +136,7 @@ const handleSubmit = (ev: any) => {
     modalBox.style.display = `none`;
 
     ev.target.reset();
+
   } catch (er) {
     console.error(er);
   }

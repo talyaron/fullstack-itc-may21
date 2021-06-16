@@ -3,9 +3,9 @@
 // 3. Have a total method.
 // 4. Write all transactions in the order they occurred, with the last line: total.
 // Use TypeScript, SCSS, BEM etc.
-var button1 = document.getElementById('deposit_check');
-var button2 = document.getElementById('withdraw_check');
-var amount_total = document.getElementById('amount');
+var button1 = document.getElementById("deposit_check");
+var button2 = document.getElementById("withdraw_check");
+var amount_total = document.getElementById("amount");
 // Funcion para tomar info de formulario
 var handleSubmit = function (ev) {
     ev.preventDefault();
@@ -19,7 +19,7 @@ var handleSubmit = function (ev) {
     var newTrasaction = new Transaction(trans, amount, description);
     newTrans.addTrans(newTrasaction);
     newTrans.renderTrans();
-    alert('YOU HAD MADE A NEW TRANSACTION!');
+    alert("YOU HAD MADE A NEW TRANSACTION!");
 };
 var Transaction = /** @class */ (function () {
     function Transaction(trans, amount, description) {
@@ -37,10 +37,10 @@ var TransactionList = /** @class */ (function () {
         this.transaction.push(trans);
     };
     TransactionList.prototype.renderTrans = function () {
-        var transRoot = document.querySelector('#acount_transactions__print');
-        var TotalRoot = document.querySelector('#acount_total__print');
+        var transRoot = document.querySelector("#acount_transactions__print");
+        var TotalRoot = document.querySelector("#acount_total__print");
         //loop over transactions
-        var htmlTrans = '';
+        var htmlTrans = "";
         var htmlTotal = 0;
         this.transaction.forEach(function (trans) {
             htmlTrans += "<div class=\"trans\"><li>" + trans.trans + ": $" + trans.amount + " - Description: " + trans.description + "</li></div>";
