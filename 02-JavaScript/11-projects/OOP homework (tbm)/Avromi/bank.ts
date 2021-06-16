@@ -23,7 +23,7 @@ class Transaction {
 }
 
 class AllTransactions {
-    transactions: Transaction[] = [];
+    transactions: Transaction= [];
 
     add(transaction: Transaction) {
         this.transactions.push(transaction);
@@ -45,13 +45,15 @@ class AllTransactions {
         // var total = 0;
         // for (var i in arr) { total += arr[i]; }
  
-        let result[] = this.transactions.map(a => a.amount);
-        console.log(result)
+    //     let result[] = this.transactions.map(a => a.amount);
+    //     console.log(result)
 
         
 
-       total = [result].reduce((a, b) => a + b)
-          
+    //    total = [result].reduce((a, b) => a + b)
+
+        
+         
 
         const totalDiv: HTMLElement = document.querySelector(".total")
 
