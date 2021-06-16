@@ -12,14 +12,16 @@ class Transaction {
     }
 }
 
-const bankAccount:Array<Transaction> = [];
 
-bankAccount.push(new Transaction(13,new Date(),'tel-aviv','ATM transaction'));
-bankAccount.push(new Transaction(-200,new Date(),'tel-aviv','ATM transaction'));
-console.log(bankAccount);
+class Account{
+    account:Array<Transaction>;
 
-let total = 0;
-bankAccount.forEach(transaction=>{
-    total += transaction.amount;
-})
-console.log(`Total amount in you account is ${total}`);
+    addNewTransaction(amount: number, date: Date, place: string, description: string){
+        this.account.push(new Transaction(amount, date, place, description))
+    }
+}
+
+
+
+
+
