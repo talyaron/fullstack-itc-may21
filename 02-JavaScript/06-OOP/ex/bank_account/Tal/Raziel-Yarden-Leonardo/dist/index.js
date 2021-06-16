@@ -39,7 +39,7 @@ var Account = /** @class */ (function () {
     Account.prototype.findTransactionsByDate = function (fromDate, toDate) {
         try {
             this.account.forEach(function (element) {
-                if (fromDate < element.date && toDate > element.date) {
+                if (fromDate <= element.date && toDate >= element.date) {
                     console.log(element.description);
                 }
             });

@@ -52,7 +52,7 @@ class Account {
     findTransactionsByDate(fromDate: Date, toDate: Date) {
         try {
             this.account.forEach(element => {
-                if (fromDate < element.date && toDate > element.date) {
+                if (fromDate <= element.date && toDate >= element.date) {
                     console.log(element.description);
                 }
             })
