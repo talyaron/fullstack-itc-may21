@@ -28,7 +28,8 @@ var Account = /** @class */ (function () {
             var signTitle = transaction.transAmount >= 0 ? "Income" : "Expense";
             var transColor = transaction.transAmount >= 0 ? "green" : "red";
             var transFormatedDate = transaction.transDate.getDate() + "-" + (transaction.transDate.getMonth() + 1) + "-" + transaction.transDate.getFullYear();
-            transContainer.innerHTML += "<div class=\"transactions__item transactions__item--action\">\n          <i id=\"sign\" class=\"fas fa-2x fa-" + signFAClass + "-circle\" title=\"" + signTitle + "\" style=\"color: " + transColor + ";\"></i>\n          <div id=\"trans_amount\" style=\"color: " + transColor + ";\">\n            \u20AA" + Math.abs(transaction.transAmount) + "\n          </div>\n          <div id=\"trans_date\">" + transFormatedDate + "</div>\n          <div id=\"trans_business\">" + transaction.transBiz + "</div>\n          <div id=\"trans_id\">" + transaction.transId + "</div>\n        </div>";
+            var transHTML = "<div class=\"transactions__item transactions__item--action\">\n      <i id=\"sign\" class=\"fas fa-2x fa-" + signFAClass + "-circle\" title=\"" + signTitle + "\" style=\"color: " + transColor + ";\"></i>\n      <div id=\"trans_amount\" style=\"color: " + transColor + ";\">\n        \u20AA" + Math.abs(transaction.transAmount) + "\n      </div>\n      <div id=\"trans_date\">" + transFormatedDate + "</div>\n      <div id=\"trans_business\">" + transaction.transBiz + "</div>\n      <div id=\"trans_id\">" + transaction.transId + "</div>\n    </div>";
+            transContainer.insertAdjacentHTML('beforeend', transHTML);
             var totalDate = document.querySelector("#total_date");
             totalDate.innerText = "For Date: " + transFormatedDate;
         }
