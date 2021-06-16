@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var Transaction = /** @class */ (function () {
     function Transaction(amount, date, place, description) {
         this.transactionId = "id" + Math.random().toString(16).slice(2);
@@ -35,6 +37,17 @@ var Account = /** @class */ (function () {
             console.error(e);
         }
     };
+    Account.prototype.filterByDate = function (fromDate, toDate) {
+        try {
+            // create the array to be returned eventually + find all transactions between those dates
+            var filteredbyDates = this.account.filter(function (transaction) { return ((transaction.date >= fromDate) && (transaction.date <= toDate)); });
+            // return a new array with only those transactions
+            return filteredbyDates;
+        }
+        catch (er) {
+            console.error(er);
+        }
+    };
     return Account;
 }());
 var account = new Account('Yaniv');
@@ -44,3 +57,5 @@ console.log(account.calculateSum());
 console.log(JSON.stringify(account));
 account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
 console.log(account);
+var filteredAccount = account.filterByDate(new Date('15-jun-2021'), new Date('17-jun-2021'));
+console.log(filteredAccount);

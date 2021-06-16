@@ -1,3 +1,5 @@
+export{};
+
 class Transaction {
     amount: number;
     date: Date;
@@ -19,7 +21,7 @@ class Transaction {
 class Account {
     account: Array<Transaction> = [];
     name: string = '';
-    constructor(name) {
+    constructor(name : string) {
         this.name = name
     }
 
@@ -45,6 +47,18 @@ class Account {
             console.error(e);
         }
     }
+
+    filterByDate(fromDate : Date, toDate : Date) {
+        try {
+            // create the array to be returned eventually + find all transactions between those dates
+            const filteredbyDates : Array<Transaction> = this.account.filter((transaction) => ((transaction.date >= fromDate) && (transaction.date <= toDate)) );
+
+            // return a new array with only those transactions
+            return filteredbyDates;
+        } catch (er) {
+            console.error(er);
+        }
+    }    
 }
 
 let account = new Account('Yaniv');
@@ -55,10 +69,10 @@ console.log(account.calculateSum());
 console.log(JSON.stringify(account))
 
 account.editTransaction(transactionId1,'Walllllaaaaa!!!');
-console.log(account)
+console.log(account);
 
-
-
+const filteredAccount = account.filterByDate(new Date('15-jun-2021'), new Date('17-jun-2021'));
+console.log(filteredAccount);
 
 
 
