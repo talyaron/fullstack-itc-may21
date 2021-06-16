@@ -1,4 +1,5 @@
-// export{};
+
+//method to see the transactions in a specific date
 
 class Transaction {
     amount: number;
@@ -21,7 +22,7 @@ class Transaction {
 class Account {
     account: Array<Transaction> = [];
     name: string = '';
-    constructor(name : string) {
+    constructor(name) {
         this.name = name
     }
 
@@ -48,35 +49,40 @@ class Account {
         }
     }
 
-    filterByDate(fromDate : Date, toDate : Date) {
+    findTransactionsByDate(fromDate: Date, toDate: Date) {
         try {
-            // create the array to be returned eventually + find all transactions between those dates
-            // [trans1, trans2, trans3, trans4]
-            const filteredbyDates : Array<Transaction> = this.account.filter(
-                (transaction) => ((transaction.date >= fromDate) && (transaction.date <= toDate))
-            );
-
-            // return a new array with only those transactions
-            return filteredbyDates;
-        } catch (er) {
-            console.error(er);
+            this.account.forEach(element => {
+                if (fromDate <= element.date && toDate >= element.date) {
+                    console.log(element.description);
+                }
+            })
+        } catch (error) {
+            console.error(error);
         }
-    }    
+    }
 }
 
 let account = new Account('Yaniv');
 const transactionId1 = account.addNewTransaction(100, new Date(), 'Tel-Aviv', 'Bank deposit');
 account.addNewTransaction(-300, new Date(), 'Ramat-Gan', 'ATM redrwal');
+account.addNewTransaction(-300, new Date('20-Jun-2020'), 'Ramat-Gan', 'ATM redrwal');
 
-console.log(account.calculateSum());
+
+/* console.log(account.calculateSum());
 console.log(JSON.stringify(account))
+ */
+account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
+/* console.log(account) */
 
-account.editTransaction(transactionId1,'Walllllaaaaa!!!');
-console.log(account);
+const doSubmit = (ev: any): void => {
+    ev.preventDefault();
+    const fromDate: Date = new Date(ev.target.elements.fromDate.value);
+    const toDate: Date = new Date(ev.target.elements.toDate.value);
 
-const filteredAccount = account.filterByDate(new Date('15-jun-2021'), new Date('17-jun-2021'));
-console.log(`The filtered array is:`);
-filteredAccount.forEach(transaction => console.log(transaction.transactionId));
+    account.findTransactionsByDate(fromDate, toDate);
+}
+
+
 
 
 
