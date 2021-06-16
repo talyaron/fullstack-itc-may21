@@ -51,7 +51,10 @@ class Account {
     filterByDate(fromDate : Date, toDate : Date) {
         try {
             // create the array to be returned eventually + find all transactions between those dates
-            const filteredbyDates : Array<Transaction> = this.account.filter((transaction) => ((transaction.date >= fromDate) && (transaction.date <= toDate)) );
+            // [trans1, trans2, trans3, trans4]
+            const filteredbyDates : Array<Transaction> = this.account.filter(
+                (transaction) => ((transaction.date >= fromDate) && (transaction.date <= toDate))
+            );
 
             // return a new array with only those transactions
             return filteredbyDates;
@@ -72,8 +75,8 @@ account.editTransaction(transactionId1,'Walllllaaaaa!!!');
 console.log(account);
 
 const filteredAccount = account.filterByDate(new Date('15-jun-2021'), new Date('17-jun-2021'));
-console.log(`The filtered array is: ${JSON.stringify(filteredAccount)}`);
-
+console.log(`The filtered array is:`);
+filteredAccount.forEach(transaction => console.log(transaction.transactionId));
 
 
 
