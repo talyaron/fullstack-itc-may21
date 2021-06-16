@@ -37,9 +37,9 @@ var AllTransactions = /** @class */ (function () {
         // var arr = this.transactions
         // var total = 0;
         // for (var i in arr) { total += arr[i]; }
-        var result, _a = this.transactions.map(function (a) { return a.amount; });
-        console.log(result);
-        total = [result].reduce(function (a, b) { return a + b; });
+        //     let result[] = this.transactions.map(a => a.amount);
+        //     console.log(result)
+        //    total = [result].reduce((a, b) => a + b)
         var totalDiv = document.querySelector(".total");
         totalDiv.innerHTML = "<p>Running Total:" + total + " </p>";
     };

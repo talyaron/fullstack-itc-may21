@@ -37,7 +37,7 @@ class Account {
     editTransaction(transactionIdToEdit: string, updatedDescription: string) {
         try {
             //find the transactiond
-            const transactionIndex: number = this.account.findIndex(transaction => transaction.transactionId === transactionIdToEdit);
+            const transactionIndex: number = this.account.findIndex(transaction => transaction.transactionId === transactionIdToEdit );
             console.log(transactionIndex)
             //want to edit
             this.account[transactionIndex].description = updatedDescription;
@@ -54,7 +54,7 @@ account.addNewTransaction(-300, new Date(), 'Ramat-Gan', 'ATM redrwal');
 console.log(account.calculateSum());
 console.log(JSON.stringify(account))
 
-account.editTransaction(transactionId1,'Walllllaaaaa!!!');
+account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
 console.log(account)
 
 
