@@ -20,7 +20,7 @@ function inputChecker ():void {
     handleSubmit(); 
 }
 
-function handleSubmit(ev: any): void {
+function handleSubmit(ev: any): void {                       //YS: Here you are missing ev.preventDefault(), notice that your page refereshes whenever you click the submit button.;
   const intDeposit = parseInt(depositString);
   const intWithdrawal = parseInt(withdrawalString);
 let newAccount = new Account(userName, intDeposit, intWithdrawal);

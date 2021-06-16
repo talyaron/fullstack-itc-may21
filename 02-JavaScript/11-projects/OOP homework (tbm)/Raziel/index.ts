@@ -1,4 +1,4 @@
-
+//YS: Please format your document before turning it in! 
 
 class BankAccount{
     amount:number;
@@ -30,7 +30,7 @@ class Transaction{
 
 renderTransaction(){
 
-const descriptionValue:HTMLElement=document.querySelector('#descriptionValue');
+const descriptionValue:HTMLElement=document.querySelector('#descriptionValue');   //YSL Where is try/catch? (error handling)
 const depositVale:HTMLElement=document.querySelector('#depositValue');
 const totalValue:HTMLElement=document.querySelector('#totalValue');
 
@@ -45,7 +45,7 @@ this.transaction.forEach(acc=>{
     deposit += `<span> ${acc.amount.toFixed(2)} ₪</span><br>`
     total += `<span > ${this.getTotalAmount(count).toFixed(2)} ₪</span><br>`;
     this.balance = this.getTotalAmount(count);
-    count++;
+    count++; //YS: Nice
 
 });
  descriptionValue.innerHTML=description;
@@ -64,5 +64,5 @@ function handleSubmit(ev:any):void{
     const newAccount=new BankAccount(description,deposit);
     transactionOne.getTransaction(newAccount);
     transactionOne.renderTransaction();
-    console.log(transactionOne.balance);
+    console.log(transactionOne.balance);  //YS: Dont leave console logs in your work.
 }

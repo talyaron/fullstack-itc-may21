@@ -7,7 +7,7 @@ var Account = /** @class */ (function () {
 }());
 var TransactionList = /** @class */ (function () {
     function TransactionList() {
-        this.transaction = []; //array account
+        this.transaction = []; //array account     
     }
     TransactionList.prototype.getTransaction = function (account) {
         //add transaction
@@ -15,7 +15,7 @@ var TransactionList = /** @class */ (function () {
     };
     TransactionList.prototype.getTotal = function (count) {
         var sum = 0;
-        for (var i = 0; i < count; i++) {
+        for (var i = 0; i < count; i++) { //YS: Nice.
             sum += this.transaction[i]['amount'];
         }
         return sum;
@@ -24,13 +24,13 @@ var TransactionList = /** @class */ (function () {
     };
     TransactionList.prototype.renderTransaction = function () {
         var _this = this;
-        var descriptionRoot = document.querySelector('#square__item--description--value');
+        var descriptionRoot = document.querySelector('#square__item--description--value'); //YS: These HTML elements should be in the global scope. Also format your code. There shouldn't be so much space between variables.  
         var depositRoot = document.querySelector('#square__item--deposit--value');
         var withdrawRoot = document.querySelector('#square__item--withdraw--value');
         var totalRoot = document.querySelector('#square__item--total--value');
         try {
             if (!descriptionRoot)
-                throw new Error('Description Root Not Founded');
+                throw new Error('Description Root Not Founded'); //YS: Nice! 
             if (!depositRoot)
                 throw new Error('Description Root Not Founded');
             if (!withdrawRoot)
@@ -77,7 +77,7 @@ function handleSumbitDeposit(event) {
     var description = event.target.elements.description_deposit.value;
     var amount = parseFloat(event.target.elements.amount_deposit.value);
     if (amount <= 0) {
-        alert('Please enter a positive number');
+        alert('Please enter a positive number'); //YS: Why cant you transfer more than you have, in a real bank account you can be in negative. 
     }
     else {
         var account = new Account(description, amount);
@@ -91,9 +91,6 @@ function handleSumbitWithdraw(event) {
     var amount = -parseFloat(event.target.elements.amount_withdraw.value);
     if (amount >= 0) {
         alert('Is negative the number you want to enter');
-    }
-    else if (transaction.balance <= 0 || transaction.balance < -amount) {
-        alert('You cant withdraw');
     }
     else {
         var account = new Account(description, amount);

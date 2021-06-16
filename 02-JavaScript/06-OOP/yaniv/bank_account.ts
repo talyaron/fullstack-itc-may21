@@ -2,7 +2,7 @@ class Transaction {
   transAmount: number;
   transDate: Date = new Date();
   transBiz: string;
-  transId: string = "id" + Math.random().toString(16).slice(2);
+  transId: string = "id" + Math.random().toString(16).slice(2); //YS: Why are these variables defined here and not in the constructor?
 
   constructor(transAmount: number, transBiz: string) {
     this.transBiz = transBiz;
@@ -31,54 +31,38 @@ class Account {
   }
 
   addTransToDOM(transaction: Transaction) {
+    /*YS: Good, if you wanted to make it shorter as you mention you could have created the HTML as a string (using template literals) and then make it equal or append to the innerHTML (innerHTML= or innerHTML+=): 
+    <div class="transactions__item transactions__item--action">
+        <i id="sign" class="fas fa-2x fa-plus-circle" title="Income" aria-hidden="true" style="color: green;"></i>
+        <span class="sr-only">Income</span>
+        <div id="trans_amount" style="color: green;">₪20</div>
+        <div id="trans_date">16-6-2021</div><div id="trans_business">asfasf</div>
+        <div id="trans_id">idbd7eb6f648f0a</div>
+    </div>*/
+
     try {
       const transContainer: HTMLElement =
         document.querySelector(".transactions");
-
-      const newTrans: HTMLElement = document.createElement(`div`);
-      newTrans.classList.add(
-        "transactions__item",
-        "transactions__item--action"
-      );
-      transContainer.appendChild(newTrans);
-      const newTransSign: HTMLElement = document.createElement(`i`);
-      newTransSign.id = "sign";
-      newTransSign.classList.add("fas", "fa-2x");
-      if (transaction.transAmount > 0) {
-        newTransSign.classList.add("fa-plus-circle");
-        newTransSign.style.color = "green";
-        newTransSign.title = "Income";
-      } else {
-        newTransSign.classList.add("fa-minus-circle");
-        newTransSign.style.color = "red";
-        newTransSign.title = "Expense";
-      }
-      newTrans.appendChild(newTransSign);
-      const newTransAmount: HTMLElement = document.createElement(`div`);
-      newTransAmount.id = "trans_amount";
-      newTransAmount.innerText = `₪${Math.abs(transaction.transAmount)}`;
-      if (transaction.transAmount >= 0) {
-        newTransAmount.style.color = "green";
-      } else {
-        newTransAmount.style.color = "red";
-      }
-      newTrans.appendChild(newTransAmount);
-      const newTransDate: HTMLElement = document.createElement(`div`);
-      newTransDate.id = "trans_date";
-      newTransDate.innerText = `${transaction.transDate.getDate()}-${
+      const signFAClass = transaction.transAmount >= 0 ? "plus" : "minus";
+      const signTitle = transaction.transAmount >= 0 ? "Income" : "Expense";
+      const transColor = transaction.transAmount >= 0 ? "green" : "red";
+      const transFormatedDate = `${transaction.transDate.getDate()}-${
         transaction.transDate.getMonth() + 1
       }-${transaction.transDate.getFullYear()}`;
-      newTrans.appendChild(newTransDate);
+      const transHTML = `<div class="transactions__item transactions__item--action">
+      <i id="sign" class="fas fa-2x fa-${signFAClass}-circle" title="${signTitle}" style="color: ${transColor};"></i>
+      <div id="trans_amount" style="color: ${transColor};">
+        ₪${Math.abs(transaction.transAmount)}
+      </div>
+      <div id="trans_date">${transFormatedDate}</div>
+      <div id="trans_business">${transaction.transBiz}</div>
+      <div id="trans_id">${transaction.transId}</div>
+    </div>`;
+
+      transContainer.insertAdjacentHTML('beforeend',transHTML);
+
       const totalDate: HTMLElement = document.querySelector("#total_date");
-      totalDate.innerText = `For Date: ${newTransDate.innerText}`;
-      const newTransBiz: HTMLElement = document.createElement(`div`);
-      newTransBiz.id = "trans_business";
-      newTransBiz.innerText = `${transaction.transBiz}`;
-      newTrans.appendChild(newTransBiz);
-      const newTransId: HTMLElement = document.createElement(`div`);
-      newTransId.id = "trans_id";
-      newTransId.innerText = `${transaction.transId}`;
-      newTrans.appendChild(newTransId);
+      totalDate.innerText = `For Date: ${transFormatedDate}`;
     } catch (er) {
       console.error(er);
     }
@@ -105,15 +89,15 @@ class Account {
 }
 
 let isModalOpen: boolean = false;
+const addTransBtn: HTMLElement = document.querySelector(
+  `.transactions__item--add`
+);
 
-const openModal = (): void => {
+const openModal = (): void => {            //YS: Very nice modal!
   try {
-    const addTransBtn: HTMLElement = document.querySelector(
-      `.transactions__item--add`
-    );
+
     const modal: HTMLElement = document.querySelector(`.modalWrapper`);
     const modalBox: HTMLElement = document.querySelector(`.modalBox`);
-
     addTransBtn.addEventListener(`click`, (ev) => {
       isModalOpen = true;
       modal.style.display = `flex`;
