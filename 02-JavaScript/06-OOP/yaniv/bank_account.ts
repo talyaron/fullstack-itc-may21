@@ -49,11 +49,14 @@ class Account {
       const transFormatedDate = `${transaction.transDate.getDate()}-${
         transaction.transDate.getMonth() + 1
       }-${transaction.transDate.getFullYear()}`;
+      const totalBeforeContainer: HTMLElement = document.querySelector("#total_amount");
+
       const transHTML = `<div class="transactions__item transactions__item--action">
       <i id="sign" class="fas fa-2x fa-${signFAClass}-circle" title="${signTitle}" style="color: ${transColor};"></i>
       <div id="trans_amount" style="color: ${transColor};">
         ₪${Math.abs(transaction.transAmount)}
       </div>
+      <div id="temp_total">Balace: ₪${Number(totalBeforeContainer.innerHTML.replace('₪','')) + transaction.transAmount}</div>
       <div id="trans_date">${transFormatedDate}</div>
       <div id="trans_business">${transaction.transBiz}</div>
       <div id="trans_id">${transaction.transId}</div>
@@ -61,8 +64,8 @@ class Account {
 
       transContainer.insertAdjacentHTML('beforeend',transHTML);
 
-      const totalDate: HTMLElement = document.querySelector("#total_date");
-      totalDate.innerText = `For Date: ${transFormatedDate}`;
+      const totalDateContainer: HTMLElement = document.querySelector("#total_date");
+      totalDateContainer.innerText = `For Date: ${transFormatedDate}`;
     } catch (er) {
       console.error(er);
     }

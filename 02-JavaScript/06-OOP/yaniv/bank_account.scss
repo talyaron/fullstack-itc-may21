@@ -90,9 +90,10 @@ body {
         &--action {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 2fr 1fr 1fr 1fr;
+            grid-template-rows: 2fr 1fr 1fr 1fr 1fr;
             grid-template-areas:
                 "sign amount"
+                "sign tempTot"
                 "sign date"
                 "sign biz"
                 "sign id";
@@ -105,6 +106,10 @@ body {
                 grid-area: amount;
                 font-size: 1.5rem;
                 font-weight: bold;
+            }
+
+            #temp_total {
+                grid-area: tempTot;
             }
 
             #trans_date {
