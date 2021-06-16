@@ -1,5 +1,4 @@
-"use strict";
-exports.__esModule = true;
+// export{};
 var Transaction = /** @class */ (function () {
     function Transaction(amount, date, place, description) {
         this.transactionId = "id" + Math.random().toString(16).slice(2);
@@ -58,4 +57,4 @@ console.log(JSON.stringify(account));
 account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
 console.log(account);
 var filteredAccount = account.filterByDate(new Date('15-jun-2021'), new Date('17-jun-2021'));
-console.log(filteredAccount);
+console.log("The filtered array is: " + JSON.stringify(filteredAccount));
