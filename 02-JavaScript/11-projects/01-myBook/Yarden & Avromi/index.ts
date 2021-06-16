@@ -1,4 +1,4 @@
-export{}
+
 var handleSumbit = (ev:any): void =>{
     ev.preventDefault()
 
@@ -6,22 +6,21 @@ var handleSumbit = (ev:any): void =>{
 }
 
 class Article{
-    imgUrl:URL
+    imgUrl:string
     description:string
     articleId:string
 
-    constructor(imgUrl:URL, description:string, articleId:string){
+    constructor(imgUrl:string, description:string, articleId:string){
         this.imgUrl = imgUrl
         this.description = description
-        this.articleId = articleId
+        this.articleId = "id" + Math.random().toString(16).slice(2)
 
     }
 
 } 
 
 class ArticleArray{
-    article:Article
-    constructor(article:Article){
-        this.article = article
-    }
+    article:Article[]
+    constructor(){
+       
 }
