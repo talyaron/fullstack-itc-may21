@@ -1,54 +1,68 @@
 
 
-class DepoSit{
-    deposit:number;
-    transaction:string;
-    constructor( deposit:number, transaction:string){
-        this.deposit=deposit;
-        this.transaction=transaction;
-
+class BankAccount{
+    amount:number;
+    description:string;
+    constructor(description:string,amount:number){
+        this.amount=amount;
+    this.description=description;
     }
 }
-class AddDep{
 
-     addMoney:Array<DepoSit>=[];
 
-     addDep(dep:DepoSit){
-         this.addMoney.push(dep);
-     }
-     renderDeposit(){
-         const depositScreen:HTMLElement=document.querySelector('#depositScreen');
+class Transaction{
+    transaction:Array<BankAccount>=[];
+    balance:number;
 
-         let addToDiv:string="";
-         this.addMoney.forEach(add=>{
-             addToDiv+=`<div><p>Amount:${add.deposit}</p><br><p>Details:${add.transaction}</p>`
-         })
-         depositScreen.innerHTML=addToDiv;
-     }
+    getTransaction(acc:BankAccount){
+        this.transaction.push(acc);
+    }
 
-     totalAmount(){
-        const totalScreen:HTMLElement=document.querySelector('#totalScreen');
-       let sumHtml:string='';
-        let sum=this.addMoney.reduce((a,b)=>a+b.deposit,0);
-       sumHtml=`<p>Total:${sum}</p>`;
-       totalScreen.innerHTML=sumHtml;
-       console.log(sum);
-     }
+    getTotalAmount(count:number):number{
+        let x:number=0;
+        for(let i=0;i<count;i++){
+            x+=this.transaction[i]['amount'];
 
+        }
+        return x;
+    }
+
+
+renderTransaction(){
+
+const descriptionValue:HTMLElement=document.querySelector('#descriptionValue');
+const depositVale:HTMLElement=document.querySelector('#depositValue');
+const totalValue:HTMLElement=document.querySelector('#totalValue');
+
+            let description: string = '';
+            let deposit: string = '';
+            let total: string = '';
+            let count: number = 1;
+
+this.transaction.forEach(acc=>{
+
+    description += `<span>${count}- ${acc.description}</span><br>`
+    deposit += `<span> ${acc.amount.toFixed(2)} ₪</span><br>`
+    total += `<span > ${this.getTotalAmount(count).toFixed(2)} ₪</span><br>`;
+    this.balance = this.getTotalAmount(count);
+    count++;
+
+});
+ descriptionValue.innerHTML=description;
+ depositVale.innerHTML=deposit;
+ totalValue.innerHTML=total;
+
+}
 }
 
 
-
-const addDeposit= new AddDep();
- const handleDeposit=(ev:any):void=>{
+const transactionOne=new Transaction();
+function handleSubmit(ev:any):void{
     ev.preventDefault();
-    const deposit:number=ev.target.elements.deposit.value;
-    const transaction:string=ev.target.elements.transaction.value;
-     const newAction=new DepoSit(deposit,`${transaction}`);
-     console.log(newAction);
-    addDeposit.addDep(newAction);
-    addDeposit.renderDeposit();
-    addDeposit.totalAmount();
-
- }
- 
+    const description:string=ev.target.elements.description.value;
+    const deposit:number=parseFloat(ev.target.elements.deposit.value);
+    const newAccount=new BankAccount(description,deposit);
+    transactionOne.getTransaction(newAccount);
+    transactionOne.renderTransaction();
+    console.log(transactionOne.balance);
+}

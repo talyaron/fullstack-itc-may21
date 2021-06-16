@@ -14,20 +14,26 @@
             <div class="actions-wrapper__deposit-wrapper">
                 <label for="deposit">Deposit</label>
                 <input type="number" name="deposit" id="deposit" required min="1">
-                <button type="submit">Deposit</button>
                 <br>
+                <label for="deposit-description">Description</label>
+                <input type="text" name="deposit-description" id="deposit-description">
+                <button onsubmit="handleSubmit(event)" id="depositButton">Deposit</button>
+                <br><br><br>
             </div>
-                <div class="actions-wrapper__withdraw-wrapper">
+            <div class="actions-wrapper__withdraw-wrapper">
                 <label for="withdraw">Withdraw</label>
-                <input type="number" name="withdraw" id="withdraw" required min="1">
-                <button type="submit">Withdraw</button>
-                </div>
+                <input type="number" name="withdraw" id="withdrawSum" required min="1">
+                <br>
+                <label for="withdraw-description">Description</label>
+                <input type="text" name="withdraw-description" id="withdraw-description">
+                <button onsubmit="handleSubmit(event)" id="withdrawButton">Withdraw</button>
+            </div>
         </div>
         <div class="overview-wrapper">
             <h2 class="overview-wrapper__total-headline">Total Balance:</h2>
             <p class="overview-wrapper__total-balance"></p>
             <h3 class="overview-wrapper__transactions-headline">Transactions:</h3>
-            <ul class="overview-wrapper__transactions">
+            <ul class="overview-wrapper__transactions-list">
             </ul>
         </div>
     </div> 

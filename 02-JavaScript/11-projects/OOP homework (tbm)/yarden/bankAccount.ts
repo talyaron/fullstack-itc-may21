@@ -1,5 +1,22 @@
-let totalAmount:number = 0
+class Account {
+    
+    totalAmount: number;
+    transactionList:Array<Transaction> = []
 
+    constructor(totalAmount:number = 0, transactionList:Array<Transaction>) {
+        this.totalAmount = totalAmount
+        this.transactionList = transactionList
+    }
+
+    addTransaction = (transaction:Transaction) => {
+        this.transactionList.push(transaction)
+        this.totalAmount += transaction.amount
+    }
+
+    total = () => {
+        return this.totalAmount 
+    }
+}
 
 class Transaction {
         
@@ -10,34 +27,28 @@ class Transaction {
         this.description = description
         this.amount = amount
     }
-    
-    addWithdrawal = () => { 
-        let withdraw = document.querySelector('#withdraw')
-        withdraw.addEventListener('click', () => {
-        return totalAmount -= withdraw:Number
-        })
-}
 
     addDeposit = () => { 
-        let deposit = document.querySelector('#deposit')
-        deposit.addEventListener('click', () => {
-        return totalAmount += deposit:Number
+        const depositButton = document.querySelector('#depositButton')
+        let depositSum = document.querySelector('#deposit')
+        depositSum.addEventListener('click', () => {
+            return Account.total += depositSum
         })
     }
 
-}
-
-class Account {
-
-    totalAmount: number;
-    transactionList:Array<Transaction> = []
-
-    addTransaction = (transaction:Transaction) => {
-        this.transactionList.push(transaction)
-        this.totalAmount += transaction.amount
+    addWithdrawal = () => { 
+        const withdrawButton = document.querySelector('#withdrawButton')
+        let withdrawSum = document.querySelector('#withdrawSum')        
+        withdrawButton.addEventListener('click', () => {
+            return Account.total += withdrawSum
+            
+        })
     }
+    generateTranListItem = (this.description, this.amount) {
+        const tranList = document.querySelector('.overview-wrapper__transactions-list')
+        tranList.appendChild
+        
 
-    total = () => { return this.totalAmount }
-
-    getTransactionsString = () => { return this.transactionList.reduce } 
+    }
 }
+
