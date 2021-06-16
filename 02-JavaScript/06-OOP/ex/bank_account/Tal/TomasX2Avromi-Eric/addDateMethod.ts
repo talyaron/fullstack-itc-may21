@@ -59,7 +59,7 @@ account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
 console.log(account)
 
 var startDate = new Date("2015-08-04");
-        var endDate = new Date("2015-08-12");
+var endDate = new Date("2015-08-12");
 
         var resultProductData = product_data.filter(function (a) {
             var hitDates = a.ProductHits || {};

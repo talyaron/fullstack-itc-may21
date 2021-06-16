@@ -51,7 +51,10 @@ class Account {
     filterByDate(fromDate : Date, toDate : Date) {
         try {
             // create the array to be returned eventually + find all transactions between those dates
-            const filteredbyDates : Array<Transaction> = this.account.filter((transaction) => ((transaction.date >= fromDate) && (transaction.date <= toDate)) );
+            // [t1,t2,t3,t4]
+            const filteredbyDates : Array<Transaction> = this.account.filter(
+                (transaction) => ((transaction.date >= fromDate) && (transaction.date <= toDate))
+            );
 
             // return a new array with only those transactions
             return filteredbyDates;
