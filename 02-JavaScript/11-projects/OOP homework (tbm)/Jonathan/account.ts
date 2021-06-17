@@ -45,11 +45,8 @@ class TransactionList {
 
 
         const descriptionRoot: HTMLElement = document.querySelector('#square__item--description--value');    //YS: These HTML elements should be in the global scope. Also format your code. There shouldn't be so much space between variables.  
-
         const depositRoot: HTMLElement = document.querySelector('#square__item--deposit--value');
-
         const withdrawRoot: HTMLElement = document.querySelector('#square__item--withdraw--value');
-
         const totalRoot: HTMLElement = document.querySelector('#square__item--total--value');
 
         try {
