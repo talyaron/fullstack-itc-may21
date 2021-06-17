@@ -55,13 +55,13 @@ class Account {
             const filteredbyDates : Array<Transaction> = this.account.filter(
                 (transaction) => ((transaction.date >= fromDate) && (transaction.date <= toDate))
             );
-
+            
             // return a new array with only those transactions
             return filteredbyDates;
         } catch (er) {
             console.error(er);
         }
-    }    
+    }
 }
 
 let account = new Account('Yaniv');
