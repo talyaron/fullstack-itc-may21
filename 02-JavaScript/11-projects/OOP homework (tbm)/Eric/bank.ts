@@ -6,15 +6,24 @@
 Use TypeScript, SCSS, BEM etc.
 */
 
+const deposit: HTMLElement = document.querySelector('#depositContainer');
+const totalAmount: HTMLElement = document.querySelector('#balance');
+const withdrawRadio = document.getElementById("withdraw");
+const depositRadio = document.getElementById("deposit");
 
-class Movements{                    
-    description:string;
-    deposit:number;
+class Movements {
+    description: string;
+    deposit: number;
+    type: string;
+    account:string
+
     //withdraw:number;
-    constructor(description:string, deposit: number /*, withdraw: number*/ ) {
+    constructor(description: string, deposit: number, type: string, account:string ) {
         this.description = description;
         this.deposit = deposit;
-        //this.withdraw= withdraw;       //YS: Please dont leave commented code
+        this.type = type;
+        this.account=account
+
     }
 }
 
@@ -22,52 +31,64 @@ class Movements{
 
 class AccountList {
     amount: number;
-    accountUsers: Array<Movements> = [];   //YS: This should be in your constructor: <this.accountUsers = []>
-  
-    constructor (amount:number)  {  
-this.amount=amount;
-}
+    accountUsers: Array<Movements>;   //YS: This should be in your constructor: <this.accountUsers = []>
+
+    constructor(amount: number) {
+        this.amount = amount;
+        this.accountUsers = []
+    }
     add(accountUser: Movements) {
         this.accountUsers.push(accountUser);
         this.total(accountUser);
-        
-      
-    
     }
-    renderMovements(){
-        const deposit:HTMLElement = document.querySelector('#deposit');
 
-        let html:string='';   
-            this.accountUsers.forEach(accountUser=>{
-            html += `<p>${accountUser.description}  $${accountUser.deposit}  </p>`   //YS: Nice
-            
+    renderMovements() {
+        let html: string = '';
+        this.accountUsers.forEach(accountUser => {
+            html = `<p>${accountUser.description} ${accountUser.account} $${accountUser.deposit} ${accountUser.type}</p>`   //YS: Nice
+            deposit.insertAdjacentHTML("afterbegin", html);
         });
-        deposit.innerHTML = html;
     }
-   total(accountUser){
-    const totalAmount: HTMLElement = document.querySelector('#balance');  //YS: Try/catch
-     accountUsers.amount += accountUser.deposit;
-     let total = `<div>Final balance: $${accountUsers.amount}</div>`;
+
+    total(accountUser) {
+        try {
+            //const deposit: HTMLElement = document.querySelector('[name="deposit"]').value; //YS: Try/catch
+            //if(!deposit) throw new Error('The element where to show the balance doesn´t exist!')
+            accountUsers.amount += accountUser.deposit;
+            let total = `<div>Final balance: $${accountUsers.amount}</div>`;
             totalAmount.innerHTML = total
-    console.log(accountUsers.amount)
+        }
+        catch (error) {
+            console.error(error);
+        }
     }
-  
 }
 
 
 const accountUsers = new AccountList(0);
 
-const handleSubmit = (ev: any):void => {
+const handleSubmit = (ev: any): void => {
     ev.preventDefault();
 
     const description: string = ev.target.elements.description.value;
-    const deposit = ev.target.elements.deposit.valueAsNumber;
-    //const withdraw:number = ev.target.elements.withdraw.value;
+    const account: string = ev.target.elements.accountUser.value;
 
-    const accountUser = new Movements(description , deposit /*,withdraw*/);
+    let deposit = ev.target.elements.deposit.valueAsNumber;
 
-   accountUsers.add(accountUser);
-   accountUsers.renderMovements();
+    let type = "deposit";
+    if (withdrawRadio.checked) {
+        deposit = -deposit;
+        type = "withdraw"
+    } else if (depositRadio.checked) {
+        deposit = deposit;
+        type = "deposit";
+    }
+    
+    const accountUser = new Movements(description, deposit, type, account);
+    
+
+    accountUsers.add(accountUser);
+    accountUsers.renderMovements();
 }
 
 //YS: Please format your code before turning it in. 

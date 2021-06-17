@@ -9,14 +9,14 @@
 </head>
 
 <body>
-
+    <h1>2nd page <span id='root'></span></h1>
     <script>
-        console.log('going home ⛅️ bla')
-        function print() {
-            console.log('going home ⛅️ going home');
-        }
-        console.log('going home ⛅️ bla')
-        console.log('going home ⛅️ bla')
+        const username = localStorage.getItem('username')
+        console.log(username)
+        document.querySelector('#root').innerText = username;
+
+    
+
     </script>
 </body>
 

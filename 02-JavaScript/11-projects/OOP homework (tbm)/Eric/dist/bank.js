@@ -5,38 +5,47 @@
 
 Use TypeScript, SCSS, BEM etc.
 */
+var deposit = document.querySelector('#depositContainer');
+var totalAmount = document.querySelector('#balance');
+var withdrawRadio = document.getElementById("withdraw");
+var depositRadio = document.getElementById("deposit");
 var Movements = /** @class */ (function () {
     //withdraw:number;
-    function Movements(description, deposit /*, withdraw: number*/) {
+    function Movements(description, deposit, type, account) {
         this.description = description;
         this.deposit = deposit;
-        //this.withdraw= withdraw;       //YS: Please dont leave commented code
+        this.type = type;
+        this.account = account;
     }
     return Movements;
 }());
 var AccountList = /** @class */ (function () {
     function AccountList(amount) {
-        this.accountUsers = []; //YS: This should be in your constructor: <this.accountUsers = []>
         this.amount = amount;
+        this.accountUsers = [];
     }
     AccountList.prototype.add = function (accountUser) {
         this.accountUsers.push(accountUser);
         this.total(accountUser);
     };
     AccountList.prototype.renderMovements = function () {
-        var deposit = document.querySelector('#deposit');
         var html = '';
         this.accountUsers.forEach(function (accountUser) {
-            html += "<p>" + accountUser.description + "  $" + accountUser.deposit + "  </p>"; //YS: Nice
+            html = "<p>" + accountUser.description + " " + accountUser.account + " $" + accountUser.deposit + " " + accountUser.type + "</p>"; //YS: Nice
+            deposit.insertAdjacentHTML("afterbegin", html);
         });
-        deposit.innerHTML = html;
     };
     AccountList.prototype.total = function (accountUser) {
-        var totalAmount = document.querySelector('#balance'); //YS: Try/catch
-        accountUsers.amount += accountUser.deposit;
-        var total = "<div>Final balance: $" + accountUsers.amount + "</div>";
-        totalAmount.innerHTML = total;
-        console.log(accountUsers.amount);
+        try {
+            //const deposit: HTMLElement = document.querySelector('[name="deposit"]').value; //YS: Try/catch
+            //if(!deposit) throw new Error('The element where to show the balance doesn´t exist!')
+            accountUsers.amount += accountUser.deposit;
+            var total = "<div>Final balance: $" + accountUsers.amount + "</div>";
+            totalAmount.innerHTML = total;
+        }
+        catch (error) {
+            console.error(error);
+        }
     };
     return AccountList;
 }());
@@ -44,9 +53,18 @@ var accountUsers = new AccountList(0);
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var description = ev.target.elements.description.value;
+    var account = ev.target.elements.accountUser.value;
     var deposit = ev.target.elements.deposit.valueAsNumber;
-    //const withdraw:number = ev.target.elements.withdraw.value;
-    var accountUser = new Movements(description, deposit /*,withdraw*/);
+    var type = "deposit";
+    if (withdrawRadio.checked) {
+        deposit = -deposit;
+        type = "withdraw";
+    }
+    else if (depositRadio.checked) {
+        deposit = deposit;
+        type = "deposit";
+    }
+    var accountUser = new Movements(description, deposit, type, account);
     accountUsers.add(accountUser);
     accountUsers.renderMovements();
 };
