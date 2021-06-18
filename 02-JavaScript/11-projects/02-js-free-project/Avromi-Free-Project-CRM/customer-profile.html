@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Profile</title>
+    <link rel="stylesheet" href="./dist/styles.min.css">
+</head>
+<body>
+    <nav>
+    <button class="nav__button" onclick="goBack()">Go Back</button>
+    </nav>
+    <div class="customer__profile"></div>
+
+    <script src="./dist/crm.js"></script>
+    <script>
+        const customerProfile = localStorage.getItem(`innerHTML`)
+        document.querySelector(".customer__profile").innerHTML = customerProfile;
+    </script>
+    
+</body>
+</html>
