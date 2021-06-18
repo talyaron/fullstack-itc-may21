@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TogetheRun</title>
+    <!-- Runner Name --><title> TogetheRun Account</title>
     <link rel="stylesheet" href="dist/togetheRun.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap" rel="stylesheet">
@@ -14,16 +14,26 @@
 
 <body>
     <header class="summary">
-        <h3 class="summary__item summary__item--runner-name">Yaniv Aflalo</h3>
+        <h3 class="summary__item summary__item--runner-name"><!-- Runner Name --></h3>
         <div class="summary__item summary__item--total">
-            <img src="https://freesvg.org/img/winkboy.png" id="profile_image" alt="profile image" title="profile image">
-            <h1 id="total_distance">Total Distance</h1>
-            <div id="total_togetheruns">Total Runs</div>
+            <img src="https://freesvg.org/img/winkboy.png" id="profile_image" alt="profile image" title=""> <!-- title=Runner Name -->
+            <div class="badges">
+                <img src="" class="badges__item badges__item--distance">
+                <img src="" class="badges__item badges__item--togetheruns">                
+            </div>
+            <h1 id="total_distance"><span id="total_sum"><!-- Distance Sum --></span> <span class="units">Km</span></h1>
+            <div id="total_togetheruns"><span id="total_counts"><!-- TogetheRuns Counter --></span> <span class="counts">TogetheRuns</span></div>
         </div>
     </header>
-    <main class="runs">
-        <h2 class="runs__item runs__item--heading">Your Runs</h2>
-        <button class="runs__item runs__item--add">Add Run</button>
+    <main class="mainscreen">
+        <section class="mainscreen__item mainscreen__item--dashboard">
+            <h2 class="runs__item runs__item--heading">TogetheRun Dashboard</h2>
+            <button class="runs__item runs__item--add">Plan a Run</button>
+            <button class="runs__item runs__item--history">TogetheRuns History</button>
+        </section>
+        <section class="mainscreen__item mainscreen__item--runs">
+
+        </section>
     </main>
     <div class="modalWrapper">
         <div class="modalBox">
@@ -40,8 +50,8 @@
                     </div>
                     <div class="addRunForm__item">
                         <label for="run_business_form">Run Business</label>
-                        <input type="text" minlength="1" maxlength="15" name="runBiz"
-                            placeholder="Up to 15 characters" required id="run_business_form" />
+                        <input type="text" minlength="1" maxlength="15" name="runBiz" placeholder="Up to 15 characters"
+                            required id="run_business_form" />
                     </div>
                     <input class="addRunForm__item addRunForm__item--submit" type="submit" name="submit"
                         value="Add Run" />

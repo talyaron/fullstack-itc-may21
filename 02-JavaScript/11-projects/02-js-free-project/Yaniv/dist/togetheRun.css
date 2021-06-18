@@ -23,7 +23,7 @@ body {
   margin: 5px;
 }
 .summary__item--total {
-  width: 50%;
+  width: 30%;
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
