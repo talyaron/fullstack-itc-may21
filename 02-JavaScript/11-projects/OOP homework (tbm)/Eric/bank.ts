@@ -6,10 +6,10 @@
 Use TypeScript, SCSS, BEM etc.
 */
 
-const deposit: HTMLElement = document.querySelector('#depositContainer');
 const totalAmount: HTMLElement = document.querySelector('#balance');
 const withdrawRadio = document.getElementById("withdraw");
 const depositRadio = document.getElementById("deposit");
+const deposit: HTMLElement = document.querySelector('#depositContainer');
 
 class Movements {
     description: string;
@@ -43,17 +43,20 @@ class AccountList {
     }
 
     renderMovements() {
+
         let html: string = '';
         this.accountUsers.forEach(accountUser => {
             html = `<p>${accountUser.description} ${accountUser.account} $${accountUser.deposit} ${accountUser.type}</p>`   //YS: Nice
-            deposit.insertAdjacentHTML("afterbegin", html);
+
         });
+            deposit.insertAdjacentHTML("afterbegin", html);
+            //como hacerlo con inner.html
     }
 
     total(accountUser) {
         try {
             //const deposit: HTMLElement = document.querySelector('[name="deposit"]').value; //YS: Try/catch
-            //if(!deposit) throw new Error('The element where to show the balance doesn´t exist!')
+            if(!deposit) throw new Error('The element where to show the balance doesn´t exist!')
             accountUsers.amount += accountUser.deposit;
             let total = `<div>Final balance: $${accountUsers.amount}</div>`;
             totalAmount.innerHTML = total
