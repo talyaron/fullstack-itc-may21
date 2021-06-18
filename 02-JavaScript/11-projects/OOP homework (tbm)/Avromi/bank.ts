@@ -3,8 +3,7 @@ var handleSubmit = (ev: any): void => {
 
     const amount: number = ev.target.elements.amount.value;
     const description: string = ev.target.elements.description.value;
-    console.log(amount)
-    console.log(description)
+
     const transaction = new Transaction(amount, description);
     transactions.add(transaction);
     transactions.renderTransactions();
@@ -23,7 +22,7 @@ class Transaction {
 }
 
 class AllTransactions {
-    transactions: Transaction= [];
+    transactions: Transaction = [];
 
     add(transaction: Transaction) {
         this.transactions.push(transaction);
@@ -41,19 +40,29 @@ class AllTransactions {
         transactionsDiv.innerHTML = html;
     }
     runningTotal() {
-        // var arr = this.transactions
+
+        const allTransactions = [];
+        this.transactions.forEach(transaction => {
+            allTransactions.push(Number(transaction.amount))
+        })
+        console.log(allTransactions)
+
         // var total = 0;
         // for (var i in arr) { total += arr[i]; }
- 
-    //     let result[] = this.transactions.map(a => a.amount);
-    //     console.log(result)
 
-        
+        //     let result[] = this.transactions.map(a => a.amount);
+        //     console.log(result)
 
-    //    total = [result].reduce((a, b) => a + b)
 
-        
-         
+        const arr = [1,2,3,4,5]
+        const total = allTransactions.reduce((acc, cur) => acc + cur)
+            // console.log(accumulator)
+            // console.log(current)
+          
+      
+
+
+        console.log(total);
 
         const totalDiv: HTMLElement = document.querySelector(".total")
 
