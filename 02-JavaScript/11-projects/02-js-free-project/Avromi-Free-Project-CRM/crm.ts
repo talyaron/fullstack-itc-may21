@@ -6,7 +6,7 @@ var handleSubmit = (ev: any): void => {
     const phone: string = ev.target.elements.phone.value;
     const address: string = ev.target.elements.address.value;
     const imgURL: string = ev.target.elements.imgURL.value;
-    
+
     console.log(name)
     console.log(email)
     console.log(phone)
@@ -20,7 +20,7 @@ var handleSubmit = (ev: any): void => {
     localStorage.setItem(`phone`, phone)
     localStorage.setItem(`address`, address)
     localStorage.setItem(`imgURL`, imgURL)
-    
+
 
     window.location.href = './customer-profile.html'
     ev.target.reset()
@@ -48,7 +48,21 @@ class Customers {
 
     add(customer: Customer) {
         this.customers.push(customer);
-        localStorage.setItem(`customers`,JSON.stringify(this.customers));
+        console.log(this.customers);
+        localStorage.setItem(`customers`, JSON.stringify(this.customers));
+    }
+
+    getCustoemrsFromStorage() {
+        try {
+            let tempCustomers = JSON.parse(localStorage.getItem('customers'))
+            if (tempCustomers) {
+                this.customers = tempCustomers;
+            }
+
+            console.log(this.customers)
+        } catch (e) {
+            console.error(e)
+        }
     }
 
 
@@ -58,10 +72,10 @@ class Customers {
 
         let html: string = "";
         this.customers.forEach((customer) => {
-           
+
             html +=
 
-            `<h4>Customer</h4>
+                `<h4>Customer</h4>
             <img src="${customer.imgURL}">
             <p>${customer.name}</p>
             <p>${customer.email}</p>
@@ -72,13 +86,13 @@ class Customers {
         });
         customerList.innerHTML = html;
         localStorage.setItem(`innerHTML`, html)
-        
+
     }
-    
+
 }
 const customers = new Customers();
+customers.getCustoemrsFromStorage();
 
 function goBack() {
     window.history.back();
-  }
- 
+}
