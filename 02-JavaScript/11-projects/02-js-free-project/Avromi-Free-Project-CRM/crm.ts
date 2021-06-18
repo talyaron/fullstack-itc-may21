@@ -44,19 +44,21 @@ class Customer {
 }
 
 class Customers {
-    customers: Customer = [];
+    customers: Array<Customer> = [];
 
     add(customer: Customer) {
         this.customers.push(customer);
+        localStorage.setItem(`customers`,JSON.stringify(this.customers));
     }
 
 
     renderCustomers() {
+
         const customerList: HTMLElement = document.querySelector(".customer__list");
 
         let html: string = "";
         this.customers.forEach((customer) => {
-            localStorage.setItem(`${this.customers}`,JSON.stringify(customers));
+           
             html +=
 
             `<h4>Customer</h4>
