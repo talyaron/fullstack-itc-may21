@@ -1,12 +1,12 @@
 class Run {
   runDistance: number;
-  runDate: Date = new Date();
+  runDate: Date;
   runBiz: string;
   runId: string = "id" + Math.random().toString(16).slice(2);
 
-  constructor(runDistance: number, runBiz: string) {
-    this.runBiz = runBiz;
+  constructor(runDistance: number, runDate: Date) {
     this.runDistance = runDistance;
+    this.runDate = runDate;
   }
 }
 
@@ -32,7 +32,7 @@ class Runner {
 
   addRunToDOM(run: Run) {
     try {
-      const transContainer: HTMLElement =
+      const runsContainer: HTMLElement =
         document.querySelector(".runs");
       const signFAClass = run.runDistance >= 0 ? "plus" : "minus";
       const signTitle = run.runDistance >= 0 ? "Income" : "Expense";
@@ -42,21 +42,21 @@ class Runner {
       }-${run.runDate.getFullYear()} ${run.runDate.getHours()}:${run.runDate.getMinutes()}`;
       const totalBeforeContainer: HTMLElement = document.querySelector("#total_distance");
 
-      const transHTML = `<div class="runs__item runs__item--action">
+      const runsHTML = `<div class="runs__item runs__item--action">
       <i id="sign" class="fas fa-2x fa-${signFAClass}-circle" title="${signTitle}" style="color: ${runColor};"></i>
-      <div id="trans_amount" style="color: ${runColor};">
+      <div id="runs_amount" style="color: ${runColor};">
         ${Math.abs(run.runDistance)} Km
       </div>
       <div id="temp_total">Balace: ${Number(totalBeforeContainer.innerHTML.replace(' Km','')) + run.runDistance} Km</div>
-      <div id="trans_date">${runFormatedDate}</div>
-      <div id="trans_business">${run.runBiz}</div>
-      <div id="trans_id">${run.runId}</div>
+      <div id="runs_date">${runFormatedDate}</div>
+      <div id="runs_business">${run.runBiz}</div>
+      <div id="runs_id">${run.runId}</div>
     </div>`;
 
-      transContainer.insertAdjacentHTML('beforeend',transHTML);
+      runsContainer.insertAdjacentHTML('beforeend',runsHTML);
 
       const totalRunsContainer: HTMLElement = document.querySelector("#total_togetheruns");
-      totalRunsContainer.innerText = `TogetheRuns So Far: ${runFormatedDate}`;
+      totalRunsContainer.innerText = `${runFormatedDate} TogetheRuns`;
     } catch (er) {
       console.error(er);
     }
@@ -83,8 +83,8 @@ class Runner {
 }
 
 let isModalOpen: boolean = false;
-const addTransBtn: HTMLElement = document.querySelector(
-  `.runs__item--add`
+const addRunBtn: HTMLElement = document.querySelector(
+  `.dashboard__item--add`
 );
 
 const openModal = (): void => {
@@ -92,7 +92,7 @@ const openModal = (): void => {
 
     const modal: HTMLElement = document.querySelector(`.modalWrapper`);
     const modalBox: HTMLElement = document.querySelector(`.modalBox`);
-    addTransBtn.addEventListener(`click`, (ev) => {
+    addRunBtn.addEventListener(`click`, (ev) => {
       isModalOpen = true;
       modal.style.display = `flex`;
       modalBox.style.display = `unset`;
@@ -125,9 +125,9 @@ const handleSubmit = (ev: any) => {
     ev.preventDefault();
 
     const runDistance: number = Number(ev.target.elements.runDistance.value);
-    const runBiz: string = ev.target.elements.runBiz.value;
+    const runDate: Date = ev.target.elements.runDate.value;
 
-    const run = new Run(runDistance, runBiz);
+    const run = new Run(runDistance, runDate);
 
     runs.addRun(run);
 

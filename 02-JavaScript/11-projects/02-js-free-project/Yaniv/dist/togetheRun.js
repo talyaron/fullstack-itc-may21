@@ -1,9 +1,8 @@
 var Run = /** @class */ (function () {
-    function Run(runDistance, runBiz) {
-        this.runDate = new Date();
+    function Run(runDistance, runDate) {
         this.runId = "id" + Math.random().toString(16).slice(2);
-        this.runBiz = runBiz;
         this.runDistance = runDistance;
+        this.runDate = runDate;
     }
     return Run;
 }());
@@ -23,16 +22,16 @@ var Runner = /** @class */ (function () {
     };
     Runner.prototype.addRunToDOM = function (run) {
         try {
-            var transContainer = document.querySelector(".runs");
+            var runsContainer = document.querySelector(".runs");
             var signFAClass = run.runDistance >= 0 ? "plus" : "minus";
             var signTitle = run.runDistance >= 0 ? "Income" : "Expense";
             var runColor = run.runDistance >= 0 ? "green" : "red";
             var runFormatedDate = run.runDate.getDate() + "-" + (run.runDate.getMonth() + 1) + "-" + run.runDate.getFullYear() + " " + run.runDate.getHours() + ":" + run.runDate.getMinutes();
             var totalBeforeContainer = document.querySelector("#total_distance");
-            var transHTML = "<div class=\"runs__item runs__item--action\">\n      <i id=\"sign\" class=\"fas fa-2x fa-" + signFAClass + "-circle\" title=\"" + signTitle + "\" style=\"color: " + runColor + ";\"></i>\n      <div id=\"trans_amount\" style=\"color: " + runColor + ";\">\n        " + Math.abs(run.runDistance) + " Km\n      </div>\n      <div id=\"temp_total\">Balace: " + (Number(totalBeforeContainer.innerHTML.replace(' Km', '')) + run.runDistance) + " Km</div>\n      <div id=\"trans_date\">" + runFormatedDate + "</div>\n      <div id=\"trans_business\">" + run.runBiz + "</div>\n      <div id=\"trans_id\">" + run.runId + "</div>\n    </div>";
-            transContainer.insertAdjacentHTML('beforeend', transHTML);
+            var runsHTML = "<div class=\"runs__item runs__item--action\">\n      <i id=\"sign\" class=\"fas fa-2x fa-" + signFAClass + "-circle\" title=\"" + signTitle + "\" style=\"color: " + runColor + ";\"></i>\n      <div id=\"runs_amount\" style=\"color: " + runColor + ";\">\n        " + Math.abs(run.runDistance) + " Km\n      </div>\n      <div id=\"temp_total\">Balace: " + (Number(totalBeforeContainer.innerHTML.replace(' Km', '')) + run.runDistance) + " Km</div>\n      <div id=\"runs_date\">" + runFormatedDate + "</div>\n      <div id=\"runs_business\">" + run.runBiz + "</div>\n      <div id=\"runs_id\">" + run.runId + "</div>\n    </div>";
+            runsContainer.insertAdjacentHTML('beforeend', runsHTML);
             var totalRunsContainer = document.querySelector("#total_togetheruns");
-            totalRunsContainer.innerText = "TogetheRuns So Far: " + runFormatedDate;
+            totalRunsContainer.innerText = runFormatedDate + " TogetheRuns";
         }
         catch (er) {
             console.error(er);
@@ -60,12 +59,12 @@ var Runner = /** @class */ (function () {
     return Runner;
 }());
 var isModalOpen = false;
-var addTransBtn = document.querySelector(".runs__item--add");
+var addRunBtn = document.querySelector(".dashboard__item--add");
 var openModal = function () {
     try {
         var modal_1 = document.querySelector(".modalWrapper");
         var modalBox_1 = document.querySelector(".modalBox");
-        addTransBtn.addEventListener("click", function (ev) {
+        addRunBtn.addEventListener("click", function (ev) {
             isModalOpen = true;
             modal_1.style.display = "flex";
             modalBox_1.style.display = "unset";
@@ -95,8 +94,8 @@ var handleSubmit = function (ev) {
     try {
         ev.preventDefault();
         var runDistance = Number(ev.target.elements.runDistance.value);
-        var runBiz = ev.target.elements.runBiz.value;
-        var run = new Run(runDistance, runBiz);
+        var runDate = ev.target.elements.runDate.value;
+        var run = new Run(runDistance, runDate);
         runs.addRun(run);
         var modal = document.querySelector(".modalWrapper");
         var modalBox = document.querySelector(".modalBox");
