@@ -40,9 +40,11 @@ var Customers = /** @class */ (function () {
         this.customers.push(customer);
     };
     Customers.prototype.renderCustomers = function () {
+        var _this = this;
         var customerList = document.querySelector(".customer__list");
         var html = "";
         this.customers.forEach(function (customer) {
+            localStorage.setItem("" + _this.customers, JSON.stringify(customers));
             html +=
                 "<h4>Customer</h4>\n            <img src=\"" + customer.imgURL + "\">\n            <p>" + customer.name + "</p>\n            <p>" + customer.email + "</p>\n            <p>" + customer.phone + "</p>\n            <p>" + customer.address + "</p>\n            <p>" + customer.customerId + "</p>";
         });
