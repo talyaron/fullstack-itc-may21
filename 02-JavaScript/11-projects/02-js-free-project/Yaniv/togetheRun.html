@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TogetheRun</title>
+    <link rel="stylesheet" href="dist/togetheRun.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3d6c8f810b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="summary">
+        <h3 class="summary__item summary__item--runner-name">Yaniv Aflalo</h3>
+        <div class="summary__item summary__item--total">
+            <img src="https://freesvg.org/img/winkboy.png" id="profile_image" alt="profile image" title="profile image">
+            <h1 id="total_distance">Total Distance</h1>
+            <div id="total_togetheruns">Total Runs</div>
+        </div>
+    </header>
+    <main class="runs">
+        <h2 class="runs__item runs__item--heading">Your Runs</h2>
+        <button class="runs__item runs__item--add">Add Run</button>
+    </main>
+    <div class="modalWrapper">
+        <div class="modalBox">
+            <div class="modalBox__item modalBox__item--title">
+                <span>New Run</span>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modalBox__item modalBox__item--content">
+                <form class="addRunForm" onsubmit="handleSubmit(event)">
+                    <div class="addRunForm__item">
+                        <label for="run_Distance_form">Run Distance (Km)</label>
+                        <input type="number" min="0" name="runDistance" placeholder="in kilometers" required
+                            id="run_distance_form" />
+                    </div>
+                    <div class="addRunForm__item">
+                        <label for="run_business_form">Run Business</label>
+                        <input type="text" minlength="1" maxlength="15" name="runBiz"
+                            placeholder="Up to 15 characters" required id="run_business_form" />
+                    </div>
+                    <input class="addRunForm__item addRunForm__item--submit" type="submit" name="submit"
+                        value="Add Run" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="dist/togetheRun.js"></script>
+</body>
+
+</html>
