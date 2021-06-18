@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The most bank account EVER</title>
+</head>
+<link href="dist/style.css" rel="stylesheet" />
+<body>
+    <div class="formContainer">
+        <h1>Ready to make a transaction?</h1>
+        
+        <form class="form-inline" onsubmit='handleSubmit(event)'>
+            <fieldset>
+                <legend>Submit your transaction here:</legend>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" autofocus placeholder="Richie Rich" required>
+                <label for="banknum">Bank number </label>
+                <input type="text" id="banknum" name="banknum" autofocus placeholder="two digits" required>
+                <label for="branch">Branch</label>
+                <input type="branch" id="branch" name="branch" placeholder="three digits" required>
+                <label for="acc">Account</label>
+                <input type="acc" id="acc" name="acc" placeholder="6-8 digits" required>
+                <label for="am">Amount</label>
+                <input type="am" id="am" name="am" placeholder="transfer up to 10,000 online" required>
+                <button type="submit" class="submit">Submit</button>
+            </fieldset>
+            <fieldset>
+                <p class="ovrw">Account overview</p>
+                <div id="overview">
+                    <h1 id="data">This text will be replaced</h1>
+                </div>
+            </fieldset>
+    </div>
+
+    <script src="dist/script.js"></script>
+</body>
+</html>
