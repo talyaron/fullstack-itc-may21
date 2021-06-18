@@ -76,5 +76,3 @@ console.log(`The filtered array is: ${JSON.stringify(filteredAccount)}`);
 
 
 
-
-
