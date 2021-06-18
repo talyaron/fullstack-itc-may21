@@ -37,6 +37,8 @@ var Account = /** @class */ (function () {
     };
     return Account;
 }());
+var trnsc = new Transaction(400, new Date(), 'kedumim', 'groucery');
+console.log(trnsc);
 var account = new Account('Yaniv');
 var transactionId1 = account.addNewTransaction(100, new Date(), 'Tel-Aviv', 'Bank deposit');
 account.addNewTransaction(-300, new Date(), 'Ramat-Gan', 'ATM redrwal');
@@ -44,3 +46,4 @@ console.log(account.calculateSum());
 console.log(JSON.stringify(account));
 account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
 console.log(account);
+console.log(account.hasOwnProperty('name'));
