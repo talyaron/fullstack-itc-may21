@@ -28,8 +28,10 @@
         arr.sort((a,b)=> a.name - b.name);
         console.log(arr)
 
+        nameList = arr.map((ele)=> `<p> Name: ${ele.name}</p>`).join()
+
         const dom = document.querySelector(".dom")
-        dom.innerHTML = `${arr.name}`
+        dom.innerHTML = nameList
 
     
     </script>
