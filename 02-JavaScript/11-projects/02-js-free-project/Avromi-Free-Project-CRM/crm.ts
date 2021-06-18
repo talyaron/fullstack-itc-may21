@@ -69,10 +69,13 @@ class Customers {
         });
         customerList.innerHTML = html;
         localStorage.setItem(`innerHTML`, html)
+    
     }
+    
 }
 const customers = new Customers();
 
 function goBack() {
     window.history.back();
   }
+ 
