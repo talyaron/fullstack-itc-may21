@@ -56,6 +56,7 @@ class Customers {
 
         let html: string = "";
         this.customers.forEach((customer) => {
+            localStorage.setItem(`${this.customers}`,JSON.stringify(customers));
             html +=
 
             `<h4>Customer</h4>
@@ -69,10 +70,13 @@ class Customers {
         });
         customerList.innerHTML = html;
         localStorage.setItem(`innerHTML`, html)
+        
     }
+    
 }
 const customers = new Customers();
 
 function goBack() {
     window.history.back();
   }
+ 
