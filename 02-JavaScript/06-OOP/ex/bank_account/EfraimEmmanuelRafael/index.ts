@@ -5,23 +5,24 @@ class Transaction {
     description: string;
     transactionId: string = "id" + Math.random().toString(16).slice(2);
 
-
     constructor(amount: number, date: Date, place: string, description: string) {
         this.amount = amount;
         this.date = date;
         this.place = place;
         this.description = description;
-
+    
 
     }
+    
 }
 
 
 class Account {
     account: Array<Transaction> = [];
-    name: string = '';
-    constructor(name) {
+    name: string;
+    constructor(name:string) {
         this.name = name
+        
     }
 
     addNewTransaction(amount: number, date: Date, place: string, description: string): string {
@@ -46,32 +47,40 @@ class Account {
             console.error(e);
         }
     }
+    findDate(fromDate: Date, toDate: Date){
+        
+        let transactionDates: Array<Transaction> = [];
+        let arr = [];
+        
+        transactionDates= this.account.filter(transaction => transaction.date > fromDate && transaction.date < toDate);
+        let dates1: Array<any> = [this.account.filter(transaction => transaction.date)]
+        console.log(dates1);
+       return transactionDates;
+      
+    }
+       
+   
 }
+
+
+
 
 let account = new Account('Yaniv');
 const transactionId1 = account.addNewTransaction(100, new Date(), 'Tel-Aviv', 'Bank deposit');
 account.addNewTransaction(-300, new Date(), 'Ramat-Gan', 'ATM redrwal');
+const bla = new Transaction (-300, new Date(), 'Ramat-Gan', 'ATM redrwal');
 
-console.log(account.calculateSum());
 console.log(JSON.stringify(account))
 
 account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
 console.log(account)
 
-var startDate = new Date("2015-08-04");
-var endDate = new Date("2015-08-12");
+console.log(account.findDate(new Date('1-1-2050'), new Date('1-1-3000')));
 
-        var resultProductData = product_data.filter(function (a) {
-            var hitDates = a.ProductHits || {};
-            // extract all date strings
-            hitDates = Object.keys(hitDates);
-            // improvement: use some. this is an improment because .map()
-            // and .filter() are walking through all elements.
-            // .some() stops this process if one item is found that returns true in the callback function and returns true for the whole expression
-            hitDateMatchExists = hitDates.some(function(dateStr) {
-                var date = new Date(dateStr);
-                return date >= startDate && date <= endDate
-            });
-            return hitDateMatchExists;
-        });
-        console.log(resultProductData);
+
+
+
+
+
+
+

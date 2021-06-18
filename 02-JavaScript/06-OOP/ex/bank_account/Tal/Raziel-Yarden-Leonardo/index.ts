@@ -1,10 +1,12 @@
+
+//method to see the transactions in a specific date
+
 class Transaction {
     amount: number;
     date: Date;
     place: string;
     description: string;
     transactionId: string = "id" + Math.random().toString(16).slice(2);
-
 
     constructor(amount: number, date: Date, place: string, description: string) {
         this.amount = amount;
@@ -38,7 +40,7 @@ class Account {
     editTransaction(transactionIdToEdit: string, updatedDescription: string) {
         try {
             //find the transactiond
-            const transactionIndex: number = this.account.findIndex(transaction => transaction.transactionId === transactionIdToEdit );
+            const transactionIndex: number = this.account.findIndex(transaction => transaction.transactionId === transactionIdToEdit);
             console.log(transactionIndex)
             //want to edit
             this.account[transactionIndex].description = updatedDescription;
@@ -46,32 +48,42 @@ class Account {
             console.error(e);
         }
     }
+
+    findTransactionsByDate(fromDate: Date, toDate: Date) {
+        try {
+            this.account.forEach(element => {
+                if (fromDate <= element.date && toDate >= element.date) {
+                    console.log(element.description);
+                }
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
 
 let account = new Account('Yaniv');
 const transactionId1 = account.addNewTransaction(100, new Date(), 'Tel-Aviv', 'Bank deposit');
 account.addNewTransaction(-300, new Date(), 'Ramat-Gan', 'ATM redrwal');
+account.addNewTransaction(-300, new Date('20-Jun-2020'), 'Ramat-Gan', 'ATM redrwal');
 
-console.log(account.calculateSum());
+
+/* console.log(account.calculateSum());
 console.log(JSON.stringify(account))
-
+ */
 account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
-console.log(account)
+/* console.log(account) */
 
-var startDate = new Date("2015-08-04");
-var endDate = new Date("2015-08-12");
+const doSubmit = (ev: any): void => {
+    ev.preventDefault();
+    const fromDate: Date = new Date(ev.target.elements.fromDate.value);
+    const toDate: Date = new Date(ev.target.elements.toDate.value);
 
-        var resultProductData = product_data.filter(function (a) {
-            var hitDates = a.ProductHits || {};
-            // extract all date strings
-            hitDates = Object.keys(hitDates);
-            // improvement: use some. this is an improment because .map()
-            // and .filter() are walking through all elements.
-            // .some() stops this process if one item is found that returns true in the callback function and returns true for the whole expression
-            hitDateMatchExists = hitDates.some(function(dateStr) {
-                var date = new Date(dateStr);
-                return date >= startDate && date <= endDate
-            });
-            return hitDateMatchExists;
-        });
-        console.log(resultProductData);
+    account.findTransactionsByDate(fromDate, toDate);
+}
+
+
+
+
+
+

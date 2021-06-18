@@ -1,4 +1,4 @@
-// export{};
+//method to see the transactions in a specific date
 var Transaction = /** @class */ (function () {
     function Transaction(amount, date, place, description) {
         this.transactionId = "id" + Math.random().toString(16).slice(2);
@@ -12,7 +12,7 @@ var Transaction = /** @class */ (function () {
 var Account = /** @class */ (function () {
     function Account(name) {
         this.account = [];
-        this.name = "";
+        this.name = '';
         this.name = name;
     }
     Account.prototype.addNewTransaction = function (amount, date, place, description) {
@@ -21,9 +21,7 @@ var Account = /** @class */ (function () {
         return newTransaction.transactionId;
     };
     Account.prototype.calculateSum = function () {
-        var sum = this.account.reduce(function (sum, transaction) {
-            return sum + transaction.amount;
-        }, 0);
+        var sum = this.account.reduce(function (sum, transaction) { return sum + transaction.amount; }, 0);
         return sum;
     };
     Account.prototype.editTransaction = function (transactionIdToEdit, updatedDescription) {
@@ -38,31 +36,32 @@ var Account = /** @class */ (function () {
             console.error(e);
         }
     };
-    Account.prototype.filterByDate = function (fromDate, toDate) {
+    Account.prototype.findTransactionsByDate = function (fromDate, toDate) {
         try {
-            // create the array to be returned eventually + find all transactions between those dates
-            // [trans1, trans2, trans3, trans4]
-            var filteredbyDates = this.account.filter(function (transaction) {
-                return transaction.date >= fromDate && transaction.date <= toDate;
+            this.account.forEach(function (element) {
+                if (fromDate <= element.date && toDate >= element.date) {
+                    console.log(element.description);
+                }
             });
-            // return a new array with only those transactions
-            return filteredbyDates;
         }
-        catch (er) {
-            console.error(er);
+        catch (error) {
+            console.error(error);
         }
     };
     return Account;
 }());
-var account = new Account("Yaniv");
-var transactionId1 = account.addNewTransaction(100, new Date(), "Tel-Aviv", "Bank deposit");
-account.addNewTransaction(-300, new Date(), "Ramat-Gan", "ATM redrwal");
-console.log(account.calculateSum());
-console.log(JSON.stringify(account));
-account.editTransaction(transactionId1, "Walllllaaaaa!!!");
-console.log(account);
-var filteredAccount = account.filterByDate(new Date("15-jun-2021"), new Date("17-jun-2021"));
-console.log("The filtered array is:");
-filteredAccount.forEach(function (transaction) {
-    return console.log(transaction.transactionId);
-});
+var account = new Account('Yaniv');
+var transactionId1 = account.addNewTransaction(100, new Date(), 'Tel-Aviv', 'Bank deposit');
+account.addNewTransaction(-300, new Date(), 'Ramat-Gan', 'ATM redrwal');
+account.addNewTransaction(-300, new Date('20-Jun-2020'), 'Ramat-Gan', 'ATM redrwal');
+/* console.log(account.calculateSum());
+console.log(JSON.stringify(account))
+ */
+account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
+/* console.log(account) */
+var doSubmit = function (ev) {
+    ev.preventDefault();
+    var fromDate = new Date(ev.target.elements.fromDate.value);
+    var toDate = new Date(ev.target.elements.toDate.value);
+    account.findTransactionsByDate(fromDate, toDate);
+};
