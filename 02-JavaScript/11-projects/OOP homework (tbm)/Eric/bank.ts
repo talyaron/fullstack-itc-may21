@@ -47,9 +47,10 @@ class AccountList {
         let html: string = '';
         this.accountUsers.forEach(accountUser => {
             html = `<p>${accountUser.description} ${accountUser.account} $${accountUser.deposit} ${accountUser.type}</p>`   //YS: Nice
-
+            console.log(html)
         });
-            deposit.insertAdjacentHTML("afterbegin", html);
+        deposit.innerHTML=html;
+       // deposit.insertAdjacentHTML("afterbegin", html);
             //como hacerlo con inner.html
     }
 
