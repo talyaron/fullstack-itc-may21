@@ -32,6 +32,6 @@ movies = movies.sort()
 movies = Object.assign(movies)
 console.log(movies);
 
-root.innerHTML = movies
+// root.innerHTML = movies
 
 console.log(root);
