@@ -1,3 +1,11 @@
+@keyframes shine {
+  0% {
+    background-position: -10vw;
+  }
+  100% {
+    background-position: 10vw;
+  }
+}
 * {
   font-family: "Raleway", sans-serif;
 }
@@ -116,6 +124,7 @@ button:hover {
   background-color: aqua;
   font-size: 1.2rem;
   color: black;
+  animation: shine 2s infinite;
 }
 #mainscreen .dashboard__item--add:hover {
   background-color: turquoise;

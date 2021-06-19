@@ -1,22 +1,42 @@
 var Run = /** @class */ (function () {
     function Run(runDistance, runDate) {
-        this.runId = "id" + Math.random().toString(16).slice(2);
+        this.runId = "runid" + Math.random().toString(16).slice(2);
+        this.runnerId = ''; // TODO get logged in runner from localStorage
         this.runDistance = runDistance;
         this.runDate = runDate;
     }
     return Run;
 }());
-document.querySelector("#total_distance").innerHTML = "0 Km";
-var Runner = /** @class */ (function () {
-    function Runner() {
-        this.allRuns = [];
-        this.totalDistance = Number(document.querySelector("#total_distance").innerHTML.replace(" Km", ""));
+document.querySelector("#total_distance").innerHTML = "0 Km"; // TODO change to the total distance of the runner from localStorage - if undefined/null - set to 0 Km
+var Preferences = /** @class */ (function () {
+    function Preferences(prefChat, prefGender, prefAgeGroup) {
+        this.prefChat = prefChat;
+        this.prefGender = prefGender;
+        this.prefAgeGroup = prefAgeGroup;
     }
-    // constructor (profImageUrl : string) {
-    //     this.profImageUrl = profImageUrl;
-    // }
+    return Preferences;
+}());
+var Shoes = /** @class */ (function () {
+    function Shoes(shoesBrand, shoesModel, shoesDistance) {
+        this.shoesBrand = shoesBrand;
+        this.shoesModel = shoesModel;
+        this.shoesDistance = shoesDistance;
+    }
+    return Shoes;
+}());
+var Runner = /** @class */ (function () {
+    function Runner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg) {
+        if (runnerGender === void 0) { runnerGender = 'Unknown'; }
+        if (runnerAgeGroup === void 0) { runnerAgeGroup = 'Unknown'; }
+        if (runnerChat === void 0) { runnerChat = 'Unknown'; }
+        this.runnerId = "runnerid" + Math.random().toString(16).slice(2); // on registration
+        this.runnerPref = { prefChat: 'All', prefGender: 'All', prefAgeGroup: 'All' }; // TODO add method to edit
+        this.runnerRuns = [];
+        this.totalDistance = Number(document.querySelector("#total_distance").innerHTML.replace(" Km", ""));
+        this.runnerProfImg = runnerProfImg;
+    }
     Runner.prototype.addRun = function (run) {
-        this.allRuns.push(run);
+        this.runnerRuns.push(run);
         this.addRunToDOM(run);
         this.refreshTotal(run.runDistance);
     };
@@ -58,6 +78,7 @@ var Runner = /** @class */ (function () {
     };
     return Runner;
 }());
+var RunsPull = []; // TODO get from localStorage (JSON.parse()). if undefined/null - []
 var isModalOpen = false;
 var addRunBtn = document.querySelector(".dashboard__item--add");
 var openModal = function () {

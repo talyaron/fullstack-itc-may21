@@ -1,8 +1,10 @@
 class Run {
-  runDistance: number;
   runDate: Date;
-  runBiz: string;
-  runId: string = "id" + Math.random().toString(16).slice(2);
+  runHour: number; // TODO check for better type for hours ranges
+  runDistance: number;
+  runArea: string;
+  runId: string = "runid" + Math.random().toString(16).slice(2);
+  runnerId: string = ''; // TODO get logged in runner from localStorage
 
   constructor(runDistance: number, runDate: Date) {
     this.runDistance = runDistance;
@@ -10,22 +12,58 @@ class Run {
   }
 }
 
-document.querySelector("#total_distance").innerHTML = "0 Km";
+document.querySelector("#total_distance").innerHTML = "0 Km"; // TODO change to the total distance of the runner from localStorage - if undefined/null - set to 0 Km
+
+class Preferences { // For the future
+  prefChat: string; // chatty, here and there, only when necessary, All (default)
+  prefGender: string; // Male, Female, All (default)
+  prefAgeGroup: string; // Like me, All (default)
+
+  constructor (prefChat: string, prefGender: string, prefAgeGroup: string) {
+    this.prefChat = prefChat;
+    this.prefGender = prefGender;
+    this.prefAgeGroup = prefAgeGroup;
+  
+  }
+
+}
+
+class Shoes {
+  shoesBrand: string;
+  shoesModel: string;
+  shoesDistance: number;
+
+  constructor (shoesBrand: string, shoesModel: string, shoesDistance: number) {
+    this.shoesBrand = shoesBrand;
+    this.shoesModel = shoesModel;
+    this.shoesDistance = shoesDistance;
+  
+  }
+
+}
 
 class Runner {
-  runnerName: string;
-  profImageUrl: string;
-  allRuns: Array<Run> = [];
+  runnerName: string; // must on registration
+  runnerId: string = "runnerid" + Math.random().toString(16).slice(2); // on registration
+  runnerEmail: string; // must on registration
+  runnerPassword: string; // must on registration
+  runnerGender: string; // Male, Female, Unknown (default)
+  runnerAgeGroup: string; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default)
+  runnerChat: string; // chatty, here and there, only when necessary, Unknown (default)
+  runnerPref: Preferences = {prefChat: 'All', prefGender: 'All', prefAgeGroup: 'All'}; // TODO add method to edit
+  runnerProfImg: string;
+  runnerShoes: Shoes;
+  runnerRuns: Array<Run> = [];
   totalDistance: number = Number(
     document.querySelector("#total_distance").innerHTML.replace(" Km", "")
   );
 
-  // constructor (profImageUrl : string) {
-  //     this.profImageUrl = profImageUrl;
-  // }
+  constructor (runnerName: string, runnerEmail: string, runnerPassword: string, runnerGender: string = 'Unknown', runnerAgeGroup: string = 'Unknown', runnerChat: string = 'Unknown', runnerProfImg : string) {
+      this.runnerProfImg = runnerProfImg;
+  }
 
   addRun(run: Run): void {
-    this.allRuns.push(run);
+    this.runnerRuns.push(run);
     this.addRunToDOM(run);
     this.refreshTotal(run.runDistance);
   }
@@ -82,6 +120,8 @@ class Runner {
   }
 }
 
+let RunsPull : Array<Run> = []; // TODO get from localStorage (JSON.parse()). if undefined/null - []
+
 let isModalOpen: boolean = false;
 const addRunBtn: HTMLElement = document.querySelector(
   `.dashboard__item--add`
@@ -89,7 +129,6 @@ const addRunBtn: HTMLElement = document.querySelector(
 
 const openModal = (): void => {
   try {
-
     const modal: HTMLElement = document.querySelector(`.modalWrapper`);
     const modalBox: HTMLElement = document.querySelector(`.modalBox`);
     addRunBtn.addEventListener(`click`, (ev) => {
@@ -97,6 +136,7 @@ const openModal = (): void => {
       modal.style.display = `flex`;
       modalBox.style.display = `unset`;
     });
+
   } catch (er) {
     console.error(er);
   }
@@ -113,6 +153,7 @@ const closeModal = (): void => {
       modal.style.display = `none`;
       modalBox.style.display = `none`;
     });
+
   } catch (er) {
     console.error(er);
   }

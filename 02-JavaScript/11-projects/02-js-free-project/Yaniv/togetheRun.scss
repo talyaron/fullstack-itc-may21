@@ -1,3 +1,12 @@
+@keyframes shine { // TODO check why not working
+    0% {
+      background-position: -10vw;
+    }
+    100% {
+      background-position: 10vw;
+    }
+  }
+
 * {
     font-family: 'Raleway', sans-serif;
 }
@@ -137,7 +146,8 @@ button {
                 background-color: aqua;
                 font-size: 1.2rem;
                 color: black;
-
+                animation: shine 2s infinite;
+                
                 &:hover {
                     background-color: turquoise;
                 }
