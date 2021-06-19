@@ -120,7 +120,7 @@ const closeModal = (): void => {
 
 const runs = new Runner();
 
-const handleSubmit = (ev: any) => {
+const runSubmit = (ev: any) => {
   try {
     ev.preventDefault();
 

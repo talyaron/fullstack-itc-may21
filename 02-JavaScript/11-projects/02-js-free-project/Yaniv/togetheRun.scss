@@ -121,24 +121,25 @@ button {
         display: flex;
         flex-direction: row;
         text-align: center;
-        align-items: center;    
-        justify-content: space-between;    
+        align-items: center;
+        justify-content: space-between;
         background-image: linear-gradient(to bottom, lightgrey, white);
 
         &__item {
             margin: 10px;
+
             &--heading {
                 font-weight: 900;
             }
-            
+
             &--add {
                 width: 50%;
-                background-color:aqua;
+                background-color: aqua;
                 font-size: 1.2rem;
                 color: black;
 
                 &:hover {
-                    background-color:turquoise;
+                    background-color: turquoise;
                 }
 
                 &:active {
@@ -152,7 +153,7 @@ button {
                 color: white;
 
                 &:hover {
-                    background-color:cornflowerblue;
+                    background-color: cornflowerblue;
                 }
 
                 &:active {
@@ -221,38 +222,35 @@ button {
     height: 100vh;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
+
+    &__item {
+        display: none;
+        // display: flex;
+        // flex-direction: column;
+
+        &--run {
+            width: 25vw;
+            min-width: 350px;
+        }
+    }
 }
 
 .modalBox {
-    display: none;
-    // display: flex;
-    // flex-direction: column;
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    padding: 5px;
 
     &__item {
-        display: flex;
-        align-items: center;
-        overflow: auto;
-        width: 25vw;
-        min-width: 350px;
-        padding: 5px;
 
         &--title {
-            border-radius: 10px 10px 0 0;
+            display: flex;
             justify-content: space-between;
+            border-radius: 10px 10px 0 0;
             height: 25px;
             color: black;
             font-weight: bold;
             background-color: cornflowerblue;
-
-            .close {
-                cursor: pointer;
-                font-size: 20px;
-                margin: 0 5px;
-
-                &:hover {
-                    color: rgb(17, 95, 91);
-                }
-            }
         }
 
         &--content {
@@ -305,5 +303,16 @@ button {
                 }
             }
         }
+    }
+}
+
+
+.close {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 0 5px;
+
+    &:hover {
+        color: rgb(17, 95, 91);
     }
 }

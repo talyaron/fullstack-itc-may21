@@ -90,7 +90,7 @@ var closeModal = function () {
     }
 };
 var runs = new Runner();
-var handleSubmit = function (ev) {
+var runSubmit = function (ev) {
     try {
         ev.preventDefault();
         var runDistance = Number(ev.target.elements.runDistance.value);

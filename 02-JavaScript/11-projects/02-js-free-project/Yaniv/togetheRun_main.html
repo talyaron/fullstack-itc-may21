@@ -39,13 +39,13 @@
         </section>
     </main>
     <div class="modalWrapper">
-        <div class="modalBox">
+        <div class="modalBox modalWrapper__item modalWrapper__item--run">
             <div class="modalBox__item modalBox__item--title">
                 <span>New Run</span>
                 <span class="close">&times;</span>
             </div>
             <div class="modalBox__item modalBox__item--content">
-                <form class="add_run_form" onsubmit="handleSubmit(event)">
+                <form class="add_run_form" onsubmit="runSubmit(event)">
                     <div class="add_run_form__item">
                         <label for="run_Distance_form">Run Distance (Km)</label>
                         <input type="number" min="0" name="runDistance" placeholder="in kilometers" required
