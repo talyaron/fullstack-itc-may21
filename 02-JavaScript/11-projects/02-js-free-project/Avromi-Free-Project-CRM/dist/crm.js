@@ -38,6 +38,20 @@ var Customers = /** @class */ (function () {
     }
     Customers.prototype.add = function (customer) {
         this.customers.push(customer);
+        console.log(this.customers);
+        localStorage.setItem("customers", JSON.stringify(this.customers));
+    };
+    Customers.prototype.getCustoemrsFromStorage = function () {
+        try {
+            var tempCustomers = JSON.parse(localStorage.getItem('customers'));
+            if (tempCustomers) {
+                this.customers = tempCustomers;
+            }
+            console.log(this.customers);
+        }
+        catch (e) {
+            console.error(e);
+        }
     };
     Customers.prototype.renderCustomers = function () {
         var customerList = document.querySelector(".customer__list");
@@ -52,6 +66,7 @@ var Customers = /** @class */ (function () {
     return Customers;
 }());
 var customers = new Customers();
+customers.getCustoemrsFromStorage();
 function goBack() {
     window.history.back();
 }

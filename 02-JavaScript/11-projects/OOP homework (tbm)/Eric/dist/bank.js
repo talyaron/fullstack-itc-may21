@@ -32,8 +32,10 @@ var AccountList = /** @class */ (function () {
         var html = '';
         this.accountUsers.forEach(function (accountUser) {
             html = "<p>" + accountUser.description + " " + accountUser.account + " $" + accountUser.deposit + " " + accountUser.type + "</p>"; //YS: Nice
+            console.log(html);
         });
-        deposit.insertAdjacentHTML("afterbegin", html);
+        deposit.innerHTML = html;
+        // deposit.insertAdjacentHTML("afterbegin", html);
         //como hacerlo con inner.html
     };
     AccountList.prototype.total = function (accountUser) {

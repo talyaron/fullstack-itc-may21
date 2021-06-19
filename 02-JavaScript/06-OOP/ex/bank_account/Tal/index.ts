@@ -1,4 +1,4 @@
-class Transaction {
+ class Transaction {
     amount: number;
     date: Date;
     place: string;

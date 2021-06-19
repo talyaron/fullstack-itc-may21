@@ -2,8 +2,6 @@ var handleSubmit = function (ev) {
     ev.preventDefault();
     var amount = ev.target.elements.amount.value;
     var description = ev.target.elements.description.value;
-    console.log(amount);
-    console.log(description);
     var transaction = new Transaction(amount, description);
     transactions.add(transaction);
     transactions.renderTransactions();
@@ -34,12 +32,20 @@ var AllTransactions = /** @class */ (function () {
         transactionsDiv.innerHTML = html;
     };
     AllTransactions.prototype.runningTotal = function () {
-        // var arr = this.transactions
+        var allTransactions = [];
+        this.transactions.forEach(function (transaction) {
+            allTransactions.push(Number(transaction.amount));
+        });
+        console.log(allTransactions);
         // var total = 0;
         // for (var i in arr) { total += arr[i]; }
         //     let result[] = this.transactions.map(a => a.amount);
         //     console.log(result)
-        //    total = [result].reduce((a, b) => a + b)
+        var arr = [1, 2, 3, 4, 5];
+        var total = allTransactions.reduce(function (acc, cur) { return acc + cur; });
+        // console.log(accumulator)
+        // console.log(current)
+        console.log(total);
         var totalDiv = document.querySelector(".total");
         totalDiv.innerHTML = "<p>Running Total:" + total + " </p>";
     };
