@@ -10,28 +10,34 @@
 </head>
 
 <body>
-    <div class="dom"></div>
+    <nav>
+        <a class="nav__item--button" href="./new-customer.html">New Customer</a>
+    </nav>
+
+    <h1 class="heading">Customers</h1>
+    <input type="text" id="myInput" onkeyup="myFilter()" placeholder="Search for names..">
+    <div class="customer__list"></div>
 
 
     <script src="./dist/crm.js"></script>
 
     <script>
-        let arr = [
-            { name: `sam`, phone: 1234 },
-            { name: `ruv`, phone: 1237 },
-            { name: `shlo`, phone: 1235 },
-            { name: `bruce`, phone: 1124 },
-            { name: `mike`, phone: 1125 }]
+        // let arr = [
+        //     { name: `sam`, phone: 1234 },
+        //     { name: `ruv`, phone: 1237 },
+        //     { name: `shlo`, phone: 1235 },
+        //     { name: `bruce`, phone: 1124 },
+        //     { name: `mike`, phone: 1125 }]
 
-        // arr.sort((a, b)=> a.phone - b.phone);
+        // // arr.sort((a, b)=> a.phone - b.phone);
        
-        arr.sort((a,b)=> a.name - b.name);
-        console.log(arr)
+        // arr.sort((a,b)=> a.name - b.name);
+        // console.log(arr)
 
-        nameList = arr.map((ele)=> `<p> Name: ${ele.name}</p>`).join()
+        // nameList = arr.map((ele)=> `<p> Name: ${ele.name}</p>`).join()
 
-        const dom = document.querySelector(".dom")
-        dom.innerHTML = nameList
+        // const dom = document.querySelector(".dom")
+        // dom.innerHTML = nameList
 
     
     </script>

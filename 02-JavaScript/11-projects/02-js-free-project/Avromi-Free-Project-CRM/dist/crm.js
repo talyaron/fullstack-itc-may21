@@ -5,14 +5,10 @@ var handleSubmit = function (ev) {
     var phone = ev.target.elements.phone.value;
     var address = ev.target.elements.address.value;
     var imgURL = ev.target.elements.imgURL.value;
-    console.log(name);
-    console.log(email);
-    console.log(phone);
-    console.log(address);
-    console.log(imgURL);
     var customer = new Customer(name, email, phone, address, imgURL);
     customers.add(customer);
-    customers.renderCustomers(customer);
+    customers.renderCustomers();
+    // customer.renderCustomerProfile();
     localStorage.setItem("name", name);
     localStorage.setItem("email", email);
     localStorage.setItem("phone", phone);
@@ -38,7 +34,7 @@ var Customers = /** @class */ (function () {
     }
     Customers.prototype.add = function (customer) {
         this.customers.push(customer);
-        console.log(this.customers);
+        this.customers.sort(function (a, b) { return (a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1); });
         localStorage.setItem("customers", JSON.stringify(this.customers));
     };
     Customers.prototype.getCustoemrsFromStorage = function () {
@@ -47,26 +43,35 @@ var Customers = /** @class */ (function () {
             if (tempCustomers) {
                 this.customers = tempCustomers;
             }
-            console.log(this.customers);
         }
         catch (e) {
             console.error(e);
         }
     };
+    // sortCustomers(){
+    //     console.log(this.customers)
+    // }
     Customers.prototype.renderCustomers = function () {
-        var customerList = document.querySelector(".customer__list");
+        // const customerList: HTMLElement = document.querySelector(".customer__list");
         var html = "";
         this.customers.forEach(function (customer) {
             html +=
-                "<h4>Customer</h4>\n            <img src=\"" + customer.imgURL + "\">\n            <p>" + customer.name + "</p>\n            <p>" + customer.email + "</p>\n            <p>" + customer.phone + "</p>\n            <p>" + customer.address + "</p>\n            <p>" + customer.customerId + "</p>";
+                "<p>" + customer.name + "</p>";
+            // <p>${customer.email}</p>
+            // <p>${customer.phone}</p>
+            // <p>${customer.address}</p>
+            // <p>${customer.customerId}</p>
         });
-        customerList.innerHTML = html;
+        // customerList.innerHTML = html;
         localStorage.setItem("innerHTML", html);
     };
     return Customers;
 }());
 var customers = new Customers();
 customers.getCustoemrsFromStorage();
+var customerList = localStorage.getItem("innerHTML");
+document.querySelector(".customer__list").innerHTML = customerList;
+// customers.sortCustomers()
 function goBack() {
     window.history.back();
 }

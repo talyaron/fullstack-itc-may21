@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Julie's Try/ Catch Attempt</title>
+  </head>
+  <body></body>
+
+  <!-- // possible errors:
+  // That one of the elements you try to grab using a document object method like getElementsbyTagName doesn't actually exist.
+  That some variable is not yet defined.
+  // Forgetting to give one of the parameters necessary for a method.
+  // A typo anywhere in the code
+  // Forgetting to call a function.
+  // Forgetting to append child to the canvas -->
+
+  <!-- I've been playing around with moving the "catch" to different places. I see that it stops the code from working when you insert it. If I put it in the third line, it tells me "canvas is not defined." This assume this indicates the necessaity for the canvas.getContext that appears on line 31, since if I move the catch to there, it tells me "context is not defined."-->
+
+  <script>
+    function init() {
+      try {
+        const body = document.getElementsByTagName("body")[0];
+        const canvas = document.createElement("canvas");
+      } catch (e) {
+        console.error();
+      }
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      const context = canvas.getContext("2d");
+
+      let randomNumber = Math.floor(Math.random() * (10 - 1)) + 1;
+      for (let i = 0; i < randomNumber; i++) {
+        const color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
+          Math.random() * 256
+        )},${Math.floor(Math.random() * 256)})`;
+        context.fillStyle = color;
+
+        context.fillRect(
+          Math.random() * window.innerWidth,
+          Math.random() * window.innerHeight,
+          Math.random() * 80 + 20,
+          Math.random() * 80 + 20
+        );
+      }
+
+      body.appendChild(canvas);
+    }
+
+    window.onload = init;
+    setInterval(function () {
+      document.location.reload();
+    }, 5000);
+  </script>
+</html>
