@@ -1,17 +1,43 @@
-@-webkit-keyframes bg-pan-right {
+@-webkit-keyframes shadow-inset-center {
   0% {
-    background-position: 0 50%;
+    -webkit-box-shadow: inset 0 0 0 0 transparent;
+    box-shadow: inset 0 0 0 0 transparent;
   }
   100% {
-    background-position: 100% 50%;
+    -webkit-box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
   }
 }
-@keyframes bg-pan-right {
+@keyframes shadow-inset-center {
   0% {
-    background-position: 0 50%;
+    -webkit-box-shadow: inset 0 0 0 0 transparent;
+    box-shadow: inset 0 0 0 0 transparent;
   }
   100% {
-    background-position: 100% 50%;
+    -webkit-box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+  }
+}
+@-webkit-keyframes blink-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes blink-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
   }
 }
 @-webkit-keyframes blink-1 {
@@ -61,8 +87,9 @@ body {
   font-size: 1.3rem;
 }
 .navbar__item a:hover {
-  -webkit-animation: blink-1 0.6s both;
-  animation: blink-1 0.6s both;
+  -webkit-animation: blink-2 0.9s both;
+  animation: blink-2 0.9s both;
+  color: coral;
 }
 .navbar img {
   width: 4%;
@@ -97,12 +124,17 @@ main .left-side .starMain__button {
 main .left-side .starMain__button:hover {
   -webkit-animation: blink-1 0.6s both;
   animation: blink-1 0.6s both;
+  color: white;
+  border: 1px solid brown;
 }
 main .left-side .starFooter {
   display: flex;
 }
 main .left-side .starFooter__left {
   margin-right: 2rem;
+}
+main .left-side h6 {
+  font-size: 1rem;
 }
 main .right-side {
   width: 50%;
@@ -127,6 +159,7 @@ main .right-side .planetPic > img {
   align-items: center;
 }
 .footer__starList__option {
+  border: 1.5px solid rgba(255, 255, 255, 0.116);
   display: flex;
   flex-direction: column;
   background-color: #4158D0;
@@ -136,13 +169,12 @@ main .right-side .planetPic > img {
   padding: 1rem;
 }
 .footer__starList__option:hover {
-  -webkit-animation: bg-pan-right 8s both;
-  animation: bg-pan-right 8s both;
+  -webkit-animation: shadow-inset-center 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: shadow-inset-center 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .footer__starList__option__headline {
   width: 70%;
   font-size: 2rem;
-  border-left: 1.5px solid rgba(255, 255, 255, 0.116);
 }
 .footer__starList__option__button {
   position: absolute;
@@ -155,4 +187,5 @@ main .right-side .planetPic > img {
 .footer__starList__option__button:hover {
   -webkit-animation: blink-1 0.6s both;
   animation: blink-1 0.6s both;
+  color: white;
 }

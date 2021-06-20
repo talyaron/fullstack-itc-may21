@@ -1,12 +1,14 @@
-@-webkit-keyframes bg-pan-right{0%{background-position:0 50%}100%{background-position:100% 50%}}@keyframes bg-pan-right{0%{background-position:0 50%}100%{background-position:100% 50%}}
+//Div animation:
+@-webkit-keyframes shadow-inset-center{0%{-webkit-box-shadow:inset 0 0 0 0 transparent;box-shadow:inset 0 0 0 0 transparent}100%{-webkit-box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5);box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5)}}@keyframes shadow-inset-center{0%{-webkit-box-shadow:inset 0 0 0 0 transparent;box-shadow:inset 0 0 0 0 transparent}100%{-webkit-box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5);box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5)}}
+// Font animations:
+@-webkit-keyframes blink-2{0%{opacity:1}50%{opacity:.2}100%{opacity:1}}@keyframes blink-2{0%{opacity:1}50%{opacity:.2}100%{opacity:1}}
 @-webkit-keyframes blink-1{0%,50%,100%{opacity:1}25%,75%{opacity:0}}@keyframes blink-1{0%,50%,100%{opacity:1}25%,75%{opacity:0}}
-
+// Font variable for the buttons:
 $buttonFont: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 * {
     scroll-behavior:auto;
 }
-
 body  {
     color: white;
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -35,7 +37,8 @@ body  {
         color: white;
         font-size: 1.3rem;
         &:hover {
-            -webkit-animation:blink-1 .6s both;animation:blink-1 .6s both
+            -webkit-animation:blink-2 .9s both;animation:blink-2 .9s both;           
+            color:coral;
         }
     }
 // Could not do this ↓ with BEM for some reason, used <img> instead
@@ -74,7 +77,10 @@ main {
                 background-color: mediumpurple;
                 color: rgb(0, 0, 0);
                 &:hover {
-                    -webkit-animation:blink-1 .6s both;animation:blink-1 .6s both
+                    -webkit-animation:blink-1 .6s both;animation:blink-1 .6s both;
+                    color: white;
+                    border: 1px solid brown
+                    
                 }
             }
         }
@@ -84,6 +90,9 @@ main {
             &__left {
                 margin-right: 2rem;
                 }
+            }
+            & h6 {
+                font-size: 1rem;
             }
         }
     .right-side{
@@ -97,9 +106,9 @@ main {
             align-items: center;
             >img {
                 width: 60%;
+                }
                 // border: pink 1px solid;
 
-            }
         }
     }
 }
@@ -111,6 +120,7 @@ main {
         align-items: center;
 
         &__option {
+            border: 1.5px solid rgba(255, 255, 255, 0.116);
             display: flex;
             flex-direction: column;
             background-color: #4158D0;
@@ -119,12 +129,10 @@ main {
             width:  25%;
             padding: 1rem;
             &:hover {
-                -webkit-animation:bg-pan-right 8s both;animation:bg-pan-right 8s both;
-            }
+                -webkit-animation:shadow-inset-center .7s cubic-bezier(.25,.46,.45,.94) both;animation:shadow-inset-center .7s cubic-bezier(.25,.46,.45,.94) both            }
             &__headline {
                 width: 70%;
                 font-size: 2rem;
-                border-left: 1.5px solid rgba(255, 255, 255, 0.116);
             }
             &__button {
                 position: absolute;
@@ -135,6 +143,7 @@ main {
                 cursor: pointer;
                 &:hover {
                     -webkit-animation:blink-1 .6s both;animation:blink-1 .6s both;
+                    color: white;
                 }
             }
         }
