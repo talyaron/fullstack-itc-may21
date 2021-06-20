@@ -1,66 +1,50 @@
 class Run {
-  runDate: Date;
-  runHour: number; // TODO check for better type for hours ranges
   runDistance: number;
+  runTime: Date; // including hour
   runArea: string;
-  runId: string = "runid" + Math.random().toString(16).slice(2);
-  runnerId: string = ''; // TODO get logged in runner from localStorage
+  runMatch: boolean = false;
+  runId: string = "run" + Math.random().toString(16).slice(2);
+  runRunnerId: string = JSON.parse(localStorage.getItem('currentRunner')).runnerId;; // TODO get logged in runner from localStorage
 
-  constructor(runDistance: number, runDate: Date) {
+  constructor(runDistance: number, runTime: Date) {
     this.runDistance = runDistance;
-    this.runDate = runDate;
+    this.runTime = runTime;
   }
 }
 
-document.querySelector("#total_distance").innerHTML = "0 Km"; // TODO change to the total distance of the runner from localStorage - if undefined/null - set to 0 Km
+document.querySelector("#total_sum").innerHTML = "0"; // for the future - get from localStorage if registered
+document.querySelector("#total_counts").innerHTML = "0"; // for the future - get from localStorage if registered
 
-class Preferences { // For the future
+interface Preferences { // For the future
   prefChat: string; // chatty, here and there, only when necessary, All (default)
   prefGender: string; // Male, Female, All (default)
   prefAgeGroup: string; // Like me, All (default)
 
-  constructor (prefChat: string, prefGender: string, prefAgeGroup: string) {
-    this.prefChat = prefChat;
-    this.prefGender = prefGender;
-    this.prefAgeGroup = prefAgeGroup;
-  
-  }
-
 }
 
-class Shoes {
+interface Shoes {
   shoesBrand: string;
   shoesModel: string;
   shoesDistance: number;
 
-  constructor (shoesBrand: string, shoesModel: string, shoesDistance: number) {
-    this.shoesBrand = shoesBrand;
-    this.shoesModel = shoesModel;
-    this.shoesDistance = shoesDistance;
-  
-  }
-
 }
 
-class Runner {
-  runnerName: string; // must on registration
-  runnerId: string = "runnerid" + Math.random().toString(16).slice(2); // on registration
-  runnerEmail: string; // must on registration
-  runnerPassword: string; // must on registration
-  runnerGender: string; // Male, Female, Unknown (default)
-  runnerAgeGroup: string; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default)
-  runnerChat: string; // chatty, here and there, only when necessary, Unknown (default)
-  runnerPref: Preferences = {prefChat: 'All', prefGender: 'All', prefAgeGroup: 'All'}; // TODO add method to edit
-  runnerProfImg: string;
-  runnerShoes: Shoes;
-  runnerRuns: Array<Run> = [];
-  totalDistance: number = Number(
+class Runner { // generated on the registration page - passed on to other pages via localStorage
+  runnerName: string; // required on registration
+  runnerId: string = JSON.parse(localStorage.getItem('currentRunner')).runnerId; // generated on registration
+  runnerEmail: string = JSON.parse(localStorage.getItem('currentRunner')).runnerEmail; // required on registration
+  runnerPassword: string = JSON.parse(localStorage.getItem('currentRunner')).runnerPassword; // required on registration
+  runnerGender: string = JSON.parse(localStorage.getItem('currentRunner')).runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
+  runnerAgeGroup: string = JSON.parse(localStorage.getItem('currentRunner')).runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
+  runnerChat: string = JSON.parse(localStorage.getItem('currentRunner')).runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
+  runnerPref: Preferences = JSON.parse(localStorage.getItem('currentRunner')).runnerPref; // default on registration - TODO add method to edit
+  runnerProfImg: string = JSON.parse(localStorage.getItem('currentRunner')).runnerProfImg; // TODO add method editDetails
+  runnerShoes: Shoes; // TODO add method editDetails
+  runnerRuns: Array<Run> = JSON.parse(localStorage.getItem('currentRunner')).runnerRuns; // empy on registration
+  runnerRunsHtml: string = document.querySelector('.runs').innerHTML; // DOM representation of all runs - new runs to DOM are added to this innerHTML
+  runnerDistance: number = Number(
     document.querySelector("#total_distance").innerHTML.replace(" Km", "")
   );
-
-  constructor (runnerName: string, runnerEmail: string, runnerPassword: string, runnerGender: string = 'Unknown', runnerAgeGroup: string = 'Unknown', runnerChat: string = 'Unknown', runnerProfImg : string) {
-      this.runnerProfImg = runnerProfImg;
-  }
 
   addRun(run: Run): void {
     this.runnerRuns.push(run);
@@ -68,16 +52,16 @@ class Runner {
     this.refreshTotal(run.runDistance);
   }
 
-  addRunToDOM(run: Run) {
+  addRunToDOM(run: Run) { // TODO adjust to this project
     try {
       const runsContainer: HTMLElement =
         document.querySelector(".runs");
       const signFAClass = run.runDistance >= 0 ? "plus" : "minus";
       const signTitle = run.runDistance >= 0 ? "Income" : "Expense";
       const runColor = run.runDistance >= 0 ? "green" : "red";
-      const runFormatedDate = `${run.runDate.getDate()}-${
-        run.runDate.getMonth() + 1
-      }-${run.runDate.getFullYear()} ${run.runDate.getHours()}:${run.runDate.getMinutes()}`;
+      const runFormatedDate = `${run.runTime.getDate()}-${
+        run.runTime.getMonth() + 1
+      }-${run.runTime.getFullYear()} ${run.runTime.getHours()}:${run.runTime.getMinutes()}`;
       const totalBeforeContainer: HTMLElement = document.querySelector("#total_distance");
 
       const runsHTML = `<div class="runs__item runs__item--action">
@@ -101,26 +85,29 @@ class Runner {
   }
 
   refreshTotal(runDistance: number): void {
-    this.totalDistance += runDistance;
-    this.updateDOMTotal(this.totalDistance);
+    this.runnerDistance += runDistance;
+    this.updateDOMTotal(this.runnerDistance);
   }
 
-  updateDOMTotal(totalDistance: number) {
+  updateDOMTotal(runnerDistance: number) {
     try {
       const domTotalDist : HTMLElement = document.querySelector("#total_distance");
-      domTotalDist.innerText = `${totalDistance} Km`;
-      if (totalDistance >= 0) {
+      domTotalDist.innerText = `${runnerDistance} Km`;
+      if (runnerDistance > 0) {
         domTotalDist.style.color = "green";
-      } else {
-        domTotalDist.style.color = "red";
       }
     } catch (er) {
       console.error(er);
     }
   }
+
+  logout() {
+    localStorage.setItem('currentRunner',null);
+    window.location.href = 'togetheRun_registration.html';
+  }
 }
 
-let RunsPull : Array<Run> = []; // TODO get from localStorage (JSON.parse()). if undefined/null - []
+let RunsPull : Array<Run> = []; // for the future - pull of all runners future runs, so matches can be made
 
 let isModalOpen: boolean = false;
 const addRunBtn: HTMLElement = document.querySelector(
@@ -166,9 +153,9 @@ const runSubmit = (ev: any) => {
     ev.preventDefault();
 
     const runDistance: number = Number(ev.target.elements.runDistance.value);
-    const runDate: Date = ev.target.elements.runDate.value;
+    const runTime: Date = ev.target.elements.runTime.value;
 
-    const run = new Run(runDistance, runDate);
+    const run = new Run(runDistance, runTime);
 
     runs.addRun(run);
 

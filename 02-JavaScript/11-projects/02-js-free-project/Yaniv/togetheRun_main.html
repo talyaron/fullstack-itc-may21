@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Runner Name --><title> TogetheRun Account</title>
-    <link rel="stylesheet" href="dist/togetheRun.css">
+    <!-- Runner Name -->
+    <title> TogetheRun Account</title>
+    <link rel="stylesheet" href="styles/dist/togetheRun_main.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3d6c8f810b.js" crossorigin="anonymous"></script>
@@ -15,17 +16,25 @@
 <body>
     <header class="summary">
         <button class="summary__item summary__item--logout">Logout</button>
-        <h3 class="summary__item summary__item--runner_name">Runner Name<!-- Runner Name --></h3>
+        <h3 class="summary__item summary__item--runner_name">Runner Name
+            <!-- Runner Name -->
+        </h3>
         <div class="summary__item summary__item--total">
             <div class="profile_image">
-                <img src="https://freesvg.org/img/winkboy.png" class="profile_image__item profile_image__item--profile_image" alt="profile image" title=""> <!-- title=Runner Name -->
+                <img src="https://freesvg.org/img/winkboy.png"
+                    class="profile_image__item profile_image__item--profile_image" alt="profile image" title="">
+                <!-- title=Runner Name -->
                 <div class="profile_image__item profile_image__item--badges">
                     <img src="images/TR_Kms_B.png" id="distance_badge">
                     <img src="images/TR_B.png" id="togetherun_badge">
-                </div>                
+                </div>
             </div>
-            <h1 id="total_distance"><span id="total_sum"><!-- Distance Sum --></span> <span class="units">Km</span></h1>
-            <div id="total_togetheruns"><span id="total_counts"><!-- TogetheRuns Counter --></span> <span class="counts">TogetheRuns</span></div>
+            <h1 id="total_distance"><span id="total_sum">
+                    <!-- Distance Sum -->
+                </span> <span class="units">Km</span></h1>
+            <div id="total_togetheruns"><span id="total_counts">
+                    <!-- TogetheRuns Counter -->
+                </span> <span class="counts">TogetheRuns</span></div>
         </div>
     </header>
     <main id="mainscreen">
@@ -35,7 +44,7 @@
             <button class="dashboard__item dashboard__item--history">TogetheRuns History</button>
         </section>
         <section class="runs">
-            
+
         </section>
     </main>
     <div class="modalWrapper">
@@ -47,14 +56,22 @@
             <div class="modalBox__item modalBox__item--content">
                 <form class="add_run_form" onsubmit="runSubmit(event)">
                     <div class="add_run_form__item">
-                        <label for="run_Distance_form">Run Distance (Km)</label>
+                        <label for="run_distance_form">Run Distance (Km)</label>
                         <input type="number" min="0" name="runDistance" placeholder="in kilometers" required
                             id="run_distance_form" />
                     </div>
                     <div class="add_run_form__item">
-                        <label for="run_date_form">Run Time</label>
-                        <input type="datetime-local" min="" name="runDate" placeholder="Choose date and time"
-                            required id="run_date_form" />
+                        <label for="run_time_form">Run Time</label>
+                        <input type="datetime-local" min="" name="runTime" placeholder="Choose date and time" required
+                            id="run_time_form" /> <!-- min=new Date() via js (only future runs can be added) -->
+                    </div>
+                    <div class="add_run_form__item">
+                        <label for="run_area_form">Run Area</label>
+                        <select name="runArea" required id="run_area_form">
+                            <option value="">choose from list</option>
+                            <option value="bsh">Be'er Sheva</option>
+                            <option value="tlv">Tel-Aviv</option>
+                        </select>
                     </div>
                     <input class="add_run_form__item add_run_form__item--submit" type="submit" name="submit"
                         value="Add Run" />
@@ -63,7 +80,7 @@
         </div>
     </div>
 
-    <script src="dist/togetheRun.js"></script>
+    <script src="scripts/dist/togetheRun_main.js"></script>
 </body>
 
 </html>

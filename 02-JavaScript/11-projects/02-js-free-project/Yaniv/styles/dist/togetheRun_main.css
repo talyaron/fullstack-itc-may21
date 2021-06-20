@@ -209,13 +209,14 @@ button:hover {
   color: black;
   font-weight: bold;
   background-color: cornflowerblue;
+  padding: 0 5px;
 }
 .modalBox__item--content {
   display: flex;
   align-items: baseline;
   justify-content: center;
   background-color: white;
-  height: 110px;
+  height: 140px;
   border-radius: 0 0 10px 10px;
 }
 .modalBox__item--content .add_run_form {
