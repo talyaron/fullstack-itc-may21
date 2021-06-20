@@ -3,7 +3,7 @@ body{
     padding: 0;
 }
     
-.back--box{
+.wrapper{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -11,8 +11,7 @@ body{
     background: linear-gradient(90deg, rgba(2,0,.6,1)0%, rgba(9,9,121, 1)35%, rgba(0, 212, 255, 1)100%);
 
 
-
-.back__simetric div{
+&__simetric div{
     position: absolute;
     width: 40px;
     height: 40px;
@@ -21,53 +20,53 @@ body{
     top: 10%;
     left: 10%;
 }
-.back__simetric div:nth-child(1){
+&__simetric div:nth-child(1){
     top: 12%;
     left: 42%;
     animation: animate  10s linear infinite;
 }
 
-.back__simetric div:nth-child(2){
+&__simetric div:nth-child(2){
     top: 70%;
     left: 50%;
     animation: animate  7s linear infinite;
 }
-.back__simetric div:nth-child(3){
+&__simetric div:nth-child(3){
     top: 17%;
     left: 6%;
     animation: animate  9s linear infinite;
 }
-.back__simetric div:nth-child(4){
+&__simetric div:nth-child(4){
     top: 20%;
     left: 60%;
     animation: animate  10s linear infinite;
 }
-.back__simetric div:nth-child(5){
+&__simetric div:nth-child(5){
     top: 67%;
     left: 10%;
     animation: animate  6s linear infinite;
 }
-.back__simetric div:nth-child(6){
+&__simetric div:nth-child(6){
     top: 80%;
     left: 70%;
     animation: animate  12s linear infinite;
 }
-.back__simetric div:nth-child(7){
+&__simetric div:nth-child(7){
     top: 60%;
     left: 80%;
     animation: animate  15s linear infinite;
 }
-.back__simetric div:nth-child(8){
+&__simetric div:nth-child(8){
     top: 32%;
     left: 25%;
     animation: animate  16s linear infinite;
 }
-.back__simetric div:nth-child(9){
+&__simetric div:nth-child(9){
     top: 90%;
     left: 25%;
     animation: animate  9s linear infinite;
 }
-.back__simetric div:nth-child(10){
+&__simetric div:nth-child(10){
     top: 20%;
     left: 80%;
     animation: animate  5s linear infinite;
@@ -84,21 +83,21 @@ body{
     
 }
 
-.top--firstanimation{
+.header__title {
+    position: relative;
+    animation-name: title;
+    animation: title 6s infinite;   
+  }
+
+.header{
     font-size: 30px;
     width: 800px;
     margin:auto;
     color: white;
     text-align: left;
     height: 40px;
+    margin-top: 20px;
 }
-
-.top__head {
-    position: relative;
-    animation-name: title;
-    animation: title 6s infinite;
-   
-  }
 
 @keyframes title {
     0%   {left:0px; top:0px;}
@@ -106,15 +105,12 @@ body{
     100% {right:0px; left:0px;}
   }
 
-.container__item1{
+.container__item{
     float: left;
     height: 180px;
     
 }
-
-
-
-.container--secondanimation{
+.container{
     display: flex;
     width: 400px;
     height: 40px;
@@ -154,21 +150,21 @@ ul,p{
     100%{margin-top: 0px;}
 }
 
-.slider--lastanimation{
+.slider{
     position: relative;
     width: 800px;
     height: 400px;
-    background: url(https://www.friendsofeurope.org/wp/wp-content/uploads/2019/06/bigstock-Planet-Earth-From-Space-Beaut-298703191-e1560939905471.jpg);
+    background: url(https://cdn.euroinnova.edu.es/img/subidasEditor/google%20earth-1603790379.webp);
     margin: 100px auto;
-    animation: slide 20s infinite;
+    animation: slide 15s infinite;
 }
 
 @keyframes slide {
 25%{
-    background: url(https://www.friendsofeurope.org/wp/wp-content/uploads/2019/06/bigstock-Planet-Earth-From-Space-Beaut-298703191-e1560939905471.jpg);
+    background: url(https://cdn.mos.cms.futurecdn.net/JDopQKUQfFR8LBDvJP6paf-1200-80.jpg);
 }
 50%{
-    background: url(https://cdn.euroinnova.edu.es/img/subidasEditor/google%20earth-1603790379.webp);
+    background: url(https://mars.nasa.gov/system/feature_items/images/6362_8944_1-PIA24546-1280.jpg);
 }
 75%{
     background: url(https://mars.nasa.gov/system/feature_items/images/6362_8944_1-PIA24546-1280.jpg);
@@ -177,6 +173,7 @@ ul,p{
     background: url(https://www.seti.org/sites/default/files/2020-10/earth-view-from-moon-perspective-footprints-1400px.jpg);
 }
 }
+
 }
 
 

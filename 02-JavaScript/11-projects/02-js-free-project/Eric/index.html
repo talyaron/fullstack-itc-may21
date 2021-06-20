@@ -19,13 +19,13 @@
             </div>
         </div>
         <div class="content">
-            <form class="add">
+            <form  class="add" onsubmit="handleSubmit(event)">
                 <input type="text" name="add" placeholder="Add item...">
-                <div class="input-buttons">
+                <button class="input-buttons">
                     <a href="#" class="add-todo">
                         <i class="fas fa-plus add"></i>
                     </a>
-                </div>
+                </button>
             </form>
 
             <ul class="todos">
@@ -53,13 +53,14 @@
             </ul>
             <div class="btns">
                 <input type="button" value="Completed" class="btn1">
-                <input type="button" value="Pending" class="btn2">
+                <input type="button" value="Pending" class="btn1">
             </div>
         </div>
         
     </div>
     
-    <script src=".dist/toDo.js"></script>
+    <script src="dist/toDo.js"></script>
+}
 </body>
 
 </html>
