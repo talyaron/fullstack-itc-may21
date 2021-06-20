@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+     let x = [2, 'g', 4, -6];
+    function highest(array) {
+        try {
+
+            if (!Array.isArray(array)) throw new Error('not array');
+
+            let largest = array[0];
+            if (typeof largest !== 'number') throw new Error('first element not number');
+            for (i = 0; i < array.length; i++) {
+                if (typeof array[i] === 'number') {
+                    if (array[i] > largest) {
+                        largest = array[i];
+                    }
+                }
+            }
+            return largest;
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+
+    }
+    //anonymous function
+    let highest2 = function highest(array) {
+        try {
+
+            if (!Array.isArray(array)) throw new Error('not array');
+
+            let largest = array[0];
+            if (typeof largest !== 'number') throw new Error('first element not number');
+            for (i = 0; i < array.length; i++) {
+                if (typeof array[i] === 'number') {
+                    if (array[i] > largest) {
+                        largest = array[i];
+                    }
+                }
+            }
+            return largest;
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+
+    }
+        console.log(highest2(x));
+
+    //arrow function
+    let hello3 = (array) => {
+        try {
+
+            if (!Array.isArray(array)) throw new Error('not array');
+
+            let largest = array[0];
+            if (typeof largest !== 'number') throw new Error('first element not number');
+            for (i = 0; i < array.length; i++) {
+                if (typeof array[i] === 'number') {
+                    if (array[i] > largest) {
+                        largest = array[i];
+                    }
+                }
+            }
+            return largest;
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+
+    }
+   
+    console.log(hello3(x));
+</script>
+
+<body>
+
+</body>
+
+</html>

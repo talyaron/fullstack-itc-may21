@@ -1,0 +1,1 @@
+"use strict";$(".like-btn").on("click",function(){$(this).toggleClass("is-active")}),$(".minus-btn").on("click",function(t){t.preventDefault();var n=$(this).closest("div").find("input"),i=parseInt(n.val());1<i?--i:i=0,n.val(i)}),$(".plus-btn").on("click",function(t){t.preventDefault();var n=$(this).closest("div").find("input"),i=parseInt(n.val());i<100?i+=1:i=100,n.val(i)});
