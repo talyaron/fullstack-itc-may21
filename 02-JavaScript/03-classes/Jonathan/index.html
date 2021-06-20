@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+</head>
+<body>
+    
+    <h1 class = "h1"></h1>
+    <div id="board"></div>
+
+    <script>
+        class Rectangle {
+            constructor(width, height, color){
+                this.width = width;
+                this.height = height;
+                this.color = color; 
+
+                //initialize
+                this.board = document.querySelector('#board');
+                this.createRect();
+            }
+
+            createRect(){
+                this.rectangle = document.createElement('div');
+                this.rectangle.style.backgroundColor = this.color;
+                this.rectangle.style.width = `${this.width}px`;
+                this.rectangle.style.height = `${this.height}px`;
+                this.board.appendChild(this.rectangle);
+            }
+
+            calcArea(){
+                return this.width * this.height;
+            }
+        }
+
+
+        let rectangle = new Rectangle('100','100','red')
+        
+        console.log(rectangle);
+        
+        let h1 = document.querySelector('.h1')
+        h1.innerText = `The Area of the rectangle is: ${rectangle.calcArea()}`;
+
+
+    </script>
+
+</body>
+</html>

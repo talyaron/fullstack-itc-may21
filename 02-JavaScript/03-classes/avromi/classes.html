@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="chessBoard"></div>
+    <script>
+
+        class ChessPiece {
+
+            constructor(pieceId, color, height){
+                this.width = `70px`
+                this.pieceId = pieceId;
+                this.color = color;
+                this.height = height;
+                this.chessBoard = document.querySelector(`#chessBoard`);
+
+                this.createPiece();
+            }
+
+            createPiece(){
+                try {
+                    this.piece = document.createElement(`div`);
+                    this.piece.style.background(this.color);
+                    this.piece.style.width(this.width)
+                    this.chessBoard.appendChild(this.piece);
+                } catch (error) {
+                    console.error(error)
+                }
+            }
+        }
+            let rook = new ChessPiece(`#rook`, `green` ,`50px`);
+            let night = new ChessPiece(`#night`, `blue` ,`20px`);
+            let pawn = new ChessPiece(`#pawn`, `yellow`);
+            let bishop = new ChessPiece(`#bishop`, `purple`);
+            let king = new ChessPiece(`#king`, `gold`);
+            let queen = new ChessPiece(`#queen`, `pink`);
+
+            console.log(rook);
+
+
+     
+
+    </script>
+</body>
+</html>
