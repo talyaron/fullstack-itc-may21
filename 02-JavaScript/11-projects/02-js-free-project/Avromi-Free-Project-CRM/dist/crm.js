@@ -26,6 +26,8 @@ var Customer = /** @class */ (function () {
         this.address = address;
         this.imgURL = imgURL;
     }
+    Customer.prototype.renderCustomerProfile = function () {
+    };
     return Customer;
 }());
 var Customers = /** @class */ (function () {
@@ -53,16 +55,21 @@ var Customers = /** @class */ (function () {
     // }
     Customers.prototype.renderCustomers = function () {
         // const customerList: HTMLElement = document.querySelector(".customer__list");
-        var html = "";
-        this.customers.forEach(function (customer) {
-            html +=
-                "<p>" + customer.name + "</p>";
-            // <p>${customer.email}</p>
-            // <p>${customer.phone}</p>
-            // <p>${customer.address}</p>
-            // <p>${customer.customerId}</p>
-        });
-        // customerList.innerHTML = html;
+        try {
+            var html_1 = "";
+            this.customers.forEach(function (customer) {
+                html_1 +=
+                    "<p onclick=handleClick(customerId)>" + customer.name + "</p>";
+                // <p>${customer.email}</p>
+                // <p>${customer.phone}</p>
+                // <p>${customer.address}</p>
+                // <p>${customer.customerId}</p>
+            });
+            // customerList.innerHTML = html;
+        }
+        catch (error) {
+            console.log(error);
+        }
         localStorage.setItem("innerHTML", html);
     };
     return Customers;
@@ -74,4 +81,8 @@ document.querySelector(".customer__list").innerHTML = customerList;
 // customers.sortCustomers()
 function goBack() {
     window.history.back();
+}
+function handleClick(customerId) {
+    console.log(handleClick);
+    window.location.href = "customer-profile.html";
 }
