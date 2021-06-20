@@ -2,7 +2,7 @@ class Product {
   imgSrc: string;
   description: string;
   price: number;
-  id:string;
+  id: string;
 
   constructor(imgSrc: string, description: string, price: number) {
     this.imgSrc = imgSrc;
@@ -13,10 +13,15 @@ class Product {
 
 }
 class Cart {
-  cart:Array<Product> = [];
-  addToCart(product:Product) {
+  cart: Array<Product> = [];
+
+  addToCart(product: Product) {
     this.cart.push(product);
     console.log(this.cart);
+  }
+
+  getCartFromStorage(){
+
   }
 }
 
@@ -24,7 +29,7 @@ class Cart {
 
 class Products {
   products: Array<Product> = [];
-  constructor(){
+  constructor() {
 
   }
 
@@ -39,26 +44,44 @@ class Products {
         `<img class="shopping-list__item-wrapper__item-image" src=${product.imgSrc} alt="">` +
         `<h2  class="shopping-list__item-wrapper__item-name">${product.description}</h2>` +
         `<h3  class="shopping-list__item-wrapper__item-price">$${product.price}</h3>` +
-        `<button  id='${product.id}' class="shopping-list__item-wrapper__add" onclick="moveToCart(${product})">Add to Cart</button>` +
+        `<button  id='${product.id}' class="shopping-list__item-wrapper__add" onclick="moveToCart('${product.id}')">Add to Cart</button>` +
         ` </div>`
-      )}).join('')
+      )
+    }).join('')
 
     domElement.innerHTML = html;
   }
-   
+
+  findProduct(productId: string): Product | false {
+    const product: Product = this.products.find(prd => prd.id === productId);
+    if (product) {
+      return product
+    } else {
+      return false;
+    }
+  }
+
 }
-const moveToCart = product=>{
+const moveToCart = (productId: string) => {
+  console.log(productId)
+  const product: Product | false = products.findProduct(productId)
   console.log(product);
+  if (product !== false) {
+    cart.addToCart(product);
+    console.log(cart)
+    window.sessionStorage.setItem('cart', JSON.stringify(cart.cart));
+  }
+
 };
 
 
- 
+
 
 const shoppingListDOM = document.querySelector('.shopping-list');
 const products = new Products();
 const cart = new Cart();
 
-products.addProduct(new Product("coffee.png",'Stainless Steel Travel Mug', 12.99))
+products.addProduct(new Product("coffee.png", 'Stainless Steel Travel Mug', 12.99))
 products.addProduct(new Product("beanie.png", 'Boundary Rib Beanie', 15.95))
 products.addProduct(new Product("3.png", 'PUMA 2021 Clash Guernsey', 39.95))
 products.addProduct(new Product("4.png", 'PUMA 2021 Home Guernsey', 39.95))
@@ -71,6 +94,7 @@ products.addProduct(new Product("10.png", 'Super Soft Touch Sherrin', 15.99))
 products.addProduct(new Product("11.png", 'Premiers 2020 Wall Flag', 27.95))
 products.addProduct(new Product("12.png", 'Dustin Martin Monatge Wall Flag', 39.95))
 products.renderProducts(shoppingListDOM);
+console.log(products)
 
 
 
@@ -79,14 +103,14 @@ products.renderProducts(shoppingListDOM);
 //   let divs1:any = document.querySelectorAll('.shopping-list__item-wrapper');
 //   let cart:Array<string> = [];
 //   let counter:number = parseInt(document.querySelector('.count').innerHTML);
-  
+
 //   for (let i = 0; i < divs.length; i++) {
 //       divs[i].addEventListener('click', function() {
 //        let purchase = divs1[i].children[0].outerHTML + divs1[i].children[1].outerHTML + divs1[i].children[2].outerHTML ;
 //         cart.push(purchase);
 //         console.log(cart);
 //         console.log(JSON.stringify(cart));
-        
+
 //         localStorage.setItem('cart', JSON.stringify(cart));
 //         counter = counter + 1;
 //         document.querySelector('.count').innerHTML = counter;
