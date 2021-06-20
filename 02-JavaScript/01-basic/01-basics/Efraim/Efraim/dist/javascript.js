@@ -15,8 +15,6 @@ var Cart = /** @class */ (function () {
         this.cart.push(product);
         console.log(this.cart);
     };
-    Cart.prototype.getCartFromStorage = function () {
-    };
     return Cart;
 }());
 var Products = /** @class */ (function () {
@@ -33,31 +31,15 @@ var Products = /** @class */ (function () {
                 ("<img class=\"shopping-list__item-wrapper__item-image\" src=" + product.imgSrc + " alt=\"\">") +
                 ("<h2  class=\"shopping-list__item-wrapper__item-name\">" + product.description + "</h2>") +
                 ("<h3  class=\"shopping-list__item-wrapper__item-price\">$" + product.price + "</h3>") +
-                ("<button  id='" + product.id + "' class=\"shopping-list__item-wrapper__add\" onclick=\"moveToCart('" + product.id + "')\">Add to Cart</button>") +
+                ("<button  id='" + product.id + "' class=\"shopping-list__item-wrapper__add\" onclick=\"moveToCart(" + product + ")\">Add to Cart</button>") +
                 " </div>");
         }).join('');
         domElement.innerHTML = html;
     };
-    Products.prototype.findProduct = function (productId) {
-        var product = this.products.find(function (prd) { return prd.id === productId; });
-        if (product) {
-            return product;
-        }
-        else {
-            return false;
-        }
-    };
     return Products;
 }());
-var moveToCart = function (productId) {
-    console.log(productId);
-    var product = products.findProduct(productId);
+var moveToCart = function (product) {
     console.log(product);
-    if (product !== false) {
-        cart.addToCart(product);
-        console.log(cart);
-        window.sessionStorage.setItem('cart', JSON.stringify(cart.cart));
-    }
 };
 var shoppingListDOM = document.querySelector('.shopping-list');
 var products = new Products();
@@ -75,7 +57,6 @@ products.addProduct(new Product("10.png", 'Super Soft Touch Sherrin', 15.99));
 products.addProduct(new Product("11.png", 'Premiers 2020 Wall Flag', 27.95));
 products.addProduct(new Product("12.png", 'Dustin Martin Monatge Wall Flag', 39.95));
 products.renderProducts(shoppingListDOM);
-console.log(products);
 // function addToCart() {
 //   let divs:any = document.querySelectorAll('.shopping-list__item-wrapper__add');
 //   let divs1:any = document.querySelectorAll('.shopping-list__item-wrapper');
