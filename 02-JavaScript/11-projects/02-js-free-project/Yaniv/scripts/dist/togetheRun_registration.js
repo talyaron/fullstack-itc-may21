@@ -1,4 +1,3 @@
-// TODO define newRunner class (according to Runner class at main ts file - vars and constructor only). Leave Runner class in main ts file with methods only - values from localStorage 'currentRunner'
 var newRunner = /** @class */ (function () {
     function newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg) {
         if (runnerGender === void 0) { runnerGender = 'Unknown'; }
@@ -31,7 +30,8 @@ var runnerSubmit = function (ev) {
         var runnerAgeGroup = ev.target.elements.runnerAgeGroup.value;
         var runnerChat = ev.target.elements.runnerChat.value;
         var runnerProfImg = ev.target.elements.runnerProfImg.value;
-        var runner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
+        currentRunner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
+        localStorage.setItem("currentRunner", JSON.stringify(currentRunner));
         window.location.href = 'togetheRun_main.html';
         // runners.addRunner(runner); // for the future - figure out how to manage runners array of type Array<Runner>
         ev.target.reset();

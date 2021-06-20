@@ -1,5 +1,3 @@
-// TODO define newRunner class (according to Runner class at main ts file - vars and constructor only). Leave Runner class in main ts file with methods only - values from localStorage 'currentRunner'
-
 class newRunner {
     runnerName: string; // required on registration
     runnerId: string = "runner" + Math.random().toString(16).slice(2); // generated on registration
@@ -40,10 +38,11 @@ const runnerSubmit = (ev: any) => {
       const runnerGender: string = ev.target.elements.runnerGender.value;
       const runnerAgeGroup: string = ev.target.elements.runnerAgeGroup.value;
       const runnerChat: string = ev.target.elements.runnerChat.value;
-      const runnerProfImg: string = ev.target.elements.runnerProfImg.value;      
-  
-      const runner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
-      
+      const runnerProfImg: string = ev.target.elements.runnerProfImg.value;
+
+      currentRunner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
+      localStorage.setItem("currentRunner", JSON.stringify(currentRunner));
+
       window.location.href = 'togetheRun_main.html';
       // runners.addRunner(runner); // for the future - figure out how to manage runners array of type Array<Runner>
     
