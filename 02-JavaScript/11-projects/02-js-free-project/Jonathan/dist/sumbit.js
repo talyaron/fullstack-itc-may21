@@ -1,4 +1,4 @@
-var boardSumbit = document.querySelector('#board');
+var welcomeRoot = document.querySelector('#welcome');
 var Customer = /** @class */ (function () {
     function Customer(name, city, stars) {
         this.name = name;
@@ -7,30 +7,26 @@ var Customer = /** @class */ (function () {
     }
     return Customer;
 }());
-var bookingList = /** @class */ (function () {
-    function bookingList() {
-        this.booking = [];
+var Booking = /** @class */ (function () {
+    function Booking() {
     }
-    bookingList.prototype.getCustomer = function (customer) {
-        this.booking.push(customer);
+    Booking.prototype.renderBooking = function (customer) {
+        var welcome = '';
+        if (customer.city === 'telaviv') {
+            welcome += "<p>Welcome " + customer.name + " to our page!!</p>";
+        }
+        else {
+            welcome += "a";
+        }
+        welcomeRoot.innerHTML = welcome;
     };
-    bookingList.prototype.renderBooking = function () {
-        var html = '';
-        this.booking.forEach(function (booking) {
-            html += "<p>" + booking.name + " " + booking.city + " " + booking.stars + "</p>";
-        });
-        console.log(this.booking);
-        boardSumbit.innerHTML = html;
-    };
-    return bookingList;
+    return Booking;
 }());
-var booking = new bookingList();
-var names = localStorage.getItem('name');
-var city = localStorage.getItem('city');
-var stars = localStorage.getItem('stars');
-var customer = new Customer(names, city, stars);
-booking.getCustomer(customer);
-booking.renderBooking();
+//get by localStorage all the information
+var getCustomer = JSON.parse(localStorage.getItem('newCustomer'));
+var booking = new Booking();
+var customer = new Customer(getCustomer.name, getCustomer.city, getCustomer.stars);
+booking.renderBooking(customer);
 function handleSumbite(event) {
     event.preventDefault();
     window.location.href = "formhotel.html";

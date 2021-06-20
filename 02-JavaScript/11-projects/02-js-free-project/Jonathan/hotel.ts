@@ -1,3 +1,16 @@
+class newCustomer {
+    name:string;
+    city:string;
+    stars:string;
+
+    constructor(name:string,city:string,stars:string){
+        this.name = name;
+        this.city = city;
+        this.stars = stars;
+
+    }
+}
+
 function handleSumbit(event:any):void{
     
     event.preventDefault();
@@ -10,17 +23,9 @@ function handleSumbit(event:any):void{
     const todate = event.target.elements.todate.value;
     const price = event.target.elements.cash.value;
     
-    //const customer = new Customer(name,city,stars,status,fromdate,todate,price);
-
-   
-
-    localStorage.setItem('name',name);
-    localStorage.setItem('city',city);
-    localStorage.setItem('stars',stars);
-    localStorage.setItem('status',status);
-    localStorage.setItem('fromdate',fromdate);
-    localStorage.setItem('todate',todate);
-    localStorage.setItem('price',price);
+    const customer = new newCustomer(name,city,stars);
+    
+    localStorage.setItem("newCustomer",JSON.stringify(customer))
 
     window.location.href = "sumbit_hotel.html"
 

@@ -1,7 +1,6 @@
-const boardSumbit = document.querySelector('#board')
+const welcomeRoot = document.querySelector('#welcome')
 
-
-class Customer {
+class Customer{
     name:string;
     city:string;
     stars:string;
@@ -10,43 +9,37 @@ class Customer {
         this.name = name;
         this.city = city;
         this.stars = stars;
-
     }
 }
 
+class Booking {
+   
+   renderBooking(customer:Customer){
 
-class bookingList {
-    booking:Array<Customer> = [];
+       let welcome:string = '';
 
-   getCustomer(customer:Customer){
-       this.booking.push(customer)
-   }
-
-   renderBooking(){
-  
-       let html:string = '';
-
-       this.booking.forEach(booking => {
-           html += `<p>${booking.name} ${booking.city} ${booking.stars}</p>`
-       })
+       if (customer.city === 'telaviv'){
+        welcome += `<p>Welcome ${customer.name} to our page!!</p>`
+       } else{
+           welcome += `a`
+       }
        
-       console.log(this.booking);
-       boardSumbit.innerHTML = html;
+       welcomeRoot.innerHTML = welcome;
    }
 
 }
 
 
-const booking = new bookingList();
+//get by localStorage all the information
+const getCustomer = JSON.parse(localStorage.getItem('newCustomer'))
 
-const names:string = localStorage.getItem('name');
-const city:string = localStorage.getItem('city');
-const stars:string = localStorage.getItem('stars');
+const booking = new Booking();
+
+const customer = new Customer(getCustomer.name, getCustomer.city, getCustomer.stars)
+booking.renderBooking(customer);
 
 
-const customer = new Customer(names,city,stars);
-booking.getCustomer(customer);
-booking.renderBooking();
+
 
 function handleSumbite(event:any):void{
     event.preventDefault();
