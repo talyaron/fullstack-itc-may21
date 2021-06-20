@@ -2,11 +2,19 @@ class newCustomer {
     name:string;
     city:string;
     stars:string;
+    status:string;
+    fromdate:Date;
+    todate:Date;
+    price:number;
 
-    constructor(name:string,city:string,stars:string){
+    constructor(name:string,city:string,stars:string, status:string, fromdate:Date, todate:Date, price:number){
         this.name = name;
         this.city = city;
         this.stars = stars;
+        this.status = status;
+        this.fromdate = fromdate;
+        this.todate = todate;
+        this.price = price;
 
     }
 }
@@ -23,11 +31,11 @@ function handleSumbit(event:any):void{
     const todate = event.target.elements.todate.value;
     const price = event.target.elements.cash.value;
     
-    const customer = new newCustomer(name,city,stars);
+    const customer = new newCustomer(name,city,stars,status,fromdate,todate,price);
     
     localStorage.setItem("newCustomer",JSON.stringify(customer))
 
-    window.location.href = "sumbit_hotel.html"
+    window.location.href = "hotel.html"
 
     //booking.getCustomer(customer);
     //booking.renderBooking();

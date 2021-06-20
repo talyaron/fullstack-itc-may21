@@ -1,8 +1,12 @@
 var newCustomer = /** @class */ (function () {
-    function newCustomer(name, city, stars) {
+    function newCustomer(name, city, stars, status, fromdate, todate, price) {
         this.name = name;
         this.city = city;
         this.stars = stars;
+        this.status = status;
+        this.fromdate = fromdate;
+        this.todate = todate;
+        this.price = price;
     }
     return newCustomer;
 }());
@@ -15,9 +19,9 @@ function handleSumbit(event) {
     var fromdate = event.target.elements.fromdate.value;
     var todate = event.target.elements.todate.value;
     var price = event.target.elements.cash.value;
-    var customer = new newCustomer(name, city, stars);
+    var customer = new newCustomer(name, city, stars, status, fromdate, todate, price);
     localStorage.setItem("newCustomer", JSON.stringify(customer));
-    window.location.href = "sumbit_hotel.html";
+    window.location.href = "hotel.html";
     //booking.getCustomer(customer);
     //booking.renderBooking();
 }
