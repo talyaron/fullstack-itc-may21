@@ -81,8 +81,8 @@ main {
                 &:hover {
                     -webkit-animation:blink-1 .6s both;animation:blink-1 .6s both;
                     color: white;
-                    border: 1px solid brown
-                    
+                    border: 1px solid brown;
+                    cursor: pointer;
                 }
             }
         }

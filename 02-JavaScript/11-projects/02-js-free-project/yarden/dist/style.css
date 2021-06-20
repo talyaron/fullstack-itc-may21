@@ -127,6 +127,7 @@ main .left-side .starMain__button:hover {
   animation: blink-1 0.6s both;
   color: white;
   border: 1px solid brown;
+  cursor: pointer;
 }
 main .left-side .starFooter {
   display: flex;

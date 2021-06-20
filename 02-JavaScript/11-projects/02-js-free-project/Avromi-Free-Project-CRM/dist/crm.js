@@ -8,6 +8,7 @@ var handleSubmit = function (ev) {
     var customer = new Customer(name, email, phone, address, imgURL);
     customers.add(customer);
     customers.renderCustomers();
+    // customer.renderCustomerProfile();
     localStorage.setItem("name", name);
     localStorage.setItem("email", email);
     localStorage.setItem("phone", phone);
