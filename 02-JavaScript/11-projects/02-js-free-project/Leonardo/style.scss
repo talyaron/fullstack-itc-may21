@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    background-image: url(../img/backgroundTinder.jpg);
 }
 
 .form {
@@ -10,6 +11,7 @@ body {
     flex-direction: column;
     border-radius: 50px;
     margin: 25px;
+    background-image: url(../img/backgroundForm.png);
 
     & input {
         margin: 20px;
@@ -57,6 +59,7 @@ body {
     position: absolute;
     top: 0;
     right: 0px;
+    background-image: url(../img/logoMatchPet.png);
 }
 
 .heart {
