@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Julie's Random Boxes</title>
+  </head>
+  <body></body>
+
+  <script>
+    function init() {
+      const body = document.getElementsByTagName("body")[0];
+
+      //   getElementsByTagName() is a dcoment object method that returns a collection of an elements's child elements with the specified tag name. These elements can be accessed by index numbers.
+      const canvas = document.createElement("canvas");
+
+      //   document.createElement() creates the HTML element specified by the tagName (canvas). Here I assign it to the variable I name canvas.
+      // The HTML canvas element is used to draw graphics with js. It's a container for graphics. JS draws the graphics.
+
+      canvas.height = window.innerHeight;
+
+      //   innerHeight property of the Window returns the interior height of the window in pixels. inner.Width returns the width. These two properties change depending on the size of the window.
+      // In other words, the height and width of the canvas just created will be the height and width of the window.
+
+      canvas.width = window.innerWidth;
+
+      const context = canvas.getContext("2d");
+      //   This gets the canvas' 2D rendering context, making it possible to draw these boxes.
+
+      //  First, I define a variable called randomNumber and use math.random to assign it to a random number between 1-10. The for loop executes the code the code that draws the rectanle a random number of times. Fillstyle is the html canvas proprty that fills the rectangle with a a particular colour. Here, I used randon rgbs as we did in class. Math.random() * 256 will generate a random number between 0 and 255. This is because the range for each colour (r, g, or b) is 0-255.
+      let randomNumber = Math.floor(Math.random() * (10 - 1)) + 1;
+      for (let i = 0; i < randomNumber; i++) {
+        const color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
+          Math.random() * 256
+        )},${Math.floor(Math.random() * 256)})`;
+        context.fillStyle = color;
+
+        context.fillRect(
+          Math.random() * window.innerWidth,
+          Math.random() * window.innerHeight,
+          Math.random() * 80 + 20,
+          Math.random() * 80 + 20
+        );
+      }
+
+      // .fillRect() method of the Canvas 2D API draws a rectangle that is filled according to the current fillStyle, whose colour is defined (randomly), above. FillRect() draws a filled rectangle whose position is at (x, y) and whose size is specified by width and height. Math.random() * window.innerWidth gives a random x axis and Math.random() * window.innerHeight gives a random y axis. The next two lines give a random size for the height and width of the box that is between 80 and 20 pixels.
+
+      body.appendChild(canvas);
+    }
+    // Body is the variable we created above. AppendChild() allows you to add a node to the end of the list of child nodes of a specified parent node. In this method, the childNode is the node to append to the given parent node. The appendChild() returns the appended child.
+
+    window.onload = init;
+    // This loads the init function when the window loads
+
+    setInterval(function () {
+      document.location.reload();
+    }, 5000);
+    // This function makes the window reload every 5 seconds (5000 miliseconds)
+  </script>
+</html>

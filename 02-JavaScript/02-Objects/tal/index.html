@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id='hi'>Hi</h1>
+    <script>
+
+        let x = {
+            a: 4,
+            b: 2,
+            multy: function () {
+                console.log(this)
+                return this.a * this.b;
+            },
+            multyArrow: () => {
+                //arrow functions dont save the scope of the object as "this" in scope of the object
+                console.log(this)
+                return x.a * x.b;
+
+            }
+        }
+
+        console.log('anonymous.....')
+        let result = x.multy();
+        console.log(result);
+
+        console.log('arrow.....')
+        let result2 = x.multyArrow();
+        console.log(result2);
+
+        console.dir(document)
+        // setTimeout(()=>{
+        //     window.close();
+        // },5000)
+       
+            
+
+    </script>
+</body>
+
+</html>

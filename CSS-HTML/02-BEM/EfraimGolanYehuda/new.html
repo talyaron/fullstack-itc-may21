@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPR music</title>
+</head>
+
+  <!-- YS: It is better practice to keep your CSS and JS files separated -->
+<style>
+        /* YS: Good use of flex */
+      body {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        width: 870px;
+        margin: auto;
+        justify-content: center;
+        /* try to make it aligned to left as original site.
+        also try to get the cool background image for the whole side - the wave cascade */
+        
+    }
+
+    .yehuda--h1 {
+        font-size: 1.5rem;
+        color: oldlace;
+         
+    }
+    .yehuda--h2 {
+        color: oldlace;
+    }
+    .menu {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        background-color: aquamarine;
+    }
+
+    .menu__button {
+        background-color: aqua;
+        color: blue;
+        width: 100px;
+        height: 40px;
+        margin: 2px;
+    }
+    .section__header--yehuda {
+        font-size: 3rem;
+        background-color: navy;
+        color: oldlace;
+    }
+    .article__wrapperfirst {
+        display: block;
+        justify-content: initial;
+        background-color: navy;
+    }
+    .article--inline {
+        background-color: gray;
+    
+    }
+
+    /*Golan starts here*/
+    /* YS: Good use of flex */
+
+     h1 {
+        font-size: 1.5rem;
+        font-variant-caps: all-small-caps;
+        margin-bottom: 0;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin-top: 0;
+    }
+
+
+    article {
+        flex: 1;    
+        margin: 4px;
+        padding: 10px;
+    }
+
+    .article__wrapper {
+        display: flex;
+        justify-content: space-around;
+        padding-left: 7rem;
+        padding-right: 7rem;
+        border: 0px solid purple;
+    }
+
+    .article__wrapper__wrappers {
+        display: flex;
+        flex: 1;
+    }
+
+    .article--inline__editors {
+        background-color: gray;
+        width: 15rem;
+
+    } 
+
+    .article--inline h1 {
+        color: white;
+        font-size: 1rem;
+        letter-spacing: 0rem;
+
+
+    }
+
+    .article--inline p {
+        color: white;
+        font-size: 1.1rem;
+    } 
+    
+    
+    .article--simple {
+        width: 200%;
+    }
+
+    .article--simple img {
+        width: 100%;
+    } 
+
+    .article--simple h1 {
+        color: brown;
+
+
+
+    }
+
+    .article--simple p {
+        color: black;
+    }
+
+    .golansection {
+        border: 2px solid gray;
+        padding: 50px;
+        max-width: 870px;
+        background-position-x: center;
+        
+
+    }
+
+    .section__top {
+        display: flex;
+        border: 0px solid red;
+    }
+
+    .section__header {
+        font-size: 3rem;
+        border: 0px solid green;
+        padding-top: 10px;
+        padding-left: 20px;
+    }
+
+    .section__icon {
+        display: inline-flex;
+        border: 0 px solid blue;
+        padding-top: 30px;
+    }
+
+    .darkred {
+        color: darkred;
+        letter-spacing: 0.25rem;
+    }
+
+
+    .white {
+        color: white;
+        background-color: #19262F;
+    }
+
+/* this part (border,mr-0,ml-auto,d-block) is all4thebutton */
+.d-block:hover {
+        background-color: #999999;
+    }
+
+    .border {
+  border: 0px blue dashed;
+}
+
+.mr-0 {
+  margin-right: 0;
+}
+.ml-auto {
+  margin-left:auto;
+}
+ .d-block {
+  display:block;
+  border-style:none;
+        font-variant-caps: all-small-caps;
+        border-radius: 0.25rem;
+        color: #446A90;
+        text-decoration:solid;
+        padding: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        letter-spacing: 0.1rem;
+} 
+
+    /*Efraim starts here*/
+    /* YS: Good use of flex */
+
+    .videos {
+        background-color: #19262f;
+        height: 35rem;
+        position: relative; 
+    }
+
+    .videos__h1 {
+        font-size: 1.5rem;
+        color: white;
+        margin-bottom: 0;
+        padding-top: 1rem;
+        margin-left: 1rem;
+    } 
+    
+    .videos__p {
+        font-size: 1.1rem;
+        margin-top: 0;
+        color: white;
+        padding-left: 1rem;
+    }
+
+    .videos__section {
+        background-color: black;
+        max-width: 870px;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    } 
+    
+    .videos__section__wrapper {
+        display: flex;
+        flex: 1;
+    }
+     
+    .videos__section__wrapper__wrappers {
+        display: flex;
+        justify-content: space-around;
+        flex: 4;
+    }  
+    .videos__section__article__big {
+        border: none;
+        padding: 0;
+        margin: 0;
+        background-size: contain;
+    } 
+    
+    .videos__section__wrapper__small {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column; 
+        flex: 1;
+    } 
+    .videos__section__h1 {
+        flex: 0.1; 
+        padding-left: 0.5rem;  
+        font-size: 0.75rem;
+        background-color: black;
+        color: white;
+        margin: 0;
+        padding: 0.5rem
+    }
+    .videos__section__article__small {
+        background-color: black;
+        margin: 2px;
+        height: 20rem;
+        position: relative;
+        border: 3px solid grey;
+        margin: 3px;
+    }
+    .videos__section__article__text {
+        padding: 0.5rem;
+        position:absolute; 
+        bottom: 0;
+        left: 0;
+        color: rgb(255, 255, 255);
+        background-color: grey;
+        font-size: 0.7rem;
+        width: 90%;
+    }
+    .videos__h2 {
+        position: absolute; 
+        bottom: 2rem; 
+        right: 1rem; 
+        padding: 0.5rem; 
+        border-radius: 1rem; 
+        font-size: 1rem; 
+        background-color: rgba(255,255,255,.15);
+       
+    }
+    .vidseries__section {
+        margin: 0px;
+        margin-bottom: 10rem;
+        background-color: #19262F;
+        height: 5rem; 
+    }
+    
+    .vidseries__section__wrapper__wrappers {
+        margin: 0px;
+
+        display: flex;
+        flex: 1;
+        width: 100%;
+    
+    }
+    .vidseries__section__wrapper {
+        margin: 0px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+
+        display: block;
+        flex: 2;
+        justify-content: space-around;
+    }
+    
+    .vidseries__section__h3 {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    .vidseries__section__wrapper__text {
+        margin: 0px;
+
+        display: block;
+        flex: 1;
+        justify-content: space-around;
+    }
+    .vidseries__section__wrapper__text__article {
+        background-color:  #19262f;;
+        border: 1px solid grey;
+        height: 13rem;
+        justify-content: space-evenly;
+        position: relative;
+        display:block; 
+        text-align: center;
+        margin: 0px;
+
+    }
+    .vidseries__section__wrapper__text__article__h4 {
+        margin-top: 0;
+        color: grey;
+        font-size: 0.7rem;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1rem;
+        
+    }
+    .vidseries--greytext {
+    color: grey;
+    font-size: 0.6rem;
+    
+    }
+    .vidseries--bluetext {
+    color: rgb(63, 63, 155);
+    font-size: 0.7rem;
+    margin: 0px;
+
+    }
+
+    .program {
+    height: 3rem;
+    background-color: white;
+    max-width: 900px;
+    margin: auto;
+    
+    }
+    .program__h2
+    {
+        font-size: 1rem; 
+        color: red; 
+        margin-top: 1rem;
+        padding-left: 1rem;
+        padding-top: 1rem;
+        margin-bottom: 0;
+        text-decoration: none;
+    }
+    .program__p {
+        padding-bottom: 1rem; 
+        padding-left: 1rem; 
+        margin-top: 0; 
+        border-bottom: 1px solid gray;
+    }
+    .article--flex {
+        flex: 1;
+        height: 100%;
+    }
+    .final {
+    max-width: 900px;
+    height: 12rem;
+    margin-top: 5rem;
+    background-color: white;
+    text-align: center;
+}
+    .final__h4 {
+    margin-top: 0;
+    color: grey;
+    font-size: 0.7rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    }
+
+    /* this is the crazy thing down here */
+    .article--inlinenew {
+        background-color:  #19262f;
+        border: 1px solid grey;
+        height: 12.75rem;
+        display: flex;
+        flex-direction: row nowrap;
+        justify-content: space-evenly;
+        width: 105%;
+        padding: 0;
+        padding-bottom: 24px;
+        margin: 0;
+        
+        align-items: center;
+    } 
+    .article--inlinenew1 {
+        background-color:  white;
+        height: 17rem;
+        display: flex;
+        flex-direction: row nowrap;
+        justify-content: space-evenly;
+        position: relative;
+    }
+    .article--inline2 {
+       height: 6rem;
+       margin-left: 2rem;
+        margin-top: 2rem;
+    }
+  
+    article .img-efraim {
+        width: 100%;
+        flex:  4;
+        height: 100%;
+    }   
+
+h5 {
+    color: grey;
+    font-size: 1rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+ul {
+    list-style-type: none;
+    text-align: left;
+    color: rgb(45, 75, 243);
+    
+}
+li {
+    padding-bottom: 0.5rem;
+}
+*/
+    </style>
+<!-- Golan starts here-->
+<body>
+    <div style="background-image: url('https://tse3.explicit.bing.net/th?id=OIP.PmiBQasQ0HzUtB2J677ifgHaEo&pid=Api&P=0&w=262&h=164');">N P R 50 HEAR EVERY VOICE</div>
+    <!-- YS: Excellent BEM -->
+    <div class="menu">
+        <div class="menu__button">NEWS</div>
+        <div class="menu__button">ARTS & LIFE</div>
+        <div class="menu__button">MUSIC</div>
+        <div class="menu__button">SHOWS & PODCASTS</div>
+        <div class="menu__button">SEARCH</div> 
+    </div>
+    <div class="menu">
+        <div class="menu__button">TINY DESK</div>
+        <div class="menu__button">ALL SONGS CONSIDERED</div>
+        <div class="menu__button">MUSIC NEWS</div>
+        <div class="menu__button">NEW MUSIC</div>
+        <div class="menu__button">MUSIC FEAUTURES</div> 
+        <div class="menu__button">LIVE SESSIONS</div>
+    </div>
+    <section>
+        <div class="section__header--yehuda">
+            N P R 50 HEAR
+                     EVERY
+                     VOICE
+        </div>
+        <!-- YS: Why not use BEM?   -->
+        <div class="article__wrapperfirst">
+            <article class="article--inline">
+                <h1 class="yehuda--h1">NEWS & STORIES</h1>
+                <h2 class="yehuda--h2">the latest from npr music></h2>
+                <h1 class="yehuda--h1">Public radio music dreams</h1>
+            <h2 class="yehuda--h2">the latest from npr music</h2>
+                <p>Maryland Repeals State Song That Called Lincoln A 'Tyrant' 1 HOUR AGO
+                    Play It Forward: George Clinton Is Everyone's Hype Man 17 HOURS AGO
+                    Mario Pavone, Hard-Hitting Bassist And Respected East-Coast Educator, Dead At 80 22 HOURS AGO
+                    Foo Fighters Headline Lollapalooza As Chicago Summer Festival Season Opens Up 17 HOURS AGO
+                    Demi Lovato Comes Out As Nonbinary 21 HOURS AGO
+                    More NPR content after sponso</p>
+            </article>
+            <h1 class="yehuda--h1">LISTEN LIVE</h1>
+            <H2 class="yehuda--h2">public radio music streams</H2>
+            <!-- YS: Good!  -->
+            <div class="menu">
+                <div class="menu__button">LOCAL</div>
+                <div class="menu__button">ROCK</div>
+                <div class="menu__button">CLASSICAL</div>
+                <div class="menu__button">JAZZ</div>
+                <div class="menu__button">R&B/HIP-HOP</div>
+                <div class="menu__button">MIXED-GENRE</div> 
+                <div class="menu__button">FOLK AMERICANA</div> 
+            </div>
+            
+        </div>
+    </section>
+    <!-- YS: Why not use BEM? It should be heirarchical:  -->
+    <div class="golansection">
+         <!-- YS: According to BEM, this should be golansection__section__top:  -->
+        <div class="section__top">
+              <!-- YS: According to BEM, this should be golansection__section__top__section__icon:  -->
+            <div class="section__icon">
+                <img src="./npr_playlists.png">
+            </div>
+            <div class="section__header">
+                <h1 class="darkred">Playlists</h1>
+                <p>hand-picked songs curated by the npr music staff</p>
+
+            </div>
+        </div>
+        <div class="article__wrapper">
+            <article class="article--simple">
+                <img src="./pause.png"
+                    alt="">
+                <h1 class="red">Press pause</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ea exercitationem necessitatibus suscipit
+                    soluta, reprehenderit recusandae adipisci. Dolorum iusto magni deleniti tempore quidem ipsum atque
+                    sunt enim natus, dolore perferendis.</p>
+            </article>
+            <article class="article--simple">
+                <img src="./viking.png"
+                    alt="">
+                <h1>Viking's choice</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ea exercitationem necessitatibus suscipit
+                    soluta, reprehenderit recusandae adipisci. Dolorum iusto magni deleniti tempore quidem ipsum atque
+                    sunt enim natus, dolore perferendis.</p>
+            </article>
+            <article class="article--simple">
+                <img src="./1971.png"
+                    alt="">
+                <h1>NPR's 50 favorite songs of 1971</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ea exercitationem necessitatibus suscipit
+                    soluta, reprehenderit recusandae adipisci. Dolorum iusto magni deleniti tempore quidem ipsum atque
+                    sunt enim natus, dolore perferendis.</p>
+            </article>
+            <article class="article--simple">
+                <img src="./mex.png"
+                    alt="">
+                <h1>what mexian regional means to you</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ea exercitationem necessitatibus suscipit
+                    soluta, reprehenderit recusandae adipisci. Dolorum iusto magni deleniti tempore quidem ipsum atque
+                    sunt enim natus, dolore perferendis.</p>
+            </article>
+        </div>
+        <div>
+            <p class="border">
+                <input type="button" class="d-block mr-0 ml-auto" value="more playlists >">
+              </p>
+        </div>
+
+    </div>
+    <div class="golansection white">
+        <div class="section__top">
+            <div class="section__icon">
+                <img src="./npr_editors.png" height="50">
+            </div>
+            <div class="section__header">
+                <h1 class="white">Editors' Picks</h1>
+                <p>essential stories and videos from npr music</p>
+
+            </div>
+        </div>
+
+        <div class="article__wrapper">
+            <article class="article--inline__editors">
+                <h1>some header</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ea exercitationem necessitatibus suscipit
+                    soluta, reprehenderit recusandae adipisci. Dolorum iusto magni deleniti tempore quidem ipsum atque
+                    sunt enim natus, dolore perferendis.</p>
+            </article>
+            <div class="article__wrapper__wrappers">
+                <div class="article__wrapper--inner">
+                    <article class="article--inline__editors">
+                        <h1>some header</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ea exercitationem necessitatibus
+                            suscipit
+                            soluta, reprehenderit recusandae adipisci. Dolorum iusto magni deleniti tempore quidem ipsum
+                            atque
+                            sunt enim natus, dolore perferendis.</p>
+                    </article>
+                    <article class="article--inline__editors">
+                        <h1>some header</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ea exercitationem necessitatibus
+                            suscipit
+                            soluta, reprehenderit recusandae adipisci. Dolorum iusto magni deleniti tempore quidem ipsum
+                            atque
+                            sunt enim natus, dolore perferendis.</p>
+                    </article>
+
+                </div>
+
+            </div>
+
+            <div class="article__wrapper__wrappers">
+                <div class="article__wrapper--inner">
+                    <article class="article--inline__editors">
+                        <h1>some header</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ea exercitationem
+                            necessitatibus
+                            suscipit
+                            soluta, reprehenderit recusandae adipisci. Dolorum iusto magni deleniti tempore quidem
+                            ipsum
+                            atque
+                            sunt enim natus, dolore perferendis.</p>
+                    </article>
+                    <article class="article--inline__editors">
+                        <h1>some header</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ea exercitationem
+                            necessitatibus
+                            suscipit
+                            soluta, reprehenderit recusandae adipisci. Dolorum iusto magni deleniti tempore quidem
+                            ipsum
+                            atque
+                            sunt enim natus, dolore perferendis.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p class="border">
+                <input type="button" class="d-block mr-0 ml-auto" value="more editors' picks >">
+              </p>
+        </div>
+    </div>
+    <!-- Efraim starts here-->
+  <!-- YS: Good use of BEM  -->
+    <div class="videos">
+        <h2 class="videos__h1">VIDEOS</h2>
+        <p class="videos__p">watch live concerts, studio sessions and music documentaries</p> 
+        <section class="videos__section"> 
+            <div class="videos__section__wrapper"> 
+                <div class="videos__section__wrapper__wrappers">
+                    <article class="videos__section__article__big article--inline article--flex">
+                     <img class="img-efraim" src="https://media.npr.org/assets/img/2021/05/19/kathleenedwards_tdhc_thumb_wide-289619c1f6201325072b6ddeb49f996cbb6ec621-s700-c85.webp">
+                    </article>
+                </div>    
+                <div class="videos__section__wrapper__small">
+                    <h1 class="videos__section__h1">MORE VIDEOS</h1>
+                    <article class="videos__section__article__small article--flex">
+                        <img class="img-efraim" src="https://media.npr.org/assets/img/2021/05/17/kathleenedwards_tdhc_thumb_wide-289619c1f6201325072b6ddeb49f996cbb6ec621-s800-c85.jpg">   
+                        <div class="videos__section__article__text">Kathleen Edwards</div>
+                    </article>
+                    <article style="margin-top: 0;" class="videos__section__article__small article--flex">
+                        <img class="img-efraim" src="https://media.npr.org/assets/img/2021/05/17/20210513_tdhc_palberta-thumb_wide-daeb50102427911365829cee95fa4be27c29e5ce-s800-c85.jpg">
+                        <div class="videos__section__article__text">Palberta</div>
+                    </article>
+                    <article style="margin-top: 0;" class="videos__section__article__small article--flex">
+                        <img class="img-efraim" src="https://media.npr.org/assets/img/2021/05/12/sarawatkins_tdhc_thumb2_wide-c79b562a82313d2ce1837c8f6eb0bd10948c676d-s800-c85.jpg">
+                        <div class="videos__section__article__text">Sara Watkins</div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <h2 class= "videos__h2">MORE VIDEOS ></h2>
+        
+        <div>
+            <p class="border">
+                <input type="button" class="d-block mr-0 ml-auto" value="more videos >">
+              </p>
+        </div>
+        
+    </div>
+<!-- Ef starts here-->
+    <section class="vidseries__section">
+        <div class="vidseries__section__wrapper__wrappers"> 
+            <div class="vidseries__section__wrapper"> 
+                <article class="article--inlinenew">
+                    <h3 class= "vidseries__section__h3">Video Series</h3>
+                        <article class="article--inline2">
+                            <img class="img-efraim" src="https://media.npr.org/assets/img/2020/10/21/lydia-loveless-wmnf_wide-a3a1829afdc6f60499f8aa176499bfbccf3792bd-s200-c85.webp"></article>
+                        <article  class="article--inline2">
+                                <img class="img-efraim" src="https://media.npr.org/assets/img/2020/10/20/screen-shot-2020-10-20-at-4.56.03-pm_wide-056c7bf382abfa6d05c801b6612a53a778255bb8-s200-c85.webp"></article>
+                        <article style="margin-right: 2rem;"  class="article--inline2">
+                                    <img class="img-efraim" src="https://media.npr.org/assets/img/2020/10/21/brian-blade-field-recordings_wide-28e972e23012c73a826c08087087441faf1a3b5c-s200-c85.webp"></article>        
+                </article>
+            </div>  
+
+            <div class="vidseries__section__wrapper__text">
+                <article class= "vidseries__section__wrapper__text__article">
+                    <h4 class="vidseries__section__wrapper__text__article__h4">POPULAR VIDEOS</h4>
+                    <p class="vidseries--greytext">TINY DESK</p>
+                      <!-- YS: Be careful with giving incorrect names to classes: videseries, vidseries  -->
+                    <p class="videseries--bluetext">Erykah Badu: Tiny Desk Concert</p>
+                    <p class="vidseries--greytext">JAZZ NIGHT IN AMERICA</p>
+                    <p class="videseries--bluetext">A Melodic Drumming Demo</p>
+                    <p class="vidseries--greytext">FRONT ROW</p>
+                    <p class="videseries--bluetext">Lucinda Williams, Live In Concert</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section>
+          <!-- YS: Good use of BEM  -->
+        <div class="program">
+            <h2 class="program__h2">PROGRAMS</h2>
+            <p class="program__p">Public radio music shows</p>
+        </div>
+    </section>
+
+    <section>
+        <div class= "final">
+            <article class="article--inlinenew1">
+                    <article  class="article--inline2">
+                        <h4 class="final__h4">all songs considered</h4>
+                        <p>Bob Boilen and Robin Hilton spin new music from emerging bands and musical icons.</p>
+                        </article>
+                    <article  class="article--inline2">
+                        <h4 class="final__h4">ALT LATINO</h4>
+                        <p>Latino arts and culture explained with music and conversation, presented by Felix Contreras.</p>
+                        </article>
+                    <article  class="article--inline2">
+                        <h4 class="final__h4">fresh air interviews</h4>
+                        <p>Terry Gross interviews luminary artists about their lives and musical work.</p>
+                        </article>
+                    <article  class="article--inline2">
+                        <h4 class="final__h4">FROM THE TOP</h4>
+                        <p>NPR Music presents From The Top program highlights. For the complete From The Top program website, visit www.fromthetop.org.</p>
+                        </article>      
+            </article>
+        </div>
+
+    </section>
+
+    <section>
+        <div class= "final">
+            <article class="article--inlinenew1">
+                    <article  class="article--inline2">
+                        <h4 class="final__h4">JAZZ<br>NIGHT</h4>
+                        <p>Jazz Night In America is a public radio program, a video concert documentary series, and an online home for the music, from NPR Music, WBGO and Jazz at Lincoln Center.</p>
+                        </article>
+                    <article  class="article--inline2">
+                        <h4 class="final__h4">Metropolis</h4>
+                        <p>KCRW's Jason Bentley hosts a weekly spin of the best electronic, dance and beyond.</p>
+                        </article>
+                    <article  class="article--inline2">
+                        <h4 class="final__h4">Mountain <br> Stage<br>with loving grace</h4>
+                        <p>Live recordings from the award-winning public radio program, hosted by Larry Groce.</p>
+                        </article>
+                    <article  class="article--inline2">
+                        <h4 class="final__h4">PIANO<br>JAZZ</h4>
+                        <p>Each week, NPR's award-winning program showcases both acclaimed artists and up-and-coming performers as they share music and memories.</p>
+                        </article>      
+            </article>
+        </div>
+
+    </section>
+
+    <section>
+        <div class= "final">
+            <article style="justify-content: center; margin-top: 5rem;" class="article--inlinenew1">
+                
+                    <article style="width: 10rem; margin-left: 15rem"  class="article--inline2">
+                        <h4 class="final__h4">Mountain <br> Stage<br>with loving grace</h4>
+                        <p>Live recordings from the award-winning public radio program, hosted by Larry Groce.</p>
+                        </article>
+                    <article style="width: 10rem; margin-right: 13.5rem;" class="article--inline2">
+                        <h4 class="final__h4" >PIANO<br>JAZZ</h4>
+                        <p>Each week, NPR's award-winning program showcases both acclaimed artists and up-and-coming performers as they share music and memories.</p>
+                        </article>      
+            </article>
+        </div>
+
+    </section>
+
+    <section>
+        <div class= "final">
+              <!-- YS: According to BEM, this should be: final__article--inlinenew1 (line 777)  -->
+            <article class="article--inlinenew1">
+                    <article  class="article--inline2">
+                        <h5>READ & LISTEN</h5>
+                        <ul>
+                            <li>Home</li>
+                            <li>News</li>
+                            <li>Arts & Life</li>
+                            <li>Music</li>
+                            <li>Podcasts</li>
+                            <li>Programs</li>
+                        </ul>
+                        </article>
+                    <article  class="article--inline2">
+                        <h5>CONNECT</h5>
+                        <ul>
+                            <li>Newsletter</li>
+                            <li>Facebook</li>
+                            <li>Twitter</li>
+                            <li>Instagram</li>
+                            <li>Press</li>
+                            <li>Contact & Help</li>
+                        </ul>
+                        </article>
+                    <article  class="article--inline2">
+                        <h5>ABOUT NPR</h5>
+                        <ul>
+                            <li>Overview</li>
+                            <li>Diversity</li>
+                            <li>Ethics</li>
+                            <li>Finances</li>
+                            <li>Public Editor</li>
+                            <li>Corrections</li>
+                        </ul>
+                        </article>
+                    <article  class="article--inline2">
+                        <h5>GET INVOLVED</h5>
+                        <ul>
+                            <li>Support Public Radio</li>
+                            <li>Sponsor NPR</li>
+                            <li>NPR Careers</li>
+                            <li>NPR Shop</li>
+                            <li>NPR Events</li>
+                            <li>NPR Extra</li>
+                        </ul>
+                        </article>      
+            </article>
+        </div>
+
+    </section>
+
+</body>
+</html>
+
+<!-- YS: Good job!  -->
