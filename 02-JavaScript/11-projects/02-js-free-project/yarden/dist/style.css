@@ -78,7 +78,7 @@ body {
 .navbar__item {
   list-style-type: none;
   padding: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   border-left: 1.5px solid rgba(255, 255, 255, 0.116);
 }
 .navbar__item a {
