@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> <!-- YS: Please add a title to your work -->
+</head>
+<style>
+</style>
+
+<body>
+    <div class="box"></div>
+</body>
+<!-- YS: Please keep your JS, CSS and HTML files separated-->
+<script>
+    function randomColor() {
+        return `background-color:rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`
+    }
+
+    function randomSize() {
+        return `height: ${Math.floor(Math.random()*160 +40)}px; width: ${Math.floor(Math.random()*160 +40)}px;`
+    }
+
+    function randomPosition() {
+        return `top: ${(Math.random() * 100)}%; left: ${(Math.random() * 100)}%;`
+    }
+
+
+    const myInterval = setInterval(function renderBoxes() {
+                //create random number of boxes
+                const randomNumber = Math.ceil((Math.random()) * 10);
+                console.log(randomNumber);
+                let html = '';
+                for (i = 0; i <= randomNumber; i++) {
+                    let color = randomColor();
+                    let size = randomSize();
+                    let position = randomPosition();
+                    html += `<div style="position: absolute; ${color}; ${size}; ${position}"></div>`;
+                }
+                try {
+                    let boxes = document.querySelector(".box");
+                    if (!boxes) {throw new Error('no boxes found')}  //YS: Great error handling!! 
+                        boxes.innerHTML = html;
+                    } catch (error) {
+
+                        console.error(error);
+                        clearInterval(myInterval); //Very nice! 
+                        return 0;
+                    }
+                }, 5000);
+</script>
+
+</html>

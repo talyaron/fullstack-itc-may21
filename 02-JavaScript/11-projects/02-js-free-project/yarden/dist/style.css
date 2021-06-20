@@ -91,9 +91,10 @@ body {
   animation: blink-2 0.9s both;
   color: coral;
 }
-.navbar img {
+.navbar #rocket {
   width: 4%;
   height: 2%;
+  fill: white;
 }
 
 main {

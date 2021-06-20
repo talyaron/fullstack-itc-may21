@@ -1,0 +1,119 @@
+body {
+    background-color: peru;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 48px;
+    color: white;
+    animation-name: title;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    position: relative;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px;
+    grid-template-rows: 200px 200px 200px;
+    gap: 10px;    
+    justify-content: center;
+
+    .item {
+            border-radius: 100%;
+            animation-name: items;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            position: relative;
+            &.item--1 {
+                background-image: url(https://th.bing.com/th/id/Rab84031582756d19bfdeaf7d7974a329?rik=q4sZifWHNIKPqQ&pid=ImgRaw);
+                background-size: cover;
+            }
+            &.item--2 {
+                background-image: url(https://th.bing.com/th/id/OIP.tg1TtYfhncBjngmy56pVAQHaFb?pid=ImgDet&rs=1);
+                background-size: cover;
+            }
+            &.item--3 {
+                background-image: url(https://th.bing.com/th/id/R15bb3164cc4f3a8da197f7c56d816214?rik=t%2bPpBY2wDyU1jA&pid=ImgRaw);
+                background-size: cover;
+            }
+            &.item--4 {
+                background-image: url(https://www.mendovoz.com/u/fotografias/m/2020/4/21/f800x450-128664_180110_5050.jpg);
+                background-size: cover;
+            }
+            &.item--5 {
+                background-image: url(https://th.bing.com/th/id/R133461958bb062f922f21ffed819305d?rik=J0RRdY0xFRlDug&riu=http%3a%2f%2ffarm2.static.flickr.com%2f1341%2f1154257258_145ffb9f4d_o.jpg&ehk=tghmjqfE0JowFbU58R8S7VVvDX6srC36fxFomGmVATY%3d&risl=&pid=ImgRaw);
+                background-size: cover;
+            }
+            &.item--6 {
+                background-image: url(https://2.bp.blogspot.com/-X0uMS5udRsM/UH06khwI7_I/AAAAAAAAlTk/vRGv6Ro5KSM/s1600/mendoza_7.jpg);
+                background-size: cover;
+            }
+            &.item--7 {
+                background-image: url(https://3.bp.blogspot.com/-bLrT6U27JyQ/TtV1YbbpqhI/AAAAAAAAAMA/2Wl_UOy9qR4/s1600/mendoza-argentina+%25281%2529.jpg);
+                background-size: cover;
+            }
+            &.item--8 {
+                background-image: url(https://imgs-akamai.mnstatic.com/f4/13/f4138a459bb4a30d978e91f3c2205ddc.jpg?quality=75&format=pjpg&fit=bounds&width=980&height=880);
+                background-size: cover;
+            }
+            &.item--9 {
+                background-image: url(https://th.bing.com/th/id/OIP.dIQA-iafOsDI24E-SlmpYwHaFj?pid=ImgDet&rs=1);
+                background-size: cover;
+            }
+            &.item--10 {
+                background-image: url(https://th.bing.com/th/id/Rc12c31d6101253d8f1dc8d1f2361e333?rik=6yGLfwOzwclldg&riu=http%3a%2f%2fpodrozniccy.com%2fen%2fwp-content%2fuploads%2fsites%2f3%2f2014%2f11%2fPuente-del-Inca-9-1024x574.jpg&ehk=hakWea4A%2fZ4YOR7bGXjPVXiDm9ks193WWaRzxdOsB1w%3d&risl=&pid=ImgRaw);
+                background-size: cover;
+            }
+            &.item--11 {
+                background-image: url(https://th.bing.com/th/id/R752bc9394d7f4885aead61a74268dea4?rik=VaKnp00uOCe6Vw&pid=ImgRaw);
+                background-size: cover;
+            }
+            &.item--12 {
+                background-image: url(https://th.bing.com/th/id/OIP.J74X9toQG9y_7JNYewYN5AHaE8?pid=ImgDet&rs=1);
+                background-size: cover;
+            }
+        }
+}
+
+    .item:hover {
+        animation-name: itemRotate;
+        animation-duration: 5s;
+        animation-direction: alternate;
+    }
+
+@keyframes items {
+    from {
+        border: 2px solid black;
+        top: 0px;
+    }
+
+    to{
+        border: 2px solid white;
+        top: 20px;
+    }
+    
+}
+
+@keyframes title {
+    from {
+        left: -100px;
+    }
+
+    to{
+        left: 100px;
+    }
+}
+
+@keyframes itemRotate {
+    from {
+        transform: rotate(5deg);
+    }
+
+    to{
+        transform: rotate(360deg);
+    }
+}

@@ -42,9 +42,11 @@ body  {
         }
     }
 // Could not do this ↓ with BEM for some reason, used <img> instead
-    & img { 
+    & #rocket { 
         width: 4%;
         height: 2%;
+        fill: white;
+
     }
 }
 
