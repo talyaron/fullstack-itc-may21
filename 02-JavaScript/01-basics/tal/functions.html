@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      //simple function
+      //unhoisted
+      function add(arg1 = 0, arg2 = 0, arg3 = 0) {
+          console.log(arg3)
+          return add;
+      }
+
+      let x = add(3, 6);
+      console.log(x);
+
+      //anonymous function
+      let add2 = function (arg1, arg2) {
+          return arg1 + arg2;
+      }
+
+      x = add2(5, 7);
+      console.log(x);
+
+      //arrow function
+      let add3 = (arg1, arg2) => {
+          return arg1 + arg2;
+      }
+
+      x = add3(5, 7);
+      console.log(x);
+
+
+
+
+      // -------------- Hoisting
+
+
+      let z = 44;
+      console.log(z);
+
+      let rs = multi(2, 5);
+      multi(100, 10);
+      console.log(rs);
+
+      console.log(multi(3, 5))
+
+      //functions are unhisted!!!!
+      function multi(a = 0, b = 0) {
+
+          try {
+
+              if(typeof a !== 'number' || typeof b !== 'number') 
+              { throw new Error( 'a or b are not numbers')
+            } //Error = constructor
+
+              return a * b;
+
+          } 
+          catch (error) {
+
+              console.error(error);
+              return 0;
+          } 
+          finally {
+              //do something at the end
+          }
+      }
+
+
+
+      // console.log(divide(3, 6));
+
+      // let divide = (a, b) => {
+      //     return a / b;
+      // }
+    </script>
+  </body>
+</html>

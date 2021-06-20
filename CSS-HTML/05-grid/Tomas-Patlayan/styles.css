@@ -1,0 +1,52 @@
+/*Globals*/
+html {
+  font-size: 62.5%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: blueviolet;
+  font-size: 2rem;
+}
+
+p {
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.container {
+  width: 95%;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+/*Grid*/
+.grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.grid .photo {
+  text-align: center;
+}
+/*# sourceMappingURL=styles.css.map */

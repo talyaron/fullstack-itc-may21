@@ -11,6 +11,7 @@ var handleSubmit = (ev: any): void => {
     const customer = new Customer(name, email, phone, address, imgURL);
     customers.add(customer);
     customers.renderCustomers();
+    // customer.renderCustomerProfile();
     localStorage.setItem(`name`, name)
     localStorage.setItem(`email`, email)
     localStorage.setItem(`phone`, phone)
@@ -37,6 +38,22 @@ class Customer {
         this.address = address;
         this.imgURL = imgURL;
     }
+
+    // renderCustomerProfile() {
+    //     let profileHtml: string = "";
+    
+    //         profileHtml +=
+
+    //             `<p>${customer.name}</p>
+    //         <p>${customer.email}</p>
+    //         <p>${customer.phone}</p>
+    //         <p>${customer.address}</p>
+    //         <p>${customer.customerId}</p>`
+
+    //     }
+    //     localStorage.setItem(`Profile HTML`, profileHtml)
+    //     console.log(profileHtml)
+    // }
 }
 
 class Customers {
@@ -86,9 +103,9 @@ class Customers {
         // customerList.innerHTML = html;
         localStorage.setItem(`innerHTML`, html)
 
-
     }
 
+ 
 
 }
 
@@ -105,5 +122,13 @@ document.querySelector(".customer__list").innerHTML = customerList;
 function goBack() {
     window.history.back();
 }
+
+
+
+
+  
+
+
+
 
 

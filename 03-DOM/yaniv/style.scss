@@ -1,0 +1,33 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 100;
+}
+
+div {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0.8;
+}
+
+// #box1,#box2,#box3,#box4,#box5,#box6,#box7,#box8,#box9,#box10 {
+//     background-color: unset;
+//     height: unset;
+//     width: unset;
+//     top: unset;
+//     left: unset;
+//     content: unset;
+// }
+
+p {
+    background-color: white;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/hotel.min.css">
+    <link rel="shortcut icon" href="https://www.logosearcher.com/wp-content/uploads/2018/07/google-hotel-ads.svg" />
+    <title>Hotel Page</title>
+</head>
+
+<body>
+    <!--hotel form-->
+    <div class="wrapper">
+        <form onsubmit="handleSumbit(event)">
+            <fieldset>
+                <legend>Booking</legend>
+                <input type="text" name="name" id="name" placeholder="Enter your name">
+                <select name="cities">
+                    <option value="" selected>Select a city</option>
+                    <option value="telaviv">Tel Aviv</option>
+                    <option value="jerusalem">Jerusalem</option>
+                    <option value="beersheva">Beer Sheva</option>
+                    <option value="eilat">Eilat</option>
+                    <option value="haifa">Haifa</option>
+                </select>
+                <label>Stars:</label>
+                <label>
+                    <input type="radio" name="stars" value="onestar" checked>
+                    <span style="color:#b29600">★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="twostar" checked>
+                    <span style="color:#b29600">★★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="threestar" checked>
+                    <span style="color:#b29600">★★★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="fourstar" checked>
+                    <span style="color:#b29600">★★★★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="fivestar" checked>
+                    <span style="color:#b29600">★★★★★</span>
+                </label>
+                <select name="status">
+                    <option value="status" selected>Select your status</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                    <option value="children">Children</option>
+                </select>
+                <label for="fromdate">From Date:
+                    <input type="date" name="fromdate" id="fromdate">
+                </label>
+                <label for="todate">To Date:
+                    <input type="date" name="todate" id="todate">
+                </label>
+                <input type="text" name="cash" id="cash" placeholder="Money">
+                <button type="submit" class="sumbit">Search</button>
+            </fieldset>
+        </form>
+    </div>
+    <div id="board"></div>
+    <script src="dist/hotel.js"></script>
+</body>
+
+</html>
