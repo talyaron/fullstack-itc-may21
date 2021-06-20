@@ -1,3 +1,11 @@
+@keyframes shine {
+  0% {
+    background-position: -10vw;
+  }
+  100% {
+    background-position: 10vw;
+  }
+}
 * {
   font-family: "Raleway", sans-serif;
 }
@@ -116,6 +124,7 @@ button:hover {
   background-color: aqua;
   font-size: 1.2rem;
   color: black;
+  animation: shine 2s infinite;
 }
 #mainscreen .dashboard__item--add:hover {
   background-color: turquoise;
@@ -178,40 +187,36 @@ button:hover {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
 }
-
-.modalBox {
+.modalWrapper__item {
   display: none;
 }
-.modalBox__item {
+.modalWrapper__item--run {
+  width: 25vw;
+  min-width: 350px;
+}
+
+.modalBox {
   display: flex;
   align-items: center;
   overflow: auto;
-  width: 25vw;
-  min-width: 350px;
   padding: 5px;
 }
 .modalBox__item--title {
-  border-radius: 10px 10px 0 0;
+  display: flex;
   justify-content: space-between;
+  border-radius: 10px 10px 0 0;
   height: 25px;
   color: black;
   font-weight: bold;
   background-color: cornflowerblue;
-}
-.modalBox__item--title .close {
-  cursor: pointer;
-  font-size: 20px;
-  margin: 0 5px;
-}
-.modalBox__item--title .close:hover {
-  color: #115f5b;
+  padding: 0 5px;
 }
 .modalBox__item--content {
   display: flex;
   align-items: baseline;
   justify-content: center;
   background-color: white;
-  height: 110px;
+  height: 140px;
   border-radius: 0 0 10px 10px;
 }
 .modalBox__item--content .add_run_form {
@@ -246,4 +251,13 @@ button:hover {
 .modalBox__item--content .add_run_form__item--submit:active {
   background-color: #2fac9f;
   color: white;
+}
+
+.close {
+  cursor: pointer;
+  font-size: 20px;
+  margin: 0 5px;
+}
+.close:hover {
+  color: #115f5b;
 }
