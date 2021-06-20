@@ -11,23 +11,56 @@
 <body>
     <header>
         <ul class="navbar">
-            <img id="rocket" src="./images/rocket-solid.svg" alt="">
-            <li class="navbar__item">
-                <a href="./index.html">Galileo Project</a></li>
-            <li class="navbar__item">
-                <a href="./team.html">Our team</a></li>
-            <li class="navbar__item">
-                <a href="./contact.html">Contact</a></li>
+          <img id="rocket" src="./images/rocket-solid.svg" alt="space rocket" />
+          <li class="navbar__item">
+            <a class="navbar__item__link" href="./index.html">Galileo Project</a>
+          </li>
+          <li class="navbar__item">
+            <a class="navbar__item__link" href="./team.html">Our team</a>
+          </li>
+          <li class="navbar__item">
+            <a class="navbar__item__link" href="./contact.html">Contact</a>
+          </li>
         </ul>
-    </header>
-    <main>
-        <div style="width: 60%; margin: 0 auto;">
-            <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+      </header>
+    <div style="display: flex; align-items: center;">
+        <img style="height: 20rem; width: 40%; margin: 0 auto; object-fit: cover" src="https://amc-theatres-res.cloudinary.com/v1614633751/amc-cdn/production/2/movies/700/673/MovieStillDynamic/121046.jpg" alt="Astronauts">
+        <div style="width: 50%; margin: 0 auto;">
+            <h1>Our Expedition Leaders</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam laboriosam voluptatibus dolorum sapiente beatae soluta doloremque minima alias, debitis sit saepe, qui sint minus tempora ullam! Cumque, dolore consequatur.
             Aut, placeat aliquid voluptates magnam deserunt enim voluptas, ab accusantium dolores nesciunt magni quam saepe harum sequi. Explicabo ex ab quibusdam optio nihil commodi dolor dolores, unde rem tempora quam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam vero dolorem provident aut. Veniam explicabo libero odit voluptates dolorem amet praesentium? Quidem dignissimos nostrum corporis, et amet dolor distinctio blanditiis.</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam laboriosam voluptatibus dolorum sapiente beatae soluta doloremque minima alias, debitis sit saepe, qui sint minus tempora ullam! Cumque, dolore consequatur.
                 Aut, placeat aliquid voluptates magnam deserunt enim voluptas, ab accusantium dolores nesciunt magni quam saepe harum sequi. Explicabo ex ab quibusdam optio nihil commodi dolor dolores, unde rem tempora quam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam vero dolorem provident aut. Veniam explicabo libero odit voluptates dolorem amet praesentium? Quidem dignissimos nostrum corporis, et amet dolor distinctio blanditiis.</p>
         </div>
-    </main>
+    </div>
+    <footer class="footer">
+        <div class="footer__starList">
+            <div class="footer__starList__option">
+                <span class="footer__starList__option__headline">Mars</span>
+                <span id="best-seller">
+                  <img style="height: 30px; width: 30px;" src="./images/best.png" alt="best seller">
+                </span>
+                <p class="footer__starList__option__text">A journey to the Korolev crater and the North polar ice cap!</p>
+                <button class="footer__starList__option__button">See details</button>
+            </div>
+                <div class="footer__starList__option">
+                    <span class="footer__starList__option__headline">Venus</span>
+                    <p class="footer__starList__option__text">Join an Expedition to see the volcanoes and craters of Venus!</p>
+                    <button class="footer__starList__option__button">See details</button>
+
+                </div>
+                <div class="footer__starList__option">
+                    <span class="footer__starList__option__headline">Moon</span>
+                    <p class="footer__starList__option__text">Never too late to hike the first toured planet of the 21st century!</p>
+                    <button class="footer__starList__option__button">See details</button>
+
+                </div>
+        </div>
+      <p class="footer__text">
+        Galileo Project® 2030 was created by Yarden Tal as an exercise in
+        JavaScript & SCSS for Fullstack evening bootcamp at Israel Tech
+        Challenge
+      </p>
+    </footer>
 </body>
 </html>
