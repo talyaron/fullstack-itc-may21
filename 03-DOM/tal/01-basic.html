@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 style='color:rgb(12,34,79)'>Hello</h1>
+    <p id='rootPargraph'></p>
+    <div id='rootDiv'></div>
+    <script src="helpers.js"></script>
+    <script>
+
+        sayHello();
+        renderStudents(['max', 'brown', 'gil']);
+
+
+
+
+        //functions
+        function sayHello() {
+            try {
+                let rootPargraph = document.querySelector('#rootPargraph');
+
+                let n = 42;
+                const elemWidth = rootPargraph.clientWidth;
+                rootPargraph.innerText = `hi all! the answer to the problem of life is ${n} and my width is ${elemWidth}px`;
+                rootPargraph.style.color = 'red';
+                console.dir(rootPargraph);
+            } catch (e) {
+                console.error();
+            }
+        }
+
+
+
+
+        function renderStudents(students) {
+            try {
+                let html = '';
+
+                students.forEach(student => {
+                    let color = randomColor();
+                    html += `<p style='${color}'>student: ${student}</p>`
+                })
+
+                console.log(html)
+                const rootDiv = document.querySelector('#rootDiv')
+                rootDiv.innerHTML = html;
+            } catch (e) {
+                console.error();
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

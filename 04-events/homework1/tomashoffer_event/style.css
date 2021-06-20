@@ -1,0 +1,26 @@
+#dog {
+  left: 40%;
+  top: 40%;
+  position: absolute;
+}
+
+.dogUp {
+  -webkit-transform: rotate(268deg);
+          transform: rotate(268deg);
+}
+
+.dogDown {
+  -webkit-transform: rotate(94deg);
+          transform: rotate(94deg);
+}
+
+.dogRight {
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+
+.dogLeft {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,337 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.back--box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: -webkit-gradient(linear, left top, right top, from(#020001), color-stop(35%, #090979), to(#00d4ff));
+  background: linear-gradient(90deg, #020001 0%, #090979 35%, #00d4ff 100%);
+}
+
+.back--box .back__simetric div {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: 4px solid white;
+  top: 10%;
+  left: 10%;
+}
+
+.back--box .back__simetric div:nth-child(1) {
+  top: 12%;
+  left: 42%;
+  -webkit-animation: animate  10s linear infinite;
+          animation: animate  10s linear infinite;
+}
+
+.back--box .back__simetric div:nth-child(2) {
+  top: 70%;
+  left: 50%;
+  -webkit-animation: animate  7s linear infinite;
+          animation: animate  7s linear infinite;
+}
+
+.back--box .back__simetric div:nth-child(3) {
+  top: 17%;
+  left: 6%;
+  -webkit-animation: animate  9s linear infinite;
+          animation: animate  9s linear infinite;
+}
+
+.back--box .back__simetric div:nth-child(4) {
+  top: 20%;
+  left: 60%;
+  -webkit-animation: animate  10s linear infinite;
+          animation: animate  10s linear infinite;
+}
+
+.back--box .back__simetric div:nth-child(5) {
+  top: 67%;
+  left: 10%;
+  -webkit-animation: animate  6s linear infinite;
+          animation: animate  6s linear infinite;
+}
+
+.back--box .back__simetric div:nth-child(6) {
+  top: 80%;
+  left: 70%;
+  -webkit-animation: animate  12s linear infinite;
+          animation: animate  12s linear infinite;
+}
+
+.back--box .back__simetric div:nth-child(7) {
+  top: 60%;
+  left: 80%;
+  -webkit-animation: animate  15s linear infinite;
+          animation: animate  15s linear infinite;
+}
+
+.back--box .back__simetric div:nth-child(8) {
+  top: 32%;
+  left: 25%;
+  -webkit-animation: animate  16s linear infinite;
+          animation: animate  16s linear infinite;
+}
+
+.back--box .back__simetric div:nth-child(9) {
+  top: 90%;
+  left: 25%;
+  -webkit-animation: animate  9s linear infinite;
+          animation: animate  9s linear infinite;
+}
+
+.back--box .back__simetric div:nth-child(10) {
+  top: 20%;
+  left: 80%;
+  -webkit-animation: animate  5s linear infinite;
+          animation: animate  5s linear infinite;
+}
+
+@-webkit-keyframes animate {
+  0% {
+    -webkit-transform: scale(0) translateY(0) rotate(0);
+            transform: scale(0) translateY(0) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.3) translateY(-90px) rotate(360deg);
+            transform: scale(1.3) translateY(-90px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* YS: Nice animation */
+@keyframes animate {
+  0% {
+    -webkit-transform: scale(0) translateY(0) rotate(0);
+            transform: scale(0) translateY(0) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.3) translateY(-90px) rotate(360deg);
+            transform: scale(1.3) translateY(-90px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.back--box .top--firstanimation {
+  font-size: 30px;
+  width: 800px;
+  margin: auto;
+  color: white;
+  text-align: left;
+  height: 40px;
+}
+
+.back--box .top__head {
+  position: relative;
+  -webkit-animation-name: title;
+          animation-name: title;
+  -webkit-animation: title 6s infinite;
+          animation: title 6s infinite;
+}
+/* // Good */
+@-webkit-keyframes title {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  50% {
+    left: 460px;
+    top: 0px;
+  }
+  100% {
+    right: 0px;
+    left: 0px;
+  }
+}
+
+@keyframes title {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  50% {
+    left: 460px;
+    top: 0px;
+  }
+  100% {
+    right: 0px;
+    left: 0px;
+  }
+}
+
+.back--box .container__item1 {
+  float: left;
+  height: 180px;
+}
+
+.back--box .container--secondanimation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 400px;
+  height: 40px;
+  color: white;
+  font-size: 30px;
+  line-height: 40px;
+  position: absolute;
+  top: 0;
+  right: 0%;
+  bottom: 70%;
+  left: 20%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.back--box ul {
+  list-style: none;
+  padding-left: 10px;
+  -webkit-animation: cambiar 6s infinite;
+          animation: cambiar 6s infinite;
+}
+
+.back--box ul, .back--box p {
+  margin: 0;
+}
+
+@-webkit-keyframes cambiar {
+  0% {
+    margin-top: 0;
+  }
+  20% {
+    margin-top: 0;
+  }
+  25% {
+    margin-top: -40px;
+  }
+  50% {
+    margin-top: -40px;
+  }
+  55% {
+    margin-top: -80px;
+  }
+  80% {
+    margin-top: -80px;
+  }
+  85% {
+    margin-top: -40px;
+  }
+  95% {
+    margin-top: -40px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}
+
+@keyframes cambiar {
+  0% {
+    margin-top: 0;
+  }
+  20% {
+    margin-top: 0;
+  }
+  25% {
+    margin-top: -40px;
+  }
+  50% {
+    margin-top: -40px;
+  }
+  55% {
+    margin-top: -80px;
+  }
+  80% {
+    margin-top: -80px;
+  }
+  85% {
+    margin-top: -40px;
+  }
+  95% {
+    margin-top: -40px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}
+
+.back--box .slider--lastanimation {
+  position: relative;
+  width: 800px;
+  height: 400px;
+  background: url(https://www.friendsofeurope.org/wp/wp-content/uploads/2019/06/bigstock-Planet-Earth-From-Space-Beaut-298703191-e1560939905471.jpg);
+  margin: 100px auto;
+  -webkit-animation: slide 20s infinite;
+          animation: slide 20s infinite;
+}
+
+@-webkit-keyframes slide {
+  25% {
+    background: url(https://www.friendsofeurope.org/wp/wp-content/uploads/2019/06/bigstock-Planet-Earth-From-Space-Beaut-298703191-e1560939905471.jpg);
+  }
+  50% {
+    background: url(https://cdn.euroinnova.edu.es/img/subidasEditor/google%20earth-1603790379.webp);
+  }
+  75% {
+    background: url(https://mars.nasa.gov/system/feature_items/images/6362_8944_1-PIA24546-1280.jpg);
+  }
+  100% {
+    background: url(https://www.seti.org/sites/default/files/2020-10/earth-view-from-moon-perspective-footprints-1400px.jpg);
+  }
+}
+
+@keyframes slide {
+  25% {
+    background: url(https://www.friendsofeurope.org/wp/wp-content/uploads/2019/06/bigstock-Planet-Earth-From-Space-Beaut-298703191-e1560939905471.jpg);
+  }
+  50% {
+    background: url(https://cdn.euroinnova.edu.es/img/subidasEditor/google%20earth-1603790379.webp);
+  }
+  75% {
+    background: url(https://mars.nasa.gov/system/feature_items/images/6362_8944_1-PIA24546-1280.jpg);
+  }
+  100% {
+    background: url(https://www.seti.org/sites/default/files/2020-10/earth-view-from-moon-perspective-footprints-1400px.jpg);
+  }
+}
+
+/* YS: Remove unecessary comments */
+
+/* block 
+.articles {
+    width: 500px;
+
+    h1 {
+        background-color: blueviolet;
+    }
+
+    p {
+        font-style: italic;
+    }
+
+     elements 
+      {
+        height: 100px;
+        width: 100%;
+    }
+
+     modifiers 
+
+    &--blue {
+        background-color: blue;
+    }
+
+    &--red {
+        background-color: red;
+    }
+
+    &--navy {
+        background-color: navy;
+    }
+}*/
+/*# sourceMappingURL=style.css.map */

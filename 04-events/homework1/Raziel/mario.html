@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario World</title>
+
+</head>
+<style>
+    .body_image {
+        background-repeat: no-repeat;
+        background-image: url(https://i.pinimg.com/originals/1e/96/3b/1e963b9d581e284d2ee519e0a042bc2b.jpg);
+        background-size: cover;
+        margin: 0;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .mario {
+        position: relative;
+        height: 300px;
+        width: 300px;
+    }
+</style>
+
+<body class="body_image">
+    <img class="mario" src="https://i.gifer.com/33HU.gif" alt="mario">
+    <script>
+        moveMario();
+
+        function moveMario() {
+            const mario = document.querySelector('.mario');
+            try {
+                const mario = document.querySelector('.mario');
+
+                if (mario == null) {
+                    throw new Error('Mario is dead!');
+                }
+                mario.style.top = '35%';
+                mario.style.left = '35%';
+
+                mario.addEventListener('mouseenter', ev => {
+                    marioOne = ev.target;
+                    marioOne.src = 'https://i.gifer.com/3vIN.gif';
+                });
+                mario.addEventListener('mouseleave', ev => {
+                    marioOne = ev.target;
+                    marioOne.src = 'https://i.gifer.com/33HU.gif';
+                });
+                document.addEventListener('keydown', mov => {
+                    if(!mov) throw new Error ("the event keydown does not work");
+                    let moveBy = 5;
+                 
+                    switch (mov.key) {
+                        case 'ArrowLeft':
+                            mario.style.left = parseInt(mario.style.left) - moveBy + 'px';
+                            mario.style.transform = "scaleX(-1)";
+                           
+                            break;
+                        case 'ArrowRight':
+                            mario.style.left = parseInt(mario.style.left) + moveBy + 'px';
+                            mario.style.transform = "scaleX(1)";
+                            break;
+                        case 'ArrowUp':
+                            mario.style.top = parseInt(mario.style.top) - moveBy + 'px';
+                            mario.style.transform = " rotate(270deg)";
+                            break;
+                        case 'ArrowDown':
+                            mario.style.top = parseInt(mario.style.top) + moveBy + 'px';
+                            mario.style.transform = "rotate(90deg)";
+                            break;
+                    }
+
+
+                })
+
+
+            } catch (e) {
+                return e;
+
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>

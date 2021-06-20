@@ -37,7 +37,7 @@ class Transact {
       } else if (transact.movement === "withdraw") {
         transaction += `<h3> You have withdraw  -$USD${transact.money} </h3>`;
       }
-    });
+    }); 
 
     putTransactions.innerHTML = transaction;
   }
@@ -81,3 +81,4 @@ const handleSubmit = (ev: any): void => {
     alert(error);
   }
 };
+  
