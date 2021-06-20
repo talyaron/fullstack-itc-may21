@@ -63,7 +63,6 @@ function addToCart() {
             counter = counter + 1;
             document.querySelector('.count').innerHTML = counter;
             console.log(counter);
-            return purchase;
         });
     };
     for (var i = 0; i < divs.length; i++) {

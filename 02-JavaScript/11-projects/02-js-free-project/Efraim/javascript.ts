@@ -81,7 +81,6 @@ function addToCart() {
         counter = counter + 1;
         document.querySelector('.count').innerHTML = counter;
         console.log(counter)
-        return purchase;
       });
 }};
 addToCart();
