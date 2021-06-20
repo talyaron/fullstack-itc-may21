@@ -11,6 +11,7 @@ var handleSubmit = (ev: any): void => {
     const customer = new Customer(name, email, phone, address, imgURL);
     customers.add(customer);
     customers.renderCustomers();
+    // customer.renderCustomerProfile();
     localStorage.setItem(`name`, name)
     localStorage.setItem(`email`, email)
     localStorage.setItem(`phone`, phone)
@@ -25,7 +26,7 @@ var handleSubmit = (ev: any): void => {
 class Customer {
     name: string;
     email: string;
-    phone: number;
+    phone: string;
     address: string;
     imgURL: string;
     customerId: string = "id" + Math.random().toString(16).slice(2)
@@ -36,6 +37,9 @@ class Customer {
         this.phone = phone;
         this.address = address;
         this.imgURL = imgURL;
+    }
+
+    renderCustomerProfile() {
     }
 }
 
@@ -70,24 +74,30 @@ class Customers {
     renderCustomers() {
 
         // const customerList: HTMLElement = document.querySelector(".customer__list");
+        try {
 
-        let html: string = "";
-        this.customers.forEach((customer) => {
 
-            html +=
+            let html: string = "";
+            this.customers.forEach((customer) => {
 
-                `<p>${customer.name}</p>`
-            // <p>${customer.email}</p>
-            // <p>${customer.phone}</p>
-            // <p>${customer.address}</p>
-            // <p>${customer.customerId}</p>
+                html +=
 
-        });
-        // customerList.innerHTML = html;
+                    `<p onclick=handleClick(customerId)>${customer.name}</p>`
+                // <p>${customer.email}</p>
+                // <p>${customer.phone}</p>
+                // <p>${customer.address}</p>
+                // <p>${customer.customerId}</p>
+
+            });
+            // customerList.innerHTML = html;
+        }catch (error) {
+            console.log(error)
+        }
+
         localStorage.setItem(`innerHTML`, html)
 
-
     }
+
 
 
 }
@@ -105,5 +115,17 @@ document.querySelector(".customer__list").innerHTML = customerList;
 function goBack() {
     window.history.back();
 }
+
+function handleClick(customerId) {
+    console.log(handleClick);
+    window.location.href = "customer-profile.html"
+}
+
+
+
+
+
+
+
 
 

@@ -57,11 +57,12 @@ var BookingList = /** @class */ (function () {
         var welcome = '';
         var img = '';
         welcome += "<h1>Welcome " + customer.name + " to our page!!</h1>";
+        //not mandatory complete which city or stars but price yes
         var result = Hotels.filter(function (tel) {
-            return (tel.city === customer.city) && (tel.stars === customer.stars) && (tel.price <= customer.price);
+            return ((tel.city === customer.city) && (tel.stars === customer.stars)) && (tel.price <= customer.price);
         });
         for (var i = 0; i < result.length; i++) {
-            img += "<p>" + result[i].name + "</p><img src=\"" + result[i].imageURL + "\"  width=\"500\" height=\"600\">\n                    <span>" + result[i].price + "</span>";
+            img += "<p>" + result[i].name + "</p><img src=\"" + result[i].imageURL + "\"  width=\"300\" height=\"300\">\n                    <span>" + result[i].price + "</span>";
         }
         welcomeRoot.innerHTML = welcome;
         imgRoot.innerHTML = img;
