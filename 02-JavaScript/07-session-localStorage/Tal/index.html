@@ -9,17 +9,27 @@
 </head>
 
 <body>
-    <form onsubmit="handelSubmit(event)">
+    <form onsubmit="handleSubmit(event)">
         <input type="text" name="username" placeholder="Username">
         <input type="text" name="password" placeholder="Password">
         <input type="submit" value="Login">
     </form>
     <script>
-        function handelSubmit(ev) {
+        let username;
+        
+        function handleSubmit(ev) {
+            
             ev.preventDefault();
-            const username = ev.target.elements.username.value;
-            sessionStorage.setItem('username', username);
+            console.log('submit')
+            username = ev.target.elements.username.value;
+
+            localStorage.setItem('username', username)
+
+            window.location.href = 'page2.html'
+
+
         }
+
     </script>
 </body>
 

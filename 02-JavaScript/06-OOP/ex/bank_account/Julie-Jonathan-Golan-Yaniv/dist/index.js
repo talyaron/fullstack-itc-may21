@@ -12,7 +12,7 @@ var Transaction = /** @class */ (function () {
 var Account = /** @class */ (function () {
     function Account(name) {
         this.account = [];
-        this.name = '';
+        this.name = "";
         this.name = name;
     }
     Account.prototype.addNewTransaction = function (amount, date, place, description) {
@@ -21,7 +21,9 @@ var Account = /** @class */ (function () {
         return newTransaction.transactionId;
     };
     Account.prototype.calculateSum = function () {
-        var sum = this.account.reduce(function (sum, transaction) { return sum + transaction.amount; }, 0);
+        var sum = this.account.reduce(function (sum, transaction) {
+            return sum + transaction.amount;
+        }, 0);
         return sum;
     };
     Account.prototype.editTransaction = function (transactionIdToEdit, updatedDescription) {
@@ -40,7 +42,9 @@ var Account = /** @class */ (function () {
         try {
             // create the array to be returned eventually + find all transactions between those dates
             // [trans1, trans2, trans3, trans4]
-            var filteredbyDates = this.account.filter(function (transaction) { return ((transaction.date >= fromDate) && (transaction.date <= toDate)); });
+            var filteredbyDates = this.account.filter(function (transaction) {
+                return transaction.date >= fromDate && transaction.date <= toDate;
+            });
             // return a new array with only those transactions
             return filteredbyDates;
         }
@@ -50,13 +54,15 @@ var Account = /** @class */ (function () {
     };
     return Account;
 }());
-var account = new Account('Yaniv');
-var transactionId1 = account.addNewTransaction(100, new Date(), 'Tel-Aviv', 'Bank deposit');
-account.addNewTransaction(-300, new Date(), 'Ramat-Gan', 'ATM redrwal');
+var account = new Account("Yaniv");
+var transactionId1 = account.addNewTransaction(100, new Date(), "Tel-Aviv", "Bank deposit");
+account.addNewTransaction(-300, new Date(), "Ramat-Gan", "ATM redrwal");
 console.log(account.calculateSum());
 console.log(JSON.stringify(account));
-account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
+account.editTransaction(transactionId1, "Walllllaaaaa!!!");
 console.log(account);
-var filteredAccount = account.filterByDate(new Date('15-jun-2021'), new Date('17-jun-2021'));
+var filteredAccount = account.filterByDate(new Date("15-jun-2021"), new Date("17-jun-2021"));
 console.log("The filtered array is:");
-filteredAccount.forEach(function (transaction) { return console.log(transaction.transactionId); });
+filteredAccount.forEach(function (transaction) {
+    return console.log(transaction.transactionId);
+});

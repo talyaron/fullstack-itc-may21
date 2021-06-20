@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Customer</title>
+    <link rel="stylesheet" href="./dist/styles.min.css">
+</head>
+
+<body>
+    <nav><a class="nav__item--button" href="./customer-list.html">Customer List</a></nav>
+
+    <form class="form" onsubmit="handleSubmit(event)">
+        <input type="text" class="form__item" name="name" placeholder="Name">
+        <input type="text" class="form__item" name="email" placeholder="Email">
+        <input type="text" class="form__item" name="phone" placeholder="Phone Number">
+        <input type="text" class="form__item" name="address" placeholder="Address: 555 Main St, Skokie IL, 60076">
+        <input type="text" class="form__item" name="imgURL" placeholder="Image URL for home">
+        <input type="submit" class="form__item--button" value="ADD NEW CUSTOMER">
+
+    </form>
+   
+
+
+
+
+    <script src="./dist/crm.js"></script>
+
+</body>
+
+</html>
