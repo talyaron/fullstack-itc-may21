@@ -16,13 +16,12 @@
 <body>
     <header class="summary">
         <button class="summary__item summary__item--logout">Logout</button>
-        <h3 class="summary__item summary__item--runner_name">Runner Name
-            <!-- Runner Name -->
+        <h3 class="summary__item summary__item--runner_name">Welcome <!-- Runner Name -->
         </h3>
         <div class="summary__item summary__item--total">
             <div class="profile_image">
                 <img src="https://freesvg.org/img/winkboy.png"
-                    class="profile_image__item profile_image__item--profile_image" alt="profile image" title="">
+                    class="profile_image__item profile_image__item--profile_image" alt="profile image">
                 <!-- title=Runner Name -->
                 <div class="profile_image__item profile_image__item--badges">
                     <img src="images/TR_Kms_B.png" id="distance_badge">
@@ -57,7 +56,7 @@
                 <form class="add_run_form" onsubmit="runSubmit(event)">
                     <div class="add_run_form__item">
                         <label for="run_distance_form">Run Distance (Km)</label>
-                        <input type="number" min="0" name="runDistance" placeholder="in kilometers" required
+                        <input type="number" min="1" name="runDistance" placeholder="in kilometers" required
                             id="run_distance_form" />
                     </div>
                     <div class="add_run_form__item">

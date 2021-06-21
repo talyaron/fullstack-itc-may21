@@ -37,6 +37,14 @@ var LoggedInRunner = /** @class */ (function () {
         this.runnerRunsHtml = document.querySelector(".runs").innerHTML; // DOM representation of all runs - new runs to DOM are added to this innerHTML
         this.runnerDistance = Number(document.querySelector("#total_sum").innerHTML);
     }
+    LoggedInRunner.prototype.updatePersonalDetails = function () {
+        var mainTitle = document.querySelector("title");
+        var runnerNameContainter = document.querySelector(".summary__item--runner_name");
+        var runnerProfImg = document.querySelector(".profile_image__item--profile_image");
+        mainTitle.insertAdjacentHTML('afterbegin', "" + this.runnerName);
+        runnerNameContainter.insertAdjacentHTML('beforeend', this.runnerName + "!");
+        runnerProfImg.title = "" + this.runnerName;
+    };
     LoggedInRunner.prototype.addRun = function (run) {
         this.runnerRuns.push(run);
         this.addRunToDOM(run);
@@ -144,6 +152,7 @@ var runSubmit = function (ev) {
         console.error(er);
     }
 };
+runner.updatePersonalDetails();
 logOut();
 openModal();
 closeModal();

@@ -20,19 +20,34 @@ var newRunner = /** @class */ (function () {
 }());
 var currentRunner = new newRunner(null, null, null, null, null, null, null);
 localStorage.setItem("currentRunner", JSON.stringify(currentRunner));
+var readURL = function (input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.querySelector('#runnerProfImg').setAttribute("src", "" + e.target.result);
+            return e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+};
 var runnerSubmit = function (ev) {
     try {
         ev.preventDefault();
         var runnerName = ev.target.elements.runnerName.value;
         var runnerEmail = ev.target.elements.runnerEmail.value;
         var runnerPassword = ev.target.elements.runnerPassword.value;
+        var runnerPasswordVerify = ev.target.elements.runnerPasswordVerify.value;
         var runnerGender = ev.target.elements.runnerGender.value;
         var runnerAgeGroup = ev.target.elements.runnerAgeGroup.value;
         var runnerChat = ev.target.elements.runnerChat.value;
-        var runnerProfImg = ev.target.elements.runnerProfImg.value;
+        var runnerProfImg = document.querySelector('#runnerProfImg').getAttribute("src");
+        if (runnerPassword != runnerPasswordVerify) {
+            alert('Your entered different passwords, please try again');
+            throw new Error('Password verification failed');
+        }
         currentRunner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
         localStorage.setItem("currentRunner", JSON.stringify(currentRunner));
-        window.location.href = 'togetheRun_main.html';
+        window.location.href = "togetheRun_main.html?" + currentRunner.runnerId;
         // runners.addRunner(runner); // for the future - figure out how to manage runners array of type Array<Runner>
         ev.target.reset();
     }

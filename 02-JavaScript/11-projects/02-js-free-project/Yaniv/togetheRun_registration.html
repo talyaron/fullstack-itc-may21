@@ -64,8 +64,9 @@
             </select>
         </div>
         <div class="add_runner_form__item">
-            <label for="runner_profile_image_form">Profile Image (URL)</label>
-            <input type="url" name="runnerProfImg" placeholder="URL for your profile image" id="runner_profile_image_form" />
+            <label for="runner_profile_image_form">Profile Image</label>
+            <input type="file" name="runnerProfImg" id="runner_profile_image_form" onchange="readURL(this);"/>
+            <img id="runnerProfImg">
         </div>
         <input class="add_runner_form__item add_runner_form__item--submit" type="submit" name="submit"
             value="Register & Login" />

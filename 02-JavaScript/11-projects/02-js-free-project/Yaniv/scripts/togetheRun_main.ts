@@ -57,6 +57,16 @@ class LoggedInRunner {
     document.querySelector("#total_sum").innerHTML
   );
 
+  updatePersonalDetails() : void {
+    const mainTitle: HTMLElement = document.querySelector("title");
+    const runnerNameContainter: HTMLElement = document.querySelector(".summary__item--runner_name");    
+    const runnerProfImg: HTMLElement = document.querySelector(".profile_image__item--profile_image");    
+    
+    mainTitle.insertAdjacentHTML('afterbegin',`${this.runnerName}`);
+    runnerNameContainter.insertAdjacentHTML('beforeend',`${this.runnerName}!`);
+    runnerProfImg.title = `${this.runnerName}`;
+  }
+
   addRun(run: Run): void {
     this.runnerRuns.push(run);
     this.addRunToDOM(run);
@@ -188,6 +198,7 @@ const runSubmit = (ev: any) => {
   }
 };
 
+runner.updatePersonalDetails();
 logOut();
 openModal();
 closeModal();
