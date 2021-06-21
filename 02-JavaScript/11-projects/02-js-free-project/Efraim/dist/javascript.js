@@ -15,8 +15,6 @@ var Cart = /** @class */ (function () {
         this.cart.push(product);
         console.log(this.cart);
     };
-    Cart.prototype.getCartFromStorage = function () {
-    };
     return Cart;
 }());
 var Products = /** @class */ (function () {
@@ -56,7 +54,7 @@ var moveToCart = function (productId) {
     if (product !== false) {
         cart.addToCart(product);
         console.log(cart);
-        window.sessionStorage.setItem('cart', JSON.stringify(cart.cart));
+        window.localStorage.setItem('cart', JSON.stringify(cart.cart));
     }
 };
 var shoppingListDOM = document.querySelector('.shopping-list');
@@ -76,11 +74,28 @@ products.addProduct(new Product("11.png", 'Premiers 2020 Wall Flag', 27.95));
 products.addProduct(new Product("12.png", 'Dustin Martin Monatge Wall Flag', 39.95));
 products.renderProducts(shoppingListDOM);
 console.log(products);
+function colorChangeButton() {
+    var button = document.querySelectorAll(".shopping-list__item-wrapper__add");
+    var counter = parseInt(document.querySelector('.nav__cart__count').innerHTML);
+    var _loop_1 = function (i) {
+        button[i].addEventListener('click', function () {
+            button[i].style.background = 'red';
+            button[i].style.color = 'white';
+            button[i].innerHTML = 'selected';
+            counter = counter + 1;
+            document.querySelector('.nav__cart__count').innerHTML = counter;
+        });
+    };
+    for (var i = 0; i <= button.length; i++) {
+        _loop_1(i);
+    }
+}
+colorChangeButton();
 // function addToCart() {
 //   let divs:any = document.querySelectorAll('.shopping-list__item-wrapper__add');
 //   let divs1:any = document.querySelectorAll('.shopping-list__item-wrapper');
 //   let cart:Array<string> = [];
-//   let counter:number = parseInt(document.querySelector('.count').innerHTML);
+//   
 //   for (let i = 0; i < divs.length; i++) {
 //       divs[i].addEventListener('click', function() {
 //        let purchase = divs1[i].children[0].outerHTML + divs1[i].children[1].outerHTML + divs1[i].children[2].outerHTML ;
@@ -88,8 +103,7 @@ console.log(products);
 //         console.log(cart);
 //         console.log(JSON.stringify(cart));
 //         localStorage.setItem('cart', JSON.stringify(cart));
-//         counter = counter + 1;
-//         document.querySelector('.count').innerHTML = counter;
+//         
 //         console.log(counter)
 //       });
 // }};
