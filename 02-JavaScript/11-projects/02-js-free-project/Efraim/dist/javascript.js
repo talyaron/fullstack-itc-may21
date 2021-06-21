@@ -7,6 +7,18 @@ var Product = /** @class */ (function () {
     }
     return Product;
 }());
+var Cart = /** @class */ (function () {
+    function Cart() {
+        this.cart = [];
+    }
+    Cart.prototype.addToCart = function (product) {
+        this.cart.push(product);
+        console.log(this.cart);
+    };
+    Cart.prototype.getCartFromStorage = function () {
+    };
+    return Cart;
+}());
 var Products = /** @class */ (function () {
     function Products() {
         this.products = [];
@@ -21,20 +33,35 @@ var Products = /** @class */ (function () {
                 ("<img class=\"shopping-list__item-wrapper__item-image\" src=" + product.imgSrc + " alt=\"\">") +
                 ("<h2  class=\"shopping-list__item-wrapper__item-name\">" + product.description + "</h2>") +
                 ("<h3  class=\"shopping-list__item-wrapper__item-price\">$" + product.price + "</h3>") +
-                ("<button  id='" + product.id + "' class=\"shopping-list__item-wrapper__add\">Add to Cart</button>") +
+                ("<button  id='" + product.id + "' class=\"shopping-list__item-wrapper__add\" onclick=\"moveToCart('" + product.id + "')\">Add to Cart</button>") +
                 " </div>");
         }).join('');
         domElement.innerHTML = html;
     };
+    Products.prototype.findProduct = function (productId) {
+        var product = this.products.find(function (prd) { return prd.id === productId; });
+        if (product) {
+            return product;
+        }
+        else {
+            return false;
+        }
+    };
     return Products;
 }());
-//addToCart(cart:Cart, productId:string){
-//find the product and copy to the purchse list\
-//console.log(cart);
-//console.log(productId);
-// push to the cart
+var moveToCart = function (productId) {
+    console.log(productId);
+    var product = products.findProduct(productId);
+    console.log(product);
+    if (product !== false) {
+        cart.addToCart(product);
+        console.log(cart);
+        window.sessionStorage.setItem('cart', JSON.stringify(cart.cart));
+    }
+};
 var shoppingListDOM = document.querySelector('.shopping-list');
 var products = new Products();
+var cart = new Cart();
 products.addProduct(new Product("coffee.png", 'Stainless Steel Travel Mug', 12.99));
 products.addProduct(new Product("beanie.png", 'Boundary Rib Beanie', 15.95));
 products.addProduct(new Product("3.png", 'PUMA 2021 Clash Guernsey', 39.95));
@@ -48,26 +75,22 @@ products.addProduct(new Product("10.png", 'Super Soft Touch Sherrin', 15.99));
 products.addProduct(new Product("11.png", 'Premiers 2020 Wall Flag', 27.95));
 products.addProduct(new Product("12.png", 'Dustin Martin Monatge Wall Flag', 39.95));
 products.renderProducts(shoppingListDOM);
-function addToCart() {
-    var divs = document.querySelectorAll('.shopping-list__item-wrapper__add');
-    var divs1 = document.querySelectorAll('.shopping-list__item-wrapper');
-    var cart = [];
-    var counter = parseInt(document.querySelector('.count').innerHTML);
-    var _loop_1 = function (i) {
-        divs[i].addEventListener('click', function () {
-            var purchase = divs1[i];
-            cart.push(purchase);
-            console.log(cart);
-            console.log(JSON.stringify(cart));
-            localStorage.setItem('cart', JSON.stringify(cart));
-            counter = counter + 1;
-            document.querySelector('.count').innerHTML = counter;
-            console.log(counter);
-        });
-    };
-    for (var i = 0; i < divs.length; i++) {
-        _loop_1(i);
-    }
-}
-;
-addToCart();
+console.log(products);
+// function addToCart() {
+//   let divs:any = document.querySelectorAll('.shopping-list__item-wrapper__add');
+//   let divs1:any = document.querySelectorAll('.shopping-list__item-wrapper');
+//   let cart:Array<string> = [];
+//   let counter:number = parseInt(document.querySelector('.count').innerHTML);
+//   for (let i = 0; i < divs.length; i++) {
+//       divs[i].addEventListener('click', function() {
+//        let purchase = divs1[i].children[0].outerHTML + divs1[i].children[1].outerHTML + divs1[i].children[2].outerHTML ;
+//         cart.push(purchase);
+//         console.log(cart);
+//         console.log(JSON.stringify(cart));
+//         localStorage.setItem('cart', JSON.stringify(cart));
+//         counter = counter + 1;
+//         document.querySelector('.count').innerHTML = counter;
+//         console.log(counter)
+//       });
+// }};
+// addToCart();

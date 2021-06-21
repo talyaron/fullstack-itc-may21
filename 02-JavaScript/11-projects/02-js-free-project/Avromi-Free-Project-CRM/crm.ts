@@ -26,7 +26,7 @@ var handleSubmit = (ev: any): void => {
 class Customer {
     name: string;
     email: string;
-    phone: number;
+    phone: string;
     address: string;
     imgURL: string;
     customerId: string = "id" + Math.random().toString(16).slice(2)
@@ -39,21 +39,8 @@ class Customer {
         this.imgURL = imgURL;
     }
 
-    // renderCustomerProfile() {
-    //     let profileHtml: string = "";
-    
-    //         profileHtml +=
-
-    //             `<p>${customer.name}</p>
-    //         <p>${customer.email}</p>
-    //         <p>${customer.phone}</p>
-    //         <p>${customer.address}</p>
-    //         <p>${customer.customerId}</p>`
-
-    //     }
-    //     localStorage.setItem(`Profile HTML`, profileHtml)
-    //     console.log(profileHtml)
-    // }
+    renderCustomerProfile() {
+    }
 }
 
 class Customers {
@@ -87,25 +74,31 @@ class Customers {
     renderCustomers() {
 
         // const customerList: HTMLElement = document.querySelector(".customer__list");
+        try {
 
-        let html: string = "";
-        this.customers.forEach((customer) => {
 
-            html +=
+            let html: string = "";
+            this.customers.forEach((customer) => {
 
-                `<p>${customer.name}</p>`
-            // <p>${customer.email}</p>
-            // <p>${customer.phone}</p>
-            // <p>${customer.address}</p>
-            // <p>${customer.customerId}</p>
+                html +=
 
-        });
-        // customerList.innerHTML = html;
+                    `<p onclick=handleClick(customerId)>${customer.name}</p>`
+                // <p>${customer.email}</p>
+                // <p>${customer.phone}</p>
+                // <p>${customer.address}</p>
+                // <p>${customer.customerId}</p>
+
+            });
+            // customerList.innerHTML = html;
+        }catch (error) {
+            console.log(error)
+        }
+
         localStorage.setItem(`innerHTML`, html)
 
     }
 
- 
+
 
 }
 
@@ -123,10 +116,14 @@ function goBack() {
     window.history.back();
 }
 
+function handleClick(customerId) {
+    console.log(handleClick);
+    window.location.href = "customer-profile.html"
+}
 
 
 
-  
+
 
 
 
