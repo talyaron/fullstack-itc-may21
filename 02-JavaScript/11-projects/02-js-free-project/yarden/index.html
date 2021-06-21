@@ -16,7 +16,7 @@
     />
     <title>Galileo Project</title>
   </head>
-  <body>
+  <body class="bg-pan-left">
     <header>
       <ul class="navbar">
         <img id="rocket" src="./images/rocket-solid.svg" alt="space rocket" />
@@ -48,7 +48,10 @@
             nam sapiente ipsum reprehenderit sunt harum asperiores et, magnam
             minima optio enim.
           </p>
-          <button onclick="" class="starMain__button">Book Expedition</button>
+          <form action="">
+            <button onclick="" class="starMain__button">Book Expedition</button>
+            <span><input class="starMain__date" type="date" name="date" id="date" required min="2030-01-01" max="2031-12-01"></span>
+        </form>
         </div>
         <div class="starFooter">
             <div class="starFooter__left">
@@ -64,7 +67,7 @@
     </div>
         <div class="right-side">
           <div class="planetPic">
-            <img
+            <img class="planetPic__image"
               src="https://d2pn8kiwq2w21t.cloudfront.net/images/Mars-800h-v2_02.width-1024.png"
               alt="planet picture"/>
               <i class="fas fa-angle-double-down"></i>
