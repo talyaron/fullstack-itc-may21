@@ -62,7 +62,7 @@ class LoggedInRunner {
 
   addRun(run: Run): void {
     this.runnerRuns.push(run);
-    this.runnerRuns.sort((a : any, b : any) => b.runTime - a.runTime);
+    // this.runnerRuns = this.runnerRuns.sort((a : any, b : any) => b.runTime - a.runTime); // in order for it to work I need to render..
     this.addRunToDOM(run);
     this.refreshTotalToDOM(run.runDistance);
   }

@@ -41,7 +41,7 @@ var LoggedInRunner = /** @class */ (function () {
     };
     LoggedInRunner.prototype.addRun = function (run) {
         this.runnerRuns.push(run);
-        this.runnerRuns.sort(function (a, b) { return b.runTime - a.runTime; });
+        // this.runnerRuns = this.runnerRuns.sort((a : any, b : any) => b.runTime - a.runTime); // in order for it to work I need to render..
         this.addRunToDOM(run);
         this.refreshTotalToDOM(run.runDistance);
     };
