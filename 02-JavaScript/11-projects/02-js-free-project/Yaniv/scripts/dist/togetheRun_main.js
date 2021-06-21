@@ -3,7 +3,7 @@ var Run = /** @class */ (function () {
         this.runMatch = false;
         this.runId = "run" + Math.random().toString(16).slice(2);
         this.runRunnerId = JSON.parse(localStorage.getItem("currentRunner"))
-            .runnerId; // TODO get logged in runner from localStorage
+            .runnerId;
         this.runDistance = runDistance;
         this.runTime = runTime;
         this.runArea = runArea;
@@ -15,51 +15,46 @@ document.querySelector("#total_counts").innerHTML = "0"; // for the future - get
 var LoggedInRunner = /** @class */ (function () {
     function LoggedInRunner() {
         // generated on the registration page - passed on to other pages via localStorage
-        this.runnerName = JSON.parse(localStorage.getItem("currentRunner"))
-            .runnerName; // required on registration
+        this.runnerName = JSON.parse(localStorage.getItem("currentRunner")).runnerName; // required on registration
         this.runnerId = JSON.parse(localStorage.getItem("currentRunner")).runnerId; // generated on registration
-        this.runnerEmail = JSON.parse(localStorage.getItem("currentRunner"))
-            .runnerEmail; // required on registration
-        this.runnerPassword = JSON.parse(localStorage.getItem("currentRunner"))
-            .runnerPassword; // required on registration
-        this.runnerGender = JSON.parse(localStorage.getItem("currentRunner"))
-            .runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
-        this.runnerAgeGroup = JSON.parse(localStorage.getItem("currentRunner"))
-            .runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
-        this.runnerChat = JSON.parse(localStorage.getItem("currentRunner"))
-            .runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
-        this.runnerPref = JSON.parse(localStorage.getItem("currentRunner"))
-            .runnerPref; // default on registration - TODO add method to edit
-        this.runnerProfImg = JSON.parse(localStorage.getItem("currentRunner"))
-            .runnerProfImg; // TODO add method editDetails
-        this.runnerRuns = JSON.parse(localStorage.getItem("currentRunner"))
-            .runnerRuns; // empy on registration
-        this.runnerRunsHtml = document.querySelector(".runs").innerHTML; // DOM representation of all runs - new runs to DOM are added to this innerHTML
+        this.runnerEmail = JSON.parse(localStorage.getItem("currentRunner")).runnerEmail; // required on registration
+        this.runnerPassword = JSON.parse(localStorage.getItem("currentRunner")).runnerPassword; // required on registration
+        this.runnerGender = JSON.parse(localStorage.getItem("currentRunner")).runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
+        this.runnerAgeGroup = JSON.parse(localStorage.getItem("currentRunner")).runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
+        this.runnerChat = JSON.parse(localStorage.getItem("currentRunner")).runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
+        this.runnerPref = JSON.parse(localStorage.getItem("currentRunner")).runnerPref; // default on registration - TODO add method to edit
+        this.runnerProfImg = JSON.parse(localStorage.getItem("currentRunner")).runnerProfImg; // TODO add method editDetails
+        this.runnerRuns = JSON.parse(localStorage.getItem("currentRunner")).runnerRuns; // empty on registration
+        this.runnerRunsHtml = JSON.parse(localStorage.getItem("currentRunner")).runnerRunsHtml; // DOM representation of all runs - new runs to DOM are added to this innerHTML
         this.runnerDistance = Number(document.querySelector("#total_sum").innerHTML);
     }
-    LoggedInRunner.prototype.updatePersonalDetails = function () {
+    LoggedInRunner.prototype.personalDetailsToDOM = function () {
         var mainTitle = document.querySelector("title");
         var runnerNameContainter = document.querySelector(".summary__item--runner_name");
-        var runnerProfImg = document.querySelector(".profile_image__item--profile_image");
+        var runnerProfileImg = document.querySelector(".profile_image__item--profile_image");
+        var runnerRunsDOM = document.querySelector(".runs");
         mainTitle.insertAdjacentHTML('afterbegin', "" + this.runnerName);
         runnerNameContainter.insertAdjacentHTML('beforeend', this.runnerName + "!");
-        runnerProfImg.title = "" + this.runnerName;
+        runnerProfileImg.title = "" + this.runnerName;
+        runnerProfileImg.setAttribute("src", this.runnerProfImg);
+        runnerRunsDOM.innerHTML = this.runnerRunsHtml;
     };
     LoggedInRunner.prototype.addRun = function (run) {
         this.runnerRuns.push(run);
+        this.runnerRuns.sort(function (a, b) { return b.runTime - a.runTime; });
         this.addRunToDOM(run);
         this.refreshTotalToDOM(run.runDistance);
     };
     LoggedInRunner.prototype.addRunToDOM = function (run) {
-        // TODO adjust to this project
         try {
             var runsContainer = document.querySelector(".runs");
             var matchFAClass = run.runMatch ? "check-double" : "check";
             var matchTitle = run.runMatch ? "Partner found!" : "Pending partner...";
             var runColor = run.runMatch ? "aqua" : "orange";
-            var runFormatedDate = run.runTime.getDate() + "-" + (run.runTime.getMonth() + 1) + "-" + run.runTime.getFullYear() + " " + run.runTime.getHours() + ":" + run.runTime.getMinutes();
+            var runFormatedDate = "" + run.runTime.toISOString().substring(0, 16).replace('T', ' ');
             var runsHTML = "<div class=\"runs__item runs__item--action\">\n      <i id=\"match\" class=\"fas fa-2x fa-" + matchFAClass + "-circle\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n      <div id=\"runs_amount\" style=\"color: " + runColor + ";\">\n        " + Math.abs(run.runDistance) + " Km\n      </div>\n      <div id=\"run_time\">" + runFormatedDate + "</div>\n      <div id=\"runs_area\">" + run.runArea + "</div>\n    </div>";
-            runsContainer.insertAdjacentHTML("beforeend", runsHTML);
+            runsContainer.insertAdjacentHTML("afterbegin", runsHTML);
+            this.runnerRunsHtml = runsContainer.innerHTML;
             var totalRunsContainer = document.querySelector("#total_counts");
             totalRunsContainer.innerText = "" + this.runnerRuns.length;
         }
@@ -111,6 +106,7 @@ var openModal = function () {
             isModalOpen = true;
             modal_1.style.display = "flex";
             modalBox_1.style.display = "unset";
+            onlyFutureRuns();
         });
     }
     catch (er) {
@@ -127,6 +123,16 @@ var closeModal = function () {
             modal_2.style.display = "none";
             modalBox_2.style.display = "none";
         });
+    }
+    catch (er) {
+        console.error(er);
+    }
+};
+var onlyFutureRuns = function () {
+    try {
+        var runTimeInput = document.querySelector("#run_time_form");
+        var now = new Date();
+        runTimeInput.setAttribute("min", now.toISOString().substring(0, 16));
     }
     catch (er) {
         console.error(er);
@@ -152,7 +158,7 @@ var runSubmit = function (ev) {
         console.error(er);
     }
 };
-runner.updatePersonalDetails();
+runner.personalDetailsToDOM();
 logOut();
 openModal();
 closeModal();

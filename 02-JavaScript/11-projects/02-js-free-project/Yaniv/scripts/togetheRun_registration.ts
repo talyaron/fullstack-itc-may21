@@ -28,13 +28,13 @@ let currentRunner = new newRunner(null,null,null,null,null,null,null);
 
 localStorage.setItem("currentRunner", JSON.stringify(currentRunner));
 
-const readURL = (input: any) => {
+const readURL = (input: any) => { // CREDIT TO LEONARDO FOR THIS ONE!!
   if (input.files && input.files[0]) {
       let reader = new FileReader();
 
       reader.onload = (e)=> {
-          document.querySelector('#runnerProfImg').setAttribute("src", `${e.target.result}`);
-          return e.target.result
+        document.querySelector('#runnerProfImg').setAttribute("src", `${e.target.result}`);
+        return e.target.result
       }
       reader.readAsDataURL(input.files[0]);
   }

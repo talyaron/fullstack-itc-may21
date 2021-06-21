@@ -1,11 +1,9 @@
-@keyframes shine { // TODO check why not working
-    0% {
-      background-position: -10vw;
-    }
-    100% {
-      background-position: 10vw;
-    }
-  }
+// logo
+@-webkit-keyframes togetheRunning{0%{-webkit-transform:translateX(0);transform:translateX(0)}100%{-webkit-transform:translateX(30px);transform:translateX(30px)}}@keyframes slide-right{0%{-webkit-transform:translateX(0);transform:translateX(0)}100%{-webkit-transform:translateX(30px);transform:translateX(30px)}}
+// header text
+@-webkit-keyframes focus-in-contract-bck{0%{letter-spacing:1em;-webkit-transform:translateZ(300px);transform:translateZ(300px);-webkit-filter:blur(12px);filter:blur(12px);opacity:0}100%{-webkit-transform:translateZ(12px);transform:translateZ(12px);-webkit-filter:blur(0);filter:blur(0);opacity:1}}@keyframes focus-in-contract-bck{0%{letter-spacing:1em;-webkit-transform:translateZ(300px);transform:translateZ(300px);-webkit-filter:blur(12px);filter:blur(12px);opacity:0}100%{-webkit-transform:translateZ(12px);transform:translateZ(12px);-webkit-filter:blur(0);filter:blur(0);opacity:1}}
+// register
+@-webkit-keyframes heartbeat{from{-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:center center;transform-origin:center center;-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}10%{-webkit-transform:scale(.91);transform:scale(.91);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}17%{-webkit-transform:scale(.98);transform:scale(.98);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}33%{-webkit-transform:scale(.87);transform:scale(.87);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}45%{-webkit-transform:scale(1);transform:scale(1);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}}@keyframes heartbeat{from{-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:center center;transform-origin:center center;-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}10%{-webkit-transform:scale(.91);transform:scale(.91);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}17%{-webkit-transform:scale(.98);transform:scale(.98);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}33%{-webkit-transform:scale(.87);transform:scale(.87);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}45%{-webkit-transform:scale(1);transform:scale(1);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}}
 
 * {
     font-family: 'Raleway', sans-serif;
@@ -20,135 +18,84 @@ body {
     margin: 0;
 }
 
-button {
-    font-weight: bold;
-    border-radius: 20px;
-    padding: 10px;
-    border: 0;
-
-    &:hover {
-        transition: 150ms;
-    }
-}
-
-.summary {
+header {
     position: sticky;
     top: 0;
     width: 100%;
-    height: 175px;
+    height: 300px;
     background-image: linear-gradient(to bottom, turquoise, cornflowerblue);
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
 
-
-    &__item {
-
-        &--logout {
-            position: fixed;
-            right: 5px;
-            top: 5px;
-            background-color: red;
-            color: white;
-
-            &:hover {
-                background-color: salmon;
-            }
-
-            &:active {
-                background-color: firebrick;
-                color: white;
-            }
-        }
-
-        &--runner_name {
-            margin: 0;
-        }
-
-        &--total {
-            width: 50%;
-            max-width: 500px;
-            display: grid;
-            align-items: center;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 2fr 1fr;
-            grid-template-areas:
-                "total img"
-                "date img";
-
-            .profile_image {
-                grid-area: img;
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                &__item {
-                    position: absolute;
-
-                    &--profile_image {
-                        height: 100px;
-                        border-radius: 50px;
-                        border: 3px solid black;
-                    }
-
-                    &--badges {
-                        top: 20px;
-                        
-                        img {
-                            height: 55px;
-                        }
-                    }
-                }
-
-            }
-
-            #total_distance {
-                grid-area: total;
-            }
-
-            #total_togetheruns {
-                grid-area: date;
-            }
-        }
-    }
-}
-
-#mainscreen {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-
-    .dashboard {
-        padding: 0 10px;
-        position: sticky;
-        top: 175px;
-        display: flex;
-        flex-direction: row;
+    .header {
+        width: 50%;
+        margin: auto;
+        display: grid;
         text-align: center;
         align-items: center;
-        justify-content: space-between;
-        background-image: linear-gradient(to bottom, lightgrey, white);
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3,100px);
+        grid-template-areas:
+            "logo title"
+            "logo title"
+            "logo reg"
+        ;
+
 
         &__item {
-            margin: 10px;
 
-            &--heading {
-                font-weight: 900;
+            &--logo {
+                grid-area: logo;
+                width: 200px;
+
+                #running_logo {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+
+                    #runner1_logo {
+                        position: absolute;
+                        -webkit-animation: togetheRunning 0.5s linear infinite alternate both;
+                        animation: togetheRunning 0.5s linear infinite alternate both;
+            
+                    }
+
+                    #runner2_logo {
+                        position: absolute;
+                        -webkit-animation: togetheRunning 0.5s linear 0.5s infinite alternate both;
+                        animation: togetheRunning 0.5s linear 0.5s infinite alternate both;
+            
+                    }
+
+                }
             }
 
-            &--add {
-                width: 50%;
-                background-color: aqua;
+            &--title {
+                grid-area: title;
+
+                h1 {
+                    font-size: 2.8rem;
+                    font-weight: bold;
+                    color: white;
+                }
+
+                h1,h2,h3 {
+                    -webkit-animation: focus-in-contract-bck 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                    animation: focus-in-contract-bck 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;        
+                }
+            }
+
+            &--register {
+                grid-area: reg;
                 font-size: 1.2rem;
+                font-weight: bold;
                 color: black;
-                animation: shine 2s infinite;
-                
+                border-radius: 20px;
+                padding: 10px;
+                border: 0;
+                -webkit-animation: heartbeat 3s ease-in-out infinite both;
+                animation: heartbeat 3s ease-in-out infinite both;    
+
                 &:hover {
+                    transition: 150ms;
                     background-color: turquoise;
                 }
 
@@ -157,173 +104,85 @@ button {
                     color: white;
                 }
             }
-
-            &--history {
-                background-color: blue;
-                color: white;
-
-                &:hover {
-                    background-color: cornflowerblue;
-                }
-
-                &:active {
-                    background-color: midnightblue;
-                }
-            }
-        }
-
-        .runs {
-            &__item {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 2fr 1fr 1fr 1fr 1fr;
-                grid-template-areas:
-                    "sign amount"
-                    "sign tempTot"
-                    "sign date"
-                    "sign biz"
-                    "sign id";
-
-                #sign {
-                    grid-area: sign;
-                }
-
-                #run_amount {
-                    grid-area: amount;
-                    font-size: 1.5rem;
-                    font-weight: bold;
-                }
-
-                #temp_total {
-                    grid-area: tempTot;
-                }
-
-                #run_date {
-                    grid-area: date;
-                }
-
-                #run_business {
-                    grid-area: biz;
-                    color: lightseagreen;
-                }
-
-                #run_id {
-                    grid-area: id;
-                    color: gray;
-                }
-            }
         }
     }
 }
 
-.modalWrapper {
-    position: fixed;
-    display: none;
-    // display: flex;
-    // flex-direction: column;
+#mainscreen {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-items: center;
     align-content: center;
     justify-content: center;
-    z-index: 2;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
 
-    &__item {
-        display: none;
-        // display: flex;
-        // flex-direction: column;
+    .add_runner_form {
+        &__item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            grid-template-areas:
+                "lbl inpt";
+            margin: 5px;
 
-        &--run {
-            width: 25vw;
-            min-width: 350px;
-        }
-    }
-}
+            &--submit {
+                width: 100%;
+                height: 40px;
+            }
 
-.modalBox {
-    display: flex;
-    align-items: center;
-    overflow: auto;
-    padding: 5px;
+            label {
+                grid-area: lbl;
+            }
 
-    &__item {
+            input,
+            img {
+                grid-area: inpt;
+            }
 
-        &--title {
-            display: flex;
-            justify-content: space-between;
-            border-radius: 10px 10px 0 0;
-            height: 25px;
-            color: black;
-            font-weight: bold;
-            background-color: cornflowerblue;
-            padding: 0 5px;
-        }
+            img {
+                width: 250px;
+            }
 
-        &--content {
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            background-color: white;
-            height: 140px;
-            border-radius: 0 0 10px 10px;
+            #add_photo {
+                text-align: center;
+                border-radius: 20px;
+                background-color: skyblue;
+                height: 20px;
+                border: 1px solid black;
 
-            .add_run_form {
-                display: flex;
-                flex-direction: column;
-
-                &__item {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    grid-template-rows: 1fr;
-                    grid-template-areas:
-                        "lbl inpt";
-
-                    margin: 5px;
-
-                    label {
-                        grid-area: lbl;
-                    }
-
-                    input {
-                        grid-area: inpt;
-                    }
-
-                    &--submit {
-                        background-color: turquoise;
-                        color: black;
-                        height: 30px;
-                        font-size: 1.2rem;
-                        font-weight: bold;
-                        border-radius: 20px;
-                        border: 0;
-
-                        &:hover {
-                            background-color: rgb(71, 255, 237);
-                        }
-
-                        &:active {
-                            background-color: rgb(47, 172, 159);
-                            color: white;
-                        }
-                    }
+                &:hover {
+                    background-color: paleturquoise;
                 }
+
+                &:active {
+                    background-color: teal;
+                    color: white;
+                }
+            }
+
+            .required {
+                color:red;
             }
         }
     }
 }
 
-
-.close {
-    cursor: pointer;
-    font-size: 20px;
-    margin: 0 5px;
+.action {
+    background-color: aqua;
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 20px;
+    border: 0;
 
     &:hover {
-        color: rgb(17, 95, 91);
+        background-color: turquoise
+    }
+
+    &:active {
+        background-color: teal;
+        color: white;
     }
 }

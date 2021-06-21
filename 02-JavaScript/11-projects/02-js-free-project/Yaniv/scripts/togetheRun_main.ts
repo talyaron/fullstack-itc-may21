@@ -5,7 +5,7 @@ class Run {
   runMatch: boolean = false;
   runId: string = "run" + Math.random().toString(16).slice(2);
   runRunnerId: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerId; // TODO get logged in runner from localStorage
+    .runnerId;
 
   constructor(runDistance: number, runTime: Date, runArea: string) {
     this.runDistance = runDistance;
@@ -32,57 +32,48 @@ interface Shoes {
 
 class LoggedInRunner {
   // generated on the registration page - passed on to other pages via localStorage
-  runnerName: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerName; // required on registration
+  runnerName: string = JSON.parse(localStorage.getItem("currentRunner")).runnerName; // required on registration
   runnerId: string = JSON.parse(localStorage.getItem("currentRunner")).runnerId; // generated on registration
-  runnerEmail: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerEmail; // required on registration
-  runnerPassword: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerPassword; // required on registration
-  runnerGender: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
-  runnerAgeGroup: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
-  runnerChat: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
-  runnerPref: Preferences = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerPref; // default on registration - TODO add method to edit
-  runnerProfImg: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerProfImg; // TODO add method editDetails
+  runnerEmail: string = JSON.parse(localStorage.getItem("currentRunner")).runnerEmail; // required on registration
+  runnerPassword: string = JSON.parse(localStorage.getItem("currentRunner")).runnerPassword; // required on registration
+  runnerGender: string = JSON.parse(localStorage.getItem("currentRunner")).runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
+  runnerAgeGroup: string = JSON.parse(localStorage.getItem("currentRunner")).runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
+  runnerChat: string = JSON.parse(localStorage.getItem("currentRunner")).runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
+  runnerPref: Preferences = JSON.parse(localStorage.getItem("currentRunner")).runnerPref; // default on registration - TODO add method to edit
+  runnerProfImg: string = JSON.parse(localStorage.getItem("currentRunner")).runnerProfImg; // TODO add method editDetails
   runnerShoes: Shoes; // TODO add method editDetails
-  runnerRuns: Array<Run> = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerRuns; // empy on registration
-  runnerRunsHtml: string = document.querySelector(".runs").innerHTML; // DOM representation of all runs - new runs to DOM are added to this innerHTML
-  runnerDistance: number = Number(
-    document.querySelector("#total_sum").innerHTML
+  runnerRuns: Array<Run> = JSON.parse(localStorage.getItem("currentRunner")).runnerRuns; // empty on registration
+  runnerRunsHtml: string = JSON.parse(localStorage.getItem("currentRunner")).runnerRunsHtml; // DOM representation of all runs - new runs to DOM are added to this innerHTML
+  runnerDistance: number = Number(document.querySelector("#total_sum").innerHTML
   );
 
-  updatePersonalDetails() : void {
+  personalDetailsToDOM() : void {
     const mainTitle: HTMLElement = document.querySelector("title");
     const runnerNameContainter: HTMLElement = document.querySelector(".summary__item--runner_name");    
-    const runnerProfImg: HTMLElement = document.querySelector(".profile_image__item--profile_image");    
-    
+    const runnerProfileImg: HTMLElement = document.querySelector(".profile_image__item--profile_image");    
+    const runnerRunsDOM: HTMLElement = document.querySelector(".runs");
+
     mainTitle.insertAdjacentHTML('afterbegin',`${this.runnerName}`);
     runnerNameContainter.insertAdjacentHTML('beforeend',`${this.runnerName}!`);
-    runnerProfImg.title = `${this.runnerName}`;
+    runnerProfileImg.title = `${this.runnerName}`;
+    runnerProfileImg.setAttribute("src",this.runnerProfImg)
+    runnerRunsDOM.innerHTML = this.runnerRunsHtml;
   }
 
   addRun(run: Run): void {
     this.runnerRuns.push(run);
+    this.runnerRuns.sort((a : any, b : any) => b.runTime - a.runTime);
     this.addRunToDOM(run);
     this.refreshTotalToDOM(run.runDistance);
   }
 
   addRunToDOM(run: Run) {
-    // TODO adjust to this project
     try {
       const runsContainer: HTMLElement = document.querySelector(".runs");
       const matchFAClass = run.runMatch ? "check-double" : "check";
       const matchTitle = run.runMatch ? "Partner found!" : "Pending partner...";
       const runColor = run.runMatch ? "aqua" : "orange";
-      const runFormatedDate = `${run.runTime.getDate()}-${
-        run.runTime.getMonth() + 1
-      }-${run.runTime.getFullYear()} ${run.runTime.getHours()}:${run.runTime.getMinutes()}`;
+      const runFormatedDate = `${run.runTime.toISOString().substring(0,16).replace('T',' ')}`;
 
       const runsHTML = `<div class="runs__item runs__item--action">
       <i id="match" class="fas fa-2x fa-${matchFAClass}-circle" title="${matchTitle}" style="color: ${runColor};"></i>
@@ -93,10 +84,10 @@ class LoggedInRunner {
       <div id="runs_area">${run.runArea}</div>
     </div>`;
 
-      runsContainer.insertAdjacentHTML("beforeend", runsHTML);
+      runsContainer.insertAdjacentHTML("afterbegin", runsHTML);
+      this.runnerRunsHtml = runsContainer.innerHTML;
 
-      const totalRunsContainer: HTMLElement =
-        document.querySelector("#total_counts");
+      const totalRunsContainer: HTMLElement = document.querySelector("#total_counts");
       totalRunsContainer.innerText = `${this.runnerRuns.length}`;
     } catch (er) {
       console.error(er);
@@ -149,6 +140,7 @@ const openModal = (): void => {
       isModalOpen = true;
       modal.style.display = `flex`;
       modalBox.style.display = `unset`;
+      onlyFutureRuns();
     });
   } catch (er) {
     console.error(er);
@@ -166,6 +158,16 @@ const closeModal = (): void => {
       modal.style.display = `none`;
       modalBox.style.display = `none`;
     });
+  } catch (er) {
+    console.error(er);
+  }
+};
+
+const onlyFutureRuns = (): void => {
+  try {
+    const runTimeInput: HTMLElement = document.querySelector(`#run_time_form`);
+    const now = new Date();
+      runTimeInput.setAttribute("min",now.toISOString().substring(0,16));
   } catch (er) {
     console.error(er);
   }
@@ -198,7 +200,7 @@ const runSubmit = (ev: any) => {
   }
 };
 
-runner.updatePersonalDetails();
+runner.personalDetailsToDOM();
 logOut();
 openModal();
 closeModal();

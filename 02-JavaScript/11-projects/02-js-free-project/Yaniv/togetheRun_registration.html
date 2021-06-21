@@ -13,66 +13,88 @@
 </head>
 
 <body>
-    <form class="add_runner_form" onsubmit="runnerSubmit(event)">
-        <div class="add_runner_form__item">
-            <label for="runner_name_form">Name</label>
-            <input type="string" minlength="2" maxlength="20" name="runnerName" placeholder="up to 20 characters"
-                required id="runner_name_form" />
+    <header>
+        <div class="header">
+            <div class="header__item header__item--logo">
+                <div id="running_logo">
+                    <img src="images/togetheRun_runner2.png" alt="togetheRun logo" title="togetheRun logo" id="runner1_logo">
+                    <img src="images/togetheRun_runner1.png" alt="togetheRun logo" title="togetheRun logo" id="runner2_logo">
+                </div>
+            </div>
+            <div class="header__item header__item--title">
+                <h1>TegetheRun</h1>
+                <h2>Find a running partners on your level</h2>
+                <h3>for every run, anytime, everywhere</h3>
+            </div>
+            <a class="header__item header__item--register action" href="#go_here">Register Now!</a>
         </div>
-        <div class="add_runner_form__item">
-            <label for="runner_email_form">Email</label>
-            <input type="email" maxlength="50" name="runnerEmail" placeholder="your_username@your_domain.com" required
-                id="runner_email_form" />
-        </div>
-        <div class="add_runner_form__item">
-            <label for="runner_password_form">Password</label>
-            <input type="password" minlength="8" name="runnerPassword" placeholder="at least 8 characters" required
-                id="runner_password_form" />
-        </div>
-        <div class="add_runner_form__item">
-            <label for="runner_password_verify_form">Password (verify)</label>
-            <input type="password" minlength="8" name="runnerPasswordVerify"
-                placeholder="enter your password again for verification" required id="runner_password_verify_form" />
-        </div>
-        <div class="add_runner_form__item">
-            <label for="runner_gender_form">Gender</label>
-            <select name="runnerGender" id="runner_gender_form">
-                <option value="Unknown">choose gender (optional)</option>
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-            </select>
-        </div>
-        <div class="add_runner_form__item">
-            <label for="runner_age_group_form">Age Group</label>
-            <select name="runnerAgeGroup" id="runner_age_group_form">
-                <option value="Unknown">choose age group (optional)</option>
-                <option value="15-19">15-19</option>
-                <option value="20s">20's</option>
-                <option value="30s">30's</option>
-                <option value="40s">40's</option>
-                <option value="50s">50's</option>
-                <option value="60s">60's</option>
-            </select>
-        </div>
-        <div class="add_runner_form__item">
-            <label for="runner_chat_form">Chatting during runs?</label>
-            <select name="runnerChat" id="runner_chat_form">
-                <option value="Unknown">choose from list (optional)</option>
-                <option value="chatty">Chatty</option>
-                <option value="soso">So so</option>
-                <option value="ifmust">Only when necessary</option>
-            </select>
-        </div>
-        <div class="add_runner_form__item">
-            <label for="runner_profile_image_form">Profile Image</label>
-            <input type="file" name="runnerProfImg" id="runner_profile_image_form" onchange="readURL(this);"/>
-            <img id="runnerProfImg">
-        </div>
-        <input class="add_runner_form__item add_runner_form__item--submit" type="submit" name="submit"
-            value="Register & Login" />
-    </form>
+    </header>
 
-    <script src="scripts/dist/togetheRun_registration.js"></script>
+    <main id="mainscreen">
+        <h2 id="go_here">Start finding perfect matches for every run</h2>
+        <form class="add_runner_form" onsubmit="runnerSubmit(event)">
+            <div class="add_runner_form__item">
+                <label for="runner_name_form">Name <span class="required">*</span></label>
+                <input type="string" minlength="2" maxlength="20" name="runnerName" placeholder="up to 20 characters"
+                    required id="runner_name_form" />
+            </div>
+            <div class="add_runner_form__item">
+                <label for="runner_email_form">Email <span class="required">*</span></label>
+                <input type="email" maxlength="50" name="runnerEmail" placeholder="your_username@your_domain.com"
+                    required id="runner_email_form" />
+            </div>
+            <div class="add_runner_form__item">
+                <label for="runner_password_form">Password <span class="required">*</span></label>
+                <input type="password" minlength="8" name="runnerPassword" placeholder="at least 8 characters" required
+                    id="runner_password_form" />
+            </div>
+            <div class="add_runner_form__item">
+                <label for="runner_password_verify_form">Password (verify) <span class="required">*</span></label>
+                <input type="password" minlength="8" name="runnerPasswordVerify"
+                    placeholder="enter your password again for verification" required
+                    id="runner_password_verify_form" />
+            </div>
+            <div class="add_runner_form__item">
+                <label for="runner_gender_form">Gender</label>
+                <select name="runnerGender" id="runner_gender_form">
+                    <option value="Unknown">choose gender (optional)</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+            <div class="add_runner_form__item">
+                <label for="runner_age_group_form">Age Group</label>
+                <select name="runnerAgeGroup" id="runner_age_group_form">
+                    <option value="Unknown">choose age group (optional)</option>
+                    <option value="15-19">15-19</option>
+                    <option value="20s">20's</option>
+                    <option value="30s">30's</option>
+                    <option value="40s">40's</option>
+                    <option value="50s">50's</option>
+                    <option value="60s">60's</option>
+                </select>
+            </div>
+            <div class="add_runner_form__item">
+                <label for="runner_chat_form">Chatting during runs?</label>
+                <select name="runnerChat" id="runner_chat_form">
+                    <option value="Unknown">choose from list (optional)</option>
+                    <option value="chatty">Chatty</option>
+                    <option value="soso">So so</option>
+                    <option value="ifmust">Only when necessary</option>
+                </select>
+            </div>
+            <div class="add_runner_form__item">
+                <label for="runner_profile_image_form" id="add_photo">Add profile
+                    Image</label>
+                <input type="file" name="runnerProfImg" id="runner_profile_image_form" onchange="readURL(this);" style="display:none" />
+                <img id="runnerProfImg">
+            </div>
+            <input class="add_runner_form__item add_runner_form__item--submit action" type="submit" name="submit"
+                value="Register & Login" />
+        </form>
+        </div>
+
+        <script src="scripts/dist/togetheRun_registration.js"></script>
 </body>
 
 </html>
