@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,23 +8,26 @@
     <title>New Customer</title>
     <link rel="stylesheet" href="./dist/styles.min.css">
 </head>
+
 <body>
-    <nav><a class="nav__item" href="./customer-list.html">Customer List</a></nav>
+    <nav><a class="nav__item--button" href="./customer-list.html">Customer List</a></nav>
 
     <form class="form" onsubmit="handleSubmit(event)">
-    <input type="text" class="form__item" name="name" placeholder="Name">
-    <input type="text" class="form__item"  name="email" placeholder="Email">
-    <input type="text" class="form__item"  name="phone" placeholder="Phone Number">
-    <input type="text" class="form__item"  name="address" placeholder="Address: 555 Main St, Skokie IL, 60076">
-    <input type="text" class="form__item"  name="imgURL" placeholder="Image URL for home">
-    <input type="submit" class="form__item--button"  value="ADD NEW CUSTOMER">
-    
-    </form>
+        <input type="text" class="form__item" name="name" placeholder="Name">
+        <input type="text" class="form__item" name="email" placeholder="Email">
+        <input type="text" class="form__item" name="phone" placeholder="Phone Number">
+        <input type="text" class="form__item" name="address" placeholder="Address: 555 Main St, Skokie IL, 60076">
+        <input type="text" class="form__item" name="imgURL" placeholder="Image URL for home">
+        <input type="submit" class="form__item--button" value="ADD NEW CUSTOMER">
 
-    <div class="customer__list"></div>
-    
-    
+    </form>
+   
+
+
+
+
     <script src="./dist/crm.js"></script>
-    
+
 </body>
+
 </html>

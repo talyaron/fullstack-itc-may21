@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./dist/style.css" />
+    <link
+      rel="stylesheet"
+      href="path/to/font-awesome/css/font-awesome.min.css"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/jpg"
+      href="./images/rocket-solid.svg"
+    />
+    <title>Galileo Project</title>
+  </head>
+  <body>
+    <header>
+      <ul class="navbar">
+        <img id="rocket" src="./images/rocket-solid.svg" alt="space rocket" />
+        <li class="navbar__item">
+          <a class="navbar__item__link" href="./index.html">Galileo Project</a>
+        </li>
+        <li class="navbar__item">
+          <a class="navbar__item__link" href="./team.html">Our team</a>
+        </li>
+        <li class="navbar__item">
+          <a class="navbar__item__link" href="./contact.html">Contact</a>
+        </li>
+      </ul>
+    </header>
+
+    <main>
+      <div class="left-side">
+        <div class="starTop">
+          <!-- <img id="starTop__pic" src="./images/bandcamp-brands.svg" alt="space travel" style="border-radius: 20%;"> -->
+          <p class="starTop__starName">Mars/Earth</p>
+          <span class="starTop__distance">288.33 million km</span>
+          <span class="starTop--distButton">Distance</span>
+        </div>
+        <div class="starMain">
+          <h1 class="starMain__headline">Mars Expedition</h1>
+          <p class="starMain__text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
+            non cum accusamus animi ipsam impedit voluptatem commodi, veritatis
+            nam sapiente ipsum reprehenderit sunt harum asperiores et, magnam
+            minima optio enim.
+          </p>
+          <button onclick="" class="starMain__button">Book Expedition</button>
+        </div>
+        <div class="starFooter">
+            <div class="starFooter__left">
+              <!-- <img class="starFooter__left__icon" src="./images/rocket-solid.svg" alt=""> -->
+              <h6 class="starFooter__left__headline">Past Expeditions</h6>
+              <p class="starFooter__left__number">43</p>
+            </div>
+            <div class="starFooter__right">
+              <h6 class="starFooter__right__headline">Past travelers</h6>
+              <p class="starFooter__right__number">308</p>
+            </div>
+        </div>
+    </div>
+        <div class="right-side">
+          <div class="planetPic">
+            <img
+              src="https://d2pn8kiwq2w21t.cloudfront.net/images/Mars-800h-v2_02.width-1024.png"
+              alt="planet picture"/>
+              <i class="fas fa-angle-double-down"></i>
+          </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__starList">
+            <div class="footer__starList__option">
+                <span class="footer__starList__option__headline">Mars</span>
+                <span id="best-seller">
+                  <img style="height: 30px; width: 30px;" src="./images/best.png" alt="best seller">
+                </span>
+                <p class="footer__starList__option__text">A journey to the Korolev crater and the North polar ice cap!</p>
+                <button class="footer__starList__option__button">See details</button>
+            </div>
+                <div class="footer__starList__option">
+                    <span class="footer__starList__option__headline">Venus</span>
+                    <p class="footer__starList__option__text">Join an Expedition to see the volcanoes and craters of Venus!</p>
+                    <button class="footer__starList__option__button">See details</button>
+
+                </div>
+                <div class="footer__starList__option">
+                    <span class="footer__starList__option__headline">Moon</span>
+                    <p class="footer__starList__option__text">Never too late to hike the first toured planet of the 21st century!</p>
+                    <button class="footer__starList__option__button">See details</button>
+
+                </div>
+        </div>
+      <p class="footer__text">
+        Galileo Project® 2030 was created by Yarden Tal as an exercise in
+        JavaScript & SCSS for Fullstack evening bootcamp at Israel Tech
+        Challenge
+      </p>
+    </footer>
+
+    <script src="./dist/galileo.js"></script>
+  </body>
+</html>

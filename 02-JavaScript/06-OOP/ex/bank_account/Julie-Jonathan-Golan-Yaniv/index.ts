@@ -91,6 +91,11 @@ console.log(JSON.stringify(account));
 account.editTransaction(transactionId1, "Walllllaaaaa!!!");
 console.log(account);
 
+const filteredAccount = account.filterByDate(new Date('15-jun-2021'), new Date('17-jun-2021'));
+console.log(`The filtered array is: ${JSON.stringify(filteredAccount)}`);
+
+
+
 const filteredAccount = account.filterByDate(
   new Date("15-jun-2021"),
   new Date("17-jun-2021")

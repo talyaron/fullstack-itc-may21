@@ -5,10 +5,10 @@
 
 Use TypeScript, SCSS, BEM etc.
 */
-var deposit = document.querySelector('#depositContainer');
 var totalAmount = document.querySelector('#balance');
 var withdrawRadio = document.getElementById("withdraw");
 var depositRadio = document.getElementById("deposit");
+var deposit = document.querySelector('#depositContainer');
 var Movements = /** @class */ (function () {
     //withdraw:number;
     function Movements(description, deposit, type, account) {
@@ -32,13 +32,17 @@ var AccountList = /** @class */ (function () {
         var html = '';
         this.accountUsers.forEach(function (accountUser) {
             html = "<p>" + accountUser.description + " " + accountUser.account + " $" + accountUser.deposit + " " + accountUser.type + "</p>"; //YS: Nice
-            deposit.insertAdjacentHTML("afterbegin", html);
+            console.log(html);
         });
+        //deposit.innerHTML=html;
+        deposit.insertAdjacentHTML("afterbegin", html);
+        //como hacerlo con inner.html
     };
     AccountList.prototype.total = function (accountUser) {
         try {
             //const deposit: HTMLElement = document.querySelector('[name="deposit"]').value; //YS: Try/catch
-            //if(!deposit) throw new Error('The element where to show the balance doesn´t exist!')
+            if (!deposit)
+                throw new Error('The element where to show the balance doesn´t exist!');
             accountUsers.amount += accountUser.deposit;
             var total = "<div>Final balance: $" + accountUsers.amount + "</div>";
             totalAmount.innerHTML = total;
