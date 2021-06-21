@@ -143,11 +143,8 @@ main .left-side .starMain__button {
   background-color: mediumpurple;
   color: black;
 }
-main .left-side .starMain__button:hover {
-  -webkit-animation: blink-1 0.6s both;
-  animation: blink-1 0.6s both;
-  color: white;
-  border: 1px solid brown;
+main .left-side .starMain :hover {
+  color: whitesmoke;
   cursor: pointer;
 }
 main .left-side .starMain__date {
@@ -155,7 +152,6 @@ main .left-side .starMain__date {
   background-color: #924f30;
   font-family: Arial, Helvetica, sans-serif;
   color: whitesmoke;
-  border-radius: 8%;
   border: none;
 }
 main .left-side .starFooter {

@@ -33,6 +33,21 @@ let pastExpeditions:HTMLElement = document.querySelector('.starFooter__left__num
 let pastTravelers:HTMLElement = document.querySelector('.starFooter__right__number')
 let imageSrc:HTMLElement = document.querySelector('.planetPic__image')
 
+//Query-select the 3 Expedition options to render on the page:
+const selectMars:HTMLElement = document.querySelector('#select-Mars')
+const selectVenus:HTMLElement = document.querySelector('#select-Venus')
+const selectMoon:HTMLElement = document.querySelector('#select-Moon')
+
+
+
+const handleSubmit = (ev:any)=> {
+    ev.preventDefault();
+}
+
+// const name:string = ev.target.elements.name.value;
+
+
+
 class user {
     name:string
     date:Date
