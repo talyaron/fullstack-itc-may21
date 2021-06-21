@@ -12,7 +12,6 @@ use google if you dont know how to do things.
 var Pet = /** @class */ (function () {
     function Pet(name, age, gender, city, image, description, contactNumber) {
         this.id = "id" + Math.random().toString(16).slice(2);
-        ;
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -35,8 +34,6 @@ var Pets = /** @class */ (function () {
 }());
 //I initialice a new array that will contains all the pets:
 var pets = new Pets();
-//Declare the image as a global scope because I
-var image = "";
 var doingSubmit = function (ev) {
     ev.preventDefault();
     var name = ev.target.elements.namePet.value;
@@ -45,9 +42,9 @@ var doingSubmit = function (ev) {
     var city = ev.target.elements.city.value;
     var description = ev.target.elements.description.value;
     var contactNumber = ev.target.elements.contactNumber.value;
-    /* const image = "https://th.bing.com/th/id/R9628dae276a7714797e55fd555be26b2?rik=B2Cbzvw7Cjp6dQ&pid=ImgRaw"; */
-    var image = document.querySelector('#ima').getAttribute("src");
+    var image = document.querySelector('#previewImage').getAttribute("src");
     pets.addPet(name, age, gender, city, image, description, contactNumber);
+    ev.target.reset();
     localStorage.setItem('pet', JSON.stringify(pets));
 };
 function redirect() {
@@ -58,7 +55,7 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            document.querySelector('#ima').setAttribute("src", "" + e.target.result);
+            document.querySelector('#previewImage').setAttribute("src", "" + e.target.result);
             return e.target.result;
         };
         reader.readAsDataURL(input.files[0]);

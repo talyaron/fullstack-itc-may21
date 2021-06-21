@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="dist/style.css">
-    <title>ToDoList</title>
+    <title>FreeProject</title>
 </head>
 
 <body>
@@ -19,15 +19,15 @@
             </div>
         </div>
         <div class="content">
-            <form class="add">
-                <input type="text" name="add" placeholder="Add item...">
-                <div class="input-buttons">
+            <form  class="add" onsubmit="doingSubmit(event)">
+                <input type="text" name="task" placeholder="Add item...">
+                <button class="input-buttons">
                     <a href="#" class="add-todo">
                         <i class="fas fa-plus add"></i>
                     </a>
-                </div>
+                </button>
             </form>
-
+            <!--
             <ul class="todos">
                 <li>
                     <input type="checkbox" id="todo_1" />
@@ -50,16 +50,19 @@
                     </label>
                     <i class="far fa-trash-alt delete"></i>
                 </li>
-            </ul>
+            </ul> 
+            -->
+            <div class="root"></div>
+            <br>
             <div class="btns">
-                <input type="button" value="Completed" class="btn1">
-                <input type="button" value="Pending" class="btn2">
+                <button onclick="redirect()"  class="btn1">Items list</button>
             </div>
         </div>
         
     </div>
     
-    <script src=".dist/toDo.js"></script>
+    <script src="dist/toDo.js"></script>
+}
 </body>
 
 </html>

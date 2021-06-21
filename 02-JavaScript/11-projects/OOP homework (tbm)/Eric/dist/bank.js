@@ -34,8 +34,8 @@ var AccountList = /** @class */ (function () {
             html = "<p>" + accountUser.description + " " + accountUser.account + " $" + accountUser.deposit + " " + accountUser.type + "</p>"; //YS: Nice
             console.log(html);
         });
-        deposit.innerHTML = html;
-        // deposit.insertAdjacentHTML("afterbegin", html);
+        //deposit.innerHTML=html;
+        deposit.insertAdjacentHTML("afterbegin", html);
         //como hacerlo con inner.html
     };
     AccountList.prototype.total = function (accountUser) {
