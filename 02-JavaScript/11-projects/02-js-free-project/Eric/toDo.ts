@@ -2,6 +2,7 @@
 class Item{
     id: string;
     task: string;
+    
 
     constructor (task:string){
     this.id = "id" + Math.random().toString(16).slice(2); // es interno

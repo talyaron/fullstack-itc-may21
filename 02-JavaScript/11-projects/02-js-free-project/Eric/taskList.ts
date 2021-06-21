@@ -1,12 +1,14 @@
 const allItems = JSON.parse(localStorage.getItem('item'));
 const root = document.querySelector('#root')
 
+
 //agregar boton check en cada item, que se vea el boton y lo pueda clickear
 function renderItems():void {
 
     let html: string = "";
     allItems.forEach(element => {
-       html += `<div onclick="deletes()"> ${element.id} ${element.task} </div>`
+       html += `<div>  ${element.task} <input type="checkbox"  id=" ${element.id}"> </div>` 
+        console.log(element.id)
     });    
     root.innerHTML = html;
 }

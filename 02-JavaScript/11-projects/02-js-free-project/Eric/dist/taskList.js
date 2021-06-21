@@ -4,7 +4,8 @@ var root = document.querySelector('#root');
 function renderItems() {
     var html = "";
     allItems.forEach(function (element) {
-        html += "<div onclick=\"deletes()\"> " + element.id + " " + element.task + " </div>";
+        html += "<div>  " + element.task + " <input type=\"checkbox\"  id=\" " + element.id + "\"> </div>";
+        console.log(element.id);
     });
     root.innerHTML = html;
 }
