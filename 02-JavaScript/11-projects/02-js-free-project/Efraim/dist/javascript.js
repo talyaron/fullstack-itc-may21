@@ -84,6 +84,7 @@ function colorChangeButton() {
             button[i].innerHTML = 'selected';
             counter = counter + 1;
             document.querySelector('.nav__cart__count').innerHTML = counter;
+            button[i].disabled = true;
         });
     };
     for (var i = 0; i <= button.length; i++) {
