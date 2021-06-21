@@ -1,41 +1,49 @@
-
 body {
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(
-        to right, 
-        #f9fd02 0%, 
-        #f7e817 50%, 
-        #000000 50%, 
-        #1b1a1a 100%
-      );
+    background: linear-gradient(to right,
+            #f9fd02 0%,
+            #f7e817 50%,
+            #000000 50%,
+            #1b1a1a 100%);
 }
+
 .nav {
     overflow: hidden;
-  background-color: #333;
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
-  display: flex;
-  z-index: 10;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    z-index: 10;
 }
-.cart, .checkout {
+
+.nav__cart,
+.nav__checkout {
     float: right;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 7px 8px;
-  text-decoration: none;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 7px 8px;
+    text-decoration: none;
 }
-.cart {
+
+.nav__cart {
     padding-left: 1rem;
     padding-right: 1rem;
 }
-.checkout {
+
+.nav__checkout {
     color: black;
+    background-color: gray;
+    text-align: center;
+    align-self: center;
+    height: 2.1rem;
+    border-radius: 5px;
 }
+
 .opener {
     width: 100vw;
     height: 700px;
@@ -45,22 +53,23 @@ body {
     z-index: -5;
     position: relative;
     margin: 0;
-    
-
 }
-.football {
+
+.opener__x {
+    width: 100px;
+    height: 100px;
+    animation: x 13s linear infinite alternate;
+}
+
+.opener__x__football {
     width: 100px;
     height: 100px;
     border-radius: 20%;
-    
+    animation: y 7s linear infinite alternate, rotation 8s infinite linear;
 }
-.x {
-    width: 100px;
-    height: 100px;
-    
-}
-.fanclub {
-    height:15vh;
+
+.opener__fanclub {
+    height: 15vh;
     width: 500px;
     align-items: center;
     z-index: 5;
@@ -70,9 +79,10 @@ body {
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-   
-  
+
+
 }
+
 .merchandise {
     margin-bottom: 5rem;
     font-size: 50px;
@@ -81,8 +91,6 @@ body {
     margin-top: 5rem;
     color: white;
     filter: drop-shadow(.05em .05em rgb(255, 38, 0));
-    
-
 }
 
 .shopping-list {
@@ -106,23 +114,24 @@ body {
     height: 400px;
     border-radius: 5px;
 }
+
 .shopping-list__item-wrapper__item-image:hover {
     transform: scale(1.1);
-    }
+}
 
 .shopping-list__item-wrapper__item-name {
     font-size: 1rem;
     margin-top: 20px;
     color: red;
 
-  
+
 }
 
 .shopping-list__item-wrapper__item-price {
     font-size: 1rem;
     color: red;
-    
-    
+
+
 }
 
 .shopping-list__item-wrapper__add {
@@ -131,35 +140,21 @@ body {
     border: none;
     font-weight: bold;
     border-radius: 5px;
-}
-.shopping-list__item-wrapper__add:hover{
-    cursor: pointer;
-}
-
-.shopping-list__item-wrapper__add {
     margin: auto;
 }
 
-.x {
-    animation: x 13s linear infinite alternate;
-    
-  }
-  
-  .y {
-    animation: y 7s linear infinite alternate, rotation 8s infinite linear;
-  }
- 
-  
-  @keyframes x {
+.shopping-list__item-wrapper__add:hover {
+    cursor: pointer;
+}
+
+@keyframes x {
     100% {
-      transform: translateX( calc(100vw - 100px) );
+        transform: translateX(calc(100vw - 100px));
     }
-  }
-  
-  @keyframes y {
+}
+
+@keyframes y {
     100% {
-      transform: translateY( calc(95vh - 100px) );
+        transform: translateY(calc(95vh - 100px));
     }
-  }
-  
- 
+}

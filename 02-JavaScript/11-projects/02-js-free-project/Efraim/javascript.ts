@@ -20,9 +20,7 @@ class Cart {
     console.log(this.cart);
   }
 
-  getCartFromStorage(){
-
-  }
+  
 }
 
 
@@ -69,7 +67,7 @@ const moveToCart = (productId: string) => {
   if (product !== false) {
     cart.addToCart(product);
     console.log(cart)
-    window.sessionStorage.setItem('cart', JSON.stringify(cart.cart));
+    window.localStorage.setItem('cart', JSON.stringify(cart.cart));
   }
 
 };
@@ -78,8 +76,8 @@ const moveToCart = (productId: string) => {
 
 
 const shoppingListDOM = document.querySelector('.shopping-list');
-const products = new Products();
-const cart = new Cart();
+const products:Products = new Products();
+const cart: Cart = new Cart();
 
 products.addProduct(new Product("coffee.png", 'Stainless Steel Travel Mug', 12.99))
 products.addProduct(new Product("beanie.png", 'Boundary Rib Beanie', 15.95))
@@ -96,13 +94,28 @@ products.addProduct(new Product("12.png", 'Dustin Martin Monatge Wall Flag', 39.
 products.renderProducts(shoppingListDOM);
 console.log(products)
 
+function colorChangeButton() {
+  let button:Array<any> = document.querySelectorAll(".shopping-list__item-wrapper__add");
+  let counter:number = parseInt(document.querySelector('.nav__cart__count').innerHTML);
+  for (let i=0; i <= button.length; i++ ) {
+  button[i].addEventListener('click', function() {
+    button[i].style.background = 'red';
+    button[i].style.color = 'white'
+    button[i].innerHTML = 'selected'
+    counter = counter + 1;
+    document.querySelector('.nav__cart__count').innerHTML = counter;
+    button[i].disabled = true;
+  })}
+}
+colorChangeButton();
+
 
 
 // function addToCart() {
 //   let divs:any = document.querySelectorAll('.shopping-list__item-wrapper__add');
 //   let divs1:any = document.querySelectorAll('.shopping-list__item-wrapper');
 //   let cart:Array<string> = [];
-//   let counter:number = parseInt(document.querySelector('.count').innerHTML);
+//   
 
 //   for (let i = 0; i < divs.length; i++) {
 //       divs[i].addEventListener('click', function() {
@@ -112,8 +125,7 @@ console.log(products)
 //         console.log(JSON.stringify(cart));
 
 //         localStorage.setItem('cart', JSON.stringify(cart));
-//         counter = counter + 1;
-//         document.querySelector('.count').innerHTML = counter;
+//         
 //         console.log(counter)
 //       });
 // }};
