@@ -7,13 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pets waiting for yours</title>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="dist/styleslistOfPets.min.css">
+    <link rel="stylesheet" href="dist/style.min.css">
 </head>
 
-<body style="background-image: url(img/backgroundpetsWaitingForYou.jpg); background-size: cover;">
-    <nav class="nav">
-        Filters!
-    </nav>
+<body class="body__filter">
+    <header class="filter">
+        <select class="filter__age" name="age"></select>
+        <select class="filter__city" name="city"></select>
+        <select class="filter__gender" name="gender"></select>
+        <button class="filter__button filter__button--filter" onclick="handleFilter()">Filter your pet´s lover</button>
+        <button class="filter__button filter__button--back" onclick="goBack()">Back to main page</button>
+    </header>
     <div id="root"></div>
     <div class="pet"></div>
     <script src="dist/scriptListOfPets.js"></script>
