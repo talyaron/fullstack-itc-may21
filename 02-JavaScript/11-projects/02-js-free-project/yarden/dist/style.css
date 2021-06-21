@@ -1,3 +1,19 @@
+@-webkit-keyframes bg-pan-left {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@keyframes bg-pan-left {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
 @-webkit-keyframes shadow-inset-center {
   0% {
     -webkit-box-shadow: inset 0 0 0 0 transparent;
@@ -58,6 +74,11 @@
 }
 * {
   scroll-behavior: auto;
+}
+
+.bg-pan-left {
+  -webkit-animation: bg-pan-left 8s infinite both;
+  animation: bg-pan-left 8s infinite both;
 }
 
 body {
@@ -122,12 +143,16 @@ main .left-side .starMain__button {
   background-color: mediumpurple;
   color: black;
 }
-main .left-side .starMain__button:hover {
-  -webkit-animation: blink-1 0.6s both;
-  animation: blink-1 0.6s both;
-  color: white;
-  border: 1px solid brown;
+main .left-side .starMain :hover {
+  color: whitesmoke;
   cursor: pointer;
+}
+main .left-side .starMain__date {
+  margin-left: 1rem;
+  background-color: #924f30;
+  font-family: Arial, Helvetica, sans-serif;
+  color: whitesmoke;
+  border: none;
 }
 main .left-side .starFooter {
   display: flex;
