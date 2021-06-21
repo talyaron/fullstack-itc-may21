@@ -81,20 +81,16 @@ main {
                 font-family: $buttonFont;
                 font-weight: bold;
                 background-color: mediumpurple;
-                color: rgb(0, 0, 0);
-                &:hover {
-                    -webkit-animation:blink-1 .6s both;animation:blink-1 .6s both;
-                    color: white;
-                    border: 1px solid brown;
-                    cursor: pointer;
-                }
+                color: black;
+            }   :hover {
+                color: whitesmoke;
+                cursor: pointer;
             }
             &__date {
                 margin-left: 1rem;
                 background-color: rgb(146, 79, 48);
                 font-family:Arial, Helvetica, sans-serif;
                 color: whitesmoke;
-                border-radius: 8%;
                 border: none;
             }
         }

@@ -21,6 +21,14 @@ var expeditionName = document.querySelector('.starTop__distance');
 var pastExpeditions = document.querySelector('.starFooter__left__number');
 var pastTravelers = document.querySelector('.starFooter__right__number');
 var imageSrc = document.querySelector('.planetPic__image');
+//Query-select the 3 Expedition options to render on the page:
+var selectMars = document.querySelector('#select-Mars');
+var selectVenus = document.querySelector('#select-Venus');
+var selectMoon = document.querySelector('#select-Moon');
+var handleSubmit = function (ev) {
+    ev.preventDefault();
+};
+// const name:string = ev.target.elements.name.value;
 var user = /** @class */ (function () {
     function user(name, date, planet, certified) {
         this.name = name;
