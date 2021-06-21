@@ -12,7 +12,6 @@ use google if you dont know how to do things.
 var Pet = /** @class */ (function () {
     function Pet(name, age, gender, city, image, description, contactNumber) {
         this.id = "id" + Math.random().toString(16).slice(2);
-        ;
         this.name = name;
         this.age = age;
         this.gender = gender;

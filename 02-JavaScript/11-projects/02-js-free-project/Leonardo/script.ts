@@ -21,7 +21,7 @@ class Pet {
     contactNumber: number;
 
     constructor(name: string, age: number, gender: string, city: string, image: any, description: string, contactNumber: number) {
-        this.id = "id" + Math.random().toString(16).slice(2);;
+        this.id = "id" + Math.random().toString(16).slice(2);
         this.name = name;
         this.age = age;
         this.gender = gender;
