@@ -16,11 +16,11 @@ class Pet {
     age: number;
     gender: string;
     city: string;
-    image: any;
+    image: string;
     description: string;
     contactNumber: number;
 
-    constructor(name: string, age: number, gender: string, city: string, image: any, description: string, contactNumber: number) {
+    constructor(name: string, age: number, gender: string, city: string, image: string, description: string, contactNumber: number) {
         this.id = "id" + Math.random().toString(16).slice(2);;
         this.name = name;
         this.age = age;
@@ -35,17 +35,14 @@ class Pet {
 class Pets {
     allPets: Array<Pet> = [];
 
-    addPet(name: string, age: number, gender: string, city: string, image: any, description: string, contactNumber: number): void {
+    addPet(name: string, age: number, gender: string, city: string, image: string, description: string, contactNumber: number): void {
         let newPet: Pet = new Pet(name, age, gender, city, image, description, contactNumber)
         this.allPets.push(newPet);
     }
 }
 
 //I initialice a new array that will contains all the pets:
-const pets = new Pets();
-
-//Declare the image as a global scope because I
-const image = "";
+const pets: Pets = new Pets();
 
 const doingSubmit = (ev: any): void => {
     ev.preventDefault();
@@ -56,25 +53,23 @@ const doingSubmit = (ev: any): void => {
     const city: string = ev.target.elements.city.value;
     const description: string = ev.target.elements.description.value;
     const contactNumber: number = ev.target.elements.contactNumber.value;
-    /* const image = "https://th.bing.com/th/id/R9628dae276a7714797e55fd555be26b2?rik=B2Cbzvw7Cjp6dQ&pid=ImgRaw"; */
-    const image = document.querySelector('#ima').getAttribute("src");
-
+    const image: string = document.querySelector('#previewImage').getAttribute("src");
     pets.addPet(name, age, gender, city, image, description, contactNumber);
-
-    localStorage.setItem('pet', JSON.stringify(pets))
+    ev.target.reset();
+    localStorage.setItem('pet', JSON.stringify(pets));
 };
 
-function redirect() {
+function redirect(): void {
     window.location.href = 'listOfPets.html'
 }
 
 //Function to show the previous image in the form:
-function readURL(input) {
+function readURL(input): void {
     if (input.files && input.files[0]) {
         let reader = new FileReader();
 
-        reader.onload = (e)=> {
-            document.querySelector('#ima').setAttribute("src", `${e.target.result}`);
+        reader.onload = (e) => {
+            document.querySelector('#previewImage').setAttribute("src", `${e.target.result}`);
             return e.target.result
         }
         reader.readAsDataURL(input.files[0]);
