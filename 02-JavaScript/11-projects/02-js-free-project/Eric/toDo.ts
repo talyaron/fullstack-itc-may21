@@ -1,25 +1,39 @@
 
-class Items {
-    itemName:string;
-    itemId:string = "id" + Math.random().toString(16).slice(2);;
+class Item{
+    id: string;
+    task: string;
 
+    constructor (task:string){
+    this.id = "id" + Math.random().toString(16).slice(2);
+    this.task = task;
+}
+}
 
-    constructor(itemName:string, itemId:string){
-        this.itemName=itemName;
-        this.itemId=itemId;
-    
+class Items{
+    allItems: Array<Item>=[];
+
+    addItem(task:string): void {
+        let newItem: Item = new Item (task);
+        this.allItems.push(newItem);
+        console.log(newItem)
+
     }
-
-
 
 }
 
-function handleSubmit(event){
-    event.preventDefault()
 
-    //agarras el contenido del input text
-    const name = event.target.elements.add.value;
-    console.log(name)
-    
+const items = new Items();
 
+const doingSubmit = (ev: any): void => {
+    ev.preventDefault();
+
+    const task: string = ev.target.elements.task.value;
+
+    items.addItem(task);
+
+    localStorage.setItem('item', JSON.stringify(items))
+};
+
+function redirect() {
+    window.location.href = 'ItemsList.html'
 }
