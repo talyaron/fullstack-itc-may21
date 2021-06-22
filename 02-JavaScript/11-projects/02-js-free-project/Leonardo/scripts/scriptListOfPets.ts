@@ -4,7 +4,7 @@ const root: HTMLElement = document.querySelector('#root')
 //I render all the pets
 function renderPets(): void {
     try {
-        let html: string = this.allPets.allPets.map(element => {
+        let html: string = this.allPets.map(element => {
             return (
                 `<div id='${element.name}' class="pet__item__wrapper">` +
                 `<div><img class="pet__item__image" src="${element.image}" alt=""></div>` +
@@ -52,7 +52,7 @@ function filter(): void {
         if (!allPets) throw new Error('You can´t access to the pets');
 
         //Separate the elements in different arrays
-        allPets.allPets.forEach(element => {
+        allPets.forEach(element => {
             petGender.push(element.gender.toUpperCase());
             petAge.push(element.age);
             petCity.push(element.city.toUpperCase());
@@ -89,7 +89,7 @@ function handleFilter(): void {
         const city: any = document.querySelector('.filter__city');
         const gender: any = document.querySelector('.filter__gender');
 
-        const petsFiltered = allPets.allPets.filter(element => (element.age === age.value) && (element.city.toUpperCase() === city.value) && (element.gender.toUpperCase() === gender.value));
+        const petsFiltered = allPets.filter(element => (element.age === age.value) && (element.city.toUpperCase() === city.value) && (element.gender.toUpperCase() === gender.value));
         localStorage.setItem('petFiltered', JSON.stringify(petsFiltered));
         window.location.href = 'filteredPets.html';
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!');
