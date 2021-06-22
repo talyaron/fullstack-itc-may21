@@ -11,7 +11,12 @@
     <script>
        const renderPlayers = localStorage.getItem(`players`);
        console.log(renderPlayers);
-       document.querySelector('.root').innerHTML = renderPlayers;
+       const playersScreen = renderPlayers.map((play)=> `<p>${play.name} Author is ${play.team}</p>`).join(' ')
+      console.log(playersScreen);
+     
+       document.querySelector('.root').innerHTML = playersScreen;
+
+      
     </script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
+.btn1 {
+  color: #6C717B;
+  border: 1px solid #6C717B;
+  border-radius: 5px;
+}

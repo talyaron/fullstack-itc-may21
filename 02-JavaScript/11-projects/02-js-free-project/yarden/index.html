@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./dist/style.css" />
     <link
       rel="stylesheet"
-      href="path/to/font-awesome/css/font-awesome.min.css"
     />
     <link
       rel="shortcut icon"
@@ -16,7 +15,7 @@
     />
     <title>Galileo Project</title>
   </head>
-  <body>
+  <body class="bg-pan-left">
     <header>
       <ul class="navbar">
         <img id="rocket" src="./images/rocket-solid.svg" alt="space rocket" />
@@ -48,7 +47,11 @@
             nam sapiente ipsum reprehenderit sunt harum asperiores et, magnam
             minima optio enim.
           </p>
-          <button onclick="" class="starMain__button">Book Expedition</button>
+          <form action="">
+            <input class="starMain__date" type="date" name="date" id="date" required min="2030-01-01" max="2031-12-01">
+            <br><br>
+            <button onclick="handleSubmit(event)" class="starMain__button">Book Expedition</button>
+        </form>
         </div>
         <div class="starFooter">
             <div class="starFooter__left">
@@ -64,7 +67,7 @@
     </div>
         <div class="right-side">
           <div class="planetPic">
-            <img
+            <img class="planetPic__image"
               src="https://d2pn8kiwq2w21t.cloudfront.net/images/Mars-800h-v2_02.width-1024.png"
               alt="planet picture"/>
               <i class="fas fa-angle-double-down"></i>
@@ -80,18 +83,18 @@
                   <img style="height: 30px; width: 30px;" src="./images/best.png" alt="best seller">
                 </span>
                 <p class="footer__starList__option__text">A journey to the Korolev crater and the North polar ice cap!</p>
-                <button class="footer__starList__option__button">See details</button>
+                <button id="select-Mars" class="footer__starList__option__button">See details</button>
             </div>
                 <div class="footer__starList__option">
                     <span class="footer__starList__option__headline">Venus</span>
                     <p class="footer__starList__option__text">Join an Expedition to see the volcanoes and craters of Venus!</p>
-                    <button class="footer__starList__option__button">See details</button>
+                    <button id="select-Venus" class="footer__starList__option__button">See details</button>
 
                 </div>
                 <div class="footer__starList__option">
                     <span class="footer__starList__option__headline">Moon</span>
                     <p class="footer__starList__option__text">Never too late to hike the first toured planet of the 21st century!</p>
-                    <button class="footer__starList__option__button">See details</button>
+                    <button id="select-Moon" class="footer__starList__option__button">See details</button>
 
                 </div>
         </div>
