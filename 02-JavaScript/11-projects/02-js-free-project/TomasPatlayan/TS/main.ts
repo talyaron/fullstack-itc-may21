@@ -10,9 +10,14 @@ class Cv {
 
   addCv(add: CvGenerator): void {
     this.cv.push(add);
+    console.log(this.cv);
+    
+    localStorage.setItem("completeCv", JSON.stringify(this.cv))
   }
+
+  
 }
-const cvs = new Cv();
+
 
 const handleSubmit = (event) => {
   event.preventDefault();
@@ -20,13 +25,15 @@ const handleSubmit = (event) => {
   const name:string = event.target.elements.name.value;
 
   const generator = new CvGenerator(name);
-  event.target.reset();
+  // event.target.reset();
   cvs.addCv(generator)
-  localStorage.setItem("completeCv", JSON.stringify(cvs))
+
   window.location.href = 'cv.html'
-  console.log(cvs);
+
   //RECORDATORIA PREGUNTAR QUE VALORES ASIGNARLE A DIVERSAS VARIABLES MASS HAYA DE STRING NUMBER ETC Y COMO ME DOY CUENTA DE COMO NOOMBRARLAS O SI EXISTE LA DOCUMENTACION DE QUE VA CON CADA UNA 
 };
+
+const cvs = new Cv();
 
 // class CvGenerator {
 //   name: string;

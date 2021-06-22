@@ -93,6 +93,8 @@ body {
 
 .navbar {
   width: 100%;
+  padding: 0;
+  margin: 0;
   display: flex;
   justify-content: space-evenly;
 }
@@ -128,6 +130,10 @@ main {
 main .left-side {
   width: 50%;
 }
+main .left-side .starTop__starName {
+  color: mediumpurple;
+  width: fit-content;
+}
 main .left-side .starTop--distButton {
   background-color: #924f30;
   padding: 0.2rem;
@@ -143,7 +149,7 @@ main .left-side .starMain__button {
   background-color: mediumpurple;
   color: black;
 }
-main .left-side .starMain :hover {
+main .left-side .starMain__button:hover {
   color: whitesmoke;
   cursor: pointer;
 }
@@ -215,4 +221,38 @@ main .right-side .planetPic > img {
   -webkit-animation: blink-1 0.6s both;
   animation: blink-1 0.6s both;
   color: white;
+}
+
+.form-page-container {
+  display: flex;
+  align-items: center;
+}
+.form-page-container .expedition-form {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 2rem;
+}
+.form-page-container .expedition-form fieldset {
+  padding: 1em;
+}
+.form-page-container .expedition-form fieldset legend {
+  color: #bb8064;
+}
+.form-page-container .expedition-form fieldset input, .form-page-container .expedition-form fieldset select {
+  padding: 0.5rem;
+  background-color: #977027;
+}
+.form-page-container .expedition-form button {
+  margin: 2rem auto;
+  width: 50%;
+  padding: 1rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-size: 1.5rem;
+  background-color: mediumpurple;
+}
+.form-page-container iframe {
+  border-radius: 3%;
 }

@@ -22,27 +22,21 @@ var Pet = /** @class */ (function () {
     }
     return Pet;
 }());
-var Pets = /** @class */ (function () {
-    function Pets() {
-        this.allPets = [];
-    }
-    //Method to add a pet to the array
-    Pets.prototype.addPet = function (name, age, gender, city, image, description, contactNumber) {
-        try {
-            var newPet = new Pet(name, age, gender, city, image, description, contactNumber);
-            this.allPets.push(newPet);
-            if (!this.allPets)
-                throw new Error('The array where you want to push the pets it doesn´t exist!');
-            localStorage.setItem('pet', JSON.stringify(pets));
-        }
-        catch (error) {
-            console.error(error);
-        }
-    };
-    return Pets;
-}());
 //I initialice a new array that will contains all the pets:
-var pets = new Pets();
+var pets = [];
+//Function to add a pet to the array
+function addPet(name, age, gender, city, image, description, contactNumber) {
+    try {
+        var newPet = new Pet(name, age, gender, city, image, description, contactNumber);
+        pets.push(newPet);
+        if (!this.pets)
+            throw new Error('The array where you want to push the pets it doesn´t exist!');
+        localStorage.setItem('pet', JSON.stringify(pets));
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
 //With this function I handle the form:
 var doingSubmit = function (ev) {
     ev.preventDefault();
@@ -54,7 +48,7 @@ var doingSubmit = function (ev) {
         var description = ev.target.elements.description.value;
         var contactNumber = ev.target.elements.contactNumber.value;
         var image = document.querySelector('#previewImage').getAttribute("src");
-        pets.addPet(name, age, gender, city, image, description, contactNumber);
+        addPet(name, age, gender, city, image, description, contactNumber);
         ev.target.reset();
     }
     catch (error) {

@@ -1,8 +1,9 @@
 var allPets = JSON.parse(localStorage.getItem('pet'));
 var root = document.querySelector('#root');
+//I render all the pets
 function renderPets() {
     try {
-        var html = this.allPets.allPets.map(function (element) {
+        var html = this.allPets.map(function (element) {
             return ("<div id='" + element.name + "' class=\"pet__item__wrapper\">" +
                 ("<div><img class=\"pet__item__image\" src=\"" + element.image + "\" alt=\"\"></div>") +
                 "<div class=\"pet__item__information__wrapper\">" +
@@ -36,71 +37,43 @@ function onlyUnique(value, index, self) {
     ;
 }
 ;
-function filterPerAge() {
+//This function is to put the values in the filter. It took me time to dont DRY, at the beginning it was 3 similar functions, then I worked on it, please let me know if I can DRY better 💪
+function filter() {
     try {
-        var agePets_1 = [];
-        var selectAge = document.querySelector('[name="age"]');
-        if (!selectAge)
-            throw new Error('You don´t select the age!');
-        if (!allPets)
-            throw new Error('You can´t access to the pets');
-        allPets.allPets.forEach(function (element) {
-            agePets_1.push(element.age);
-        });
-        var uniqueAgePets = agePets_1.filter(onlyUnique);
-        var selectAgeToAdd = uniqueAgePets.map(function (element) {
-            return ("<option value=\"" + element + "\">" + element + "</option>");
-        }).join('');
-        selectAge.innerHTML = selectAgeToAdd;
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
-function filterPerCity() {
-    try {
-        var cityPets_1 = [];
-        var selectCity = document.querySelector('[name="city"]');
-        if (!selectCity)
-            throw new Error('You don´t select the city!');
-        if (!allPets)
-            throw new Error('You can´t access to the pets');
-        allPets.allPets.forEach(function (element) {
-            var cityUppercased = element.city.toUpperCase();
-            cityPets_1.push(cityUppercased);
-        });
-        var uniqueCityPets = cityPets_1.filter(onlyUnique);
-        var selectCityToAdd = uniqueCityPets.map(function (element) {
-            return ("<option value=\"" + element + "\">" + element + "</option>");
-        }).join('');
-        selectCity.innerHTML = selectCityToAdd;
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
-function filterPerGender() {
-    try {
-        var genderPets_1 = [];
+        var petGender_1 = []; //I was not sure to what type write, so I know that is an array and because then I call some functions I prefer to write array on any 😁
+        var petAge_1 = [];
+        var petCity_1 = [];
         var selectGender = document.querySelector('[name="gender"]');
-        ;
-        if (!selectGender)
+        var selectAge = document.querySelector('[name="age"]');
+        var selectCity = document.querySelector('[name="city"]');
+        if (!selectGender || !selectAge || !selectCity)
             throw new Error('You don´t select the gender!');
         if (!allPets)
             throw new Error('You can´t access to the pets');
-        allPets.allPets.forEach(function (element) {
-            var genderUppercased = element.gender.toUpperCase();
-            genderPets_1.push(genderUppercased);
+        //Separate the elements in different arrays
+        allPets.forEach(function (element) {
+            petGender_1.push(element.gender.toUpperCase());
+            petAge_1.push(element.age);
+            petCity_1.push(element.city.toUpperCase());
         });
-        var uniqueGenderPets = genderPets_1.filter(onlyUnique);
-        var selectGenderToAdd = uniqueGenderPets.map(function (element) {
-            return ("<option value=\"" + element + "\">" + element + "</option>");
-        }).join('');
-        selectGender.innerHTML = selectGenderToAdd;
+        //Delete duplicate elements in an array
+        var uniqueGender = petGender_1.filter(onlyUnique);
+        var uniqueAge = petAge_1.filter(onlyUnique);
+        var uniqueCity = petCity_1.filter(onlyUnique);
+        //Call a function to add the unique values in the filters
+        addFilter(uniqueGender, selectGender);
+        addFilter(uniqueAge, selectAge);
+        addFilter(uniqueCity, selectCity);
     }
     catch (error) {
         console.error(error);
     }
+}
+function addFilter(unique, select) {
+    var htmlToAdd = unique.map(function (element) {
+        return ("<option value=\"" + element + "\">" + element + "</option>");
+    }).join('');
+    select.innerHTML = htmlToAdd;
 }
 function handleFilter() {
     try {
@@ -108,7 +81,7 @@ function handleFilter() {
         var age_1 = document.querySelector('.filter__age');
         var city_1 = document.querySelector('.filter__city');
         var gender_1 = document.querySelector('.filter__gender');
-        var petsFiltered = allPets.allPets.filter(function (element) { return (element.age === age_1.value) && (element.city.toUpperCase() === city_1.value) && (element.gender.toUpperCase() === gender_1.value); });
+        var petsFiltered = allPets.filter(function (element) { return (element.age === age_1.value) && (element.city.toUpperCase() === city_1.value) && (element.gender.toUpperCase() === gender_1.value); });
         localStorage.setItem('petFiltered', JSON.stringify(petsFiltered));
         window.location.href = 'filteredPets.html';
         if (!window.location.href)
@@ -132,6 +105,4 @@ function goBack() {
 //Call this functions to render all the pets
 renderPets();
 //Call this functions to show what to select in the filters
-filterPerAge();
-filterPerCity();
-filterPerGender();
+filter();
