@@ -1,10 +1,10 @@
-
+const inputFile = document.querySelector('input[type="file"]');
 
 class Post{
     title: string;
-    file: any;
+    file: string;
     description: string;
-    constructor(title: string, file: any, description: string){
+    constructor(title: string, file: string, description: string){
         this.title = title;
         this.file = file;
         this.description = description;
@@ -21,10 +21,24 @@ class PostList{
         window.location.href = "posts.html";
     }
 }
+inputFile.addEventListener("change", function(){
+    console.log(this.files);
+    // This converts the file to a DataURL
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () =>{
+        localStorage.setItem('image', JSON.stringify(reader.result));
+    })
+   
+       //Takes the file index 0
+       reader.readAsDataURL(this.files[0]);
+});
+
+
 // Funcion para tomar info de formulario
 const handleSubmit = (ev: any):void => {
     ev.preventDefault();
-    
+    try{
     const title: string= ev.target.elements.title.value;
     let file: string = ev.target.elements.file.value;
     const description:string = ev.target.elements.description.value;
@@ -34,6 +48,10 @@ const handleSubmit = (ev: any):void => {
 
     newPost.addPost(newPosts);
     console.log(newPosts)
+}
+catch(e){
+    console.error(e);
+}
 }
 const newPost = new PostList();
 
