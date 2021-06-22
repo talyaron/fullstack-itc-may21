@@ -37,5 +37,5 @@ function renderDescription() {
 renderDescription();
 function handleReturnHotel(event) {
     event.preventDefault();
-    window.location.href = "hotel.html";
+    window.location.href = "second.html";
 }

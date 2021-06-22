@@ -1,5 +1,5 @@
-const getHotel = JSON.parse(localStorage.getItem('checkedHotel')) //check the hotel
-const boardRoot = document.querySelector('#board')
+const getCheckedHotel = JSON.parse(localStorage.getItem('checkedHotel'))
+const boardCheckedRoot: HTMLElement = document.querySelector('#boardCheked')
 
 interface Hotel {
     imageURL: string;
@@ -29,21 +29,27 @@ const Hotels: Array<Hotel> = [
 ]
 
 
-function renderDescription(): void {
+function renderDescription() {
 
     let html: string = " ";
-    getHotel.forEach(element => {
-        let encontrarIndex = Hotels.findIndex(algo => algo.name === element.name);
-        html += `<div>
-                        <p class="titlep">${Hotels[encontrarIndex].name}</p>
-                        <div class="float">
-                            <img src = "${Hotels[encontrarIndex].imageURL}" class="hotel">
-                            <p>${Hotels[encontrarIndex].description}</p>
-                        </div>
-                    </div>`
-    });
 
-    boardRoot.innerHTML = html;
+    try {
+        if(!boardCheckedRoot) throw new Error("The board checked root does not exist");
+        if(!getCheckedHotel) throw new Error("Empty LocalStorage");
+
+        getCheckedHotel.forEach(hotel => {
+            let indexHotel = Hotels.findIndex(hotelslist => hotelslist.name === hotel.name);
+            html += `<p class="boardCheked--name">${Hotels[indexHotel].name}</p>
+                    <div class="boardCheked__box">
+                        <img src = "${Hotels[indexHotel].imageURL}" class="boardCheked__box--img">
+                        <p class = "boardCheked__box--description">${Hotels[indexHotel].description}</p>
+                    </div>`
+        });
+
+        boardCheckedRoot.innerHTML = html;
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 renderDescription();
@@ -51,5 +57,5 @@ renderDescription();
 
 function handleReturnHotel(event: any): void {
     event.preventDefault();
-    window.location.href = "hotel.html"
+    window.location.href = "second.html"
 }

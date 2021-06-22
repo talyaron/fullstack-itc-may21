@@ -47,7 +47,7 @@ var BookingList = /** @class */ (function () {
             }
             else {
                 localStorage.setItem('checkedHotel', JSON.stringify(arrayChecked));
-                window.location.href = "fulldescription.html";
+                window.location.href = "third.html";
             }
         }
         catch (e) {
@@ -123,7 +123,7 @@ var customer = new Customer();
 var count = booking.renderBooking(customer);
 function handlePrevPage(event) {
     event.preventDefault();
-    window.location.href = "main.html";
+    window.location.href = "first.html";
     localStorage.clear();
 }
 function handleNextPage(event) {

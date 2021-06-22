@@ -4,14 +4,14 @@
     padding: 0;
 }
 
-header{
+.header{
     background-color:black;
     padding:1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    input{
+    &__prevpage{
         text-decoration: none;
         padding: 5px;
         font-family: arial;
@@ -26,13 +26,13 @@ header{
 
     }
 
-    input:hover{
+    &__prevpage:hover{
         color: #9b0e0e;
         background-color: #bc6355;
         text-decoration: none;
       }
 
-    div{
+    &__title{
         color:white;
         position: relative;
         right:25%;
@@ -41,47 +41,33 @@ header{
 
 }
 
-.hotel{
-    width: 450px;
-    height: 300px;
-}
-
-.titlep{
-    margin-left: 10px;
-    margin-top: 20px;
-    font-size: 20px;
-    color: wheat;
-    text-decoration: underline;
-}
-
-
-.float{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-
-    img{
-        margin-left: 10px;
-    }
-
-    p{
-        max-width: 600px;
-        text-align: justify;
-        margin: 20px 10px;
-        color: wheat;
-    }
-}
-
-
-.board{
+.boardCheked{
     margin-bottom: 20px;
-}
 
-footer{
-    background-color: black;
-    padding:1rem;
+    .boardCheked--name{
+        margin-left: 10px;
+        margin-top: 20px;
+        font-size: 20px;
+        color: wheat;
+        text-decoration: underline;
+    }
     
-    p{
-        color:white;
+    .boardCheked__box{
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+    
+        .boardCheked__box--img{
+            margin-left: 10px;
+            width: 450px;
+            height: 300px;
+        }
+    
+        .boardCheked__box--description{
+            max-width: 600px;
+            text-align: justify;
+            margin: 20px 10px;
+            color: wheat;
+        }
     }
 }
