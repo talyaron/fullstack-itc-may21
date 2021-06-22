@@ -4,8 +4,8 @@
     transform: translateX(0);
   }
   100% {
-    -webkit-transform: translateX(30px);
-    transform: translateX(30px);
+    -webkit-transform: translateX(8vw);
+    transform: translateX(8vw);
   }
 }
 @keyframes slide-right {
@@ -137,23 +137,21 @@ header {
   position: sticky;
   top: 0;
   width: 100%;
-  height: 300px;
+  height: 21vw;
   background-image: linear-gradient(to bottom, turquoise, cornflowerblue);
 }
 header .header {
   width: 80%;
-  min-width: 600px;
   margin: auto;
   display: grid;
   text-align: center;
   align-items: center;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(3, 100px);
+  grid-template-rows: repeat(3, 7vw);
   grid-template-areas: "logo title" "logo title" "logo reg";
 }
 header .header__item--logo {
   grid-area: logo;
-  width: 200px;
 }
 header .header__item--logo #running_logo {
   position: relative;
@@ -161,11 +159,13 @@ header .header__item--logo #running_logo {
   align-items: center;
 }
 header .header__item--logo #running_logo #runner1_logo {
+  width: 15vw;
   position: absolute;
   -webkit-animation: togetheRunning 1s linear infinite alternate both;
   animation: togetheRunning 1s linear infinite alternate both;
 }
 header .header__item--logo #running_logo #runner2_logo {
+  width: 15vw;
   position: absolute;
   -webkit-animation: togetheRunning 1s linear 1s infinite alternate both;
   animation: togetheRunning 1s linear 1s infinite alternate both;
@@ -174,9 +174,15 @@ header .header__item--title {
   grid-area: title;
 }
 header .header__item--title h1 {
-  font-size: 2.8rem;
+  font-size: 2.8vw;
   font-weight: bold;
   color: white;
+}
+header .header__item--title h2 {
+  font-size: 2.2vw;
+}
+header .header__item--title h3 {
+  font-size: 2vw;
 }
 header .header__item--title h1, header .header__item--title h2, header .header__item--title h3 {
   -webkit-animation: focus-in-contract-bck 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -184,11 +190,11 @@ header .header__item--title h1, header .header__item--title h2, header .header__
 }
 header .header__item--register {
   grid-area: reg;
-  font-size: 1.2rem;
+  font-size: 3vw;
   font-weight: bold;
   color: black;
   border-radius: 20px;
-  padding: 10px;
+  padding: 1vw;
   border: 0;
   -webkit-animation: heartbeat 5s ease-in-out infinite both;
   animation: heartbeat 5s ease-in-out infinite both;
@@ -209,7 +215,10 @@ header .header__item--register:active {
   justify-items: center;
   align-content: center;
   justify-content: center;
-  min-width: 600px;
+}
+#mainscreen h2 {
+  margin: 10px;
+  text-align: center;
 }
 #mainscreen .add_runner_form__item {
   display: grid;
@@ -236,7 +245,8 @@ header .header__item--register:active {
   text-align: center;
   border-radius: 20px;
   background-color: skyblue;
-  height: 20px;
+  max-height: 60px;
+  padding: 1vw 0;
   border: 1px solid black;
 }
 #mainscreen .add_runner_form__item #add_photo:hover {
