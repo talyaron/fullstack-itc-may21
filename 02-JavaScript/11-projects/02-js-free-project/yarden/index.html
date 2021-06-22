@@ -35,7 +35,7 @@
       <div class="left-side">
         <div class="starTop">
           <!-- <img id="starTop__pic" src="./images/bandcamp-brands.svg" alt="space travel" style="border-radius: 20%;"> -->
-          <p class="starTop__starName">Mars/Earth</p>
+          <p class="starTop__starName">Mars to Earth</p>
           <span class="starTop__distance">288.33 million km</span>
           <span class="starTop--distButton">Distance</span>
         </div>
@@ -47,10 +47,10 @@
             nam sapiente ipsum reprehenderit sunt harum asperiores et, magnam
             minima optio enim.
           </p>
-          <form action="">
+          <form onsubmit="handleSubmit(event)">
             <input class="starMain__date" type="date" name="date" id="date" required min="2030-01-01" max="2031-12-01">
             <br><br>
-            <button onclick="handleSubmit(event)" class="starMain__button">Book Expedition</button>
+            <button class="starMain__button">Book Expedition</button>
         </form>
         </div>
         <div class="starFooter">
@@ -83,18 +83,18 @@
                   <img style="height: 30px; width: 30px;" src="./images/best.png" alt="best seller">
                 </span>
                 <p class="footer__starList__option__text">A journey to the Korolev crater and the North polar ice cap!</p>
-                <button id="select-Mars" class="footer__starList__option__button">See details</button>
+                <button id="select-Mars" class="footer__starList__option__button" onclick="changePlanet('mars')">See details</button>
             </div>
                 <div class="footer__starList__option">
                     <span class="footer__starList__option__headline">Venus</span>
                     <p class="footer__starList__option__text">Join an Expedition to see the volcanoes and craters of Venus!</p>
-                    <button id="select-Venus" class="footer__starList__option__button">See details</button>
+                    <button id="select-Venus" class="footer__starList__option__button" onclick="changePlanet('venus')">See details</button>
 
                 </div>
                 <div class="footer__starList__option">
                     <span class="footer__starList__option__headline">Moon</span>
                     <p class="footer__starList__option__text">Never too late to hike the first toured planet of the 21st century!</p>
-                    <button id="select-Moon" class="footer__starList__option__button">See details</button>
+                    <button id="select-Moon" class="footer__starList__option__button" onclick="changePlanet('moon')">See details</button>
 
                 </div>
         </div>

@@ -25,10 +25,11 @@ body  {
 
 .navbar {
     width: 100%;
+    padding: 0;
+    margin: 0;
     display: flex;
     justify-content: space-evenly;
-    // border: yellowgreen 1px solid;
-
+    
     &__item {
         list-style-type: none;
         padding: 1rem;
@@ -64,7 +65,10 @@ main {
     .left-side {
         width: 50%;
         & .starTop {
-            // border: red 1px solid;
+            &__starName {
+                color: mediumpurple;
+                width: fit-content;
+            }
             &--distButton {
                 background-color: rgb(146, 79, 48);
                 padding: 0.2rem;
@@ -82,10 +86,11 @@ main {
                 font-weight: bold;
                 background-color: mediumpurple;
                 color: black;
-            }   :hover {
+               &:hover {
                 color: whitesmoke;
                 cursor: pointer;
             }
+        }
             &__date {
                 margin-left: 1rem;
                 background-color: rgb(146, 79, 48);
@@ -157,5 +162,39 @@ main {
                 }
             }
         }
+    }
+}
+
+.form-page-container{
+    display: flex;
+    align-items: center;
+    & .expedition-form {
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items:stretch;
+        padding: 2rem;
+        & fieldset {
+            padding: 1em;
+            & legend {
+                color:rgb(187, 128, 100);
+            }
+            & input, select {
+             padding: 0.5rem;
+             background-color: #977027;       
+            }
+        }
+        & button {
+            margin: 2rem auto;
+            width: 50%;
+            padding: 1rem;
+            font-family: $buttonFont;
+            font-size: 1.5rem;
+            background-color:mediumpurple;
+        }
+    }
+    & iframe {
+        border-radius: 3%;
     }
 }
