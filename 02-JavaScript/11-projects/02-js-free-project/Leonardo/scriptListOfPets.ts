@@ -2,7 +2,7 @@ const allPets = JSON.parse(localStorage.getItem('pet'));
 const root: HTMLElement = document.querySelector('#root')
 
 function renderPets(): void {
-    try { 
+    try {
         let html: string = this.allPets.allPets.map(element => {
             return (
                 `<div id='${element.name}' class="pet__item__wrapper">` +
@@ -33,15 +33,15 @@ function onlyUnique(value: number, index: number, self: any): boolean {
         return self.indexOf(value) === index;
     } catch (error) {
         console.error(error);
-    }
-}
+    };
+};
 
 function filterPerAge(): void {
     try {
         const agePets: Array<any> = [];
         const selectAge = document.querySelector('[name="age"]');
         if (!selectAge) throw new Error('You don´t select the age!')
-        if (!allPets) throw new Error ('You can´t access to the pets');
+        if (!allPets) throw new Error('You can´t access to the pets');
         allPets.allPets.forEach(element => {
             agePets.push(element.age);
         });
@@ -62,7 +62,7 @@ function filterPerCity(): void {
         const cityPets: Array<any> = [];
         const selectCity: HTMLElement = document.querySelector('[name="city"]');
         if (!selectCity) throw new Error('You don´t select the city!')
-        if (!allPets) throw new Error ('You can´t access to the pets');
+        if (!allPets) throw new Error('You can´t access to the pets');
         allPets.allPets.forEach(element => {
             let cityUppercased = element.city.toUpperCase();
             cityPets.push(cityUppercased);
@@ -84,7 +84,7 @@ function filterPerGender(): void {
         const genderPets: Array<any> = [];
         const selectGender: HTMLElement = document.querySelector('[name="gender"]');;
         if (!selectGender) throw new Error('You don´t select the gender!')
-        if (!allPets) throw new Error ('You can´t access to the pets');
+        if (!allPets) throw new Error('You can´t access to the pets');
         allPets.allPets.forEach(element => {
             let genderUppercased = element.gender.toUpperCase();
             genderPets.push(genderUppercased);

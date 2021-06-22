@@ -40,8 +40,8 @@ class Pets {
         try {
             let newPet: Pet = new Pet(name, age, gender, city, image, description, contactNumber)
             this.allPets.push(newPet);
-            if (!this.allPets) throw new Error ('The array where you want to push the pets it doesn´t exist!')
-            localStorage.setItem('pet', JSON.stringify(pets));   
+            if (!this.allPets) throw new Error('The array where you want to push the pets it doesn´t exist!')
+            localStorage.setItem('pet', JSON.stringify(pets));
         } catch (error) {
             console.error(error);
         }

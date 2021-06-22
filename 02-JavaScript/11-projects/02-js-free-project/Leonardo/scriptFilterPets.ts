@@ -20,7 +20,7 @@ function renderPetsFilter(): void {
                 ` </div>`
             )
         }).join('');
-        if (!html) throw new Error ('An error happens when you want to render the pets filtered!')
+        if (!html) throw new Error('An error happens when you want to render the pets filtered!')
         rootFilter.innerHTML = html;
     } catch (error) {
         console.error(error);

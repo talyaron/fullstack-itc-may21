@@ -33,7 +33,9 @@ function onlyUnique(value, index, self) {
     catch (error) {
         console.error(error);
     }
+    ;
 }
+;
 function filterPerAge() {
     try {
         var agePets_1 = [];
