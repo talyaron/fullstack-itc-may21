@@ -19,7 +19,8 @@ class UserInfo {
 
 // this is for page2:
     showOnDOM() {
-        window.location.href = 'supporters.html'
+        // window.location.href = 'supporters.html'
+        // localStorage.getItem(JSON.parse(allOfUsers.users) => allOfUsers)
         //on 2nd page parse
 
     //display on 2nd page:
@@ -33,7 +34,7 @@ class AllUsers {
     addNewUser(user) {
         this.users.push(user)
         console.log(this.users)
-        //only strings go in local storage
+        //only strings can go into local storage
        
         ;
     }
@@ -60,13 +61,15 @@ function handleSubmit(event) {
     );
     console.log(user)
     allOfUsers.addNewUser(user)
-    //instance of userInfo to local storage, stringifiy, save in local storage
+    //instance of userInfo to local storage, stringifiy, then save in local storage
     localStorage.setItem('user', JSON.stringify(user))
     localStorage.setItem("AllUsers", JSON.stringify(allOfUsers.users))
+    
     //the other direction is -  //getItemm-setItem, parse-stringifiy   
 
 }
 const allOfUsers = new AllUsers()
+
 // [Hey the problems is that you have to initialize the AllUsers class outside of the submit 
 //     We initialized it inside the function
 //     Const AllUsers = new Allusers

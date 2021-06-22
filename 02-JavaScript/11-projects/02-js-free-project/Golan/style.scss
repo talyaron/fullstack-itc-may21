@@ -1,16 +1,15 @@
-// @import url('https://fonts.googleapis.com/css?family=Slabo+27px&display=swap');
+//global stuff then blocks
 
-// *,
-// *:after,
-// *:before {
-//   box-sizing: border-box;
-// }
-
-body {
+body, a:visited, a:link {
     background-color: black;
     color: white;
+    text-decoration: none;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+a:hover {
+    color: #A590F9;
+  }
 
 h1 {
     font-size: 100%;
@@ -23,7 +22,7 @@ h1 {
         size: 150%;
         border-radius: 50px;
         display: flex;
-        flex-direction: row;
+        flex-direction: row nowrap;
         // padding-left: 2.5rem;
         justify-content: center;
 
@@ -38,16 +37,32 @@ h1 {
     &__navdiv {
         border-top: 5px solid #4E25CF;
         border-radius: 50px;
+
+        &--ul {
+            list-style-type: none;
+            display: flex;
+            // flex-direction: row;
+            // justify-content: space-evenly;
+            //     justify-content: center;
+            // flex-basis: 10%;
+            border-bottom: 5px solid #8B0000;
+            border-radius: 10px;
+            
+
+            &--li {
+                // display: inline-block;
+                // width: 10rem;
+                // border: 2px dashed white;
+                margin-right: 2rem;
+
+            }
+
+        }
+        
+        
     }
 }
 
-.wrpr-news {
-    border-bottom: 5px solid #8B0000;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
 
 .wrpr-grid {
     border-top: 5px solid darkblue;
@@ -67,12 +82,13 @@ h1 {
         justify-content: center;
     }
 
-    &__img--blognew--iframe{
-        border: 0px solid grey;
+    // &__imgs--blognew--iframe{
+    //     border: 0px solid grey;
 
-    }
+    // }
 }
 
+//how to bem all of this>> input:not, fieldset,button, button:hover? >>> inside wrpr-grid__form
 input:not([type="radio"]):not([type="checkbox"]), 
 textarea {
 	display: block;
@@ -97,22 +113,137 @@ button {
 	padding: 1rem;
 }
 button:hover {
-	font-size: 1.3333rem;
 	color: white;
 	background-color: #4E25CF;
+    animation-name: shake-horizontal;
+    animation-timing-function: ease;
 }
 
-// .wrpr-footer {
-    
-// }
+@media only screen and (max-width: 400px) {
+    body {
+        width: 50%;
+        // width: 50vw;
+        // height: 50vh;
+        // margin: 0 0 0 0;
+        // padding: 0 0 0 0;
+        // margin-left: 0;
+    }
+    .wrpr-top {
+        
+        &__logo-div {
+            size: 100%;
+            position: absolute;
+            // padding-bottom: 10rem;
+            left: 100px;
+            top: 10px;
+            // padding-left: 11rem;
+            &--letter {
+                // border: 2px solid black;
+                padding: 0.5rem;
+                font-size: 1rem;
 
-// .watch {
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: center;
-//     padding: 5rem;
+            }
+        }
+        
+    }
+}
 
-//     &__video {
-//         border: 5px solid blue;
-//     }
-// }
+//animation
+
+.pulsate-fwd {
+	-webkit-animation: pulsate-fwd 0.8s ease-in-out infinite both;
+	        animation: pulsate-fwd 0.8s ease-in-out infinite both;
+}
+
+
+ @-webkit-keyframes pulsate-fwd {
+    0% {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9);
+    }
+    50% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    100% {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9);
+    }
+  }
+  @keyframes pulsate-fwd {
+    0% {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9);
+    }
+    50% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    100% {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9);
+    }
+  }
+  
+  .shake-horizontal {
+	-webkit-animation: shake-horizontal 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	        animation: shake-horizontal 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+ @-webkit-keyframes shake-horizontal {
+    0%,
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70% {
+      -webkit-transform: translateX(-10px);
+              transform: translateX(-10px);
+    }
+    20%,
+    40%,
+    60% {
+      -webkit-transform: translateX(10px);
+              transform: translateX(10px);
+    }
+    80% {
+      -webkit-transform: translateX(8px);
+              transform: translateX(8px);
+    }
+    90% {
+      -webkit-transform: translateX(-8px);
+              transform: translateX(-8px);
+    }
+  }
+  @keyframes shake-horizontal {
+    0%,
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70% {
+      -webkit-transform: translateX(-10px);
+              transform: translateX(-10px);
+    }
+    20%,
+    40%,
+    60% {
+      -webkit-transform: translateX(10px);
+              transform: translateX(10px);
+    }
+    80% {
+      -webkit-transform: translateX(8px);
+              transform: translateX(8px);
+    }
+    90% {
+      -webkit-transform: translateX(-8px);
+              transform: translateX(-8px);
+    }
+  }
+  

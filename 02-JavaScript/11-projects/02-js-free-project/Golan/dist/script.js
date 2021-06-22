@@ -10,7 +10,8 @@ var UserInfo = /** @class */ (function () {
     }
     // this is for page2:
     UserInfo.prototype.showOnDOM = function () {
-        window.location.href = 'supporters.html';
+        // window.location.href = 'supporters.html'
+        // localStorage.getItem(JSON.parse(allOfUsers.users) => allOfUsers)
         //on 2nd page parse
         //display on 2nd page:
         //         document.getElementById("data").innerHTML = `Hi ${this.name}, thanks for signing up! Your details are ${this.email} ${this.phone}. We'll be in touch soon!`;
@@ -42,7 +43,7 @@ function handleSubmit(event) {
     var user = new UserInfo(name, favsong, email, phone, checkbox);
     console.log(user);
     allOfUsers.addNewUser(user);
-    //instance of userInfo to local storage, stringifiy, save in local storage
+    //instance of userInfo to local storage, stringifiy, then save in local storage
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem("AllUsers", JSON.stringify(allOfUsers.users));
     //the other direction is -  //getItemm-setItem, parse-stringifiy   

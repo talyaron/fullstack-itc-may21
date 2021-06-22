@@ -11,7 +11,7 @@
 
 <body>
     <div class="wrpr-top">
-        <div class="wrpr-top__logo-div">
+        <div class="wrpr-top__logo-div pulsate-fwd">
             <div class="wrpr-top__logo-div--letter">V</div>
             <div class="wrpr-top__logo-div--letter">i</div>
             <div class="wrpr-top__logo-div--letter">t</div>
@@ -21,20 +21,20 @@
             <div class="wrpr-top__logo-div--letter">K</div>
         </div>
         <div class="wrpr-top__navdiv">
-            <div class="wrpr_top__navdiv--home"></div>
-            <div class="wrpr_top__navdiv--supporters"></div>
+            <nav>
+                <ul class="wrpr-top__navdiv--ul">
+                    <li class="wrpr-top__navdiv--ul--li"><a href="./home.html">Home</a></li>
+                    <li class="wrpr-top__navdiv--ul--li"><a href="./supporters.html">Supporters</a></li>
+                </ul>
+            </nav>
         </div>
     </div>
-    <div class="wrpr-news">
-        <div class="newsdiv">My first single is online!</div>
-    </div>
     <div class="wrpr-grid">
-        <div class="wrpr-grid__h1"></div>
-        <div class="wrpr-grid__p"></div>
-        <div class="wrpr-grid__img">
-            <div class="wrpr-grid__img wrpr-grid__img--blognew">
-                <p class="data">This song is about...small paragrpah about the song - based on my FB post?</p>
-                <div class="wrpr-grid__img wrpr-grid__img--blognew--iframe">
+        <div class="wrpr-grid__elements">
+            <div class="wrpr-grid__elements wrpr-grid__elements--p">
+                <p class="data">My first single is online! This song is about..<br>small paragrpah about the song -
+                    based on my short FB post/fiverr description</p>
+                <div class="wrpr-grid__elements wrpr-grid__elements--iframe">
                     <h1>Watch</h1>
 
                     <iframe class="video" width="560" height="315"
@@ -46,17 +46,14 @@
 
 
             </div>
-            <div class="wrpr-grid__img wrpr-grid__img--blognew--iframe">
+            <div class="wrpr-grid__elements wrpr-grid__elements--iframe">
                 <h1>Listen</h1>
                 <iframe src="https://open.spotify.com/embed/track/1XVdacgxcALvWgoowl0cfP" width="560" height="315"
                     frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
         </div>
-        <div class="wrpr-grid__img wrpr-grid__img--blog1"></div>
-        <div class="wrpr-grid__img wrpr-grid__img--blog2"></div>
-        <div class="wrpr-grid__img wrpr-grid__img--blog3"></div>
     </div>
-    <div class="wrpr-grid wrpr-grid__form">
+    <div class="wrpr-grid">
         <div>
             <h1>Sign up to get news and upcoming releases first</h1>
             <form class="wrpr-grid__form" onsubmit='handleSubmit(event)'>
@@ -66,7 +63,7 @@
                     <input type="text" id="name" name="name" autofocus placeholder="Wayne Campbell or Garth Algar.."
                         required>
                     <label for="favsong">Your favorite song</label>
-                    <input type="text" id="favsong" name="favsong" autofocus placeholder="Write the name of your favorite song"
+                    <input type="text" id="favsong" name="favsong" placeholder="Type your favorite song's name :)"
                         required>
                     <label for="email">Email </label>
                     <input type="email" id="email" name="email" autofocus placeholder="wayne92@waynesworld.com"
@@ -75,13 +72,13 @@
                     <input type="tel" id="phone" name="phone" placeholder="+972-540-123456" required>
                     <input type="checkbox" id="checkbox" name="checkbox" value="checkbox" required>
                     <label for="checkbox"> Send me updates from VitaliK!</label><br>
-                    <button type="submit" class="submit">Submit</button>
+                    <button type="submit" class="submit shake-horizontal">Submit</button>
                 </fieldset>
                 <fieldset>
 
-                    <div id="overview">
-                        <p class="ovrw">Demo footer text</p>
-                        <h1 id="data">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </h1>
+                    <div class="wrpr-footer">
+                        <a href="mailto:contact@vitalikmusic.com">contact@vitalikmusic.com</a>
+                        <h2 id="data">©2021 Vitalik Music. All rights reserved. </h2>
                     </div>
                 </fieldset>
             </form>
@@ -89,9 +86,6 @@
     </div>
     </div>
     <!-- <div class="wrpr-grid__supporter"></div> -->
-    </div>
-    <div class="wrpr-footer">
-        <div class="wrpr-footer__email"></div>
     </div>
 
     <script src="dist/script.js"></script>
