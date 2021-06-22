@@ -1,6 +1,7 @@
 const allPets = JSON.parse(localStorage.getItem('pet'));
 const root: HTMLElement = document.querySelector('#root')
 
+//I render all the pets
 function renderPets(): void {
     try {
         let html: string = this.allPets.allPets.map(element => {
@@ -36,69 +37,49 @@ function onlyUnique(value: number, index: number, self: any): boolean {
     };
 };
 
-function filterPerAge(): void {
+//This function is to put the values in the filter. It took me time to dont DRY, at the beginning it was 3 similar functions, then I worked on it, please let me know if I can DRY better 💪
+function filter(): void {
     try {
-        const agePets: Array<any> = [];
-        const selectAge = document.querySelector('[name="age"]');
-        if (!selectAge) throw new Error('You don´t select the age!')
-        if (!allPets) throw new Error('You can´t access to the pets');
-        allPets.allPets.forEach(element => {
-            agePets.push(element.age);
-        });
-        const uniqueAgePets = agePets.filter(onlyUnique);
-        let selectAgeToAdd = uniqueAgePets.map(element => {
-            return (
-                `<option value="${element}">${element}</option>`
-            )
-        }).join('');
-        selectAge.innerHTML = selectAgeToAdd;
-    } catch (error) {
-        console.error(error);
-    }
-}
+        const petGender: Array<any> = [];  //I was not sure to what type write, so I know that is an array and because then I call some functions I prefer to write array on any 😁
+        const petAge: Array<any> = [];
+        const petCity: Array<any> = [];
 
-function filterPerCity(): void {
-    try {
-        const cityPets: Array<any> = [];
+        const selectGender: HTMLElement = document.querySelector('[name="gender"]');
+        const selectAge: HTMLElement = document.querySelector('[name="age"]');
         const selectCity: HTMLElement = document.querySelector('[name="city"]');
-        if (!selectCity) throw new Error('You don´t select the city!')
+
+        if (!selectGender || !selectAge || !selectCity) throw new Error('You don´t select the gender!')
         if (!allPets) throw new Error('You can´t access to the pets');
+
+        //Separate the elements in different arrays
         allPets.allPets.forEach(element => {
-            let cityUppercased = element.city.toUpperCase();
-            cityPets.push(cityUppercased);
+            petGender.push(element.gender.toUpperCase());
+            petAge.push(element.age);
+            petCity.push(element.city.toUpperCase());
         });
-        const uniqueCityPets = cityPets.filter(onlyUnique);
-        let selectCityToAdd = uniqueCityPets.map(element => {
-            return (
-                `<option value="${element}">${element}</option>`
-            )
-        }).join('');
-        selectCity.innerHTML = selectCityToAdd;
+
+        //Delete duplicate elements in an array
+        const uniqueGender: Array<number> = petGender.filter(onlyUnique);
+        const uniqueAge: Array<number> = petAge.filter(onlyUnique);
+        const uniqueCity: Array<number> = petCity.filter(onlyUnique);
+
+        //Call a function to add the unique values in the filters
+        addFilter(uniqueGender, selectGender);
+        addFilter(uniqueAge, selectAge);
+        addFilter(uniqueCity, selectCity);
+
     } catch (error) {
         console.error(error);
     }
 }
 
-function filterPerGender(): void {
-    try {
-        const genderPets: Array<any> = [];
-        const selectGender: HTMLElement = document.querySelector('[name="gender"]');;
-        if (!selectGender) throw new Error('You don´t select the gender!')
-        if (!allPets) throw new Error('You can´t access to the pets');
-        allPets.allPets.forEach(element => {
-            let genderUppercased = element.gender.toUpperCase();
-            genderPets.push(genderUppercased);
-        });
-        const uniqueGenderPets = genderPets.filter(onlyUnique);
-        let selectGenderToAdd = uniqueGenderPets.map(element => {
-            return (
-                `<option value="${element}">${element}</option>`
-            )
-        }).join('');
-        selectGender.innerHTML = selectGenderToAdd;
-    } catch (error) {
-        console.error(error);
-    }
+function addFilter(unique: Array<any>, select: any): void {
+    let htmlToAdd: string = unique.map(element => {
+        return (
+            `<option value="${element}">${element}</option>`
+        )
+    }).join('');
+    select.innerHTML = htmlToAdd;
 }
 
 function handleFilter(): void {
@@ -131,6 +112,4 @@ function goBack(): void {
 renderPets();
 
 //Call this functions to show what to select in the filters
-filterPerAge();
-filterPerCity();
-filterPerGender();
+filter();
