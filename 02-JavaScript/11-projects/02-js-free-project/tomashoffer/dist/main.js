@@ -1,19 +1,7 @@
-// Funcion para tomar info de formulario
-var handleSubmit = function (ev) {
-    ev.preventDefault();
-    var title = ev.target.elements.title.value;
-    var url = ev.target.elements.url.value;
-    var description = ev.target.elements.description.value;
-    // Esto debe ir debajo del if para que tome los Withdraws negativos (-)
-    var newPosts = new Post(title, url, description);
-    newPost.addPost(newPosts);
-    newPost.storePost(newPost);
-    console.log(newPosts);
-};
 var Post = /** @class */ (function () {
-    function Post(title, url, description) {
+    function Post(title, file, description) {
         this.title = title;
-        this.url = url;
+        this.file = file;
         this.description = description;
     }
     return Post;
@@ -24,12 +12,21 @@ var PostList = /** @class */ (function () {
     }
     PostList.prototype.addPost = function (post) {
         this.posts.push(post);
-    };
-    PostList.prototype.storePost = function (data) {
-        var postsScreen = JSON.stringify(data);
+        var postsScreen = JSON.stringify(post);
         localStorage.setItem("posts", postsScreen);
-        window.location.href = 'posts.html';
+        window.location.href = "posts.html";
     };
     return PostList;
 }());
+// Funcion para tomar info de formulario
+var handleSubmit = function (ev) {
+    ev.preventDefault();
+    var title = ev.target.elements.title.value;
+    var file = ev.target.elements.file.value;
+    var description = ev.target.elements.description.value;
+    // Esto debe ir debajo del if para que tome los Withdraws negativos (-)
+    var newPosts = new Post(title, file, description);
+    newPost.addPost(newPosts);
+    console.log(newPosts);
+};
 var newPost = new PostList();
