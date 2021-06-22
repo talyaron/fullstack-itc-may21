@@ -66,6 +66,7 @@ button {
         &--total {
             width: 50%;
             max-width: 500px;
+            min-width: 275px;
             display: grid;
             align-items: center;
             grid-template-columns: 1fr 1fr;
