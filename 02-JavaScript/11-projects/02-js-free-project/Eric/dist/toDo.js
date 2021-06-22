@@ -1,6 +1,6 @@
 var Item = /** @class */ (function () {
     function Item(task) {
-        this.id = "id" + Math.random().toString(16).slice(2); // es interno
+        this.id = "id" + Math.random().toString(16).slice(2);
         this.task = task;
     }
     return Item;
@@ -26,9 +26,8 @@ var doingSubmit = function (ev) {
     var task = ev.target.elements.task.value;
     //llamas esa funcion, le pasas el argumento task para que se agregue en un objecto
     items.addItem(task);
-    //localStorage.setItem('item', JSON.stringify(items))
-    //ev.reset();
 };
 function redirect() {
     window.location.href = 'ItemsList.html';
 }
+localStorage.clear();
