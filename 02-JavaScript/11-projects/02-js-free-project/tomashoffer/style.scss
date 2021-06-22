@@ -39,6 +39,7 @@ a{
     background-color: var(--darkGray);
     margin: 0 auto;
     padding: 0.2rem;
+    text-align: center;
     .menu__list{
         display: flex;
         gap: 1.5rem;
@@ -77,3 +78,20 @@ a{
         }
     }
   }
+.posts{
+    max-width: 120rem;
+    width: 50%;
+    margin: 0 auto;
+    -webkit-box-shadow: -3px 14px 67px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -3px 14px 67px 0px rgba(0,0,0,0.75);
+    box-shadow: -3px 14px 67px 0px rgba(0,0,0,0.75);
+    border: 1px solid var(--darkGray);
+    margin-top: 2rem;
+    padding: 2rem;
+    .posts_items{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+    }
+}

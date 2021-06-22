@@ -15,8 +15,7 @@
             <ul class="menu__list">
                 <li class="menu__link"><a href="index.html">HOME</a></li>
                 <li class="menu__link"><a href="posts.html">POSTS</a></li>
-                <li class="menu__link"><a href="">ABOUT US</a></li>
-                <li class="menu__link"><a href="">CONTACT</a></li>
+
             </ul>
         </div>
     </header>
@@ -25,17 +24,12 @@
     </div>
     <script>
      
-
-        const renderPost = JSON.parse(localStorage.getItem('posts'));
+        const root = document.querySelector('.posts');
+        const renderPost = JSON.parse(localStorage.getItem("posts"));
+    
 
         console.log(renderPost);
-
-        // const postScreen = renderPost.map((post) => `<div class="posts_items"><h1>${post.title}</h1>
-        // <img src="${post.url}" alt="">
-        // <p>${post.description}</p></div>`).join(' ');
-        // console.log(postScreen);
-
-        document.querySelector('.posts').innerHTML = renderPost;
+        root.innerHTML = `<div class="posts_items"><h1 class="posts_title">${renderPost.title}</h1><img class="posts_img" src="${renderPost.file}" alt=""><p>${renderPost.description}</p></div>`;
        
      </script>
 </body>

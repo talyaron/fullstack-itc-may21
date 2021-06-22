@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+header{
+    background-color:black;
+    padding:1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    input{
+        text-decoration: none;
+        padding: 5px;
+        font-family: arial;
+        text-transform: uppercase;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-weight: 800;
+        font-size: 15px;
+        color: black;
+        background-color: salmon;
+        border-radius: 30px;
+
+    }
+
+    input:hover{
+        color: #9b0e0e;
+        background-color: #bc6355;
+        text-decoration: none;
+      }
+
+    div{
+        color:white;
+        position: relative;
+        right:25%;
+        font-size:2rem;
+    }
+
+}

@@ -10,21 +10,21 @@ var Cv = /** @class */ (function () {
     }
     Cv.prototype.addCv = function (add) {
         this.cv.push(add);
+        console.log(this.cv);
+        localStorage.setItem("completeCv", JSON.stringify(this.cv));
     };
     return Cv;
 }());
-var cvs = new Cv();
 var handleSubmit = function (event) {
     event.preventDefault();
     var name = event.target.elements.name.value;
     var generator = new CvGenerator(name);
-    event.target.reset();
+    // event.target.reset();
     cvs.addCv(generator);
-    localStorage.setItem("completeCv", JSON.stringify(cvs));
     window.location.href = 'cv.html';
-    console.log(cvs);
     //RECORDATORIA PREGUNTAR QUE VALORES ASIGNARLE A DIVERSAS VARIABLES MASS HAYA DE STRING NUMBER ETC Y COMO ME DOY CUENTA DE COMO NOOMBRARLAS O SI EXISTE LA DOCUMENTACION DE QUE VA CON CADA UNA 
 };
+var cvs = new Cv();
 // class CvGenerator {
 //   name: string;
 //   constructor(name: string) {

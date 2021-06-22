@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dist/hotel.min.css">
+    <link rel="stylesheet" href="dist/main.min.css">
     <link rel="shortcut icon" href="https://www.logosearcher.com/wp-content/uploads/2018/07/google-hotel-ads.svg" />
     <title>Hotel Page</title>
 </head>
 
-<body>
+<body style="background-image: linear-gradient(to right, #0b486b ,#f56217 );">
     <!--hotel form-->
     <div class="wrapper">
         <form onsubmit="handleSumbit(event)">
             <fieldset>
                 <legend>Booking</legend>
-                <input type="text" name="name" id="name" placeholder="Enter your name">
-                <select name="cities">
+                <input type="text" name="name" id="name" placeholder="Enter your name" required>
+                <select name="cities" required>
                     <option value="" selected>Select a city</option>
                     <option value="telaviv">Tel Aviv</option>
                     <option value="jerusalem">Jerusalem</option>
@@ -52,18 +52,68 @@
                     <option value="married">Married</option>
                     <option value="children">Children</option>
                 </select>
-                <label for="fromdate">From Date:
+                <!--<label for="fromdate">From Date:
                     <input type="date" name="fromdate" id="fromdate">
                 </label>
                 <label for="todate">To Date:
                     <input type="date" name="todate" id="todate">
-                </label>
-                <input type="text" name="cash" id="cash" placeholder="Money">
-                <button type="submit" class="sumbit">Search</button>
+                </label>-->
+                <input type="text" name="cash" id="cash" placeholder="Money you want to spend" required>
+                <input type="submit" value = "Sumbit" class="sumbit"></input>
             </fieldset>
         </form>
+        <div class="wrapper__elements">
+            <h1 class="wrapper__elements--title">Booking in Israel<img
+                    src="https://www.logosearcher.com/wp-content/uploads/2018/07/google-hotel-ads.svg" width="50px"
+                    height="50px" class="wrapper__img"></h1>
+            <h2 class="wrapper__elements--description">Without coronavirus in Israel <img
+                    src="https://images.emojiterra.com/google/android-11/128px/1f1ee-1f1f1.png" width="20px"
+                    height="20px"> is your vacation moment. <br> Complete the form on your 👈 and choose your next
+                destination</h2>
+            <h2>Look at the cities we offer</h2>
+            <div class='container'>
+                <div class="slider">
+                    <input type="radio" class="radio" name="images" id="radio-1" checked>
+                    <input type="radio" class="radio" name="images" id="radio-2">
+                    <input type="radio" class="radio" name="images" id="radio-3">
+                    <input type="radio" class="radio" name="images" id="radio-4">
+                    <input type="radio" class="radio" name="images" id="radio-5">
+                    <div class="slide" id="slide-1">
+                        <img
+                            src="https://www.danhotels.com/sites/default/files/styles/medium_12_25/public/2017-10/7716417222_8c1c2c5232_b_0.jpg?h=d8d85a56&itok=ic3iNq7D">
+                        <div class="caption"><span>Tel Aviv</span></div>
+                    </div>
+                    <div class="slide" id="slide-2">
+                        <img src="https://www.danhotels.com/sites/default/files/2018-08/PJGeneralDeluxePlus.jpg">
+                        <div class="caption"><span>Jerusalem</span></div>
+                    </div>
+                    <div class="slide" id="slide-3">
+                        <img src="https://q-xx.bstatic.com/images/hotel/max1024x768/381/38148933.jpg">
+                        <div class="caption"><span>Be'er Sheva</span></div>
+                    </div>
+                    <div class="slide" id="slide-4">
+                        <img
+                            src="https://www.leonardo-hotels.com/octopus/upload/images/pages/magic-palace-eilat-pool-2.jpg">
+                        <div class="caption"><span>Eilat</span></div>
+                    </div>
+                    <div class="slide" id="slide-5">
+                        <img src="https://www.secrettelaviv.com/wp-content/uploads/2020/04/251139332-1-1024x683.jpg">
+                        <div class="caption"><span>Haifa</span></div>
+                    </div>
+                    <div class="dots">
+                        <label for="radio-1" id="label-1"></label>
+                        <label for="radio-2" id="label-2"></label>
+                        <label for="radio-3" id="label-3"></label>
+                        <label for="radio-4" id="label-4"></label>
+                        <label for="radio-5" id="label-5"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="board"></div>
+    <footer>
+        <p>Ⓒ Booking</p>
+    </footer>
     <script src="dist/hotel.js"></script>
 </body>
 
