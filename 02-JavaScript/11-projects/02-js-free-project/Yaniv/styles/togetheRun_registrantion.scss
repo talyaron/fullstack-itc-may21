@@ -26,7 +26,8 @@ header {
     background-image: linear-gradient(to bottom, turquoise, cornflowerblue);
 
     .header {
-        width: 50%;
+        width: 80%;
+        min-width: 600px;
         margin: auto;
         display: grid;
         text-align: center;
@@ -115,7 +116,7 @@ header {
     justify-items: center;
     align-content: center;
     justify-content: center;
-    overflow: auto;
+    min-width: 600px;
 
     .add_runner_form {
         &__item {

@@ -141,7 +141,8 @@ header {
   background-image: linear-gradient(to bottom, turquoise, cornflowerblue);
 }
 header .header {
-  width: 50%;
+  width: 80%;
+  min-width: 600px;
   margin: auto;
   display: grid;
   text-align: center;
@@ -208,7 +209,7 @@ header .header__item--register:active {
   justify-items: center;
   align-content: center;
   justify-content: center;
-  overflow: auto;
+  min-width: 600px;
 }
 #mainscreen .add_runner_form__item {
   display: grid;
