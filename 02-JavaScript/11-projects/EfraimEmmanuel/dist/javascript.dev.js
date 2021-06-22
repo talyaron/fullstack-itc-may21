@@ -10,7 +10,7 @@ function handleSubmit(ev) {
   ev.preventDefault();
   var enterURL = ev.target.children.enterURL.value;
   var imageDescription = ev.target.children.description.value;
-  var newArticle = new Article("".concat(enterURL), "".concat(imageDescription), "ID", '200px', '200px');
+  var newArticle = new Article("".concat(enterURL), "".concat(imageDescription), "".concat(this.articleID), '200px', '200px');
   ev.target.reset();
 }
 
@@ -22,7 +22,8 @@ function () {
 
     this.imageURL = imageURL;
     this.description = description;
-    this.articleID = articleID;
+    this.articleID = "id" + Math.random().toString(16).slice(2);
+    ;
     this.width = width;
     this.height = height;
     this.boardGamed = document.querySelector('#boardGame');
@@ -35,6 +36,7 @@ function () {
     value: function creatImage() {
       try {
         this.box = document.createElement('img');
+        this.box.setAttribute('ID', this.articleID);
         this.box.setAttribute('src', this.imageURL);
         this.box.setAttribute('width', this.width);
         this.box.setAttribute('height', this.height);

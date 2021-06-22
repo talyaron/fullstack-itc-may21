@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dist/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <ul class="navbar">
+            <img id="rocket" src="./images/rocket-solid.svg" alt="space rocket" />
+            <li class="navbar__item">
+                <a class="navbar__item__link" href="./index.html">Galileo Project</a>
+            </li>
+            <li class="navbar__item">
+                <a class="navbar__item__link" href="./team.html">Our team</a>
+            </li>
+            <li class="navbar__item">
+                <a class="navbar__item__link" href="./contact.html">Contact</a>
+            </li>
+        </ul>
+    </header>
+        <div class="form-page-container">
+            <form class="expedition-form">
+                <h1>Book your expedition</h1>
+                <fieldset><legend>Full name</legend>
+                <label for="name"></label>
+                    <input type="text" id="name" name="name" required>
+                </fieldset>
+                <fieldset> <legend>Date</legend>
+                    <label for="date"></label>
+                    <input type="date" name="date" id="date" value="" required min="2030-01-01" max="2031-12-01">
+                </fieldset>
+                <fieldset> <legend>Expedition</legend>
+                    <label for="expedition"></label>
+                    <select name="expedition" id="expedition">
+                </fieldset>
+                <fieldset>
+                        <option value="Mars Expedition">Mars Expedition</option>
+                        <option value="Venus Expedition">Venus Expedition</option>
+                        <option value="Moon Expedition">Moon Expedition</option>
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <legend>Training</legend>
+                <label for="isCertified">Do you hold a valid Astronaut Card? If not, we offer training options.</label>
+                    <input type="checkbox" id="isCertified">
+                </fieldset>
+                <button type="submit">Book</button>
+            </form>
+            <div>
+                <iframe width="950" height="534" src="https://www.youtube.com/embed/yDiD8F9ItX0?start=223&autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+            </div>
+        </div>
+    <p class="footer__text">
+        Galileo Project® 2030 was created by Yarden Tal as an exercise in
+        JavaScript & SCSS for Fullstack evening bootcamp at Israel Tech
+        Challenge
+    </p>
+    </footer>
+<script src="./dist/form.js"></script>
+</body>
+</html>

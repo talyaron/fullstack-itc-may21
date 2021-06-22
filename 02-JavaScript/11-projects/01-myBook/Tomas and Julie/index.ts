@@ -19,6 +19,13 @@ class Article {
     this.desc =  
   }
   changeImageUrl() {}
+  changeDesc() {}
+  changeImageUrl() {
+    if (i <= articleArray.length) {
+      i++;
+    }
+    imageGallery.src = articleArray[i];
+  }
 }
 
 

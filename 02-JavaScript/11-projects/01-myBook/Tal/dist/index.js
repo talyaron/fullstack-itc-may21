@@ -14,16 +14,19 @@ var ArticlesList = /** @class */ (function () {
         this.articles.push(article);
     };
     ArticlesList.prototype.removeArticle = function (articleId) {
+        this.articles = this.articles.filter(function (art) { return art.articleId !== articleId; });
+        console.log(this.articles);
+        this.renderArticles();
     };
-    ArticlesList.prototype.updateArticle = function (articleId) {
-    };
+    ArticlesList.prototype.updateArticle = function (articleId) { };
     ArticlesList.prototype.renderArticles = function () {
-        var articlesRoot = document.querySelector('#articlesRoot');
+        var articlesRoot = document.querySelector("#articlesRoot");
         //loop over articles
-        var html = '';
+        var html = "";
         this.articles.forEach(function (article) {
-            html += "<div><img src='" + article.imageUrl + "' alt='" + article.description + "' />" +
-                ("<p>" + article.description + "</p></div>");
+            html +=
+                "<div><img src='" + article.imageUrl + "' alt='" + article.description + "' />" +
+                    ("<p>" + article.description + "</p><button onclick='handleDelete(\"" + article.articleId + "\")'>DELETE</button></div>");
         });
         console.log(html);
         articlesRoot.innerHTML = html;
@@ -39,4 +42,7 @@ var handleSubmit = function (ev) {
     articles.add(article);
     articles.renderArticles();
     console.log(articles);
+};
+var handleDelete = function (articleId) {
+    articles.removeArticle(articleId);
 };
