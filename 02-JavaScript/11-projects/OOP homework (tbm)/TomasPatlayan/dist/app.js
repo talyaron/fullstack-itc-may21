@@ -46,7 +46,7 @@ var Transact = /** @class */ (function () {
     };
     return Transact;
 }());
-var Balance = new Transact(0); //YS: Variable shouldnt be capitalized.
+; //YS: Variable shouldnt be capitalized.
 var handleSubmit = function (ev) {
     ev.preventDefault();
     try {
