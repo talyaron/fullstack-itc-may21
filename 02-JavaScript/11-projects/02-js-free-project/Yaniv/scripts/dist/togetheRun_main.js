@@ -45,6 +45,7 @@ var LoggedInRunner = /** @class */ (function () {
         runnerRunsDOM.innerHTML = this.runnerRunsHtml;
         ruunerTotalDistance.innerHTML = "" + this.runnerDistance;
         runnerRunsCounter.innerHTML = "" + this.runnerRuns.length;
+        // window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`; // causes endless loop of loading the page...can be solved by localSession.setItem("isFirstLoad",false) during first loading of the page
     };
     LoggedInRunner.prototype.addRun = function (run) {
         this.runnerRuns.push(run);
@@ -110,6 +111,10 @@ var LoggedInRunner = /** @class */ (function () {
     return LoggedInRunner;
 }());
 // let RunsPool : Array<Run>; // for the future - pool of all runners future runs, so matches can be made
+var currentRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
+if (currentRunner === null) {
+    window.location.href = "togetheRun_registration.html";
+}
 var isModalOpen = false;
 var logOut = function () {
     try {
@@ -164,7 +169,7 @@ var onlyFutureRuns = function () {
         console.error(er);
     }
 };
-var runner = new LoggedInRunner();
+currentRunner = new LoggedInRunner();
 var runSubmit = function (ev) {
     try {
         ev.preventDefault();
@@ -172,7 +177,7 @@ var runSubmit = function (ev) {
         var runTime = new Date(ev.target.elements.runTime.value);
         var runArea = ev.target.elements.runArea.value;
         var run = new Run(runDistance, runTime, runArea);
-        runner.addRun(run);
+        currentRunner.addRun(run);
         var modal = document.querySelector(".modalWrapper");
         var modalBox = document.querySelector(".modalBox");
         isModalOpen = false;
@@ -184,7 +189,7 @@ var runSubmit = function (ev) {
         console.error(er);
     }
 };
-runner.personalDetailsToDOM();
+currentRunner.personalDetailsToDOM();
 logOut();
 openModal();
 closeModal();

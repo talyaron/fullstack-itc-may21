@@ -60,6 +60,7 @@ class LoggedInRunner {
     runnerRunsDOM.innerHTML = this.runnerRunsHtml;
     ruunerTotalDistance.innerHTML = `${this.runnerDistance}`;
     runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
+    // window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`; // causes endless loop of loading the page...can be solved by localSession.setItem("isFirstLoad",false) during first loading of the page
 
   }
   
@@ -138,6 +139,9 @@ class LoggedInRunner {
 
 // let RunsPool : Array<Run>; // for the future - pool of all runners future runs, so matches can be made
 
+let currentRunner: LoggedInRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
+if (currentRunner === null) {window.location.href = `togetheRun_registration.html`;}
+
 let isModalOpen: boolean = false;
 
 const logOut = (): void => {
@@ -196,7 +200,7 @@ const onlyFutureRuns = (): void => {
   }
 };
 
-const runner = new LoggedInRunner();
+currentRunner = new LoggedInRunner();
 
 const runSubmit = (ev: any) => {
   try {
@@ -208,7 +212,7 @@ const runSubmit = (ev: any) => {
 
     const run = new Run(runDistance, runTime, runArea);
 
-    runner.addRun(run);
+    currentRunner.addRun(run);
 
     const modal: HTMLElement = document.querySelector(`.modalWrapper`);
     const modalBox: HTMLElement = document.querySelector(`.modalBox`);
@@ -223,7 +227,7 @@ const runSubmit = (ev: any) => {
   }
 };
 
-runner.personalDetailsToDOM();
+currentRunner.personalDetailsToDOM();
 logOut();
 openModal();
 closeModal();
