@@ -14,8 +14,6 @@ class Run {
   }
 }
 
-document.querySelector("#total_sum").innerHTML = "0"; // for the future - get from localStorage if registered
-document.querySelector("#total_counts").innerHTML = "0"; // for the future - get from localStorage if registered
 
 interface Preferences {
   // For the future
@@ -44,76 +42,101 @@ class LoggedInRunner {
   runnerShoes: Shoes; // TODO add method editDetails
   runnerRuns: Array<Run> = JSON.parse(localStorage.getItem("currentRunner")).runnerRuns; // empty on registration
   runnerRunsHtml: string = JSON.parse(localStorage.getItem("currentRunner")).runnerRunsHtml; // DOM representation of all runs - new runs to DOM are added to this innerHTML
-  runnerDistance: number = Number(document.querySelector("#total_sum").innerHTML
-  );
-
+  runnerDistance: number = JSON.parse(localStorage.getItem("currentRunner")).runnerDistance;
+  
   personalDetailsToDOM() : void {
     const mainTitle: HTMLElement = document.querySelector("title");
     const runnerNameContainter: HTMLElement = document.querySelector(".summary__item--runner_name");    
     const runnerProfileImg: HTMLElement = document.querySelector(".profile_image__item--profile_image");    
     const runnerRunsDOM: HTMLElement = document.querySelector(".runs");
-
+    const ruunerTotalDistance: HTMLElement = document.querySelector("#total_sum");
+    const runnerRunsCounter: HTMLElement = document.querySelector("#total_counts");
+    
     mainTitle.insertAdjacentHTML('afterbegin',`${this.runnerName}`);
     runnerNameContainter.insertAdjacentHTML('beforeend',`${this.runnerName}!`);
     runnerProfileImg.title = `${this.runnerName}`;
-    runnerProfileImg.setAttribute("src",this.runnerProfImg)
+    if (this.runnerProfImg === null) {runnerProfileImg.setAttribute("src","images/togetheRun_logo.png");}
+    else {runnerProfileImg.setAttribute("src",this.runnerProfImg);}
     runnerRunsDOM.innerHTML = this.runnerRunsHtml;
-  }
+    ruunerTotalDistance.innerHTML = `${this.runnerDistance}`;
+    runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
 
+  }
+  
   addRun(run: Run): void {
     this.runnerRuns.push(run);
-    // this.runnerRuns = this.runnerRuns.sort((a : any, b : any) => b.runTime - a.runTime); // in order for it to work I need to render..
-    this.addRunToDOM(run);
-    this.refreshTotalToDOM(run.runDistance);
+    this.runnerRuns = this.runnerRuns.sort((a : any, b : any) => a.runTime - b.runTime);
+    this.renderRunsToDOM();
+    this.refreshDOMSummary(run.runDistance);
   }
 
-  addRunToDOM(run: Run) {
+  renderRunsToDOM() {
     try {
       const runsContainer: HTMLElement = document.querySelector(".runs");
-      const matchFAClass = run.runMatch ? "check-double" : "check";
-      const matchTitle = run.runMatch ? "Partner found!" : "Pending partner...";
-      const runColor = run.runMatch ? "aqua" : "orange";
-      const runFormatedDate = `${run.runTime.toISOString().substring(0,16).replace('T',' ')}`;
+      
+      runsContainer.innerHTML = '';
+      this.runnerRuns.forEach(run => {
+        const matchFAClass = run.runMatch ? "check-double" : "check";
+        const matchTitle = run.runMatch ? "Partner found!" : "Pending partner...";
+        const runColor = run.runMatch ? "aqua" : "orange";
+        const runFormatedDate = `${run.runTime.toISOString().substring(0,16).replace('T',' ')}`;
+        const runHTML =
+        `<div class="runs__item runs__item">
+          <i id="match" class="fas fa-2x fa-${matchFAClass}-circle" title="${matchTitle}" style="color: ${runColor};"></i>
+          <div id="run_distance" style="color: ${runColor};">
+            ${Math.abs(run.runDistance)} Km
+          </div>
+          <div id="run_time">${runFormatedDate}</div>
+          <div id="run_area">${run.runArea}</div>
+        </div>`;
 
-      const runsHTML = `<div class="runs__item runs__item--action">
-      <i id="match" class="fas fa-2x fa-${matchFAClass}-circle" title="${matchTitle}" style="color: ${runColor};"></i>
-      <div id="runs_amount" style="color: ${runColor};">
-        ${Math.abs(run.runDistance)} Km
-      </div>
-      <div id="run_time">${runFormatedDate}</div>
-      <div id="runs_area">${run.runArea}</div>
-    </div>`;
+        runsContainer.innerHTML += runHTML;
+        });
 
-      runsContainer.insertAdjacentHTML("afterbegin", runsHTML);
-      this.runnerRunsHtml = runsContainer.innerHTML;
-
-      const totalRunsContainer: HTMLElement = document.querySelector("#total_counts");
-      totalRunsContainer.innerText = `${this.runnerRuns.length}`;
     } catch (er) {
       console.error(er);
     }
   }
 
-  refreshTotalToDOM(runDistance: number): void {
+  refreshDOMSummary(runDistance: number): void {
     try {
       this.runnerDistance += runDistance;
-      const domTotalDist: HTMLElement = document.querySelector("#total_sum");
-      
-      domTotalDist.innerText = `${this.runnerDistance}`;
+      const ruunerTotalDistance: HTMLElement = document.querySelector("#total_sum");
+      const runnerRunsCounter: HTMLElement = document.querySelector("#total_counts");
+      const distanceBadge: HTMLElement = document.querySelector("#distance_badge");
+      const togetherunBadge: HTMLElement =document.querySelector("#togetherun_badge");
+
+      ruunerTotalDistance.innerText = `${this.runnerDistance}`;
+      runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
       if (this.runnerDistance > 199) {
-        domTotalDist.style.color = "gold"; // TODO add method to change the badge
+        ruunerTotalDistance.style.color = "gold";
+        distanceBadge.setAttribute("src","images/TR_Kms_G.png");
+      } else if (this.runnerDistance > 99) {
+        ruunerTotalDistance.style.color = "silver";
+        distanceBadge.setAttribute("src","images/TR_Kms_S.png");
+      } else {
+        ruunerTotalDistance.style.color = "#cd7f32";
+        distanceBadge.setAttribute("src","images/TR_Kms_B.png");
       }
-      else if (this.runnerDistance > 99) {
-        domTotalDist.style.color = "silver";
+
+      if (this.runnerRuns.length > 4) { //49 - 4 only for easy testing
+        runnerRunsCounter.style.color = "gold";
+        togetherunBadge.setAttribute("src","images/TR_G.png");
+      } else if (this.runnerRuns.length > 1) { //19 - 1 only for easy testing
+        runnerRunsCounter.style.color = "silver";
+        togetherunBadge.setAttribute("src","images/TR_S.png");
+      } else {
+        runnerRunsCounter.style.color = "#cd7f32";
+        togetherunBadge.setAttribute("src","images/TR_B.png");
       }
-      else {domTotalDist.style.color = "#cd7f32";}
+
     } catch (er) {
       console.error(er);
     }
   }
 }
 
-// let RunsPool : Array<Run> = []; // for the future - pool of all runners future runs, so matches can be made
+// let RunsPool : Array<Run>; // for the future - pool of all runners future runs, so matches can be made
 
 let isModalOpen: boolean = false;
 
@@ -122,7 +145,7 @@ const logOut = (): void => {
     const logoutBtn: HTMLElement = document.querySelector(`.summary__item--logout`);
 
     logoutBtn.addEventListener(`click`, (ev) => {
-      console.log('hi');
+      localStorage.clear();
       window.location.href = "togetheRun_registration.html";
     });
   } catch (er) {

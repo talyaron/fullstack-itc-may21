@@ -18,8 +18,10 @@ var newRunner = /** @class */ (function () {
     }
     return newRunner;
 }());
-var currentRunner = new newRunner(null, null, null, null, null, null, null);
-localStorage.setItem("currentRunner", JSON.stringify(currentRunner));
+var currentRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
+if (currentRunner !== null) {
+    window.location.href = "togetheRun_main.html?" + currentRunner.runnerId;
+}
 var readURL = function (input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -45,9 +47,9 @@ var runnerSubmit = function (ev) {
             alert('Your entered different passwords, please try again');
             throw new Error('Password verification failed');
         }
-        currentRunner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
-        localStorage.setItem("currentRunner", JSON.stringify(currentRunner));
-        window.location.href = "togetheRun_main.html?" + currentRunner.runnerId;
+        var runner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
+        localStorage.setItem("currentRunner", JSON.stringify(runner));
+        window.location.href = "togetheRun_main.html?" + runner.runnerId;
         // runners.addRunner(runner); // for the future - figure out how to manage runners array of type Array<Runner>
         ev.target.reset();
     }

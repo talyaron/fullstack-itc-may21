@@ -161,13 +161,13 @@ header .header__item--logo #running_logo {
 }
 header .header__item--logo #running_logo #runner1_logo {
   position: absolute;
-  -webkit-animation: togetheRunning 0.5s linear infinite alternate both;
-  animation: togetheRunning 0.5s linear infinite alternate both;
+  -webkit-animation: togetheRunning 1s linear infinite alternate both;
+  animation: togetheRunning 1s linear infinite alternate both;
 }
 header .header__item--logo #running_logo #runner2_logo {
   position: absolute;
-  -webkit-animation: togetheRunning 0.5s linear 0.5s infinite alternate both;
-  animation: togetheRunning 0.5s linear 0.5s infinite alternate both;
+  -webkit-animation: togetheRunning 1s linear 1s infinite alternate both;
+  animation: togetheRunning 1s linear 1s infinite alternate both;
 }
 header .header__item--title {
   grid-area: title;
@@ -189,8 +189,8 @@ header .header__item--register {
   border-radius: 20px;
   padding: 10px;
   border: 0;
-  -webkit-animation: heartbeat 3s ease-in-out infinite both;
-  animation: heartbeat 3s ease-in-out infinite both;
+  -webkit-animation: heartbeat 5s ease-in-out infinite both;
+  animation: heartbeat 5s ease-in-out infinite both;
 }
 header .header__item--register:hover {
   transition: 150ms;

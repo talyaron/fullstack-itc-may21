@@ -10,8 +10,6 @@ var Run = /** @class */ (function () {
     }
     return Run;
 }());
-document.querySelector("#total_sum").innerHTML = "0"; // for the future - get from localStorage if registered
-document.querySelector("#total_counts").innerHTML = "0"; // for the future - get from localStorage if registered
 var LoggedInRunner = /** @class */ (function () {
     function LoggedInRunner() {
         // generated on the registration page - passed on to other pages via localStorage
@@ -26,55 +24,83 @@ var LoggedInRunner = /** @class */ (function () {
         this.runnerProfImg = JSON.parse(localStorage.getItem("currentRunner")).runnerProfImg; // TODO add method editDetails
         this.runnerRuns = JSON.parse(localStorage.getItem("currentRunner")).runnerRuns; // empty on registration
         this.runnerRunsHtml = JSON.parse(localStorage.getItem("currentRunner")).runnerRunsHtml; // DOM representation of all runs - new runs to DOM are added to this innerHTML
-        this.runnerDistance = Number(document.querySelector("#total_sum").innerHTML);
+        this.runnerDistance = JSON.parse(localStorage.getItem("currentRunner")).runnerDistance;
     }
     LoggedInRunner.prototype.personalDetailsToDOM = function () {
         var mainTitle = document.querySelector("title");
         var runnerNameContainter = document.querySelector(".summary__item--runner_name");
         var runnerProfileImg = document.querySelector(".profile_image__item--profile_image");
         var runnerRunsDOM = document.querySelector(".runs");
+        var ruunerTotalDistance = document.querySelector("#total_sum");
+        var runnerRunsCounter = document.querySelector("#total_counts");
         mainTitle.insertAdjacentHTML('afterbegin', "" + this.runnerName);
         runnerNameContainter.insertAdjacentHTML('beforeend', this.runnerName + "!");
         runnerProfileImg.title = "" + this.runnerName;
-        runnerProfileImg.setAttribute("src", this.runnerProfImg);
+        if (this.runnerProfImg === null) {
+            runnerProfileImg.setAttribute("src", "images/togetheRun_logo.png");
+        }
+        else {
+            runnerProfileImg.setAttribute("src", this.runnerProfImg);
+        }
         runnerRunsDOM.innerHTML = this.runnerRunsHtml;
+        ruunerTotalDistance.innerHTML = "" + this.runnerDistance;
+        runnerRunsCounter.innerHTML = "" + this.runnerRuns.length;
     };
     LoggedInRunner.prototype.addRun = function (run) {
         this.runnerRuns.push(run);
-        // this.runnerRuns = this.runnerRuns.sort((a : any, b : any) => b.runTime - a.runTime); // in order for it to work I need to render..
-        this.addRunToDOM(run);
-        this.refreshTotalToDOM(run.runDistance);
+        this.runnerRuns = this.runnerRuns.sort(function (a, b) { return a.runTime - b.runTime; });
+        this.renderRunsToDOM();
+        this.refreshDOMSummary(run.runDistance);
     };
-    LoggedInRunner.prototype.addRunToDOM = function (run) {
+    LoggedInRunner.prototype.renderRunsToDOM = function () {
         try {
-            var runsContainer = document.querySelector(".runs");
-            var matchFAClass = run.runMatch ? "check-double" : "check";
-            var matchTitle = run.runMatch ? "Partner found!" : "Pending partner...";
-            var runColor = run.runMatch ? "aqua" : "orange";
-            var runFormatedDate = "" + run.runTime.toISOString().substring(0, 16).replace('T', ' ');
-            var runsHTML = "<div class=\"runs__item runs__item--action\">\n      <i id=\"match\" class=\"fas fa-2x fa-" + matchFAClass + "-circle\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n      <div id=\"runs_amount\" style=\"color: " + runColor + ";\">\n        " + Math.abs(run.runDistance) + " Km\n      </div>\n      <div id=\"run_time\">" + runFormatedDate + "</div>\n      <div id=\"runs_area\">" + run.runArea + "</div>\n    </div>";
-            runsContainer.insertAdjacentHTML("afterbegin", runsHTML);
-            this.runnerRunsHtml = runsContainer.innerHTML;
-            var totalRunsContainer = document.querySelector("#total_counts");
-            totalRunsContainer.innerText = "" + this.runnerRuns.length;
+            var runsContainer_1 = document.querySelector(".runs");
+            runsContainer_1.innerHTML = '';
+            this.runnerRuns.forEach(function (run) {
+                var matchFAClass = run.runMatch ? "check-double" : "check";
+                var matchTitle = run.runMatch ? "Partner found!" : "Pending partner...";
+                var runColor = run.runMatch ? "aqua" : "orange";
+                var runFormatedDate = "" + run.runTime.toISOString().substring(0, 16).replace('T', ' ');
+                var runHTML = "<div class=\"runs__item runs__item\">\n          <i id=\"match\" class=\"fas fa-2x fa-" + matchFAClass + "-circle\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n          <div id=\"run_distance\" style=\"color: " + runColor + ";\">\n            " + Math.abs(run.runDistance) + " Km\n          </div>\n          <div id=\"run_time\">" + runFormatedDate + "</div>\n          <div id=\"run_area\">" + run.runArea + "</div>\n        </div>";
+                runsContainer_1.innerHTML += runHTML;
+            });
         }
         catch (er) {
             console.error(er);
         }
     };
-    LoggedInRunner.prototype.refreshTotalToDOM = function (runDistance) {
+    LoggedInRunner.prototype.refreshDOMSummary = function (runDistance) {
         try {
             this.runnerDistance += runDistance;
-            var domTotalDist = document.querySelector("#total_sum");
-            domTotalDist.innerText = "" + this.runnerDistance;
+            var ruunerTotalDistance = document.querySelector("#total_sum");
+            var runnerRunsCounter = document.querySelector("#total_counts");
+            var distanceBadge = document.querySelector("#distance_badge");
+            var togetherunBadge = document.querySelector("#togetherun_badge");
+            ruunerTotalDistance.innerText = "" + this.runnerDistance;
+            runnerRunsCounter.innerHTML = "" + this.runnerRuns.length;
             if (this.runnerDistance > 199) {
-                domTotalDist.style.color = "gold"; // TODO add method to change the badge
+                ruunerTotalDistance.style.color = "gold";
+                distanceBadge.setAttribute("src", "images/TR_Kms_G.png");
             }
             else if (this.runnerDistance > 99) {
-                domTotalDist.style.color = "silver";
+                ruunerTotalDistance.style.color = "silver";
+                distanceBadge.setAttribute("src", "images/TR_Kms_S.png");
             }
             else {
-                domTotalDist.style.color = "#cd7f32";
+                ruunerTotalDistance.style.color = "#cd7f32";
+                distanceBadge.setAttribute("src", "images/TR_Kms_B.png");
+            }
+            if (this.runnerRuns.length > 4) { //49 - 4 only for easy testing
+                runnerRunsCounter.style.color = "gold";
+                togetherunBadge.setAttribute("src", "images/TR_G.png");
+            }
+            else if (this.runnerRuns.length > 1) { //19 - 1 only for easy testing
+                runnerRunsCounter.style.color = "silver";
+                togetherunBadge.setAttribute("src", "images/TR_S.png");
+            }
+            else {
+                runnerRunsCounter.style.color = "#cd7f32";
+                togetherunBadge.setAttribute("src", "images/TR_B.png");
             }
         }
         catch (er) {
@@ -83,13 +109,13 @@ var LoggedInRunner = /** @class */ (function () {
     };
     return LoggedInRunner;
 }());
-// let RunsPool : Array<Run> = []; // for the future - pool of all runners future runs, so matches can be made
+// let RunsPool : Array<Run>; // for the future - pool of all runners future runs, so matches can be made
 var isModalOpen = false;
 var logOut = function () {
     try {
         var logoutBtn = document.querySelector(".summary__item--logout");
         logoutBtn.addEventListener("click", function (ev) {
-            console.log('hi');
+            localStorage.clear();
             window.location.href = "togetheRun_registration.html";
         });
     }
