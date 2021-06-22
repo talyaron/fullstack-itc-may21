@@ -5,23 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://www.logosearcher.com/wp-content/uploads/2018/07/google-hotel-ads.svg"/>
-    <link rel="stylesheet" href="dist/hotel.min.css">
-    <title>Sumbit Hotel</title>
+    <link rel="stylesheet" href="dist/description.min.css">
+    <title>Full Description</title>
 </head>
 <body style="background-image: linear-gradient(to right, #0b486b ,#f56217 );">
     <header>
-        <form onsubmit="handleSumbite(event)">
+        <form onsubmit="handleReturnHotel(event)">
             <input type="submit" value="Return">
         </form>
-        <div id="welcome"></div>
-        <form onsubmit="handleNextPage(event)">
-            <input type="submit" value="Next Page">
-        </form>
-        
+        <div id="fulldescription">Full Description of the Hotel you choose</div>
     </header>
-    
-    <div id="img" class="img"></div>
 
-    <script src="dist/sumbit.js"></script>
+    <div id="board" class="board"></div>
+    <script src ="dist/fulldescription.js"></script>
 </body>
 </html>
