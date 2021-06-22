@@ -3,7 +3,7 @@ var root = document.querySelector('#root');
 //I render all the pets
 function renderPets() {
     try {
-        var html = this.allPets.allPets.map(function (element) {
+        var html = this.allPets.map(function (element) {
             return ("<div id='" + element.name + "' class=\"pet__item__wrapper\">" +
                 ("<div><img class=\"pet__item__image\" src=\"" + element.image + "\" alt=\"\"></div>") +
                 "<div class=\"pet__item__information__wrapper\">" +
@@ -51,7 +51,7 @@ function filter() {
         if (!allPets)
             throw new Error('You can´t access to the pets');
         //Separate the elements in different arrays
-        allPets.allPets.forEach(function (element) {
+        allPets.forEach(function (element) {
             petGender_1.push(element.gender.toUpperCase());
             petAge_1.push(element.age);
             petCity_1.push(element.city.toUpperCase());
@@ -81,7 +81,7 @@ function handleFilter() {
         var age_1 = document.querySelector('.filter__age');
         var city_1 = document.querySelector('.filter__city');
         var gender_1 = document.querySelector('.filter__gender');
-        var petsFiltered = allPets.allPets.filter(function (element) { return (element.age === age_1.value) && (element.city.toUpperCase() === city_1.value) && (element.gender.toUpperCase() === gender_1.value); });
+        var petsFiltered = allPets.filter(function (element) { return (element.age === age_1.value) && (element.city.toUpperCase() === city_1.value) && (element.gender.toUpperCase() === gender_1.value); });
         localStorage.setItem('petFiltered', JSON.stringify(petsFiltered));
         window.location.href = 'filteredPets.html';
         if (!window.location.href)

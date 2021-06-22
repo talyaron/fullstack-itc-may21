@@ -32,24 +32,20 @@ class Pet {
     }
 }
 
-class Pets {
-    allPets: Array<Pet> = [];
+//I initialice a new array that will contains all the pets:
+const pets: Array<Pet> = [];
 
-    //Method to add a pet to the array
-    addPet(name: string, age: number, gender: string, city: string, image: string, description: string, contactNumber: number): void {
-        try {
-            let newPet: Pet = new Pet(name, age, gender, city, image, description, contactNumber)
-            this.allPets.push(newPet);
-            if (!this.allPets) throw new Error('The array where you want to push the pets it doesn´t exist!')
-            localStorage.setItem('pet', JSON.stringify(pets));
-        } catch (error) {
-            console.error(error);
-        }
+//Function to add a pet to the array
+function addPet(name: string, age: number, gender: string, city: string, image: string, description: string, contactNumber: number): void {
+    try {
+        let newPet: Pet = new Pet(name, age, gender, city, image, description, contactNumber)
+        pets.push(newPet);
+        if (!this.pets) throw new Error('The array where you want to push the pets it doesn´t exist!')
+        localStorage.setItem('pet', JSON.stringify(pets));
+    } catch (error) {
+        console.error(error);
     }
 }
-
-//I initialice a new array that will contains all the pets:
-const pets: Pets = new Pets();
 
 //With this function I handle the form:
 const doingSubmit = (ev: any): void => {
@@ -62,7 +58,7 @@ const doingSubmit = (ev: any): void => {
         const description: string = ev.target.elements.description.value;
         const contactNumber: number = ev.target.elements.contactNumber.value;
         const image: string = document.querySelector('#previewImage').getAttribute("src");
-        pets.addPet(name, age, gender, city, image, description, contactNumber);
+        addPet(name, age, gender, city, image, description, contactNumber);
         ev.target.reset();
     } catch (error) {
         console.error(error);
