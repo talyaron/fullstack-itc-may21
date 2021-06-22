@@ -20,13 +20,8 @@ class Pet {
     description: string;
     contactNumber: number;
 
-<<<<<<< HEAD
-    constructor(name: string, age: number, gender: string, city: string, image: any, description: string, contactNumber: number) {
-        this.id = "id" + Math.random().toString(16).slice(2);
-=======
     constructor(name: string, age: number, gender: string, city: string, image: string, description: string, contactNumber: number) {
-        this.id = "id" + Math.random().toString(16).slice(2);;
->>>>>>> 7eae9796d250bd899fac0151bd08457d26e71bb5
+        this.id = "id" + Math.random().toString(16).slice(2);
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -40,41 +35,60 @@ class Pet {
 class Pets {
     allPets: Array<Pet> = [];
 
+    //Method to add a pet to the array
     addPet(name: string, age: number, gender: string, city: string, image: string, description: string, contactNumber: number): void {
-        let newPet: Pet = new Pet(name, age, gender, city, image, description, contactNumber)
-        this.allPets.push(newPet);
+        try {
+            let newPet: Pet = new Pet(name, age, gender, city, image, description, contactNumber)
+            this.allPets.push(newPet);
+            if (!this.allPets) throw new Error('The array where you want to push the pets it doesn´t exist!')
+            localStorage.setItem('pet', JSON.stringify(pets));
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
 
 //I initialice a new array that will contains all the pets:
 const pets: Pets = new Pets();
 
+//With this function I handle the form:
 const doingSubmit = (ev: any): void => {
     ev.preventDefault();
-
-    const name: string = ev.target.elements.namePet.value;
-    const gender: string = ev.target.elements.gender.value;
-    const age: number = ev.target.elements.age.value;
-    const city: string = ev.target.elements.city.value;
-    const description: string = ev.target.elements.description.value;
-    const contactNumber: number = ev.target.elements.contactNumber.value;
-    const image: string = document.querySelector('#previewImage').getAttribute("src");
-    pets.addPet(name, age, gender, city, image, description, contactNumber);
-    ev.target.reset();
-    localStorage.setItem('pet', JSON.stringify(pets));
+    try {
+        const name: string = ev.target.elements.namePet.value;
+        const gender: string = ev.target.elements.gender.value;
+        const age: number = ev.target.elements.age.value;
+        const city: string = ev.target.elements.city.value;
+        const description: string = ev.target.elements.description.value;
+        const contactNumber: number = ev.target.elements.contactNumber.value;
+        const image: string = document.querySelector('#previewImage').getAttribute("src");
+        pets.addPet(name, age, gender, city, image, description, contactNumber);
+        ev.target.reset();
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 function redirect(): void {
-    window.location.href = 'listOfPets.html'
+    try {
+        window.location.href = 'listOfPets.html';
+        if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 //Function to show the previous image in the form:
 function readURL(input): void {
     if (input.files && input.files[0]) {
-        let reader = new FileReader();
+        let reader: FileReader = new FileReader();
 
         reader.onload = (e) => {
-            document.querySelector('#previewImage').setAttribute("src", `${e.target.result}`);
+            try {
+                document.querySelector('#previewImage').setAttribute("src", `${e.target.result}`);
+            } catch (error) {
+                console.error(error);
+            }
             return e.target.result
         }
         reader.readAsDataURL(input.files[0]);
