@@ -3,9 +3,7 @@
 
     const chosenDate = localStorage.getItem('date')
     const chosenExpedition = localStorage.getItem('expedition')
-    
-    console.log(date, chosenExpedition)
-    
+        
     document.querySelector('#date').setAttribute('value', chosenDate)
     
     //Match selected expedition with the form Select element Option:

@@ -77,6 +77,7 @@ const handleSubmit = (event:any)=> {
 
         //Transfer to the Form page:
         window.location.href = './form.html'
+        event.target.reset()
     } catch (error) {
         console.error(error)
     }

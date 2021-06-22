@@ -60,6 +60,7 @@ var handleSubmit = function (event) {
         localStorage.setItem('expedition', expeditionName.innerHTML.toString());
         //Transfer to the Form page:
         window.location.href = './form.html';
+        event.target.reset();
     }
     catch (error) {
         console.error(error);

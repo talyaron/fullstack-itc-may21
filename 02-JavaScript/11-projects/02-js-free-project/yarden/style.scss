@@ -16,7 +16,7 @@ $buttonFont: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
 body  {
     color: white;
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-image: linear-gradient( 94.3deg,  rgba(26,33,64,1) 10.9%, rgba(81,84,115,1) 87.1% );
+    background-image: linear-gradient( 94.3deg,  rgb(18, 25, 58) 10.9%, rgba(81,84,115,1) 87.1% );
     margin: 1rem;
     border: 0.1px solid rgba(255, 255, 255, 0.116);
     border-radius: 4%;
@@ -97,6 +97,8 @@ main {
                 font-family:Arial, Helvetica, sans-serif;
                 color: whitesmoke;
                 border: none;
+                padding: 0.2rem;
+                border-radius: 6%;
             }
         }
         & .starFooter {
