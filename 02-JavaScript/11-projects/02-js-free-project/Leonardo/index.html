@@ -16,7 +16,6 @@
     <div class="heart"></div>
     <div class="heart heart--first"></div>
 
-
     <form class="form" onsubmit="doingSubmit(event)">
         <input type="text" name="namePet" placeholder="Your pet´s name" maxlength="35" required>
 
@@ -38,15 +37,15 @@
             required>
 
         <input type="file" id="image" name="image" onchange="readURL(this);">
-        <img class="form__input--image" id="ima">
+        <img class="form__input--image" id="previewImage">
 
         <input class="form__input--submit" type="submit" value="Post my lovely pet!">
 
+        <!-- 
+        Will see that the next button is not the niciest, that is because my idea is to have a database and when a user upload his pet, that redirect to see all the pets in the page. However, because we dont have a database I choose to upload as many pets as you want and then you see all the pets that you upload in local mode -->
+        <button class="form__input--submit" onclick="redirect()">See the tinder </button>
     </form>
-
-    <button onclick="redirect()">Push</button>
-    <script src="dist/script.js"></script>
+    <script src="scripts/dist/script.js"></script>
 </body>
 
 </html>
-<img class="" src="" alt="">

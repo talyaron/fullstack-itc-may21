@@ -1,26 +1,29 @@
 var allItems = JSON.parse(localStorage.getItem('item'));
 var root = document.querySelector('#root');
-//agregar boton check en cada item, que se vea el boton y lo pueda clickear
 function renderItems() {
     var html = "";
     allItems.forEach(function (element) {
-        html += "<div onclick=\"deletes()\"> " + element.id + " " + element.task + " </div>";
+        html += "<div>  " + element.task + " <input type=\"checkbox\" class=\"checkItem\" onclick = checkear() > </div> ";
     });
     root.innerHTML = html;
 }
+function checkear() {
+    var check = document.getElementsByClassName('checkItem');
+    var itemArray = [];
+    var count = 0;
+    allItems.forEach(function (element) {
+        if (check[count].checked === true) {
+            itemArray.push(element);
+        }
+        count++;
+    });
+    localStorage.setItem('checkedItem', JSON.stringify(itemArray));
+    mostrarItems();
+}
 renderItems();
-//function deletes(){}
 function redirectt() {
     window.location.href = 'index.html';
 }
-//al entrar en esta pagina que me muestre solamente los que estan checked de la pagina anterior
-function checked() {
-    window.location.href = 'completed.html';
+function mostrarItems() {
+    localStorage.parse;
 }
-//localStorage.clear()
-/*let html: string = this.allItems.allItems.map(element => {
-    console.log(element.task)
-    return (
-        `<div onclick="deletes()"> ${element.task} </div>`)
-})
-console.log(html)*/

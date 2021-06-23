@@ -11,18 +11,22 @@
 
 <body>
     <form onsubmit="handlerSumbit(event)">
-        <div class="div"> 
-        <label for ="imageURL" class="form__input">Enter the URL
-        <input type="text" name="imageURL">
-        </label>
-        <label for = "description"  class="form__input">Enter Description
-        <input type="text" name="description">
-        </label>
-        <button class='add'>ADD</button>
-    </div>
+        
+        <div class="inputDiv">
+            <label for="imageURL" class="form__input">Enter the URL
+                <input type="text" name="imageURL">
+            </label>
+            <label for="description" class="form__input">Enter Description
+                <input type="text" name="description">
+            </label>
+            <button class='add'>ADD</button>
+        </div>
+    
     </form>
-
-    <div class="container"></div>
+    <div class="container">
+        <div class="imgDiv"></div>
+    </div>
+    
 
     <script src="dist/project.js"></script>
 </body>
