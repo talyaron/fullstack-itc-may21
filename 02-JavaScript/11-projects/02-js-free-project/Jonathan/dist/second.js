@@ -48,6 +48,8 @@ var BookingList = /** @class */ (function () {
             else {
                 localStorage.setItem('checkedHotel', JSON.stringify(arrayChecked));
                 window.location.href = "third.html";
+                if (!window.location.href)
+                    throw new Error("The page does not exist");
             }
         }
         catch (e) {
