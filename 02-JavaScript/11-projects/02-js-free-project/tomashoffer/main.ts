@@ -54,6 +54,3 @@ catch(e){
 }
 }
 const newPost = new PostList();
-
-
-
