@@ -1,9 +1,37 @@
-@keyframes shine {
+@-webkit-keyframes text-shadow-drop-center {
   0% {
-    background-position: -10vw;
+    text-shadow: 0 0 0 transparent;
   }
   100% {
-    background-position: 10vw;
+    text-shadow: 0 0 180px white;
+  }
+}
+@keyframes text-shadow-drop-center {
+  0% {
+    text-shadow: 0 0 0 transparent;
+  }
+  100% {
+    text-shadow: 0 0 18px white;
+  }
+}
+@-webkit-keyframes shadow-inset-center {
+  0% {
+    -webkit-box-shadow: inset 0 0 0 0 transparent;
+    box-shadow: inset 0 0 0 0 transparent;
+  }
+  100% {
+    -webkit-box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes shadow-inset-center {
+  0% {
+    -webkit-box-shadow: inset 0 0 0 0 transparent;
+    box-shadow: inset 0 0 0 0 transparent;
+  }
+  100% {
+    -webkit-box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
   }
 }
 * {
@@ -11,6 +39,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   width: 100vw;
   margin: 0 auto;
 }
@@ -56,11 +85,13 @@ button:hover {
   color: white;
 }
 .summary__item--runner_name {
+  z-index: 1;
   margin: 0;
 }
 .summary__item--total {
   width: 50%;
   max-width: 500px;
+  min-width: 275px;
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 1fr;
@@ -79,9 +110,10 @@ button:hover {
   position: absolute;
 }
 .summary__item--total .profile_image__item--profile_image {
-  height: 100px;
-  border-radius: 50px;
-  border: 3px solid black;
+  height: 110px;
+  width: 110px;
+  border-radius: 80px;
+  box-shadow: 0px 0px 30px 20px white;
 }
 .summary__item--total .profile_image__item--badges {
   top: 20px;
@@ -91,9 +123,14 @@ button:hover {
 }
 .summary__item--total #total_distance {
   grid-area: total;
+  -webkit-animation: text-shadow-drop-center 0.6s both;
+  animation: text-shadow-drop-center 0.6s both;
 }
 .summary__item--total #total_togetheruns {
+  font-weight: bold;
   grid-area: date;
+  -webkit-animation: text-shadow-drop-center 0.6s both;
+  animation: text-shadow-drop-center 0.6s both;
 }
 
 #mainscreen {
@@ -124,7 +161,6 @@ button:hover {
   background-color: aqua;
   font-size: 1.2rem;
   color: black;
-  animation: shine 2s infinite;
 }
 #mainscreen .dashboard__item--add:hover {
   background-color: turquoise;
@@ -143,33 +179,46 @@ button:hover {
 #mainscreen .dashboard__item--history:active {
   background-color: midnightblue;
 }
-#mainscreen .dashboard .runs__item {
+#mainscreen .runs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#mainscreen .runs__item {
+  width: 220px;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid aqua;
+  padding: 5px;
+  margin: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: "sign amount" "sign tempTot" "sign date" "sign biz" "sign id";
+  grid-template-rows: 2fr 1fr 1fr 1fr;
+  grid-template-areas: "match distance" "match time" "match pace" "match area";
+  -webkit-animation: shadow-inset-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: shadow-inset-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  transition: 0.5s;
 }
-#mainscreen .dashboard .runs__item #sign {
-  grid-area: sign;
+#mainscreen .runs__item:hover {
+  transform: scale(1.1);
 }
-#mainscreen .dashboard .runs__item #run_amount {
-  grid-area: amount;
-  font-size: 1.5rem;
+#mainscreen .runs__item #match {
+  grid-area: match;
+}
+#mainscreen .runs__item #run_distance {
+  grid-area: distance;
+  font-size: 1.6rem;
   font-weight: bold;
 }
-#mainscreen .dashboard .runs__item #temp_total {
-  grid-area: tempTot;
+#mainscreen .runs__item #run_time {
+  grid-area: time;
 }
-#mainscreen .dashboard .runs__item #run_date {
-  grid-area: date;
+#mainscreen .runs__item #run_pace {
+  grid-area: pace;
 }
-#mainscreen .dashboard .runs__item #run_business {
-  grid-area: biz;
+#mainscreen .runs__item #run_area {
+  grid-area: area;
   color: lightseagreen;
-}
-#mainscreen .dashboard .runs__item #run_id {
-  grid-area: id;
-  color: gray;
 }
 
 .modalWrapper {
@@ -216,7 +265,7 @@ button:hover {
   align-items: baseline;
   justify-content: center;
   background-color: white;
-  height: 140px;
+  height: 170px;
   border-radius: 0 0 10px 10px;
 }
 .modalBox__item--content .add_run_form {
