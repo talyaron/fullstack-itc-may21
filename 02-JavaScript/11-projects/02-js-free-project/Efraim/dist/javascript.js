@@ -19,7 +19,6 @@ var Cart = /** @class */ (function () {
     Cart.prototype.addToCart = function (product) {
         try {
             this.cart.push(product);
-            console.log(this.cart);
         }
         catch (e) {
             console.error(e);
@@ -105,7 +104,6 @@ try {
     products.addProduct(new Product("11.png", 'Premiers 2020 Wall Flag', 27.95));
     products.addProduct(new Product("12.png", 'Dustin Martin Monatge Wall Flag', 39.95));
     products.renderProducts(shoppingListDOM);
-    console.log(products);
 }
 catch (e) {
     console.error(e);

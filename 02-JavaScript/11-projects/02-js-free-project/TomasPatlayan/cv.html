@@ -15,9 +15,16 @@
   <body>
     <div id="show"></div>
 
-    <script src="/TS/cvs.ts"></script>
-   
-      
-    
+    <script
+      src="https://kit.fontawesome.com/3d37771d36.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./TS/cvs.js"></script>
+    <script>
+      const btn = document.querySelector(".btn");
+      btn.onclick = () => {
+        window.print();
+      };
+    </script>
   </body>
 </html>
