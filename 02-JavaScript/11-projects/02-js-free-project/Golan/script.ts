@@ -1,5 +1,5 @@
-const getUser = 
-console.log(getUser)
+// const getUser = 
+// console.log(getUser)
 
 //method for adding individual user info
 class UserInfo {
@@ -29,11 +29,11 @@ class UserInfo {
 }
 //class to provide an array of all users for local storage
 class AllUsers {
-    users: Array<UserInfo> = JSON.parse(localStorage.getItem('AllUsers')); 
+    users: Array<UserInfo> = JSON.parse(localStorage.getItem('AllUsers')) ? JSON.parse(localStorage.getItem('AllUsers')) : []; 
     //method to push new user to the array
     addNewUser(user) {
-        this.users.push(user)
-        console.log(this.users)
+        this.users.push(user);
+        console.log(this.users);
         localStorage.setItem("AllUsers", JSON.stringify(this.users));
         //only strings can go into local storage
        
@@ -61,7 +61,7 @@ function handleSubmit(event) {
         checkbox
     );
     console.log(user)
-    allOfUsers.addNewUser(user)
+    allOfUsers.addNewUser(user);
     //instance of userInfo to local storage, stringifiy, then save in local storage
 
     window.location.href = "supporters.html";
@@ -72,9 +72,9 @@ function handleSubmit(event) {
 const allOfUsers = new AllUsers()
 
 
-    function showOnDOM() {
-        throw new Error("Function not implemented.");
-    }
+    // function showOnDOM() {
+    //     throw new Error("Function not implemented.");
+    // }
 //pull info from local storage
 
 
