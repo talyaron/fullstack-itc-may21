@@ -183,7 +183,7 @@ button {
         flex-wrap: wrap;
 
         &__item {
-            width: 200px;
+            width: 220px;
             align-items: center;
             border-radius: 20px;
             border: 2px solid aqua;
@@ -191,10 +191,11 @@ button {
             margin: 10px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 2fr 1fr 1fr;
+            grid-template-rows: 2fr 1fr 1fr 1fr;
             grid-template-areas:
                 "match distance"
                 "match time"
+                "match pace"
                 "match area";
             -webkit-animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
             animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -216,6 +217,10 @@ button {
 
             #run_time {
                 grid-area: time;
+            }
+
+            #run_pace {
+                grid-area: pace;
             }
 
             #run_area {
@@ -279,7 +284,7 @@ button {
             align-items: baseline;
             justify-content: center;
             background-color: white;
-            height: 140px;
+            height: 170px;
             border-radius: 0 0 10px 10px;
 
             .add_run_form {

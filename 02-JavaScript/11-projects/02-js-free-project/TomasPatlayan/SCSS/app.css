@@ -1,3 +1,4 @@
+/*BASE*/
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -379,7 +380,6 @@ h1, h2, h3 {
   font-family: "Roboto", sans-serif;
   margin: 0 0 2.5rem 0;
   font-weight: 900;
-  text-align: center;
 }
 
 h1 {
@@ -392,6 +392,201 @@ h2 {
 
 h3 {
   font-size: 3rem;
+}
+
+/*LAYOUT*/
+form p {
+  font-size: 1.5rem;
+  color: #4f4f4f;
+  margin: 2rem 0 0 0;
+}
+
+legend {
+  font-size: 2rem;
+  color: #333333;
+}
+
+label {
+  font-weight: 700;
+  text-transform: uppercase;
+  display: block;
+}
+
+input:not([type="submit"], [type="file"]),
+textarea {
+  padding: 1rem;
+  display: block;
+  width: 100%;
+  background-color: #e1e1e1;
+  margin-bottom: 2rem;
+  border: none;
+  border-radius: 1rem;
+}
+
+textarea {
+  height: 20rem;
+}
+
+.header {
+  width: 100%;
+  height: 15rem;
+  background-color: #1f222b;
   text-align: center;
+}
+
+.header__text {
+  padding-top: 3rem;
+}
+
+.header__text h1 {
+  color: #ffffff;
+  font-size: 8rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.header__text p {
+  font-size: 2rem;
+  color: #d3d3d3;
+  margin: 0;
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.content__left-area {
+  width: 30%;
+  background-color: #ececec;
+  text-align: center;
+  margin-top: 10rem;
+  padding: 0 3rem;
+}
+
+.content__left-area h4 {
+  font-size: 3rem;
+  font-weight: 400;
+  margin: 2rem 0;
+}
+
+.content__left-area h5 {
+  font-size: 1.8rem;
+  margin: 1rem;
+}
+
+.content__left-area p {
+  font-size: 1.7rem;
+}
+
+.content__left-area .skills__bar {
+  margin-top: 3rem;
+  display: -ms-grid;
+  display: grid;
+  display: grid;
+  gap: 1rem;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  margin-top: 1rem;
+  padding: 0 2rem;
+}
+
+.content__left-area .skills__bar__bars p {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.content__right-area {
+  width: 70%;
+  padding: 5rem;
+}
+
+.content__right-area h2 {
+  font-size: 3.5rem;
+  font-weight: 400;
+}
+
+.content__right-area h2 span {
+  margin-right: 3rem;
+  font-size: 5rem;
+  color: #d3d3d3;
+}
+
+.content__right-area p {
+  padding-left: 7rem;
+  text-align: justify;
+  word-break: break-all;
+  color: grey;
+  margin-top: 1rem;
+}
+
+.content .work__experience {
+  position: relative;
+}
+
+.content .work__experience h3 {
+  font-size: 2.2rem;
+  font-weight: 400;
+  padding-left: 7rem;
+}
+
+.content .work__experience h4 {
+  font-size: 1.8rem;
+  padding-left: 7rem;
+  font-weight: 400;
+  color: gray;
+}
+
+.content .work__experience span {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  color: #000000;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+.content .education {
+  margin-top: 30px;
+}
+
+.content .education__experience {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.content .education__experience h4 {
+  padding-left: 8rem;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.content .education__experience span {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.content .education__experience p {
+  padding-left: 8rem;
+}
+
+button {
+  font-size: 2.5rem;
+  padding: 1rem 2rem;
+  margin: 5rem 0;
+  background-color: #000000;
+  border: none;
+  outline: none;
+  color: white;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 /*# sourceMappingURL=app.css.map */

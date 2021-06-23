@@ -87,3 +87,24 @@
     width: 100%;
   }
 }
+@media (max-width: 700px) {
+  .header {
+    display: flex;
+  }
+  .header__title {
+    position: relative;
+    right: 2%;
+    text-align: center;
+  }
+
+  .boardCheked--name {
+    text-align: center;
+  }
+  .boardCheked__box {
+    flex-direction: column;
+  }
+  .boardCheked__box--img {
+    margin: auto 0;
+    width: 100%;
+  }
+}

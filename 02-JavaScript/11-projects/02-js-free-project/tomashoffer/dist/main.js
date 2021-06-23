@@ -15,16 +15,27 @@ var PostList = /** @class */ (function () {
         this.posts.push(post);
         var postsScreen = JSON.stringify(post);
         localStorage.setItem("posts", postsScreen);
-        window.location.href = "posts.html";
+        try {
+            window.location.href = "posts.html";
+            if (!window.location.href)
+                throw new Error('The page where you want to redirect it doesn´t exist!');
+        }
+        catch (e) {
+            console.error(e);
+        }
     };
     return PostList;
 }());
 inputFile.addEventListener("change", function () {
-    console.log(this.files);
     // This converts the file to a DataURL
     var reader = new FileReader();
     reader.addEventListener("load", function () {
-        localStorage.setItem('image', JSON.stringify(reader.result));
+        try {
+            localStorage.setItem('image', JSON.stringify(reader.result));
+        }
+        catch (e) {
+            console.error(e);
+        }
     });
     //Takes the file index 0
     reader.readAsDataURL(this.files[0]);

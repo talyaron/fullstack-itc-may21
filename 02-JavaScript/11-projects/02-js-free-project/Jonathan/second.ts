@@ -59,6 +59,8 @@ class BookingList {
             } else {
                 localStorage.setItem('checkedHotel', JSON.stringify(arrayChecked))
                 window.location.href = "third.html";
+
+                if(!window.location.href) throw new Error("The page does not exist");
             }
         } catch (e) {
             console.log(e);
@@ -142,7 +144,7 @@ class BookingList {
             let welcome: string = '';
             let html: string = '';
 
-            welcome += `<h1 class = "header__title">Welcome to Booking 😊 ${customer.name}. Have a nice Journey </h1>`
+            welcome += `<h1 class = "header__title">Welcome to Booking 😊 ${customer.name}. Pick an hotel and get a full description </h1>`
 
             const result = Hotels.filter(element =>
                 ((element.city === customer.city) && (element.stars === customer.stars)) && (element.price <= customer.price) && (element.status === customer.status))
@@ -168,8 +170,8 @@ class BookingList {
 
             }
 
-            if (!welcomeRoot) throw new Error("The Welcome Root does not exist");
-            if (!imgRoot) throw new Error("The Welcome Root does not exist");
+            if (!welcomeRoot) throw new Error("The WelcomeRoot does not exist");
+            if (!imgRoot) throw new Error("The imgRoot does not exist");
 
             welcomeRoot.innerHTML = welcome;
             imgRoot.innerHTML = html;
