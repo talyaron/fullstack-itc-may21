@@ -59,6 +59,8 @@ class BookingList {
             } else {
                 localStorage.setItem('checkedHotel', JSON.stringify(arrayChecked))
                 window.location.href = "third.html";
+
+                if(!window.location.href) throw new Error("The page does not exist");
             }
         } catch (e) {
             console.log(e);
@@ -108,15 +110,41 @@ class BookingList {
                     city: "jerusalem",
                     stars: "fivestar",
                     price: 300,
-                    status: "children"
+                    status: "single"
+                },
+                {
+                    imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/250744836.jpg?k=c0831284c5bafa39a02fb1691c5d0faaee80441f204a1d2366b28f9015246ead&o=&hp=1',
+                    name: "Eden Hotel",
+                    address: "8 Shmaryahu Levin Street, Haifa, 33101, Israel",
+                    city: "haifa",
+                    stars: "threestar",
+                    price: 400,
+                    status: "married"
+                },
+                {
+                    imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/229779320.jpg?k=5cdc43ee0fd39adbd8991edf983d56cb281b3af71b3460cff8fc84c84a08b680&o=&hp=1',
+                    name: "Hashimi Hotel",
+                    address: "Khan El Zeit St. No 73 Old City-Jerusalem, Jerusalén,",
+                    city: "jerusalem",
+                    stars: "twostar",
+                    price: 200,
+                    status: "married"
+                },
+                {
+                    imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/40888968.jpg?k=543a1a0c9e1616444e1407237df26c4c8a7bd1c5587a848ac404fc21ac751a2b&o=&hp=1',
+                    name: "Club Hotel Eilat - 5 Stars Superior",
+                    address: "Ha'arava Road P.O 4444, Eilat, 88000, Israel ",
+                    city: "eilat",
+                    stars: "fourstar",
+                    price: 500,
+                    status: "single"
                 }
-
             ]
 
             let welcome: string = '';
             let html: string = '';
 
-            welcome += `<h1 class = "header__title">Welcome to Booking 😊 ${customer.name}. Have a nice Journey </h1>`
+            welcome += `<h1 class = "header__title">Welcome to Booking 😊 ${customer.name}. Pick an hotel and get a full description </h1>`
 
             const result = Hotels.filter(element =>
                 ((element.city === customer.city) && (element.stars === customer.stars)) && (element.price <= customer.price) && (element.status === customer.status))
@@ -126,9 +154,9 @@ class BookingList {
             } else {
                 for (let i = 0; i < result.length; i++) {
                     html +=
-                        `<div class = "boardHotel_container">
-                        <p class="boardHotel_container--name">${result[i].name}</p>
-                        <img src="${result[i].imageURL}" width="400" height="300" class="boardHotel__container--img">
+                        `<div class = "boardHotel__container">
+                        <p class="boardHotel__container--name">${result[i].name}</p>
+                        <img src="${result[i].imageURL}" width="350" height="300" class="boardHotel__container--img">
                         <p class="boardHotel__container--address">${result[i].address}</p>
                         <div class = "boardHotel__container__box">
                             <span class = "boardHotel__container__box--price">Cost: ${result[i].price} ₪ 
@@ -142,8 +170,8 @@ class BookingList {
 
             }
 
-            if (!welcomeRoot) throw new Error("The Welcome Root does not exist");
-            if (!imgRoot) throw new Error("The Welcome Root does not exist");
+            if (!welcomeRoot) throw new Error("The WelcomeRoot does not exist");
+            if (!imgRoot) throw new Error("The imgRoot does not exist");
 
             welcomeRoot.innerHTML = welcome;
             imgRoot.innerHTML = html;

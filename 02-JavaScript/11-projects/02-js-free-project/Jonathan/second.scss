@@ -4,28 +4,28 @@
     padding: 0;
 }
 
+
 .header {
     background-color: black;
     padding: 1rem;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    
+    width: 100%;
+
     &__prevpage,
     &__nextpage {
         text-decoration: none;
-        padding: 5px;
+        padding: 2px;
         font-family: arial;
         text-transform: uppercase;
-        padding-left: 10px;
-        padding-right: 10px;
         font-weight: 800;
         font-size: 15px;
         color: black;
         background-color: salmon;
         border-radius: 30px;
         position: relative;
-        left: 15%;
+        left: 5%;
     }
 
     &__prevpage:hover,
@@ -37,60 +37,180 @@
 
     &__title {
         color: white;
+        position: relative;
+        left: 5%;
+        font-size: 1.4rem;
     }
 
 }
 
-
 .boardHotel {
     display: flex;
     align-items: end;
-    justify-content: center;
-    margin-top: 20px;
+    justify-content: space-evenly;
+    margin-top: 1.6rem;
 
     &__nohotel {
         position: absolute;
         top: 50%;
         left: 20%;
         color: white;
-        font-size: 30px;
+        font-size: 1.7rem;
     }
+
 
     &__container {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         flex-direction: column;
 
-    }
-
-    .boardHotel_container--name {
-        color: white;
-        font-size: 1.5rem;
-        position: relative;
-        left: 30%;
-    }
-
-    .boardHotel__container--img {
-        margin-right: 40px;
-    }
-
-    .boardHotel__container--address {
-        max-width: 400px;
-        margin-top: 10px;
-        color: white;
-        margin-bottom: 10px;
-    }
+        &--name {
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
+            text-align: center;
+        }
 
 
-    .boardHotel__container__box {
-        position: absolute;
-        top: 90%;
-    }
+        &--address {
+            max-width: 400px;
+            margin-top: 10px;
+            color: white;
+            margin-bottom: 10px;
+        }
 
-    .boardHotel__container__box--price {
-        color: white;
-        margin-top: 10px;
+        &__box {
+            position: relative;
+            top: 90%;
+
+            &--price {
+                color: white;
+                margin-top: 10px;
+
+            }
+
+        }
+
 
     }
 
+
+}
+
+@media (max-width: 900px) {
+
+
+    .boardHotel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__container {
+            display: flex;
+            justify-content: center;
+
+            &--name {
+                text-align: center;
+                position: relative;
+                left: 3%;
+                margin-top: 2rem;
+            }
+
+            &--address {
+                text-align: center;
+            }
+
+            &--img {
+                margin-left: 5px;
+
+            }
+
+            &__box {
+
+                text-align: center;
+                margin-bottom: 10px;
+
+                &--price {
+                    color: white;
+                    margin-top: 10px;
+                    text-align: center;
+
+                }
+
+            }
+
+        }
+    }
+}
+
+
+
+
+
+
+
+@media (max-width: 300px) {
+
+    .header{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        &__prevpage,
+        &__nextpage {
+         margin: 1rem 0;
+         position: relative;
+         left:5%;
+        }
+
+        &__prevpage{
+            position: relative;
+            left:5%;
+        }
+    }
+
+    .boardHotel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__container {
+            display: flex;
+            justify-content: center;
+
+            &--name {
+                text-align: center;
+                position: relative;
+                left: 3%;
+                margin-top: 2rem;
+            }
+
+            &--address {
+                text-align: center;
+                position: relative;
+                left:10%;
+                max-width: 200px;
+            }
+
+            &--img {
+                width: 100%;
+            }
+
+            &__box {
+
+                text-align: center;
+                margin-bottom: 10px;
+
+                &--price {
+                    color: white;
+                    margin-top: 10px;
+                    text-align: center;
+                    position: relative;
+                    left:-5%;
+                    
+                }
+
+            }
+
+        }
+    }
 }
