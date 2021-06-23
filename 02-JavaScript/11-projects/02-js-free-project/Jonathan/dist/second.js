@@ -132,9 +132,9 @@ var BookingList = /** @class */ (function () {
                 }
             }
             if (!welcomeRoot)
-                throw new Error("The Welcome Root does not exist");
+                throw new Error("The WelcomeRoot does not exist");
             if (!imgRoot)
-                throw new Error("The Welcome Root does not exist");
+                throw new Error("The imgRoot does not exist");
             welcomeRoot.innerHTML = welcome;
             imgRoot.innerHTML = html;
             return result.length;
