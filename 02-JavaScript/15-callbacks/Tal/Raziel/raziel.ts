@@ -14,7 +14,8 @@ id:12},
 id:13}
   
 ]
+
 console.log(persons.filter(person=>person.name=='HANA'));
 
-let X:any=persons.filter(person=>person.name!=="Danni").splice(0); //remove person
+let X:any=persons.filter(person=>person.name!=="Danni").splice(0); //remove person+array
 console.log(X);

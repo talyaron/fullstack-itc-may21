@@ -9,5 +9,5 @@ var persons = [
         id: 13 }
 ];
 console.log(persons.filter(function (person) { return person.name == 'HANA'; }));
-var X = persons.filter(function (person) { return person.name !== "Danni"; }).splice(0); //remove person
+var X = persons.filter(function (person) { return person.name !== "Danni"; }).splice(0); //remove person+array
 console.log(X);
