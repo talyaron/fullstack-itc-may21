@@ -1,6 +1,7 @@
 const allItems = JSON.parse(localStorage.getItem('item'));
 const root = document.querySelector('#root');
 
+
 function renderItems(): void {
 
     let html: string = "";
@@ -11,6 +12,7 @@ function renderItems(): void {
     });
     try {
         root.innerHTML = html;
+
         if (!html) throw new Error('An error occurs when you want to render..')
     } catch (error) {
         console.error(error)
@@ -26,27 +28,31 @@ function checkear() {
 
 
     allItems.forEach(element => {
+
         try {
 
             if (check[count].checked === true) {
                 itemArray.push(element)
+
             }
             count++;
+
 
         } catch (error) {
             console.error(error)
         }
     });
 
+
     localStorage.setItem('checkedItem', JSON.stringify(itemArray))
 
     mostrarItems();
 
 }
-
-
-
 renderItems();
+
+
+
 
 
 function redirectt() {

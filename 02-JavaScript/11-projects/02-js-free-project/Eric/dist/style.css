@@ -27,7 +27,6 @@ input {
   background: #fff;
 }
 
-/** Header Image **/
 .cover-img .cover-inner {
   background: url("https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1533&q=80");
   height: 190px;
@@ -96,6 +95,52 @@ input {
   color: black;
 }
 
+.body2 {
+  background-size: 100%;
+  background-image: url("http://blog.welcomebeds.com/wp-content/uploads/2018/12/playa-paraiso-mexico.jpg");
+}
+
+.card {
+  position: absolute;
+  background-color: rgba(220, 220, 220, 0.897);
+  height: 400px;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.9);
+  transition: 0.1s;
+  border-radius: 5px;
+}
+
+.card:hover {
+  opacity: 0.8;
+}
+
+.btn1 {
+  color: black;
+  border: 1px solid grey;
+  border-radius: 5px;
+  position: relative;
+  margin-left: 30%;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: black;
+  margin-top: 10%;
+}
+
+#root {
+  text-align: center;
+  color: black;
+  margin-top: 5%;
+}
+
 /* Animations*/
 .title {
   -webkit-animation: title 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -159,52 +204,6 @@ input {
     transform: scale(1);
   }
 }
-.body2 {
-  background-size: 100%;
-  background-image: url("http://blog.welcomebeds.com/wp-content/uploads/2018/12/playa-paraiso-mexico.jpg");
-}
-
-.card {
-  position: absolute;
-  background-color: rgba(220, 220, 220, 0.897);
-  height: 500px;
-  transform: translate(-50%, -50%);
-  width: 320px;
-  top: 50%;
-  left: 50%;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.9);
-  transition: 0.1s;
-  border-radius: 5px;
-}
-
-.card:hover {
-  opacity: 0.8;
-}
-
-.btn1 {
-  color: black;
-  border: 1px solid grey;
-  border-radius: 5px;
-  position: relative;
-  margin-left: 30%;
-}
-
-h2 {
-  text-align: center;
-  font-family: "Nunito", sans-serif;
-  font-size: 2rem;
-  font-weight: 500;
-  color: black;
-  margin-top: 10%;
-}
-
-#root {
-  text-align: center;
-  color: black;
-  margin-top: 5%;
-}
-
-/*Animation*/
 .btn1 {
   -webkit-animation: btn1 2s ease-in-out infinite both;
   animation: btn1 2s ease-in-out infinite both;
