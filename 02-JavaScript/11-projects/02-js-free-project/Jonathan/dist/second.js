@@ -48,6 +48,8 @@ var BookingList = /** @class */ (function () {
             else {
                 localStorage.setItem('checkedHotel', JSON.stringify(arrayChecked));
                 window.location.href = "third.html";
+                if (!window.location.href)
+                    throw new Error("The page does not exist");
             }
         }
         catch (e) {
@@ -116,7 +118,7 @@ var BookingList = /** @class */ (function () {
             ];
             var welcome = '';
             var html = '';
-            welcome += "<h1 class = \"header__title\">Welcome to Booking \uD83D\uDE0A " + customer.name + ". Have a nice Journey </h1>";
+            welcome += "<h1 class = \"header__title\">Welcome to Booking \uD83D\uDE0A " + customer.name + ". Pick an hotel and get a full description </h1>";
             var result = Hotels.filter(function (element) {
                 return ((element.city === customer.city) && (element.stars === customer.stars)) && (element.price <= customer.price) && (element.status === customer.status);
             });
@@ -126,15 +128,15 @@ var BookingList = /** @class */ (function () {
             else {
                 for (var i = 0; i < result.length; i++) {
                     html +=
-                        "<div class = \"boardHotel__container\">\n                        <p class=\"boardHotel__container--name\">" + result[i].name + "</p>\n                        <img src=\"" + result[i].imageURL + "\" width=\"400\" height=\"300\" class=\"boardHotel__container--img\">\n                        <p class=\"boardHotel__container--address\">" + result[i].address + "</p>\n                        <div class = \"boardHotel__container__box\">\n                            <span class = \"boardHotel__container__box--price\">Cost: " + result[i].price + " \u20AA \n                            <input type=\"checkbox\" id=\"cbox" + i + "\" value=\"checkbox" + i + "\" class=\"boardHotel__container__box--checks\"> \n                            </span>\n                        </div>\n                    </div>";
+                        "<div class = \"boardHotel__container\">\n                        <p class=\"boardHotel__container--name\">" + result[i].name + "</p>\n                        <img src=\"" + result[i].imageURL + "\" width=\"350\" height=\"300\" class=\"boardHotel__container--img\">\n                        <p class=\"boardHotel__container--address\">" + result[i].address + "</p>\n                        <div class = \"boardHotel__container__box\">\n                            <span class = \"boardHotel__container__box--price\">Cost: " + result[i].price + " \u20AA \n                            <input type=\"checkbox\" id=\"cbox" + i + "\" value=\"checkbox" + i + "\" class=\"boardHotel__container__box--checks\"> \n                            </span>\n                        </div>\n                    </div>";
                     newHotel = new Booking(result[i].name, result[i].status, result[i].city, result[i].imageURL, result[i].address, result[i].price, result[i].stars);
                     booking.getBooking(newHotel);
                 }
             }
             if (!welcomeRoot)
-                throw new Error("The Welcome Root does not exist");
+                throw new Error("The WelcomeRoot does not exist");
             if (!imgRoot)
-                throw new Error("The Welcome Root does not exist");
+                throw new Error("The imgRoot does not exist");
             welcomeRoot.innerHTML = welcome;
             imgRoot.innerHTML = html;
             return result.length;

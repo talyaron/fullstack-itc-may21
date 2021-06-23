@@ -40,6 +40,7 @@ function renderDescription() {
         if (!getCheckedHotel)
             throw new Error("Empty LocalStorage");
         getCheckedHotel.forEach(function (hotel) {
+            // for YS, maybe the green message is a problem because of VS?
             var indexHotel = Hotels.findIndex(function (hotelslist) { return hotelslist.name === hotel.name; });
             html += "<p class=\"boardCheked--name\">" + Hotels[indexHotel].name + "</p>\n                    <div class=\"boardCheked__box\">\n                        <img src = \"" + Hotels[indexHotel].imageURL + "\" class=\"boardCheked__box--img\">\n                        <p class = \"boardCheked__box--description\">" + Hotels[indexHotel].description + "</p>\n                    </div>";
         });

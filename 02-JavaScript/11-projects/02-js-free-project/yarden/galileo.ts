@@ -54,7 +54,6 @@ try {
     expeditionName.innerHTML = planet.expeditionName
     pastExpeditions.innerHTML = planet.pastExpeditions.toString()
     pastTravelers.innerHTML = planet.pastTravelers.toString()
-    console.log(planet.imageSrc);
     
     document.querySelector('.planetPic__image').setAttribute('src', planet.imageSrc)
 
@@ -80,20 +79,5 @@ const handleSubmit = (event:any)=> {
         event.target.reset()
     } catch (error) {
         console.error(error)
-    }
-}
-
-//The user class for the expedition form: 
-class user {
-    name:string
-    date:Date
-    planet:Planet
-    isCertified:Boolean
-
-    constructor(name:string, date:Date, planet:Planet, isCertified:Boolean) {
-        this.name = name
-        this.date = date
-        this.planet = planet
-        this.isCertified = isCertified
     }
 }

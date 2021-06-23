@@ -25,7 +25,7 @@
         </ul>
     </header>
         <div class="form-page-container">
-            <form class="expedition-form">
+            <form onsubmit="handleSubmit(event)" class="expedition-form">
                 <h1>Book your expedition</h1>
                 <fieldset><legend>Full name</legend>
                 <label for="name"></label>
@@ -48,12 +48,12 @@
                 <fieldset>
                     <legend>Training</legend>
                 <label for="isCertified">Do you hold a valid Astronaut Card? If not, we offer training options.</label>
-                    <input type="checkbox" id="isCertified">
+                    <input type="checkbox" id="isCertified" name="isCertified">
                 </fieldset>
                 <button type="submit">Book</button>
             </form>
             <div>
-                <iframe width="950" height="534" src="https://www.youtube.com/embed/yDiD8F9ItX0?start=223&autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+                <iframe width="950" height="534" src="https://www.youtube.com/embed/yDiD8F9ItX0?start=224&autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
             </div>
         </div>
     <p class="footer__text">

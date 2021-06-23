@@ -10,7 +10,8 @@
     <title>Hotel Page</title>
 </head>
 
-<body style="background-image: linear-gradient(to right, #0b486b ,#f56217 );">
+<body style="background-image: linear-gradient(to right, #0b486b ,#f56217 ); background-attachment:fixed;
+     width: 100%;">
    
     <div class="wrapper">
         <form onsubmit="handleSumbit(event)">
@@ -47,7 +48,7 @@
                     <span style="color:#b29600">★★★★★</span>
                 </label>
                 <select name="status" required>
-                    <option value="status" selected>Select your status</option>
+                    <option value="" selected>Select your status</option>
                     <option value="single">Single</option>
                     <option value="married">Married</option>
                 </select>

@@ -188,9 +188,40 @@
 }
 
 footer {
-  background-color: black;
+  background: #151414;
   padding: 1rem;
 }
 footer p {
   color: white;
+}
+
+@media (max-width: 668px) {
+  .wrapper {
+    display: block;
+  }
+  .wrapper__elements--title, .wrapper__elements--subtitle {
+    margin-top: 30px;
+    margin-left: -12px;
+  }
+  .wrapper__elements__container {
+    margin-top: 30px;
+    margin-left: -12px;
+  }
+}
+@media (max-width: 312px) {
+  .wrapper {
+    display: block;
+  }
+  .wrapper__elements--title, .wrapper__elements--subtitle {
+    margin-top: 30px;
+    margin-left: 30px;
+  }
+  .wrapper__elements__container {
+    margin-top: 30px;
+    margin-left: 30px;
+  }
+
+  footer {
+    width: 312px;
+  }
 }

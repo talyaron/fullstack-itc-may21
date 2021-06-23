@@ -167,6 +167,7 @@ main {
     }
 }
 
+// Styling for the Form page:
 .form-page-container{
     display: flex;
     align-items: center;
@@ -184,7 +185,8 @@ main {
             }
             & input, select {
              padding: 0.5rem;
-             background-color: #977027;       
+             background-color: #977027;
+             color: whitesmoke;       
             }
         }
         & button {

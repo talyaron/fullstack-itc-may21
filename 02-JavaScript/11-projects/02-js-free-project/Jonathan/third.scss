@@ -71,3 +71,67 @@
         }
     }
 }
+@media (max-width: 300px) {
+    .header{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &__title{
+            position: relative;
+            right:2%;
+            text-align: center;
+ 
+        }
+    }
+
+    .boardCheked{
+
+        &--name{
+         text-align: center;
+        }
+
+        &__box{
+            flex-direction: column;
+            &--img{
+                margin: auto 0;
+                width: 100%;
+            }
+        }
+
+
+        
+    }
+}
+
+@media (max-width: 700px) {
+    .header{
+        display: flex;
+
+        &__title{
+            position: relative;
+            right:2%;
+            text-align: center;
+ 
+        }
+    }
+
+    .boardCheked{
+
+        &--name{
+         text-align: center;
+        }
+
+        &__box{
+            flex-direction: column;
+            &--img{
+                margin: auto 0;
+                width: 100%;
+            }
+        }
+
+
+        
+    }
+}

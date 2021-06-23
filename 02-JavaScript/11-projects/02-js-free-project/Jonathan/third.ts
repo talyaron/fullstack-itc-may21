@@ -53,13 +53,15 @@ function renderDescription() {
         if(!getCheckedHotel) throw new Error("Empty LocalStorage");
 
         getCheckedHotel.forEach(hotel => {
-            let indexHotel = Hotels.findIndex(hotelslist => hotelslist.name === hotel.name);
+            // for YS, maybe the green message is a problem because of VS?
+             let indexHotel = Hotels.findIndex(hotelslist => hotelslist.name === hotel.name);
             html += `<p class="boardCheked--name">${Hotels[indexHotel].name}</p>
                     <div class="boardCheked__box">
                         <img src = "${Hotels[indexHotel].imageURL}" class="boardCheked__box--img">
                         <p class = "boardCheked__box--description">${Hotels[indexHotel].description}</p>
                     </div>`
         });
+
 
         boardCheckedRoot.innerHTML = html;
     } catch (e) {

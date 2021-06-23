@@ -40,7 +40,7 @@ h1 {
   margin-right: 2rem;
 }
 
-.wrpr-grid {
+.wrpr-grid, .allusers {
   border-top: 5px solid darkblue;
   border-radius: 50px;
   display: flex;
@@ -48,14 +48,14 @@ h1 {
   justify-content: center;
   text-align: center;
 }
-.wrpr-grid__form {
+.wrpr-grid__form, .allusers__form {
   justify-content: center;
 }
-.wrpr-grid__elements--p-left {
+.wrpr-grid__elements--p--left, .allusers__elements--p--left {
   text-align: left;
   line-height: 2rem;
 }
-.wrpr-grid__elements--p-right {
+.wrpr-grid__elements--p--center, .allusers__elements--p--center {
   line-height: 2rem;
 }
 
