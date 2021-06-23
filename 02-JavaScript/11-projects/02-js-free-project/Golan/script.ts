@@ -1,3 +1,6 @@
+const getUser = 
+console.log(getUser)
+
 //method for adding individual user info
 class UserInfo {
     name: string;
@@ -17,23 +20,21 @@ class UserInfo {
 
     }
 
-// this is for page2:
-    showOnDOM() {
-        // window.location.href = 'supporters.html'
-        // localStorage.getItem(JSON.parse(allOfUsers.users) => allOfUsers)
-        //on 2nd page parse
 
-    //display on 2nd page:
-    //         document.getElementById("data").innerHTML = `Hi ${this.name}, thanks for signing up! Your details are ${this.email} ${this.phone}. We'll be in touch soon!`;
+    
+
+    
+            
 
 }
 //class to provide an array of all users for local storage
 class AllUsers {
-    users: Array<UserInfo> = []; 
+    users: Array<UserInfo> = JSON.parse(localStorage.getItem('AllUsers')); 
     //method to push new user to the array
     addNewUser(user) {
         this.users.push(user)
         console.log(this.users)
+        localStorage.setItem("AllUsers", JSON.stringify(this.users));
         //only strings can go into local storage
        
         ;
@@ -62,40 +63,23 @@ function handleSubmit(event) {
     console.log(user)
     allOfUsers.addNewUser(user)
     //instance of userInfo to local storage, stringifiy, then save in local storage
-    localStorage.setItem('user', JSON.stringify(user))
-    localStorage.setItem("AllUsers", JSON.stringify(allOfUsers.users))
-    
-    //the other direction is -  //getItemm-setItem, parse-stringifiy   
 
+    window.location.href = "supporters.html";
+
+    
 }
+//call AllUsers outside of the scope
 const allOfUsers = new AllUsers()
 
-// [Hey the problems is that you have to initialize the AllUsers class outside of the submit 
-//     We initialized it inside the function
-//     Const AllUsers = new Allusers
-//     You have to do that outside the function
 
-//class for storing all the song info that the user likes - skip it, too complicated
-// class Song {
-//     infoToArray : Array<UserInfo> = [];
-//     name: string = "";
-//     constructor(name: string) {
-//         this.name = name;
-//     }
-//method for adding new user info:
-// addNewFormSubmit(
-//     name: string,
-//     email: string,
-//     phone: any
-// ): string {
-//     const newFormSubmit: any = new UserInfo(
-//         name,
-//         email,
-//         phone,
+    function showOnDOM() {
+        throw new Error("Function not implemented.");
+    }
+//pull info from local storage
 
-//     );
-//     this.infoToArray.push(newFormSubmit);
-//     return newFormSubmit;
+
+
+
 
 
 

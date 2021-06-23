@@ -14,6 +14,8 @@ a:hover {
 h1 {
     font-size: 100%;
 }
+
+
 .wrpr-top {
 
     &__logo-div {
@@ -63,7 +65,7 @@ h1 {
     }
 }
 
-.wrpr-grid {
+.wrpr-grid, .allusers {
     border-top: 5px solid darkblue;
     border-radius: 50px;
     // display: grid;
@@ -81,11 +83,11 @@ h1 {
         justify-content: center;
     }
 
-    &__elements--p-left {
+    &__elements--p--left {
         text-align: left;
         line-height: 2rem;
     }
-    &__elements--p-right {  
+    &__elements--p--center {  
         line-height: 2rem;
     }
 
