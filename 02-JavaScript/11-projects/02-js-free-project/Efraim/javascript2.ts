@@ -1,4 +1,5 @@
-
+// if had more time/required a third page, i would have liked to have made this a form to be able to collect the input of the number
+//of items the customer wanted..
 function getCartFromStorage(domElement: any){
   try{
   let cart:Array<any> = JSON.parse(localStorage.getItem('cart'));
