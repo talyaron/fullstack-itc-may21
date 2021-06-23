@@ -10,7 +10,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    
+
     &__prevpage,
     &__nextpage {
         text-decoration: none;
@@ -41,7 +41,6 @@
 
 }
 
-
 .boardHotel {
     display: flex;
     align-items: end;
@@ -56,41 +55,44 @@
         font-size: 30px;
     }
 
+    
     &__container {
         display: flex;
         justify-content: center;
         flex-direction: column;
 
+        &--name {
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
+            left: 30%;
+        }
+
+        &--img {
+            margin-right: 40px;
+        }
+
+        &--address {
+            max-width: 400px;
+            margin-top: 10px;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        &__box {
+            position: absolute;
+            top: 90%;
+
+            &--price {
+                color: white;
+                margin-top: 10px;
+
+            }
+
+        }
+
+    
     }
-
-    .boardHotel_container--name {
-        color: white;
-        font-size: 1.5rem;
-        position: relative;
-        left: 30%;
-    }
-
-    .boardHotel__container--img {
-        margin-right: 40px;
-    }
-
-    .boardHotel__container--address {
-        max-width: 400px;
-        margin-top: 10px;
-        color: white;
-        margin-bottom: 10px;
-    }
-
-
-    .boardHotel__container__box {
-        position: absolute;
-        top: 90%;
-    }
-
-    .boardHotel__container__box--price {
-        color: white;
-        margin-top: 10px;
-
-    }
+    
 
 }
