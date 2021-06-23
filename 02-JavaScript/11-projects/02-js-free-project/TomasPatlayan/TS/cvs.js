@@ -1,45 +1,11 @@
-// const getCv = JSON.stringify(localStorage.getItem("completeCv"));
-// const show: HTMLElement = document.querySelector("#show");
-// function pe() {
-//     let html: string = this.cvs.cvs.map( element => {
-//         return (
-//          `<h1>${element.name}</h1>`
-//         )
-//     }).join('');
-//     show.innerHTML = html;
-// }
-// pe();
-// const printCv = JSON.parse(localStorage.getItem("completeCv"));
-// const pato: HTMLElement = document.querySelector("#show");
 var root = document.querySelector("#show");
 var renderPost = JSON.parse(localStorage.getItem("completeCv"));
-function render() {
-    var p = this.renderPost.renderPost.forEach(function (element) {
-        "<h1 class=\"posts_title\">" + element[0].name + "</h1></div>";
+var render = function () {
+    var html = "";
+    renderPost.forEach(function (element) {
+        html += "\n<div class=\"container\">\n  <header class=\"header\">\n    <div class=\"header__text\">\n      <h1>" + element.name + "</h1>\n      <p>" + element.currentlyWorking + "</p>\n    </div>\n  </header>\n\n  <div class=\"content\">\n    <div class=\"content__left-area\">\n      <div class=\"contact\">\n        <h4>CONTACT</h4>\n        <h5>Phone</h5>\n     <p>" + element.contactPhone + "</p>\n\n        <h5>E-mail</h5>\n        <p>" + element.contactMail + "</p>\n\n        <h5>Linkedin</h5>\n        <p>" + element.contactLin + "</p>\n      </div>\n\n      <div class=\"skills\">\n        <h4>Skills</h4>\n        <div class=\"skills__bar\">\n          <div class=\"skills__bar__bars\">\n            <p>" + element.skill1 + "</p>\n          </div>\n\n          <div class=\"skills__bar__bars\">\n            <p>" + element.skill2 + "</p>\n          </div>\n\n          <div class=\"skills__bar__bars\">\n            <p>" + element.skill3 + "</p>\n          </div>\n\n          <div class=\"skills__bar__bars\">\n            <p>" + element.skill4 + "</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"content__right-area\">\n      <div class=\"about\">\n        <h2>\n          <span><i class=\"far fa-user\"></i></span>PERSONAL PROFILE\n        </h2>\n        <p>\n         " + element.personalPrfile + "\n        </p>\n      </div>\n      <div class=\"work\">\n        <h2>\n          <span><i class=\"fas fa-briefcase\"></i></span>WORK EXPERIENCE\n        </h2>\n\n        <div class=\"work__experience\">\n          <h3>" + element.work1 + "</h3>\n          <h4>ETC College America</h4>\n          <span>2014/2016</span>\n        </div>\n        <div class=\"work__experience\">\n          <h3>" + element.work2 + "</h3>\n          <h4>ETC College America</h4>\n          <span>2014/2016</span>\n        </div>\n        <div class=\"work__experience\">\n          <h3>" + element.work3 + "</h3>\n          <h4>ETC College America</h4>\n          <span>2014/2016</span>\n        </div>\n        <div class=\"work__experience\">\n          <h3>" + element.work4 + "</h3>\n          <h4>ETC College America</h4>\n          <span>2014/2016</span>\n        </div> \n      </div>\n      <div class=\"education\">\n        <h2>\n          <span><i class=\"fas fa-book\"></i></span>EDUCATION\n        </h2>\n        <div class=\"education__experience\">\n          <h4>" + element.education1 + "</h4>\n          <span>2015/2020</span>\n        </div>\n        <div class=\"education__experience\">\n          <h4>" + element.education2 + "</h4>\n          <span>2015/2020</span>\n        </div>\n        <div class=\"education__experience\">\n          <h4>" + element.education3 + "</h4>\n          <span>2015/2020</span>\n        </div>\n      </div>\n    </div>\n  </div>\n  <button id=\"btn\">Print CV</button>\n</div>\n";
     });
     console.log(renderPost);
-    root.innerHTML = p;
-}
+    root.innerHTML = html;
+};
 render();
-// console.log(printCv);
-// function renderPets(): void {
-//   let pepe: string = this.printCv.printCv.map((pepito) => {
-//     pepe += `<p> hola ${pepito.name}<p>`;
-//   })
-//   pato.innerHTML = pepe;
-// }
-// console.log(renderPets());
-// console.log(printCv);
-// renderPets()
-// const allPets = JSON.parse(localStorage.getItem('completeCv'));
-// const root: HTMLElement = document.querySelector('#show')
-// console.log(allPets);
-// function renderPets(): void {
-//     let html: string = this.allPets.allPets.map(element => {
-//         return (
-//             `<div id='${element.name}' class="pet__item__wrapper">`  
-//         )
-//     }).join('');
-//     root.innerHTML = html;
-// }
-// renderPets()
