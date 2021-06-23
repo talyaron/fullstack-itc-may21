@@ -57,13 +57,13 @@
   position: relative;
   left: 5%;
 }
-.wrapper__elements .wrapper__elements--title {
+.wrapper__elements--title {
   animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
   letter-spacing: 0.15rem;
   font-size: 2.5rem;
   margin-bottom: 2rem;
 }
-.wrapper__elements .wrapper__elements--subtitle {
+.wrapper__elements--subtitle {
   margin-bottom: 1.1rem;
   animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
@@ -81,12 +81,12 @@
     opacity: 1;
   }
 }
-.wrapper__elements .wrapper__elements__container {
+.wrapper__elements__container {
   position: relative;
   max-width: 500px;
   margin: 2% 0;
 }
-.wrapper__elements .wrapper__elements__container__slider {
+.wrapper__elements__container__slider {
   width: 100%;
   position: relative;
   height: 0;
@@ -96,10 +96,10 @@
   border: solid 1px #2e2e2e;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
 }
-.wrapper__elements .wrapper__elements__container__slider--radio {
+.wrapper__elements__container__slider--radio {
   display: none;
 }
-.wrapper__elements .wrapper__elements__container__slider--slide {
+.wrapper__elements__container__slider--slide {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -107,14 +107,14 @@
   left: 0;
   opacity: 0;
 }
-.wrapper__elements .wrapper__elements__container__slider--slide img {
+.wrapper__elements__container__slider--slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transform: scale(1.1);
   transition: 1.3s;
 }
-.wrapper__elements .wrapper__elements__container__slider--caption {
+.wrapper__elements__container__slider--caption {
   position: absolute;
   width: 100%;
   left: 5%;
@@ -126,7 +126,7 @@
   line-height: 50px;
   transition: 0.9s;
 }
-.wrapper__elements .wrapper__elements__container__slider--caption span {
+.wrapper__elements__container__slider--caption span {
   display: block;
   text-transform: initial;
   font-size: 30px;
@@ -134,7 +134,7 @@
   color: black;
   line-height: 15px;
 }
-.wrapper__elements .wrapper__elements__container__slider--dots {
+.wrapper__elements__container__slider--dots {
   width: 100%;
   position: absolute;
   bottom: 5%;
@@ -142,7 +142,7 @@
   justify-content: center;
   align-items: center;
 }
-.wrapper__elements .wrapper__elements__container__slider--dots label {
+.wrapper__elements__container__slider--dots label {
   width: 15px;
   height: 15px;
   background: #fff;
@@ -152,38 +152,38 @@
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
-.wrapper__elements .wrapper__elements__container__slider--dots label:hover {
+.wrapper__elements__container__slider--dots label:hover {
   opacity: 0.7;
 }
-.wrapper__elements #radio-1:checked ~ #slide-1,
-.wrapper__elements #radio-2:checked ~ #slide-2,
-.wrapper__elements #radio-3:checked ~ #slide-3,
-.wrapper__elements #radio-4:checked ~ #slide-4,
-.wrapper__elements #radio-5:checked ~ #slide-5 {
+.wrapper__elements__container #radio-1:checked ~ #slide-1,
+.wrapper__elements__container #radio-2:checked ~ #slide-2,
+.wrapper__elements__container #radio-3:checked ~ #slide-3,
+.wrapper__elements__container #radio-4:checked ~ #slide-4,
+.wrapper__elements__container #radio-5:checked ~ #slide-5 {
   opacity: 1;
 }
-.wrapper__elements #radio-1:checked ~ #slide-1 img,
-.wrapper__elements #radio-2:checked ~ #slide-2 img,
-.wrapper__elements #radio-3:checked ~ #slide-3 img,
-.wrapper__elements #radio-4:checked ~ #slide-4 img,
-.wrapper__elements #radio-5:checked ~ #slide-5 img {
+.wrapper__elements__container #radio-1:checked ~ #slide-1 img,
+.wrapper__elements__container #radio-2:checked ~ #slide-2 img,
+.wrapper__elements__container #radio-3:checked ~ #slide-3 img,
+.wrapper__elements__container #radio-4:checked ~ #slide-4 img,
+.wrapper__elements__container #radio-5:checked ~ #slide-5 img {
   transform: scale(1);
 }
-.wrapper__elements #radio-1:checked ~ #slide-1 .wrapper__elements__container__slider--caption,
-.wrapper__elements #radio-2:checked ~ #slide-2 .wrapper__elements__container__slider--caption,
-.wrapper__elements #radio-3:checked ~ #slide-3 .wrapper__elements__container__slider--caption,
-.wrapper__elements #radio-4:checked ~ #slide-4 .wrapper__elements__container__slider--caption,
-.wrapper__elements #radio-5:checked ~ #slide-5 .wrapper__elements__container__slider--caption {
+.wrapper__elements__container #radio-1:checked ~ #slide-1 .wrapper__elements__container__slider--caption,
+.wrapper__elements__container #radio-2:checked ~ #slide-2 .wrapper__elements__container__slider--caption,
+.wrapper__elements__container #radio-3:checked ~ #slide-3 .wrapper__elements__container__slider--caption,
+.wrapper__elements__container #radio-4:checked ~ #slide-4 .wrapper__elements__container__slider--caption,
+.wrapper__elements__container #radio-5:checked ~ #slide-5 .wrapper__elements__container__slider--caption {
   opacity: 1;
   top: 7%;
   font-size: 80px;
 }
-.wrapper__elements #radio-1:checked ~ .wrapper__elements__container__slider--dots #label-1,
-.wrapper__elements #radio-2:checked ~ .wrapper__elements__container__slider--dots #label-2,
-.wrapper__elements #radio-3:checked ~ .wrapper__elements__container__slider--dots #label-3,
-.wrapper__elements #radio-4:checked ~ .wrapper__elements__container__slider--dots #label-4,
-.wrapper__elements #radio-5:checked ~ .wrapper__elements__container__slider--dots #label-5 {
-  background: gray;
+.wrapper__elements__container #radio-1:checked ~ .wrapper__elements__container__slider--dots #label-1,
+.wrapper__elements__container #radio-2:checked ~ .wrapper__elements__container__slider--dots #label-2,
+.wrapper__elements__container #radio-3:checked ~ .wrapper__elements__container__slider--dots #label-3,
+.wrapper__elements__container #radio-4:checked ~ .wrapper__elements__container__slider--dots #label-4,
+.wrapper__elements__container #radio-5:checked ~ .wrapper__elements__container__slider--dots #label-5 {
+  background: lightblue;
   opacity: 1;
 }
 
