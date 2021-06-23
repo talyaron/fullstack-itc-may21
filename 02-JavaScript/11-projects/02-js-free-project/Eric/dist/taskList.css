@@ -1,16 +1,34 @@
-.List {
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-size: 100%;
+  background-image: url("http://blog.welcomebeds.com/wp-content/uploads/2018/12/playa-paraiso-mexico.jpg");
+  margin: 0;
+  padding: 0;
+}
+
+.card {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  background-color: rgba(220, 220, 220, 0.897);
+  height: 500px;
   transform: translate(-50%, -50%);
   width: 320px;
-  height: 500px;
-  background: #fff;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.9);
+  transition: 0.1s;
+  border-radius: 5px;
+}
+
+.card:hover {
+  opacity: 0.8;
 }
 
 .btn1 {
-  color: #6C717B;
-  border: 1px solid #6C717B;
+  color: black;
+  border: 1px solid grey;
   border-radius: 5px;
   position: relative;
   margin-left: 30%;
@@ -25,4 +43,39 @@ h2 {
 
 #root {
   text-align: center;
+}
+
+/*Animation*/
+.btn1 {
+  -webkit-animation: btn1 2s ease-in-out infinite both;
+  animation: btn1 2s ease-in-out infinite both;
+}
+
+@-webkit-keyframes btn1 {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes btn1 {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }

@@ -6,24 +6,36 @@ function renderItems(): void {
     let html: string = "";
 
     allItems.forEach(element => {
+
         html += `<div>  ${element.task} <input type="checkbox" class="checkItem" onclick = checkear() > </div> `
     });
-    root.innerHTML = html;
+    try {
+        root.innerHTML = html;
+        if (!html) throw new Error('An error occurs when you want to render..')
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-function checkear() {
 
+
+function checkear() {
     const check: any = document.getElementsByClassName('checkItem');
     let itemArray: any = [];
-    let count:number =0;
-    
+    let count: number = 0;
+
 
     allItems.forEach(element => {
-        
-        if (check[count].checked === true) {
-            itemArray.push(element)
+        try {
+
+            if (check[count].checked === true) {
+                itemArray.push(element)
+            }
+            count++;
+
+        } catch (error) {
+            console.error(error)
         }
-        count++;
     });
 
     localStorage.setItem('checkedItem', JSON.stringify(itemArray))
@@ -38,10 +50,20 @@ renderItems();
 
 
 function redirectt() {
-    window.location.href = 'index.html'
+    try {
+        window.location.href = 'index.html'
+        if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 
-function mostrarItems(){
-    localStorage.parse
+function mostrarItems() {
+    try {
+        localStorage.parse
+
+    } catch (error) {
+        console.error(error)
+    }
 }
