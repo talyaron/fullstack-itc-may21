@@ -59,9 +59,9 @@ function filter(): void {
         });
 
         //Delete duplicate elements in an array
-        const uniqueGender: Array<number> = petGender.filter(onlyUnique);
+        const uniqueGender: Array<string> = petGender.filter(onlyUnique);
         const uniqueAge: Array<number> = petAge.filter(onlyUnique);
-        const uniqueCity: Array<number> = petCity.filter(onlyUnique);
+        const uniqueCity: Array<string> = petCity.filter(onlyUnique);
 
         //Call a function to add the unique values in the filters
         addFilter(uniqueGender, selectGender);
@@ -73,7 +73,7 @@ function filter(): void {
     }
 }
 
-function addFilter(unique: Array<any>, select: any): void {
+function addFilter(unique: Array<string | number>, select: HTMLElement): void {
     let htmlToAdd: string = unique.map(element => {
         return (
             `<option value="${element}">${element}</option>`
