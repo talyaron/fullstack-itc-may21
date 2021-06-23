@@ -1,30 +1,85 @@
 var Run = /** @class */ (function () {
-    function Run(runDistance, runTime, runArea) {
-        this.runMatch = false;
+    function Run(runDistance, runTime, runPace, runArea, runMatch) {
         this.runId = "run" + Math.random().toString(16).slice(2);
         this.runRunnerId = JSON.parse(localStorage.getItem("currentRunner"))
             .runnerId;
         this.runDistance = runDistance;
         this.runTime = runTime;
+        this.runPace = runPace;
         this.runArea = runArea;
+        this.runMatch = runMatch;
     }
     return Run;
+}());
+var RunsPool = /** @class */ (function () {
+    function RunsPool(allRuns) {
+        this.allRuns = allRuns;
+    }
+    RunsPool.prototype.addToPool = function (run) {
+        try {
+            this.allRuns.push(run);
+            this.allRuns = this.allRuns.sort(function (a, b) { return Date.parse(a.runTime) - Date.parse(b.runTime); });
+            this.allRuns = this.allRuns.sort(function (a, b) { return a.runRunnerId - b.runRunnerId; });
+            run.runMatch = this.findMatch(run);
+            return run.runMatch;
+        }
+        catch (er) {
+            console.error(er);
+        }
+    };
+    RunsPool.prototype.findMatch = function (run) {
+        try {
+            var runMatches = this.allRuns.filter(function (runItem) {
+                return runItem.runRunnerId !== run.runRunnerId &&
+                    Math.abs((runItem.runDistance - run.runDistance)) < 2 && // less than 2 Km dif
+                    Math.abs((Date.parse(runItem.runTime) - Date.parse(run.runTime)) / (1000 * 60 * 60)) < 2 && // less than 2 hours dif
+                    runItem.runPace === run.runPace &&
+                    runItem.runArea === run.runArea;
+            });
+            if (runMatches.length > 0) {
+                run.runMatch = true;
+                var currentRunIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === run.runId; });
+                this.allRuns[currentRunIndex].runMatch = true;
+                this.showMatchesOnDON(runMatches);
+            }
+            return run.runMatch;
+        }
+        catch (er) {
+            console.error(er);
+        }
+    };
+    RunsPool.prototype.showMatchesOnDON = function (runMatches) {
+        // in the future - the method will add a button to show matches to the run box, in case available.
+        // clicking will open a modal of the matches
+    };
+    return RunsPool;
 }());
 var LoggedInRunner = /** @class */ (function () {
     function LoggedInRunner() {
         // generated on the registration page - passed on to other pages via localStorage
-        this.runnerName = JSON.parse(localStorage.getItem("currentRunner")).runnerName; // required on registration
+        this.runnerName = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerName; // required on registration
         this.runnerId = JSON.parse(localStorage.getItem("currentRunner")).runnerId; // generated on registration
-        this.runnerEmail = JSON.parse(localStorage.getItem("currentRunner")).runnerEmail; // required on registration
-        this.runnerPassword = JSON.parse(localStorage.getItem("currentRunner")).runnerPassword; // required on registration
-        this.runnerGender = JSON.parse(localStorage.getItem("currentRunner")).runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
-        this.runnerAgeGroup = JSON.parse(localStorage.getItem("currentRunner")).runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
-        this.runnerChat = JSON.parse(localStorage.getItem("currentRunner")).runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
-        this.runnerPref = JSON.parse(localStorage.getItem("currentRunner")).runnerPref; // default on registration - TODO add method to edit
-        this.runnerProfImg = JSON.parse(localStorage.getItem("currentRunner")).runnerProfImg; // TODO add method editDetails
-        this.runnerRuns = JSON.parse(localStorage.getItem("currentRunner")).runnerRuns; // empty on registration
-        this.runnerRunsHtml = JSON.parse(localStorage.getItem("currentRunner")).runnerRunsHtml; // DOM representation of all runs - new runs to DOM are added to this innerHTML
-        this.runnerDistance = JSON.parse(localStorage.getItem("currentRunner")).runnerDistance;
+        this.runnerEmail = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerEmail; // required on registration
+        this.runnerPassword = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerPassword; // required on registration
+        this.runnerGender = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
+        this.runnerAgeGroup = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
+        this.runnerChat = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
+        this.runnerPref = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerPref; // default on registration - TODO add method to edit
+        this.runnerProfImg = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerProfImg; // TODO add method editDetails
+        this.runnerRuns = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerRuns; // empty on registration
+        this.runnerRunsHtml = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerRunsHtml; // DOM representation of all runs - new runs to DOM are added to this innerHTML
+        this.runnerDistance = JSON.parse(localStorage.getItem("currentRunner"))
+            .runnerDistance;
     }
     LoggedInRunner.prototype.personalDetailsToDOM = function () {
         var mainTitle = document.querySelector("title");
@@ -33,8 +88,8 @@ var LoggedInRunner = /** @class */ (function () {
         var runnerRunsDOM = document.querySelector(".runs");
         var ruunerTotalDistance = document.querySelector("#total_sum");
         var runnerRunsCounter = document.querySelector("#total_counts");
-        mainTitle.insertAdjacentHTML('afterbegin', "" + this.runnerName);
-        runnerNameContainter.insertAdjacentHTML('beforeend', this.runnerName + "!");
+        mainTitle.insertAdjacentHTML("afterbegin", "" + this.runnerName);
+        runnerNameContainter.insertAdjacentHTML("beforeend", this.runnerName + "!");
         runnerProfileImg.title = "" + this.runnerName;
         if (this.runnerProfImg === null) {
             runnerProfileImg.setAttribute("src", "images/togetheRun_logo.png");
@@ -56,13 +111,18 @@ var LoggedInRunner = /** @class */ (function () {
     LoggedInRunner.prototype.renderRunsToDOM = function () {
         try {
             var runsContainer_1 = document.querySelector(".runs");
-            runsContainer_1.innerHTML = '';
+            runsContainer_1.innerHTML = "";
             this.runnerRuns.forEach(function (run) {
-                var matchFAClass = run.runMatch ? "check-double" : "check";
-                var matchTitle = run.runMatch ? "Partner found!" : "Pending partner...";
+                var matchFAClass = run.runMatch ? "-double" : "";
+                var matchTitle = run.runMatch
+                    ? "Buddy found!"
+                    : "Pending buddy...";
                 var runColor = run.runMatch ? "aqua" : "orange";
-                var runFormatedDate = "" + run.runTime.toISOString().substring(0, 16).replace('T', ' ');
-                var runHTML = "<div class=\"runs__item runs__item\">\n          <i id=\"match\" class=\"fas fa-2x fa-" + matchFAClass + "-circle\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n          <div id=\"run_distance\" style=\"color: " + runColor + ";\">\n            " + Math.abs(run.runDistance) + " Km\n          </div>\n          <div id=\"run_time\">" + runFormatedDate + "</div>\n          <div id=\"run_area\">" + run.runArea + "</div>\n        </div>";
+                var runFormatedDate = "" + run.runTime
+                    .toISOString()
+                    .substring(0, 16)
+                    .replace("T", " ");
+                var runHTML = "<div class=\"runs__item runs__item\">\n          <i id=\"match\" class=\"fas fa-2x fa-check" + matchFAClass + "\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n          <div id=\"run_distance\" style=\"color: " + runColor + ";\">\n            " + Math.abs(run.runDistance) + " Km\n          </div>\n          <div id=\"run_time\">" + runFormatedDate + "</div>\n          <div id=\"run_pace\">" + run.runPace + "</div>\n          <div id=\"run_area\">" + run.runArea + "</div>\n        </div>";
                 runsContainer_1.innerHTML += runHTML;
             });
         }
@@ -91,11 +151,13 @@ var LoggedInRunner = /** @class */ (function () {
                 ruunerTotalDistance.style.color = "#cd7f32";
                 distanceBadge.setAttribute("src", "images/TR_Kms_B.png");
             }
-            if (this.runnerRuns.length > 4) { //49 - 4 only for easy testing
+            if (this.runnerRuns.length > 4) {
+                //49 - 4 only for easy testing
                 runnerRunsCounter.style.color = "gold";
                 togetherunBadge.setAttribute("src", "images/TR_G.png");
             }
-            else if (this.runnerRuns.length > 1) { //19 - 1 only for easy testing
+            else if (this.runnerRuns.length > 1) {
+                //19 - 1 only for easy testing
                 runnerRunsCounter.style.color = "silver";
                 togetherunBadge.setAttribute("src", "images/TR_S.png");
             }
@@ -110,8 +172,12 @@ var LoggedInRunner = /** @class */ (function () {
     };
     return LoggedInRunner;
 }());
-// let RunsPool : Array<Run>; // for the future - pool of all runners future runs, so matches can be made
-var currentRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
+var RunsMainPool = JSON.parse(localStorage.getItem("runsPool"))
+    ? new RunsPool(JSON.parse(localStorage.getItem("runsPool")).allRuns)
+    : new RunsPool([]);
+var currentRunner = JSON.parse(localStorage.getItem("currentRunner"))
+    ? JSON.parse(localStorage.getItem("currentRunner"))
+    : null;
 if (currentRunner === null) {
     window.location.href = "togetheRun_registration.html";
 }
@@ -121,6 +187,7 @@ var logOut = function () {
         var logoutBtn = document.querySelector(".summary__item--logout");
         logoutBtn.addEventListener("click", function (ev) {
             localStorage.clear();
+            localStorage.setItem("runsPool", JSON.stringify(RunsMainPool));
             window.location.href = "togetheRun_registration.html";
         });
     }
@@ -175,9 +242,14 @@ var runSubmit = function (ev) {
         ev.preventDefault();
         var runDistance = Number(ev.target.elements.runDistance.value);
         var runTime = new Date(ev.target.elements.runTime.value);
+        var runPace = ev.target.elements.runPace.value;
         var runArea = ev.target.elements.runArea.value;
-        var run = new Run(runDistance, runTime, runArea);
+        var runMatch = false;
+        var run = new Run(runDistance, runTime, runPace, runArea, runMatch);
+        run.runMatch = RunsMainPool.addToPool(run);
+        localStorage.setItem("runsPool", JSON.stringify(RunsMainPool));
         currentRunner.addRun(run);
+        localStorage.setItem("currenRunner", JSON.stringify(currentRunner));
         var modal = document.querySelector(".modalWrapper");
         var modalBox = document.querySelector(".modalBox");
         isModalOpen = false;

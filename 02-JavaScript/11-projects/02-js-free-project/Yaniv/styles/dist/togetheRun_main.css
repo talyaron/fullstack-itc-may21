@@ -185,7 +185,7 @@ button:hover {
   flex-wrap: wrap;
 }
 #mainscreen .runs__item {
-  width: 200px;
+  width: 220px;
   align-items: center;
   border-radius: 20px;
   border: 2px solid aqua;
@@ -193,8 +193,8 @@ button:hover {
   margin: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 1fr 1fr;
-  grid-template-areas: "match distance" "match time" "match area";
+  grid-template-rows: 2fr 1fr 1fr 1fr;
+  grid-template-areas: "match distance" "match time" "match pace" "match area";
   -webkit-animation: shadow-inset-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: shadow-inset-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   transition: 0.5s;
@@ -212,6 +212,9 @@ button:hover {
 }
 #mainscreen .runs__item #run_time {
   grid-area: time;
+}
+#mainscreen .runs__item #run_pace {
+  grid-area: pace;
 }
 #mainscreen .runs__item #run_area {
   grid-area: area;
@@ -262,7 +265,7 @@ button:hover {
   align-items: baseline;
   justify-content: center;
   background-color: white;
-  height: 140px;
+  height: 170px;
   border-radius: 0 0 10px 10px;
 }
 .modalBox__item--content .add_run_form {
