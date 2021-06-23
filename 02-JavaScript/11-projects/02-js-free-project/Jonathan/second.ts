@@ -154,7 +154,7 @@ class BookingList {
                     html +=
                         `<div class = "boardHotel__container">
                         <p class="boardHotel__container--name">${result[i].name}</p>
-                        <img src="${result[i].imageURL}" width="400" height="300" class="boardHotel__container--img">
+                        <img src="${result[i].imageURL}" width="350" height="300" class="boardHotel__container--img">
                         <p class="boardHotel__container--address">${result[i].address}</p>
                         <div class = "boardHotel__container__box">
                             <span class = "boardHotel__container__box--price">Cost: ${result[i].price} ₪ 
