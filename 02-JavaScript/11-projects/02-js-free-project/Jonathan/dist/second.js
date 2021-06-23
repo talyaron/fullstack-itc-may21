@@ -116,7 +116,7 @@ var BookingList = /** @class */ (function () {
             ];
             var welcome = '';
             var html = '';
-            welcome += "<h1 class = \"header__title\">Welcome to Booking \uD83D\uDE0A " + customer.name + ". Have a nice Journey </h1>";
+            welcome += "<h1 class = \"header__title\">Welcome to Booking \uD83D\uDE0A " + customer.name + ". Pick an hotel and get a full description </h1>";
             var result = Hotels.filter(function (element) {
                 return ((element.city === customer.city) && (element.stars === customer.stars)) && (element.price <= customer.price) && (element.status === customer.status);
             });

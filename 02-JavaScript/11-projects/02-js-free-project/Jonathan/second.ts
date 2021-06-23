@@ -142,7 +142,7 @@ class BookingList {
             let welcome: string = '';
             let html: string = '';
 
-            welcome += `<h1 class = "header__title">Welcome to Booking 😊 ${customer.name}. Have a nice Journey </h1>`
+            welcome += `<h1 class = "header__title">Welcome to Booking 😊 ${customer.name}. Pick an hotel and get a full description </h1>`
 
             const result = Hotels.filter(element =>
                 ((element.city === customer.city) && (element.stars === customer.stars)) && (element.price <= customer.price) && (element.status === customer.status))
