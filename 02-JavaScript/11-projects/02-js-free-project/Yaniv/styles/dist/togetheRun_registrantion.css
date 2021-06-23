@@ -234,10 +234,14 @@ header .header__item--register:active {
 }
 #mainscreen .add_runner_form__item label {
   grid-area: lbl;
+  font-size: 1.2rem;
 }
 #mainscreen .add_runner_form__item input,
 #mainscreen .add_runner_form__item img {
   grid-area: inpt;
+}
+#mainscreen .add_runner_form__item input, #mainscreen .add_runner_form__item option, #mainscreen .add_runner_form__item select {
+  font-size: 1.1rem;
 }
 #mainscreen .add_runner_form__item img {
   width: 250px;
