@@ -60,7 +60,7 @@ class Transact {
   }
 }
 
-const Balance = new Transact(0); //YS: Variable shouldnt be capitalized.
+    ; //YS: Variable shouldnt be capitalized.
 
 const handleSubmit = (ev: any): void => {
   ev.preventDefault();
