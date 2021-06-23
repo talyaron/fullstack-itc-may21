@@ -5,29 +5,23 @@ var handleSubmit = function (ev) {
     var phone = ev.target.elements.phone.value;
     var address = ev.target.elements.address.value;
     var imgURL = ev.target.elements.imgURL.value;
-    var customer = new Customer(name, email, phone, address, imgURL);
+    var customerId = Math.random().toString(16).slice(2);
+    var customer = new Customer(name, email, phone, address, imgURL, customerId);
     customers.add(customer);
-    customers.renderCustomers();
+    // customers.renderCustomers();
     // customer.renderCustomerProfile();
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("phone", phone);
-    localStorage.setItem("address", address);
-    localStorage.setItem("imgURL", imgURL);
-    window.location.href = './customer-profile.html';
+    window.location.href = "customer-profile.html?customerId=" + customerId;
     ev.target.reset();
 };
 var Customer = /** @class */ (function () {
-    function Customer(name, email, phone, address, imgURL) {
-        this.customerId = "id" + Math.random().toString(16).slice(2);
+    function Customer(name, email, phone, address, imgURL, customerId) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.imgURL = imgURL;
+        this.customerId = customerId;
     }
-    Customer.prototype.renderCustomerProfile = function () {
-    };
     return Customer;
 }());
 var Customers = /** @class */ (function () {
@@ -50,39 +44,7 @@ var Customers = /** @class */ (function () {
             console.error(e);
         }
     };
-    // sortCustomers(){
-    //     console.log(this.customers)
-    // }
-    Customers.prototype.renderCustomers = function () {
-        // const customerList: HTMLElement = document.querySelector(".customer__list");
-        try {
-            var html_1 = "";
-            this.customers.forEach(function (customer) {
-                html_1 +=
-                    "<p onclick=handleClick(customerId)>" + customer.name + "</p>";
-                // <p>${customer.email}</p>
-                // <p>${customer.phone}</p>
-                // <p>${customer.address}</p>
-                // <p>${customer.customerId}</p>
-            });
-            // customerList.innerHTML = html;
-        }
-        catch (error) {
-            console.log(error);
-        }
-        localStorage.setItem("innerHTML", html);
-    };
     return Customers;
 }());
 var customers = new Customers();
 customers.getCustoemrsFromStorage();
-var customerList = localStorage.getItem("innerHTML");
-document.querySelector(".customer__list").innerHTML = customerList;
-// customers.sortCustomers()
-function goBack() {
-    window.history.back();
-}
-function handleClick(customerId) {
-    console.log(handleClick);
-    window.location.href = "customer-profile.html";
-}
