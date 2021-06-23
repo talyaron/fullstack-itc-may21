@@ -31,7 +31,11 @@ function handleSumbit(event:any):void{
     
     localStorage.setItem("newCustomer",JSON.stringify(customer))
 
+    
+
     window.location.href = "second.html"
+
+    if(!window.location.href) throw new Error("The page does not exist");
   } catch(e){
     console.log(e);
   }

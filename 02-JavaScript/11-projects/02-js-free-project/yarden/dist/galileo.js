@@ -43,7 +43,6 @@ var changePlanet = function (planetChoice) {
         expeditionName.innerHTML = planet.expeditionName;
         pastExpeditions.innerHTML = planet.pastExpeditions.toString();
         pastTravelers.innerHTML = planet.pastTravelers.toString();
-        console.log(planet.imageSrc);
         document.querySelector('.planetPic__image').setAttribute('src', planet.imageSrc);
     }
     catch (error) {
@@ -66,13 +65,3 @@ var handleSubmit = function (event) {
         console.error(error);
     }
 };
-//The user class for the expedition form: 
-var user = /** @class */ (function () {
-    function user(name, date, planet, isCertified) {
-        this.name = name;
-        this.date = date;
-        this.planet = planet;
-        this.isCertified = isCertified;
-    }
-    return user;
-}());

@@ -246,6 +246,7 @@ main .right-side .planetPic > img {
 .form-page-container .expedition-form fieldset input, .form-page-container .expedition-form fieldset select {
   padding: 0.5rem;
   background-color: #977027;
+  color: whitesmoke;
 }
 .form-page-container .expedition-form button {
   margin: 2rem auto;

@@ -66,7 +66,7 @@ a {
   box-shadow: -3px 14px 67px 0px rgba(0, 0, 0, 0.75);
   border: 1px solid var(--darkGray);
   margin-top: 2rem;
-  padding: 5rem;
+  padding: 4rem;
 }
 .container__form form {
   margin: 0 auto;
@@ -91,7 +91,7 @@ a {
   box-shadow: -3px 14px 67px 0px rgba(0, 0, 0, 0.75);
   border: 1px solid var(--darkGray);
   margin-top: 2rem;
-  padding: 2rem;
+  padding: 1.2rem;
 }
 .posts .posts_items {
   display: flex;

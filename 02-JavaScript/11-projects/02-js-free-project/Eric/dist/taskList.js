@@ -5,25 +5,49 @@ function renderItems() {
     allItems.forEach(function (element) {
         html += "<div>  " + element.task + " <input type=\"checkbox\" class=\"checkItem\" onclick = checkear() > </div> ";
     });
-    root.innerHTML = html;
+    try {
+        root.innerHTML = html;
+        if (!html)
+            throw new Error('An error occurs when you want to render..');
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 function checkear() {
     var check = document.getElementsByClassName('checkItem');
     var itemArray = [];
     var count = 0;
     allItems.forEach(function (element) {
-        if (check[count].checked === true) {
-            itemArray.push(element);
+        try {
+            if (check[count].checked === true) {
+                itemArray.push(element);
+            }
+            count++;
         }
-        count++;
+        catch (error) {
+            console.error(error);
+        }
     });
     localStorage.setItem('checkedItem', JSON.stringify(itemArray));
     mostrarItems();
 }
 renderItems();
 function redirectt() {
-    window.location.href = 'index.html';
+    try {
+        window.location.href = 'index.html';
+        if (!window.location.href)
+            throw new Error('The page where you want to redirect it doesn´t exist!');
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 function mostrarItems() {
-    localStorage.parse;
+    try {
+        localStorage.parse;
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
