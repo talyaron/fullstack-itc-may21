@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">Hi</div>
+    <script>
+
+        const root = document.querySelector('#root');
+
+        root.addEventListener('click', e => {
+            console.log('clicked')
+        })
+
+        let x = [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 67 }, { a: -13 }, { a: 100 }];
+
+        let y = x.sort(function (a, b) {
+            return a.a - b.a
+        });
+        let z = x.sort((a, b) => a.a - b.a)
+        
+
+        let q2  = x.forEach(el=>{
+            console.log(el.a)
+        })
+
+        let q = x.map((el, i)=>{
+            return el.a+100
+        })
+        console.log(q)
+
+        //please create array of objects... {name:'aaaa'}
+        //find a specific object based on name
+        //and delete one object in the array,
+
+        //delete all objects with this name.
+
+
+    </script>
+</body>
+
+</html>

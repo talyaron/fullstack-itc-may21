@@ -22,7 +22,6 @@ class Cart {
   addToCart(product: Product) {
     try {
       this.cart.push(product);
-      console.log(this.cart);
     } catch (e) {
       console.error(e)
     }
@@ -45,7 +44,7 @@ class Products {
     }
   };
 
-  renderProducts(domElement: any) {
+  renderProducts(domElement: Element) {
     try{
     let html: string = this.products.map(product => {
       return (
@@ -76,13 +75,12 @@ class Products {
     console.error(e)
   }
 }
-
 }
+
 const products: Products = new Products();
 const cart: Cart = new Cart();
 const moveToCart = (productId: string) => {
   try {
-
   const product: Product | false = products.findProduct(productId)
   console.log(product);
   if (product !== false) {
@@ -114,7 +112,7 @@ products.addProduct(new Product("10.png", 'Super Soft Touch Sherrin', 15.99))
 products.addProduct(new Product("11.png", 'Premiers 2020 Wall Flag', 27.95))
 products.addProduct(new Product("12.png", 'Dustin Martin Monatge Wall Flag', 39.95))
 products.renderProducts(shoppingListDOM);
-console.log(products)
+
 }catch(e){
   console.error(e)
 }

@@ -147,11 +147,16 @@ header {
 
             label {
                 grid-area: lbl;
+                font-size: 1.2rem;
             }
 
             input,
             img {
                 grid-area: inpt;
+            }
+
+            input,option,select {
+                font-size: 1.1rem;
             }
 
             img {
