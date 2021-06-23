@@ -20,7 +20,7 @@ function handleSumbit(event) {
             throw new Error("You have to put some money on the input");
         var customer = new newCustomer(name, city, stars, status, price);
         localStorage.setItem("newCustomer", JSON.stringify(customer));
-        window.location.href = "hotel.html";
+        window.location.href = "second.html";
     }
     catch (e) {
         console.log(e);

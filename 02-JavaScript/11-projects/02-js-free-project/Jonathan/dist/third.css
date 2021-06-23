@@ -39,26 +39,51 @@
 .boardCheked {
   margin-bottom: 20px;
 }
-.boardCheked .boardCheked--name {
+.boardCheked--name {
   margin-left: 10px;
   margin-top: 20px;
   font-size: 20px;
   color: wheat;
   text-decoration: underline;
 }
-.boardCheked .boardCheked__box {
+.boardCheked__box {
   margin-top: 20px;
   display: flex;
   align-items: center;
 }
-.boardCheked .boardCheked__box .boardCheked__box--img {
+.boardCheked__box--img {
   margin-left: 10px;
   width: 450px;
   height: 300px;
 }
-.boardCheked .boardCheked__box .boardCheked__box--description {
+.boardCheked__box--description {
   max-width: 600px;
   text-align: justify;
   margin: 20px 10px;
   color: wheat;
+}
+
+@media (max-width: 300px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .header__title {
+    position: relative;
+    right: 2%;
+    text-align: center;
+  }
+
+  .boardCheked--name {
+    text-align: center;
+  }
+  .boardCheked__box {
+    flex-direction: column;
+  }
+  .boardCheked__box--img {
+    margin: auto 0;
+    width: 100%;
+  }
 }

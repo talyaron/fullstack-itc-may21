@@ -1,25 +1,35 @@
 class Article {
-    imageURL:string;
-    description:string;
-    articleId:number;
+    imageURL: string;
+    description: string;
+    articleId: number;
 
-    constructor(imageURL:string, description:string, articleId:number){
+    constructor(imageURL: string, description: string, articleId: number) {
         this.imageURL = imageURL;
         this.description = description;
         this.articleId = articleId;
     }
 
-    changeDescription(){
+    changeDescription() {
 
     }
 
-    changeImageURL(){
+    changeImageURL() {
 
     }
 }
 
-class ArticleArray{
+class ArticleArray {
 
+<<<<<<< HEAD
+    articles: Array<string>
+
+    constructor(articles: Array<string>) {
+        this.articles = articles;
+
+    }
+
+    Add() {
+=======
     articles:Array<Article>
 
     constructor(){
@@ -27,17 +37,18 @@ class ArticleArray{
     }
 
     Add(article:Article){
+>>>>>>> main
 
     }
 
-    Remove(){ //articleId
+    Remove() { //articleId
 
     }
 
-    renderArray(){
+    renderArray() {
 
     }
-    renderArticle(){ //articleId
+    renderArticle() { //articleId
 
     }
 
@@ -45,15 +56,21 @@ class ArticleArray{
 }
 
 function handlerSumbit(event) {
-    
+
     event.preventDefault();
 
-    var root: HTMLElement = document.querySelector('.div');
+    var root: HTMLElement = document.querySelector('.inputDiv');
 
 
     var inputURL = event.target.elements.imageURL.value;
     var description = event.target.elements.description.value;
 
+<<<<<<< HEAD
+    var container:HTMLElement = document.querySelector(".container");
+    container.style.width = "100px";
+    container.style.height = "100px";
+    container.style.backgroundColor = "red";
+=======
     var article:HTMLElement = document.createElement('div'); 
     article.className = "divArt";
     article.style.width = "100px";
@@ -66,8 +83,8 @@ function handlerSumbit(event) {
 
 
 
+>>>>>>> main
 
-    
 
 
 }
