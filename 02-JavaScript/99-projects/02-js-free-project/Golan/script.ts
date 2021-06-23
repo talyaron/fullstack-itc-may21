@@ -1,6 +1,3 @@
-// const getUser = 
-// console.log(getUser)
-
 //method for adding individual user info
 class UserInfo {
     name: string;
@@ -16,16 +13,7 @@ class UserInfo {
         this.email = email;
         this.phone = phone;
         this.checkbox = checkbox;
-
-
     }
-
-
-    
-
-    
-            
-
 }
 //class to provide an array of all users for local storage
 class AllUsers {
@@ -40,9 +28,6 @@ class AllUsers {
         ;
     }
 }
-
-
-
 // function for injecting the info from the form to the DOM//
 function handleSubmit(event) {
     event.preventDefault();
@@ -52,7 +37,6 @@ function handleSubmit(event) {
     const email = event.target.elements.email.value;
     const phone = event.target.elements.phone.value;
     const checkbox = event.target.elements.checkbox.checked;
-    //console.log(name, email, phone);
     const user: UserInfo = new UserInfo(
         name,
         favsong,
@@ -60,24 +44,12 @@ function handleSubmit(event) {
         phone,
         checkbox
     );
-    console.log(user)
+    console.log(user, 'should display user')
     allOfUsers.addNewUser(user);
-    //instance of userInfo to local storage, stringifiy, then save in local storage
-
     window.location.href = "supporters.html";
-
-    
 }
 //call AllUsers outside of the scope
 const allOfUsers = new AllUsers()
-
-
-    // function showOnDOM() {
-    //     throw new Error("Function not implemented.");
-    // }
-//pull info from local storage
-
-
 
 
 

@@ -1,4 +1,6 @@
-body, a:visited, a:link {
+body,
+a:visited,
+a:link {
   background-color: black;
   color: white;
   text-decoration: none;
@@ -40,7 +42,8 @@ h1 {
   margin-right: 2rem;
 }
 
-.wrpr-grid, .allusers {
+.wrpr-grid,
+.allusers {
   border-top: 5px solid darkblue;
   border-radius: 50px;
   display: flex;
@@ -48,14 +51,17 @@ h1 {
   justify-content: center;
   text-align: center;
 }
-.wrpr-grid__form, .allusers__form {
+.wrpr-grid__form,
+.allusers__form {
   justify-content: center;
 }
-.wrpr-grid__elements--p--left, .allusers__elements--p--left {
+.wrpr-grid__elements--p--left,
+.allusers__elements--p--left {
   text-align: left;
   line-height: 2rem;
 }
-.wrpr-grid__elements--p--center, .allusers__elements--p--center {
+.wrpr-grid__elements--p--center,
+.allusers__elements--p--center {
   line-height: 2rem;
 }
 
@@ -90,20 +96,92 @@ button:hover {
   animation-timing-function: ease;
 }
 
-@media only screen and (max-width: 400px) {
-  body {
-    width: 50%;
+#hamnav {
+  width: 100%;
+  background: #000;
+  position: sticky;
+  top: 0;
+}
+
+#hamnav label,
+#hamburger {
+  display: none;
+}
+
+#hamitems {
+  display: flex;
+}
+
+#hamitems a {
+  width: 20%;
+  padding-left: 5rem;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  #hamnav label {
+    display: inline-block;
+    color: white;
+    background: #8B0000;
+    border-radius: 30%;
+    font-size: 1.2rem;
+    padding: 1rem;
   }
 
-  .wrpr-top__logo-div {
-    size: 100%;
-    position: absolute;
-    left: 100px;
-    top: 10px;
+  #hamitems a {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-top: 0.5 rem solid black;
   }
-  .wrpr-top__logo-div--letter {
-    padding: 0.5rem;
-    font-size: 1rem;
+
+  #hamitems {
+    display: none;
+  }
+
+  #hamnav input:checked ~ #hamitems {
+    display: block;
+  }
+}
+@media screen and (max-width: 400px) {
+  body {
+    width: 70%;
+  }
+
+  iframe {
+    width: 70vw;
+    height: 70vh;
+  }
+
+  input:not([type=radio]):not([type=checkbox]),
+textarea {
+    width: 70vw;
+  }
+
+  #hamnav label {
+    display: inline-block;
+    color: white;
+    background: #8B0000;
+    border-radius: 30%;
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+
+  #hamitems a {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-top: 0.5 rem solid black;
+  }
+
+  #hamitems {
+    display: none;
+  }
+
+  #hamnav input:checked ~ #hamitems {
+    display: block;
   }
 }
 .pulsate-fwd {
