@@ -1,5 +1,3 @@
-
-
 const root = document.querySelector("#show");
 const renderPost = JSON.parse(localStorage.getItem("completeCv"));
 
@@ -67,23 +65,23 @@ const render = () => {
 
         <div class="work__experience">
           <h3>${element.work1}</h3>
-          <h4>ETC College America</h4>
-          <span>2014/2016</span>
+          
+          
         </div>
         <div class="work__experience">
           <h3>${element.work2}</h3>
-          <h4>ETC College America</h4>
-          <span>2014/2016</span>
+          
+          
         </div>
         <div class="work__experience">
           <h3>${element.work3}</h3>
-          <h4>ETC College America</h4>
-          <span>2014/2016</span>
+          
+          
         </div>
         <div class="work__experience">
           <h3>${element.work4}</h3>
-          <h4>ETC College America</h4>
-          <span>2014/2016</span>
+          
+          
         </div> 
       </div>
       <div class="education">
@@ -92,15 +90,15 @@ const render = () => {
         </h2>
         <div class="education__experience">
           <h4>${element.education1}</h4>
-          <span>2015/2020</span>
+      
         </div>
         <div class="education__experience">
           <h4>${element.education2}</h4>
-          <span>2015/2020</span>
+      
         </div>
         <div class="education__experience">
           <h4>${element.education3}</h4>
-          <span>2015/2020</span>
+      
         </div>
       </div>
     </div>
@@ -108,8 +106,6 @@ const render = () => {
   <button id="btn">Print CV</button>
 </div>
 `;
-
-
   });
 
   console.log(renderPost);
@@ -118,5 +114,3 @@ const render = () => {
 };
 
 render();
-
-
