@@ -27,7 +27,6 @@ var PostList = /** @class */ (function () {
     return PostList;
 }());
 inputFile.addEventListener("change", function () {
-    console.log(this.files);
     // This converts the file to a DataURL
     var reader = new FileReader();
     reader.addEventListener("load", function () {
