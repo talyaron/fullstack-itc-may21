@@ -1,6 +1,8 @@
 
 function getCartFromStorage(domElement: any){
+  try{
   let cart:Array<any> = JSON.parse(localStorage.getItem('cart'));
+  if (!cart){throw new Error ('Cart isnt passing to this page')}
   let html: string = cart.map(cart => {
     return (
       `<div class= "shopping-cart__put__item">`
@@ -13,15 +15,22 @@ function getCartFromStorage(domElement: any){
   }).join('')
 
   domElement.innerHTML = html;
-  
+}catch(e){
+  console.error(e)
+}
   }
 
-
+try{
 const shoppingCartDOM = document.querySelector('.shopping-cart__put');
+if (!shoppingCartDOM) {throw new Error ('No cart to display items')}
 getCartFromStorage(shoppingCartDOM);
+}catch(e){
+  console.error(e)
+}
 
 
 
+//original plan continued
 
 
 // function renderProducts(domElement: any) {
