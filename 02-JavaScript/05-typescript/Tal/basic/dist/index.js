@@ -1,8 +1,12 @@
-var x = false;
-x = 'by';
+var p = [];
+var x = "hi";
+x = "stry";
 var arr = [1, 2, 3, 'a', 4];
 console.log(x);
 var add = function (a, b) { return a + b; };
+var q = {
+    a: 45
+};
 var z = {
     a: 1,
     b: 2
@@ -17,6 +21,7 @@ var root = document.querySelector('#root');
 console.dir(root);
 var addToDOM = function (htmlElement, adds) {
     htmlElement.innerText = "add " + adds.a + " + " + adds.b + " = " + add(adds.a, adds.b);
+    return true;
 };
 addToDOM(root, w);
 var Person = /** @class */ (function () {
