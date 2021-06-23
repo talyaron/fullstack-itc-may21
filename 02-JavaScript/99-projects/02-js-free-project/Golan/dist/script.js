@@ -1,4 +1,3 @@
-var getUser = console.log(getUser);
 //method for adding individual user info
 var UserInfo = /** @class */ (function () {
     function UserInfo(name, favsong, email, phone, checkbox) {
@@ -14,7 +13,7 @@ var UserInfo = /** @class */ (function () {
 //class to provide an array of all users for local storage
 var AllUsers = /** @class */ (function () {
     function AllUsers() {
-        this.users = JSON.parse(localStorage.getItem('AllUsers'));
+        this.users = JSON.parse(localStorage.getItem('AllUsers')) ? JSON.parse(localStorage.getItem('AllUsers')) : [];
     }
     //method to push new user to the array
     AllUsers.prototype.addNewUser = function (user) {
@@ -35,16 +34,10 @@ function handleSubmit(event) {
     var email = event.target.elements.email.value;
     var phone = event.target.elements.phone.value;
     var checkbox = event.target.elements.checkbox.checked;
-    //console.log(name, email, phone);
     var user = new UserInfo(name, favsong, email, phone, checkbox);
-    console.log(user);
+    console.log(user, 'should display user');
     allOfUsers.addNewUser(user);
-    //instance of userInfo to local storage, stringifiy, then save in local storage
     window.location.href = "supporters.html";
 }
 //call AllUsers outside of the scope
 var allOfUsers = new AllUsers();
-function showOnDOM() {
-    throw new Error("Function not implemented.");
-}
-//pull info from local storage
