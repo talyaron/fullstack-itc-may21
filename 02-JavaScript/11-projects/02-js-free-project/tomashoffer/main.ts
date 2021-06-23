@@ -18,7 +18,13 @@ class PostList{
         let postsScreen = JSON.stringify(post);
 
         localStorage.setItem("posts", postsScreen); 
-        window.location.href = "posts.html";
+        try{
+            window.location.href = "posts.html";
+            if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')   
+        }catch(e){
+            console.error(e)
+        }
+       
     }
 }
 inputFile.addEventListener("change", function(){
@@ -27,7 +33,11 @@ inputFile.addEventListener("change", function(){
     const reader = new FileReader();
 
     reader.addEventListener("load", () =>{
+        try{
         localStorage.setItem('image', JSON.stringify(reader.result));
+    }catch(e){
+        console.error(e)
+    }
     })
    
        //Takes the file index 0
