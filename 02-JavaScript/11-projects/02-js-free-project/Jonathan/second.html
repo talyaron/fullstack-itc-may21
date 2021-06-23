@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://www.logosearcher.com/wp-content/uploads/2018/07/google-hotel-ads.svg"/>
+    <link rel="stylesheet" href="dist/second.min.css">
+    <title>Hotel</title>
+</head>
+<body style="background-image: linear-gradient(to right, #0b486b ,#f56217);">
+    <header class = "header">
+        <form onsubmit="handlePrevPage(event)">
+            <input type="submit" value="Return" class = "header__prevpage">
+        </form>
+        <div id="welcome"></div>
+        <form onsubmit="handleNextPage(event)">
+            <input type="submit" value="Full Description" class = "header__nextpage">
+        </form>
+    </header>
+    
+    <div id="boardHotel" class="boardHotel"></div>
+ 
+    <script src="dist/second.js"></script>
+</body>
+</html>

@@ -5,14 +5,10 @@ var handleSubmit = function (ev) {
     var phone = ev.target.elements.phone.value;
     var address = ev.target.elements.address.value;
     var imgURL = ev.target.elements.imgURL.value;
-    console.log(name);
-    console.log(email);
-    console.log(phone);
-    console.log(address);
-    console.log(imgURL);
     var customer = new Customer(name, email, phone, address, imgURL);
     customers.add(customer);
-    customers.renderCustomers(customer);
+    customers.renderCustomers();
+    // customer.renderCustomerProfile();
     localStorage.setItem("name", name);
     localStorage.setItem("email", email);
     localStorage.setItem("phone", phone);
@@ -30,6 +26,8 @@ var Customer = /** @class */ (function () {
         this.address = address;
         this.imgURL = imgURL;
     }
+    Customer.prototype.renderCustomerProfile = function () {
+    };
     return Customer;
 }());
 var Customers = /** @class */ (function () {
@@ -38,20 +36,53 @@ var Customers = /** @class */ (function () {
     }
     Customers.prototype.add = function (customer) {
         this.customers.push(customer);
+        this.customers.sort(function (a, b) { return (a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1); });
+        localStorage.setItem("customers", JSON.stringify(this.customers));
     };
+    Customers.prototype.getCustoemrsFromStorage = function () {
+        try {
+            var tempCustomers = JSON.parse(localStorage.getItem('customers'));
+            if (tempCustomers) {
+                this.customers = tempCustomers;
+            }
+        }
+        catch (e) {
+            console.error(e);
+        }
+    };
+    // sortCustomers(){
+    //     console.log(this.customers)
+    // }
     Customers.prototype.renderCustomers = function () {
-        var customerList = document.querySelector(".customer__list");
-        var html = "";
-        this.customers.forEach(function (customer) {
-            html +=
-                "<h4>Customer</h4>\n            <img src=\"" + customer.imgURL + "\">\n            <p>" + customer.name + "</p>\n            <p>" + customer.email + "</p>\n            <p>" + customer.phone + "</p>\n            <p>" + customer.address + "</p>\n            <p>" + customer.customerId + "</p>";
-        });
-        customerList.innerHTML = html;
+        // const customerList: HTMLElement = document.querySelector(".customer__list");
+        try {
+            var html_1 = "";
+            this.customers.forEach(function (customer) {
+                html_1 +=
+                    "<p onclick=handleClick(customerId)>" + customer.name + "</p>";
+                // <p>${customer.email}</p>
+                // <p>${customer.phone}</p>
+                // <p>${customer.address}</p>
+                // <p>${customer.customerId}</p>
+            });
+            // customerList.innerHTML = html;
+        }
+        catch (error) {
+            console.log(error);
+        }
         localStorage.setItem("innerHTML", html);
     };
     return Customers;
 }());
 var customers = new Customers();
+customers.getCustoemrsFromStorage();
+var customerList = localStorage.getItem("innerHTML");
+document.querySelector(".customer__list").innerHTML = customerList;
+// customers.sortCustomers()
 function goBack() {
     window.history.back();
+}
+function handleClick(customerId) {
+    console.log(handleClick);
+    window.location.href = "customer-profile.html";
 }

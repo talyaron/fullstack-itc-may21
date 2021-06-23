@@ -1,4 +1,4 @@
-class Transaction {
+ class Transaction {
     amount: number;
     date: Date;
     place: string;
@@ -47,6 +47,9 @@ class Account {
     }
 }
 
+let trnsc = new Transaction(400, new Date(), 'kedumim', 'groucery')
+console.log(trnsc)
+
 let account = new Account('Yaniv');
 const transactionId1 = account.addNewTransaction(100, new Date(), 'Tel-Aviv', 'Bank deposit');
 account.addNewTransaction(-300, new Date(), 'Ramat-Gan', 'ATM redrwal');
@@ -56,6 +59,9 @@ console.log(JSON.stringify(account))
 
 account.editTransaction(transactionId1, 'Walllllaaaaa!!!');
 console.log(account)
+console.log(account.hasOwnProperty('name'));
+
+
 
 
 

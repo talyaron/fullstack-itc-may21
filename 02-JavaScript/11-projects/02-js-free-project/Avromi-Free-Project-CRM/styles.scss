@@ -1,37 +1,49 @@
 body {
     font-size: 18px;
     background-color: rgb(248, 248, 248);
+    padding: 1%;
 }
 
 .nav {
+  
+    
     &__item {
-        text-decoration: none;
 
         // &:visited {
         //     color: cyan;
         //   }
-        &:hover {
-            color: rgb(255, 255, 255);
+        &--button{
+            text-decoration: none;
+            background-color: rgb(13, 68, 68);
+            color: white;
+            font-weight: bolder;
+            padding: 1%;
+            margin-left: 1%;
+            margin-right: 1%;
+            &:hover {
+                background-color: blanchedalmond;
+          
+            }
         }
-    }
-    &__button{
-        background-color: darkcyan;
-        color: white;
-        font-weight: bolder;
 
     }
+}
+
+.heading{
+    text-align: center;
 }
 
 .form {
     display: flex;
     flex-direction: column;
+    margin-top: 2%;
 
     &__item {
         margin: 1%;
         padding: .5%;
 
         &--button {
-            background-color: darkcyan;
+            background-color: rgb(13, 68, 68);
             color: white;
             font-weight: bolder;
             padding: 1%;
@@ -50,5 +62,23 @@ body {
     p {
         background-color: rgb(255, 255, 255);
         margin-top: .5%;
+    }
+}
+
+.customer__list {
+    display: flex;
+    flex-flow: column;
+    margin: 3%;
+    width: 80%;
+    margin: auto;
+
+  
+
+    p {
+        background-color: rgb(255, 255, 255);
+        margin: .5%;
+        padding: .5%;
+        text-transform: capitalize;
+        font-weight: bolder;
     }
 }

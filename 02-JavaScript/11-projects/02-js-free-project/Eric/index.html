@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="dist/style.css">
+    <title>FreeProject</title>
+</head>
+
+<body>
+    <div class="inputList">
+        <div class="cover-img">
+            <div class="cover-inner">
+                <h3>Vacation list</h3>
+            </div>
+        </div>
+        <div class="content">
+            <form class="add" onsubmit="doingSubmit(event)">
+                <input type="text" name="task" placeholder="Add item...">
+                <button class="input-buttons">
+                    <a href="#" class="add-todo">
+                        <i class="fas fa-plus add"></i>
+                    </a>
+                </button>
+            </form>
+            <div class="root"></div>
+            <br>
+            <div class="btns">
+                <button onclick="redirect()" class="btn1">Show items list</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="dist/toDo.js"></script>
+    }
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="boxes" >
+
+    </div>
+    <script>
+        function randomColor() {
+          return "rgb(".concat(Math.floor(Math.random() * 255), ", ").concat(Math.floor(Math.random() * 255), ",").concat(Math.floor(Math.random() * 255), ")");
+        }
+
+     function randomWidth(){
+         return width=Math.floor((Math.random() * 200) + 40);
+     }
+     function randomH(){
+         return hieght=Math.floor((Math.random() * 200) + 40);
+     }
+
+        
+        function createBox(){
+        
+            let boxes=document.querySelector('#boxes');
+            let randomNumber=Math.floor((Math.random() * 10) + 1);
+        
+            for (let i = 0; i < randomNumber; i++) {
+                let box = document.createElement("div");
+                boxes.appendChild(box);
+                let colors = randomColor();
+                let wdth=randomWidth();
+                let hgt=randomH();
+                box.style.backgroundColor = colors;
+                box.style.width=`${wdth}px`;
+               box.style.height=`${hgt}px`;
+        
+            }
+        }
+         createBox();
+        
+            </script>
+
+   
+</body>
+</html>

@@ -1,13 +1,21 @@
-body{
+body {
     font-size: 16px;
+    width: 20vw;
+    margin: auto;
+    margin-top: 2%;
 }
-.button{
-    background-color: rgb(98, 98, 133);
+
+.button {
+    background-color: rgb(192, 192, 238);
+    
+    
 }
-.transactions-div{
-    color:rgb(28, 85, 87);
+
+.transactions-div {
+    color: rgb(28, 85, 87);
 }
-// .form{
-//     display: flex;
-//     justify-content: center;
-// }
+
+.form {
+    display: flex;
+    flex-flow: column;
+}

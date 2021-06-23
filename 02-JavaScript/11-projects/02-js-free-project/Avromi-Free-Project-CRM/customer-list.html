@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +8,20 @@
     <title>Customer List</title>
     <link rel="stylesheet" href="./dist/styles.min.css">
 </head>
+
 <body>
-    
+    <nav>
+        <a class="nav__item--button" href="./new-customer.html">New Customer</a>
+    </nav>
+
+    <h1 class="heading">Customers</h1>
+    <input type="text" id="myInput" onkeyup="myFilter()" placeholder="Search for names..">
+    <div class="customer__list"></div>
+
+
     <script src="./dist/crm.js"></script>
-    
+
+
 </body>
+
 </html>

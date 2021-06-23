@@ -1,0 +1,28 @@
+.List {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 500px;
+  background: #fff;
+}
+
+.btn1 {
+  color: #6C717B;
+  border: 1px solid #6C717B;
+  border-radius: 5px;
+  position: relative;
+  margin-left: 30%;
+}
+
+h2 {
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+#root {
+  text-align: center;
+}

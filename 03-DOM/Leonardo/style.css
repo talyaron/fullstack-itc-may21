@@ -1,0 +1,95 @@
+.button {
+  position: fixed;
+  z-index: 100;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.button__item {
+  left: 0;
+  color: white;
+  padding: 15px;
+  border-radius: 25%;
+  cursor: pointer;
+  -webkit-animation: movement 5s linear infinite alternate;
+          animation: movement 5s linear infinite alternate;
+  position: relative;
+}
+
+.button--green {
+  background-color: green;
+}
+
+.button--red {
+  background-color: red;
+}
+
+.button--peru {
+  background-color: peru;
+}
+
+.button__item:hover {
+  background-color: blue;
+}
+
+#container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding-top: 100px;
+}
+
+#container div:hover {
+  -webkit-animation: rotate 5s linear infinite alternate;
+          animation: rotate 5s linear infinite alternate;
+}
+
+@-webkit-keyframes movement {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50px;
+  }
+}
+
+@keyframes movement {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50px;
+  }
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+/*# sourceMappingURL=style.css.map */

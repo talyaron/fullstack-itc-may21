@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="root"></div>
+    <script>
+       const renderPlayers = localStorage.getItem(`players`);
+       console.log(renderPlayers);
+       const playersScreen = renderPlayers.map((play)=> `<p>${play.name} Author is ${play.team}</p>`).join(' ')
+      console.log(playersScreen);
+     
+       document.querySelector('.root').innerHTML = playersScreen;
+
+      
+    </script>
+</body>
+</html>
