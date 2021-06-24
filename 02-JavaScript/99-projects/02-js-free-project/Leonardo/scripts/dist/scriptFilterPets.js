@@ -16,7 +16,7 @@ function renderPetsFilter() {
                 " </div>" +
                 ("<div class=\"pet__item__information__description\">" + element.gender.toUpperCase() + "</div>") +
                 " </div>");
-        }).join('');
+        }).join(''); //YS: Please use template literals (string interpolation)  instead of concatenating with + and joining. 
         if (!html)
             throw new Error('An error happens when you want to render the pets filtered!');
         rootFilter.innerHTML = html;
@@ -28,7 +28,7 @@ function renderPetsFilter() {
 //Function to show the completly list of the pets with out a filter
 function goBack() {
     try {
-        window.location.href = 'listOfPets.html';
+        window.location.href = 'listOfPets.html'; //YS: Would have liked to see a navbar with <a> tags instead of this. 
         if (!window.location.href)
             throw new Error('The page where you want to redirect it doesn´t exist!');
     }

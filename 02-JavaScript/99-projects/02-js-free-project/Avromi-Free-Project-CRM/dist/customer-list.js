@@ -14,7 +14,7 @@ function renderCustomers() {
     this.customers.forEach(function (customer) {
         var customerList = document.querySelector(".customer__list");
         var html = "<p>Customer: <a href=\"customer-profile.html?customerId=" + customer.customerId + "\">" + customer.name + "</a></p>";
-        customerList.insertAdjacentHTML("afterbegin", html);
+        customerList.insertAdjacentHTML("afterbegin", html); //YS: Nice! 
     });
     // customerList.innerHTML = html;
 }

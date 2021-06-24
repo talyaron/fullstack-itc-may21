@@ -71,7 +71,7 @@ class BookingList {
 
         try {
 
-            if(!customer) throw new Error("LocalStorage is empty");
+            if(!customer) throw new Error("LocalStorage is empty");  
             
             interface Hotel {
                 imageURL: string;
@@ -83,7 +83,7 @@ class BookingList {
                 status: string;
             }
 
-            const Hotels: Array<Hotel> = [
+            const Hotels: Array<Hotel> = [ //YS: Dont capitalize variables, this should be outside your function. 
                 {
                     imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/56431315.jpg?k=659e126bcf6b4aed537ea28f9c3085ae4a25e72164670ef7192af495120d12e6&o=&hp=1',
                     name: "Cucu Hotel",
@@ -147,12 +147,13 @@ class BookingList {
             welcome += `<h1 class = "header__title">Welcome to Booking 😊 ${customer.name}. Pick an hotel and get a full description </h1>`
 
             const result = Hotels.filter(element =>
-                ((element.city === customer.city) && (element.stars === customer.stars)) && (element.price <= customer.price) && (element.status === customer.status))
+                ((element.city === customer.city) && (element.stars === customer.stars)) && (element.price <= customer.price) && (element.status === customer.status));
+                ///YS: This filter is too specific for the amount of hotels you have in your array (most of the time I couldn't find a hotel). 
 
             if (result.length === 0) {
-                html += `<p class="boardHotel__nohotel">Sorry we don't have hotel for that request. Just return to the form</p>`
+                html += `<p class="boardHotel__nohotel">Sorry we don't have hotel for that request. Just return to the form</p>` //YS: Good for letting your users know what is happening. 
             } else {
-                for (let i = 0; i < result.length; i++) {
+                for (let i = 0; i < result.length; i++) {  //YS: Use forEach instead of for loop, or look at for...of loop. 
                     html +=
                         `<div class = "boardHotel__container">
                         <p class="boardHotel__container--name">${result[i].name}</p>
@@ -173,7 +174,7 @@ class BookingList {
             if (!welcomeRoot) throw new Error("The WelcomeRoot does not exist");
             if (!imgRoot) throw new Error("The imgRoot does not exist");
 
-            welcomeRoot.innerHTML = welcome;
+            welcomeRoot.innerHTML = welcome;  
             imgRoot.innerHTML = html;
             return result.length;
 
@@ -186,18 +187,18 @@ class BookingList {
 
 const booking = new BookingList();
 const customer = new Customer();
-let count: number = booking.renderBooking(customer);
+let count: number = booking.renderBooking(customer); 
 
 
 function handlePrevPage(event: any): void {
     event.preventDefault();
-    window.location.href = "first.html"
+    window.location.href = "first.html"  //YS: I would've liked to see a navbar instead. 
     localStorage.clear();
 }
 
 function handleNextPage(event: any): void {
     event.preventDefault();
-    booking.checkBooking();
+    booking.checkBooking();  //YS: I would've liked to see a navbar instead. 
 
 }
 

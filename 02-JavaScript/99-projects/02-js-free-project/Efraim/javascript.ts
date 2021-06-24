@@ -30,7 +30,7 @@ class Cart {
 
 
 
-class Products {
+class Products {            //YS: Was this class really necessary? You couldve done this with html - you shouldve used JS if you had a form to add more products. 
   products: Array<Product> = [];
   constructor() {
 
@@ -55,9 +55,10 @@ class Products {
         `<button  id='${product.id}' class="shopping-list__item-wrapper__add" onclick="moveToCart('${product.id}')">Add to Cart</button>` +
         ` </div>`
       )
-    }).join('')
+    }).join('') //YS: Please use template literals (string interpolation)  instead of concatenating with + and joining.
 
     domElement.innerHTML = html;
+    //YS: Use insertAdjectentHTML instead of innerHTML
   }catch(e){
     console.error(e)
   }
@@ -83,7 +84,7 @@ const moveToCart = (productId: string) => {
   try {
   const product: Product | false = products.findProduct(productId)
   console.log(product);
-  if (product !== false) {
+  if (product !== false) {  //YS: if(!product)  - you could have also used 'includes' or '!includes' here - please look it up. 
     cart.addToCart(product);
     
     window.localStorage.setItem('cart', JSON.stringify(cart.cart));
@@ -95,11 +96,11 @@ const moveToCart = (productId: string) => {
 
 
 try{
-const shoppingListDOM = document.querySelector('.shopping-list');
+const shoppingListDOM = document.querySelector('.shopping-list');        //YS: You could have also done this in the HTML since they are static. 
 if (!shoppingListDOM){
   throw new Error('No shopping list to hold items!')
 }
-products.addProduct(new Product("coffee.png", 'Stainless Steel Travel Mug', 12.99))
+products.addProduct(new Product("coffee.png", 'Stainless Steel Travel Mug', 12.99))  //YS: DRY! 
 products.addProduct(new Product("beanie.png", 'Boundary Rib Beanie', 15.95))
 products.addProduct(new Product("3.png", 'PUMA 2021 Clash Guernsey', 39.95))
 products.addProduct(new Product("4.png", 'PUMA 2021 Home Guernsey', 39.95))
