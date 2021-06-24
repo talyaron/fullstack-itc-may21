@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald&family=Playfair+Display:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Lets Date!</title>
+    <link rel="stylesheet" href="../refael/dist/stylesheet.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="../refael/index.html">Home</a>
+      <a href="../refael/userList.html">User List</a>
+    </nav>
+    <div class="container">
+      <div class="hi slide-in-bck-center">Hi.</div>
+      <div class="hi__welcome slide-in-bck-center2">
+        Welcome to the Next chapter of your life.
+      </div>
+      <div class="hi__welcome2 slide-in-bck-center3">
+        Its simply the best dating app ever.
+      </div>
+      <div class="lts-btn bounce-in-top">
+        <div class="lts-btn__">Lets Go</div>
+      </div>
+      <div class="form__container">
+        <div class="form__container-item">
+          <b>Lets create a stunning profile</b>
+        </div>
+        <form class="form">
+          <div class="form__container-item2">Your name</div>
+          <input type="text" name="name" id="name" />
+          <div class="form__container-item2">Age</div>
+          <input type="number" name="age" id="age" />
+          <div class="form__container-item2">Gender</div>
+          <input type="radio" id="male" name="gender" value="male" />
+          <label for="male">Male</label>
+          <input type="radio" id="female" name="gender" value="female" />
+          <label for="female">Female</label>
+          <input type="radio" id="confused" name="gender" value="confused" />
+          <label for="confused">Confused..</label>
+          <div class="form__container-item2">
+            Lets add a description of your hobbies, likes & dislikes
+          </div>
+          <textarea
+            name="desc"
+            id="desc"
+            maxlength="262"
+            minlength="20"
+            size="50"
+            style="resize: none"
+            rows="4"
+            cols="70"
+          ></textarea>
+          <div class="form__container-item2">Looking for</div>
+          <input type="radio" id="intrested" name="intrested" value="man" />
+          <label id="intrested" for="man">Man</label>
+          <input type="radio" id="intrested" name="intrested" value="woman" />
+          <label id="intrested" for="woman">Woman</label>
+          <input type="radio" id="intrested" name="intrested" value="both" />
+          <label id="intrested" for="both">Both..</label>
+          <button class="submitButton">Submit</button>
+        </form>
+      </div>
+    </div>
+    <script src="../refael/dist/script.js"></script>
+  </body>
+</html>

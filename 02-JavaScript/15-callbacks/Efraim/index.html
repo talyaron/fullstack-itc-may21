@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let x = [{
+            id: 1234,
+            name: 'dusty'
+        },
+        {
+            id: 24323,
+            name: 'jacky'
+        },
+        {
+            id: 2433,
+            name: 'nick'
+        },
+        {
+            id: 23,
+            name: 'bolton'
+        },
+
+    ]
+
+    
+    console.log(x.find(name=> name.name === "dusty"));
+    let q = x.map(function(name){
+        if(name.name != "dusty"){
+            name.name = null
+        }else{
+            name.name= name.name
+        }
+        return name.name;}
+    )
+    console.log(q);
+</script>
+
+</html>

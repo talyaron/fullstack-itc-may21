@@ -1,0 +1,15 @@
+.container {
+  width: 900px;
+  margin: auto;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.user {
+  display: flex;
+  width: 91px;
+  height: 155px;
+  border: 2px solid black;
+}

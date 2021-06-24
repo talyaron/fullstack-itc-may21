@@ -27,17 +27,28 @@ class acountTrans {
     });
     trans__container.innerHTML = html;
   }
-  showTotal() {
+  calculateSum(): any {
     const show__total = document.querySelector(".show__total");
-    let html: any = "";
-    this.transactions.forEach((acount) => {
-      html += `<div class="div__total">${acount.amount}</div>`;
-      console.dir(html);
-      let show__total = html;
-    });
-    show__total.innerHTML = html;
+    const sum = this.transactions.reduce((sum, acount) => {
+      return sum + acount.amount;
+    }, 0);
+    show__total.innerHTML = sum;
+    console.log(sum);
+    // const show__total.innerHTML = sum;
   }
+  // show__total.innerHTML = sum;
 }
+// showTotal() {
+//   const show__total = document.querySelector(".show__total");
+//   let html: any = "";
+//   this.transactions.forEach((acount) => {
+//     html += `<div class="div__total">${acount.amount}</div>`;
+//     console.dir(html);
+//     let show__total = html;
+//   });
+//   show__total.innerHTML = html; show__total.innerHTML = html;
+// }
+
 const transactions = new acountTrans();
 
 const handleSubmit = (ev: any): void => {
@@ -48,6 +59,7 @@ const handleSubmit = (ev: any): void => {
   const newAcount = new acount(desc, amount);
   transactions.add(newAcount);
   transactions.addAcountToDOM();
-  transactions.showTotal();
+  transactions.calculateSum();
+  // transactions.showTotal();
   ev.target.reset();
 };
