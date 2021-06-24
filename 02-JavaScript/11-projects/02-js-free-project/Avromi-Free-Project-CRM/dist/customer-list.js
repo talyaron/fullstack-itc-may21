@@ -13,14 +13,22 @@ function renderCustomers() {
     // const customerList: HTMLElement = document.querySelector(".customer__list");
     this.customers.forEach(function (customer) {
         var customerList = document.querySelector(".customer__list");
-        var html = "<div class=\"p\"><p><a href=\"customer-profile.html?customerId=" + customer.customerId + "\">" + customer.name + "</a></p>\n        <p><a href=\"tel:" + customer.phone + "\">" + customer.phone + "</a></p>\n        <p><a href=\"mailto:" + customer.email + "\">" + customer.email + "</a></p>\n        <p><button onclick=\"handleDelete()\">Delete</button></p>\n        </div>";
+        var html = "<div class=\"p\"><p><a href=\"customer-profile.html?customerId=" + customer.customerId + "\">" + customer.name + "</a></p>\n        <p><a href=\"tel:" + customer.phone + "\">" + customer.phone + "</a></p>\n        <p><a href=\"mailto:" + customer.email + "\">" + customer.email + "</a></p>\n        <p><button onclick=\"handleDelete(\"" + customer.customerId + "\")\">Delete</button></p>\n        </div>";
         customerList.insertAdjacentHTML("afterbegin", html);
     });
     // customerList.innerHTML = html;
 }
-function handleDelete() {
-    console.log(handleDelete());
+;
+function removeCustomer(customerId) {
+    this.customers = this.customers.filter(function (cus) { return cus.customerId !== customerId; });
+    console.log(this.articles);
+    this.renderCustomers();
 }
+;
+function handleDelete(customerId) {
+    removeCustomer(customerId);
+}
+;
 function handleClick(id) {
     // const customerId = id
     // window.location.href = `customer-profile.html?customerId=${customerId}`;
