@@ -10,13 +10,11 @@ const objects = [
   { name: "yosi", age: "40" },
 ];
 
-const remove = () => {
-  objects.forEach((element) => {
-    if (element.name === "yosi") {
-      console.log(element.name);
-      i[element] = remove;
-    }
-  });
-};
+const remove = objects.indexOf("yosi");
+if (objects.name === "yosi") {
+  //       console.log(element.name);
+  //     }
+  //   });
+}
 remove();
 console.log(objects);

@@ -7,13 +7,11 @@ var objects = [
     { name: "shimon", age: "20" },
     { name: "yosi", age: "40" },
 ];
-var remove = function () {
-    objects.forEach(function (element) {
-        if (element.name === "yosi") {
-            console.log(element.name);
-            i[element] = remove;
-        }
-    });
-};
+var remove = objects.indexOf("yosi");
+if (objects.name === "yosi") {
+    //       console.log(element.name);
+    //     }
+    //   });
+}
 remove();
 console.log(objects);
