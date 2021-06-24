@@ -19,7 +19,11 @@ function renderCustomers() {
     this.customers.forEach((customer) => {
         const customerList: HTMLElement = document.querySelector(".customer__list")
 
-        const html = `<p>Customer: <a href="customer-profile.html?customerId=${customer.customerId}">${customer.name}</a></p>`
+        const html = `<div class="p"><p><a href="customer-profile.html?customerId=${customer.customerId}">${customer.name}</a></p>
+        <p><a href="tel:${customer.phone}">${customer.phone}</a></p>
+        <p><a href="mailto:${customer.email}">${customer.email}</a></p>
+        <p><button onclick="handleDelete()">Delete</button></p>
+        </div>`
 
         customerList.insertAdjacentHTML(`afterbegin`, html)
 
@@ -30,6 +34,12 @@ function renderCustomers() {
 
 
 
+}
+
+function handleDelete() {
+    console.log(handleDelete());
+
+   
 }
 
 function handleClick(id) {
@@ -54,7 +64,10 @@ function myFilter() { //needs work
             result.forEach((customer) => {
 
                 const customerList: HTMLElement = document.querySelector(".customer__list")
-                const html = `<p>Customer: <a href="customer-profile.html?customerId=${customer.customerId}">${customer.name}</a></p>`
+                const html = `<div class="p"><a href="customer-profile.html?customerId=${customer.customerId}">${customer.name}</a>
+                <a href="tel:${customer.phone}">${customer.phone}</a>
+                <a href="mailto:${customer.email}">${customer.email}</a>
+                </div>`
                 customerList.insertAdjacentHTML(`afterbegin`, html)
 
             });
