@@ -1,3 +1,5 @@
+// let userinfo = JSON.parse(localStorage.getItem("creatUsers"));
+// console.log(userinfo);
 var letsGoBTN = document.querySelector(".lts-btn");
 letsGoBTN.addEventListener("click", function (event) {
     var form = document.querySelector(".form__container");
@@ -10,6 +12,7 @@ letsGoBTN.addEventListener("click", function (event) {
     welcome_hi.style.display = "none";
     welcome_hi2.style.display = "none";
     welcome_hi3.style.display = "none";
+    JSON.parse(localStorage.getItem("creatUsers"));
 });
 var User = /** @class */ (function () {
     function User(name, age, gender, desc, intrested) {
@@ -23,7 +26,7 @@ var User = /** @class */ (function () {
 }());
 var UserList = /** @class */ (function () {
     function UserList() {
-        this.users = JSON.parse(localStorage.getItem("creatUsers"));
+        this.users = [];
     }
     UserList.prototype.addUser = function (user) {
         this.users.push(user);
