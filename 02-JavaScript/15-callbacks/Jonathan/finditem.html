@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        const obj = [
+            {
+                name:'Eric',
+                age:'29',
+            },
+            {
+                name:'Jony',
+                age:'31',
+            },
+            {
+                name:'Jony',
+                age:'22',
+            },
+            {
+                name:'Gili',
+                age:'13',
+            },
+            {
+                name:'Jony',
+                age:'15',
+            }
+        ]
+
+        console.log(obj)
+
+        const name = "Jony";
+        const index = obj.findIndex(elem => elem.name === name)
+       
+
+        //delete is filter
+        let a = obj.filter(item => item.name !=name)
+
+        
+
+        console.log(a)
+
+        
+
+        console.log(obj.map(elem => elem.name + 'A').join(','))
+
+
+    </script>
+</body>
+</html>
