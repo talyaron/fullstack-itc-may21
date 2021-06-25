@@ -11,7 +11,7 @@ class Item {
 }
 
 class Items {
-    allItems: Array<Item> = [];
+    allItems: Array<Item> = []; //YS: Here instead of having an empty array you had to get the array from localstorage: <JSON.parse(localStorage.getItem('item'));>
     addItem(task: string): void {
         try {
             let newItem: Item = new Item(task);

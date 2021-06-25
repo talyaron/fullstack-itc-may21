@@ -48,7 +48,7 @@ function addPet(name: string, age: number, gender: string, city: string, image: 
 }
 
 //With this function I handle the form:
-const doingSubmit = (ev: any): void => {
+const doingSubmit = (ev: any): void => {   
     ev.preventDefault();
     try {
         const name: string = ev.target.elements.namePet.value;
@@ -57,9 +57,10 @@ const doingSubmit = (ev: any): void => {
         const city: string = ev.target.elements.city.value;
         const description: string = ev.target.elements.description.value;
         const contactNumber: number = ev.target.elements.contactNumber.value;
-        const image: string = document.querySelector('#previewImage').getAttribute("src");
+        const image: string = document.querySelector('#previewImage').getAttribute("src");  
         addPet(name, age, gender, city, image, description, contactNumber);
         ev.target.reset();
+        //YS: Add an alert here or some message that a pet has been added. 
     } catch (error) {
         console.error(error);
     }
@@ -77,11 +78,11 @@ function redirect(): void {
 //Function to show the previous image in the form:
 function readURL(input): void {
     if (input.files && input.files[0]) {
-        let reader: FileReader = new FileReader();
+        let reader: FileReader = new FileReader();   //YS: Very nice! 
 
         reader.onload = (e) => {
             try {
-                document.querySelector('#previewImage').setAttribute("src", `${e.target.result}`);
+                document.querySelector('#previewImage').setAttribute("src", `${e.target.result}`);   //YS: You dont need temlate literals here ${}
             } catch (error) {
                 console.error(error);
             }
