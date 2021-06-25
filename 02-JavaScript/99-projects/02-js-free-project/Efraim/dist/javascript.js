@@ -48,8 +48,9 @@ var Products = /** @class */ (function () {
                     ("<h3  class=\"shopping-list__item-wrapper__item-price\">$" + product.price + "</h3>") +
                     ("<button  id='" + product.id + "' class=\"shopping-list__item-wrapper__add\" onclick=\"moveToCart('" + product.id + "')\">Add to Cart</button>") +
                     " </div>");
-            }).join('');
+            }).join(''); //YS: Please use template literals (string interpolation)  instead of concatenating with + and joining.
             domElement.innerHTML = html;
+            //YS: Use insertAdjectentHTML instead of innerHTML
         }
         catch (e) {
             console.error(e);
@@ -77,7 +78,7 @@ var moveToCart = function (productId) {
     try {
         var product = products.findProduct(productId);
         console.log(product);
-        if (product !== false) {
+        if (product !== false) { //YS: if(!product)  - you could have also used 'includes' or '!includes' here - please look it up. 
             cart.addToCart(product);
             window.localStorage.setItem('cart', JSON.stringify(cart.cart));
         }
@@ -87,11 +88,11 @@ var moveToCart = function (productId) {
     }
 };
 try {
-    var shoppingListDOM = document.querySelector('.shopping-list');
+    var shoppingListDOM = document.querySelector('.shopping-list'); //YS: You could have also done this in the HTML since they are static. 
     if (!shoppingListDOM) {
         throw new Error('No shopping list to hold items!');
     }
-    products.addProduct(new Product("coffee.png", 'Stainless Steel Travel Mug', 12.99));
+    products.addProduct(new Product("coffee.png", 'Stainless Steel Travel Mug', 12.99)); //YS: DRY! 
     products.addProduct(new Product("beanie.png", 'Boundary Rib Beanie', 15.95));
     products.addProduct(new Product("3.png", 'PUMA 2021 Clash Guernsey', 39.95));
     products.addProduct(new Product("4.png", 'PUMA 2021 Home Guernsey', 39.95));

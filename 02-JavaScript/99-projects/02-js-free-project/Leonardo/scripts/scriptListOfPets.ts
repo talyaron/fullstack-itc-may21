@@ -20,7 +20,7 @@ function renderPets(): void {
                 `<div class="pet__item__information__description">${element.gender.toUpperCase()}</div>` +
                 ` </div>`
             )
-        }).join('');
+        }).join('');  //YS: Please use template literals (string interpolation)  instead of concatenating with + and joining. 
         if (!html) throw new Error('An error happens when you want to render the pets!')
         root.innerHTML = html;
     } catch (error) {
@@ -29,7 +29,7 @@ function renderPets(): void {
 }
 
 //Delete duplicate elements in an array
-function onlyUnique(value: number, index: number, self: any): boolean {
+function onlyUnique(value: number, index: number, self: any): boolean {   //YS: Look at sets in javascript - better way to get unique values. 
     try {
         return self.indexOf(value) === index;
     } catch (error) {
@@ -38,6 +38,8 @@ function onlyUnique(value: number, index: number, self: any): boolean {
 };
 
 //This function is to put the values in the filter. It took me time to dont DRY, at the beginning it was 3 similar functions, then I worked on it, please let me know if I can DRY better 💪
+
+//YS: Yes you can have 1 array with objects instead of 3 separate arrays. 
 function filter(): void {
     try {
         const petGender: Array<any> = [];  //I was not sure to what type write, so I know that is an array and because then I call some functions I prefer to write array on any 😁
@@ -88,8 +90,7 @@ function handleFilter(): void {
         const age: any = document.querySelector('.filter__age');
         const city: any = document.querySelector('.filter__city');
         const gender: any = document.querySelector('.filter__gender');
-
-        const petsFiltered = allPets.filter(element => (element.age === age.value) && (element.city.toUpperCase() === city.value) && (element.gender.toUpperCase() === gender.value));
+        const petsFiltered = allPets.filter(element => (element.age === age.value) && (element.city.toUpperCase() === city.value) && (element.gender.toUpperCase() === gender.value)); //YS: What if all of them are false? Let the user know.
         localStorage.setItem('petFiltered', JSON.stringify(petsFiltered));
         window.location.href = 'filteredPets.html';
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!');
@@ -101,7 +102,7 @@ function handleFilter(): void {
 //Call this function to go back to the main page
 function goBack(): void {
     try {
-        window.location.href = 'index.html';
+        window.location.href = 'index.html';       //YS: Would have liked to see navbar
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!');
     } catch (error) {
         console.error(error);

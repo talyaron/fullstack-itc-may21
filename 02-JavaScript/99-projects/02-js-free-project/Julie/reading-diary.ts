@@ -29,7 +29,7 @@ class Book {
 }
 
 class BooksArray {
-  booksList: Array<Book> = [];
+  booksList: Array<Book> = []; //YS: In order to save your previous books, here you had to make it equal to your items from localstorage < JSON.parse(localStorage.getItem("myLibrary")) > instead of making it equal to an empty array. 
   addBook(book: Book) {
     this.booksList.push(book);
     localStorage.setItem("myLibrary", JSON.stringify(this.booksList); 

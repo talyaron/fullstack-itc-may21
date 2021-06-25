@@ -17,7 +17,7 @@ function renderPets() {
                 " </div>" +
                 ("<div class=\"pet__item__information__description\">" + element.gender.toUpperCase() + "</div>") +
                 " </div>");
-        }).join('');
+        }).join(''); //YS: Please use template literals (string interpolation)  instead of concatenating with + and joining. 
         if (!html)
             throw new Error('An error happens when you want to render the pets!');
         root.innerHTML = html;
@@ -38,6 +38,7 @@ function onlyUnique(value, index, self) {
 }
 ;
 //This function is to put the values in the filter. It took me time to dont DRY, at the beginning it was 3 similar functions, then I worked on it, please let me know if I can DRY better 💪
+//YS: Yes you can have 1 array with objects instead of 3 separate arrays. 
 function filter() {
     try {
         var petGender_1 = []; //I was not sure to what type write, so I know that is an array and because then I call some functions I prefer to write array on any 😁
@@ -81,7 +82,7 @@ function handleFilter() {
         var age_1 = document.querySelector('.filter__age');
         var city_1 = document.querySelector('.filter__city');
         var gender_1 = document.querySelector('.filter__gender');
-        var petsFiltered = allPets.filter(function (element) { return (element.age === age_1.value) && (element.city.toUpperCase() === city_1.value) && (element.gender.toUpperCase() === gender_1.value); });
+        var petsFiltered = allPets.filter(function (element) { return (element.age === age_1.value) && (element.city.toUpperCase() === city_1.value) && (element.gender.toUpperCase() === gender_1.value); }); //YS: What if all of them are false? Let the user know.
         localStorage.setItem('petFiltered', JSON.stringify(petsFiltered));
         window.location.href = 'filteredPets.html';
         if (!window.location.href)
@@ -94,7 +95,7 @@ function handleFilter() {
 //Call this function to go back to the main page
 function goBack() {
     try {
-        window.location.href = 'index.html';
+        window.location.href = 'index.html'; //YS: Would have liked to see navbar
         if (!window.location.href)
             throw new Error('The page where you want to redirect it doesn´t exist!');
     }

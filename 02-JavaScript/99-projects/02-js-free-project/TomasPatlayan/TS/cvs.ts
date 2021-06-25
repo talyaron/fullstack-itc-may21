@@ -103,14 +103,15 @@ const render = () => {
       </div>
     </div>
   </div>
-  <button id="btn">Print CV</button>
+  <button id="btn">Print CV</button> 
 </div>
-`;
+`; //YS: What does the button do?
   });
 
-  console.log(renderPost);
+  console.log(renderPost); //YS: Please don't leave console logs.
 
   root.innerHTML = html;
+  //YS: Use insertAdjacentHTML instead of innerHTML
 };
 
 render();

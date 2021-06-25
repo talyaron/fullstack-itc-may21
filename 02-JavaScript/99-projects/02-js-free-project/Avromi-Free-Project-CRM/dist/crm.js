@@ -26,7 +26,7 @@ var Customer = /** @class */ (function () {
 }());
 var Customers = /** @class */ (function () {
     function Customers() {
-        this.customers = [];
+        this.customers = []; //YS: It is better practice to put this in a constructor. 
     }
     Customers.prototype.add = function (customer) {
         this.customers.push(customer);

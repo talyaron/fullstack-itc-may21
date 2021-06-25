@@ -13,8 +13,8 @@ function renderCustomers() {
     // const customerList: HTMLElement = document.querySelector(".customer__list");
     this.customers.forEach(function (customer) {
         var customerList = document.querySelector(".customer__list");
-        var html = "<div class=\"p\"><p><a href=\"customer-profile.html?customerId=" + customer.customerId + "\">" + customer.name + "</a></p>\n        <p><a href=\"tel:" + customer.phone + "\">" + customer.phone + "</a></p>\n        <p><a href=\"mailto:" + customer.email + "\">" + customer.email + "</a></p>\n        <p><button onclick=\"handleDelete(\"" + customer.customerId + "\")\">Delete</button></p>\n        </div>";
-        customerList.insertAdjacentHTML("afterbegin", html);
+        var html = "<p>Customer: <a href=\"customer-profile.html?customerId=" + customer.customerId + "\">" + customer.name + "</a></p>";
+        customerList.insertAdjacentHTML("afterbegin", html); //YS: Nice! 
     });
     // customerList.innerHTML = html;
 }

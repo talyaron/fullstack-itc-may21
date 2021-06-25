@@ -1,4 +1,4 @@
-function getCustoemrsFromStorage() {
+function getCustoemrsFromStorage() {         //YS: You dont really need a function for this. 
     try {
         let tempCustomers = JSON.parse(localStorage.getItem('customers'))
         if (tempCustomers) {
@@ -25,7 +25,7 @@ function renderCustomers() {
         <p><button onclick="handleDelete("${customer.customerId}")">Delete</button></p>
         </div>`
 
-        customerList.insertAdjacentHTML(`afterbegin`, html)
+        customerList.insertAdjacentHTML(`afterbegin`, html)  //YS: Nice! 
 
 
     });
@@ -56,7 +56,7 @@ function handleClick(id) {
 
 
 
-function myFilter() { //needs work
+function myFilter() { //needs work               YS: Good try! 
     document.querySelector("#myFilter").addEventListener("keyup", event => {
         const searchInput: any = event.key
 
