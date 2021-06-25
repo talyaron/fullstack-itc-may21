@@ -5,15 +5,15 @@ body {
 }
 
 button {
-    text-decoration: none;
-    background: none;
-    color: rgb(123, 131, 158);
-    font-weight: bolder;
-    // padding: 1.5%;
-    // margin-left: 1%;
-    // margin-right: 1%;
-    border: none;
-    font-size: 4rem;
+    // text-decoration: none;
+    // background: none;
+    // color: rgb(123, 131, 158);
+    // font-weight: bolder;
+    // // padding: 1.5%;
+    // // margin-left: 1%;
+    // // margin-right: 1%;
+    // border: none;
+    // font-size: 4rem;
 
   
 
@@ -56,6 +56,14 @@ button:hover {
 .heading {
     text-align: center;
 }
+#myFilter{
+    padding-left: 30%;
+    padding-right: 30%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-size:larger;
+    margin-left: 10%;
+}
 
 .form {
     display: flex;
@@ -87,6 +95,7 @@ button:hover {
         background-color: rgb(255, 255, 255);
         margin-top: .5%;
 
+
     }
 }
 
@@ -99,12 +108,30 @@ button:hover {
 
 
 
-    p {
+    .p {
+
         background-color: rgb(255, 255, 255);
         margin: .5%;
         padding: .5%;
         text-transform: capitalize;
         font-weight: bolder;
         text-decoration: none;
+        display:flex;
+        flex-flow: nowrap;
+        justify-content: center;
+       
+
+        // justify-content: center;
+        p{
+            width:20%;
+            button{
+                margin-left: 5rem;
+            }
+          
+           
+            
+        }
+    
+        
     }
 }
