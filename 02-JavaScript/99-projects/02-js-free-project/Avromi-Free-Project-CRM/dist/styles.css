@@ -4,15 +4,6 @@ body {
   padding: 1%;
 }
 
-button {
-  text-decoration: none;
-  background: none;
-  color: #7b839e;
-  font-weight: bolder;
-  border: none;
-  font-size: 4rem;
-}
-
 button:hover {
   color: blanchedalmond;
 }
@@ -37,6 +28,15 @@ button:hover {
 
 .heading {
   text-align: center;
+}
+
+#myFilter {
+  padding-left: 30%;
+  padding-right: 30%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  font-size: larger;
+  margin-left: 10%;
 }
 
 .form {
@@ -74,11 +74,20 @@ button:hover {
   width: 80%;
   margin: auto;
 }
-.customer__list p {
+.customer__list .p {
   background-color: white;
   margin: 0.5%;
   padding: 0.5%;
   text-transform: capitalize;
   font-weight: bolder;
   text-decoration: none;
+  display: flex;
+  flex-flow: nowrap;
+  justify-content: center;
+}
+.customer__list .p p {
+  width: 20%;
+}
+.customer__list .p p button {
+  margin-left: 5rem;
 }
