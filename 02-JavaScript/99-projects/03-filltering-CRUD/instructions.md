@@ -9,4 +9,4 @@ UPDATE: The user can also edit the item name
 
 CREATE: the user can create a new item
 
-there will be a free search input text, to search within the items (I'll teach you to search on Friday) (RegExp)
+there will be a free search input text, to search within the items (I'll teach you to search on Friday) (RegEx)
