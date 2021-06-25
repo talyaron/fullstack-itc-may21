@@ -152,8 +152,15 @@ var customer = new Customer();
 var count = booking.renderBooking(customer, Hotels);
 function handlePrevPage(event) {
     event.preventDefault();
-    window.location.href = "first.html";
-    localStorage.clear();
+    try {
+        window.location.href = "first.html";
+        if (!window.location.href)
+            throw new Error("The page does not exist");
+        localStorage.clear();
+    }
+    catch (e) {
+        console.log(e);
+    }
 }
 function handleNextPage(event) {
     event.preventDefault();
