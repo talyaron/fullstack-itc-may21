@@ -67,79 +67,12 @@ class BookingList {
         }
     }
 
-    renderBooking(customer: Customer): number {
+    renderBooking(customer: Customer, Hotels:Array<any>): number {
 
         try {
 
             if(!customer) throw new Error("LocalStorage is empty");
             
-            interface Hotel {
-                imageURL: string;
-                name: string;
-                address: string;
-                city: string;
-                stars: string;
-                price: number;
-                status: string;
-            }
-
-            const Hotels: Array<Hotel> = [
-                {
-                    imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/56431315.jpg?k=659e126bcf6b4aed537ea28f9c3085ae4a25e72164670ef7192af495120d12e6&o=&hp=1',
-                    name: "Cucu Hotel",
-                    address: "Dizengoff St 83, Tel Aviv-Yafo",
-                    city: "telaviv",
-                    stars: "fivestar",
-                    price: 880,
-                    status: "single",
-
-                },
-                {
-                    imageURL: 'https://cf.bstatic.com/xdata/images/hotel/square600/13274862.webp?k=bf0a35e9accb7f8bc68500adbe6549e2effc4da9eae15face3d9e63fd1457f7c&o=',
-                    name: "Embassy",
-                    address: "Shalom Aleichem St 5, Tel Aviv-Yafo, 6380606",
-                    city: "telaviv",
-                    stars: "fivestar",
-                    price: 500,
-                    status: "single",
-                },
-                {
-                    imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/109512203.jpg?k=530a61f98c4ba39fddfc3c831504e28b31cde3764ecc4d324afebea8fdc195bd&o=&hp=1',
-                    name: "Abraham Hostel Jerusalem",
-                    address: "67 Hanevi'im Street, Davidka Square, Jerusalén, 94702, Israel",
-                    city: "jerusalem",
-                    stars: "fivestar",
-                    price: 300,
-                    status: "single"
-                },
-                {
-                    imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/250744836.jpg?k=c0831284c5bafa39a02fb1691c5d0faaee80441f204a1d2366b28f9015246ead&o=&hp=1',
-                    name: "Eden Hotel",
-                    address: "8 Shmaryahu Levin Street, Haifa, 33101, Israel",
-                    city: "haifa",
-                    stars: "threestar",
-                    price: 400,
-                    status: "married"
-                },
-                {
-                    imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/229779320.jpg?k=5cdc43ee0fd39adbd8991edf983d56cb281b3af71b3460cff8fc84c84a08b680&o=&hp=1',
-                    name: "Hashimi Hotel",
-                    address: "Khan El Zeit St. No 73 Old City-Jerusalem, Jerusalén,",
-                    city: "jerusalem",
-                    stars: "twostar",
-                    price: 200,
-                    status: "married"
-                },
-                {
-                    imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/40888968.jpg?k=543a1a0c9e1616444e1407237df26c4c8a7bd1c5587a848ac404fc21ac751a2b&o=&hp=1',
-                    name: "Club Hotel Eilat - 5 Stars Superior",
-                    address: "Ha'arava Road P.O 4444, Eilat, 88000, Israel ",
-                    city: "eilat",
-                    stars: "fourstar",
-                    price: 500,
-                    status: "single"
-                }
-            ]
 
             let welcome: string = '';
             let html: string = '';
@@ -184,9 +117,79 @@ class BookingList {
     }
 }
 
+interface Hotel {
+    imageURL: string;
+    name: string;
+    address: string;
+    city: string;
+    stars: string;
+    price: number;
+    status: string;
+}
+
+const Hotels: Array<Hotel> = [
+    {
+        imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/56431315.jpg?k=659e126bcf6b4aed537ea28f9c3085ae4a25e72164670ef7192af495120d12e6&o=&hp=1',
+        name: "Cucu Hotel",
+        address: "Dizengoff St 83, Tel Aviv-Yafo",
+        city: "telaviv",
+        stars: "fivestar",
+        price: 880,
+        status: "single",
+
+    },
+    {
+        imageURL: 'https://cf.bstatic.com/xdata/images/hotel/square600/13274862.webp?k=bf0a35e9accb7f8bc68500adbe6549e2effc4da9eae15face3d9e63fd1457f7c&o=',
+        name: "Embassy",
+        address: "Shalom Aleichem St 5, Tel Aviv-Yafo, 6380606",
+        city: "telaviv",
+        stars: "fivestar",
+        price: 500,
+        status: "single",
+    },
+    {
+        imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/109512203.jpg?k=530a61f98c4ba39fddfc3c831504e28b31cde3764ecc4d324afebea8fdc195bd&o=&hp=1',
+        name: "Abraham Hostel Jerusalem",
+        address: "67 Hanevi'im Street, Davidka Square, Jerusalén, 94702, Israel",
+        city: "jerusalem",
+        stars: "fivestar",
+        price: 300,
+        status: "single"
+    },
+    {
+        imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/250744836.jpg?k=c0831284c5bafa39a02fb1691c5d0faaee80441f204a1d2366b28f9015246ead&o=&hp=1',
+        name: "Eden Hotel",
+        address: "8 Shmaryahu Levin Street, Haifa, 33101, Israel",
+        city: "haifa",
+        stars: "threestar",
+        price: 400,
+        status: "married"
+    },
+    {
+        imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/229779320.jpg?k=5cdc43ee0fd39adbd8991edf983d56cb281b3af71b3460cff8fc84c84a08b680&o=&hp=1',
+        name: "Hashimi Hotel",
+        address: "Khan El Zeit St. No 73 Old City-Jerusalem, Jerusalén,",
+        city: "jerusalem",
+        stars: "twostar",
+        price: 200,
+        status: "married"
+    },
+    {
+        imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/40888968.jpg?k=543a1a0c9e1616444e1407237df26c4c8a7bd1c5587a848ac404fc21ac751a2b&o=&hp=1',
+        name: "Club Hotel Eilat - 5 Stars Superior",
+        address: "Ha'arava Road P.O 4444, Eilat, 88000, Israel ",
+        city: "eilat",
+        stars: "fourstar",
+        price: 500,
+        status: "single"
+    }
+]
+
+
+
 const booking = new BookingList();
 const customer = new Customer();
-let count: number = booking.renderBooking(customer);
+let count: number = booking.renderBooking(customer, Hotels);
 
 
 function handlePrevPage(event: any): void {
