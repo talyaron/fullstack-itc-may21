@@ -60,19 +60,19 @@ class BookingList {
                 localStorage.setItem('checkedHotel', JSON.stringify(arrayChecked))
                 window.location.href = "third.html";
 
-                if(!window.location.href) throw new Error("The page does not exist");
+                if (!window.location.href) throw new Error("The page does not exist");
             }
         } catch (e) {
             console.log(e);
         }
     }
 
-    renderBooking(customer: Customer, Hotels:Array<any>): number {
+    renderBooking(customer: Customer, Hotels: Array<any>): number {
 
         try {
 
-            if(!customer) throw new Error("LocalStorage is empty");
-            
+            if (!customer) throw new Error("LocalStorage is empty");
+
 
             let welcome: string = '';
             let html: string = '';
