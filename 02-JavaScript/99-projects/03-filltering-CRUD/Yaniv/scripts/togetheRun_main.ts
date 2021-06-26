@@ -160,22 +160,26 @@ class LoggedInRunner {
       runsContainer.innerHTML = "";
       this.runnerRuns.forEach((run) => {
         const matchFAClass = run.runMatch ? "-double" : "";
-        const matchTitle = run.runMatch
-          ? "Buddy found!"
-          : "Pending buddy...";
+        const matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
         const runColor = run.runMatch ? "aqua" : "orange";
+        const MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
+        const MatchesBtnLook = run.runMatch ? '' : ` disabled style="background-color:${runColor};cursor:not-allowed`;
         const runFormatedDate = `${run.runTime
           .toISOString()
           .substring(0, 16)
           .replace("T", " ")}`;
-        const runHTML = `<div class="runs__item runs__item">
-          <i id="match" class="fas fa-2x fa-check${matchFAClass}" title="${matchTitle}" style="color: ${runColor};"></i>
+        const runHTML = `
+        <div class="runs__item runs__item">
+          <i id="run_edit" class="fas fa-edit"></i>
+          <i id="run_delete" class="fas fa-trash"></i>
+          <i id="match_status" class="fas fa-2x fa-check${matchFAClass}" title="${matchTitle}" style="color: ${runColor};"></i>
           <div id="run_distance" style="color: ${runColor};">
             ${Math.abs(run.runDistance)} Km
           </div>
           <div id="run_time">${runFormatedDate}</div>
           <div id="run_pace">${run.runPace}</div>
           <div id="run_area">${run.runArea}</div>
+          <button id="run_matches"${MatchesBtnLook}">${MatchesBtnText}</button>
         </div>`;
 
         runsContainer.innerHTML += runHTML;
