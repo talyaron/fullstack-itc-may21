@@ -13,7 +13,7 @@ var Book = /** @class */ (function () {
 }());
 var BooksArray = /** @class */ (function () {
     function BooksArray() {
-        this.booksList = [];
+        this.booksList = []; //YS: In order to save your previous books, here you had to make it equal to your items from localstorage < JSON.parse(localStorage.getItem("myLibrary")) > instead of making it equal to an empty array. 
     }
     BooksArray.prototype.addBook = function (book) {
         this.booksList.push(book);

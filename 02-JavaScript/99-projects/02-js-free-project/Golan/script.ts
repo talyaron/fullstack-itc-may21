@@ -21,7 +21,7 @@ class AllUsers {
     //method to push new user to the array
     addNewUser(user) {
         this.users.push(user);
-        console.log(this.users);
+        console.log(this.users); //YS: Please dont leave console logs in your code
         localStorage.setItem("AllUsers", JSON.stringify(this.users));
         //only strings can go into local storage
        
@@ -36,7 +36,7 @@ function handleSubmit(event) {
     const favsong = event.target.elements.favsong.value;
     const email = event.target.elements.email.value;
     const phone = event.target.elements.phone.value;
-    const checkbox = event.target.elements.checkbox.checked;
+    const checkbox = event.target.elements.checkbox.checked; //YS: What is the purpose of this checkbox? 
     const user: UserInfo = new UserInfo(
         name,
         favsong,
@@ -44,7 +44,7 @@ function handleSubmit(event) {
         phone,
         checkbox
     );
-    console.log(user, 'should display user')
+    console.log(user, 'should display user')  //YS: Please dont leave console logs. 
     allOfUsers.addNewUser(user);
     window.location.href = "supporters.html";
 }

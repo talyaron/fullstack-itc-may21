@@ -1,4 +1,4 @@
-find a joke startg with "a"
+find a joke starting with "a"
 
 look for jokes with the search term enterd by the user
 
