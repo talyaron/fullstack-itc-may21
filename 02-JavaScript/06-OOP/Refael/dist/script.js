@@ -10,6 +10,7 @@ var acount = /** @class */ (function () {
 var acountTrans = /** @class */ (function () {
     function acountTrans() {
         this.transactions = [];
+        // show__total.innerHTML = sum;
     }
     acountTrans.prototype.add = function (trans) {
         this.transactions.push(trans);
@@ -22,18 +23,27 @@ var acountTrans = /** @class */ (function () {
         });
         trans__container.innerHTML = html;
     };
-    acountTrans.prototype.showTotal = function () {
+    acountTrans.prototype.calculateSum = function () {
         var show__total = document.querySelector(".show__total");
-        var html = "";
-        this.transactions.forEach(function (acount) {
-            html += "<div class=\"div__total\">" + acount.amount + "</div>";
-            console.dir(html);
-            var show__total = html;
-        });
-        show__total.innerHTML = html;
+        var sum = this.transactions.reduce(function (sum, acount) {
+            return sum + acount.amount;
+        }, 0);
+        show__total.innerHTML = sum;
+        console.log(sum);
+        // const show__total.innerHTML = sum;
     };
     return acountTrans;
 }());
+// showTotal() {
+//   const show__total = document.querySelector(".show__total");
+//   let html: any = "";
+//   this.transactions.forEach((acount) => {
+//     html += `<div class="div__total">${acount.amount}</div>`;
+//     console.dir(html);
+//     let show__total = html;
+//   });
+//   show__total.innerHTML = html; show__total.innerHTML = html;
+// }
 var transactions = new acountTrans();
 var handleSubmit = function (ev) {
     ev.preventDefault();
@@ -42,6 +52,7 @@ var handleSubmit = function (ev) {
     var newAcount = new acount(desc, amount);
     transactions.add(newAcount);
     transactions.addAcountToDOM();
-    transactions.showTotal();
+    transactions.calculateSum();
+    // transactions.showTotal();
     ev.target.reset();
 };

@@ -14,10 +14,21 @@ function renderCustomers() {
     this.customers.forEach(function (customer) {
         var customerList = document.querySelector(".customer__list");
         var html = "<p>Customer: <a href=\"customer-profile.html?customerId=" + customer.customerId + "\">" + customer.name + "</a></p>";
-        customerList.insertAdjacentHTML("afterbegin", html);
+        customerList.insertAdjacentHTML("afterbegin", html); //YS: Nice! 
     });
     // customerList.innerHTML = html;
 }
+;
+function removeCustomer(customerId) {
+    this.customers = this.customers.filter(function (cus) { return cus.customerId !== customerId; });
+    console.log(this.articles);
+    this.renderCustomers();
+}
+;
+function handleDelete(customerId) {
+    removeCustomer(customerId);
+}
+;
 function handleClick(id) {
     // const customerId = id
     // window.location.href = `customer-profile.html?customerId=${customerId}`;
@@ -33,7 +44,7 @@ function myFilter() {
         if (result.length >= 0) {
             result.forEach(function (customer) {
                 var customerList = document.querySelector(".customer__list");
-                var html = "<p>Customer: <a href=\"customer-profile.html?customerId=" + customer.customerId + "\">" + customer.name + "</a></p>";
+                var html = "<div class=\"p\"><a href=\"customer-profile.html?customerId=" + customer.customerId + "\">" + customer.name + "</a>\n                <a href=\"tel:" + customer.phone + "\">" + customer.phone + "</a>\n                <a href=\"mailto:" + customer.email + "\">" + customer.email + "</a>\n                </div>";
                 customerList.insertAdjacentHTML("afterbegin", html);
             });
         }

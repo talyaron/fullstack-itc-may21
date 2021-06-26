@@ -51,14 +51,17 @@ class RunsPool {
       const runMatches: Array<Run> = this.allRuns.filter(
         (runItem) =>
           runItem.runRunnerId !== run.runRunnerId &&
-          Math.abs((runItem.runDistance - run.runDistance)) < 2 && // less than 2 Km dif
-          Math.abs((Date.parse(runItem.runTime) - Date.parse(run.runTime)) / (1000 * 60 * 60)) < 2 && // less than 2 hours dif
+          Math.abs(runItem.runDistance - run.runDistance) < 2 && // less than 2 Km dif
+          Math.abs(
+            (Date.parse(runItem.runTime) - Date.parse(run.runTime)) /
+              (1000 * 60 * 60)
+          ) < 2 && // less than 2 hours dif
           runItem.runPace === run.runPace &&
           runItem.runArea === run.runArea
       );
       if (runMatches.length > 0) {
         run.runMatch = true;
-        let currentRunIndex = this.allRuns.findIndex(
+        let currentRunIndex = this.allRuns.findIndex(    //YS: Why not find or filter?
           (runItem) => runItem.runId === run.runId
         );
         this.allRuns[currentRunIndex].runMatch = true;
@@ -89,10 +92,12 @@ interface Shoes {
   shoesDistance: number;
 }
 
-class LoggedInRunner {
+
+ 
+class LoggedInRunner { // YS: It would have been better to have a runner object insted of grabbing each element individually.
   // generated on the registration page - passed on to other pages via localStorage
   runnerName: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerName; // required on registration
+    .runnerName; // required on registration                                        
   runnerId: string = JSON.parse(localStorage.getItem("currentRunner")).runnerId; // generated on registration
   runnerEmail: string = JSON.parse(localStorage.getItem("currentRunner"))
     .runnerEmail; // required on registration
@@ -130,17 +135,17 @@ class LoggedInRunner {
     const runnerRunsCounter: HTMLElement =
       document.querySelector("#total_counts");
 
-    mainTitle.insertAdjacentHTML("afterbegin", `${this.runnerName}`);
+    mainTitle.insertAdjacentHTML("afterbegin", `${this.runnerName}`); //YS: You dont need template literals here ${}, just the variable this.runnerName
     runnerNameContainter.insertAdjacentHTML("beforeend", `${this.runnerName}!`);
     runnerProfileImg.title = `${this.runnerName}`;
     if (this.runnerProfImg === null) {
-      runnerProfileImg.setAttribute("src", "images/togetheRun_logo.png");
+      runnerProfileImg.setAttribute("src", "images/togetheRun_logo.png"); //YS: Nice
     } else {
       runnerProfileImg.setAttribute("src", this.runnerProfImg);
     }
     runnerRunsDOM.innerHTML = this.runnerRunsHtml;
-    ruunerTotalDistance.innerHTML = `${this.runnerDistance}`;
-    runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
+    ruunerTotalDistance.innerHTML = `${this.runnerDistance}`; //YS: No template literals
+    runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`; //YS: No template literals
     // window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`; // causes endless loop of loading the page...can be solved by localSession.setItem("isFirstLoad",false) during first loading of the page
   }
 
@@ -160,9 +165,7 @@ class LoggedInRunner {
       runsContainer.innerHTML = "";
       this.runnerRuns.forEach((run) => {
         const matchFAClass = run.runMatch ? "-double" : "";
-        const matchTitle = run.runMatch
-          ? "Buddy found!"
-          : "Pending buddy...";
+        const matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
         const runColor = run.runMatch ? "aqua" : "orange";
         const runFormatedDate = `${run.runTime
           .toISOString()
@@ -197,8 +200,8 @@ class LoggedInRunner {
       const togetherunBadge: HTMLElement =
         document.querySelector("#togetherun_badge");
 
-      ruunerTotalDistance.innerText = `${this.runnerDistance}`;
-      runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
+      ruunerTotalDistance.innerText = `${this.runnerDistance}`; //YS: Same as above
+      runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`; //YS: Same as above
       if (this.runnerDistance > 199) {
         ruunerTotalDistance.style.color = "gold";
         distanceBadge.setAttribute("src", "images/TR_Kms_G.png");
@@ -228,7 +231,7 @@ class LoggedInRunner {
   }
 }
 
-let RunsMainPool: RunsPool = JSON.parse(localStorage.getItem("runsPool"))
+let RunsMainPool: RunsPool = JSON.parse(localStorage.getItem("runsPool"))  //YS: Is this terneray operator necessary? And why is it capitalized. 
   ? new RunsPool(JSON.parse(localStorage.getItem("runsPool")).allRuns)
   : new RunsPool([]);
 

@@ -46,7 +46,7 @@ var handleSubmit = function (event) {
         var isCertified = event.target.elements.isCertified.checked;
         //Add participant to the participants array:
         participants.push(new Participant(name, date_1, expedition_1, isCertified));
-        console.log(participants);
+        console.log(participants); //YS: I would have liked to see an array of participants in the DOM instead of console log
         alert("Thank you, " + name + "!");
     }
     catch (error) {

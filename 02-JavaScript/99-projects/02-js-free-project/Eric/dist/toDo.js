@@ -7,7 +7,7 @@ var Item = /** @class */ (function () {
 }());
 var Items = /** @class */ (function () {
     function Items() {
-        this.allItems = [];
+        this.allItems = []; //YS: Here instead of having an empty array you had to get the array from localstorage: <JSON.parse(localStorage.getItem('item'));>
     }
     Items.prototype.addItem = function (task) {
         try {
