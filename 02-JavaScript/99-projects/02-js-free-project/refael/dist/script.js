@@ -1,5 +1,3 @@
-// let userinfo = JSON.parse(localStorage.getItem("creatUsers"));
-// console.log(userinfo);
 var letsGoBTN = document.querySelector(".lts-btn");
 letsGoBTN.addEventListener("click", function (event) {
     var form = document.querySelector(".form__container");
@@ -15,6 +13,7 @@ letsGoBTN.addEventListener("click", function (event) {
 });
 var User = /** @class */ (function () {
     function User(name, age, gender, desc, intrested) {
+        this.id = "id" + Math.random();
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -25,11 +24,17 @@ var User = /** @class */ (function () {
 }());
 var UserList = /** @class */ (function () {
     function UserList() {
-        this.users = JSON.parse(localStorage.getItem("creatUsers"));
+        this.users = [];
     }
     UserList.prototype.addUser = function (user) {
         this.users.push(user);
         localStorage.setItem("creatUsers", JSON.stringify(this.users));
+    };
+    UserList.prototype.usersFromStorage = function () {
+        var usersStorage = JSON.parse(localStorage.getItem("creatUsers"));
+        if (usersStorage) {
+            this.users = usersStorage;
+        }
     };
     return UserList;
 }());
@@ -48,6 +53,7 @@ submit.addEventListener("click", function (ev) {
     desc = desc.value;
     intrested = intrested.value;
     var creatNewUser = new User(name, age, gender, desc, intrested);
+    creatUsers.usersFromStorage();
     creatUsers.addUser(creatNewUser);
-    // window.location.href = "userList.html";
+    window.location.href = "../refael/userList.html";
 });

@@ -1,0 +1,10 @@
+var urlSearchParams = new URLSearchParams(window.location.search);
+var params = Object.fromEntries(urlSearchParams.entries());
+console.log(params);
+var userId = params.userId;
+var users = JSON.parse(window.localStorage.getItem("creatUsers"));
+console.log(users);
+var user = users.find(function (user) { return user.id === userId; });
+console.log(user);
+var userOnPage = document.querySelector(".username");
+userOnPage.innerHTML = user.name + " is a " + user.age + " years old " + user.gender + ", who likes " + user.desc + " and looking for a " + user.intrested;
