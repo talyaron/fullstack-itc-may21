@@ -34,7 +34,7 @@ const changePlanet = (planetChoice: string) => {
 
 try {
 
-    let planet: Planet;
+    let planet: Planet;   //YS: Nice!
     switch (planetChoice) {
         case "moon":
             planet = moon

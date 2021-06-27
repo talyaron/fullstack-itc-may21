@@ -11,8 +11,8 @@ function renderItems(): void {
         html += `<div>  ${element.task} <input type="checkbox" class="checkItem" onclick = checkear() > </div> `
     });
     try {
-        root.innerHTML = html;
-
+        root.innerHTML = html; //YS: Use insertAdjectentHTML instead of innerHTML.
+        
         if (!html) throw new Error('An error occurs when you want to render..')
     } catch (error) {
         console.error(error)
@@ -21,7 +21,7 @@ function renderItems(): void {
 
 
 
-function checkear() {
+function checkear() {    //YS: Not sure what the purpose of this is. 
     const check: any = document.getElementsByClassName('checkItem');
     let itemArray: any = [];
     let count: number = 0;
@@ -65,7 +65,7 @@ function redirectt() {
 }
 
 
-function mostrarItems() {
+function mostrarItems() {  //YS: Please dont leave unfinished code. 
     try {
         localStorage.parse
 

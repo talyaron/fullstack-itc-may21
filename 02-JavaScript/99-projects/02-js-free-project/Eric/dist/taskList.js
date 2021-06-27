@@ -6,7 +6,7 @@ function renderItems() {
         html += "<div>  " + element.task + " <input type=\"checkbox\" class=\"checkItem\" onclick = checkear() > </div> ";
     });
     try {
-        root.innerHTML = html;
+        root.innerHTML = html; //YS: Use insertAdjectentHTML instead of innerHTML.
         if (!html)
             throw new Error('An error occurs when you want to render..');
     }
