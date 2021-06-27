@@ -3,7 +3,6 @@ const boardDataRoot: HTMLElement = document.querySelector('#boardData')
 const checks: any = document.getElementsByClassName('checks')
 const btnAdd = document.querySelector('#add')
 const btnEdit = document.querySelector('#edit')
-const btnBring = document.querySelector('#bring')
 const btnDelete = document.querySelectorAll('#delete')
 const btnFilter = document.querySelector('#filter')
 
@@ -41,7 +40,6 @@ class DataList {
     getOldData(dataList: Array<any>): number {
         dataList.forEach(item => {
             this.datalist.push(item)
-
         });
         return this.datalist.length
     }
@@ -53,20 +51,22 @@ class DataList {
     }
 
     //editar
-    bringItem(count: number): number {
+    bringItem(): number {
         const checks: any = document.getElementsByClassName('checks')
-        console.log(count)
-        let posicion: number = 0;
-        for (let i = 0; i < count; i++) {
-            if (checks[i].checked === true) {
-                inputName.value = this.datalist[i].name
-                city.value = this.datalist[i].city
-                tel.value = this.datalist[i].tel
-                inputStatus.value = this.datalist[i].status
-                salary.value = String(this.datalist[i].salary)
+        let i:number = 0;
+        this.datalist.forEach(element => {
+            if (checks[i].checked === true) 
+            {
+                inputName.value = element.name
+                city.value = element.city
+                tel.value = element.tel
+                inputStatus.value = element.status
+                salary.value = String(element.salary)
                 posicion = i;
             }
-        }
+            i++;
+        });
+
         return posicion
     }
 
@@ -95,30 +95,28 @@ class DataList {
     }
 
     removeItem(id:string){
-       const itemIndex:number = this.datalist.findIndex(elem=>elem.id = id)
-        this.datalist.splice(itemIndex,1)
+       this.datalist = this.datalist.filter(item=>item.id !== id)
         this.renderDataList(this.datalist)
     }
 
     renderDataList(dataList: Array<any>): number {
 
         let html: string = '';
-
+        let count:number = 0;
         console.log(dataList)
         dataList.forEach(item => {
             html += `<div class = "item">
-                       <span> Id: ${item.id} </span>
                        <span> Name: ${item.name} </span> 
                        <span> Citiy: ${item.city} </span> 
                        <span> Tel: ${item.tel} </span> 
                        <span> Status: ${item.status} </span> 
                        <span> Salary: ${item.salary} </span>
                        <label for="checkbox${count}">Edit Item</label>
-                       <input type="checkbox" id="cbox${count}" value="checkbox${count}" class="checks">
-                       <input type="submit" value="🗑️" onclick="handleDelete(${item.id})"></input>
+                       <input type="radio" name="edit" value="checkbox${count}" onclick='handleEdit()' class="checks">
+                       <input type="submit" value="🗑️" onclick='handleDelete("${item.id}")'></input>
                         
                     </div>`
-
+            count++;
         });
         boardDataRoot.innerHTML = html
         return this.datalist.length;
@@ -172,6 +170,8 @@ datalist.renderDataList(personalDataList);
 let posicion: number;
 
 
+//Buttons
+
 btnAdd.addEventListener('click', event => {
     event.preventDefault()
     console.log(id)
@@ -182,13 +182,13 @@ btnAdd.addEventListener('click', event => {
 btnEdit.addEventListener('click', event => {
     event.preventDefault()
     datalist.editItem(posicion)
+    inputName.value = "";
+    city.value = "";
+    tel.value = "";
+    inputStatus.value = "";
+    salary.value = "";
 });
 
-
-btnBring.addEventListener('click', event => {
-    event.preventDefault()
-    posicion = datalist.bringItem(count);
-});
 
 btnFilter.addEventListener('click', event => {
     event.preventDefault()
@@ -196,8 +196,13 @@ btnFilter.addEventListener('click', event => {
 });
 
 
-function handleDelete() {
-    const id:string = '212312321asdas'
-    console.log(id)
+//function
+
+function handleDelete(id:string) {
     datalist.removeItem(id);
+    
+}
+
+function handleEdit(){
+    datalist.bringItem();
 }
