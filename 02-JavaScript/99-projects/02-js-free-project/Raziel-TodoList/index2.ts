@@ -1,5 +1,7 @@
 
     const listFromIndex1 = JSON.parse(localStorage.getItem("taskList"));
+    console.log(listFromIndex1);
+    /*
     const listRoot: HTMLElement = document.querySelector("#root");
     function renderList(): void {
         try {
@@ -16,6 +18,7 @@
     }
 
     renderList();
+*/
 
 const dt = new Date();
         function renderDate() {
@@ -67,7 +70,7 @@ const dt = new Date();
                         tasks+=`<div> heydddddd</div>`
                     }
                 }
-             document.querySelector('#daysTask').innerHTML=tasks;
+             //document.querySelector('#daysTask').innerHTML=tasks;
         }
 
         function moveDate(para) {
