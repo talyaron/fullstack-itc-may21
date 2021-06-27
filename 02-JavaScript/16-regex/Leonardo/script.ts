@@ -17,6 +17,8 @@ startWithA(jokes);
 //use the dom for entering the term and showing the jokes
 function checkEnterByUser(jokes, searchTerm: string) {
     const searchTermReg: RegExp = new RegExp(searchTerm, 'gmi');
+    console.log(searchTermReg);
+    const newSearch = `/^${searchTerm}/`
     let pepe =  jokes.filter(joke => searchTermReg.test(joke.value))
     return pepe
 }
