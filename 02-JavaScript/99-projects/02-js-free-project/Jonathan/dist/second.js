@@ -66,11 +66,12 @@ var BookingList = /** @class */ (function () {
             var result = Hotels.filter(function (element) {
                 return ((element.city === customer.city) && (element.stars === customer.stars)) && (element.price <= customer.price) && (element.status === customer.status);
             });
+            ///YS: This filter is too specific for the amount of hotels you have in your array (most of the time I couldn't find a hotel). 
             if (result.length === 0) {
-                html += "<p class=\"boardHotel__nohotel\">Sorry we don't have hotel for that request. Just return to the form</p>";
+                html += "<p class=\"boardHotel__nohotel\">Sorry we don't have hotel for that request. Just return to the form</p>"; //YS: Good for letting your users know what is happening. 
             }
             else {
-                for (var i = 0; i < result.length; i++) {
+                for (var i = 0; i < result.length; i++) { //YS: Use forEach instead of for loop, or look at for...of loop. 
                     html +=
                         "<div class = \"boardHotel__container\">\n                        <p class=\"boardHotel__container--name\">" + result[i].name + "</p>\n                        <img src=\"" + result[i].imageURL + "\" width=\"350\" height=\"300\" class=\"boardHotel__container--img\">\n                        <p class=\"boardHotel__container--address\">" + result[i].address + "</p>\n                        <div class = \"boardHotel__container__box\">\n                            <span class = \"boardHotel__container__box--price\">Cost: " + result[i].price + " \u20AA \n                            <input type=\"checkbox\" id=\"cbox" + i + "\" value=\"checkbox" + i + "\" class=\"boardHotel__container__box--checks\"> \n                            </span>\n                        </div>\n                    </div>";
                     newHotel = new Booking(result[i].name, result[i].status, result[i].city, result[i].imageURL, result[i].address, result[i].price, result[i].stars);
@@ -152,17 +153,10 @@ var customer = new Customer();
 var count = booking.renderBooking(customer, Hotels);
 function handlePrevPage(event) {
     event.preventDefault();
-    try {
-        window.location.href = "first.html";
-        if (!window.location.href)
-            throw new Error("The page does not exist");
-        localStorage.clear();
-    }
-    catch (e) {
-        console.log(e);
-    }
+    window.location.href = "first.html"; //YS: I would've liked to see a navbar instead. 
+    localStorage.clear();
 }
 function handleNextPage(event) {
     event.preventDefault();
-    booking.checkBooking();
+    booking.checkBooking(); //YS: I would've liked to see a navbar instead. 
 }

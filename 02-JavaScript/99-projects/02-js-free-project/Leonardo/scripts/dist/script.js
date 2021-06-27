@@ -50,6 +50,7 @@ var doingSubmit = function (ev) {
         var image = document.querySelector('#previewImage').getAttribute("src");
         addPet(name, age, gender, city, image, description, contactNumber);
         ev.target.reset();
+        //YS: Add an alert here or some message that a pet has been added. 
     }
     catch (error) {
         console.error(error);
@@ -68,10 +69,10 @@ function redirect() {
 //Function to show the previous image in the form:
 function readURL(input) {
     if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        var reader = new FileReader(); //YS: Very nice! 
         reader.onload = function (e) {
             try {
-                document.querySelector('#previewImage').setAttribute("src", "" + e.target.result);
+                document.querySelector('#previewImage').setAttribute("src", "" + e.target.result); //YS: You dont need temlate literals here ${}
             }
             catch (error) {
                 console.error(error);

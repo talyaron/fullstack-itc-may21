@@ -15,7 +15,7 @@ class PostList{
     posts: Array<Post> = [];
     addPost(post: Post) {
         this.posts.push(post);
-        let postsScreen = JSON.stringify(post);
+        let postsScreen = JSON.stringify(post); //YS: You should be setting the whole post array to localstorage instead of the individual post, so that in the next page you can display all the posts instead of just 1.
 
         localStorage.setItem("posts", postsScreen); 
         try{
@@ -40,7 +40,7 @@ inputFile.addEventListener("change", function(){
     })
    
        //Takes the file index 0
-       reader.readAsDataURL(this.files[0]);
+       reader.readAsDataURL(this.files[0]); //YS: Nice
 });
 
 
@@ -62,4 +62,4 @@ catch(e){
     console.error(e);
 }
 }
-const newPost = new PostList();
+const newPost = new PostList(); //YS: This should be defined before you use it (you use it in line 56 so this should be in line 46)

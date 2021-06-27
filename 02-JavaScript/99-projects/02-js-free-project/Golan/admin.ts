@@ -5,6 +5,7 @@ function showOnDOM() {
     console.log(allUsers);
     allUsers.forEach(user => {
         data.innerHTML += `<div class="allusers">${user.name} entered the following data: ${user.email}, ${user.phone}, ${user.favsong}. Keep rockin'!</div>`;
+        //YS: Use insertAdjecentHtml instead of innerHTML
     });
 
 }

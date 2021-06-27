@@ -24,7 +24,7 @@ var imageSrc = document.querySelector('.planetPic__image').getAttribute(' src');
 //Function for planet-change:
 var changePlanet = function (planetChoice) {
     try {
-        var planet = void 0;
+        var planet = void 0; //YS: Nice!
         switch (planetChoice) {
             case "moon":
                 planet = moon;
