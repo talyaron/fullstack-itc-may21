@@ -87,9 +87,8 @@ var DataList = /** @class */ (function () {
         var html = '';
         console.log(dataList);
         dataList.forEach(function (item) {
-            html += "<div class = \"item\">\n                       \n                       <span> Name: " + item.name + " </span> \n                       <span> Citiy: " + item.city + " </span> \n                       <span> Tel: " + item.tel + " </span> \n                       <span> Status: " + item.status + " </span> \n                       <span> Salary: " + item.salary + " </span>\n                       <label for=\"checkbox" + count + "\">Edit Item</label>\n                        <input type=\"checkbox\" id=\"cbox" + count + "\" value=\"checkbox" + count + "\" class=\"checks\">\n                        <button type=\"sumbit\" onclick='handleDelete(" + item.id + ")' class = \"btn\">Button</button>\n                    </div>";
+            html += "<div class = \"item\">\n                       <span> Id: " + item.id + " </span>\n                       <span> Name: " + item.name + " </span> \n                       <span> Citiy: " + item.city + " </span> \n                       <span> Tel: " + item.tel + " </span> \n                       <span> Status: " + item.status + " </span> \n                       <span> Salary: " + item.salary + " </span>\n                       <label for=\"checkbox" + count + "\">Edit Item</label>\n                       <input type=\"checkbox\" id=\"cbox" + count + "\" value=\"checkbox" + count + "\" class=\"checks\">\n                       <input type=\"submit\" value=\"\uD83D\uDDD1\uFE0F\" onclick=\"handleDelete(" + item.id + ")\"></input>\n                        \n                    </div>";
         });
-        console.log(boardDataRoot);
         boardDataRoot.innerHTML = html;
         return this.datalist.length;
     };
@@ -126,7 +125,6 @@ btnAdd.addEventListener('click', function (event) {
 });
 btnEdit.addEventListener('click', function (event) {
     event.preventDefault();
-    console.log(posicion);
     datalist.editItem(posicion);
 });
 btnBring.addEventListener('click', function (event) {
@@ -137,7 +135,8 @@ btnFilter.addEventListener('click', function (event) {
     event.preventDefault();
     datalist.filterOption();
 });
-function handleDelete(id) {
+function handleDelete() {
+    var id = '212312321asdas';
     console.log(id);
     datalist.removeItem(id);
 }
