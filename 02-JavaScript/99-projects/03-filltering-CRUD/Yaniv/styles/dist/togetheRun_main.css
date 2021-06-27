@@ -182,6 +182,7 @@ button:hover {
 #mainscreen .runs {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
 }
 #mainscreen .runs__item {
@@ -189,6 +190,7 @@ button:hover {
   align-items: center;
   border-radius: 20px;
   border: 2px solid aqua;
+  background-color: rgba(0, 255, 255, 0.2);
   padding: 5px;
   margin: 10px;
   display: grid;
@@ -202,44 +204,44 @@ button:hover {
 #mainscreen .runs__item:hover {
   transform: scale(1.1);
 }
-#mainscreen .runs__item #run_edit {
+#mainscreen .runs__item .run_edit {
   grid-area: edit;
   cursor: pointer;
   width: 50%;
   color: darkgray;
 }
-#mainscreen .runs__item #run_edit:hover {
+#mainscreen .runs__item .run_edit:hover {
   color: gray;
 }
-#mainscreen .runs__item #run_delete {
+#mainscreen .runs__item .run_delete {
   grid-area: delete;
   cursor: pointer;
   width: 50%;
   justify-self: flex-end;
   color: salmon;
 }
-#mainscreen .runs__item #run_delete:hover {
+#mainscreen .runs__item .run_delete:hover {
   color: firebrick;
 }
-#mainscreen .runs__item #match_status {
+#mainscreen .runs__item .match_status {
   grid-area: status;
 }
-#mainscreen .runs__item #run_distance {
+#mainscreen .runs__item .run_distance {
   grid-area: distance;
   font-size: 1.6rem;
   font-weight: bold;
 }
-#mainscreen .runs__item #run_time {
+#mainscreen .runs__item .run_time {
   grid-area: time;
 }
-#mainscreen .runs__item #run_pace {
+#mainscreen .runs__item .run_pace {
   grid-area: pace;
 }
-#mainscreen .runs__item #run_area {
+#mainscreen .runs__item .run_area {
   grid-area: area;
   color: lightseagreen;
 }
-#mainscreen .runs__item #run_matches {
+#mainscreen .runs__item .run_matches {
   grid-area: matches;
   cursor: pointer;
   width: 75%;
@@ -248,10 +250,10 @@ button:hover {
   background-color: aqua;
   color: black;
 }
-#mainscreen .runs__item #run_matches:hover {
+#mainscreen .runs__item .run_matches:hover {
   background-color: turquoise;
 }
-#mainscreen .runs__item #run_matches:active {
+#mainscreen .runs__item .run_matches:active {
   background-color: teal;
   color: white;
 }
@@ -288,8 +290,9 @@ button:hover {
 .modalBox__item--title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-radius: 10px 10px 0 0;
-  height: 25px;
+  height: 35px;
   color: black;
   font-weight: bold;
   background-color: cornflowerblue;
@@ -297,30 +300,34 @@ button:hover {
 }
 .modalBox__item--content {
   display: flex;
+  flex-direction: column;
   align-items: baseline;
   justify-content: center;
   background-color: white;
-  height: 170px;
+  height: 230px;
   border-radius: 0 0 10px 10px;
 }
-.modalBox__item--content .add_run_form {
+.modalBox__item--content .update_run_form {
   display: flex;
   flex-direction: column;
 }
-.modalBox__item--content .add_run_form__item {
+.modalBox__item--content .update_run_form__item {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: "lbl inpt";
   margin: 5px;
 }
-.modalBox__item--content .add_run_form__item label {
+.modalBox__item--content .update_run_form__item label {
   grid-area: lbl;
 }
-.modalBox__item--content .add_run_form__item input {
+.modalBox__item--content .update_run_form__item input {
   grid-area: inpt;
 }
-.modalBox__item--content .add_run_form__item--submit {
+.modalBox__item--content .update_run_form__item--submit {
+  grid-template-areas: "inpt inpt";
+}
+.modalBox__item--content .update_run_form__item--submit #submit {
   background-color: turquoise;
   color: black;
   height: 30px;
@@ -329,12 +336,19 @@ button:hover {
   border-radius: 20px;
   border: 0;
 }
-.modalBox__item--content .add_run_form__item--submit:hover {
+.modalBox__item--content .update_run_form__item--submit #submit:hover {
   background-color: #47ffed;
 }
-.modalBox__item--content .add_run_form__item--submit:active {
+.modalBox__item--content .update_run_form__item--submit #submit:active {
   background-color: #2fac9f;
   color: white;
+}
+.modalBox__item--content button {
+  width: 98%;
+  height: 30px;
+  font-size: 1.2rem;
+  padding: 0;
+  grid-area: cncl;
 }
 
 .close {
