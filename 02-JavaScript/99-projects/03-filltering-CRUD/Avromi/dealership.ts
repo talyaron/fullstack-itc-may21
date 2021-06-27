@@ -1,26 +1,38 @@
-
+interface CarInterface {
+    Name: string;
+    Miles_per_Gallon: number;
+    Cylinders: number;
+    Displacement:number;
+    Horsepower: number;
+    Weight_in_lbs: number;
+    Acceleration:number;
+    Year: string;
+    Origin: string;
+}
 
 class Car {
-    name: string;
-    milesPerGallon: number;
-    cylinders: number;
-    horsepower: number;
-    weightLb: number;
-    year: number;
-    origin: string;
+    Name: string;
+    Miles_per_Gallon: number;
+    Cylinders: number;
+    Displacement:number;
+    Horsepower: number;
+    Weight_in_lbs: number;
+    Acceleration:number;
+    Year: string;
+    Origin: string;
     carId: string;
 
 
-    constructor(name: string, milesPerGallon: number, cylinders: number, horsepower: number, weightLb: number, year: number, origin: string, carId: string) {
+    constructor(Name: string, Miles_per_Gallon: number, Cylinders: number, Horsepower: number, Weight_in_lbs: number, Year: string, Origin: string) {
 
-        this.name = name;
-        this.milesPerGallon = milesPerGallon;
-        this.cylinders = cylinders;
-        this.horsepower = horsepower;
-        this.weightLb = weightLb;
-        this.year = year;
-        this.origin = origin;
-        this.carId = carId;
+        this.Name = Name;
+        this.Miles_per_Gallon = Miles_per_Gallon;
+        this.Cylinders = Cylinders;
+        this.Horsepower = Horsepower;
+        this.Weight_in_lbs = Weight_in_lbs;
+        this.Year = Year;
+        this.Origin = Origin;
+        this.carId = Math.random().toString(16).slice(2);;
     }
 }
 
@@ -31,8 +43,19 @@ class Cars {
         this.cars.push(car)
         localStorage.setItem(`cars`, JSON.stringify(cars))
     };
+    
+    addCars(carsArray:Array<Car|CarInterface>){
+        carsArray.forEach(car=>{
+            const newCar = new Car(car.Name, car.Miles_per_Gallon, car.Cylinders, car.Horsepower, car.Weight_in_lbs, car.Year,car.Origin)
+            this.cars.push(newCar);
+        })
+        console.log(this.cars);
+       
+    }
+
     removeCar(carId: string){
-        this.cars = this.cars.filter((c)=> c.carId !== carId);
+        const carIndex = this.cars.findIndex((c)=> c.carId === carId);
+        this.cars.splice(carIndex, 1);
         this.renderCars();
     }
     getCarsFromStorage() {
@@ -43,18 +66,18 @@ class Cars {
         let html: string = "";
         this.cars.forEach((car) => {
             
-           html += ` <tbody>
+           html += `<tbody>
        <tr>
-        <td>${car.name}</td>
-        <td>${car.milesPerGallon}</td> 
-        <td>${car.cylinders}</td> 
-        <td>${car.horsepower}</td> 
-        <td>${car.weightLb}</td> 
-        <td>${car.year}</td> 
-        <td>${car.origin}</td>
-        <td> <i onclick="handleDelete("${car.carId}")" class="fas fa-trash"></i></td>
+        <td>${car.Name}</td>
+        <td>${car.Miles_per_Gallon}</td> 
+        <td>${car.Cylinders}</td> 
+        <td>${car.Horsepower}</td> 
+        <td>${car.Weight_in_lbs}</td> 
+        <td>${car.Year}</td> 
+        <td>${car.Origin}</td>
+        <td> <i onclick='handleDelete("${car.carId}")' class="fas fa-trash"></i></td>
       </tr>`;
-      console.log(html);
+      
       table.innerHTML = html;
         });
     };
@@ -63,6 +86,8 @@ class Cars {
 }
 
 const cars = new Cars();
+cars.addCars(carsData)
+cars.renderCars();
 
 
 
@@ -70,16 +95,15 @@ const cars = new Cars();
 const handleSubmit = (ev: any): void => {
     ev.preventDefault();
 
-    const name: string = ev.target.elements.name.value;
-    const milesPerGallon: number = ev.target.elements.milesPerGallon.value;
-    const cylinders: number = ev.target.elements.cylinders.value;
-    const horsepower: number = ev.target.elements.horsepower.value;
-    const weightLb: number = ev.target.elements.weightLb.value;
-    const year: number = ev.target.elements.year.value;
-    const origin: string = ev.target.elements.origin.value;
-    const carId: string = Math.random().toString(16).slice(2);
-
-    const car = new Car(name, milesPerGallon, cylinders, horsepower, weightLb, year, origin, carId)
+    const Name: string = ev.target.elements.Name.value;
+    const Miles_per_Gallon: number = ev.target.elements.Miles_per_Gallon.value;
+    const Cylinders: number = ev.target.elements.Cylinders.value;
+    const Horsepower: number = ev.target.elements.Horsepower.value;
+    const Weight_in_lbs: number = ev.target.elements.Weight_in_lbs.value;
+    const Year: number = ev.target.elements.Year.value;
+    const Origin: string = ev.target.elements.Origin.value;
+   
+    const car = new Car(Name, Miles_per_Gallon, Cylinders, Horsepower, Weight_in_lbs, Year, Origin)
     cars.add(car);
     cars.renderCars()
     console.log(cars)
