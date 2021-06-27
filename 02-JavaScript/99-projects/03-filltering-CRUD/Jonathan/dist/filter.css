@@ -47,3 +47,15 @@
 .btn {
   padding: 1rem;
 }
+
+[type=radio] {
+  opacity: 0;
+}
+
+[type=radio] + i {
+  cursor: pointer;
+}
+
+[type=radio]:checked + i {
+  outline: 2px solid black;
+}
