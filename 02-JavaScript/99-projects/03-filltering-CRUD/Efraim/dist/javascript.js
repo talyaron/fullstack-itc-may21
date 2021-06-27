@@ -35,7 +35,7 @@ var Products = /** @class */ (function () {
                     ("<div id='" + product.id2 + "'> - Edit the text and click to save for next time</div>") +
                     ("<h2  class=\"shopping-list__item-wrapper__item-name edit\" id=\"" + product.id3 + "\" contenteditable=\"true\">" + product.description + "</h2>") +
                     ("<h3  class=\"shopping-list__item-wrapper__item-price\">" + product.price + "</h3>") +
-                    ("<input type=\"button\"  value=\"save my edits\" onclick=\"saveEdits('" + product.id + "', '" + product.id3 + "', '" + product.id2 + "')\"/>") +
+                    ("<input type=\"button\"  value=\"save my edits\" onclick=\"saveEdits('" + product.id + "', '" + product.description + "', '" + product.id2 + "')\"/>") +
                     ("<button class=\"shopping-list__item-wrapper__add\" onclick=\"deleteProduct('" + product.id + "')\">Delete</button>") +
                     " </div>");
             }).join('');
@@ -105,24 +105,84 @@ function handleSubmit(ev) {
     var shoppingListDOM = document.querySelector('.shopping-list');
     products.addProduct(new Product("\"" + imgUrl + "\"", "" + description, "" + year));
     products.renderProducts(shoppingListDOM);
+    console.log(products.products);
+    sessionStorage.setItem('products', JSON.stringify(products.products));
     ev.target.reset();
 }
-function saveEdits(productId, productID3, productID2) {
+var nameUpdate = products.products.map(function (proddes) { return proddes.description; });
+console.log(nameUpdate);
+function saveEdits(productId, proddes, productID2) {
     var index = products.findIndexes(productId);
     console.log(index);
+    var editElem = document.querySelectorAll(".edit");
+    nameUpdate.length = editElem.length;
+    nameUpdate[index] = editElem[index].innerHTML;
+    console.log(nameUpdate);
+    sessionStorage.userEdits = JSON.stringify(nameUpdate);
     var update = document.getElementById("" + productID2);
-    var editElem = document.getElementById("" + productID3);
-    localStorage.userEdits = editElem.innerHTML;
     update.innerHTML = "Edits saved!";
 }
 function checkEdits() {
-    //find out if the user has previously saved edits
-    if (localStorage.userEdits != null)
-        document.querySelector(".edit").innerHTML = localStorage.userEdits;
+    var render = JSON.parse(sessionStorage.getItem('products'));
+    addToDom1(render);
+    products.products = render;
+    if (sessionStorage.userEdits != null) {
+        var nameUpdate_1 = [JSON.parse(sessionStorage.userEdits)];
+        console.log(nameUpdate_1);
+        var editElem = document.querySelectorAll(".edit");
+        for (var i = 0; i < editElem.length; i++) {
+            editElem[i].innerHTML = nameUpdate_1[0][i];
+        }
+    }
 }
-// function saveEdits(productID3, productID2) {
-//     let update = document.getElementById(`${productID2}`);
-//     let editElem = document.getElementById(`${productID3}`);
-//     localStorage.userEdits = editElem.innerHTML;
-//     update.innerHTML = "Edits saved!"
-//     }
+var findProductbySearchTerm = function (productSearch, searchTerm) {
+    var userRegEx = new RegExp(searchTerm, 'gmi');
+    var searchResults = productSearch.filter(function (productItem) { return userRegEx.test(productItem.description); });
+    return searchResults;
+};
+var addToDom1 = function (searchResults) {
+    var shoppingList = document.querySelector('.shopping-list');
+    shoppingList.innerHTML = "";
+    if (searchResults.length === 0) {
+        shoppingList.innerHTML = 'no results to show';
+        return;
+    }
+    searchResults.forEach(function (productItem) { return shoppingList.innerHTML += ("<div id='" + productItem.id + "'  class=\"shopping-list__item-wrapper\">" +
+        ("<img class=\"shopping-list__item-wrapper__item-image\" src=" + productItem.imgSrc + " alt=\"\">") +
+        ("<div id='" + productItem.id2 + "'> - Edit the text and click to save for next time</div>") +
+        ("<h2  class=\"shopping-list__item-wrapper__item-name edit\" id=\"" + productItem.id3 + "\" contenteditable=\"true\">" + productItem.description + "</h2>") +
+        ("<h3  class=\"shopping-list__item-wrapper__item-price\">" + productItem.price + "</h3>") +
+        ("<input type=\"button\"  value=\"save my edits\" onclick=\"saveEdits('" + productItem.id + "', '" + productItem.description + "', '" + productItem.id2 + "')\"/>") +
+        ("<button class=\"shopping-list__item-wrapper__add\" onclick=\"deleteProduct('" + productItem.id + "')\">Delete</button>") +
+        " </div>"); });
+};
+var handleSubmit1 = function (ev) {
+    try {
+        ev.preventDefault();
+        var searchTerm = ev.target.elements.search.value;
+        var results = findProductbySearchTerm(products.products, searchTerm);
+        addToDom1(results);
+        ev.target.reset();
+    }
+    catch (er) {
+        console.error(er);
+    }
+};
+var handleKeyUp = function (ev) {
+    try {
+        ev.preventDefault();
+        var searchTerm = ev.target.value;
+        var results = findProductbySearchTerm(products.products, searchTerm);
+        addToDom1(results);
+    }
+    catch (er) {
+        console.error(er);
+    }
+};
+var filterYear = function (ev) {
+    var value = parseInt(ev.target.value);
+    var searchResults = products.products.filter(function (productItem) {
+        return productItem.price === value;
+    });
+    addToDom1(searchResults);
+};
