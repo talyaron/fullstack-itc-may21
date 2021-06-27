@@ -4,7 +4,7 @@ class Product {
     price: number;
     id: string;
     id2: string;
-    id3:string
+    id3: string
 
     constructor(imgSrc: string, description: string, price: number) {
         try {
@@ -43,7 +43,7 @@ class Products {
                     `<div id='${product.id2}'> - Edit the text and click to save for next time</div>` +
                     `<h2  class="shopping-list__item-wrapper__item-name edit" id="${product.id3}" contenteditable="true">${product.description}</h2>` +
                     `<h3  class="shopping-list__item-wrapper__item-price">${product.price}</h3>` +
-                    `<input type="button"  value="save my edits" onclick="saveEdits('${product.id}', '${product.id3}', '${product.id2}')"/>` +
+                    `<input type="button"  value="save my edits" onclick="saveEdits('${product.id}', '${product.description}', '${product.id2}')"/>` +
                     `<button class="shopping-list__item-wrapper__add" onclick="deleteProduct('${product.id}')">Delete</button>` +
                     ` </div>`
                 )
@@ -54,7 +54,7 @@ class Products {
             console.error(e)
         }
     }
-    findIndexes(productId: string){
+    findIndexes(productId: string) {
         const index = this.products.findIndex(prd => prd.id === productId)
         return index;
     }
@@ -68,6 +68,7 @@ class Products {
             console.error(e)
         }
     }
+
 }
 
 const products: Products = new Products();
@@ -109,42 +110,124 @@ try {
 } catch (e) {
     console.error(e)
 }
-function handleSubmit(ev):any {
+function handleSubmit(ev): any {
     ev.preventDefault();
-    let imgUrl:string = ev.target.children.imgSrc.value;
-    let description:string = ev.target.children.description.value;
-    let year:number = ev.target.children.year.value;
-    
+    let imgUrl: string = ev.target.children.imgSrc.value;
+    let description: string = ev.target.children.description.value;
+    let year: number = ev.target.children.year.value;
+
     const shoppingListDOM = document.querySelector('.shopping-list');
     products.addProduct(new Product(`"${imgUrl}"`, `${description}`, `${year}`));
     products.renderProducts(shoppingListDOM);
+    console.log(products.products);
+    sessionStorage.setItem('products', JSON.stringify(products.products))
     ev.target.reset();
 }
 
-function saveEdits(productId, productID3, productID2) {
+
+
+
+
+
+
+
+
+
+
+let nameUpdate:Array<any> = products.products.map(proddes=> proddes.description)
+console.log(nameUpdate)
+function saveEdits(productId, proddes, productID2) {
     const index = products.findIndexes(productId);
     console.log(index);
+    let editElem = document.querySelectorAll(`.edit`);
+    nameUpdate.length = editElem.length
+ 
+    nameUpdate[index] = editElem[index].innerHTML;
+    console.log(nameUpdate);
+    
+    
+
+    sessionStorage.userEdits = JSON.stringify(nameUpdate);
     let update = document.getElementById(`${productID2}`);
-    let editElem = document.getElementById(`${productID3}`);
-    
-    localStorage.userEdits = editElem.innerHTML;
     update.innerHTML = "Edits saved!"
-    
+
+}
+
+
+function checkEdits() {
+    const render = JSON.parse(sessionStorage.getItem('products'))
+    addToDom1(render)
+    products.products = render
+    if (sessionStorage.userEdits != null){
+     let nameUpdate:Array<any> = [JSON.parse(sessionStorage.userEdits)]
+     console.log(nameUpdate);
+     let editElem = document.querySelectorAll(`.edit`);
+     for (let i=0; i<editElem.length; i++){
+     editElem[i].innerHTML = nameUpdate[0][i]
+     } 
+}}
+
+
+
+
+const findProductbySearchTerm = (productSearch: Array<any>, searchTerm: string) => {
+    const userRegEx = new RegExp(searchTerm, 'gmi');
+
+    const searchResults: Array<any> = productSearch.filter(productItem => userRegEx.test(productItem.description));
+    return searchResults;
+}
+
+const addToDom1 = (searchResults: Array<any>) => {
+    const shoppingList: HTMLElement = document.querySelector('.shopping-list');
+    shoppingList.innerHTML = ``;
+    if (searchResults.length === 0) { shoppingList.innerHTML = 'no results to show'; return; }
+    searchResults.forEach(productItem => shoppingList.innerHTML += (
+        `<div id='${productItem.id}'  class="shopping-list__item-wrapper">` +
+        `<img class="shopping-list__item-wrapper__item-image" src=${productItem.imgSrc} alt="">` +
+        `<div id='${productItem.id2}'> - Edit the text and click to save for next time</div>` +
+        `<h2  class="shopping-list__item-wrapper__item-name edit" id="${productItem.id3}" contenteditable="true">${productItem.description}</h2>` +
+        `<h3  class="shopping-list__item-wrapper__item-price">${productItem.price}</h3>` +
+        `<input type="button"  value="save my edits" onclick="saveEdits('${productItem.id}', '${productItem.description}', '${productItem.id2}')"/>` +
+        `<button class="shopping-list__item-wrapper__add" onclick="deleteProduct('${productItem.id}')">Delete</button>` +
+        ` </div>`
+    )
+    )
+}
+
+
+
+const handleSubmit1 = (ev: any) => {
+    try {
+        ev.preventDefault();
+        const searchTerm: string = ev.target.elements.search.value;
+        const results = findProductbySearchTerm(products.products, searchTerm);
+        addToDom1(results);
+
+        ev.target.reset();
+    } catch (er) {
+        console.error(er)
     }
+}
+
+const handleKeyUp = (ev: any) => {
+    try {
+        ev.preventDefault();
+
+        const searchTerm: string = ev.target.value;
+        const results = findProductbySearchTerm(products.products, searchTerm);
+        addToDom1(results);
+
+    } catch (er) {
+        console.error(er)
+    }
+}
+const filterYear = (ev: any) => {
+
+    const value = parseInt(ev.target.value);
+    const searchResults: Array<any> = products.products.filter(productItem => 
+            productItem.price === value);
+    addToDom1(searchResults)};
 
 
-    function checkEdits() {
-
-        //find out if the user has previously saved edits
-        if(localStorage.userEdits!=null)
-        document.querySelector(".edit").innerHTML = localStorage.userEdits;
-        }
 
 
-        // function saveEdits(productID3, productID2) {
-        //     let update = document.getElementById(`${productID2}`);
-        //     let editElem = document.getElementById(`${productID3}`);
-        //     localStorage.userEdits = editElem.innerHTML;
-        //     update.innerHTML = "Edits saved!"
-            
-        //     }

@@ -6,3 +6,4 @@ console.log(currentDate);
 var nextMonth = new Date('1-jul-2021');
 console.log(nextMonth.getFullYear());
 console.log(nextMonth - currentDate);
+//the functio get two dates and return the diffrence in days
