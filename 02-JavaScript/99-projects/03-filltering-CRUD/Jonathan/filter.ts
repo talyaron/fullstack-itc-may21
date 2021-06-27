@@ -107,19 +107,19 @@ class DataList {
         console.log(dataList)
         dataList.forEach(item => {
             html += `<div class = "item">
-                       
+                       <span> Id: ${item.id} </span>
                        <span> Name: ${item.name} </span> 
                        <span> Citiy: ${item.city} </span> 
                        <span> Tel: ${item.tel} </span> 
                        <span> Status: ${item.status} </span> 
                        <span> Salary: ${item.salary} </span>
                        <label for="checkbox${count}">Edit Item</label>
-                        <input type="checkbox" id="cbox${count}" value="checkbox${count}" class="checks">
-                        <button type="sumbit" onclick='handleDelete(${item.id})' class = "btn">Button</button>
+                       <input type="checkbox" id="cbox${count}" value="checkbox${count}" class="checks">
+                       <input type="submit" value="🗑️" onclick="handleDelete(${item.id})"></input>
+                        
                     </div>`
 
         });
-        console.log(boardDataRoot)
         boardDataRoot.innerHTML = html
         return this.datalist.length;
     }
@@ -181,7 +181,6 @@ btnAdd.addEventListener('click', event => {
 
 btnEdit.addEventListener('click', event => {
     event.preventDefault()
-    console.log(posicion)
     datalist.editItem(posicion)
 });
 
@@ -197,7 +196,8 @@ btnFilter.addEventListener('click', event => {
 });
 
 
-function handleDelete(id: string) {
+function handleDelete() {
+    const id:string = '212312321asdas'
     console.log(id)
     datalist.removeItem(id);
 }
