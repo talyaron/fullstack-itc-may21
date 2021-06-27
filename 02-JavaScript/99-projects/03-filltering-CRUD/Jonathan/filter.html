@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/filter.min.css">
+    <title>Filter Crud</title>
+</head>
+
+<body>
+    <div class="container">
+        <form id='form'>
+            <fieldset>
+                <legend>Personal Data</legend>
+                <input type="text" name="name" id="name" placeholder="Enter your name">
+                <input type="text" name="city" id="city" placeholder="Enter your city">
+                <input type="tel" name="tel" id="tel" placeholder="Enter your telephone">
+                <input type="text" name="status" id="status" placeholder="Enter you status">
+                <input type="text" name="salary" id="salary" placeholder="Enter your salary">
+                <div class="btnContainer">
+                    <input type="submit" value="ADD" class="btn add" id="add"></input>
+                    <div>
+                        <input type="submit" value="BRING" class="btn bring" id="bring"></input>
+                        <input type="submit" value="EDIT" class="btn edit" id="edit"></input>
+                    </div>
+                    <input type="submit" value="FILTER" class="btn filter" id="filter"></input>
+                </div>
+            </fieldset>
+        </form>
+        <div id="boardData" class="boardData">
+
+        </div>
+    </div>
+    <script src="dist/filter.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,5 @@
 var boardRoot = document.querySelector('#board');
+var form = document.getElementById('form');
 console.log('jokes:');
 console.log(jokes);
 function searchJokes(jokesArr) {
@@ -14,15 +15,22 @@ function searchJokesInput(text, jokesArr) {
 function renderJokesInput(jokesInput) {
     var html = "";
     var count = 0;
-    jokesInput.forEach(function (joke) {
-        html += "<p><span>" + count + "- </span>" + joke.value + "</p>";
-        count++;
-    });
+    if (jokesInput.length === 0) {
+        html += "<p>Not found</p>";
+    }
+    else {
+        jokesInput.forEach(function (joke) {
+            html += "<p><span>" + count + "- </span>" + joke.value + "</p>";
+            count++;
+        });
+    }
     boardRoot.innerHTML = html;
 }
-function handlePera(event) {
+form.addEventListener('submit', jokesSumbit);
+function jokesSumbit(event) {
     event.preventDefault();
     var name = event.target.elements.name.value;
     var jokesInput = searchJokesInput(name, jokes);
     renderJokesInput(jokesInput);
+    event.target.reset();
 }
