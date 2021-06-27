@@ -1,6 +1,6 @@
 "use strict";
 
-cars = [{
+var carsData = [{
   "Name": "chevrolet chevelle malibu",
   "Miles_per_Gallon": 18,
   "Cylinders": 8,
