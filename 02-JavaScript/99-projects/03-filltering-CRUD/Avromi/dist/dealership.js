@@ -20,21 +20,24 @@ var Cars = /** @class */ (function () {
         localStorage.setItem("cars", JSON.stringify(cars));
     };
     ;
+    Cars.prototype.removeCar = function (carId) {
+        this.cars = this.cars.filter(function (c) { return c.carId !== carId; });
+        this.renderCars();
+    };
     Cars.prototype.getCarsFromStorage = function () {
         JSON.parse(localStorage.getItem("cars"));
     };
     ;
     Cars.prototype.renderCars = function () {
+        var table = document.querySelector(".table");
+        var html = "";
         this.cars.forEach(function (car) {
-            var table = document.querySelector(".table");
-            var html = "   <tbody>\n       <tr>\n        <td>" + car.name + "</td>\n        <td>" + car.milesPerGallon + "</td> \n        <td>" + car.cylinders + "</td> \n        <td>" + car.horsepower + "</td> \n        <td>" + car.weightLb + "</td> \n        <td>" + car.year + "</td> \n        <td>" + car.origin + "</td>\n        <td> <i class=\"fas fa-trash\" onclick=\"handleDelete(" + car.carId + ")\"></i></td>\n      </tr>";
-            table.insertAdjacentHTML("afterbegin", html);
+            html += " <tbody>\n       <tr>\n        <td>" + car.name + "</td>\n        <td>" + car.milesPerGallon + "</td> \n        <td>" + car.cylinders + "</td> \n        <td>" + car.horsepower + "</td> \n        <td>" + car.weightLb + "</td> \n        <td>" + car.year + "</td> \n        <td>" + car.origin + "</td>\n        <td> <i onclick=\"handleDelete(\"" + car.carId + "\")\" class=\"fas fa-trash\"></i></td>\n      </tr>";
+            console.log(html);
+            table.innerHTML = html;
         });
     };
     ;
-    Cars.prototype.handleDelete = function (ev) {
-        this.cars.filter((function (ev) { return ev !== carId; }), console.log(ev));
-    };
     return Cars;
 }());
 var cars = new Cars();
@@ -51,7 +54,10 @@ var handleSubmit = function (ev) {
     var car = new Car(name, milesPerGallon, cylinders, horsepower, weightLb, year, origin, carId);
     cars.add(car);
     cars.renderCars();
-    cars.getCarsFromStorage();
     console.log(cars);
     ev.target.reset();
+};
+var handleDelete = function (carId) {
+    console.log(carId);
+    cars.removeCar(carId);
 };
