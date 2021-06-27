@@ -31,14 +31,19 @@ class Cars {
         this.cars.push(car)
         localStorage.setItem(`cars`, JSON.stringify(cars))
     };
+    removeCar(carId: string){
+        this.cars = this.cars.filter((c)=> c.carId !== carId);
+        this.renderCars();
+    }
     getCarsFromStorage() {
         JSON.parse(localStorage.getItem(`cars`))
     };
     renderCars() {
-
+        const table: HTMLElement = document.querySelector(".table")
+        let html: string = "";
         this.cars.forEach((car) => {
-            const table: HTMLElement = document.querySelector(".table")
-            const html = `   <tbody>
+            
+           html += ` <tbody>
        <tr>
         <td>${car.name}</td>
         <td>${car.milesPerGallon}</td> 
@@ -47,15 +52,14 @@ class Cars {
         <td>${car.weightLb}</td> 
         <td>${car.year}</td> 
         <td>${car.origin}</td>
-        <td> <i class="fas fa-trash" onclick="handleDelete(${car.carId})"></i></td>
-      </tr>`
-      table.insertAdjacentHTML(`afterbegin`, html)
+        <td> <i onclick="handleDelete("${car.carId}")" class="fas fa-trash"></i></td>
+      </tr>`;
+      console.log(html);
+      table.innerHTML = html;
         });
     };
-    handleDelete(ev){
-        this.cars.filter((ev=> ev !== carId)
-        console.log(ev);
-    }
+    
+
 }
 
 const cars = new Cars();
@@ -78,8 +82,11 @@ const handleSubmit = (ev: any): void => {
     const car = new Car(name, milesPerGallon, cylinders, horsepower, weightLb, year, origin, carId)
     cars.add(car);
     cars.renderCars()
-    cars.getCarsFromStorage();
     console.log(cars)
     ev.target.reset()
 }
 
+const handleDelete = (carId:string):void =>{
+    console.log(carId);
+    cars.removeCar(carId);
+};
