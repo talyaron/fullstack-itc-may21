@@ -1,6 +1,3 @@
-// let userinfo = JSON.parse(localStorage.getItem("creatUsers"));
-// console.log(userinfo);
-
 const letsGoBTN = document.querySelector(".lts-btn");
 letsGoBTN.addEventListener("click", (event) => {
   const form = document.querySelector(".form__container");
@@ -21,6 +18,7 @@ class User {
   gender: string;
   desc: string;
   intrested: string;
+  id: string = "id" + Math.random();
   constructor(name, age, gender, desc, intrested) {
     this.name = name;
     this.age = age;
@@ -32,13 +30,20 @@ class User {
 class UserList {
   users: Array<User>;
   constructor() {
-    this.users = JSON.parse(localStorage.getItem("creatUsers"));
+    this.users = [];
   }
   addUser(user: User) {
     this.users.push(user);
     localStorage.setItem("creatUsers", JSON.stringify(this.users));
   }
+  usersFromStorage() {
+    let usersStorage = JSON.parse(localStorage.getItem("creatUsers"));
+    if (usersStorage) {
+      this.users = usersStorage;
+    }
+  }
 }
+
 const creatUsers = new UserList();
 
 const submit = document.querySelector(".submitButton");
@@ -57,8 +62,7 @@ submit.addEventListener("click", (ev) => {
   desc = desc.value;
   intrested = intrested.value;
   const creatNewUser = new User(name, age, gender, desc, intrested);
-
+  creatUsers.usersFromStorage();
   creatUsers.addUser(creatNewUser);
-
-  // window.location.href = "userList.html";
+  window.location.href = "../refael/userList.html";
 });
