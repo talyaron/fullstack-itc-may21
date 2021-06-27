@@ -213,6 +213,7 @@ var openModal = function () {
                 isModalOpen = true;
                 modal_1.style.display = "flex";
                 modalBox_1.style.display = "unset";
+                console.log('hi');
                 onlyFutureRuns();
                 var runDiv = UpdtBtn.parentElement;
                 setRunToUpdateData(runDiv);
@@ -257,6 +258,7 @@ var setRunToUpdateData = function (runDiv) {
         var runAreaSelect = document.querySelector("#run_area_form");
         var runLocationInput = document.querySelector("#run_location_form");
         var runPaceSelect = document.querySelector("#run_pace_form");
+        var submitInput = document.querySelector("#submit");
         var runDistanceDiv = runDiv.querySelector(".run_distance");
         var runTimeDiv = runDiv.querySelector(".run_time");
         var runAreaDiv_1 = runDiv.querySelector(".run_area");
@@ -268,7 +270,7 @@ var setRunToUpdateData = function (runDiv) {
             runAreaSelect.selectedIndex = Array.from(runAreaSelect.children).findIndex(function (child) { return child.getAttribute('value') === runAreaDiv_1.innerText; });
             // runLocationInput.setAttribute('value',runLocationDiv.innerHTML); TODO to be added to the run box
             runPaceSelect.selectedIndex = Array.from(runPaceSelect.children).findIndex(function (child) { return child.getAttribute('value') === runPaceDiv_1.innerText; });
-            ;
+            submitInput.setAttribute('alt', "" + runDiv.getAttribute('id'));
         }
         else {
             runDistanceInput.setAttribute('value', '');
@@ -276,6 +278,7 @@ var setRunToUpdateData = function (runDiv) {
             runAreaSelect.selectedIndex = 0;
             runLocationInput.setAttribute('value', '');
             runPaceSelect.selectedIndex = 0;
+            submitInput.removeAttribute('alt');
         }
     }
     catch (er) {
@@ -286,7 +289,7 @@ currentRunner = new LoggedInRunner();
 var updateRunSubmit = function (ev) {
     try {
         ev.preventDefault();
-        var runToUpdateId = ev.target.parentElement.getAttribute('id');
+        var runToUpdateId = ev.target.getAttribute('alt');
         var runDistance = Number(ev.target.elements.runDistance.value);
         var runTime = new Date(ev.target.elements.runTime.value);
         var runPace = ev.target.elements.runPace.value;
@@ -296,6 +299,9 @@ var updateRunSubmit = function (ev) {
         var run = new Run(runDistance, runTime, runPace, runArea, runLocation, runMatch);
         if (runToUpdateId !== null) {
             run.runId = runToUpdateId;
+        }
+        else {
+            console.log('runToUpdateId === null');
         }
         run.runMatch = runsMainPool.updateToPool(run);
         localStorage.setItem("runsPool", JSON.stringify(runsMainPool));

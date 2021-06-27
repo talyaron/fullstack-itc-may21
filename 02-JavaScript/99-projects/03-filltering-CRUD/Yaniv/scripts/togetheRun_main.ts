@@ -268,6 +268,7 @@ const openModal = (): void => {
         isModalOpen = true;
         modal.style.display = `flex`;
         modalBox.style.display = `unset`;
+        console.log('hi');
         onlyFutureRuns();
         const runDiv = UpdtBtn.parentElement;
         setRunToUpdateData(runDiv);
@@ -314,6 +315,7 @@ const setRunToUpdateData = (runDiv: HTMLElement): void => {
     const runAreaSelect: HTMLSelectElement = document.querySelector(`#run_area_form`);
     const runLocationInput: HTMLElement = document.querySelector(`#run_location_form`);
     const runPaceSelect: HTMLSelectElement = document.querySelector(`#run_pace_form`);
+    const submitInput: HTMLElement = document.querySelector(`#submit`);
     
     const runDistanceDiv: HTMLElement = runDiv.querySelector(`.run_distance`)
     const runTimeDiv: HTMLElement = runDiv.querySelector(`.run_time`)
@@ -326,13 +328,15 @@ const setRunToUpdateData = (runDiv: HTMLElement): void => {
       runTimeInput.setAttribute('value',runTimeDiv.innerText.replace(' ','T'));
       runAreaSelect.selectedIndex = Array.from(runAreaSelect.children).findIndex(child => child.getAttribute('value') === runAreaDiv.innerText);
       // runLocationInput.setAttribute('value',runLocationDiv.innerHTML); TODO to be added to the run box
-      runPaceSelect.selectedIndex = Array.from(runPaceSelect.children).findIndex(child => child.getAttribute('value') === runPaceDiv.innerText);;
+      runPaceSelect.selectedIndex = Array.from(runPaceSelect.children).findIndex(child => child.getAttribute('value') === runPaceDiv.innerText);
+      submitInput.setAttribute('alt',`${runDiv.getAttribute('id')}`)
     } else {
       runDistanceInput.setAttribute('value','');
       runTimeInput.setAttribute('value','');
       runAreaSelect.selectedIndex = 0;
       runLocationInput.setAttribute('value','');
       runPaceSelect.selectedIndex = 0;
+      submitInput.removeAttribute('alt');
     }
 
   } catch (er) {
@@ -346,7 +350,7 @@ const updateRunSubmit = (ev: any) => {
   try {
     ev.preventDefault();
 
-    const runToUpdateId:string = ev.target.parentElement.getAttribute('id');
+    const runToUpdateId:string = ev.target.getAttribute('alt');
 
     const runDistance = Number(ev.target.elements.runDistance.value);
     const runTime = new Date(ev.target.elements.runTime.value);
@@ -359,7 +363,7 @@ const updateRunSubmit = (ev: any) => {
 
     if (runToUpdateId !== null) {
       run.runId = runToUpdateId;
-    }
+    } else {console.log('runToUpdateId === null');}
 
     run.runMatch = runsMainPool.updateToPool(run);
     localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
