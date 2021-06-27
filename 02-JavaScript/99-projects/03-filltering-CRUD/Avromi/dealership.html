@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dist/dealership.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <form onsubmit="handleSubmit(event)">
+        <fieldset>
+            <legend>Insert Vehicle Details</legend>
+        <select name="name" id="name">
+            <option disabled selected>Model</option>
+            <option class="318i" value="318i">318i</option>
+            <option class="lanos" value="Lanos">Lanos</option>
+            <option class="courier" value="Courier">Courier</option>
+            <option class="falcon" value="Falcon">Falcon</option>
+            <option class="festiva" value="Festiva">Festiva</option>
+            <option class="fiesta" value="Fiesta">Fiesta</option>
+            <option class="focus" value="Focus">Focus</option>
+            <option class="laser" value="Laser">Laser</option>
+            <option class="ranger" value="Ranger">Ranger</option>
+            <option class="territory" value="Territory">Territory</option>
+            <option class="astra" value="Astra">Astra</option>
+            <option class="barina" value="Barina">Barina</option>
+            <option class="captiva" value="Captiva">Captiva</option>
+            <option class="colorado" value="Colorado">Colorado</option>
+            <option class="commodore" value="Commodore">Commodore</option>
+        </select>
+        <select name="milesPerGallon" id="milesPerGallon">
+            <option disabled selected>MPG</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+
+        </select>
+        <select name="cylinders" id="cylinders">
+            <option disabled selected>Cylinders</option>
+            <option value="4">4</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+
+        </select>
+        <input type="number" name="horsepower" placeholder="Horsepower">
+        <input type="number" name="weightLb" placeholder="Weight in LBS">
+        <input type="number" id="year" name="year" min="1900" max="2099" step="1" placeholder="Year..">
+        <input type="text" name="origin" placeholder="Origin">
+    </fieldset>
+        <input type="submit" value="ADD A VEHICLE">
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Car     <select name="name" id="name">
+                    <option disabled selected>Model</option>
+                    <option class="318i" value="318i">318i</option>
+                    <option class="lanos" value="Lanos">Lanos</option>
+                    <option class="courier" value="Courier">Courier</option>
+                    <option class="falcon" value="Falcon">Falcon</option>
+                    <option class="festiva" value="Festiva">Festiva</option>
+                    <option class="fiesta" value="Fiesta">Fiesta</option>
+                    <option class="focus" value="Focus">Focus</option>
+                    <option class="laser" value="Laser">Laser</option>
+                    <option class="ranger" value="Ranger">Ranger</option>
+                    <option class="territory" value="Territory">Territory</option>
+                    <option class="astra" value="Astra">Astra</option>
+                    <option class="barina" value="Barina">Barina</option>
+                    <option class="captiva" value="Captiva">Captiva</option>
+                    <option class="colorado" value="Colorado">Colorado</option>
+                    <option class="commodore" value="Commodore">Commodore</option>
+                </select></th>
+                <th>MPG   <select name="milesPerGallon" id="milesPerGallon">
+                    <option disabled selected>MPG</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+        
+                </select></th>
+                <th>Cylinders</th>
+                <th>Horsepower</th>
+                <th>Weight</th>
+                <th>Year</th>
+                <th>Origin</th>
+            </tr>
+        </thead>
+      
+    </table>
+
+
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <script src="./dist/dealership.js"></script>
+</body>
+
+</html>

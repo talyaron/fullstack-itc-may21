@@ -25,7 +25,11 @@ function renderCustomers() {
         <p><button onclick="handleDelete("${customer.customerId}")">Delete</button></p>
         </div>`
 
+<<<<<<< HEAD
+        customerList.insertAdjacentHTML(`beforeend`, html)
+=======
         customerList.insertAdjacentHTML(`afterbegin`, html)  //YS: Nice! 
+>>>>>>> 9ce2ca8e78fd13dceaf9286a4fd77f058e6ab91f
 
 
     });
@@ -43,7 +47,7 @@ function removeCustomer(customerId: string) {
 };
 
 
-function handleDelete(customerId:any):void {
+function handleDelete(customerId: any): void {
     removeCustomer(customerId);
 };
 

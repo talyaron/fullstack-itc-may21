@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+::selection {
+  color: #ffff;
+  background: #8e49e8;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  /* overflow: hidden; */
+  padding: 10px;
+  background: linear-gradient(to bottom, #68EACC 0%, #497BE8 100%);
+}
+
+.wrapper {
+  background: #fff;
+  max-width: 700px;
+  height: 300px;
+  margin: 120px auto;
+  padding: 25px;
+  border-radius: 5px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+}
+.wrapper header {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.wrapper__inputField {
+  margin: 20px 0;
+  width: 100%;
+  text-align: center;
+  height: 45px;
+}
+.wrapper__inputField input {
+  width: 70%;
+  height: 70%;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #14ddab;
+  font-size: 17px;
+  transition: all 0.3s ease;
+  text-align: center;
+  padding: 10px;
+}
+
+.button {
+  width: 50px;
+  height: 100%;
+  border: none;
+  color: #fff;
+  margin-left: 5px;
+  font-size: 21px;
+  outline: none;
+  background: #8E49E8;
+  cursor: pointer;
+  border-radius: 3px;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: #279fe6;
+  font-size: 14px;
+  transition: 0.2s;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ul li:nth-child(odd) {
+  background: #b2bec3;
+}
+
+ul li:hover {
+  background: #dddddd;
+}

@@ -13,6 +13,8 @@ startWithA(jokes);
 //use the dom for entering the term and showing the jokes
 function checkEnterByUser(jokes, searchTerm) {
     var searchTermReg = new RegExp(searchTerm, 'gmi');
+    console.log(searchTermReg);
+    var newSearch = "/^" + searchTerm + "/";
     var pepe = jokes.filter(function (joke) { return searchTermReg.test(joke.value); });
     return pepe;
 }
