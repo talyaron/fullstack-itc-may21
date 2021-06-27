@@ -1,4 +1,5 @@
-cars = [
+
+const carsData:Array<CarInterface> = [
     {
        "Name":"chevrolet chevelle malibu",
        "Miles_per_Gallon":18,

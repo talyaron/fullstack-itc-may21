@@ -1,13 +1,14 @@
 var Car = /** @class */ (function () {
-    function Car(name, milesPerGallon, cylinders, horsepower, weightLb, year, origin, carId) {
-        this.name = name;
-        this.milesPerGallon = milesPerGallon;
-        this.cylinders = cylinders;
-        this.horsepower = horsepower;
-        this.weightLb = weightLb;
-        this.year = year;
-        this.origin = origin;
-        this.carId = carId;
+    function Car(Name, Miles_per_Gallon, Cylinders, Horsepower, Weight_in_lbs, Year, Origin) {
+        this.Name = Name;
+        this.Miles_per_Gallon = Miles_per_Gallon;
+        this.Cylinders = Cylinders;
+        this.Horsepower = Horsepower;
+        this.Weight_in_lbs = Weight_in_lbs;
+        this.Year = Year;
+        this.Origin = Origin;
+        this.carId = Math.random().toString(16).slice(2);
+        ;
     }
     return Car;
 }());
@@ -20,8 +21,17 @@ var Cars = /** @class */ (function () {
         localStorage.setItem("cars", JSON.stringify(cars));
     };
     ;
+    Cars.prototype.addCars = function (carsArray) {
+        var _this = this;
+        carsArray.forEach(function (car) {
+            var newCar = new Car(car.Name, car.Miles_per_Gallon, car.Cylinders, car.Horsepower, car.Weight_in_lbs, car.Year, car.Origin);
+            _this.cars.push(newCar);
+        });
+        console.log(this.cars);
+    };
     Cars.prototype.removeCar = function (carId) {
-        this.cars = this.cars.filter(function (c) { return c.carId !== carId; });
+        var carIndex = this.cars.findIndex(function (c) { return c.carId === carId; });
+        this.cars.splice(carIndex, 1);
         this.renderCars();
     };
     Cars.prototype.getCarsFromStorage = function () {
@@ -32,8 +42,7 @@ var Cars = /** @class */ (function () {
         var table = document.querySelector(".table");
         var html = "";
         this.cars.forEach(function (car) {
-            html += " <tbody>\n       <tr>\n        <td>" + car.name + "</td>\n        <td>" + car.milesPerGallon + "</td> \n        <td>" + car.cylinders + "</td> \n        <td>" + car.horsepower + "</td> \n        <td>" + car.weightLb + "</td> \n        <td>" + car.year + "</td> \n        <td>" + car.origin + "</td>\n        <td> <i onclick=\"handleDelete(\"" + car.carId + "\")\" class=\"fas fa-trash\"></i></td>\n      </tr>";
-            console.log(html);
+            html += "<tbody>\n       <tr>\n        <td>" + car.Name + "</td>\n        <td>" + car.Miles_per_Gallon + "</td> \n        <td>" + car.Cylinders + "</td> \n        <td>" + car.Horsepower + "</td> \n        <td>" + car.Weight_in_lbs + "</td> \n        <td>" + car.Year + "</td> \n        <td>" + car.Origin + "</td>\n        <td> <i onclick='handleDelete(\"" + car.carId + "\")' class=\"fas fa-trash\"></i></td>\n      </tr>";
             table.innerHTML = html;
         });
     };
@@ -41,17 +50,18 @@ var Cars = /** @class */ (function () {
     return Cars;
 }());
 var cars = new Cars();
+cars.addCars(carsData);
+cars.renderCars();
 var handleSubmit = function (ev) {
     ev.preventDefault();
-    var name = ev.target.elements.name.value;
-    var milesPerGallon = ev.target.elements.milesPerGallon.value;
-    var cylinders = ev.target.elements.cylinders.value;
-    var horsepower = ev.target.elements.horsepower.value;
-    var weightLb = ev.target.elements.weightLb.value;
-    var year = ev.target.elements.year.value;
-    var origin = ev.target.elements.origin.value;
-    var carId = Math.random().toString(16).slice(2);
-    var car = new Car(name, milesPerGallon, cylinders, horsepower, weightLb, year, origin, carId);
+    var Name = ev.target.elements.Name.value;
+    var Miles_per_Gallon = ev.target.elements.Miles_per_Gallon.value;
+    var Cylinders = ev.target.elements.Cylinders.value;
+    var Horsepower = ev.target.elements.Horsepower.value;
+    var Weight_in_lbs = ev.target.elements.Weight_in_lbs.value;
+    var Year = ev.target.elements.Year.value;
+    var Origin = ev.target.elements.Origin.value;
+    var car = new Car(Name, Miles_per_Gallon, Cylinders, Horsepower, Weight_in_lbs, Year, Origin);
     cars.add(car);
     cars.renderCars();
     console.log(cars);
