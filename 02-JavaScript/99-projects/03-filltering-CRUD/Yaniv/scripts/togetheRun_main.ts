@@ -3,22 +3,24 @@ class Run {
   runTime: any; // including hour - Date type caused issues with parsing from local storage
   runPace: string;
   runArea: string;
+  runLocation: string;
   runMatch: boolean;
   runId: string = "run" + Math.random().toString(16).slice(2);
-  runRunnerId: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerId;
+  runRunnerId: string = JSON.parse(localStorage.getItem("currentRunner")).runnerId;
 
   constructor(
     runDistance: number,
     runTime: any,
     runPace: string,
     runArea: string,
+    runLocation: string,
     runMatch: boolean
   ) {
     this.runDistance = runDistance;
     this.runTime = runTime;
     this.runPace = runPace;
     this.runArea = runArea;
+    this.runLocation = runLocation;
     this.runMatch = runMatch;
   }
 }
@@ -30,20 +32,27 @@ class RunsPool {
     this.allRuns = allRuns;
   }
 
-  addToPool(run: Run): boolean {
+  updateToPool(run: Run): boolean {
     try {
-      this.allRuns.push(run);
-      this.allRuns = this.allRuns.sort(
-        (a: any, b: any) => Date.parse(a.runTime) - Date.parse(b.runTime)
-      );
-      this.allRuns = this.allRuns.sort(
-        (a: any, b: any) => a.runRunnerId - b.runRunnerId
-      );
+      const runToUpdateIndex: number = this.allRuns.findIndex(runItem => runItem.runId === run.runId);
+
+      if (runToUpdateIndex === -1) {
+        this.allRuns.push(run);
+      } else {
+        this.allRuns[runToUpdateIndex] = run;
+      }
+      this.allRuns = this.allRuns.sort((a: any, b: any) => Date.parse(a.runTime) - Date.parse(b.runTime));
+      this.allRuns = this.allRuns.sort((a: any, b: any) => a.runRunnerId - b.runRunnerId);
       run.runMatch = this.findMatch(run);
       return run.runMatch;
     } catch (er) {
       console.error(er);
     }
+  }
+
+  deleteFromPool(runToDeleteId: string) {
+    const runToDeleteIndex: number = this.allRuns.findIndex(runItem => runItem.runId === runToDeleteId);
+    this.allRuns = this.allRuns.splice(runToDeleteIndex,1);
   }
 
   findMatch(run: Run): boolean {
@@ -58,9 +67,7 @@ class RunsPool {
       );
       if (runMatches.length > 0) {
         run.runMatch = true;
-        let currentRunIndex = this.allRuns.findIndex(
-          (runItem) => runItem.runId === run.runId
-        );
+        const currentRunIndex: number = this.allRuns.findIndex((runItem) => runItem.runId === run.runId);
         this.allRuns[currentRunIndex].runMatch = true;
         this.showMatchesOnDON(runMatches);
       }
@@ -91,30 +98,18 @@ interface Shoes {
 
 class LoggedInRunner {
   // generated on the registration page - passed on to other pages via localStorage
-  runnerName: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerName; // required on registration
+  runnerName: string = JSON.parse(localStorage.getItem("currentRunner")).runnerName; // required on registration
   runnerId: string = JSON.parse(localStorage.getItem("currentRunner")).runnerId; // generated on registration
-  runnerEmail: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerEmail; // required on registration
-  runnerPassword: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerPassword; // required on registration
-  runnerGender: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
-  runnerAgeGroup: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
-  runnerChat: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
-  runnerPref: Preferences = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerPref; // default on registration - TODO add method to edit
-  runnerProfImg: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerProfImg; // TODO add method editDetails
+  runnerEmail: string = JSON.parse(localStorage.getItem("currentRunner")).runnerEmail; // required on registration
+  runnerPassword: string = JSON.parse(localStorage.getItem("currentRunner")).runnerPassword; // required on registration
+  runnerGender: string = JSON.parse(localStorage.getItem("currentRunner")).runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
+  runnerAgeGroup: string = JSON.parse(localStorage.getItem("currentRunner")).runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
+  runnerChat: string = JSON.parse(localStorage.getItem("currentRunner")).runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
+  runnerPref: Preferences = JSON.parse(localStorage.getItem("currentRunner")).runnerPref; // default on registration - TODO add method to edit
+  runnerProfImg: string = JSON.parse(localStorage.getItem("currentRunner")).runnerProfImg; // TODO add method editDetails
   runnerShoes: Shoes; // TODO add method editDetails
-  runnerRuns: Array<Run> = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerRuns; // empty on registration
-  runnerRunsHtml: string = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerRunsHtml; // DOM representation of all runs - new runs to DOM are added to this innerHTML
-  runnerDistance: number = JSON.parse(localStorage.getItem("currentRunner"))
-    .runnerDistance;
+  runnerRuns: Array<Run> = JSON.parse(localStorage.getItem("currentRunner")).runnerRuns; // empty on registration
+  runnerDistance: number = JSON.parse(localStorage.getItem("currentRunner")).runnerDistance;
 
   personalDetailsToDOM(): void {
     const mainTitle: HTMLElement = document.querySelector("title");
@@ -124,7 +119,6 @@ class LoggedInRunner {
     const runnerProfileImg: HTMLElement = document.querySelector(
       ".profile_image__item--profile_image"
     );
-    const runnerRunsDOM: HTMLElement = document.querySelector(".runs");
     const ruunerTotalDistance: HTMLElement =
       document.querySelector("#total_sum");
     const runnerRunsCounter: HTMLElement =
@@ -138,19 +132,31 @@ class LoggedInRunner {
     } else {
       runnerProfileImg.setAttribute("src", this.runnerProfImg);
     }
-    runnerRunsDOM.innerHTML = this.runnerRunsHtml;
     ruunerTotalDistance.innerHTML = `${this.runnerDistance}`;
     runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
+    this.renderRunsToDOM();
     // window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`; // causes endless loop of loading the page...can be solved by localSession.setItem("isFirstLoad",false) during first loading of the page
   }
 
-  addRun(run: Run): void {
-    this.runnerRuns.push(run);
-    this.runnerRuns = this.runnerRuns.sort(
-      (a: any, b: any) => a.runTime - b.runTime
-    );
+  updateRun(run: Run): void {
+    const runToEditIndex: number = this.runnerRuns.findIndex(runItem => runItem.runId === run.runId);
+
+    if (runToEditIndex === -1) {
+      this.runnerRuns.push(run);
+    } else {
+      this.runnerRuns[runToEditIndex] = run;
+    }
+    this.runnerRuns = this.runnerRuns.sort((a: any, b: any) => a.runTime - b.runTime);
     this.renderRunsToDOM();
     this.refreshDOMSummary(run.runDistance);
+  }
+
+  deleteRun(runToDeleteId: string): void {
+    const runToDeleteIndex: number = this.runnerRuns.findIndex(runItem => runItem.runId === runToDeleteId);
+    const runToDeleteDistance: number = - this.runnerRuns[runToDeleteIndex].runDistance;
+    this.runnerRuns.splice(runToDeleteIndex,1);
+    this.renderRunsToDOM();
+    this.refreshDOMSummary(runToDeleteDistance);
   }
 
   renderRunsToDOM() {
@@ -158,32 +164,32 @@ class LoggedInRunner {
       const runsContainer: HTMLElement = document.querySelector(".runs");
 
       runsContainer.innerHTML = "";
-      this.runnerRuns.forEach((run) => {
-        const matchFAClass = run.runMatch ? "-double" : "";
-        const matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
-        const runColor = run.runMatch ? "aqua" : "orange";
-        const MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
-        const MatchesBtnLook = run.runMatch ? '' : ` disabled style="background-color:${runColor};cursor:not-allowed`;
-        const runFormatedDate = `${run.runTime
-          .toISOString()
-          .substring(0, 16)
-          .replace("T", " ")}`;
-        const runHTML = `
-        <div class="runs__item runs__item">
-          <i id="run_edit" class="fas fa-edit"></i>
-          <i id="run_delete" class="fas fa-trash"></i>
-          <i id="match_status" class="fas fa-2x fa-check${matchFAClass}" title="${matchTitle}" style="color: ${runColor};"></i>
-          <div id="run_distance" style="color: ${runColor};">
-            ${Math.abs(run.runDistance)} Km
-          </div>
-          <div id="run_time">${runFormatedDate}</div>
-          <div id="run_pace">${run.runPace}</div>
-          <div id="run_area">${run.runArea}</div>
-          <button id="run_matches"${MatchesBtnLook}">${MatchesBtnText}</button>
-        </div>`;
+      if (this.runnerRuns.length === 0) {runsContainer.innerHTML = "<h2>You have no scheduled runs.<br/>Take this opportunity to rest<br/>😌</h2>";}
+      else {
+        this.runnerRuns.forEach((run) => {
+          const matchFAClass = run.runMatch ? "-double" : "";
+          const matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
+          const runColor = run.runMatch ? "aqua" : "orange";
+          const MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
+          const MatchesBtnLook = run.runMatch ? "" : ` disabled style="background-color:${runColor};cursor:not-allowed`;
+          const runFormatedDate = typeof run.runTime === 'object' ? `${run.runTime.toISOString().substring(0, 16).replace("T", " ")}` : `${run.runTime.substring(0, 16).replace("T", " ")}`;
+          const runHTML = `
+          <div class="runs__item" id="${run.runId}">
+            <i class="run_edit fas fa-edit update_run_btn""></i>
+            <i class="run_delete fas fa-trash" onclick="handleDelete(event)"></i>
+            <i class="match_status fas fa-2x fa-check${matchFAClass}" title="${matchTitle}" style="color: ${runColor};"></i>
+            <div class="run_distance" style="color: ${runColor};">
+              ${Math.abs(run.runDistance)} Km
+            </div>
+            <div class="run_time">${runFormatedDate}</div>
+            <div class="run_pace">${run.runPace}</div>
+            <div class="run_area">${run.runArea}</div>
+            <button class="run_matches"${MatchesBtnLook}">${MatchesBtnText}</button>
+          </div>`;
 
-        runsContainer.innerHTML += runHTML;
-      });
+          runsContainer.innerHTML += runHTML;
+        });
+      }
     } catch (er) {
       console.error(er);
     }
@@ -192,14 +198,10 @@ class LoggedInRunner {
   refreshDOMSummary(runDistance: number): void {
     try {
       this.runnerDistance += runDistance;
-      const ruunerTotalDistance: HTMLElement =
-        document.querySelector("#total_sum");
-      const runnerRunsCounter: HTMLElement =
-        document.querySelector("#total_counts");
-      const distanceBadge: HTMLElement =
-        document.querySelector("#distance_badge");
-      const togetherunBadge: HTMLElement =
-        document.querySelector("#togetherun_badge");
+      const ruunerTotalDistance: HTMLElement = document.querySelector("#total_sum");
+      const runnerRunsCounter: HTMLElement = document.querySelector("#total_counts");
+      const distanceBadge: HTMLElement = document.querySelector("#distance_badge");
+      const togetherunBadge: HTMLElement = document.querySelector("#togetherun_badge");
 
       ruunerTotalDistance.innerText = `${this.runnerDistance}`;
       runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
@@ -232,15 +234,9 @@ class LoggedInRunner {
   }
 }
 
-let RunsMainPool: RunsPool = JSON.parse(localStorage.getItem("runsPool"))
-  ? new RunsPool(JSON.parse(localStorage.getItem("runsPool")).allRuns)
-  : new RunsPool([]);
+let runsMainPool: RunsPool = JSON.parse(localStorage.getItem("runsPool")) ? new RunsPool(JSON.parse(localStorage.getItem("runsPool")).allRuns) : new RunsPool([]);
 
-let currentRunner: LoggedInRunner = JSON.parse(
-  localStorage.getItem("currentRunner")
-)
-  ? JSON.parse(localStorage.getItem("currentRunner"))
-  : null;
+let currentRunner: LoggedInRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
 if (currentRunner === null) {
   window.location.href = `togetheRun_registration.html`;
 }
@@ -249,13 +245,11 @@ let isModalOpen: boolean = false;
 
 const logOut = (): void => {
   try {
-    const logoutBtn: HTMLElement = document.querySelector(
-      `.summary__item--logout`
-    );
+    const logoutBtn: HTMLElement = document.querySelector(`.summary__item--logout`);
 
     logoutBtn.addEventListener(`click`, (ev) => {
       localStorage.clear();
-      localStorage.setItem("runsPool", JSON.stringify(RunsMainPool));
+      localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
       window.location.href = "togetheRun_registration.html";
     });
   } catch (er) {
@@ -266,17 +260,20 @@ const logOut = (): void => {
 const openModal = (): void => {
   try {
     const modal: HTMLElement = document.querySelector(`.modalWrapper`);
-    const modalBox: HTMLElement = document.querySelector(`.modalBox`);
-    const addRunBtn: HTMLElement = document.querySelector(
-      `.dashboard__item--add`
-    );
+    const modalBox: HTMLElement = document.querySelector(`.modalWrapper__item--update_run`);
+    const updateRunBtns: NodeListOf<HTMLElement> = document.querySelectorAll(`.update_run_btn`);
 
-    addRunBtn.addEventListener(`click`, (ev) => {
-      isModalOpen = true;
-      modal.style.display = `flex`;
-      modalBox.style.display = `unset`;
-      onlyFutureRuns();
-    });
+    updateRunBtns.forEach(UpdtBtn =>
+      UpdtBtn.addEventListener(`click`, (ev) => {
+        isModalOpen = true;
+        modal.style.display = `flex`;
+        modalBox.style.display = `unset`;
+        console.log('hi');
+        onlyFutureRuns();
+        const runDiv = UpdtBtn.parentElement;
+        setRunToUpdateData(runDiv);
+      })
+    );
   } catch (er) {
     console.error(er);
   }
@@ -284,15 +281,17 @@ const openModal = (): void => {
 
 const closeModal = (): void => {
   try {
-    const close: HTMLElement = document.querySelector(`.close`);
     const modal: HTMLElement = document.querySelector(`.modalWrapper`);
-    const modalBox: HTMLElement = document.querySelector(`.modalBox`);
+    const modalBox: HTMLElement = document.querySelector(`.modalWrapper__item--update_run`);
+    const close: NodeListOf<HTMLElement> = document.querySelectorAll(`.close`);
 
-    close.addEventListener(`click`, (ev) => {
-      isModalOpen = false;
-      modal.style.display = `none`;
-      modalBox.style.display = `none`;
-    });
+    close.forEach(clsBtn =>
+      clsBtn.addEventListener(`click`, (ev) => {
+        isModalOpen = false;
+        modal.style.display = `none`;
+        modalBox.style.display = `none`;
+      })
+    );
   } catch (er) {
     console.error(er);
   }
@@ -308,25 +307,69 @@ const onlyFutureRuns = (): void => {
   }
 };
 
+
+const setRunToUpdateData = (runDiv: HTMLElement): void => {
+  try {
+    const runDistanceInput: HTMLElement = document.querySelector(`#run_distance_form`);
+    const runTimeInput: HTMLElement = document.querySelector(`#run_time_form`);
+    const runAreaSelect: HTMLSelectElement = document.querySelector(`#run_area_form`);
+    const runLocationInput: HTMLElement = document.querySelector(`#run_location_form`);
+    const runPaceSelect: HTMLSelectElement = document.querySelector(`#run_pace_form`);
+    const submitInput: HTMLElement = document.querySelector(`#submit`);
+    
+    const runDistanceDiv: HTMLElement = runDiv.querySelector(`.run_distance`)
+    const runTimeDiv: HTMLElement = runDiv.querySelector(`.run_time`)
+    const runAreaDiv: HTMLElement = runDiv.querySelector(`.run_area`);
+    // const runLocationDiv: HTMLElement = docrunDivument.querySelector(`.run_location`);
+    const runPaceDiv: HTMLElement = runDiv.querySelector(`.run_pace`);
+    
+    if (runDiv.className === 'runs__item') {
+      runDistanceInput.setAttribute('value',runDistanceDiv.innerText.replace(' Km',''));
+      runTimeInput.setAttribute('value',runTimeDiv.innerText.replace(' ','T'));
+      runAreaSelect.selectedIndex = Array.from(runAreaSelect.children).findIndex(child => child.getAttribute('value') === runAreaDiv.innerText);
+      // runLocationInput.setAttribute('value',runLocationDiv.innerHTML); TODO to be added to the run box
+      runPaceSelect.selectedIndex = Array.from(runPaceSelect.children).findIndex(child => child.getAttribute('value') === runPaceDiv.innerText);
+      submitInput.setAttribute('alt',`${runDiv.getAttribute('id')}`)
+    } else {
+      runDistanceInput.setAttribute('value','');
+      runTimeInput.setAttribute('value','');
+      runAreaSelect.selectedIndex = 0;
+      runLocationInput.setAttribute('value','');
+      runPaceSelect.selectedIndex = 0;
+      submitInput.removeAttribute('alt');
+    }
+
+  } catch (er) {
+    console.error(er);
+  }
+};
+
 currentRunner = new LoggedInRunner();
 
-const runSubmit = (ev: any) => {
+const updateRunSubmit = (ev: any) => {
   try {
     ev.preventDefault();
 
-    const runDistance: number = Number(ev.target.elements.runDistance.value);
-    const runTime: any = new Date(ev.target.elements.runTime.value);
-    const runPace: string = ev.target.elements.runPace.value;
-    const runArea: string = ev.target.elements.runArea.value;
-    const runMatch: boolean = false;
+    const runToUpdateId:string = ev.target.getAttribute('alt');
 
-    const run = new Run(runDistance, runTime, runPace, runArea, runMatch);
+    const runDistance = Number(ev.target.elements.runDistance.value);
+    const runTime = new Date(ev.target.elements.runTime.value);
+    const runPace = ev.target.elements.runPace.value;
+    const runArea = ev.target.elements.runArea.value;
+    const runLocation = ev.target.elements.runLocation.value;
+    const runMatch = false;
 
-    run.runMatch = RunsMainPool.addToPool(run);
-    localStorage.setItem("runsPool", JSON.stringify(RunsMainPool));
+    const run = new Run(runDistance, runTime, runPace, runArea, runLocation, runMatch);
 
-    currentRunner.addRun(run);
-    localStorage.setItem("currenRunner", JSON.stringify(currentRunner));
+    if (runToUpdateId !== null) {
+      run.runId = runToUpdateId;
+    } else {console.log('runToUpdateId === null');}
+
+    run.runMatch = runsMainPool.updateToPool(run);
+    localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
+
+    currentRunner.updateRun(run);
+    localStorage.setItem("currentRunner", JSON.stringify(currentRunner));
 
     const modal: HTMLElement = document.querySelector(`.modalWrapper`);
     const modalBox: HTMLElement = document.querySelector(`.modalBox`);
@@ -336,6 +379,21 @@ const runSubmit = (ev: any) => {
     modalBox.style.display = `none`;
 
     ev.target.reset();
+  } catch (er) {
+    console.error(er);
+  }
+};
+
+const handleDelete = (ev: any): void => {
+  try {
+    const runToDeleteId:string = ev.target.parentElement.getAttribute('id');
+    
+    runsMainPool.deleteFromPool(runToDeleteId);
+    localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
+
+    currentRunner.deleteRun(runToDeleteId);
+    localStorage.setItem("currentRunner", JSON.stringify(currentRunner));
+
   } catch (er) {
     console.error(er);
   }

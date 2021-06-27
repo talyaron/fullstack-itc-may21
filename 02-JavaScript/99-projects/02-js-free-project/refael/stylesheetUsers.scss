@@ -1,3 +1,10 @@
+html {
+  background-color: #baf6bd87;
+}
+h1 {
+  font-size: 20px;
+  font-family: "Playfair Display", serif;
+}
 .container {
   width: 900px;
   margin: auto;
@@ -8,7 +15,9 @@
 }
 .user {
   display: flex;
-  width: 91px;
-  height: 155px;
+  width: 210px;
+  text-align: center;
+  height: 250px;
   border: 2px solid black;
+  align-items: center;
 }

@@ -55,7 +55,7 @@ const runnerSubmit = (ev: any) => {
       const nameRegExRule = /^[^\s]([a-z]{2,}[ ]){1,3}[a-z]*[^\s]$/;
       const nameRegEx = new RegExp(nameRegExRule,'gmi');
       if (!nameRegEx.test(runnerName)) {
-        alert('Your name must contain 2-30 characters, first name at least 2 characters, not start/end with a space and have up to 2 middle names. Please try again');
+        alert('Your name must contain 2-30 characters, first & middle names at least 2 characters, not start/end with a space and have up to 2 middle names. Please try again');
         throw new Error('Invalid name');
       }
 

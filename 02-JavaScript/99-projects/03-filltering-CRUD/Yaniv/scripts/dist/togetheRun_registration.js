@@ -46,7 +46,7 @@ var runnerSubmit = function (ev) {
         var nameRegExRule = /^[^\s]([a-z]{2,}[ ]){1,3}[a-z]*[^\s]$/;
         var nameRegEx = new RegExp(nameRegExRule, 'gmi');
         if (!nameRegEx.test(runnerName)) {
-            alert('Your name must contain 2-30 characters, first name at least 2 characters, not start/end with a space and have up to 2 middle names. Please try again');
+            alert('Your name must contain 2-30 characters, first & middle names at least 2 characters, not start/end with a space and have up to 2 middle names. Please try again');
             throw new Error('Invalid name');
         }
         var emailRegExRule = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;

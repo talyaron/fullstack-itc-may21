@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dist/styles.min.css">
+</head>
+
+<body onload="checkEdits()">
+
+    <h1 class="merchandise">Merchandise</h2>
+        <select onchange="filterYear(event)" id="year-produced">
+            <option selected>choose</option>
+            <option value="2000">2000</option>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+        </select>
+
+        <form onsubmit="handleSubmit1(event)">
+            <label for="search">What would you like to search for?</label>
+            <input type="search" name="search" id="searching" onkeyup="handleKeyUp(event)">
+            <input type="submit" value="Search" id="submit">
+        </form>
+        <br />
+       
+
+        <div class="shopping-list">
+        </div>
+        <form onsubmit="handleSubmit(event)">
+            <label>Add your own!</label>
+            <input type='text' name='imgSrc' placeholder="image URL" required />
+            <input type='text' name='description' placeholder="description" required />
+            <input type='number' name='year' min="1900" max="2021" placeholder="year produced" required />
+            <input class="submit-button" type="submit" value="Add!">
+        </form>
+
+
+
+</body>
+<script src="dist/javascript.js"></script>
+
+</html>
