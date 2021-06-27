@@ -111,9 +111,11 @@ class DataList {
                        <span> Tel: ${item.tel} </span> 
                        <span> Status: ${item.status} </span> 
                        <span> Salary: ${item.salary} </span>
-                       <label for="checkbox${count}">Edit Item</label>
-                       <input type="radio" name="edit" value="checkbox${count}" onclick='handleEdit()' class="checks">
-                       <input type="submit" value="🗑️" onclick='handleDelete("${item.id}")'></input>
+                       <label for="checkbox${count}">Edit Item
+                       <input type="radio" name="edit" value="radiobox${count}" onclick='handleEdit()' class="checks">
+                       <i class="fas fa-edit"></i>
+                       </label>
+                       <i class="fas fa-trash" onclick='handleDelete("${item.id}")'></i>
                         
                     </div>`
             count++;
