@@ -13,7 +13,7 @@ var PostList = /** @class */ (function () {
     }
     PostList.prototype.addPost = function (post) {
         this.posts.push(post);
-        var postsScreen = JSON.stringify(post);
+        var postsScreen = JSON.stringify(post); //YS: You should be setting the whole post array to localstorage instead of the individual post, so that in the next page you can display all the posts instead of just 1.
         localStorage.setItem("posts", postsScreen);
         try {
             window.location.href = "posts.html";
@@ -38,7 +38,7 @@ inputFile.addEventListener("change", function () {
         }
     });
     //Takes the file index 0
-    reader.readAsDataURL(this.files[0]);
+    reader.readAsDataURL(this.files[0]); //YS: Nice
 });
 // Funcion para tomar info de formulario
 var handleSubmit = function (ev) {
@@ -56,4 +56,4 @@ var handleSubmit = function (ev) {
         console.error(e);
     }
 };
-var newPost = new PostList();
+var newPost = new PostList(); //YS: This should be defined before you use it (you use it in line 56 so this should be in line 46)

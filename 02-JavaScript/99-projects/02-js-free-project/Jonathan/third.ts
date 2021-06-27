@@ -8,7 +8,7 @@ interface Hotel {
 
 }
 
-const Hotels: Array<Hotel> = [
+const Hotels: Array<Hotel> = [  //YOu could have set your Hotel array to localstorage and included the missing keys so that you dont have to repeat it here too. 
     {
         imageURL: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/56431315.jpg?k=659e126bcf6b4aed537ea28f9c3085ae4a25e72164670ef7192af495120d12e6&o=&hp=1',
         name: "Cucu Hotel",
@@ -54,8 +54,8 @@ function renderDescription() {
 
         getCheckedHotel.forEach(hotel => {
             // for YS, maybe the green message is a problem because of VS?
-             let indexHotel = Hotels.findIndex(hotelslist => hotelslist.name === hotel.name);
-            html += `<p class="boardCheked--name">${Hotels[indexHotel].name}</p>
+             let indexHotel = Hotels.findIndex(hotelslist => hotelslist.name === hotel.name); //Nice, why not use filter or just find? 
+            html += `<p class="boardCheked--name">${Hotels[indexHotel].name}</p>    
                     <div class="boardCheked__box">
                         <img src = "${Hotels[indexHotel].imageURL}" class="boardCheked__box--img">
                         <p class = "boardCheked__box--description">${Hotels[indexHotel].description}</p>

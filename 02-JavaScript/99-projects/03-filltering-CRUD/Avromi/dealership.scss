@@ -1,0 +1,43 @@
+form {
+    // border: solid black .3rem;
+
+
+    input[type=number] {
+        width: 8rem;
+    }
+
+    input[type=submit] {
+        font-weight: bolder;
+        color: white;
+        background-color: rgb(16, 44, 53);
+    }
+}
+
+table {
+    border: 2px solid navy;
+    width: 100%;
+
+   
+
+
+    th,
+    td {
+       
+        padding: 15px;
+        text-align: left;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #eee;
+    }
+
+    th {
+        background-color: rgb(60, 169, 177);
+        color: white;
+    }
+   
+}

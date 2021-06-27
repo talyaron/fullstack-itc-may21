@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="handleSubmit(event)">
+        <label for="searchInJoke">What would you like to search for?</label>
+        <input type="search" name="searchInJoke" id="search_in_joke" onkeyup="handleKeyUp(event)">
+        <input type="submit" value="Search" id="submit">
+    </form>
+    <br/>
+    <main class="results">
+        no results to show
+    </main>
+    <script src="../jokes.js"></script>
+    <script src="dist/chuck.js"></script>
+</body>
+</html>

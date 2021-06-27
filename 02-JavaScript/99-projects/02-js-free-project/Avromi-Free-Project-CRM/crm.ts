@@ -1,4 +1,4 @@
-var handleSubmit = (ev: any): void => {
+var handleSubmit = (ev: any): void => {   //YS: We don't use var, only const or let
     ev.preventDefault()
 
     const name: string = ev.target.elements.name.value;
@@ -38,7 +38,7 @@ class Customer {
 }
 
 class Customers {
-    customers: Array<Customer> = [];
+    customers: Array<Customer> = []; //YS: It is better practice to put this in a constructor. 
 
     add(customer: Customer) {
         this.customers.push(customer);

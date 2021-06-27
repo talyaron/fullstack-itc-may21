@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dist/index1.css">
+</head>
+<body> <div class="wrapper">
+    <header>To do list</header>
+    <div class="wrapper__inputField">
+    <form onsubmit="handelTask(event)">
+        <input type="text" name="task" placeholder="add an task..." required>
+        <input type="date" name="date">
+        <input type="submit" value="ADD" class="button" >
+    </form>
+</div>
+</div>
+    <ul id="root">
+    </ul>
+   <script src="dist/index1.js"></script>
+   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-replace-svg></script>
+</body>
+</html>

@@ -35,23 +35,23 @@
         <form class="add_runner_form" onsubmit="runnerSubmit(event)">
             <div class="add_runner_form__item">
                 <label for="runner_name_form">Name <span class="required">*</span></label>
-                <input type="string" minlength="2" maxlength="20" name="runnerName" placeholder="up to 20 characters"
+                <input type="string" minlength="2" maxlength="30" name="runnerName" placeholder="enter full name" title="Your name must contain 2-30 characters, first & middle names at least 2 characters, not start/end with a space and have up to 2 middle names. Please try again"
                     required id="runner_name_form" />
             </div>
             <div class="add_runner_form__item">
                 <label for="runner_email_form">Email <span class="required">*</span></label>
-                <input type="email" maxlength="50" name="runnerEmail" placeholder="your_username@your_domain.com"
+                <input type="email" maxlength="50" name="runnerEmail" placeholder="enter email address"
                     required id="runner_email_form" />
             </div>
             <div class="add_runner_form__item">
                 <label for="runner_password_form">Password <span class="required">*</span></label>
-                <input type="password" minlength="8" name="runnerPassword" placeholder="at least 8 characters" required
+                <input type="password" minlength="8" name="runnerPassword" placeholder="choose password" title="Your password must contain 8-10 characters, at least one uppercase letter, one lowercase letter, one number and one special character. Please try again" required
                     id="runner_password_form" />
             </div>
             <div class="add_runner_form__item">
                 <label for="runner_password_verify_form">Password (verify) <span class="required">*</span></label>
                 <input type="password" minlength="8" name="runnerPasswordVerify"
-                    placeholder="enter your password again for verification" required
+                    placeholder="verify password" required
                     id="runner_password_verify_form" />
             </div>
             <div class="add_runner_form__item">
