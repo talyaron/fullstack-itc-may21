@@ -1,7 +1,7 @@
 create one page with data constructed of an array of objects (of your preferred subject)
 show all objects on the DOM (responsively)
 
-filter it with a select-option button
+filter it with a select-option button (like in Leo's, :male/female)
 
 DELETE: each item can be deleted using a button on the bottom of the item.
 
