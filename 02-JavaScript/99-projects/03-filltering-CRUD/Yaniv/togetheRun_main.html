@@ -19,7 +19,7 @@
         <h3 class="summary__item summary__item--runner_name">Welcome <!-- Runner Name --></h3>
         <div class="summary__item summary__item--total">
             <div class="profile_image">
-                <img src="https://freesvg.org/img/winkboy.png" class="profile_image__item profile_image__item--profile_image" alt="profile image"> <!-- title=Runner Name -->
+                <img src="./images/togetheRun_logo.png" class="profile_image__item profile_image__item--profile_image" alt="profile image"> <!-- title=Runner Name -->
                 <div class="profile_image__item profile_image__item--badges">
                     <img src="images/TR_Kms_B.png" id="distance_badge">
                     <img src="images/TR_B.png" id="togetherun_badge">
@@ -32,30 +32,29 @@
     <main id="mainscreen">
         <section class="dashboard">
             <h2 class="dashboard__item dashboard__item--heading">TogetheRun Dashboard</h2>
-            <button class="dashboard__item dashboard__item--add">Schedule a Run</button>
+            <button class="dashboard__item dashboard__item--add update_run_btn">Schedule a Run</button>
             <button class="dashboard__item dashboard__item--history">TogetheRuns History</button>
         </section>
         <section class="runs">
-
         </section>
     </main>
     <div class="modalWrapper">
-        <div class="modalBox modalWrapper__item modalWrapper__item--run">
+        <div class="modalBox modalWrapper__item modalWrapper__item--update_run">
             <div class="modalBox__item modalBox__item--title">
-                <span>New Run</span>
+                <span>Update Run</span>
                 <span class="close">&times;</span>
             </div>
             <div class="modalBox__item modalBox__item--content">
-                <form class="add_run_form" onsubmit="runSubmit(event)">
-                    <div class="add_run_form__item">
+                <form class="update_run_form" onsubmit="updateRunSubmit(event)">
+                    <div class="update_run_form__item">
                         <label for="run_distance_form">Run Distance (Km)</label>
                         <input type="number" min="1" max="100" name="runDistance" placeholder="in kilometers" required id="run_distance_form" />
                     </div>
-                    <div class="add_run_form__item">
+                    <div class="update_run_form__item">
                         <label for="run_time_form">Run Time</label>
                         <input type="datetime-local" min="" name="runTime" placeholder="Choose date and time" required id="run_time_form" /> <!-- min=new Date() via js (only future runs can be added) -->
                     </div>
-                    <div class="add_run_form__item">
+                    <div class="update_run_form__item">
                         <label for="run_area_form">Run Area</label>
                         <select name="runArea" required id="run_area_form">
                             <option value="">choose from list</option>
@@ -63,7 +62,11 @@
                             <option value="Tel Aviv">Tel Aviv</option>
                         </select>
                     </div>
-                    <div class="add_run_form__item">
+                    <div class="update_run_form__item">
+                        <label for="run_location_form">Run Starting location</label>
+                        <input type="text" minlengt="2" maxlength="30" placeholder="Specify starting location" name="runLocation" required id="run_location_form" />
+                    </div>
+                    <div class="update_run_form__item">
                         <label for="run_pace_form">Run Pace (min/Km)</label>
                         <select name="runPace" required id="run_pace_form">
                             <option value="">choose from list</option>
@@ -76,8 +79,11 @@
                             <option value="03'00&quot; - 04'00&quot;">03'00" - 04'00"</option>
                         </select>
                     </div>
-                    <input class="add_run_form__item add_run_form__item--submit" type="submit" name="submit" value="Add Run" />
+                    <div class="update_run_form__item update_run_form__item--submit">
+                        <input id="submit" type="submit" name="submit" value="Update Run" />
+                    </div>
                 </form>
+                <button class="close">Cancel</button>
             </div>
         </div>
     </div>
