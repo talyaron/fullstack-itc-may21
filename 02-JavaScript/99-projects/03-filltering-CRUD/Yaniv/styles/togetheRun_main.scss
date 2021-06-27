@@ -191,12 +191,13 @@ button {
             margin: 10px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 2fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
             grid-template-areas:
-                "match distance"
-                "match time"
-                "match pace"
-                "match area";
+                "edit delete"
+                "status distance"
+                "matches time"
+                "matches pace"
+                "matches area";
             -webkit-animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
             animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
             transition: 0.5s;
@@ -205,8 +206,31 @@ button {
                 transform: scale(1.1);
             }
 
-            #match {
-                grid-area: match;
+            #run_edit {
+                grid-area: edit;
+                cursor: pointer;
+                width: 50%;
+                color: darkgray;
+
+                &:hover {
+                    color: gray
+                }
+            }
+
+            #run_delete {
+                grid-area: delete;
+                cursor: pointer;
+                width: 50%;
+                justify-self: flex-end;
+                color: salmon;
+
+                &:hover {
+                    color: firebrick
+                }
+            }
+
+            #match_status {
+                grid-area: status;
             }
 
             #run_distance {
@@ -226,6 +250,25 @@ button {
             #run_area {
                 grid-area: area;
                 color: lightseagreen;
+            }
+
+            #run_matches {
+                grid-area: matches;
+                cursor: pointer;
+                width: 75%;
+                justify-self: center;
+                font-size: 0.65rem;
+                background-color: aqua;
+                color: black;
+
+                &:hover {
+                    background-color: turquoise;
+                }
+
+                &:active {
+                    background-color: teal;
+                    color: white;
+                }
             }
         }
     }

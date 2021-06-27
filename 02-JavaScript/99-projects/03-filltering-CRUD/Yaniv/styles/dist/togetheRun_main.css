@@ -193,8 +193,8 @@ button:hover {
   margin: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 1fr 1fr 1fr;
-  grid-template-areas: "match distance" "match time" "match pace" "match area";
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "edit delete" "status distance" "matches time" "matches pace" "matches area";
   -webkit-animation: shadow-inset-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: shadow-inset-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   transition: 0.5s;
@@ -202,8 +202,27 @@ button:hover {
 #mainscreen .runs__item:hover {
   transform: scale(1.1);
 }
-#mainscreen .runs__item #match {
-  grid-area: match;
+#mainscreen .runs__item #run_edit {
+  grid-area: edit;
+  cursor: pointer;
+  width: 50%;
+  color: darkgray;
+}
+#mainscreen .runs__item #run_edit:hover {
+  color: gray;
+}
+#mainscreen .runs__item #run_delete {
+  grid-area: delete;
+  cursor: pointer;
+  width: 50%;
+  justify-self: flex-end;
+  color: salmon;
+}
+#mainscreen .runs__item #run_delete:hover {
+  color: firebrick;
+}
+#mainscreen .runs__item #match_status {
+  grid-area: status;
 }
 #mainscreen .runs__item #run_distance {
   grid-area: distance;
@@ -219,6 +238,22 @@ button:hover {
 #mainscreen .runs__item #run_area {
   grid-area: area;
   color: lightseagreen;
+}
+#mainscreen .runs__item #run_matches {
+  grid-area: matches;
+  cursor: pointer;
+  width: 75%;
+  justify-self: center;
+  font-size: 0.65rem;
+  background-color: aqua;
+  color: black;
+}
+#mainscreen .runs__item #run_matches:hover {
+  background-color: turquoise;
+}
+#mainscreen .runs__item #run_matches:active {
+  background-color: teal;
+  color: white;
 }
 
 .modalWrapper {

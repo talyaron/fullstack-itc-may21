@@ -1,0 +1,14 @@
+form {
+    // border: solid black .3rem;
+   
+
+    input[type=number] {
+        width: 8rem;
+    }
+
+    input[type=submit] {
+        font-weight: bolder;
+        color: white;
+        background-color: rgb(16, 44, 53);
+    }
+}

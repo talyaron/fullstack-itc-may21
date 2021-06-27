@@ -9,7 +9,7 @@
 <body>
     <form onsubmit="handleSubmit(event)">
         <label for="searchInJoke">What would you like to search for?</label>
-        <input type="search" name="searchInJoke" id="search_in_joke">
+        <input type="search" name="searchInJoke" id="search_in_joke" onkeyup="handleKeyUp(event)">
         <input type="submit" value="Search" id="submit">
     </form>
     <br/>

@@ -17,17 +17,17 @@ console.log(findJokesStartingWithA(jokes));
 // look for jokes with the search term enterd by the user + use the dom for entering the term and showing the jokes
 
 const findJokesbySearchTerm = (chuckJokes: Array<any>, serachTerm: string) => {
-    const startsWithARegEx = new RegExp(serachTerm,'gmi');
+    const userRegEx = new RegExp(serachTerm,'gmi');
 
-    const searchResults: Array<any> = chuckJokes.filter(chuckJoke => startsWithARegEx.test(chuckJoke.value));
+    const searchResults: Array<any> = chuckJokes.filter(chuckJoke => userRegEx.test(chuckJoke.value));
     return searchResults;
 }
 
 const addToDom = (searchResults: Array<any>) => {
     const JokesContainer: HTMLElement = document.querySelector('.results');
-    console.log(JokesContainer);
+    JokesContainer.innerHTML = ``;
     if (searchResults.length === 0) {JokesContainer.innerHTML = 'no results to show';return;}
-    searchResults.forEach(chuckJoke => JokesContainer.innerHTML += `<div id="results results__item">${chuckJoke.value}</div>`)
+    searchResults.forEach(chuckJoke => JokesContainer.innerHTML += `<div class="results results__item">${chuckJoke.value}</div>`)
 
 }
 
@@ -37,10 +37,22 @@ const handleSubmit = (ev: any) => {
 
         const searchTerm: string = ev.target.elements.searchInJoke.value;
         const results = findJokesbySearchTerm(jokes,searchTerm);
-        console.log(results);
         addToDom(results);
 
         ev.target.reset();
+    } catch (er) {
+        console.error(er)
+    }
+}
+
+const handleKeyUp = (ev: any) => {
+    try {  
+        ev.preventDefault();
+
+        const searchTerm: string = ev.target.value;
+        const results = findJokesbySearchTerm(jokes,searchTerm);
+        addToDom(results);
+
     } catch (er) {
         console.error(er)
     }
