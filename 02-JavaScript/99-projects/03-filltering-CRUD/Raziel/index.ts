@@ -100,6 +100,7 @@ const handelForm = (ev) => {
     lists.addToList(contact);
      lists.emailValid(email);
      lists.phoneValid(phone);
+     lists.renderList()
     console.log(lists);
     ev.target.reset()
   };
