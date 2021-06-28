@@ -131,7 +131,7 @@ class LoggedInRunner {
     }
     ruunerTotalDistance.innerHTML = `${this.runnerDistance}`;
     runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
-    this.renderRunsToDOM();
+    this.renderRunsToDOM(null);
     // window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`; // causes endless loop of loading the page...can be solved by localSession.setItem("isFirstLoad",false) during first loading of the page
   }
 
@@ -147,51 +147,68 @@ class LoggedInRunner {
       this.refreshDOMSummary(run.runDistance - prevDistance);
     }
     this.runnerRuns = this.runnerRuns.sort((a: Run, b: Run) => Date.parse(a.runTime) - Date.parse(b.runTime));
-    this.renderRunsToDOM();
+    this.renderRunsToDOM(null);
   }
 
   deleteRun(runToDeleteId: string): void {
     const runToDeleteIndex: number = this.runnerRuns.findIndex(runItem => runItem.runId === runToDeleteId);
     const runToDeleteDistance: number = - this.runnerRuns[runToDeleteIndex].runDistance;
     this.runnerRuns.splice(runToDeleteIndex,1);
-    this.renderRunsToDOM();
+    this.renderRunsToDOM(null);
     this.refreshDOMSummary(runToDeleteDistance);
   }
 
-  renderRunsToDOM() {
+  filterRuns(minDistanceFilter: number, maxDistanceFilter: number, paceFilter: string, areaFilter: string, locationFilter: string) {
+    const locationRegEx = locationFilter ? new RegExp(locationFilter,'gmi') : undefined;
+    console.log('hi');
+    const filteredRuns: Array<Run> = this.runnerRuns.filter(runItem => {
+      ((minDistanceFilter === undefined) || (runItem.runDistance >= minDistanceFilter)) &&
+      ((maxDistanceFilter === undefined) || (runItem.runDistance <= maxDistanceFilter)) &&
+      ((paceFilter === undefined) || (runItem.runPace === paceFilter)) &&
+      ((areaFilter === undefined) || (runItem.runArea === areaFilter)) &&
+      ((locationFilter === undefined) || locationRegEx.test(runItem.runLocation))
+      })
+
+    this.renderRunsToDOM(filteredRuns)
+
+  }
+
+  renderRunsToDOM(filteredRunsToRender: Array<Run>) {
     try {
       const runsContainer: HTMLElement = document.querySelector(".runs");
 
+      const runsToRender: Array<Run> = filteredRunsToRender ? filteredRunsToRender : this.runnerRuns;
       runsContainer.innerHTML = "";
-      if (this.runnerRuns.length === 0) {runsContainer.innerHTML = "<h2>You have no scheduled runs.<br/>Take this opportunity to rest<br/>😌</h2>";}
-      else {
-        this.runnerRuns.forEach((run) => {
-          const matchFAClass = run.runMatch ? "-double" : "";
-          const matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
-          const runColor = run.runMatch ? "aqua" : "orange";
-          const MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
-          const MatchesBtnLook = run.runMatch ? "" : ` disabled style="background-color:${runColor};cursor:not-allowed`;
-          const runFormatedDate = (new Date(Date.parse(run.runTime)+clientTimezoneOffset*60*60*1000)).toISOString().replace("T", " ").substring(0, 16);
-          // this is for string. for object: `${run.runTime.toISOString().substring(0, 16).replace("T", " ")}`
-          const runHTML = `
-          <div class="runs__item" id="${run.runId}">
-            <i class="run_edit fas fa-edit update_run_btn" title="Edit your run"></i>
-            <i class="run_delete fas fa-trash" onclick="handleDelete(event)" title="Delete your run"></i>
-            <i class="match_status fas fa-2x fa-check${matchFAClass}" title="${matchTitle}" style="color: ${runColor};"></i>
-            <div class="run_distance" style="color: ${runColor};" title="Run distance">
-              ${Math.abs(run.runDistance)} Km
-            </div>
-            <div class="run_time" title="Run time">${runFormatedDate}</div>
-            <div class="run_pace" title="Run pace">${run.runPace}</div>
-            <div class="run_area" title="Run area">${run.runArea}</div>
-            <div class="run_location" title="Run location">${run.runLocation}</div>
-            <button class="run_matches"${MatchesBtnLook}">${MatchesBtnText}</button>
-          </div>`;
-
-          runsContainer.innerHTML += runHTML;
-        });
-        openModal();
+      if (runsToRender.length === 0) {
+        runsContainer.innerHTML = "<h2>You have no scheduled runs.<br/>Take this opportunity to rest<br/>😌</h2>";
+        return;
       }
+      runsToRender.forEach((run) => {
+        const matchFAClass = run.runMatch ? "-double" : "";
+        const matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
+        const runColor = run.runMatch ? "aqua" : "orange";
+        const MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
+        const MatchesBtnLook = run.runMatch ? "" : ` disabled style="background-color:${runColor};cursor:not-allowed`;
+        const runFormatedDate = (new Date(Date.parse(run.runTime)+clientTimezoneOffset*60*60*1000)).toISOString().replace("T", " ").substring(0, 16);
+        // this is for string. for object: `${run.runTime.toISOString().substring(0, 16).replace("T", " ")}`
+        const runHTML = `
+        <div class="runs__item" id="${run.runId}">
+          <i class="run_edit fas fa-edit update_run_btn" title="Edit your run"></i>
+          <i class="run_delete fas fa-trash" onclick="handleDelete(event)" title="Delete your run"></i>
+          <i class="match_status fas fa-2x fa-check${matchFAClass}" title="${matchTitle}" style="color: ${runColor};"></i>
+          <div class="run_distance" style="color: ${runColor};" title="Run distance">
+            ${Math.abs(run.runDistance)} Km
+          </div>
+          <div class="run_time" title="Run time">${runFormatedDate}</div>
+          <div class="run_pace" title="Run pace">${run.runPace}</div>
+          <div class="run_area" title="Run area">${run.runArea}</div>
+          <div class="run_location" title="Run location">${run.runLocation}</div>
+          <button class="run_matches"${MatchesBtnLook}">${MatchesBtnText}</button>
+        </div>`;
+
+        runsContainer.innerHTML += runHTML;
+      });
+      openModal();
     } catch (er) {
       console.error(er);
     }
@@ -270,7 +287,7 @@ const openModal = (): void => {
         isModalOpen = true;
         modal.style.display = `flex`;
         modalBox.style.display = `unset`;
-        onlyFutureRuns();
+        runsWithinNextMonth();
         const runDiv = UpdtBtn.parentElement;
         setRunToUpdateData(runDiv);
       })
@@ -298,7 +315,7 @@ const closeModal = (): void => {
   }
 };
 
-const onlyFutureRuns = (): void => {
+const runsWithinNextMonth = (): void => {
   try {
     const runTimeInput: HTMLElement = document.querySelector(`#run_time_form`);
     const now = new Date();
@@ -381,6 +398,26 @@ const updateRunSubmit = (ev: any) => {
     isModalOpen = false;
     modal.style.display = `none`;
     modalBox.style.display = `none`;
+
+    ev.target.reset();
+  } catch (er) {
+    console.error(er);
+  }
+};
+
+const filterSubmit = (ev: any) => {
+  try {
+    ev.preventDefault();
+
+    const minDistanceFilter = Number(ev.target.elements.minDistanceFilter.value);
+    const maxDistanceFilter = Number(ev.target.elements.maxDistanceFilter.value);
+    const paceFilter = ev.target.elements.paceFilter.value;
+    const areaFilter = ev.target.elements.areaFilter.value;
+    const locationFilter = ev.target.elements.locationFilter.value;
+
+    if (currentRunner.runnerRuns.length === 0) {return;}
+
+    currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
 
     ev.target.reset();
   } catch (er) {
