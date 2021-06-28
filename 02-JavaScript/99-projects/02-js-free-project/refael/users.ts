@@ -21,7 +21,7 @@ console.log(users);
 let usersHTML = users.map((user) => {
   let userName = user.name;
   let userAge = user.age;
-  let userGender = user.gender;
+  let userGender = user.gender;  /* All of these variables are not necessary. You couldve just wrote on your HTML ${user.name}, ${user.age}, etc */
   let userDesc = user.desc;
   let userIntrested = user.intrested;
   let userId = user.id;
