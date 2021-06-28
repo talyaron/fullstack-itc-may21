@@ -91,7 +91,7 @@ const handelForm = (ev) => {
         alert('Your Email seems to be wrong. Please correct it or use a different Email address');
         throw new Error('Wrong email address');
       }
-      const validPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+      const validPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
       const phoneReg = new RegExp(validPhone,'gmi');
       if (!phoneReg.test(phone)) {
         alert('Please enter a valid phone number');
