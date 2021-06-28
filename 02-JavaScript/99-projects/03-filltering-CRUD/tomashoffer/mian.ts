@@ -1,4 +1,4 @@
-const select = document.getElementById('select');
+
 
 interface ProdInterface{
     product:string;
@@ -45,8 +45,7 @@ class ListProducto{
      itemDelete(id:string){
         this.list = this.list.filter((prod) => prod.id !== id);
         this.renderData();
-    }
-
+    }S
     renderData(){
         const container: HTMLElement = document.querySelector(".container_products")
         let html: string = "";

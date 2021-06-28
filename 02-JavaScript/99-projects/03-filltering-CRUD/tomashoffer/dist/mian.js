@@ -1,4 +1,3 @@
-var select = document.getElementById('select');
 var Producto = /** @class */ (function () {
     function Producto(product, brand, price, stock, description) {
         this.product = product;
