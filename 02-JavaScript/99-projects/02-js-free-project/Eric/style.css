@@ -1,0 +1,266 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 450px;
+  height: 100vh;
+  color: #fff;
+}
+
+button,
+input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.inputList {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 320px;
+  height: 500px;
+  background: #fff;
+}
+
+.cover-img .cover-inner {
+  background: url("https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1533&q=80");
+  height: 190px;
+  background-size: cover;
+  background-position: 10% 20%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: relative;
+}
+
+.cover-img .cover-inner::after {
+  background: rgba(0, 0, 0, 0.3);
+  content: "";
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.cover-img .cover-inner .title {
+  position: absolute;
+  top: 40%;
+  left: 15%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-family: 'Nunito', sans-serif;
+  text-transform: uppercase;
+  font-size: 2.8rem;
+  z-index: 10;
+  font-weight: 700;
+}
+
+.content {
+  padding: 10px 20px;
+}
+
+.content form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 0 10px 0 5px;
+  border-bottom: 1px solid #8e979c;
+}
+
+.content form > * {
+  background: transparent;
+  border: none;
+  height: 35px;
+}
+
+.content input[type=text] {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #6C717B;
+}
+
+.content .input-buttons i {
+  margin-top: 5px;
+  font-size: 20px;
+  color: #8e979c;
+}
+
+.content .btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.content .btnUno {
+  color: #6C717B;
+  border: 1px solid #6C717B;
+  border-radius: 5px;
+  color: black;
+}
+
+.body2 {
+  background-size: 100%;
+  background-image: url("http://blog.welcomebeds.com/wp-content/uploads/2018/12/playa-paraiso-mexico.jpg");
+}
+
+.card {
+  position: absolute;
+  background-color: rgba(220, 220, 220, 0.897);
+  height: 400px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 320px;
+  top: 50%;
+  left: 50%;
+  -webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.9);
+          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.9);
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+  border-radius: 5px;
+}
+
+.card:hover {
+  opacity: 0.8;
+}
+
+.btn1 {
+  color: black;
+  border: 1px solid grey;
+  border-radius: 5px;
+  position: relative;
+  margin-left: 30%;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: black;
+  margin-top: 10%;
+}
+
+#root {
+  text-align: center;
+  color: black;
+  margin-top: 5%;
+}
+
+/* Animations*/
+.title {
+  -webkit-animation: title 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: title 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes title {
+  0% {
+    -webkit-transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px) skew(-35deg, 10deg);
+    transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px) skew(-35deg, 10deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+    transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes title {
+  0% {
+    -webkit-transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px) skew(-35deg, 10deg);
+    transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px) skew(-35deg, 10deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+    transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+    opacity: 1;
+  }
+}
+
+.btns {
+  -webkit-animation: btns 1s ease-in-out infinite both;
+  animation: btns 1s ease-in-out infinite both;
+}
+
+@-webkit-keyframes btns {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes btns {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.btn1 {
+  -webkit-animation: btn1 2s ease-in-out infinite both;
+  animation: btn1 2s ease-in-out infinite both;
+}
+
+@-webkit-keyframes btn1 {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes btn1 {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+/*# sourceMappingURL=style.css.map */

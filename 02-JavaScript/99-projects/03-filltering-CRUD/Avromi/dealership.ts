@@ -32,7 +32,7 @@ class Car {
         this.Weight_in_lbs = Weight_in_lbs;
         this.Year = Year;
         this.Origin = Origin;
-        this.carId = Math.random().toString(16).slice(2);;
+        this.carId = Math.random().toString(16).slice(2);
     }
 }
 

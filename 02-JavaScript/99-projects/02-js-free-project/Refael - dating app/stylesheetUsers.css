@@ -1,0 +1,23 @@
+.container {
+  width: 900px;
+  margin: auto;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 91px;
+  height: 155px;
+  border: 2px solid black;
+}
+/*# sourceMappingURL=stylesheetUsers.css.map */

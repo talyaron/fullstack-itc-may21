@@ -8,7 +8,6 @@ var Car = /** @class */ (function () {
         this.Year = Year;
         this.Origin = Origin;
         this.carId = Math.random().toString(16).slice(2);
-        ;
     }
     return Car;
 }());
