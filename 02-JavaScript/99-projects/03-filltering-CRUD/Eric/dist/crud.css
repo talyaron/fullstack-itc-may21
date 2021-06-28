@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+.container {
+  border: 2px solid red;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.table-product {
+  width: 100%;
+  border: 2px solid red;
+  text-align: center;
+}
+
+legend {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+form {
+  margin-top: 10px;
+  width: 100%;
+}
+
+input {
+  text-align: center;
+}
+
+.head {
+  display: flex;
+  justify-content: space-around;
+}
+
+/*body {
+    animation: body 5s linear infinite alternate both;
+}
+
+@keyframes body {
+    0% {
+        background: #5b84f5;
+    }
+
+    100% {
+        background: #fafafc;
+    }
+}
+
+
+.Add {
+    -webkit-animation: Add 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: Add 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes Add {
+    0% {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+    }
+}
+
+@keyframes Add {
+    0% {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+    }
+}*/
