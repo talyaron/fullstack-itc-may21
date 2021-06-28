@@ -32,6 +32,3 @@ function getSecondsInHours(hours:number):number{
      return Math.ceil(day1mili-day2mili/1000/60/60/24)
  
  }
- // console.log(differenceInDaysByDay(nextMonth, currentDate));
- 
- 
