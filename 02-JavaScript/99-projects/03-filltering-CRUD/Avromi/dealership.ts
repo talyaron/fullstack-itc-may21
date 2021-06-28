@@ -53,9 +53,16 @@ class Cars {
     }
 
     removeCar(carId: string){
-        const carIndex = this.cars.findIndex((c)=> c.carId === carId);
-        this.cars.splice(carIndex, 1);
+        const carIndex = this.cars.filter((c)=> c.carId !== carId);
+        this.cars = carIndex
         this.renderCars();
+    }
+
+    updateCar(name:string){
+        const carToUpdate = this.cars.find(car=>car.Name === name)
+        carToUpdate.Horsepower = 500;
+        console.log(carToUpdate);
+        this.renderCars()
     }
 
 
@@ -67,7 +74,7 @@ class Cars {
         let html: string = "";
         this.cars.forEach((car) => {
             
-           html += `<tbody>
+           html = `<tbody>
        <tr>
         <td>${car.Name}</td>
         <td>${car.Miles_per_Gallon}</td> 
@@ -79,18 +86,17 @@ class Cars {
         <td> <i onclick='handleDelete("${car.carId}")' class="fas fa-trash"></i></td>
       </tr>`;
       
-      table.innerHTML = html;
+      table.insertAdjacentHTML(`afterbegin`, html)
         });
     };
-    createDropDownByName(){
-     
-    }
+   
 }
 
 const cars = new Cars();
 cars.addCars(carsData)
 cars.renderCars();
-cars.createDropDownByName();
+
+cars.updateCar(`ford ranger`);
 
 
 
@@ -117,6 +123,16 @@ const handleDelete = (carId:string):void =>{
     console.log(carId);
     cars.removeCar(carId);
 };
+
+const select =document.querySelector("#origin")
+const origin= [];
+cars.cars.forEach((c)=>origin.push(c.Origin))
+let mySet = new Set(origin)
+console.log(mySet);
+mySet.forEach(o=> {
+    const option = `<option value="${o}">${o}</option>`
+select.insertAdjacentHTML(`afterbegin`, option)
+});
 
 
 
