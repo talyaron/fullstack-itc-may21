@@ -7,29 +7,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="dist/filter.min.css">
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
-    <title>Filter Crud</title>
+    <link rel="shortcut icon" href="favicon-96x96.png" />
+    <title>CRUD</title>
 </head>
 
-<body>
+<body style="background-image: linear-gradient(to right, #434343 ,#000000 ); background-attachment:fixed;
+width: 100%;">
+    <header>
+        <h2>CRUD<img src="favicon-96x96.png" ></h2>
+    </header>
     <div class="container">
         <form id='form'>
-            <fieldset>
-                <legend>Personal Data</legend>
-                <input type="text" name="name" id="name" placeholder="Enter your name">
-                <input type="text" name="city" id="city" placeholder="Enter your city">
-                <input type="tel" name="tel" id="tel" placeholder="Enter your telephone">
-                <input type="text" name="status" id="status" placeholder="Enter you status">
-                <input type="text" name="salary" id="salary" placeholder="Enter your salary">
-                <div class="btnContainer">
-                    <input type="submit" value="ADD" class="btn add" id="add"></input>
-                    <input type="submit" value="EDIT" class="btn edit" id="edit"></input>
-                    <input type="submit" value="FILTER" class="btn filter" id="filter"></input>
-                </div>
+            <div class="container__actions">
+                <label>Search a specific name:
+                    <input type="text" name="filtername" id="filtername">
+                </label>
+                <fieldset class="container__actions__filtergender">
+                    <legend>Filter.by.Gender</legend>
+                    <label><input type="radio" name="gender_filter" class="container__actions__filtergender--radio" value="todos"
+                            checked><span>👱👸</span></label>
+                    <label><input type="radio" name="gender_filter" class="container__actions__filtergender--radio"
+                            value="male"><span>👱</span></label>
+                    <label><input type="radio" name="gender_filter" class="container__actions__filtergender--radio"
+                            value="female"><span>👸</span></label>
+                    </label>
+                </fieldset>
+                <fieldset class="container__actions__addedit">
+                    <legend>Action</legend>
+                    <input type="submit" value="ADD" class="container__actions__addedit--btn container__actions__addedit--add" id="add" title="Add new person"></input>
+                    <input type="submit" value="EDIT" class="container__actions__addedit--btn container__actions__addedit--edit" id="edit" disabled></input>
+                </fieldset>
+            </div>
+            <fieldset class="container__list">
+                <legend>List of People</legend>
+                        <label>Name:<span class="container__list--red-color">*</span> <input type="text" name="name" id="name"
+                                placeholder="Enter your name" required></label>
+                        <label>City:<span class="container__list--red-color">*</span> <input type="text" name="city" id="city"
+                                placeholder="Enter your city" required></label>
+                        <label>Gender:<span class="container__list--red-color">*</span>
+                            <select id="gender" required>
+                                <option value="male" selected="selected">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </label>
+                        <label>Tel:<span class="container__list--red-color">*</span> <input type="tel" name="tel" id="tel"
+                                placeholder="Enter your telephone" required></label>
+                        <label>Status:<span class="container__list--red-color">*</span>
+                            <select id="status" required>
+                                <option value="single" selected="selected">Single</option>
+                                <option value="married">Married</option>
+                                <option value="children">Children</option>
+                            </select>
+                        </label>
+                        <label>Salary:<span class="container__list--red-color">*</span> <input type="text" name="salary" id="salary"
+                                placeholder="Enter your salary" required></label>
+               
             </fieldset>
         </form>
-        <div id="boardData" class="boardData">
-
-        </div>
+        <div id="boardData" class="container__boardData"></div>
     </div>
     <script src="dist/filter.js"></script>
 </body>
