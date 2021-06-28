@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CAAC;EACD,gBAAgB,EAAC,wIAAwI;CAC5J;;AAED,AAAA,MAAM,CAAC;EACN,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,IAAI;CACX",
+    "sources": [
+        "waldo.scss"
+    ],
+    "names": [],
+    "file": "waldo.css"
+}

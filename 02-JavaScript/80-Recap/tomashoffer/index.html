@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let date1 = new Date("06/30/2019");
+        let date2 = new Date("07/30/2019");
+
+        console.log(date1.getTime())
+
+        function daysDifference(date1, date2){
+            // To calculate the time difference of two dates
+        var Difference_In_Time = date2.getTime() - date1.getTime();
+ 
+        // To calculate the no. of days between two dates
+        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+        // x1000 para pasarlo a segundos, x3600 q una hora y x24hrs para pasarlo a dias, y luego restarlo.  
+
+          document.write("Total number of days between dates  <br>"
+               + date1 + "<br> and <br>"
+               + date2 + " is: <br> "
+               + Difference_In_Days);
+        }
+        daysDifference(date1, date2)
+
+        // these are the most useful ones IMO
+var time = new Date();
+time.getDate(); // returns value 1-31 for day of the month
+time.getDay(); //returns value 0-6 for day of the week
+time.getFullYear(); //returns a 4 digit value for the current year
+time.getHours(); //returns value 0-23 for the current hour
+time.getMinutes(); //returns value 0-59 for the current minute of the hour
+time.getSeconds(); //returns value 0-59 for current second of the minute
+time.getMilliseconds(); //returns value 0-999 for current ms of the second
+time.getTime(); //returns date as ms since Jan 1, 1970
+time.toDateString(); //returns a string (e.g. "Fri May 9 2020")
+time.toLocaleString(); //returns date and time (e.g. "9/12/2015, 6:08:25 PM")
+time.toLocaleTimeString(); //returns time (e.g. "6:08:25 PM")
+time.toLocaleDateString(); //returns date (e.g. "9/12/2015")
+      
+    </script>
+</body>
+</html>

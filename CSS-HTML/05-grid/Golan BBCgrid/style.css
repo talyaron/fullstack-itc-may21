@@ -1,0 +1,126 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+  background-color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 40px;
+  padding-left: 10rem;
+}
+
+nav .nav__logoletter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: space-around;
+      -ms-flex-align: space-around;
+          align-items: space-around;
+  background-color: white;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 2px;
+  height: 24px;
+  width: 24px;
+  font-size: 24px;
+}
+
+nav .nav__rest {
+  padding-left: 5rem;
+}
+
+nav .nav__rest .nav__rest--element {
+  text-decoration: none;
+  color: white;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+h1 {
+  padding-top: 2rem;
+  padding-left: 10rem;
+}
+
+.container {
+  padding-left: 10rem;
+  padding-right: 10rem;
+  padding-top: 1rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr [4];
+  grid-template-columns: repeat(4, 1fr);
+  -ms-grid-rows: 200px [4];
+  grid-template-rows: repeat(4, 200px);
+  gap: 6px;
+      grid-template-areas: "main main . ." "main main . ." ". . . . " ". adv333 . ." ". adv333 . ." ". . . .";
+}
+
+.container__item {
+  background-color: red;
+  background-image: url("gtr2.jpg");
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: baseline;
+      -ms-flex-pack: baseline;
+          justify-content: baseline;
+}
+
+.container__item .container__item__h2 {
+  border-left: 4px solid red;
+  margin-left: 6px;
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
+
+.container__item .container__item__p {
+  margin-left: 6px;
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
+
+.container__header {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: main;
+  background: url("https://www.roadiemusic.com/blog/wp-content/uploads/2018/03/DAngelico-Guitars-Showroom-e1521445437261.jpg") no-repeat center top;
+  opacity: 0.7;
+}
+
+.drums {
+  background: url("https://s3.amazonaws.com/drumeoblog/beat/wp-content/uploads/2019/11/15161457/DSC_6202-1-1024x683.jpg") no-repeat center top;
+  opacity: 0.7;
+}
+
+.sports {
+  background: url("https://www.puma-catchup.com/wp-content/uploads/2019/03/H_New_Running-750x298.jpg") no-repeat center top;
+  opacity: 0.7;
+}
+
+.beer {
+  background: url("https://media.cheddars.com/en_us/images/product/beer-bottles.jpg") no-repeat center top;
+  opacity: 0.7;
+}
+
+.lang {
+  background: url("https://learnenglishteens.britishcouncil.org/sites/teens/files/styles/article/public/field/image/rs7352_thinkstockphotos-493800479-low.jpg?itok=NKUqml8J") no-repeat center top;
+  opacity: 0.7;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,121 @@
+body {
+  font-size: 18px;
+  background-color: #f8f8f8;
+  padding: 1%;
+}
+
+button:hover {
+  color: blanchedalmond;
+}
+
+.nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav__item--button {
+  text-decoration: none;
+  background-color: #0d4444;
+  color: white;
+  font-weight: bolder;
+  padding: 1%;
+  margin-left: 1%;
+  margin-right: 1%;
+  border: solid black 1%;
+}
+
+.nav__item--button:hover {
+  background-color: blanchedalmond;
+}
+
+.heading {
+  text-align: center;
+}
+
+#myFilter {
+  padding-left: 30%;
+  padding-right: 30%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  font-size: larger;
+  margin-left: 10%;
+}
+
+.form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 2%;
+}
+
+.form__item {
+  margin: 1%;
+  padding: .5%;
+}
+
+.form__item--button {
+  background-color: #0d4444;
+  color: white;
+  font-weight: bolder;
+  padding: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.customer__profile {
+  margin: 3%;
+  width: 40%;
+  margin: auto;
+}
+
+.customer__profile p {
+  background-color: white;
+  margin-top: .5%;
+}
+
+.customer__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  margin: 3%;
+  width: 80%;
+  margin: auto;
+}
+
+.customer__list .p {
+  background-color: white;
+  margin: .5%;
+  padding: .5%;
+  text-transform: capitalize;
+  font-weight: bolder;
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: nowrap;
+      flex-flow: nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.customer__list .p p {
+  width: 20%;
+}
+
+.customer__list .p p button {
+  margin-left: 5rem;
+}
+/*# sourceMappingURL=styles.css.map */
