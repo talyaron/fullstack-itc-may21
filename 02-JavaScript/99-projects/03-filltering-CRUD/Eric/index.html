@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dist/crud.css">
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <title>CRUD</title>
+</head>
+
+<body>
+    <div class="container">
+       <div class="head">
+        <div>
+            <label for="">Search products</label>
+            <input type="text" id="search">
+        </div>
+        <div>
+            <label for="">Filter by quantity lower than 10</label>
+            <select name="qty" id="qty">
+                <option disabled selected>Qty</option>
+                <option class="" value="">0</option>
+                <option class="" value="">1</option>
+                <option class="" value="">2</option>
+                <option class="" value="">3</option>
+                <option class="" value="">4</option>
+                <option class="" value="">5</option>
+                <option class="" value="">6</option>
+                <option class="" value="">7</option>
+                <option class="" value="">8</option>
+                <option class="" value="">9</option>
+                <option class="" value="">10</option>
+            </select>
+        </div>
+    </div>
+        <form onsubmit="handleSubmit(event)" id="product-form">
+            <fieldset>
+                <legend>Insert Product</legend>
+            <label for="title">ProductName</label>
+            <br>
+            <input type="text" id="title" name="name" class="product-name" placeholder="add name">
+            <br>
+            <label for="description">Description</label>
+            <br>
+            <input type="text" id="description" name="description" class="product-description" placeholder="add description">
+            <br>
+            <label for="origin">Origin</label>
+            <br>
+            <input type="text" id="origin" name="origin" class="product-origin" placeholder="add origin">
+            <br>
+            <label for="quantity">Quantity</label>
+            <br>
+            <input type="number" id="quantity" name="quantity" class="product-quantity" max="10" placeholder="add quantity">
+            <br><br>
+            <input type="submit" value="Add" class="btn-product">
+            </fieldset>
+        </form>
+        <br>
+    </div>
+    <table class="table-product">
+        <thead>
+            <tr>
+                <th>Product-Name</th>
+                <th>Description</th>
+                <th>Origen</th>
+                <th>Quantity</th>
+                <th>ID</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="product-list"></tbody>
+    </table>
+    <script src="./dist/products.js"></script>
+    <SCript src="./dist/main.js"></SCript>
+  
+</body>
+
+</html>

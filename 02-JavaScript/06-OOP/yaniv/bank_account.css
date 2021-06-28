@@ -61,7 +61,7 @@ body {
 }
 
 .summary__item--total #total_date {
-  -ms-grid-row: 2;
+  -ms-grid-row: 3;
   -ms-grid-column: 2;
   grid-area: date;
 }
@@ -110,14 +110,14 @@ body {
   display: grid;
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
-  -ms-grid-rows: 2fr 1fr 1fr 1fr;
-      grid-template-rows: 2fr 1fr 1fr 1fr;
-      grid-template-areas: "sign amount" "sign date" "sign biz" "sign id";
+  -ms-grid-rows: 2fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 2fr 1fr 1fr 1fr 1fr;
+      grid-template-areas: "sign amount" "sign tempTot" "sign date" "sign biz" "sign id";
 }
 
 .transactions__item--action #sign {
   -ms-grid-row: 1;
-  -ms-grid-row-span: 4;
+  -ms-grid-row-span: 5;
   -ms-grid-column: 1;
   grid-area: sign;
 }
@@ -130,21 +130,27 @@ body {
   font-weight: bold;
 }
 
-.transactions__item--action #trans_date {
+.transactions__item--action #temp_total {
   -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: tempTot;
+}
+
+.transactions__item--action #trans_date {
+  -ms-grid-row: 3;
   -ms-grid-column: 2;
   grid-area: date;
 }
 
 .transactions__item--action #trans_business {
-  -ms-grid-row: 3;
+  -ms-grid-row: 4;
   -ms-grid-column: 2;
   grid-area: biz;
   color: lightseagreen;
 }
 
 .transactions__item--action #trans_id {
-  -ms-grid-row: 4;
+  -ms-grid-row: 5;
   -ms-grid-column: 2;
   grid-area: id;
   color: gray;
