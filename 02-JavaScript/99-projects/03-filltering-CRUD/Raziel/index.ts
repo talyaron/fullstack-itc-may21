@@ -26,35 +26,8 @@ class List{
             console.log("Error");
         }
     }
-   emailValid(inputEmail:string){
-        const validEmail= /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        this.contactList.forEach(email=>{
-            if(email.email.match(validEmail)){
-                alert("Valid email address!");
-                 return true;
-            }
-            else{
-                alert("You have entered an invalid email address!");
-                return false;
-            }
-        }
-            )
-
-    }
-    phoneValid(phone:string){
-        const validphone= /^\+?([0-10]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-10]{4})$/;
-        this.contactList.forEach(phone=>{
-            if(phone.phone.match(validphone)){
-                alert("Valid phone number!");
-                 return true;
-            }
-            else{
-                alert("You have entered an invalid phone number!");
-                return false;
-            }
-        }
-            )
-    }
+  
+ 
     renderList():void{
         let html:string="";
         this.contactList.forEach(element=>{
@@ -77,7 +50,7 @@ class List{
                     <i class = "fas fa-trash"></i>
                 </span> Delete
             </button>
-            <button type = "button" id = "delete-btn" onclick='handelRemove("${element.id}")'>
+            <button type = "button" id = "delete-btn" onclick='edit("${element.id}")'>
                 <span>
                 <i class="fas fa-edit"></i>
                 </span> Edit
@@ -104,10 +77,20 @@ const handelForm = (ev) => {
     const fname: string = ev.target.elements.lastName.value;
     const phone: string = ev.target.elements.phone.value;
     const email: string = ev.target.elements.email.value;
+    const validEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+      const emailReg = new RegExp(validEmail,'gmi');
+      if (!emailReg.test(email)) {
+        alert('Your Email seems to be wrong. Please correct it or use a different Email address');
+        throw new Error('Wrong email address');
+      }
+      const validPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+      const phoneReg = new RegExp(validPhone,'gmi');
+      if (!phoneReg.test(phone)) {
+        alert('Please enter a valid phone number');
+        throw new Error('Wrong phone number');
+      }
     const  contact= new Contact(name,fname,phone,email);
     lists.addToList(contact);
-     lists.emailValid(email);
-     lists.phoneValid(phone);
      lists.renderList()
     console.log(lists);
     ev.target.reset()
