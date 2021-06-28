@@ -22,23 +22,38 @@ var List = /** @class */ (function () {
     };
     List.prototype.emailValid = function (inputEmail) {
         var validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if (inputEmail.value.match(validEmail)) {
-            alert("Valid email address!");
-            return true;
-        }
-        else {
-            alert("You have entered an invalid email address!");
-            return false;
-        }
+        this.contactList.forEach(function (email) {
+            if (email.email.match(validEmail)) {
+                alert("Valid email address!");
+                return true;
+            }
+            else {
+                alert("You have entered an invalid email address!");
+                return false;
+            }
+        });
     };
-    List.prototype.phoneValid = function () { };
-    List.prototype.renderList = function () { };
+    List.prototype.phoneValid = function (phone) {
+        var validphone = /^\+?([0-10]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-10]{4})$/;
+        this.contactList.forEach(function (phone) {
+            if (phone.phone.match(validphone)) {
+                alert("Valid phone number!");
+                return true;
+            }
+            else {
+                alert("You have entered an invalid phone number!");
+                return false;
+            }
+        });
+    };
+    List.prototype.renderList = function () {
+    };
     List.prototype.deleteContact = function () { };
     List.prototype.editContact = function () { };
     List.prototype.searchContact = function () { };
     return List;
 }());
-var list = new List();
+var lists = new List();
 var handelForm = function (ev) {
     ev.preventDefault();
     var name = ev.target.elements.firstName.value;
@@ -46,7 +61,9 @@ var handelForm = function (ev) {
     var phone = ev.target.elements.phone.value;
     var email = ev.target.elements.email.value;
     var contact = new Contact(name, fname, phone, email);
-    list.addToList(contact);
-    console.log(list);
+    lists.addToList(contact);
+    lists.emailValid(email);
+    lists.phoneValid(phone);
+    console.log(lists);
     ev.target.reset();
 };
