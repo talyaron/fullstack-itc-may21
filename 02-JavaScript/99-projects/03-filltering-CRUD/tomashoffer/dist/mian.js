@@ -16,17 +16,19 @@ var ListProducto = /** @class */ (function () {
     ListProducto.prototype.addList = function (add) {
         this.list.push(add);
     };
-    ListProducto.prototype.addCars = function (prodArray) {
+    ListProducto.prototype.addObject = function (prodArray) {
         var _this = this;
         prodArray.forEach(function (prd) {
             var prods = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description, prd.id);
             _this.list.push(prods);
         });
     };
+    ListProducto.prototype.renderData = function () {
+    };
     return ListProducto;
 }());
 var listP = new ListProducto();
-listP.addCars(productos);
+listP.addObject(productos);
 console.log(listP);
 var handleSubmit = function (event) {
     event.preventDefault();

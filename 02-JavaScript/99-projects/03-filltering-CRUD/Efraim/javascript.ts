@@ -40,11 +40,12 @@ class Products {
                 return (
                     `<div id='${product.id}'  class="shopping-list__item-wrapper">` +
                     `<img class="shopping-list__item-wrapper__item-image" src=${product.imgSrc} alt="">` +
-                    `<div id='${product.id2}'> - Edit the text and click to save for next time</div>` +
+                    `<div class="shopping-list__item-wrapper__edit" id='${product.id2}'> - Edit the text and click to save for next time</div>` +
                     `<h2  class="shopping-list__item-wrapper__item-name edit" id="${product.id3}" contenteditable="true">${product.description}</h2>` +
                     `<h3  class="shopping-list__item-wrapper__item-price">${product.price}</h3>` +
-                    `<input type="button"  value="save my edits" onclick="saveEdits('${product.id}', '${product.description}', '${product.id2}')"/>` +
-                    `<button class="shopping-list__item-wrapper__add" onclick="deleteProduct('${product.id}')">Delete</button>` +
+
+                    `<button class="shopping-list__item-wrapper__wrapper__save" type="button"  onclick="saveEdits('${product.id}', '${product.id2}')">Save Edit</button>` +
+                    `<button class="shopping-list__item-wrapper__wraper__delete" onclick="deleteProduct('${product.id}')">Delete</button>` +
                     ` </div>`
                 )
             }).join('')
@@ -78,9 +79,11 @@ const deleteProduct = (productId: string) => {
     try {
         const shoppingListDOM = document.querySelector('.shopping-list');
         const index = products.findIndexes(productId)
-        console.log(index)
         products.products.splice(index, 1);
         products.renderProducts(shoppingListDOM);
+        nameUpdate = products.products.map(proddes => proddes.description)
+        console.log(products.products);
+        sessionStorage.setItem('products', JSON.stringify(products.products))
     } catch (e) {
         console.error(e)
     }
@@ -119,33 +122,25 @@ function handleSubmit(ev): any {
     const shoppingListDOM = document.querySelector('.shopping-list');
     products.addProduct(new Product(`"${imgUrl}"`, `${description}`, `${year}`));
     products.renderProducts(shoppingListDOM);
+    nameUpdate = products.products.map(proddes => proddes.description)
     console.log(products.products);
     sessionStorage.setItem('products', JSON.stringify(products.products))
     ev.target.reset();
 }
 
 
-
-
-
-
-
-
-
-
-
-let nameUpdate:Array<any> = products.products.map(proddes=> proddes.description)
+let nameUpdate: Array<any> = products.products.map(proddes => proddes.description)
 console.log(nameUpdate)
-function saveEdits(productId, proddes, productID2) {
+function saveEdits(productId, productID2) {
     const index = products.findIndexes(productId);
     console.log(index);
     let editElem = document.querySelectorAll(`.edit`);
     nameUpdate.length = editElem.length
- 
+
     nameUpdate[index] = editElem[index].innerHTML;
     console.log(nameUpdate);
-    
-    
+
+
 
     sessionStorage.userEdits = JSON.stringify(nameUpdate);
     let update = document.getElementById(`${productID2}`);
@@ -156,16 +151,20 @@ function saveEdits(productId, proddes, productID2) {
 
 function checkEdits() {
     const render = JSON.parse(sessionStorage.getItem('products'))
-    addToDom1(render)
-    products.products = render
-    if (sessionStorage.userEdits != null){
-     let nameUpdate:Array<any> = [JSON.parse(sessionStorage.userEdits)]
-     console.log(nameUpdate);
-     let editElem = document.querySelectorAll(`.edit`);
-     for (let i=0; i<editElem.length; i++){
-     editElem[i].innerHTML = nameUpdate[0][i]
-     } 
-}}
+    if (render != null) {
+        addToDom1(render)
+        products.products = render
+        nameUpdate = render.map(proddes => proddes.description)
+    }
+    if (sessionStorage.userEdits != null) {
+        let nameUpdate: Array<any> = [JSON.parse(sessionStorage.userEdits)]
+        console.log(nameUpdate);
+        let editElem = document.querySelectorAll(`.edit`);
+        for (let i = 0; i < editElem.length; i++) {
+            editElem[i].innerHTML = nameUpdate[0][i]
+        }
+    }
+}
 
 
 
@@ -184,11 +183,11 @@ const addToDom1 = (searchResults: Array<any>) => {
     searchResults.forEach(productItem => shoppingList.innerHTML += (
         `<div id='${productItem.id}'  class="shopping-list__item-wrapper">` +
         `<img class="shopping-list__item-wrapper__item-image" src=${productItem.imgSrc} alt="">` +
-        `<div id='${productItem.id2}'> - Edit the text and click to save for next time</div>` +
+        `<div class="shopping-list__item-wrapper__edit" id='${productItem.id2}'> - Edit the text and click to save for next time</div>` +
         `<h2  class="shopping-list__item-wrapper__item-name edit" id="${productItem.id3}" contenteditable="true">${productItem.description}</h2>` +
         `<h3  class="shopping-list__item-wrapper__item-price">${productItem.price}</h3>` +
-        `<input type="button"  value="save my edits" onclick="saveEdits('${productItem.id}', '${productItem.description}', '${productItem.id2}')"/>` +
-        `<button class="shopping-list__item-wrapper__add" onclick="deleteProduct('${productItem.id}')">Delete</button>` +
+        `<button class="shopping-list__item-wrapper__wrapper__save" type="button" onclick="saveEdits('${productItem.id}', '${productItem.id2}')">Save Edits</button>` +
+        `<button class="shopping-list__item-wrapper__wrapper__delete" onclick="deleteProduct('${productItem.id}')">Delete</button>` +
         ` </div>`
     )
     )
@@ -221,12 +220,38 @@ const handleKeyUp = (ev: any) => {
         console.error(er)
     }
 }
-const filterYear = (ev: any) => {
+const filterYear = (ev: any):any => {
 
     const value = parseInt(ev.target.value);
-    const searchResults: Array<any> = products.products.filter(productItem => 
-            productItem.price === value);
-    addToDom1(searchResults)};
+    const searchResults: Array<any> = products.products.filter(productItem =>
+        productItem.price === value);
+    addToDom1(searchResults)
+};
+const resetButton = () => {
+        addToDom1(products.products);
+    }
+
+
+
+
+// var myParent = document.querySelector('.trial');
+
+// //Create array of options to be added
+// var array = ['2000','2001','2002','2020'];
+
+// //Create and append select list
+// var selectList = document.createElement("select");
+// selectList.className = "wrapper__select-filter";
+// selectList.onchange(filterYear(event));
+// myParent.appendChild(selectList);
+
+// //Create and append the options
+// for (var i = 0; i < array.length; i++) {
+//     var option = document.createElement("option");
+//     option.value = array[i];
+//     option.text = array[i];
+//     selectList.appendChild(option);
+// }
 
 
 

@@ -31,16 +31,19 @@ class ListProducto{
     addList(add:Producto){
         this.list.push(add)
     }
-    addCars(prodArray:Array<Producto|ProdInterface>){
+    addObject(prodArray:Array<Producto|ProdInterface>){
         prodArray.forEach(prd=>{
             const prods = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description, prd.id)
             this.list.push(prods);
         })
      }
+    renderData(){
+
+    }
 
 }
 const listP = new ListProducto()
-listP.addCars(productos);
+listP.addObject(productos);
 console.log(listP);
 
 
