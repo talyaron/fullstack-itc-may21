@@ -75,7 +75,7 @@ class Cars {
         <td>${car.Weight_in_lbs}</td> 
         <td>${car.Year}</td> 
         <td>${car.Origin}</td>
-        <td> <i onclick='handleDelete("${car.carId}")' class="fas fa-trash"></i></td>
+        <td> <i  class="fas fa-trash"></i></td>
       </tr>`;
       
       table.innerHTML = html;

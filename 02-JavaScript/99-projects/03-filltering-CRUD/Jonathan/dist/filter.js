@@ -3,7 +3,6 @@ var boardDataRoot = document.querySelector('#boardData');
 var checks = document.getElementsByClassName('checks');
 var btnAdd = document.querySelector('#add');
 var btnEdit = document.querySelector('#edit');
-var btnBring = document.querySelector('#bring');
 var btnDelete = document.querySelectorAll('#delete');
 var btnFilter = document.querySelector('#filter');
 //data
@@ -42,20 +41,20 @@ var DataList = /** @class */ (function () {
         return this.datalist.length;
     };
     //editar
-    DataList.prototype.bringItem = function (count) {
+    DataList.prototype.bringItem = function () {
         var checks = document.getElementsByClassName('checks');
-        console.log(count);
-        var posicion = 0;
-        for (var i = 0; i < count; i++) {
+        var i = 0;
+        this.datalist.forEach(function (element) {
             if (checks[i].checked === true) {
-                inputName.value = this.datalist[i].name;
-                city.value = this.datalist[i].city;
-                tel.value = this.datalist[i].tel;
-                inputStatus.value = this.datalist[i].status;
-                salary.value = String(this.datalist[i].salary);
+                inputName.value = element.name;
+                city.value = element.city;
+                tel.value = element.tel;
+                inputStatus.value = element.status;
+                salary.value = String(element.salary);
                 posicion = i;
             }
-        }
+            i++;
+        });
         return posicion;
     };
     DataList.prototype.editItem = function (posicion) {
@@ -79,17 +78,17 @@ var DataList = /** @class */ (function () {
         this.renderDataList(this.datalist);
     };
     DataList.prototype.removeItem = function (id) {
-        var itemIndex = this.datalist.findIndex(function (elem) { return elem.id = id; });
-        this.datalist.splice(itemIndex, 1);
+        this.datalist = this.datalist.filter(function (item) { return item.id !== id; });
         this.renderDataList(this.datalist);
     };
     DataList.prototype.renderDataList = function (dataList) {
         var html = '';
+        var count = 0;
         console.log(dataList);
         dataList.forEach(function (item) {
-            html += "<div class = \"item\">\n                       \n                       <span> Name: " + item.name + " </span> \n                       <span> Citiy: " + item.city + " </span> \n                       <span> Tel: " + item.tel + " </span> \n                       <span> Status: " + item.status + " </span> \n                       <span> Salary: " + item.salary + " </span>\n                       <label for=\"checkbox" + count + "\">Edit Item</label>\n                        <input type=\"checkbox\" id=\"cbox" + count + "\" value=\"checkbox" + count + "\" class=\"checks\">\n                        <button type=\"sumbit\" onclick='handleDelete(" + item.id + ")' class = \"btn\">Button</button>\n                    </div>";
+            html += "<div class = \"item\">\n                       <span> Name: " + item.name + " </span> \n                       <span> Citiy: " + item.city + " </span> \n                       <span> Tel: " + item.tel + " </span> \n                       <span> Status: " + item.status + " </span> \n                       <span> Salary: " + item.salary + " </span>\n                       <label for=\"checkbox" + count + "\">Edit Item\n                       <input type=\"radio\" name=\"edit\" value=\"radiobox" + count + "\" onclick='handleEdit()' class=\"checks\">\n                       <i class=\"fas fa-edit\"></i>\n                       </label>\n                       <i class=\"fas fa-trash\" onclick='handleDelete(\"" + item.id + "\")'></i>\n                        \n                    </div>";
+            count++;
         });
-        console.log(boardDataRoot);
         boardDataRoot.innerHTML = html;
         return this.datalist.length;
     };
@@ -118,6 +117,7 @@ var count = 0;
 count = datalist.getOldData(personalDataList);
 datalist.renderDataList(personalDataList);
 var posicion;
+//Buttons
 btnAdd.addEventListener('click', function (event) {
     event.preventDefault();
     console.log(id);
@@ -126,18 +126,21 @@ btnAdd.addEventListener('click', function (event) {
 });
 btnEdit.addEventListener('click', function (event) {
     event.preventDefault();
-    console.log(posicion);
     datalist.editItem(posicion);
-});
-btnBring.addEventListener('click', function (event) {
-    event.preventDefault();
-    posicion = datalist.bringItem(count);
+    inputName.value = "";
+    city.value = "";
+    tel.value = "";
+    inputStatus.value = "";
+    salary.value = "";
 });
 btnFilter.addEventListener('click', function (event) {
     event.preventDefault();
     datalist.filterOption();
 });
+//function
 function handleDelete(id) {
-    console.log(id);
     datalist.removeItem(id);
+}
+function handleEdit() {
+    datalist.bringItem();
 }
