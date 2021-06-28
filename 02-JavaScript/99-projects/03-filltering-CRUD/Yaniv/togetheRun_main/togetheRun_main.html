@@ -35,6 +35,46 @@
             <button class="dashboard__item dashboard__item--add update_run_btn">Schedule a Run</button>
             <button class="dashboard__item dashboard__item--history">TogetheRuns History</button>
         </section>
+        <section id="filters">
+            <form class="filter_form" onsubmit="filterSubmit(event)">
+                <div class="filter_form__item">
+                    <label for="min_distance_filter">From (Km):</label>
+                    <input type="number" min="1" name="minDistanceFilter" id="min_distance_filter" onkeyup="filterKeyUp(event)" />
+                </div>
+                <div class="filter_form__item">
+                    <label for="max_distance_filter">To (Km):</label>
+                    <input type="number" max="100" name="maxDistanceFilter" id="max_distance_filter" onkeyup="filterKeyUp(event)" />
+                </div>
+                <div class="filter_form__item">
+                    <label for="pace_filter">Pace (min/Km):</label>
+                    <select name="paceFilter" id="pace_filter" onchange="filterChange(event)">
+                        <option value="">choose from list</option>
+                        <option value="09'00&quot; - 10'00&quot;">09'00" - 10'00"</option>
+                        <option value="08'00&quot; - 09'00&quot;">08'00" - 09'00"</option>
+                        <option value="07'00&quot; - 08'00&quot;">07'00" - 08'00"</option>
+                        <option value="06'00&quot; - 07'00&quot;">06'00" - 07'00"</option>
+                        <option value="05'00&quot; - 06'00&quot;">05'00" - 06'00"</option>
+                        <option value="04'00&quot; - 05'00&quot;">04'00" - 05'00"</option>
+                        <option value="03'00&quot; - 04'00&quot;">03'00" - 04'00"</option>
+                    </select>
+                </div>
+                <div class="filter_form__item">
+                    <label for="area_filter">Area:</label>
+                    <select name="areaFilter" id="area_filter" onchange="filterChange(event)">
+                        <option value="">choose from list</option>
+                        <option value="Be'er Sheva">Be'er Sheva</option>
+                        <option value="Tel Aviv">Tel Aviv</option>
+                    </select>
+                </div>
+                <div class="filter_form__item">
+                    <label for="location_filter">Location:</label>
+                    <input type="search" name="locationFilter" id="location_filter" onkeyup="filterKeyUp(event)" />
+                </div>
+                <div class="filter_form__item">
+                    <input type="submit" value="Filter" id="filter_submit" />
+                </div>
+            </form>
+        </section>
         <section class="runs">
         </section>
     </main>

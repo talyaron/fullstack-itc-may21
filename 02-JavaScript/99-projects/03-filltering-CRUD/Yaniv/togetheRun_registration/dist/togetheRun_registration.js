@@ -4,9 +4,8 @@ var newRunner = /** @class */ (function () {
         if (runnerAgeGroup === void 0) { runnerAgeGroup = 'Unknown'; }
         if (runnerChat === void 0) { runnerChat = 'Unknown'; }
         this.runnerId = "runner" + Math.random().toString(16).slice(2); // generated on registration
-        this.runnerPref = { prefChat: 'All', prefGender: 'All', prefAgeGroup: 'All' }; // default on registration
+        this.runnerPref = { prefChat: 'All', prefCompetative: 'All', prefGender: 'All', prefAgeGroup: 'All' }; // default on registration
         this.runnerRuns = [];
-        this.runnerRunsHtml = ''; // DOM representation of all runs
         this.runnerDistance = 0;
         this.runnerName = runnerName;
         this.runnerEmail = runnerEmail;
