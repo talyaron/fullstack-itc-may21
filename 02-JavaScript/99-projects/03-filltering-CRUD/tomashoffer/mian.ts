@@ -1,3 +1,5 @@
+const select = document.getElementById('select');
+
 interface ProdInterface{
     product:string;
     brand:string;
@@ -31,10 +33,11 @@ class ListProducto{
     addList(add: Producto){
         this.list.push(add)
         this.renderData();
+        localStorage.setItem(`product`, JSON.stringify(list));
     }
     addObject(prodArray:Array<Producto|ProdInterface>){
         prodArray.forEach(prd=>{
-            const prods = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description)
+            const prods = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description);
             this.list.push(prods);
         })
         this.renderData();
@@ -43,6 +46,7 @@ class ListProducto{
         this.list = this.list.filter((prod) => prod.id !== id);
         this.renderData();
     }
+
     renderData(){
         const container: HTMLElement = document.querySelector(".container_products")
         let html: string = "";
@@ -64,8 +68,8 @@ class ListProducto{
                         <p>${prod.description}</p>
                     </div>
                     <div class="container-icons item">
-                    <a href=""><i class="fas fa-trash icono_productos icono_productos_delete"></i></a>
-                    <a href="" onclick="handleDelete('${prod.id}')"><i  class="fas fa-edit icono_productos icono_productos_edit"></i></a>
+                    <button href=""><i class="fas fa-trash icono_productos icono_productos_delete"></i></button>
+                    <button href="" onclick="handleDelete('${prod.id}')"><i  class="fas fa-edit icono_productos icono_productos_edit"></i></button>
                     </div>`
                   
                     
@@ -86,14 +90,20 @@ const handleDelete = (id:string):void=>{
       listP.itemDelete(id);
 }
 
+const filterSelect = listP.filter(function(el){
+    
+})
+
+
 const handleSubmit = (event) => {
     event.preventDefault();
   
     const product: string = event.target.elements.producto.value;
     const brand: string = event.target.elements.brand.value; 
-    const price: number = event.target.elements.price.value; 
-    const stock: number = event.target.elements.stock.value; 
+    const price: number = event.target.elements.price.valueAsNumber; 
+    const stock: number = event.target.elements.stock.valueAsNumber; 
     const description: string = event.target.elements.description.value; 
+
 
 
 
