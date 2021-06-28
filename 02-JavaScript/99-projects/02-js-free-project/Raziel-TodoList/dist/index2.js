@@ -1,19 +1,23 @@
 var listFromIndex1 = JSON.parse(localStorage.getItem("taskList"));
-var listRoot = document.querySelector("#root");
-function renderList() {
+console.log(listFromIndex1);
+/*
+const listRoot: HTMLElement = document.querySelector("#root");
+function renderList(): void {
     try {
-        var html = this.listFromIndex1.map(function (el) {
-            return (" <li class=\"Test\">" + el.task + "  " + el.date + " </li>");
+        let html: string = this.listFromIndex1.map(el => {
+            return (
+                ` <li class="Test">${el.task}  ${el.date} </li>`
+            )
         }).join('');
-        if (!html)
-            throw new Error('An error happens when you want to render the pets filtered!');
+        if (!html) throw new Error('An error happens when you want to render the pets filtered!')
         listRoot.innerHTML = html;
-    }
-    catch (error) {
+    } catch (error) {
         console.error(error);
     }
 }
+
 renderList();
+*/
 var dt = new Date();
 function renderDate() {
     dt.setDate(1);
@@ -54,7 +58,7 @@ function renderDate() {
             tasks += "<div> heydddddd</div>";
         }
     }
-    document.querySelector('#daysTask').innerHTML = tasks;
+    //document.querySelector('#daysTask').innerHTML=tasks;
 }
 function moveDate(para) {
     if (para == "prev") {

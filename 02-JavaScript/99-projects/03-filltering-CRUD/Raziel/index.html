@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dist/index.css">
+    <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="container__input">
+            <h2>Create Contact</h2>
+            <div class="enteryForm">
+         <form onsubmit="handelForm(event)">
+         <label for="firstName">First Name</label>
+         <input type="text" name="firstName" id="firstName">
+         <label for="firstName">Last Name</label>
+         <input type="text"name="lastName" id="lastName">
+         <label for="firstName">Phone Number</label>
+         <input type="text" name="phone" id="phone">
+         <label for="firstName">Email</label>
+         <input type="email" name="email" id="email">
+         <button type = "submit" id = "submit-btn" class = "input-btns">
+            <span>
+                <i class = "fas fa-plus"></i>
+            </span> Add Contact
+        </button>
+        </form>
+        </div>
+    </div>
+</div>
+        
+       <div class="display__output" id="root">
+            <h2>Available Contacts: </h2>
+    </div>
+    <script src="dist/index.js"></script>
+</body>
+
+</html>

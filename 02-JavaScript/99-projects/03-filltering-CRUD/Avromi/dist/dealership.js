@@ -8,7 +8,6 @@ var Car = /** @class */ (function () {
         this.Year = Year;
         this.Origin = Origin;
         this.carId = Math.random().toString(16).slice(2);
-        ;
     }
     return Car;
 }());
@@ -27,7 +26,6 @@ var Cars = /** @class */ (function () {
             var newCar = new Car(car.Name, car.Miles_per_Gallon, car.Cylinders, car.Horsepower, car.Weight_in_lbs, car.Year, car.Origin);
             _this.cars.push(newCar);
         });
-        console.log(this.cars);
     };
     Cars.prototype.removeCar = function (carId) {
         var carIndex = this.cars.findIndex(function (c) { return c.carId === carId; });
@@ -42,16 +40,19 @@ var Cars = /** @class */ (function () {
         var table = document.querySelector(".table");
         var html = "";
         this.cars.forEach(function (car) {
-            html += "<tbody>\n       <tr>\n        <td>" + car.Name + "</td>\n        <td>" + car.Miles_per_Gallon + "</td> \n        <td>" + car.Cylinders + "</td> \n        <td>" + car.Horsepower + "</td> \n        <td>" + car.Weight_in_lbs + "</td> \n        <td>" + car.Year + "</td> \n        <td>" + car.Origin + "</td>\n        <td> <i  class=\"fas fa-trash\"></i></td>\n      </tr>";
+            html += "<tbody>\n       <tr>\n        <td>" + car.Name + "</td>\n        <td>" + car.Miles_per_Gallon + "</td> \n        <td>" + car.Cylinders + "</td> \n        <td>" + car.Horsepower + "</td> \n        <td>" + car.Weight_in_lbs + "</td> \n        <td>" + car.Year + "</td> \n        <td>" + car.Origin + "</td>\n        <td> <i onclick='handleDelete(\"" + car.carId + "\")' class=\"fas fa-trash\"></i></td>\n      </tr>";
             table.innerHTML = html;
         });
     };
     ;
+    Cars.prototype.createDropDownByName = function () {
+    };
     return Cars;
 }());
 var cars = new Cars();
 cars.addCars(carsData);
 cars.renderCars();
+cars.createDropDownByName();
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var Name = ev.target.elements.Name.value;

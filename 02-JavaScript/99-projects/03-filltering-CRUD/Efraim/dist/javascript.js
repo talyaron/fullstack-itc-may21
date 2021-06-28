@@ -32,11 +32,11 @@ var Products = /** @class */ (function () {
             var html = this.products.map(function (product) {
                 return ("<div id='" + product.id + "'  class=\"shopping-list__item-wrapper\">" +
                     ("<img class=\"shopping-list__item-wrapper__item-image\" src=" + product.imgSrc + " alt=\"\">") +
-                    ("<div id='" + product.id2 + "'> - Edit the text and click to save for next time</div>") +
+                    ("<div class=\"shopping-list__item-wrapper__edit\" id='" + product.id2 + "'> - Edit the text and click to save for next time</div>") +
                     ("<h2  class=\"shopping-list__item-wrapper__item-name edit\" id=\"" + product.id3 + "\" contenteditable=\"true\">" + product.description + "</h2>") +
                     ("<h3  class=\"shopping-list__item-wrapper__item-price\">" + product.price + "</h3>") +
-                    ("<input type=\"button\"  value=\"save my edits\" onclick=\"saveEdits('" + product.id + "', '" + product.description + "', '" + product.id2 + "')\"/>") +
-                    ("<button class=\"shopping-list__item-wrapper__add\" onclick=\"deleteProduct('" + product.id + "')\">Delete</button>") +
+                    ("<button class=\"shopping-list__item-wrapper__wrapper__save\" type=\"button\"  onclick=\"saveEdits('" + product.id + "', '" + product.id2 + "')\">Save Edit</button>") +
+                    ("<button class=\"shopping-list__item-wrapper__wraper__delete\" onclick=\"deleteProduct('" + product.id + "')\">Delete</button>") +
                     " </div>");
             }).join('');
             domElement.innerHTML = html;
@@ -67,9 +67,11 @@ var deleteProduct = function (productId) {
     try {
         var shoppingListDOM = document.querySelector('.shopping-list');
         var index = products.findIndexes(productId);
-        console.log(index);
         products.products.splice(index, 1);
         products.renderProducts(shoppingListDOM);
+        nameUpdate = products.products.map(function (proddes) { return proddes.description; });
+        console.log(products.products);
+        sessionStorage.setItem('products', JSON.stringify(products.products));
     }
     catch (e) {
         console.error(e);
@@ -105,13 +107,14 @@ function handleSubmit(ev) {
     var shoppingListDOM = document.querySelector('.shopping-list');
     products.addProduct(new Product("\"" + imgUrl + "\"", "" + description, "" + year));
     products.renderProducts(shoppingListDOM);
+    nameUpdate = products.products.map(function (proddes) { return proddes.description; });
     console.log(products.products);
     sessionStorage.setItem('products', JSON.stringify(products.products));
     ev.target.reset();
 }
 var nameUpdate = products.products.map(function (proddes) { return proddes.description; });
 console.log(nameUpdate);
-function saveEdits(productId, proddes, productID2) {
+function saveEdits(productId, productID2) {
     var index = products.findIndexes(productId);
     console.log(index);
     var editElem = document.querySelectorAll(".edit");
@@ -124,8 +127,11 @@ function saveEdits(productId, proddes, productID2) {
 }
 function checkEdits() {
     var render = JSON.parse(sessionStorage.getItem('products'));
-    addToDom1(render);
-    products.products = render;
+    if (render != null) {
+        addToDom1(render);
+        products.products = render;
+        nameUpdate = render.map(function (proddes) { return proddes.description; });
+    }
     if (sessionStorage.userEdits != null) {
         var nameUpdate_1 = [JSON.parse(sessionStorage.userEdits)];
         console.log(nameUpdate_1);
@@ -149,11 +155,11 @@ var addToDom1 = function (searchResults) {
     }
     searchResults.forEach(function (productItem) { return shoppingList.innerHTML += ("<div id='" + productItem.id + "'  class=\"shopping-list__item-wrapper\">" +
         ("<img class=\"shopping-list__item-wrapper__item-image\" src=" + productItem.imgSrc + " alt=\"\">") +
-        ("<div id='" + productItem.id2 + "'> - Edit the text and click to save for next time</div>") +
+        ("<div class=\"shopping-list__item-wrapper__edit\" id='" + productItem.id2 + "'> - Edit the text and click to save for next time</div>") +
         ("<h2  class=\"shopping-list__item-wrapper__item-name edit\" id=\"" + productItem.id3 + "\" contenteditable=\"true\">" + productItem.description + "</h2>") +
         ("<h3  class=\"shopping-list__item-wrapper__item-price\">" + productItem.price + "</h3>") +
-        ("<input type=\"button\"  value=\"save my edits\" onclick=\"saveEdits('" + productItem.id + "', '" + productItem.description + "', '" + productItem.id2 + "')\"/>") +
-        ("<button class=\"shopping-list__item-wrapper__add\" onclick=\"deleteProduct('" + productItem.id + "')\">Delete</button>") +
+        ("<button class=\"shopping-list__item-wrapper__wrapper__save\" type=\"button\" onclick=\"saveEdits('" + productItem.id + "', '" + productItem.id2 + "')\">Save Edits</button>") +
+        ("<button class=\"shopping-list__item-wrapper__wrapper__delete\" onclick=\"deleteProduct('" + productItem.id + "')\">Delete</button>") +
         " </div>"); });
 };
 var handleSubmit1 = function (ev) {
@@ -186,3 +192,21 @@ var filterYear = function (ev) {
     });
     addToDom1(searchResults);
 };
+var resetButton = function () {
+    addToDom1(products.products);
+};
+// var myParent = document.querySelector('.trial');
+// //Create array of options to be added
+// var array = ['2000','2001','2002','2020'];
+// //Create and append select list
+// var selectList = document.createElement("select");
+// selectList.className = "wrapper__select-filter";
+// selectList.onchange(filterYear(event));
+// myParent.appendChild(selectList);
+// //Create and append the options
+// for (var i = 0; i < array.length; i++) {
+//     var option = document.createElement("option");
+//     option.value = array[i];
+//     option.text = array[i];
+//     selectList.appendChild(option);
+// }

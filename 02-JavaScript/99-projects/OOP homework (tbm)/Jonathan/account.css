@@ -124,7 +124,8 @@ h1 .img-bank {
   color: #77dd77;
 }
 
-.square__item--total span .img-no-ok, .square__item--total span .img-ok {
+.square__item--total span .img-no-ok,
+.square__item--total span .img-ok {
   width: 14px;
   height: 14px;
   margin-right: 2px;
@@ -175,6 +176,8 @@ h1 .img-bank {
 }
 
 .container-forms fieldset .btn {
+  position: relative;
+  left: 35%;
   background-color: #3da728ce;
   color: white;
   margin-bottom: 10px;

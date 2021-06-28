@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //please create array of objects... {name:'aaaa'}
+        //find a specific object based on name
+        //and delete one object in the array,
+
+        //delete all objects with this name.
+
+        let x = [{ name: "tomas" }, { name: "martin" }, { name: "matias" }, { name: "hernan" }, { name: "tal" }, { name: "juan" }];
+
+        var screenName = x.filter(function(names) {
+	    return names.name == "tomas";
+});
+console.log(screenName);
+
+var screenName = x.filter(function(names) {
+	    return names.name == "tomas";
+});
+
+delete x.name['martin'];
+
+
+var screenName = x.filter(function(names) {
+   return delete names['martin'];
+});
+
+console.log(x)
+    </script>
+</body>
+</html>
