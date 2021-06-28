@@ -19,7 +19,7 @@
        <div class="head">
         <div>
             <label for="">Search products</label>
-            <input type="text" id="search">
+            <input type="text" id="filtername" name="filtername">
         </div>
         <div>
             <label for="">Filter by quantity lower than 10</label>
@@ -46,6 +46,10 @@
             <br>
             <input type="text" id="title" name="name" class="product-name" placeholder="add name">
             <br>
+            <label for="title">Type</label>
+            <br>
+            <input type="text" id="title" name="type" class="product-type" placeholder="add type">
+            <br>
             <label for="description">Description</label>
             <br>
             <input type="text" id="description" name="description" class="product-description" placeholder="add description">
@@ -59,7 +63,7 @@
             <input type="number" id="quantity" name="quantity" class="product-quantity" max="10" placeholder="add quantity">
             <br><br>
             <input type="submit" value="Add" class="btn-product">
-            </fieldset>
+        </fieldset>
         </form>
         <br>
     </div>
@@ -67,10 +71,10 @@
         <thead>
             <tr>
                 <th>Product-Name</th>
+                <th>Type</th>
                 <th>Description</th>
                 <th>Origen</th>
                 <th>Quantity</th>
-                <th>ID</th>
                 <th></th>
             </tr>
         </thead>
