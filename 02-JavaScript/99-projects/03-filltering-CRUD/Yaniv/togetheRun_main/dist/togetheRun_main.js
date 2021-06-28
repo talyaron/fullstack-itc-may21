@@ -89,7 +89,7 @@ var LoggedInRunner = /** @class */ (function () {
         runnerNameContainter.insertAdjacentHTML("beforeend", this.runnerName + "!");
         runnerProfileImg.title = "" + this.runnerName;
         if (this.runnerProfImg === null) {
-            runnerProfileImg.setAttribute("src", "images/togetheRun_logo.png");
+            runnerProfileImg.setAttribute("src", "../images/togetheRun_logo.png");
         }
         else {
             runnerProfileImg.setAttribute("src", this.runnerProfImg);
@@ -133,9 +133,10 @@ var LoggedInRunner = /** @class */ (function () {
                     var MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
                     var MatchesBtnLook = run.runMatch ? "" : " disabled style=\"background-color:" + runColor + ";cursor:not-allowed";
                     var runFormatedDate = typeof run.runTime === 'object' ? "" + run.runTime.toISOString().substring(0, 16).replace("T", " ") : "" + run.runTime.substring(0, 16).replace("T", " ");
-                    var runHTML = "\n          <div class=\"runs__item\" id=\"" + run.runId + "\">\n            <i class=\"run_edit fas fa-edit update_run_btn\"\"></i>\n            <i class=\"run_delete fas fa-trash\" onclick=\"handleDelete(event)\"></i>\n            <i class=\"match_status fas fa-2x fa-check" + matchFAClass + "\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n            <div class=\"run_distance\" style=\"color: " + runColor + ";\">\n              " + Math.abs(run.runDistance) + " Km\n            </div>\n            <div class=\"run_time\">" + runFormatedDate + "</div>\n            <div class=\"run_pace\">" + run.runPace + "</div>\n            <div class=\"run_area\">" + run.runArea + "</div>\n            <button class=\"run_matches\"" + MatchesBtnLook + "\">" + MatchesBtnText + "</button>\n          </div>";
+                    var runHTML = "\n          <div class=\"runs__item\" id=\"" + run.runId + "\">\n            <i class=\"run_edit fas fa-edit update_run_btn\"></i>\n            <i class=\"run_delete fas fa-trash\" onclick=\"handleDelete(event)\"></i>\n            <i class=\"match_status fas fa-2x fa-check" + matchFAClass + "\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n            <div class=\"run_distance\" style=\"color: " + runColor + ";\">\n              " + Math.abs(run.runDistance) + " Km\n            </div>\n            <div class=\"run_time\">" + runFormatedDate + "</div>\n            <div class=\"run_pace\">" + run.runPace + "</div>\n            <div class=\"run_area\">" + run.runArea + "</div>\n            <button class=\"run_matches\"" + MatchesBtnLook + "\">" + MatchesBtnText + "</button>\n          </div>";
                     runsContainer_1.innerHTML += runHTML;
                 });
+                openModal();
             }
         }
         catch (er) {
@@ -153,29 +154,29 @@ var LoggedInRunner = /** @class */ (function () {
             runnerRunsCounter.innerHTML = "" + this.runnerRuns.length;
             if (this.runnerDistance > 199) {
                 ruunerTotalDistance.style.color = "gold";
-                distanceBadge.setAttribute("src", "images/TR_Kms_G.png");
+                distanceBadge.setAttribute("src", "../images/TR_Kms_G.png");
             }
             else if (this.runnerDistance > 99) {
                 ruunerTotalDistance.style.color = "silver";
-                distanceBadge.setAttribute("src", "images/TR_Kms_S.png");
+                distanceBadge.setAttribute("src", "../images/TR_Kms_S.png");
             }
             else {
                 ruunerTotalDistance.style.color = "#cd7f32";
-                distanceBadge.setAttribute("src", "images/TR_Kms_B.png");
+                distanceBadge.setAttribute("src", "../images/TR_Kms_B.png");
             }
             if (this.runnerRuns.length > 4) {
                 //49 - 4 only for easy testing
                 runnerRunsCounter.style.color = "gold";
-                togetherunBadge.setAttribute("src", "images/TR_G.png");
+                togetherunBadge.setAttribute("src", "../images/TR_G.png");
             }
             else if (this.runnerRuns.length > 1) {
                 //19 - 1 only for easy testing
                 runnerRunsCounter.style.color = "silver";
-                togetherunBadge.setAttribute("src", "images/TR_S.png");
+                togetherunBadge.setAttribute("src", "../images/TR_S.png");
             }
             else {
                 runnerRunsCounter.style.color = "#cd7f32";
-                togetherunBadge.setAttribute("src", "images/TR_B.png");
+                togetherunBadge.setAttribute("src", "../images/TR_B.png");
             }
         }
         catch (er) {
@@ -187,7 +188,7 @@ var LoggedInRunner = /** @class */ (function () {
 var runsMainPool = JSON.parse(localStorage.getItem("runsPool")) ? new RunsPool(JSON.parse(localStorage.getItem("runsPool")).allRuns) : new RunsPool([]);
 var currentRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
 if (currentRunner === null) {
-    window.location.href = "togetheRun_registration.html";
+    window.location.href = "../togetheRun_registration/togetheRun_registration.html";
 }
 var isModalOpen = false;
 var logOut = function () {
@@ -196,7 +197,7 @@ var logOut = function () {
         logoutBtn.addEventListener("click", function (ev) {
             localStorage.clear();
             localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
-            window.location.href = "togetheRun_registration.html";
+            window.location.href = "../togetheRun_registration/togetheRun_registration.html";
         });
     }
     catch (er) {
@@ -213,7 +214,6 @@ var openModal = function () {
                 isModalOpen = true;
                 modal_1.style.display = "flex";
                 modalBox_1.style.display = "unset";
-                console.log('hi');
                 onlyFutureRuns();
                 var runDiv = UpdtBtn.parentElement;
                 setRunToUpdateData(runDiv);
@@ -290,7 +290,6 @@ var updateRunSubmit = function (ev) {
     try {
         ev.preventDefault();
         var runToUpdateId = ev.target.getAttribute('id');
-        console.log(ev.target);
         var runDistance = Number(ev.target.elements.runDistance.value);
         var runTime = new Date(ev.target.elements.runTime.value);
         var runPace = ev.target.elements.runPace.value;
@@ -298,12 +297,9 @@ var updateRunSubmit = function (ev) {
         var runLocation = ev.target.elements.runLocation.value;
         var runMatch = false;
         var run = new Run(runDistance, runTime, runPace, runArea, runLocation, runMatch);
-        console.log(runToUpdateId);
-        console.log(run.runId);
         if (runToUpdateId !== null) {
             run.runId = runToUpdateId;
         }
-        console.log(run.runId);
         run.runMatch = runsMainPool.updateToPool(run);
         localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
         currentRunner.updateRun(run);

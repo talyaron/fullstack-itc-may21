@@ -86,6 +86,7 @@ class RunsPool {
 interface Preferences {
   // For the future
   prefChat: string; // chatty, here and there, only when necessary, All (default)
+  prefCompetative: string; // very, a little, not at all, All (default)
   prefGender: string; // Male, Female, All (default)
   prefAgeGroup: string; // Like me, All (default)
 }
@@ -128,7 +129,7 @@ class LoggedInRunner {
     runnerNameContainter.insertAdjacentHTML("beforeend", `${this.runnerName}!`);
     runnerProfileImg.title = `${this.runnerName}`;
     if (this.runnerProfImg === null) {
-      runnerProfileImg.setAttribute("src", "images/togetheRun_logo.png");
+      runnerProfileImg.setAttribute("src", "../images/togetheRun_logo.png");
     } else {
       runnerProfileImg.setAttribute("src", this.runnerProfImg);
     }
@@ -175,7 +176,7 @@ class LoggedInRunner {
           const runFormatedDate = typeof run.runTime === 'object' ? `${run.runTime.toISOString().substring(0, 16).replace("T", " ")}` : `${run.runTime.substring(0, 16).replace("T", " ")}`;
           const runHTML = `
           <div class="runs__item" id="${run.runId}">
-            <i class="run_edit fas fa-edit update_run_btn""></i>
+            <i class="run_edit fas fa-edit update_run_btn"></i>
             <i class="run_delete fas fa-trash" onclick="handleDelete(event)"></i>
             <i class="match_status fas fa-2x fa-check${matchFAClass}" title="${matchTitle}" style="color: ${runColor};"></i>
             <div class="run_distance" style="color: ${runColor};">
@@ -189,6 +190,7 @@ class LoggedInRunner {
 
           runsContainer.innerHTML += runHTML;
         });
+        openModal();
       }
     } catch (er) {
       console.error(er);
@@ -207,26 +209,26 @@ class LoggedInRunner {
       runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
       if (this.runnerDistance > 199) {
         ruunerTotalDistance.style.color = "gold";
-        distanceBadge.setAttribute("src", "images/TR_Kms_G.png");
+        distanceBadge.setAttribute("src", "../images/TR_Kms_G.png");
       } else if (this.runnerDistance > 99) {
         ruunerTotalDistance.style.color = "silver";
-        distanceBadge.setAttribute("src", "images/TR_Kms_S.png");
+        distanceBadge.setAttribute("src", "../images/TR_Kms_S.png");
       } else {
         ruunerTotalDistance.style.color = "#cd7f32";
-        distanceBadge.setAttribute("src", "images/TR_Kms_B.png");
+        distanceBadge.setAttribute("src", "../images/TR_Kms_B.png");
       }
 
       if (this.runnerRuns.length > 4) {
         //49 - 4 only for easy testing
         runnerRunsCounter.style.color = "gold";
-        togetherunBadge.setAttribute("src", "images/TR_G.png");
+        togetherunBadge.setAttribute("src", "../images/TR_G.png");
       } else if (this.runnerRuns.length > 1) {
         //19 - 1 only for easy testing
         runnerRunsCounter.style.color = "silver";
-        togetherunBadge.setAttribute("src", "images/TR_S.png");
+        togetherunBadge.setAttribute("src", "../images/TR_S.png");
       } else {
         runnerRunsCounter.style.color = "#cd7f32";
-        togetherunBadge.setAttribute("src", "images/TR_B.png");
+        togetherunBadge.setAttribute("src", "../images/TR_B.png");
       }
     } catch (er) {
       console.error(er);
@@ -238,7 +240,7 @@ let runsMainPool: RunsPool = JSON.parse(localStorage.getItem("runsPool")) ? new 
 
 let currentRunner: LoggedInRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
 if (currentRunner === null) {
-  window.location.href = `togetheRun_registration.html`;
+  window.location.href = `../togetheRun_registration/togetheRun_registration.html`;
 }
 
 let isModalOpen: boolean = false;
@@ -250,7 +252,7 @@ const logOut = (): void => {
     logoutBtn.addEventListener(`click`, (ev) => {
       localStorage.clear();
       localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
-      window.location.href = "togetheRun_registration.html";
+      window.location.href = "../togetheRun_registration/togetheRun_registration.html";
     });
   } catch (er) {
     console.error(er);
@@ -268,7 +270,6 @@ const openModal = (): void => {
         isModalOpen = true;
         modal.style.display = `flex`;
         modalBox.style.display = `unset`;
-        console.log('hi');
         onlyFutureRuns();
         const runDiv = UpdtBtn.parentElement;
         setRunToUpdateData(runDiv);
@@ -351,7 +352,6 @@ const updateRunSubmit = (ev: any) => {
     ev.preventDefault();
 
     const runToUpdateId: string = ev.target.getAttribute('id');
-    console.log(ev.target);
 
     const runDistance = Number(ev.target.elements.runDistance.value);
     const runTime = new Date(ev.target.elements.runTime.value);
@@ -362,13 +362,9 @@ const updateRunSubmit = (ev: any) => {
 
     const run = new Run(runDistance, runTime, runPace, runArea, runLocation, runMatch);
     
-    console.log(runToUpdateId);
-    console.log(run.runId);
-
     if (runToUpdateId !== null) {
       run.runId = runToUpdateId;
     }
-    console.log(run.runId);
 
     run.runMatch = runsMainPool.updateToPool(run);
     localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
