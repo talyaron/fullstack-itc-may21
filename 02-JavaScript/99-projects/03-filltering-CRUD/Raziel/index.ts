@@ -1,3 +1,6 @@
+
+const rootHtml:HTMLElement=document.querySelector('#root');
+
 class Contact{
      name:string
      fname:string
@@ -52,8 +55,34 @@ class List{
         }
             )
     }
-    renderList(){
-        
+    renderList():void{
+        let html:string="";
+        this.contactList.forEach(element=>{
+
+            html+=`<div class = "record-item">
+            <div class = "record-el">
+                <span id = "labelling">Name:${element.name} </span>
+            </div>
+            <div class = "record-el">
+                <span id = "labelling">Family Name:${element.fname} </span>
+            </div>
+            <div class = "record-el">
+                <span id = "labelling">Phone Number:${element.phone} </span>
+            </div>
+            <div class = "record-el">
+                <span id = "labelling">Email Address :${element.email} </span>
+            </div>
+            <button type = "button" id = "delete-btn">
+                <span>
+                    <i class = "fas fa-trash"></i>
+                </span> Delete
+            </button>
+        </div>
+    
+    </div>
+`
+        });
+        rootHtml.innerHTML=html;
     }
     deleteContact(){}
     editContact(){}
