@@ -26,7 +26,17 @@ var RunsPool = /** @class */ (function () {
                 this.allRuns[runToUpdateIndex] = run;
             }
             this.allRuns = this.allRuns.sort(function (a, b) { return Date.parse(a.runTime) - Date.parse(b.runTime); });
-            this.allRuns = this.allRuns.sort(function (a, b) { return a.runRunnerId - b.runRunnerId; }); // TODO check how to sort array of objects by key
+            this.allRuns = this.allRuns.sort(function (a, b) {
+                var aId = a.runRunnerId;
+                var bId = b.runRunnerId;
+                if (aId < bId) {
+                    return -1;
+                }
+                if (aId > bId) {
+                    return 1;
+                }
+                return 0;
+            });
             run.runMatch = this.findMatch(run);
             return run.runMatch;
         }
@@ -86,9 +96,9 @@ var LoggedInRunner = /** @class */ (function () {
         var runnerProfileImg = document.querySelector(".profile_image__item--profile_image");
         var ruunerTotalDistance = document.querySelector("#total_sum");
         var runnerRunsCounter = document.querySelector("#total_counts");
-        mainTitle.insertAdjacentHTML("afterbegin", "" + this.runnerName);
+        mainTitle.insertAdjacentHTML("afterbegin", this.runnerName);
         runnerNameContainter.insertAdjacentHTML("beforeend", this.runnerName + "!");
-        runnerProfileImg.title = "" + this.runnerName;
+        runnerProfileImg.title = this.runnerName;
         if (this.runnerProfImg === null) {
             runnerProfileImg.setAttribute("src", "../images/togetheRun_logo.png");
         }
@@ -97,7 +107,7 @@ var LoggedInRunner = /** @class */ (function () {
         }
         ruunerTotalDistance.innerHTML = "" + this.runnerDistance;
         runnerRunsCounter.innerHTML = "" + this.runnerRuns.length;
-        this.renderRunsToDOM();
+        this.renderRunsToDOM(null);
         // window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`; // causes endless loop of loading the page...can be solved by localSession.setItem("isFirstLoad",false) during first loading of the page
     };
     LoggedInRunner.prototype.updateRun = function (run) {
@@ -112,36 +122,49 @@ var LoggedInRunner = /** @class */ (function () {
             this.refreshDOMSummary(run.runDistance - prevDistance);
         }
         this.runnerRuns = this.runnerRuns.sort(function (a, b) { return Date.parse(a.runTime) - Date.parse(b.runTime); });
-        this.renderRunsToDOM();
+        this.renderRunsToDOM(null);
     };
     LoggedInRunner.prototype.deleteRun = function (runToDeleteId) {
         var runToDeleteIndex = this.runnerRuns.findIndex(function (runItem) { return runItem.runId === runToDeleteId; });
         var runToDeleteDistance = -this.runnerRuns[runToDeleteIndex].runDistance;
         this.runnerRuns.splice(runToDeleteIndex, 1);
-        this.renderRunsToDOM();
+        this.renderRunsToDOM(null);
         this.refreshDOMSummary(runToDeleteDistance);
     };
-    LoggedInRunner.prototype.renderRunsToDOM = function () {
+    LoggedInRunner.prototype.filterRuns = function (minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter) {
+        var locationRegEx = locationFilter ? new RegExp(locationFilter, 'gmi') : undefined;
+        console.log(locationRegEx);
+        var filteredRuns = this.runnerRuns.filter(function (runItem) {
+            ((minDistanceFilter === 0) || (runItem.runDistance >= minDistanceFilter)) &&
+                ((maxDistanceFilter === 0) || (runItem.runDistance <= maxDistanceFilter)) &&
+                ((paceFilter === "") || (runItem.runPace === paceFilter)) &&
+                ((areaFilter === "") || (runItem.runArea === areaFilter)) &&
+                ((locationFilter === "") || locationRegEx.test(runItem.runLocation));
+        });
+        console.log(filteredRuns);
+        this.renderRunsToDOM(filteredRuns);
+    };
+    LoggedInRunner.prototype.renderRunsToDOM = function (filteredRunsToRender) {
         try {
             var runsContainer_1 = document.querySelector(".runs");
+            var runsToRender = filteredRunsToRender ? filteredRunsToRender : this.runnerRuns;
             runsContainer_1.innerHTML = "";
-            if (this.runnerRuns.length === 0) {
+            if (runsToRender.length === 0) {
                 runsContainer_1.innerHTML = "<h2>You have no scheduled runs.<br/>Take this opportunity to rest<br/>😌</h2>";
+                return;
             }
-            else {
-                this.runnerRuns.forEach(function (run) {
-                    var matchFAClass = run.runMatch ? "-double" : "";
-                    var matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
-                    var runColor = run.runMatch ? "aqua" : "orange";
-                    var MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
-                    var MatchesBtnLook = run.runMatch ? "" : " disabled style=\"background-color:" + runColor + ";cursor:not-allowed";
-                    var runFormatedDate = (new Date(Date.parse(run.runTime) + clientTimezoneOffset * 60 * 60 * 1000)).toISOString().replace("T", " ").substring(0, 16);
-                    // this is for string. for object: `${run.runTime.toISOString().substring(0, 16).replace("T", " ")}`
-                    var runHTML = "\n          <div class=\"runs__item\" id=\"" + run.runId + "\">\n            <i class=\"run_edit fas fa-edit update_run_btn\" title=\"Edit your run\"></i>\n            <i class=\"run_delete fas fa-trash\" onclick=\"handleDelete(event)\" title=\"Delete your run\"></i>\n            <i class=\"match_status fas fa-2x fa-check" + matchFAClass + "\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n            <div class=\"run_distance\" style=\"color: " + runColor + ";\" title=\"Run distance\">\n              " + Math.abs(run.runDistance) + " Km\n            </div>\n            <div class=\"run_time\" title=\"Run time\">" + runFormatedDate + "</div>\n            <div class=\"run_pace\" title=\"Run pace\">" + run.runPace + "</div>\n            <div class=\"run_area\" title=\"Run area\">" + run.runArea + "</div>\n            <div class=\"run_location\" title=\"Run location\">" + run.runLocation + "</div>\n            <button class=\"run_matches\"" + MatchesBtnLook + "\">" + MatchesBtnText + "</button>\n          </div>";
-                    runsContainer_1.innerHTML += runHTML;
-                });
-                openModal();
-            }
+            runsToRender.forEach(function (run) {
+                var matchFAClass = run.runMatch ? "-double" : "";
+                var matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
+                var runColor = run.runMatch ? "aqua" : "orange";
+                var MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
+                var MatchesBtnLook = run.runMatch ? "" : " disabled style=\"background-color:" + runColor + ";cursor:not-allowed";
+                var runFormatedDate = (new Date(Date.parse(run.runTime) + clientTimezoneOffset * 60 * 60 * 1000)).toISOString().replace("T", " ").substring(0, 16);
+                // this is for string. for object: `${run.runTime.toISOString().substring(0, 16).replace("T", " ")}`
+                var runHTML = "\n        <div class=\"runs__item\" id=\"" + run.runId + "\">\n          <i class=\"run_edit fas fa-edit update_run_btn\" title=\"Edit your run\"></i>\n          <i class=\"run_delete fas fa-trash\" onclick=\"handleDelete(event)\" title=\"Delete your run\"></i>\n          <i class=\"match_status fas fa-2x fa-check" + matchFAClass + "\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n          <div class=\"run_distance\" style=\"color: " + runColor + ";\" title=\"Run distance\">\n            " + Math.abs(run.runDistance) + " Km\n          </div>\n          <div class=\"run_time\" title=\"Run time\">" + runFormatedDate + "</div>\n          <div class=\"run_pace\" title=\"Run pace\">" + run.runPace + "</div>\n          <div class=\"run_area\" title=\"Run area\">" + run.runArea + "</div>\n          <div class=\"run_location\" title=\"Run location\">" + run.runLocation + "</div>\n          <button class=\"run_matches\"" + MatchesBtnLook + "\">" + MatchesBtnText + "</button>\n        </div>";
+                runsContainer_1.innerHTML += runHTML;
+            });
+            openModal();
         }
         catch (er) {
             console.error(er);
@@ -218,7 +241,7 @@ var openModal = function () {
                 isModalOpen = true;
                 modal_1.style.display = "flex";
                 modalBox_1.style.display = "unset";
-                onlyFutureRuns();
+                runsWithinNextMonth();
                 var runDiv = UpdtBtn.parentElement;
                 setRunToUpdateData(runDiv);
             });
@@ -245,7 +268,7 @@ var closeModal = function () {
         console.error(er);
     }
 };
-var onlyFutureRuns = function () {
+var runsWithinNextMonth = function () {
     try {
         var runTimeInput = document.querySelector("#run_time_form");
         var now = new Date();
@@ -316,6 +339,24 @@ var updateRunSubmit = function (ev) {
         isModalOpen = false;
         modal.style.display = "none";
         modalBox.style.display = "none";
+        ev.target.reset();
+    }
+    catch (er) {
+        console.error(er);
+    }
+};
+var filterSubmit = function (ev) {
+    try {
+        ev.preventDefault();
+        var minDistanceFilter = Number(ev.target.elements.minDistanceFilter.value);
+        var maxDistanceFilter = Number(ev.target.elements.maxDistanceFilter.value);
+        var paceFilter = ev.target.elements.paceFilter.value;
+        var areaFilter = ev.target.elements.areaFilter.value;
+        var locationFilter = ev.target.elements.locationFilter.value;
+        if (currentRunner.runnerRuns.length === 0) {
+            return;
+        }
+        currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
         ev.target.reset();
     }
     catch (er) {

@@ -10,14 +10,7 @@ class Run {
   runId: string = "run" + Math.random().toString(16).slice(2);
   runRunnerId: string = JSON.parse(localStorage.getItem("currentRunner")).runnerId;
 
-  constructor(
-    runDistance: number,
-    runTime: string,
-    runPace: string,
-    runArea: string,
-    runLocation: string,
-    runMatch: boolean
-  ) {
+  constructor(runDistance: number, runTime: string, runPace: string, runArea: string, runLocation: string, runMatch: boolean) {
     this.runDistance = runDistance;
     this.runTime = runTime;
     this.runPace = runPace;
@@ -44,7 +37,13 @@ class RunsPool {
         this.allRuns[runToUpdateIndex] = run;
       }
       this.allRuns = this.allRuns.sort((a: Run, b: Run) => Date.parse(a.runTime) - Date.parse(b.runTime));
-      this.allRuns = this.allRuns.sort((a: Run, b: Run) => a.runRunnerId - b.runRunnerId); // TODO check how to sort array of objects by key
+      this.allRuns = this.allRuns.sort((a: Run, b: Run) => {
+        const aId = a.runRunnerId;
+        const bId = b.runRunnerId;
+        if (aId < bId) {return -1;}
+        if (aId > bId) {return 1;}
+        return 0;
+      });
       run.runMatch = this.findMatch(run);
       return run.runMatch;
     } catch (er) {
@@ -121,9 +120,9 @@ class LoggedInRunner {
     const ruunerTotalDistance: HTMLElement = document.querySelector("#total_sum");
     const runnerRunsCounter: HTMLElement = document.querySelector("#total_counts");
 
-    mainTitle.insertAdjacentHTML("afterbegin", `${this.runnerName}`);
+    mainTitle.insertAdjacentHTML("afterbegin", this.runnerName);
     runnerNameContainter.insertAdjacentHTML("beforeend", `${this.runnerName}!`);
-    runnerProfileImg.title = `${this.runnerName}`;
+    runnerProfileImg.title = this.runnerName;
     if (this.runnerProfImg === null) {
       runnerProfileImg.setAttribute("src", "../images/togetheRun_logo.png");
     } else {
@@ -160,15 +159,15 @@ class LoggedInRunner {
 
   filterRuns(minDistanceFilter: number, maxDistanceFilter: number, paceFilter: string, areaFilter: string, locationFilter: string) {
     const locationRegEx = locationFilter ? new RegExp(locationFilter,'gmi') : undefined;
-    console.log('hi');
+    console.log(locationRegEx);
     const filteredRuns: Array<Run> = this.runnerRuns.filter(runItem => {
-      ((minDistanceFilter === undefined) || (runItem.runDistance >= minDistanceFilter)) &&
-      ((maxDistanceFilter === undefined) || (runItem.runDistance <= maxDistanceFilter)) &&
-      ((paceFilter === undefined) || (runItem.runPace === paceFilter)) &&
-      ((areaFilter === undefined) || (runItem.runArea === areaFilter)) &&
-      ((locationFilter === undefined) || locationRegEx.test(runItem.runLocation))
-      })
-
+      ((minDistanceFilter === 0) || (runItem.runDistance >= minDistanceFilter)) &&
+      ((maxDistanceFilter === 0) || (runItem.runDistance <= maxDistanceFilter)) &&
+      ((paceFilter === "") || (runItem.runPace === paceFilter)) &&
+      ((areaFilter === "") || (runItem.runArea === areaFilter)) &&
+      ((locationFilter === "") || locationRegEx.test(runItem.runLocation))
+      });
+    console.log(filteredRuns);
     this.renderRunsToDOM(filteredRuns)
 
   }
@@ -408,7 +407,7 @@ const updateRunSubmit = (ev: any) => {
 const filterSubmit = (ev: any) => {
   try {
     ev.preventDefault();
-
+    
     const minDistanceFilter = Number(ev.target.elements.minDistanceFilter.value);
     const maxDistanceFilter = Number(ev.target.elements.maxDistanceFilter.value);
     const paceFilter = ev.target.elements.paceFilter.value;
