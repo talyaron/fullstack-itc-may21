@@ -1,7 +1,8 @@
-var inputSearch = document.querySelector("#search");
+var inputNameFilter = document.querySelector("#filtername");
 var Product = /** @class */ (function () {
-    function Product(ProductName, Description, Origin, Quantity) {
+    function Product(ProductName, Type, Description, Origin, Quantity) {
         this.ProductName = ProductName;
+        this.Type = Type;
         this.Description = Description;
         this.Quantity = Quantity;
         this.Origin = Origin;
@@ -24,13 +25,13 @@ var Products = /** @class */ (function () {
     Products.prototype.addProducts = function (productsArray) {
         var _this = this;
         productsArray.forEach(function (product) {
-            var newProduct = new Product(product.ProductName, product.Description, product.Origin, product.Quantity);
+            var newProduct = new Product(product.ProductName, product.Type, product.Description, product.Origin, product.Quantity);
             _this.products.push(newProduct);
             _this.productsFilter.push(newProduct);
         });
     };
-    Products.prototype.searchProduct = function (letters) {
-        var regrExp = "" + letters;
+    Products.prototype.searchProduct = function (inputNameFilter) {
+        var regrExp = "^" + inputNameFilter;
         var searchTermReg = new RegExp(regrExp, 'i');
         this.products = this.products.filter(function (elem) { return searchTermReg.test(elem.ProductName); });
         this.renderProducts();
@@ -46,9 +47,9 @@ var Products = /** @class */ (function () {
         var table = document.querySelector(".product-list");
         var html = "";
         this.products.forEach(function (product) {
-            html += "<tbody>\n       <tr>\n        <td>" + product.ProductName + "</td>\n        <td>" + product.Description + "</td> \n        <td>" + product.Origin + "</td> \n        <td>" + product.Quantity + "</td> \n        <td>" + product.ProductId + "</td>\n        <td> <i onclick='handleEdit(\"" + product.ProductId + "\")' class=\"fas fa-pencil-alt\"></i></td>\n        <td> <i onclick='handleDelete(\"" + product.ProductId + "\")'id=\"del\" class=\"fas fa-trash\"></i></td>\n        </tr>";
-            table.innerHTML = html;
+            html += "<tbody>\n       <tr>\n        <td>" + product.ProductName + "</td>\n        <td>" + product.Type + "</td> \n        <td>" + product.Description + "</td> \n        <td>" + product.Origin + "</td> \n        <td>" + product.Quantity + "</td> \n        <td> <i onclick='handleEdit(\"" + product.ProductId + "\")' class=\"fas fa-pencil-alt\"></i></td>\n        <td> <i onclick='handleDelete(\"" + product.ProductId + "\")'id=\"del\" class=\"fas fa-trash\"></i></td>\n        </tr>";
         });
+        table.innerHTML = html;
     };
     ;
     Products.prototype.getProductsFromStorage = function () {
@@ -63,10 +64,11 @@ products.renderProducts();
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var ProductName = ev.target.elements.name.value;
+    var Type = ev.target.elements.type.value;
     var Description = ev.target.elements.description.value;
     var Origin = ev.target.elements.origin.value;
     var Quantity = ev.target.elements.quantity.value;
-    var product = new Product(ProductName, Description, Origin, Quantity);
+    var product = new Product(ProductName, Type, Description, Origin, Quantity);
     products.add(product);
     products.renderProducts();
     ev.target.reset();
@@ -74,9 +76,10 @@ var handleSubmit = function (ev) {
 //delete products
 var handleDelete = function (ProductId) {
     products.removeProduct(ProductId);
+    console.log(products);
 };
 //search products
-inputSearch.addEventListener('keyup', handleKeyUp);
+inputNameFilter.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
-    products.searchProduct(inputSearch.value);
+    products.searchProduct(inputNameFilter.value);
 }
