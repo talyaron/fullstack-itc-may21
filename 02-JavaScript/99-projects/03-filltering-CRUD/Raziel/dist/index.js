@@ -1,11 +1,12 @@
 var rootHtml = document.querySelector('#root');
 var searchName = document.querySelector("#search");
 var Contact = /** @class */ (function () {
-    function Contact(name, fname, phone, email) {
+    function Contact(name, fname, phone, email, gender) {
         this.name = name;
         this.fname = fname;
         this.phone = phone;
         this.email = email;
+        this.gender = gender;
         this.id = this.id = "id" + Math.random().toString(16).slice(2);
     }
     return Contact;
@@ -50,7 +51,7 @@ var handelForm = function (ev) {
     var fname = ev.target.elements.lastName.value;
     var phone = ev.target.elements.phone.value;
     var email = ev.target.elements.email.value;
-    var validEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+    var gender, validEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
     var emailReg = new RegExp(validEmail, 'gmi');
     if (!emailReg.test(email)) {
         alert('Your Email seems to be wrong. Please correct it or use a different Email address');
