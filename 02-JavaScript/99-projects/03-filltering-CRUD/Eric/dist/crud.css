@@ -29,6 +29,7 @@ form {
 
 input {
   text-align: center;
+  background-color: white;
 }
 
 .head {
@@ -36,6 +37,13 @@ input {
   justify-content: space-around;
 }
 
+/* to add color to delete and edit btns
+#del{
+    background-color: red;
+}
+.fas{
+    font-size: 18px;
+}*/
 /*body {
     animation: body 5s linear infinite alternate both;
 }

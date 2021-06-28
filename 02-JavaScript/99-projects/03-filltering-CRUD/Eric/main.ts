@@ -55,10 +55,9 @@ class Products {
     }
    
  
-
+//eliminar
     removeProduct(ProductId: string) {
         this.products = this.products.filter((prod) => prod.ProductId !== ProductId);
-        console.log(this.products);
         this.renderProducts();
       }
     
@@ -77,8 +76,8 @@ class Products {
         <td>${product.Origin}</td> 
         <td>${product.Quantity}</td> 
         <td>${product.ProductId}</td>
-        <td> <i onclick='handleDelete("${product.ProductId}")' class="fas fa-trash"></i></td>
         <td> <i onclick='handleEdit("${product.ProductId}")' class="fas fa-pencil-alt"></i></td>
+        <td> <i onclick='handleDelete("${product.ProductId}")'id="del" class="fas fa-trash"></i></td>
         </tr>`;
       table.innerHTML = html;
         });
