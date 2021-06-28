@@ -179,6 +179,9 @@ button {
 
     #filters {
         padding: 20px;
+        margin: 5px;
+        border-radius: 100px;
+        border: 2px solid lightgray;
 
         .filter_form {
             display: flex;

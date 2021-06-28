@@ -181,6 +181,9 @@ button:hover {
 }
 #mainscreen #filters {
   padding: 20px;
+  margin: 5px;
+  border-radius: 100px;
+  border: 2px solid lightgray;
 }
 #mainscreen #filters .filter_form {
   display: flex;
