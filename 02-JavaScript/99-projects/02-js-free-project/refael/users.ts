@@ -14,11 +14,31 @@ class User {
   }
 }
 
-let users = JSON.parse(localStorage.getItem("creatUsers"));
+class UserList {
+  users: Array<User>;
+  constructor() {
+    this.users = [];
+  }
+  addUser(user: User) {
+    this.users.push(user);
+    localStorage.setItem("creatUsers", JSON.stringify(this.users));
+  }
+  usersFromStorage() {
+    let usersStorage = JSON.parse(localStorage.getItem("creatUsers"));
+    if (usersStorage) {
+      this.users = usersStorage;
+    }
+  }
+  renderUsers() {
+    // loop over array and show on dom
+  }
+}
+
+let users: UserList = JSON.parse(localStorage.getItem("creatUsers"));
 console.log(users);
 console.log(users);
 
-let usersHTML = users.map((user) => {
+let usersHTML = users.map((user) => { // this should take place on the renderUsers() method - users.renderUsers();
   let userName = user.name;
   let userAge = user.age;
   let userGender = user.gender;  /* All of these variables are not necessary. You couldve just wrote on your HTML ${user.name}, ${user.age}, etc */
@@ -34,6 +54,7 @@ let usersHTML = users.map((user) => {
     button.addEventListener("click", (event) => {
       if ((button.innerHTML === "Remove ID:", `${userId}`)) {
         button.parentElement.remove();
+
       }
     });
   }

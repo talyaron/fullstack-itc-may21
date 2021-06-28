@@ -9,13 +9,32 @@ var User = /** @class */ (function () {
     }
     return User;
 }());
+var UserList = /** @class */ (function () {
+    function UserList() {
+        this.users = [];
+    }
+    UserList.prototype.addUser = function (user) {
+        this.users.push(user);
+        localStorage.setItem("creatUsers", JSON.stringify(this.users));
+    };
+    UserList.prototype.usersFromStorage = function () {
+        var usersStorage = JSON.parse(localStorage.getItem("creatUsers"));
+        if (usersStorage) {
+            this.users = usersStorage;
+        }
+    };
+    UserList.prototype.renderUsers = function () {
+        // loop over array and show on dom
+    };
+    return UserList;
+}());
 var users = JSON.parse(localStorage.getItem("creatUsers"));
 console.log(users);
 console.log(users);
 var usersHTML = users.map(function (user) {
     var userName = user.name;
     var userAge = user.age;
-    var userGender = user.gender;
+    var userGender = user.gender; /* All of these variables are not necessary. You couldve just wrote on your HTML ${user.name}, ${user.age}, etc */
     var userDesc = user.desc;
     var userIntrested = user.intrested;
     var userId = user.id;
