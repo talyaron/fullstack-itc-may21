@@ -49,8 +49,7 @@ class Cars {
             const newCar = new Car(car.Name, car.Miles_per_Gallon, car.Cylinders, car.Horsepower, car.Weight_in_lbs, car.Year,car.Origin)
             this.cars.push(newCar);
         })
-        console.log(this.cars);
-       
+        
     }
 
     removeCar(carId: string){
@@ -58,6 +57,8 @@ class Cars {
         this.cars.splice(carIndex, 1);
         this.renderCars();
     }
+
+
     getCarsFromStorage() {
         JSON.parse(localStorage.getItem(`cars`))
     };
@@ -81,13 +82,15 @@ class Cars {
       table.innerHTML = html;
         });
     };
-    
-
+    createDropDownByName(){
+     
+    }
 }
 
 const cars = new Cars();
 cars.addCars(carsData)
 cars.renderCars();
+cars.createDropDownByName();
 
 
 
@@ -114,3 +117,7 @@ const handleDelete = (carId:string):void =>{
     console.log(carId);
     cars.removeCar(carId);
 };
+
+
+
+

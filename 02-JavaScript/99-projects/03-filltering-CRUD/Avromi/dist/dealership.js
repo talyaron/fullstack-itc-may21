@@ -27,7 +27,6 @@ var Cars = /** @class */ (function () {
             var newCar = new Car(car.Name, car.Miles_per_Gallon, car.Cylinders, car.Horsepower, car.Weight_in_lbs, car.Year, car.Origin);
             _this.cars.push(newCar);
         });
-        console.log(this.cars);
     };
     Cars.prototype.removeCar = function (carId) {
         var carIndex = this.cars.findIndex(function (c) { return c.carId === carId; });
@@ -47,11 +46,14 @@ var Cars = /** @class */ (function () {
         });
     };
     ;
+    Cars.prototype.createDropDownByName = function () {
+    };
     return Cars;
 }());
 var cars = new Cars();
 cars.addCars(carsData);
 cars.renderCars();
+cars.createDropDownByName();
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var Name = ev.target.elements.Name.value;
