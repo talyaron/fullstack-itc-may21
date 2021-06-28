@@ -1,6 +1,6 @@
 
 const rootHtml:HTMLElement=document.querySelector('#root');
-
+const searchName = (<HTMLInputElement>document.querySelector("#search"))
 class Contact{
      name:string
      fname:string
@@ -67,7 +67,15 @@ class List{
        this.renderList();
     }
     editContact(){}
-    searchContact(){}
+    searchContact(name:string){
+        const regEx: string = `${name}`;
+
+        const searchName: RegExp = new RegExp(regEx, 'i');
+
+        this.contactList = this.contactList.filter(elem => searchName.test(elem.name))
+
+        this.renderList();
+    }
 }
 
 const lists=new List();
@@ -98,3 +106,9 @@ const handelForm = (ev) => {
   const handelRemove = (id: string): void => {
     lists.deleteContact(id);
   }
+
+  searchName .addEventListener('keyup', handleKeyUp)
+
+function handleKeyUp() {
+    lists.searchContact(searchName .value)   
+}

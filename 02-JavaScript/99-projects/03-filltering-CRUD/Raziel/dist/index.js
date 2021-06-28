@@ -1,4 +1,5 @@
 var rootHtml = document.querySelector('#root');
+var searchName = document.querySelector("#search");
 var Contact = /** @class */ (function () {
     function Contact(name, fname, phone, email) {
         this.name = name;
@@ -33,7 +34,12 @@ var List = /** @class */ (function () {
         this.renderList();
     };
     List.prototype.editContact = function () { };
-    List.prototype.searchContact = function () { };
+    List.prototype.searchContact = function (name) {
+        var regEx = "" + name;
+        var searchName = new RegExp(regEx, 'i');
+        this.contactList = this.contactList.filter(function (elem) { return searchName.test(elem.name); });
+        this.renderList();
+    };
     return List;
 }());
 var lists = new List();
@@ -64,3 +70,7 @@ var handelForm = function (ev) {
 var handelRemove = function (id) {
     lists.deleteContact(id);
 };
+searchName.addEventListener('keyup', handleKeyUp);
+function handleKeyUp() {
+    lists.searchContact(searchName.value);
+}
