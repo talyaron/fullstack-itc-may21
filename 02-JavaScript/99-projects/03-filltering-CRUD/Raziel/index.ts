@@ -61,21 +61,26 @@ class List{
 
             html+=`<div class = "record-item">
             <div class = "record-el">
-                <span id = "labelling">Name:${element.name} </span>
+                <span>Name:${element.name} </span>
             </div>
             <div class = "record-el">
-                <span id = "labelling">Family Name:${element.fname} </span>
+                <span>Family Name:${element.fname} </span>
             </div>
             <div class = "record-el">
-                <span id = "labelling">Phone Number:${element.phone} </span>
+                <span >Phone Number:${element.phone} </span>
             </div>
             <div class = "record-el">
-                <span id = "labelling">Email Address :${element.email} </span>
+                <span>Email Address :${element.email} </span>
             </div>
             <button type = "button" id = "delete-btn" onclick='handelRemove("${element.id}")'>
                 <span>
                     <i class = "fas fa-trash"></i>
                 </span> Delete
+            </button>
+            <button type = "button" id = "delete-btn" onclick='handelRemove("${element.id}")'>
+                <span>
+                <i class="fas fa-edit"></i>
+                </span> Edit
             </button>
         </div>
     
