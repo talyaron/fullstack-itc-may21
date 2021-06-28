@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 
-.back--box {
+.wrapper {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -12,7 +12,7 @@ body {
   background: linear-gradient(90deg, #020001 0%, #090979 35%, #00d4ff 100%);
 }
 
-.back--box .back__simetric div {
+.wrapper__simetric div {
   position: absolute;
   width: 40px;
   height: 40px;
@@ -22,70 +22,70 @@ body {
   left: 10%;
 }
 
-.back--box .back__simetric div:nth-child(1) {
+.wrapper__simetric div:nth-child(1) {
   top: 12%;
   left: 42%;
   -webkit-animation: animate  10s linear infinite;
           animation: animate  10s linear infinite;
 }
 
-.back--box .back__simetric div:nth-child(2) {
+.wrapper__simetric div:nth-child(2) {
   top: 70%;
   left: 50%;
   -webkit-animation: animate  7s linear infinite;
           animation: animate  7s linear infinite;
 }
 
-.back--box .back__simetric div:nth-child(3) {
+.wrapper__simetric div:nth-child(3) {
   top: 17%;
   left: 6%;
   -webkit-animation: animate  9s linear infinite;
           animation: animate  9s linear infinite;
 }
 
-.back--box .back__simetric div:nth-child(4) {
+.wrapper__simetric div:nth-child(4) {
   top: 20%;
   left: 60%;
   -webkit-animation: animate  10s linear infinite;
           animation: animate  10s linear infinite;
 }
 
-.back--box .back__simetric div:nth-child(5) {
+.wrapper__simetric div:nth-child(5) {
   top: 67%;
   left: 10%;
   -webkit-animation: animate  6s linear infinite;
           animation: animate  6s linear infinite;
 }
 
-.back--box .back__simetric div:nth-child(6) {
+.wrapper__simetric div:nth-child(6) {
   top: 80%;
   left: 70%;
   -webkit-animation: animate  12s linear infinite;
           animation: animate  12s linear infinite;
 }
 
-.back--box .back__simetric div:nth-child(7) {
+.wrapper__simetric div:nth-child(7) {
   top: 60%;
   left: 80%;
   -webkit-animation: animate  15s linear infinite;
           animation: animate  15s linear infinite;
 }
 
-.back--box .back__simetric div:nth-child(8) {
+.wrapper__simetric div:nth-child(8) {
   top: 32%;
   left: 25%;
   -webkit-animation: animate  16s linear infinite;
           animation: animate  16s linear infinite;
 }
 
-.back--box .back__simetric div:nth-child(9) {
+.wrapper__simetric div:nth-child(9) {
   top: 90%;
   left: 25%;
   -webkit-animation: animate  9s linear infinite;
           animation: animate  9s linear infinite;
 }
 
-.back--box .back__simetric div:nth-child(10) {
+.wrapper__simetric div:nth-child(10) {
   top: 20%;
   left: 80%;
   -webkit-animation: animate  5s linear infinite;
@@ -118,21 +118,22 @@ body {
   }
 }
 
-.back--box .top--firstanimation {
+.wrapper .header__title {
+  position: relative;
+  -webkit-animation-name: title;
+          animation-name: title;
+  -webkit-animation: title 6s infinite;
+          animation: title 6s infinite;
+}
+
+.wrapper .header {
   font-size: 30px;
   width: 800px;
   margin: auto;
   color: white;
   text-align: left;
   height: 40px;
-}
-
-.back--box .top__head {
-  position: relative;
-  -webkit-animation-name: title;
-          animation-name: title;
-  -webkit-animation: title 6s infinite;
-          animation: title 6s infinite;
+  margin-top: 20px;
 }
 
 @-webkit-keyframes title {
@@ -165,12 +166,12 @@ body {
   }
 }
 
-.back--box .container__item1 {
+.wrapper .container__item {
   float: left;
   height: 180px;
 }
 
-.back--box .container--secondanimation {
+.wrapper .container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -188,14 +189,14 @@ body {
   overflow: hidden;
 }
 
-.back--box ul {
+.wrapper ul {
   list-style: none;
   padding-left: 10px;
   -webkit-animation: cambiar 6s infinite;
           animation: cambiar 6s infinite;
 }
 
-.back--box ul, .back--box p {
+.wrapper ul, .wrapper p {
   margin: 0;
 }
 
@@ -259,22 +260,22 @@ body {
   }
 }
 
-.back--box .slider--lastanimation {
+.wrapper .slider {
   position: relative;
   width: 800px;
   height: 400px;
-  background: url(https://www.friendsofeurope.org/wp/wp-content/uploads/2019/06/bigstock-Planet-Earth-From-Space-Beaut-298703191-e1560939905471.jpg);
+  background: url(https://cdn.euroinnova.edu.es/img/subidasEditor/google%20earth-1603790379.webp);
   margin: 100px auto;
-  -webkit-animation: slide 20s infinite;
-          animation: slide 20s infinite;
+  -webkit-animation: slide 15s infinite;
+          animation: slide 15s infinite;
 }
 
 @-webkit-keyframes slide {
   25% {
-    background: url(https://www.friendsofeurope.org/wp/wp-content/uploads/2019/06/bigstock-Planet-Earth-From-Space-Beaut-298703191-e1560939905471.jpg);
+    background: url(https://cdn.mos.cms.futurecdn.net/JDopQKUQfFR8LBDvJP6paf-1200-80.jpg);
   }
   50% {
-    background: url(https://cdn.euroinnova.edu.es/img/subidasEditor/google%20earth-1603790379.webp);
+    background: url(https://mars.nasa.gov/system/feature_items/images/6362_8944_1-PIA24546-1280.jpg);
   }
   75% {
     background: url(https://mars.nasa.gov/system/feature_items/images/6362_8944_1-PIA24546-1280.jpg);
@@ -286,10 +287,10 @@ body {
 
 @keyframes slide {
   25% {
-    background: url(https://www.friendsofeurope.org/wp/wp-content/uploads/2019/06/bigstock-Planet-Earth-From-Space-Beaut-298703191-e1560939905471.jpg);
+    background: url(https://cdn.mos.cms.futurecdn.net/JDopQKUQfFR8LBDvJP6paf-1200-80.jpg);
   }
   50% {
-    background: url(https://cdn.euroinnova.edu.es/img/subidasEditor/google%20earth-1603790379.webp);
+    background: url(https://mars.nasa.gov/system/feature_items/images/6362_8944_1-PIA24546-1280.jpg);
   }
   75% {
     background: url(https://mars.nasa.gov/system/feature_items/images/6362_8944_1-PIA24546-1280.jpg);
