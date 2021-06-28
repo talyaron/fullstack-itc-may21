@@ -1,0 +1,36 @@
+html {
+  background-color: #baf6bd87;
+}
+
+h1 {
+  font-size: 20px;
+  font-family: "Playfair Display", serif;
+}
+
+.container {
+  width: 900px;
+  margin: auto;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 210px;
+  text-align: center;
+  height: 250px;
+  border: 2px solid black;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=stylesheetUsers.css.map */

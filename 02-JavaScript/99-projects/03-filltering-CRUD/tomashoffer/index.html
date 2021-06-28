@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Employees List</title>
+      <link rel="stylesheet" href="./dist/style.css">
+   </head>
+   <body>
+      <!-- <h1>List of Personal</h1>
+         <select class="employees__select" name="form__select">
+             <option value="" class="employees__option" disabled selected hidden>Select Employee</option>
+         </select>
+         
+         <h3 class="result"></h3> -->
+      <div class="container">
+         <div class="formulario">
+            <form action="" onsubmit="handleSubmit(e)">
+            <div>
+               <label for="product">Product</label>
+               <input type="text" name="product" id="product" >
+            </div>
+            <div>
+               <label for="brand">Brand</label>
+               <input type="text" name="brand" id="brand">
+            </div>
+            <div>
+               <label for="stock">Stock</label>
+               <input type="number" name="stock" id="stock">
+            </div>
+            <div>
+               <label for="price">Price</label>
+               <input type="number" name="price" id="price">
+            </div>
+            <div>
+               <label for="description">Description</label>
+               <input type="textarea" name="description" id="description">
+            </div>
+            <div>
+               <input type="submit">
+            </div>
+         </div>
+         <div class="table">
+            <table class="list" id="productList">
+               <thead>
+                  <tr class="list_fila">
+                     <th>Product</th>
+                     <th>Brand</th>
+                     <th>Stock</th>
+                     <th>Price</th>
+                     <th>Description</th>
+                     <th></th>
+                  </tr>
+               </thead>
+               <tbody id="book-list"></tbody>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <script src="dist/productos.js"></script>
+      <script src="dist/script.js"></script>
+   </body>
+</html>
