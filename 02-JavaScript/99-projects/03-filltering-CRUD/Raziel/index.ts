@@ -72,7 +72,7 @@ class List{
             <div class = "record-el">
                 <span id = "labelling">Email Address :${element.email} </span>
             </div>
-            <button type = "button" id = "delete-btn">
+            <button type = "button" id = "delete-btn" onclick='handelRemove("${element.id}")'>
                 <span>
                     <i class = "fas fa-trash"></i>
                 </span> Delete
@@ -84,7 +84,10 @@ class List{
         });
         rootHtml.innerHTML=html;
     }
-    deleteContact(){}
+    deleteContact(id:string):void{
+       this.contactList= this.contactList.filter((ev)=>ev.id!==id);
+       this.renderList();
+    }
     editContact(){}
     searchContact(){}
 }
@@ -104,3 +107,6 @@ const handelForm = (ev) => {
     console.log(lists);
     ev.target.reset()
   };
+  const handelRemove = (id: string): void => {
+    lists.deleteContact(id);
+  }
