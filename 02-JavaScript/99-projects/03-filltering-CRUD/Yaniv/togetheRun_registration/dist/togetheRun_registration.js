@@ -4,9 +4,8 @@ var newRunner = /** @class */ (function () {
         if (runnerAgeGroup === void 0) { runnerAgeGroup = 'Unknown'; }
         if (runnerChat === void 0) { runnerChat = 'Unknown'; }
         this.runnerId = "runner" + Math.random().toString(16).slice(2); // generated on registration
-        this.runnerPref = { prefChat: 'All', prefGender: 'All', prefAgeGroup: 'All' }; // default on registration
+        this.runnerPref = { prefChat: 'All', prefCompetative: 'All', prefGender: 'All', prefAgeGroup: 'All' }; // default on registration
         this.runnerRuns = [];
-        this.runnerRunsHtml = ''; // DOM representation of all runs
         this.runnerDistance = 0;
         this.runnerName = runnerName;
         this.runnerEmail = runnerEmail;
@@ -20,7 +19,7 @@ var newRunner = /** @class */ (function () {
 }());
 var currentRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
 if (currentRunner !== null) {
-    window.location.href = "togetheRun_main.html?" + currentRunner.runnerId;
+    window.location.href = "../togetheRun_main/togetheRun_main.html?" + currentRunner.runnerId;
 }
 var readURL = function (input) {
     if (input.files && input.files[0]) {
@@ -67,7 +66,7 @@ var runnerSubmit = function (ev) {
         }
         var runner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
         localStorage.setItem("currentRunner", JSON.stringify(runner));
-        window.location.href = "togetheRun_main.html?" + runner.runnerId;
+        window.location.href = "../togetheRun_main/togetheRun_main.html?" + runner.runnerId;
         // runners.addRunner(runner); // for the future - figure out how to manage runners array of type Array<Runner>
         ev.target.reset();
     }

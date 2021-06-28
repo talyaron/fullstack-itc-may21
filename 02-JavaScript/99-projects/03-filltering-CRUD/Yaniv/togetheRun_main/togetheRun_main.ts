@@ -1,6 +1,8 @@
+const clientTimezoneOffset: number = new Date().getTimezoneOffset()/-60; // for now it is the client timezone. in the future - set chosen runArea (so that users can schedule runs from countryA while in cuntryB)
+
 class Run {
   runDistance: number;
-  runTime: any; // including hour - Date type caused issues with parsing from local storage
+  runTime: string;
   runPace: string;
   runArea: string;
   runLocation: string;
@@ -10,7 +12,7 @@ class Run {
 
   constructor(
     runDistance: number,
-    runTime: any,
+    runTime: string,
     runPace: string,
     runArea: string,
     runLocation: string,
@@ -41,8 +43,8 @@ class RunsPool {
       } else {
         this.allRuns[runToUpdateIndex] = run;
       }
-      this.allRuns = this.allRuns.sort((a: any, b: any) => Date.parse(a.runTime) - Date.parse(b.runTime));
-      this.allRuns = this.allRuns.sort((a: any, b: any) => a.runRunnerId - b.runRunnerId);
+      this.allRuns = this.allRuns.sort((a: Run, b: Run) => Date.parse(a.runTime) - Date.parse(b.runTime));
+      this.allRuns = this.allRuns.sort((a: Run, b: Run) => a.runRunnerId - b.runRunnerId); // TODO check how to sort array of objects by key
       run.runMatch = this.findMatch(run);
       return run.runMatch;
     } catch (er) {
@@ -86,6 +88,7 @@ class RunsPool {
 interface Preferences {
   // For the future
   prefChat: string; // chatty, here and there, only when necessary, All (default)
+  prefCompetative: string; // very, a little, not at all, All (default)
   prefGender: string; // Male, Female, All (default)
   prefAgeGroup: string; // Like me, All (default)
 }
@@ -113,22 +116,16 @@ class LoggedInRunner {
 
   personalDetailsToDOM(): void {
     const mainTitle: HTMLElement = document.querySelector("title");
-    const runnerNameContainter: HTMLElement = document.querySelector(
-      ".summary__item--runner_name"
-    );
-    const runnerProfileImg: HTMLElement = document.querySelector(
-      ".profile_image__item--profile_image"
-    );
-    const ruunerTotalDistance: HTMLElement =
-      document.querySelector("#total_sum");
-    const runnerRunsCounter: HTMLElement =
-      document.querySelector("#total_counts");
+    const runnerNameContainter: HTMLElement = document.querySelector(".summary__item--runner_name");
+    const runnerProfileImg: HTMLElement = document.querySelector(".profile_image__item--profile_image");
+    const ruunerTotalDistance: HTMLElement = document.querySelector("#total_sum");
+    const runnerRunsCounter: HTMLElement = document.querySelector("#total_counts");
 
     mainTitle.insertAdjacentHTML("afterbegin", `${this.runnerName}`);
     runnerNameContainter.insertAdjacentHTML("beforeend", `${this.runnerName}!`);
     runnerProfileImg.title = `${this.runnerName}`;
     if (this.runnerProfImg === null) {
-      runnerProfileImg.setAttribute("src", "images/togetheRun_logo.png");
+      runnerProfileImg.setAttribute("src", "../images/togetheRun_logo.png");
     } else {
       runnerProfileImg.setAttribute("src", this.runnerProfImg);
     }
@@ -143,12 +140,14 @@ class LoggedInRunner {
 
     if (runToEditIndex === -1) {
       this.runnerRuns.push(run);
+      this.refreshDOMSummary(run.runDistance);
     } else {
+      const prevDistance: number = this.runnerRuns[runToEditIndex].runDistance;
       this.runnerRuns[runToEditIndex] = run;
+      this.refreshDOMSummary(run.runDistance - prevDistance);
     }
-    this.runnerRuns = this.runnerRuns.sort((a: any, b: any) => a.runTime - b.runTime);
+    this.runnerRuns = this.runnerRuns.sort((a: Run, b: Run) => Date.parse(a.runTime) - Date.parse(b.runTime));
     this.renderRunsToDOM();
-    this.refreshDOMSummary(run.runDistance);
   }
 
   deleteRun(runToDeleteId: string): void {
@@ -172,23 +171,26 @@ class LoggedInRunner {
           const runColor = run.runMatch ? "aqua" : "orange";
           const MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
           const MatchesBtnLook = run.runMatch ? "" : ` disabled style="background-color:${runColor};cursor:not-allowed`;
-          const runFormatedDate = typeof run.runTime === 'object' ? `${run.runTime.toISOString().substring(0, 16).replace("T", " ")}` : `${run.runTime.substring(0, 16).replace("T", " ")}`;
+          const runFormatedDate = (new Date(Date.parse(run.runTime)+clientTimezoneOffset*60*60*1000)).toISOString().replace("T", " ").substring(0, 16);
+          // this is for string. for object: `${run.runTime.toISOString().substring(0, 16).replace("T", " ")}`
           const runHTML = `
           <div class="runs__item" id="${run.runId}">
-            <i class="run_edit fas fa-edit update_run_btn""></i>
-            <i class="run_delete fas fa-trash" onclick="handleDelete(event)"></i>
+            <i class="run_edit fas fa-edit update_run_btn" title="Edit your run"></i>
+            <i class="run_delete fas fa-trash" onclick="handleDelete(event)" title="Delete your run"></i>
             <i class="match_status fas fa-2x fa-check${matchFAClass}" title="${matchTitle}" style="color: ${runColor};"></i>
-            <div class="run_distance" style="color: ${runColor};">
+            <div class="run_distance" style="color: ${runColor};" title="Run distance">
               ${Math.abs(run.runDistance)} Km
             </div>
-            <div class="run_time">${runFormatedDate}</div>
-            <div class="run_pace">${run.runPace}</div>
-            <div class="run_area">${run.runArea}</div>
+            <div class="run_time" title="Run time">${runFormatedDate}</div>
+            <div class="run_pace" title="Run pace">${run.runPace}</div>
+            <div class="run_area" title="Run area">${run.runArea}</div>
+            <div class="run_location" title="Run location">${run.runLocation}</div>
             <button class="run_matches"${MatchesBtnLook}">${MatchesBtnText}</button>
           </div>`;
 
           runsContainer.innerHTML += runHTML;
         });
+        openModal();
       }
     } catch (er) {
       console.error(er);
@@ -207,26 +209,26 @@ class LoggedInRunner {
       runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
       if (this.runnerDistance > 199) {
         ruunerTotalDistance.style.color = "gold";
-        distanceBadge.setAttribute("src", "images/TR_Kms_G.png");
+        distanceBadge.setAttribute("src", "../images/TR_Kms_G.png");
       } else if (this.runnerDistance > 99) {
         ruunerTotalDistance.style.color = "silver";
-        distanceBadge.setAttribute("src", "images/TR_Kms_S.png");
+        distanceBadge.setAttribute("src", "../images/TR_Kms_S.png");
       } else {
         ruunerTotalDistance.style.color = "#cd7f32";
-        distanceBadge.setAttribute("src", "images/TR_Kms_B.png");
+        distanceBadge.setAttribute("src", "../images/TR_Kms_B.png");
       }
 
       if (this.runnerRuns.length > 4) {
         //49 - 4 only for easy testing
         runnerRunsCounter.style.color = "gold";
-        togetherunBadge.setAttribute("src", "images/TR_G.png");
+        togetherunBadge.setAttribute("src", "../images/TR_G.png");
       } else if (this.runnerRuns.length > 1) {
         //19 - 1 only for easy testing
         runnerRunsCounter.style.color = "silver";
-        togetherunBadge.setAttribute("src", "images/TR_S.png");
+        togetherunBadge.setAttribute("src", "../images/TR_S.png");
       } else {
         runnerRunsCounter.style.color = "#cd7f32";
-        togetherunBadge.setAttribute("src", "images/TR_B.png");
+        togetherunBadge.setAttribute("src", "../images/TR_B.png");
       }
     } catch (er) {
       console.error(er);
@@ -238,7 +240,7 @@ let runsMainPool: RunsPool = JSON.parse(localStorage.getItem("runsPool")) ? new 
 
 let currentRunner: LoggedInRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
 if (currentRunner === null) {
-  window.location.href = `togetheRun_registration.html`;
+  window.location.href = `../togetheRun_registration/togetheRun_registration.html`;
 }
 
 let isModalOpen: boolean = false;
@@ -250,7 +252,7 @@ const logOut = (): void => {
     logoutBtn.addEventListener(`click`, (ev) => {
       localStorage.clear();
       localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
-      window.location.href = "togetheRun_registration.html";
+      window.location.href = "../togetheRun_registration/togetheRun_registration.html";
     });
   } catch (er) {
     console.error(er);
@@ -268,7 +270,6 @@ const openModal = (): void => {
         isModalOpen = true;
         modal.style.display = `flex`;
         modalBox.style.display = `unset`;
-        console.log('hi');
         onlyFutureRuns();
         const runDiv = UpdtBtn.parentElement;
         setRunToUpdateData(runDiv);
@@ -301,7 +302,10 @@ const onlyFutureRuns = (): void => {
   try {
     const runTimeInput: HTMLElement = document.querySelector(`#run_time_form`);
     const now = new Date();
+    const inThirtyDays = new Date();
+    inThirtyDays.setDate(now.getDate() + 30);
     runTimeInput.setAttribute("min", now.toISOString().substring(0, 16));
+    runTimeInput.setAttribute("max", inThirtyDays.toISOString().substring(0, 16));
   } catch (er) {
     console.error(er);
   }
@@ -315,28 +319,28 @@ const setRunToUpdateData = (runDiv: HTMLElement): void => {
     const runAreaSelect: HTMLSelectElement = document.querySelector(`#run_area_form`);
     const runLocationInput: HTMLElement = document.querySelector(`#run_location_form`);
     const runPaceSelect: HTMLSelectElement = document.querySelector(`#run_pace_form`);
-    const submitInput: HTMLElement = document.querySelector(`#submit`);
+    const updateRunForm: HTMLElement = document.querySelector(`.update_run_form`);
     
     const runDistanceDiv: HTMLElement = runDiv.querySelector(`.run_distance`)
     const runTimeDiv: HTMLElement = runDiv.querySelector(`.run_time`)
     const runAreaDiv: HTMLElement = runDiv.querySelector(`.run_area`);
-    // const runLocationDiv: HTMLElement = docrunDivument.querySelector(`.run_location`);
+    const runLocationDiv: HTMLElement = runDiv.querySelector(`.run_location`);
     const runPaceDiv: HTMLElement = runDiv.querySelector(`.run_pace`);
     
     if (runDiv.className === 'runs__item') {
       runDistanceInput.setAttribute('value',runDistanceDiv.innerText.replace(' Km',''));
       runTimeInput.setAttribute('value',runTimeDiv.innerText.replace(' ','T'));
       runAreaSelect.selectedIndex = Array.from(runAreaSelect.children).findIndex(child => child.getAttribute('value') === runAreaDiv.innerText);
-      // runLocationInput.setAttribute('value',runLocationDiv.innerHTML); TODO to be added to the run box
+      runLocationInput.setAttribute('value',runLocationDiv.innerHTML);
       runPaceSelect.selectedIndex = Array.from(runPaceSelect.children).findIndex(child => child.getAttribute('value') === runPaceDiv.innerText);
-      submitInput.setAttribute('alt',`${runDiv.getAttribute('id')}`)
+      updateRunForm.setAttribute('id',`${runDiv.getAttribute('id')}`)
     } else {
       runDistanceInput.setAttribute('value','');
       runTimeInput.setAttribute('value','');
       runAreaSelect.selectedIndex = 0;
       runLocationInput.setAttribute('value','');
       runPaceSelect.selectedIndex = 0;
-      submitInput.removeAttribute('alt');
+      updateRunForm.removeAttribute('id');
     }
 
   } catch (er) {
@@ -350,20 +354,20 @@ const updateRunSubmit = (ev: any) => {
   try {
     ev.preventDefault();
 
-    const runToUpdateId:string = ev.target.getAttribute('alt');
+    const runToUpdateId: string = ev.target.getAttribute('id');
 
     const runDistance = Number(ev.target.elements.runDistance.value);
-    const runTime = new Date(ev.target.elements.runTime.value);
+    const runTime = ev.target.elements.runTime.value;
     const runPace = ev.target.elements.runPace.value;
     const runArea = ev.target.elements.runArea.value;
     const runLocation = ev.target.elements.runLocation.value;
     const runMatch = false;
 
     const run = new Run(runDistance, runTime, runPace, runArea, runLocation, runMatch);
-
+    
     if (runToUpdateId !== null) {
       run.runId = runToUpdateId;
-    } else {console.log('runToUpdateId === null');}
+    }
 
     run.runMatch = runsMainPool.updateToPool(run);
     localStorage.setItem("runsPool", JSON.stringify(runsMainPool));

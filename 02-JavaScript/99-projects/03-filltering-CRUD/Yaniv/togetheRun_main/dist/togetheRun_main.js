@@ -1,3 +1,4 @@
+var clientTimezoneOffset = new Date().getTimezoneOffset() / -60; // for now it is the client timezone. in the future - set chosen runArea (so that users can schedule runs from countryA while in cuntryB)
 var Run = /** @class */ (function () {
     function Run(runDistance, runTime, runPace, runArea, runLocation, runMatch) {
         this.runId = "run" + Math.random().toString(16).slice(2);
@@ -25,7 +26,7 @@ var RunsPool = /** @class */ (function () {
                 this.allRuns[runToUpdateIndex] = run;
             }
             this.allRuns = this.allRuns.sort(function (a, b) { return Date.parse(a.runTime) - Date.parse(b.runTime); });
-            this.allRuns = this.allRuns.sort(function (a, b) { return a.runRunnerId - b.runRunnerId; });
+            this.allRuns = this.allRuns.sort(function (a, b) { return a.runRunnerId - b.runRunnerId; }); // TODO check how to sort array of objects by key
             run.runMatch = this.findMatch(run);
             return run.runMatch;
         }
@@ -89,7 +90,7 @@ var LoggedInRunner = /** @class */ (function () {
         runnerNameContainter.insertAdjacentHTML("beforeend", this.runnerName + "!");
         runnerProfileImg.title = "" + this.runnerName;
         if (this.runnerProfImg === null) {
-            runnerProfileImg.setAttribute("src", "images/togetheRun_logo.png");
+            runnerProfileImg.setAttribute("src", "../images/togetheRun_logo.png");
         }
         else {
             runnerProfileImg.setAttribute("src", this.runnerProfImg);
@@ -103,13 +104,15 @@ var LoggedInRunner = /** @class */ (function () {
         var runToEditIndex = this.runnerRuns.findIndex(function (runItem) { return runItem.runId === run.runId; });
         if (runToEditIndex === -1) {
             this.runnerRuns.push(run);
+            this.refreshDOMSummary(run.runDistance);
         }
         else {
+            var prevDistance = this.runnerRuns[runToEditIndex].runDistance;
             this.runnerRuns[runToEditIndex] = run;
+            this.refreshDOMSummary(run.runDistance - prevDistance);
         }
-        this.runnerRuns = this.runnerRuns.sort(function (a, b) { return a.runTime - b.runTime; });
+        this.runnerRuns = this.runnerRuns.sort(function (a, b) { return Date.parse(a.runTime) - Date.parse(b.runTime); });
         this.renderRunsToDOM();
-        this.refreshDOMSummary(run.runDistance);
     };
     LoggedInRunner.prototype.deleteRun = function (runToDeleteId) {
         var runToDeleteIndex = this.runnerRuns.findIndex(function (runItem) { return runItem.runId === runToDeleteId; });
@@ -132,10 +135,12 @@ var LoggedInRunner = /** @class */ (function () {
                     var runColor = run.runMatch ? "aqua" : "orange";
                     var MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
                     var MatchesBtnLook = run.runMatch ? "" : " disabled style=\"background-color:" + runColor + ";cursor:not-allowed";
-                    var runFormatedDate = typeof run.runTime === 'object' ? "" + run.runTime.toISOString().substring(0, 16).replace("T", " ") : "" + run.runTime.substring(0, 16).replace("T", " ");
-                    var runHTML = "\n          <div class=\"runs__item\" id=\"" + run.runId + "\">\n            <i class=\"run_edit fas fa-edit update_run_btn\"\"></i>\n            <i class=\"run_delete fas fa-trash\" onclick=\"handleDelete(event)\"></i>\n            <i class=\"match_status fas fa-2x fa-check" + matchFAClass + "\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n            <div class=\"run_distance\" style=\"color: " + runColor + ";\">\n              " + Math.abs(run.runDistance) + " Km\n            </div>\n            <div class=\"run_time\">" + runFormatedDate + "</div>\n            <div class=\"run_pace\">" + run.runPace + "</div>\n            <div class=\"run_area\">" + run.runArea + "</div>\n            <button class=\"run_matches\"" + MatchesBtnLook + "\">" + MatchesBtnText + "</button>\n          </div>";
+                    var runFormatedDate = (new Date(Date.parse(run.runTime) + clientTimezoneOffset * 60 * 60 * 1000)).toISOString().replace("T", " ").substring(0, 16);
+                    // this is for string. for object: `${run.runTime.toISOString().substring(0, 16).replace("T", " ")}`
+                    var runHTML = "\n          <div class=\"runs__item\" id=\"" + run.runId + "\">\n            <i class=\"run_edit fas fa-edit update_run_btn\" title=\"Edit your run\"></i>\n            <i class=\"run_delete fas fa-trash\" onclick=\"handleDelete(event)\" title=\"Delete your run\"></i>\n            <i class=\"match_status fas fa-2x fa-check" + matchFAClass + "\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n            <div class=\"run_distance\" style=\"color: " + runColor + ";\" title=\"Run distance\">\n              " + Math.abs(run.runDistance) + " Km\n            </div>\n            <div class=\"run_time\" title=\"Run time\">" + runFormatedDate + "</div>\n            <div class=\"run_pace\" title=\"Run pace\">" + run.runPace + "</div>\n            <div class=\"run_area\" title=\"Run area\">" + run.runArea + "</div>\n            <div class=\"run_location\" title=\"Run location\">" + run.runLocation + "</div>\n            <button class=\"run_matches\"" + MatchesBtnLook + "\">" + MatchesBtnText + "</button>\n          </div>";
                     runsContainer_1.innerHTML += runHTML;
                 });
+                openModal();
             }
         }
         catch (er) {
@@ -153,29 +158,29 @@ var LoggedInRunner = /** @class */ (function () {
             runnerRunsCounter.innerHTML = "" + this.runnerRuns.length;
             if (this.runnerDistance > 199) {
                 ruunerTotalDistance.style.color = "gold";
-                distanceBadge.setAttribute("src", "images/TR_Kms_G.png");
+                distanceBadge.setAttribute("src", "../images/TR_Kms_G.png");
             }
             else if (this.runnerDistance > 99) {
                 ruunerTotalDistance.style.color = "silver";
-                distanceBadge.setAttribute("src", "images/TR_Kms_S.png");
+                distanceBadge.setAttribute("src", "../images/TR_Kms_S.png");
             }
             else {
                 ruunerTotalDistance.style.color = "#cd7f32";
-                distanceBadge.setAttribute("src", "images/TR_Kms_B.png");
+                distanceBadge.setAttribute("src", "../images/TR_Kms_B.png");
             }
             if (this.runnerRuns.length > 4) {
                 //49 - 4 only for easy testing
                 runnerRunsCounter.style.color = "gold";
-                togetherunBadge.setAttribute("src", "images/TR_G.png");
+                togetherunBadge.setAttribute("src", "../images/TR_G.png");
             }
             else if (this.runnerRuns.length > 1) {
                 //19 - 1 only for easy testing
                 runnerRunsCounter.style.color = "silver";
-                togetherunBadge.setAttribute("src", "images/TR_S.png");
+                togetherunBadge.setAttribute("src", "../images/TR_S.png");
             }
             else {
                 runnerRunsCounter.style.color = "#cd7f32";
-                togetherunBadge.setAttribute("src", "images/TR_B.png");
+                togetherunBadge.setAttribute("src", "../images/TR_B.png");
             }
         }
         catch (er) {
@@ -187,7 +192,7 @@ var LoggedInRunner = /** @class */ (function () {
 var runsMainPool = JSON.parse(localStorage.getItem("runsPool")) ? new RunsPool(JSON.parse(localStorage.getItem("runsPool")).allRuns) : new RunsPool([]);
 var currentRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
 if (currentRunner === null) {
-    window.location.href = "togetheRun_registration.html";
+    window.location.href = "../togetheRun_registration/togetheRun_registration.html";
 }
 var isModalOpen = false;
 var logOut = function () {
@@ -196,7 +201,7 @@ var logOut = function () {
         logoutBtn.addEventListener("click", function (ev) {
             localStorage.clear();
             localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
-            window.location.href = "togetheRun_registration.html";
+            window.location.href = "../togetheRun_registration/togetheRun_registration.html";
         });
     }
     catch (er) {
@@ -213,7 +218,6 @@ var openModal = function () {
                 isModalOpen = true;
                 modal_1.style.display = "flex";
                 modalBox_1.style.display = "unset";
-                console.log('hi');
                 onlyFutureRuns();
                 var runDiv = UpdtBtn.parentElement;
                 setRunToUpdateData(runDiv);
@@ -245,7 +249,10 @@ var onlyFutureRuns = function () {
     try {
         var runTimeInput = document.querySelector("#run_time_form");
         var now = new Date();
+        var inThirtyDays = new Date();
+        inThirtyDays.setDate(now.getDate() + 30);
         runTimeInput.setAttribute("min", now.toISOString().substring(0, 16));
+        runTimeInput.setAttribute("max", inThirtyDays.toISOString().substring(0, 16));
     }
     catch (er) {
         console.error(er);
@@ -258,19 +265,19 @@ var setRunToUpdateData = function (runDiv) {
         var runAreaSelect = document.querySelector("#run_area_form");
         var runLocationInput = document.querySelector("#run_location_form");
         var runPaceSelect = document.querySelector("#run_pace_form");
-        var submitInput = document.querySelector("#submit");
+        var updateRunForm = document.querySelector(".update_run_form");
         var runDistanceDiv = runDiv.querySelector(".run_distance");
         var runTimeDiv = runDiv.querySelector(".run_time");
         var runAreaDiv_1 = runDiv.querySelector(".run_area");
-        // const runLocationDiv: HTMLElement = docrunDivument.querySelector(`.run_location`);
+        var runLocationDiv = runDiv.querySelector(".run_location");
         var runPaceDiv_1 = runDiv.querySelector(".run_pace");
         if (runDiv.className === 'runs__item') {
             runDistanceInput.setAttribute('value', runDistanceDiv.innerText.replace(' Km', ''));
             runTimeInput.setAttribute('value', runTimeDiv.innerText.replace(' ', 'T'));
             runAreaSelect.selectedIndex = Array.from(runAreaSelect.children).findIndex(function (child) { return child.getAttribute('value') === runAreaDiv_1.innerText; });
-            // runLocationInput.setAttribute('value',runLocationDiv.innerHTML); TODO to be added to the run box
+            runLocationInput.setAttribute('value', runLocationDiv.innerHTML);
             runPaceSelect.selectedIndex = Array.from(runPaceSelect.children).findIndex(function (child) { return child.getAttribute('value') === runPaceDiv_1.innerText; });
-            submitInput.setAttribute('alt', "" + runDiv.getAttribute('id'));
+            updateRunForm.setAttribute('id', "" + runDiv.getAttribute('id'));
         }
         else {
             runDistanceInput.setAttribute('value', '');
@@ -278,7 +285,7 @@ var setRunToUpdateData = function (runDiv) {
             runAreaSelect.selectedIndex = 0;
             runLocationInput.setAttribute('value', '');
             runPaceSelect.selectedIndex = 0;
-            submitInput.removeAttribute('alt');
+            updateRunForm.removeAttribute('id');
         }
     }
     catch (er) {
@@ -289,9 +296,9 @@ currentRunner = new LoggedInRunner();
 var updateRunSubmit = function (ev) {
     try {
         ev.preventDefault();
-        var runToUpdateId = ev.target.getAttribute('alt');
+        var runToUpdateId = ev.target.getAttribute('id');
         var runDistance = Number(ev.target.elements.runDistance.value);
-        var runTime = new Date(ev.target.elements.runTime.value);
+        var runTime = ev.target.elements.runTime.value;
         var runPace = ev.target.elements.runPace.value;
         var runArea = ev.target.elements.runArea.value;
         var runLocation = ev.target.elements.runLocation.value;
@@ -299,9 +306,6 @@ var updateRunSubmit = function (ev) {
         var run = new Run(runDistance, runTime, runPace, runArea, runLocation, runMatch);
         if (runToUpdateId !== null) {
             run.runId = runToUpdateId;
-        }
-        else {
-            console.log('runToUpdateId === null');
         }
         run.runMatch = runsMainPool.updateToPool(run);
         localStorage.setItem("runsPool", JSON.stringify(runsMainPool));

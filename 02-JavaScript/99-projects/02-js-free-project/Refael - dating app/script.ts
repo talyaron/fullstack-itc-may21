@@ -33,7 +33,7 @@ class User {
 class UserList {
   users: Array<User>;
   constructor() {
-    this.users = [];
+    this.users = []; //YS: Why did you remove the localstorage array? 
   }
   addUser(user: User) {
     this.users.push(user);
@@ -60,6 +60,7 @@ submit.addEventListener("click", (ev) => {
   const creatNewUser = new User(name, age, gender, desc, intrested);
 
   creatUsers.addUser(creatNewUser);
+  //YS: Add some sort of approval message that the user was added. Even an alert. 
 
   // window.location.href = "userList.html";
 });

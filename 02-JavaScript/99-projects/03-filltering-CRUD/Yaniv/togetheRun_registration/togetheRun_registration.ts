@@ -6,11 +6,10 @@ class newRunner {
   runnerGender: string; // Male, Female, Unknown (default)
   runnerAgeGroup: string; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default)
   runnerChat: string; // chatty, so so, only when necessary, Unknown (default)
-  runnerPref: Preferences = {prefChat: 'All', prefGender: 'All', prefAgeGroup: 'All'}; // default on registration
+  runnerPref: Preferences = {prefChat: 'All', prefCompetative: 'All', prefGender: 'All', prefAgeGroup: 'All'}; // default on registration
   runnerProfImg: any;
   runnerShoes: Shoes;
   runnerRuns: Array<Run> = [];
-  runnerRunsHtml: string = ''; // DOM representation of all runs
   runnerDistance: number = 0;
 
   constructor (runnerName: string, runnerEmail: string, runnerPassword: string, runnerGender: string = 'Unknown', runnerAgeGroup: string = 'Unknown', runnerChat: string = 'Unknown', runnerProfImg: any) {
@@ -25,7 +24,7 @@ class newRunner {
 }
 
 let currentRunner: newRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
-if (currentRunner !== null) {window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`;}
+if (currentRunner !== null) {window.location.href = `../togetheRun_main/togetheRun_main.html?${currentRunner.runnerId}`;}
 
 const readURL = (input: any) => { // CREDIT TO LEONARDO FOR THIS ONE!!
   if (input.files && input.files[0]) {
@@ -81,7 +80,7 @@ const runnerSubmit = (ev: any) => {
       const runner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
       localStorage.setItem("currentRunner", JSON.stringify(runner));
 
-      window.location.href = `togetheRun_main.html?${runner.runnerId}`;
+      window.location.href = `../togetheRun_main/togetheRun_main.html?${runner.runnerId}`;
       // runners.addRunner(runner); // for the future - figure out how to manage runners array of type Array<Runner>
     
       ev.target.reset();

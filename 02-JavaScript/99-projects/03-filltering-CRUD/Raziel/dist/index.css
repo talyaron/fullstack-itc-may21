@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+}
+
+.wrapper {
+  margin: 0px auto;
+  padding: 25px;
+  border-radius: 5px;
+}
+.wrapper__form {
+  border-radius: 10px;
+  padding: 20px 0;
+  margin: 30px 0;
+  box-shadow: 0px 0px 6px 0px #080008;
+}
+.wrapper__form form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 0 auto;
+}
+.wrapper__form h2 {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 22px;
+}
+.wrapper__form form label {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.wrapper__form form label, .wrapper__form form input {
+  display: block;
+  outline: none;
+  border-radius: 25px;
+  border: none;
+}
+.wrapper__form form input[type=text], .wrapper__form form input[type=number], .wrapper__form form input[type=email] {
+  color: #000;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 10px 18px;
+  margin: 12px 0;
+  transition: all 0.5s ease;
+}
+.wrapper__form form input:focus {
+  background: #252525;
+  color: #fff;
+}
+.wrapper__form .input-btns {
+  text-align: center;
+}
+.wrapper__form button {
+  display: block;
+  width: 160px;
+  margin: 20px auto;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 10px;
+  border: 3px solid #fff;
+  border-radius: 25px;
+  color: #fff;
+  background: #000411;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.5s ease;
+  outline: none;
+}
+.wrapper__form button:hover {
+  opacity: 1;
+}
+.wrapper__contacts {
+  border-radius: 10px;
+  padding: 20px 0;
+  margin: 30px 0;
+  box-shadow: 0px 0px 6px 0px #080008;
+}
+.wrapper__contacts .record-el {
+  display: block;
+  padding: 4px 0;
+  text-align: center;
+  opacity: 0.9;
+}
+.wrapper__contacts #labelling {
+  font-weight: 700;
+}
+.wrapper__contacts .record-item {
+  color: #000;
+  border-radius: 10px;
+  padding: 10px 25px;
+  margin: 15px 0;
+  background: #fff;
+  box-shadow: 0 0 6px #777;
+}
+.wrapper__contacts button {
+  display: block;
+  width: 160px;
+  margin: 20px auto;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 10px;
+  border: 3px solid #fff;
+  border-radius: 25px;
+  color: #fff;
+  background: #000411;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.5s ease;
+  outline: none;
+}
