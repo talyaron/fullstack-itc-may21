@@ -2,7 +2,7 @@ const letsGoBTN = document.querySelector(".lts-btn");
 letsGoBTN.addEventListener("click", (event) => {
   const form = document.querySelector(".form__container");
   const welcome_hi = document.querySelector(".hi");
-  const welcome_hi2 = document.querySelector(".hi__welcome");
+  const welcome_hi2 = document.querySelector(".hi__welcome"); //YS: These names are not very good (hi_1, hi_2) DRY
   const welcome_hi3 = document.querySelector(".hi__welcome2");
   letsGoBTN.classList.remove("lts-btn");
   letsGoBTN.textContent = " ";
@@ -38,7 +38,7 @@ class UserList {
   }
   usersFromStorage() {
     let usersStorage = JSON.parse(localStorage.getItem("creatUsers"));
-    if (usersStorage) {
+    if (usersStorage) {  //YS: Nice
       this.users = usersStorage;
     }
   }
