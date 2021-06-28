@@ -20,4 +20,9 @@ h1 {
   height: 250px;
   border: 2px solid black;
   align-items: center;
+  flex-direction: column;
+}
+.removeFromDOM {
+  position: relative;
+  // top: 45px;
 }
