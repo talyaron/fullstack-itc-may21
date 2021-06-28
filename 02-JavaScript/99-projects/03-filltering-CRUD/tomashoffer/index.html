@@ -4,25 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./dist/style.css">
     <title>Document</title>
 </head>
 <body>
+    <div class="container">
+        <div class="formulario">
+        <form onsubmit="handleSubmit(event)">
+        <label class="formulario_item" for="product">Product</label>
+        <input class="formulario_item" type="text" name="producto">
+        <label class="formulario_item" for="brand">Brand</label>
+        <input class="formulario_item" type="text" name="brand">
+        <label class="formulario_item" for="stock">Price</label>
+        <input class="formulario_item" type="number" name="price">
+        <label class="formulario_item" for="stock">Stock</label>
+        <input class="formulario_item" type="number" name="stock">
+        <label class="formulario_item" for="description">Description</label>
+        <textarea class="formulario_item" name="description" id="" cols="30" rows="10" name="description"></textarea>
     
-<form onsubmit="handleSubmit(event)">
-<label for="product">Product</label>
-<input type="text" name="producto">
-<label for="brand">Brand</label>
-<input type="text" name="brand">
-<label for="stock">Price</label>
-<input type="number" name="price">
-<label for="stock">Stock</label>
-<input type="number" name="stock">
-<label for="description">Description</label>
-<textarea name="description" id="" cols="30" rows="10" name="description"></textarea>
+        <button type="submit" >Send</button>
+        </form>
+    </div>
+            <div class="container_titles">
+                <div class="container_products-product">
+                    <h3>Products</h3>
+                </div>
+                <div class="container_products-brand">
+                    <h3>Brand</h3>
+                </div>
+                <div class="container_products-price">
+                    <h3>Price</h3>
+                </div>
+                <div class="container_products-stock">
+                    <h3>Stock</h3>
+                </div>
+                <div class="container_products-description">
+                    <h3>Description</h3>
+                </div>
+                <div class="container_products-icons">
+                    <h3>Action</h3>
+                </div>
+            </div>
+            <div class="container_products">
 
-<button type="submit" >Send</button>
-</form>
+            </div>
 
+    </div>
 
 <script src="./dist/productos.js"></script>
 <script src="./dist/mian.js"></script>
