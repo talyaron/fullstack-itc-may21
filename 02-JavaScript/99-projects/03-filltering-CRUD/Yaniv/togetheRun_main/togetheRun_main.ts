@@ -158,9 +158,12 @@ class LoggedInRunner {
   }
 
   filterRuns(minDistanceFilter: number, maxDistanceFilter: number, paceFilter: string, areaFilter: string, locationFilter: string) {
+    if ((minDistanceFilter === 0) && (maxDistanceFilter === 0) && (paceFilter === "") && (areaFilter === "") && (locationFilter === "")) {return;}
+    
     const locationRegEx = locationFilter ? new RegExp(locationFilter,'gmi') : undefined;
     console.log(locationRegEx);
-    const filteredRuns: Array<Run> = this.runnerRuns.filter(runItem => {
+    let filteredRuns: Array<Run>;
+     = this.runnerRuns.filter(runItem => {
       ((minDistanceFilter === 0) || (runItem.runDistance >= minDistanceFilter)) &&
       ((maxDistanceFilter === 0) || (runItem.runDistance <= maxDistanceFilter)) &&
       ((paceFilter === "") || (runItem.runPace === paceFilter)) &&

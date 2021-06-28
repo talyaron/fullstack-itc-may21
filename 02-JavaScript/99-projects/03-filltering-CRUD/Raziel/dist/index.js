@@ -22,23 +22,24 @@ var List = /** @class */ (function () {
             console.log("Error");
         }
     };
-    List.prototype.renderList = function () {
+    List.prototype.renderList = function (filteredArray) {
+        var ArrayToRender = filteredArray ? filteredArray : this.contactList;
         var html = "";
-        this.contactList.forEach(function (element) {
+        ArrayToRender.forEach(function (element) {
             html += "<div class = \"record-item\">\n            <div class = \"record-el\">\n                <span>Name:" + element.name + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Family Name:" + element.fname + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span >Phone Number:" + element.phone + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Email Address :" + element.email + " </span>\n            </div>\n            <button type = \"button\" id = \"delete-btn\" onclick='handelRemove(\"" + element.id + "\")'>\n                <span>\n                    <i class = \"fas fa-trash\"></i>\n                </span> Delete\n            </button>\n            <button type = \"button\" id = \"delete-btn\" onclick='edit(\"" + element.id + "\")'>\n                <span>\n                <i class=\"fas fa-edit\"></i>\n                </span> Edit\n            </button>\n        </div>\n    \n    </div>\n";
         });
         rootHtml.innerHTML = html;
     };
     List.prototype.deleteContact = function (id) {
         this.contactList = this.contactList.filter(function (ev) { return ev.id !== id; });
-        this.renderList();
+        this.renderList(null);
     };
     List.prototype.editContact = function () { };
     List.prototype.searchContact = function (name) {
         var regEx = "" + name;
         var searchName = new RegExp(regEx, 'i');
-        this.contactList = this.contactList.filter(function (elem) { return searchName.test(elem.name); });
-        this.renderList();
+        var filteredArray = this.contactList.filter(function (elem) { return searchName.test(elem.name); });
+        this.renderList(filteredArray);
     };
     return List;
 }());
@@ -63,7 +64,7 @@ var handelForm = function (ev) {
     }
     var contact = new Contact(name, fname, phone, email);
     lists.addToList(contact);
-    lists.renderList();
+    lists.renderList(null);
     console.log(lists);
     ev.target.reset();
 };

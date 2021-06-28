@@ -132,9 +132,13 @@ var LoggedInRunner = /** @class */ (function () {
         this.refreshDOMSummary(runToDeleteDistance);
     };
     LoggedInRunner.prototype.filterRuns = function (minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter) {
+        if ((minDistanceFilter === 0) && (maxDistanceFilter === 0) && (paceFilter === "") && (areaFilter === "") && (locationFilter === "")) {
+            return;
+        }
         var locationRegEx = locationFilter ? new RegExp(locationFilter, 'gmi') : undefined;
         console.log(locationRegEx);
-        var filteredRuns = this.runnerRuns.filter(function (runItem) {
+        var filteredRuns;
+        this.runnerRuns.filter(function (runItem) {
             ((minDistanceFilter === 0) || (runItem.runDistance >= minDistanceFilter)) &&
                 ((maxDistanceFilter === 0) || (runItem.runDistance <= maxDistanceFilter)) &&
                 ((paceFilter === "") || (runItem.runPace === paceFilter)) &&

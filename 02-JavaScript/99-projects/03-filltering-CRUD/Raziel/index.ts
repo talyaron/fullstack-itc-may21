@@ -28,9 +28,10 @@ class List{
     }
   
  
-    renderList():void{
+    renderList(filteredArray: Array<Contact>):void{
+        const ArrayToRender = filteredArray ? filteredArray : this.contactList;
         let html:string="";
-        this.contactList.forEach(element=>{
+        ArrayToRender.forEach(element=>{
 
             html+=`<div class = "record-item">
             <div class = "record-el">
@@ -64,17 +65,18 @@ class List{
     }
     deleteContact(id:string):void{
        this.contactList= this.contactList.filter((ev)=>ev.id!==id);
-       this.renderList();
+       this.renderList(null);
     }
     editContact(){}
     searchContact(name:string){
+        
         const regEx: string = `${name}`;
 
         const searchName: RegExp = new RegExp(regEx, 'i');
 
-        this.contactList = this.contactList.filter(elem => searchName.test(elem.name))
+        const filteredArray: Array<Contact> = this.contactList.filter(elem => searchName.test(elem.name))
 
-        this.renderList();
+        this.renderList(filteredArray);
     }
 }
 
@@ -99,7 +101,7 @@ const handelForm = (ev) => {
       }
     const  contact= new Contact(name,fname,phone,email);
     lists.addToList(contact);
-     lists.renderList()
+     lists.renderList(null)
     console.log(lists);
     ev.target.reset()
   };
@@ -107,7 +109,7 @@ const handelForm = (ev) => {
     lists.deleteContact(id);
   }
 
-  searchName .addEventListener('keyup', handleKeyUp)
+  searchName.addEventListener('keyup', handleKeyUp)
 
 function handleKeyUp() {
     lists.searchContact(searchName .value)   
