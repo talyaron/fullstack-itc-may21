@@ -164,7 +164,8 @@ var LoggedInRunner = /** @class */ (function () {
             runsToRender.forEach(function (run) {
                 var matchFAClass = run.runMatch ? "-double" : "";
                 var matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
-                var runColor = run.runMatch ? "aqua" : "orange";
+                var runColor = run.runMatch ? "#189AB4" : "orange";
+                var statusColor = run.runMatch ? "#75E6DA" : "orange";
                 var MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
                 var MatchesBtnLook = run.runMatch ? "" : " disabled style=\"background-color:" + runColor + ";cursor:not-allowed";
                 var runFormatedDate = (new Date(Date.parse(run.runTime) + clientTimezoneOffset * 60 * 60 * 1000)).toISOString().replace("T", " ").substring(0, 16);

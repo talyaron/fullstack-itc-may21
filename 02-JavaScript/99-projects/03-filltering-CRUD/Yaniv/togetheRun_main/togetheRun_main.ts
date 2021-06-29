@@ -188,7 +188,8 @@ class LoggedInRunner {
       runsToRender.forEach((run) => {
         const matchFAClass = run.runMatch ? "-double" : "";
         const matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
-        const runColor = run.runMatch ? "aqua" : "orange";
+        const runColor = run.runMatch ? "#189AB4" : "orange";
+        const statusColor = run.runMatch ? "#75E6DA" : "orange";
         const MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
         const MatchesBtnLook = run.runMatch ? "" : ` disabled style="background-color:${runColor};cursor:not-allowed`;
         const runFormatedDate = (new Date(Date.parse(run.runTime)+clientTimezoneOffset*60*60*1000)).toISOString().replace("T", " ").substring(0, 16);

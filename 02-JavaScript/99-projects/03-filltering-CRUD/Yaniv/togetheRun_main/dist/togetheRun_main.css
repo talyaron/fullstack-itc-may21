@@ -262,11 +262,12 @@ button:hover {
   width: 75%;
   justify-self: center;
   font-size: 0.65rem;
-  background-color: #189AB4;
+  background-color: #75E6DA;
   color: black;
 }
 #mainscreen .runs__item .run_matches:hover {
-  background-color: #75E6DA;
+  background-color: #21B6A8;
+  color: white;
 }
 #mainscreen .runs__item .run_matches:active {
   background-color: #189AB4;
