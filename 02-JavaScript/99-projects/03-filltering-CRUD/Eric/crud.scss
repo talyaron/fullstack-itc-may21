@@ -1,13 +1,9 @@
-
-
 * {
     box-sizing: border-box;
-  
     font-family: 'Montserrat', sans-serif;
 }
 
 .container {
-    border: 2px solid red;
     font-size: 15px;
     font-weight: bold;
     text-align: center;
@@ -15,8 +11,9 @@
 }
 .table-product{
     width: 100%;
-    border: 2px solid red;
     text-align: center;
+    border: 2px solid black;
+    border-radius: 5px;
 }
 legend{
     text-align: center;
@@ -25,9 +22,11 @@ legend{
 form{
     margin-top: 10px;
     width: 100%;
+
 }
 input{
     text-align: center;
+    background-color: white;
 
 }
 
@@ -36,21 +35,46 @@ input{
     justify-content: space-around;
 }
 
+.btn-productEdit{
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.btn-product{
+    background-color: green;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.btn-product:hover{
+    opacity: 0.6;
+}
+.btn-productEdit:hover{
+    opacity: 0.6;
+}
 
+fieldset{
+    border: 2px solid black;
+    border-radius: 5px;
 
+}
 
-
-
-
-
-
-
+/* to add color to delete and edit btns
+#del{
+    background-color: red;
+}
+.fas{
+    font-size: 18px;
+}*/
 
 
 
 //animations
 
-/*body {
+body {
     animation: body 5s linear infinite alternate both;
 }
 
@@ -100,4 +124,4 @@ input{
         -webkit-transform-origin: 50% 0%;
         transform-origin: 50% 0%;
     }
-}*/
+}
