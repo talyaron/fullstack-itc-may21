@@ -31,15 +31,18 @@ var Products = /** @class */ (function () {
         });
     };
     Products.prototype.searchProduct = function (inputNameFilter) {
-        var regrExp = "^" + inputNameFilter;
+        var regrExp = "" + inputNameFilter;
         var searchTermReg = new RegExp(regrExp, 'i');
-        this.products = this.products.filter(function (elem) { return searchTermReg.test(elem.ProductName); });
+        this.products = this.productsFilter.filter(function (elem) { return searchTermReg.test(elem.ProductName); });
         this.renderProducts();
     };
     //eliminar
     Products.prototype.removeProduct = function (ProductId) {
         this.products = this.products.filter(function (prod) { return prod.ProductId !== ProductId; });
         this.renderProducts();
+    };
+    //editar
+    Products.prototype.editProduct = function (ProductId) {
     };
     //  Update id
     //  updateProduct(ProductId: string) {}
@@ -77,6 +80,10 @@ var handleSubmit = function (ev) {
 var handleDelete = function (ProductId) {
     products.removeProduct(ProductId);
     console.log(products);
+};
+//edit products
+var handleEdit = function (ProductId) {
+    products.editProduct(ProductId);
 };
 //search products
 inputNameFilter.addEventListener('keyup', handleKeyUp);

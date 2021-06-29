@@ -48,9 +48,9 @@ class Products {
 
     searchProduct(inputNameFilter:string){
         
-        const regrExp: string = `^${inputNameFilter}`;
+        const regrExp: string = `${inputNameFilter}`;
         const searchTermReg: RegExp = new RegExp(regrExp, 'i');
-        this.products = this.products.filter(elem => searchTermReg.test(elem.ProductName))
+        this.products = this.productsFilter.filter(elem => searchTermReg.test(elem.ProductName))
         this.renderProducts();
     }
    
@@ -59,7 +59,11 @@ class Products {
         this.products = this.products.filter((prod) => prod.ProductId !== ProductId);
         this.renderProducts();
     }
-    
+
+    //editar
+    editProduct(ProductId: string){
+
+    }
  
 
     //  Update id
@@ -91,7 +95,7 @@ class Products {
     
 }
 const products = new Products();
-products.addProducts(productsData)
+products.addProducts(productsData);
 products.renderProducts();
 
 
@@ -112,6 +116,11 @@ const handleSubmit = (ev: any): void => {
 const handleDelete = (ProductId:string):void =>{
     products.removeProduct(ProductId);
     console.log(products);
+};
+//edit products
+const handleEdit = (ProductId:string):void =>{
+    products.editProduct(ProductId);
+    
 };
 //search products
 inputNameFilter.addEventListener('keyup', handleKeyUp)
