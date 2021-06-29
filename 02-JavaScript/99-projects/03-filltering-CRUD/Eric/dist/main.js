@@ -1,5 +1,11 @@
 var inputNameFilter = document.querySelector("#filtername");
 var product_qty = document.querySelectorAll(".filter-option");
+var ProductN = document.querySelector(".product-name");
+var Type = document.querySelector(".product-type");
+var Description = document.querySelector(".product-description");
+var Origin = document.querySelector(".product-origin");
+var Quantity = document.querySelector(".product-quantity");
+var btnAdd = document.querySelector(".btn-product");
 var Product = /** @class */ (function () {
     function Product(ProductName, Type, Description, Origin, Quantity) {
         this.ProductName = ProductName;
@@ -37,23 +43,34 @@ var Products = /** @class */ (function () {
         this.products = this.productsFilter.filter(function (elem) { return searchTermReg.test(elem.ProductName); });
         this.renderProducts();
     };
-    //filter qty
-    Products.prototype.filterOption = function (Quantity) {
-        if (Quantity === 7 || Quantity === 3) {
-            this.products = this.productsFilter.filter(function (elem) { return elem.Quantity === Quantity; });
-        }
-        else {
-            this.products = this.productsFilter.filter(function (elem) { return elem.Quantity === 3 || elem.Quantity === 7; });
-        }
-        this.renderProducts();
-    };
     //eliminar
     Products.prototype.removeProduct = function (ProductId) {
         this.products = this.products.filter(function (prod) { return prod.ProductId !== ProductId; });
         this.renderProducts();
     };
     //editar
-    Products.prototype.editProduct = function (ProductId) {
+    Products.prototype.getProduct = function (ProductId) {
+        this.products.forEach(function (element) {
+            if (element.ProductId === ProductId) {
+                ProductN.value = element.ProductName;
+                Type.value = element.Type;
+                Description.value = element.Description;
+                Origin.value = element.Origin;
+                Quantity.value = String(element.Quantity);
+            }
+        });
+        return ProductId;
+    };
+    Products.prototype.editProduct = function (product, productId) {
+        this.products.forEach(function (element) {
+            if (element.ProductId === productId) {
+                element.ProductName = ProductN.value;
+                element.Type = Type.value;
+                element.Description = Description.value;
+                element.Origin = Origin.value;
+                element.Quantity = Number(Quantity.value);
+            }
+        });
     };
     //  Update id
     //  updateProduct(ProductId: string) {}
@@ -61,7 +78,7 @@ var Products = /** @class */ (function () {
         var table = document.querySelector(".product-list");
         var html = "";
         this.products.forEach(function (product) {
-            html += "<tbody>\n       <tr>\n        <td>" + product.ProductName + "</td>\n        <td>" + product.Type + "</td> \n        <td>" + product.Description + "</td> \n        <td>" + product.Origin + "</td> \n        <td>" + product.Quantity + "</td> \n        <td> <i onclick='handleEdit(\"" + product.ProductId + "\")' class=\"fas fa-pencil-alt\"></i></td>\n        <td> <i onclick='handleDelete(\"" + product.ProductId + "\")'id=\"del\" class=\"fas fa-trash\"></i></td>\n        </tr>";
+            html += "<tbody>\n       <tr>\n        <td>" + product.ProductName + "</td>\n        <td>" + product.Type + "</td> \n        <td>" + product.Description + "</td> \n        <td>" + product.Origin + "</td> \n        <td>" + product.Quantity + "</td> \n        <td> <i onclick='handleGet(\"" + product.ProductId + "\")' class=\"fas fa-pencil-alt\"></i></td>\n        <td> <i onclick='handleDelete(\"" + product.ProductId + "\")'id=\"del\" class=\"fas fa-trash\"></i></td>\n        </tr>";
         });
         table.innerHTML = html;
     };
@@ -75,6 +92,7 @@ var Products = /** @class */ (function () {
 var products = new Products();
 products.addProducts(productsData);
 products.renderProducts();
+var productId;
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var ProductName = ev.target.elements.name.value;
@@ -87,27 +105,33 @@ var handleSubmit = function (ev) {
     products.renderProducts();
     ev.target.reset();
 };
+var handleEdit = function (ev) {
+    ev.preventDefault();
+    var p = ProductN.value;
+    var t = Type.value;
+    var d = Description.value;
+    var o = Origin.value;
+    var q = Number(Quantity.value);
+    var product = new Product(p, t, d, o, q);
+    products.editProduct(product, productId);
+    products.renderProducts();
+    btnAdd.disabled = false;
+    console.log(btnAdd);
+    ev.target.reset();
+};
 //delete products
 var handleDelete = function (ProductId) {
     products.removeProduct(ProductId);
     console.log(products);
 };
 //edit products
-var handleEdit = function (ProductId) {
-    products.editProduct(ProductId);
+var handleGet = function (ProductId) {
+    productId = products.getProduct(ProductId);
+    btnAdd.disabled = true;
+    console.log(btnAdd);
 };
 //search products
 inputNameFilter.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
     products.searchProduct(inputNameFilter.value);
-}
-function filterOption() {
-    var _loop_1 = function (i) {
-        product_qty[i].addEventListener("click", function () {
-            products.filterOption(product_qty[i].nodeType);
-        });
-    };
-    for (var i = 0; i < product_qty.length; i++) {
-        _loop_1(i);
-    }
 }

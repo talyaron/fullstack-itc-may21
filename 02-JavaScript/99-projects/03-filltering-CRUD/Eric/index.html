@@ -64,10 +64,10 @@
             <input type="number" id="quantity" value="quantity" name="quantity" class="product-quantity" max="10" placeholder="add quantity">
             <br><br>
             <input type="submit" value="Add" class="btn-product">
-            <form onsubmit="handleSubmit(ev)">
-            <input type="submit" value="Edit" class="btn-productEdit">
-        </form>
         </fieldset>
+        </form>
+        <form onsubmit="handleEdit(event)">
+            <input type="submit" value="Edit" class="btn-productEdit">
         </form>
         <br>
     </div>

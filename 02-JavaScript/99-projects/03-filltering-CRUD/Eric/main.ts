@@ -1,6 +1,11 @@
 const inputNameFilter = (<HTMLInputElement>document.querySelector("#filtername"))
 const product_qty = <NodeList>document.querySelectorAll(".filter-option");
-
+const ProductN = (<HTMLInputElement>document.querySelector(".product-name"))
+const Type = (<HTMLInputElement>document.querySelector(".product-type"))
+const Description = (<HTMLInputElement>document.querySelector(".product-description"))
+const Origin = (<HTMLInputElement>document.querySelector(".product-origin"))
+const Quantity = (<HTMLInputElement>document.querySelector(".product-quantity"))
+const btnAdd = (<HTMLButtonElement>document.querySelector(".btn-product"))
 
 
 interface ProductsInterface {
@@ -57,18 +62,7 @@ class Products {
         this.renderProducts();
     }
 
-    //filter qty
-    filterOption(Quantity: number) {
-
-        if (Quantity === 7 || Quantity === 3) {
-            this.products = this.productsFilter.filter(elem => elem.Quantity === Quantity)
-
-        } else {
-            this.products = this.productsFilter.filter(elem => elem.Quantity === 3 || elem.Quantity === 7)
-        }
-
-        this.renderProducts()
-    }
+   
    
 //eliminar
     removeProduct(ProductId: string) {
@@ -77,10 +71,32 @@ class Products {
     }
 
     //editar
-    editProduct(ProductId: string){
-
+    getProduct(ProductId: string):string{
+        this.products.forEach(element => {
+            if(element.ProductId === ProductId){
+                ProductN.value=element.ProductName;
+                Type.value=element.Type;
+                Description.value=element.Description;
+                Origin.value=element.Origin;
+                Quantity.value=String(element.Quantity);
+                
+            }
+        });
+        return ProductId
     }
- 
+    editProduct(product: Product, productId){
+        this.products.forEach(element => {
+            if(element.ProductId === productId){
+                element.ProductName=ProductN.value;
+                element.Type=Type.value;
+                element.Description=Description.value;
+                element.Origin=Origin.value;
+                element.Quantity=Number(Quantity.value);
+                               
+            }
+
+        });
+    }
 
     //  Update id
     //  updateProduct(ProductId: string) {}
@@ -97,7 +113,7 @@ class Products {
         <td>${product.Description}</td> 
         <td>${product.Origin}</td> 
         <td>${product.Quantity}</td> 
-        <td> <i onclick='handleEdit("${product.ProductId}")' class="fas fa-pencil-alt"></i></td>
+        <td> <i onclick='handleGet("${product.ProductId}")' class="fas fa-pencil-alt"></i></td>
         <td> <i onclick='handleDelete("${product.ProductId}")'id="del" class="fas fa-trash"></i></td>
         </tr>`;
         });
@@ -114,6 +130,8 @@ const products = new Products();
 products.addProducts(productsData);
 products.renderProducts();
 
+let productId:string;
+
 
 const handleSubmit = (ev: any): void => {
     ev.preventDefault();
@@ -126,6 +144,24 @@ const handleSubmit = (ev: any): void => {
     products.add(product);
     products.renderProducts()
     ev.target.reset()
+
+}
+
+const handleEdit = (ev: any): void => {
+    ev.preventDefault();
+    const p: string =  ProductN.value;
+    const t:string = Type.value;
+    const d:string = Description.value;
+    const o:string = Origin.value;
+    const q:number = Number(Quantity.value);
+    const product = new Product(p, t, d, o, q)
+    products.editProduct(product,productId)
+    products.renderProducts()
+    btnAdd.disabled=false
+    console.log(btnAdd)
+    ev.target.reset()
+    
+
 }
 
 //delete products
@@ -134,8 +170,10 @@ const handleDelete = (ProductId:string):void =>{
     console.log(products);
 };
 //edit products
-const handleEdit = (ProductId:string):void =>{
-    products.editProduct(ProductId);
+const handleGet = (ProductId:string):void =>{
+    productId = products.getProduct(ProductId);
+    btnAdd.disabled=true
+    console.log(btnAdd)
 };
 //search products
 inputNameFilter.addEventListener('keyup', handleKeyUp)
@@ -145,10 +183,3 @@ function handleKeyUp() {
        
 }
 
-function filterOption() {
-    for (let i = 0; i < product_qty.length; i++) {
-        product_qty[i].addEventListener("click", function () {
-            products.filterOption(product_qty[i].nodeType);
-        });
-    }
-}
