@@ -1,4 +1,4 @@
-const productos: Array<ProdInterface> = [{
+const productos: Array<any> = [{
     "product": "Laptop",
     "brand": "HP",
     "price": 550 ,
