@@ -17,6 +17,8 @@ var Cars = /** @class */ (function () {
     }
     Cars.prototype.add = function (car) {
         this.cars.push(car);
+        addNewOrigin();
+        console.log(cars);
         localStorage.setItem("cars", JSON.stringify(cars));
     };
     ;
@@ -38,15 +40,16 @@ var Cars = /** @class */ (function () {
         console.log(carToUpdate);
         this.renderCars();
     };
-    Cars.prototype.getCarsFromStorage = function () {
-        JSON.parse(localStorage.getItem("cars"));
-    };
-    ;
+    // getCarsFromStorage() {
+    //     const tempCars = JSON.parse(localStorage.getItem(`cars`))
+    //     console.log(tempCars);
+    //     this.cars = tempCars
+    // };
     Cars.prototype.renderCars = function () {
         var table = document.querySelector(".table");
         var html = "";
         this.cars.forEach(function (car) {
-            html = "<tbody>\n       <tr>\n        <td>" + car.Name + "</td>\n        <td>" + car.Miles_per_Gallon + "</td> \n        <td>" + car.Cylinders + "</td> \n        <td>" + car.Horsepower + "</td> \n        <td>" + car.Weight_in_lbs + "</td> \n        <td>" + car.Year + "</td> \n        <td>" + car.Origin + "</td>\n        <td> <i onclick='handleDelete(\"" + car.carId + "\")' class=\"fas fa-trash\"></i></td>\n      </tr>";
+            html = "<tbody>\n       <tr>\n        <td>" + car.Name + "</td>\n        <td>" + car.Miles_per_Gallon + "</td> \n        <td>" + car.Cylinders + "</td> \n        <td>" + car.Horsepower + "<button onclick='handleEdit(\"" + car.Name + "\")' >Make Me 500!</button></td> \n        <td>" + car.Weight_in_lbs + "</td> \n        <td>" + car.Year + "</td> \n        <td>" + car.Origin + "</td>\n        <td> <i onclick='handleDelete(\"" + car.carId + "\")' class=\"fas fa-trash\"></i></td>\n      </tr>";
             table.insertAdjacentHTML("afterbegin", html);
         });
     };
@@ -56,7 +59,11 @@ var Cars = /** @class */ (function () {
 var cars = new Cars();
 cars.addCars(carsData);
 cars.renderCars();
-cars.updateCar("ford ranger");
+// cars.getCarsFromStorage();
+var handleEdit = function (carName) {
+    console.log(carName);
+    cars.updateCar(carName);
+};
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var Name = ev.target.elements.Name.value;
@@ -69,19 +76,23 @@ var handleSubmit = function (ev) {
     var car = new Car(Name, Miles_per_Gallon, Cylinders, Horsepower, Weight_in_lbs, Year, Origin);
     cars.add(car);
     cars.renderCars();
-    console.log(cars);
     ev.target.reset();
 };
 var handleDelete = function (carId) {
     console.log(carId);
     cars.removeCar(carId);
 };
-var select = document.querySelector("#origin");
-var origin = [];
-cars.cars.forEach(function (c) { return origin.push(c.Origin); });
-var mySet = new Set(origin);
-console.log(mySet);
-mySet.forEach(function (o) {
-    var option = "<option value=\"" + o + "\">" + o + "</option>";
-    select.insertAdjacentHTML("afterbegin", option);
-});
+function addNewOrigin() {
+    var selectOrigin = document.querySelector("table #origin");
+    var originList = [];
+    cars.cars.forEach(function (c) { return originList.push(c.Origin); });
+    var mySet = new Set(originList);
+    // console.log(mySet);
+    selectOrigin.innerHTML = "";
+    mySet.forEach(function (o) {
+        var option = "<option value=\"" + o + "\">" + o + "</option>";
+        selectOrigin.insertAdjacentHTML("afterbegin", option);
+    });
+}
+;
+addNewOrigin();
