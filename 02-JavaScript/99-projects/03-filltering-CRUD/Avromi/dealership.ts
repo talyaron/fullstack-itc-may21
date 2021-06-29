@@ -43,6 +43,7 @@ class Cars {
     add(car: Car) {
         this.cars.push(car)
         addNewOrigin()
+        addNewCylinders()
         console.log(cars);
         localStorage.setItem(`cars`, JSON.stringify(cars))
     };
@@ -63,6 +64,18 @@ class Cars {
         this.renderCars();
     }
 
+    filterByOrigin(value) {
+        const carFilteredByOrgin = this.cars.filter(c => c.Origin === value);
+        this.cars = carFilteredByOrgin
+        this.renderCars();
+    }
+    filterByCylinders(value) {
+        const carFilteredByCylinders = this.cars.filter(c => c.Cylinders === value);
+        this.cars = carFilteredByCylinders
+        console.log(`in filter ` + value);
+        this.renderCars();
+    }
+
     updateCar(name: string) {
         const carToUpdate = this.cars.find(car => car.Name === name)
         carToUpdate.Horsepower = 500;
@@ -70,21 +83,21 @@ class Cars {
         this.renderCars()
     }
 
+    getCarsFromStorage() {
+        const tempCars = JSON.parse(localStorage.getItem(`cars`))
+        console.log(tempCars);
+        this.cars.unshift(tempCars);
+    };
 
 
 
-    // getCarsFromStorage() {
-    //     const tempCars = JSON.parse(localStorage.getItem(`cars`))
-    //     console.log(tempCars);
-    //     this.cars = tempCars
-    // };
     renderCars() {
-        
+
         const table: HTMLElement = document.querySelector(".table")
         let html: string = "";
         this.cars.forEach((car) => {
 
-            html = `<tbody>
+            html += `<tbody>
        <tr>
         <td>${car.Name}</td>
         <td>${car.Miles_per_Gallon}</td> 
@@ -96,25 +109,41 @@ class Cars {
         <td> <i onclick='handleDelete("${car.carId}")' class="fas fa-trash"></i></td>
       </tr>`;
 
-            table.insertAdjacentHTML(`afterbegin`, html)
+            table.innerHTML = html;
+            // table.insertAdjacentHTML(`afterbegin`, html)
         });
     };
 
 }
 
 const cars = new Cars();
+
+cars.getCarsFromStorage();
+
 cars.addCars(carsData)
 
 cars.renderCars();
 
-// cars.getCarsFromStorage();
 
-const handleEdit = (carName)=>{
+const handleEdit = (carName) => {
     console.log(carName);
     cars.updateCar(carName);
 }
+const handleDelete = (carId: string): void => {
+    console.log(carId);
+    cars.removeCar(carId);
+};
+function handleSelect() {
+    const originValue = document.querySelector("table #origin").value;
 
+    cars.filterByOrigin(originValue)
 
+}
+
+function handleSelectCylinders() {
+    const cylindersValue = document.querySelector("table #cylinders").value;
+    cars.filterByCylinders(parseInt(cylindersValue))
+}
 
 
 
@@ -135,28 +164,9 @@ const handleSubmit = (ev: any): void => {
     ev.target.reset()
 }
 
-const handleDelete = (carId: string): void => {
-    console.log(carId);
-    cars.removeCar(carId);
-};
 
 
 
-function addNewOrigin() {
-    const selectOrigin = document.querySelector("table #origin")
-    const originList = [];
-
-    cars.cars.forEach(c => originList.push(c.Origin))
-    let mySet = new Set(originList)
-    // console.log(mySet);
-    selectOrigin.innerHTML = "";
-    mySet.forEach(o => {
-        const option = `<option value="${o}">${o}</option>`
-        selectOrigin.insertAdjacentHTML(`afterbegin`, option)
-    });
-
-};
-addNewOrigin();
 
 
 
