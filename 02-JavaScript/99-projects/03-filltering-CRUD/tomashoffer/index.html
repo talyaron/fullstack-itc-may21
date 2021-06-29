@@ -1,67 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./dist/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dist/style.css" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="formulario">
+      <div class="formulario">
         <form onsubmit="handleSubmit(event)">
-        <label class="formulario_item" for="product">Product</label>
-        <input class="formulario_item" type="text" name="producto">
-        <label class="formulario_item" for="brand">Brand</label>
-        <input class="formulario_item" type="text" name="brand">
-        <label class="formulario_item" for="stock">Price</label>
-        <input class="formulario_item" type="number" name="price">
-        <label class="formulario_item" for="stock">Stock</label>
-        <input class="formulario_item" type="number" name="stock">
-        <label class="formulario_item" for="description">Description</label>
-        <textarea class="formulario_item" name="description" id="" cols="30" rows="10" name="description"></textarea>
-    
-        <button type="submit" >Send</button>
+          <label class="formulario_item" for="product">Product</label>
+          <input class="formulario_item" type="text" name="producto" />
+          <label class="formulario_item" for="brand">Brand</label>
+          <input class="formulario_item" type="text" name="brand" />
+          <label class="formulario_item" for="stock">Price</label>
+          <input class="formulario_item" type="number" name="price" />
+          <label class="formulario_item" for="stock">Stock</label>
+          <input class="formulario_item" type="number" name="stock" />
+          <label class="formulario_item" for="description">Description</label>
+          <textarea
+            class="formulario_item"
+            name="description"
+            id=""
+            cols="30"
+            rows="10"
+            name="description"
+          ></textarea>
+
+          <button type="submit">Send</button>
         </form>
         <div class="selectors">
-            <h3>Select by price</h3>
-            <select name="select" id="select">
-                <option class="option_item" value="" hidden disabled selected>-----</option>
-                <option value="100">greater than $100</option>
-                <option value="200">greater than $200</option>
-                <option value="300">greater than $300</option>
-            </select>
+          <h3>Select by price</h3>
+          <select name="select" class="select">
+            <option class="option_item" value="" hidden disabled selected>
+              -----
+            </option>
+            <option class="option_item" value="100">greater than $100</option>
+            <option class="option_item" value="200">greater than $200</option>
+            <option class="option_item" value="300">greater than $300</option>
+          </select>
         </div>
-    </div>
-            <div class="container_titles">
-                <div class="container_products-product">
-                    <h3>Products</h3>
-                </div>
-                <div class="container_products-brand">
-                    <h3>Brand</h3>
-                </div>
-                <div class="container_products-price">
-                    <h3>Price</h3>
-                </div>
-                <div class="container_products-stock">
-                    <h3>Stock</h3>
-                </div>
-                <div class="container_products-description">
-                    <h3>Description</h3>
-                </div>
-                <div class="container_products-icons">
-                    <h3>Action</h3>
-                </div>
-            </div>
-            <div class="container_products">
-
-            </div>
-
+      </div>
+      <div class="container_titles">
+        <div class="container_products-product">
+          <h3>Products</h3>
+        </div>
+        <div class="container_products-brand">
+          <h3>Brand</h3>
+        </div>
+        <div class="container_products-price">
+          <h3>Price</h3>
+        </div>
+        <div class="container_products-stock">
+          <h3>Stock</h3>
+        </div>
+        <div class="container_products-description">
+          <h3>Description</h3>
+        </div>
+        <div class="container_products-icons">
+          <h3>Action</h3>
+        </div>
+      </div>
+      <div class="container_products"></div>
     </div>
 
-<script src="./dist/productos.js"></script>
-<script src="./dist/mian.js"></script>
-</body>
+    <script src="./dist/productos.js"></script>
+    <script src="./dist/mian.js"></script>
+  </body>
 </html>
