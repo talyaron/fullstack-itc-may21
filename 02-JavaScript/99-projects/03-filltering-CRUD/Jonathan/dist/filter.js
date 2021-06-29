@@ -207,14 +207,13 @@ function handleKeyUp() {
 function filterGender() {
     var _loop_1 = function (i) {
         gender_list[i].addEventListener("click", function () {
-            datalist.filterGender(gender_list[i].value);
+            datalist.filterGender(gender_list[i].nodeValue);
         });
     };
     for (var i = 0; i < gender_list.length; i++) {
         _loop_1(i);
     }
 }
-//function
 function handleDelete(id) {
     datalist.removeItem(id);
 }

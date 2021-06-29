@@ -270,15 +270,11 @@ function handleKeyUp() {
 function filterGender() {
     for (let i = 0; i < gender_list.length; i++) {
         gender_list[i].addEventListener("click", function () {
-            datalist.filterGender(gender_list[i].value);
+            datalist.filterGender(gender_list[i].nodeValue);
         });
     }
 }
 
-
-
-
-//function
 
 function handleDelete(id: string) {
     datalist.removeItem(id);
