@@ -75,20 +75,21 @@ var RunsPool = /** @class */ (function () {
     };
     return RunsPool;
 }());
+var localStorageRunner = JSON.parse(localStorage.getItem("currentRunner")); // TODO check if works
 var LoggedInRunner = /** @class */ (function () {
     function LoggedInRunner() {
         // generated on the registration page - passed on to other pages via localStorage
-        this.runnerName = JSON.parse(localStorage.getItem("currentRunner")).runnerName; // required on registration
-        this.runnerId = JSON.parse(localStorage.getItem("currentRunner")).runnerId; // generated on registration
-        this.runnerEmail = JSON.parse(localStorage.getItem("currentRunner")).runnerEmail; // required on registration
-        this.runnerPassword = JSON.parse(localStorage.getItem("currentRunner")).runnerPassword; // required on registration
-        this.runnerGender = JSON.parse(localStorage.getItem("currentRunner")).runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
-        this.runnerAgeGroup = JSON.parse(localStorage.getItem("currentRunner")).runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
-        this.runnerChat = JSON.parse(localStorage.getItem("currentRunner")).runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
-        this.runnerPref = JSON.parse(localStorage.getItem("currentRunner")).runnerPref; // default on registration - TODO add method to edit
-        this.runnerProfImg = JSON.parse(localStorage.getItem("currentRunner")).runnerProfImg; // TODO add method editDetails
-        this.runnerRuns = JSON.parse(localStorage.getItem("currentRunner")).runnerRuns; // empty on registration
-        this.runnerDistance = JSON.parse(localStorage.getItem("currentRunner")).runnerDistance;
+        this.runnerName = localStorageRunner.runnerName; // required on registration
+        this.runnerId = localStorageRunner.runnerId; // generated on registration
+        this.runnerEmail = localStorageRunner.runnerEmail; // required on registration
+        this.runnerPassword = localStorageRunner.runnerPassword; // required on registration
+        this.runnerGender = localStorageRunner.runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
+        this.runnerAgeGroup = localStorageRunner.runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
+        this.runnerChat = localStorageRunner.runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
+        this.runnerPref = localStorageRunner.runnerPref; // default on registration - TODO add method to edit
+        this.runnerProfImg = localStorageRunner.runnerProfImg; // TODO add method editDetails
+        this.runnerRuns = localStorageRunner.runnerRuns; // empty on registration
+        this.runnerDistance = localStorageRunner.runnerDistance;
     }
     LoggedInRunner.prototype.personalDetailsToDOM = function () {
         var mainTitle = document.querySelector("title");
@@ -132,30 +133,23 @@ var LoggedInRunner = /** @class */ (function () {
         this.refreshDOMSummary(runToDeleteDistance);
     };
     LoggedInRunner.prototype.filterRuns = function (minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter) {
-        var filteredRuns = null;
+        var filteredRuns = this.runnerRuns;
         var locationRegEx = locationFilter ? new RegExp(locationFilter, 'gmi') : undefined;
         var filterSubmitBtn = document.querySelector('#filter_submit');
-        if (minDistanceFilter !== 0) {
+        if (minDistanceFilter !== 0)
             filteredRuns = this.runnerRuns.filter(function (runItem) { return runItem.runDistance >= minDistanceFilter; });
-        }
-        if (maxDistanceFilter !== 0) {
-            filteredRuns = this.runnerRuns.filter(function (runItem) { return runItem.runDistance <= maxDistanceFilter; });
-        }
-        if (paceFilter !== "") {
-            filteredRuns = this.runnerRuns.filter(function (runItem) { return runItem.runPace === paceFilter; });
-        }
-        if (areaFilter !== "") {
-            filteredRuns = this.runnerRuns.filter(function (runItem) { return runItem.runArea === areaFilter; });
-        }
-        if (locationFilter !== "") {
-            filteredRuns = this.runnerRuns.filter(function (runItem) { return locationRegEx.test(runItem.runLocation); });
-        }
-        if (filteredRuns !== null) {
+        if (maxDistanceFilter !== 0)
+            filteredRuns = filteredRuns.filter(function (runItem) { return runItem.runDistance <= maxDistanceFilter; });
+        if (paceFilter !== "")
+            filteredRuns = filteredRuns.filter(function (runItem) { return runItem.runPace === paceFilter; });
+        if (areaFilter !== "")
+            filteredRuns = filteredRuns.filter(function (runItem) { return runItem.runArea === areaFilter; });
+        if (locationFilter !== "")
+            filteredRuns = filteredRuns.filter(function (runItem) { return locationRegEx.test(runItem.runLocation); });
+        if (filteredRuns !== this.runnerRuns)
             filterSubmitBtn.setAttribute('value', 'Reset');
-        }
-        else {
+        else
             filterSubmitBtn.setAttribute('value', 'Filter');
-        }
         this.renderRunsToDOM(filteredRuns);
     };
     LoggedInRunner.prototype.renderRunsToDOM = function (filteredRunsToRender) {
@@ -178,7 +172,6 @@ var LoggedInRunner = /** @class */ (function () {
                 var runHTML = "\n        <div class=\"runs__item\" id=\"" + run.runId + "\">\n          <i class=\"run_edit fas fa-edit update_run_btn\" title=\"Edit your run\"></i>\n          <i class=\"run_delete fas fa-trash\" onclick=\"handleDelete(event)\" title=\"Delete your run\"></i>\n          <i class=\"match_status fas fa-2x fa-check" + matchFAClass + "\" title=\"" + matchTitle + "\" style=\"color: " + runColor + ";\"></i>\n          <div class=\"run_distance\" style=\"color: " + runColor + ";\" title=\"Run distance\">\n            " + Math.abs(run.runDistance) + " Km\n          </div>\n          <div class=\"run_time\" title=\"Run time\">" + runFormatedDate + "</div>\n          <div class=\"run_pace\" title=\"Run pace\">" + run.runPace + "</div>\n          <div class=\"run_area\" title=\"Run area\">" + run.runArea + "</div>\n          <div class=\"run_location\" title=\"Run location\">" + run.runLocation + "</div>\n          <button class=\"run_matches\"" + MatchesBtnLook + "\">" + MatchesBtnText + "</button>\n        </div>";
                 runsContainer_1.innerHTML += runHTML;
             });
-            openModal();
         }
         catch (er) {
             console.error(er);
@@ -227,7 +220,7 @@ var LoggedInRunner = /** @class */ (function () {
     return LoggedInRunner;
 }());
 var runsMainPool = JSON.parse(localStorage.getItem("runsPool")) ? new RunsPool(JSON.parse(localStorage.getItem("runsPool")).allRuns) : new RunsPool([]);
-var currentRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
+var currentRunner = localStorageRunner ? localStorageRunner : null;
 if (currentRunner === null) {
     window.location.href = "../togetheRun_registration/togetheRun_registration.html";
 }
@@ -245,21 +238,22 @@ var logOut = function () {
         console.error(er);
     }
 };
-var openModal = function () {
+var modal = document.querySelector(".modalWrapper");
+var modalBox = document.querySelector(".modalWrapper__item--update_run");
+var editRunsAncestor = document.querySelector('.runs');
+var addRunParent = document.querySelector(".dashboard");
+editRunsAncestor.addEventListener('click', function (ev) { return openModal(ev); });
+addRunParent.addEventListener('click', function (ev) { return openModal(ev); });
+var openModal = function (ev) {
     try {
-        var modal_1 = document.querySelector(".modalWrapper");
-        var modalBox_1 = document.querySelector(".modalWrapper__item--update_run");
-        var updateRunBtns = document.querySelectorAll(".update_run_btn");
-        updateRunBtns.forEach(function (UpdtBtn) {
-            return UpdtBtn.addEventListener("click", function (ev) {
-                isModalOpen = true;
-                modal_1.style.display = "flex";
-                modalBox_1.style.display = "unset";
-                runsWithinNextMonth();
-                var runDiv = UpdtBtn.parentElement;
-                setRunToUpdateData(runDiv);
-            });
-        });
+        if ((ev.target.className !== 'run_edit fas fa-edit update_run_btn') && (ev.target.className !== 'dashboard__item dashboard__item--add update_run_btn'))
+            return;
+        isModalOpen = true;
+        modal.style.display = "flex";
+        modalBox.style.display = "unset";
+        runsWithinNextMonth();
+        var runDiv = ev.target.parentElement;
+        setRunToUpdateData(runDiv);
     }
     catch (er) {
         console.error(er);
@@ -267,14 +261,12 @@ var openModal = function () {
 };
 var closeModal = function () {
     try {
-        var modal_2 = document.querySelector(".modalWrapper");
-        var modalBox_2 = document.querySelector(".modalWrapper__item--update_run");
         var close = document.querySelectorAll(".close");
         close.forEach(function (clsBtn) {
             return clsBtn.addEventListener("click", function (ev) {
                 isModalOpen = false;
-                modal_2.style.display = "none";
-                modalBox_2.style.display = "none";
+                modal.style.display = "none";
+                modalBox.style.display = "none";
             });
         });
     }
@@ -302,7 +294,7 @@ var setRunToUpdateData = function (runDiv) {
         var runAreaSelect = document.querySelector("#run_area_form");
         var runLocationInput = document.querySelector("#run_location_form");
         var runPaceSelect = document.querySelector("#run_pace_form");
-        var updateRunForm = document.querySelector(".update_run_form");
+        var updateRunForm_1 = document.querySelector(".update_run_form");
         var runDistanceDiv = runDiv.querySelector(".run_distance");
         var runTimeDiv = runDiv.querySelector(".run_time");
         var runAreaDiv_1 = runDiv.querySelector(".run_area");
@@ -314,7 +306,7 @@ var setRunToUpdateData = function (runDiv) {
             runAreaSelect.selectedIndex = Array.from(runAreaSelect.children).findIndex(function (child) { return child.getAttribute('value') === runAreaDiv_1.innerText; });
             runLocationInput.setAttribute('value', runLocationDiv.innerHTML);
             runPaceSelect.selectedIndex = Array.from(runPaceSelect.children).findIndex(function (child) { return child.getAttribute('value') === runPaceDiv_1.innerText; });
-            updateRunForm.setAttribute('id', "" + runDiv.getAttribute('id'));
+            updateRunForm_1.setAttribute('id', "" + runDiv.getAttribute('id'));
         }
         else {
             runDistanceInput.setAttribute('value', '');
@@ -322,7 +314,7 @@ var setRunToUpdateData = function (runDiv) {
             runAreaSelect.selectedIndex = 0;
             runLocationInput.setAttribute('value', '');
             runPaceSelect.selectedIndex = 0;
-            updateRunForm.removeAttribute('id');
+            updateRunForm_1.removeAttribute('id');
         }
     }
     catch (er) {
@@ -330,6 +322,8 @@ var setRunToUpdateData = function (runDiv) {
     }
 };
 currentRunner = new LoggedInRunner();
+var updateRunForm = document.querySelector('.update_run_form');
+updateRunForm.addEventListener('submit', function (ev) { return updateRunSubmit(ev); });
 var updateRunSubmit = function (ev) {
     try {
         ev.preventDefault();
@@ -348,30 +342,51 @@ var updateRunSubmit = function (ev) {
         localStorage.setItem("runsPool", JSON.stringify(runsMainPool));
         currentRunner.updateRun(run);
         localStorage.setItem("currentRunner", JSON.stringify(currentRunner));
-        var modal = document.querySelector(".modalWrapper");
-        var modalBox = document.querySelector(".modalBox");
+        var modal_1 = document.querySelector(".modalWrapper");
+        var modalBox_1 = document.querySelector(".modalBox");
         isModalOpen = false;
-        modal.style.display = "none";
-        modalBox.style.display = "none";
+        modal_1.style.display = "none";
+        modalBox_1.style.display = "none";
         ev.target.reset();
     }
     catch (er) {
         console.error(er);
     }
 };
+var filterRunsForm = document.querySelector('.filter_form');
+filterRunsForm.addEventListener('submit', function (ev) { return filterSubmit(ev); });
+filterRunsForm.addEventListener('change', function (ev) { return filterChangeKeyUp(ev); });
+filterRunsForm.addEventListener('keyup', function (ev) { return filterChangeKeyUp(ev); });
 var filterSubmit = function (ev) {
     try {
         ev.preventDefault();
+        if (currentRunner.runnerRuns.length === 0) {
+            return;
+        }
         var minDistanceFilter = Number(ev.target.elements.minDistanceFilter.value);
         var maxDistanceFilter = Number(ev.target.elements.maxDistanceFilter.value);
         var paceFilter = ev.target.elements.paceFilter.value;
         var areaFilter = ev.target.elements.areaFilter.value;
         var locationFilter = ev.target.elements.locationFilter.value;
+        currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
+        ev.target.reset();
+    }
+    catch (er) {
+        console.error(er);
+    }
+};
+var filterChangeKeyUp = function (ev) {
+    try {
+        ev.preventDefault();
         if (currentRunner.runnerRuns.length === 0) {
             return;
         }
+        var minDistanceFilter = Number(ev.target.parentElement.parentElement.elements.minDistanceFilter.value);
+        var maxDistanceFilter = Number(ev.target.parentElement.parentElement.elements.maxDistanceFilter.value);
+        var paceFilter = ev.target.parentElement.parentElement.elements.paceFilter.value;
+        var areaFilter = ev.target.parentElement.parentElement.elements.areaFilter.value;
+        var locationFilter = ev.target.parentElement.parentElement.elements.locationFilter.value;
         currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
-        ev.target.reset();
     }
     catch (er) {
         console.error(er);
@@ -391,5 +406,4 @@ var handleDelete = function (ev) {
 };
 currentRunner.personalDetailsToDOM();
 logOut();
-openModal();
 closeModal();

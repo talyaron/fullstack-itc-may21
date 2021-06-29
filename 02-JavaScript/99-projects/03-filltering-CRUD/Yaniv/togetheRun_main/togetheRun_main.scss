@@ -1,7 +1,5 @@
 // summary text glow
 @-webkit-keyframes text-shadow-drop-center{0%{text-shadow:0 0 0 transparent}100%{text-shadow:0 0 180px rgba(255,255,255,1)}}@keyframes text-shadow-drop-center{0%{text-shadow:0 0 0 transparent}100%{text-shadow:0 0 18px rgba(255,255,255,1)}}
-// run boxes shadow
-@-webkit-keyframes shadow-inset-center{0%{-webkit-box-shadow:inset 0 0 0 0 transparent;box-shadow:inset 0 0 0 0 transparent}100%{-webkit-box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5);box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5)}}@keyframes shadow-inset-center{0%{-webkit-box-shadow:inset 0 0 0 0 transparent;box-shadow:inset 0 0 0 0 transparent}100%{-webkit-box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5);box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5)}}
 
 * {
     font-family: 'Raleway', sans-serif;
@@ -22,6 +20,9 @@ button {
     border-radius: 20px;
     padding: 10px;
     border: 0;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
 
     &:hover {
         transition: 150ms;
@@ -33,7 +34,7 @@ button {
     top: 0;
     width: 100%;
     height: 175px;
-    background-image: linear-gradient(to bottom, turquoise, cornflowerblue);
+    background-image: linear-gradient(to bottom, #75E6DA, #189AB4);
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -139,7 +140,7 @@ button {
         background-image: linear-gradient(to bottom, lightgrey, white);
 
         &__item {
-            margin: 10px;
+            margin: 10px 0;
 
             &--heading {
                 font-weight: 900;
@@ -147,30 +148,31 @@ button {
 
             &--add {
                 width: 50%;
-                background-color: aqua;
+                background-color: #60BEEB;
                 font-size: 1.2rem;
                 color: black;
+                margin-right: 5px;
 
                 &:hover {
-                    background-color: turquoise;
+                    background-color: #7EC8E3;
                 }
 
                 &:active {
-                    background-color: teal;
+                    background-color: #000C66;
                     color: white;
                 }
             }
 
             &--history {
-                background-color: blue;
+                background-color: #189AB4;
                 color: white;
 
                 &:hover {
-                    background-color: cornflowerblue;
+                    background-color: #60BEEB;
                 }
 
                 &:active {
-                    background-color: midnightblue;
+                    background-color: #05445E;
                 }
             }
         }
@@ -178,17 +180,20 @@ button {
     }
 
     #filters {
-        padding: 20px;
         margin: 5px;
-        border-radius: 100px;
-        border: 2px solid lightgray;
 
         .filter_form {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
             flex-wrap: wrap;
-
+            padding: 20px;
+            border-radius: 100px;
+            border: 2px solid lightgray;    
+            -moz-box-shadow:    inset 0 0 10px #000000;
+            -webkit-box-shadow: inset 0 0 10px #000000;
+            box-shadow:         inset 0 0 10px #000000;
+         
             &__item {
                 padding: 10px;
             }
@@ -206,22 +211,24 @@ button {
             width: 220px;
             align-items: center;
             border-radius: 20px;
-            border: 2px solid aqua;
-            background-color: rgb(200, 255, 255);
+            border: 2px solid #189AB4;
+            background-color: #D4F1F4;
             padding: 20px;
-            margin: 20px;
+            margin: 15px;
+            text-align: left;
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: repeat(1fr,6);
             grid-template-areas:
                 "edit delete"
-                "status distance"
-                "status time"
-                "matches pace"
-                "matches area"
-                "matches location";
-            -webkit-animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-            animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                "distance status"
+                "time status"
+                "pace matches"
+                "area matches"
+                "location matches";
+            -moz-box-shadow:    inset 0 0 10px #000000;
+            -webkit-box-shadow: inset 0 0 10px #000000;
+            box-shadow:         inset 0 0 10px #000000;
             transition: 0.5s;
 
             &:hover{
@@ -231,7 +238,6 @@ button {
             .run_edit {
                 grid-area: edit;
                 cursor: pointer;
-                width: 50%;
                 color: darkgray;
 
                 &:hover {
@@ -242,7 +248,6 @@ button {
             .run_delete {
                 grid-area: delete;
                 cursor: pointer;
-                width: 50%;
                 justify-self: flex-end;
                 color: salmon;
 
@@ -253,32 +258,39 @@ button {
 
             .match_status {
                 grid-area: status;
+                justify-self: center;
             }
 
             .run_distance {
                 grid-area: distance;
                 font-size: 1.6rem;
                 font-weight: bold;
+                padding: 3px 0;
             }
 
             .run_time {
                 grid-area: time;
+                padding: 3px 0;
             }
 
             .run_pace {
                 grid-area: pace;
+                padding: 3px 0;
             }
 
             .run_area {
                 grid-area: area;
                 font-weight: bold;
-                color: teal;
+                color: #18A558;
+                padding: 3px 0;
             }
 
             .run_location {
                 grid-area: location;
-                font-size: 0.8rem;
-                color: teal;
+                font-size: 0.9rem;
+                font-weight: bold;
+                color: #21B6A8;
+                padding: 3px 0;
             }
 
             .run_matches {
@@ -287,15 +299,15 @@ button {
                 width: 75%;
                 justify-self: center;
                 font-size: 0.65rem;
-                background-color: aqua;
+                background-color: #189AB4;
                 color: black;
 
                 &:hover {
-                    background-color: turquoise;
+                    background-color: #75E6DA;
                 }
 
                 &:active {
-                    background-color: teal;
+                    background-color: #189AB4;
                     color: white;
                 }
             }
@@ -348,7 +360,7 @@ button {
             height: 35px;
             color: black;
             font-weight: bold;
-            background-color: cornflowerblue;
+            background-color: #60BEEB;
             padding: 0 5px;
         }
 
@@ -387,20 +399,23 @@ button {
                         "inpt inpt";
 
                         #submit {
-                            background-color: turquoise;
+                            background-color: #75E6DA;
                             color: black;
                             height: 30px;
                             font-size: 1.2rem;
                             font-weight: bold;
                             border-radius: 20px;
                             border: 0;
+                            -moz-box-shadow:    inset 0 0 10px #000000;
+                            -webkit-box-shadow: inset 0 0 10px #000000;
+                            box-shadow:         inset 0 0 10px #000000;                        
 
                             &:hover {
-                                background-color: rgb(71, 255, 237);
+                                background-color: #60BEEB;
                             }
 
                             &:active {
-                                background-color: rgb(47, 172, 159);
+                                background-color: #189AB4;
                                 color: white;
                             }
                         }
@@ -427,6 +442,6 @@ button {
     margin: 0 5px;
 
     &:hover {
-        color: rgb(17, 95, 91);
+        color: #189AB4;
     }
 }
