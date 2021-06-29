@@ -28,6 +28,7 @@ form{
 }
 input{
     text-align: center;
+    background-color: white;
 
 }
 
@@ -36,8 +37,13 @@ input{
     justify-content: space-around;
 }
 
-
-
+/* to add color to delete and edit btns
+#del{
+    background-color: red;
+}
+.fas{
+    font-size: 18px;
+}*/
 
 
 
