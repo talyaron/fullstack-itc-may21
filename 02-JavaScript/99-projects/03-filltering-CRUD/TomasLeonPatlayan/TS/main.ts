@@ -7,13 +7,19 @@ const show: HTMLElement = document.querySelector(".show");
 
 interface PersonaInterface {
   name: string;
+  imageUrl: string;
+  pokeType:string;
 }
 
 class IdsGenerator {
   name: string;
   ident: string;
-  constructor(name: string) {
+  imageUrl: string;
+  pokeType:string;
+  constructor(name: string, imageUrl: string,pokeType:string) {
     this.name = name;
+    this.imageUrl = imageUrl;
+    this.pokeType =pokeType;
     this.ident = Math.random().toString(16).slice(2);
   }
 }
@@ -27,11 +33,11 @@ class Ids {
   }
   addList(addlist: Array<IdsGenerator | PersonaInterface>) {
     addlist.forEach((element) => {
-      const pers = new IdsGenerator(element.name);
+      const pers = new IdsGenerator(element.name, element.imageUrl, element.pokeType);
       this.id.push(pers);
     });
 
-    this.render()
+    this.render();
   }
 
   deleteItem(ident: string) {
@@ -47,6 +53,8 @@ class Ids {
 
     this.id.forEach((element) => {
       html += `<div class = 'show-id' ><h1 contenteditable="true"> ${element.name}</h1>
+      <img src="${element.imageUrl}" alt="">
+      <p>${element.pokeType}</p>
       <button class = 'delete' onclick='handleDelete("${element.ident}")'>X</button>
      
       </div>`;
@@ -57,14 +65,15 @@ class Ids {
 }
 
 const ids = new Ids();
-ids.addList(peronas)
+ids.addList(peronas);
 const handleSubmit = (event) => {
   event.preventDefault();
 
   const name: string = event.target.elements.name.value;
+  const imageUrl: string = event.target.elements.imageUrl.value;
+  const pokeType:string = event.target.elements.pokeType.value
 
-
-  const generator = new IdsGenerator(name);
+  const generator = new IdsGenerator(name, imageUrl, pokeType);
   console.log(generator);
   ids.add(generator);
   event.target.reset();
