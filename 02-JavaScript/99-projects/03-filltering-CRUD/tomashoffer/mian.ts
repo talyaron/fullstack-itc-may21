@@ -1,3 +1,11 @@
+const select:any = document.querySelector(".select");
+const boton = document.querySelector(".boton_trash");
+const editBtn = document.getElementById('nameInput');
+const modal = document.getElementById('Mymodal')
+// VARIABLE GLOBAL
+let list: Array<Producto> = [];
+let updateID;
+
 interface ProdInterface {
     product: string;
     brand: string;
@@ -5,7 +13,7 @@ interface ProdInterface {
     stock: number;
     description: string;
 }
-let list: Array<Producto> = [];
+
 
 
 class Producto {
@@ -33,7 +41,7 @@ function addObject() {
     })
 }
 addObject();
-const boton = document.querySelector(".boton_trash");
+
 
 
 function remove(id) {
@@ -43,13 +51,12 @@ function remove(id) {
 }
 
 function edit(id){
-    const edit = list.find((prod)=> prod.id === id);
-    console.log(edit);
-    edit.price = 1000;
-    renderData(list);
+    
+    updateID = id;
+
 }
 
-const select:any = document.querySelector(".select");
+
 select.addEventListener('change', function(){
         const selectedValue = Number(select.value);
         console.log(typeof selectedValue);
@@ -97,12 +104,14 @@ function renderData(listado) {
                     <p>${element.description}</p>
                 </div>
                 <div class="container-icons item">
-                <button href="" onclick='remove("${element.id}")'><i class="fas fa-trash icono_productos icono_productos_delete"></i></button>
-                <button href="" onclick='edit("${element.id}")'><i class="fas fa-edit icono_productos icono_productos_edit"></i></button>
+                <button href="#" onclick='remove("${element.id}")'><i class="fas fa-trash icono_productos icono_productos_delete"></i></button>
+                <button href="#" data-toggle="modal" data-target="#myModal" onclick='edit("${element.id}")'><i class="fas fa-edit icono_productos icono_productos_edit"></i></button>
                 </div>`
     });
     container.innerHTML = html;
 }
+
+
 renderData(list);
 
 const handleSubmit = (event) => {
@@ -124,57 +133,29 @@ const handleSubmit = (event) => {
     event.target.reset();
 
 };
-console.log(list);
+
+const handleEdit = (event) => {
+    event.preventDefault();
+
+    const productModal: string = event.target.elements.productoModal.value;
+    const brandModal: string = event.target.elements.brandModal.value;
+    const priceModal: number = event.target.elements.priceModal.valueAsNumber;
+    const stockModal: number = event.target.elements.stockModal.valueAsNumber;
+    const descriptionModal: string = event.target.elements.descriptionModal.value;
+
+    const edit = list.find((prod)=> prod.id === updateID);
+    edit.product = productModal;
+    edit.brand = brandModal;
+    edit.price = priceModal;
+    edit.stock = stockModal;
+    edit.description = descriptionModal;
+    
+
+    console.log(productModal, brandModal, priceModal, stockModal, descriptionModal);
+    console.log(edit);
+    renderData(list);
+}
+console.log(updateID);
 
 
 
-// class ListProducto{
-//     list:Array<Producto> = [];
-
-//     addList(add: Producto){
-//         this.list.push(add)
-//         this.renderData();
-//         localStorage.setItem(`product`, JSON.stringify(list));
-//     }
-//     addObject(prodArray:Array<Producto|ProdInterface>){
-//         prodArray.forEach(prd=>{
-//             const prods = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description);
-//             this.list.push(prods);
-//         })
-//         this.renderData();
-//      }
-//      itemDelete(id:string){
-//         this.list = this.list.filter((prod) => prod.id !== id);
-//         this.renderData();
-//     }S
-//     renderData(){
-//         const container: HTMLElement = document.querySelector(".container_products")
-//         let html: string = "";
-//         this.list.forEach((prod) => {
-
-//            html += ` <div class="container-product item">
-//                         <p>${prod.product}</p>
-//                     </div>
-//                     <div class="container-brand item">
-//                         <p>${prod.brand}</p>
-//                     </div>
-//                     <div class="container-price item">
-//                         <p>${prod.price}</p>
-//                     </div>
-//                     <div class="container-stock item">
-//                         <p>${prod.stock}</p>
-//                     </div>
-//                     <div class="container-description item">
-//                         <p>${prod.description}</p>
-//                     </div>
-//                     <div class="container-icons item">
-//                     <button href=""><i class="fas fa-trash icono_productos icono_productos_delete"></i></button>
-//                     <button href="" onclick="handleDelete('${prod.id}')"><i  class="fas fa-edit icono_productos icono_productos_edit"></i></button>
-//                     </div>`
-
-
-//         });
-//         container.innerHTML = html;
-//     }
-
-// }
