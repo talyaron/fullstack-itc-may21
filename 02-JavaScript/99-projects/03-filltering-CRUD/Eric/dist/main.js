@@ -1,4 +1,5 @@
 var inputNameFilter = document.querySelector("#filtername");
+var product_qty = document.querySelectorAll(".filter-option");
 var Product = /** @class */ (function () {
     function Product(ProductName, Type, Description, Origin, Quantity) {
         this.ProductName = ProductName;
@@ -34,6 +35,16 @@ var Products = /** @class */ (function () {
         var regrExp = "" + inputNameFilter;
         var searchTermReg = new RegExp(regrExp, 'i');
         this.products = this.productsFilter.filter(function (elem) { return searchTermReg.test(elem.ProductName); });
+        this.renderProducts();
+    };
+    //filter qty
+    Products.prototype.filterOption = function (Quantity) {
+        if (Quantity === 7 || Quantity === 3) {
+            this.products = this.productsFilter.filter(function (elem) { return elem.Quantity === Quantity; });
+        }
+        else {
+            this.products = this.productsFilter.filter(function (elem) { return elem.Quantity === 3 || elem.Quantity === 7; });
+        }
         this.renderProducts();
     };
     //eliminar
@@ -89,4 +100,14 @@ var handleEdit = function (ProductId) {
 inputNameFilter.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
     products.searchProduct(inputNameFilter.value);
+}
+function filterOption() {
+    var _loop_1 = function (i) {
+        product_qty[i].addEventListener("click", function () {
+            products.filterOption(product_qty[i].nodeType);
+        });
+    };
+    for (var i = 0; i < product_qty.length; i++) {
+        _loop_1(i);
+    }
 }
