@@ -158,19 +158,17 @@ class LoggedInRunner {
   }
 
   filterRuns(minDistanceFilter: number, maxDistanceFilter: number, paceFilter: string, areaFilter: string, locationFilter: string) {
-    if ((minDistanceFilter === 0) && (maxDistanceFilter === 0) && (paceFilter === "") && (areaFilter === "") && (locationFilter === "")) {return;}
-    
+    let filteredRuns: Array<Run> = null;
     const locationRegEx = locationFilter ? new RegExp(locationFilter,'gmi') : undefined;
-    console.log(locationRegEx);
-    let filteredRuns: Array<Run>;
-     = this.runnerRuns.filter(runItem => {
-      ((minDistanceFilter === 0) || (runItem.runDistance >= minDistanceFilter)) &&
-      ((maxDistanceFilter === 0) || (runItem.runDistance <= maxDistanceFilter)) &&
-      ((paceFilter === "") || (runItem.runPace === paceFilter)) &&
-      ((areaFilter === "") || (runItem.runArea === areaFilter)) &&
-      ((locationFilter === "") || locationRegEx.test(runItem.runLocation))
-      });
-    console.log(filteredRuns);
+    const filterSubmitBtn: HTMLElement = document.querySelector('#filter_submit');
+
+    if (minDistanceFilter !== 0) {filteredRuns = this.runnerRuns.filter(runItem => runItem.runDistance >= minDistanceFilter);}
+    if (maxDistanceFilter !== 0) {filteredRuns = this.runnerRuns.filter(runItem => runItem.runDistance <= maxDistanceFilter);}
+    if (paceFilter !== "") {filteredRuns = this.runnerRuns.filter(runItem => runItem.runPace === paceFilter);}
+    if (areaFilter !== "") {filteredRuns = this.runnerRuns.filter(runItem => runItem.runArea === areaFilter);}
+    if (locationFilter !== "") {filteredRuns = this.runnerRuns.filter(runItem => locationRegEx.test(runItem.runLocation));}
+    if (filteredRuns !== null) {filterSubmitBtn.setAttribute('value','Reset')}
+    else {filterSubmitBtn.setAttribute('value','Filter')}
     this.renderRunsToDOM(filteredRuns)
 
   }

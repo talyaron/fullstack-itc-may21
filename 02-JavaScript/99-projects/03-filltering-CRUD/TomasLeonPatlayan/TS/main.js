@@ -3,8 +3,10 @@
 // const filterOption:HTMLElement = document.querySelector('.filter-todo');
 var show = document.querySelector(".show");
 var IdsGenerator = /** @class */ (function () {
-    function IdsGenerator(name) {
+    function IdsGenerator(name, imageUrl, pokeType) {
         this.name = name;
+        this.imageUrl = imageUrl;
+        this.pokeType = pokeType;
         this.ident = Math.random().toString(16).slice(2);
     }
     return IdsGenerator;
@@ -20,7 +22,7 @@ var Ids = /** @class */ (function () {
     Ids.prototype.addList = function (addlist) {
         var _this = this;
         addlist.forEach(function (element) {
-            var pers = new IdsGenerator(element.name);
+            var pers = new IdsGenerator(element.name, element.imageUrl, element.pokeType);
             _this.id.push(pers);
         });
         this.render();
@@ -34,7 +36,7 @@ var Ids = /** @class */ (function () {
         var html = "";
         console.log(this.id);
         this.id.forEach(function (element) {
-            html += "<div class = 'show-id' ><h1 contenteditable=\"true\"> " + element.name + "</h1>\n      <button class = 'delete' onclick='handleDelete(\"" + element.ident + "\")'>X</button>\n     \n      </div>";
+            html += "<div class = 'show-id' ><h1 contenteditable=\"true\"> " + element.name + "</h1>\n      <img src=\"" + element.imageUrl + "\" alt=\"\">\n      <p>" + element.pokeType + "</p>\n      <button class = 'delete' onclick='handleDelete(\"" + element.ident + "\")'>X</button>\n     \n      </div>";
         });
         show.innerHTML = html;
     };
@@ -45,7 +47,9 @@ ids.addList(peronas);
 var handleSubmit = function (event) {
     event.preventDefault();
     var name = event.target.elements.name.value;
-    var generator = new IdsGenerator(name);
+    var imageUrl = event.target.elements.imageUrl.value;
+    var pokeType = event.target.elements.pokeType.value;
+    var generator = new IdsGenerator(name, imageUrl, pokeType);
     console.log(generator);
     ids.add(generator);
     event.target.reset();

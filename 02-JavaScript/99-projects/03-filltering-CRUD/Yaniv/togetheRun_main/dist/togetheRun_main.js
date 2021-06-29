@@ -132,20 +132,30 @@ var LoggedInRunner = /** @class */ (function () {
         this.refreshDOMSummary(runToDeleteDistance);
     };
     LoggedInRunner.prototype.filterRuns = function (minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter) {
-        if ((minDistanceFilter === 0) && (maxDistanceFilter === 0) && (paceFilter === "") && (areaFilter === "") && (locationFilter === "")) {
-            return;
-        }
+        var filteredRuns = null;
         var locationRegEx = locationFilter ? new RegExp(locationFilter, 'gmi') : undefined;
-        console.log(locationRegEx);
-        var filteredRuns;
-        this.runnerRuns.filter(function (runItem) {
-            ((minDistanceFilter === 0) || (runItem.runDistance >= minDistanceFilter)) &&
-                ((maxDistanceFilter === 0) || (runItem.runDistance <= maxDistanceFilter)) &&
-                ((paceFilter === "") || (runItem.runPace === paceFilter)) &&
-                ((areaFilter === "") || (runItem.runArea === areaFilter)) &&
-                ((locationFilter === "") || locationRegEx.test(runItem.runLocation));
-        });
-        console.log(filteredRuns);
+        var filterSubmitBtn = document.querySelector('#filter_submit');
+        if (minDistanceFilter !== 0) {
+            filteredRuns = this.runnerRuns.filter(function (runItem) { return runItem.runDistance >= minDistanceFilter; });
+        }
+        if (maxDistanceFilter !== 0) {
+            filteredRuns = this.runnerRuns.filter(function (runItem) { return runItem.runDistance <= maxDistanceFilter; });
+        }
+        if (paceFilter !== "") {
+            filteredRuns = this.runnerRuns.filter(function (runItem) { return runItem.runPace === paceFilter; });
+        }
+        if (areaFilter !== "") {
+            filteredRuns = this.runnerRuns.filter(function (runItem) { return runItem.runArea === areaFilter; });
+        }
+        if (locationFilter !== "") {
+            filteredRuns = this.runnerRuns.filter(function (runItem) { return locationRegEx.test(runItem.runLocation); });
+        }
+        if (filteredRuns !== null) {
+            filterSubmitBtn.setAttribute('value', 'Reset');
+        }
+        else {
+            filterSubmitBtn.setAttribute('value', 'Filter');
+        }
         this.renderRunsToDOM(filteredRuns);
     };
     LoggedInRunner.prototype.renderRunsToDOM = function (filteredRunsToRender) {

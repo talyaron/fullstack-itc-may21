@@ -24,6 +24,13 @@
          <input type="text" name="phone" id="phone">
          <label for="firstName">Email</label>
          <input type="email" name="email" id="email">
+         <label>Gender:<span class="container__list"></span>
+            <select id="gender" required>
+                <option value="male" selected="selected">Male</option>
+                <option value="female">Female</option>
+                <option value="unicorn">Unicorn</option>
+                <option value="helicopter">Apache helicopter</option>
+            </select>
          <button type = "submit" id = "submit-btn" class = "input-btns">
             <span>
                 <i class = "fas fa-plus"></i>
@@ -37,9 +44,22 @@
     <label for="">Search Contact by name</label>
     <input type="text" id="search">
 </div>
+
+<div class="gender-field">
+<label><input type="radio" name="gender_filter"   class="gender" 
+        value="male"><span>&#128113;&#127999;</span></label>
+<label><input type="radio" name="gender_filter" class="gender"
+        value="female"><span>&#128105;</span></label>
+</label>
+<label><input type="radio" name="gender_filter" class="gender"
+    value="unicorn"><span>🦄</span></label>
+</label>
+<label><input type="radio" name="gender_filter" class="gender"
+    value="helicopter"><span>🚁</span></label>
+</label>
+</div>
        <div class="display__output" id="root">
             <h2>Available Contacts: </h2>
-         
     </div>
     <script src="dist/index.js"></script>
 </body>

@@ -1,4 +1,5 @@
 var inputNameFilter = document.querySelector("#filtername");
+var product_qty = document.querySelectorAll(".filter-option");
 var Product = /** @class */ (function () {
     function Product(ProductName, Type, Description, Origin, Quantity) {
         this.ProductName = ProductName;
@@ -31,15 +32,28 @@ var Products = /** @class */ (function () {
         });
     };
     Products.prototype.searchProduct = function (inputNameFilter) {
-        var regrExp = "^" + inputNameFilter;
+        var regrExp = "" + inputNameFilter;
         var searchTermReg = new RegExp(regrExp, 'i');
-        this.products = this.products.filter(function (elem) { return searchTermReg.test(elem.ProductName); });
+        this.products = this.productsFilter.filter(function (elem) { return searchTermReg.test(elem.ProductName); });
+        this.renderProducts();
+    };
+    //filter qty
+    Products.prototype.filterOption = function (Quantity) {
+        if (Quantity === 7 || Quantity === 3) {
+            this.products = this.productsFilter.filter(function (elem) { return elem.Quantity === Quantity; });
+        }
+        else {
+            this.products = this.productsFilter.filter(function (elem) { return elem.Quantity === 3 || elem.Quantity === 7; });
+        }
         this.renderProducts();
     };
     //eliminar
     Products.prototype.removeProduct = function (ProductId) {
         this.products = this.products.filter(function (prod) { return prod.ProductId !== ProductId; });
         this.renderProducts();
+    };
+    //editar
+    Products.prototype.editProduct = function (ProductId) {
     };
     //  Update id
     //  updateProduct(ProductId: string) {}
@@ -78,8 +92,22 @@ var handleDelete = function (ProductId) {
     products.removeProduct(ProductId);
     console.log(products);
 };
+//edit products
+var handleEdit = function (ProductId) {
+    products.editProduct(ProductId);
+};
 //search products
 inputNameFilter.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
     products.searchProduct(inputNameFilter.value);
+}
+function filterOption() {
+    var _loop_1 = function (i) {
+        product_qty[i].addEventListener("click", function () {
+            products.filterOption(product_qty[i].nodeType);
+        });
+    };
+    for (var i = 0; i < product_qty.length; i++) {
+        _loop_1(i);
+    }
 }

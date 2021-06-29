@@ -17,6 +17,9 @@ var Cars = /** @class */ (function () {
     }
     Cars.prototype.add = function (car) {
         this.cars.push(car);
+        addNewOrigin();
+        addNewCylinders();
+        console.log(cars);
         localStorage.setItem("cars", JSON.stringify(cars));
     };
     ;
@@ -32,6 +35,17 @@ var Cars = /** @class */ (function () {
         this.cars = carIndex;
         this.renderCars();
     };
+    Cars.prototype.filterByOrigin = function (value) {
+        var carFilteredByOrgin = this.cars.filter(function (c) { return c.Origin === value; });
+        this.cars = carFilteredByOrgin;
+        this.renderCars();
+    };
+    Cars.prototype.filterByCylinders = function (value) {
+        var carFilteredByCylinders = this.cars.filter(function (c) { return c.Cylinders === value; });
+        this.cars = carFilteredByCylinders;
+        console.log("in filter " + value);
+        this.renderCars();
+    };
     Cars.prototype.updateCar = function (name) {
         var carToUpdate = this.cars.find(function (car) { return car.Name === name; });
         carToUpdate.Horsepower = 500;
@@ -39,24 +53,43 @@ var Cars = /** @class */ (function () {
         this.renderCars();
     };
     Cars.prototype.getCarsFromStorage = function () {
-        JSON.parse(localStorage.getItem("cars"));
+        var tempCars = JSON.parse(localStorage.getItem("cars"));
+        console.log(tempCars);
+        this.cars.unshift(tempCars);
     };
     ;
     Cars.prototype.renderCars = function () {
         var table = document.querySelector(".table");
         var html = "";
         this.cars.forEach(function (car) {
-            html = "<tbody>\n       <tr>\n        <td>" + car.Name + "</td>\n        <td>" + car.Miles_per_Gallon + "</td> \n        <td>" + car.Cylinders + "</td> \n        <td>" + car.Horsepower + "</td> \n        <td>" + car.Weight_in_lbs + "</td> \n        <td>" + car.Year + "</td> \n        <td>" + car.Origin + "</td>\n        <td> <i onclick='handleDelete(\"" + car.carId + "\")' class=\"fas fa-trash\"></i></td>\n      </tr>";
-            table.insertAdjacentHTML("afterbegin", html);
+            html += "<tbody>\n       <tr>\n        <td>" + car.Name + "</td>\n        <td>" + car.Miles_per_Gallon + "</td> \n        <td>" + car.Cylinders + "</td> \n        <td>" + car.Horsepower + "<button onclick='handleEdit(\"" + car.Name + "\")' >Make Me 500!</button></td> \n        <td>" + car.Weight_in_lbs + "</td> \n        <td>" + car.Year + "</td> \n        <td>" + car.Origin + "</td>\n        <td> <i onclick='handleDelete(\"" + car.carId + "\")' class=\"fas fa-trash\"></i></td>\n      </tr>";
+            table.innerHTML = html;
+            // table.insertAdjacentHTML(`afterbegin`, html)
         });
     };
     ;
     return Cars;
 }());
 var cars = new Cars();
+cars.getCarsFromStorage();
 cars.addCars(carsData);
 cars.renderCars();
-cars.updateCar("ford ranger");
+var handleEdit = function (carName) {
+    console.log(carName);
+    cars.updateCar(carName);
+};
+var handleDelete = function (carId) {
+    console.log(carId);
+    cars.removeCar(carId);
+};
+function handleSelect() {
+    var originValue = document.querySelector("table #origin").value;
+    cars.filterByOrigin(originValue);
+}
+function handleSelectCylinders() {
+    var cylindersValue = document.querySelector("table #cylinders").value;
+    cars.filterByCylinders(parseInt(cylindersValue));
+}
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var Name = ev.target.elements.Name.value;
@@ -69,19 +102,5 @@ var handleSubmit = function (ev) {
     var car = new Car(Name, Miles_per_Gallon, Cylinders, Horsepower, Weight_in_lbs, Year, Origin);
     cars.add(car);
     cars.renderCars();
-    console.log(cars);
     ev.target.reset();
 };
-var handleDelete = function (carId) {
-    console.log(carId);
-    cars.removeCar(carId);
-};
-var select = document.querySelector("#origin");
-var origin = [];
-cars.cars.forEach(function (c) { return origin.push(c.Origin); });
-var mySet = new Set(origin);
-console.log(mySet);
-mySet.forEach(function (o) {
-    var option = "<option value=\"" + o + "\">" + o + "</option>";
-    select.insertAdjacentHTML("afterbegin", option);
-});

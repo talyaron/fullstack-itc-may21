@@ -21,18 +21,19 @@
             <label for="">Search products</label>
             <input type="text" id="filtername" name="filtername">
         </div>
+        <br><br><br>
         <div>
             <label for="">Filter by quantity lower than 10</label>
-            <select name="qty" id="qty">
+            <select name="qty" id="qty" class="filter-option">
                 <option disabled selected>Qty</option>
                 <option class="" value="">0</option>
                 <option class="" value="">1</option>
                 <option class="" value="">2</option>
-                <option class="" value="">3</option>
+                <option class="filter-option" value="">3</option>
                 <option class="" value="">4</option>
                 <option class="" value="">5</option>
                 <option class="" value="">6</option>
-                <option class="" value="">7</option>
+                <option class="filter-option" value="">7</option>
                 <option class="" value="">8</option>
                 <option class="" value="">9</option>
                 <option class="" value="">10</option>
@@ -60,9 +61,12 @@
             <br>
             <label for="quantity">Quantity</label>
             <br>
-            <input type="number" id="quantity" name="quantity" class="product-quantity" max="10" placeholder="add quantity">
+            <input type="number" id="quantity" value="quantity" name="quantity" class="product-quantity" max="10" placeholder="add quantity">
             <br><br>
             <input type="submit" value="Add" class="btn-product">
+            <form onsubmit="handleSubmit(ev)">
+            <input type="submit" value="Edit" class="btn-productEdit">
+        </form>
         </fieldset>
         </form>
         <br>

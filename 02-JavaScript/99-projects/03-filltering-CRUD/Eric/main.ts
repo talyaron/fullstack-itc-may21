@@ -1,4 +1,7 @@
 const inputNameFilter = (<HTMLInputElement>document.querySelector("#filtername"))
+const product_qty = <NodeList>document.querySelectorAll(".filter-option");
+
+
 
 interface ProductsInterface {
     ProductName: string;
@@ -48,10 +51,23 @@ class Products {
 
     searchProduct(inputNameFilter:string){
         
-        const regrExp: string = `^${inputNameFilter}`;
+        const regrExp: string = `${inputNameFilter}`;
         const searchTermReg: RegExp = new RegExp(regrExp, 'i');
-        this.products = this.products.filter(elem => searchTermReg.test(elem.ProductName))
+        this.products = this.productsFilter.filter(elem => searchTermReg.test(elem.ProductName))
         this.renderProducts();
+    }
+
+    //filter qty
+    filterOption(Quantity: number) {
+
+        if (Quantity === 7 || Quantity === 3) {
+            this.products = this.productsFilter.filter(elem => elem.Quantity === Quantity)
+
+        } else {
+            this.products = this.productsFilter.filter(elem => elem.Quantity === 3 || elem.Quantity === 7)
+        }
+
+        this.renderProducts()
     }
    
 //eliminar
@@ -59,7 +75,11 @@ class Products {
         this.products = this.products.filter((prod) => prod.ProductId !== ProductId);
         this.renderProducts();
     }
-    
+
+    //editar
+    editProduct(ProductId: string){
+
+    }
  
 
     //  Update id
@@ -91,7 +111,7 @@ class Products {
     
 }
 const products = new Products();
-products.addProducts(productsData)
+products.addProducts(productsData);
 products.renderProducts();
 
 
@@ -113,10 +133,22 @@ const handleDelete = (ProductId:string):void =>{
     products.removeProduct(ProductId);
     console.log(products);
 };
+//edit products
+const handleEdit = (ProductId:string):void =>{
+    products.editProduct(ProductId);
+};
 //search products
 inputNameFilter.addEventListener('keyup', handleKeyUp)
 
 function handleKeyUp() {
     products.searchProduct(inputNameFilter.value)
        
+}
+
+function filterOption() {
+    for (let i = 0; i < product_qty.length; i++) {
+        product_qty[i].addEventListener("click", function () {
+            products.filterOption(product_qty[i].nodeType);
+        });
+    }
 }
