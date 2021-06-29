@@ -59,12 +59,12 @@ var List = /** @class */ (function () {
     };
     List.prototype.filterByGender = function (gender) {
         if (gender === "female" || gender === "male" || gender === "unicorn" || gender === "helicopter") {
-            this.filteredArray = this.contactList.filter(function (elem) { return elem.gender === gender; });
+            this.contactList = this.filteredArray.filter(function (elem) { return elem.gender === gender; });
         }
         else {
-            this.filteredArray = this.contactList.filter(function (elem) { return elem.gender === 'male' || elem.gender === 'female' || gender === "unicorn" || gender === "helicopter"; });
+            this.contactList = this.filteredArray.filter(function (elem) { return elem.gender === 'male' || elem.gender === 'female' || gender === "unicorn" || gender === "helicopter"; });
         }
-        this.renderList(this.filteredArray);
+        this.renderList(this.contactList);
     };
     return List;
 }());

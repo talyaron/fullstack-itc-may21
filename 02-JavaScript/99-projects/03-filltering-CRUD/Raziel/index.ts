@@ -104,15 +104,16 @@ class List{
     filterByGender(gender:string){
   
         if (gender === "female" || gender === "male" || gender==="unicorn" || gender==="helicopter") {
-            this.filteredArray= this.contactList.filter(elem => elem.gender === gender)
+            this.contactList=  this.filteredArray.filter(elem => elem.gender === gender)
+       
+         } else {
+            this.contactList=  this.filteredArray.filter(elem => elem.gender === 'male' || elem.gender === 'female'|| gender==="unicorn" || gender==="helicopter")
+         }
 
-        } else {
-            this.filteredArray= this.contactList.filter(elem => elem.gender === 'male' || elem.gender === 'female'|| gender==="unicorn" || gender==="helicopter")
-        }
-
-        this. renderList(this.filteredArray)
+        this. renderList(this.contactList)
 
     }
+
 
 }
 
@@ -139,7 +140,7 @@ const handelForm = (ev) => {
         throw new Error('Wrong phone number');
       }
     const  contact= new Contact(name,fname,phone,email,gender);
-
+   
     lists.addToList(contact);
     lists.renderList(null)
     console.log(lists);
