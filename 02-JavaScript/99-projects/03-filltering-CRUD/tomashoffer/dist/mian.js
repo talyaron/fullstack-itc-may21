@@ -51,6 +51,9 @@ select.addEventListener('change', function () {
         arr2 = priceFilter1;
         renderData(arr2);
     }
+    else if (selectedValue === 0) {
+        renderData(list);
+    }
     else {
         var priceFilter2 = arr3.filter(function (prod) { return prod.price >= selectedValue; });
         arr3 = priceFilter2;
