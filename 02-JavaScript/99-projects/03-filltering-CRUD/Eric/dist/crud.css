@@ -4,7 +4,6 @@
 }
 
 .container {
-  border: 2px solid red;
   font-size: 15px;
   font-weight: bold;
   text-align: center;
@@ -13,8 +12,9 @@
 
 .table-product {
   width: 100%;
-  border: 2px solid red;
   text-align: center;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
 legend {
@@ -29,6 +29,7 @@ form {
 
 input {
   text-align: center;
+  background-color: white;
 }
 
 .head {
@@ -36,54 +37,84 @@ input {
   justify-content: space-around;
 }
 
-/*body {
-    animation: body 5s linear infinite alternate both;
+.btn-productEdit {
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.btn-product {
+  background-color: green;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.btn-product:hover {
+  opacity: 0.6;
+}
+
+.btn-productEdit:hover {
+  opacity: 0.6;
+}
+
+fieldset {
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+/* to add color to delete and edit btns
+#del{
+    background-color: red;
+}
+.fas{
+    font-size: 18px;
+}*/
+body {
+  animation: body 5s linear infinite alternate both;
 }
 
 @keyframes body {
-    0% {
-        background: #5b84f5;
-    }
-
-    100% {
-        background: #fafafc;
-    }
+  0% {
+    background: #5b84f5;
+  }
+  100% {
+    background: #fafafc;
+  }
 }
-
-
 .Add {
-    -webkit-animation: Add 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: Add 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  -webkit-animation: Add 3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: Add 3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 @-webkit-keyframes Add {
-    0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-    }
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
 }
-
 @keyframes Add {
-    0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-    }
-}*/
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+}
