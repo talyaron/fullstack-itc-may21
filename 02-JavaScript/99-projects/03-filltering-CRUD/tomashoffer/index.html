@@ -81,10 +81,10 @@
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1>Edit Product</h1>
+                            <h1 style="text-align: center;">Edit Product</h1>
                         </div>
                         <div class="modal-body">
-                            <form action="" onsubmit="handleEdit(event)">
+                            <form class="form_modal" action="" onsubmit="handleEdit(event)">
                                 <label class="formulario_item--modal" for="product-modal">Product</label>
                                 <input class="formulario_item--modal" type="text" name="productoModal" />
                                 <label class="formulario_item--modal" for="brand-modal">Brand</label>
@@ -95,7 +95,7 @@
                                 <input class="formulario_item--modal" type="number" name="stockModal" />
                                 <label class="formulario_item--modal" for="description-modal">Description</label>
                                 <input class="formulario_item--modal" type="text" name="descriptionModal" />
-                                <input type="submit">Send</input>
+                                <input class="btn btn-primary" style="margin-top: 5px; font-size: 1.2rem;" type="submit" value="Send"></input>
                             </form>
                         </div>
                         <div class="modal-footer">
