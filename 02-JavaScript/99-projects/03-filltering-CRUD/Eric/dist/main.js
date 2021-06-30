@@ -1,11 +1,14 @@
-var inputNameFilter = document.querySelector("#filtername");
+var botonAdd = document.querySelector(".btn-product");
+var table = document.querySelector(".product-list");
+//search-regrex
+var inputFilter = document.querySelector("#filterN");
+//data-edit
 var product_qty = document.querySelectorAll(".filter-option");
 var ProductN = document.querySelector(".product-name");
 var Type = document.querySelector(".product-type");
 var Description = document.querySelector(".product-description");
 var Origin = document.querySelector(".product-origin");
 var Quantity = document.querySelector(".product-quantity");
-var btnAdd = document.querySelector(".btn-product");
 var Product = /** @class */ (function () {
     function Product(ProductName, Type, Description, Origin, Quantity) {
         this.ProductName = ProductName;
@@ -37,8 +40,9 @@ var Products = /** @class */ (function () {
             _this.productsFilter.push(newProduct);
         });
     };
-    Products.prototype.searchProduct = function (inputNameFilter) {
-        var regrExp = "" + inputNameFilter;
+    //search
+    Products.prototype.searchProduct = function (inputFilter) {
+        var regrExp = "" + inputFilter;
         var searchTermReg = new RegExp(regrExp, 'i');
         this.products = this.productsFilter.filter(function (elem) { return searchTermReg.test(elem.ProductName); });
         this.renderProducts();
@@ -62,25 +66,36 @@ var Products = /** @class */ (function () {
         return ProductId;
     };
     Products.prototype.editProduct = function (product, productId) {
-        this.products.forEach(function (element) {
-            if (element.ProductId === productId) {
-                element.ProductName = ProductN.value;
-                element.Type = Type.value;
-                element.Description = Description.value;
-                element.Origin = Origin.value;
-                element.Quantity = Number(Quantity.value);
-            }
-        });
+        try {
+            this.products.forEach(function (element) {
+                if (element.ProductId === productId) {
+                    if (ProductN.value === "" || Type.value === "" || Description.value === "" || Origin.value === "" || parseInt(Quantity.value) === NaN)
+                        throw new Error("Check all the inputs before continue");
+                    element.ProductName = ProductN.value;
+                    element.Type = Type.value;
+                    element.Description = Description.value;
+                    element.Origin = Origin.value;
+                    element.Quantity = Number(Quantity.value);
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+        }
     };
-    //  Update id
-    //  updateProduct(ProductId: string) {}
     Products.prototype.renderProducts = function () {
-        var table = document.querySelector(".product-list");
         var html = "";
-        this.products.forEach(function (product) {
-            html += "<tbody>\n       <tr>\n        <td>" + product.ProductName + "</td>\n        <td>" + product.Type + "</td> \n        <td>" + product.Description + "</td> \n        <td>" + product.Origin + "</td> \n        <td>" + product.Quantity + "</td> \n        <td> <i onclick='handleGet(\"" + product.ProductId + "\")' class=\"fas fa-pencil-alt\"></i></td>\n        <td> <i onclick='handleDelete(\"" + product.ProductId + "\")'id=\"del\" class=\"fas fa-trash\"></i></td>\n        </tr>";
-        });
-        table.innerHTML = html;
+        try {
+            this.products.forEach(function (product) {
+                if (!table)
+                    throw new Error("Imposible render");
+                html += "<tbody>\n       <tr>\n        <td>" + product.ProductName + "</td>\n        <td>" + product.Type + "</td> \n        <td>" + product.Description + "</td> \n        <td>" + product.Origin + "</td> \n        <td>" + product.Quantity + "</td> \n        <td> <i onclick='handleGet(\"" + product.ProductId + "\")' class=\"fas fa-pencil-alt\"></i></td>\n        <td> <i onclick='handleDelete(\"" + product.ProductId + "\")'id=\"del\" class=\"fas fa-trash\"></i></td>\n        </tr>";
+            });
+            table.innerHTML = html;
+        }
+        catch (error) {
+            console.log(error);
+        }
     };
     ;
     Products.prototype.getProductsFromStorage = function () {
@@ -115,8 +130,8 @@ var handleEdit = function (ev) {
     var product = new Product(p, t, d, o, q);
     products.editProduct(product, productId);
     products.renderProducts();
-    btnAdd.disabled = false;
-    console.log(btnAdd);
+    botonAdd.disabled = false;
+    console.log(botonAdd);
     ev.target.reset();
 };
 //delete products
@@ -127,11 +142,16 @@ var handleDelete = function (ProductId) {
 //edit products
 var handleGet = function (ProductId) {
     productId = products.getProduct(ProductId);
-    btnAdd.disabled = true;
-    console.log(btnAdd);
+    botonAdd.disabled = true;
+    console.log(botonAdd);
 };
 //search products
-inputNameFilter.addEventListener('keyup', handleKeyUp);
+inputFilter.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
-    products.searchProduct(inputNameFilter.value);
+    try {
+        products.searchProduct(inputFilter.value);
+    }
+    catch (e) {
+        console.log(e);
+    }
 }

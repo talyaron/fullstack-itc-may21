@@ -1,11 +1,16 @@
-const inputNameFilter = (<HTMLInputElement>document.querySelector("#filtername"))
+const botonAdd = (<HTMLButtonElement>document.querySelector(".btn-product"))
+const table: HTMLElement = document.querySelector(".product-list")
+
+//search-regrex
+const inputFilter = (<HTMLInputElement>document.querySelector("#filterN"))
+
+//data-edit
 const product_qty = <NodeList>document.querySelectorAll(".filter-option");
 const ProductN = (<HTMLInputElement>document.querySelector(".product-name"))
 const Type = (<HTMLInputElement>document.querySelector(".product-type"))
 const Description = (<HTMLInputElement>document.querySelector(".product-description"))
 const Origin = (<HTMLInputElement>document.querySelector(".product-origin"))
 const Quantity = (<HTMLInputElement>document.querySelector(".product-quantity"))
-const btnAdd = (<HTMLButtonElement>document.querySelector(".btn-product"))
 
 
 interface ProductsInterface {
@@ -37,7 +42,7 @@ class Product {
 
 class Products {
     products: Array<Product> = [];
-   productsFilter: Array<Product> = [];
+    productsFilter: Array<Product> = [];
 
     add(product: Product) {
         this.products.push(product)
@@ -53,16 +58,14 @@ class Products {
         })
     }
 
-
-    searchProduct(inputNameFilter:string){
+//search
+    searchProduct(inputFilter:string){
         
-        const regrExp: string = `${inputNameFilter}`;
+        const regrExp: string = `${inputFilter}`;
         const searchTermReg: RegExp = new RegExp(regrExp, 'i');
         this.products = this.productsFilter.filter(elem => searchTermReg.test(elem.ProductName))
         this.renderProducts();
     }
-
-   
    
 //eliminar
     removeProduct(ProductId: string) {
@@ -70,7 +73,7 @@ class Products {
         this.renderProducts();
     }
 
-    //editar
+//editar
     getProduct(ProductId: string):string{
         this.products.forEach(element => {
             if(element.ProductId === ProductId){
@@ -84,28 +87,32 @@ class Products {
         });
         return ProductId
     }
+
     editProduct(product: Product, productId){
+
+        try {
+
         this.products.forEach(element => {
             if(element.ProductId === productId){
+                if (ProductN.value === "" || Type.value === "" || Description.value === "" || Origin.value === "" || parseInt(Quantity.value) === NaN) throw new Error("Check all the inputs before continue");
                 element.ProductName=ProductN.value;
                 element.Type=Type.value;
                 element.Description=Description.value;
                 element.Origin=Origin.value;
-                element.Quantity=Number(Quantity.value);
-                               
+                element.Quantity=Number(Quantity.value);                
             }
 
         });
+    } catch (e) {
+        console.log(e)
+    }
     }
 
-    //  Update id
-    //  updateProduct(ProductId: string) {}
-    
     renderProducts() {
-        const table: HTMLElement = document.querySelector(".product-list")
         let html: string = "";
+        try {
         this.products.forEach((product) => {
-            
+          if (!table) throw new Error("Imposible render");
            html += `<tbody>
        <tr>
         <td>${product.ProductName}</td>
@@ -117,19 +124,21 @@ class Products {
         <td> <i onclick='handleDelete("${product.ProductId}")'id="del" class="fas fa-trash"></i></td>
         </tr>`;
         });
+    
         table.innerHTML = html;
+    } catch (error) {
+        console.log(error)
+    }
     };
-
 
     getProductsFromStorage() {
         JSON.parse(localStorage.getItem(`products`))
     }; 
-    
 }
+
 const products = new Products();
 products.addProducts(productsData);
 products.renderProducts();
-
 let productId:string;
 
 
@@ -144,7 +153,6 @@ const handleSubmit = (ev: any): void => {
     products.add(product);
     products.renderProducts()
     ev.target.reset()
-
 }
 
 const handleEdit = (ev: any): void => {
@@ -157,11 +165,9 @@ const handleEdit = (ev: any): void => {
     const product = new Product(p, t, d, o, q)
     products.editProduct(product,productId)
     products.renderProducts()
-    btnAdd.disabled=false
-    console.log(btnAdd)
+    botonAdd.disabled=false
+    console.log(botonAdd)
     ev.target.reset()
-    
-
 }
 
 //delete products
@@ -172,14 +178,17 @@ const handleDelete = (ProductId:string):void =>{
 //edit products
 const handleGet = (ProductId:string):void =>{
     productId = products.getProduct(ProductId);
-    btnAdd.disabled=true
-    console.log(btnAdd)
+    botonAdd.disabled=true
+    console.log(botonAdd)
 };
 //search products
-inputNameFilter.addEventListener('keyup', handleKeyUp)
+inputFilter.addEventListener('keyup', handleKeyUp)
 
 function handleKeyUp() {
-    products.searchProduct(inputNameFilter.value)
-       
+    try {
+    products.searchProduct(inputFilter.value)
+} catch (e) {
+    console.log(e)
+}   
 }
 
