@@ -147,6 +147,7 @@ function saveEdits(productId, productID2) {
     var editElem = document.querySelectorAll(".edit");
     nameUpdate.length = editElem.length;
     nameUpdate[index] = editElem[index].innerHTML;
+    products.products[index].description = nameUpdate[index];
     localStorage.userEdits = JSON.stringify(nameUpdate);
     var update = document.getElementById("" + productID2);
     update.innerHTML = "Edits saved!";
