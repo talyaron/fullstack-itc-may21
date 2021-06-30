@@ -162,8 +162,9 @@ class DataList {
 
         try {
             if (!boardDataRoot) throw new Error("This page cant render");
-
+         
             this.datalist.forEach(item => {
+                let num: number = Number(`${item.salary}`);
                 if (item.gender === 'male') {
                     html += `<div class = "container__boardData--item container__boardData--blue">
                   <span> 👱</span>`
@@ -171,20 +172,42 @@ class DataList {
                     html += `<div class = "container__boardData--item container__boardData--pink">
                             <span> 👸</span>`
                 }
-                html += ` <p><span>Name:</span> ${item.name} </p> 
-                        <p><span>City:</span> ${item.city} </p>
-                        <p><span>Gender:</span> ${item.gender.charAt(0).toUpperCase() + item.gender.slice(1)}</p> 
-                         <p><span>Tel:</span> ${item.tel} </p> 
-                        <p> <span>Status:</span> ${item.status.charAt(0).toUpperCase() + item.status.slice(1)} </p> 
-                        <p><span>Salary:</span> ₪ ${item.salary} </p>
-                        <label>Edit Item: 
-                            <input type="radio" name="edit" value="radiobox${count}" onclick='handleEdit()' class="container__boardData--checks" checked 
-                             >
+                html += `
+                        <table id="data">
+                            <tr>
+                               <th>Name: </th>
+                               <td>${item.name} </td>
+                            </tr>
+                            <tr>   
+                               <th>City: </th>
+                               <td>${item.city} </td>
+                            </tr>
+                            <tr>
+                               <th>Gender: </th>
+                               <td>${item.gender.charAt(0).toUpperCase() + item.gender.slice(1)} </td>
+                             </tr>
+                             <tr>  
+                               <th>Tel</th>
+                               <td>${item.tel} </td>
+                             </tr>
+                             <tr>
+                               <th>Status</th>
+                               <td>${item.status.charAt(0).toUpperCase() + item.status.slice(1)} </td>
+                             </tr>
+                             <tr>  
+                               <th>Salary</th>
+                               <td>₪ ${num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.').split('').reverse().join('').replace(/^[\.]/,'')}<td>
+                            </tr>
+                        </table>    
+                    <div>
+                        <label>
+                            <input type="radio" name="edit" value="radiobox${count}" onclick='handleEdit()' class="container__boardData--checks" checked>
                             <i class="fas fa-edit container__boardData--yellow-color" title="Click on the edit item and then edit"></i>
                         </label>
-                            <label>Delete Item: 
+                            <label> 
                             <i class="fa fa-trash container__boardData--red-color" onclick='handleDelete("${item.id}")' title="Delete Item"></i>
                         </label>  
+                     </div>   
                     </div>`
                 count++;
             });
@@ -196,6 +219,7 @@ class DataList {
         }
     }
 }
+
 
 //Existing Data before the user can add, remove or edit
 interface personalData {

@@ -32,7 +32,9 @@ header img {
 .container__list--red-color {
   color: #c00;
 }
-.container__list input, .container__list select, .container__list option {
+.container__list input,
+.container__list select,
+.container__list option {
   color: black;
 }
 .container__actions {
@@ -77,7 +79,7 @@ header img {
   text-align: center;
 }
 .container__actions__addedit--btn {
-  margin: 10px auto;
+  margin: 10px 5px;
   padding: 0.6rem 1rem;
   border-radius: 4px;
   font-size: 1rem;
@@ -95,8 +97,8 @@ header img {
   color: black;
 }
 .container__actions__addedit--reset {
-  background-color: lightgray;
-  border: 1px solid gray;
+  background-color: gray;
+  border: 1px solid lightgray;
 }
 .container__actions__addedit--edit:disabled {
   border: 1px solid #fed821;
@@ -117,7 +119,7 @@ header img {
   color: black;
 }
 .container__actions__addedit--reset:hover {
-  background-color: gray;
+  background-color: lightgray;
   color: black;
 }
 .container__boardData {
@@ -130,8 +132,17 @@ header img {
   top: -2rem;
   left: 4rem;
 }
+.container__boardData th {
+  text-align: left;
+}
+.container__boardData td {
+  text-align: center;
+}
 .container__boardData--checks {
   opacity: 0;
+}
+.container__boardData span {
+  margin-top: 0.4rem;
 }
 .container__boardData-checks + i {
   cursor: pointer;
@@ -162,7 +173,165 @@ header img {
 }
 .container__boardData--red-color {
   color: #c00;
+  position: relative;
+  left: -20%;
+  margin: 0.5rem 0;
 }
 .container__boardData--yellow-color {
   color: #b79801;
+  position: relative;
+  left: -20%;
+  margin: 0.5rem 0;
+}
+
+@media only screen and (max-width: 800px) {
+  .container form {
+    position: relative;
+    left: -1%;
+  }
+  .container__actions {
+    width: 90%;
+  }
+  .container__actions__filtergender {
+    position: relative;
+    left: -7%;
+  }
+  .container__boardData {
+    position: relative;
+    left: 7%;
+  }
+  .container__boardData--item {
+    width: 40%;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .container form {
+    position: relative;
+    left: -1%;
+  }
+  .container__actions {
+    width: 90%;
+  }
+  .container__actions__filtergender {
+    margin: 1rem auto;
+    padding: auto;
+    width: 50%;
+  }
+  .container__actions__filtergender span {
+    position: relative;
+    left: 17%;
+  }
+  .container__actions__addedit {
+    display: block;
+    margin: 0 auto;
+  }
+  .container__actions__addedit--btn {
+    position: relative;
+    left: 5px;
+  }
+  .container__boardData {
+    position: relative;
+    left: 7%;
+  }
+  .container__boardData--item {
+    width: 40%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .container form {
+    position: relative;
+    left: -20%;
+  }
+  .container__actions {
+    margin: 2rem auto;
+    display: block;
+    width: 90%;
+  }
+  .container__actions fieldset {
+    display: block;
+  }
+  .container__actions label {
+    position: relative;
+    left: 5%;
+  }
+  .container__actions__filtergender {
+    position: relative;
+    left: 5%;
+    margin: 1rem auto;
+  }
+  .container__actions__filtergender span {
+    position: relative;
+    left: 0%;
+  }
+  .container__actions__addedit {
+    margin: 0 auto;
+  }
+  .container__actions__addedit--btn {
+    position: relative;
+    left: 5px;
+  }
+  .container__list {
+    display: grid;
+    position: relative;
+    left: 25%;
+  }
+  .container__list legend {
+    text-align: center;
+    position: relative;
+    left: -36%;
+  }
+  .container__list input, .container__list label {
+    margin-bottom: 0.3rem;
+  }
+  .container__boardData--item {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 300px) {
+  .container form {
+    position: relative;
+    left: -20%;
+  }
+  .container__actions {
+    margin: 2rem auto;
+    display: block;
+    width: 90%;
+  }
+  .container__actions fieldset {
+    display: block;
+  }
+  .container__actions label {
+    position: relative;
+    left: 15%;
+  }
+  .container__actions__filtergender {
+    position: relative;
+    left: -3%;
+    width: 100%;
+  }
+  .container__actions__filtergender span {
+    position: relative;
+    left: 8%;
+  }
+  .container__actions__addedit {
+    margin: 0 auto;
+  }
+  .container__actions__addedit--btn {
+    position: relative;
+    left: 5px;
+  }
+  .container__list {
+    display: grid;
+  }
+  .container__list legend {
+    text-align: center;
+    position: relative;
+    left: -32%;
+  }
+  .container__list input, .container__list label {
+    margin-bottom: 0.3rem;
+  }
+  .container__boardData--item {
+    width: 100%;
+  }
 }
