@@ -3,11 +3,12 @@
 
 //  const filterOption:HTMLElement = document.querySelector('.filter-todo');
 let updateElement;
+let filterSearch;
 const show: HTMLElement = document.querySelector(".show");
 
 const select: any = document.querySelector(".filter-todo");
 
-// const search = document.getElementById('search');
+ const search = document.getElementById('search');
 
 // const inputName = <HTMLInputElement>document.getElementById("name");
 // const inputImageUrl = <HTMLInputElement>document.getElementById("imageUrl");
@@ -83,20 +84,20 @@ class Ids {
   }
 
   searchItem(event){
-    const name: string = event.target.elements.name.value;
-    const searchTermReg: RegExp = new RegExp(name, 'i'); 
-const search = this.id.filter((elements) =>{
-  searchTermReg.test(elements.name)
+   filterSearch = event.target.value;
 
-});
+  this.searchRegs(filterSearch);
+this.render()
+console.log(filterSearch);
 
+ }
 
+ searchRegs(inputSearch:string){
+  const regExp: string = `^${inputSearch}`
+  const searchTermReg: RegExp = new RegExp(regExp, 'i');
+this.id = this.id.filter((element) =>searchTermReg.test( element.name));
 
-
-console.log(search);
-
-
-
+  // this.render()
  }
 
   fiterItem() {
@@ -190,7 +191,7 @@ const handleEdit = (event) => {
 
 };
 
-const searchBar = (name:string) =>{
-ids.searchItem(name)
-  
+const searchBar = (event)=> {
+  ids.searchItem(event)
 }
+

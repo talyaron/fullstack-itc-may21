@@ -2,8 +2,10 @@
 //PONER BIEN LOS NOMBRES LUEGO DE PASAR LA SECION DE PPRUEBA
 //  const filterOption:HTMLElement = document.querySelector('.filter-todo');
 var updateElement;
+var filterSearch;
 var show = document.querySelector(".show");
 var select = document.querySelector(".filter-todo");
+var search = document.getElementById('search');
 var IdsGenerator = /** @class */ (function () {
     function IdsGenerator(name, imageUrl, pokeType) {
         this.name = name;
@@ -49,12 +51,16 @@ var Ids = /** @class */ (function () {
         this.render();
     };
     Ids.prototype.searchItem = function (event) {
-        var name = event.target.elements.name.value;
-        var searchTermReg = new RegExp(name, 'i');
-        var search = this.id.filter(function (elements) {
-            searchTermReg.test(elements.name);
-        });
-        console.log(search);
+        filterSearch = event.target.value;
+        this.searchRegs(filterSearch);
+        this.render();
+        console.log(filterSearch);
+    };
+    Ids.prototype.searchRegs = function (inputSearch) {
+        var regExp = "^" + inputSearch;
+        var searchTermReg = new RegExp(regExp, 'i');
+        this.id = this.id.filter(function (element) { return searchTermReg.test(element.name); });
+        // this.render()
     };
     Ids.prototype.fiterItem = function () {
         var selectValue = String(select.value);
@@ -123,6 +129,6 @@ var handleEdit = function (event) {
     event.preventDefault();
     ids.editElement(event);
 };
-var searchBar = function (name) {
-    ids.searchItem(name);
+var searchBar = function (event) {
+    ids.searchItem(event);
 };
