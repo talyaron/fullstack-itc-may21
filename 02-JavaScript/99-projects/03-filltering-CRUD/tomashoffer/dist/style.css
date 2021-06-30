@@ -1,23 +1,96 @@
-.container {
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  width: 1000px;
+  margin: 0 auto;
+  border: black solid 2px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h3 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+h4 {
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+p {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container_content .header {
+  text-align: center;
+  background-color: #686868;
+  color: white;
+}
+.container_content .formulario {
   display: flex;
   flex-direction: column;
-  background-color: aqua;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  background-color: #312f2f;
+  color: white;
 }
-.container .formulario .formulario_item {
-  display: block;
+.container_content .formulario .btn_send {
+  font-size: 1.5rem;
+  background-color: #4848f0;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20%;
 }
-
-.container_titles {
+.container_content .formulario .formulario_item {
+  margin-top: 0.2rem;
+}
+.container_content .container_titles {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   border: 1px black solid;
+  text-align: center;
 }
-
-.container_products {
+.container_content .container_products_style {
+  border: 1px black solid;
+}
+.container_content .container_products {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+}
+.container_content .container_products .item {
   border: 1px black solid;
 }
-.container_products .item {
-  border: 1px black solid;
+.container_content .filters {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.container_content .filters .filters_search {
+  margin-right: 1rem;
+}
+.container_content .container_titles {
+  background-color: #aaaaaa;
+}
+.container_content .container-icons {
+  text-align: center;
+}
+
+.footer_info {
+  margin-top: 1rem;
+  background-color: #686868;
+  color: white;
+  padding: 2rem;
 }

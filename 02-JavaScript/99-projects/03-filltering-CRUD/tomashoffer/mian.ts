@@ -1,11 +1,17 @@
+// QUERIES SELECTORS
 const select:any = document.querySelector(".select");
 const boton = document.querySelector(".boton_trash");
 const editBtn = document.getElementById('nameInput');
 const modal = document.getElementById('Mymodal')
+const searchBar = document.querySelector("#searchBar");
+
 // VARIABLE GLOBAL
 let list: Array<Producto> = [];
 let updateID;
+let searchValue;
 
+
+// INTERFACES AND CLASES
 interface ProdInterface {
     product: string;
     brand: string;
@@ -13,8 +19,6 @@ interface ProdInterface {
     stock: number;
     description: string;
 }
-
-
 
 class Producto {
     product: string;
@@ -33,6 +37,12 @@ class Producto {
         this.id = Math.random().toString(16).slice(2);
     }
 }
+
+// EVENTS LISTENERS
+select.addEventListener('change', selectFilter); 
+searchBar.addEventListener('keyup', search);
+
+// FUNCTIONS
 // ADD JSON TO LIST ARRAY
 function addObject() {
     productos.forEach(prd => {
@@ -42,23 +52,23 @@ function addObject() {
 }
 addObject();
 
-
-
+// DELETE PRODUCT
 function remove(id) {
     const filtrado = list.filter((prod) => prod.id !== id);
     list = filtrado;
     renderData(list);
 }
 
-function edit(id){
-    
+// TAKING ID FOR EDIT, THEN I USED AT THE handleEdit()
+function edit(id){ 
     updateID = id;
-
 }
 
-
-select.addEventListener('change', function(){
+// FILTER BY SELECTS OPTIONS [see event]
+function selectFilter(){
+    try{
         const selectedValue = Number(select.value);
+        if (selectedValue > 300) throw new Error('You have an error in your value');
         console.log(typeof selectedValue);
         let arr = [];
         arr = list;
@@ -66,27 +76,48 @@ select.addEventListener('change', function(){
         arr2 = list;
         let arr3 = [];
         arr3 = list;
-        if(selectedValue === 100){
-            let priceFilter = arr.filter((prod)=>prod.price >= selectedValue);
-            arr = priceFilter;
-            renderData(arr);
-        }
-        else if(selectedValue === 200){
-            let priceFilter1 = arr2.filter((prod)=>prod.price >= selectedValue);
-            arr2 = priceFilter1;
-            renderData(arr2);
-        }
-        else if(selectedValue === 0){
-            renderData(list);
-        }
-        else{
-            let priceFilter2 = arr3.filter((prod)=>prod.price >= selectedValue);
-            arr3 = priceFilter2;
-            renderData(arr3);
-        }
-      
-}) 
+    if(selectedValue === 100){
+        let priceFilter = arr.filter((prod)=>prod.price >= selectedValue);
+        arr = priceFilter;
+        renderData(arr);
+    }
+    else if(selectedValue === 200){
+        let priceFilter1 = arr2.filter((prod)=>prod.price >= selectedValue);
+        arr2 = priceFilter1;
+        renderData(arr2);
+    }
+    else if(selectedValue === 0){
+        renderData(list);
+    }
+    else{
+        let priceFilter2 = arr3.filter((prod)=>prod.price >= selectedValue);
+        arr3 = priceFilter2;
+        renderData(arr3);
+    }
+     }catch(e){
+        console.error(e);
+    }
+}
+ 
+// TAKING VALUE FROM INPUT FOR USE IT AT searchRegEx()
+function search(e){
+    try{
+        searchValue = e.target.value;  
+        searchRegEx(searchValue); 
+       }catch(e){
+           console.error(e);
+       }
+    }
 
+// RegEx FOR FILTER BY PRODUCTS NAME
+function searchRegEx(inputSearch: string) {
+    const regExp: string = `^${inputSearch}`
+    const searchTermReg: RegExp = new RegExp(regExp, 'i');
+    const filterSearch = list.filter(elem => searchTermReg.test(elem.product))
+    renderData(filterSearch);
+}
+
+// RENDER DATA
 function renderData(listado) {
     const container: HTMLElement = document.querySelector(".container_products")
     let html: string = "";
@@ -107,17 +138,17 @@ function renderData(listado) {
                     <p>${element.description}</p>
                 </div>
                 <div class="container-icons item">
-                <button href="#" onclick='remove("${element.id}")'><i class="fas fa-trash icono_productos icono_productos_delete"></i></button>
-                <button href="#" data-toggle="modal" data-target="#myModal" onclick='edit("${element.id}")'><i class="fas fa-edit icono_productos icono_productos_edit"></i></button>
+                <button href="#" class="btn_icons" onclick='remove("${element.id}")'><i class="fas fa-trash icono_productos icono_productos_delete"></i></button>
+                <button href="#" class="btn_icons" data-toggle="modal" data-target="#myModal" onclick='edit("${element.id}")'><i class="fas fa-edit icono_productos icono_productos_edit"></i></button>
                 </div>`
     });
     container.innerHTML = html;
 }
-
-
 renderData(list);
 
+// HANDLE DATA FROM PRINCIPAL FORM
 const handleSubmit = (event) => {
+    try{
     event.preventDefault();
 
     const product: string = event.target.elements.producto.value;
@@ -133,11 +164,15 @@ const handleSubmit = (event) => {
     renderData(list);
     console.log(producto);
 
-    event.target.reset();
-
+    event.target.reset(); 
+    }catch(e){
+        console.error(e);
+    }
 };
 
+// HANDLEING DATA FROM MODAL TO EDIT
 const handleEdit = (event) => {
+    try{
     event.preventDefault();
 
     const productModal: string = event.target.elements.productoModal.value;
@@ -157,8 +192,8 @@ const handleEdit = (event) => {
     console.log(productModal, brandModal, priceModal, stockModal, descriptionModal);
     console.log(edit);
     renderData(list);
+    }catch(e){
+        console.error(e);
+    }
 }
 console.log(updateID);
-
-
-
