@@ -8,7 +8,6 @@ var Car = /** @class */ (function () {
         this.Year = Year;
         this.Origin = Origin;
         this.carId = Math.random().toString(16).slice(2);
-        ;
     }
     return Car;
 }());
@@ -18,6 +17,9 @@ var Cars = /** @class */ (function () {
     }
     Cars.prototype.add = function (car) {
         this.cars.push(car);
+        addNewOrigin();
+        addNewCylinders();
+        console.log(cars);
         localStorage.setItem("cars", JSON.stringify(cars));
     };
     ;
@@ -27,31 +29,67 @@ var Cars = /** @class */ (function () {
             var newCar = new Car(car.Name, car.Miles_per_Gallon, car.Cylinders, car.Horsepower, car.Weight_in_lbs, car.Year, car.Origin);
             _this.cars.push(newCar);
         });
-        console.log(this.cars);
     };
     Cars.prototype.removeCar = function (carId) {
-        var carIndex = this.cars.findIndex(function (c) { return c.carId === carId; });
-        this.cars.splice(carIndex, 1);
+        var carIndex = this.cars.filter(function (c) { return c.carId !== carId; });
+        this.cars = carIndex;
+        this.renderCars();
+    };
+    Cars.prototype.filterByOrigin = function (value) {
+        var carFilteredByOrgin = this.cars.filter(function (c) { return c.Origin === value; });
+        this.cars = carFilteredByOrgin;
+        this.renderCars();
+    };
+    Cars.prototype.filterByCylinders = function (value) {
+        var carFilteredByCylinders = this.cars.filter(function (c) { return c.Cylinders === value; });
+        this.cars = carFilteredByCylinders;
+        console.log("in filter " + value);
+        this.renderCars();
+    };
+    Cars.prototype.updateCar = function (name) {
+        var carToUpdate = this.cars.find(function (car) { return car.Name === name; });
+        carToUpdate.Horsepower = 500;
+        console.log(carToUpdate);
         this.renderCars();
     };
     Cars.prototype.getCarsFromStorage = function () {
-        JSON.parse(localStorage.getItem("cars"));
+        var tempCars = JSON.parse(localStorage.getItem("cars"));
+        console.log(tempCars);
+        this.cars.unshift(tempCars);
     };
     ;
     Cars.prototype.renderCars = function () {
         var table = document.querySelector(".table");
         var html = "";
         this.cars.forEach(function (car) {
-            html += "<tbody>\n       <tr>\n        <td>" + car.Name + "</td>\n        <td>" + car.Miles_per_Gallon + "</td> \n        <td>" + car.Cylinders + "</td> \n        <td>" + car.Horsepower + "</td> \n        <td>" + car.Weight_in_lbs + "</td> \n        <td>" + car.Year + "</td> \n        <td>" + car.Origin + "</td>\n        <td> <i  class=\"fas fa-trash\"></i></td>\n      </tr>";
+            html += "<tbody>\n       <tr>\n        <td>" + car.Name + "</td>\n        <td>" + car.Miles_per_Gallon + "</td> \n        <td>" + car.Cylinders + "</td> \n        <td>" + car.Horsepower + "<button onclick='handleEdit(\"" + car.Name + "\")' >Make Me 500!</button></td> \n        <td>" + car.Weight_in_lbs + "</td> \n        <td>" + car.Year + "</td> \n        <td>" + car.Origin + "</td>\n        <td> <i onclick='handleDelete(\"" + car.carId + "\")' class=\"fas fa-trash\"></i></td>\n      </tr>";
             table.innerHTML = html;
+            // table.insertAdjacentHTML(`afterbegin`, html)
         });
     };
     ;
     return Cars;
 }());
 var cars = new Cars();
+cars.getCarsFromStorage();
 cars.addCars(carsData);
 cars.renderCars();
+var handleEdit = function (carName) {
+    console.log(carName);
+    cars.updateCar(carName);
+};
+var handleDelete = function (carId) {
+    console.log(carId);
+    cars.removeCar(carId);
+};
+function handleSelect() {
+    var originValue = document.querySelector("table #origin").value;
+    cars.filterByOrigin(originValue);
+}
+function handleSelectCylinders() {
+    var cylindersValue = document.querySelector("table #cylinders").value;
+    cars.filterByCylinders(parseInt(cylindersValue));
+}
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var Name = ev.target.elements.Name.value;
@@ -64,10 +102,5 @@ var handleSubmit = function (ev) {
     var car = new Car(Name, Miles_per_Gallon, Cylinders, Horsepower, Weight_in_lbs, Year, Origin);
     cars.add(car);
     cars.renderCars();
-    console.log(cars);
     ev.target.reset();
-};
-var handleDelete = function (carId) {
-    console.log(carId);
-    cars.removeCar(carId);
 };

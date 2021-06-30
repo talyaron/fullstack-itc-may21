@@ -1,0 +1,191 @@
+body {
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: -webkit-gradient(linear, left top, right top, from(#f9fd02), color-stop(50%, #f7e817), color-stop(50%, #000000), to(#1b1a1a));
+  background: linear-gradient(to right, #f9fd02 0%, #f7e817 50%, #000000 50%, #1b1a1a 100%);
+}
+
+.nav {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 10;
+}
+
+.nav__cart, .nav__checkout {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 7px 8px;
+  text-decoration: none;
+}
+
+.nav__cart {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.nav__checkout {
+  color: black;
+  background-color: gray;
+  text-align: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  height: 2.1rem;
+  border-radius: 5px;
+}
+
+.opener {
+  width: 100vw;
+  height: 700px;
+  background-image: url("https://cdn.newsapi.com.au/image/v1/af711d3e42345f3514e64a578ddb1574");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -5;
+  position: relative;
+  margin: 0;
+}
+
+.opener__x {
+  width: 100px;
+  height: 100px;
+  -webkit-animation: x 13s linear infinite alternate;
+          animation: x 13s linear infinite alternate;
+}
+
+.opener__x__football {
+  width: 100px;
+  height: 100px;
+  border-radius: 20%;
+  -webkit-animation: y 7s linear infinite alternate, rotation 8s infinite linear;
+          animation: y 7s linear infinite alternate, rotation 8s infinite linear;
+}
+
+.opener__fanclub {
+  height: 15vh;
+  width: 500px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 5;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.merchandise {
+  margin-bottom: 5rem;
+  font-size: 50px;
+  font: 900 10vmin/7vh cookie, cursive;
+  font-style: italic;
+  margin-top: 5rem;
+  color: white;
+  -webkit-filter: drop-shadow(0.05em 0.05em #ff2600);
+          filter: drop-shadow(0.05em 0.05em #ff2600);
+}
+
+.shopping-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row wrap;
+          flex-direction: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.shopping-list__item-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  margin: 5rem;
+}
+
+.shopping-list__item-wrapper__item-image {
+  width: 350px;
+  height: 400px;
+  border-radius: 5px;
+}
+
+.shopping-list__item-wrapper__item-image:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.shopping-list__item-wrapper__item-name {
+  font-size: 1rem;
+  margin-top: 20px;
+  color: red;
+}
+
+.shopping-list__item-wrapper__item-price {
+  font-size: 1rem;
+  color: red;
+}
+
+.shopping-list__item-wrapper__add {
+  width: 100px;
+  background-color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.shopping-list__item-wrapper__add:hover {
+  cursor: pointer;
+}
+
+@-webkit-keyframes x {
+  100% {
+    -webkit-transform: translateX(calc(100vw - 100px));
+            transform: translateX(calc(100vw - 100px));
+  }
+}
+
+@keyframes x {
+  100% {
+    -webkit-transform: translateX(calc(100vw - 100px));
+            transform: translateX(calc(100vw - 100px));
+  }
+}
+
+@-webkit-keyframes y {
+  100% {
+    -webkit-transform: translateY(calc(95vh - 100px));
+            transform: translateY(calc(95vh - 100px));
+  }
+}
+
+@keyframes y {
+  100% {
+    -webkit-transform: translateY(calc(95vh - 100px));
+            transform: translateY(calc(95vh - 100px));
+  }
+}
+/*# sourceMappingURL=styles.css.map */

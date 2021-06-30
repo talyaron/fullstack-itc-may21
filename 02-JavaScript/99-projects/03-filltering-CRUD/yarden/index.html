@@ -6,30 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./dist/crud.css">
     <title>My contacts</title>
+
+    <script src="https://kit.fontawesome.com/9e08100192.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
-    <h1>Contacts</h1>
+    <h1 class="main-headline">My contacts</h1>
+    <div class="body-wrapper">
+        <div class="form-container">
+            <form class="form" action="">
+                <h2 class="form__headline">Add contact:</h2>
+                <label class="form__label" for="Phone number">Phone number</label>
+                    <input class="form__input" type="number" name="phone-number" id="phone-number" required>
+                <label class="form__label" for="name">Name</label>
+                    <input class="form__input" type="text" name="name" id="name" required>
+                <br>
+                    <label class="form__label" for="email">Email address (Optional)</label>
+                    <input class="form__input" type="email" name="email" id="email">
+                <label class="form__label" for="address">Address (Optional)</label>
+                    <input class="form__input" type="text" name="address" id="address">
+                <label class="form__label" for="on-Whatsapp">On Whatsapp (Optional)</label>
+                    <input class="form__input" type="checkbox" name="on-Whatsapp" id="on-Whatsapp">
+                <label class="form__label" for="photo">Photo URL (Optional)</label>
+                    <input class="form__input" type="url" name="photo" id="photo">
+                <label class="form__label" for=""></label>
+                    <input id="form__submit-button" onsubmit="handleSubmit(event)" type="submit" value="Add">
+            </form>
+        </div>
+        <div class="saved-contacts-container">
+            <h2 class="saved-contacts-headline" >Saved contacts</h2>
+            <div class="saved-contacts-root">
+                <div class="contact">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <img class="contact__img" src="https://media-exp1.licdn.com/dms/image/C5603AQHbnNSsG8PV6A/profile-displayphoto-shrink_200_200/0/1578362783143?e=1630540800&v=beta&t=DbF683p-tE3nFqA8Wo0AMJtlT8D0206pHR7-DDMjCdM" alt="Contact image">
+                    <div class="contact__inner-wrapper">
+                        <h3 class="contact__inner-wrapper__name">Yarden Tal</h3>
+                        <div class="contact__inner-wrapper__phone-wrapper">
+                            <p class="contact__number">0527895463</p>
+                            <i class="fa fa-whatsapp fa" aria-hidden="true"></i>
+                        </div>
 
-    <div class="container">
-        <form class="form" action="">
-            <label for="Phone number">Phone number</label>
-                <input type="number" name="phone-number" id="phone-number">
-            <label for="name">Name</label>
-                <input type="text" name="name" id="name">
-            <label for="email">Eamil address</label>
-                <input type="email" name="email" id="email">
-            <label for="address">Address</label>
-                <input type="text" name="address" id="address">
-            <label for="on-Whatsapp">On Whatsapp</label>
-                <input type="checkbox" name="on-Whatsapp" id="on-Whatsapp">
-            <label for="photo">Photo</label>
-                <input type="url" name="photo" id="photo">
-            <label for=""></label>
-                <input onsubmit="handleSubmit(event)" type="submit" value="Add">
-        </form>
-        <div class="list">
-            <h2>My contacts</h2>
+                    </div>
+                    <p class="contact__address">25 Yaffa street, Haifa, Israel</p>
+                    <p class="contact__email">yardenmail@gmail.com</p>
+                    <i class="fas fa-edit"></i>
+                    <i class="far fa-trash-alt"></i>
+                </div>
+                <div class="contact">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <img class="contact__img" src="https://media-exp1.licdn.com/dms/image/C5603AQHbnNSsG8PV6A/profile-displayphoto-shrink_200_200/0/1578362783143?e=1630540800&v=beta&t=DbF683p-tE3nFqA8Wo0AMJtlT8D0206pHR7-DDMjCdM" alt="Contact image">
+                    <div class="contact__inner-wrapper">
+                        <h3 class="contact__inner-wrapper__name">Marie Noel</h3>
+                        <div class="contact__inner-wrapper__phone-wrapper">
+                            <p class="contact__number">0527895463</p>
+                            <i class="fa fa-whatsapp fa" aria-hidden="true"></i>
+                        </div>
+
+                    </div>
+                    <p class="contact__address">25 Einstein street, Haifa, United States</p>
+                    <p class="contact__email">yardenmail@gmail.com</p>
+                    <i class="fas fa-edit"></i>
+                    <i class="far fa-trash-alt"></i>
+                </div>
+            </div>
         </div>
     </div>
 

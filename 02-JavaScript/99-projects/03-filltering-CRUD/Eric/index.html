@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dist/crud.css">
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <title>CRUD</title>
+</head>
+<body>
+    <div class="container">
+       <div class="head">
+        <div>
+            <label for="">Search products by name</label>
+            <input type="text" id="filterN" name="filterN">
+        </div>
+        <br><br><br>
+        <form class="editForm" onsubmit="handleEdit(event)">
+            <input type="submit" value="Edit" class="btn-productEdit">
+          </form>
+        <div> <!--The idea is filter by quantity, I'm in process to do that-->
+            <label for="">Filter by quantity until 15</label>
+            <select name="selector"  class="selector">
+                <option class="filter-option" value="" hidden disabled selected>
+                    -----
+                      <option class="filter-option" value="">0-5</option>
+                <option class="filter-option" value="">5-10</option>
+                <option class="filter-option" value="">10-15</option>
+            </select>
+        </div>
+    </div>
+        <form onsubmit="handleSubmit(event)" id="product-form">
+            <fieldset>
+                <legend>Insert stock product</legend>
+            <label for="title">ProductName</label>
+            <br>
+            <input type="text" id="title" name="name" class="product-name" placeholder="add name" required>
+            <br>
+            <label for="title">Type</label>
+            <br>
+            <input type="text" id="title" name="type" class="product-type" placeholder="add type" required>
+            <br>
+            <label for="description">Description</label>
+            <br>
+            <input type="text" id="description" name="description" class="product-description" placeholder="add description" required>
+            <br>
+            <label for="origin">Origin</label>
+            <br>
+            <input type="text" id="origin" name="origin" class="product-origin" placeholder="add origin" required>
+            <br>
+            <label for="quantity">Quantity</label>
+            <br>
+            <input type="number" id="quantity" value="quantity" name="quantity" class="product-quantity" max="10" placeholder="add quantity" required>
+            <br><br>
+            <input type="submit" value="Add" class="btn-product">
+        </fieldset>
+        </form>
+            <br>
+    </div>
+    <table class="table-product">
+        <thead>
+            <tr>
+                <th>Product-Name</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Origen</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="product-list"></tbody>
+    </table>
+    <script src="./dist/products.js"></script>
+    <SCript src="./dist/main.js"></SCript>
+  
+</body>
+
+</html>
