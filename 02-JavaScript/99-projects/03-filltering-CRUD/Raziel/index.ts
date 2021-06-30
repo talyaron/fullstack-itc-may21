@@ -1,7 +1,7 @@
 //--CONSTS--//
 const rootHtml:HTMLElement=document.querySelector('#root');
 const searchName = (<HTMLInputElement>document.querySelector("#search"))
-const gender_node = <NodeList>document.querySelectorAll(".gender");
+const genderNode:any=document.querySelectorAll(".gender");
 filterGender();
 class Contact{
      name:string
@@ -33,9 +33,9 @@ class List{
   
  
     renderList(filteredArray: Array<Contact>):void{
-        const ArrayToRender = filteredArray ? filteredArray : this.contactList;
+        const arrayToRender = filteredArray ? filteredArray : this.contactList;
         let html:string="";
-        ArrayToRender.forEach(element=>{
+        arrayToRender.forEach(element=>{
             if(element.gender=='male'){ html+= `<div class = "record-item"><div class = "record-el">
             <span>&#128113;&#127999;</span>
         </div>`
@@ -73,11 +73,11 @@ class List{
                     <i class = "fas fa-trash"></i>
                 </span> Delete
             </button>
-            <button type = "button" id = "delete-btn" class="editButton">
-                <span>
-                <i class="fas fa-edit"></i>
-                </span> Edit
-            </button>
+            <button type = "button" id = "delete-btn" onclick='editContact("${element.id}")'>
+            <span>
+                <i class = "fas fa-trash"></i>
+            </span> Edit
+        </button>
         </div>
     </div>
     </div>
@@ -86,10 +86,14 @@ class List{
         rootHtml.innerHTML=html;
     }
     deleteContact(id:string):void{
-       this.contactList= this.contactList.filter((ev)=>ev.id!==id);
+       this.contactList= this.contactList.filter(ev=>ev.id!==id);
        this.renderList(null);
     }
-    editContact(){}
+    editContacts(id:string){
+        const contactEdit=this.contactList.find(contact=>contact.id==id);
+       contactEdit.name="DAN";
+       this.renderList(this.contactList);
+    }
     searchContact(name:string){
         
         const regEx: string = `${name}`;
@@ -127,6 +131,7 @@ const handelForm = (ev) => {
     const email: string = ev.target.elements.email.value;
     const gender:string=ev.target.elements.gender.value;
     //--email and phone validation--//
+
     const validEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
       const emailReg = new RegExp(validEmail,'gmi');
       if (!emailReg.test(email)) {
@@ -152,17 +157,32 @@ const handelForm = (ev) => {
   const handelRemove = (id: string): void => {
     lists.deleteContact(id);
   }
-
+const editContact=(id:string):void=>{
+    lists.editContacts(id);
+    console.log("hey");
+}
   searchName.addEventListener('keyup', handleKeyUp)
 
 function handleKeyUp() {
     lists.searchContact(searchName .value)   
 }
 
+// function filterGender() {
+//     for (let i = 0; i < genderNode.length; i++) {
+//         genderNode[i].addEventListener("click", function () {
+//             lists.filterByGender(genderNode[i].nodeValue);
+//         });
+//     }
+// }
+const genderFilter=document.querySelector('#genderFilter');
+
+genderFilter.addEventListener("click",filterGender);
+
 function filterGender() {
-    for (let i = 0; i < gender_node.length; i++) {
-        gender_node[i].addEventListener("click", function () {
-            lists.filterByGender(gender_node[i].nodeValue);
-        });
-    }
+    genderNode.forEach(node=>{
+      if(node.checked){
+     const filterGenderList=lists.contactList.filter(contact=>contact.gender==node.value);
+     lists.renderList(filterGenderList);
+      }
+    })
 }
