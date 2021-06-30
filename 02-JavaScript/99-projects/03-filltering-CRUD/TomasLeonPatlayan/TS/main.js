@@ -138,6 +138,7 @@ var handleSubmit = function (event) {
         ids.add(generator);
     }
     catch (error) {
+        alert(error);
     }
     event.target.reset();
 };
