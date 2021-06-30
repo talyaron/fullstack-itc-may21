@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="dist/style.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
 </head>
 
 <body>
@@ -39,6 +40,8 @@
         <button class="top-submenu-button" id="buttonUpload">Upload a new student</button>
         <button class="top-submenu-button" onclick="exportTableToExcel('tblData', 'Students Data')">Export to
             Excel</button>
+        <input class="top-submenu-button" type="file" id="inputExcel" accept=".xls,.xlsx">
+
     </nav>
 
     <!-- Modal to upload a user -->
