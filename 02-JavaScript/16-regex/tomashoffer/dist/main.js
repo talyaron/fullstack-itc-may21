@@ -15,3 +15,26 @@ var handleSubmit = function (ev) {
     var lookJoke = new RegExp('[a-z]+');
     return lookArray.filter(function (joke) { return lookJoke.test(joke.value); });
 };
+var inputSearch = document.getElementById("inpSearch");
+searchRegEx(inputSearch, string);
+{
+    var regExp = "^" + inputSearch;
+    var searchTermReg_1 = new RegExp(regExp, 'i');
+    var filterSearch = list.filter(function (elem) { return searchTermReg_1.test(elem.product); });
+    renderData(filterSearch);
+}
+inputSearch.addEventListener('keyup', handleKeyUp);
+function handleKeyUp() {
+    try {
+        list.filterbyName(inputSearch.value);
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
+function filterbyName(inputSearch) {
+    var regrExp = "^" + inputSearch;
+    var searchTermReg = new RegExp(regrExp, 'i');
+    this.datalist = list.filter(function (elem) { return searchTermReg.test(elem.product); });
+    renderData();
+}
