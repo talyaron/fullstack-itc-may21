@@ -355,6 +355,17 @@ var updateRunSubmit = function (ev) {
     }
 };
 var filterRunsForm = document.querySelector('.filter_form');
+var filterBtn = document.querySelector('#filter_button');
+filterBtn.addEventListener('click', function (ev) { return showFilterForm(ev); });
+var showFilterForm = function (ev) {
+    try {
+        ev.target.style.display = 'none';
+        filterRunsForm.style.display = 'flex';
+    }
+    catch (er) {
+        console.error(er);
+    }
+};
 filterRunsForm.addEventListener('submit', function (ev) { return filterSubmit(ev); });
 filterRunsForm.addEventListener('change', function (ev) { return filterChangeKeyUp(ev); });
 filterRunsForm.addEventListener('keyup', function (ev) { return filterChangeKeyUp(ev); });
@@ -364,11 +375,20 @@ var filterSubmit = function (ev) {
         if (currentRunner.runnerRuns.length === 0) {
             return;
         }
+        var filterSubmitBtn = document.querySelector('#filter_submit');
+        if (filterSubmitBtn.getAttribute('value') === 'Reset') {
+            filterSubmitBtn.setAttribute('value', 'Filter');
+            currentRunner.renderRunsToDOM(null);
+            ev.target.reset();
+            return;
+        }
         var minDistanceFilter = Number(ev.target.elements.minDistanceFilter.value);
         var maxDistanceFilter = Number(ev.target.elements.maxDistanceFilter.value);
         var paceFilter = ev.target.elements.paceFilter.value;
         var areaFilter = ev.target.elements.areaFilter.value;
         var locationFilter = ev.target.elements.locationFilter.value;
+        ev.target.style.display = 'none';
+        filterBtn.style.display = 'unset';
         currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
         ev.target.reset();
     }

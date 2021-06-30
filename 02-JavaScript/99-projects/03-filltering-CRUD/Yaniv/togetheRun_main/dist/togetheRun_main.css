@@ -144,7 +144,7 @@ button:hover {
   background-color: #60BEEB;
   font-size: 1.2rem;
   color: black;
-  margin-right: 5px;
+  margin: 0 5px;
 }
 #mainscreen .dashboard__item--add:hover {
   background-color: #7EC8E3;
@@ -155,19 +155,19 @@ button:hover {
 }
 #mainscreen .dashboard__item--history {
   background-color: #189AB4;
-  color: white;
 }
 #mainscreen .dashboard__item--history:hover {
   background-color: #60BEEB;
 }
 #mainscreen .dashboard__item--history:active {
   background-color: #05445E;
+  color: white;
 }
 #mainscreen #filters {
   margin: 5px;
 }
 #mainscreen #filters .filter_form {
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -267,7 +267,6 @@ button:hover {
 }
 #mainscreen .runs__item .run_matches:hover {
   background-color: #21B6A8;
-  color: white;
 }
 #mainscreen .runs__item .run_matches:active {
   background-color: #189AB4;
@@ -320,7 +319,7 @@ button:hover {
   align-items: baseline;
   justify-content: center;
   background-color: white;
-  height: 230px;
+  height: 250px;
   border-radius: 0 0 10px 10px;
 }
 .modalBox__item--content .update_run_form {

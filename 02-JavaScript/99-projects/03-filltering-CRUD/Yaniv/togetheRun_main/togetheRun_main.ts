@@ -413,6 +413,20 @@ const updateRunSubmit = (ev: any) => {
 };
 
 const filterRunsForm: HTMLElement = document.querySelector('.filter_form');
+const filterBtn: HTMLElement = document.querySelector('#filter_button');
+
+filterBtn.addEventListener('click', ev => showFilterForm(ev));
+
+const showFilterForm = (ev: any) => {
+  try {
+    ev.target.style.display = 'none';
+    filterRunsForm.style.display = 'flex';
+
+  } catch (er) {
+    console.error(er);
+  }
+};
+
 filterRunsForm.addEventListener('submit', ev => filterSubmit(ev));
 filterRunsForm.addEventListener('change', ev => filterChangeKeyUp(ev));
 filterRunsForm.addEventListener('keyup', ev => filterChangeKeyUp(ev));
@@ -422,12 +436,22 @@ const filterSubmit = (ev: any) => {
     ev.preventDefault();
     
     if (currentRunner.runnerRuns.length === 0) {return;}
+    const filterSubmitBtn: HTMLElement = document.querySelector('#filter_submit');
+    if (filterSubmitBtn.getAttribute('value') === 'Reset') {
+      filterSubmitBtn.setAttribute('value','Filter');
+      currentRunner.renderRunsToDOM(null);
+      ev.target.reset();
+      return;
+    }
 
     const minDistanceFilter = Number(ev.target.elements.minDistanceFilter.value);
     const maxDistanceFilter = Number(ev.target.elements.maxDistanceFilter.value);
     const paceFilter = ev.target.elements.paceFilter.value;
     const areaFilter = ev.target.elements.areaFilter.value;
     const locationFilter = ev.target.elements.locationFilter.value;
+
+    ev.target.style.display = 'none';
+    filterBtn.style.display = 'unset';
 
     currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
 

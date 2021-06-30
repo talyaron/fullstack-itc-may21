@@ -151,7 +151,7 @@ button {
                 background-color: #60BEEB;
                 font-size: 1.2rem;
                 color: black;
-                margin-right: 5px;
+                margin: 0 5px;
 
                 &:hover {
                     background-color: #7EC8E3;
@@ -165,7 +165,6 @@ button {
 
             &--history {
                 background-color: #189AB4;
-                color: white;
 
                 &:hover {
                     background-color: #60BEEB;
@@ -173,6 +172,7 @@ button {
 
                 &:active {
                     background-color: #05445E;
+                    color: white
                 }
             }
         }
@@ -181,9 +181,10 @@ button {
 
     #filters {
         margin: 5px;
-
+        
         .filter_form {
-            display: flex;
+            display: none;
+            // display: flex;
             flex-direction: row;
             justify-content: space-around;
             flex-wrap: wrap;
@@ -304,7 +305,6 @@ button {
 
                 &:hover {
                     background-color: #21B6A8;
-                    color: white;
                 }
 
                 &:active {
@@ -371,7 +371,7 @@ button {
             align-items: baseline;
             justify-content: center;
             background-color: white;
-            height: 230px;
+            height: 250px;
             border-radius: 0 0 10px 10px;
 
             .update_run_form {
@@ -435,7 +435,6 @@ button {
         }
     }
 }
-
 
 .close {
     cursor: pointer;
