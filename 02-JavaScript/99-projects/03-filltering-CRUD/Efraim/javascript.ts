@@ -143,12 +143,13 @@ function handleSubmit(ev): any {
         if (!shoppingListDOM) {
             throw new Error('No shopping list to hold items!')
         }
-        products.addProduct(new Product(`"${imgUrl}"`, `${description}`, `${year}`));
+        products.addProduct(new Product(`"${imgUrl}"`, `${description}`, parseInt(year)));
         products.renderProducts(shoppingListDOM);
         nameUpdate.push(`${description}`)
         localStorage.userEdits = JSON.stringify(nameUpdate);
         commonFunction()
         localStorage.setItem('products', JSON.stringify(products.products))
+        console.log(products.products)
         ev.target.reset();
     } catch (e) {
         console.error(e)
@@ -161,6 +162,7 @@ function saveEdits(productId, productID2) {
         let editElem: NodeListOf<Element> = document.querySelectorAll(`.edit`);
         nameUpdate.length = editElem.length
         nameUpdate[index] = editElem[index].innerHTML;
+        products.products[index].description = nameUpdate[index];
         localStorage.userEdits = JSON.stringify(nameUpdate);
         let update = document.getElementById(`${productID2}`);
         update.innerHTML = "Edits saved!"
@@ -229,6 +231,25 @@ const addToDom1 = (searchResults: Array<any>) => {
         console.error(e)
     }
 }
+const addToDom2 = (searchResults: Array<any>) => {
+    try {
+        const shoppingList: HTMLElement = document.querySelector('.shopping-list');
+        if (!shoppingList) {
+            throw new Error('No shopping list available!')
+        }
+        shoppingList.innerHTML = ``;
+        if (searchResults.length === 0) { shoppingList.innerHTML = 'no results to show'; return; }
+        searchResults.forEach((productItem) => shoppingList.innerHTML += (
+            `<div id='${productItem.id}'  class="shopping-list__item-wrapper">` +
+            `<img class="shopping-list__item-wrapper__item-image" src=${productItem.imgSrc} alt="">`  +
+            `<h2  class="shopping-list__item-wrapper__item-name edit" id="${productItem.id3}" >${productItem.description}</h2>` +
+            `<h3  class="shopping-list__item-wrapper__item-year">${productItem.year}</h3>` 
+        )
+        )
+    } catch (e) {
+        console.error(e)
+    }
+}
 
 
 
@@ -240,7 +261,7 @@ const handleSubmit1 = (ev: any) => {
             throw new Error('No value being read for search term!')
         }
         const results = findProductbySearchTerm(products.products, searchTerm);
-        addToDom1(results);
+        addToDom2(results);
         ev.target.reset();
     } catch (er) {
         console.error(er)
@@ -255,7 +276,7 @@ const handleKeyUp = (ev: any) => {
             throw new Error('No value being read for search term!')
         }
         const results = findProductbySearchTerm(products.products, searchTerm);
-        addToDom1(results);
+        addToDom2(results);
 
     } catch (er) {
         console.error(er)
@@ -278,7 +299,7 @@ const filterYear = (ev: any): any => {
         for (let i = 0; i < indexArray.length; i++) {
             results[i].description = nameUpdate[indexArray[i]]
         }
-        addToDom1(results);
+        addToDom2(results);
 
        
     } catch (er) {

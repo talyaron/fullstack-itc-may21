@@ -40,7 +40,7 @@ var Student = /** @class */ (function () {
 //Initialice an array of students empty (I will push al new students there)
 var students = [];
 //Use this function to add all the students created in the other page to the new array "Students"
-function addStudentsCreated() {
+function addStudentsCreated(studentsData) {
     try {
         if (!studentsData)
             throw new Error('You can`t access to students data');
@@ -58,7 +58,7 @@ function addStudentsCreated() {
     ;
 }
 ;
-addStudentsCreated();
+addStudentsCreated(studentsData);
 var handleSubmit = function (ev) {
     ev.preventDefault();
     try {
@@ -396,3 +396,45 @@ var compareDateOposite = function (firstDate, secondDate) {
     }
     ;
 };
+//Instructions to import an Excel into the Table
+try {
+    document.querySelector('#inputExcel').addEventListener("click", function () {
+        alert("Instructions to import: \n                        \u2714 The file should be an Excel \".xls\" or \".xlsx\"\n                        \u2714 The first row must be firstname, lastname, email, subject, date\n                        \u2714 The column \"date\" must be in a text format (ex: 2021-07-30)");
+    });
+}
+catch (error) {
+    console.error(error);
+}
+;
+//The following code is to import an Excel into the Table
+var selectedFile;
+try {
+    document.querySelector('#inputExcel').addEventListener("change", function (event) {
+        selectedFile = event.target.files[0];
+        var option = confirm('Are you sure do you want to import this file?');
+        if (option === true) {
+            var data = [];
+            XLSX.utils.json_to_sheet(data, 'out.xlsx');
+            if (selectedFile) {
+                var fileReader = new FileReader();
+                fileReader.readAsBinaryString(selectedFile);
+                fileReader.onload = function (event) {
+                    var data = event.target.result;
+                    var workbook = XLSX.read(data, { type: "binary" });
+                    workbook.SheetNames.forEach(function (sheet) {
+                        var rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
+                        var info = JSON.stringify(rowObject, undefined, 4);
+                        var newArrayStudents = JSON.parse(info);
+                        addStudentsCreated(newArrayStudents);
+                    });
+                };
+            }
+            ;
+        }
+        ;
+    });
+}
+catch (error) {
+    console.error(error);
+}
+;

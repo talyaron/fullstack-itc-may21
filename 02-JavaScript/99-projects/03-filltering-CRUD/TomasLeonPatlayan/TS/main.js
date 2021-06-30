@@ -36,15 +36,26 @@ var Ids = /** @class */ (function () {
         console.log(ident);
     };
     Ids.prototype.editElement = function (event) {
-        var name = event.target.elements.name.value;
-        var imageUrl = event.target.elements.imageUrl.value;
-        var pokeType = event.target.elements.pokeType.value;
-        var edit = this.id.find(function (element) { return element.ident === updateElement; });
-        edit.name = name;
-        edit.imageUrl = imageUrl;
-        edit.pokeType = pokeType;
-        this.bringInfo(event);
-        this.render();
+        try {
+            var name_1 = event.target.elements.name.value;
+            var imageUrl = event.target.elements.imageUrl.value;
+            var pokeType = event.target.elements.pokeType.value;
+            if (name_1 === '')
+                throw Error("Put a Pokemon");
+            if (imageUrl === '')
+                throw Error('Put a Url Image');
+            if (pokeType !== "fire" && pokeType !== "water" && pokeType !== "bug" && pokeType !== "grass" && pokeType !== "normal" && pokeType !== "flying" && pokeType !== "electric")
+                throw Error("Please in the Type of Pokemon put fire, water,bug,grass,normal,flying or electric");
+            var edit = this.id.find(function (element) { return element.ident === updateElement; });
+            edit.name = name_1;
+            edit.imageUrl = imageUrl;
+            edit.pokeType = pokeType;
+            this.bringInfo(event);
+            this.render();
+        }
+        catch (error) {
+            alert(error);
+        }
     };
     Ids.prototype.deleteItem = function (ident) {
         this.id = this.id.filter(function (element) { return element.ident !== ident; });
@@ -64,33 +75,37 @@ var Ids = /** @class */ (function () {
     };
     Ids.prototype.fiterItem = function () {
         var selectValue = String(select.value);
-        if (selectValue === "fire") {
-            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
-            this.render();
+        try {
+            if (selectValue === "fire") {
+                this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+                this.render();
+            }
+            else if (selectValue === "bug") {
+                this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+                this.render();
+            }
+            else if (selectValue === "grass") {
+                this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+                this.render();
+            }
+            else if (selectValue === "water") {
+                this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+                this.render();
+            }
+            else if (selectValue === "flying") {
+                this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+                this.render();
+            }
+            else if (selectValue === "normal") {
+                this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+                this.render();
+            }
+            else if (selectValue === "electric") {
+                this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+                this.render();
+            }
         }
-        if (selectValue === "bug") {
-            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
-            this.render();
-        }
-        if (selectValue === "grass") {
-            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
-            this.render();
-        }
-        if (selectValue === "water") {
-            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
-            this.render();
-        }
-        if (selectValue === "flying") {
-            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
-            this.render();
-        }
-        if (selectValue === "normal") {
-            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
-            this.render();
-        }
-        if (selectValue === "electric") {
-            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
-            this.render();
+        catch (error) {
         }
     };
     Ids.prototype.render = function () {
@@ -108,12 +123,23 @@ var ids = new Ids();
 ids.addList(peronas);
 var handleSubmit = function (event) {
     event.preventDefault();
-    var name = event.target.elements.name.value;
-    var imageUrl = event.target.elements.imageUrl.value;
-    var pokeType = event.target.elements.pokeType.value;
-    var generator = new IdsGenerator(name, imageUrl, pokeType);
-    console.log(generator);
-    ids.add(generator);
+    try {
+        var name_2 = event.target.elements.name.value;
+        var imageUrl = event.target.elements.imageUrl.value;
+        var pokeType = event.target.elements.pokeType.value;
+        if (name_2 === '')
+            throw Error("Put a Pokemon");
+        if (imageUrl === '')
+            throw Error('Put a Url Image');
+        if (pokeType !== "fire" && pokeType !== "water" && pokeType !== "bug" && pokeType !== "grass" && pokeType !== "normal" && pokeType !== "flying" && pokeType !== "electric")
+            throw Error("Please in the Type of Pokemon put fire, water,bug,grass,normal,flying or electric");
+        var generator = new IdsGenerator(name_2, imageUrl, pokeType);
+        console.log(generator);
+        ids.add(generator);
+    }
+    catch (error) {
+        alert(error);
+    }
     event.target.reset();
 };
 var handleDelete = function (ident) {
@@ -128,6 +154,7 @@ var editItem = function (ident) {
 var handleEdit = function (event) {
     event.preventDefault();
     ids.editElement(event);
+    event.target.reset();
 };
 var searchBar = function (event) {
     ids.searchItem(event);
