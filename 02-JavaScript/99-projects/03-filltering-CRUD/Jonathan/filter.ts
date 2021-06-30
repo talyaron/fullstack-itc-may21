@@ -51,6 +51,7 @@ class DataList {
 
     getOldData(dataList: Array<personalData|Data>): number {
 
+        
         dataList.forEach(item => {
             const oldData = new Data(item.name, item.city, item.gender, item.tel, item.status, item.salary, item.id)
             this.datalist.push(oldData)
@@ -86,24 +87,24 @@ class DataList {
                     tel.value = element.tel
                     inputStatus.value = element.status
                     salary.value = String(element.salary)
-                    posicion = i;
+                    position = i;
                 }
                 i++;
             });
-            return posicion
+            return position
         } catch (e) {
             console.log(e)
         }
 
     }
 
-    editItem(posicion: number) {
+    editItem(position: number) {
 
         try {
 
             let index: number = 0
             this.datalist.forEach(item => {
-                if (index === posicion) {
+                if (index === position) {
                     if (inputName.name === "" || city.value === "" || tel.value === "" || tel.value === "" || parseInt(salary.value) === NaN) throw new Error("Check if you complete all the inputs");
                     if (parseInt(salary.value) <= 0) throw new Error("Salary must be positive");
                     item.name = inputName.value
@@ -210,7 +211,7 @@ interface personalData {
 
 const datalist = new DataList();
 let count: number = 0;
-let posicion: number;
+let position: number;
 
 
 
@@ -245,7 +246,7 @@ btnAdd.addEventListener('click', event => {
 
 btnEdit.addEventListener('click', event => {
     event.preventDefault()
-    datalist.editItem(posicion)
+    datalist.editItem(position)
 
     //form clear
     inputName.value = "";
@@ -289,6 +290,6 @@ function handleEdit() {
 
 btnReset.addEventListener('click', event => {
     event.preventDefault()
-    localStorage.clear()
-    count = datalist.getOldData(personalDataList);
+    localStorage.clear() // reset and bring to the board only the two items from data.ts
+    window.location.reload(); //refresh page
 });
