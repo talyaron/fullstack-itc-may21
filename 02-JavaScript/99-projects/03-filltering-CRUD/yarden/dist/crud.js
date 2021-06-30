@@ -23,34 +23,57 @@ var Contacts = /** @class */ (function () {
     }
     Contacts.prototype.render = function () {
         try {
-            var rootDiv_1 = document.querySelector(".saved-contacts-root");
-            var htmlPattern_1 = '';
+            var rootDiv = document.querySelector(".saved-contacts-root");
+            var htmlPattern_1 = "";
             this.contacts.forEach(function (contact) {
-                htmlPattern_1 += "<div class=\"contact\">\n        <i class=\"fa fa-bars\" aria-hidden=\"true\"></i>\n        <img class=\"contact__img\" src=\"" + contact.photo + "\" alt=\"Contact image\">\n        <div class=\"contact__inner-wrapper\">\n            <h3 class=\"contact__inner-wrapper__name\">" + contact.contactName + "</h3>\n            <div class=\"contact__inner-wrapper__phone-wrapper\">\n                <p class=\"contact__number\">" + contact.phoneNumber + "</p>\n                <i class=\"fa fa-whatsapp fa\" aria-hidden=\"true\"></i>\n            </div>\n        </div>\n        <p class=\"contact__address\">" + contact.address + "</p>\n        <p class=\"contact__email\">" + contact.email + "</p>\n        <i class=\"fas fa-edit\" style=\"cursor:pointer;\"></i>\n        <i class=\"far fa-trash-alt\" style=\"cursor:pointer;\" onclick=\"handleDelete('" + contact.id + "')\"></i>\n        </div>";
-                rootDiv_1.innerHTML = htmlPattern_1;
+                htmlPattern_1 += "<div class=\"contact\">\n        <i class=\"fa fa-bars fa-lg\" aria-hidden=\"true\"></i>\n        <img class=\"contact__img\" src=\"" + contact.photo + "\" alt=\"Contact image\">\n        <div class=\"contact__inner-wrapper\">\n            <h3 contenteditable=\"true\" class=\"contact__inner-wrapper__name\">" + contact.contactName + "</h3>\n            <div class=\"contact__inner-wrapper__phone-wrapper\">\n                <p class=\"contact__number\" contenteditable=\"true\">" + contact.phoneNumber + "</p>\n                <i class=\"fa fa-whatsapp fa\" aria-hidden=\"true\"></i>\n            </div>\n        </div>\n        <p class=\"contact__address\">" + contact.address + "</p>\n        <p class=\"contact__email\">" + contact.email + "</p>\n        <i class=\"fas fa-edit fa-lg\" style=\"cursor:pointer;\" onclick=\"handleEdit('" + contact.id + "')\"></i>\n        <i class=\"far fa-trash-alt fa-lg\" style=\"cursor:pointer;\" onclick=\"handleDelete('" + contact.id + "')\"></i>\n        </div>";
             });
+            rootDiv.innerHTML = htmlPattern_1;
         }
         catch (error) { }
     };
     //Update method
-    Contacts.prototype.update = function (params) { };
+    Contacts.prototype.update = function (id) {
+        try {
+            var indexToEdit = this.contacts.findIndex(function (element) { return element.id === id; });
+            this.contacts[indexToEdit].contactName;
+            console.log(this.contacts[indexToEdit]);
+        }
+        catch (error) { }
+    };
     //Remove method
-    Contacts.prototype.remove = function (params) {
-        // savedContacts.filter()
+    Contacts.prototype.remove = function (id) {
+        try {
+            var indexToRemove = this.contacts.findIndex(function (element) { return element.id === id; });
+            this.contacts.splice(indexToRemove, 1);
+            this.render();
+        }
+        catch (error) { }
     };
     //search method
     Contacts.prototype.search = function (params) { };
     return Contacts;
 }());
 var savedContacts = new Contacts();
+//Click the edit button should make the name and phone number contenteditable="true", show it visually
+function handleEdit(id) {
+    try {
+        var handleEdit_1 = function (id) {
+            savedContacts.update(id);
+        };
+    }
+    catch (error) { }
+}
 var handleDelete = function (id) {
-    savedContacts.remove(id);
+    try {
+        savedContacts.remove(id);
+    }
+    catch (error) { }
 };
 //Adding a contact:
 var handleSubmit = function (event) {
     try {
         event.preventDefault();
-        console.dir(event.target);
         var phoneNumber_1 = event.target[0].value;
         var contactName_1 = event.target[1].value;
         var email_1 = event.target[2].value;
@@ -60,10 +83,7 @@ var handleSubmit = function (event) {
         var newContact = new Contact(phoneNumber_1, contactName_1, email_1, address_1, onWhatsapp_1, photo_1);
         savedContacts.contacts.push(newContact);
         savedContacts.render();
-        console.log();
-        //Add contact to the contacts array:
-        // contacts.push(new Contact(phoneNumber, contactName, email, address, onWhatsapp, photo));
-        // event.target.reset()
+        event.target.reset();
     }
     catch (error) {
         console.error(error);
