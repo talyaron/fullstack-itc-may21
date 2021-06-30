@@ -24,4 +24,32 @@ const handleSubmit = (ev) => {
     return lookArray.filter(joke=> lookJoke.test(joke.value))
 }
 
+const inputSearch = document.getElementById("inpSearch");
+
+searchRegEx(inputSearch: string) {
+
+    const regExp: string = `^${inputSearch}`
+    const searchTermReg: RegExp = new RegExp(regExp, 'i');
+    const filterSearch = list.filter(elem => searchTermReg.test(elem.product))
+    renderData(filterSearch);
+
+}
+inputSearch.addEventListener('keyup', handleKeyUp)
+
+function handleKeyUp() {
+    try {
+        list.filterbyName(inputSearch.value)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+function filterbyName(inputSearch: string) {
+
+    const regrExp: string = `^${inputSearch}`
+    const searchTermReg: RegExp = new RegExp(regrExp, 'i');
+    this.datalist = list.filter(elem => searchTermReg.test(elem.product))
+    renderData()
+
+}
 
