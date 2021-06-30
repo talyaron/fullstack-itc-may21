@@ -7,6 +7,7 @@ class Contact {
   address: string;
   onWhatsapp: boolean;
   photo: string;
+  id: string
 
   constructor(
     phoneNumber: number,
@@ -14,7 +15,7 @@ class Contact {
     email: string,
     address: string,
     onWhatsapp: boolean,
-    photo: string
+    photo: string,
   ) {
     this.phoneNumber = phoneNumber;
     this.contactName = contactName;
@@ -22,6 +23,7 @@ class Contact {
     this.address = address;
     this.onWhatsapp = onWhatsapp;
     this.photo = photo;
+    this.id = Math.random().toString(16).slice(2)
   }
 }
 
@@ -53,8 +55,8 @@ class Contacts {
         </div>
         <p class="contact__address">${contact.address}</p>
         <p class="contact__email">${contact.email}</p>
-        <i class="fas fa-edit"></i>
-        <i class="far fa-trash-alt"></i>
+        <i class="fas fa-edit" style="cursor:pointer;"></i>
+        <i class="far fa-trash-alt" style="cursor:pointer;" onclick="handleDelete('${contact.id}')"></i>
         </div>`;
         rootDiv.innerHTML = htmlPattern;
       });
@@ -63,12 +65,18 @@ class Contacts {
   //Update method
   update(params: void) {}
   //Remove method
-  remove(params: void) {}
+  remove(params: void) {
+    // savedContacts.filter()
+  }
   //search method
   search(params: void) {}
 }
 
 const savedContacts = new Contacts();
+
+const handleDelete = (id) => {
+    savedContacts.remove(id)    
+}
 
 //Adding a contact:
 const handleSubmit = (event: any) => {

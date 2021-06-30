@@ -7,6 +7,7 @@ var Contact = /** @class */ (function () {
         this.address = address;
         this.onWhatsapp = onWhatsapp;
         this.photo = photo;
+        this.id = Math.random().toString(16).slice(2);
     }
     return Contact;
 }());
@@ -25,7 +26,7 @@ var Contacts = /** @class */ (function () {
             var rootDiv_1 = document.querySelector(".saved-contacts-root");
             var htmlPattern_1 = '';
             this.contacts.forEach(function (contact) {
-                htmlPattern_1 += "<div class=\"contact\">\n        <i class=\"fa fa-bars\" aria-hidden=\"true\"></i>\n        <img class=\"contact__img\" src=\"" + contact.photo + "\" alt=\"Contact image\">\n        <div class=\"contact__inner-wrapper\">\n            <h3 class=\"contact__inner-wrapper__name\">" + contact.contactName + "</h3>\n            <div class=\"contact__inner-wrapper__phone-wrapper\">\n                <p class=\"contact__number\">" + contact.phoneNumber + "</p>\n                <i class=\"fa fa-whatsapp fa\" aria-hidden=\"true\"></i>\n            </div>\n        </div>\n        <p class=\"contact__address\">" + contact.address + "</p>\n        <p class=\"contact__email\">" + contact.email + "</p>\n        <i class=\"fas fa-edit\"></i>\n        <i class=\"far fa-trash-alt\"></i>\n        </div>";
+                htmlPattern_1 += "<div class=\"contact\">\n        <i class=\"fa fa-bars\" aria-hidden=\"true\"></i>\n        <img class=\"contact__img\" src=\"" + contact.photo + "\" alt=\"Contact image\">\n        <div class=\"contact__inner-wrapper\">\n            <h3 class=\"contact__inner-wrapper__name\">" + contact.contactName + "</h3>\n            <div class=\"contact__inner-wrapper__phone-wrapper\">\n                <p class=\"contact__number\">" + contact.phoneNumber + "</p>\n                <i class=\"fa fa-whatsapp fa\" aria-hidden=\"true\"></i>\n            </div>\n        </div>\n        <p class=\"contact__address\">" + contact.address + "</p>\n        <p class=\"contact__email\">" + contact.email + "</p>\n        <i class=\"fas fa-edit\" style=\"cursor:pointer;\"></i>\n        <i class=\"far fa-trash-alt\" style=\"cursor:pointer;\" onclick=\"handleDelete('" + contact.id + "')\"></i>\n        </div>";
                 rootDiv_1.innerHTML = htmlPattern_1;
             });
         }
@@ -34,12 +35,17 @@ var Contacts = /** @class */ (function () {
     //Update method
     Contacts.prototype.update = function (params) { };
     //Remove method
-    Contacts.prototype.remove = function (params) { };
+    Contacts.prototype.remove = function (params) {
+        // savedContacts.filter()
+    };
     //search method
     Contacts.prototype.search = function (params) { };
     return Contacts;
 }());
 var savedContacts = new Contacts();
+var handleDelete = function (id) {
+    savedContacts.remove(id);
+};
 //Adding a contact:
 var handleSubmit = function (event) {
     try {
