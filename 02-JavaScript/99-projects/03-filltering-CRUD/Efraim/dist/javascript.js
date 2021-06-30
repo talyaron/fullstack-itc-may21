@@ -210,6 +210,27 @@ var addToDom1 = function (searchResults) {
         console.error(e);
     }
 };
+var addToDom2 = function (searchResults) {
+    try {
+        var shoppingList_2 = document.querySelector('.shopping-list');
+        if (!shoppingList_2) {
+            throw new Error('No shopping list available!');
+        }
+        shoppingList_2.innerHTML = "";
+        if (searchResults.length === 0) {
+            shoppingList_2.innerHTML = 'no results to show';
+            return;
+        }
+        searchResults.forEach(function (productItem) { return shoppingList_2.innerHTML += ("<div id='" + productItem.id + "'  class=\"shopping-list__item-wrapper\">" +
+            ("<img class=\"shopping-list__item-wrapper__item-image\" src=" + productItem.imgSrc + " alt=\"\">") +
+            ("<div class=\"shopping-list__item-wrapper__edit\" id='" + productItem.id2 + "'> - Edit the text and click to save for next time</div>") +
+            ("<h2  class=\"shopping-list__item-wrapper__item-name edit\" id=\"" + productItem.id3 + "\" contenteditable=\"true\">" + productItem.description + "</h2>") +
+            ("<h3  class=\"shopping-list__item-wrapper__item-year\">" + productItem.year + "</h3>")); });
+    }
+    catch (e) {
+        console.error(e);
+    }
+};
 var handleSubmit1 = function (ev) {
     try {
         ev.preventDefault();
@@ -218,7 +239,7 @@ var handleSubmit1 = function (ev) {
             throw new Error('No value being read for search term!');
         }
         var results = findProductbySearchTerm(products.products, searchTerm);
-        addToDom1(results);
+        addToDom2(results);
         ev.target.reset();
     }
     catch (er) {
@@ -233,7 +254,7 @@ var handleKeyUp = function (ev) {
             throw new Error('No value being read for search term!');
         }
         var results = findProductbySearchTerm(products.products, searchTerm);
-        addToDom1(results);
+        addToDom2(results);
     }
     catch (er) {
         console.error(er);
@@ -256,7 +277,7 @@ var filterYear = function (ev) {
         for (var i = 0; i < indexArray.length; i++) {
             results[i].description = nameUpdate[indexArray[i]];
         }
-        addToDom1(results);
+        addToDom2(results);
     }
     catch (er) {
         console.error(er);
