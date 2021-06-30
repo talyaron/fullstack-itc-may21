@@ -64,18 +64,28 @@ class Ids {
   }
 
   editElement(event) {
-    const name: string = event.target.elements.name.value;
-    const imageUrl: string = event.target.elements.imageUrl.value;
-    const pokeType: string = event.target.elements.pokeType.value;
+    try {
 
-    const edit = this.id.find((element) => element.ident === updateElement);
-
-    edit.name = name;
-    edit.imageUrl = imageUrl;
-    edit.pokeType = pokeType;
-    this.bringInfo(event);
-
-    this.render()
+ 
+      const name: string = event.target.elements.name.value;
+      const imageUrl: string = event.target.elements.imageUrl.value;
+      const pokeType: string = event.target.elements.pokeType.value;
+      if(name === '')throw Error("Put a Pokemon");
+      if(imageUrl === '') throw Error('Put a Url Image');
+      if(pokeType !== "fire" && pokeType !== "water"&&pokeType !== "bug"&&pokeType !== "grass"&&pokeType !== "normal"&&pokeType !== "flying"&&pokeType !== "electric") throw Error("Please in the Type of Pokemon put fire, water,bug,grass,normal,flying or electric");
+      const edit = this.id.find((element) => element.ident === updateElement);
+  
+      edit.name = name;
+      edit.imageUrl = imageUrl;
+      edit.pokeType = pokeType;
+      this.bringInfo(event);
+  
+      this.render()
+      
+    } catch (error) {
+      alert(error)
+    }
+  
   }
 
   deleteItem(ident: string) {
@@ -102,36 +112,42 @@ this.id = this.id.filter((element) =>searchTermReg.test( element.name));
 
   fiterItem() {
     const selectValue = String(select.value);
+    try {
 
-    if (selectValue === "fire") {
-      this.id = this.id.filter((element) => element.pokeType === selectValue);
-      this.render();
-    }
-    if (selectValue === "bug") {
-      this.id = this.id.filter((element) => element.pokeType === selectValue);
-      this.render();
+       if (selectValue === "fire") {
+        this.id = this.id.filter((element) => element.pokeType === selectValue);
+        this.render();
+      }
+      else if (selectValue === "bug") {
+        this.id = this.id.filter((element) => element.pokeType === selectValue);
+        this.render();
+      }
+  
+      else if (selectValue === "grass") {
+        this.id = this.id.filter((element) => element.pokeType === selectValue);
+        this.render();
+      }
+      else if (selectValue === "water") {
+        this.id = this.id.filter((element) => element.pokeType === selectValue);
+        this.render();
+      }
+      else if (selectValue === "flying") {
+        this.id = this.id.filter((element) => element.pokeType === selectValue);
+        this.render();
+      }
+      else if (selectValue === "normal") {
+        this.id = this.id.filter((element) => element.pokeType === selectValue);
+        this.render();
+      }
+      else if (selectValue === "electric") {
+        this.id = this.id.filter((element) => element.pokeType === selectValue);
+        this.render();
+      }
+    } catch (error) {
+      
     }
 
-    if (selectValue === "grass") {
-      this.id = this.id.filter((element) => element.pokeType === selectValue);
-      this.render();
-    }
-    if (selectValue === "water") {
-      this.id = this.id.filter((element) => element.pokeType === selectValue);
-      this.render();
-    }
-    if (selectValue === "flying") {
-      this.id = this.id.filter((element) => element.pokeType === selectValue);
-      this.render();
-    }
-    if (selectValue === "normal") {
-      this.id = this.id.filter((element) => element.pokeType === selectValue);
-      this.render();
-    }
-    if (selectValue === "electric") {
-      this.id = this.id.filter((element) => element.pokeType === selectValue);
-      this.render();
-    }
+   
   }
 
 
@@ -162,14 +178,20 @@ const ids = new Ids();
 ids.addList(peronas);
 const handleSubmit = (event) => {
   event.preventDefault();
-
+try {
   const name: string = event.target.elements.name.value;
   const imageUrl: string = event.target.elements.imageUrl.value;
   const pokeType: string = event.target.elements.pokeType.value;
-
+  if(name === '')throw Error("Put a Pokemon");
+  if(imageUrl === '') throw Error('Put a Url Image');
+  if(pokeType !== "fire" && pokeType !== "water"&&pokeType !== "bug"&&pokeType !== "grass"&&pokeType !== "normal"&&pokeType !== "flying"&&pokeType !== "electric") throw Error("Please in the Type of Pokemon put fire, water,bug,grass,normal,flying or electric");
   const generator = new IdsGenerator(name, imageUrl, pokeType);
   console.log(generator);
   ids.add(generator);
+} catch (error) {
+  
+}
+
   event.target.reset();
 };
 
@@ -179,16 +201,18 @@ const handleDelete = (ident: string) => {
 
 const handleFilter = () => {
   ids.fiterItem();
+  
 };
 
 const editItem = (ident: string) => {
   ids.bringInfo(ident);
+
 };
 
 const handleEdit = (event) => {
   event.preventDefault();
   ids.editElement(event);
-
+event.target.reset();
 };
 
 const searchBar = (event)=> {

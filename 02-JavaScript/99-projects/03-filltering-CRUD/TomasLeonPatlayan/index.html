@@ -35,7 +35,7 @@
     </div>
 
     <div class="container__button">
-      <button type="submit" >Send</button>
+      <button  class="btn btn-warning" type="submit" >Send</button>
     </div>
 </div>
 
@@ -43,26 +43,32 @@
 
 
 </form>
-<div class="select">
-  <select onchange="handleFilter(event)" name="todos" class="filter-todo">
-      <option class="option_item" value="" hidden disabled selected> ----
-      </option>
-<option class="option-item" value="fire">fire</option>
-<option class="option-item" value="bug">bug</option>
-<option class="option-item" value="grass">grass</option>
-<option class="option-item" value="water">water</option>
-<option class="option-item" value="flying">flying</option>
-<option class="option-item" value="normal">normal</option>
-<option class="option-item" value="electric">electric</option>
+
+<div class="out-form">
+  <div class="select">
+    <select onchange="handleFilter(event)" name="todos" class="filter-todo">
+        <option class="option_item" value="" hidden disabled selected> ----
+        </option>
+  <option class="option-item" value="fire">fire</option>
+  <option class="option-item" value="bug">bug</option>
+  <option class="option-item" value="grass">grass</option>
+  <option class="option-item" value="water">water</option>
+  <option class="option-item" value="flying">flying</option>
+  <option class="option-item" value="normal">normal</option>
+  <option class="option-item" value="electric">electric</option>
 
 
 
-   </select>
+    </select>
+
+</div>
 
 
    <div class="input-search">
      <input onkeyup="searchBar(event)" type="search" name="search" id="search">
    </div>
+</div>
+
 </header>
 
 <main class="show container"></main>
@@ -79,16 +85,29 @@
       <div class="modal-body">
         <form onsubmit="handleEdit(event)">
 
-            <input id="name" type="text" name="name" >
+          <div class="container__input-name">
+            <legend>Pokemon Name</legend>
+            <input  type="text" name="name" >
+          </div>
+      
+      
+          <div class="container__input-imageUrl">
+            <legend>Pokemon ImageUrl</legend>
+            <input type="url" name="imageUrl" >
+          </div>
+      
+          <div class="container__input-typePoke">
             
-            <input id="imageUrl" type="url" name="imageUrl" >
+          <legend>Pokemon Type</legend>
+            <input type="text" name="pokeType">
+          </div>
+      
+          <div class="container__button">
+            <button class="btn btn-warning" type="submit" >Send</button>
+          </div>
             
-            <input id="pokeType" type="text" name="pokeType">
             
-            <button type="submit" >Send</button>
-            
-            
-            </div> 
+           
             </form>
       </div>
       <div class="modal-footer">
