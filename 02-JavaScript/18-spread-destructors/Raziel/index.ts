@@ -10,4 +10,12 @@ console.log(name2,age);
 const{streets}=city
 console.log(streets);
 
-function volume({width,height,deepth})
+const cube={width:100,height:200,depth:900}
+
+function volume({width,height,depth}:{width:number,height:number,depth:number}){
+ 
+    return  console.log(width*height*depth);
+}
+
+volume({width:200,height:200,depth:100});
+volume(cube);
