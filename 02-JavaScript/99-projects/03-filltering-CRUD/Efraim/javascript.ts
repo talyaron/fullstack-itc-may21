@@ -83,11 +83,21 @@ function commonFunction() {
         }
         for (let i = 0; i < editElem.length; i++) {
             editElem[i].innerHTML = nameUpdate[i]
+            products.products[i].description = nameUpdate[i]
         }
     } catch (e) {
         console.error(e);
     }
 }
+function saveToLocalStorage() {
+    try {
+        localStorage.setItem('products', JSON.stringify(products.products))
+        localStorage.userEdits = JSON.stringify(nameUpdate);
+    } catch (e) {
+        console.error(e);
+    }
+}
+
 
 const deleteProduct = (productId: string) => {
     try {
@@ -102,8 +112,8 @@ const deleteProduct = (productId: string) => {
         products.products.splice(index, 1);
         products.renderProducts(shoppingListDOM);
         nameUpdate.splice(index, 1);
-        commonFunction()
-        localStorage.setItem('products', JSON.stringify(products.products))
+        commonFunction();
+        saveToLocalStorage()
     } catch (e) {
         console.error(e)
     }
@@ -146,10 +156,8 @@ function handleSubmit(ev): any {
         products.addProduct(new Product(`"${imgUrl}"`, `${description}`, parseInt(year)));
         products.renderProducts(shoppingListDOM);
         nameUpdate.push(`${description}`)
-        localStorage.userEdits = JSON.stringify(nameUpdate);
-        commonFunction()
-        localStorage.setItem('products', JSON.stringify(products.products))
-        console.log(products.products)
+        commonFunction();
+        saveToLocalStorage()
         ev.target.reset();
     } catch (e) {
         console.error(e)
@@ -158,21 +166,20 @@ function handleSubmit(ev): any {
 
 let nameUpdate: Array<any> = products.products.map(proddes => proddes.description)
 function saveEdits(productId, productID2) {
-        const index = products.findIndexes(productId);
-        let editElem: NodeListOf<Element> = document.querySelectorAll(`.edit`);
-        nameUpdate.length = editElem.length
-        nameUpdate[index] = editElem[index].innerHTML;
-        products.products[index].description = nameUpdate[index];
-        localStorage.userEdits = JSON.stringify(nameUpdate);
-        let update = document.getElementById(`${productID2}`);
-        update.innerHTML = "Edits saved!"
-  
+    const index = products.findIndexes(productId);
+    let editElem: NodeListOf<Element> = document.querySelectorAll(`.edit`);
+    nameUpdate.length = editElem.length
+    nameUpdate[index] = editElem[index].innerHTML;
+    products.products[index].description = nameUpdate[index];
+    let update = document.getElementById(`${productID2}`);
+    update.innerHTML = "Edits saved!"
+    saveToLocalStorage()
 }
 
 
 function checkEdits() {
     try {
-        const render:any = JSON.parse(localStorage.getItem('products'))
+        const render: any = JSON.parse(localStorage.getItem('products'))
         if (render != null) {
             addToDom1(render)
             products.products = render
@@ -192,12 +199,12 @@ function checkEdits() {
 const findProductbySearchTerm = (productSearch: Array<any>, searchTerm: string) => {
     try {
         const userRegEx: RegExp = new RegExp(searchTerm, 'gmi');
-        let indexArray: Array<any> = products.products.reduce(function(acc, productItem, index) {
+        let indexArray: Array<any> = products.products.reduce(function (acc, productItem, index) {
             if (userRegEx.test(productItem.description)) {
-              acc.push(index);
+                acc.push(index);
             }
             return acc;
-          }, []);
+        }, []);
         const searchResults: Array<any> = productSearch.filter(productItem => userRegEx.test(productItem.description));
         for (let i = 0; i < indexArray.length; i++) {
             searchResults[i].description = nameUpdate[indexArray[i]]
@@ -241,9 +248,9 @@ const addToDom2 = (searchResults: Array<any>) => {
         if (searchResults.length === 0) { shoppingList.innerHTML = 'no results to show'; return; }
         searchResults.forEach((productItem) => shoppingList.innerHTML += (
             `<div id='${productItem.id}'  class="shopping-list__item-wrapper">` +
-            `<img class="shopping-list__item-wrapper__item-image" src=${productItem.imgSrc} alt="">`  +
+            `<img class="shopping-list__item-wrapper__item-image" src=${productItem.imgSrc} alt="">` +
             `<h2  class="shopping-list__item-wrapper__item-name edit" id="${productItem.id3}" >${productItem.description}</h2>` +
-            `<h3  class="shopping-list__item-wrapper__item-year">${productItem.year}</h3>` 
+            `<h3  class="shopping-list__item-wrapper__item-year">${productItem.year}</h3>`
         )
         )
     } catch (e) {
@@ -288,20 +295,20 @@ const filterYear = (ev: any): any => {
         if (!value) {
             throw new Error('No value being read for filter!')
         }
-        let indexArray:Array<number> = products.products.reduce(function(acc, curr, index) {
+        let indexArray: Array<number> = products.products.reduce(function (acc, curr, index) {
             if (curr.year === value) {
-              acc.push(index);
+                acc.push(index);
             }
             return acc;
-          }, []);
-        let results:Array<any> = products.products.filter(productItem => productItem.year === value);
+        }, []);
+        let results: Array<any> = products.products.filter(productItem => productItem.year === value);
         console.log(results)
         for (let i = 0; i < indexArray.length; i++) {
             results[i].description = nameUpdate[indexArray[i]]
         }
         addToDom2(results);
 
-       
+
     } catch (er) {
         console.error(er)
     }
@@ -317,10 +324,10 @@ const resetButton = () => {
 
 const selectList = () => {
     try {
-        let array = ["2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"];
+        let array = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"];
         let selectList = document.querySelector(".wrapper__div__select-filter");
         selectList.id = "mySelect";
-        
+
         //Create and append the options
         for (let i = 0; i < array.length; i++) {
             let option = document.createElement("option");
