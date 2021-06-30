@@ -1,10 +1,13 @@
+// QUERIES SELECTORS
 var select = document.querySelector(".select");
 var boton = document.querySelector(".boton_trash");
 var editBtn = document.getElementById('nameInput');
 var modal = document.getElementById('Mymodal');
+var searchBar = document.querySelector("#searchBar");
 // VARIABLE GLOBAL
 var list = [];
 var updateID;
+var searchValue;
 var Producto = /** @class */ (function () {
     function Producto(product, brand, price, stock, description) {
         this.product = product;
@@ -16,6 +19,10 @@ var Producto = /** @class */ (function () {
     }
     return Producto;
 }());
+// EVENTS LISTENERS
+select.addEventListener('change', selectFilter);
+searchBar.addEventListener('keyup', search);
+// FUNCTIONS
 // ADD JSON TO LIST ARRAY
 function addObject() {
     productos.forEach(function (prd) {
@@ -24,42 +31,70 @@ function addObject() {
     });
 }
 addObject();
+// DELETE PRODUCT
 function remove(id) {
     var filtrado = list.filter(function (prod) { return prod.id !== id; });
     list = filtrado;
     renderData(list);
 }
+// TAKING ID FOR EDIT, THEN I USED AT THE handleEdit()
 function edit(id) {
     updateID = id;
 }
-select.addEventListener('change', function () {
-    var selectedValue = Number(select.value);
-    console.log(typeof selectedValue);
-    var arr = [];
-    arr = list;
-    var arr2 = [];
-    arr2 = list;
-    var arr3 = [];
-    arr3 = list;
-    if (selectedValue === 100) {
-        var priceFilter = arr.filter(function (prod) { return prod.price >= selectedValue; });
-        arr = priceFilter;
-        renderData(arr);
+// FILTER BY SELECTS OPTIONS [see event]
+function selectFilter() {
+    try {
+        var selectedValue_1 = Number(select.value);
+        if (selectedValue_1 > 300)
+            throw new Error('You have an error in your value');
+        console.log(typeof selectedValue_1);
+        var arr = [];
+        arr = list;
+        var arr2 = [];
+        arr2 = list;
+        var arr3 = [];
+        arr3 = list;
+        if (selectedValue_1 === 100) {
+            var priceFilter = arr.filter(function (prod) { return prod.price >= selectedValue_1; });
+            arr = priceFilter;
+            renderData(arr);
+        }
+        else if (selectedValue_1 === 200) {
+            var priceFilter1 = arr2.filter(function (prod) { return prod.price >= selectedValue_1; });
+            arr2 = priceFilter1;
+            renderData(arr2);
+        }
+        else if (selectedValue_1 === 0) {
+            renderData(list);
+        }
+        else {
+            var priceFilter2 = arr3.filter(function (prod) { return prod.price >= selectedValue_1; });
+            arr3 = priceFilter2;
+            renderData(arr3);
+        }
     }
-    else if (selectedValue === 200) {
-        var priceFilter1 = arr2.filter(function (prod) { return prod.price >= selectedValue; });
-        arr2 = priceFilter1;
-        renderData(arr2);
+    catch (e) {
+        console.error(e);
     }
-    else if (selectedValue === 0) {
-        renderData(list);
+}
+// TAKING VALUE FROM INPUT FOR USE IT AT searchRegEx()
+function search(e) {
+    try {
+        searchValue = e.target.value;
+        searchRegEx(searchValue);
     }
-    else {
-        var priceFilter2 = arr3.filter(function (prod) { return prod.price >= selectedValue; });
-        arr3 = priceFilter2;
-        renderData(arr3);
+    catch (e) {
+        console.error(e);
     }
-});
+}
+// RegEx FOR FILTER BY PRODUCTS NAME
+function searchRegEx(inputSearch) {
+    var regExp = "^" + inputSearch;
+    var searchTermReg = new RegExp(regExp, 'i');
+    var filterSearch = list.filter(function (elem) { return searchTermReg.test(elem.product); });
+    renderData(filterSearch);
+}
+// RENDER DATA
 function renderData(listado) {
     var container = document.querySelector(".container_products");
     var html = "";
@@ -69,35 +104,47 @@ function renderData(listado) {
     container.innerHTML = html;
 }
 renderData(list);
+// HANDLE DATA FROM PRINCIPAL FORM
 var handleSubmit = function (event) {
-    event.preventDefault();
-    var product = event.target.elements.producto.value;
-    var brand = event.target.elements.brand.value;
-    var price = event.target.elements.price.valueAsNumber;
-    var stock = event.target.elements.stock.valueAsNumber;
-    var description = event.target.elements.description.value;
-    var producto = new Producto(product, brand, price, stock, description);
-    // ADD NEW PRODUCT TO LIST ARRAY
-    list.unshift(producto);
-    renderData(list);
-    console.log(producto);
-    event.target.reset();
+    try {
+        event.preventDefault();
+        var product = event.target.elements.producto.value;
+        var brand = event.target.elements.brand.value;
+        var price = event.target.elements.price.valueAsNumber;
+        var stock = event.target.elements.stock.valueAsNumber;
+        var description = event.target.elements.description.value;
+        var producto = new Producto(product, brand, price, stock, description);
+        // ADD NEW PRODUCT TO LIST ARRAY
+        list.unshift(producto);
+        renderData(list);
+        console.log(producto);
+        event.target.reset();
+    }
+    catch (e) {
+        console.error(e);
+    }
 };
+// HANDLEING DATA FROM MODAL TO EDIT
 var handleEdit = function (event) {
-    event.preventDefault();
-    var productModal = event.target.elements.productoModal.value;
-    var brandModal = event.target.elements.brandModal.value;
-    var priceModal = event.target.elements.priceModal.valueAsNumber;
-    var stockModal = event.target.elements.stockModal.valueAsNumber;
-    var descriptionModal = event.target.elements.descriptionModal.value;
-    var edit = list.find(function (prod) { return prod.id === updateID; });
-    edit.product = productModal;
-    edit.brand = brandModal;
-    edit.price = priceModal;
-    edit.stock = stockModal;
-    edit.description = descriptionModal;
-    console.log(productModal, brandModal, priceModal, stockModal, descriptionModal);
-    console.log(edit);
-    renderData(list);
+    try {
+        event.preventDefault();
+        var productModal = event.target.elements.productoModal.value;
+        var brandModal = event.target.elements.brandModal.value;
+        var priceModal = event.target.elements.priceModal.valueAsNumber;
+        var stockModal = event.target.elements.stockModal.valueAsNumber;
+        var descriptionModal = event.target.elements.descriptionModal.value;
+        var edit_1 = list.find(function (prod) { return prod.id === updateID; });
+        edit_1.product = productModal;
+        edit_1.brand = brandModal;
+        edit_1.price = priceModal;
+        edit_1.stock = stockModal;
+        edit_1.description = descriptionModal;
+        console.log(productModal, brandModal, priceModal, stockModal, descriptionModal);
+        console.log(edit_1);
+        renderData(list);
+    }
+    catch (e) {
+        console.error(e);
+    }
 };
 console.log(updateID);

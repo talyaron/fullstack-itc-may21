@@ -2,22 +2,23 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color:white;
+    color: white;
 }
 
-header{
-    h2{
+header {
+    h2 {
         text-align: center;
-        color: white    ;
+        color: white;
         background-color: black;
         padding-bottom: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    img{
-        width:50px;
-        height:50px;
+
+    img {
+        width: 50px;
+        height: 50px;
     }
 }
 
@@ -25,7 +26,7 @@ header{
 .container {
     &__list {
         position: relative;
-        top:-2rem;
+        top: -2rem;
         left: 4rem;
         margin-bottom: 0.5rem;
         padding: 0.7rem 0;
@@ -36,15 +37,18 @@ header{
         &--red-color {
             color: #c00;
         }
-        input,select,option{
-            color:black
+
+        input,
+        select,
+        option {
+            color: black
         }
     }
 
     &__actions {
 
         position: relative;
-        top:-1rem;
+        top: -1rem;
         left: 4rem;
         width: 90%;
         display: flex;
@@ -53,17 +57,18 @@ header{
         margin: 0.7rem 0;
         padding-bottom: 0.5rem;
 
-        input{
-            color:black;
+        input {
+            color: black;
         }
-        fieldset{
-            border:2px solid red;
+
+        fieldset {
+            border: 2px solid red;
         }
 
         &__filtergender {
             display: block;
             padding: 0.5rem;
-           
+
 
             legend {
                 text-align: center;
@@ -85,15 +90,15 @@ header{
             justify-content: center;
             align-items: center;
             padding: 0.3rem;
-            margin-top:2px;
-            
-         
+            margin-top: 2px;
+
+
             legend {
                 text-align: center;
             }
 
             &--btn {
-                margin: 10px auto;
+                margin: 10px 5px;
                 padding: .6rem 1rem;
                 border-radius: 4px;
                 font-size: 1rem;
@@ -114,24 +119,36 @@ header{
                 color: black;
             }
 
+            &--reset {
+                background-color: gray;
+                border: 1px solid lightgray;
+            }
+
             &--edit:disabled {
                 border: 1px solid #fed821;
                 background-color: #b79801;
                 cursor: not-allowed
             }
+
             &--add:disabled {
                 border: 1px solid #244623;
                 background-color: #006400;
                 cursor: not-allowed
             }
 
-            &--add:hover{
+            &--add:hover {
                 background-color: #c5e1a5;
-                color:black;
+                color: black;
             }
-            &--edit:hover{
+
+            &--edit:hover {
                 background-color: #ffffbf;
-                color:black;
+                color: black;
+            }
+
+            &--reset:hover {
+                background-color: lightgray;
+                color: black;
             }
         }
 
@@ -144,12 +161,23 @@ header{
         height: 100%;
         flex-wrap: wrap;
         position: relative;
-        top:-2rem;
+        top: -2rem;
         left: 4rem;
-        
+
+        th {
+            text-align: left;
+        }
+
+        td {
+            text-align: center;
+        }
 
         &--checks {
             opacity: 0;
+        }
+
+        span {
+            margin-top: 0.4rem;
         }
 
         &-checks+i {
@@ -188,9 +216,16 @@ header{
 
         &--red-color {
             color: #c00;
+            position: relative;
+            left: -20%;
+            margin: 0.5rem 0;
         }
+
         &--yellow-color {
             color: #b79801;
+            position: relative;
+            left: -20%;
+            margin: 0.5rem 0;
         }
 
     }
@@ -198,19 +233,232 @@ header{
 
 
 
+@media only screen and (max-width: 800px) {
+
+    .container {
+
+        form {
+            position: relative;
+            left: -1%;
+        }
+
+        &__actions {
+            width: 90%;
+
+            &__filtergender {
+                position: relative;
+                left: -7%;
+            }
+        }
+
+        &__boardData {
+            position: relative;
+            left: 7%;
+
+            &--item {
+                width: 40%;
+            }
+        }
+
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
+
+    .container {
+
+        form {
+            position: relative;
+            left: -1%;
+        }
+
+        &__actions {
+            width: 90%;
+
+            &__filtergender {
+
+                margin: 1rem auto;
+                padding: auto;
+                width: 50%;
+
+                span{
+                    position: relative;
+                    left:17%;
+                }
+
+            }
+            &__addedit {
+                display: block;
+                margin: 0 auto;
+
+                &--btn {
+                    position: relative;
+                    left: 5px;
+                }
+            }
+        }
+
+        &__boardData {
+            position: relative;
+            left: 7%;
+
+            &--item {
+                width: 40%;
+            }
+        }
+
+    }
+
+}
 
 
+@media only screen and (max-width: 400px) {
+
+    .container {
+
+        form {
+            position: relative;
+            left: -20%;
+        }
+
+        &__actions {
+            margin: 2rem auto;
+            display: block;
+            width: 90%;
+
+            fieldset {
+                display: block;
+            }
 
 
+            label {
+                position: relative;
+                left: 5%;
+
+            }
 
 
+            &__filtergender {
+                position: relative;
+                left:5%;
+                margin: 1rem auto;
+
+                span{
+                    position: relative;
+                    left:0%;
+                }
+            }
+
+            &__addedit {
+                margin: 0 auto;
+
+                &--btn {
+                    position: relative;
+                    left: 5px;
+                }
+            }
+        }
+
+        &__list{
+            display: grid;
+            position: relative;
+            left: 25%;
+            legend{
+                text-align: center;
+                position: relative;
+                left: -36%;
+            }
+
+            input,label{
+                margin-bottom: 0.3rem;
+            }
+        }
+
+        &__boardData {
 
 
+            &--item {
+                width: 100%;
+            }
+        }
+
+    }
 
 
+}
 
 
+@media only screen and (max-width: 300px) {
+
+    .container {
+
+        form {
+            position: relative;
+            left: -20%;
+        }
+
+        &__actions {
+            margin: 2rem auto;
+            display: block;
+            width: 90%;
+
+            fieldset {
+                display: block;
+            }
 
 
+            label {
+                position: relative;
+                left: 15%;
+
+            }
 
 
+            &__filtergender {
+                position: relative;
+                left:-3%;
+                width: 100%;
+
+                span{
+                    position: relative;
+                    left:8%;
+                }
+            }
+
+            &__addedit {
+                margin: 0 auto;
+
+                &--btn {
+                    position: relative;
+                    left: 5px;
+                }
+            }
+
+        }
+
+        &__list{
+            display: grid;
+            legend{
+                text-align: center;
+                position: relative;
+                left: -32%;
+            }
+            
+            input,label{
+                margin-bottom: 0.3rem;
+            }
+        }
+
+        &__boardData {
+
+
+            &--item {
+                width: 100%;
+            }
+        }
+
+    }
+
+
+}
