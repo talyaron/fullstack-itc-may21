@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //create a function which get height, width, deepth (all of type number). the function returns the qubick volume
+        //which equals to height * width * deepth
+        //do it with destucotr
+
+        const medidas = {
+            height: "2",
+            width: "3", 
+            deepth: "10"
+        }
+
+        const {height, width, deepth} = medidas;
+
+        function qubickVol(height, width, deepth){
+            const qubick = height * width * deepth;
+            console.log(qubick);
+        }
+        qubickVol(height, width, deepth);
+         
+    </script>
+</body>
+</html>
