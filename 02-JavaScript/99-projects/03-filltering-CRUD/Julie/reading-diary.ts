@@ -13,19 +13,13 @@ class Book {
     this.bookId = "id" + Math.random().toString(16).slice(2);
   }
 }
-// const addedBookArray = [];
 
-const totalArray = booksData;
+let totalArray = booksData;
 
 class BooksArray {
-  totalArray: Array<any>;
   addBook(book: Book) {
-    // this.totalArray.push(book);
-    // renderBook(this.totalArray);
-    // const addedBookArray = [];
-    totalArray.push(book);
+    totalArray.unshift(book);
     renderBook(totalArray);
-    // When I"m rendering the book, the booksLIst is this.totalArray
   }
 }
 
@@ -33,16 +27,20 @@ const bookArrayInstance = new BooksArray();
 bookArrayInstance.totalArray;
 
 function handleDelete(bookId: string) {
-  console.log(bookArrayInstance.totalArray);
-  const reducedArray = bookArrayInstance.totalArray.filter((book) => {
+  const reducedArray = totalArray.filter((book) => {
     return bookId !== book.bookId;
   });
-  // renderBook(reducedArray);
-  // console.log(reducedArray);
-  // When I'm deleting, booksList is assigned to reducedArray
+  totalArray = reducedArray;
+  renderBook(reducedArray);
 }
 
-// function updateTitle ()
+function updateTitle(bookId) {
+  const titleToUpdate = totalArray.find((book) => {
+    return bookId === book.bookId;
+  });
+  titleToUpdate.title = "Changed";
+  renderBook(totalArray);
+}
 
 const handleSubmit = (ev: any): void => {
   ev.preventDefault();
@@ -57,7 +55,7 @@ const handleSubmit = (ev: any): void => {
 };
 
 function renderBook(booksList) {
-  console.log(booksList);
+  let newBooks = "";
   const booksRoot: HTMLElement = document.querySelector("#booksRoot");
   booksList.forEach((book) => {
     const booktoDom = `<div class="form-wrapper-random">
@@ -76,17 +74,31 @@ function renderBook(booksList) {
     <button onclick='handleDelete("${book.bookId}")'>Delete</button>
     <button onclick='updateTitle("${book.bookId}")'>Update</button>
   </div>`;
-    booksRoot.insertAdjacentHTML("afterbegin", booktoDom);
+    newBooks += booktoDom;
+    booksRoot.innerHTML = newBooks;
   });
 }
 
 window.onload = renderBook(booksData);
-// Displaying everything in bookslist array
 
-// Write  a function for handle Delete and another for handle Update
+const searchBooksbyTerm = (totalArray: Array<any>, searchTerm: string) => {
+  const myRegEx = new RegExp(searchTerm, "g");
+  const searchedBooks: Array<any> = totalArray.filter((book) =>
+    myRegEx.test(book)
+  );
+  return searchedBooks;
+};
 
-// function searchBooks(term: string, totalArray: Array<any>): any {
-//   const searchTermReg: RegExp = new RegExp(term, "i");
+const handleKeyUp = (ev: any) => {
+  ev.preventDefault();
+  const searchTerm: string = ev.target.value;
+  const results = searchBooksbyTerm(totalArray, searchTerm);
+  renderBook(results);
+};
 
-//   return totalArray.filter((book) => searchTermReg.test(book.title));
-// }
+const handleRegExSubmit = (ev: any) => {
+  ev.preventDefault();
+  const searchTerm: string = ev.target.elements.input.value;
+  const results = searchBooksbyTerm(totalArray, searchTerm);
+  renderBook(results);
+};
