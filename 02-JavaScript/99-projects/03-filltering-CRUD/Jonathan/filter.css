@@ -1,0 +1,94 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  top: 15px;
+  left: 5%;
+}
+
+.container fieldset legend {
+  text-align: center;
+}
+
+.container fieldset input {
+  margin: 2rem;
+}
+
+.container .boardData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 2rem;
+}
+
+.container .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 2rem;
+  padding: 1rem;
+  width: 100%;
+  line-height: 1.7rem;
+  -webkit-box-shadow: -1px 1px 5px 9px rgba(0, 0, 0, 0.75);
+          box-shadow: -1px 1px 5px 9px rgba(0, 0, 0, 0.75);
+}
+
+.btnContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1rem;
+}
+
+[type=radio] {
+  opacity: 0;
+}
+
+[type=radio] + i {
+  cursor: pointer;
+}
+
+[type=radio]:checked + i {
+  outline: 2px solid black;
+}
+/*# sourceMappingURL=filter.css.map */

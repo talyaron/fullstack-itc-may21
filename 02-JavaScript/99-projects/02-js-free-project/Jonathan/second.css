@@ -1,0 +1,221 @@
+* {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+}
+
+.header {
+  background-color: black;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.header__prevpage, .header__nextpage {
+  text-decoration: none;
+  padding: 2px;
+  font-family: arial;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 15px;
+  color: black;
+  background-color: salmon;
+  border-radius: 30px;
+  position: relative;
+  left: 5%;
+}
+
+.header__prevpage:hover, .header__nextpage:hover {
+  color: #9b0e0e;
+  background-color: #bc6355;
+  text-decoration: none;
+}
+
+.header__title {
+  color: white;
+  position: relative;
+  left: 5%;
+  font-size: 1.4rem;
+}
+
+.boardHotel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin-top: 1.6rem;
+}
+
+.boardHotel__nohotel {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  color: white;
+  font-size: 1.7rem;
+}
+
+.boardHotel__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.boardHotel__container--name {
+  color: white;
+  font-size: 1.5rem;
+  position: relative;
+  text-align: center;
+}
+
+.boardHotel__container--address {
+  max-width: 400px;
+  margin-top: 10px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.boardHotel__container__box {
+  position: relative;
+  top: 90%;
+}
+
+.boardHotel__container__box--price {
+  color: white;
+  margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+  .boardHotel {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .boardHotel__container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .boardHotel__container--name {
+    text-align: center;
+    position: relative;
+    left: 3%;
+    margin-top: 2rem;
+  }
+  .boardHotel__container--address {
+    text-align: center;
+  }
+  .boardHotel__container--img {
+    margin-left: 5px;
+  }
+  .boardHotel__container__box {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .boardHotel__container__box--price {
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 300px) {
+  .header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .header__prevpage, .header__nextpage {
+    margin: 1rem 0;
+    position: relative;
+    left: 5%;
+  }
+  .header__prevpage {
+    position: relative;
+    left: 5%;
+  }
+  .boardHotel {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .boardHotel__container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .boardHotel__container--name {
+    text-align: center;
+    position: relative;
+    left: 3%;
+    margin-top: 2rem;
+  }
+  .boardHotel__container--address {
+    text-align: center;
+    position: relative;
+    left: 10%;
+    max-width: 200px;
+  }
+  .boardHotel__container--img {
+    width: 100%;
+  }
+  .boardHotel__container__box {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .boardHotel__container__box--price {
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+    position: relative;
+    left: -5%;
+  }
+}
+/*# sourceMappingURL=second.css.map */

@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    .formulario{
+        .formulario_item{
+            display: block;
+        }
+    }
+}
+.container_titles{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border: 1px black solid;
+}
+.container_products{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border: 1px black solid;
+    .item{
+        border: 1px black solid;
+    }
+}

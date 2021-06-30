@@ -3,17 +3,11 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
     padding: 0;
-    // background: linear-gradient(to right,
-    //         #f9fd02 0%,
-    //         #f7e817 50%,
-    //         #000000 50%,
-    //         #1b1a1a 100%);
-}
-.delete {
-    display: none;
-}
-#delete {
-    display: none;
+    background: linear-gradient(to right,
+            #f9fd02 0%,
+            #f7e817 50%,
+            #000000 50%,
+            #1b1a1a 100%);
 }
 
 .merchandise {
@@ -24,6 +18,69 @@ body {
     margin-top: 5rem;
     color: white;
     filter: drop-shadow(.05em .05em rgb(255, 38, 0));
+}
+.filter {
+    padding-bottom: 2rem;
+    font-size: larger;
+    color: red;
+    font-weight: bold;
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    &__div {
+        margin-top: 15px; 
+
+        &__label {
+            color: red;
+            padding-right: 0.5rem;
+        }
+        &__select-filter {
+            padding-right: 2rem;
+        }
+        &__select-filter:hover, &__reset:hover {
+            cursor: pointer;
+        }
+        &__reset {
+            width: fit-content; 
+            background-color: black; 
+            color: yellow; 
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin: auto;
+            margin-bottom: 1rem 
+        }
+    }
+
+    &__or {
+        padding: 1rem;
+        color: red;
+        font-style: italic;
+    }
+    &__label {
+        color: red;
+        padding-right: 0.5rem;
+    }
+
+    &__form {
+
+        &__submit {
+            background-color: yellow;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        &__submit:hover {
+            cursor: pointer;
+        }
+
+    }
+
 }
 
 .shopping-list {
@@ -40,8 +97,6 @@ body {
         text-align: center;
         margin: 5rem;
 
-
-
         &__item-image {
             width: 350px;
             height: 400px;
@@ -56,28 +111,191 @@ body {
             font-size: 1rem;
             margin-top: 20px;
             color: red;
-
-
         }
 
         &__item-price {
             font-size: 1rem;
             color: red;
-
-
         }
 
-        &__add {
-            width: 100px;
-            background-color: white;
-            border: none;
+        &__edit {
+            color: grey;
+        }
+
+        &__wrapper {
+            display: flex;
+
+            &__delete, &__save  {
+                width: 100px;
+                background-color: white;
+                border: none;
+                font-weight: bold;
+                border-radius: 5px;
+                margin: auto;
+                margin-bottom: 1rem
+              
+            }
+           
+            &__delete:hover, &__save:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: auto;
+
+    &__addown {
+        color: red;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+    &__submit-button {
+        background: linear-gradient(to right,
+                #1b1a1a 0%,
+                #000000 50%,
+                #f7e817 50%, 
+                #f9fd02 100%);
+                border: none;
+                font-weight: bold;
+                font-size: larger;
+                border-radius: 5px;
+                color: red ;
+                margin-bottom: 2rem;
+    }
+    &__submit-button:hover {
+        cursor: pointer;
+    }   
+}
+
+@media only screen and (max-width: 700px) {
+   
+    .merchandise {
+        margin-bottom: 1rem;
+        font-size: 40px;
+        font: 600 9vmin/7vh cookie, cursive;
+        font-style: italic;
+        margin-top: 2rem;
+       
+    }
+    .filter {
+        padding-bottom: 1rem;
+        font-size: smaller;
+        color: red;
+        font-weight: bold;
+    }
+    
+    .wrapper {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+    
+        &__div {
+            margin-top: 15px; 
+    
+            &__label {
+                font-size: 0.7rem;
+            }
+            &__select-filter {
+                padding-right: 1rem;
+                font-size: 0.5rem;
+            }
+            &__reset {
+                font-size: 0.5rem;  
+            }
+        }
+    
+       
+        &__label {
+            font-size: 0.7rem;
+        }
+    
+        &__form {
+            &__search {
+                width: 100px;
+            }
+            &__submit {
+                font-size: 0.5rem;
+            }
+    
+        }
+    
+    }
+    
+    .shopping-list {
+      
+        &__item-wrapper {
+            margin: 2.5rem;
+            
+    
+            &__item-image {
+                width: 200px;
+                height: 200px;
+                align-self: center;
+            }
+    
+    
+            &__item-name {
+                font-size: 0.8rem;
+               
+            }
+    
+            &__item-price {
+                font-size: 0.8rem
+            }
+    
+            &__edit {
+                color: grey;
+                font-size: 0.6rem;
+            }
+    
+            &__wrapper {
+                display: flex;
+    
+                &__delete, &__save  {
+                    font-size: 0.7rem;
+                    
+            }
+        }
+    }}
+    
+    .form {
+       
+    
+        &__addown {
+            color: red;
             font-weight: bold;
-            border-radius: 5px;
-            margin: auto;
+            margin-bottom: 0.5rem;
         }
-
-        &__add:hover {
+        &__submit-button {
+            background: linear-gradient(to right,
+                    #1b1a1a 0%,
+                    #000000 50%,
+                    #f7e817 50%, 
+                    #f9fd02 100%);
+                    border: none;
+                    font-weight: bold;
+                    font-size: larger;
+                    border-radius: 5px;
+                    color: red ;
+                    margin-bottom: 2rem;
+        }
+        &__submit-button:hover {
             cursor: pointer;
+        }   
+    }    
+}
+@media only screen and (max-width: 463px) {
+    .wrapper {
+        &__form {
+            &__search {
+                margin-top: 20px;
+            }
         }
     }
 }

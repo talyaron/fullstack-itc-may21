@@ -342,6 +342,7 @@ template {
   display: none;
 }
 
+/* YS: What are these files? */
 html {
   font-size: 62.5%;
   -webkit-box-sizing: border-box;
@@ -395,6 +396,7 @@ h3 {
   text-align: center;
 }
 
+/* YS: What are these files? */
 /*LAYOUT*/
 .card-container {
   position: relative;

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Runner Name -->
+    <title> TogetheRun Account</title>
+    <link rel="stylesheet" href="dist/togetheRun_main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3d6c8f810b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="summary">
+        <button class="summary__item summary__item--logout">Logout</button>
+        <h3 class="summary__item summary__item--runner_name">Welcome <!-- Runner Name --></h3>
+        <div class="summary__item summary__item--total">
+            <div class="profile_image">
+                <img src="../images/togetheRun_logo.png" class="profile_image__item profile_image__item--profile_image" alt="profile image"> <!-- title=Runner Name -->
+                <div class="profile_image__item profile_image__item--badges">
+                    <img src="../images/TR_Kms_B.png" id="distance_badge">
+                    <img src="../images/TR_B.png" id="togetherun_badge">
+                </div>
+            </div>
+            <h1 id="total_distance"><span id="total_sum"> <!-- Distance Sum --></span> <span class="units">Km</span></h1>
+            <div id="total_togetheruns"><span id="total_counts"><!-- TogetheRuns Counter --></span> <span class="counts">TogetheRuns</span></div>
+        </div>
+    </header>
+    <main id="mainscreen">
+        <section class="dashboard">
+            <h2 class="dashboard__item dashboard__item--heading">TogetheRun Dashboard</h2>
+            <button class="dashboard__item dashboard__item--add update_run_btn">Schedule a Run</button>
+            <button class="dashboard__item dashboard__item--history">TogetheRuns History</button>
+        </section>
+        <section id="filters">
+            <form class="filter_form" onsubmit="filterSubmit(event)">
+                <div class="filter_form__item">
+                    <label for="min_distance_filter">From (Km):</label>
+                    <input type="number" min="1" name="minDistanceFilter" id="min_distance_filter" onkeyup="filterKeyUp(event)" />
+                </div>
+                <div class="filter_form__item">
+                    <label for="max_distance_filter">To (Km):</label>
+                    <input type="number" max="100" name="maxDistanceFilter" id="max_distance_filter" onkeyup="filterKeyUp(event)" />
+                </div>
+                <div class="filter_form__item">
+                    <label for="pace_filter">Pace (min/Km):</label>
+                    <select name="paceFilter" id="pace_filter" onchange="filterChange(event)">
+                        <option value="">choose from list</option>
+                        <option value="09'00&quot; - 10'00&quot;">09'00" - 10'00"</option>
+                        <option value="08'00&quot; - 09'00&quot;">08'00" - 09'00"</option>
+                        <option value="07'00&quot; - 08'00&quot;">07'00" - 08'00"</option>
+                        <option value="06'00&quot; - 07'00&quot;">06'00" - 07'00"</option>
+                        <option value="05'00&quot; - 06'00&quot;">05'00" - 06'00"</option>
+                        <option value="04'00&quot; - 05'00&quot;">04'00" - 05'00"</option>
+                        <option value="03'00&quot; - 04'00&quot;">03'00" - 04'00"</option>
+                    </select>
+                </div>
+                <div class="filter_form__item">
+                    <label for="area_filter">Area:</label>
+                    <select name="areaFilter" id="area_filter" onchange="filterChange(event)">
+                        <option value="">choose from list</option>
+                        <option value="Be'er Sheva">Be'er Sheva</option>
+                        <option value="Tel Aviv">Tel Aviv</option>
+                    </select>
+                </div>
+                <div class="filter_form__item">
+                    <label for="location_filter">Location:</label>
+                    <input type="search" name="locationFilter" id="location_filter" onkeyup="filterKeyUp(event)" />
+                </div>
+                <div class="filter_form__item">
+                    <input id="filter_submit" type="submit" name="submit" value="Filter" />
+                </div>
+            </form>
+        </section>
+        <section class="runs">
+        </section>
+    </main>
+    <div class="modalWrapper">
+        <div class="modalBox modalWrapper__item modalWrapper__item--update_run">
+            <div class="modalBox__item modalBox__item--title">
+                <span>Update Run</span>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modalBox__item modalBox__item--content">
+                <form class="update_run_form" onsubmit="updateRunSubmit(event)">
+                    <div class="update_run_form__item">
+                        <label for="run_distance_form">Run Distance (Km)</label>
+                        <input type="number" min="1" max="100" name="runDistance" placeholder="in kilometers" required id="run_distance_form" />
+                    </div>
+                    <div class="update_run_form__item">
+                        <label for="run_time_form">Run Time</label>
+                        <input type="datetime-local" min="" name="runTime" placeholder="Choose date and time" required id="run_time_form" /> <!-- min=new Date() via js (only future runs can be added) -->
+                    </div>
+                    <div class="update_run_form__item">
+                        <label for="run_area_form">Run Area</label>
+                        <select name="runArea" required id="run_area_form">
+                            <option value="">choose from list</option>
+                            <option value="Be'er Sheva">Be'er Sheva</option>
+                            <option value="Tel Aviv">Tel Aviv</option>
+                        </select>
+                    </div>
+                    <div class="update_run_form__item">
+                        <label for="run_location_form">Run Starting location</label>
+                        <input type="text" minlengt="2" maxlength="30" placeholder="Specify starting location" name="runLocation" required id="run_location_form" />
+                    </div>
+                    <div class="update_run_form__item">
+                        <label for="run_pace_form">Run Pace (min/Km)</label>
+                        <select name="runPace" required id="run_pace_form">
+                            <option value="">choose from list</option>
+                            <option value="09'00&quot; - 10'00&quot;">09'00" - 10'00"</option>
+                            <option value="08'00&quot; - 09'00&quot;">08'00" - 09'00"</option>
+                            <option value="07'00&quot; - 08'00&quot;">07'00" - 08'00"</option>
+                            <option value="06'00&quot; - 07'00&quot;">06'00" - 07'00"</option>
+                            <option value="05'00&quot; - 06'00&quot;">05'00" - 06'00"</option>
+                            <option value="04'00&quot; - 05'00&quot;">04'00" - 05'00"</option>
+                            <option value="03'00&quot; - 04'00&quot;">03'00" - 04'00"</option>
+                        </select>
+                    </div>
+                    <div class="update_run_form__item update_run_form__item--submit">
+                        <input id="submit" type="submit" name="submit" value="Update Run" />
+                    </div>
+                </form>
+                <button class="close">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dist/togetheRun_main.js"></script>
+</body>
+
+</html>
