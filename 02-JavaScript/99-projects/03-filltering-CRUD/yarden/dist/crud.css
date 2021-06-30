@@ -1,3 +1,25 @@
+@-webkit-keyframes blink-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes blink-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .main-headline {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
@@ -11,7 +33,6 @@
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   border: #155c15d5 1px solid;
-  height: 92vh;
 }
 
 .form-container {
@@ -38,12 +59,27 @@
   text-align: center;
   padding: 0.4rem;
 }
+.form-container .form__input:hover {
+  border-color: rgba(187, 134, 65, 0.438);
+}
 .form-container .form__submit-button {
-  padding: 5rem;
+  margin: 1rem;
+  padding: 0.7rem 1.5rem;
+  background-color: #f6330cc2;
+  cursor: pointer;
+  border-radius: 5%;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.form-container .form__submit-button:hover {
+  background-color: white;
+  color: #155c15d5;
 }
 
 .saved-contacts-container {
   padding: 0.1rem;
+  padding-bottom: 40rem;
   border: purple 1px solid;
   width: 100%;
 }
@@ -62,10 +98,17 @@
   margin: 1.1rem auto;
   border-bottom: rgba(187, 134, 65, 0.438) 1px solid;
 }
+.saved-contacts-container .saved-contacts-root .contact:hover {
+  background-color: rgba(187, 134, 65, 0.438);
+  border-radius: 2%;
+}
+.saved-contacts-container .saved-contacts-root .contact .fa-bars {
+  cursor: pointer;
+}
 .saved-contacts-container .saved-contacts-root .contact__img {
   border-radius: 50%;
-  width: 10%;
-  margin: 0.5rem;
+  width: 9%;
+  margin: 1rem;
 }
 .saved-contacts-container .saved-contacts-root .contact__inner-wrapper {
   display: flex;
@@ -102,6 +145,14 @@
   color: #0059ff;
   margin-right: 0.5rem;
 }
+.saved-contacts-container .saved-contacts-root .contact .fa-edit:hover {
+  -webkit-animation: blink-2 0.9s both;
+  animation: blink-2 0.9s both;
+}
 .saved-contacts-container .saved-contacts-root .contact .fa-trash-alt {
   color: red;
+}
+.saved-contacts-container .saved-contacts-root .contact .fa-trash-alt:hover {
+  -webkit-animation: blink-2 0.9s both;
+  animation: blink-2 0.9s both;
 }

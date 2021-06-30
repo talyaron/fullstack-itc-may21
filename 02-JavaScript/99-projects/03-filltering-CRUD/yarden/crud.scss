@@ -1,3 +1,5 @@
+// Animation keyframes:
+@-webkit-keyframes blink-2{0%{opacity:1}50%{opacity:.2}100%{opacity:1}}@keyframes blink-2{0%{opacity:1}50%{opacity:.2}100%{opacity:1}}
 $contacts-font: Arial, Helvetica, sans-serif;
 //Color palette for this project:
 $contacts-orange: #f6330cc2;
@@ -18,7 +20,6 @@ $contacts-light-brown: rgba(187, 134, 65, 0.438);
   font-family: $contacts-font;
   display: flex;
   border: $contacts-green 1px solid;
-  height: 92vh;
 }
 
 .form-container {
@@ -42,15 +43,30 @@ $contacts-light-brown: rgba(187, 134, 65, 0.438);
       border-radius: 5%;
       text-align: center;
       padding: 0.4rem;
+      &:hover {
+        border-color: $contacts-light-brown;
+      }
     }
     &__submit-button {
-        padding: 5rem;
+      margin: 1rem;  
+      padding: 0.7rem 1.5rem;
+      background-color: $contacts-orange;
+      cursor: pointer;
+      border-radius: 5%;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      &:hover{
+        background-color: white;
+        color: $contacts-green;
+      }
     }
   }
 }
 
 .saved-contacts-container {
   padding: 0.1rem;
+  padding-bottom: 40rem;
   border: purple 1px solid;
   width: 100%;
   & .saved-contacts-headline {
@@ -68,10 +84,17 @@ $contacts-light-brown: rgba(187, 134, 65, 0.438);
       padding: 2.5rem;
       margin: 1.1rem auto;
       border-bottom: $contacts-light-brown 1px solid;
+      &:hover {
+        background-color: $contacts-light-brown;
+        border-radius: 2%;
+      }
+      & .fa-bars {
+        cursor: pointer;
+      }
       &__img {
         border-radius: 50%;
-        width: 10%;
-        margin: 0.5rem;
+        width: 9%;
+        margin: 1rem;
       }
       &__inner-wrapper {
         display: flex;
@@ -107,9 +130,15 @@ $contacts-light-brown: rgba(187, 134, 65, 0.438);
       & .fa-edit {
           color: rgb(0, 89, 255);
           margin-right: 0.5rem;
+          &:hover{
+            -webkit-animation:blink-2 .9s both;animation:blink-2 .9s both          
+          }
       }
       & .fa-trash-alt {
           color: red;
+          &:hover{
+            -webkit-animation:blink-2 .9s both;animation:blink-2 .9s both          
+          }
       }
     }
   }
