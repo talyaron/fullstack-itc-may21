@@ -240,9 +240,8 @@ const addToDom2 = (searchResults: Array<any>) => {
         if (searchResults.length === 0) { shoppingList.innerHTML = 'no results to show'; return; }
         searchResults.forEach((productItem) => shoppingList.innerHTML += (
             `<div id='${productItem.id}'  class="shopping-list__item-wrapper">` +
-            `<img class="shopping-list__item-wrapper__item-image" src=${productItem.imgSrc} alt="">` +
-            `<div class="shopping-list__item-wrapper__edit" id='${productItem.id2}'> - Edit the text and click to save for next time</div>` +
-            `<h2  class="shopping-list__item-wrapper__item-name edit" id="${productItem.id3}" contenteditable="true">${productItem.description}</h2>` +
+            `<img class="shopping-list__item-wrapper__item-image" src=${productItem.imgSrc} alt="">`  +
+            `<h2  class="shopping-list__item-wrapper__item-name edit" id="${productItem.id3}" >${productItem.description}</h2>` +
             `<h3  class="shopping-list__item-wrapper__item-year">${productItem.year}</h3>` 
         )
         )
