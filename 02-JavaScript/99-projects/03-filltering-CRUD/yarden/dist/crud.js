@@ -1,4 +1,5 @@
-//I am creating a simple contact form with Responsive SCSS
+//This is a simple contacts list with possibility to add and remove contacts
+//The class for input from user, to add to an array later:
 var Contact = /** @class */ (function () {
     function Contact(phoneNumber, contactName, email, address, onWhatsapp, photo) {
         this.phoneNumber = phoneNumber;
@@ -11,16 +12,19 @@ var Contact = /** @class */ (function () {
     }
     return Contact;
 }());
+//Selecting the relevant elements on the DOM:
 var phoneNumber = document.querySelector("#phone-number");
 var contactName = document.querySelector("#name");
 var email = document.querySelector("#email");
 var address = document.querySelector("#address");
 var onWhatsapp = document.querySelector("#on-Whatsapp");
 var photo = document.querySelector("#photo");
+//Contacts class for methods and storage of the instances on an array:
 var Contacts = /** @class */ (function () {
     function Contacts() {
         this.contacts = [];
     }
+    //Function for rendering an instance to the DOM:
     Contacts.prototype.render = function () {
         try {
             var rootDiv = document.querySelector(".saved-contacts-root");
@@ -32,7 +36,7 @@ var Contacts = /** @class */ (function () {
         }
         catch (error) { }
     };
-    //Update method
+    //Update method - did not manage to finish it:
     Contacts.prototype.update = function (id) {
         try {
             var indexToEdit = this.contacts.findIndex(function (element) { return element.id === id; });
@@ -41,7 +45,7 @@ var Contacts = /** @class */ (function () {
         }
         catch (error) { }
     };
-    //Remove method
+    //Remove method that works with handle-delete function:
     Contacts.prototype.remove = function (id) {
         try {
             var indexToRemove = this.contacts.findIndex(function (element) { return element.id === id; });
@@ -50,12 +54,13 @@ var Contacts = /** @class */ (function () {
         }
         catch (error) { }
     };
-    //search method
+    //search method - had to skip it! Did not have time ):
     Contacts.prototype.search = function (params) { };
     return Contacts;
 }());
+//The array instance of Contacts class for this page:
 var savedContacts = new Contacts();
-//Click the edit button should make the name and phone number contenteditable="true", show it visually
+//Clicking on the edit button -should have- made the name and phone number contenteditable="true"; and show it visually for editing; could not finish this on time
 function handleEdit(id) {
     try {
         var handleEdit_1 = function (id) {
@@ -70,7 +75,7 @@ var handleDelete = function (id) {
     }
     catch (error) { }
 };
-//Adding a contact:
+//Adding a contact after form submission:
 var handleSubmit = function (event) {
     try {
         event.preventDefault();

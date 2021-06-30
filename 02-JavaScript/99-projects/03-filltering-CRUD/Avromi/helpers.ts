@@ -28,5 +28,20 @@ function addNewCylinders() {
     })
 }
 
+function addNewMpg() {
+
+    const selectMpg = document.querySelector("table #milesPerGallon");
+    const mpgList = [];
+
+    cars.cars.forEach(c => mpgList.push(c.Miles_per_Gallon))
+    let myMpgSet = new Set(mpgList)
+    selectMpg.innerHTML = "";
+    myMpgSet.forEach(c => {
+        const option = `<option value="${c}">${c}</option>`
+        selectMpg.insertAdjacentHTML('afterbegin', option)
+    })
+}
+
 addNewOrigin();
-addNewCylinders()
+addNewCylinders();
+addNewMpg();

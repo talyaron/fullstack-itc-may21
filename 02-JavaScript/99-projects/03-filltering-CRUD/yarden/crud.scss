@@ -24,7 +24,7 @@ $contacts-fade-to-black: rgba(0, 0, 0, 0.712);
   display: flex;
   border: $contacts-green 1px solid;
 }
-
+//Form side styling:
 .form-container {
   padding: 0.1rem;
   width: 25%;
@@ -67,7 +67,7 @@ $contacts-fade-to-black: rgba(0, 0, 0, 0.712);
     }
   }
 }
-
+//List side styling:
 .saved-contacts-container {
   padding: 0.1rem;
   padding-bottom: 40rem;

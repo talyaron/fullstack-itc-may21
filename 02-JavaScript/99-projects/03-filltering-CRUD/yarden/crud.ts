@@ -1,5 +1,6 @@
-//I am creating a simple contact form with Responsive SCSS
+//This is a simple contacts list with possibility to add and remove contacts
 
+//The class for input from user, to add to an array later:
 class Contact {
   phoneNumber: number;
   contactName: string;
@@ -26,17 +27,17 @@ class Contact {
     this.id = Math.random().toString(16).slice(2);
   }
 }
-
+//Selecting the relevant elements on the DOM:
 const phoneNumber = document.querySelector("#phone-number");
 const contactName = document.querySelector("#name");
 const email = document.querySelector("#email");
 const address = document.querySelector("#address");
 const onWhatsapp = document.querySelector("#on-Whatsapp");
 const photo = document.querySelector("#photo");
-
+//Contacts class for methods and storage of the instances on an array:
 class Contacts {
   contacts: Array<Contact> = [];
-
+//Function for rendering an instance to the DOM:
   render() {
     try {
       let rootDiv = document.querySelector(".saved-contacts-root");
@@ -61,7 +62,7 @@ class Contacts {
       rootDiv.innerHTML = htmlPattern;
     } catch (error) {}
   }
-  //Update method
+  //Update method - did not manage to finish it:
   update(id: string) {
     try {
       const indexToEdit = this.contacts.findIndex(
@@ -71,7 +72,7 @@ class Contacts {
       console.log(this.contacts[indexToEdit]);
     } catch (error) {}
   }
-  //Remove method
+  //Remove method that works with handle-delete function:
   remove(id: string): void {
     try {
       const indexToRemove = this.contacts.findIndex(
@@ -81,12 +82,13 @@ class Contacts {
       this.render();
     } catch (error) {}
   }
-  //search method
+  //search method - had to skip it! Did not have time ):
   search(params: void) {}
 }
-
+//The array instance of Contacts class for this page:
 let savedContacts = new Contacts();
-//Click the edit button should make the name and phone number contenteditable="true", show it visually
+
+//Clicking on the edit button -should have- made the name and phone number contenteditable="true"; and show it visually for editing; could not finish this on time
 function handleEdit(id) {
   try {
     const handleEdit = (id) => {
@@ -101,7 +103,7 @@ const handleDelete = (id) => {
   } catch (error) {}
 };
 
-//Adding a contact:
+//Adding a contact after form submission:
 const handleSubmit = (event: any) => {
   try {
     event.preventDefault();
