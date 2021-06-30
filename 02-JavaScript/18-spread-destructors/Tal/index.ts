@@ -5,6 +5,8 @@ const person={
     street:'Herzel'
 }
 
+
+
 const cities=['Tel-Aviv','Jerusalem','Beer-Sheva']
 
 // const personName = person.name;
