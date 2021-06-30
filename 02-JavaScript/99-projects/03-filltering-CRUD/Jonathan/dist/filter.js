@@ -1,6 +1,7 @@
 var boardDataRoot = document.querySelector('#boardData');
 var btnAdd = document.getElementById('add');
 var btnEdit = document.getElementById('edit');
+var btnReset = document.getElementById('reset');
 //data
 var inputName = document.querySelector("#name");
 var city = document.querySelector("#city");
@@ -39,11 +40,13 @@ var DataList = /** @class */ (function () {
             _this.datalist.push(oldData);
             _this.datalistFilter.push(oldData);
         });
+        this.renderDataList();
         return this.datalist.length;
     };
     DataList.prototype.getNewData = function (data) {
         this.datalist.push(data);
         this.datalistFilter.push(data);
+        localStorage.setItem("newPeople", JSON.stringify(this.datalist));
         this.renderDataList();
         return this.datalist.length;
     };
@@ -63,21 +66,21 @@ var DataList = /** @class */ (function () {
                     tel.value = element.tel;
                     inputStatus.value = element.status;
                     salary.value = String(element.salary);
-                    posicion = i;
+                    position = i;
                 }
                 i++;
             });
-            return posicion;
+            return position;
         }
         catch (e) {
             console.log(e);
         }
     };
-    DataList.prototype.editItem = function (posicion) {
+    DataList.prototype.editItem = function (position) {
         try {
             var index_1 = 0;
             this.datalist.forEach(function (item) {
-                if (index_1 === posicion) {
+                if (index_1 === position) {
                     if (inputName.name === "" || city.value === "" || tel.value === "" || tel.value === "" || parseInt(salary.value) === NaN)
                         throw new Error("Check if you complete all the inputs");
                     if (parseInt(salary.value) <= 0)
@@ -93,6 +96,7 @@ var DataList = /** @class */ (function () {
             });
             btnAdd.disabled = false;
             this.renderDataList();
+            localStorage.setItem("newPeople", JSON.stringify(this.datalist));
         }
         catch (e) {
             console.log(e);
@@ -117,6 +121,7 @@ var DataList = /** @class */ (function () {
         this.datalist = this.datalist.filter(function (item) { return item.id !== id; });
         this.datalistFilter = this.datalistFilter.filter(function (item) { return item.id !== id; });
         this.renderDataList();
+        localStorage.setItem("newPeople", JSON.stringify(this.datalist));
     };
     DataList.prototype.renderDataList = function () {
         var html = '';
@@ -143,31 +148,20 @@ var DataList = /** @class */ (function () {
     };
     return DataList;
 }());
-var personalDataList = [
-    {
-        name: 'Jonathan',
-        city: 'Buenos Aires',
-        gender: 'male',
-        tel: '972-555-2232',
-        status: 'single',
-        salary: 500,
-        id: Math.random().toString(16).slice(2)
-    },
-    {
-        name: 'Agustina',
-        city: 'Madrid',
-        gender: 'female',
-        tel: '5-55-232',
-        status: 'single',
-        salary: 1000,
-        id: Math.random().toString(16).slice(2)
-    }
-];
 var datalist = new DataList();
 var count = 0;
-count = datalist.getOldData(personalDataList);
-datalist.renderDataList();
-var posicion;
+var position;
+var newPeople = JSON.parse(localStorage.getItem("newPeople"));
+var oldPeople = JSON.parse(localStorage.getItem("oldPeople"));
+if (newPeople === null) {
+    count = datalist.getOldData(oldPeople);
+}
+else if (newPeople !== oldPeople) {
+    count = datalist.getOldData(newPeople);
+}
+else {
+    count = datalist.getOldData(oldPeople);
+}
 //Buttons
 btnAdd.addEventListener('click', function (event) {
     event.preventDefault();
@@ -186,7 +180,7 @@ btnAdd.addEventListener('click', function (event) {
 });
 btnEdit.addEventListener('click', function (event) {
     event.preventDefault();
-    datalist.editItem(posicion);
+    datalist.editItem(position);
     //form clear
     inputName.value = "";
     city.value = "";
@@ -197,7 +191,6 @@ btnEdit.addEventListener('click', function (event) {
 inputNameFilter.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
     try {
-        //
         datalist.filterbyName(inputNameFilter.value);
     }
     catch (e) {
@@ -207,7 +200,7 @@ function handleKeyUp() {
 function filterGender() {
     var _loop_1 = function (i) {
         gender_list[i].addEventListener("click", function () {
-            datalist.filterGender(gender_list[i].nodeValue);
+            datalist.filterGender(gender_list[i].value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
         });
     };
     for (var i = 0; i < gender_list.length; i++) {
@@ -221,3 +214,8 @@ function handleEdit() {
     btnAdd.disabled = true;
     datalist.bringItem();
 }
+btnReset.addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.clear(); // reset and bring to the board only the two items from data.ts
+    window.location.reload(); //refresh page
+});

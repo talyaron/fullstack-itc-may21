@@ -94,6 +94,10 @@ header img {
   background-color: #fed821;
   color: black;
 }
+.container__actions__addedit--reset {
+  background-color: lightgray;
+  border: 1px solid gray;
+}
 .container__actions__addedit--edit:disabled {
   border: 1px solid #fed821;
   background-color: #b79801;
@@ -110,6 +114,10 @@ header img {
 }
 .container__actions__addedit--edit:hover {
   background-color: #ffffbf;
+  color: black;
+}
+.container__actions__addedit--reset:hover {
+  background-color: gray;
   color: black;
 }
 .container__boardData {

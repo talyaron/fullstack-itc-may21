@@ -2,6 +2,7 @@
 var rootHtml = document.querySelector('#root');
 var searchName = document.querySelector("#search");
 var gender_node = document.querySelectorAll(".gender");
+filterGender();
 var Contact = /** @class */ (function () {
     function Contact(name, fname, phone, email, gender) {
         this.name = name;
@@ -42,7 +43,7 @@ var List = /** @class */ (function () {
             if (element.gender == 'helicopter') {
                 html += "<div class = \"record-item\"><div class = \"record-el\">\n                <span>\uD83D\uDE81</span>\n            </div>";
             }
-            html += "<div class = \"record-item\">\n            <div class = \"record-el\">\n                <span>Name:" + element.name + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Family Name:" + element.fname + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span >Phone Number:" + element.phone + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Email Address :" + element.email + " </span>\n            </div>\n            <button type = \"button\" id = \"delete-btn\" onclick='handelRemove(\"" + element.id + "\")'>\n                <span>\n                    <i class = \"fas fa-trash\"></i>\n                </span> Delete\n            </button>\n            <button type = \"button\" id = \"delete-btn\" onclick='edit(\"" + element.id + "\")'>\n                <span>\n                <i class=\"fas fa-edit\"></i>\n                </span> Edit\n            </button>\n        </div>\n    </div>\n    </div>\n";
+            html += "<div class = \"record-item\">\n            <div class = \"record-el\">\n                <span>Name:" + element.name + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Family Name:" + element.fname + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span >Phone Number:" + element.phone + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Email Address :" + element.email + " </span>\n            </div>\n            <button type = \"button\" id = \"delete-btn\" onclick='handelRemove(\"" + element.id + "\")'>\n                <span>\n                    <i class = \"fas fa-trash\"></i>\n                </span> Delete\n            </button>\n            <button type = \"button\" id = \"delete-btn\" class=\"editButton\">\n                <span>\n                <i class=\"fas fa-edit\"></i>\n                </span> Edit\n            </button>\n        </div>\n    </div>\n    </div>\n";
         });
         rootHtml.innerHTML = html;
     };
@@ -64,7 +65,7 @@ var List = /** @class */ (function () {
         else {
             this.contactList = this.filteredArray.filter(function (elem) { return elem.gender === 'male' || elem.gender === 'female' || gender === "unicorn" || gender === "helicopter"; });
         }
-        this.renderList(this.contactList);
+        this.renderList(this.filteredArray);
     };
     return List;
 }());
