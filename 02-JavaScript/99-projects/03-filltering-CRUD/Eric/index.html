@@ -13,59 +13,55 @@
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
     <title>CRUD</title>
 </head>
-
 <body>
     <div class="container">
        <div class="head">
         <div>
-            <label for="">Search products</label>
-            <input type="text" id="filtername" name="filtername">
+            <label for="">Search products by name</label>
+            <input type="text" id="filterN" name="filterN">
         </div>
-        <div>
-            <label for="">Filter by quantity lower than 10</label>
-            <select name="qty" id="qty">
-                <option disabled selected>Qty</option>
-                <option class="" value="">0</option>
-                <option class="" value="">1</option>
-                <option class="" value="">2</option>
-                <option class="" value="">3</option>
-                <option class="" value="">4</option>
-                <option class="" value="">5</option>
-                <option class="" value="">6</option>
-                <option class="" value="">7</option>
-                <option class="" value="">8</option>
-                <option class="" value="">9</option>
-                <option class="" value="">10</option>
+        <br><br><br>
+        <form class="editForm" onsubmit="handleEdit(event)">
+            <input type="submit" value="Edit" class="btn-productEdit">
+          </form>
+        <div> <!--The idea is filter by quantity, I'm in process to do that-->
+            <label for="">Filter by quantity until 15</label>
+            <select name="selector"  class="selector">
+                <option class="filter-option" value="" hidden disabled selected>
+                    -----
+                      <option class="filter-option" value="">0-5</option>
+                <option class="filter-option" value="">5-10</option>
+                <option class="filter-option" value="">10-15</option>
             </select>
         </div>
     </div>
         <form onsubmit="handleSubmit(event)" id="product-form">
             <fieldset>
-                <legend>Insert Product</legend>
+                <legend>Insert stock product</legend>
             <label for="title">ProductName</label>
             <br>
-            <input type="text" id="title" name="name" class="product-name" placeholder="add name">
+            <input type="text" id="title" name="name" class="product-name" placeholder="add name" required>
             <br>
             <label for="title">Type</label>
             <br>
-            <input type="text" id="title" name="type" class="product-type" placeholder="add type">
+            <input type="text" id="title" name="type" class="product-type" placeholder="add type" required>
             <br>
             <label for="description">Description</label>
             <br>
-            <input type="text" id="description" name="description" class="product-description" placeholder="add description">
+            <input type="text" id="description" name="description" class="product-description" placeholder="add description" required>
             <br>
             <label for="origin">Origin</label>
             <br>
-            <input type="text" id="origin" name="origin" class="product-origin" placeholder="add origin">
+            <input type="text" id="origin" name="origin" class="product-origin" placeholder="add origin" required>
             <br>
             <label for="quantity">Quantity</label>
             <br>
-            <input type="number" id="quantity" name="quantity" class="product-quantity" max="10" placeholder="add quantity">
+            <input type="number" id="quantity" value="quantity" name="quantity" class="product-quantity" max="10" placeholder="add quantity" required>
             <br><br>
             <input type="submit" value="Add" class="btn-product">
         </fieldset>
         </form>
-        <br>
+            <br>
     </div>
     <table class="table-product">
         <thead>
