@@ -129,12 +129,13 @@ function handleSubmit(ev) {
         if (!shoppingListDOM) {
             throw new Error('No shopping list to hold items!');
         }
-        products.addProduct(new Product("\"" + imgUrl + "\"", "" + description, "" + year));
+        products.addProduct(new Product("\"" + imgUrl + "\"", "" + description, parseInt(year)));
         products.renderProducts(shoppingListDOM);
         nameUpdate.push("" + description);
         localStorage.userEdits = JSON.stringify(nameUpdate);
         commonFunction();
         localStorage.setItem('products', JSON.stringify(products.products));
+        console.log(products.products);
         ev.target.reset();
     }
     catch (e) {
