@@ -9,50 +9,51 @@
     <link rel="stylesheet" href="dist/styles.min.css">
 </head>
 
-<body onload="checkEdits()" onload="saveEdits()">
+<body onload="checkEdits()">
 
     <h1 class="merchandise">Memorabilia</h2>
         <label class="filter">How would you like to filter your search?</label>
         <div class="wrapper">
-            <div style="margin-top: 15px;">
-            <label class="wrapper__label">By Year</label>
-            <select class="wrapper__select-filter" onchange="filterYear(event)" id="year-produced">
-                <option selected>Please Choose a Year</option>
-                <option value="2000">2000</option>
-                <option value="2001">2001</option>
-                <option value="2002">2002</option>
-                <option value="2003">2003</option>
-                <option value="2004">2004</option>
-                <option value="2005">2005</option>
-                <option value="2006">2006</option>
-                <option value="2007">2007</option>
-                <option value="2008">2008</option>
-                <option value="2009">2009</option>
-                <option value="2010">2010</option>
-                <option value="2011">2011</option>
-                <option value="2012">2012</option>
-                <option value="2013">2013</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-            </select>
-            <button class="reset" style="width: fit-content; background-color: black; color: yellow;" onclick="resetButton()">Reset</button>
-        </div>
+            <div class="wrapper__div">
+                <label class="wrapper__div__label">By Year</label>
+                <select class="wrapper__div__select-filter" onchange="filterYear(event)" id="year-produced">
+                    <option selected>Please Choose a Year</option>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                    <option value="2002">2002</option>
+                    <option value="2003">2003</option>
+                    <option value="2004">2004</option>
+                    <option value="2005">2005</option>
+                    <option value="2006">2006</option>
+                    <option value="2007">2007</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                </select>
+                <button class="wrapper__div__reset" onclick="resetButton()">Reset</button>
+            
+            </div>
 
             <div class="wrapper__or">or</div>
-
             <label class="wrapper__label">By Word</label>
             <form class="wrapper__form" onsubmit="handleSubmit1(event)">
-                <input type="search" name="search" id="searching" onkeyup="handleKeyUp(event)">
+                <input class="wrapper__form__search" type="search" name="search" id="searching" onkeyup="handleKeyUp(event)">
                 <input class="wrapper__form__submit" type="submit" value="Search" id="submit">
             </form>
         
+
         </div>
 
 
@@ -60,13 +61,13 @@
         <div class="shopping-list">
         </div>
         <form class="form" onsubmit="handleSubmit(event)">
-            <label class="addown">Add your own!</label>
+            <label class="form__addown">Add your own!</label>
             <input type='text' name='imgSrc' placeholder="image URL" required />
             <input type='text' name='description' placeholder="description" required />
-            <input type='number' name='year' min="1900" max="2021" placeholder="year produced" required />
-            <input class="submit-button" type="submit" value="ADD!">
+            <input type='number' name='year' min="2000" max="2021" placeholder="year produced" required />
+            <input class="form__submit-button" type="submit" value="ADD!">
         </form>
-<div class=trial></div>
+
 
 
 </body>
