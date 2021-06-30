@@ -20,4 +20,16 @@ const [firstOne, secondOne, third, fourth ] = obj;
 console.log(firstOne, secondOne);
 
 
+const sizes = [{height: 2, width: 2, depth: 2}]
+
+function cubicVolume({height, width, depth}:{height:number, width:number, depth:number}):number{
+    const x = height*width*depth
+    return x
+}
+
+console.log(cubicVolume({height: 2, width:2, depth: 2}));
+console.log(cubicVolume({height: 6, width:2, depth: 9}));
+
+
+
 
