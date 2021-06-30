@@ -7,7 +7,8 @@ var getVol = function (dimentions) {
         var volume = h * w * d;
         return volume;
     }
-    catch (error) {
+    catch (er) {
+        console.error(er);
     }
 };
 var myCube = { h: 10, w: 5, d: 8 };

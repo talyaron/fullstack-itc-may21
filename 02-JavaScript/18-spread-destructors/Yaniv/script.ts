@@ -13,10 +13,10 @@ const getVol = (dimentions: ThreeD) : number => {
         const {h, w, d} = dimentions
         const volume = h*w*d;
         return volume;
-    } catch (error) {
-        
+    } catch (er) {
+        console.error(er);
     }
-}
+  }
 
 const myCube: ThreeD = {h:10,w:5,d:8};
 console.log(getVol(myCube));
