@@ -1,4 +1,4 @@
-const boardDataRoot: HTMLElement = document.querySelector('#boardData')
+let boardDataRoot: HTMLElement = document.querySelector('#boardData')
 const btnAdd = <HTMLButtonElement>document.getElementById('add')
 const btnEdit = <HTMLButtonElement>document.getElementById('edit')
 const btnReset = <HTMLButtonElement>document.getElementById('reset')
