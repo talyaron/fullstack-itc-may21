@@ -47,21 +47,15 @@
                     <th> <i class="fas fa-car-side"></i></th>
                 </tr>
                 <tr>
-                    <td><select  name="name" id="name">
-                        <option disabled selected>Filter By Name</option>
-                        <option class="318i" value="318i">318i</option>
-  
-                    </select></td>
-                    <td><select name="milesPerGallon" id="milesPerGallon">
+                    <td><input type="search" placeholder="Search by name..." onkeyup="handleKeyUp(event)"></td>
+                    <td><select onchange="handleSelectmilesPerGallon()" name="milesPerGallon" id="milesPerGallon">
                         <option disabled selected>MPG</option>
-                        <option value="12">12</option>
+                      
                       
 
                     </select></td>
                     <td><select onchange="handleSelectCylinders()" name="cylinders" id="cylinders">
-                        <option disabled selected>Cylinders</option>
-                     
-
+                       
                     </select></td>
                     <td></td>
                     <td></td>
