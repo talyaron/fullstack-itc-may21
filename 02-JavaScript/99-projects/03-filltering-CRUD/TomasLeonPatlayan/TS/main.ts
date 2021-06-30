@@ -189,7 +189,7 @@ try {
   console.log(generator);
   ids.add(generator);
 } catch (error) {
-  
+  alert(error)
 }
 
   event.target.reset();
