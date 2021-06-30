@@ -1,10 +1,3 @@
-// Here, presumably, I need to make these keys accord tp those defined by the class "Book."
-// It would be easier to change the class to accord with what is here, rather than change all of these.
-// In Avromi/ Tal's code (done in class), instead of taking in a class (i.e. Book), it takes in an interface. What';s with that?
-// I've created this array of objects, now I need to add it to the DOM, either using tyhe string/ HTML method, or the nodes method.
-// I don't really understand how it's supposed to look. Am I supposed to have this as a page of visible 'book" or just as a database, that I can search through, and then add when I find the right book?
-// And I need to add stuff that's not in there books, like date started and date finished, marks out of ten, etc. So the list cannot correspond to what we enter manually.
-//
 var booksData = [
     {
         author: "Chinua Achebe",
