@@ -114,6 +114,11 @@ header{
                 color: black;
             }
 
+            &--reset {
+                background-color: lightgray;
+                border: 1px solid gray;
+            }
+
             &--edit:disabled {
                 border: 1px solid #fed821;
                 background-color: #b79801;
@@ -131,6 +136,10 @@ header{
             }
             &--edit:hover{
                 background-color: #ffffbf;
+                color:black;
+            }
+            &--reset:hover{
+                background-color: gray;
                 color:black;
             }
         }

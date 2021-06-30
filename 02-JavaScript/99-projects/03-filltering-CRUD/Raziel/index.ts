@@ -2,7 +2,7 @@
 const rootHtml:HTMLElement=document.querySelector('#root');
 const searchName = (<HTMLInputElement>document.querySelector("#search"))
 const gender_node = <NodeList>document.querySelectorAll(".gender");
-
+filterGender();
 class Contact{
      name:string
      fname:string
@@ -73,7 +73,7 @@ class List{
                     <i class = "fas fa-trash"></i>
                 </span> Delete
             </button>
-            <button type = "button" id = "delete-btn" onclick='edit("${element.id}")'>
+            <button type = "button" id = "delete-btn" class="editButton">
                 <span>
                 <i class="fas fa-edit"></i>
                 </span> Edit
@@ -110,7 +110,7 @@ class List{
             this.contactList=  this.filteredArray.filter(elem => elem.gender === 'male' || elem.gender === 'female'|| gender==="unicorn" || gender==="helicopter")
          }
 
-        this. renderList(this.contactList)
+        this. renderList( this.filteredArray)
 
     }
 
