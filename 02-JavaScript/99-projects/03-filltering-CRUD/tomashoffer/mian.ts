@@ -138,8 +138,8 @@ function renderData(listado) {
                     <p>${element.description}</p>
                 </div>
                 <div class="container-icons item">
-                <button href="#" onclick='remove("${element.id}")'><i class="fas fa-trash icono_productos icono_productos_delete"></i></button>
-                <button href="#" data-toggle="modal" data-target="#myModal" onclick='edit("${element.id}")'><i class="fas fa-edit icono_productos icono_productos_edit"></i></button>
+                <button href="#" class="btn_icons" onclick='remove("${element.id}")'><i class="fas fa-trash icono_productos icono_productos_delete"></i></button>
+                <button href="#" class="btn_icons" data-toggle="modal" data-target="#myModal" onclick='edit("${element.id}")'><i class="fas fa-edit icono_productos icono_productos_edit"></i></button>
                 </div>`
     });
     container.innerHTML = html;
