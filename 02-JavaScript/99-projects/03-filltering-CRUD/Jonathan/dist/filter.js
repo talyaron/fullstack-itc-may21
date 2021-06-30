@@ -46,7 +46,7 @@ var DataList = /** @class */ (function () {
     DataList.prototype.getNewData = function (data) {
         this.datalist.push(data);
         this.datalistFilter.push(data);
-        localStorage.setItem("newPeople", JSON.stringify(this.datalist));
+        this.getStorage();
         this.renderDataList();
         return this.datalist.length;
     };
@@ -96,18 +96,31 @@ var DataList = /** @class */ (function () {
             });
             btnAdd.disabled = false;
             this.renderDataList();
-            localStorage.setItem("newPeople", JSON.stringify(this.datalist));
+            this.getStorage();
         }
         catch (e) {
             console.log(e);
         }
     };
-    DataList.prototype.filterGender = function (gender) {
-        if (gender === "female" || gender === "male") {
-            this.datalist = this.datalistFilter.filter(function (elem) { return elem.gender === gender; });
+    DataList.prototype.filterGender = function (gender, searchInput) {
+        var something = "^" + searchInput;
+        var searchTermReg = new RegExp(something, 'i');
+        if (inputNameFilter.value === "") {
+            if (gender === "female" || gender === "male") {
+                this.datalist = this.datalistFilter.filter(function (elem) { return elem.gender === gender; });
+            }
+            else {
+                this.datalist = this.datalistFilter.filter(function (elem) { return elem.gender === 'male' || elem.gender === 'female'; });
+            }
         }
         else {
-            this.datalist = this.datalistFilter.filter(function (elem) { return elem.gender === 'male' || elem.gender === 'female'; });
+            this.datalist = this.datalistFilter.filter(function (elem) { return searchTermReg.test(elem.name); });
+            if (gender === "female" || gender === "male") {
+                this.datalist = this.datalist.filter(function (elem) { return elem.gender === gender; });
+            }
+            else {
+                this.datalist = this.datalist.filter(function (elem) { return elem.gender === 'male' || elem.gender === 'female'; });
+            }
         }
         this.renderDataList();
     };
@@ -121,6 +134,9 @@ var DataList = /** @class */ (function () {
         this.datalist = this.datalist.filter(function (item) { return item.id !== id; });
         this.datalistFilter = this.datalistFilter.filter(function (item) { return item.id !== id; });
         this.renderDataList();
+        this.getStorage();
+    };
+    DataList.prototype.getStorage = function () {
         localStorage.setItem("newPeople", JSON.stringify(this.datalist));
     };
     DataList.prototype.renderDataList = function () {
@@ -130,13 +146,14 @@ var DataList = /** @class */ (function () {
             if (!boardDataRoot)
                 throw new Error("This page cant render");
             this.datalist.forEach(function (item) {
+                var num = Number("" + item.salary);
                 if (item.gender === 'male') {
                     html += "<div class = \"container__boardData--item container__boardData--blue\">\n                  <span> \uD83D\uDC71</span>";
                 }
                 else {
                     html += "<div class = \"container__boardData--item container__boardData--pink\">\n                            <span> \uD83D\uDC78</span>";
                 }
-                html += " <p><span>Name:</span> " + item.name + " </p> \n                        <p><span>City:</span> " + item.city + " </p>\n                        <p><span>Gender:</span> " + (item.gender.charAt(0).toUpperCase() + item.gender.slice(1)) + "</p> \n                         <p><span>Tel:</span> " + item.tel + " </p> \n                        <p> <span>Status:</span> " + (item.status.charAt(0).toUpperCase() + item.status.slice(1)) + " </p> \n                        <p><span>Salary:</span> \u20AA " + item.salary + " </p>\n                        <label>Edit Item: \n                            <input type=\"radio\" name=\"edit\" value=\"radiobox" + count + "\" onclick='handleEdit()' class=\"container__boardData--checks\" checked \n                             >\n                            <i class=\"fas fa-edit container__boardData--yellow-color\" title=\"Click on the edit item and then edit\"></i>\n                        </label>\n                            <label>Delete Item: \n                            <i class=\"fa fa-trash container__boardData--red-color\" onclick='handleDelete(\"" + item.id + "\")' title=\"Delete Item\"></i>\n                        </label>  \n                    </div>";
+                html += "\n                        <table id=\"data\">\n                            <tr>\n                               <th>Name: </th>\n                               <td>" + item.name + " </td>\n                            </tr>\n                            <tr>   \n                               <th>City: </th>\n                               <td>" + item.city + " </td>\n                            </tr>\n                            <tr>\n                               <th>Gender: </th>\n                               <td>" + (item.gender.charAt(0).toUpperCase() + item.gender.slice(1)) + " </td>\n                             </tr>\n                             <tr>  \n                               <th>Tel: </th>\n                               <td>" + item.tel + " </td>\n                             </tr>\n                             <tr>\n                               <th>Status: </th>\n                               <td>" + (item.status.charAt(0).toUpperCase() + item.status.slice(1)) + " </td>\n                             </tr>\n                             <tr>  \n                               <th>Salary: </th>\n                               <td>\u20AA " + num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.').split('').reverse().join('').replace(/^[\.]/, '') + "<td>\n                            </tr>\n                        </table>    \n                    <div>\n                        <label>\n                            <input type=\"radio\" name=\"edit\" value=\"radiobox" + count + "\" onclick='handleEdit()' class=\"container__boardData--checks\" checked>\n                            <i class=\"fas fa-edit container__boardData--yellow-color\" title=\"Click on the edit item and then edit\"></i>\n                        </label>\n                            <label> \n                            <i class=\"fa fa-trash container__boardData--red-color\" onclick='handleDelete(\"" + item.id + "\")' title=\"Delete Item\"></i>\n                        </label>  \n                     </div>   \n                    </div>";
                 count++;
             });
             boardDataRoot.innerHTML = html;
@@ -172,6 +189,11 @@ btnAdd.addEventListener('click', function (event) {
             throw new Error("Salary must be positive");
         var data = new Data(inputName.value, city.value, gender.value, tel.value, inputStatus.value, parseInt(salary.value), id);
         count = datalist.getNewData(data);
+        //form clear
+        inputName.value = "";
+        city.value = "";
+        tel.value = "";
+        salary.value = "";
         filterGender();
     }
     catch (e) {
@@ -197,10 +219,11 @@ function handleKeyUp() {
         console.log(e);
     }
 }
+console.log(filterGender());
 function filterGender() {
     var _loop_1 = function (i) {
         gender_list[i].addEventListener("click", function () {
-            datalist.filterGender(gender_list[i].value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
+            datalist.filterGender(gender_list[i].value, inputNameFilter.value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
         });
     };
     for (var i = 0; i < gender_list.length; i++) {

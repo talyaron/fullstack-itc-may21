@@ -97,7 +97,7 @@ body {
   margin-top: 20px;
   color: red;
 }
-.shopping-list__item-wrapper__item-price {
+.shopping-list__item-wrapper__item-year {
   font-size: 1rem;
   color: red;
 }
@@ -200,7 +200,7 @@ body {
   .shopping-list__item-wrapper__item-name {
     font-size: 0.8rem;
   }
-  .shopping-list__item-wrapper__item-price {
+  .shopping-list__item-wrapper__item-year {
     font-size: 0.8rem;
   }
   .shopping-list__item-wrapper__edit {

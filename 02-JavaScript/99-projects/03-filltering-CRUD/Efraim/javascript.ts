@@ -1,16 +1,16 @@
 class Product {
     imgSrc: string;
     description: string;
-    price: number;
+    year: number;
     id: string;
     id2: string;
     id3: string
 
-    constructor(imgSrc: string, description: string, price: number) {
+    constructor(imgSrc: string, description: string, year: number) {
         try {
             this.imgSrc = imgSrc;
             this.description = description;
-            this.price = price;
+            this.year = year;
             this.id = "id" + Math.random().toString(16).slice(2);
             this.id2 = "id" + Math.random().toString(16).slice(2);
             this.id3 = "id" + Math.random().toString(16).slice(2);
@@ -42,7 +42,7 @@ class Products {
                     `<img class="shopping-list__item-wrapper__item-image" src=${product.imgSrc} alt="">` +
                     `<div class="shopping-list__item-wrapper__edit" id='${product.id2}'> - Edit the text and click to save for next time</div>` +
                     `<h2  class="shopping-list__item-wrapper__item-name edit" id="${product.id3}" contenteditable="true">${product.description}</h2>` +
-                    `<h3  class="shopping-list__item-wrapper__item-price">${product.price}</h3>` +
+                    `<h3  class="shopping-list__item-wrapper__item-year">${product.year}</h3>` +
 
                     `<button class="shopping-list__item-wrapper__wrapper__save" type="button"  onclick="saveEdits('${product.id}', '${product.id2}')">Save Edit</button>` +
                     `<button class="shopping-list__item-wrapper__wrapper__delete" onclick="deleteProduct('${product.id}')">Delete</button>` +
@@ -72,12 +72,12 @@ class Products {
 
 }
 const products: Products = new Products();
-let nameUpdate: Array<any> = products.products.map(proddes => proddes.description)
+
 
 
 function commonFunction() {
     try {
-        let editElem = document.querySelectorAll(`.edit`);
+        let editElem: NodeListOf<Element> = document.querySelectorAll(`.edit`);
         if (!editElem) {
             throw new Error('No edit elements detected!')
         }
@@ -91,7 +91,7 @@ function commonFunction() {
 
 const deleteProduct = (productId: string) => {
     try {
-        const shoppingListDOM = document.querySelector('.shopping-list');
+        const shoppingListDOM: Element = document.querySelector('.shopping-list');
         if (!shoppingListDOM) {
             throw new Error('No shopping list detected!')
         }
@@ -103,9 +103,7 @@ const deleteProduct = (productId: string) => {
         products.renderProducts(shoppingListDOM);
         nameUpdate.splice(index, 1);
         commonFunction()
-        console.log(nameUpdate)
-        console.log(products.products);
-        sessionStorage.setItem('products', JSON.stringify(products.products))
+        localStorage.setItem('products', JSON.stringify(products.products))
     } catch (e) {
         console.error(e)
     }
@@ -147,51 +145,38 @@ function handleSubmit(ev): any {
         }
         products.addProduct(new Product(`"${imgUrl}"`, `${description}`, `${year}`));
         products.renderProducts(shoppingListDOM);
-        console.log(products.products)
         nameUpdate.push(`${description}`)
-        sessionStorage.userEdits = JSON.stringify(nameUpdate);
+        localStorage.userEdits = JSON.stringify(nameUpdate);
         commonFunction()
-        sessionStorage.setItem('products', JSON.stringify(products.products))
+        localStorage.setItem('products', JSON.stringify(products.products))
         ev.target.reset();
     } catch (e) {
         console.error(e)
     }
 }
 
-
+let nameUpdate: Array<any> = products.products.map(proddes => proddes.description)
 function saveEdits(productId, productID2) {
-    try {
         const index = products.findIndexes(productId);
-        console.log(index);
-        let editElem = document.querySelectorAll(`.edit`);
-        if (!editElem) {
-            throw new Error('No description items to edit!')
-        }
+        let editElem: NodeListOf<Element> = document.querySelectorAll(`.edit`);
         nameUpdate.length = editElem.length
         nameUpdate[index] = editElem[index].innerHTML;
-        console.log(nameUpdate);
-        sessionStorage.userEdits = JSON.stringify(nameUpdate);
+        localStorage.userEdits = JSON.stringify(nameUpdate);
         let update = document.getElementById(`${productID2}`);
-        if (!update) {
-            throw new Error('No update element to change!')
-        }
         update.innerHTML = "Edits saved!"
-    } catch (e) {
-        console.error(e)
-    }
+  
 }
 
 
 function checkEdits() {
     try {
-        const render = JSON.parse(sessionStorage.getItem('products'))
+        const render:any = JSON.parse(localStorage.getItem('products'))
         if (render != null) {
             addToDom1(render)
             products.products = render
         }
-        if (sessionStorage.userEdits != null) {
-            nameUpdate = JSON.parse(sessionStorage.userEdits)
-            console.log(nameUpdate);
+        if (localStorage.userEdits != null) {
+            nameUpdate = JSON.parse(localStorage.userEdits)
             commonFunction()
         }
     } catch (e) {
@@ -204,8 +189,17 @@ function checkEdits() {
 
 const findProductbySearchTerm = (productSearch: Array<any>, searchTerm: string) => {
     try {
-        const userRegEx = new RegExp(searchTerm, 'gmi');
+        const userRegEx: RegExp = new RegExp(searchTerm, 'gmi');
+        let indexArray: Array<any> = products.products.reduce(function(acc, productItem, index) {
+            if (userRegEx.test(productItem.description)) {
+              acc.push(index);
+            }
+            return acc;
+          }, []);
         const searchResults: Array<any> = productSearch.filter(productItem => userRegEx.test(productItem.description));
+        for (let i = 0; i < indexArray.length; i++) {
+            searchResults[i].description = nameUpdate[indexArray[i]]
+        }
         return searchResults;
     } catch (e) {
         console.error(e)
@@ -225,7 +219,7 @@ const addToDom1 = (searchResults: Array<any>) => {
             `<img class="shopping-list__item-wrapper__item-image" src=${productItem.imgSrc} alt="">` +
             `<div class="shopping-list__item-wrapper__edit" id='${productItem.id2}'> - Edit the text and click to save for next time</div>` +
             `<h2  class="shopping-list__item-wrapper__item-name edit" id="${productItem.id3}" contenteditable="true">${productItem.description}</h2>` +
-            `<h3  class="shopping-list__item-wrapper__item-price">${productItem.price}</h3>` +
+            `<h3  class="shopping-list__item-wrapper__item-year">${productItem.year}</h3>` +
             `<button class="shopping-list__item-wrapper__wrapper__save" type="button" onclick="saveEdits('${productItem.id}', '${productItem.id2}')">Save Edits</button>` +
             `<button class="shopping-list__item-wrapper__wrapper__delete" onclick="deleteProduct('${productItem.id}')">Delete</button>` +
             ` </div>`
@@ -273,7 +267,20 @@ const filterYear = (ev: any): any => {
         if (!value) {
             throw new Error('No value being read for filter!')
         }
-        addToDom1(products.products.filter(productItem => productItem.price === value))
+        let indexArray:Array<number> = products.products.reduce(function(acc, curr, index) {
+            if (curr.year === value) {
+              acc.push(index);
+            }
+            return acc;
+          }, []);
+        let results:Array<any> = products.products.filter(productItem => productItem.year === value);
+        console.log(results)
+        for (let i = 0; i < indexArray.length; i++) {
+            results[i].description = nameUpdate[indexArray[i]]
+        }
+        addToDom1(results);
+
+       
     } catch (er) {
         console.error(er)
     }
@@ -287,27 +294,30 @@ const resetButton = () => {
     }
 }
 
+const selectList = () => {
+    try {
+        let array = ["2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"];
+        let selectList = document.querySelector(".wrapper__div__select-filter");
+        selectList.id = "mySelect";
+        
+        //Create and append the options
+        for (let i = 0; i < array.length; i++) {
+            let option = document.createElement("option");
+            option.value = array[i];
+            option.text = array[i];
+            selectList.appendChild(option);
+        }
+    } catch (er) {
+        console.error(er)
+    }
+}
 
 
 
-// var myParent = document.querySelector('.trial');
 
-// //Create array of options to be added
-// var array = ['2000','2001','2002','2020'];
 
-// //Create and append select list
-// var selectList = document.createElement("select");
-// selectList.className = "wrapper__select-filter";
-// selectList.onchange(filterYear(event));
-// myParent.appendChild(selectList);
 
-// //Create and append the options
-// for (var i = 0; i < array.length; i++) {
-//     var option = document.createElement("option");
-//     option.value = array[i];
-//     option.text = array[i];
-//     selectList.appendChild(option);
-// }
+
 
 
 
