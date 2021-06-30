@@ -12,6 +12,10 @@ const Description = (<HTMLInputElement>document.querySelector(".product-descript
 const Origin = (<HTMLInputElement>document.querySelector(".product-origin"))
 const Quantity = (<HTMLInputElement>document.querySelector(".product-quantity"))
 
+//filter
+const selector:any = document.querySelector(".selector");
+
+
 
 interface ProductsInterface {
     ProductName: string;
@@ -87,6 +91,9 @@ class Products {
         });
         return ProductId
     }
+
+//filtar
+
 
     editProduct(product: Product, productId){
 

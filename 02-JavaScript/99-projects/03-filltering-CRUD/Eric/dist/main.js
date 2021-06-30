@@ -9,6 +9,8 @@ var Type = document.querySelector(".product-type");
 var Description = document.querySelector(".product-description");
 var Origin = document.querySelector(".product-origin");
 var Quantity = document.querySelector(".product-quantity");
+//filter
+var selector = document.querySelector(".selector");
 var Product = /** @class */ (function () {
     function Product(ProductName, Type, Description, Origin, Quantity) {
         this.ProductName = ProductName;
@@ -65,6 +67,7 @@ var Products = /** @class */ (function () {
         });
         return ProductId;
     };
+    //filtar
     Products.prototype.editProduct = function (product, productId) {
         try {
             this.products.forEach(function (element) {
