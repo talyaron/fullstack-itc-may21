@@ -83,6 +83,7 @@ function commonFunction() {
         }
         for (let i = 0; i < editElem.length; i++) {
             editElem[i].innerHTML = nameUpdate[i]
+            products.products[i].description = nameUpdate[i]
         }
     } catch (e) {
         console.error(e);
