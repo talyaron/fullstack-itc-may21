@@ -1,0 +1,15 @@
+.show{
+    @include grid(3,1)
+   
+}
+
+.poke {
+
+    margin: 3rem 0;
+    .poke-image {
+        background-color: #F2F2F2;
+        border-radius: 1rem;
+        width: 205px;
+        height: 205px;
+    }
+}

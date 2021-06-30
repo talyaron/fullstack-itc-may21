@@ -1,7 +1,9 @@
 ///NOTA PARA MANANA VER LOS DE CREAR UN RANDOM ID Y HACER LO DE INDEX PARA FILTAR Y BORRAR
 //PONER BIEN LOS NOMBRES LUEGO DE PASAR LA SECION DE PPRUEBA
-// const filterOption:HTMLElement = document.querySelector('.filter-todo');
+//  const filterOption:HTMLElement = document.querySelector('.filter-todo');
+var updateElement;
 var show = document.querySelector(".show");
+var select = document.querySelector(".filter-todo");
 var IdsGenerator = /** @class */ (function () {
     function IdsGenerator(name, imageUrl, pokeType) {
         this.name = name;
@@ -27,16 +29,70 @@ var Ids = /** @class */ (function () {
         });
         this.render();
     };
+    Ids.prototype.bringInfo = function (ident) {
+        updateElement = ident;
+        console.log(ident);
+    };
+    Ids.prototype.editElement = function (event) {
+        var name = event.target.elements.name.value;
+        var imageUrl = event.target.elements.imageUrl.value;
+        var pokeType = event.target.elements.pokeType.value;
+        var edit = this.id.find(function (element) { return element.ident === updateElement; });
+        edit.name = name;
+        edit.imageUrl = imageUrl;
+        edit.pokeType = pokeType;
+        this.bringInfo(event);
+        this.render();
+    };
     Ids.prototype.deleteItem = function (ident) {
         this.id = this.id.filter(function (element) { return element.ident !== ident; });
         this.render();
+    };
+    Ids.prototype.searchItem = function (event) {
+        var name = event.target.elements.name.value;
+        var searchTermReg = new RegExp(name, 'i');
+        var search = this.id.filter(function (elements) {
+            searchTermReg.test(elements.name);
+        });
+        console.log(search);
+    };
+    Ids.prototype.fiterItem = function () {
+        var selectValue = String(select.value);
+        if (selectValue === "fire") {
+            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+            this.render();
+        }
+        if (selectValue === "bug") {
+            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+            this.render();
+        }
+        if (selectValue === "grass") {
+            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+            this.render();
+        }
+        if (selectValue === "water") {
+            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+            this.render();
+        }
+        if (selectValue === "flying") {
+            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+            this.render();
+        }
+        if (selectValue === "normal") {
+            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+            this.render();
+        }
+        if (selectValue === "electric") {
+            this.id = this.id.filter(function (element) { return element.pokeType === selectValue; });
+            this.render();
+        }
     };
     Ids.prototype.render = function () {
         var show = document.querySelector(".show");
         var html = "";
         console.log(this.id);
         this.id.forEach(function (element) {
-            html += "<div class = 'show-id' ><h1 contenteditable=\"true\"> " + element.name + "</h1>\n      <img src=\"" + element.imageUrl + "\" alt=\"\">\n      <p>" + element.pokeType + "</p>\n      <button class = 'delete' onclick='handleDelete(\"" + element.ident + "\")'>X</button>\n     \n      </div>";
+            html += "\n<div class = \"poke\">\n      <div class= \"poke-image\">\n      <img src=\"" + element.imageUrl + "\" alt=\"\">\n      </div>\n      <div class =\"poke-name\" ><h2 contenteditable=\"true\"> " + element.name + "</h2>  </div>  \n     <div class=\"poke-pokeType\"> <h4>" + element.pokeType + "</h4></div>\n      <button class =\"btn btn-danger\"  'delete' onclick='handleDelete(\"" + element.ident + "\")'>X</button>\n<button type=\"button\" class=\"btn btn-primary itemInfo\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-bs-whatever=\"@getbootstrap\" onclick='editItem(\"" + element.ident + "\")' checked>Edit</button>\n     </div> ";
         });
         show.innerHTML = html;
     };
@@ -56,4 +112,17 @@ var handleSubmit = function (event) {
 };
 var handleDelete = function (ident) {
     ids.deleteItem(ident);
+};
+var handleFilter = function () {
+    ids.fiterItem();
+};
+var editItem = function (ident) {
+    ids.bringInfo(ident);
+};
+var handleEdit = function (event) {
+    event.preventDefault();
+    ids.editElement(event);
+};
+var searchBar = function (name) {
+    ids.searchItem(name);
 };
