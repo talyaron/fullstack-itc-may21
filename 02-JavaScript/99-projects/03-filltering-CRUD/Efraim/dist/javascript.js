@@ -170,7 +170,16 @@ function checkEdits() {
 var findProductbySearchTerm = function (productSearch, searchTerm) {
     try {
         var userRegEx_1 = new RegExp(searchTerm, 'gmi');
+        var indexArray = products.products.reduce(function (acc, productItem, index) {
+            if (userRegEx_1.test(productItem.description)) {
+                acc.push(index);
+            }
+            return acc;
+        }, []);
         var searchResults = productSearch.filter(function (productItem) { return userRegEx_1.test(productItem.description); });
+        for (var i = 0; i < indexArray.length; i++) {
+            searchResults[i].description = nameUpdate[indexArray[i]];
+        }
         return searchResults;
     }
     catch (e) {
@@ -236,7 +245,18 @@ var filterYear = function (ev) {
         if (!value_1) {
             throw new Error('No value being read for filter!');
         }
-        addToDom1(products.products.filter(function (productItem) { return productItem.year === value_1; }));
+        var indexArray = products.products.reduce(function (acc, curr, index) {
+            if (curr.year === value_1) {
+                acc.push(index);
+            }
+            return acc;
+        }, []);
+        var results = products.products.filter(function (productItem) { return productItem.year === value_1; });
+        console.log(results);
+        for (var i = 0; i < indexArray.length; i++) {
+            results[i].description = nameUpdate[indexArray[i]];
+        }
+        addToDom1(results);
     }
     catch (er) {
         console.error(er);
