@@ -98,20 +98,22 @@ interface Shoes {
   shoesDistance: number;
 }
 
+const localStorageRunner = JSON.parse(localStorage.getItem("currentRunner")); // TODO check if works
+
 class LoggedInRunner {
   // generated on the registration page - passed on to other pages via localStorage
-  runnerName: string = JSON.parse(localStorage.getItem("currentRunner")).runnerName; // required on registration
-  runnerId: string = JSON.parse(localStorage.getItem("currentRunner")).runnerId; // generated on registration
-  runnerEmail: string = JSON.parse(localStorage.getItem("currentRunner")).runnerEmail; // required on registration
-  runnerPassword: string = JSON.parse(localStorage.getItem("currentRunner")).runnerPassword; // required on registration
-  runnerGender: string = JSON.parse(localStorage.getItem("currentRunner")).runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
-  runnerAgeGroup: string = JSON.parse(localStorage.getItem("currentRunner")).runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
-  runnerChat: string = JSON.parse(localStorage.getItem("currentRunner")).runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
-  runnerPref: Preferences = JSON.parse(localStorage.getItem("currentRunner")).runnerPref; // default on registration - TODO add method to edit
-  runnerProfImg: string = JSON.parse(localStorage.getItem("currentRunner")).runnerProfImg; // TODO add method editDetails
+  runnerName: string = localStorageRunner.runnerName; // required on registration
+  runnerId: string = localStorageRunner.runnerId; // generated on registration
+  runnerEmail: string = localStorageRunner.runnerEmail; // required on registration
+  runnerPassword: string = localStorageRunner.runnerPassword; // required on registration
+  runnerGender: string = localStorageRunner.runnerGender; // Male, Female, Unknown (default) - TODO add method editDetails
+  runnerAgeGroup: string = localStorageRunner.runnerAgeGroup; // 15-19, 20's, 30's, 40's, 50's, 60's, Unknown (default) - TODO add method editDetails
+  runnerChat: string = localStorageRunner.runnerChat; // chatty, so so, only when necessary, Unknown (default) - TODO add method editDetails
+  runnerPref: Preferences = localStorageRunner.runnerPref; // default on registration - TODO add method to edit
+  runnerProfImg: string = localStorageRunner.runnerProfImg; // TODO add method editDetails
   runnerShoes: Shoes; // TODO add method editDetails
-  runnerRuns: Array<Run> = JSON.parse(localStorage.getItem("currentRunner")).runnerRuns; // empty on registration
-  runnerDistance: number = JSON.parse(localStorage.getItem("currentRunner")).runnerDistance;
+  runnerRuns: Array<Run> = localStorageRunner.runnerRuns; // empty on registration
+  runnerDistance: number = localStorageRunner.runnerDistance;
 
   personalDetailsToDOM(): void {
     const mainTitle: HTMLElement = document.querySelector("title");
@@ -158,17 +160,17 @@ class LoggedInRunner {
   }
 
   filterRuns(minDistanceFilter: number, maxDistanceFilter: number, paceFilter: string, areaFilter: string, locationFilter: string) {
-    let filteredRuns: Array<Run> = null;
+    let filteredRuns: Array<Run> = this.runnerRuns;
     const locationRegEx = locationFilter ? new RegExp(locationFilter,'gmi') : undefined;
     const filterSubmitBtn: HTMLElement = document.querySelector('#filter_submit');
 
-    if (minDistanceFilter !== 0) {filteredRuns = this.runnerRuns.filter(runItem => runItem.runDistance >= minDistanceFilter);}
-    if (maxDistanceFilter !== 0) {filteredRuns = this.runnerRuns.filter(runItem => runItem.runDistance <= maxDistanceFilter);}
-    if (paceFilter !== "") {filteredRuns = this.runnerRuns.filter(runItem => runItem.runPace === paceFilter);}
-    if (areaFilter !== "") {filteredRuns = this.runnerRuns.filter(runItem => runItem.runArea === areaFilter);}
-    if (locationFilter !== "") {filteredRuns = this.runnerRuns.filter(runItem => locationRegEx.test(runItem.runLocation));}
-    if (filteredRuns !== null) {filterSubmitBtn.setAttribute('value','Reset')}
-    else {filterSubmitBtn.setAttribute('value','Filter')}
+    if (minDistanceFilter !== 0) filteredRuns = this.runnerRuns.filter(runItem => runItem.runDistance >= minDistanceFilter);
+    if (maxDistanceFilter !== 0) filteredRuns = filteredRuns.filter(runItem => runItem.runDistance <= maxDistanceFilter);
+    if (paceFilter !== "") filteredRuns = filteredRuns.filter(runItem => runItem.runPace === paceFilter);
+    if (areaFilter !== "") filteredRuns = filteredRuns.filter(runItem => runItem.runArea === areaFilter);
+    if (locationFilter !== "") filteredRuns = filteredRuns.filter(runItem => locationRegEx.test(runItem.runLocation));
+    if (filteredRuns !== this.runnerRuns) filterSubmitBtn.setAttribute('value','Reset');
+    else filterSubmitBtn.setAttribute('value','Filter');
     this.renderRunsToDOM(filteredRuns)
 
   }
@@ -186,7 +188,8 @@ class LoggedInRunner {
       runsToRender.forEach((run) => {
         const matchFAClass = run.runMatch ? "-double" : "";
         const matchTitle = run.runMatch ? "Buddy found!" : "Pending buddy...";
-        const runColor = run.runMatch ? "aqua" : "orange";
+        const runColor = run.runMatch ? "#189AB4" : "orange";
+        const statusColor = run.runMatch ? "#75E6DA" : "orange";
         const MatchesBtnText = run.runMatch ? "View Matches" : "No Matches Yet";
         const MatchesBtnLook = run.runMatch ? "" : ` disabled style="background-color:${runColor};cursor:not-allowed`;
         const runFormatedDate = (new Date(Date.parse(run.runTime)+clientTimezoneOffset*60*60*1000)).toISOString().replace("T", " ").substring(0, 16);
@@ -208,7 +211,6 @@ class LoggedInRunner {
 
         runsContainer.innerHTML += runHTML;
       });
-      openModal();
     } catch (er) {
       console.error(er);
     }
@@ -255,7 +257,7 @@ class LoggedInRunner {
 
 let runsMainPool: RunsPool = JSON.parse(localStorage.getItem("runsPool")) ? new RunsPool(JSON.parse(localStorage.getItem("runsPool")).allRuns) : new RunsPool([]);
 
-let currentRunner: LoggedInRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
+let currentRunner: LoggedInRunner = localStorageRunner ? localStorageRunner : null;
 if (currentRunner === null) {
   window.location.href = `../togetheRun_registration/togetheRun_registration.html`;
 }
@@ -276,31 +278,33 @@ const logOut = (): void => {
   }
 };
 
-const openModal = (): void => {
-  try {
-    const modal: HTMLElement = document.querySelector(`.modalWrapper`);
-    const modalBox: HTMLElement = document.querySelector(`.modalWrapper__item--update_run`);
-    const updateRunBtns: NodeListOf<HTMLElement> = document.querySelectorAll(`.update_run_btn`);
+const modal: HTMLElement = document.querySelector(`.modalWrapper`);
+const modalBox: HTMLElement = document.querySelector(`.modalWrapper__item--update_run`);
 
-    updateRunBtns.forEach(UpdtBtn =>
-      UpdtBtn.addEventListener(`click`, (ev) => {
-        isModalOpen = true;
-        modal.style.display = `flex`;
-        modalBox.style.display = `unset`;
-        runsWithinNextMonth();
-        const runDiv = UpdtBtn.parentElement;
-        setRunToUpdateData(runDiv);
-      })
-    );
+const editRunsAncestor: HTMLElement = document.querySelector('.runs');
+const addRunParent: HTMLElement = document.querySelector(`.dashboard`);
+
+editRunsAncestor.addEventListener('click', ev => openModal(ev));
+addRunParent.addEventListener('click', ev => openModal(ev));
+
+const openModal = (ev: any): void => {
+  try {
+
+    if ((ev.target.className !== 'run_edit fas fa-edit update_run_btn') && (ev.target.className !== 'dashboard__item dashboard__item--add update_run_btn')) return;
+    
+    isModalOpen = true;
+    modal.style.display = `flex`;
+    modalBox.style.display = `unset`;
+    runsWithinNextMonth();
+    const runDiv = ev.target.parentElement;
+    setRunToUpdateData(runDiv);
   } catch (er) {
     console.error(er);
   }
-};
+}
 
 const closeModal = (): void => {
   try {
-    const modal: HTMLElement = document.querySelector(`.modalWrapper`);
-    const modalBox: HTMLElement = document.querySelector(`.modalWrapper__item--update_run`);
     const close: NodeListOf<HTMLElement> = document.querySelectorAll(`.close`);
 
     close.forEach(clsBtn =>
@@ -367,6 +371,9 @@ const setRunToUpdateData = (runDiv: HTMLElement): void => {
 
 currentRunner = new LoggedInRunner();
 
+const updateRunForm: HTMLElement = document.querySelector('.update_run_form');
+updateRunForm.addEventListener('submit', ev => updateRunSubmit(ev));
+
 const updateRunSubmit = (ev: any) => {
   try {
     ev.preventDefault();
@@ -405,21 +412,69 @@ const updateRunSubmit = (ev: any) => {
   }
 };
 
+const filterRunsForm: HTMLElement = document.querySelector('.filter_form');
+const filterBtn: HTMLElement = document.querySelector('#filter_button');
+
+filterBtn.addEventListener('click', ev => showFilterForm(ev));
+
+const showFilterForm = (ev: any) => {
+  try {
+    ev.target.style.display = 'none';
+    filterRunsForm.style.display = 'flex';
+
+  } catch (er) {
+    console.error(er);
+  }
+};
+
+filterRunsForm.addEventListener('submit', ev => filterSubmit(ev));
+filterRunsForm.addEventListener('change', ev => filterChangeKeyUp(ev));
+filterRunsForm.addEventListener('keyup', ev => filterChangeKeyUp(ev));
+
 const filterSubmit = (ev: any) => {
   try {
     ev.preventDefault();
     
+    if (currentRunner.runnerRuns.length === 0) {return;}
+    const filterSubmitBtn: HTMLElement = document.querySelector('#filter_submit');
+    if (filterSubmitBtn.getAttribute('value') === 'Reset') {
+      filterSubmitBtn.setAttribute('value','Filter');
+      currentRunner.renderRunsToDOM(null);
+      ev.target.reset();
+      return;
+    }
+
     const minDistanceFilter = Number(ev.target.elements.minDistanceFilter.value);
     const maxDistanceFilter = Number(ev.target.elements.maxDistanceFilter.value);
     const paceFilter = ev.target.elements.paceFilter.value;
     const areaFilter = ev.target.elements.areaFilter.value;
     const locationFilter = ev.target.elements.locationFilter.value;
 
-    if (currentRunner.runnerRuns.length === 0) {return;}
+    ev.target.style.display = 'none';
+    filterBtn.style.display = 'unset';
 
     currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
 
     ev.target.reset();
+  } catch (er) {
+    console.error(er);
+  }
+};
+
+const filterChangeKeyUp = (ev: any) => {
+  try {
+    ev.preventDefault();
+    
+    if (currentRunner.runnerRuns.length === 0) {return;}
+    
+    const minDistanceFilter = Number(ev.target.parentElement.parentElement.elements.minDistanceFilter.value);
+    const maxDistanceFilter = Number(ev.target.parentElement.parentElement.elements.maxDistanceFilter.value);
+    const paceFilter = ev.target.parentElement.parentElement.elements.paceFilter.value;
+    const areaFilter = ev.target.parentElement.parentElement.elements.areaFilter.value;
+    const locationFilter = ev.target.parentElement.parentElement.elements.locationFilter.value;
+
+    currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
+
   } catch (er) {
     console.error(er);
   }
@@ -442,5 +497,4 @@ const handleDelete = (ev: any): void => {
 
 currentRunner.personalDetailsToDOM();
 logOut();
-openModal();
 closeModal();

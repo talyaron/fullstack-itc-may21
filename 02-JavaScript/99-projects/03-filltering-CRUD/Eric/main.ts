@@ -1,5 +1,19 @@
-const inputNameFilter = (<HTMLInputElement>document.querySelector("#filtername"))
+const botonAdd = (<HTMLButtonElement>document.querySelector(".btn-product"))
+const table: HTMLElement = document.querySelector(".product-list")
+
+//search-regrex
+const inputFilter = (<HTMLInputElement>document.querySelector("#filterN"))
+
+//data-edit
 const product_qty = <NodeList>document.querySelectorAll(".filter-option");
+const ProductN = (<HTMLInputElement>document.querySelector(".product-name"))
+const Type = (<HTMLInputElement>document.querySelector(".product-type"))
+const Description = (<HTMLInputElement>document.querySelector(".product-description"))
+const Origin = (<HTMLInputElement>document.querySelector(".product-origin"))
+const Quantity = (<HTMLInputElement>document.querySelector(".product-quantity"))
+
+//filter
+const selector:any = document.querySelector(".selector");
 
 
 
@@ -32,7 +46,7 @@ class Product {
 
 class Products {
     products: Array<Product> = [];
-   productsFilter: Array<Product> = [];
+    productsFilter: Array<Product> = [];
 
     add(product: Product) {
         this.products.push(product)
@@ -48,26 +62,13 @@ class Products {
         })
     }
 
-
-    searchProduct(inputNameFilter:string){
+//search
+    searchProduct(inputFilter:string){
         
-        const regrExp: string = `${inputNameFilter}`;
+        const regrExp: string = `${inputFilter}`;
         const searchTermReg: RegExp = new RegExp(regrExp, 'i');
         this.products = this.productsFilter.filter(elem => searchTermReg.test(elem.ProductName))
         this.renderProducts();
-    }
-
-    //filter qty
-    filterOption(Quantity: number) {
-
-        if (Quantity === 7 || Quantity === 3) {
-            this.products = this.productsFilter.filter(elem => elem.Quantity === Quantity)
-
-        } else {
-            this.products = this.productsFilter.filter(elem => elem.Quantity === 3 || elem.Quantity === 7)
-        }
-
-        this.renderProducts()
     }
    
 //eliminar
@@ -76,20 +77,49 @@ class Products {
         this.renderProducts();
     }
 
-    //editar
-    editProduct(ProductId: string){
-
+//editar
+    getProduct(ProductId: string):string{
+        this.products.forEach(element => {
+            if(element.ProductId === ProductId){
+                ProductN.value=element.ProductName;
+                Type.value=element.Type;
+                Description.value=element.Description;
+                Origin.value=element.Origin;
+                Quantity.value=String(element.Quantity);
+                
+            }
+        });
+        return ProductId
     }
- 
 
-    //  Update id
-    //  updateProduct(ProductId: string) {}
-    
+//filtar
+
+
+    editProduct(product: Product, productId){
+
+        try {
+
+        this.products.forEach(element => {
+            if(element.ProductId === productId){
+                if (ProductN.value === "" || Type.value === "" || Description.value === "" || Origin.value === "" || parseInt(Quantity.value) === NaN) throw new Error("Check all the inputs before continue");
+                element.ProductName=ProductN.value;
+                element.Type=Type.value;
+                element.Description=Description.value;
+                element.Origin=Origin.value;
+                element.Quantity=Number(Quantity.value);                
+            }
+
+        });
+    } catch (e) {
+        console.log(e)
+    }
+    }
+
     renderProducts() {
-        const table: HTMLElement = document.querySelector(".product-list")
         let html: string = "";
+        try {
         this.products.forEach((product) => {
-            
+          if (!table) throw new Error("Imposible render");
            html += `<tbody>
        <tr>
         <td>${product.ProductName}</td>
@@ -97,22 +127,26 @@ class Products {
         <td>${product.Description}</td> 
         <td>${product.Origin}</td> 
         <td>${product.Quantity}</td> 
-        <td> <i onclick='handleEdit("${product.ProductId}")' class="fas fa-pencil-alt"></i></td>
+        <td> <i onclick='handleGet("${product.ProductId}")' class="fas fa-pencil-alt"></i></td>
         <td> <i onclick='handleDelete("${product.ProductId}")'id="del" class="fas fa-trash"></i></td>
         </tr>`;
         });
+    
         table.innerHTML = html;
+    } catch (error) {
+        console.log(error)
+    }
     };
-
 
     getProductsFromStorage() {
         JSON.parse(localStorage.getItem(`products`))
     }; 
-    
 }
+
 const products = new Products();
 products.addProducts(productsData);
 products.renderProducts();
+let productId:string;
 
 
 const handleSubmit = (ev: any): void => {
@@ -128,27 +162,40 @@ const handleSubmit = (ev: any): void => {
     ev.target.reset()
 }
 
+const handleEdit = (ev: any): void => {
+    ev.preventDefault();
+    const p: string =  ProductN.value;
+    const t:string = Type.value;
+    const d:string = Description.value;
+    const o:string = Origin.value;
+    const q:number = Number(Quantity.value);
+    const product = new Product(p, t, d, o, q)
+    products.editProduct(product,productId)
+    products.renderProducts()
+    botonAdd.disabled=false
+    console.log(botonAdd)
+    ev.target.reset()
+}
+
 //delete products
 const handleDelete = (ProductId:string):void =>{
     products.removeProduct(ProductId);
     console.log(products);
 };
 //edit products
-const handleEdit = (ProductId:string):void =>{
-    products.editProduct(ProductId);
+const handleGet = (ProductId:string):void =>{
+    productId = products.getProduct(ProductId);
+    botonAdd.disabled=true
+    console.log(botonAdd)
 };
 //search products
-inputNameFilter.addEventListener('keyup', handleKeyUp)
+inputFilter.addEventListener('keyup', handleKeyUp)
 
 function handleKeyUp() {
-    products.searchProduct(inputNameFilter.value)
-       
+    try {
+    products.searchProduct(inputFilter.value)
+} catch (e) {
+    console.log(e)
+}   
 }
 
-function filterOption() {
-    for (let i = 0; i < product_qty.length; i++) {
-        product_qty[i].addEventListener("click", function () {
-            products.filterOption(product_qty[i].nodeType);
-        });
-    }
-}

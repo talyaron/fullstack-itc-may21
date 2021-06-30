@@ -1,116 +1,200 @@
+// QUERIES SELECTORS
+const select: any = document.querySelector(".select");
+const boton = document.querySelector(".boton_trash");
+const editBtn = document.getElementById('nameInput');
+const modal = document.getElementById('Mymodal')
+const searchBar = document.querySelector("#searchBar");
+
+// VARIABLE GLOBAL
+let list: Array<Producto> = [];
+let updateID;
+let searchValue;
 
 
-interface ProdInterface{
-    product:string;
-    brand:string;
+// INTERFACES AND CLASES
+interface ProdInterface {
+    product: string;
+    brand: string;
     price: number;
     stock: number;
     description: string;
-
 }
 
 class Producto {
-    product:string;
-    brand:string;
+    product: string;
+    brand: string;
     price: number;
     stock: number;
     description: string;
-    id:string;
+    id: string;
 
-    constructor(product:string, brand:string, price: number, stock:number, description: string){
-     this.product=product;
-     this.brand=brand;
-     this.price=price;
-     this.stock=stock;
-     this.description=description;
-     this.id= Math.random().toString(16).slice(2);
-     }
+    constructor(product: string, brand: string, price: number, stock: number, description: string) {
+        this.product = product;
+        this.brand = brand;
+        this.price = price;
+        this.stock = stock;
+        this.description = description;
+        this.id = Math.random().toString(16).slice(2);
+    }
 }
 
-class ListProducto{
-    list:Array<Producto> = [];
+// EVENTS LISTENERS
+select.addEventListener('change', selectFilter);
+searchBar.addEventListener('keyup', search);
 
-    addList(add: Producto){
-        this.list.push(add)
-        this.renderData();
-        localStorage.setItem(`product`, JSON.stringify(list));
+// FUNCTIONS
+// ADD JSON TO LIST ARRAY
+function addObject() {
+    productos.forEach(prd => {
+        prd = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description);
+        list.push(prd);
+    })
+}
+addObject();
+
+// DELETE PRODUCT
+function remove(id) {
+    const filtrado = list.filter((prod) => prod.id !== id);
+    list = filtrado;
+    renderData(list);
+}
+
+// TAKING ID FOR EDIT, THEN I USED AT THE handleEdit()
+function edit(id) {
+    updateID = id;
+}
+
+// FILTER BY SELECTS OPTIONS [see event]
+function selectFilter() {
+    try {
+        const selectedValue = Number(select.value);
+        if (selectedValue > 300) throw new Error('You have an error in your value');
+        console.log(typeof selectedValue);
+        let arr = [];
+        arr = list;
+        let arr2 = [];
+        arr2 = list;
+        let arr3 = [];
+        arr3 = list;
+        if (selectedValue === 100) {
+            let priceFilter = arr.filter((prod) => prod.price >= selectedValue);
+            arr = priceFilter;
+            renderData(arr);
+        }
+        else if (selectedValue === 200) {
+            let priceFilter1 = arr2.filter((prod) => prod.price >= selectedValue);
+            arr2 = priceFilter1;
+            renderData(arr2);
+        }
+        else if (selectedValue === 0) {
+            renderData(list);
+        }
+        else {
+            let priceFilter2 = arr3.filter((prod) => prod.price >= selectedValue);
+            arr3 = priceFilter2;
+            renderData(arr3);
+        }
+    } catch (e) {
+        console.error(e);
     }
-    addObject(prodArray:Array<Producto|ProdInterface>){
-        prodArray.forEach(prd=>{
-            const prods = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description);
-            this.list.push(prods);
-        })
-        this.renderData();
-     }
-     itemDelete(id:string){
-        this.list = this.list.filter((prod) => prod.id !== id);
-        this.renderData();
-    }S
-    renderData(){
-        const container: HTMLElement = document.querySelector(".container_products")
-        let html: string = "";
-        this.list.forEach((prod) => {
-            
-           html += ` <div class="container-product item">
-                        <p>${prod.product}</p>
-                    </div>
-                    <div class="container-brand item">
-                        <p>${prod.brand}</p>
-                    </div>
-                    <div class="container-price item">
-                        <p>${prod.price}</p>
-                    </div>
-                    <div class="container-stock item">
-                        <p>${prod.stock}</p>
-                    </div>
-                    <div class="container-description item">
-                        <p>${prod.description}</p>
-                    </div>
-                    <div class="container-icons item">
-                    <button href=""><i class="fas fa-trash icono_productos icono_productos_delete"></i></button>
-                    <button href="" onclick="handleDelete('${prod.id}')"><i  class="fas fa-edit icono_productos icono_productos_edit"></i></button>
-                    </div>`
-                  
+}
+
+// TAKING VALUE FROM INPUT FOR USE IT AT searchRegEx()
+function search(e) {
+    try {
+        searchValue = e.target.value;
+        searchRegEx(searchValue);
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+// RegEx FOR FILTER BY PRODUCTS NAME
+function searchRegEx(inputSearch: string) {
+    const regExp: string = `^${inputSearch}`
+    const searchTermReg: RegExp = new RegExp(regExp, 'i');
+    const filterSearch = list.filter(elem => searchTermReg.test(elem.product))
+    renderData(filterSearch);
+}
+
+// RENDER DATA
+function renderData(listado) {
+    const container: HTMLElement = document.querySelector(".container_products")
+    let html: string = "";
+    listado.forEach((element) => {
+        html += ` <div class="container-product item">
+                    <p>${element.product}</p>
+                </div>
+                <div class="container-brand item">
+                    <p>${element.brand}</p>
+                </div>
+                <div class="container-price item">
+                    <p>${element.price}</p>
+                </div>
+                <div class="container-stock item">
+                    <p>${element.stock}</p>
+                </div>
+                <div class="container-description item">
+                    <p>${element.description}</p>
+                </div>
+                <div class="container-icons item">
+                    <button href="#" class="btn_icons" onclick='remove("${element.id}")'><i class="fas fa-trash icono_productos icono_productos_delete"></i></button>
                     
-        });
-        container.innerHTML = html;
-    }
-
+                    <button href="#" class="btn_icons" data-toggle="modal" data-target="#myModal" onclick='edit("${element.id}")'><i class="fas fa-edit icono_productos icono_productos_edit"></i></button>
+                </div>`
+    });
+    container.innerHTML = html;
 }
+renderData(list);
 
-
-
-const listP = new ListProducto()
-listP.addObject(productos);
-console.log(listP);
-listP.renderData();
-
-const handleDelete = (id:string):void=>{
-      listP.itemDelete(id);
-}
-
-const filterSelect = listP.filter(function(el){
-    
-})
-
-
+// HANDLE DATA FROM PRINCIPAL FORM
 const handleSubmit = (event) => {
-    event.preventDefault();
-  
-    const product: string = event.target.elements.producto.value;
-    const brand: string = event.target.elements.brand.value; 
-    const price: number = event.target.elements.price.valueAsNumber; 
-    const stock: number = event.target.elements.stock.valueAsNumber; 
-    const description: string = event.target.elements.description.value; 
+    try {
+        event.preventDefault();
+
+        const product: string = event.target.elements.producto.value;
+        const brand: string = event.target.elements.brand.value;
+        const price: number = event.target.elements.price.valueAsNumber;
+        const stock: number = event.target.elements.stock.valueAsNumber;
+        const description: string = event.target.elements.description.value;
 
 
+        const producto = new Producto(product, brand, price, stock, description);
+        // ADD NEW PRODUCT TO LIST ARRAY
+        list.unshift(producto);
+        renderData(list);
+        console.log(producto);
+
+        event.target.reset();
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+// HANDLEING DATA FROM MODAL TO EDIT
+const handleEdit = (event) => {
+    try {
+        event.preventDefault();
+
+        const productModal: string = event.target.elements.productoModal.value;
+        const brandModal: string = event.target.elements.brandModal.value;
+        const priceModal: number = event.target.elements.priceModal.valueAsNumber;
+        const stockModal: number = event.target.elements.stockModal.valueAsNumber;
+        const descriptionModal: string = event.target.elements.descriptionModal.value;
+
+        const edit = list.find((prod) => prod.id === updateID);
+        edit.product = productModal;
+        edit.brand = brandModal;
+        edit.price = priceModal;
+        edit.stock = stockModal;
+        edit.description = descriptionModal;
 
 
-    const producto = new Producto(product, brand, price, stock, description);
-    
-    console.log(producto);
-    listP.addList(producto);
-    event.target.reset();
-
-  };
-
+        console.log(productModal, brandModal, priceModal, stockModal, descriptionModal);
+        console.log(edit);
+        renderData(list);
+    } catch (e) {
+        console.error(e);
+    }
+}
+console.log(updateID);

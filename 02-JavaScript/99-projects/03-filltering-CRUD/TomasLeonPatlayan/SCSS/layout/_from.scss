@@ -1,0 +1,24 @@
+  
+
+  .pokemon-form{
+      @include grid(4,1);
+
+   justify-items: center;
+    
+
+  }  
+
+  .container__button{
+    margin:2.7rem;
+}
+.out-form{
+    display: flex;
+    gap: 2rem;
+}
+
+
+@include telefono {
+    .pokemon-form{
+        display: block;
+    }
+}

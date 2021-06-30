@@ -23,7 +23,7 @@ width: 100%;">
                     <input type="text" name="filtername" id="filtername">
                 </label>
                 <fieldset class="container__actions__filtergender">
-                    <legend>Filter.by.Gender</legend>
+                    <legend>Filter by Gender</legend>
                     <label><input type="radio" name="gender_filter" class="container__actions__filtergender--radio" value="todos"
                             checked><span>👱👸</span></label>
                     <label><input type="radio" name="gender_filter" class="container__actions__filtergender--radio"
@@ -35,7 +35,8 @@ width: 100%;">
                 <fieldset class="container__actions__addedit">
                     <legend>Action</legend>
                     <input type="submit" value="ADD" class="container__actions__addedit--btn container__actions__addedit--add" id="add" title="Add new person"></input>
-                    <input type="submit" value="EDIT" class="container__actions__addedit--btn container__actions__addedit--edit" id="edit" disabled></input>
+                    <input type="submit" value="EDIT" class="container__actions__addedit--btn container__actions__addedit--edit" id="edit" title="Edit person"disabled></input>
+                    <input type="submit" value="RESET" class="container__actions__addedit--btn container__actions__addedit--reset" id="reset" title="Reset the page"></input>
                 </fieldset>
             </div>
             <fieldset class="container__list">
@@ -66,7 +67,8 @@ width: 100%;">
         </form>
         <div id="boardData" class="container__boardData"></div>
     </div>
-    <script src="dist/filter.js"></script>
+    <script src="./dist/data.js"></script>
+    <script src="./dist/filter.js"></script>
 </body>
 
 </html>

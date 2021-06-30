@@ -5,42 +5,116 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ITC BackOffice</title>
+    <link rel="shortcut icon" href="img/logoITC.png" type="image/x-icon">
     <link rel="stylesheet" href="dist/style.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
 </head>
 
 <body>
-    <form>
-        <label for="firstname">First name:</label>
-        <input type="text" name="firstname" id="firstname" required>
+    <nav class="top-menu">
+        <img class="top-menu__logo" src="img/logoITC.png" alt="logoITC">
+    </nav>
 
-        <label for="lastname">Last name:</label>
-        <input type="text" name="lastname" id="lastname" required>
+    <nav class="top-submenu">
+        <select class="top-submenu-filter__subject" id="subject" onchange="handleFilter()">
+            <option value="-">No filter status</option>
+            <option value="Approved">Approved</option>
+            <option value="Disapproved">Disapproved</option>
+            <option value="In Process">In Process</option>
+        </select>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required>
+        <select class="top-submenu-filter__status" id="status" onchange="handleFilter()">
+            <option value="-">No filter subject</option>
+            <option value="Cyber Security">Cyber Security</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Full Stack Developer">Full Stack Developer</option>
+        </select>
 
-        <label for="date">Inscription date:</label>
-        <input type="date" name="date" id="date" required>
+        <form onkeyup="handleSearch(event)">
+            <input class="form__search" type="text" name="search" id="search" placeholder="Search by name">
+        </form>
 
-        <div>
-            <label for="math">Math</label>
-            <input type="checkbox" name="subject" id="math" value="math">
+        <button class="top-submenu-button" id="buttonUpload">Upload a new student</button>
+        <button class="top-submenu-button" onclick="exportTableToExcel('tblData', 'Students Data')">Export to
+            Excel</button>
+        <input class="top-submenu-button" type="file" id="inputExcel" accept=".xls,.xlsx">
 
-            <label for="science">Science</label>
-            <input type="checkbox" name="subject" id="science" value="science">
+    </nav>
 
-            <label for="literacy">Literacy</label>
-            <input type="checkbox" name="subject" id="literacy" value="literacy">
+    <!-- Modal to upload a user -->
+    <div id="modalUpload" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeUpload" class="close">&times;</span>
+            <form class="form" onsubmit="handleSubmit(event)">
+                <h1>NEW STUDENT 🙌</h1>
+                <div class="form__wrapper">
+                    <label for="firstname">First name:</label>
+                    <input type="text" name="firstname" id="firstname" maxlength="20" required>
+                </div>
 
-            <label for="music">Music</label>
-            <input type="checkbox" name="subject" id="music" value="music">
+                <div class="form__wrapper">
+                    <label for="lastname">Last name:</label>
+                    <input type="text" name="lastname" id="lastname" maxlength="20" required>
+                </div>
+
+                <div class="form__wrapper">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+
+                <div class="form__wrapper">
+                    <label for="date">Inscription date:</label>
+                    <input type="date" name="date" id="date" required>
+                </div>
+
+                <div>
+                    <label for="fullStack">Full Stack Developer</label>
+                    <input type="radio" id="fullStack" name="subject" value="Full Stack Developer" checked />
+
+                    <label for="dataScience">Data Science</label>
+                    <input type="radio" id="dataScience" name="subject" value="Data Science" />
+
+                    <label for="cyberSecurity">Cyber Security</label>
+                    <input type="radio" id="cyberSecurity" name="subject" value="Cyber Security" />
+                </div>
+
+                <input class="form__input--submit" type="submit" value="Done">
+            </form>
         </div>
+    </div>
 
-        <input type="submit" value="Upload new student">
+    <!-- Modal to edit a user -->
+    <div id="modalEdit" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeEdit" class="close">&times;</span>
+            <form class="form" id="formEdit" onsubmit="handleEdit(event)">
 
-    </form>
+            </form>
+        </div>
+    </div>
+
+    <table id="tblData">
+        <tr id="tblData__titles">
+            <th id="tblData__titles--firstname">First Name</th>
+            <th id="tblData__titles--lastname">Last Name</th>
+            <th id="tblData__titles--email">Email </th>
+            <th id="tblData__titles--date">Inscription date</th>
+            <th id="tblData__titles--subject">Subject</th>
+            <th id="tblData__titles--status">Status</th>
+            <th> <i class="fas fa-wrench"></i></th>
+        </tr>
+        <tbody class="table"></tbody>
+    </table>
+
+    <script src="dist/studentsCreated.js"></script>
     <script src="dist/script.js"></script>
+    <script src="dist/helpersModal.js"></script>
+    <script src="dist/helperDownload.js"></script>
 </body>
 
 </html>

@@ -5,34 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./dist/crud.css">
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
     <title>My contacts</title>
+
+    <script src="https://kit.fontawesome.com/9e08100192.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
-    <h1>Contacts</h1>
-
-    <div class="container">
-        <form class="form" action="">
-            <label for="Phone number">Phone number</label>
-                <input type="number" name="phone-number" id="phone-number">
-            <label for="name">Name</label>
-                <input type="text" name="name" id="name">
-            <label for="email">Eamil address</label>
-                <input type="email" name="email" id="email">
-            <label for="address">Address</label>
-                <input type="text" name="address" id="address">
-            <label for="on-Whatsapp">On Whatsapp</label>
-                <input type="checkbox" name="on-Whatsapp" id="on-Whatsapp">
-            <label for="photo">Photo</label>
-                <input type="url" name="photo" id="photo">
-            <label for=""></label>
-                <input onsubmit="handleSubmit(event)" type="submit" value="Add">
-        </form>
-        <div class="list">
-            <h2>My contacts</h2>
+    <h1 class="main-headline"><i class="far fa-id-badge"></i> My contacts</h1>
+    <div class="body-wrapper">
+        <div class="form-container"> <!--This is the form part-->
+            <form onsubmit="handleSubmit(event)" class="form">
+                <h2 class="form__headline"><i class="fas fa-user-plus"></i> Add contact:</h2>
+                <label class="form__label" for="Phone number">Phone number</label>
+                    <input class="form__input" type="tel" name="phone-number" id="phone-number" required>
+                <label class="form__label" for="name">Name</label>
+                    <input class="form__input" type="text" name="name" id="name" required>
+                <br>
+                    <label class="form__label" for="email">Email address (Optional)</label>
+                    <input class="form__input" type="email" name="email" id="email">
+                <label class="form__label" for="address">Address (Optional)</label>
+                    <input class="form__input" type="text" name="address" id="address">
+                <label class="form__label" for="on-Whatsapp">On Whatsapp (Optional)</label>
+                    <input class="form__input" type="checkbox" name="on-Whatsapp" id="on-Whatsapp">
+                <label class="form__label" for="photo">Photo URL (Optional)</label>
+                    <input class="form__input" type="url" name="photo" id="photo">
+                <button class="form__submit-button" type="submit">Add <i class="fas fa-plus-circle"></i></button>
+            </form>
+        </div>
+        <div class="saved-contacts-container"> <!--Here is the list itself-->
+            <h2 class="saved-contacts-headline" ><i class="far fa-save"></i> Saved contacts</h2>
+            <div class="saved-contacts-root">
+            </div>
         </div>
     </div>
-
-    <script src="./dist/crud.js"></script>
+<script src="./dist/crud.js"></script>
 </body>
 </html>
