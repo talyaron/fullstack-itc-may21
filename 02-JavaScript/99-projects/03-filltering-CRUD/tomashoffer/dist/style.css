@@ -35,6 +35,12 @@ p {
   margin: 0 auto;
   width: 100rem;
 }
+.container_all .container_content footer {
+  margin-top: 1rem;
+  color: white;
+  background-color: #686868;
+  padding: 2rem;
+}
 .container_all .container_content .header {
   text-align: center;
   background-color: #686868;
@@ -91,12 +97,6 @@ p {
 .container_all .container_content .container-icons {
   text-align: center;
 }
-.container_all .footer_info {
-  margin-top: 1rem;
-  background-color: #686868;
-  color: white;
-  padding: 2rem;
-}
 .container_all .form_modal {
   display: flex;
   flex-direction: column;
@@ -109,4 +109,10 @@ p {
   .container_all {
     width: 80rem;
   }
+}
+footer {
+  margin-top: 1rem;
+  color: white;
+  background-color: #686868;
+  padding: 2rem;
 }
