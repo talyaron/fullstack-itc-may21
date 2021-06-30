@@ -229,6 +229,26 @@ const addToDom1 = (searchResults: Array<any>) => {
         console.error(e)
     }
 }
+const addToDom2 = (searchResults: Array<any>) => {
+    try {
+        const shoppingList: HTMLElement = document.querySelector('.shopping-list');
+        if (!shoppingList) {
+            throw new Error('No shopping list available!')
+        }
+        shoppingList.innerHTML = ``;
+        if (searchResults.length === 0) { shoppingList.innerHTML = 'no results to show'; return; }
+        searchResults.forEach((productItem) => shoppingList.innerHTML += (
+            `<div id='${productItem.id}'  class="shopping-list__item-wrapper">` +
+            `<img class="shopping-list__item-wrapper__item-image" src=${productItem.imgSrc} alt="">` +
+            `<div class="shopping-list__item-wrapper__edit" id='${productItem.id2}'> - Edit the text and click to save for next time</div>` +
+            `<h2  class="shopping-list__item-wrapper__item-name edit" id="${productItem.id3}" contenteditable="true">${productItem.description}</h2>` +
+            `<h3  class="shopping-list__item-wrapper__item-year">${productItem.year}</h3>` 
+        )
+        )
+    } catch (e) {
+        console.error(e)
+    }
+}
 
 
 
@@ -240,7 +260,7 @@ const handleSubmit1 = (ev: any) => {
             throw new Error('No value being read for search term!')
         }
         const results = findProductbySearchTerm(products.products, searchTerm);
-        addToDom1(results);
+        addToDom2(results);
         ev.target.reset();
     } catch (er) {
         console.error(er)
@@ -255,7 +275,7 @@ const handleKeyUp = (ev: any) => {
             throw new Error('No value being read for search term!')
         }
         const results = findProductbySearchTerm(products.products, searchTerm);
-        addToDom1(results);
+        addToDom2(results);
 
     } catch (er) {
         console.error(er)
@@ -278,7 +298,7 @@ const filterYear = (ev: any): any => {
         for (let i = 0; i < indexArray.length; i++) {
             results[i].description = nameUpdate[indexArray[i]]
         }
-        addToDom1(results);
+        addToDom2(results);
 
        
     } catch (er) {

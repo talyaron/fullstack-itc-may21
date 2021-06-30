@@ -22,5 +22,17 @@ function addNewCylinders() {
         selectCylinders.insertAdjacentHTML('afterbegin', option);
     });
 }
+function addNewMpg() {
+    var selectMpg = document.querySelector("table #milesPerGallon");
+    var mpgList = [];
+    cars.cars.forEach(function (c) { return mpgList.push(c.Miles_per_Gallon); });
+    var myMpgSet = new Set(mpgList);
+    selectMpg.innerHTML = "";
+    myMpgSet.forEach(function (c) {
+        var option = "<option value=\"" + c + "\">" + c + "</option>";
+        selectMpg.insertAdjacentHTML('afterbegin', option);
+    });
+}
 addNewOrigin();
 addNewCylinders();
+addNewMpg();
