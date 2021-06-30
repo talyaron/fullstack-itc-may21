@@ -13,93 +13,106 @@
     <title>Products List</title>
   </head>
   <body>
-    <div class="container">
-      <div class="formulario">
-        <form onsubmit="handleSubmit(event)">
-          <label class="formulario_item" for="product">Product</label>
-          <input class="formulario_item" type="text" name="producto" />
-          <label class="formulario_item" for="brand">Brand</label>
-          <input class="formulario_item" type="text" name="brand" />
-          <label class="formulario_item" for="price">Price</label>
-          <input class="formulario_item" type="number" name="price" />
-          <label class="formulario_item" for="stock">Stock</label>
-          <input class="formulario_item" type="number" name="stock" />
-          <label class="formulario_item" for="description">Description</label>
-          <input class="formulario_item" type="text" name="description" />
-          <button type="submit">Send</button>
-        </form>
-        <div class="search">
-            <h3>Search by product</h3>
+    <div class="container_all">
+        <div class="container_content">
+            <div class="header">
+                <h1>Product List Crud</h1>
+            </div>
+        <div>
+            <h3>Add a New Product</h3>
+            <form class="formulario" onsubmit="handleSubmit(event)">
+            <label class="formulario_item" for="product">Product</label>
+            <input class="formulario_item" type="text" name="producto" />
+            <label class="formulario_item" for="brand">Brand</label>
+            <input class="formulario_item" type="text" name="brand" />
+            <label class="formulario_item" for="price">Price</label>
+            <input class="formulario_item" type="number" name="price" />
+            <label class="formulario_item" for="stock">Stock</label>
+            <input class="formulario_item" type="number" name="stock" />
+            <label class="formulario_item" for="description">Description</label>
+            <input class="formulario_item" type="text" name="description" />
+            <button class="btn_send formulario_item" type="submit">Send</button>
+            </form>
+        </div>
+        <div class="filters">
+            <div class="filters_search">
+                <h4>Search by product</h4>
+                    <input type="text" name="searchBar" id="searchBar">
+            </div>
+            <div class="filters_selectors">
+            <h4>Select by price</h4>
+            <select name="select" class="select">
+                <option class="option_item" value="" hidden disabled selected>-----</option>
+                <option value="0">All Products</option>
+                <option class="option_item" value="100">> $100</option>
+                <option class="option_item" value="200">> $200</option>
+                <option class="option_item" value="300">> $300</option>
+            </select>
+            </div>
+        </div>
+        <div class="container_titles">
+            <div class="container_products_style container_products-product">
+            <h3>Products</h3>
+            </div>
+            <div class="container_products_style container_products-brand">
+            <h3>Brand</h3>
+            </div>
+            <div class="container_products_style container_products-price">
+            <h3>Price</h3>
+            </div>
+            <div class="container_products_style container_products-stock">
+            <h3>Stock</h3>
+            </div>
+            <div class="container_products_style container_products-description">
+            <h3>Description</h3>
+            </div>
+            <div class="container_products_style container_products-icons">
+            <h3>Action</h3>
+            </div>
+        </div>
+        <div class="container_products">
+            <!-- RENDER DATA -->
+        </div>
+        </div>
 
-                <input type="text" name="searchBar" id="searchBar">
-
-        </div>
-        <div class="selectors">
-          <h3>Select by price</h3>
-          <select name="select" class="select">
-            <option class="option_item" value="" hidden disabled selected>-----</option>
-            <option value="0">All Products</option>
-            <option class="option_item" value="100">> $100</option>
-            <option class="option_item" value="200">> $200</option>
-            <option class="option_item" value="300">> $300</option>
-          </select>
-        </div>
-      </div>
-      <div class="container_titles">
-        <div class="container_products-product">
-          <h3>Products</h3>
-        </div>
-        <div class="container_products-brand">
-          <h3>Brand</h3>
-        </div>
-        <div class="container_products-price">
-          <h3>Price</h3>
-        </div>
-        <div class="container_products-stock">
-          <h3>Stock</h3>
-        </div>
-        <div class="container_products-description">
-          <h3>Description</h3>
-        </div>
-        <div class="container_products-icons">
-          <h3>Action</h3>
-        </div>
-      </div>
-      <div class="container_products"></div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="modal fade" id="myModal">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1>Edit Product</h1>
+        <div class="container">
+            <div class="row">
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 style="text-align: center;">Edit Product</h1>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form_modal" action="" onsubmit="handleEdit(event)">
+                                    <label class="formulario_item--modal" for="product-modal">Product</label>
+                                    <input class="formulario_item--modal" type="text" name="productoModal" />
+                                    <label class="formulario_item--modal" for="brand-modal">Brand</label>
+                                    <input class="formulario_item--modal" type="text" name="brandModal" />
+                                    <label class="formulario_item--modal" for="price-modal">Price</label>
+                                    <input class="formulario_item--modal" type="number" name="priceModal" />
+                                    <label class="formulario_item--modal" for="stock-modal">Stock</label>
+                                    <input class="formulario_item--modal" type="number" name="stockModal" />
+                                    <label class="formulario_item--modal" for="description-modal">Description</label>
+                                    <input class="formulario_item--modal" type="text" name="descriptionModal" />
+                                    <input class="btn btn-primary" style="margin-top: 5px; font-size: 1.2rem;" type="submit" value="Send"></input>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <input class="btn btn-primary" type="text" name="" data-dismiss="modal" value="Close" id="">
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <form action="" onsubmit="handleEdit(event)">
-                                <label class="formulario_item--modal" for="product-modal">Product</label>
-                                <input class="formulario_item--modal" type="text" name="productoModal" />
-                                <label class="formulario_item--modal" for="brand-modal">Brand</label>
-                                <input class="formulario_item--modal" type="text" name="brandModal" />
-                                <label class="formulario_item--modal" for="price-modal">Price</label>
-                                <input class="formulario_item--modal" type="number" name="priceModal" />
-                                <label class="formulario_item--modal" for="stock-modal">Stock</label>
-                                <input class="formulario_item--modal" type="number" name="stockModal" />
-                                <label class="formulario_item--modal" for="description-modal">Description</label>
-                                <input class="formulario_item--modal" type="text" name="descriptionModal" />
-                                <input type="submit">Send</input>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <input class="btn btn-primary" type="text" name="" data-dismiss="modal" value="Close" id="">
-                        </div>
-                    </div>
-                </div> 
+                    </div> 
+                </div>
             </div>
         </div>
     </div>
-
+        <footer>
+            <div class="footer_info">
+                <p>Crud for Products List - Tomas Hoffer - 2021 ITC Full Stack Development Course</p>
+            </div>
+        </footer>
+</div>
     <script
     src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

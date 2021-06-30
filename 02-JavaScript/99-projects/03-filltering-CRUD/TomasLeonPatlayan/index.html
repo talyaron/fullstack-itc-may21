@@ -4,38 +4,121 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./SCSS/app.css">
     <title>Document</title>
 </head>
 <body>
-
-
+<h1>PokeDex</h1>
+<header class="container header-style">
 <form onsubmit="handleSubmit(event)">
 
-<input type="text" name="name" >
+  <div class="pokemon-form">
 
-<input type="url" name="imageUrl" id="imageUrl">
 
-<input type="text" name="pokeType">
 
-<button type="submit" >Send</button>
-<!-- 
-<div class="select">
-    <select name="todo" class="filter-todo">
-<option value="all">All</option>
-<option value="name">Name</option>
-<option value="age">Age</option>
-<option value="female">Female</option>
-<option value="male">Male</option>
+    <div class="container__input-name">
+      <legend>Pokemon Name</legend>
+      <input  type="text" name="name" >
+    </div>
 
-     </select> -->
-</div> 
+
+    <div class="container__input-imageUrl">
+      <legend>Pokemon ImageUrl</legend>
+      <input type="url" name="imageUrl" >
+    </div>
+
+    <div class="container__input-typePoke">
+      
+    <legend>Pokemon Type</legend>
+      <input type="text" name="pokeType">
+    </div>
+
+    <div class="container__button">
+      <button  class="btn btn-warning" type="submit" >Send</button>
+    </div>
+</div>
+
+
+
+
 </form>
 
-<div class="show"></div>
+<div class="out-form">
+  <div class="select">
+    <select onchange="handleFilter(event)" name="todos" class="filter-todo">
+        <option class="option_item" value="" hidden disabled selected> ----
+        </option>
+  <option class="option-item" value="fire">fire</option>
+  <option class="option-item" value="bug">bug</option>
+  <option class="option-item" value="grass">grass</option>
+  <option class="option-item" value="water">water</option>
+  <option class="option-item" value="flying">flying</option>
+  <option class="option-item" value="normal">normal</option>
+  <option class="option-item" value="electric">electric</option>
 
-<div class="edit name"></div>
-  
+
+
+    </select>
+
 </div>
+
+
+   <div class="input-search">
+     <input onkeyup="searchBar(event)" type="search" name="search" id="search">
+   </div>
+</div>
+
+</header>
+
+<main class="show container"></main>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="handleEdit(event)">
+
+          <div class="container__input-name">
+            <legend>Pokemon Name</legend>
+            <input  type="text" name="name" >
+          </div>
+      
+      
+          <div class="container__input-imageUrl">
+            <legend>Pokemon ImageUrl</legend>
+            <input type="url" name="imageUrl" >
+          </div>
+      
+          <div class="container__input-typePoke">
+            
+          <legend>Pokemon Type</legend>
+            <input type="text" name="pokeType">
+          </div>
+      
+          <div class="container__button">
+            <button class="btn btn-warning" type="submit" >Send</button>
+          </div>
+            
+            
+           
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="./TS/personas.js"></script>
 <script src="./TS/main.js"></script> 
 </body>

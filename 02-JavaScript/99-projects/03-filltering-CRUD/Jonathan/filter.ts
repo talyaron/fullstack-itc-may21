@@ -47,17 +47,17 @@ class Data {
 class DataList {
     datalist: Array<Data> = [];
     datalistFilter: Array<Data> = [];
-    
 
-    getOldData(dataList: Array<personalData|Data>): number {
 
-        
+    getOldData(dataList: Array<personalData | Data>): number {
+
+
         dataList.forEach(item => {
             const oldData = new Data(item.name, item.city, item.gender, item.tel, item.status, item.salary, item.id)
             this.datalist.push(oldData)
             this.datalistFilter.push(oldData)
         });
-        
+
         this.renderDataList()
         return this.datalist.length
     }
@@ -65,9 +65,9 @@ class DataList {
     getNewData(data: Data): number {
         this.datalist.push(data)
         this.datalistFilter.push(data)
-        localStorage.setItem("newPeople", JSON.stringify(this.datalist))
+        this.getStorage()
         this.renderDataList();
-       
+
         return this.datalist.length
     }
 
@@ -118,21 +118,33 @@ class DataList {
             });
             btnAdd.disabled = false;
             this.renderDataList();
-            localStorage.setItem("newPeople", JSON.stringify(this.datalist))
-          
+            this.getStorage()
+
         } catch (e) {
             console.log(e)
         }
     }
 
-    filterGender(gender: string) {
+    filterGender(gender: string,searchInput: string) {
 
+        const something: string = `^${searchInput}`;
+        const searchTermReg: RegExp = new RegExp(something, 'i');
 
-        if (gender === "female" || gender === "male") {
-            this.datalist = this.datalistFilter.filter(elem => elem.gender === gender)
-
+        if (inputNameFilter.value === "") {
+            if (gender === "female" || gender === "male") {
+                this.datalist = this.datalistFilter.filter(elem => elem.gender === gender)
+            } else {
+                this.datalist = this.datalistFilter.filter(elem => elem.gender === 'male' || elem.gender === 'female')
+            }
         } else {
-            this.datalist = this.datalistFilter.filter(elem => elem.gender === 'male' || elem.gender === 'female')
+            this.datalist = this.datalistFilter.filter(elem => searchTermReg.test(elem.name))
+
+            if (gender === "female" || gender === "male") {
+                this.datalist = this.datalist.filter(elem => elem.gender === gender)
+            } else {
+                this.datalist = this.datalist.filter(elem => elem.gender === 'male' || elem.gender === 'female')
+            }
+            
         }
 
         this.renderDataList()
@@ -151,6 +163,10 @@ class DataList {
         this.datalist = this.datalist.filter(item => item.id !== id)
         this.datalistFilter = this.datalistFilter.filter(item => item.id !== id)
         this.renderDataList()
+        this.getStorage()
+    }
+
+    getStorage(){
         localStorage.setItem("newPeople", JSON.stringify(this.datalist))
     }
 
@@ -162,7 +178,7 @@ class DataList {
 
         try {
             if (!boardDataRoot) throw new Error("This page cant render");
-         
+
             this.datalist.forEach(item => {
                 let num: number = Number(`${item.salary}`);
                 if (item.gender === 'male') {
@@ -187,16 +203,16 @@ class DataList {
                                <td>${item.gender.charAt(0).toUpperCase() + item.gender.slice(1)} </td>
                              </tr>
                              <tr>  
-                               <th>Tel</th>
+                               <th>Tel: </th>
                                <td>${item.tel} </td>
                              </tr>
                              <tr>
-                               <th>Status</th>
+                               <th>Status: </th>
                                <td>${item.status.charAt(0).toUpperCase() + item.status.slice(1)} </td>
                              </tr>
                              <tr>  
-                               <th>Salary</th>
-                               <td>₪ ${num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.').split('').reverse().join('').replace(/^[\.]/,'')}<td>
+                               <th>Salary: </th>
+                               <td>₪ ${num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.').split('').reverse().join('').replace(/^[\.]/, '')}<td>
                             </tr>
                         </table>    
                     <div>
@@ -244,11 +260,11 @@ const newPeople = JSON.parse(localStorage.getItem("newPeople"))
 const oldPeople = JSON.parse(localStorage.getItem("oldPeople"))
 
 
-if(newPeople === null){
-    count = datalist.getOldData(oldPeople); 
-}else if(newPeople!== oldPeople){
+if (newPeople === null) {
+    count = datalist.getOldData(oldPeople);
+} else if (newPeople !== oldPeople) {
     count = datalist.getOldData(newPeople)
-}else{
+} else {
     count = datalist.getOldData(oldPeople);
 }
 
@@ -261,6 +277,11 @@ btnAdd.addEventListener('click', event => {
         if (parseInt(salary.value) <= 0) throw new Error("Salary must be positive");
         const data = new Data(inputName.value, city.value, gender.value, tel.value, inputStatus.value, parseInt(salary.value), id)
         count = datalist.getNewData(data);
+        //form clear
+        inputName.value = "";
+        city.value = "";
+        tel.value = "";
+        salary.value = "";
         filterGender();
     } catch (e) {
         console.log(e)
@@ -292,11 +313,14 @@ function handleKeyUp() {
     }
 }
 
+console.log(filterGender())
+
 
 function filterGender() {
     for (let i = 0; i < gender_list.length; i++) {
         gender_list[i].addEventListener("click", function () {
-            datalist.filterGender(gender_list[i].value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
+            datalist.filterGender(gender_list[i].value,inputNameFilter.value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
+
         });
     }
 }

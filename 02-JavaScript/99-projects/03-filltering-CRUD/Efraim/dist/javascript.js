@@ -129,12 +129,13 @@ function handleSubmit(ev) {
         if (!shoppingListDOM) {
             throw new Error('No shopping list to hold items!');
         }
-        products.addProduct(new Product("\"" + imgUrl + "\"", "" + description, "" + year));
+        products.addProduct(new Product("\"" + imgUrl + "\"", "" + description, parseInt(year)));
         products.renderProducts(shoppingListDOM);
         nameUpdate.push("" + description);
         localStorage.userEdits = JSON.stringify(nameUpdate);
         commonFunction();
         localStorage.setItem('products', JSON.stringify(products.products));
+        console.log(products.products);
         ev.target.reset();
     }
     catch (e) {
@@ -147,6 +148,7 @@ function saveEdits(productId, productID2) {
     var editElem = document.querySelectorAll(".edit");
     nameUpdate.length = editElem.length;
     nameUpdate[index] = editElem[index].innerHTML;
+    products.products[index].description = nameUpdate[index];
     localStorage.userEdits = JSON.stringify(nameUpdate);
     var update = document.getElementById("" + productID2);
     update.innerHTML = "Edits saved!";
@@ -170,7 +172,16 @@ function checkEdits() {
 var findProductbySearchTerm = function (productSearch, searchTerm) {
     try {
         var userRegEx_1 = new RegExp(searchTerm, 'gmi');
+        var indexArray = products.products.reduce(function (acc, productItem, index) {
+            if (userRegEx_1.test(productItem.description)) {
+                acc.push(index);
+            }
+            return acc;
+        }, []);
         var searchResults = productSearch.filter(function (productItem) { return userRegEx_1.test(productItem.description); });
+        for (var i = 0; i < indexArray.length; i++) {
+            searchResults[i].description = nameUpdate[indexArray[i]];
+        }
         return searchResults;
     }
     catch (e) {
@@ -201,6 +212,26 @@ var addToDom1 = function (searchResults) {
         console.error(e);
     }
 };
+var addToDom2 = function (searchResults) {
+    try {
+        var shoppingList_2 = document.querySelector('.shopping-list');
+        if (!shoppingList_2) {
+            throw new Error('No shopping list available!');
+        }
+        shoppingList_2.innerHTML = "";
+        if (searchResults.length === 0) {
+            shoppingList_2.innerHTML = 'no results to show';
+            return;
+        }
+        searchResults.forEach(function (productItem) { return shoppingList_2.innerHTML += ("<div id='" + productItem.id + "'  class=\"shopping-list__item-wrapper\">" +
+            ("<img class=\"shopping-list__item-wrapper__item-image\" src=" + productItem.imgSrc + " alt=\"\">") +
+            ("<h2  class=\"shopping-list__item-wrapper__item-name edit\" id=\"" + productItem.id3 + "\" >" + productItem.description + "</h2>") +
+            ("<h3  class=\"shopping-list__item-wrapper__item-year\">" + productItem.year + "</h3>")); });
+    }
+    catch (e) {
+        console.error(e);
+    }
+};
 var handleSubmit1 = function (ev) {
     try {
         ev.preventDefault();
@@ -209,7 +240,7 @@ var handleSubmit1 = function (ev) {
             throw new Error('No value being read for search term!');
         }
         var results = findProductbySearchTerm(products.products, searchTerm);
-        addToDom1(results);
+        addToDom2(results);
         ev.target.reset();
     }
     catch (er) {
@@ -224,7 +255,7 @@ var handleKeyUp = function (ev) {
             throw new Error('No value being read for search term!');
         }
         var results = findProductbySearchTerm(products.products, searchTerm);
-        addToDom1(results);
+        addToDom2(results);
     }
     catch (er) {
         console.error(er);
@@ -236,7 +267,18 @@ var filterYear = function (ev) {
         if (!value_1) {
             throw new Error('No value being read for filter!');
         }
-        addToDom1(products.products.filter(function (productItem) { return productItem.year === value_1; }));
+        var indexArray = products.products.reduce(function (acc, curr, index) {
+            if (curr.year === value_1) {
+                acc.push(index);
+            }
+            return acc;
+        }, []);
+        var results = products.products.filter(function (productItem) { return productItem.year === value_1; });
+        console.log(results);
+        for (var i = 0; i < indexArray.length; i++) {
+            results[i].description = nameUpdate[indexArray[i]];
+        }
+        addToDom2(results);
     }
     catch (er) {
         console.error(er);
@@ -246,6 +288,23 @@ var resetButton = function () {
     try {
         addToDom1(products.products);
         commonFunction();
+    }
+    catch (er) {
+        console.error(er);
+    }
+};
+var selectList = function () {
+    try {
+        var array = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"];
+        var selectList_1 = document.querySelector(".wrapper__div__select-filter");
+        selectList_1.id = "mySelect";
+        //Create and append the options
+        for (var i = 0; i < array.length; i++) {
+            var option = document.createElement("option");
+            option.value = array[i];
+            option.text = array[i];
+            selectList_1.appendChild(option);
+        }
     }
     catch (er) {
         console.error(er);
