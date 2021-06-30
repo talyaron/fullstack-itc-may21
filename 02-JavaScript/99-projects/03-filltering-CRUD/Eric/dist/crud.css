@@ -3,95 +3,112 @@
   font-family: "Montserrat", sans-serif;
 }
 
+body {
+  animation: body 5s linear infinite alternate both;
+}
+
+@keyframes body {
+  0% {
+    background: #5b84f5;
+  }
+  100% {
+    background: #fafafc;
+  }
+}
 .container {
-  border: 2px solid red;
   font-size: 15px;
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
+  margin: auto;
+  width: 70%;
 }
-
-.table-product {
-  width: 100%;
-  border: 2px solid red;
-  text-align: center;
-}
-
-legend {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-form {
-  margin-top: 10px;
-  width: 100%;
-}
-
-input {
-  text-align: center;
-  background-color: white;
-}
-
-.head {
+.container .head {
   display: flex;
   justify-content: space-around;
 }
 
-/* to add color to delete and edit btns
-#del{
-    background-color: red;
+#product-form {
+  margin-top: 10px;
+  width: 100%;
 }
-.fas{
-    font-size: 18px;
-}*/
-/*body {
-    animation: body 5s linear infinite alternate both;
+#product-form legend {
+  text-align: center;
+  margin-bottom: 10px;
+}
+#product-form input {
+  text-align: center;
+  background-color: white;
+}
+#product-form .btn-product {
+  background-color: green;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 20px;
+}
+#product-form .btn-product:disabled {
+  cursor: not-allowed;
+}
+#product-form .btn-product:hover {
+  opacity: 0.6;
+}
+#product-form .btn-product {
+  -webkit-animation: btn-product 3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: btn-product 3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+@-webkit-keyframes btn-product {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+}
+@keyframes btn-product {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+}
+#product-form fieldset {
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
-@keyframes body {
-    0% {
-        background: #5b84f5;
-    }
-
-    100% {
-        background: #fafafc;
-    }
+.table-product {
+  margin: auto;
+  width: 70%;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
-
-.Add {
-    -webkit-animation: Add 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: Add 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+.editForm {
+  margin-top: 10px;
+  width: 100%;
 }
-
-@-webkit-keyframes Add {
-    0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-    }
+.editForm .btn-productEdit {
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 20px;
 }
-
-@keyframes Add {
-    0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-    }
-}*/
+.editForm .btn-productEdit:hover {
+  opacity: 0.6;
+}

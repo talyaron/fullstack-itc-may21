@@ -1,6 +1,7 @@
-const boardDataRoot: HTMLElement = document.querySelector('#boardData')
+let boardDataRoot: HTMLElement = document.querySelector('#boardData')
 const btnAdd = <HTMLButtonElement>document.getElementById('add')
 const btnEdit = <HTMLButtonElement>document.getElementById('edit')
+const btnReset = <HTMLButtonElement>document.getElementById('reset')
 
 
 
@@ -46,20 +47,27 @@ class Data {
 class DataList {
     datalist: Array<Data> = [];
     datalistFilter: Array<Data> = [];
+    
 
-    getOldData(dataList: Array<personalData>): number {
+    getOldData(dataList: Array<personalData|Data>): number {
+
+        
         dataList.forEach(item => {
             const oldData = new Data(item.name, item.city, item.gender, item.tel, item.status, item.salary, item.id)
             this.datalist.push(oldData)
             this.datalistFilter.push(oldData)
         });
+        
+        this.renderDataList()
         return this.datalist.length
     }
 
     getNewData(data: Data): number {
         this.datalist.push(data)
         this.datalistFilter.push(data)
+        localStorage.setItem("newPeople", JSON.stringify(this.datalist))
         this.renderDataList();
+       
         return this.datalist.length
     }
 
@@ -79,24 +87,24 @@ class DataList {
                     tel.value = element.tel
                     inputStatus.value = element.status
                     salary.value = String(element.salary)
-                    posicion = i;
+                    position = i;
                 }
                 i++;
             });
-            return posicion
+            return position
         } catch (e) {
             console.log(e)
         }
 
     }
 
-    editItem(posicion: number) {
+    editItem(position: number) {
 
         try {
-            
+
             let index: number = 0
             this.datalist.forEach(item => {
-                if (index === posicion) {
+                if (index === position) {
                     if (inputName.name === "" || city.value === "" || tel.value === "" || tel.value === "" || parseInt(salary.value) === NaN) throw new Error("Check if you complete all the inputs");
                     if (parseInt(salary.value) <= 0) throw new Error("Salary must be positive");
                     item.name = inputName.value
@@ -110,12 +118,15 @@ class DataList {
             });
             btnAdd.disabled = false;
             this.renderDataList();
+            localStorage.setItem("newPeople", JSON.stringify(this.datalist))
+          
         } catch (e) {
             console.log(e)
         }
     }
 
     filterGender(gender: string) {
+
 
         if (gender === "female" || gender === "male") {
             this.datalist = this.datalistFilter.filter(elem => elem.gender === gender)
@@ -138,9 +149,11 @@ class DataList {
 
     removeItem(id: string) {
         this.datalist = this.datalist.filter(item => item.id !== id)
-        this.datalistFilter = this.datalistFilter.filter(item=>item.id !==id)
+        this.datalistFilter = this.datalistFilter.filter(item => item.id !== id)
         this.renderDataList()
+        localStorage.setItem("newPeople", JSON.stringify(this.datalist))
     }
+
 
     renderDataList(): number {
 
@@ -149,7 +162,6 @@ class DataList {
 
         try {
             if (!boardDataRoot) throw new Error("This page cant render");
-
 
             this.datalist.forEach(item => {
                 if (item.gender === 'male') {
@@ -177,6 +189,7 @@ class DataList {
                 count++;
             });
             boardDataRoot.innerHTML = html
+
             return this.datalist.length;
         } catch (e) {
             console.log(e)
@@ -195,34 +208,25 @@ interface personalData {
     id: string,
 }
 
-const personalDataList: Array<personalData> =
-    [
-        {
-            name: 'Jonathan',
-            city: 'Buenos Aires',
-            gender: 'male',
-            tel: '972-555-2232',
-            status: 'single',
-            salary: 500,
-            id: Math.random().toString(16).slice(2),
-        },
-        {
-            name: 'Agustina',
-            city: 'Madrid',
-            gender: 'female',
-            tel: '5-55-232',
-            status: 'single',
-            salary: 1000,
-            id: Math.random().toString(16).slice(2),
-        }
-    ]
 
 const datalist = new DataList();
 let count: number = 0;
-count = datalist.getOldData(personalDataList);
-datalist.renderDataList();
+let position: number;
 
-let posicion: number;
+
+
+
+const newPeople = JSON.parse(localStorage.getItem("newPeople"))
+const oldPeople = JSON.parse(localStorage.getItem("oldPeople"))
+
+
+if(newPeople === null){
+    count = datalist.getOldData(oldPeople); 
+}else if(newPeople!== oldPeople){
+    count = datalist.getOldData(newPeople)
+}else{
+    count = datalist.getOldData(oldPeople);
+}
 
 
 //Buttons
@@ -232,7 +236,6 @@ btnAdd.addEventListener('click', event => {
         if (inputName.name === "" || city.value === "" || tel.value === "" || tel.value === "" || parseInt(salary.value) === NaN) throw new Error("Check if you complete all the inputs");
         if (parseInt(salary.value) <= 0) throw new Error("Salary must be positive");
         const data = new Data(inputName.value, city.value, gender.value, tel.value, inputStatus.value, parseInt(salary.value), id)
-        
         count = datalist.getNewData(data);
         filterGender();
     } catch (e) {
@@ -243,7 +246,7 @@ btnAdd.addEventListener('click', event => {
 
 btnEdit.addEventListener('click', event => {
     event.preventDefault()
-    datalist.editItem(posicion)
+    datalist.editItem(position)
 
     //form clear
     inputName.value = "";
@@ -258,8 +261,7 @@ inputNameFilter.addEventListener('keyup', handleKeyUp)
 
 function handleKeyUp() {
     try {
-       
-        //
+
         datalist.filterbyName(inputNameFilter.value)
     } catch (e) {
         console.log(e)
@@ -270,7 +272,7 @@ function handleKeyUp() {
 function filterGender() {
     for (let i = 0; i < gender_list.length; i++) {
         gender_list[i].addEventListener("click", function () {
-            datalist.filterGender(gender_list[i].nodeValue);
+            datalist.filterGender(gender_list[i].value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
         });
     }
 }
@@ -285,3 +287,9 @@ function handleEdit() {
     btnAdd.disabled = true;
     datalist.bringItem();
 }
+
+btnReset.addEventListener('click', event => {
+    event.preventDefault()
+    localStorage.clear() // reset and bring to the board only the two items from data.ts
+    window.location.reload(); //refresh page
+});
