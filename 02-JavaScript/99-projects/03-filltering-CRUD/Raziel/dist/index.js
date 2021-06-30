@@ -113,13 +113,6 @@ searchName.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
     lists.searchContact(searchName.value);
 }
-// function filterGender() {
-//     for (let i = 0; i < genderNode.length; i++) {
-//         genderNode[i].addEventListener("click", function () {
-//             lists.filterByGender(genderNode[i].nodeValue);
-//         });
-//     }
-// }
 var genderFilter = document.querySelector('#genderFilter');
 genderFilter.addEventListener("click", filterGender);
 function filterGender() {
