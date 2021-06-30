@@ -170,7 +170,16 @@ function checkEdits() {
 var findProductbySearchTerm = function (productSearch, searchTerm) {
     try {
         var userRegEx_1 = new RegExp(searchTerm, 'gmi');
+        var indexArray = products.products.reduce(function (acc, productItem, index) {
+            if (userRegEx_1.test(productItem.description)) {
+                acc.push(index);
+            }
+            return acc;
+        }, []);
         var searchResults = productSearch.filter(function (productItem) { return userRegEx_1.test(productItem.description); });
+        for (var i = 0; i < indexArray.length; i++) {
+            searchResults[i].description = nameUpdate[indexArray[i]];
+        }
         return searchResults;
     }
     catch (e) {
@@ -236,7 +245,18 @@ var filterYear = function (ev) {
         if (!value_1) {
             throw new Error('No value being read for filter!');
         }
-        addToDom1(products.products.filter(function (productItem) { return productItem.year === value_1; }));
+        var indexArray = products.products.reduce(function (acc, curr, index) {
+            if (curr.year === value_1) {
+                acc.push(index);
+            }
+            return acc;
+        }, []);
+        var results = products.products.filter(function (productItem) { return productItem.year === value_1; });
+        console.log(results);
+        for (var i = 0; i < indexArray.length; i++) {
+            results[i].description = nameUpdate[indexArray[i]];
+        }
+        addToDom1(results);
     }
     catch (er) {
         console.error(er);
@@ -246,6 +266,23 @@ var resetButton = function () {
     try {
         addToDom1(products.products);
         commonFunction();
+    }
+    catch (er) {
+        console.error(er);
+    }
+};
+var selectList = function () {
+    try {
+        var array = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"];
+        var selectList_1 = document.querySelector(".wrapper__div__select-filter");
+        selectList_1.id = "mySelect";
+        //Create and append the options
+        for (var i = 0; i < array.length; i++) {
+            var option = document.createElement("option");
+            option.value = array[i];
+            option.text = array[i];
+            selectList_1.appendChild(option);
+        }
     }
     catch (er) {
         console.error(er);

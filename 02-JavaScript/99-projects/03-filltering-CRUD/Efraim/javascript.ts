@@ -77,7 +77,7 @@ const products: Products = new Products();
 
 function commonFunction() {
     try {
-        let editElem = document.querySelectorAll(`.edit`);
+        let editElem: NodeListOf<Element> = document.querySelectorAll(`.edit`);
         if (!editElem) {
             throw new Error('No edit elements detected!')
         }
@@ -91,7 +91,7 @@ function commonFunction() {
 
 const deleteProduct = (productId: string) => {
     try {
-        const shoppingListDOM = document.querySelector('.shopping-list');
+        const shoppingListDOM: Element = document.querySelector('.shopping-list');
         if (!shoppingListDOM) {
             throw new Error('No shopping list detected!')
         }
@@ -158,8 +158,7 @@ function handleSubmit(ev): any {
 let nameUpdate: Array<any> = products.products.map(proddes => proddes.description)
 function saveEdits(productId, productID2) {
         const index = products.findIndexes(productId);
-        let editElem = document.querySelectorAll(`.edit`);
-       
+        let editElem: NodeListOf<Element> = document.querySelectorAll(`.edit`);
         nameUpdate.length = editElem.length
         nameUpdate[index] = editElem[index].innerHTML;
         localStorage.userEdits = JSON.stringify(nameUpdate);
@@ -171,7 +170,7 @@ function saveEdits(productId, productID2) {
 
 function checkEdits() {
     try {
-        const render = JSON.parse(localStorage.getItem('products'))
+        const render:any = JSON.parse(localStorage.getItem('products'))
         if (render != null) {
             addToDom1(render)
             products.products = render
@@ -190,8 +189,17 @@ function checkEdits() {
 
 const findProductbySearchTerm = (productSearch: Array<any>, searchTerm: string) => {
     try {
-        const userRegEx = new RegExp(searchTerm, 'gmi');
+        const userRegEx: RegExp = new RegExp(searchTerm, 'gmi');
+        let indexArray: Array<any> = products.products.reduce(function(acc, productItem, index) {
+            if (userRegEx.test(productItem.description)) {
+              acc.push(index);
+            }
+            return acc;
+          }, []);
         const searchResults: Array<any> = productSearch.filter(productItem => userRegEx.test(productItem.description));
+        for (let i = 0; i < indexArray.length; i++) {
+            searchResults[i].description = nameUpdate[indexArray[i]]
+        }
         return searchResults;
     } catch (e) {
         console.error(e)
@@ -259,7 +267,20 @@ const filterYear = (ev: any): any => {
         if (!value) {
             throw new Error('No value being read for filter!')
         }
-        addToDom1(products.products.filter(productItem => productItem.year === value))
+        let indexArray:Array<number> = products.products.reduce(function(acc, curr, index) {
+            if (curr.year === value) {
+              acc.push(index);
+            }
+            return acc;
+          }, []);
+        let results:Array<any> = products.products.filter(productItem => productItem.year === value);
+        console.log(results)
+        for (let i = 0; i < indexArray.length; i++) {
+            results[i].description = nameUpdate[indexArray[i]]
+        }
+        addToDom1(results);
+
+       
     } catch (er) {
         console.error(er)
     }
@@ -272,6 +293,26 @@ const resetButton = () => {
         console.error(er)
     }
 }
+
+const selectList = () => {
+    try {
+        let array = ["2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"];
+        let selectList = document.querySelector(".wrapper__div__select-filter");
+        selectList.id = "mySelect";
+        
+        //Create and append the options
+        for (let i = 0; i < array.length; i++) {
+            let option = document.createElement("option");
+            option.value = array[i];
+            option.text = array[i];
+            selectList.appendChild(option);
+        }
+    } catch (er) {
+        console.error(er)
+    }
+}
+
+
 
 
 
