@@ -9,3 +9,5 @@ const{name2,age}=city;
 console.log(name2,age);
 const{streets}=city
 console.log(streets);
+
+function volume({width,height,deepth})
