@@ -78,6 +78,15 @@ function commonFunction() {
         console.error(e);
     }
 }
+function saveToLocalStorage() {
+    try {
+        localStorage.setItem('products', JSON.stringify(products.products));
+        localStorage.userEdits = JSON.stringify(nameUpdate);
+    }
+    catch (e) {
+        console.error(e);
+    }
+}
 var deleteProduct = function (productId) {
     try {
         var shoppingListDOM = document.querySelector('.shopping-list');
@@ -92,8 +101,7 @@ var deleteProduct = function (productId) {
         products.renderProducts(shoppingListDOM);
         nameUpdate.splice(index, 1);
         commonFunction();
-        localStorage.setItem('products', JSON.stringify(products.products));
-        localStorage.userEdits = JSON.stringify(nameUpdate);
+        saveToLocalStorage();
     }
     catch (e) {
         console.error(e);
@@ -134,10 +142,8 @@ function handleSubmit(ev) {
         products.addProduct(new Product("\"" + imgUrl + "\"", "" + description, parseInt(year)));
         products.renderProducts(shoppingListDOM);
         nameUpdate.push("" + description);
-        localStorage.userEdits = JSON.stringify(nameUpdate);
         commonFunction();
-        localStorage.setItem('products', JSON.stringify(products.products));
-        console.log(products.products);
+        saveToLocalStorage();
         ev.target.reset();
     }
     catch (e) {
@@ -151,9 +157,9 @@ function saveEdits(productId, productID2) {
     nameUpdate.length = editElem.length;
     nameUpdate[index] = editElem[index].innerHTML;
     products.products[index].description = nameUpdate[index];
-    localStorage.userEdits = JSON.stringify(nameUpdate);
     var update = document.getElementById("" + productID2);
     update.innerHTML = "Edits saved!";
+    saveToLocalStorage();
 }
 function checkEdits() {
     try {
