@@ -105,6 +105,7 @@ const deleteProduct = (productId: string) => {
         nameUpdate.splice(index, 1);
         commonFunction()
         localStorage.setItem('products', JSON.stringify(products.products))
+        localStorage.userEdits = JSON.stringify(nameUpdate);
     } catch (e) {
         console.error(e)
     }

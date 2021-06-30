@@ -71,6 +71,7 @@ function commonFunction() {
         }
         for (var i = 0; i < editElem.length; i++) {
             editElem[i].innerHTML = nameUpdate[i];
+            products.products[i].description = nameUpdate[i];
         }
     }
     catch (e) {
@@ -92,6 +93,7 @@ var deleteProduct = function (productId) {
         nameUpdate.splice(index, 1);
         commonFunction();
         localStorage.setItem('products', JSON.stringify(products.products));
+        localStorage.userEdits = JSON.stringify(nameUpdate);
     }
     catch (e) {
         console.error(e);
