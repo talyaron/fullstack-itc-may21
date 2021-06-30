@@ -1,7 +1,7 @@
 //--CONSTS--//
 var rootHtml = document.querySelector('#root');
 var searchName = document.querySelector("#search");
-var gender_node = document.querySelectorAll(".gender");
+var genderNode = document.querySelectorAll(".gender");
 filterGender();
 var Contact = /** @class */ (function () {
     function Contact(name, fname, phone, email, gender) {
@@ -28,9 +28,9 @@ var List = /** @class */ (function () {
         }
     };
     List.prototype.renderList = function (filteredArray) {
-        var ArrayToRender = filteredArray ? filteredArray : this.contactList;
+        var arrayToRender = filteredArray ? filteredArray : this.contactList;
         var html = "";
-        ArrayToRender.forEach(function (element) {
+        arrayToRender.forEach(function (element) {
             if (element.gender == 'male') {
                 html += "<div class = \"record-item\"><div class = \"record-el\">\n            <span>&#128113;&#127999;</span>\n        </div>";
             }
@@ -43,7 +43,7 @@ var List = /** @class */ (function () {
             if (element.gender == 'helicopter') {
                 html += "<div class = \"record-item\"><div class = \"record-el\">\n                <span>\uD83D\uDE81</span>\n            </div>";
             }
-            html += "<div class = \"record-item\">\n            <div class = \"record-el\">\n                <span>Name:" + element.name + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Family Name:" + element.fname + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span >Phone Number:" + element.phone + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Email Address :" + element.email + " </span>\n            </div>\n            <button type = \"button\" id = \"delete-btn\" onclick='handelRemove(\"" + element.id + "\")'>\n                <span>\n                    <i class = \"fas fa-trash\"></i>\n                </span> Delete\n            </button>\n            <button type = \"button\" id = \"delete-btn\" class=\"editButton\">\n                <span>\n                <i class=\"fas fa-edit\"></i>\n                </span> Edit\n            </button>\n        </div>\n    </div>\n    </div>\n";
+            html += "<div class = \"record-item\">\n            <div class = \"record-el\">\n                <span>Name:" + element.name + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Family Name:" + element.fname + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span >Phone Number:" + element.phone + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Email Address :" + element.email + " </span>\n            </div>\n            <button type = \"button\" id = \"delete-btn\" onclick='handelRemove(\"" + element.id + "\")'>\n                <span>\n                    <i class = \"fas fa-trash\"></i>\n                </span> Delete\n            </button>\n            <button type = \"button\" id = \"delete-btn\" onclick='editContact(\"" + element.id + "\")'>\n            <span>\n                <i class = \"fas fa-trash\"></i>\n            </span> Edit\n        </button>\n        </div>\n    </div>\n    </div>\n";
         });
         rootHtml.innerHTML = html;
     };
@@ -51,7 +51,11 @@ var List = /** @class */ (function () {
         this.contactList = this.contactList.filter(function (ev) { return ev.id !== id; });
         this.renderList(null);
     };
-    List.prototype.editContact = function () { };
+    List.prototype.editContacts = function (id) {
+        var contactEdit = this.contactList.find(function (contact) { return contact.id == id; });
+        contactEdit.name = "DAN";
+        this.renderList(this.contactList);
+    };
     List.prototype.searchContact = function (name) {
         var regEx = "" + name;
         var searchName = new RegExp(regEx, 'i');
@@ -101,17 +105,21 @@ var handelForm = function (ev) {
 var handelRemove = function (id) {
     lists.deleteContact(id);
 };
+var editContact = function (id) {
+    lists.editContacts(id);
+    console.log("hey");
+};
 searchName.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
     lists.searchContact(searchName.value);
 }
+var genderFilter = document.querySelector('#genderFilter');
+genderFilter.addEventListener("click", filterGender);
 function filterGender() {
-    var _loop_1 = function (i) {
-        gender_node[i].addEventListener("click", function () {
-            lists.filterByGender(gender_node[i].nodeValue);
-        });
-    };
-    for (var i = 0; i < gender_node.length; i++) {
-        _loop_1(i);
-    }
+    genderNode.forEach(function (node) {
+        if (node.checked) {
+            var filterGenderList = lists.contactList.filter(function (contact) { return contact.gender == node.value; });
+            lists.renderList(filterGenderList);
+        }
+    });
 }
