@@ -66,21 +66,21 @@ var DataList = /** @class */ (function () {
                     tel.value = element.tel;
                     inputStatus.value = element.status;
                     salary.value = String(element.salary);
-                    posicion = i;
+                    position = i;
                 }
                 i++;
             });
-            return posicion;
+            return position;
         }
         catch (e) {
             console.log(e);
         }
     };
-    DataList.prototype.editItem = function (posicion) {
+    DataList.prototype.editItem = function (position) {
         try {
             var index_1 = 0;
             this.datalist.forEach(function (item) {
-                if (index_1 === posicion) {
+                if (index_1 === position) {
                     if (inputName.name === "" || city.value === "" || tel.value === "" || tel.value === "" || parseInt(salary.value) === NaN)
                         throw new Error("Check if you complete all the inputs");
                     if (parseInt(salary.value) <= 0)
@@ -150,7 +150,7 @@ var DataList = /** @class */ (function () {
 }());
 var datalist = new DataList();
 var count = 0;
-var posicion;
+var position;
 var newPeople = JSON.parse(localStorage.getItem("newPeople"));
 var oldPeople = JSON.parse(localStorage.getItem("oldPeople"));
 if (newPeople === null) {
@@ -180,7 +180,7 @@ btnAdd.addEventListener('click', function (event) {
 });
 btnEdit.addEventListener('click', function (event) {
     event.preventDefault();
-    datalist.editItem(posicion);
+    datalist.editItem(position);
     //form clear
     inputName.value = "";
     city.value = "";
@@ -216,6 +216,6 @@ function handleEdit() {
 }
 btnReset.addEventListener('click', function (event) {
     event.preventDefault();
-    localStorage.clear();
-    count = datalist.getOldData(personalDataList);
+    localStorage.clear(); // reset and bring to the board only the two items from data.ts
+    window.location.reload(); //refresh page
 });
