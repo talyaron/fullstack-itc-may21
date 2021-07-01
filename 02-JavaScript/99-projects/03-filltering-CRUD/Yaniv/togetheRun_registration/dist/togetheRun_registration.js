@@ -17,7 +17,7 @@ var newRunner = /** @class */ (function () {
     }
     return newRunner;
 }());
-var currentRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null;
+var currentRunner = JSON.parse(localStorage.getItem("currentRunner")) ? JSON.parse(localStorage.getItem("currentRunner")) : null; //YS: Should be const
 if (currentRunner !== null) {
     window.location.href = "../togetheRun_main/togetheRun_main.html?" + currentRunner.runnerId;
 }
@@ -46,27 +46,27 @@ var runnerSubmit = function (ev) {
         var nameRegEx = new RegExp(nameRegExRule, 'gmi');
         if (!nameRegEx.test(runnerName)) {
             alert('Your name must contain 2-30 characters, first & middle names at least 2 characters, not start/end with a space and have up to 2 middle names. Please try again');
-            throw new Error('Invalid name');
+            throw new Error('Invalid name'); //YS: Instead of using alert, display the error.message that you get in your catch in your DOM, in red.
         }
         var emailRegExRule = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
         var emailRegEx = new RegExp(emailRegExRule, 'gmi');
         if (!emailRegEx.test(runnerEmail)) {
-            alert('Your Email seems to be wrong. Please correct it or use a different Email address');
+            alert('Your Email seems to be wrong. Please correct it or use a different Email address'); //YS: Same as before
             throw new Error('Email not compliant to RFC 2822');
         }
         var passRegExRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/;
         var passRegEx = new RegExp(passRegExRule, 'gm');
-        if (!passRegEx.test(runnerPassword)) {
-            alert('Your password must contain 8-10 characters, at least one uppercase letter, one lowercase letter, one number and one special character. Please try again');
-            throw new Error('Password not secured enough');
-        }
-        if (runnerPassword != runnerPasswordVerify) {
-            alert('You entered a different password in you verification field. Please try again');
-            throw new Error('Password verification failed');
-        }
+        // if (!passRegEx.test(runnerPassword)) {
+        //   alert('Your password must contain 8-10 characters, at least one uppercase letter, one lowercase letter, one number and one special character. Please try again');
+        //   throw new Error('Password not secured enough');
+        // }
+        // if (runnerPassword != runnerPasswordVerify) {
+        //   alert('You entered a different password in you verification field. Please try again');
+        //   throw new Error('Password verification failed');
+        // }
         var runner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
         localStorage.setItem("currentRunner", JSON.stringify(runner));
-        window.location.href = "../togetheRun_main/togetheRun_main.html?" + runner.runnerId;
+        window.location.href = "../togetheRun_main/togetheRun_main.html?" + runner.runnerId; //YS: Very nice
         // runners.addRunner(runner); // for the future - figure out how to manage runners array of type Array<Runner>
         ev.target.reset();
     }

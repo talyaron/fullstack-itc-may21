@@ -172,10 +172,13 @@ var handleEdit = function (ev) {
 //To delete a Student
 function remove(studentId, name) {
     try {
-        var option = confirm("Are you sure do you want to delete " + name + "?");
-        if (option === true) {
+        var option = confirm("Are you sure do you want to delete " + name + "?"); //YS: Nice!
+        if (option === true) { //YS: If its true, you just need: if(option)
             var studentIndex = this.students.findIndex(function (element) { return element.id === studentId; });
             this.students.splice(studentIndex, 1);
+            /*YS: Notice that with splice you are changing the original array
+            while with other methods like filter you create a new array. Always be aware of what the method returns
+            and if it modifies the original array or not.*/
             if (!renderStudents)
                 throw new Error('There is a problem to render the students');
             renderStudents(students);
@@ -196,6 +199,9 @@ function handleFilter() {
             throw new Error('Can`t access to status in filter');
         if (subject_1.value === '-' && status_1.value !== '-') {
             var studentsFiltered = students.filter(function (element) { return (element.status === status_1.value); });
+            /*YS: You should use square brackets and not parenthesis in a callback: .filter(element => {element.status === status.value});
+            And if you use arrow functions and return in the same line you dont need anything: .filter(element => element.status === status.value);
+            */
             checkFilters(studentsFiltered);
         }
         else if (status_1.value === '-' && subject_1.value !== '-') {
@@ -290,6 +296,9 @@ try {
     if (!sortStatus)
         throw new Error('There is a problem sorting the status');
     sortName.addEventListener('click', function () {
+        /*YS: Very nice! Although as you can see this code is not DRY. You could have used the same eventlistener/function
+        for all of them and passed parameters. Also, instead of writing your function in the event listener, make a callback:
+       < sortName.addEventListener('click', mySortFunction) > */
         if (order === true) {
             var sortByFirstName = students.sort(function (a, b) { return a.firstname.localeCompare(b.firstname); });
             renderStudents(sortByFirstName);

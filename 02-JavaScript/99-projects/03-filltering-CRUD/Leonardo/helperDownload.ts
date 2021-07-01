@@ -1,5 +1,5 @@
 //This function convert the data of a table in HTML to a format XLS for Excel
-function exportTableToExcel(tableID, filename = 'Students Table') {
+function exportTableToExcel(tableID, filename = 'Students Table') {  //YS: Very nice!
     try {
         let downloadLink: any;
         let dataType: string = 'application/vnd.ms-excel';
@@ -15,7 +15,7 @@ function exportTableToExcel(tableID, filename = 'Students Table') {
         document.body.appendChild(downloadLink);
 
         if (navigator.msSaveOrOpenBlob) {
-            var blob = new Blob(['ufeff', tableHTML], {
+            var blob = new Blob(['ufeff', tableHTML], { //YS: Never use var
                 type: dataType
             });
             navigator.msSaveOrOpenBlob(blob, filename);
