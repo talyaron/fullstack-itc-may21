@@ -34,11 +34,24 @@ function handleDelete(bookId: string) {
   renderBook(reducedArray);
 }
 
-function updateTitle(bookId) {
+function updateTitle(bookId: string) {
   const titleToUpdate = totalArray.find((book) => {
     return bookId === book.bookId;
   });
-  titleToUpdate.title = "Changed";
+  // titleToUpdate.title = "Changed";
+  renderBook(totalArray);
+}
+
+// Here, I want to make it so that when they click "update" a box pops up. They put something in and it uopdates the title. The JS is already grabbing the title (the onlick in the created string below). I added the function call to the onclick. I need to use another string literal to render what they write to the DOM, and updtae innerHTML, which will replace the title that is already there.
+
+function writeNewTitle(bookId: string) {
+  let newTitle;
+  let user = prompt("Please enter a new title");
+  if (user == null || user == "") {
+    newTitle = "User cancelled.";
+  } else {
+    newTitle.innerHTML = `${newTitle.title}`;
+  }
   renderBook(totalArray);
 }
 
@@ -72,7 +85,7 @@ function renderBook(booksList) {
     <p><span class = "year">Year: </span>${book.year}</p>
     </div>
     <button onclick='handleDelete("${book.bookId}")'>Delete</button>
-    <button onclick='updateTitle("${book.bookId}")'>Update</button>
+    <button id = "update" onclick='updateTitle("${book.bookId}"); writeNewTitle("${book.bookId}")'>Update</button>
   </div>`;
     newBooks += booktoDom;
     booksRoot.innerHTML = newBooks;
@@ -82,7 +95,7 @@ function renderBook(booksList) {
 window.onload = renderBook(booksData);
 
 const searchBooksbyTerm = (totalArray: Array<any>, searchTerm: string) => {
-  const myRegEx = new RegExp(searchTerm, "g");
+  const myRegEx = new RegExp(searchTerm, "gmi");
   const searchedBooks: Array<any> = totalArray.filter((book) =>
     myRegEx.test(book)
   );
@@ -101,4 +114,5 @@ const handleRegExSubmit = (ev: any) => {
   const searchTerm: string = ev.target.elements.input.value;
   const results = searchBooksbyTerm(totalArray, searchTerm);
   renderBook(results);
+  // ev.target.reset();
 };

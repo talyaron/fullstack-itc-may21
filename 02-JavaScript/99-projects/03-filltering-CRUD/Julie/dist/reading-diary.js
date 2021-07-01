@@ -31,7 +31,19 @@ function updateTitle(bookId) {
     var titleToUpdate = totalArray.find(function (book) {
         return bookId === book.bookId;
     });
-    titleToUpdate.title = "Changed";
+    // titleToUpdate.title = "Changed";
+    renderBook(totalArray);
+}
+// Here, I want to make it so that when they click "update" a box pops up. They put something in and it uopdates the title. The JS is already grabbing the title (the onlick in the created string below). I added the function call to the onclick. I need to use another string literal to render what they write to the DOM, and updtae innerHTML, which will replace the title that is already there.
+function writeNewTitle(bookId) {
+    var newTitle;
+    var user = prompt("Please enter a new title");
+    if (user == null || user == "") {
+        newTitle = "User cancelled.";
+    }
+    else {
+        newTitle.innerHTML = "" + newTitle.title;
+    }
     renderBook(totalArray);
 }
 var handleSubmit = function (ev) {
@@ -47,14 +59,14 @@ function renderBook(booksList) {
     var newBooks = "";
     var booksRoot = document.querySelector("#booksRoot");
     booksList.forEach(function (book) {
-        var booktoDom = "<div class=\"form-wrapper-random\">\n    <div>\n        <p><span class = \"author\">Author: </span>" + book.author + "</p>\n    </div>\n    <div>\n    <p><span class = \"country\">Country: </span>" + book.country + "</p>\n    </div>\n    <div>\n    <p><span class = \"title\">Title: </span>" + book.title + "</p>\n    </div>\n    <div>\n    <p><span class = \"year\">Year: </span>" + book.year + "</p>\n    </div>\n    <button onclick='handleDelete(\"" + book.bookId + "\")'>Delete</button>\n    <button onclick='updateTitle(\"" + book.bookId + "\")'>Update</button>\n  </div>";
+        var booktoDom = "<div class=\"form-wrapper-random\">\n    <div>\n        <p><span class = \"author\">Author: </span>" + book.author + "</p>\n    </div>\n    <div>\n    <p><span class = \"country\">Country: </span>" + book.country + "</p>\n    </div>\n    <div>\n    <p><span class = \"title\">Title: </span>" + book.title + "</p>\n    </div>\n    <div>\n    <p><span class = \"year\">Year: </span>" + book.year + "</p>\n    </div>\n    <button onclick='handleDelete(\"" + book.bookId + "\")'>Delete</button>\n    <button id = \"update\" onclick='updateTitle(\"" + book.bookId + "\"); writeNewTitle(\"" + book.bookId + "\")'>Update</button>\n  </div>";
         newBooks += booktoDom;
         booksRoot.innerHTML = newBooks;
     });
 }
 window.onload = renderBook(booksData);
 var searchBooksbyTerm = function (totalArray, searchTerm) {
-    var myRegEx = new RegExp(searchTerm, "g");
+    var myRegEx = new RegExp(searchTerm, "gmi");
     var searchedBooks = totalArray.filter(function (book) {
         return myRegEx.test(book);
     });
@@ -71,4 +83,5 @@ var handleRegExSubmit = function (ev) {
     var searchTerm = ev.target.elements.input.value;
     var results = searchBooksbyTerm(totalArray, searchTerm);
     renderBook(results);
+    // ev.target.reset();
 };
