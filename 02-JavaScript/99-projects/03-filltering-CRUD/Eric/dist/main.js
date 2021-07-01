@@ -1,19 +1,19 @@
-var botonAdd = document.querySelector(".btn-product");
+var botonAdd = document.querySelector(".btn-product"); //YS: You dont need the first and last parenthesis
 var table = document.querySelector(".product-list");
 //search-regrex
-var inputFilter = document.querySelector("#filterN");
-//data-edit
+var inputFilter = document.querySelector("#filterN"); //YS: You dont need the first and last parenthesis
+//data-edit    //YS: Why are all these variable names in different formats? In JS we use camelCase: description, productQty, type, origin, quantity..
 var product_qty = document.querySelectorAll(".filter-option");
-var ProductN = document.querySelector(".product-name");
+var ProductN = document.querySelector(".product-name"); //YS: You dont need the first and last parenthesis
 var Type = document.querySelector(".product-type");
-var Description = document.querySelector(".product-description");
-var Origin = document.querySelector(".product-origin");
-var Quantity = document.querySelector(".product-quantity");
+var Description = document.querySelector(".product-description"); //YS: You dont need the first and last parenthesis
+var Origin = document.querySelector(".product-origin"); //YS: You dont need the first and last parenthesis
+var Quantity = document.querySelector(".product-quantity"); //YS: You dont need the first and last parenthesis
 //filter
 var selector = document.querySelector(".selector");
 var Product = /** @class */ (function () {
     function Product(ProductName, Type, Description, Origin, Quantity) {
-        this.ProductName = ProductName;
+        this.ProductName = ProductName; //YS: These varbiables shouldnt be capitalized.
         this.Type = Type;
         this.Description = Description;
         this.Quantity = Quantity;
@@ -38,20 +38,20 @@ var Products = /** @class */ (function () {
         var _this = this;
         productsArray.forEach(function (product) {
             var newProduct = new Product(product.ProductName, product.Type, product.Description, product.Origin, product.Quantity);
-            _this.products.push(newProduct);
+            _this.products.push(newProduct); //YS: Why not unshift to add your product at the beginning of the array? 
             _this.productsFilter.push(newProduct);
         });
     };
     //search
     Products.prototype.searchProduct = function (inputFilter) {
-        var regrExp = "" + inputFilter;
+        var regrExp = "" + inputFilter; //YS: You dont need template literals here: < const regrExp: string = inputFilter >
         var searchTermReg = new RegExp(regrExp, 'i');
         this.products = this.productsFilter.filter(function (elem) { return searchTermReg.test(elem.ProductName); });
         this.renderProducts();
     };
     //eliminar
     Products.prototype.removeProduct = function (ProductId) {
-        this.products = this.products.filter(function (prod) { return prod.ProductId !== ProductId; });
+        this.products = this.products.filter(function (prod) { return prod.ProductId !== ProductId; }); //YS:  Nice
         this.renderProducts();
     };
     //editar
@@ -73,7 +73,7 @@ var Products = /** @class */ (function () {
             this.products.forEach(function (element) {
                 if (element.ProductId === productId) {
                     if (ProductN.value === "" || Type.value === "" || Description.value === "" || Origin.value === "" || parseInt(Quantity.value) === NaN)
-                        throw new Error("Check all the inputs before continue");
+                        throw new Error("Check all the inputs before continue"); //YS: Good!
                     element.ProductName = ProductN.value;
                     element.Type = Type.value;
                     element.Description = Description.value;
@@ -134,7 +134,7 @@ var handleEdit = function (ev) {
     products.editProduct(product, productId);
     products.renderProducts();
     botonAdd.disabled = false;
-    console.log(botonAdd);
+    console.log(botonAdd); //YS: Dont leave console.logs. 
     ev.target.reset();
 };
 //delete products
@@ -146,7 +146,7 @@ var handleDelete = function (ProductId) {
 var handleGet = function (ProductId) {
     productId = products.getProduct(ProductId);
     botonAdd.disabled = true;
-    console.log(botonAdd);
+    console.log(botonAdd); //YS: Dont leave console.logs.
 };
 //search products
 inputFilter.addEventListener('keyup', handleKeyUp);

@@ -3,17 +3,17 @@ var btnAdd = document.getElementById('add');
 var btnEdit = document.getElementById('edit');
 var btnReset = document.getElementById('reset');
 //data
-var inputName = document.querySelector("#name");
-var city = document.querySelector("#city");
-var gender = document.querySelector('#gender');
-var tel = document.querySelector("#tel");
-var inputStatus = document.querySelector("#status");
-var salary = document.querySelector("#salary");
+var inputName = document.querySelector("#name"); //YS: You dont need the first and last parenthesis 
+var city = document.querySelector("#city"); //YS: You dont need the first and last parenthesis
+var gender = document.querySelector('#gender'); //YS: You dont need the first and last parenthesis
+var tel = document.querySelector("#tel"); //YS: You dont need the first and last parenthesis
+var inputStatus = document.querySelector("#status"); //YS: You dont need the first and last parenthesis
+var salary = document.querySelector("#salary"); //YS: You dont need the first and last parenthesis
 var id = Math.random().toString(16).slice(2);
 //Regrex
-var inputNameFilter = document.querySelector("#filtername");
+var inputNameFilter = document.querySelector("#filtername"); //YS: You dont need the first and last parenthesis
 //filter
-var gender_list = document.querySelectorAll(".container__actions__filtergender--radio");
+var gender_list = document.querySelectorAll(".container__actions__filtergender--radio"); //YS: Why is this snake_case and not camelCase? 
 filterGender();
 // a class for take new items
 var Data = /** @class */ (function () {
@@ -99,7 +99,7 @@ var DataList = /** @class */ (function () {
             this.getStorage();
         }
         catch (e) {
-            console.log(e);
+            console.log(e); //YS: You should let the client know (in the DOM), a client doesnt know how to check the console log. He will think the form is broken. 
         }
     };
     DataList.prototype.filterGender = function (gender, searchInput) {
@@ -170,7 +170,7 @@ var count = 0;
 var position;
 var newPeople = JSON.parse(localStorage.getItem("newPeople"));
 var oldPeople = JSON.parse(localStorage.getItem("oldPeople"));
-if (newPeople === null) {
+if (newPeople === null) { //YS: I didnt really understand why you had this, you should work with the same array. 
     count = datalist.getOldData(oldPeople);
 }
 else if (newPeople !== oldPeople) {
@@ -190,14 +190,14 @@ btnAdd.addEventListener('click', function (event) {
         var data = new Data(inputName.value, city.value, gender.value, tel.value, inputStatus.value, parseInt(salary.value), id);
         count = datalist.getNewData(data);
         //form clear
-        inputName.value = "";
+        inputName.value = ""; //YS: You can use form.reset()
         city.value = "";
         tel.value = "";
         salary.value = "";
         filterGender();
     }
     catch (e) {
-        console.log(e);
+        console.log(e); //YS: The client wont see this error. 
     }
 });
 btnEdit.addEventListener('click', function (event) {
@@ -219,10 +219,11 @@ function handleKeyUp() {
         console.log(e);
     }
 }
-console.log(filterGender());
+console.log(filterGender()); //YS: Dont leave console.logs
 function filterGender() {
     var _loop_1 = function (i) {
         gender_list[i].addEventListener("click", function () {
+            console.log(typeof datalist);
             datalist.filterGender(gender_list[i].value, inputNameFilter.value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
         });
     };

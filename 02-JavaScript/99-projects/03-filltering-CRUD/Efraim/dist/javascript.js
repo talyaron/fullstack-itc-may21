@@ -4,7 +4,7 @@ var Product = /** @class */ (function () {
             this.imgSrc = imgSrc;
             this.description = description;
             this.year = year;
-            this.id = "id" + Math.random().toString(16).slice(2);
+            this.id = "id" + Math.random().toString(16).slice(2); /* YS: Why do you need 3 ids? */
             this.id2 = "id" + Math.random().toString(16).slice(2);
             this.id3 = "id" + Math.random().toString(16).slice(2);
         }
@@ -69,7 +69,7 @@ function commonFunction() {
         if (!editElem) {
             throw new Error('No edit elements detected!');
         }
-        for (var i = 0; i < editElem.length; i++) {
+        for (var i = 0; i < editElem.length; i++) { //YS: It would be better to use forEach here. 
             editElem[i].innerHTML = nameUpdate[i];
             products.products[i].description = nameUpdate[i];
         }
@@ -97,7 +97,7 @@ var deleteProduct = function (productId) {
         if (!products) {
             throw new Error('No product list detected!');
         }
-        products.products.splice(index, 1);
+        products.products.splice(index, 1); //YS: Why do you need two different arrays? You can use the same one and filter. 
         products.renderProducts(shoppingListDOM);
         nameUpdate.splice(index, 1);
         commonFunction();
@@ -139,9 +139,9 @@ function handleSubmit(ev) {
         if (!shoppingListDOM) {
             throw new Error('No shopping list to hold items!');
         }
-        products.addProduct(new Product("\"" + imgUrl + "\"", "" + description, parseInt(year)));
+        products.addProduct(new Product("\"" + imgUrl + "\"", "" + description, parseInt(year))); //YS: You dont need temlate literals for description.
         products.renderProducts(shoppingListDOM);
-        nameUpdate.push("" + description);
+        nameUpdate.push("" + description); //YS: You dont need temlate literals here.
         commonFunction();
         saveToLocalStorage();
         ev.target.reset();
@@ -151,9 +151,11 @@ function handleSubmit(ev) {
     }
 }
 var nameUpdate = products.products.map(function (proddes) { return proddes.description; });
+/*YS: In this function you should use find to get the product that you want to edit and make the value
+of the object that you find equal to the input. Instead of a nodelist, you should get the individual object.  */
 function saveEdits(productId, productID2) {
     var index = products.findIndexes(productId);
-    var editElem = document.querySelectorAll(".edit");
+    var editElem = document.querySelectorAll(".edit"); //YS: YOu need a loop here. 
     nameUpdate.length = editElem.length;
     nameUpdate[index] = editElem[index].innerHTML;
     products.products[index].description = nameUpdate[index];
@@ -187,7 +189,7 @@ var findProductbySearchTerm = function (productSearch, searchTerm) {
             return acc;
         }, []);
         var searchResults = productSearch.filter(function (productItem) { return userRegEx_1.test(productItem.description); });
-        for (var i = 0; i < indexArray.length; i++) {
+        for (var i = 0; i < indexArray.length; i++) { //YS: Use forEach loop. 
             searchResults[i].description = nameUpdate[indexArray[i]];
         }
         return searchResults;
@@ -276,7 +278,7 @@ var filterYear = function (ev) {
             throw new Error('No value being read for filter!');
         }
         var indexArray = products.products.reduce(function (acc, curr, index) {
-            if (curr.year === value_1) {
+            if (curr.year === value_1) { //YS: Since there are a lot of years but not so many products you couldve use > or <
                 acc.push(index);
             }
             return acc;
@@ -303,7 +305,7 @@ var resetButton = function () {
 };
 var selectList = function () {
     try {
-        var array = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"];
+        var array = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"]; //YS: This shouldve been added dynamically by using dates in your products. 
         var selectList_1 = document.querySelector(".wrapper__div__select-filter");
         selectList_1.id = "mySelect";
         //Create and append the options

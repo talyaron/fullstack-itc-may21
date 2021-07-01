@@ -29,7 +29,7 @@ class RunsPool {
 
   updateToPool(run: Run): boolean {
     try {
-      const runToUpdateIndex: number = this.allRuns.findIndex(runItem => runItem.runId === run.runId);
+      const runToUpdateIndex: number = this.allRuns.findIndex(runItem => runItem.runId === run.runId); //YS: Would be better to use find instead of findIndex
 
       if (runToUpdateIndex === -1) {
         this.allRuns.push(run);
@@ -53,7 +53,11 @@ class RunsPool {
 
   deleteFromPool(runToDeleteId: string) {
     const runToDeleteIndex: number = this.allRuns.findIndex(runItem => runItem.runId === runToDeleteId);
-    this.allRuns = this.allRuns.splice(runToDeleteIndex,1);
+    this.allRuns = this.allRuns.splice(runToDeleteIndex,1); 
+    /*YS: Notice that with splice you are modifying the original array. In this case its ok, but in many cases you dont want to do that, 
+    instead you want to create a new array (with filter or map). It is important to know which array methods
+    modify the original array and which ones create a new copy. It is also important to know what they return.
+    This is all well explained in MDN.*/
   }
 
   findMatch(run: Run): boolean {
@@ -66,9 +70,9 @@ class RunsPool {
           runItem.runPace === run.runPace &&
           runItem.runArea === run.runArea
       );
-      if (runMatches.length > 0) {
+      if (runMatches.length > 0) { //YS: Else, throw an error
         run.runMatch = true;
-        const currentRunIndex: number = this.allRuns.findIndex((runItem) => runItem.runId === run.runId);
+        const currentRunIndex: number = this.allRuns.findIndex((runItem) => runItem.runId === run.runId); //YS: Find would be better than findIndex
         this.allRuns[currentRunIndex].runMatch = true;
         this.showMatchesOnDON(runMatches);
       }
@@ -122,7 +126,7 @@ class LoggedInRunner {
     const ruunerTotalDistance: HTMLElement = document.querySelector("#total_sum");
     const runnerRunsCounter: HTMLElement = document.querySelector("#total_counts");
 
-    mainTitle.insertAdjacentHTML("afterbegin", this.runnerName);
+    mainTitle.insertAdjacentHTML("afterbegin", this.runnerName); //YS: Very nice touch
     runnerNameContainter.insertAdjacentHTML("beforeend", `${this.runnerName}!`);
     runnerProfileImg.title = this.runnerName;
     if (this.runnerProfImg === null) {
@@ -130,8 +134,8 @@ class LoggedInRunner {
     } else {
       runnerProfileImg.setAttribute("src", this.runnerProfImg);
     }
-    ruunerTotalDistance.innerHTML = `${this.runnerDistance}`;
-    runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
+    ruunerTotalDistance.innerHTML = `${this.runnerDistance}`;  //YS: You dont need template literals here: < ... = this.runnerDistance >
+    runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`; //YS: You dont need template literals here
     this.renderRunsToDOM(null);
     // window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`; // causes endless loop of loading the page...can be solved by localSession.setItem("isFirstLoad",false) during first loading of the page
   }
@@ -159,7 +163,7 @@ class LoggedInRunner {
     this.refreshDOMSummary(runToDeleteDistance);
   }
 
-  filterRuns(minDistanceFilter: number, maxDistanceFilter: number, paceFilter: string, areaFilter: string, locationFilter: string) {
+  filterRuns(minDistanceFilter: number, maxDistanceFilter: number, paceFilter: string, areaFilter: string, locationFilter: string) { //YS: Nice filtering! Although maybe it wouldve been better to make a filter function so it is more DRY.
     let filteredRuns: Array<Run> = this.runnerRuns;
     const locationRegEx = locationFilter ? new RegExp(locationFilter,'gmi') : undefined;
     const filterSubmitBtn: HTMLElement = document.querySelector('#filter_submit');
@@ -179,7 +183,7 @@ class LoggedInRunner {
     try {
       const runsContainer: HTMLElement = document.querySelector(".runs");
 
-      const runsToRender: Array<Run> = filteredRunsToRender ? filteredRunsToRender : this.runnerRuns;
+      const runsToRender: Array<Run> = filteredRunsToRender ? filteredRunsToRender : this.runnerRuns; //YS: Nice!
       runsContainer.innerHTML = "";
       if (runsToRender.length === 0) {
         runsContainer.innerHTML = "<h2>You have no scheduled runs.<br/>Take this opportunity to rest<br/>😌</h2>";
@@ -224,8 +228,8 @@ class LoggedInRunner {
       const distanceBadge: HTMLElement = document.querySelector("#distance_badge");
       const togetherunBadge: HTMLElement = document.querySelector("#togetherun_badge");
 
-      ruunerTotalDistance.innerText = `${this.runnerDistance}`;
-      runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;
+      ruunerTotalDistance.innerText = `${this.runnerDistance}`; //YS: No template literals
+      runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;  //YS: No template literals
       if (this.runnerDistance > 199) {
         ruunerTotalDistance.style.color = "gold";
         distanceBadge.setAttribute("src", "../images/TR_Kms_G.png");
@@ -428,14 +432,14 @@ const showFilterForm = (ev: any) => {
 };
 
 filterRunsForm.addEventListener('submit', ev => filterSubmit(ev));
-filterRunsForm.addEventListener('change', ev => filterChangeKeyUp(ev));
+filterRunsForm.addEventListener('change', ev => filterChangeKeyUp(ev)); //YS: You dont need this. 
 filterRunsForm.addEventListener('keyup', ev => filterChangeKeyUp(ev));
 
 const filterSubmit = (ev: any) => {
   try {
     ev.preventDefault();
     
-    if (currentRunner.runnerRuns.length === 0) {return;}
+    if (currentRunner.runnerRuns.length === 0) {return;} //YS: No brackets in return
     const filterSubmitBtn: HTMLElement = document.querySelector('#filter_submit');
     if (filterSubmitBtn.getAttribute('value') === 'Reset') {
       filterSubmitBtn.setAttribute('value','Filter');
@@ -461,11 +465,11 @@ const filterSubmit = (ev: any) => {
   }
 };
 
-const filterChangeKeyUp = (ev: any) => {
+const filterChangeKeyUp = (ev: any) => { //YS: Well done! 
   try {
     ev.preventDefault();
     
-    if (currentRunner.runnerRuns.length === 0) {return;}
+    if (currentRunner.runnerRuns.length === 0) {return;} //YS: No brackets in return
     
     const minDistanceFilter = Number(ev.target.parentElement.parentElement.elements.minDistanceFilter.value);
     const maxDistanceFilter = Number(ev.target.parentElement.parentElement.elements.maxDistanceFilter.value);
