@@ -9,7 +9,21 @@
     <title>Chat Groups</title>
 </head>
 <body>
-
+    <header class="header">
+        <img class="header__item header__item--img" src="" />
+        <form class="header__item header__item--search">
+            <input type="search" name="searchInGroups" id="search_in_groups" placeholder="🔍 Search in groups..." />
+        </form>
+        <main class="groups">
+            <div class="groups__item group">
+                <img class="group__item group__item--img" src="" />
+                <h2 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">last message time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name of member:</span> last message in chat</p>
+                <i class="group__item group__item--delete">fa-trash</i>
+            </div>
+        </main>
+    </header>
     <script src="dist/groups.js"></script>
 </body>
 </html>
