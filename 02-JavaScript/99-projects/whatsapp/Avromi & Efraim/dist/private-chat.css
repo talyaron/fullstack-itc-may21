@@ -39,7 +39,7 @@ body {
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  border-radius: 15%;
+  border-radius: 20px;
   height: 10vh;
   width: 80vw;
 }
@@ -61,6 +61,10 @@ body {
   border: none;
   height: 50%;
   width: 80vw;
+}
+.input__send__wrapper .input__send__wrapper {
+  position: absolute;
+  bottom: 0;
 }
 .input__send__wrapper .mic__or__send__button {
   display: flex;

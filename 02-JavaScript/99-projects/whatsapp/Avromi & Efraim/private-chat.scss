@@ -46,7 +46,7 @@ body {
         align-items: center;
         justify-content: space-between;
         background-color: rgb(255, 255, 255);
-        border-radius: 15%;
+        border-radius: 20px;
         height:10vh;
         width:80vw;
         &--left{
@@ -69,7 +69,10 @@ body {
             width:80vw;
         }
     }
-
+    .input__send__wrapper{
+        position: absolute;
+        bottom:0 ;
+    }
     .mic__or__send__button{
         display:flex;
         justify-content: center;
@@ -80,6 +83,7 @@ body {
         border-radius: 100px;
         background-color: #128C7E;
         color:white;
+      
     }
    
 }
