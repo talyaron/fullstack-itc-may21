@@ -42,16 +42,18 @@ function updateTitle(bookId: string) {
   renderBook(totalArray);
 }
 
-// Here, I want to make it so that when they click "update" a box pops up. They put something in and it uopdates the title. The JS is already grabbing the title (the onlick in the created string below). I added the function call to the onclick. I need to use another string literal to render what they write to the DOM, and updtae innerHTML, which will replace the title that is already there.
+// When they click "update" a box pops up. They put something in. It is supposed to update the title. The JS is already grabbing the title (the onlick in the created string below). I added the 2 function calls (writeNEwTitle and updateTitle) to the onclick. I realise I need to use another string literal to render what they write to the DOM, and updtae innerHTML, which will replace the title that is already there. I think this is the idea, but I haven't managed to get it to work (yet).
 
 function writeNewTitle(bookId: string) {
-  let newTitle;
+  let text;
   let user = prompt("Please enter a new title");
   if (user == null || user == "") {
-    newTitle = "User cancelled.";
+    text = "User cancelled.";
   } else {
-    newTitle.innerHTML = `${newTitle.title}`;
+    user = "";
   }
+  const userInput = `${user}`;
+  text.innerHTML = userInput;
   renderBook(totalArray);
 }
 
