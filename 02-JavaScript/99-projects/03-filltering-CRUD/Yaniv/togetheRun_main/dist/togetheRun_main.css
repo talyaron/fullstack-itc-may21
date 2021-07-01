@@ -1,0 +1,379 @@
+@-webkit-keyframes text-shadow-drop-center {
+  0% {
+    text-shadow: 0 0 0 transparent;
+  }
+  100% {
+    text-shadow: 0 0 180px white;
+  }
+}
+@keyframes text-shadow-drop-center {
+  0% {
+    text-shadow: 0 0 0 transparent;
+  }
+  100% {
+    text-shadow: 0 0 18px white;
+  }
+}
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100vw;
+  margin: 0 auto;
+}
+
+body {
+  margin: 0;
+}
+
+button {
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 10px;
+  border: 0;
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+}
+button:hover {
+  transition: 150ms;
+}
+
+.summary {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 175px;
+  background-image: linear-gradient(to bottom, #75E6DA, #189AB4);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.summary__item--logout {
+  position: fixed;
+  right: 5px;
+  top: 5px;
+  background-color: red;
+  color: white;
+}
+.summary__item--logout:hover {
+  background-color: salmon;
+}
+.summary__item--logout:active {
+  background-color: firebrick;
+  color: white;
+}
+.summary__item--runner_name {
+  z-index: 1;
+  margin: 0;
+}
+.summary__item--total {
+  width: 50%;
+  max-width: 500px;
+  min-width: 275px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  grid-template-areas: "total img" "date img";
+}
+.summary__item--total .profile_image {
+  grid-area: img;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.summary__item--total .profile_image__item {
+  position: absolute;
+}
+.summary__item--total .profile_image__item--profile_image {
+  height: 110px;
+  width: 110px;
+  border-radius: 80px;
+  box-shadow: 0px 0px 30px 20px white;
+}
+.summary__item--total .profile_image__item--badges {
+  top: 20px;
+}
+.summary__item--total .profile_image__item--badges img {
+  height: 55px;
+}
+.summary__item--total #total_distance {
+  grid-area: total;
+  -webkit-animation: text-shadow-drop-center 0.6s both;
+  animation: text-shadow-drop-center 0.6s both;
+}
+.summary__item--total #total_togetheruns {
+  font-weight: bold;
+  grid-area: date;
+  -webkit-animation: text-shadow-drop-center 0.6s both;
+  animation: text-shadow-drop-center 0.6s both;
+}
+
+#mainscreen {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+#mainscreen .dashboard {
+  padding: 0 10px;
+  position: sticky;
+  top: 175px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  background-image: linear-gradient(to bottom, lightgrey, white);
+}
+#mainscreen .dashboard__item {
+  margin: 10px 0;
+}
+#mainscreen .dashboard__item--heading {
+  font-weight: 900;
+}
+#mainscreen .dashboard__item--add {
+  width: 50%;
+  background-color: #60BEEB;
+  font-size: 1.2rem;
+  color: black;
+  margin: 0 5px;
+}
+#mainscreen .dashboard__item--add:hover {
+  background-color: #7EC8E3;
+}
+#mainscreen .dashboard__item--add:active {
+  background-color: #000C66;
+  color: white;
+}
+#mainscreen .dashboard__item--history {
+  background-color: #189AB4;
+}
+#mainscreen .dashboard__item--history:hover {
+  background-color: #60BEEB;
+}
+#mainscreen .dashboard__item--history:active {
+  background-color: #05445E;
+  color: white;
+}
+#mainscreen #filters {
+  margin: 5px;
+}
+#mainscreen #filters .filter_form {
+  display: none;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+  border-radius: 100px;
+  border: 2px solid lightgray;
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+}
+#mainscreen #filters .filter_form__item {
+  padding: 10px;
+}
+#mainscreen .runs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#mainscreen .runs__item {
+  width: 220px;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid #189AB4;
+  background-color: #D4F1F4;
+  padding: 20px;
+  margin: 15px;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(1fr, 6);
+  grid-template-areas: "edit delete" "distance status" "time status" "pace matches" "area matches" "location matches";
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+  transition: 0.5s;
+}
+#mainscreen .runs__item:hover {
+  transform: scale(1.3);
+}
+#mainscreen .runs__item .run_edit {
+  grid-area: edit;
+  cursor: pointer;
+  color: darkgray;
+}
+#mainscreen .runs__item .run_edit:hover {
+  color: gray;
+}
+#mainscreen .runs__item .run_delete {
+  grid-area: delete;
+  cursor: pointer;
+  justify-self: flex-end;
+  color: salmon;
+}
+#mainscreen .runs__item .run_delete:hover {
+  color: firebrick;
+}
+#mainscreen .runs__item .match_status {
+  grid-area: status;
+  justify-self: center;
+}
+#mainscreen .runs__item .run_distance {
+  grid-area: distance;
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 3px 0;
+}
+#mainscreen .runs__item .run_time {
+  grid-area: time;
+  padding: 3px 0;
+}
+#mainscreen .runs__item .run_pace {
+  grid-area: pace;
+  padding: 3px 0;
+}
+#mainscreen .runs__item .run_area {
+  grid-area: area;
+  font-weight: bold;
+  color: #18A558;
+  padding: 3px 0;
+}
+#mainscreen .runs__item .run_location {
+  grid-area: location;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #21B6A8;
+  padding: 3px 0;
+}
+#mainscreen .runs__item .run_matches {
+  grid-area: matches;
+  cursor: pointer;
+  width: 75%;
+  justify-self: center;
+  font-size: 0.65rem;
+  background-color: #75E6DA;
+  color: black;
+}
+#mainscreen .runs__item .run_matches:hover {
+  background-color: #21B6A8;
+}
+#mainscreen .runs__item .run_matches:active {
+  background-color: #189AB4;
+  color: white;
+}
+
+.modalWrapper {
+  position: fixed;
+  display: none;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  justify-content: center;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modalWrapper__item {
+  display: none;
+}
+.modalWrapper__item--run {
+  width: 25vw;
+  min-width: 350px;
+}
+
+.modalBox {
+  display: flex;
+  align-items: center;
+  overflow: auto;
+  padding: 5px;
+}
+.modalBox__item--title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px 10px 0 0;
+  height: 35px;
+  color: black;
+  font-weight: bold;
+  background-color: #60BEEB;
+  padding: 0 5px;
+}
+.modalBox__item--content {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: center;
+  background-color: white;
+  height: 250px;
+  border-radius: 0 0 10px 10px;
+}
+.modalBox__item--content .update_run_form {
+  display: flex;
+  flex-direction: column;
+}
+.modalBox__item--content .update_run_form__item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "lbl inpt";
+  margin: 5px;
+}
+.modalBox__item--content .update_run_form__item label {
+  grid-area: lbl;
+}
+.modalBox__item--content .update_run_form__item input {
+  grid-area: inpt;
+}
+.modalBox__item--content .update_run_form__item--submit {
+  grid-template-areas: "inpt inpt";
+}
+.modalBox__item--content .update_run_form__item--submit #submit {
+  background-color: #75E6DA;
+  color: black;
+  height: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 20px;
+  border: 0;
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+}
+.modalBox__item--content .update_run_form__item--submit #submit:hover {
+  background-color: #60BEEB;
+}
+.modalBox__item--content .update_run_form__item--submit #submit:active {
+  background-color: #189AB4;
+  color: white;
+}
+.modalBox__item--content button {
+  width: 98%;
+  height: 30px;
+  font-size: 1.2rem;
+  padding: 0;
+  grid-area: cncl;
+}
+
+.close {
+  cursor: pointer;
+  font-size: 20px;
+  margin: 0 5px;
+}
+.close:hover {
+  color: #189AB4;
+}

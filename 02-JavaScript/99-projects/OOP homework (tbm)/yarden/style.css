@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #8fa8d6;
+  font-size: 1.3rem;
+}
+
+.page-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: black solid 1px;
+  height: 100vh;
+}
+
+.actions-wrapper {
+  background-color: cornflowerblue;
+  width: 35%;
+  border: black solid 1px;
+}
+
+.actions-wrapper__deposit-wrapper {
+  margin-bottom: 1rem;
+}
+
+.actions-wrapper__page-headline {
+  font-size: 2.5rem;
+  padding-bottom: 15rem;
+}
+
+.overview-wrapper {
+  width: 50%;
+  border: black solid 1px;
+  background-color: cornflowerblue;
+}
+
+.overview-wrapper__total-balance {
+  background-color: cornflowerblue;
+  border-bottom: black solid 1px;
+}
+
+.overview-wrapper__total-headline {
+  font-weight: 800;
+}
+/*# sourceMappingURL=style.css.map */

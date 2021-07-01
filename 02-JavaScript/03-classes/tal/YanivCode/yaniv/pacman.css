@@ -36,5 +36,9 @@ body {
 #pacman {
   position: relative;
   height: 80px;
+  top: 50vh;
+  left: 50vw;
+  -webkit-transform: translate(-50%, 50%);
+          transform: translate(-50%, 50%);
 }
 /*# sourceMappingURL=pacman.css.map */

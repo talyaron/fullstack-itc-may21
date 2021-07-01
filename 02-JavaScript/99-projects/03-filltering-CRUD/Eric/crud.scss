@@ -1,0 +1,128 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+//animation body
+body {
+    animation: body 5s linear infinite alternate both;
+}
+@keyframes body {
+    0% {
+        background: #5b84f5;
+    }
+    100% {
+        background: #fafafc;
+    }
+}
+
+.container {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    margin:auto;
+    width: 70%;
+
+ .head{
+        display: flex;
+        justify-content: space-around;
+    }
+    
+}
+
+#product-form{
+    margin-top: 10px;
+    width: 100%;
+legend{
+    text-align: center;
+    margin-bottom: 10px;
+}
+input{
+    text-align: center;
+    background-color: white;
+}
+.btn-product{
+    background-color: green;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.btn-product:disabled {
+    cursor: not-allowed
+}
+.btn-product:hover{
+    opacity: 0.6;
+}
+//animation bottom
+.btn-product {
+    -webkit-animation: btn-product 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: btn-product 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes btn-product {
+    0% {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+    }
+}
+
+@keyframes btn-product {
+    0% {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+    }
+}
+fieldset{
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+}
+.table-product{
+    margin:auto;
+    width: 70%;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.editForm{
+    margin-top: 10px;
+    width: 100%;
+
+    .btn-productEdit{
+        background-color: yellow;
+        color: black;
+        font-weight: bold;
+        border-radius: 5px;
+        font-size: 20px;
+    }
+    
+    .btn-productEdit:hover{
+        opacity: 0.6;
+    }
+}
+
+
+
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">Hi</div>
+    <script>
+//array of objects
+const cars = [{
+ name: 'Chevrolet',
+ model: 'AAA',
+ Year: "2009",
+
+},{
+ name: 'Audi',
+ model: 'BBB',
+ Year: "2010",
+}];
+console.log(cars)
+//find specific object based on name
+const found = cars.find(name => name = 'Audi');
+
+console.log(found);
+
+//x=cars.shift(0);
+//console.log(x)
+y = cars.slice(1);
+console.log(y)
+
+cars.shift();
+
+
+        //please create array of objects... {name:'aaaa'}
+        //find a specific object based on name
+        //and delete one object in the array,
+
+        //delete all objects with this name.
+
+
+    </script>
+</body>
+
+</html>

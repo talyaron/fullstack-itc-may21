@@ -1,0 +1,118 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h3 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+h4 {
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+p {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container_all {
+  border: 2px solid black;
+  margin: 0 auto;
+  width: 100rem;
+}
+.container_all .container_content footer {
+  margin-top: 1rem;
+  color: white;
+  background-color: #686868;
+  padding: 2rem;
+}
+.container_all .container_content .header {
+  text-align: center;
+  background-color: #686868;
+  color: white;
+}
+.container_all .container_content .formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  background-color: #312f2f;
+  color: white;
+}
+.container_all .container_content .formulario .btn_send {
+  font-size: 1.5rem;
+  background-color: #4848f0;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20%;
+}
+.container_all .container_content .formulario .formulario_item {
+  margin-top: 0.2rem;
+}
+.container_all .container_content .container_titles {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border: 1px black solid;
+  text-align: center;
+}
+.container_all .container_content .container_products_style {
+  border: 1px black solid;
+}
+.container_all .container_content .container_products {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.container_all .container_content .container_products .item {
+  border: 1px black solid;
+}
+.container_all .container_content .filters {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.container_all .container_content .filters .filters_search {
+  margin-right: 1rem;
+}
+.container_all .container_content .container_titles {
+  background-color: #aaaaaa;
+}
+.container_all .container_content .container-icons {
+  text-align: center;
+}
+.container_all .form_modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+@media screen and (min-width: 900px) {
+  .container_all {
+    width: 80rem;
+  }
+}
+footer {
+  margin-top: 1rem;
+  color: white;
+  background-color: #686868;
+  padding: 2rem;
+}
