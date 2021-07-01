@@ -39,20 +39,28 @@ class Producto {
 }
 
 // EVENTS LISTENERS
-select.addEventListener('change', selectFilter);
+select.addEventListener('change', selectFilter); //YS: Nice! 
 searchBar.addEventListener('keyup', search);
 
 // FUNCTIONS
 // ADD JSON TO LIST ARRAY
 function addObject() {
     productos.forEach(prd => {
-        prd = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description);
+        /*YS: No! The prd above and the prd below are not the same. It is a different thing and you should make a new variable.
+         You are lucky this worked for you, but it is incorrect. Should be: 
+
+          const myOtherProdThatisNotTheSameAsMyCallback = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description); 
+          list.push(myOtherProdThatisNotTheSameAsMyCallback)
+
+         */
+        
+        prd = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description); 
         list.push(prd);
     })
 }
 addObject();
 
-// DELETE PRODUCT
+// DELETE PRODUCTvariable
 function remove(id) {
     const filtrado = list.filter((prod) => prod.id !== id);
     list = filtrado;
@@ -60,7 +68,7 @@ function remove(id) {
 }
 
 // TAKING ID FOR EDIT, THEN I USED AT THE handleEdit()
-function edit(id) {
+function edit(id) { //YS: Is this function really necessary? 
     updateID = id;
 }
 
@@ -69,15 +77,16 @@ function selectFilter() {
     try {
         const selectedValue = Number(select.value);
         if (selectedValue > 300) throw new Error('You have an error in your value');
-        console.log(typeof selectedValue);
+        console.log(typeof selectedValue); //YS: No console logs. 
         let arr = [];
         arr = list;
         let arr2 = [];
         arr2 = list;
         let arr3 = [];
         arr3 = list;
+        //YS: DRY! You shouldve made this into a function and passed different parameters
         if (selectedValue === 100) {
-            let priceFilter = arr.filter((prod) => prod.price >= selectedValue);
+            let priceFilter = arr.filter((prod) => prod.price >= selectedValue); 
             arr = priceFilter;
             renderData(arr);
         }
@@ -110,7 +119,7 @@ function search(e) {
 }
 
 // RegEx FOR FILTER BY PRODUCTS NAME
-function searchRegEx(inputSearch: string) {
+function searchRegEx(inputSearch: string) { //YS: Nice
     const regExp: string = `^${inputSearch}`
     const searchTermReg: RegExp = new RegExp(regExp, 'i');
     const filterSearch = list.filter(elem => searchTermReg.test(elem.product))
@@ -163,7 +172,7 @@ const handleSubmit = (event) => {
         // ADD NEW PRODUCT TO LIST ARRAY
         list.unshift(producto);
         renderData(list);
-        console.log(producto);
+        console.log(producto); //YS: Console log! 
 
         event.target.reset();
     } catch (e) {
@@ -190,7 +199,7 @@ const handleEdit = (event) => {
         edit.description = descriptionModal;
 
 
-        console.log(productModal, brandModal, priceModal, stockModal, descriptionModal);
+        console.log(productModal, brandModal, priceModal, stockModal, descriptionModal); //YS: Console.log!
         console.log(edit);
         renderData(list);
     } catch (e) {

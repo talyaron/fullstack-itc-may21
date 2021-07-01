@@ -24,7 +24,7 @@ class BooksArray {
 }
 
 const bookArrayInstance = new BooksArray();
-bookArrayInstance.totalArray;
+bookArrayInstance.totalArray; //YS: Why is this here? 
 
 function handleDelete(bookId: string) {
   const reducedArray = totalArray.filter((book) => {
@@ -43,6 +43,7 @@ function updateTitle(bookId: string) {
 }
 
 // When they click "update" a box pops up. They put something in. It is supposed to update the title. The JS is already grabbing the title (the onlick in the created string below). I added the 2 function calls (writeNEwTitle and updateTitle) to the onclick. I realise I need to use another string literal to render what they write to the DOM, and updtae innerHTML, which will replace the title that is already there. I think this is the idea, but I haven't managed to get it to work (yet).
+// YS: You were very close, you just had to join parts of the updateTitle with the writeNewTitle (all in one function). 
 
 function writeNewTitle(bookId: string) {
   let text;
@@ -53,7 +54,7 @@ function writeNewTitle(bookId: string) {
     user = "";
   }
   const userInput = `${user}`;
-  text.innerHTML = userInput;
+  text.innerHTML = userInput;  //YS: What is text? You should select the <p> element that has the title instead of text. pElementWithTitle.innerHtml
   renderBook(totalArray);
 }
 
@@ -99,7 +100,7 @@ window.onload = renderBook(booksData);
 const searchBooksbyTerm = (totalArray: Array<any>, searchTerm: string) => {
   const myRegEx = new RegExp(searchTerm, "gmi");
   const searchedBooks: Array<any> = totalArray.filter((book) =>
-    myRegEx.test(book)
+    myRegEx.test(book) //YS: What are you filtering it by? should be book.title or book.author
   );
   return searchedBooks;
 };
@@ -111,8 +112,7 @@ const handleKeyUp = (ev: any) => {
   renderBook(results);
 };
 
-const handleRegExSubmit = (ev: any) => {
-  ev.preventDefault();
+const handleRegExSubmit = (ev: any) => { //YS: Why do you have this? Its not being used. 
   const searchTerm: string = ev.target.elements.input.value;
   const results = searchBooksbyTerm(totalArray, searchTerm);
   renderBook(results);

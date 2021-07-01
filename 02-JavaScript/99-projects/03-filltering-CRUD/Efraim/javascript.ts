@@ -11,8 +11,8 @@ class Product {
             this.imgSrc = imgSrc;
             this.description = description;
             this.year = year;
-            this.id = "id" + Math.random().toString(16).slice(2);
-            this.id2 = "id" + Math.random().toString(16).slice(2);
+            this.id = "id" + Math.random().toString(16).slice(2);    /* YS: Why do you need 3 ids? */
+            this.id2 = "id" + Math.random().toString(16).slice(2); 
             this.id3 = "id" + Math.random().toString(16).slice(2);
         } catch (e) {
             console.error(e);
@@ -59,7 +59,7 @@ class Products {
         const index = this.products.findIndex(prd => prd.id === productId)
         return index;
     }
-    findProduct(productId: string): Product {
+    findProduct(productId: string): Product { //YS: Is this being used anywhere? 
         try {
             const product: Product = this.products.find(prd => prd.id === productId);
             if (product) {
@@ -81,7 +81,7 @@ function commonFunction() {
         if (!editElem) {
             throw new Error('No edit elements detected!')
         }
-        for (let i = 0; i < editElem.length; i++) {
+        for (let i = 0; i < editElem.length; i++) {//YS: It would be better to use forEach here. 
             editElem[i].innerHTML = nameUpdate[i]
             products.products[i].description = nameUpdate[i]
         }
@@ -89,7 +89,7 @@ function commonFunction() {
         console.error(e);
     }
 }
-function saveToLocalStorage() {
+function saveToLocalStorage() {  //YS: YOu dont need localstorage since its one page. 
     try {
         localStorage.setItem('products', JSON.stringify(products.products))
         localStorage.userEdits = JSON.stringify(nameUpdate);
@@ -109,7 +109,7 @@ const deleteProduct = (productId: string) => {
         if (!products) {
             throw new Error('No product list detected!')
         }
-        products.products.splice(index, 1);
+        products.products.splice(index, 1); //YS: Why do you need two different arrays? You can use the same one and filter. 
         products.renderProducts(shoppingListDOM);
         nameUpdate.splice(index, 1);
         commonFunction();
@@ -153,9 +153,9 @@ function handleSubmit(ev): any {
         if (!shoppingListDOM) {
             throw new Error('No shopping list to hold items!')
         }
-        products.addProduct(new Product(`"${imgUrl}"`, `${description}`, parseInt(year)));
+        products.addProduct(new Product(`"${imgUrl}"`, `${description}`, parseInt(year)));//YS: You dont need temlate literals for description.
         products.renderProducts(shoppingListDOM);
-        nameUpdate.push(`${description}`)
+        nameUpdate.push(`${description}`) //YS: You dont need temlate literals here.
         commonFunction();
         saveToLocalStorage()
         ev.target.reset();
@@ -164,10 +164,12 @@ function handleSubmit(ev): any {
     }
 }
 
-let nameUpdate: Array<any> = products.products.map(proddes => proddes.description)
+let nameUpdate: Array<any> = products.products.map(proddes => proddes.description) 
+/*YS: In this function you should use find to get the product that you want to edit and make the value 
+of the object that you find equal to the input. Instead of a nodelist, you should get the individual object.  */
 function saveEdits(productId, productID2) {
     const index = products.findIndexes(productId);
-    let editElem: NodeListOf<Element> = document.querySelectorAll(`.edit`);
+    let editElem: NodeListOf<Element> = document.querySelectorAll(`.edit`); //YS: YOu need a loop here. 
     nameUpdate.length = editElem.length
     nameUpdate[index] = editElem[index].innerHTML;
     products.products[index].description = nameUpdate[index];
@@ -199,14 +201,14 @@ function checkEdits() {
 const findProductbySearchTerm = (productSearch: Array<any>, searchTerm: string) => {
     try {
         const userRegEx: RegExp = new RegExp(searchTerm, 'gmi');
-        let indexArray: Array<any> = products.products.reduce(function (acc, productItem, index) {
+        let indexArray: Array<any> = products.products.reduce(function (acc, productItem, index) { //YS: THere are better methods to use than reduce: find or findIndex
             if (userRegEx.test(productItem.description)) {
                 acc.push(index);
             }
             return acc;
         }, []);
         const searchResults: Array<any> = productSearch.filter(productItem => userRegEx.test(productItem.description));
-        for (let i = 0; i < indexArray.length; i++) {
+        for (let i = 0; i < indexArray.length; i++) { //YS: Use forEach loop. 
             searchResults[i].description = nameUpdate[indexArray[i]]
         }
         return searchResults;
@@ -215,7 +217,7 @@ const findProductbySearchTerm = (productSearch: Array<any>, searchTerm: string) 
     }
 }
 
-const addToDom1 = (searchResults: Array<any>) => {
+const addToDom1 = (searchResults: Array<any>) => { //YS: Better names 
     try {
         const shoppingList: HTMLElement = document.querySelector('.shopping-list');
         if (!shoppingList) {
@@ -275,7 +277,7 @@ const handleSubmit1 = (ev: any) => {
     }
 }
 
-const handleKeyUp = (ev: any) => {
+const handleKeyUp = (ev: any) => { //YS: Nice! 
     try {
         ev.preventDefault();
         const searchTerm: string = ev.target.value;
@@ -295,8 +297,8 @@ const filterYear = (ev: any): any => {
         if (!value) {
             throw new Error('No value being read for filter!')
         }
-        let indexArray: Array<number> = products.products.reduce(function (acc, curr, index) {
-            if (curr.year === value) {
+        let indexArray: Array<number> = products.products.reduce(function (acc, curr, index) { //YS: You can use find here.
+            if (curr.year === value) { //YS: Since there are a lot of years but not so many products you couldve use > or <
                 acc.push(index);
             }
             return acc;
@@ -324,7 +326,7 @@ const resetButton = () => {
 
 const selectList = () => {
     try {
-        let array = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"];
+        let array = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"]; //YS: This shouldve been added dynamically by using dates in your products. 
         let selectList = document.querySelector(".wrapper__div__select-filter");
         selectList.id = "mySelect";
 

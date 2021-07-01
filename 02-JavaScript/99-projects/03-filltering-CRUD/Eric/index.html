@@ -21,7 +21,7 @@
             <input type="text" id="filterN" name="filterN">
         </div>
         <br><br><br>
-        <form class="editForm" onsubmit="handleEdit(event)">
+        <form class="editForm" onsubmit="handleEdit(event)"> <!-- YS: Dont put event listeners in your HTML -->
             <input type="submit" value="Edit" class="btn-productEdit">
           </form>
         <div> <!--The idea is filter by quantity, I'm in process to do that-->
@@ -35,7 +35,7 @@
             </select>
         </div>
     </div>
-        <form onsubmit="handleSubmit(event)" id="product-form">
+        <form onsubmit="handleSubmit(event)" id="product-form"> <!-- YS: Dont put event listeners in your HTML -->
             <fieldset>
                 <legend>Insert stock product</legend>
             <label for="title">ProductName</label>

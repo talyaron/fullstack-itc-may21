@@ -34,12 +34,14 @@ var Contacts = /** @class */ (function () {
             });
             rootDiv.innerHTML = htmlPattern_1;
         }
-        catch (error) { }
+        catch (error) { } //YS: And? Wheres the error handling? 
     };
     //Update method - did not manage to finish it:
     Contacts.prototype.update = function (id) {
         try {
-            var indexToEdit = this.contacts.findIndex(function (element) { return element.id === id; });
+            var indexToEdit = this.contacts.findIndex(
+            /*YS: Ok you were close. Here you had to make the this.contacts[indexToEdit].contactName = something */
+            function (element) { return element.id === id; });
             this.contacts[indexToEdit].contactName;
             console.log(this.contacts[indexToEdit]);
         }
@@ -50,9 +52,12 @@ var Contacts = /** @class */ (function () {
         try {
             var indexToRemove = this.contacts.findIndex(function (element) { return element.id === id; });
             this.contacts.splice(indexToRemove, 1);
+            /*YS: Notice that with splice you are changing the original array
+            while with other methods like filter you create a new array. Always be aware of what the method returns
+            and if it modifies the original array or not.*/
             this.render();
         }
-        catch (error) { }
+        catch (error) { } //YS: Error handling? You cant just leave it empty. At least console.log(error)
     };
     //search method - had to skip it! Did not have time ):
     Contacts.prototype.search = function (params) { };
@@ -67,20 +72,20 @@ function handleEdit(id) {
             savedContacts.update(id);
         };
     }
-    catch (error) { }
+    catch (error) { } //YS: Error handling
 }
 var handleDelete = function (id) {
     try {
         savedContacts.remove(id);
     }
-    catch (error) { }
+    catch (error) { } //YS: Error handling
 };
 //Adding a contact after form submission:
 var handleSubmit = function (event) {
     try {
         event.preventDefault();
-        var phoneNumber_1 = event.target[0].value;
-        var contactName_1 = event.target[1].value;
+        var phoneNumber_1 = event.target[0].value; //YS: ev.target.elements.phone-number.value;
+        var contactName_1 = event.target[1].value; //YS: ev.target.elements.name.value;
         var email_1 = event.target[2].value;
         var address_1 = event.target[3].value;
         var onWhatsapp_1 = event.target[4].checked;
@@ -91,6 +96,6 @@ var handleSubmit = function (event) {
         event.target.reset();
     }
     catch (error) {
-        console.error(error);
+        console.error(error); //YS: Mazal Tov!!!  
     }
 };

@@ -60,12 +60,13 @@ class Contacts {
         </div>`;
       });
       rootDiv.innerHTML = htmlPattern;
-    } catch (error) {}
+    } catch (error) {} //YS: And? Wheres the error handling? 
   }
   //Update method - did not manage to finish it:
   update(id: string) {
     try {
-      const indexToEdit = this.contacts.findIndex(
+      const indexToEdit = this.contacts.findIndex(  
+        /*YS: Ok you were close. Here you had to make the this.contacts[indexToEdit].contactName = something */
         (element) => element.id === id
       );
       this.contacts[indexToEdit].contactName;
@@ -79,8 +80,11 @@ class Contacts {
         (element) => element.id === id
       );
       this.contacts.splice(indexToRemove, 1);
+       /*YS: Notice that with splice you are changing the original array 
+       while with other methods like filter you create a new array. Always be aware of what the method returns 
+       and if it modifies the original array or not.*/
       this.render();
-    } catch (error) {}
+    } catch (error) {} //YS: Error handling? You cant just leave it empty. At least console.log(error)
   }
   //search method - had to skip it! Did not have time ):
   search(params: void) {}
@@ -94,13 +98,13 @@ function handleEdit(id) {
     const handleEdit = (id) => {
       savedContacts.update(id);
     };
-  } catch (error) {}
+  } catch (error) {} //YS: Error handling
 }
 
 const handleDelete = (id) => {
   try {
     savedContacts.remove(id);
-  } catch (error) {}
+  } catch (error) {} //YS: Error handling
 };
 
 //Adding a contact after form submission:
@@ -108,8 +112,8 @@ const handleSubmit = (event: any) => {
   try {
     event.preventDefault();
 
-    const phoneNumber = event.target[0].value;
-    const contactName = event.target[1].value;
+    const phoneNumber = event.target[0].value; //YS: ev.target.elements.phone-number.value;
+    const contactName = event.target[1].value; //YS: ev.target.elements.name.value;
     const email = event.target[2].value;
     const address = event.target[3].value;
     const onWhatsapp = event.target[4].checked;
@@ -128,6 +132,6 @@ const handleSubmit = (event: any) => {
 
     event.target.reset();
   } catch (error) {
-    console.error(error);
+    console.error(error); //YS: Mazal Tov!!!  
   }
 };

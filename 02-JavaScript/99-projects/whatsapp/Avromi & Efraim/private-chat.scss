@@ -1,0 +1,89 @@
+body {
+    background-color: #ECE5DD;
+}
+
+.nav {
+    background-color: #128C7E;
+    color: white;
+    height: 15vh;
+    display: flex;
+    justify-content: space-between;
+
+    // align-items: center;
+    i {
+        height: 2rem;
+        width: 3rem;
+    }
+
+    p {
+        margin-top: -8%;
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-left: 2rem;
+
+    }
+
+    &__img {
+        border-radius: 100px;
+        height: 3rem;
+        width: 3rem;
+    }
+
+    &__contact {
+        margin-left: 1rem;
+    }
+}
+
+.input__send__wrapper{
+    display: flex;
+ 
+    .input__container{
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(255, 255, 255);
+        border-radius: 20px;
+        height:10vh;
+        width:80vw;
+        &--left{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        &--right{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img{
+            height:2rem;
+            width:2rem;
+        }
+        #input{
+            border:none;
+            height: 50%;
+            width:80vw;
+        }
+    }
+    .input__send__wrapper{
+        position: absolute;
+        bottom:0 ;
+    }
+    .mic__or__send__button{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height:3rem;
+        width:3rem;
+        font-size:2rem;
+        border-radius: 100px;
+        background-color: #128C7E;
+        color:white;
+      
+    }
+   
+}

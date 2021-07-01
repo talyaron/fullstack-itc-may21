@@ -20,7 +20,7 @@ var Cars = /** @class */ (function () {
         addNewOrigin();
         addNewCylinders();
         addNewMpg();
-        console.log(cars);
+        console.log(cars); //YS: Dont leave console.logs in your code. 
         localStorage.setItem("cars", JSON.stringify(cars));
     };
     ;
@@ -62,7 +62,7 @@ var Cars = /** @class */ (function () {
     };
     Cars.prototype.getCarsFromStorage = function () {
         var tempCars = JSON.parse(localStorage.getItem("cars"));
-        console.log(tempCars);
+        console.log(tempCars); //YS: console.log
         this.cars.unshift(tempCars);
     };
     ;
@@ -94,11 +94,11 @@ function handleKeyUp(event) {
     // event.key
 }
 var handleEdit = function (carName) {
-    console.log(carName);
+    console.log(carName); //YS: console.log
     cars.updateCar(carName);
 };
 var handleDelete = function (carId) {
-    console.log(carId);
+    console.log(carId); //YS: console.log
     cars.removeCar(carId);
 };
 function handleSelect() {
