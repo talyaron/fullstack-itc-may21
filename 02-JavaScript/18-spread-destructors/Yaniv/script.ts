@@ -10,7 +10,7 @@ interface ThreeD {
 
 const getVol = (dimentions: ThreeD) : number => {
     try {
-        const {h, w, d} = dimentions
+        const {h, w, d} = dimentions;
         const volume = h*w*d;
         return volume;
     } catch (er) {
