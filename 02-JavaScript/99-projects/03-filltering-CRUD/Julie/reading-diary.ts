@@ -13,19 +13,13 @@ class Book {
     this.bookId = "id" + Math.random().toString(16).slice(2);
   }
 }
-// const addedBookArray = [];
 
-const totalArray = booksData;
+let totalArray = booksData;
 
 class BooksArray {
-  totalArray: Array<any>;
   addBook(book: Book) {
-    // this.totalArray.push(book);
-    // renderBook(this.totalArray);
-    // const addedBookArray = [];
-    totalArray.push(book);
+    totalArray.unshift(book);
     renderBook(totalArray);
-    // When I"m rendering the book, the booksLIst is this.totalArray
   }
 }
 
@@ -33,16 +27,35 @@ const bookArrayInstance = new BooksArray();
 bookArrayInstance.totalArray;
 
 function handleDelete(bookId: string) {
-  console.log(bookArrayInstance.totalArray);
-  const reducedArray = bookArrayInstance.totalArray.filter((book) => {
+  const reducedArray = totalArray.filter((book) => {
     return bookId !== book.bookId;
   });
-  // renderBook(reducedArray);
-  // console.log(reducedArray);
-  // When I'm deleting, booksList is assigned to reducedArray
+  totalArray = reducedArray;
+  renderBook(reducedArray);
 }
 
-// function updateTitle ()
+function updateTitle(bookId: string) {
+  const titleToUpdate = totalArray.find((book) => {
+    return bookId === book.bookId;
+  });
+  // titleToUpdate.title = "Changed";
+  renderBook(totalArray);
+}
+
+// When they click "update" a box pops up. They put something in. It is supposed to update the title. The JS is already grabbing the title (the onlick in the created string below). I added the 2 function calls (writeNEwTitle and updateTitle) to the onclick. I realise I need to use another string literal to render what they write to the DOM, and updtae innerHTML, which will replace the title that is already there. I think this is the idea, but I haven't managed to get it to work (yet).
+
+function writeNewTitle(bookId: string) {
+  let text;
+  let user = prompt("Please enter a new title");
+  if (user == null || user == "") {
+    text = "User cancelled.";
+  } else {
+    user = "";
+  }
+  const userInput = `${user}`;
+  text.innerHTML = userInput;
+  renderBook(totalArray);
+}
 
 const handleSubmit = (ev: any): void => {
   ev.preventDefault();
@@ -57,7 +70,7 @@ const handleSubmit = (ev: any): void => {
 };
 
 function renderBook(booksList) {
-  console.log(booksList);
+  let newBooks = "";
   const booksRoot: HTMLElement = document.querySelector("#booksRoot");
   booksList.forEach((book) => {
     const booktoDom = `<div class="form-wrapper-random">
@@ -74,19 +87,34 @@ function renderBook(booksList) {
     <p><span class = "year">Year: </span>${book.year}</p>
     </div>
     <button onclick='handleDelete("${book.bookId}")'>Delete</button>
-    <button onclick='updateTitle("${book.bookId}")'>Update</button>
+    <button id = "update" onclick='updateTitle("${book.bookId}"); writeNewTitle("${book.bookId}")'>Update</button>
   </div>`;
-    booksRoot.insertAdjacentHTML("afterbegin", booktoDom);
+    newBooks += booktoDom;
+    booksRoot.innerHTML = newBooks;
   });
 }
 
 window.onload = renderBook(booksData);
-// Displaying everything in bookslist array
 
-// Write  a function for handle Delete and another for handle Update
+const searchBooksbyTerm = (totalArray: Array<any>, searchTerm: string) => {
+  const myRegEx = new RegExp(searchTerm, "gmi");
+  const searchedBooks: Array<any> = totalArray.filter((book) =>
+    myRegEx.test(book)
+  );
+  return searchedBooks;
+};
 
-// function searchBooks(term: string, totalArray: Array<any>): any {
-//   const searchTermReg: RegExp = new RegExp(term, "i");
+const handleKeyUp = (ev: any) => {
+  ev.preventDefault();
+  const searchTerm: string = ev.target.value;
+  const results = searchBooksbyTerm(totalArray, searchTerm);
+  renderBook(results);
+};
 
-//   return totalArray.filter((book) => searchTermReg.test(book.title));
-// }
+const handleRegExSubmit = (ev: any) => {
+  ev.preventDefault();
+  const searchTerm: string = ev.target.elements.input.value;
+  const results = searchBooksbyTerm(totalArray, searchTerm);
+  renderBook(results);
+  // ev.target.reset();
+};
