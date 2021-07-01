@@ -1,4 +1,5 @@
-<!-- body>
+BEM:
+body>
 	.wrpr-top>
 		.wrpr-top__logo-div (scss: &__logo-div?)
 		.wrpr-top__navdiv (&__navdiv?)
@@ -17,4 +18,18 @@
 		.wrpr-grid__img--blog2 (&--blog2)
 		.wrpr-grid__img--blog3 (&--blog3)
 	.wrpr-grid__supporter (only on pg2) 
-.wrpr-footer -->
+.wrpr-footer
+
+instructions:
+
+Create a Whatsapp application with two pages. 
+1st page: the chatGroups
+2nd page: chat
+
+
+use classes, destructors, spread, typescript
+use BEM model
+make it look as similar as you can to the real Whatsapp
+
+
+Work in a group.start with the design of the classes, BEM
