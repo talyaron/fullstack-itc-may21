@@ -16,10 +16,41 @@
         <i></i>
     </header>
     <div class="container">
-        <div class="chat">
-            <img src="" alt="">
-            <h3></h3>
-            <i></i>
+        <div class="container_contacts">
+            <img class="container_contacts_img" src="" alt="">
+            <h3 class="container_contacts_name"></h3>
+            <i class="container_contacts_icon"></i>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 style="text-align: center;">Edit Product</h1>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form_modal" action="" onsubmit="handleEdit(event)">
+                                <label class="formulario_item--modal" for="product-modal">Product</label>
+                                <input class="formulario_item--modal" type="text" name="productoModal" />
+                                <label class="formulario_item--modal" for="brand-modal">Brand</label>
+                                <input class="formulario_item--modal" type="text" name="brandModal" />
+                                <label class="formulario_item--modal" for="price-modal">Price</label>
+                                <input class="formulario_item--modal" type="number" name="priceModal" />
+                                <label class="formulario_item--modal" for="stock-modal">Stock</label>
+                                <input class="formulario_item--modal" type="number" name="stockModal" />
+                                <label class="formulario_item--modal" for="description-modal">Description</label>
+                                <input class="formulario_item--modal" type="text" name="descriptionModal" />
+                                <input class="btn btn-primary" style="margin-top: 5px; font-size: 1.2rem;" type="submit" value="Send"></input>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <input class="btn btn-primary" type="text" name="" data-dismiss="modal" value="Close" id="">
+                        </div>
+                    </div>
+                </div> 
+            </div>
         </div>
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
