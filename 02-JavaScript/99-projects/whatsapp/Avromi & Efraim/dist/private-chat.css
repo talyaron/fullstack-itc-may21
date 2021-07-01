@@ -32,6 +32,8 @@ body {
 }
 
 .input__send__wrapper {
+  position: absolute;
+  bottom: 2vh;
   display: flex;
 }
 .input__send__wrapper .input__container {
@@ -41,7 +43,7 @@ body {
   background-color: white;
   border-radius: 20px;
   height: 10vh;
-  width: 80vw;
+  width: 92.5vw;
 }
 .input__send__wrapper .input__container--left {
   display: flex;
@@ -49,30 +51,32 @@ body {
   align-items: center;
 }
 .input__send__wrapper .input__container--right {
+  border: 3px solid red;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 .input__send__wrapper .input__container img {
-  height: 2rem;
-  width: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
 }
 .input__send__wrapper .input__container #input {
   border: none;
   height: 50%;
   width: 80vw;
 }
-.input__send__wrapper .input__send__wrapper {
-  position: absolute;
-  bottom: 0;
-}
 .input__send__wrapper .mic__or__send__button {
+  display: flex;
+  align-items: center;
+}
+.input__send__wrapper .mic__or__send__button .fas {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 3rem;
-  width: 3rem;
-  font-size: 2rem;
+  margin-left: 1rem;
+  height: 3.5rem;
+  width: 3.5rem;
+  font-size: 1.5rem;
   border-radius: 100px;
   background-color: #128C7E;
   color: white;
