@@ -30,7 +30,7 @@ var Contacts = /** @class */ (function () {
             var rootDiv = document.querySelector(".saved-contacts-root");
             var htmlPattern_1 = "";
             this.contacts.forEach(function (contact) {
-                htmlPattern_1 += "<div class=\"contact\">\n        <i class=\"fa fa-bars fa-lg\" aria-hidden=\"true\"></i>\n        <img class=\"contact__img\" src=\"" + contact.photo + "\" alt=\"Contact image\">\n        <div class=\"contact__inner-wrapper\">\n            <h3 contenteditable=\"false\" id=\"contactName\" class=\"contact__inner-wrapper__name\" onkeyup=\"handleEdit('" + contact.id + "')\">" + contact.contactName + "</h3>\n            <div class=\"contact__inner-wrapper__phone-wrapper\">\n                <p class=\"contact__number\">" + contact.phoneNumber + "</p>\n                <i class=\"fa fa-whatsapp fa\" aria-hidden=\"true\"></i>\n            </div>\n        </div>\n        <p class=\"contact__address\">" + contact.address + "</p>\n        <p class=\"contact__email\">" + contact.email + "</p>\n        <i class=\"fas fa-edit fa-lg\" style=\"cursor:pointer;\" onclick=\"handleEdit('" + contact.id + "')\"></i>\n        <i class=\"far fa-trash-alt fa-lg\" style=\"cursor:pointer;\" onclick=\"handleDelete('" + contact.id + "')\"></i>\n        </div>";
+                htmlPattern_1 += "<div class=\"contact\">\n        <i class=\"fa fa-bars fa-lg\" aria-hidden=\"true\"></i>\n        <img class=\"contact__img\" src=\"" + contact.photo + "\" alt=\"Contact image\">\n        <div class=\"contact__inner-wrapper\">\n            <h3 contenteditable=\"false\" id=\"" + contact.id + "\" class=\"contact__inner-wrapper__name\" onkeyup=\"handleEditName(event)\">" + contact.contactName + "</h3>\n            <div class=\"contact__inner-wrapper__phone-wrapper\">\n                <p class=\"contact__number\">" + contact.phoneNumber + "</p>\n                <i class=\"fa fa-whatsapp fa\" aria-hidden=\"true\"></i>\n            </div>\n        </div>\n        <p class=\"contact__address\">" + contact.address + "</p>\n        <p class=\"contact__email\">" + contact.email + "</p>\n        <i class=\"fas fa-edit fa-lg\" style=\"cursor:pointer;\" onclick=\"handleEdit('" + contact.id + "')\"></i>\n        <i class=\"far fa-trash-alt fa-lg\" style=\"cursor:pointer;\" onclick=\"handleDelete('" + contact.id + "')\"></i>\n        </div>";
             });
             rootDiv.innerHTML = htmlPattern_1;
         }
@@ -42,10 +42,10 @@ var Contacts = /** @class */ (function () {
             var indexToEdit = this.contacts.findIndex(
             /*YS: Ok you were close. Here you had to make the this.contacts[indexToEdit].contactName = something */
             function (element) { return element.id === id; });
-            var changeEditable = document.querySelector('.contact__inner-wrapper__name');
-            changeEditable.setAttribute("contenteditable", true);
+            var changeEditable = document.getElementById("" + id);
+            changeEditable.setAttribute("contenteditable", "true");
             document.getElementById('contactName').style.border = "1px solid black";
-            console.dir(changeEditable);
+            console.log(changeEditable);
             this.contacts[indexToEdit].contactName = changeEditable.textContent;
             console.log(this.contacts[indexToEdit]);
             this.render();
@@ -102,3 +102,11 @@ var handleSubmit = function (event) {
         console.error(error); //YS: Mazal Tov!!!  
     }
 };
+function handleEditName(ev) {
+    //get the id
+    console.log(ev);
+    var id = ev.target.id;
+    var name = ev.target.innerText;
+    console.log(id, name);
+    //get the new name
+}

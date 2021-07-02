@@ -47,7 +47,7 @@ class Contacts {
         <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
         <img class="contact__img" src="${contact.photo}" alt="Contact image">
         <div class="contact__inner-wrapper">
-            <h3 contenteditable="false" id="contactName" class="contact__inner-wrapper__name" onkeyup="handleEdit('${contact.id}')">${contact.contactName}</h3>
+            <h3 contenteditable="false" id="${contact.id}" class="contact__inner-wrapper__name" onkeyup="handleEditName(event)">${contact.contactName}</h3>
             <div class="contact__inner-wrapper__phone-wrapper">
                 <p class="contact__number">${contact.phoneNumber}</p>
                 <i class="fa fa-whatsapp fa" aria-hidden="true"></i>
@@ -70,11 +70,11 @@ class Contacts {
         (element) => element.id === id
       );
 
-      const changeEditable = document.querySelector('.contact__inner-wrapper__name');
-      changeEditable.setAttribute("contenteditable", true); 
+      const changeEditable = document.getElementById(`${id}`);
+      changeEditable.setAttribute("contenteditable", "true"); 
       document.getElementById('contactName').style.border = "1px solid black";
 
-      console.dir(changeEditable);
+      console.log(changeEditable);
 
       this.contacts[indexToEdit].contactName = changeEditable.textContent;
       console.log(this.contacts[indexToEdit]);
@@ -142,3 +142,13 @@ const handleSubmit = (event: any) => {
     console.error(error); //YS: Mazal Tov!!!  
   }
 };
+
+function handleEditName(ev:any){
+  //get the id
+  console.log(ev)
+  const id = ev.target.id;
+  const name = ev.target.innerText;
+  console.log(id, name)
+
+  //get the new name
+}
