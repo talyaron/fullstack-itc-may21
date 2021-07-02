@@ -37,7 +37,7 @@ const photo = document.querySelector("#photo");
 //Contacts class for methods and storage of the instances on an array:
 class Contacts {
   contacts: Array<Contact> = [];
-//Function for rendering an instance to the DOM:
+  //Function for rendering an instance to the DOM:
   render() {
     try {
       let rootDiv = document.querySelector(".saved-contacts-root");
@@ -47,9 +47,9 @@ class Contacts {
         <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
         <img class="contact__img" src="${contact.photo}" alt="Contact image">
         <div class="contact__inner-wrapper">
-            <h3 contenteditable="true" class="contact__inner-wrapper__name">${contact.contactName}</h3>
+            <h3 contenteditable="false" id="contactName" class="contact__inner-wrapper__name" onkeyup="handleEdit('${contact.id}')">${contact.contactName}</h3>
             <div class="contact__inner-wrapper__phone-wrapper">
-                <p class="contact__number" contenteditable="true">${contact.phoneNumber}</p>
+                <p class="contact__number">${contact.phoneNumber}</p>
                 <i class="fa fa-whatsapp fa" aria-hidden="true"></i>
             </div>
         </div>
@@ -60,18 +60,27 @@ class Contacts {
         </div>`;
       });
       rootDiv.innerHTML = htmlPattern;
-    } catch (error) {} //YS: And? Wheres the error handling? 
+    } catch (error) { } //YS: And? Wheres the error handling? 
   }
   //Update method - did not manage to finish it:
   update(id: string) {
     try {
-      const indexToEdit = this.contacts.findIndex(  
+      const indexToEdit = this.contacts.findIndex(
         /*YS: Ok you were close. Here you had to make the this.contacts[indexToEdit].contactName = something */
         (element) => element.id === id
       );
-      this.contacts[indexToEdit].contactName;
+
+      const changeEditable = document.querySelector('.contact__inner-wrapper__name');
+      changeEditable.setAttribute("contenteditable", true); 
+      document.getElementById('contactName').style.border = "1px solid black";
+
+      console.dir(changeEditable);
+
+      this.contacts[indexToEdit].contactName = changeEditable.textContent;
       console.log(this.contacts[indexToEdit]);
-    } catch (error) {}
+
+      this.render();
+    } catch (error) { }
   }
   //Remove method that works with handle-delete function:
   remove(id: string): void {
@@ -80,14 +89,14 @@ class Contacts {
         (element) => element.id === id
       );
       this.contacts.splice(indexToRemove, 1);
-       /*YS: Notice that with splice you are changing the original array 
-       while with other methods like filter you create a new array. Always be aware of what the method returns 
-       and if it modifies the original array or not.*/
+      /*YS: Notice that with splice you are changing the original array 
+      while with other methods like filter you create a new array. Always be aware of what the method returns 
+      and if it modifies the original array or not.*/
       this.render();
-    } catch (error) {} //YS: Error handling? You cant just leave it empty. At least console.log(error)
+    } catch (error) { } //YS: Error handling? You cant just leave it empty. At least console.log(error)
   }
   //search method - had to skip it! Did not have time ):
-  search(params: void) {}
+  search(params: void) { }
 }
 //The array instance of Contacts class for this page:
 let savedContacts = new Contacts();
@@ -95,16 +104,14 @@ let savedContacts = new Contacts();
 //Clicking on the edit button -should have- made the name and phone number contenteditable="true"; and show it visually for editing; could not finish this on time
 function handleEdit(id) {
   try {
-    const handleEdit = (id) => {
-      savedContacts.update(id);
-    };
-  } catch (error) {} //YS: Error handling
+    savedContacts.update(id);
+  } catch (error) { } //YS: Error handling
 }
 
 const handleDelete = (id) => {
   try {
     savedContacts.remove(id);
-  } catch (error) {} //YS: Error handling
+  } catch (error) { } //YS: Error handling
 };
 
 //Adding a contact after form submission:
