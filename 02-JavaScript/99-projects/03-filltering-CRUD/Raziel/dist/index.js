@@ -54,6 +54,7 @@ var List = /** @class */ (function () {
     List.prototype.editContacts = function (id) {
         var contactEdit = this.contactList.find(function (contact) { return contact.id == id; });
         contactEdit.name = "DAN";
+        console.log(contactEdit);
         this.renderList(this.contactList);
     };
     List.prototype.searchContact = function (name) {

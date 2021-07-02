@@ -92,6 +92,9 @@ class List{
     editContacts(id:string){  //YS: Where is the input?
         const contactEdit=this.contactList.find(contact=>contact.id==id);
        contactEdit.name="DAN";
+
+       console.log(contactEdit);
+       
        this.renderList(this.contactList);
     }
     searchContact(name:string){
