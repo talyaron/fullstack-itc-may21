@@ -6,19 +6,19 @@ const btnReset = <HTMLButtonElement>document.getElementById('reset')
 
 
 //data
-const inputName = (<HTMLInputElement>document.querySelector("#name"))
-const city = (<HTMLInputElement>document.querySelector("#city"))
-const gender = (<HTMLInputElement>document.querySelector('#gender'))
-const tel = (<HTMLInputElement>document.querySelector("#tel"))
-const inputStatus = (<HTMLInputElement>document.querySelector("#status"))
-const salary = (<HTMLInputElement>document.querySelector("#salary"))
+const inputName = (<HTMLInputElement>document.querySelector("#name")) //YS: You dont need the first and last parenthesis 
+const city = (<HTMLInputElement>document.querySelector("#city")) //YS: You dont need the first and last parenthesis
+const gender = (<HTMLInputElement>document.querySelector('#gender')) //YS: You dont need the first and last parenthesis
+const tel = (<HTMLInputElement>document.querySelector("#tel")) //YS: You dont need the first and last parenthesis
+const inputStatus = (<HTMLInputElement>document.querySelector("#status")) //YS: You dont need the first and last parenthesis
+const salary = (<HTMLInputElement>document.querySelector("#salary")) //YS: You dont need the first and last parenthesis
 const id = Math.random().toString(16).slice(2);
 
 //Regrex
-const inputNameFilter = (<HTMLInputElement>document.querySelector("#filtername"))
+const inputNameFilter = (<HTMLInputElement>document.querySelector("#filtername")) //YS: You dont need the first and last parenthesis
 
 //filter
-const gender_list = <NodeList>document.querySelectorAll(".container__actions__filtergender--radio");
+const gender_list = <NodeList>document.querySelectorAll(".container__actions__filtergender--radio"); //YS: Why is this snake_case and not camelCase? 
 
 
 filterGender();
@@ -80,7 +80,7 @@ class DataList {
             if (!checks) throw new Error("Can get the check inputs");
             if (!btnEdit) throw new Error("An error of button Edit has ocurred")
             btnEdit.disabled = false;
-            this.datalist.forEach(element => {
+            this.datalist.forEach(element => { //YS: Nice! Although it would've been better to use .find here. 
                 if (checks[i].checked === true) {
                     inputName.value = element.name
                     city.value = element.city
@@ -103,7 +103,7 @@ class DataList {
         try {
 
             let index: number = 0
-            this.datalist.forEach(item => {
+            this.datalist.forEach(item => { //YS: Again, find would have been better here. But good!
                 if (index === position) {
                     if (inputName.name === "" || city.value === "" || tel.value === "" || tel.value === "" || parseInt(salary.value) === NaN) throw new Error("Check if you complete all the inputs");
                     if (parseInt(salary.value) <= 0) throw new Error("Salary must be positive");
@@ -121,11 +121,11 @@ class DataList {
             this.getStorage()
 
         } catch (e) {
-            console.log(e)
+            console.log(e) //YS: You should let the client know (in the DOM), a client doesnt know how to check the console log. He will think the form is broken. 
         }
     }
 
-    filterGender(gender: string,searchInput: string) {
+    filterGender(gender: string,searchInput: string) { //YS: Ok, a little DRY. 
 
         const something: string = `^${searchInput}`;
         const searchTermReg: RegExp = new RegExp(something, 'i');
@@ -179,7 +179,7 @@ class DataList {
         try {
             if (!boardDataRoot) throw new Error("This page cant render");
 
-            this.datalist.forEach(item => {
+            this.datalist.forEach(item => { //YS: A forEach has an index as a parameter so you dont need the count: forEach((item, index))
                 let num: number = Number(`${item.salary}`);
                 if (item.gender === 'male') {
                     html += `<div class = "container__boardData--item container__boardData--blue">
@@ -260,7 +260,7 @@ const newPeople = JSON.parse(localStorage.getItem("newPeople"))
 const oldPeople = JSON.parse(localStorage.getItem("oldPeople"))
 
 
-if (newPeople === null) {
+if (newPeople === null) {  //YS: I didnt really understand why you had this, you should work with the same array. 
     count = datalist.getOldData(oldPeople);
 } else if (newPeople !== oldPeople) {
     count = datalist.getOldData(newPeople)
@@ -278,13 +278,13 @@ btnAdd.addEventListener('click', event => {
         const data = new Data(inputName.value, city.value, gender.value, tel.value, inputStatus.value, parseInt(salary.value), id)
         count = datalist.getNewData(data);
         //form clear
-        inputName.value = "";
+        inputName.value = "";  //YS: You can use form.reset()
         city.value = "";
         tel.value = "";
         salary.value = "";
         filterGender();
     } catch (e) {
-        console.log(e)
+        console.log(e) //YS: The client wont see this error. 
     }
 
 });
@@ -294,7 +294,7 @@ btnEdit.addEventListener('click', event => {
     datalist.editItem(position)
 
     //form clear
-    inputName.value = "";
+    inputName.value = ""; 
     city.value = "";
     tel.value = "";
     salary.value = "";
@@ -313,12 +313,13 @@ function handleKeyUp() {
     }
 }
 
-console.log(filterGender())
+console.log(filterGender()) //YS: Dont leave console.logs
 
 
 function filterGender() {
     for (let i = 0; i < gender_list.length; i++) {
-        gender_list[i].addEventListener("click", function () {
+        gender_list[i].addEventListener("click", function () {                  //YS: The problem is that your dataList is of type NodeList, you have to find the correct type, mabye object, if not, any? 
+            console.log(typeof datalist)
             datalist.filterGender(gender_list[i].value,inputNameFilter.value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
 
         });

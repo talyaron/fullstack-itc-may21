@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Document</title> <!-- YS: Title? -->
     <link rel="stylesheet" href="dist/styles.min.css">
 </head>
 
-<body onload="checkEdits(); selectList()">
+<body onload="checkEdits(); selectList()"> <!-- YS: Your event listener should not be in the HTML, also, you shouldnt call 2 functions at once. You should call one function that then calls the second function. -->
 
     <h1 class="merchandise">Memorabilia</h2>
         <label class="filter">How would you like to filter your search?</label>
@@ -19,13 +19,13 @@
                 <select class="wrapper__div__select-filter" onchange="filterYear(event)" id="year-produced">
                     <option selected>Please Choose a Year</option>
                 </select>
-                <button class="wrapper__div__reset" onclick="resetButton()">Reset</button>
+                <button class="wrapper__div__reset" onclick="resetButton()">Reset</button> <!-- YS: Event listener shouldnt be here, it should be in your JS -->
             
             </div>
 
             <div class="wrapper__or">or</div>
             <label class="wrapper__label">By Word</label>
-            <form class="wrapper__form" onsubmit="handleSubmit1(event)">
+            <form class="wrapper__form" onsubmit="handleSubmit1(event)">  <!-- YS: Better names + this shouldnt be here, it should be in your JS -->
                 <input class="wrapper__form__search" type="search" name="search" id="searching" onkeyup="handleKeyUp(event)">
                 <input class="wrapper__form__submit" type="submit" value="Search" id="submit">
             </form>
@@ -37,7 +37,7 @@
 
         <div class="shopping-list">
         </div>
-        <form class="form" onsubmit="handleSubmit(event)">
+        <form class="form" onsubmit="handleSubmit(event)"> <!-- YS: In your JS -->
             <label class="form__addown">Add your own!</label>
             <input type='text' name='imgSrc' placeholder="image URL" required />
             <input type='text' name='description' placeholder="description" required />

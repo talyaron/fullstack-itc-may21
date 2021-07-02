@@ -60,7 +60,7 @@ class Ids {
   bringInfo(ident: string) {
     updateElement = ident;
 
-    console.log(ident);
+    console.log(ident); //YS: console.log
   }
 
   editElement(event) {
@@ -70,10 +70,10 @@ class Ids {
       const name: string = event.target.elements.name.value;
       const imageUrl: string = event.target.elements.imageUrl.value;
       const pokeType: string = event.target.elements.pokeType.value;
-      if(name === '')throw Error("Put a Pokemon");
+      if(name === '')throw Error("Put a Pokemon"); //YS: Good
       if(imageUrl === '') throw Error('Put a Url Image');
       if(pokeType !== "fire" && pokeType !== "water"&&pokeType !== "bug"&&pokeType !== "grass"&&pokeType !== "normal"&&pokeType !== "flying"&&pokeType !== "electric") throw Error("Please in the Type of Pokemon put fire, water,bug,grass,normal,flying or electric");
-      const edit = this.id.find((element) => element.ident === updateElement);
+      const edit = this.id.find((element) => element.ident === updateElement); //YS: Nice!
   
       edit.name = name;
       edit.imageUrl = imageUrl;
@@ -81,6 +81,7 @@ class Ids {
       this.bringInfo(event);
   
       this.render()
+      //YS: You couldve added a line here to close your modal after clicking the button. 
       
     } catch (error) {
       alert(error)
@@ -98,7 +99,7 @@ class Ids {
 
   this.searchRegs(filterSearch);
 this.render()
-console.log(filterSearch);
+console.log(filterSearch); //YS: Dont leave console.logs
 
  }
 
@@ -110,7 +111,7 @@ this.id = this.id.filter((element) =>searchTermReg.test( element.name));
   // this.render()
  }
 
-  fiterItem() {
+  fiterItem() { //YS: Here you could have passed the selectValue as a parameter and had 1 function instead of repeating the same function 7 times! DRY
     const selectValue = String(select.value);
     try {
 
@@ -151,11 +152,11 @@ this.id = this.id.filter((element) =>searchTermReg.test( element.name));
   }
 
 
-    render() {
+    render() { //YS: In this case you couldve passed a list of a parameter, to render a different list depending on what you do
     const show: HTMLElement = document.querySelector(".show");
     let html: string = "";
 
-    console.log(this.id);
+    console.log(this.id); //YS: dont leave console logs
 
     this.id.forEach((element) => {
       html += `
@@ -186,7 +187,7 @@ try {
   if(imageUrl === '') throw Error('Put a Url Image');
   if(pokeType !== "fire" && pokeType !== "water"&&pokeType !== "bug"&&pokeType !== "grass"&&pokeType !== "normal"&&pokeType !== "flying"&&pokeType !== "electric") throw Error("Please in the Type of Pokemon put fire, water,bug,grass,normal,flying or electric");
   const generator = new IdsGenerator(name, imageUrl, pokeType);
-  console.log(generator);
+  console.log(generator); //YS: Dont leave console.logs 
   ids.add(generator);
 } catch (error) {
   alert(error)

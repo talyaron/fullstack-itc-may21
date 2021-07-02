@@ -33,7 +33,7 @@ class List{
   
  
     renderList(filteredArray: Array<Contact>):void{
-        const arrayToRender = filteredArray ? filteredArray : this.contactList;
+        const arrayToRender = filteredArray ? filteredArray : this.contactList; //YS: Nice
         let html:string="";
         arrayToRender.forEach(element=>{
             if(element.gender=='male'){ html+= `<div class = "record-item"><div class = "record-el">
@@ -73,7 +73,7 @@ class List{
                     <i class = "fas fa-trash"></i>
                 </span> Delete
             </button>
-            <button type = "button" id = "delete-btn" onclick='editContact("${element.id}")'>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap  onclick='editContact("${element.id}")'  </button>
             <span>
                 <i class = "fas fa-trash"></i>
             </span> Edit
@@ -85,18 +85,23 @@ class List{
         });
         rootHtml.innerHTML=html;
     }
+    
     deleteContact(id:string):void{
        this.contactList= this.contactList.filter(ev=>ev.id!==id);
        this.renderList(null);
     }
-    editContacts(id:string){
+    editContacts(id:string){  //YS: Where is the input?
         const contactEdit=this.contactList.find(contact=>contact.id==id);
        contactEdit.name="DAN";
+
+       console.log(contactEdit);
+       
        this.renderList(this.contactList);
     }
+  
     searchContact(name:string){
         
-        const regEx: string = `${name}`;
+        const regEx: string = `${name}`; //YS: You dont need template literals here. 
 
         const searchName: RegExp = new RegExp(regEx, 'i');
 
@@ -147,7 +152,7 @@ const handelForm = (ev) => {
     const  contact= new Contact(name,fname,phone,email,gender);
    
     lists.addToList(contact);
-    lists.renderList(null)
+    lists.renderList(null);
     console.log(lists);
     ev.target.reset()
   };
@@ -159,7 +164,7 @@ const handelForm = (ev) => {
   }
 const editContact=(id:string):void=>{
     lists.editContacts(id);
-    console.log("hey");
+    console.log("hey"); //YS: Dont leave console.logs 
 }
   searchName.addEventListener('keyup', handleKeyUp)
 
@@ -175,7 +180,7 @@ function filterGender() {
     genderNode.forEach(node=>{
       if(node.checked){
      const filterGenderList=lists.contactList.filter(contact=>contact.gender==node.value);
-     lists.renderList(filterGenderList);
+     lists.renderList(filterGenderList); //YS: How do you go back to the original list after filtering? 
       }
     })
 }

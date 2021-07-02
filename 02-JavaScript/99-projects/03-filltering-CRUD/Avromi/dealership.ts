@@ -1,4 +1,4 @@
-interface CarInterface {
+interface CarInterface {    //YS: Your variables are capitalized, also some are snake_case. Use camelCase.
     Name: string;
     Miles_per_Gallon: number;
     Cylinders: number;
@@ -10,7 +10,7 @@ interface CarInterface {
     Origin: string;
 }
 
-class Car {
+class Car { //YS: Your variables are capitalized, also some are snake_case. Use camelCase.
     Name: string;
     Miles_per_Gallon: number;
     Cylinders: number;
@@ -46,7 +46,7 @@ class Cars {
         addNewOrigin()
         addNewCylinders()
         addNewMpg();
-        console.log(cars);
+        console.log(cars); //YS: Dont leave console.logs in your code. 
         localStorage.setItem(`cars`, JSON.stringify(cars))
     };
 
@@ -67,7 +67,8 @@ class Cars {
         this.renderCars();
     }
 
-    filterByOrigin(value) {
+    filterByOrigin(value) {  /*YS: DRY, all of these filter functions are basically the same. The only thing 
+                                    that changed was the value and by what to filter (couldve also been a parameter)*/
         const carFilteredByOrigin = this.cars.filter(c => c.Origin === value);
         this.cars = carFilteredByOrigin
         console.log(`in filter ` + value);
@@ -87,7 +88,7 @@ class Cars {
         this.renderFilteredCars();
     }
 
-    updateCar(name: string) {
+    updateCar(name: string) { //YS: Wheres the form? 
         const carToUpdate = this.cars.find(car => car.Name === name)
         carToUpdate.Horsepower = 500;
         console.log(carToUpdate);
@@ -96,7 +97,7 @@ class Cars {
 
     getCarsFromStorage() {
         const tempCars = JSON.parse(localStorage.getItem(`cars`))
-        console.log(tempCars);
+        console.log(tempCars); //YS: console.log
         this.cars.unshift(tempCars);
     };
 
@@ -106,7 +107,7 @@ class Cars {
 
         const table: HTMLElement = document.querySelector(".table")
        
-        this.cars.map((car) => {
+        this.cars.map((car) => { //YS: In this case its better to use forEach since you dont need to return an array (map returns an array)
 
           const html = `<tbody>
        <tr>
@@ -162,11 +163,11 @@ function handleKeyUp(event){
 }
 
 const handleEdit = (carName) => {
-    console.log(carName);
+    console.log(carName); //YS: console.log
     cars.updateCar(carName);
 }
 const handleDelete = (carId: string): void => {
-    console.log(carId);
+    console.log(carId); //YS: console.log
     cars.removeCar(carId);
 };
 function handleSelect() {
