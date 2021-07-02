@@ -8,33 +8,47 @@ var Book = /** @class */ (function () {
     }
     return Book;
 }());
-// const addedBookArray = [];
 var totalArray = booksData;
 var BooksArray = /** @class */ (function () {
     function BooksArray() {
     }
     BooksArray.prototype.addBook = function (book) {
-        // this.totalArray.push(book);
-        // renderBook(this.totalArray);
-        // const addedBookArray = [];
-        totalArray.push(book);
+        totalArray.unshift(book);
         renderBook(totalArray);
-        // When I"m rendering the book, the booksLIst is this.totalArray
     };
     return BooksArray;
 }());
 var bookArrayInstance = new BooksArray();
-bookArrayInstance.totalArray;
+bookArrayInstance.totalArray; //YS: Why is this here? 
 function handleDelete(bookId) {
-    console.log(bookArrayInstance.totalArray);
-    var reducedArray = bookArrayInstance.totalArray.filter(function (book) {
+    var reducedArray = totalArray.filter(function (book) {
         return bookId !== book.bookId;
     });
-    // renderBook(reducedArray);
-    // console.log(reducedArray);
-    // When I'm deleting, booksList is assigned to reducedArray
+    totalArray = reducedArray;
+    renderBook(reducedArray);
 }
-// function updateTitle ()
+function updateTitle(bookId) {
+    var titleToUpdate = totalArray.find(function (book) {
+        return bookId === book.bookId;
+    });
+    // titleToUpdate.title = "Changed";
+    renderBook(totalArray);
+}
+// When they click "update" a box pops up. They put something in. It is supposed to update the title. The JS is already grabbing the title (the onlick in the created string below). I added the 2 function calls (writeNEwTitle and updateTitle) to the onclick. I realise I need to use another string literal to render what they write to the DOM, and updtae innerHTML, which will replace the title that is already there. I think this is the idea, but I haven't managed to get it to work (yet).
+// YS: You were very close, you just had to join parts of the updateTitle with the writeNewTitle (all in one function). 
+function writeNewTitle(bookId) {
+    var text;
+    var user = prompt("Please enter a new title");
+    if (user == null || user == "") {
+        text = "User cancelled.";
+    }
+    else {
+        user = "";
+    }
+    var userInput = "" + user;
+    text.innerHTML = userInput; //YS: What is text? You should select the <p> element that has the title instead of text. pElementWithTitle.innerHtml
+    renderBook(totalArray);
+}
 var handleSubmit = function (ev) {
     ev.preventDefault();
     var author = ev.target.elements.author.value;
@@ -45,17 +59,32 @@ var handleSubmit = function (ev) {
     bookArrayInstance.addBook(book);
 };
 function renderBook(booksList) {
-    console.log(booksList);
+    var newBooks = "";
     var booksRoot = document.querySelector("#booksRoot");
     booksList.forEach(function (book) {
-        var booktoDom = "<div class=\"form-wrapper-random\">\n    <div>\n        <p><span class = \"author\">Author: </span>" + book.author + "</p>\n    </div>\n    <div>\n    <p><span class = \"country\">Country: </span>" + book.country + "</p>\n    </div>\n    <div>\n    <p><span class = \"title\">Title: </span>" + book.title + "</p>\n    </div>\n    <div>\n    <p><span class = \"year\">Year: </span>" + book.year + "</p>\n    </div>\n    <button onclick='handleDelete(\"" + book.bookId + "\")'>Delete</button>\n    <button onclick='updateTitle(\"" + book.bookId + "\")'>Update</button>\n  </div>";
-        booksRoot.insertAdjacentHTML("afterbegin", booktoDom);
+        var booktoDom = "<div class=\"form-wrapper-random\">\n    <div>\n        <p><span class = \"author\">Author: </span>" + book.author + "</p>\n    </div>\n    <div>\n    <p><span class = \"country\">Country: </span>" + book.country + "</p>\n    </div>\n    <div>\n    <p><span class = \"title\">Title: </span>" + book.title + "</p>\n    </div>\n    <div>\n    <p><span class = \"year\">Year: </span>" + book.year + "</p>\n    </div>\n    <button onclick='handleDelete(\"" + book.bookId + "\")'>Delete</button>\n    <button id = \"update\" onclick='updateTitle(\"" + book.bookId + "\"); writeNewTitle(\"" + book.bookId + "\")'>Update</button>\n  </div>";
+        newBooks += booktoDom;
+        booksRoot.innerHTML = newBooks;
     });
 }
 window.onload = renderBook(booksData);
-// Displaying everything in bookslist array
-// Write  a function for handle Delete and another for handle Update
-// function searchBooks(term: string, totalArray: Array<any>): any {
-//   const searchTermReg: RegExp = new RegExp(term, "i");
-//   return totalArray.filter((book) => searchTermReg.test(book.title));
-// }
+var searchBooksbyTerm = function (totalArray, searchTerm) {
+    var myRegEx = new RegExp(searchTerm, "gmi");
+    var searchedBooks = totalArray.filter(function (book) {
+        return myRegEx.test(book);
+    } //YS: What are you filtering it by? should be book.title or book.author
+    );
+    return searchedBooks;
+};
+var handleKeyUp = function (ev) {
+    ev.preventDefault();
+    var searchTerm = ev.target.value;
+    var results = searchBooksbyTerm(totalArray, searchTerm);
+    renderBook(results);
+};
+var handleRegExSubmit = function (ev) {
+    var searchTerm = ev.target.elements.input.value;
+    var results = searchBooksbyTerm(totalArray, searchTerm);
+    renderBook(results);
+    // ev.target.reset();
+};

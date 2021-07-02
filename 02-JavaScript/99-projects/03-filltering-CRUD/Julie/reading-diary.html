@@ -11,14 +11,16 @@
     <input
       class="search"
       type="text"
-      placeholder="Search for Author by Surname"
-    />
+      id="input"
+      placeholder="Search Books"
+      onkeyup="handleKeyUp(event)" 
+    /> <!-- YS: You should not have eventListeners in your HTML, only in your JS -->
     <div class="big-container">
       <div class="form-wrapper">
         <div>
           <h1>Enter a Book</h1>
         </div>
-        <form onsubmit="handleSubmit(event)">
+        <form onsubmit="handleSubmit(event)"> <!-- YS: You should not have eventListeners in your HTML, only in your JS -->
           <div>
             <input type="text" id="author" name="author" placeholder="Author" />
           </div>

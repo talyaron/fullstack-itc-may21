@@ -15,7 +15,7 @@ function addNewOrigin() {
 
 
 function addNewCylinders() {
-
+    
     const selectCylinders = document.querySelector("table #cylinders");
     const cylinderList = [];
 
