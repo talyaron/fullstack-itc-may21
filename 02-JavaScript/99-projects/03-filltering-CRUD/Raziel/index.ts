@@ -90,10 +90,11 @@ class List{
        this.renderList(null);
     }
     editContacts(id:string){  //YS: Where is the input?
-        const contactEdit=this.contactList.find(contact=>contact.id==id);
-       contactEdit.name="DAN";
-       this.renderList(this.contactList);
+       let  contactEdit=this.contactList.find(contact=>contact.id==id);
+      
+        
     }
+  
     searchContact(name:string){
         
         const regEx: string = `${name}`; //YS: You dont need template literals here. 
