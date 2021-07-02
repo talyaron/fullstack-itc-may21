@@ -89,11 +89,11 @@ var addToDom = function (searchResults) {
     try {
         var holder_1 = document.querySelector('.holder');
         if (!holder_1) {
-            throw new Error('No shopping list available!');
+            throw new Error('No holder available!');
         }
         holder_1.innerHTML = "";
         if (searchResults.length === 0) {
-            holder_1.innerHTML = '';
+            holder_1.innerHTML = 'no results available';
             return;
         }
         searchResults.forEach(function (contact) { return holder_1.innerHTML += ("<div class=\"holder__contact\">" +
@@ -118,7 +118,7 @@ var findProductbySearchTerm = function (chatSearch, searchTerm) {
         //     }
         //     return acc;
         // }, []);
-        var searchResults = chatSearch.filter(function (contactName) { return userRegEx_1.test(contactName.chats || contactName.name); });
+        var searchResults = chatSearch.filter(function (contactName) { return userRegEx_1.test(contactName.name); });
         // for (let i = 0; i < indexArray.length; i++) { //YS: Use forEach loop. 
         //     searchResults[i].description = nameUpdate[indexArray[i]]
         // }
@@ -137,6 +137,10 @@ var handleKeyUp = function (ev) {
         }
         var results = findProductbySearchTerm(contacts.contacts, searchTerm);
         addToDom(results);
+        if (searchTerm === '') {
+            addToDom(contacts.contacts);
+        }
+        console.log(results);
     }
     catch (er) {
         console.error(er);
