@@ -213,10 +213,13 @@ const handleEdit = (ev: any): void => {
 //To delete a Student
 function remove(studentId: string, name: string) {
     try {
-        const option = confirm(`Are you sure do you want to delete ${name}?`);
-        if (option === true) {
+        const option = confirm(`Are you sure do you want to delete ${name}?`); //YS: Nice!
+        if (option === true) { //YS: If its true, you just need: if(option)
             const studentIndex = this.students.findIndex((element: Student) => element.id === studentId);
-            this.students.splice(studentIndex, 1);
+            this.students.splice(studentIndex, 1); 
+            /*YS: Notice that with splice you are changing the original array 
+            while with other methods like filter you create a new array. Always be aware of what the method returns 
+            and if it modifies the original array or not.*/
             if (!renderStudents) throw new Error('There is a problem to render the students');
             renderStudents(students);
         }
@@ -225,7 +228,7 @@ function remove(studentId: string, name: string) {
     }
 };
 
-function handleFilter(): void {
+function handleFilter(): void {  
     try {
         const subject: any = document.querySelector('#status');
         if (!subject) throw new Error('Can`t access to subject in filter');
@@ -234,6 +237,9 @@ function handleFilter(): void {
 
         if (subject.value === '-' && status.value !== '-') {
             const studentsFiltered: Array<Student> = students.filter(element => (element.status === status.value));
+            /*YS: You should use square brackets and not parenthesis in a callback: .filter(element => {element.status === status.value}); 
+            And if you use arrow functions and return in the same line you dont need anything: .filter(element => element.status === status.value);
+            */
             checkFilters(studentsFiltered);
         } else if (status.value === '-' && subject.value !== '-') {
             const studentsFiltered: Array<Student> = students.filter(element => (element.subject === subject.value));
@@ -284,7 +290,7 @@ function handleSearch(ev): void {
 function checkEnterByUser(searchTerm: string): Array<Student> {
     try {
         const searchTermReg: RegExp = new RegExp(searchTerm, 'gmi');
-        let studentResult = students.filter(function (student) {
+        let studentResult = students.filter(function (student) { //YS: Why not arrow function?
             return searchTermReg.test(student.firstname) || searchTermReg.test(student.lastname)
         });
         return studentResult
@@ -316,7 +322,10 @@ try {
     const sortStatus: HTMLElement = document.querySelector("#tblData__titles--status");
     if (!sortStatus) throw new Error('There is a problem sorting the status');
 
-    sortName.addEventListener('click', () => {
+    sortName.addEventListener('click', () => { 
+        /*YS: Very nice! Although as you can see this code is not DRY. You could have used the same eventlistener/function 
+        for all of them and passed parameters. Also, instead of writing your function in the event listener, make a callback:
+       < sortName.addEventListener('click', mySortFunction) > */
         if (order === true) {
             const sortByFirstName: Array<Student> = students.sort((a, b) => a.firstname.localeCompare(b.firstname))
             renderStudents(sortByFirstName);
@@ -388,7 +397,7 @@ try {
 
 
 //Function to compare dates
-const compareDate = function (firstDate, secondDate) {
+const compareDate = function (firstDate, secondDate) {  //YS: DRY, you could make one function and add an if statement. 
     try {
         const date1 = new Date(firstDate.date).getTime();
         const date2 = new Date(secondDate.date).getTime();
@@ -426,7 +435,7 @@ let selectedFile: File;
 try {
     document.querySelector('#inputExcel').addEventListener("change", (event) => {
         selectedFile = event.target.files[0];
-        let option = confirm('Are you sure do you want to import this file?');
+        let option = confirm('Are you sure do you want to import this file?'); 
         if (option === true) {
             let data = [];
             XLSX.utils.json_to_sheet(data, 'out.xlsx');

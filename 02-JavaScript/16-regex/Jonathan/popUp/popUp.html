@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/popUp.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h2>The modal</h2>
+        <p>Scroll down to see the modal</p>
+    </header>
+    <div class="suscribe-section">
+        <h2>This is the modal</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Modi labore ex quo enim voluptate. Corporis dolores quod error, 
+            hic ea fugiat necessitatibus dignissimos quas repellat possimus alias officiis blanditiis perferendis?</p>
+        <button type="submit" class="modal-btn">Modal</button>
+    </div>
+    
+    <div class="modal-bg">
+        <div class="modal"> <!--actual box on the screen-->
+            <h2>Suscribe to our thing</h2>
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name">
+            <label for="email">Email: </label>
+            <input type="email" name="email" id="email">
+            <button type="submit" class = "btn-modal">Suscribe</button>
+            <span class="modal-close">X</span>
+        </div>
+    </div>
+    <div id="board"></div>
+    <script src="dist/popUp.js"></script>
+</body>
+</html>

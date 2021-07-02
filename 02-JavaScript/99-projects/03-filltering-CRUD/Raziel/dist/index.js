@@ -28,7 +28,7 @@ var List = /** @class */ (function () {
         }
     };
     List.prototype.renderList = function (filteredArray) {
-        var arrayToRender = filteredArray ? filteredArray : this.contactList;
+        var arrayToRender = filteredArray ? filteredArray : this.contactList; //YS: Nice
         var html = "";
         arrayToRender.forEach(function (element) {
             if (element.gender == 'male') {
@@ -53,11 +53,9 @@ var List = /** @class */ (function () {
     };
     List.prototype.editContacts = function (id) {
         var contactEdit = this.contactList.find(function (contact) { return contact.id == id; });
-        contactEdit.name = "DAN";
-        this.renderList(this.contactList);
     };
     List.prototype.searchContact = function (name) {
-        var regEx = "" + name;
+        var regEx = "" + name; //YS: You dont need template literals here. 
         var searchName = new RegExp(regEx, 'i');
         this.filteredArray = this.contactList.filter(function (elem) { return searchName.test(elem.name); });
         this.renderList(this.filteredArray);
@@ -107,7 +105,7 @@ var handelRemove = function (id) {
 };
 var editContact = function (id) {
     lists.editContacts(id);
-    console.log("hey");
+    console.log("hey"); //YS: Dont leave console.logs 
 };
 searchName.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
@@ -119,7 +117,7 @@ function filterGender() {
     genderNode.forEach(function (node) {
         if (node.checked) {
             var filterGenderList = lists.contactList.filter(function (contact) { return contact.gender == node.value; });
-            lists.renderList(filterGenderList);
+            lists.renderList(filterGenderList); //YS: How do you go back to the original list after filtering? 
         }
     });
 }

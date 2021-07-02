@@ -9,9 +9,8 @@
     <title>Document</title>
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
-    <form onsubmit="handleSubmit(event)">
+    <form onsubmit="handleSubmit(event)"> <!-- YS: You should not add eventListeners to your HTML, this should be in your JS -->
         <fieldset>
             <legend>Insert Vehicle Details</legend>
             <input type="text" name="Name" id="name" placeholder="Name Your Vehicle">
@@ -48,19 +47,19 @@
                 </tr>
                 <tr>
                     <td><input type="search" placeholder="Search by name..." onkeyup="handleKeyUp(event)"></td>
-                    <td><select onchange="handleSelectmilesPerGallon()" name="milesPerGallon" id="milesPerGallon">
+                    <td><select onchange="handleSelectmilesPerGallon()" name="milesPerGallon" id="milesPerGallon"> <!-- YS: This eventListener should be in your JS -->
                         <option disabled selected>MPG</option>
                       
                       
 
                     </select></td>
-                    <td><select onchange="handleSelectCylinders()" name="cylinders" id="cylinders">
+                    <td><select onchange="handleSelectCylinders()" name="cylinders" id="cylinders"> <!-- YS: This eventListener should be in your JS -->
                        
                     </select></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td> <select  onchange="handleSelect()" id="origin" name="origin">
+                    <td> <select  onchange="handleSelect()" id="origin" name="origin"> <!-- YS: This eventListener should be in your JS -->
                      
                     </select></td>
                     <td> <i class="fas fa-filter"></i></td>

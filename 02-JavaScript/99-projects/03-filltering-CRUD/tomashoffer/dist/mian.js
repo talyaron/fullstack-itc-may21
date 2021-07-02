@@ -20,18 +20,25 @@ var Producto = /** @class */ (function () {
     return Producto;
 }());
 // EVENTS LISTENERS
-select.addEventListener('change', selectFilter);
+select.addEventListener('change', selectFilter); //YS: Nice! 
 searchBar.addEventListener('keyup', search);
 // FUNCTIONS
 // ADD JSON TO LIST ARRAY
 function addObject() {
     productos.forEach(function (prd) {
+        /*YS: No! The prd above and the prd below are not the same. It is a different thing and you should make a new variable.
+         You are lucky this worked for you, but it is incorrect. Should be:
+
+          const myOtherProdThatisNotTheSameAsMyCallback = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description);
+          list.push(myOtherProdThatisNotTheSameAsMyCallback)
+
+         */
         prd = new Producto(prd.product, prd.brand, prd.price, prd.stock, prd.description);
         list.push(prd);
     });
 }
 addObject();
-// DELETE PRODUCT
+// DELETE PRODUCTvariable
 function remove(id) {
     var filtrado = list.filter(function (prod) { return prod.id !== id; });
     list = filtrado;
@@ -47,13 +54,14 @@ function selectFilter() {
         var selectedValue_1 = Number(select.value);
         if (selectedValue_1 > 300)
             throw new Error('You have an error in your value');
-        console.log(typeof selectedValue_1);
+        console.log(typeof selectedValue_1); //YS: No console logs. 
         var arr = [];
         arr = list;
         var arr2 = [];
         arr2 = list;
         var arr3 = [];
         arr3 = list;
+        //YS: DRY! You shouldve made this into a function and passed different parameters
         if (selectedValue_1 === 100) {
             var priceFilter = arr.filter(function (prod) { return prod.price >= selectedValue_1; });
             arr = priceFilter;
@@ -117,7 +125,7 @@ var handleSubmit = function (event) {
         // ADD NEW PRODUCT TO LIST ARRAY
         list.unshift(producto);
         renderData(list);
-        console.log(producto);
+        console.log(producto); //YS: Console log! 
         event.target.reset();
     }
     catch (e) {
@@ -139,7 +147,7 @@ var handleEdit = function (event) {
         edit_1.price = priceModal;
         edit_1.stock = stockModal;
         edit_1.description = descriptionModal;
-        console.log(productModal, brandModal, priceModal, stockModal, descriptionModal);
+        console.log(productModal, brandModal, priceModal, stockModal, descriptionModal); //YS: Console.log!
         console.log(edit_1);
         renderData(list);
     }

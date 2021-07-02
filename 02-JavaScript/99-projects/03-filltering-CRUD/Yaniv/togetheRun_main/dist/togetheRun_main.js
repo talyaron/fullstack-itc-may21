@@ -18,7 +18,7 @@ var RunsPool = /** @class */ (function () {
     }
     RunsPool.prototype.updateToPool = function (run) {
         try {
-            var runToUpdateIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === run.runId; });
+            var runToUpdateIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === run.runId; }); //YS: Would be better to use find instead of findIndex
             if (runToUpdateIndex === -1) {
                 this.allRuns.push(run);
             }
@@ -47,6 +47,10 @@ var RunsPool = /** @class */ (function () {
     RunsPool.prototype.deleteFromPool = function (runToDeleteId) {
         var runToDeleteIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === runToDeleteId; });
         this.allRuns = this.allRuns.splice(runToDeleteIndex, 1);
+        /*YS: Notice that with splice you are modifying the original array. In this case its ok, but in many cases you dont want to do that,
+        instead you want to create a new array (with filter or map). It is important to know which array methods
+        modify the original array and which ones create a new copy. It is also important to know what they return.
+        This is all well explained in MDN.*/
     };
     RunsPool.prototype.findMatch = function (run) {
         try {
@@ -57,9 +61,9 @@ var RunsPool = /** @class */ (function () {
                     runItem.runPace === run.runPace &&
                     runItem.runArea === run.runArea;
             });
-            if (runMatches.length > 0) {
+            if (runMatches.length > 0) { //YS: Else, throw an error
                 run.runMatch = true;
-                var currentRunIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === run.runId; });
+                var currentRunIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === run.runId; }); //YS: Find would be better than findIndex
                 this.allRuns[currentRunIndex].runMatch = true;
                 this.showMatchesOnDON(runMatches);
             }
@@ -97,7 +101,7 @@ var LoggedInRunner = /** @class */ (function () {
         var runnerProfileImg = document.querySelector(".profile_image__item--profile_image");
         var ruunerTotalDistance = document.querySelector("#total_sum");
         var runnerRunsCounter = document.querySelector("#total_counts");
-        mainTitle.insertAdjacentHTML("afterbegin", this.runnerName);
+        mainTitle.insertAdjacentHTML("afterbegin", this.runnerName); //YS: Very nice touch
         runnerNameContainter.insertAdjacentHTML("beforeend", this.runnerName + "!");
         runnerProfileImg.title = this.runnerName;
         if (this.runnerProfImg === null) {
@@ -106,8 +110,8 @@ var LoggedInRunner = /** @class */ (function () {
         else {
             runnerProfileImg.setAttribute("src", this.runnerProfImg);
         }
-        ruunerTotalDistance.innerHTML = "" + this.runnerDistance;
-        runnerRunsCounter.innerHTML = "" + this.runnerRuns.length;
+        ruunerTotalDistance.innerHTML = "" + this.runnerDistance; //YS: You dont need template literals here: < ... = this.runnerDistance >
+        runnerRunsCounter.innerHTML = "" + this.runnerRuns.length; //YS: You dont need template literals here
         this.renderRunsToDOM(null);
         // window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`; // causes endless loop of loading the page...can be solved by localSession.setItem("isFirstLoad",false) during first loading of the page
     };
@@ -155,7 +159,7 @@ var LoggedInRunner = /** @class */ (function () {
     LoggedInRunner.prototype.renderRunsToDOM = function (filteredRunsToRender) {
         try {
             var runsContainer_1 = document.querySelector(".runs");
-            var runsToRender = filteredRunsToRender ? filteredRunsToRender : this.runnerRuns;
+            var runsToRender = filteredRunsToRender ? filteredRunsToRender : this.runnerRuns; //YS: Nice!
             runsContainer_1.innerHTML = "";
             if (runsToRender.length === 0) {
                 runsContainer_1.innerHTML = "<h2>You have no scheduled runs.<br/>Take this opportunity to rest<br/>😌</h2>";
@@ -185,8 +189,8 @@ var LoggedInRunner = /** @class */ (function () {
             var runnerRunsCounter = document.querySelector("#total_counts");
             var distanceBadge = document.querySelector("#distance_badge");
             var togetherunBadge = document.querySelector("#togetherun_badge");
-            ruunerTotalDistance.innerText = "" + this.runnerDistance;
-            runnerRunsCounter.innerHTML = "" + this.runnerRuns.length;
+            ruunerTotalDistance.innerText = "" + this.runnerDistance; //YS: No template literals
+            runnerRunsCounter.innerHTML = "" + this.runnerRuns.length; //YS: No template literals
             if (this.runnerDistance > 199) {
                 ruunerTotalDistance.style.color = "gold";
                 distanceBadge.setAttribute("src", "../images/TR_Kms_G.png");
@@ -367,14 +371,14 @@ var showFilterForm = function (ev) {
     }
 };
 filterRunsForm.addEventListener('submit', function (ev) { return filterSubmit(ev); });
-filterRunsForm.addEventListener('change', function (ev) { return filterChangeKeyUp(ev); });
+filterRunsForm.addEventListener('change', function (ev) { return filterChangeKeyUp(ev); }); //YS: You dont need this. 
 filterRunsForm.addEventListener('keyup', function (ev) { return filterChangeKeyUp(ev); });
 var filterSubmit = function (ev) {
     try {
         ev.preventDefault();
         if (currentRunner.runnerRuns.length === 0) {
             return;
-        }
+        } //YS: No brackets in return
         var filterSubmitBtn = document.querySelector('#filter_submit');
         if (filterSubmitBtn.getAttribute('value') === 'Reset') {
             filterSubmitBtn.setAttribute('value', 'Filter');
@@ -401,7 +405,7 @@ var filterChangeKeyUp = function (ev) {
         ev.preventDefault();
         if (currentRunner.runnerRuns.length === 0) {
             return;
-        }
+        } //YS: No brackets in return
         var minDistanceFilter = Number(ev.target.parentElement.parentElement.elements.minDistanceFilter.value);
         var maxDistanceFilter = Number(ev.target.parentElement.parentElement.elements.maxDistanceFilter.value);
         var paceFilter = ev.target.parentElement.parentElement.elements.paceFilter.value;
