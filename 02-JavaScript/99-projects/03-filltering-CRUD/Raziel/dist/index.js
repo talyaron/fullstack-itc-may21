@@ -43,7 +43,7 @@ var List = /** @class */ (function () {
             if (element.gender == 'helicopter') {
                 html += "<div class = \"record-item\"><div class = \"record-el\">\n                <span>\uD83D\uDE81</span>\n            </div>";
             }
-            html += "<div class = \"record-item\">\n            <div class = \"record-el\">\n                <span>Name:" + element.name + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Family Name:" + element.fname + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span >Phone Number:" + element.phone + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Email Address :" + element.email + " </span>\n            </div>\n            <button type = \"button\" id = \"delete-btn\" onclick='handelRemove(\"" + element.id + "\")'>\n                <span>\n                    <i class = \"fas fa-trash\"></i>\n                </span> Delete\n            </button>\n            <button type = \"button\" id = \"delete-btn\" onclick='editContact(\"" + element.id + "\")'>\n            <span>\n                <i class = \"fas fa-trash\"></i>\n            </span> Edit\n        </button>\n        </div>\n    </div>\n    </div>\n";
+            html += "<div class = \"record-item\">\n            <div class = \"record-el\">\n                <span>Name:" + element.name + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Family Name:" + element.fname + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span >Phone Number:" + element.phone + " </span>\n            </div>\n            <div class = \"record-el\">\n                <span>Email Address :" + element.email + " </span>\n            </div>\n            <button type = \"button\" id = \"delete-btn\" onclick='handelRemove(\"" + element.id + "\")'>\n                <span>\n                    <i class = \"fas fa-trash\"></i>\n                </span> Delete\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-bs-whatever=\"@getbootstrap\">Open modal for @getbootstrap  onclick='editContact(\"" + element.id + "\")'  </button>\n            <span>\n                <i class = \"fas fa-trash\"></i>\n            </span> Edit\n        </button>\n        </div>\n    </div>\n    </div>\n";
         });
         rootHtml.innerHTML = html;
     };
@@ -52,7 +52,9 @@ var List = /** @class */ (function () {
         this.renderList(null);
     };
     List.prototype.editContacts = function (id) {
-        var contactEdit = this.contactList.find(function (contact) { return contact.id == id; });
+    };
+    List.prototype.bringContact = function (id) {
+        var bringContact = id;
     };
     List.prototype.searchContact = function (name) {
         var regEx = "" + name; //YS: You dont need template literals here. 
