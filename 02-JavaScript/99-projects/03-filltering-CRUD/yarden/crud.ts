@@ -47,9 +47,9 @@ class Contacts {
         <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
         <img class="contact__img" src="${contact.photo}" alt="Contact image">
         <div class="contact__inner-wrapper">
-            <h3 contenteditable="true" class="contact__inner-wrapper__name">${contact.contactName}</h3>
+            <h3 contenteditable="false" class="contact__inner-wrapper__name">${contact.contactName}</h3>
             <div class="contact__inner-wrapper__phone-wrapper">
-                <p class="contact__number" contenteditable="true">${contact.phoneNumber}</p>
+                <p class="contact__number">${contact.phoneNumber}</p>
                 <i class="fa fa-whatsapp fa" aria-hidden="true"></i>
             </div>
         </div>
@@ -60,7 +60,9 @@ class Contacts {
         </div>`;
       });
       rootDiv.innerHTML = htmlPattern;
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
   }
   //Update method - did not manage to finish it:
   update(id: string) {
@@ -69,8 +71,9 @@ class Contacts {
         (element) => element.id === id
       );
       this.contacts[indexToEdit].contactName;
-      console.log(this.contacts[indexToEdit]);
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
   }
   //Remove method that works with handle-delete function:
   remove(id: string): void {
@@ -80,7 +83,9 @@ class Contacts {
       );
       this.contacts.splice(indexToRemove, 1);
       this.render();
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
   }
   //search method - had to skip it! Did not have time ):
   search(params: void) {}
@@ -89,13 +94,22 @@ class Contacts {
 let savedContacts = new Contacts();
 
 //Clicking on the edit button -should have- made the name and phone number contenteditable="true"; and show it visually for editing; could not finish this on time
-function handleEdit(id) {
-  try {
-    const handleEdit = (id) => {
-      savedContacts.update(id);
-    };
-  } catch (error) {}
+function handleEdit(idToEdit) {
+  try {    
+      savedContacts.update(idToEdit);
+      const elmToEdit = savedContacts.contacts.find(e => {
+        e.id === idToEdit
+        console.dir(elmToEdit);
+      })
+      // eToEdit.contactName = 
+      // console.dir(eToEdit);
+
+
+  } catch (error) {
+    console.error(error)
+  }
 }
+
 
 const handleDelete = (id) => {
   try {
@@ -130,4 +144,4 @@ const handleSubmit = (event: any) => {
   } catch (error) {
     console.error(error);
   }
-};
+}
