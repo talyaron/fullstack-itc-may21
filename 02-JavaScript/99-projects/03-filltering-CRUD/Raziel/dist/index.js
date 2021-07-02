@@ -54,8 +54,6 @@ var List = /** @class */ (function () {
     List.prototype.editContacts = function (id) {
         var contactEdit = this.contactList.find(function (contact) { return contact.id == id; });
     };
-    List.prototype.bringContactInfo = function () {
-    };
     List.prototype.searchContact = function (name) {
         var regEx = "" + name; //YS: You dont need template literals here. 
         var searchName = new RegExp(regEx, 'i');
