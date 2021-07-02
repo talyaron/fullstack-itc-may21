@@ -67,6 +67,7 @@ function handleSubmit(ev): any {
         contacts.addContact(new Contact(`${name}`, `${imgUrl}`, phoneNumber, []));
         contacts.renderProducts(holder);
         localStorage.setItem('contacts', JSON.stringify(contacts.contacts))
+        closeForm()
         ev.target.reset();
     } catch (e) {
         console.error(e)
