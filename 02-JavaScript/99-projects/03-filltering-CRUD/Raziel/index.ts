@@ -73,7 +73,7 @@ class List{
                     <i class = "fas fa-trash"></i>
                 </span> Delete
             </button>
-            <button type = "button" id = "delete-btn" onclick='editContact("${element.id}")'>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap  onclick='editContact("${element.id}")'  </button>
             <span>
                 <i class = "fas fa-trash"></i>
             </span> Edit
@@ -85,6 +85,7 @@ class List{
         });
         rootHtml.innerHTML=html;
     }
+    
     deleteContact(id:string):void{
        this.contactList= this.contactList.filter(ev=>ev.id!==id);
        this.renderList(null);
@@ -97,6 +98,7 @@ class List{
        
        this.renderList(this.contactList);
     }
+  
     searchContact(name:string){
         
         const regEx: string = `${name}`; //YS: You dont need template literals here. 
@@ -150,7 +152,7 @@ const handelForm = (ev) => {
     const  contact= new Contact(name,fname,phone,email,gender);
    
     lists.addToList(contact);
-    lists.renderList(null)
+    lists.renderList(null);
     console.log(lists);
     ev.target.reset()
   };
