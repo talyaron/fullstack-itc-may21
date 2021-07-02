@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Julie's Reading Diary</title>
+    <link rel="stylesheet" href="dist/reading-diary.css" />
+  </head>
+  <body>
+    <input
+      class="search"
+      type="text"
+      id="input"
+      placeholder="Search Books"
+      onkeyup="handleKeyUp(event)" 
+    /> <!-- YS: You should not have eventListeners in your HTML, only in your JS -->
+    <div class="big-container">
+      <div class="form-wrapper">
+        <div>
+          <h1>Enter a Book</h1>
+        </div>
+        <form onsubmit="handleSubmit(event)"> <!-- YS: You should not have eventListeners in your HTML, only in your JS -->
+          <div>
+            <input type="text" id="author" name="author" placeholder="Author" />
+          </div>
+
+          <div>
+            <input
+              type="text"
+              id="country"
+              name="country"
+              placeholder="Country"
+            />
+          </div>
+          <div>
+            <input type="text" id="title" name="title" placeholder="Title" />
+          </div>
+
+          <div>
+            <input
+              type="number"
+              min="1000"
+              max="2022"
+              id="year"
+              name="year"
+              placeholder="Year"
+            />
+          </div>
+
+          <input
+            type="submit"
+            id="submit-button"
+            name="submit-button"
+            value="Submit"
+          />
+        </form>
+      </div>
+    </div>
+    <div class="big-container">
+      <div id="booksRoot"></div>
+    </div>
+    <script src="dist/books.js"></script>
+    <script src="dist/reading-diary.js"></script>
+  </body>
+</html>
