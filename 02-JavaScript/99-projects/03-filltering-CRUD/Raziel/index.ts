@@ -73,11 +73,11 @@ class List{
                     <i class = "fas fa-trash"></i>
                 </span> Delete
             </button>
-            <button type = "button" id = "delete-btn" onclick='editContact("${element.id}")'>
+            <button type="button" class="btn btn-primary itemInfo" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" onclick='editItem("${element.id}")' checked>Edit</button>
             <span>
                 <i class = "fas fa-trash"></i>
             </span> Edit
-        </button>
+        
         </div>
     </div>
     </div>
