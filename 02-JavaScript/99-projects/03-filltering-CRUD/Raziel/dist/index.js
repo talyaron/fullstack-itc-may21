@@ -2,6 +2,7 @@
 var rootHtml = document.querySelector('#root');
 var searchName = document.querySelector("#search");
 var genderNode = document.querySelectorAll(".gender");
+var getContact;
 filterGender();
 var Contact = /** @class */ (function () {
     function Contact(name, fname, phone, email, gender) {
@@ -51,10 +52,19 @@ var List = /** @class */ (function () {
         this.contactList = this.contactList.filter(function (ev) { return ev.id !== id; });
         this.renderList(null);
     };
-    List.prototype.editContacts = function (id) {
-        var contactEdit = this.contactList.find(function (contact) { return contact.id == id; });
-        contactEdit.name = "DAN";
+    List.prototype.editContacts = function (event) {
+        var name = event.target.elements.name.value;
+        var fname = event.target.elements.fname.value;
+        var phone = event.target.elements.name.value;
+        var edit = this.contactList.find(function (element) { return element.id === getContact; });
+        edit.name = name;
+        edit.fname = fname;
+        edit.phone = phone;
+        this.bringContact(event);
         this.renderList(this.contactList);
+    };
+    List.prototype.bringContact = function (id) {
+        getContact = id;
     };
     List.prototype.searchContact = function (name) {
         var regEx = "" + name; //YS: You dont need template literals here. 
@@ -123,3 +133,11 @@ function filterGender() {
         }
     });
 }
+var editItem = function (id) {
+    lists.bringContact(id);
+};
+var handleEdit = function (event) {
+    event.preventDefault();
+    lists.editContacts(event);
+    event.target.reset();
+};

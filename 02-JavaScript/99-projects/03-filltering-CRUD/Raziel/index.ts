@@ -8,6 +8,7 @@
 const rootHtml:HTMLElement=document.querySelector('#root');
 const searchName = (<HTMLInputElement>document.querySelector("#search"))
 const genderNode:any=document.querySelectorAll(".gender");
+let getContact;
 filterGender();
 class Contact{
      name:string
@@ -95,10 +96,22 @@ class List{
        this.contactList= this.contactList.filter(ev=>ev.id!==id);
        this.renderList(null);
     }
-    editContacts(id:string){  //YS: Where is the input?
-        const contactEdit=this.contactList.find(contact=>contact.id==id);
-       contactEdit.name="DAN";
-       this.renderList(this.contactList);
+    editContacts(event){  //YS: Where is the input?
+        const name: string = event.target.elements.name.value;
+        const fname: string = event.target.elements.fname.value;
+        const phone:string = event.target.elements.name.value;   
+      const edit=this.contactList.find((element) => element.id === getContact);
+
+      edit.name=name;
+      edit.fname=fname;
+      edit.phone=phone;
+      this.bringContact(event);
+      this.renderList(this.contactList);
+
+    }
+
+    bringContact(id:string){
+      getContact=id;
     }
     searchContact(name:string){
         
@@ -185,3 +198,15 @@ function filterGender() {
       }
     })
 }
+
+
+const editItem= (id: string) => {
+    lists.bringContact(id);
+  
+  };
+  
+  const handleEdit = (event) => {
+    event.preventDefault();
+    lists.editContacts(event);
+  event.target.reset();
+  };
