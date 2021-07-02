@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body onload="checkEdits()">
+    <div class="header">
+        <div class="header__edit" onclick="edit()">Edit</div>
+        <button class="header__new-convo" onclick="openForm()">O</button>
+            <div class="header__new-convo__form-popup" id="myForm">
+                <form onsubmit="handleSubmit(event)" class="header__new-convo__form-popup__form-container">
+                  <h1>Add Contact</h1>
+                  <label for="fullname"><b>Fullname:</b></label>
+                  <input type="text" placeholder="Enter Full Name" name="name" required>
+              
+                  <label for="number"><b>Number</b></label>
+                  <input type="number" placeholder="Enter Phone Number" name="number" required>
+
+                  <label for="photo"><b>Upload Profile Photo</b></label>
+                  <input type="text" placeholder="Upload Photo URL" name="photo" required>
+              
+                  <button type="submit" class="header__new-convo__form-popup__form-container__btn">ADD</button>
+                  <button type="submit" class="header__new-convo__form-popup__form-container__btn button--cancel" onclick="closeForm()">Close</button>
+                </form>
+              </div>
+        </div>
+    </div>
+    <h1 class="chats">Chats</h1>
+    <div>
+        <input class="search" type="search" name="search" id="searching" placeholder="  Search"
+            onkeyup="handleKeyUp(event)">
+    </div>
+    <div class="groups">
+        <div class="groups__broadcast">Broadcast Lists</div>
+        <div class="groups__new-group">New Group</div>
+    </div>
+
+    <div class="holder">
+      
+    </div>
+
+
+    <div class="footer">
+        <div class="status">Status</div>
+        <div class="Calls">Calls</div>
+        <div class="Camera">Camera</div>
+        <div class="Chats">Chats</div>
+        <div class="Settings">Settings</div>
+    </div>
+</body>
+<script src="dist/javacript.js"></script>
+
+</html>
