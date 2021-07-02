@@ -1,3 +1,9 @@
+
+
+
+
+
+
 //--CONSTS--//
 const rootHtml:HTMLElement=document.querySelector('#root');
 const searchName = (<HTMLInputElement>document.querySelector("#search"))
@@ -73,11 +79,11 @@ class List{
                     <i class = "fas fa-trash"></i>
                 </span> Delete
             </button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap  onclick='editContact("${element.id}")'  </button>
+            <button type="button" class="btn btn-primary itemInfo" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" onclick='editItem("${element.id}")' checked>Edit</button>
             <span>
                 <i class = "fas fa-trash"></i>
             </span> Edit
-        </button>
+        
         </div>
     </div>
     </div>
@@ -85,7 +91,6 @@ class List{
         });
         rootHtml.innerHTML=html;
     }
-    
     deleteContact(id:string):void{
        this.contactList= this.contactList.filter(ev=>ev.id!==id);
        this.renderList(null);
@@ -93,12 +98,8 @@ class List{
     editContacts(id:string){  //YS: Where is the input?
         const contactEdit=this.contactList.find(contact=>contact.id==id);
        contactEdit.name="DAN";
-
-       console.log(contactEdit);
-       
        this.renderList(this.contactList);
     }
-  
     searchContact(name:string){
         
         const regEx: string = `${name}`; //YS: You dont need template literals here. 
@@ -152,7 +153,7 @@ const handelForm = (ev) => {
     const  contact= new Contact(name,fname,phone,email,gender);
    
     lists.addToList(contact);
-    lists.renderList(null);
+    lists.renderList(null)
     console.log(lists);
     ev.target.reset()
   };
