@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="whatsapp.png" />
-    <link rel="stylesheet" href="dist/chat.min.css">
+    <link rel="shortcut icon" href="../whatsapp.png" />
+    <link rel="stylesheet" href="dist/chat.css">
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
     <title>Chat</title>
 </head>
@@ -38,18 +38,48 @@
                 </div>
             </div>
         </header>
-        <section class="container__chat-box"></section> <!--messages shows-->
+        <section class="container__chat-box"></section>
+        <!--messages shows-->
         <footer class="container__chat-footer">
             <i class="far fa-smile container__chat-footer--smile"></i>
             <form action="">
-            <input type="text" name="writemsg" id="writemsg" placeholder="Escriba un mensaje aqui">
-            <i class="fas fa-arrow-alt-circle-right container__chat-footer--entermsg"></i>
-        </form>
-
+                <input type="text" name="writemsg" id="writemsg" placeholder="Escriba un mensaje aqui">
+                <i class="fas fa-arrow-alt-circle-right container__chat-footer--entermsg"></i>
         </footer>
     </div>
 
-<script src="dist/whatsapp.js"></script>
+    <div class="modal-bg">
+        <div class="modal">
+            <!--actual box on the screen-->
+            <form>
+                <label>Emoji:
+                    <label>
+                    <input type="radio" name="emoji" class="emoji" value="😀">
+                    <span>😀</span>
+                </label>
+                <label>
+                    <input type="radio" name="emoji" class="emoji" value="😄">
+                    <span>😄</span>
+                </label>
+                <label>
+                    <input type="radio" name="emoji" class="emoji" value="😅">
+                    <span>😅</span>
+                </label>
+                <label>
+                    <input type="radio" name="emoji" class="emoji"  value="😍" >
+                    <span>😍</span>
+                </label>
+                <label>
+                    <input type="radio" name="emoji" class="emoji"  value="🤬">
+                    <span>🤬</span>
+                </label>
+                <button type="submit" class="btn-modal">Suscribe</button>
+            </form>
+            <span class="modal-close">X</span>
+        </div>
+    </div>
+
+    <script src="dist/whatsapp.js"></script>
 </body>
 
 </html>
