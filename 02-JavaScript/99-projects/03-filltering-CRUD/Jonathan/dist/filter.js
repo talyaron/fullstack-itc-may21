@@ -223,6 +223,7 @@ console.log(filterGender()); //YS: Dont leave console.logs
 function filterGender() {
     var _loop_1 = function (i) {
         gender_list[i].addEventListener("click", function () {
+            console.log(gender_list[i]);
             datalist.filterGender(gender_list[i].value, inputNameFilter.value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
         });
     };
