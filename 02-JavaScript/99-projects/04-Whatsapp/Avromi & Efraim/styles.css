@@ -29,7 +29,7 @@ body {
   
 
 
-  /* The popup form - hidden by default */
+
   .header__new-convo__form-popup {
     display: none;
     position: fixed;
@@ -39,7 +39,7 @@ body {
     z-index: 9;
   }
   
-  /* Add styles to the form container */
+
   .header__new-convo__form-popup__form-container {
     max-width: 300px;
     padding: 10px;
@@ -59,8 +59,7 @@ body {
     background-color: #ddd;
     outline: none;
   } 
-  
- 
+
   .header__new-convo__form-popup__form-container__btn {
     background-color: #04AA6D;
     color: white;
@@ -72,10 +71,11 @@ body {
     opacity: 0.8;
   }
   
-
+ 
   .button--cancel {
     background-color: red;
   }
+  
 
   .header__new-convo__form-popup__form-container__btn, .header__new-convo:hover {
     opacity: 1;
@@ -173,7 +173,7 @@ body {
     height: 2rem;
     line-height: 2rem;
     color: white;
-    background-color: rgb(66, 66, 255);
+    background-color: red;
     border-radius: 100%;
     text-align: center;
     

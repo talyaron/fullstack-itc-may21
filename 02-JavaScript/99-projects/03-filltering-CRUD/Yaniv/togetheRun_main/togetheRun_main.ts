@@ -29,7 +29,7 @@ class RunsPool {
 
   updateToPool(run: Run): boolean {
     try {
-      const runToUpdateIndex: number = this.allRuns.findIndex(runItem => runItem.runId === run.runId); //YS: Would be better to use find instead of findIndex
+      const runToUpdateIndex: number = this.allRuns.findIndex(runItem => runItem.runId === run.runId); //YS: Would be better to use find instead of findIndex. YA: Don't see how find helps here. Can you explain?
 
       if (runToUpdateIndex === -1) {
         this.allRuns.push(run);
@@ -70,9 +70,9 @@ class RunsPool {
           runItem.runPace === run.runPace &&
           runItem.runArea === run.runArea
       );
-      if (runMatches.length > 0) { //YS: Else, throw an error
+      if (runMatches.length > 0) { //YS: Else, throw an error. YA: I'm not sure that it's an error, it is just one of the outcomes
         run.runMatch = true;
-        const currentRunIndex: number = this.allRuns.findIndex((runItem) => runItem.runId === run.runId); //YS: Find would be better than findIndex
+        const currentRunIndex: number = this.allRuns.findIndex((runItem) => runItem.runId === run.runId); //YS: Find would be better than findIndex. YA: Don't see how find helps here. Can you explain?
         this.allRuns[currentRunIndex].runMatch = true;
         this.showMatchesOnDON(runMatches);
       }
@@ -134,8 +134,8 @@ class LoggedInRunner {
     } else {
       runnerProfileImg.setAttribute("src", this.runnerProfImg);
     }
-    ruunerTotalDistance.innerHTML = `${this.runnerDistance}`;  //YS: You dont need template literals here: < ... = this.runnerDistance >
-    runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`; //YS: You dont need template literals here
+    ruunerTotalDistance.innerHTML = `${this.runnerDistance}`;  //YS: You dont need template literals here: < ... = this.runnerDistance >. YA: this is a number, innerHTML expects a string
+    runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`; //YS: You dont need template literals here. YA: this is a number, innerHTML expects a string
     this.renderRunsToDOM(null);
     // window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`; // causes endless loop of loading the page...can be solved by localSession.setItem("isFirstLoad",false) during first loading of the page
   }
@@ -163,7 +163,7 @@ class LoggedInRunner {
     this.refreshDOMSummary(runToDeleteDistance);
   }
 
-  filterRuns(minDistanceFilter: number, maxDistanceFilter: number, paceFilter: string, areaFilter: string, locationFilter: string) { //YS: Nice filtering! Although maybe it wouldve been better to make a filter function so it is more DRY.
+  filterRuns(minDistanceFilter: number, maxDistanceFilter: number, paceFilter: string, areaFilter: string, locationFilter: string) { //YS: Nice filtering! Although maybe it wouldve been better to make a filter function so it is more DRY. YA: can you clarify how another function will help minimize repeatitions?
     let filteredRuns: Array<Run> = this.runnerRuns;
     const locationRegEx = locationFilter ? new RegExp(locationFilter,'gmi') : undefined;
     const filterSubmitBtn: HTMLElement = document.querySelector('#filter_submit');
@@ -228,8 +228,8 @@ class LoggedInRunner {
       const distanceBadge: HTMLElement = document.querySelector("#distance_badge");
       const togetherunBadge: HTMLElement = document.querySelector("#togetherun_badge");
 
-      ruunerTotalDistance.innerText = `${this.runnerDistance}`; //YS: No template literals
-      runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;  //YS: No template literals
+      ruunerTotalDistance.innerText = `${this.runnerDistance}`; //YS: No template literals. YA: this is a number, innerHTML expects a string
+      runnerRunsCounter.innerHTML = `${this.runnerRuns.length}`;  //YS: No template literals. YA: this is a number, innerHTML expects a string
       if (this.runnerDistance > 199) {
         ruunerTotalDistance.style.color = "gold";
         distanceBadge.setAttribute("src", "../images/TR_Kms_G.png");
@@ -432,14 +432,17 @@ const showFilterForm = (ev: any) => {
 };
 
 filterRunsForm.addEventListener('submit', ev => filterSubmit(ev));
-filterRunsForm.addEventListener('change', ev => filterChangeKeyUp(ev)); //YS: You dont need this. 
+filterRunsForm.addEventListener('change', ev => filterChangeKeyUp(ev)); //YS: You dont need this. YA: I tested and found that I need both - change for selects and keyup for inputs
 filterRunsForm.addEventListener('keyup', ev => filterChangeKeyUp(ev));
 
 const filterSubmit = (ev: any) => {
   try {
     ev.preventDefault();
     
-    if (currentRunner.runnerRuns.length === 0) {return;} //YS: No brackets in return
+    ev.target.style.display = 'none';
+    filterBtn.style.display = 'unset';
+
+    if (currentRunner.runnerRuns.length === 0) return; //YS: No brackets in return
     const filterSubmitBtn: HTMLElement = document.querySelector('#filter_submit');
     if (filterSubmitBtn.getAttribute('value') === 'Reset') {
       filterSubmitBtn.setAttribute('value','Filter');
@@ -448,14 +451,12 @@ const filterSubmit = (ev: any) => {
       return;
     }
 
-    const minDistanceFilter = Number(ev.target.elements.minDistanceFilter.value);
-    const maxDistanceFilter = Number(ev.target.elements.maxDistanceFilter.value);
-    const paceFilter = ev.target.elements.paceFilter.value;
-    const areaFilter = ev.target.elements.areaFilter.value;
-    const locationFilter = ev.target.elements.locationFilter.value;
-
-    ev.target.style.display = 'none';
-    filterBtn.style.display = 'unset';
+    const filterRunsFormElements = ev.target.elements;
+    const minDistanceFilter = Number(filterRunsFormElements.minDistanceFilter.value);
+    const maxDistanceFilter = Number(filterRunsFormElements.maxDistanceFilter.value);
+    const paceFilter = filterRunsFormElements.paceFilter.value;
+    const areaFilter = filterRunsFormElements.areaFilter.value;
+    const locationFilter = filterRunsFormElements.locationFilter.value;
 
     currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
 
@@ -469,13 +470,14 @@ const filterChangeKeyUp = (ev: any) => { //YS: Well done!
   try {
     ev.preventDefault();
     
-    if (currentRunner.runnerRuns.length === 0) {return;} //YS: No brackets in return
+    if (currentRunner.runnerRuns.length === 0) return; //YS: No brackets in return
     
-    const minDistanceFilter = Number(ev.target.parentElement.parentElement.elements.minDistanceFilter.value);
-    const maxDistanceFilter = Number(ev.target.parentElement.parentElement.elements.maxDistanceFilter.value);
-    const paceFilter = ev.target.parentElement.parentElement.elements.paceFilter.value;
-    const areaFilter = ev.target.parentElement.parentElement.elements.areaFilter.value;
-    const locationFilter = ev.target.parentElement.parentElement.elements.locationFilter.value;
+    const filterRunsFormElements = ev.target.parentElement.parentElement.elements;
+    const minDistanceFilter = Number(filterRunsFormElements.minDistanceFilter.value);
+    const maxDistanceFilter = Number(filterRunsFormElements.maxDistanceFilter.value);
+    const paceFilter = filterRunsFormElements.paceFilter.value;
+    const areaFilter = filterRunsFormElements.areaFilter.value;
+    const locationFilter = filterRunsFormElements.locationFilter.value;
 
     currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
 

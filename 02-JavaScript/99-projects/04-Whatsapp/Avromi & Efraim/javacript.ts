@@ -67,6 +67,7 @@ function handleSubmit(ev): any {
         contacts.addContact(new Contact(`${name}`, `${imgUrl}`, phoneNumber, []));
         contacts.renderProducts(holder);
         localStorage.setItem('contacts', JSON.stringify(contacts.contacts))
+        closeForm()
         ev.target.reset();
     } catch (e) {
         console.error(e)
@@ -102,10 +103,10 @@ const addToDom = (searchResults: Array<any>) => {
     try {
         const holder: HTMLElement = document.querySelector('.holder');
         if (!holder) {
-            throw new Error('No shopping list available!')
+            throw new Error('No holder available!')
         }
         holder.innerHTML = ``;
-        if (searchResults.length === 0) { holder.innerHTML = ''; return; }
+        if (searchResults.length === 0) { holder.innerHTML = 'no results available'; return; }
         searchResults.forEach((contact) => holder.innerHTML += (
             `<div class="holder__contact">`+
             `<img class="holder__contact__image" src="${contact.imgUrl}">`+
@@ -130,7 +131,7 @@ const findProductbySearchTerm = (chatSearch: Array<any>, searchTerm: string) => 
         //     }
         //     return acc;
         // }, []);
-        const searchResults: Array<any> = chatSearch.filter(contactName => userRegEx.test(contactName.chats || contactName.name));
+        const searchResults: Array<any> = chatSearch.filter(contactName => userRegEx.test(contactName.name));
         // for (let i = 0; i < indexArray.length; i++) { //YS: Use forEach loop. 
         //     searchResults[i].description = nameUpdate[indexArray[i]]
         // }
@@ -142,12 +143,16 @@ const findProductbySearchTerm = (chatSearch: Array<any>, searchTerm: string) => 
 const handleKeyUp = (ev: any) => { 
     try {
         ev.preventDefault();
-        const searchTerm: string = ev.target.value;
+        let searchTerm: string = ev.target.value;
         if (!searchTerm) {
             throw new Error('No value being read for search term!')
         }
         const results = findProductbySearchTerm(contacts.contacts, searchTerm);
         addToDom(results);
+        if(searchTerm === '') {
+            addToDom(contacts.contacts)
+        }
+        console.log(results)
 
     } catch (er) {
         console.error(er)
