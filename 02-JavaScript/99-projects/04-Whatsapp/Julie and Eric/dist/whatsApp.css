@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.container3 {
+  position: absolute;
+  margin-left: 10%;
+  margin-top: 50px;
+  width: 80%;
+  background-color: #ededed;
+  height: 100vh;
+}
+
+.container1 {
+  background-color: #009688;
+  width: 100%;
+  height: 20vh;
+}
+
+.container2 {
+  background-color: #dadbd4;
+  width: 100%;
+  height: 100vh;
+}
+
+/*
+.mainBar{
+    width: 40%;
+    justify-content: left;
+}
+.chat1{
+}
+.searchBar{
+    border: 2px solid red;
+}
+.leftColumn{
+    border: 2px solid red;
+}
+.rightColumn{
+    border: 2px solid red;
+    width: 60%;
+}*/
