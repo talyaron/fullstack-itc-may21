@@ -22,7 +22,7 @@ start with the design of the classes, BEM
     2nd bar
     rgb(215,219,215) we will put a profile image on the left (with circle design) + buttom +(to add group or chats) and 3points(... to select options)
 
-    search bar with border radius and lens inside and placegolder: "search or start new chat"
+    search bar with border radius and lens inside and placeholder: "search or start new chat"
 
     chats space:
     divs with each chat (we can put 3 or 4) each one with their profile image on the left and contact name
