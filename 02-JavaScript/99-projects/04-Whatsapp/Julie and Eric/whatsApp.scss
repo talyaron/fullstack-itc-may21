@@ -10,11 +10,44 @@
 }
 .container3{
     position: absolute;
-    margin-left: 10%;
-    margin-top: 50px;
-    width: 80%;
+    margin-left: 30%;
+    margin-top: 25px;
+    width: 40%;
     background-color: rgb(237, 237,237);
     height: 100vh;
+}
+.myProfileVar{
+    height: 8vh; 
+    background-color: rgb(218, 219,212);
+    
+}
+.addChat{
+    margin-left: 400px;
+    border-radius: 20px;
+    border: 1px solid  rgb(237, 237,237);
+    width: 7vh;
+    height: 6vh;
+    margin-top: 5px;
+}
+.photo1{
+    text-align: left;
+    width: 7vh;
+    height: 6vh;
+    margin-left: 10px;
+    margin-top: 5px;
+    border-radius: 50px;
+}
+.searchVar{
+    height: 8vh; 
+    background-color: rgb(218, 219,212);
+}
+.searchInput{
+    border-radius: 10px;
+    margin-top: 15px;
+    text-align: left;
+    border: 1px solid  rgb(237, 237,237);
+    width: 60%;
+    margin-left: 20%;
 }
 
 .container1{
@@ -30,20 +63,3 @@
 
 
 
-/*
-.mainBar{
-    width: 40%;
-    justify-content: left;
-}
-.chat1{
-}
-.searchBar{
-    border: 2px solid red;
-}
-.leftColumn{
-    border: 2px solid red;
-}
-.rightColumn{
-    border: 2px solid red;
-    width: 60%;
-}*/
