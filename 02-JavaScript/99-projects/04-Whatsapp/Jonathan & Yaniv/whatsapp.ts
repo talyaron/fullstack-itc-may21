@@ -5,6 +5,15 @@ const elementMessage = <HTMLInputElement>document.querySelector('#writemsg')
 const containerChat = <HTMLElement>document.querySelector('.container__chat-box')
 
 
+//modal
+const btnModal = <HTMLElement>document.querySelector('.container__chat-footer--smile')
+const bgModal =  document.querySelector('.modal-bg')
+const modalClose = document.querySelector('.modal-close')
+
+//Ratio
+const emojiList = <any>document.querySelectorAll('.emoji')
+
+
 
 class Message {
     content: string;
@@ -61,7 +70,7 @@ class MessageList {
                              <span class="container__chat-box__messages--datemsg">${message.dateMsg}</span>
                             <i class="fas fa-check-double container__chat-box__messages--doubleclick"></i>
                             <i class="fa fa-trash container__chat-box__messages--doubleclick" onclick='handleDelete("${message.msgID}")' title="Delete Item"></i>
-                
+
                             </div>`
         });
 
@@ -122,4 +131,32 @@ function handleKeyUp() {
         console.log(e)
     }
 }
+
+
+
+btnModal.addEventListener('click', openModal)
+
+function openModal(){
+
+    bgModal.classList.add('bg-active')
+
+
+        emojiList.forEach((emoji,index) => {
+            emojiList[index].addEventListener("click", function () {  
+                console.log(emojiList[index].value)               
+                elementMessage.value += emoji.value
+                bgModal.classList.remove('bg-active');
+            });
+        });
+    
+}
+
+modalClose.addEventListener('click', closeModal)
+
+function closeModal(){
+    bgModal.classList.remove('bg-active')
+}
+
+
+
 
