@@ -26,7 +26,7 @@ class ChatProfile {
   }
 
   renderUser() {
-    const getUser: HTMLElement = document.querySelector("#chat-box");
+    const getUser: HTMLElement = document.querySelector(".userText");
 
     let html: string = "";
     console.log(this.arrayChat);
@@ -43,7 +43,7 @@ class ChatProfile {
   }
   respondBot() {
     const respon = String(messageValue.value);
-    const getBot: HTMLElement = document.querySelector("#chat-box");
+    const getBot: HTMLElement = document.querySelector(".botText");
     let htmlBot = "";
     this.arrayChat.forEach(() => {
       if (respon === "Hola") {

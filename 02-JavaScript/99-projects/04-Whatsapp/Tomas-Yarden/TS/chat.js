@@ -22,7 +22,7 @@ var ChatProfile = /** @class */ (function () {
         this.respondBot();
     };
     ChatProfile.prototype.renderUser = function () {
-        var getUser = document.querySelector("#chat-box");
+        var getUser = document.querySelector(".userText");
         var html = "";
         console.log(this.arrayChat);
         this.arrayChat.forEach(function (element) {
@@ -32,7 +32,7 @@ var ChatProfile = /** @class */ (function () {
     };
     ChatProfile.prototype.respondBot = function () {
         var respon = String(messageValue.value);
-        var getBot = document.querySelector("#chat-box");
+        var getBot = document.querySelector(".botText");
         var htmlBot = "";
         this.arrayChat.forEach(function () {
             if (respon === "Hola") {
