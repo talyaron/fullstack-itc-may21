@@ -6,11 +6,13 @@
 
 .container {
   border: 2px solid red;
-  width: 100%;
+  width: 70vw;
   height: 100vh;
+  position: relative;
+  left: 30vw;
 }
 .container .container__header {
-  background-color: #036055;
+  background-color: #292E31;
   width: 100%;
   height: 12vh;
   display: flex;
@@ -21,10 +23,18 @@
   width: 60px;
   height: 60px;
   margin-left: 10px;
+  /* opacity */
+  cursor: pointer;
 }
 .container .container__header__text {
-  position: relative;
-  left: 20px;
-  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  color: white;
+}
+.container .container__header__text__first {
+  font-size: 1.3rem;
+}
+.container .container__header__text__second {
+  font-size: 0.7rem;
 }
