@@ -51,16 +51,18 @@ class MessageList {
 
     renderChat() {
         let html: string = ''
-        containerChat.innerHTML = html;
+       // containerChat.innerHTML = html;
 
 
         this.messageList.forEach(message => { /*por que se me va dezplazando*/
             html += `<div class="container__chat-box__messages">
+                           
                              <p class="container__chat-box__messages--content">${message.content}<p>
                              <span class="container__chat-box__messages--datemsg">${message.dateMsg}</span>
                             <i class="fas fa-check-double container__chat-box__messages--doubleclick"></i>
                             <i class="fa fa-trash container__chat-box__messages--doubleclick" onclick='handleDelete("${message.msgID}")' title="Delete Item"></i>
-                   <div>`
+                
+                            </div>`
         });
 
         containerChat.innerHTML = html;
@@ -115,9 +117,9 @@ inputSearch.addEventListener('keyup', handleKeyUp) //en caso de qu vuelva hacia 
 
 function handleKeyUp() {
     try {
-        console.log(inputSearch.value)
         messageList.filterByMessage(inputSearch.value)
     } catch (e) {
         console.log(e)
     }
 }
+

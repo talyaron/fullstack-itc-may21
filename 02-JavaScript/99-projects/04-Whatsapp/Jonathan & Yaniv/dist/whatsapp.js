@@ -36,9 +36,9 @@ var MessageList = /** @class */ (function () {
     };
     MessageList.prototype.renderChat = function () {
         var html = '';
-        containerChat.innerHTML = html;
+        // containerChat.innerHTML = html;
         this.messageList.forEach(function (message) {
-            html += "<div class=\"container__chat-box__messages\">\n                             <p class=\"container__chat-box__messages--content\">" + message.content + "<p>\n                             <span class=\"container__chat-box__messages--datemsg\">" + message.dateMsg + "</span>\n                            <i class=\"fas fa-check-double container__chat-box__messages--doubleclick\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--doubleclick\" onclick='handleDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                   <div>";
+            html += "<div class=\"container__chat-box__messages\">\n                           \n                             <p class=\"container__chat-box__messages--content\">" + message.content + "<p>\n                             <span class=\"container__chat-box__messages--datemsg\">" + message.dateMsg + "</span>\n                            <i class=\"fas fa-check-double container__chat-box__messages--doubleclick\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--doubleclick\" onclick='handleDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                \n                            </div>";
         });
         containerChat.innerHTML = html;
     };
@@ -76,7 +76,6 @@ inputSearch.addEventListener('keyup', handleKeyUp); //en caso de qu vuelva hacia
 //lupita
 function handleKeyUp() {
     try {
-        console.log(inputSearch.value);
         messageList.filterByMessage(inputSearch.value);
     }
     catch (e) {
