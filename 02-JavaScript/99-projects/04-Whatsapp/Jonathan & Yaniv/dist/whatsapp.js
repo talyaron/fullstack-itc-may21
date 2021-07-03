@@ -3,6 +3,12 @@ var inputSearch = document.querySelector('#filtermsg');
 var btnMessage = document.querySelector('.container__chat-footer--entermsg');
 var elementMessage = document.querySelector('#writemsg');
 var containerChat = document.querySelector('.container__chat-box');
+//modal
+var btnModal = document.querySelector('.container__chat-footer--smile');
+var bgModal = document.querySelector('.modal-bg');
+var modalClose = document.querySelector('.modal-close');
+//Ratio
+var emojiList = document.querySelectorAll('.emoji');
 var Message = /** @class */ (function () {
     function Message(content, personID, dateMsg, groupID) {
         this.content = content;
@@ -38,7 +44,7 @@ var MessageList = /** @class */ (function () {
         var html = '';
         // containerChat.innerHTML = html;
         this.messageList.forEach(function (message) {
-            html += "<div class=\"container__chat-box__messages\">\n                           \n                             <p class=\"container__chat-box__messages--content\">" + message.content + "<p>\n                             <span class=\"container__chat-box__messages--datemsg\">" + message.dateMsg + "</span>\n                            <i class=\"fas fa-check-double container__chat-box__messages--doubleclick\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--doubleclick\" onclick='handleDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                \n                            </div>";
+            html += "<div class=\"container__chat-box__messages\">\n                           \n                             <p class=\"container__chat-box__messages--content\">" + message.content + "<p>\n                             <span class=\"container__chat-box__messages--datemsg\">" + message.dateMsg + "</span>\n                            <i class=\"fas fa-check-double container__chat-box__messages--doubleclick\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--doubleclick\" onclick='handleDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n\n                            </div>";
         });
         containerChat.innerHTML = html;
     };
@@ -81,4 +87,19 @@ function handleKeyUp() {
     catch (e) {
         console.log(e);
     }
+}
+btnModal.addEventListener('click', openModal);
+function openModal() {
+    bgModal.classList.add('bg-active');
+    emojiList.forEach(function (emoji, index) {
+        emojiList[index].addEventListener("click", function () {
+            console.log(emojiList[index].value);
+            elementMessage.value += emoji.value;
+            bgModal.classList.remove('bg-active');
+        });
+    });
+}
+modalClose.addEventListener('click', closeModal);
+function closeModal() {
+    bgModal.classList.remove('bg-active');
 }

@@ -23,7 +23,7 @@
             align-items: center;
             margin-left: 5%;
 
-            &--arrowleft{
+            &--arrowleft {
                 color: #6E7377;
                 margin-right: 10px;
             }
@@ -48,7 +48,7 @@
                     font-weight: 500;
                     line-height: 21px;
                     color: #D6D7D9;
-                    border:0;
+                    border: 0;
                 }
 
 
@@ -92,31 +92,33 @@
         flex-direction: column;
         align-items: flex-end;
 
-        &__messages{
+        &__messages {
 
-            margin:7px 10px;
-                &--content{
-                    color:white;
-                    margin-right: 10px;
-                    z-index: 1;
-                }
-        
-                &--datemsg{
-                    color:white;
-                    margin-right: 10px;
-                    z-index: 1;
-                }
-                &--doubleclick{
-                    color:lightskyblue;
-                    margin-right: 10px;
-                    z-index: 1;
-                }
-            
+            margin: 7px 10px;
 
-         
+            &--content {
+                color: white;
+                margin-right: 10px;
+                z-index: 1;
+            }
+
+            &--datemsg {
+                color: white;
+                margin-right: 10px;
+                z-index: 1;
+            }
+
+            &--doubleclick {
+                color: lightskyblue;
+                margin-right: 10px;
+                z-index: 1;
+            }
+
+
+
         }
 
-     
+
     }
 
 
@@ -126,31 +128,34 @@
         background-color: #131C21;
         position: relative;
         align-items: center;
-        
 
-        &--smile{
-            color:gray;
+
+        &--smile {
+            color: gray;
             position: absolute;
-            top:20%;
-            left:7%;
-            font-size:30px;
+            top: 20%;
+            left: 7%;
+            font-size: 30px;
         }
-        input{
+
+        input {
             border-radius: 10px;
             padding: 5px 0;
-            background-color:gray;
+            background-color: gray;
             border: 0;
-            color:white;
+            color: white;
             position: absolute;
-            top:23%;
-            left:18%;
-            text-indent: 0.4rem; /*correr el mensaje del input*/
+            top: 23%;
+            left: 18%;
+            text-indent: 0.4rem;
+            /*correr el mensaje del input*/
             width: 65%;
-            cursor: default ;
+            cursor: default;
         }
 
-        input:focus{
-            outline: none; /*sacar el click del input*/
+        input:focus {
+            outline: none;
+            /*sacar el click del input*/
         }
 
         input::placeholder {
@@ -158,19 +163,83 @@
             text-indent: 0.4rem;
         }
 
-        input::hover{
-            background-color:white;
-            color:blacl;
-            
+        input::hover {
+            background-color: white;
+            color: blacl;
+
         }
-        &--entermsg{
-            color:gray;
+
+        &--entermsg {
+            color: gray;
             position: absolute;
-            top:20%;
-            left:92%;
-            font-size:30px;
+            top: 20%;
+            left: 92%;
+            font-size: 30px;
         }
     }
 
+}
 
+[type=radio] {
+    opacity: 0;
+}
+
+[type=radio]+span {
+    cursor: pointer;
+}
+
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /*cover the all things*/
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    /*to see nothing at the beginning*/
+    opacity: 0;
+    transition: visibility 0s, opacity 2s;
+}
+
+.bg-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+.modal {
+    position: relative;
+    background-color: white;
+    width: 30%;
+    height: 30%;
+
+
+    form {
+
+        label{
+            display: block;
+        }
+
+        .btn-modal {
+            padding: 0.5rem;
+            background-color: lightslategray;
+            color: white;
+            border-radius: 12%;
+            margin-top: 0.5rem;
+            cursor: pointer;
+        }
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 }
