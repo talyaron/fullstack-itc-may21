@@ -16,13 +16,22 @@ var Message = /** @class */ (function () {
 var MessageList = /** @class */ (function () {
     function MessageList() {
         this.messageList = [];
+        this.messageListFilter = [];
     }
     MessageList.prototype.addMessage = function (message) {
         this.messageList.push(message);
+        this.messageListFilter.push(message);
         this.renderChat();
     };
     MessageList.prototype.deleteMessage = function (messagePassId) {
         this.messageList = this.messageList.filter(function (message) { return messagePassId !== message.msgID; });
+        this.messageListFilter = this.messageListFilter.filter(function (message) { return messagePassId !== message.msgID; });
+        this.renderChat();
+    };
+    MessageList.prototype.filterByMessage = function (inputMessageFilter) {
+        var regrExp = "^" + inputMessageFilter;
+        var searchTermReg = new RegExp(regrExp, 'i');
+        this.messageList = this.messageListFilter.filter(function (elem) { return searchTermReg.test(elem.content); });
         this.renderChat();
     };
     MessageList.prototype.renderChat = function () {
@@ -41,7 +50,8 @@ function sendMessage() {
     var inputMessage = elementMessage.value;
     //current date
     var today = new Date();
-    var time = (today.getHours() < 10 ? "0" : "" + today.getHours()) + ":" + (today.getMinutes() < 10 ? "0" : "" + today.getMinutes());
+    console.log(today.getMinutes());
+    var time = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
     var message = new Message(inputMessage, '1234', time, '123');
     messageList.addMessage(message);
 }
@@ -61,4 +71,15 @@ function displayInput() {
 }
 function handleDelete(messageId) {
     messageList.deleteMessage(messageId);
+}
+inputSearch.addEventListener('keyup', handleKeyUp); //en caso de qu vuelva hacia atras, me tiene que mostrar todos los mensajes
+//lupita
+function handleKeyUp() {
+    try {
+        console.log(inputSearch.value);
+        messageList.filterByMessage(inputSearch.value);
+    }
+    catch (e) {
+        console.log(e);
+    }
 }

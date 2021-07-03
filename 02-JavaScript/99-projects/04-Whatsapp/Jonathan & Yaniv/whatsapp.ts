@@ -5,6 +5,7 @@ const elementMessage = <HTMLInputElement>document.querySelector('#writemsg')
 const containerChat = <HTMLElement>document.querySelector('.container__chat-box')
 
 
+
 class Message {
     content: string;
     personID: string;
@@ -24,25 +25,37 @@ class Message {
 
 class MessageList {
     messageList: Array<Message> = []
+    messageListFilter: Array<Message> = []
 
     addMessage(message: Message) {
         this.messageList.push(message)
+        this.messageListFilter.push(message)
         this.renderChat()
     }
 
-    deleteMessage(messagePassId:string){
+    deleteMessage(messagePassId: string) {
 
-        this.messageList = this.messageList.filter(message=>messagePassId !== message.msgID)
+        this.messageList = this.messageList.filter(message => messagePassId !== message.msgID)
+        this.messageListFilter = this.messageListFilter.filter(message => messagePassId !== message.msgID)
         this.renderChat()
+    }
+
+    filterByMessage(inputMessageFilter: string) {
+
+        const regrExp: string = `^${inputMessageFilter}`
+        const searchTermReg: RegExp = new RegExp(regrExp, 'i');
+        this.messageList = this.messageListFilter.filter(elem => searchTermReg.test(elem.content))
+        this.renderChat()
+
     }
 
     renderChat() {
-        let html:string = ''
+        let html: string = ''
         containerChat.innerHTML = html;
 
 
         this.messageList.forEach(message => { /*por que se me va dezplazando*/
-            html+=`<div class="container__chat-box__messages">
+            html += `<div class="container__chat-box__messages">
                              <p class="container__chat-box__messages--content">${message.content}<p>
                              <span class="container__chat-box__messages--datemsg">${message.dateMsg}</span>
                             <i class="fas fa-check-double container__chat-box__messages--doubleclick"></i>
@@ -58,17 +71,18 @@ const messageList = new MessageList();
 
 btnMessage.addEventListener('click', sendMessage)
 
-function sendMessage(){
+function sendMessage() {
     const inputMessage = elementMessage.value;
-    
+
     //current date
     let today = new Date();
-    let time = (today.getHours() < 10?"0":"" + today.getHours()) + ":" + (today.getMinutes() < 10?"0":"" + today.getMinutes())
-    
-    const message = new Message(inputMessage,'1234',time,'123')
+    console.log(today.getMinutes())
+    let time = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes())
+
+    const message = new Message(inputMessage, '1234', time, '123')
 
     messageList.addMessage(message)
-    
+
 }
 
 
@@ -92,6 +106,18 @@ function displayInput() {
 }
 
 
-function handleDelete(messageId:string){
+function handleDelete(messageId: string) {
     messageList.deleteMessage(messageId)
+}
+
+inputSearch.addEventListener('keyup', handleKeyUp) //en caso de qu vuelva hacia atras, me tiene que mostrar todos los mensajes
+//lupita
+
+function handleKeyUp() {
+    try {
+        console.log(inputSearch.value)
+        messageList.filterByMessage(inputSearch.value)
+    } catch (e) {
+        console.log(e)
+    }
 }

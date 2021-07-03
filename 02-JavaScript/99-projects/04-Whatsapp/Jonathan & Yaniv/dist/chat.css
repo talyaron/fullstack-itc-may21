@@ -120,6 +120,10 @@
   color: white;
   text-indent: 0.4rem;
 }
+.container__chat-footer input::hover {
+  background-color: white;
+  color: blacl;
+}
 .container__chat-footer--entermsg {
   color: gray;
   position: absolute;

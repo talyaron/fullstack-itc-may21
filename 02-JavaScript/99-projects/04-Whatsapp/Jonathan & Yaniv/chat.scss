@@ -151,7 +151,13 @@
         input::placeholder {
             color: white;
             text-indent: 0.4rem;
-          }
+        }
+
+        input::hover{
+            background-color:white;
+            color:blacl;
+            
+        }
         &--entermsg{
             color:gray;
             position: absolute;
