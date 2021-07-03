@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/first.min.css">
+    <link rel="shortcut icon" href="https://www.logosearcher.com/wp-content/uploads/2018/07/google-hotel-ads.svg" />
+    <title>Hotel Page</title>
+</head>
+
+<body style="background-image: linear-gradient(to right, #0b486b ,#f56217 ); background-attachment:fixed;
+     width: 100%;">
+   
+    <div class="wrapper">
+        <form onsubmit="handleSumbit(event)">
+            <fieldset>
+                <legend>Booking</legend>
+                <input type="text" name="name" id="name" placeholder="Enter your name" required>
+                <select name="cities" required>
+                    <option value="" selected>Select a city</option>
+                    <option value="telaviv">Tel Aviv</option>
+                    <option value="jerusalem">Jerusalem</option>
+                    <option value="beersheva">Beer Sheva</option>
+                    <option value="eilat">Eilat</option>
+                    <option value="haifa">Haifa</option>
+                </select>
+                <label>Stars:</label>
+                <label>
+                    <input type="radio" name="stars" value="onestar" checked>
+                    <span style="color:#b29600">★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="twostar">
+                    <span style="color:#b29600">★★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="threestar">
+                    <span style="color:#b29600">★★★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="fourstar">
+                    <span style="color:#b29600">★★★★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="fivestar">
+                    <span style="color:#b29600">★★★★★</span>
+                </label>
+                <select name="status" required>
+                    <option value="" selected>Select your status</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                </select>
+                <input type="text" name="cash" id="cash" placeholder="Money you want to spend" required>
+                <input type="submit" value = "Sumbit" class="wrapper__sumbit"></input>
+            </fieldset>
+        </form>
+        <div class="wrapper__elements">
+            <h1 class="wrapper__elements--title">Booking in Israel<img
+                    src="https://www.logosearcher.com/wp-content/uploads/2018/07/google-hotel-ads.svg" width="50px"
+                    height="50px" class="wrapper__img"></h1>
+            <h2 class="wrapper__elements--subtitle">Without coronavirus in Israel <img
+                    src="https://images.emojiterra.com/google/android-11/128px/1f1ee-1f1f1.png" width="20px"
+                    height="20px"> is your vacation moment. <br> Complete the form on your 👈 and choose your next
+                destination</h2>
+            <h2 class = "wrapper__elements--subtitle">Look at the cities we offer</h2>
+            <div class='wrapper__elements__container'>
+                <div class="wrapper__elements__container__slider">
+                    <input type="radio" class="wrapper__elements__container__slider--radio" name="images" id="radio-1" checked>
+                    <input type="radio" class="wrapper__elements__container__slider--radio" name="images" id="radio-2">
+                    <input type="radio" class="wrapper__elements__container__slider--radio" name="images" id="radio-3">
+                    <input type="radio" class="wrapper__elements__container__slider--radio" name="images" id="radio-4">
+                    <input type="radio" class="wrapper__elements__container__slider--radio" name="images" id="radio-5">
+                    <div class="wrapper__elements__container__slider--slide" id="slide-1">
+                        <img
+                            src="https://www.danhotels.com/sites/default/files/styles/medium_12_25/public/2017-10/7716417222_8c1c2c5232_b_0.jpg?h=d8d85a56&itok=ic3iNq7D">
+                        <div class="wrapper__elements__container__slider--caption"><span>Tel Aviv</span></div>
+                    </div>
+                    <div class="wrapper__elements__container__slider--slide" id="slide-2">
+                        <img src="https://www.danhotels.com/sites/default/files/2018-08/PJGeneralDeluxePlus.jpg">
+                        <div class="wrapper__elements__container__slider--caption"><span>Jerusalem</span></div>
+                    </div>
+                    <div class="wrapper__elements__container__slider--slide" id="slide-3">
+                        <img src="https://q-xx.bstatic.com/images/hotel/max1024x768/381/38148933.jpg">
+                        <div class="wrapper__elements__container__slider--caption"><span>Be'er Sheva</span></div>
+                    </div>
+                    <div class="wrapper__elements__container__slider--slide" id="slide-4">
+                        <img
+                            src="https://www.leonardo-hotels.com/octopus/upload/images/pages/magic-palace-eilat-pool-2.jpg">
+                        <div class="wrapper__elements__container__slider--caption"><span>Eilat</span></div>
+                    </div>
+                    <div class="wrapper__elements__container__slider--slide" id="slide-5">
+                        <img src="https://www.secrettelaviv.com/wp-content/uploads/2020/04/251139332-1-1024x683.jpg">
+                        <div class="wrapper__elements__container__slider--caption"><span>Haifa</span></div>
+                    </div>
+                    <div class="wrapper__elements__container__slider--dots">
+                        <label for="radio-1" id="label-1"></label>
+                        <label for="radio-2" id="label-2"></label>
+                        <label for="radio-3" id="label-3"></label>
+                        <label for="radio-4" id="label-4"></label>
+                        <label for="radio-5" id="label-5"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Ⓒ Booking</p>
+    </footer>
+    <script src="dist/first.js"></script>
+</body>
+
+</html>
