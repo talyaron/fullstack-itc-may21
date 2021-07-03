@@ -24,6 +24,10 @@
   align-items: center;
   margin-left: 5%;
 }
+.container .container__header__left--arrowleft {
+  color: #6E7377;
+  margin-right: 10px;
+}
 .container .container__header__left img {
   border-radius: 50%;
   width: 50px;
