@@ -125,7 +125,7 @@ class DataList {
         }
     }
 
-    filterGender(gender: string,searchInput: string) { //YS: Ok, a little DRY. 
+    filterGender(gender: string, searchInput: string) { //YS: Ok, a little DRY. 
 
         const something: string = `^${searchInput}`;
         const searchTermReg: RegExp = new RegExp(something, 'i');
@@ -144,7 +144,7 @@ class DataList {
             } else {
                 this.datalist = this.datalist.filter(elem => elem.gender === 'male' || elem.gender === 'female')
             }
-            
+
         }
 
         this.renderDataList()
@@ -166,7 +166,7 @@ class DataList {
         this.getStorage()
     }
 
-    getStorage(){
+    getStorage() {
         localStorage.setItem("newPeople", JSON.stringify(this.datalist))
     }
 
@@ -294,7 +294,7 @@ btnEdit.addEventListener('click', event => {
     datalist.editItem(position)
 
     //form clear
-    inputName.value = ""; 
+    inputName.value = "";
     city.value = "";
     tel.value = "";
     salary.value = "";
@@ -319,8 +319,7 @@ console.log(filterGender()) //YS: Dont leave console.logs
 function filterGender() {
     for (let i = 0; i < gender_list.length; i++) {
         gender_list[i].addEventListener("click", function () {                  //YS: The problem is that your dataList is of type NodeList, you have to find the correct type, mabye object, if not, any? 
-            console.log(typeof datalist)
-            datalist.filterGender(gender_list[i].value,inputNameFilter.value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
+            datalist.filterGender(gender_list[i].value, inputNameFilter.value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
 
         });
     }
