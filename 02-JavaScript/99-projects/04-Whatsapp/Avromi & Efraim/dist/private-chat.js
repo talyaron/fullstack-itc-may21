@@ -12,15 +12,17 @@ var allContacts = JSON.parse(localStorage.getItem('contacts'));
 var thisContact = allContacts.filter(function (contact) { return contact.contactId === params.contactId; });
 var contactName = document.querySelector(".nav__contact h2");
 contactName.innerHTML = "" + thisContact[0].name;
+var contactImg = document.querySelector(".nav__img__wrapper");
+contactImg.innerHTML = "<img class=\"nav__img\"\nsrc=\"" + thisContact[0].imgUrl + "\"\nalt = \"\" >";
 function updateLastSent() {
     var lastSent = document.querySelector(".nav__contact p");
-    lastSent.innerHTML = "Last Sent: " + thisContact[0].chats[0].timeStamp;
+    lastSent.innerHTML = "Last Sent: " + thisContact[0].chats[0].timeStamp + " ";
 }
 function renderMessages(arrToRender) {
     var messagesDiv = document.querySelector(".messages");
     var html = "";
     thisContact[0].chats.forEach(function (chat) {
-        html += "<div class=\"single__message\" oncontextmenu=\"javascript:alert('success!');return false;\">\n    <p>" + chat.message + "</p>\n    <div class=\"single__message__timestamp\">" + chat.timeStamp + "</div>\n</div>";
+        html += "<div class=\"single__message\" oncontextmenu = \"javascript:alert('success!');return false;\" >\n    <p>" + chat.message + " </p>\n        <div class=\"single__message__timestamp\"> " + chat.timeStamp + " </div>\n            </div>";
         messagesDiv.innerHTML = html;
     });
 }
