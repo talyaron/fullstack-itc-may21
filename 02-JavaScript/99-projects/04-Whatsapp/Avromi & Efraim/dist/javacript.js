@@ -1,5 +1,6 @@
 var Contact = /** @class */ (function () {
     function Contact(name, imgUrl, phone, chats) {
+        if (chats === void 0) { chats = [{ message: "New Message", timeStamp: new Date }]; }
         this.name = name;
         this.imgUrl = imgUrl;
         this.phone = phone;
@@ -27,8 +28,8 @@ var Contacts = /** @class */ (function () {
                 return ("<div class=\"holder__contact\" id=\"" + contact.contactId + "\">" +
                     ("<img class=\"holder__contact__image\" src=\"" + contact.imgUrl + "\">") +
                     ("<div class=\"holder__contact__name\"><a href=\"./private-chat.html?contactId=" + contact.contactId + "\">" + contact.name + "</a></div>") +
-                    ("<div class=\"holder__contact__chat\">New Converstion " + contact.chats + "</div>") +
-                    "<div class=\"holder__contact__timestamp\">5:20pm</div>" +
+                    ("<div class=\"holder__contact__chat\">" + contact.chats[0].message + "</div>") +
+                    ("<div class=\"holder__contact__timestamp\">" + contact.chats[0].timeStamp + "</div>") +
                     "<div class=\"holder__contact__unread\" id=\"unread\">6</div>" +
                     ("<div class=\"holder__contact__unread\" id=\"delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
                     "</div>");
@@ -56,7 +57,7 @@ function handleSubmit(ev) {
         if (!holder) {
             throw new Error('No holder!');
         }
-        contacts.addContact(new Contact("" + name, "" + imgUrl, phoneNumber, []));
+        contacts.addContact(new Contact("" + name, "" + imgUrl, phoneNumber));
         contacts.renderProducts(holder);
         localStorage.setItem('contacts', JSON.stringify(contacts.contacts));
         closeForm();
@@ -99,8 +100,8 @@ var addToDom = function (searchResults) {
         searchResults.forEach(function (contact) { return holder_1.innerHTML += ("<div class=\"holder__contact\">" +
             ("<img class=\"holder__contact__image\" src=\"" + contact.imgUrl + "\">") +
             ("<div class=\"holder__contact__name\"><a href=\"./private-chat.html?contactId=" + contact.contactId + "\">" + contact.name + "</a></div>") +
-            ("<div class=\"holder__contact__chat\">" + contact.chats + "</div>") +
-            "<div class=\"holder__contact__timestamp\">5:20pm</div>" +
+            ("<div class=\"holder__contact__chat\">" + contact.chats[0].message + "</div>") +
+            ("<div class=\"holder__contact__timestamp\">" + contact.chats[0].timeStamp + "</div>") +
             "<div class=\"holder__contact__unread id=\"unread\">6</div>" +
             ("<div class=\"holder__contact__unread id=\"delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
             "</div>"); });
