@@ -28,7 +28,6 @@ a {
   height: 100%;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 12.8rem 1fr;
-  border: 2px solid red;
 }
 
 /*App Background*/
@@ -36,7 +35,6 @@ a {
   background-color: #009688;
   grid-column: 2/-2;
   grid-row: 1/2;
-  border: 2px solid blue;
 }
 
 .bottom {
@@ -55,7 +53,6 @@ a {
   margin: 2rem auto;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 1rem 0.05rem rgba(0, 0, 0, 0.2);
-  border: 2px solid yellow;
 }
 
 .sidebar {
