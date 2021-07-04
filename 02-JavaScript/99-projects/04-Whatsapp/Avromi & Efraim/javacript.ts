@@ -6,12 +6,13 @@ class Contact {
     phone: number;
     chats: Array<object>;
     contactId: string;
-    constructor(name, imgUrl, phone, chats){
+    constructor(name, imgUrl, phone, chats=[{message:"New Message", timeStamp: new Date}]){
         this.name = name;
         this.imgUrl = imgUrl;
         this.phone = phone;
         this.chats = chats;
         this.contactId = Math.random().toString(16).slice(2);
+        
         
     }}
 
@@ -37,8 +38,8 @@ class Contact {
                         `<div class="holder__contact" id="${contact.contactId}">`+
                     `<img class="holder__contact__image" src="${contact.imgUrl}">`+
                     `<div class="holder__contact__name"><a href="./private-chat.html?contactId=${contact.contactId}">${contact.name}</a></div>`+
-                    `<div class="holder__contact__chat">New Converstion ${contact.chats}</div>`+
-                    `<div class="holder__contact__timestamp">5:20pm</div>`+
+                    `<div class="holder__contact__chat">${contact.chats[0].message}</div>`+
+                    `<div class="holder__contact__timestamp">${contact.chats[0].timeStamp}</div>`+
                     `<div class="holder__contact__unread" id="unread">6</div>`+
                     `<div class="holder__contact__unread" id="delete" onclick="deleteContact('${contact.contactId}')">x</div>`+
                 `</div>`
@@ -69,7 +70,7 @@ function handleSubmit(ev): any {
         if (!holder) {
             throw new Error('No holder!')
         }
-        contacts.addContact(new Contact(`${name}`, `${imgUrl}`, phoneNumber, []));
+        contacts.addContact(new Contact(`${name}`, `${imgUrl}`, phoneNumber));
         contacts.renderProducts(holder);
         localStorage.setItem('contacts', JSON.stringify(contacts.contacts))
         closeForm()
@@ -116,8 +117,8 @@ const addToDom = (searchResults: Array<any>) => {
             `<div class="holder__contact">`+
             `<img class="holder__contact__image" src="${contact.imgUrl}">`+
             `<div class="holder__contact__name"><a href="./private-chat.html?contactId=${contact.contactId}">${contact.name}</a></div>`+
-            `<div class="holder__contact__chat">${contact.chats}</div>`+
-            `<div class="holder__contact__timestamp">5:20pm</div>`+
+            `<div class="holder__contact__chat">${contact.chats[0].message}</div>`+
+            `<div class="holder__contact__timestamp">${contact.chats[0].timeStamp}</div>`+
             `<div class="holder__contact__unread id="unread">6</div>`+
             `<div class="holder__contact__unread id="delete" onclick="deleteContact('${contact.contactId}')">x</div>`+
         `</div>`
