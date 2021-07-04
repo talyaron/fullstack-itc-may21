@@ -1,3 +1,6 @@
+const scrollBox = document.querySelector(".messages");
+scrollBox.scrollTop = scrollBox.scrollHeight;
+
 function goBack() {
     window.location.href = "index.html"
 }
