@@ -89,6 +89,7 @@ main {
 main .contact-container {
   display: flex;
   margin: 0.4em;
+  height: 65px;
 }
 main .contact-container__contact-image {
   width: 15%;
