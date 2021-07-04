@@ -14,33 +14,47 @@ var Chat = /** @class */ (function () {
 var ChatProfile = /** @class */ (function () {
     function ChatProfile() {
         this.arrayChat = [];
+        // respondBot() {
+        //   const respon = String(messageValue.value);
+        //   // const arrLength = this.arrayChat.length
+        //   const getBot: HTMLElement = document.querySelector(".botText");
+        //   let htmlBot = "";
+        //   this.arrayChat.forEach(() => {
+        //     if (respon.includes("Hola")) {
+        //       htmlBot += `
+        //       <div class="botText">
+        //       <span>Hola</span>
+        //       </div>
+        //       `;
+        //     }
+        //   });
+        //   setTimeout(() => {
+        //     getBot.innerHTML = htmlBot;
+        //   }, 1000);
+        // }
     }
     // arrayBot:Array<Bot> =[];
     ChatProfile.prototype.add = function (add) {
         this.arrayChat.push(add);
         this.renderUser();
-        this.respondBot();
+        // this.respondBot();
     };
     ChatProfile.prototype.renderUser = function () {
-        var getUser = document.querySelector(".userText");
+        var getUser = document.querySelector("#chat-box");
+        var respon = String(messageValue.value);
         var html = "";
         console.log(this.arrayChat);
         this.arrayChat.forEach(function (element) {
-            html += "\n      <div class=\"userText\">\n      <span>" + element.message + "</span>\n      </div>\n     \n     ";
-        });
-        getUser.innerHTML = html;
-    };
-    ChatProfile.prototype.respondBot = function () {
-        var respon = String(messageValue.value);
-        var getBot = document.querySelector(".botText");
-        var htmlBot = "";
-        this.arrayChat.forEach(function () {
-            if (respon === "Hola") {
-                htmlBot += "\n        <div class=\"botText\">\n        <span>Hola</span>\n        </div>\n        ";
+            html += "\n      <p class=\"userText\">\n      <span>" + element.message + "</span>\n      </p>\n     \n     ";
+            if (respon.includes("Hola")) {
+                return html += "\n           <p class=\"botText\">\n            <span>Hola</span>\n             </p>\n             ";
+            }
+            else if (respon.includes("pepe")) {
+                html += "\n               <p class=\"botText\">\n                <span>pepe</span>\n                 </p>\n                 ";
             }
         });
         setTimeout(function () {
-            getBot.innerHTML = htmlBot;
+            getUser.innerHTML = html;
         }, 1000);
     };
     return ChatProfile;

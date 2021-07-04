@@ -6,7 +6,6 @@ const render: HTMLElement = document.querySelector(".chats")
 const inputFilter = <HTMLInputElement>document.querySelector("#filterN") 
 
 
-
 interface ContactsInterface {
     contactName: string;
     image: string;
@@ -18,7 +17,6 @@ class ContactGenerator {
     image: string;
     phone: number;
     contactId: string;
-
 
     constructor(contactName: string, image: string, phone: number) {
 
@@ -54,17 +52,14 @@ class Contacts {
         this.renderContacts();
     }
 
-
-
     renderContacts() {
         let html: string = "";
         
             this.contacts.forEach((element) => {
               
 
-                html += `<div class="chat1"> <img src="${element.image}" alt="" class="photo2"> <h4 class="nameContact">${element.contactName}</h4> </div>`;
+                html += `<div class="chat1" onclick="redirect()"><img src="${element.image}" alt="" class="photo2"> <h4 class="nameContact">${element.contactName}</h4><i class="far fa-trash-alt" id="delete"></i></div>`;
             });
-
             render.innerHTML = html;
             console.log(html)
     
@@ -94,4 +89,13 @@ function handleKeyUp() {
 } catch (e) {
     console.log(e)
 }   
+}
+
+function redirect() {
+    try {
+        window.location.href = 'chat.html'
+        if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!');
+    } catch (error) {
+        console.error(error)
+    }
 }

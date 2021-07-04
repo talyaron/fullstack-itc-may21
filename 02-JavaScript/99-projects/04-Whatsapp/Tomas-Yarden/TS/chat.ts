@@ -22,43 +22,64 @@ class ChatProfile {
   add(add: Chat) {
     this.arrayChat.push(add);
     this.renderUser();
-    this.respondBot();
+    // this.respondBot();
   }
 
   renderUser() {
-    const getUser: HTMLElement = document.querySelector(".userText");
-
+    const getUser: HTMLElement = document.querySelector("#chat-box");
+    const respon = String(messageValue.value);
     let html: string = "";
     console.log(this.arrayChat);
     this.arrayChat.forEach((element) => {
       html += `
-      <div class="userText">
+      <p class="userText">
       <span>${element.message}</span>
-      </div>
+      </p>
      
      `;
+     if (respon.includes("Hola")) {
+     return html += `
+           <p class="botText">
+            <span>Hola</span>
+             </p>
+             `;
+         
+        }  else if (respon.includes("pepe")) {
+             html += `
+               <p class="botText">
+                <span>pepe</span>
+                 </p>
+                 `;
+             
+            }
+      
     });
-
-    getUser.innerHTML = html;
-  }
-  respondBot() {
-    const respon = String(messageValue.value);
-    const getBot: HTMLElement = document.querySelector(".botText");
-    let htmlBot = "";
-    this.arrayChat.forEach(() => {
-      if (respon === "Hola") {
-        htmlBot += `
-        <div class="botText">
-        <span>Hola</span>
-        </div>
-        `;
-      }
-    });
-
     setTimeout(() => {
-      getBot.innerHTML = htmlBot;
-    }, 1000);
+                  
+      getUser.innerHTML = html;
+                 }, 1000);
+
   }
+  // respondBot() {
+  //   const respon = String(messageValue.value);
+  //   // const arrLength = this.arrayChat.length
+  //   const getBot: HTMLElement = document.querySelector(".botText");
+  //   let htmlBot = "";
+  //   this.arrayChat.forEach(() => {
+  //     if (respon.includes("Hola")) {
+  //       htmlBot += `
+  //       <div class="botText">
+  //       <span>Hola</span>
+  //       </div>
+  //       `;
+        
+  //     }
+  //   });
+
+  //   setTimeout(() => {
+  //     getBot.innerHTML = htmlBot;
+  //   }, 1000);
+  // }
 }
 
 const chatProfile = new ChatProfile();

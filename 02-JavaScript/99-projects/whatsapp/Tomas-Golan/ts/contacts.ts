@@ -45,14 +45,15 @@ function renderData() {
                     <p>${element.phone}</p>
                 </div>
             </a>
-            <i onclick='deleteChat("${element.id}")' class="fas fa-trash fa-2x contacts_icon"></i>
+            <i onclick='deleteChat("${element.id}")' class="fas fa-trash fa-lg contacts_icon"></i>
         </div>`
     });
     containerData.innerHTML = html;
 }
-
+renderData();
 const deleteChat = (id) =>{
-    const deleteChats = allContacts.filter((chat) => chat.id !== id);
+    let contactsDelete = JSON.parse(localStorage.getItem("contactos"));
+    const deleteChats = contactsDelete.filter((chat) => chat.id !== id);
     allContacts = deleteChats;
     localStorage.setItem("contactos", JSON.stringify(allContacts));
     renderData();
@@ -70,6 +71,4 @@ const handleContact = (ev)=>{
     localStorage.setItem("contactos", JSON.stringify(allContacts));
     renderData();
 }
-
-
 
