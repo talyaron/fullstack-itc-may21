@@ -1,13 +1,21 @@
 // VARIABLES GLOBALES
 let contactsGroup = JSON.parse(localStorage.getItem("contactos"));
 let arraysOfNames:Array<any> = [];
+let groups:Array<Group> = [];
 
-// contactsGroup.forEach(element => {  
-//     const names = element.name;
-//     arraysOfNames.push(names);
-// });   
-
-// console.log(arraysOfNames);
+// CLASS GROUP
+class Group{
+    groupName: string;
+    groupIMG: string;
+    contactsOfGroup: Array<string>; 
+    id: string;
+    constructor(groupName: string, groupIMG: string, contactsOfGroup: Array<string>) {
+        this.groupName = groupName;
+        this.groupIMG = groupIMG;
+        this.contactsOfGroup = contactsOfGroup;
+        this.id = Math.random().toString(16).slice(2);
+    }
+}
 
 
 function renderModalGroupData() {
@@ -30,30 +38,50 @@ function renderModalGroupData() {
 renderModalGroupData();  
 
 
-const handleGroup = (ev)=>{
-    ev.preventDefault();
+// function renderGroups() {
+//     const containerData: HTMLElement = document.querySelector(".contacts")
+//     let htmlGroup: string = "";
+//     let renderGroup = JSON.parse(localStorage.getItem("groups"));
+//     renderGroup.forEach((element) => {
+//         htmlGroup += `
+//         <div class="contacts_chat">
+//             <img class="contacts_img" src="${element.groupIMG}" alt="">
+//             <a href="">
+//                 <div class="contacts_info">
+//                     <h3 class="contacts_name">${element.groupName}</h3>
+//                     <p>${element.contactsOfGroup + " "}</p>
+//                 </div>
+//             </a>
+//             <i onclick='deleteGroup("${element.id}")' class="fas fa-trash fa-lg contacts_icon"></i>
+//         </div>`
+//     });
+//     containerData.innerHTML += htmlGroup;
+// }
 
-    const nameGroup: string = ev.target.elements.nameGroup.value;
-    const GroupImg: string = ev.target.elements.imgGroup.value;
-
-
-
-    // const newContacto = new Contact(name, phone, profileImg);
-    // allContacts.unshift(newContacto);
-    // localStorage.setItem("contactos", JSON.stringify(allContacts));
-    // renderData();
+const deleteGroup = (id) =>{
+    let groupDelete = JSON.parse(localStorage.getItem("groups"));
+    const deleteGroup = groupDelete.filter((group) => group.id !== id);
+    groups = deleteGroup;
+    localStorage.setItem("groups", JSON.stringify(groups));
+    render()
+ 
 }
 
-// const getNames = ()=>{
-//     let checks = document.querySelector('.check');
-//     let str = "";
+document.getElementById('btn').onclick = function() { 
+    const nameGroup: string = document.querySelector("#nameGroup").value;
+    const GroupImg: string = document.querySelector("#imgGroup").value; 
+    var markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');  
+    for (var checkbox of markedCheckbox) {  
+        arraysOfNames.push(checkbox.value);  
+        // localStorage.setItem("contactos", JSON.stringify(allContacts))
+    }  
+    const contactsGroup:Array<string> = arraysOfNames;
+    const newGroup = new Group(nameGroup, GroupImg, contactsGroup);
+        console.log(newGroup);
+    groups.unshift(newGroup);
+    localStorage.setItem("groups", JSON.stringify(groups));
+    render()
+  }  
 
-//     for(let i = 0;i < 2000; i++ ){
-//         if(checks[i].checked === true){
-//             str += checks[i].value + " ";
-//             console.log(str);
-//         }
 
-        
-//     }
-// }
+ 

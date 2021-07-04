@@ -1,3 +1,4 @@
+console.log('javascript');
 var Contact = /** @class */ (function () {
     function Contact(name, imgUrl, phone, chats) {
         if (chats === void 0) { chats = [{ message: "New Message", timeStamp: new Date }]; }
@@ -119,9 +120,32 @@ var addToDom = function (searchResults) {
 };
 var findContactSearch = function (chatSearch, searchTerm) {
     try {
+        console.log('chatSearch');
+        console.log(chatSearch);
         var userRegEx_1 = new RegExp(searchTerm, 'gmi');
-        var searchResultsName = chatSearch.filter(function (contactName) { return userRegEx_1.test(contactName.name); });
-        return searchResultsName;
+        var searchedUsers = chatSearch.filter(function (contactName) { return userRegEx_1.test(contactName.name); });
+        return searchedUsers;
+    }
+    catch (e) {
+        console.error(e);
+    }
+};
+var findTextInMessages = function (searchTerm) {
+    try {
+        console.log(searchTerm);
+        var termRegEx_1 = new RegExp(searchTerm, 'i');
+        var searchedMessages = contacts.contacts.map(function (contact) {
+            var x = contact.chats.filter(function (message) {
+                var msg = message.message;
+                var tst = termRegEx_1.test(msg);
+                console.log(msg, tst);
+                return tst;
+            });
+            console.log(x);
+            return x;
+        }).flat();
+        console.log(searchedMessages);
+        return searchedMessages;
     }
     catch (e) {
         console.error(e);
@@ -135,6 +159,7 @@ var handleKeyUp = function (ev) {
             throw new Error('No value being read for search term!');
         }
         var results = findContactSearch(contacts.contacts, searchTerm);
+        var searchMessages = findTextInMessages(searchTerm);
         addToDom(results);
     }
     catch (er) {
@@ -148,19 +173,19 @@ function checkEdits() {
         contacts.contacts = render;
         console.log(contacts.contacts.map(function (c) { return console.log(c.chats); }));
     }
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-    }
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-    }
-    function edit() {
-        var indices = document.querySelectorAll("#delete");
-        var unread = document.querySelectorAll("#delete");
-        for (var i = 0; i <= indices.length; i++) {
-            if (unread[i].style.display = "none") {
-                unread[i].style.display = "block";
-            }
+}
+function openForm() {
+    document.getElementById("myForm").style.display = "block";
+}
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+}
+function edit() {
+    var indices = document.querySelectorAll("#delete");
+    var unread = document.querySelectorAll("#delete");
+    for (var i = 0; i <= indices.length; i++) {
+        if (unread[i].style.display = "none") {
+            unread[i].style.display = "block";
         }
     }
 }
