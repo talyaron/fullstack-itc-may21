@@ -19,6 +19,7 @@ body {
 #unread, #delete {
   display: none;
 }
+
 .header__new-convo, .groups__new-group {
     margin-left: auto;
     margin-right: 3vw;

@@ -1,10 +1,12 @@
 const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 const root: HTMLElement = document.querySelector('#main');
+const userNumber=localStorage.getItem('numberToSearch');
+const userfiltered = userInfo.userList.filter(element => (element.number == userNumber));
 
 //Render the chat of the User
-function renderChat(userInfo): void {
+function renderChat(userfiltered): void {
     try {
-        let html: string = userInfo.map(element => {
+        let html: string = userfiltered.map(element => {
             console.log(element.message);
             return (
                 `<div class="chat-window__header" onclick='redirectBack()'>
@@ -30,7 +32,7 @@ function renderChat(userInfo): void {
 };
 
 //Call this functions to render the user
-renderChat(userInfo);
+renderChat(userfiltered);
 
 //With this function I handle the form:
 const handleSubmitMessage = (ev: any): void => {
@@ -52,7 +54,8 @@ const handleSubmitMessage = (ev: any): void => {
 function redirectBack(): void {
     try {
         window.location.href ='./whatsapp.html'
-        if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
+        if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!');
+        
     } catch (error) {
         console.error(error);
     }

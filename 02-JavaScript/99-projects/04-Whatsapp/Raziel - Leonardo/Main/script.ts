@@ -8,7 +8,7 @@ make it look as similar as you can to the real Whatsapp
 
 Work in a group.
 start with the design of the classes, BEM */
-
+const arrayName=JSON.parse(localStorage.getItem('userInfo'));
 const searchName = (<HTMLInputElement>document.querySelector("#search"));
 const nextPage:HTMLElement=document.querySelector('#chat'); //change the name later
 class Message {
@@ -53,10 +53,27 @@ class UserList {
             console.error(error);
         }
     };
+     
+    // if (userFilter) { arrayToRender =userFilter} else { arrayToRender =this.userList
+
 
     //To Show the contacts in the page
     renderContacts(userFilter:Array<User>): void {
-        const arrayToRender = userFilter ? userFilter : this.userList;
+        let arrayToRender:Array<User> =[];
+        if(userFilter!=null){
+         arrayToRender=userFilter;
+        }
+        else
+        if(userFilter===this.userList){
+            arrayToRender=this.userList;
+        }
+        else
+        if(userFilter===arrayName)
+        {
+            arrayToRender=arrayName;
+        }
+        // const arrayToRender = userFilter ? userFilter : this.userList;
+       
         try {
             const showContact: HTMLElement = document.querySelector('#chats');
             if (!showContact) throw new Error('The element where to show the contacts doesn´t exist!')
@@ -147,8 +164,9 @@ function readURL(input): void {
 
 //Method to pass information to another page when you click the User
 function passInformation(userNumber) {
-    const userInfo = userList.userList.filter(element => (element.number == userNumber));
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    
+    localStorage.setItem('userInfo', JSON.stringify(userList));
+    localStorage.setItem('numberToSearch',userNumber);
     redirect();
 };
 
@@ -161,6 +179,9 @@ function redirect(): void {
         console.error(error);
     }
 }
+
+
+
 // nextPage.addEventListener('onclick',passInformation('')); //fix it later
 searchName.addEventListener('keyup', handleKeyUp)
 
