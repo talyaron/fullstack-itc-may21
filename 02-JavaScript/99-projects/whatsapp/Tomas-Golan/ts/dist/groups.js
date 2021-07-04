@@ -6,11 +6,10 @@ contactsGroup.forEach(function (element) {
     arraysOfNames.push(names);
 });
 console.log(arraysOfNames);
-if (deleteChat) {
-    var deleteContactsGroup = JSON.parse(localStorage.getItem("contactos")).name;
-    arraysOfNames = deleteContactsGroup;
-}
-else if (handleContact) {
-    var addContactGroup = JSON.parse(localStorage.getItem("contactos")).name;
-    arraysOfNames = addContactGroup;
-}
+// if(deleteChat){
+//     let deleteContactsGroup = JSON.parse(localStorage.getItem("contactos")).name;
+//     arraysOfNames = deleteContactsGroup;
+// }else if(handleContact){
+//     let addContactGroup = JSON.parse(localStorage.getItem("contactos")).name;
+//     arraysOfNames = addContactGroup;
+// }

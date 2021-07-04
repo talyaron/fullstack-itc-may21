@@ -58,7 +58,7 @@ var doingSubmit = function (ev) {
 };
 function redirect() {
     try {
-        window.location.href = 'listOfPets.html';
+        window.location.href = '../Chat/listOfPets.html';
         if (!window.location.href)
             throw new Error('The page where you want to redirect it doesn´t exist!');
     }
