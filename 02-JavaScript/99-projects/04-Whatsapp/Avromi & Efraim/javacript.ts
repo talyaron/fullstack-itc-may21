@@ -1,66 +1,74 @@
+interface Message {
+    message: string,
+    timeStamp: Date
+
+}
+
+console.log('javascript')
 class Contact {
-    name: string ;
+    name: string;
     imgUrl: string;
     phone: number;
-    chats: Array<object>;
+    chats: Array<Message>;
     contactId: string;
-    constructor(name, imgUrl, phone, chats=[{message:"New Message", timeStamp: new Date}]){
+    constructor(name, imgUrl, phone, chats = [{ message: "New Message", timeStamp: new Date }]) {
         this.name = name;
         this.imgUrl = imgUrl;
         this.phone = phone;
         this.chats = chats;
         this.contactId = Math.random().toString(16).slice(2);
-        
-        
-    }}
 
-    class Contacts {
-        contacts: Array<Contact> = [];
-        constructor() {
-    
+
+    }
+}
+
+class Contacts {
+    contacts: Array<Contact> = [];
+    constructor() {
+
+    }
+
+
+    addContact(contacts: Contact) {
+        try {
+            this.contacts.unshift(contacts);
+        } catch (e) {
+            console.error(e)
         }
+    };
 
-    
-        addContact(contacts: Contact) {
-            try {
-                this.contacts.unshift(contacts);
-            } catch (e) {
-                console.error(e)
-            }
-        };
-    
-        renderProducts(domElement: Element) {
-            try {
-                let html: string = this.contacts.map(contact => {
-                    return (
-                        `<div class="holder__contact" id="${contact.contactId}" onclick="hRef('${contact.contactId}')">` +
-                    `<img class="holder__contact__image" src="${contact.imgUrl}">`+
-                    `<div class="holder__contact__name">${contact.name}</div>`+
-                    `<div class="holder__contact__chat">${contact.chats[0].message}</div>`+
-                    `<div class="holder__contact__timestamp">${contact.chats[0].timeStamp}</div>`+
-                    `<div class="holder__contact__unread" id="unread">6</div>`+
-                    `<div class="holder__contact__unread" id="delete" onclick="deleteContact('${contact.contactId}')">x</div>`+
-                `</div>`
+    renderProducts(domElement: Element) {
+        try {
+            let html: string = this.contacts.map(contact => {
+                return (
+                    `<div class="holder__contact" id="${contact.contactId}" onclick="hRef('${contact.contactId}')">` +
+                    `<img class="holder__contact__image" src="${contact.imgUrl}">` +
+                    `<div class="holder__contact__name">${contact.name}</div>` +
+                    `<div class="holder__contact__chat">${contact.chats[0].message}</div>` +
+                    `<div class="holder__contact__timestamp">${contact.chats[0].timeStamp}</div>` +
+                    `<div class="holder__contact__unread" id="unread">6</div>` +
+                    `<div class="holder__contact__unread" id="delete" onclick="deleteContact('${contact.contactId}')">x</div>` +
+                    `</div>`
                 )
             }).join('')
-                
-                domElement.innerHTML = html;
-            } catch (e) {
-                console.error(e)
-            }
+
+            domElement.innerHTML = html;
+        } catch (e) {
+            console.error(e)
         }
-        findIndexes(contactID: string) {
-            const index = this.contacts.findIndex(cnt => cnt.contactId === contactID)
-            return index;
-        }
+    }
+    findIndexes(contactID: string) {
+        const index = this.contacts.findIndex(cnt => cnt.contactId === contactID)
+        return index;
+    }
 }
 
 
 const contacts: Contacts = new Contacts();
 
-function hRef(id){
-        window.location.href = `./private-chat.html?contactId=${id}`
-    }
+function hRef(id) {
+    window.location.href = `./private-chat.html?contactId=${id}`
+}
 
 
 function handleSubmit(ev): any {
@@ -86,6 +94,7 @@ function handleSubmit(ev): any {
 
 const deleteContact = (conatctID: string) => {
     try {
+        window.event.cancelBubble = true
         const holder: Element = document.querySelector('.holder');
         if (!holder) {
             throw new Error('No shopping list detected!')
@@ -108,93 +117,112 @@ const deleteContact = (conatctID: string) => {
 
 
 
-const addToDom = (searchResults: Array<any>) => { 
+const addToDom = (searchResults: Array<any>) => {
     try {
         const holder: HTMLElement = document.querySelector('.holder');
         if (!holder) {
             throw new Error('No holder available!')
         }
         holder.innerHTML = ``;
-        
+
         if (searchResults.length === 0) { holder.innerHTML = 'no results available'; return; }
         searchResults.forEach((contact) => {
             let index = parseInt(contact.chats.length - 1)
-        holder.innerHTML += (
-            `<div class="holder__contact">`+
-            `<img class="holder__contact__image" src="${contact.imgUrl}">`+
-            `<div class="holder__contact__name"><a href="./private-chat.html?contactId=${contact.contactId}">${contact.name}</a></div>`+
-            `<div class="holder__contact__chat">${contact.chats[index].message}</div>`+
-            `<div class="holder__contact__timestamp">${contact.chats[index].timeStamp}</div>`+
-            `<div class="holder__contact__unread id="unread">6</div>`+
-            `<div class="holder__contact__unread id="delete" onclick="deleteContact('${contact.contactId}')">x</div>`+
-        `</div>`
-        )
+            holder.innerHTML += (
+                `<div class="holder__contact" id="${contact.contactId}" onclick="hRef('${contact.contactId}')">` +
+                `<img class="holder__contact__image" src="${contact.imgUrl}">` +
+                `<div class="holder__contact__name"><a href="./private-chat.html?contactId=${contact.contactId}">${contact.name}</a></div>` +
+                `<div class="holder__contact__chat">${contact.chats[index].message}</div>` +
+                `<div class="holder__contact__timestamp">${contact.chats[index].timeStamp}</div>` +
+                `<div class="holder__contact__unread id="unread">6</div>` +
+                `<div class="holder__contact__unread id="delete" onclick="deleteContact('${contact.contactId}')">x</div>` +
+                `</div>`
+            )
         })
     } catch (e) {
         console.error(e)
     }
 }
-const findProductbySearchTerm = (chatSearch: Array<any>, searchTerm: string) => {
+const findContactSearch = (chatSearch: Array<any>, searchTerm: string) => {
     try {
+        console.log('chatSearch')
+        console.log(chatSearch)
         const userRegEx: RegExp = new RegExp(searchTerm, 'gmi');
-        // let indexArray: Array<any> = contacts.contacts.reduce(function (acc, contactName, index) { //YS: THere are better methods to use than reduce: find or findIndex
-        //     if (userRegEx.test(contactName.name)) {
-        //         acc.push(index);
-        //     }
-        //     return acc;
-        // }, []);
-        const searchResults: Array<any> = chatSearch.filter(contactName => userRegEx.test(contactName.name));
-        // for (let i = 0; i < indexArray.length; i++) { //YS: Use forEach loop. 
-        //     searchResults[i].description = nameUpdate[indexArray[i]]
-        // }
-        return searchResults;
+        const searchedUsers: Array<any> = chatSearch.filter(contactName => userRegEx.test(contactName.name));
+
+        return searchedUsers;
     } catch (e) {
         console.error(e)
     }
 }
-const handleKeyUp = (ev: any) => { 
+
+const findTextInMessages = (searchTerm: string): Array<Message> => {
+    try {
+        console.log(searchTerm)
+        const termRegEx: RegExp = new RegExp(searchTerm, 'i');
+
+        let searchedMessages = contacts.contacts.map(contact => {
+           
+            
+
+            const x = contact.chats.filter(message =>{ 
+               
+                let msg = message.message;
+                const tst = termRegEx.test(msg);
+                console.log(msg, tst)
+                return tst
+            })
+            ;
+            console.log(x)
+            return x
+        }).flat()
+        console.log(searchedMessages)
+        return searchedMessages
+    } catch (e) {
+        console.error(e)
+    }
+}
+const handleKeyUp = (ev: any) => {
     try {
         ev.preventDefault();
         let searchTerm: string = ev.target.value;
         if (!searchTerm) {
             throw new Error('No value being read for search term!')
         }
-        const results = findProductbySearchTerm(contacts.contacts, searchTerm);
+        const results = findContactSearch(contacts.contacts, searchTerm);
+        const searchMessages = findTextInMessages(searchTerm)
         addToDom(results);
-        if(searchTerm === '') {
-            addToDom(contacts.contacts)
-        }
-        console.log(results)
-
     } catch (er) {
         console.error(er)
     }
 }
 
 function checkEdits() {
-        const render: any = JSON.parse(localStorage.getItem('contacts'))
-        if (render != null) {
-            addToDom(render)
-            contacts.contacts = render
-        }}
+    const render: any = JSON.parse(localStorage.getItem('contacts'))
+    if (render != null) {
+        addToDom(render)
+        contacts.contacts = render
 
+        console.log(contacts.contacts.map(c => console.log(c.chats)))
+    }
+}
 
 
 function openForm() {
     document.getElementById("myForm").style.display = "block";
-  }
-  
-  function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-  }
+}
 
-  function edit() {
-    let indices = document.querySelectorAll("#delete") 
-    let unread:Array<HTMLElement> = document.querySelectorAll("#delete");
-    for (let i =0; i<= indices.length; i++){
-        if(unread[i].style.display = "none"){
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+}
+
+function edit() {
+    let indices = document.querySelectorAll("#delete")
+    let unread: Array<HTMLElement> = document.querySelectorAll("#delete");
+    for (let i = 0; i <= indices.length; i++) {
+        if (unread[i].style.display = "none") {
             unread[i].style.display = "block"
         }
-    }}
-    
-  
+    }
+}
+
