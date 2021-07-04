@@ -1,5 +1,3 @@
-
-
 class Contact {
     name: string ;
     imgUrl: string;
@@ -35,9 +33,9 @@ class Contact {
             try {
                 let html: string = this.contacts.map(contact => {
                     return (
-                        `<div class="holder__contact" id="${contact.contactId}">`+
+                        `<div class="holder__contact" id="${contact.contactId}" onclick="hRef('${contact.contactId}')">` +
                     `<img class="holder__contact__image" src="${contact.imgUrl}">`+
-                    `<div class="holder__contact__name"><a href="./private-chat.html?contactId=${contact.contactId}">${contact.name}</a></div>`+
+                    `<div class="holder__contact__name">${contact.name}</div>`+
                     `<div class="holder__contact__chat">${contact.chats[0].message}</div>`+
                     `<div class="holder__contact__timestamp">${contact.chats[0].timeStamp}</div>`+
                     `<div class="holder__contact__unread" id="unread">6</div>`+
@@ -59,6 +57,11 @@ class Contact {
 
 
 const contacts: Contacts = new Contacts();
+
+function hRef(id){
+        window.location.href = `./private-chat.html?contactId=${id}`
+    }
+
 
 function handleSubmit(ev): any {
     ev.preventDefault();
