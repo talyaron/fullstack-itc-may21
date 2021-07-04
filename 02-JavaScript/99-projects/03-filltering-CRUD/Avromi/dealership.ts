@@ -23,7 +23,7 @@ class Car { //YS: Your variables are capitalized, also some are snake_case. Use 
     carId: string;
 
 
-    constructor(Name: string, Miles_per_Gallon: number, Cylinders: number, 
+    constructor(Name: string, Miles_per_Gallon: number, Cylinders: number,
         Horsepower: number, Weight_in_lbs: number, Year: Date, Origin: string) {
 
         this.Name = Name;
@@ -54,7 +54,7 @@ class Cars {
 
     addCars(carsArray: Array<Car | CarInterface>) {
         carsArray.forEach(car => {
-            const newCar = new Car(car.Name, car.Miles_per_Gallon, car.Cylinders, car.Horsepower, 
+            const newCar = new Car(car.Name, car.Miles_per_Gallon, car.Cylinders, car.Horsepower,
                 car.Weight_in_lbs, car.Year, car.Origin)
             this.cars.push(newCar);
         })
@@ -64,35 +64,54 @@ class Cars {
     removeCar(carId: string) {
         const carIndex = this.cars.filter((c) => c.carId !== carId);
         this.cars = carIndex
-        this.renderCars();
+        this.renderCars(this.cars);
     }
 
-    filterByOrigin(value) {  /*YS: DRY, all of these filter functions are basically the same. The only thing 
-                                    that changed was the value and by what to filter (couldve also been a parameter)*/
-        const carFilteredByOrigin = this.cars.filter(c => c.Origin === value);
-        this.cars = carFilteredByOrigin
-        console.log(`in filter ` + value);
-        this.renderFilteredCars();
-    }
-    filterByCylinders(value) {
-        const carFilteredByCylinders = this.cars.filter(c => c.Cylinders === value);
-        this.cars = carFilteredByCylinders
-        console.log(`in filter ` + value);
-        this.renderFilteredCars();
+    filter(mpgValue, cylindersValue, originValue) {
+        let filteredArray = this.cars
+        if (mpgValue !== "undefined") {
+            console.log(filteredArray);
+            filteredArray = filteredArray.filter(car => car.Miles_per_Gallon === Number(mpgValue))
+            console.log(filteredArray);
+        }
+        if (cylindersValue !== "undefined") {
+            console.log(filteredArray);
+            filteredArray = filteredArray.filter(car => car.Cylinders === parseFloat(cylindersValue))
+            console.log(filteredArray);
+        }
+        if (originValue !== "undefined") {
+            console.log(filteredArray);
+            filteredArray= filteredArray.filter(car => car.Origin === originValue)
+            console.log(filteredArray);
+        }
+        console.log(filteredArray);
+        this.renderCars(filteredArray)
     }
 
-    filterByMpg(value) {
-        const carFilteredByMpg = this.cars.filter(c => c.Miles_per_Gallon === value);
-        this.cars = carFilteredByMpg
-        console.log(`in filter ` + value);
-        this.renderFilteredCars();
-    }
+    // filterByOrigin(value) {  /*YS: DRY, all of these filter functions are basically the same. The only thing 
+    //                                 that changed was the value and by what to filter (couldve also been a parameter)*/
+    //     const carFilteredByOrigin = this.cars.filter(c => c.Origin === value);
+    //     console.log(`in filter ` + value);
+    //     this.renderCars(carFilteredByOrigin);
+    // }
+    // filterByCylinders(value) {
+    //     const carFilteredByCylinders = this.cars.filter(c => c.Cylinders === value);
+    //     console.log(`in filter ` + value);
+    //     this.renderCars(carFilteredByCylinders);
+    // }
+
+    // filterByMpg(value) {
+    //     const carFilteredByMpg = this.cars.filter(c => c.Miles_per_Gallon === value);
+    //     // this.cars = carFilteredByMpg
+    //     console.log(`in filter ` + value);
+    //     this.renderCars(carFilteredByMpg);
+    // }
 
     updateCar(name: string) { //YS: Wheres the form? 
         const carToUpdate = this.cars.find(car => car.Name === name)
         carToUpdate.Horsepower = 500;
         console.log(carToUpdate);
-        this.renderCars()
+        this.renderCars(this.cars)
     }
 
     getCarsFromStorage() {
@@ -103,13 +122,13 @@ class Cars {
 
 
 
-    renderCars() {
+    renderCars(arrToRender: Array<Car>) {
 
         const table: HTMLElement = document.querySelector(".table")
-       
-        this.cars.map((car) => { //YS: In this case its better to use forEach since you dont need to return an array (map returns an array)
+        let html ="";
+        arrToRender.forEach((car) => { //YS: In this case its better to use forEach since you dont need to return an array (map returns an array)
 
-          const html = `<tbody>
+             html += `<tbody>
        <tr>
         <td>${car.Name}</td>
         <td>${car.Miles_per_Gallon}</td> 
@@ -120,34 +139,33 @@ class Cars {
         <td>${car.Origin}</td>
         <td> <i onclick='handleDelete("${car.carId}")' class="fas fa-trash"></i></td>
       </tr>`;
+            
 
-            table.insertAdjacentHTML(`afterbegin`, html)
         });
-    };
+        table.innerHTML = html
+    }
 
-    renderFilteredCars() {
+    //     const table: HTMLElement = document.querySelector(".table")
+    //    let html =""
+    //     this.cars.forEach((car) => {
 
-        const table: HTMLElement = document.querySelector(".table")
-       let html =""
-        this.cars.forEach((car) => {
+    //       html += `<tbody>
+    //    <tr>
+    //     <td>${car.Name}</td>
+    //     <td>${car.Miles_per_Gallon}</td> 
+    //     <td>${car.Cylinders}</td> 
+    //     <td>${car.Horsepower}<button onclick='handleEdit("${car.Name}")' >Make Me 500!</button></td> 
+    //     <td>${car.Weight_in_lbs}</td> 
+    //     <td>${car.Year}</td> 
+    //     <td>${car.Origin}</td>
+    //     <td> <i onclick='handleDelete("${car.carId}")' class="fas fa-trash"></i></td>
+    //   </tr>`;
 
-          html += `<tbody>
-       <tr>
-        <td>${car.Name}</td>
-        <td>${car.Miles_per_Gallon}</td> 
-        <td>${car.Cylinders}</td> 
-        <td>${car.Horsepower}<button onclick='handleEdit("${car.Name}")' >Make Me 500!</button></td> 
-        <td>${car.Weight_in_lbs}</td> 
-        <td>${car.Year}</td> 
-        <td>${car.Origin}</td>
-        <td> <i onclick='handleDelete("${car.carId}")' class="fas fa-trash"></i></td>
-      </tr>`;
-
-            table.innerHTML = html 
-        });
-    };
-
+    //         table.innerHTML = html 
+    //     });
+    // };
 }
+
 
 const cars = new Cars();
 
@@ -155,11 +173,22 @@ cars.getCarsFromStorage();
 
 cars.addCars(carsData)
 
-cars.renderCars();
+cars.renderCars(cars.cars);
 
-function handleKeyUp(event){
+function handleKeyUp(event) {
     console.log(event.key);
     // event.key
+}
+
+const handleSelectedFilter = (event) => {
+    event.preventDefault()
+    const formElement = event.target.parentElement.parentElement.parentElement.parentElement.parentElement.elements
+    const mpgValue = formElement.milesPerGallon.value;
+    const cylindersValue = formElement.cylinders.value;
+    const originValue = formElement.origin.value;
+
+    console.log(mpgValue, cylindersValue, originValue);
+    cars.filter(mpgValue, cylindersValue, originValue)
 }
 
 const handleEdit = (carName) => {
@@ -170,21 +199,21 @@ const handleDelete = (carId: string): void => {
     console.log(carId); //YS: console.log
     cars.removeCar(carId);
 };
-function handleSelect() {
-    const originValue = document.querySelector("table #origin").value;
-    cars.filterByOrigin(originValue)
+// function handleSelect() {
+//     const originValue = document.querySelector("table #origin").value;
+//     cars.filterByOrigin(originValue)
 
-}
+// }
 
-function handleSelectCylinders() {
-    const cylindersValue = document.querySelector("table #cylinders").value;
-    cars.filterByCylinders(parseInt(cylindersValue))
-}
+// function handleSelectCylinders() {
+//     const cylindersValue = document.querySelector("table #cylinders").value;
+//     cars.filterByCylinders(parseInt(cylindersValue))
+// }
 
-function handleSelectmilesPerGallon() {
-    const mpgValue = document.querySelector("table #milesPerGallon").value;
-    cars.filterByMpg(parseFloat(mpgValue))
-}
+// function handleSelectmilesPerGallon() {
+//     const mpgValue = document.querySelector("table #milesPerGallon").value;
+//     cars.filterByMpg(parseFloat(mpgValue))
+// }
 
 
 
@@ -201,7 +230,7 @@ const handleSubmit = (ev: any): void => {
 
     const car = new Car(Name, Miles_per_Gallon, Cylinders, Horsepower, Weight_in_lbs, Year, Origin)
     cars.add(car);
-    cars.renderCars()
+    cars.renderCars(cars.cars)
     ev.target.reset()
 }
 
