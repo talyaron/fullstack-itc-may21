@@ -17,6 +17,39 @@ var Chat = /** @class */ (function () {
 var ChatProfile = /** @class */ (function () {
     function ChatProfile() {
         this.arrayChat = [];
+    }
+    // arrayBot:Array<Bot> =[];
+    ChatProfile.prototype.add = function (add) {
+        console.log('new chat');
+        this.arrayChat.push(add);
+        this.renderUser();
+        // this.respondBot();
+    };
+    // addBot(addBot:Array<Chat|RespondsInterface>){
+    // addBot.forEach((element) => {
+    //   const res = new Chat(element.message)
+    //   this.arrayChat.push(res);
+    // });
+    // this.renderUser()
+    // }
+    ChatProfile.prototype.renderUser = function () {
+        var getUser = document.querySelector("#chat-box");
+        // const respon = String(messageValue.value);
+        var html = "";
+        console.log(this.arrayChat);
+        this.arrayChat.forEach(function (element) {
+            console.log(element.message);
+            html += "\n      <p class=\"userText\">\n      <span>" + element.message + "</span>\n      </p>\n     \n     ";
+            if (element.message.includes("Hola")) {
+                html += "\n           <p class=\"botText\">\n            <span>Hola</span>\n             </p>\n             ";
+            }
+            else if (element.message.includes("Como Estas?")) {
+                html += "\n                 <p class=\"botText\">\n                  <span>Bien</span>\n                   </p>\n                   ";
+            }
+            setTimeout(function () {
+                getUser.innerHTML = html;
+            }, 1000);
+        });
         // renderBot(){
         //   const respon = String(messageValue.value);
         //   if(respon === 'Hola') {
@@ -42,37 +75,6 @@ var ChatProfile = /** @class */ (function () {
         //     getBot.innerHTML = htmlBot;
         //   }, 1000);
         // }
-    }
-    // arrayBot:Array<Bot> =[];
-    ChatProfile.prototype.add = function (add) {
-        this.arrayChat.push(add);
-        this.renderUser();
-        // this.respondBot();
-    };
-    // addBot(addBot:Array<Chat|RespondsInterface>){
-    // addBot.forEach((element) => {
-    //   const res = new Chat(element.message)
-    //   this.arrayChat.push(res);
-    // });
-    // this.renderUser()
-    // }
-    ChatProfile.prototype.renderUser = function () {
-        var getUser = document.querySelector("#chat-box");
-        var respon = String(messageValue.value);
-        var html = "";
-        console.log(this.arrayChat);
-        this.arrayChat.forEach(function (element) {
-            html += "\n      <p class=\"userText\">\n      <span>" + element.message + "</span>\n      </p>\n     \n     ";
-            if (respon.includes("Hola")) {
-                html += "\n           <p class=\"botText\">\n            <span>Hola</span>\n             </p>\n             ";
-            }
-            else if (respon.includes("Como Estas?")) {
-                html += "\n               <p class=\"botText\">\n                <span>Bien</span>\n                 </p>\n                 ";
-            }
-        });
-        setTimeout(function () {
-            getUser.innerHTML = html;
-        }, 1000);
     };
     return ChatProfile;
 }());
