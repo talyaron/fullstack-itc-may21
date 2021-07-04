@@ -85,7 +85,6 @@ a {
 .container .search_wrapper .search {
   width: 85%;
   height: 3rem;
-  background: #ffffff;
   margin: auto;
   border: 1px solid #cac9c9;
   border-radius: 5rem;
@@ -99,8 +98,16 @@ a {
   color: #aaaaaa;
 }
 .container .search_wrapper .search .search_input {
-  width: 100%;
+  width: 90%;
+  height: 90%;
+  position: relative;
+  top: 0.1rem;
+  right: 0.2rem;
   border: none;
+  font-size: 1.3rem;
+}
+.container .search_wrapper .search .search_input:focus {
+  outline: none;
 }
 .container .search_wrapper .search:hover {
   border: gray solid 1px;
@@ -142,23 +149,53 @@ a {
 .container .background_chats {
   display: flex;
   flex-direction: column;
-  background-color: #353030;
+  background-color: #fbfbfb;
   position: fixed;
 }
 .container .modal {
   border: solid 2px black;
 }
 .container .modal .modal-header {
-  background-color: #353030;
-  color: #e9e9e9;
+  background-color: #fbfbfb;
+  color: #3d3d3d;
 }
 .container .modal .modal-body {
-  background-color: #353030;
-  color: #e9e9e9;
+  background-color: #fbfbfb;
+  color: #3d3d3d;
 }
 .container .modal .modal-body .form_modal {
   display: flex;
   flex-direction: column;
+}
+
+.contacts_chat_modal {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background-color: #FFFFFF;
+  border-top: 0.5px solid #b6b5b5;
+  color: white;
+  font-size: 400;
+}
+.contacts_chat_modal .contacts_info_modal {
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  top: 1rem;
+}
+.contacts_chat_modal .contacts_img_modal {
+  width: 6.5rem;
+  height: 6rem;
+  position: relative;
+  left: 2rem;
+  border-radius: 50%;
+  padding: 1rem;
+}
+
+.contacts_chat_modal:hover {
+  background-color: #F5F5F5;
 }
 
 @media only screen and (max-width: 770px) {

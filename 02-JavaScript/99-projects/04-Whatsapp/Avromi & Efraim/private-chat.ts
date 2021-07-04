@@ -1,3 +1,6 @@
+const scrollBox = document.querySelector(".messages");
+scrollBox.scrollTop = scrollBox.scrollHeight;
+
 function goBack() {
     window.location.href = "index.html"
 }
@@ -15,22 +18,25 @@ const thisContact = allContacts.filter(contact => contact.contactId === params.c
 
 const contactName = document.querySelector(".nav__contact h2")
 contactName.innerHTML = `${thisContact[0].name}`
-
+const contactImg = document.querySelector(".nav__img__wrapper")
+contactImg.innerHTML = `<img class="nav__img"
+src="${thisContact[0].imgUrl}"
+alt = "" >`
 
 function updateLastSent() {
     const lastSent = document.querySelector(".nav__contact p")
-    lastSent.innerHTML = `Last Sent: ${thisContact[0].chats[0].timeStamp}`
+    lastSent.innerHTML = `Last Sent: ${thisContact[0].chats[0].timeStamp} `
 }
 
 function renderMessages(arrToRender: Array<Contact>) {
     const messagesDiv = document.querySelector(".messages")
-    let html ="";
+    let html = "";
     thisContact[0].chats.forEach((chat) => {
-        html += `<div class="single__message" oncontextmenu="javascript:alert('success!');return false;">
-    <p>${chat.message}</p>
-    <div class="single__message__timestamp">${chat.timeStamp}</div>
-</div>`
-        messagesDiv.innerHTML = html 
+        html += `<div class="single__message" oncontextmenu = "javascript:alert('success!');return false;" >
+    <p>${chat.message} </p>
+        <div class="single__message__timestamp"> ${chat.timeStamp} </div>
+            </div>`
+        messagesDiv.innerHTML = html
     })
 
 }
