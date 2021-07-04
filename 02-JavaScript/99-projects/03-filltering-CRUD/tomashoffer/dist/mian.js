@@ -20,8 +20,8 @@ var Producto = /** @class */ (function () {
     return Producto;
 }());
 // EVENTS LISTENERS
-select.addEventListener('change', selectFilter); //YS: Nice! 
-searchBar.addEventListener('keyup', search);
+// select.addEventListener('change', selectFilter); //YS: Nice! 
+// searchBar.addEventListener('keyup', search);
 // FUNCTIONS
 // ADD JSON TO LIST ARRAY
 function addObject() {
@@ -48,60 +48,35 @@ function remove(id) {
 function edit(id) {
     updateID = id;
 }
-// FILTER BY SELECTS OPTIONS [see event]
-function selectFilter() {
-    try {
-        var selectedValue_1 = Number(select.value);
-        if (selectedValue_1 > 300)
-            throw new Error('You have an error in your value');
-        console.log(typeof selectedValue_1); //YS: No console logs. 
-        var arr = [];
-        arr = list;
-        var arr2 = [];
-        arr2 = list;
-        var arr3 = [];
-        arr3 = list;
-        //YS: DRY! You shouldve made this into a function and passed different parameters
-        if (selectedValue_1 === 100) {
-            var priceFilter = arr.filter(function (prod) { return prod.price >= selectedValue_1; });
-            arr = priceFilter;
-            renderData(arr);
-        }
-        else if (selectedValue_1 === 200) {
-            var priceFilter1 = arr2.filter(function (prod) { return prod.price >= selectedValue_1; });
-            arr2 = priceFilter1;
-            renderData(arr2);
-        }
-        else if (selectedValue_1 === 0) {
-            renderData(list);
-        }
-        else {
-            var priceFilter2 = arr3.filter(function (prod) { return prod.price >= selectedValue_1; });
-            arr3 = priceFilter2;
-            renderData(arr3);
-        }
+// TAKING FILTERS VALUES 
+var filters = function (event) {
+    event.preventDefault();
+    var parentElements = event.target.parentElement.parentElement.parentElement.elements;
+    var selectPrice = parentElements.select.value;
+    var searchBar = parentElements.searchBar.value;
+    filterFunction(selectPrice, searchBar);
+    console.log(selectPrice, searchBar);
+};
+var formElement = document.querySelector("#filterForm");
+formElement.addEventListener('change', filters);
+formElement.addEventListener('keyup', filters);
+// LINKING FILTERS
+var filterFunction = function (selectPrice, searchBar) {
+    var filterArray = list;
+    if (searchBar) {
+        var regExp = "^" + searchBar;
+        var searchTermReg_1 = new RegExp(regExp, 'i');
+        filterArray = filterArray.filter(function (elem) { return searchTermReg_1.test(elem.product) && elem.price >= selectPrice; });
+        renderData(filterArray);
     }
-    catch (e) {
-        console.error(e);
+    if (selectPrice !== 'allproducts') {
+        filterArray = filterArray.filter(function (prod) { return prod.price >= selectPrice; });
+        renderData(filterArray);
     }
-}
-// TAKING VALUE FROM INPUT FOR USE IT AT searchRegEx()
-function search(e) {
-    try {
-        searchValue = e.target.value;
-        searchRegEx(searchValue);
+    else {
+        renderData(list);
     }
-    catch (e) {
-        console.error(e);
-    }
-}
-// RegEx FOR FILTER BY PRODUCTS NAME
-function searchRegEx(inputSearch) {
-    var regExp = "^" + inputSearch;
-    var searchTermReg = new RegExp(regExp, 'i');
-    var filterSearch = list.filter(function (elem) { return searchTermReg.test(elem.product); });
-    renderData(filterSearch);
-}
+};
 // RENDER DATA
 function renderData(listado) {
     var container = document.querySelector(".container_products");
