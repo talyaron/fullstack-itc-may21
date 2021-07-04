@@ -89,31 +89,23 @@ function handleKeyUp() {
     }
 }
 btnModal.addEventListener('click', openModal);
-function openModal(e) {
+function openModal(ev) {
+    ev.preventDefault();
     bgModal.classList.add('bg-active');
-    document.querySelector('.emoji').addEventListener("click", function (e) {
-        e.preventDefault();
-        elementMessage.value += e.target.value;
-        e.target.reset;
-    });
-    e.target.reset;
-    /*emojiList.forEach((emoji, index) => {
-        console.log(emojiList)
+    emojiList.forEach(function (emoji, index) {
+        console.log(emojiList[index]);
         emojiList[index].addEventListener('click', function () {
-            console.log(emoji.checked)
-            if (emoji.checked === true) {
-                
-                elementMessage.value = emoji.value
-               
+            console.log(emoji.value);
+            if (emoji.checked) {
+                elementMessage.value += emoji.value;
+                console.log('A');
             }
             bgModal.classList.remove('bg-active');
         });
-            
-    });*/
+    });
 }
 modalClose.addEventListener('click', closeModal);
-function closeModal(e) {
-    e.preventDefault();
+function closeModal(ev) {
+    ev.preventDefault();
     bgModal.classList.remove('bg-active');
-    e.target.reset();
 }

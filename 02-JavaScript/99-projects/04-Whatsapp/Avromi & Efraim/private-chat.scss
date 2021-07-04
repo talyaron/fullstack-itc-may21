@@ -15,9 +15,9 @@ body {
         width: 3rem;
     }
 
-    p {
-        margin-top: -8%;
-    }
+    // p {
+    //     // margin-top: -8%;
+    // }
 
     &__wrapper {
         display: flex;
@@ -38,7 +38,7 @@ body {
     }
 }
 
-.input__send__wrapper {
+.input__send__wrapper .form {
     position: absolute;
     bottom: 2vh;
     display: flex;
@@ -83,6 +83,7 @@ body {
 
         align-items: center;
 
+
         .fas {
             display: flex;
             justify-content: center;
@@ -95,5 +96,9 @@ body {
             background-color: #128C7E;
             color: white;
         }
+        // .fa-paper-plane{
+        //     border:solid pink 3px;
+        //     display: none;
+        // }
     }
 }
