@@ -46,7 +46,7 @@ class UserList {
 let userList: Array<User> = [];
 if (arrayName != null) {
     userList = arrayName;
-} 
+}
 
 //With this function I handle the form:
 const handleSubmitNewUser = (ev: any): void => {
@@ -68,7 +68,7 @@ const handleSubmitNewUser = (ev: any): void => {
     }
 }
 
-//Every time that I add a new contact, I will use this method, this add a new user to the array "userList"   
+//Every time that I add a new contact, I will use this method, this add a new user to the array "userList"
 function addUser(user: User): void {
     try {
         if (!user) throw new Error('The user it doesn´t exist!');
@@ -103,7 +103,7 @@ function renderContacts(arrayUser: Array<User>): void {
                 <div class="chat__right--bottom">
                     <div class="chat__right--bottom--left">
                         <img class="double-check-mark" src="Img_whatsapp/double-check-seen.svg" alt="">
-                        <span>Raziel is typing...</span> 
+                        <span>Raziel is typing...</span>
                     </div>
                 </div>
 

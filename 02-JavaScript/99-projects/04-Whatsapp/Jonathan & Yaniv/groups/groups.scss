@@ -28,25 +28,32 @@ body {
     background-image: url('https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png');
 }
 
+.search {
+    background-color: #F6F6F6;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px 0;
 
-.search_icon {
-    cursor: pointer;
-    -webkit-text-stroke-width: 0.5px;
-    -webkit-text-stroke-color: white;
-    background-color: white;
-    padding: 10px 15px;
-    border-radius: 50px 0 0 50px;
-}
-
-.search_form {
-    width: 80%;
-
-    .search_in_groups {
-        font-size: 1rem;
-        width: 100%;
-        padding: 10px 10px;
-        border: 0;
-        border-radius: 0 50px 50px 0;
+    .search_icon {
+        cursor: pointer;
+        -webkit-text-stroke-width: 0.5px;
+        -webkit-text-stroke-color: white;
+        background-color: white;
+        padding: 10px 15px;
+        border-radius: 50px 0 0 50px;
+    }
+    
+    .search_form {
+        width: 80%;
+    
+        .search_in_groups {
+            font-size: 1rem;
+            width: 100%;
+            padding: 10px 10px;
+            border: 0;
+            border-radius: 0 50px 50px 0;
+        }
     }
 }
 
@@ -56,6 +63,9 @@ body {
     justify-content: center;
     align-content: center;
     background-color: #EDEDED;
+    position: sticky;
+    top: 0;
+    height: 100px;
 
     .controls {
         display: grid;
@@ -99,13 +109,6 @@ body {
 
     &__item {
         padding: 5px 0;
-
-        &--search {
-            background-color: #F6F6F6;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-        }
     }
 }
 
@@ -122,6 +125,7 @@ body {
             "img title time"
             "img msg delete";
         padding: 10px;
+        border-bottom: 1px solid #F6F6F6;
 
         &__item {
             margin: 0;
@@ -179,32 +183,44 @@ body {
 
 .new_conversation {
     width: 600px;
+    height: 100vh;
     position: fixed;
     left: 600px;
     top: 0;
+    background-color: white;
+    overflow: hidden;
+    overflow-y: auto; 
 
     .options {
         &__item {
             margin: 0;
             color: #BABABA;
-            border-bottom: 1px solid #BABABA;
+            border-bottom: 1px solid #F6F6F6;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #F6F6F6;
+            }
 
             &--group {
                 display: grid;
-                grid-template-columns: 1fr 5fr;
+                grid-template-columns: 1fr 7fr;
                 grid-template-rows: 25px 25px;
                 grid-template-areas:
                     "img title"
                     "img title";
                 padding: 10px;
+                align-items: center;
 
                 #new_group_logo {
                     grid-area: img;
-                    padding: 0 5px;
-                    margin: 0;
+                    padding: 8px;
+                    margin: 0 5px;
+                    filter: invert(1); 
+                    background-color: #FF6977;
                     border-radius: 50px;
-                    width: 50px;
-                    height: 50px;
+                    width: 34px;
+                    height: 34px;
                 }
 
                 #new_group {
@@ -217,7 +233,7 @@ body {
 
             &--contact {
                 display: grid;
-                grid-template-columns: 1fr 5fr;
+                grid-template-columns: 1fr 7fr;
                 grid-template-rows: 25px 25px;
                 grid-template-areas:
                     "img title"
@@ -254,35 +270,24 @@ body {
 
     &__item {
         
-        &--title {
-            background-color: #00BFA5;
-            height: 10vh;
-
+        &--header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            
             .title {
+                background-color: #00BFA5;
                 display: flex;
                 flex-direction: row;
                 color: white;
-                align-items: center;
+                align-items: flex-end;
+                height: 100px;
                 
                 &__item {
                     padding: 0 5px;
                 }
 
             }
-
-            #search {
-                background-color: #F6F6F6;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-            }
-        }
-
-        &--body {
-            background-color: white;
-            height: 90vh;
-            overflow: hidden;
-            overflow-y: auto;        
         }
     }
 }

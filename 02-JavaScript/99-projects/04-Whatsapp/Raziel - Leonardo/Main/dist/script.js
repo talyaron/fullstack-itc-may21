@@ -61,7 +61,7 @@ var handleSubmitNewUser = function (ev) {
         console.error(error);
     }
 };
-//Every time that I add a new contact, I will use this method, this add a new user to the array "userList"   
+//Every time that I add a new contact, I will use this method, this add a new user to the array "userList"
 function addUser(user) {
     try {
         if (!user)
