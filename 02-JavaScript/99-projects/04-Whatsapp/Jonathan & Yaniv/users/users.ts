@@ -76,4 +76,7 @@ const userPicker = (ev: any) : void => {
     const pickedUser: User = new User(userImg, userName, userPhone, userGroups);
 
     localStorage.setItem('currentUser',JSON.stringify(pickedUser));
+
+    window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
+
 }
