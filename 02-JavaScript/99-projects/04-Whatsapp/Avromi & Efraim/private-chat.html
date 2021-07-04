@@ -30,24 +30,29 @@
 
     </nav>
 
-    <div class="messages"></div>
+    <div class="messages">
+        <div class="single__message" oncontextmenu="javascript:alert('success!');return false;">
+            <p>Some Mesaage</p>
+            <div class="single__message__timestamp"></div>
+        </div>
+    </div>
 
     <div class="input__send__wrapper">
         <form class="form">
             <div class="input__container">
                 <div class="input__container--left">
-                    <i class="far fa-laugh"></i>
+                    <i class="i far fa-laugh"></i>
                     <input type="text" id="input" placeholder="Type a message" name="message">
                 </div>
                 <div class="input__container--right">
-                    <i class="fas fa-paperclip"></i>
-                    <i class="fas fa-camera"></i>
+                    <i class="i fas fa-paperclip"></i>
+                    <i class="i fas fa-camera" onclick="openCamera()"></i>
                 </div>
             </div>
             <div class="mic__or__send__button">
 
-                <button type="submit" class="fas fa-microphone sendButton"></button>
-                <!-- <i class="fas fa-paper-plane"></i> -->
+                <!-- <button type="submit" class="fas fa-microphone sendButton"></button> -->
+                <button type="submit" class="fas fa-paper-plane"></button>
             </div>
         </form>
     </div>

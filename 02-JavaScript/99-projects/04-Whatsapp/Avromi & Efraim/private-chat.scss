@@ -3,11 +3,14 @@ body {
 }
 
 .nav {
+    
     background-color: #128C7E;
     color: white;
     height: 15vh;
+    width:100%;
     display: flex;
     justify-content: space-between;
+    position: fixed;
 
     // align-items: center;
     i {
@@ -37,9 +40,11 @@ body {
         margin-left: 1rem;
     }
 }
-
+.message{
+    margin-bottom:10px ;
+}
 .input__send__wrapper .form {
-    position: absolute;
+    position: fixed;
     bottom: 2vh;
     display: flex;
 
@@ -61,20 +66,22 @@ body {
 
         &--right {
             border: 3px solid red;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+           display: flex;
+         
+           
+
         }
 
-        img {
-            height: 2.5rem;
-            width: 2.5rem;
+        .i {
+            opacity: 30%;
+            margin: 15px;
         }
 
         #input {
             border: none;
             height: 50%;
             width: 80vw;
+            outline:none;
         }
     }
 
@@ -96,9 +103,9 @@ body {
             background-color: #128C7E;
             color: white;
         }
-        // .fa-paper-plane{
-        //     border:solid pink 3px;
-        //     display: none;
-        // }
+        .fa-paper-plane{
+             
+            // display: none;
+        }
     }
 }
