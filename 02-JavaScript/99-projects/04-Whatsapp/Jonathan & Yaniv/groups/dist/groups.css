@@ -27,6 +27,26 @@ body {
   background-image: url("https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png");
 }
 
+.search_icon {
+  cursor: pointer;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: white;
+  background-color: white;
+  padding: 10px 15px;
+  border-radius: 50px 0 0 50px;
+}
+
+.search_form {
+  width: 80%;
+}
+.search_form .search_in_groups {
+  font-size: 1rem;
+  width: 100%;
+  padding: 10px 10px;
+  border: 0;
+  border-radius: 0 50px 50px 0;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -74,24 +94,6 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-}
-.header__item--search #search_icon {
-  cursor: pointer;
-  -webkit-text-stroke-width: 0.5px;
-  -webkit-text-stroke-color: white;
-  background-color: white;
-  padding: 10px 15px;
-  border-radius: 50px 0 0 50px;
-}
-.header__item--search #search_form {
-  width: 80%;
-}
-.header__item--search #search_form #search_in_groups {
-  font-size: 1rem;
-  width: 100%;
-  padding: 10px 10px;
-  border: 0;
-  border-radius: 0 50px 50px 0;
 }
 
 .groups {
@@ -153,12 +155,13 @@ body {
   overflow: hidden;
   overflow-y: auto;
   position: fixed;
-  left: -600px;
+  left: 600px;
   top: 0;
 }
 .new_conversation .options__item {
   margin: 0;
   color: #BABABA;
+  border-bottom: 1px solid #BABABA;
 }
 .new_conversation .options__item--group {
   display: grid;
@@ -204,8 +207,18 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.new_conversation__item {
+  padding: 5px 0;
+}
 .new_conversation__item--title {
   background-color: #009688;
+}
+.new_conversation__item--title #title #text {
+  color: white;
+}
+.new_conversation__item--title #title #search {
+  display: flex;
+  flex-direction: row;
 }
 .new_conversation__item--body {
   background-color: white;

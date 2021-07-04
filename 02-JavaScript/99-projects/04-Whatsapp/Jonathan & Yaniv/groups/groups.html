@@ -21,9 +21,9 @@
                 <i class="controls__item controls__item--ellipsis fas fa-2x fa-ellipsis-h"></i>
             </div>
             <div class="header__item header__item--search">
-                <i id="search_icon" class="fas fa-search"></i>
-                <form id="search_form">
-                    <input type="search" name="searchInGroups" id="search_in_groups"
+                <i class="search_icon fas fa-search"></i>
+                <form class="search_form">
+                    <input type="search" name="searchInGroups" class="search_in_groups"
                         placeholder="Search or start a new chat" />
                 </form>
             </div>
@@ -43,8 +43,17 @@
         </main>
         <div class="new_conversation">
             <div class="new_conversation__item new_conversation__item--title">
-                <div id="back">🡰</div>
-                <h2 id="title">New Chat</h2>
+                <div id="title">
+                    <div id="back">🡰</div>
+                    <h3 id="text">New Chat</h3>
+                </div>
+                <div id="search">
+                    <i class="search_icon fas fa-search"></i>
+                    <form class="search_form">
+                        <input type="search" name="searchInGroups" class="search_in_groups"
+                            placeholder="Search or start a new chat" />
+                    </form>
+                </div>
             </div>
             <div class="new_conversation__item new_conversation__item--body options">
                 <div class="options__item options__item--group">
