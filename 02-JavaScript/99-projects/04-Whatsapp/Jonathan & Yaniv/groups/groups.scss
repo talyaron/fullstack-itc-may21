@@ -21,12 +21,11 @@ body {
     min-width: 320px;
     overflow: hidden;
     overflow-y: auto;
-
 }
 
 .chat_section {
     grid-area: chts;
-    background-image:url('https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png');
+    background-image: url('https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png');
 }
 
 .header {
@@ -173,6 +172,90 @@ body {
         &:hover {
             cursor: pointer;
             background-color: #F6F6F6;
+        }
+    }
+}
+
+.new_conversation {
+    width: 600px;
+    overflow: hidden;
+    overflow-y: auto;
+    position: fixed;
+    left: -600px;
+    top: 0;
+
+    .options {
+        &__item {
+            margin: 0;
+            color: #BABABA;
+
+            &--group {
+                display: grid;
+                grid-template-columns: 1fr 5fr;
+                grid-template-rows: 25px 25px;
+                grid-template-areas:
+                    "img title"
+                    "img title";
+                padding: 10px;
+
+                #new_group_logo {
+                    grid-area: img;
+                    padding: 0 5px;
+                    border-radius: 50px;
+                    width: 50px;
+                    height: 50px;
+                }
+
+                #new_group {
+                    grid-area: title;
+                    font-weight: normal;
+                    color: black;
+                }
+            }
+
+            &--contact {
+                display: grid;
+                grid-template-columns: 1fr 5fr;
+                grid-template-rows: 25px 25px;
+                grid-template-areas:
+                    "img title"
+                    "img status";
+                padding: 10px;
+
+                .new_chat_contact_img {
+                    grid-area: img;
+                    padding: 0 5px;
+                    border-radius: 50px;
+                    width: 50px;
+                    height: 50px;
+                }
+
+                .new_chat_contact_name {
+                    grid-area: title;
+                    font-weight: normal;
+                    color: black;
+                }
+
+                .new_chat_status {
+                    grid-area: status;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+            }
+
+        }
+    }
+
+    &__item {
+
+        &--title {
+            background-color: #009688;
+        }
+
+        &--body {
+            background-color: white;
         }
     }
 }
