@@ -1,3 +1,5 @@
+
+
 class Contact {
     name: string ;
     imgUrl: string;
@@ -19,7 +21,6 @@ class Contact {
     
         }
 
-       
     
         addContact(contacts: Contact) {
             try {
