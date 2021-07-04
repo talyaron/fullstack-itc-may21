@@ -256,16 +256,21 @@ body {
         &--title {
             background-color: #009688;
 
-            #title {
+            .title {
+                display: flex;
+                flex-direction: row;
+                color: white;
+                align-items: center;
                 
-                #text {
-                    color: white;
+                &__item {
+                    padding: 0 5px ;
                 }
 
-                #search {
-                    display: flex;
-                    flex-direction: row;
-                }
+            }
+
+            #search {
+                display: flex;
+                flex-direction: row;
             }
         }
 

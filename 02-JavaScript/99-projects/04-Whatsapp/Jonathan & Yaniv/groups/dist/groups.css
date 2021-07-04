@@ -213,10 +213,16 @@ body {
 .new_conversation__item--title {
   background-color: #009688;
 }
-.new_conversation__item--title #title #text {
+.new_conversation__item--title .title {
+  display: flex;
+  flex-direction: row;
   color: white;
+  align-items: center;
 }
-.new_conversation__item--title #title #search {
+.new_conversation__item--title .title__item {
+  padding: 0 5px;
+}
+.new_conversation__item--title #search {
   display: flex;
   flex-direction: row;
 }
