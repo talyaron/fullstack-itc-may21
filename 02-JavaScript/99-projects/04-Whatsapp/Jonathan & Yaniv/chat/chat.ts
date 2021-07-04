@@ -15,6 +15,7 @@ const emojiList = <any>document.querySelectorAll('.emoji')
 
 
 
+
 class Message {
     content: string;
     personID: string;
