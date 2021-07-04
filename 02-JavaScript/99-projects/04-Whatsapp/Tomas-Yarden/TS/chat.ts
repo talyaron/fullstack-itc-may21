@@ -1,5 +1,9 @@
 const messageValue: any = document.getElementById("text-input");
 
+// interface RespondsInterface {
+//   message:string;
+// }
+
 class Chat {
   message: string;
 
@@ -24,7 +28,14 @@ class ChatProfile {
     this.renderUser();
     // this.respondBot();
   }
+// addBot(addBot:Array<Chat|RespondsInterface>){
+// addBot.forEach((element) => {
+//   const res = new Chat(element.message)
+//   this.arrayChat.push(res);
+// });
 
+// this.renderUser()
+// }
   renderUser() {
     const getUser: HTMLElement = document.querySelector("#chat-box");
     const respon = String(messageValue.value);
@@ -38,16 +49,16 @@ class ChatProfile {
      
      `;
      if (respon.includes("Hola")) {
-     return html += `
+      html += `
            <p class="botText">
             <span>Hola</span>
              </p>
              `;
          
-        }  else if (respon.includes("pepe")) {
-             html += `
+        }else if (respon.includes("Como Estas?")) {
+          html += `
                <p class="botText">
-                <span>pepe</span>
+                <span>Bien</span>
                  </p>
                  `;
              
@@ -60,6 +71,17 @@ class ChatProfile {
                  }, 1000);
 
   }
+
+
+// renderBot(){
+//   const respon = String(messageValue.value);
+
+//   if(respon === 'Hola') {
+// this.arrayChat = this.arrayChat.filter((element) => element.message ===respon)
+// this.renderUser()
+//   }
+// }
+
   // respondBot() {
   //   const respon = String(messageValue.value);
   //   // const arrLength = this.arrayChat.length

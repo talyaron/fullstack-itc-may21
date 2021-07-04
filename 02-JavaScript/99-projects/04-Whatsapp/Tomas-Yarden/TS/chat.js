@@ -1,4 +1,7 @@
 var messageValue = document.getElementById("text-input");
+// interface RespondsInterface {
+//   message:string;
+// }
 var Chat = /** @class */ (function () {
     function Chat(message) {
         this.message = message;
@@ -14,6 +17,13 @@ var Chat = /** @class */ (function () {
 var ChatProfile = /** @class */ (function () {
     function ChatProfile() {
         this.arrayChat = [];
+        // renderBot(){
+        //   const respon = String(messageValue.value);
+        //   if(respon === 'Hola') {
+        // this.arrayChat = this.arrayChat.filter((element) => element.message ===respon)
+        // this.renderUser()
+        //   }
+        // }
         // respondBot() {
         //   const respon = String(messageValue.value);
         //   // const arrLength = this.arrayChat.length
@@ -39,6 +49,13 @@ var ChatProfile = /** @class */ (function () {
         this.renderUser();
         // this.respondBot();
     };
+    // addBot(addBot:Array<Chat|RespondsInterface>){
+    // addBot.forEach((element) => {
+    //   const res = new Chat(element.message)
+    //   this.arrayChat.push(res);
+    // });
+    // this.renderUser()
+    // }
     ChatProfile.prototype.renderUser = function () {
         var getUser = document.querySelector("#chat-box");
         var respon = String(messageValue.value);
@@ -47,10 +64,10 @@ var ChatProfile = /** @class */ (function () {
         this.arrayChat.forEach(function (element) {
             html += "\n      <p class=\"userText\">\n      <span>" + element.message + "</span>\n      </p>\n     \n     ";
             if (respon.includes("Hola")) {
-                return html += "\n           <p class=\"botText\">\n            <span>Hola</span>\n             </p>\n             ";
+                html += "\n           <p class=\"botText\">\n            <span>Hola</span>\n             </p>\n             ";
             }
-            else if (respon.includes("pepe")) {
-                html += "\n               <p class=\"botText\">\n                <span>pepe</span>\n                 </p>\n                 ";
+            else if (respon.includes("Como Estas?")) {
+                html += "\n               <p class=\"botText\">\n                <span>Bien</span>\n                 </p>\n                 ";
             }
         });
         setTimeout(function () {
