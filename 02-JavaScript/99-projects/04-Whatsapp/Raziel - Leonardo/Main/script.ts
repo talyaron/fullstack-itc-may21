@@ -9,6 +9,8 @@ make it look as similar as you can to the real Whatsapp
 Work in a group.
 start with the design of the classes, BEM */
 
+const searchName = (<HTMLInputElement>document.querySelector("#search"));
+const nextPage:HTMLElement=document.querySelector('#chat'); //change the name later
 class Message {
     id: string;
     text: string;
@@ -37,13 +39,14 @@ class User {
 
 class UserList {
     userList: Array<User> = [];
+    filterUser:Array<User>=[];
 
     //Every time that I add a new contact, I will use this method, this add a new user to the array "userList"   
     addUser(user: User): void {
         try {
             if (!user) throw new Error('The user it doesn´t exist!');
             this.userList.push(user);
-            this.renderContacts();
+            this.renderContacts(this.userList);
             modal.style.display = "none";
 
         } catch (error) {
@@ -52,18 +55,34 @@ class UserList {
     };
 
     //To Show the contacts in the page
-    renderContacts(): void {
+    renderContacts(userFilter:Array<User>): void {
+        const arrayToRender = userFilter ? userFilter : this.userList;
         try {
-            const showContact: HTMLElement = document.querySelector('#showContacts');
+            const showContact: HTMLElement = document.querySelector('#chats');
             if (!showContact) throw new Error('The element where to show the contacts doesn´t exist!')
             //Doing a loop to show the contacts
-            let html: any = this.userList.map(element => {
+            let html: any = arrayToRender.map(element => {
                 return (
-                    `<div class="user__info" id="${element.number}" onclick='passInformation("${element.number}")'>
-                    <div><img class="user__info__picture" src="${element.picture}" alt=""></div>
-                    <div class="user__info__name">${element.name}</div>
-                    <div>${element.message[0].text}</b></div>
-                    </div>`
+                `<div class="chat" id="chat" onclick='passInformation("${element.number}")'
+                >
+                <div class="chat__left">
+                    <img src="${element.picture}" alt="">
+                </div>
+                <div class="chat__right">
+                    <div class="chat__right--top">
+                        <span class="chat__right--top__contact-name">${element.name}</span>
+                        <span class="chat__right--top__phone-number">Phone Number: ${element.number}</span>
+
+                    </div>
+                    <div class="chat__right--bottom">
+                        <div class="chat__right--bottom--left">
+                            <img class="double-check-mark" src="Img_whatsapp/double-check-seen.svg" alt="">
+                            <span>Raziel is typing...</span> 
+                        </div>
+                    </div>
+
+                </div>
+            </div>`
                 )
             }).join('');
             showContact.innerHTML = html;
@@ -71,6 +90,19 @@ class UserList {
             console.error(error);
         }
     }
+
+
+    searchContact(name:string){
+        
+        const regEx: string = `${name}`; //YS: You dont need template literals here. 
+
+        const searchName: RegExp = new RegExp(regEx, 'i');
+
+        this.filterUser = this.userList.filter(elem => searchName.test(elem.name))
+         console.log(this.filterUser);
+        this.renderContacts(this.filterUser);
+    }
+
 };
 
 //Initialice a new array that will contains all the users:
@@ -123,9 +155,15 @@ function passInformation(userNumber) {
 //Function to redirect to the user Chat
 function redirect(): void {
     try {
-        window.location.href = '/Chat/chat.html';
+        window.location.href ='./whatsappChat.html'
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
     } catch (error) {
         console.error(error);
     }
+}
+// nextPage.addEventListener('onclick',passInformation('')); //fix it later
+searchName.addEventListener('keyup', handleKeyUp)
+
+function handleKeyUp() {
+    userList.searchContact(searchName .value)   
 }
