@@ -8,9 +8,11 @@ make it look as similar as you can to the real Whatsapp
 
 Work in a group.
 start with the design of the classes, BEM */
+//Consts-----------------------------//
 var arrayName = JSON.parse(localStorage.getItem('userInfo'));
 var searchName = document.querySelector("#search");
 var nextPage = document.querySelector('#chat'); //change the name later
+//---------------------------------//
 var Message = /** @class */ (function () {
     function Message(text) {
         this.text = text;
@@ -62,13 +64,15 @@ var UserList = /** @class */ (function () {
         }
         else if (userFilter === arrayName) {
             arrayToRender = arrayName;
+            console.log(arrayName);
         }
-        // const arrayToRender = userFilter ? userFilter : this.userList;
+        //   const arrayToRender = userFilter ? userFilter : this.userList;
         try {
             var showContact = document.querySelector('#chats');
             if (!showContact)
                 throw new Error('The element where to show the contacts doesn´t exist!');
             //Doing a loop to show the contacts
+            console.log(arrayToRender);
             var html = arrayToRender.map(function (element) {
                 return ("<div class=\"chat\" id=\"chat\" onclick='passInformation(\"" + element.number + "\")'\n                >\n                <div class=\"chat__left\">\n                    <img src=\"" + element.picture + "\" alt=\"\">\n                </div>\n                <div class=\"chat__right\">\n                    <div class=\"chat__right--top\">\n                        <span class=\"chat__right--top__contact-name\">" + element.name + "</span>\n                        <span class=\"chat__right--top__phone-number\">Phone Number: " + element.number + "</span>\n\n                    </div>\n                    <div class=\"chat__right--bottom\">\n                        <div class=\"chat__right--bottom--left\">\n                            <img class=\"double-check-mark\" src=\"Img_whatsapp/double-check-seen.svg\" alt=\"\">\n                            <span>Raziel is typing...</span> \n                        </div>\n                    </div>\n\n                </div>\n            </div>");
             }).join('');

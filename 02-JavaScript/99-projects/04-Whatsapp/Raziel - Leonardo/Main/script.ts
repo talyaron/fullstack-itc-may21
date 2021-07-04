@@ -8,9 +8,14 @@ make it look as similar as you can to the real Whatsapp
 
 Work in a group.
 start with the design of the classes, BEM */
+
+//Consts-----------------------------//
 const arrayName=JSON.parse(localStorage.getItem('userInfo'));
 const searchName = (<HTMLInputElement>document.querySelector("#search"));
 const nextPage:HTMLElement=document.querySelector('#chat'); //change the name later
+
+//---------------------------------//
+
 class Message {
     id: string;
     text: string;
@@ -71,15 +76,18 @@ class UserList {
         if(userFilter===arrayName)
         {
             arrayToRender=arrayName;
+            console.log(arrayName);
         }
-        // const arrayToRender = userFilter ? userFilter : this.userList;
+        //   const arrayToRender = userFilter ? userFilter : this.userList;
        
         try {
             const showContact: HTMLElement = document.querySelector('#chats');
             if (!showContact) throw new Error('The element where to show the contacts doesn´t exist!')
             //Doing a loop to show the contacts
+            console.log(arrayToRender);
             let html: any = arrayToRender.map(element => {
                 return (
+                   
                 `<div class="chat" id="chat" onclick='passInformation("${element.number}")'
                 >
                 <div class="chat__left">
@@ -188,3 +196,7 @@ searchName.addEventListener('keyup', handleKeyUp)
 function handleKeyUp() {
     userList.searchContact(searchName .value)   
 }
+
+
+  
+
