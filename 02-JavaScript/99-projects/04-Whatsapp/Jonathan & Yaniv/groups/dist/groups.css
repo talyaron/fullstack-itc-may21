@@ -27,6 +27,26 @@ body {
   background-image: url("https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png");
 }
 
+.search_icon {
+  cursor: pointer;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: white;
+  background-color: white;
+  padding: 10px 15px;
+  border-radius: 50px 0 0 50px;
+}
+
+.search_form {
+  width: 80%;
+}
+.search_form .search_in_groups {
+  font-size: 1rem;
+  width: 100%;
+  padding: 10px 10px;
+  border: 0;
+  border-radius: 0 50px 50px 0;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -74,24 +94,6 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-}
-.header__item--search #search_icon {
-  cursor: pointer;
-  -webkit-text-stroke-width: 0.5px;
-  -webkit-text-stroke-color: white;
-  background-color: white;
-  padding: 10px 15px;
-  border-radius: 50px 0 0 50px;
-}
-.header__item--search #search_form {
-  width: 80%;
-}
-.header__item--search #search_form #search_in_groups {
-  font-size: 1rem;
-  width: 100%;
-  padding: 10px 10px;
-  border: 0;
-  border-radius: 0 50px 50px 0;
 }
 
 .groups {
@@ -146,4 +148,89 @@ body {
 .groups__item:hover {
   cursor: pointer;
   background-color: #F6F6F6;
+}
+
+.new_conversation {
+  width: 600px;
+  position: fixed;
+  left: 600px;
+  top: 0;
+}
+.new_conversation .options__item {
+  margin: 0;
+  color: #BABABA;
+  border-bottom: 1px solid #BABABA;
+}
+.new_conversation .options__item--group {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 25px 25px;
+  grid-template-areas: "img title" "img title";
+  padding: 10px;
+}
+.new_conversation .options__item--group #new_group_logo {
+  grid-area: img;
+  padding: 0 5px;
+  margin: 0;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+.new_conversation .options__item--group #new_group {
+  grid-area: title;
+  margin: 0;
+  font-weight: normal;
+  color: black;
+}
+.new_conversation .options__item--contact {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 25px 25px;
+  grid-template-areas: "img title" "img status";
+  padding: 10px;
+}
+.new_conversation .options__item--contact .new_chat_contact_img {
+  grid-area: img;
+  padding: 0 5px;
+  margin: 0;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+.new_conversation .options__item--contact .new_chat_contact_name {
+  grid-area: title;
+  margin: 0;
+  font-weight: normal;
+  color: black;
+}
+.new_conversation .options__item--contact .new_chat_status {
+  grid-area: status;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.new_conversation__item--title {
+  background-color: #00BFA5;
+  height: 10vh;
+}
+.new_conversation__item--title .title {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  align-items: center;
+}
+.new_conversation__item--title .title__item {
+  padding: 0 5px;
+}
+.new_conversation__item--title #search {
+  background-color: #F6F6F6;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.new_conversation__item--body {
+  background-color: white;
+  height: 90vh;
+  overflow: hidden;
+  overflow-y: auto;
 }
