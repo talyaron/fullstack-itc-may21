@@ -23,17 +23,18 @@
         <div class="header">
             <img class="header_img_profile" src="https://4.bp.blogspot.com/-_l1CO_iPW7k/WSSCseY5OII/AAAAAAAAHBQ/pCIAu4atrAEC7hkz2gshL0b5psQJ11H8ACLcB/s1600/CYMERA_20170415_171750.png" alt="">
             <div class="header_icon">
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn_icons"  href=""><i class="fas fa-user-plus fa-2x header_icon_item header_icon_item--add"></i></a>
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn_icons"  href=""><i class="fas fa-plus fa-2x header_icon_item header_icon_item--add"></i></a>
                 <a data-bs-toggle="modal" data-bs-target="#groupModal" class="btn_icons" href=""><i class="fas fa-users fa-2x header_icon_item header_icon_item--group"></i></a>
-                <a class="btn_icons" href=""><i class="fas fa-tools fa-2x header_icon_item header_icon_item--config"></i></a>
+                <a class="btn_icons" href=""><i class="fas fa-ellipsis-h fa-2x header_icon_item header_icon_item--config"></i></a>
             </div>
         </div>
         <div class="search_wrapper">
           <div class="search">
-  
+            
               <i class="fa fa-search fa fa-2x search_icon" aria-hidden="true"></i>
-              <input type="text" class="search_input" placeholder="Search Chat">       
-
+              <form class="search_input">
+                <input type="text" class="search_input" name="searchValue" placeholder="Search Chat">       
+              </form> 
         </div>
       </div>
         <div class="contacts">
@@ -45,17 +46,17 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Add Contact</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <div class="modal-body">
                     <form class="form_modal" action="" onsubmit="handleContact(event)">
                         <label class="formulario_item--modal" for="nameContact">Name:</label>
-                        <input class="formulario_item--modal" type="text" name="nameContact" />
+                        <input class="formulario_item--modal" type="text" name="nameContact" required/>
                         <label class="formulario_item--modal" for="phoneContact">Phone:</label>
-                        <input class="formulario_item--modal" type="number" name="phoneContact" />
+                        <input class="formulario_item--modal" type="number" name="phoneContact" required/>
                         <label class="formulario_item--modal" for="imgContact">Profile Image:</label>
                         <input class="formulario_item--modal" type="url" name="imgContact" placeholder="enter url..."/>
-                        <input class="btn btn-primary" style="margin-top: 5px; font-size: 1.2rem;" type="submit" value="Create Chat" data-dismiss="modal"></input>
+                        <input class="btn btn-primary" style="margin-top: 5px; font-size: 1.2rem;" data-bs-dismiss="modal" type="submit" value="Create Chat"></input>
                     </form>
                 </div>
               </div>
@@ -68,29 +69,29 @@
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title" id="exampleModalLabel">Create Group</h3>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <i class="fas fa-search fa-2x search_icon"><input type="text" name="searchNewChat" id="searchNewChat"></i>
+          <div class="search_wrapper">
+            <div class="search">
+              
+                <i class="fa fa-search fa fa-2x search_icon" aria-hidden="true"></i>
+                <form class="search_input">
+                  <input type="text" class="search_input" name="searchValue" placeholder="Search Contact">       
+                </form> 
+          </div>
+        </div>
             <form class="form_modal" action="" onsubmit="handleGroup(event)">
                 <label class="formulario_item--modal" for="name-modal">Name of group:</label>
                 <input class="formulario_item--modal" type="text" name="nameGroup" />
                 <label class="formulario_item--modal" for="imgGroup">Profile image Group:</label>
-                <input class="formulario_item--modal" type="file" name="imgGroup" style="cursor:auto"/>
+                <input class="formulario_item--modal" type="url" name="imgGroup" placeholder="url here..."/>
                 <label for="selectContact">Select Contacts:</label>
-                <div class="contacts_chat">
-                    <input type="radio">
-                    <div class="contacts_chat">
-                      <img class="contacts_img" style="width: 6.5rem;
-                      height: 6rem;" src="https://4.bp.blogspot.com/-_l1CO_iPW7k/WSSCseY5OII/AAAAAAAAHBQ/pCIAu4atrAEC7hkz2gshL0b5psQJ11H8ACLcB/s1600/CYMERA_20170415_171750.png" alt="">
-                      <a href="">
-                          <div class="contacts_info">
-                              <h3 class="contacts_name">Tomas Hoffer</h3>
-                              <p>114959499</p>
-                          </div>
-                      </a>
-                  </div>
-                <input class="btn btn-primary" style="margin-top: 5px; font-size: 1.2rem;" type="submit" value="Create Group" data-dismiss="modal"></input>
+
+                <div id="contacts_group">
+
+                </div>
+
+                <input class="btn btn-primary" style="margin-top: 5px; font-size: 1.2rem;" type="submit" value="Create Group"  data-bs-dismiss="modal"></input>
             </form>
         </div>
       </div>

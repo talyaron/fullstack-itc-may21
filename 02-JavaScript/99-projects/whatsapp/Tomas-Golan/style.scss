@@ -81,7 +81,6 @@ a {
    .search{
     width: 85%;
     height: 3rem;
-    background: #ffffff;
     margin: auto;
     border: 1px solid #cac9c9;
     border-radius: 5rem;
@@ -94,8 +93,16 @@ a {
       color: #aaaaaa;
     }
     .search_input{
-      width: 100%;
+      width: 90%;
+      height: 90%;
+      position: relative;
+      top: .1rem;
+      right: 0.2rem;
       border: none;
+      font-size: 1.3rem;
+    }
+    .search_input:focus{ 
+      outline: none;
     }
   }
   .search:hover{
@@ -112,7 +119,6 @@ a {
         border-top: 0.5px solid rgb(182, 181, 181);
         color: white;
         font-size: 400;
-        // 2D3134;
         .contacts_info{
           padding: 0.3rem;
           display: flex;
@@ -120,7 +126,6 @@ a {
           text-align: center;
           position: relative;
           top: 1rem;
-
         }
         .contacts_img{
             width: 6.5rem;
@@ -147,18 +152,18 @@ a {
   .background_chats{
       display: flex;
       flex-direction: column;
-      background-color: rgb(53, 48, 48);
+      background-color:#fbfbfb;
       position: fixed;
   }
   .modal{
       border: solid 2px black;
       .modal-header{
-        background-color: rgb(53, 48, 48);
-        color: rgb(233, 233, 233);
+        background-color:#fbfbfb;
+        color: rgb(61, 61, 61);
       }
    .modal-body{
-    background-color: rgb(53, 48, 48);
-    color: rgb(233, 233, 233);
+    background-color:#fbfbfb;
+    color: rgb(61, 61, 61);
   .form_modal{
       display: flex;
       flex-direction: column;   
@@ -167,6 +172,35 @@ a {
 }
 }
 
+.contacts_chat_modal{
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        background-color: #FFFFFF;
+        border-top: 0.5px solid rgb(182, 181, 181);
+        color: white;
+        font-size: 400;
+          .contacts_info_modal{
+            padding: 0.3rem;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            top: 1rem;
+        }
+        .contacts_img_modal{
+          width: 6.5rem;
+          height: 6rem;
+          position: relative;
+          left: 2rem;
+          border-radius: 50%;
+          padding: 1rem;
+
+      }
+}
+.contacts_chat_modal:hover{
+  background-color: #F5F5F5;
+}
 @media only screen and (max-width: 770px) {
     body {
       width: 100%;
