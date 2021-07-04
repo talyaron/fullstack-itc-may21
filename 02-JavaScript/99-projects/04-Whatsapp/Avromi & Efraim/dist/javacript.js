@@ -72,6 +72,7 @@ function handleSubmit(ev) {
 }
 var deleteContact = function (conatctID) {
     try {
+        window.event.cancelBubble = true;
         var holder = document.querySelector('.holder');
         if (!holder) {
             throw new Error('No shopping list detected!');
@@ -102,7 +103,7 @@ var addToDom = function (searchResults) {
         }
         searchResults.forEach(function (contact) {
             var index = parseInt(contact.chats.length - 1);
-            holder_1.innerHTML += ("<div class=\"holder__contact\">" +
+            holder_1.innerHTML += ("<div class=\"holder__contact\" id=\"" + contact.contactId + "\" onclick=\"hRef('" + contact.contactId + "')\">" +
                 ("<img class=\"holder__contact__image\" src=\"" + contact.imgUrl + "\">") +
                 ("<div class=\"holder__contact__name\"><a href=\"./private-chat.html?contactId=" + contact.contactId + "\">" + contact.name + "</a></div>") +
                 ("<div class=\"holder__contact__chat\">" + contact.chats[index].message + "</div>") +
@@ -116,20 +117,11 @@ var addToDom = function (searchResults) {
         console.error(e);
     }
 };
-var findProductbySearchTerm = function (chatSearch, searchTerm) {
+var findContactSearch = function (chatSearch, searchTerm) {
     try {
         var userRegEx_1 = new RegExp(searchTerm, 'gmi');
-        // let indexArray: Array<any> = contacts.contacts.reduce(function (acc, contactName, index) { //YS: THere are better methods to use than reduce: find or findIndex
-        //     if (userRegEx.test(contactName.name)) {
-        //         acc.push(index);
-        //     }
-        //     return acc;
-        // }, []);
-        var searchResults = chatSearch.filter(function (contactName) { return userRegEx_1.test(contactName.name); });
-        // for (let i = 0; i < indexArray.length; i++) { //YS: Use forEach loop. 
-        //     searchResults[i].description = nameUpdate[indexArray[i]]
-        // }
-        return searchResults;
+        var searchResultsName = chatSearch.filter(function (contactName) { return userRegEx_1.test(contactName.name); });
+        return searchResultsName;
     }
     catch (e) {
         console.error(e);
@@ -142,12 +134,8 @@ var handleKeyUp = function (ev) {
         if (!searchTerm) {
             throw new Error('No value being read for search term!');
         }
-        var results = findProductbySearchTerm(contacts.contacts, searchTerm);
+        var results = findContactSearch(contacts.contacts, searchTerm);
         addToDom(results);
-        if (searchTerm === '') {
-            addToDom(contacts.contacts);
-        }
-        console.log(results);
     }
     catch (er) {
         console.error(er);
@@ -158,20 +146,21 @@ function checkEdits() {
     if (render != null) {
         addToDom(render);
         contacts.contacts = render;
+        console.log(contacts.contacts.map(function (c) { return console.log(c.chats); }));
     }
-}
-function openForm() {
-    document.getElementById("myForm").style.display = "block";
-}
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-}
-function edit() {
-    var indices = document.querySelectorAll("#delete");
-    var unread = document.querySelectorAll("#delete");
-    for (var i = 0; i <= indices.length; i++) {
-        if (unread[i].style.display = "none") {
-            unread[i].style.display = "block";
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+    function edit() {
+        var indices = document.querySelectorAll("#delete");
+        var unread = document.querySelectorAll("#delete");
+        for (var i = 0; i <= indices.length; i++) {
+            if (unread[i].style.display = "none") {
+                unread[i].style.display = "block";
+            }
         }
     }
 }

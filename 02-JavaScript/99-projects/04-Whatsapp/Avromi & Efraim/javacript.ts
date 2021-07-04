@@ -86,6 +86,7 @@ function handleSubmit(ev): any {
 
 const deleteContact = (conatctID: string) => {
     try {
+        window.event.cancelBubble = true
         const holder: Element = document.querySelector('.holder');
         if (!holder) {
             throw new Error('No shopping list detected!')
@@ -120,7 +121,7 @@ const addToDom = (searchResults: Array<any>) => {
         searchResults.forEach((contact) => {
             let index = parseInt(contact.chats.length - 1)
         holder.innerHTML += (
-            `<div class="holder__contact">`+
+            `<div class="holder__contact" id="${contact.contactId}" onclick="hRef('${contact.contactId}')">`+
             `<img class="holder__contact__image" src="${contact.imgUrl}">`+
             `<div class="holder__contact__name"><a href="./private-chat.html?contactId=${contact.contactId}">${contact.name}</a></div>`+
             `<div class="holder__contact__chat">${contact.chats[index].message}</div>`+
@@ -134,20 +135,12 @@ const addToDom = (searchResults: Array<any>) => {
         console.error(e)
     }
 }
-const findProductbySearchTerm = (chatSearch: Array<any>, searchTerm: string) => {
+const findContactSearch = (chatSearch: Array<any>, searchTerm: string) => {
     try {
         const userRegEx: RegExp = new RegExp(searchTerm, 'gmi');
-        // let indexArray: Array<any> = contacts.contacts.reduce(function (acc, contactName, index) { //YS: THere are better methods to use than reduce: find or findIndex
-        //     if (userRegEx.test(contactName.name)) {
-        //         acc.push(index);
-        //     }
-        //     return acc;
-        // }, []);
-        const searchResults: Array<any> = chatSearch.filter(contactName => userRegEx.test(contactName.name));
-        // for (let i = 0; i < indexArray.length; i++) { //YS: Use forEach loop. 
-        //     searchResults[i].description = nameUpdate[indexArray[i]]
-        // }
-        return searchResults;
+        const searchResultsName: Array<any> = chatSearch.filter(contactName => userRegEx.test(contactName.name));
+        
+        return searchResultsName;
     } catch (e) {
         console.error(e)
     }
@@ -159,13 +152,8 @@ const handleKeyUp = (ev: any) => {
         if (!searchTerm) {
             throw new Error('No value being read for search term!')
         }
-        const results = findProductbySearchTerm(contacts.contacts, searchTerm);
+        const results = findContactSearch(contacts.contacts, searchTerm);
         addToDom(results);
-        if(searchTerm === '') {
-            addToDom(contacts.contacts)
-        }
-        console.log(results)
-
     } catch (er) {
         console.error(er)
     }
@@ -176,8 +164,9 @@ function checkEdits() {
         if (render != null) {
             addToDom(render)
             contacts.contacts = render
-        }}
-
+        
+  console.log(contacts.contacts.map(c => console.log(c.chats)))
+        }
 
 
 function openForm() {
