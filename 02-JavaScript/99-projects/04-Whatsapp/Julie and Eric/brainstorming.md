@@ -18,7 +18,9 @@ start with the design of the classes, BEM
 
     search
 
-
+    JSON/local storage
+    first contracts pre-loaded (I don't know the word, but are the pre contact that we have when we refresh or open the page)
+    I created a JASON with our contact in one typescript, then we call it in other typescript and render it. Here we use for each and create a method to render contacts
 
     filter
 
