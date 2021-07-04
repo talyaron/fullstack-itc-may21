@@ -203,7 +203,6 @@ body {
 }
 .new_conversation .options__item--contact .new_chat_status {
   grid-area: status;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -225,6 +224,7 @@ body {
 .new_conversation__item--title #search {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 .new_conversation__item--body {
   background-color: white;
