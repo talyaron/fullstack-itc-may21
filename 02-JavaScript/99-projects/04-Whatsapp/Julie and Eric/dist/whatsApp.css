@@ -5,12 +5,12 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.container {
+.wrapper {
   height: 100%;
   width: 100%;
 }
 
-.container3 {
+.wrapper__container {
   position: absolute;
   margin-left: 30%;
   margin-top: 25px;
@@ -19,7 +19,7 @@
   height: 112vh;
 }
 
-.myProfileVar {
+.wrapper__container--profile {
   height: 8vh;
   background-color: #dadbd4;
 }
@@ -41,7 +41,7 @@
   opacity: 0.8;
 }
 
-.searchVar {
+.wrapper__container--search {
   height: 8vh;
   background-color: #e2e2e2;
 }
@@ -107,13 +107,13 @@
   margin-top: 30px;
 }
 
-.container1 {
+.green-background {
   background-color: #009688;
   width: 100%;
   height: 20vh;
 }
 
-.container2 {
+.grey-background {
   background-color: #dadbd4;
   width: 100%;
   height: 100vh;
