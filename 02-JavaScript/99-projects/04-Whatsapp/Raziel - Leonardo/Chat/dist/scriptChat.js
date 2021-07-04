@@ -1,9 +1,11 @@
 var userInfo = JSON.parse(localStorage.getItem('userInfo'));
 var root = document.querySelector('#main');
+var userNumber = localStorage.getItem('numberToSearch');
+var userfiltered = userInfo.userList.filter(function (element) { return (element.number == userNumber); });
 //Render the chat of the User
-function renderChat(userInfo) {
+function renderChat(userfiltered) {
     try {
-        var html = userInfo.map(function (element) {
+        var html = userfiltered.map(function (element) {
             console.log(element.message);
             return ("<div class=\"chat-window__header\" onclick='redirectBack()'>\n                <div class=\"chat-window__header--left\">\n                    <img   class=\"chat-window__contact--img\" src=\"" + element.picture + "\">\n                    <div class=\"contact-name-and-phone\">\n                        <span class=\"chat-window__name\">" + element.name + "</span>\n                        <span class=\"chat-window__phone\">" + element.number + "</span>\n                    </div>\n                </div>\n                <div class=\"chat-window__header--left\">\n                    <img class=\"chat-window-search-icon\" src=\"Img_whatsapp/search-icon.svg\">\n                    <img class=\"chat-window-menu-icon\"  src=\"Img_whatsapp/menu-icon.svg\">\n                </div>\n            </div>");
         }).join('');
@@ -18,7 +20,7 @@ function renderChat(userInfo) {
 }
 ;
 //Call this functions to render the user
-renderChat(userInfo);
+renderChat(userfiltered);
 //With this function I handle the form:
 var handleSubmitMessage = function (ev) {
     ev.preventDefault();
