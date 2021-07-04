@@ -18,7 +18,7 @@ var RunsPool = /** @class */ (function () {
     }
     RunsPool.prototype.updateToPool = function (run) {
         try {
-            var runToUpdateIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === run.runId; }); //YS: Would be better to use find instead of findIndex
+            var runToUpdateIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === run.runId; }); //YS: Would be better to use find instead of findIndex. YA: Don't see how find helps here. Can you explain?
             if (runToUpdateIndex === -1) {
                 this.allRuns.push(run);
             }
@@ -61,9 +61,9 @@ var RunsPool = /** @class */ (function () {
                     runItem.runPace === run.runPace &&
                     runItem.runArea === run.runArea;
             });
-            if (runMatches.length > 0) { //YS: Else, throw an error
+            if (runMatches.length > 0) { //YS: Else, throw an error. YA: I'm not sure that it's an error, it is just one of the outcomes
                 run.runMatch = true;
-                var currentRunIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === run.runId; }); //YS: Find would be better than findIndex
+                var currentRunIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === run.runId; }); //YS: Find would be better than findIndex. YA: Don't see how find helps here. Can you explain?
                 this.allRuns[currentRunIndex].runMatch = true;
                 this.showMatchesOnDON(runMatches);
             }
@@ -110,8 +110,8 @@ var LoggedInRunner = /** @class */ (function () {
         else {
             runnerProfileImg.setAttribute("src", this.runnerProfImg);
         }
-        ruunerTotalDistance.innerHTML = "" + this.runnerDistance; //YS: You dont need template literals here: < ... = this.runnerDistance >
-        runnerRunsCounter.innerHTML = "" + this.runnerRuns.length; //YS: You dont need template literals here
+        ruunerTotalDistance.innerHTML = "" + this.runnerDistance; //YS: You dont need template literals here: < ... = this.runnerDistance >. YA: this is a number, innerHTML expects a string
+        runnerRunsCounter.innerHTML = "" + this.runnerRuns.length; //YS: You dont need template literals here. YA: this is a number, innerHTML expects a string
         this.renderRunsToDOM(null);
         // window.location.href = `togetheRun_main.html?${currentRunner.runnerId}`; // causes endless loop of loading the page...can be solved by localSession.setItem("isFirstLoad",false) during first loading of the page
     };
@@ -189,8 +189,8 @@ var LoggedInRunner = /** @class */ (function () {
             var runnerRunsCounter = document.querySelector("#total_counts");
             var distanceBadge = document.querySelector("#distance_badge");
             var togetherunBadge = document.querySelector("#togetherun_badge");
-            ruunerTotalDistance.innerText = "" + this.runnerDistance; //YS: No template literals
-            runnerRunsCounter.innerHTML = "" + this.runnerRuns.length; //YS: No template literals
+            ruunerTotalDistance.innerText = "" + this.runnerDistance; //YS: No template literals. YA: this is a number, innerHTML expects a string
+            runnerRunsCounter.innerHTML = "" + this.runnerRuns.length; //YS: No template literals. YA: this is a number, innerHTML expects a string
             if (this.runnerDistance > 199) {
                 ruunerTotalDistance.style.color = "gold";
                 distanceBadge.setAttribute("src", "../images/TR_Kms_G.png");
@@ -371,14 +371,15 @@ var showFilterForm = function (ev) {
     }
 };
 filterRunsForm.addEventListener('submit', function (ev) { return filterSubmit(ev); });
-filterRunsForm.addEventListener('change', function (ev) { return filterChangeKeyUp(ev); }); //YS: You dont need this. 
+filterRunsForm.addEventListener('change', function (ev) { return filterChangeKeyUp(ev); }); //YS: You dont need this. YA: I tested and found that I need both - change for selects and keyup for inputs
 filterRunsForm.addEventListener('keyup', function (ev) { return filterChangeKeyUp(ev); });
 var filterSubmit = function (ev) {
     try {
         ev.preventDefault();
-        if (currentRunner.runnerRuns.length === 0) {
-            return;
-        } //YS: No brackets in return
+        ev.target.style.display = 'none';
+        filterBtn.style.display = 'unset';
+        if (currentRunner.runnerRuns.length === 0)
+            return; //YS: No brackets in return
         var filterSubmitBtn = document.querySelector('#filter_submit');
         if (filterSubmitBtn.getAttribute('value') === 'Reset') {
             filterSubmitBtn.setAttribute('value', 'Filter');
@@ -386,13 +387,12 @@ var filterSubmit = function (ev) {
             ev.target.reset();
             return;
         }
-        var minDistanceFilter = Number(ev.target.elements.minDistanceFilter.value);
-        var maxDistanceFilter = Number(ev.target.elements.maxDistanceFilter.value);
-        var paceFilter = ev.target.elements.paceFilter.value;
-        var areaFilter = ev.target.elements.areaFilter.value;
-        var locationFilter = ev.target.elements.locationFilter.value;
-        ev.target.style.display = 'none';
-        filterBtn.style.display = 'unset';
+        var filterRunsFormElements = ev.target.elements;
+        var minDistanceFilter = Number(filterRunsFormElements.minDistanceFilter.value);
+        var maxDistanceFilter = Number(filterRunsFormElements.maxDistanceFilter.value);
+        var paceFilter = filterRunsFormElements.paceFilter.value;
+        var areaFilter = filterRunsFormElements.areaFilter.value;
+        var locationFilter = filterRunsFormElements.locationFilter.value;
         currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
         ev.target.reset();
     }
@@ -403,14 +403,14 @@ var filterSubmit = function (ev) {
 var filterChangeKeyUp = function (ev) {
     try {
         ev.preventDefault();
-        if (currentRunner.runnerRuns.length === 0) {
-            return;
-        } //YS: No brackets in return
-        var minDistanceFilter = Number(ev.target.parentElement.parentElement.elements.minDistanceFilter.value);
-        var maxDistanceFilter = Number(ev.target.parentElement.parentElement.elements.maxDistanceFilter.value);
-        var paceFilter = ev.target.parentElement.parentElement.elements.paceFilter.value;
-        var areaFilter = ev.target.parentElement.parentElement.elements.areaFilter.value;
-        var locationFilter = ev.target.parentElement.parentElement.elements.locationFilter.value;
+        if (currentRunner.runnerRuns.length === 0)
+            return; //YS: No brackets in return
+        var filterRunsFormElements = ev.target.parentElement.parentElement.elements;
+        var minDistanceFilter = Number(filterRunsFormElements.minDistanceFilter.value);
+        var maxDistanceFilter = Number(filterRunsFormElements.maxDistanceFilter.value);
+        var paceFilter = filterRunsFormElements.paceFilter.value;
+        var areaFilter = filterRunsFormElements.areaFilter.value;
+        var locationFilter = filterRunsFormElements.locationFilter.value;
         currentRunner.filterRuns(minDistanceFilter, maxDistanceFilter, paceFilter, areaFilter, locationFilter);
     }
     catch (er) {

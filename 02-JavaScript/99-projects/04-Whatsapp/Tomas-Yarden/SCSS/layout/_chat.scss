@@ -1,0 +1,86 @@
+@include telefono {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #128c7e;
+
+    &__left {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      text-align: center;
+      &__profile {
+        img {
+          width: 30px;
+          border-radius: 50%;
+        }
+      }
+      &__name {
+        h3 {
+          font-size: 1.6rem;
+          font-weight: 400;
+          margin: 0;
+        }
+      }
+    }
+
+    &__right {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
+
+  .content {
+     max-height: 0;
+    // overflow: hidden;
+    &__full-chat-block {
+      width: 100%;
+      text-align: center;
+      overflow: auto;
+      scrollbar-width: none;
+      height: max-content;
+      &__outer-container {
+        min-height: 500px;
+        position: relative;
+        bottom: 0%;
+
+         &__chat-container{
+          max-height: 500px;
+          width: 100%;
+          position: absolute;
+           bottom: 0;
+           left: 0;
+           scroll-behavior: smooth;
+           hyphens: auto;
+           &::-webkit-scrollbar{
+             display: none;
+           }
+          }
+      }
+    }
+    .chat-bar-input-block{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+     
+    
+      .chat-bar-icons{
+        display: flex;
+        gap: 1rem;
+        
+        
+      }
+    #userInput{
+      width: 75%;
+      .input-box{
+        border-radius: 1rem 1rem;
+        width: 100%;
+        outline: none
+     
+      }
+    }
+    }
+  }
+}

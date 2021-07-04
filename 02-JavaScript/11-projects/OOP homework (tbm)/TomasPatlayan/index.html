@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Pepe-Bank-Account</title>
+  </head>
+  <body>
+    <div class="container">
+      <form class="form" onsubmit="handleSubmit(event)">
+        <div class="img-profile-account">
+          <img src="753aadc3-d9fd-4cc6-8b92-a8ef6f689217_x365.jpg" alt="" />
+          <span>Name:Kermit </span>
+          <span>Age:60</span>
+        </div>
+
+        <div class="container-inputs">
+          <div class="container-inputs__input">
+            <label> Deposit</label>
+            <input type="radio" name="movement" value="deposit" checked />
+          </div>
+          <div class="container-inputs__input">
+            <label> Withdraw</label>
+            <input type="radio" name="movement" value="withdraw" />
+          </div>
+
+          <div class="container-inputs__input">
+            <label> Amount</label>
+            <input type="number" name="amount" required />
+          </div>
+          <div class="sumbit container-inputs__input">
+            <button class="submit">Send</button>
+          </div>
+        </div>
+      </form>
+      <div class="show-movements">
+        <div class="show-movements__total"></div>
+
+        <div class="show-movements__transactions"></div>
+      </div>
+    </div>
+
+    <script src="./dist/app.js"></script>
+  </body>
+</html>
