@@ -11,41 +11,50 @@ html {
 }
 
 body {
-  background-color: #090E11;
+  background-color: #DBDBDB;
 }
 
 h1 {
   font-size: 4rem;
-  color: #b6b5b5;
+  color: #3d3d3d;
 }
 
 h3 {
   font-size: 2rem;
-  color: #b6b5b5;
+  color: #3d3d3d;
 }
 
 h4 {
   font-size: 1.7rem;
-  color: #b6b5b5;
+  color: #3d3d3d;
 }
 
 p {
   font-size: 1.5rem;
-  color: #b6b5b5;
+  color: #3d3d3d;
 }
 
 a {
   text-decoration: none;
-  color: #b6b5b5;
+  color: #3d3d3d;
+}
+
+.greenHeader {
+  background-color: #009688;
+  height: 12rem;
+  width: 100%;
+  position: absolute;
 }
 
 .container {
   width: 40%;
+  position: relative;
+  top: 3rem;
 }
 .container .header {
   display: flex;
   justify-content: space-between;
-  background-color: #2A2F32;
+  background-color: #DBDBDB;
 }
 .container .header .header_img_profile {
   width: 6.5rem;
@@ -59,7 +68,7 @@ a {
   right: 3rem;
 }
 .container .header .header_icon .btn_icons {
-  color: #e9e9e9;
+  color: #3d3d3d;
 }
 .container .header .header_icon .header_icon_item--add {
   margin-right: 2rem;
@@ -67,29 +76,40 @@ a {
 .container .header .header_icon .header_icon_item--group {
   margin-right: 2rem;
 }
-.container .form_search {
-  border: 1px solid #b6b5b5;
-}
-.container .form_search .form_search_contact {
+.container .search_wrapper {
+  width: 100%;
+  height: 4rem;
+  background: #fbfbfb;
   display: flex;
-  justify-content: center;
-  align-content: center;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
-.container .form_search .form_search_contact #searchContact {
-  border-radius: 20px;
-  background-color: #2A2F32;
-  color: white;
+.container .search_wrapper .search {
+  width: 85%;
+  height: 3rem;
+  background: #ffffff;
+  margin: auto;
+  border: 1px solid #cac9c9;
+  border-radius: 5rem;
+  display: flex;
 }
-.container .form_search .form_search_contact .search_icon {
-  color: #e9e9e9;
+.container .search_wrapper .search .search_icon {
+  color: #aaaaaa;
+  text-align: center;
+  width: 6rem;
+  margin: auto;
+  color: #aaaaaa;
+}
+.container .search_wrapper .search .search_input {
+  width: 100%;
+  border: none;
+}
+.container .search_wrapper .search:hover {
+  border: gray solid 1px;
 }
 .container .contacts .contacts_chat {
   display: flex;
   justify-content: space-between;
   position: relative;
-  background-color: #2D3134;
+  background-color: #FFFFFF;
   border-top: 0.5px solid #b6b5b5;
   color: white;
   font-size: 400;
@@ -112,12 +132,12 @@ a {
 }
 .container .contacts .contacts_chat .contacts_icon {
   position: relative;
-  top: 2rem;
+  top: 3rem;
   right: 3rem;
-  color: #e9e9e9;
+  color: #777777;
 }
 .container .contacts .contacts_chat:hover {
-  background-color: #4f5355;
+  background-color: #F5F5F5;
 }
 .container .background_chats {
   display: flex;

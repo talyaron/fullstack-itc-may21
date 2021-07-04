@@ -5,13 +5,15 @@ const elementMessage = <HTMLInputElement>document.querySelector('#writemsg')
 const containerChat = <HTMLElement>document.querySelector('.container__chat-box')
 
 
+
+
 //modal
 const btnModal = <HTMLElement>document.querySelector('.container__chat-footer--smile')
 const bgModal = document.querySelector('.modal-bg')
 const modalClose = document.querySelector('.modal-close')
 
 //Ratio
-const emojiList = <any>document.querySelectorAll('.emoji')
+let emojiList = <any>document.querySelectorAll('.emoji')
 
 
 
@@ -19,7 +21,7 @@ const emojiList = <any>document.querySelectorAll('.emoji')
 class Message {
     content: string;
     personID: string;
-    dateMsg: string; /* es asi el tipo*/
+    dateMsg: string; 
     groupID: string;
     msgID: string;
 
@@ -43,8 +45,10 @@ class MessageList {
         this.renderChat()
     }
 
+
     deleteMessage(messagePassId: string) {
 
+       
         this.messageList = this.messageList.filter(message => messagePassId !== message.msgID)
         this.messageListFilter = this.messageListFilter.filter(message => messagePassId !== message.msgID)
         this.renderChat()
@@ -60,21 +64,35 @@ class MessageList {
     }
 
     renderChat() {
-        let html: string = ''
-        // containerChat.innerHTML = html;
+        let html: string = '';
 
 
-        this.messageList.forEach(message => { /*por que se me va dezplazando*/
-            html += `<div class="container__chat-box__messages">
-                           
+        /* 
+        
+        var messageIndex = 0;
+        heartbeatInterval = setInterval(function() {
+        if (messageIndex < sampleMessages.length) {
+        alert(sampleMessages[messageIndex]);
+     window.eval(eoWebBrowser.extInvoke("applicationHeartbeat", data));
+     messageIndex++;
+        } else {
+     clearInterval(heartbeatInterval);
+        }
+        }, 5000)
+        
+        */
+
+        this.messageList.forEach(message => { 
+            html += `<div class="container__chat-box__messages" id="historieta">
                              <p class="container__chat-box__messages--content">${message.content}<p>
                              <span class="container__chat-box__messages--datemsg">${message.dateMsg}</span>
                             <i class="fas fa-check-double container__chat-box__messages--doubleclick"></i>
-                            <i class="fa fa-trash container__chat-box__messages--doubleclick" onclick='handleDelete("${message.msgID}")' title="Delete Item"></i>
-
-                            </div>`
+                            <i class="fa fa-trash container__chat-box__messages--trash" onclick='handleDelete("${message.msgID}")' title="Delete Item"></i>
+                    </div>`
         });
-
+        
+        
+        
         containerChat.innerHTML = html;
     }
 }
@@ -88,19 +106,15 @@ function sendMessage() {
 
     //current date
     let today = new Date();
-    console.log(today.getMinutes())
     let time = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes())
 
     const message = new Message(inputMessage, '1234', time, '123')
 
     messageList.addMessage(message)
 
+    elementMessage.value = '';
+
 }
-
-
-//const d: Date = new Date();
-
-
 
 
 //display inputSearch with search icon 
@@ -122,8 +136,8 @@ function handleDelete(messageId: string) {
     messageList.deleteMessage(messageId)
 }
 
-inputSearch.addEventListener('keyup', handleKeyUp) //en caso de qu vuelva hacia atras, me tiene que mostrar todos los mensajes
-//lupita
+inputSearch.addEventListener('keyup', handleKeyUp) 
+
 
 function handleKeyUp() {
     try {
@@ -144,18 +158,19 @@ function openModal(ev) {
 
 
     emojiList.forEach((emoji, index) => {
-        console.log(emojiList[index])
-        emojiList[index].addEventListener('click', function () {
+        emojiList[index].addEventListener('click', function (ev) {
+            ev.preventDefault()
             console.log(emoji.value)
             if (emoji.checked) {
                 elementMessage.value += emoji.value
-                console.log('A')
                 
             }   
             bgModal.classList.remove('bg-active');
+            ev.target.reset
         });
       
     });
+    emojiList = [];
 }
 
 modalClose.addEventListener('click', closeModal)
