@@ -157,16 +157,38 @@
     margin-top: 400px;
     position: absolute;
     background-color: grey;
+    display: flex;
 }
 
 .inputTyping{
     border: 1px solid rgb(226, 226,226);
     border-radius: 30px;
     height: 35px;
-    margin: 12px;
-    margin-left: 23%;
+    padding: 5px;
+    width:100%;
+    border: none;
+	outline: none;
+}
+.boxInput{
+    border: 1px solid rgb(226, 226,226);
+    border-radius: 30px;
+    height: 35px;
     padding: 10px;
-    width: 75%;
+    width: 85%;
+    border: none;
+	outline: none;
 }
 
-//#emoji{} I don't know why I don't see it
+#emoji{
+    color: white;
+}
+
+#paperClip{
+    color: white;
+    margin-left: 25px;
+}
+
+.boxIcon{
+    margin: 15px;
+    display: flex;
+}
