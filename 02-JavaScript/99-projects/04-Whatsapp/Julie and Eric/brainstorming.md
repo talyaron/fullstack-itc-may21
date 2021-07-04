@@ -13,50 +13,14 @@ start with the design of the classes, BEM
 
     brainstorming 
 
-
-    style:
-    color wsp:
-    1st bar green: rgb(0,190,164) 
-    width 80% center
-
-    2nd bar
-    rgb(215,219,215) we will put a profile image on the left (with circle design) + buttom +(to add group or chats) and 3points(... to select options)
-
-    search bar with border radius and lens inside and placegolder: "search or start new chat"
-
-    chats space:
-    divs with each chat (we can put 3 or 4) each one with their profile image on the left and contact name
-    each div need to have a hover 
-
-
-    font&text
-    font family: segoe UI helvetica neue, helvetica lucida grande arial ubuntu, cnatarell, fira sans, sans serif
-    14px
-    line height 20 px
-    text align: left
-    white space: nowrap
-    word-spacing:0px
-
-
-    box/divs
-    height 22.5 px
-    width
-    min-height:auto
-    min-width: auto
-
-    color&background
-    contact name #000000
-    background-color:#ffffff
-
-    cursor:pointer
-    overflow:hidden
-
-
+    Rsponsive
 
 
     search
 
-
+    JSON/local storage
+    first contracts pre-loaded (I don't know the word, but are the pre contact that we have when we refresh or open the page)
+    I created a JASON with our contact in one typescript, then we call it in other typescript and render it. Here we use for each and create a method to render contacts
 
     filter
 

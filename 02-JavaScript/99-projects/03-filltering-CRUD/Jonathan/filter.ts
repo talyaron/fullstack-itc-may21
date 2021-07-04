@@ -319,9 +319,8 @@ console.log(filterGender()) //YS: Dont leave console.logs
 function filterGender() {
     for (let i = 0; i < gender_list.length; i++) {
         gender_list[i].addEventListener("click", function () {                  //YS: The problem is that your dataList is of type NodeList, you have to find the correct type, mabye object, if not, any? 
-            console.log(typeof datalist)
+            console.log(gender_list[i])
             datalist.filterGender(gender_list[i].value, inputNameFilter.value); //for YS, It works but some reason I have this error. I try with NodeValue but does not work.
-
         });
     }
 }

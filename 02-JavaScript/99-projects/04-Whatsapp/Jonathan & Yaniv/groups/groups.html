@@ -1,30 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="whatsapp.png" />
+    <link rel="shortcut icon" href="../whatsapp.png" />
     <link rel="stylesheet" href="dist/groups.css">
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
     <title>Chat Groups</title>
 </head>
+
 <body>
-    <header class="header">
-        <img class="header__item header__item--img" src="" />
-        <form class="header__item header__item--search">
-            <input type="search" name="searchInGroups" id="search_in_groups" placeholder="🔍 Search in groups..." />
-        </form>
+    <section class="groups_section">
+        <header class="header">
+            <div class="header__item controls">
+                <img class="controls__item controls__item--profile_img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <i class="controls__item controls__item--plus fas fa-2x fa-plus"></i>
+                <i class="controls__item controls__item--ellipsis fas fa-2x fa-ellipsis-h"></i>
+            </div>
+            <div class="header__item header__item--search">
+                <i id="search_icon" class="fas fa-search"></i>
+                <form id="search_form">
+                    <input type="search" name="searchInGroups" id="search_in_groups"
+                        placeholder="Search or start a new chat" />
+                </form>
+            </div>
+        </header>
         <main class="groups">
             <div class="groups__item group">
-                <img class="group__item group__item--img" src="" />
-                <h2 class="group__item group__item--name">name of group/contact</h2>
-                <p class="group__item group__item--last_msg_time">last message time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
-                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name of member:</span> last message in chat</p>
-                <i class="group__item group__item--delete fas fa-trash">fa-trash</i>
+                <img class="group__item group__item--img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <h3 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name:</span> <!-- only if not currentUser -->
+                    last message</p>
+                <i class="group__item group__item--delete fas fa-trash"></i>
+            </div>
+            <div class="groups__item group">
+                <img class="group__item group__item--img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <h3 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name of member:</span> <!-- only if not currentUser -->
+                    last message in chat sdsdf dsf dsf dsf sdf dsfds s f</p>
+                <i class="group__item group__item--delete fas fa-trash"></i>
+            </div>
+            <div class="groups__item group">
+                <img class="group__item group__item--img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <h3 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name:</span> <!-- only if not currentUser -->
+                    last message</p>
+                <i class="group__item group__item--delete fas fa-trash"></i>
+            </div>
+            <div class="groups__item group">
+                <img class="group__item group__item--img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <h3 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name of member:</span> <!-- only if not currentUser -->
+                    last message in chat sdsdf dsf dsf dsf sdf dsfds s f</p>
+                <i class="group__item group__item--delete fas fa-trash"></i>
+            </div>
+            <div class="groups__item group">
+                <img class="group__item group__item--img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <h3 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name:</span> <!-- only if not currentUser -->
+                    last message</p>
+                <i class="group__item group__item--delete fas fa-trash"></i>
+            </div>
+            <div class="groups__item group">
+                <img class="group__item group__item--img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <h3 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name of member:</span> <!-- only if not currentUser -->
+                    last message in chat sdsdf dsf dsf dsf sdf dsfds s f</p>
+                <i class="group__item group__item--delete fas fa-trash"></i>
+            </div>
+            <div class="groups__item group">
+                <img class="group__item group__item--img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <h3 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name:</span> <!-- only if not currentUser -->
+                    last message</p>
+                <i class="group__item group__item--delete fas fa-trash"></i>
+            </div>
+            <div class="groups__item group">
+                <img class="group__item group__item--img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <h3 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name of member:</span> <!-- only if not currentUser -->
+                    last message in chat sdsdf dsf dsf dsf sdf dsfds s f</p>
+                <i class="group__item group__item--delete fas fa-trash"></i>
+            </div>
+            <div class="groups__item group">
+                <img class="group__item group__item--img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <h3 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name:</span> <!-- only if not currentUser -->
+                    last message</p>
+                <i class="group__item group__item--delete fas fa-trash"></i>
+            </div>
+            <div class="groups__item group">
+                <img class="group__item group__item--img" src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
+                <h3 class="group__item group__item--name">name of group/contact</h2>
+                <p class="group__item group__item--last_msg_time">time</p> <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
+                <p class="group__item group__item--last_msg_content"><span id="grp_member_name">name of member:</span> <!-- only if not currentUser -->
+                    last message in chat sdsdf dsf dsf dsf sdf dsfds s f</p>
+                <i class="group__item group__item--delete fas fa-trash"></i>
             </div>
         </main>
-    </header>
+    </section>
+    <section class="chat_section">This is where private chats are shown</section>
     <script src="dist/groups.js"></script>
 </body>
+
 </html>
