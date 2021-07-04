@@ -1,0 +1,97 @@
+:root{
+    --headerFont: font-family: 'Montserrat', sans-serif;
+    --contectFont: font-family: 'Roboto Slab', serif;
+    --blue: #0453bb;
+    --darkGray: #4B4C4F;
+    --liteGray: #B2B5AB;
+    --white: #fff;
+    --black: #000;
+
+}
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  body{
+      font-family: var(--fuenteParrafos);
+      line-height: 1.2;
+      font-size: 62,5%;
+      margin: 0;
+  }
+// GLOBALS
+h1, h2, h3, h4{
+    font-family: var(--headerFont);
+    text-align: center;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: var(--black);
+    font-family: var(--contectFont);
+}
+
+// CONTENT
+.menu{
+    background-color: var(--darkGray);
+    margin: 0 auto;
+    padding: 0.2rem;
+    text-align: center;
+    .menu__list{
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        text-align: center;
+        .menu__link a{
+            color: var(--white);
+            font-weight: bold;
+            font-family: var(--headerFont);
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.container__form{
+    max-width: 120rem;
+    width: 70%;
+    margin: 0 auto;
+    -webkit-box-shadow: -3px 14px 67px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -3px 14px 67px 0px rgba(0,0,0,0.75);
+    box-shadow: -3px 14px 67px 0px rgba(0,0,0,0.75);
+    border: 1px solid var(--darkGray);
+    margin-top: 2rem;
+    padding: 4rem;
+    form{
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        width: 80%;
+        .form__input{
+            margin-bottom: 1rem;
+            font-family: var(--contectFont);
+        }
+    }
+  }
+.posts{
+    max-width: 120rem;
+    width: 50%;
+    margin: 0 auto;
+    -webkit-box-shadow: -3px 14px 67px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -3px 14px 67px 0px rgba(0,0,0,0.75);
+    box-shadow: -3px 14px 67px 0px rgba(0,0,0,0.75);
+    border: 1px solid var(--darkGray);
+    margin-top: 2rem;
+    padding: 1.2rem;
+    .posts_items{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+    }
+}

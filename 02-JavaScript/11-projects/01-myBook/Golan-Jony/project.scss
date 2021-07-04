@@ -1,0 +1,18 @@
+* {
+    margin:0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+div{
+    display: flex;
+    flex-direction: column;
+
+    &__input{
+        margin-bottom: 10px;
+    }
+}
+
+.add{
+    width: 12%;
+}

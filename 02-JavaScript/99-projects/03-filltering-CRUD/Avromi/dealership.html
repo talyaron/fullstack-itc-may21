@@ -9,19 +9,21 @@
     <title>Document</title>
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <form onsubmit="handleSubmit(event)"> <!-- YS: You should not add eventListeners to your HTML, this should be in your JS -->
+    <form onsubmit="handleSubmit(event)">
+        <!-- YS: You should not add eventListeners to your HTML, this should be in your JS -->
         <fieldset>
             <legend>Insert Vehicle Details</legend>
             <input type="text" name="Name" id="name" placeholder="Name Your Vehicle">
-       
+
             <select name="Miles_per_Gallon" id="milesPerGallon">
                 <option disabled selected>MPG</option>
                 <option value="12">12</option>
 
 
             </select>
-         <input type="number" name="Cylinders" id="cylinders" placeholder="Cylinders">
+            <input type="number" name="Cylinders" id="cylinders" placeholder="Cylinders">
             <input type="number" name="Horsepower" placeholder="Horsepower" min="99">
             <input type="number" name="Weight_in_lbs" placeholder="Weight in LBS">
             <input type="number" id="year" name="Year" min="1900" max="2099" step="1" placeholder="Year..">
@@ -33,47 +35,52 @@
     <div id="origin"></div>
 
     <div style="overflow-x:auto;">
-        <table >
-            <thead>
-                <tr>
-                    <th>Car </th>
-                    <th>MPG </th>
-                    <th>Cylinders </th>
-                    <th>Horsepower</th>
-                    <th>Weight</th>
-                    <th>Year</th>
-                    <th>Origin</th>
-                    <th> <i class="fas fa-car-side"></i></th>
-                </tr>
-                <tr>
-                    <td><input type="search" placeholder="Search by name..." onkeyup="handleKeyUp(event)"></td>
-                    <td><select onchange="handleSelectmilesPerGallon()" name="milesPerGallon" id="milesPerGallon"> <!-- YS: This eventListener should be in your JS -->
-                        <option disabled selected>MPG</option>
-                      
-                      
+        <form onchange="handleSelectedFilter(event)" onkeyup="handleSelectedFilter(event)" id="filterForm">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Car </th>
+                        <th>MPG </th>
+                        <th>Cylinders </th>
+                        <th>Horsepower</th>
+                        <th>Weight</th>
+                        <th>Year</th>
+                        <th>Origin</th>
+                        <th> <i class="fas fa-car-side"></i></th>
+                    </tr>
 
-                    </select></td>
-                    <td><select onchange="handleSelectCylinders()" name="cylinders" id="cylinders"> <!-- YS: This eventListener should be in your JS -->
-                       
-                    </select></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td> <select  onchange="handleSelect()" id="origin" name="origin"> <!-- YS: This eventListener should be in your JS -->
-                     
-                    </select></td>
-                    <td> <i class="fas fa-filter"></i></td>
+                    <tr>
 
-                </tr>
-            </thead>
-            <tbody class="table"></tbody>
+                        <td><input type="search" placeholder="Search by name..." onkeyup="handleKeyUp(event)"></td>
+                        <td><select name="milesPerGallon" id="milesPerGallon">
+                                <!-- YS: This eventListener should be in your JS -->
+                                <option disabled selected>MPG</option>
 
-        </table>
+                            </select></td>
+                        <td><select name="cylinders" id="cylinders">
+                                <!-- YS: This eventListener should be in your JS -->
+
+                            </select></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td> <select id="origin" name="origin">
+                                <!-- YS: This eventListener should be in your JS -->
+
+                            </select></td>
+                        <td> <i class="fas fa-filter"></i></td>
+
+                    </tr>
+                </thead>
+                <tbody class="table"></tbody>
+
+            </table>
+        </form>
     </div>
 
 
     <script src="./dist/cars.js"></script>
-   
+
     <script src="./dist/dealership.js"></script>
     <script src="./dist/helpers.js"></script>
 </body>
