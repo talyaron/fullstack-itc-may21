@@ -56,6 +56,9 @@ body {
     justify-content: center;
     align-content: center;
     background-color: #EDEDED;
+    position: sticky;
+    top: 0;
+    height: 100px;
 
     .controls {
         display: grid;
@@ -179,9 +182,13 @@ body {
 
 .new_conversation {
     width: 600px;
+    height: 100vh;
     position: fixed;
     left: 600px;
     top: 0;
+    background-color: white;
+    overflow: hidden;
+    overflow-y: auto; 
 
     .options {
         &__item {
@@ -191,20 +198,23 @@ body {
 
             &--group {
                 display: grid;
-                grid-template-columns: 1fr 5fr;
+                grid-template-columns: 1fr 7fr;
                 grid-template-rows: 25px 25px;
                 grid-template-areas:
                     "img title"
                     "img title";
                 padding: 10px;
+                align-items: center;
 
                 #new_group_logo {
                     grid-area: img;
-                    padding: 0 5px;
-                    margin: 0;
+                    padding: 8px;
+                    margin: 0 5px;
+                    filter: invert(1); 
+                    background-color: #FF6977;
                     border-radius: 50px;
-                    width: 50px;
-                    height: 50px;
+                    width: 34px;
+                    height: 34px;
                 }
 
                 #new_group {
@@ -217,7 +227,7 @@ body {
 
             &--contact {
                 display: grid;
-                grid-template-columns: 1fr 5fr;
+                grid-template-columns: 1fr 7fr;
                 grid-template-rows: 25px 25px;
                 grid-template-areas:
                     "img title"
@@ -254,15 +264,18 @@ body {
 
     &__item {
         
-        &--title {
-            background-color: #00BFA5;
-            height: 10vh;
-
+        &--header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            
             .title {
+                background-color: #00BFA5;
                 display: flex;
                 flex-direction: row;
                 color: white;
-                align-items: center;
+                align-items: flex-end;
+                height: 100px;
                 
                 &__item {
                     padding: 0 5px;
@@ -275,14 +288,13 @@ body {
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
+                padding: 5px 0;
+
             }
         }
 
         &--body {
-            background-color: white;
-            height: 90vh;
-            overflow: hidden;
-            overflow-y: auto;        
+       
         }
     }
 }
