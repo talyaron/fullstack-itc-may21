@@ -8,6 +8,7 @@ make it look as similar as you can to the real Whatsapp
 
 Work in a group.
 start with the design of the classes, BEM */
+var arrayName = JSON.parse(localStorage.getItem('userInfo'));
 var searchName = document.querySelector("#search");
 var nextPage = document.querySelector('#chat'); //change the name later
 var Message = /** @class */ (function () {
@@ -49,9 +50,20 @@ var UserList = /** @class */ (function () {
         }
     };
     ;
+    // if (userFilter) { arrayToRender =userFilter} else { arrayToRender =this.userList
     //To Show the contacts in the page
     UserList.prototype.renderContacts = function (userFilter) {
-        var arrayToRender = userFilter ? userFilter : this.userList;
+        var arrayToRender = [];
+        if (userFilter != null) {
+            arrayToRender = userFilter;
+        }
+        else if (userFilter === this.userList) {
+            arrayToRender = this.userList;
+        }
+        else if (userFilter === arrayName) {
+            arrayToRender = arrayName;
+        }
+        // const arrayToRender = userFilter ? userFilter : this.userList;
         try {
             var showContact = document.querySelector('#chats');
             if (!showContact)
@@ -116,8 +128,8 @@ function readURL(input) {
 ;
 //Method to pass information to another page when you click the User
 function passInformation(userNumber) {
-    var userInfo = userList.userList.filter(function (element) { return (element.number == userNumber); });
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    localStorage.setItem('userInfo', JSON.stringify(userList));
+    localStorage.setItem('numberToSearch', userNumber);
     redirect();
 }
 ;
