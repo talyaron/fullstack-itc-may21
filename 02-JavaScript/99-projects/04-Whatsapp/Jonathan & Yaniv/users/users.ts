@@ -2,7 +2,7 @@ class User {
     userImg: string;
     userName: string;
     userPhone: string;
-    userGroups: Array<string>;// = JSON.parse(localStorage.getItem("currentRunner")).runnerId; 
+    userGroups: Array<string>;
 
     constructor (userImg: string, userName: string, userPhone: string, userGroups: Array<string>) {
         this.userImg = userImg;
