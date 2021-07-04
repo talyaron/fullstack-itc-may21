@@ -58,9 +58,8 @@ class Contacts {
             this.contacts.forEach((element) => {
               
 
-                html += `<div class="chat1" onclick="redirect()"> <img src="${element.image}" alt="" class="photo2"> <h4 class="nameContact">${element.contactName}</h4> </div>`;
+                html += `<div class="chat1" onclick="redirect()"><img src="${element.image}" alt="" class="photo2"> <h4 class="nameContact">${element.contactName}</h4><i class="far fa-trash-alt" id="delete"></i></div>`;
             });
-
             render.innerHTML = html;
             console.log(html)
     
