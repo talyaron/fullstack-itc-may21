@@ -47,7 +47,7 @@ a {
     border: 2px solid black;
   
 }
-
+/*The app window*/
 .app {
     display: grid;
     grid-template-columns: 40rem 1fr;
@@ -71,12 +71,15 @@ a {
         justify-content: space-between;
         height: 6rem;
         padding: 1rem 2rem;
+        
 
         img {
             width: 4rem;
             height: 4rem;
             border-radius: 50%;
             cursor: pointer;
+            
+            
         }
 
         &--icons {
@@ -85,17 +88,19 @@ a {
             flex: 1;
             justify-content: flex-end;
             cursor: pointer;
+          
 
             img:active {
                 background: #d5d5d5;
                 border-radius: 50%;
                 box-shadow: 0 0 1px 8px #d5d5d5;
+                margin: 1.5rem 1rem;
             }
 
-            img:nth-child(2) {
-                //margin to the icon in the middle//
-                margin: 0 1rem;
-            }
+            // img:nth-child(2) {
+            //     //margin to the icon in the middle//
+            //     margin: 0 1rem;
+            // }
         }
     }
 
@@ -106,6 +111,7 @@ a {
         height: 9rem;
         padding: 0 2rem;
         cursor: pointer;
+      
 
         img {
             margin-right: 2rem;
