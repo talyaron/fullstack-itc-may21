@@ -18,6 +18,8 @@ class Contact {
         constructor() {
     
         }
+
+       
     
         addContact(contacts: Contact) {
             try {
