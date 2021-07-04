@@ -18,9 +18,10 @@ function updateLastSent() {
 }
 function renderMessages(arrToRender) {
     var messagesDiv = document.querySelector(".messages");
-    thisContact[0].chats.map(function (chat) {
-        var html = "<div class=\"single__message\" oncontextmenu=\"javascript:alert('success!');return false;\">\n    <p>" + chat.message + "</p>\n    <div class=\"single__message__timestamp\">" + chat.timeStamp + "</div>\n</div>";
-        messagesDiv.insertAdjacentHTML("beforeend", html);
+    var html = "";
+    thisContact[0].chats.forEach(function (chat) {
+        html += "<div class=\"single__message\" oncontextmenu=\"javascript:alert('success!');return false;\">\n    <p>" + chat.message + "</p>\n    <div class=\"single__message__timestamp\">" + chat.timeStamp + "</div>\n</div>";
+        messagesDiv.innerHTML = html;
     });
 }
 function openCamera() {

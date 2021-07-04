@@ -30,8 +30,11 @@ body {
   margin-left: 1rem;
 }
 
-.message {
+.messages {
   margin-bottom: 10px;
+}
+.messages .single__message {
+  background-color: #DCF8C6;
 }
 
 .input__send__wrapper .form {

@@ -24,12 +24,13 @@ function updateLastSent() {
 
 function renderMessages(arrToRender: Array<Contact>) {
     const messagesDiv = document.querySelector(".messages")
-    thisContact[0].chats.map((chat) => {
-        const html = `<div class="single__message" oncontextmenu="javascript:alert('success!');return false;">
+    let html ="";
+    thisContact[0].chats.forEach((chat) => {
+        html += `<div class="single__message" oncontextmenu="javascript:alert('success!');return false;">
     <p>${chat.message}</p>
     <div class="single__message__timestamp">${chat.timeStamp}</div>
 </div>`
-        messagesDiv.insertAdjacentHTML(`beforeend`, html)
+        messagesDiv.innerHTML = html 
     })
 
 }
