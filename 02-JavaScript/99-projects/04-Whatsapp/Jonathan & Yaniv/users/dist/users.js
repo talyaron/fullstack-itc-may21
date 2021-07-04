@@ -1,9 +1,9 @@
 var User = /** @class */ (function () {
-    // userGroups: Array<string> = JSON.parse(localStorage.getItem("currentRunner")).runnerId; 
-    function User(userImg, userName, userPhone) {
+    function User(userImg, userName, userPhone, userGroups) {
         this.userImg = userImg;
         this.userName = userName;
         this.userPhone = userPhone;
+        this.userGroups = userGroups;
     }
     return User;
 }());
@@ -20,7 +20,8 @@ var ContactList = /** @class */ (function () {
                 var contactName = contactNameContainer.innerText;
                 var contactPhoneContainer = contact.firstChild.parentElement.querySelector("#user_phone");
                 var contactPhone = contactPhoneContainer.innerText;
-                contactToPush_1 = new User(contactImg, contactName, contactPhone);
+                var contactGroups = [];
+                contactToPush_1 = new User(contactImg, contactName, contactPhone, contactGroups);
                 _this.allContacts.push(contactToPush_1);
             });
             return;
@@ -31,15 +32,11 @@ var ContactList = /** @class */ (function () {
         var contact = this.allContacts.find(function (contactItem) { return contactItem.userPhone === contactPhone; });
         return contact;
     };
-    ContactList.prototype.addContact = function (contact) {
-        this.allContacts.push(contact);
-    };
     return ContactList;
 }());
-console.log(JSON.parse(localStorage.getItem('contactList')));
 var allContacts;
 if (JSON.parse(localStorage.getItem('contactList')) !== null)
-    allContacts = new ContactList(JSON.parse(localStorage.getItem('ContactList')).allContacts);
+    allContacts = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 else {
     allContacts = new ContactList(null);
     localStorage.setItem('contactList', JSON.stringify(allContacts));
@@ -59,6 +56,7 @@ var userPicker = function (ev) {
     var userName = userNameContainer.innerText;
     var userPhoneContainer = userContainer.querySelector("#user_phone");
     var userPhone = userPhoneContainer.innerText;
-    var pickedUser = new User(userImg, userName, userPhone);
+    var userGroups = allContacts.findContact(userPhone).userGroups;
+    var pickedUser = new User(userImg, userName, userPhone, userGroups);
     localStorage.setItem('currentUser', JSON.stringify(pickedUser));
 };

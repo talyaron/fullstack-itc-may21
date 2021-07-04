@@ -2,12 +2,13 @@ class User {
     userImg: string;
     userName: string;
     userPhone: string;
-    // userGroups: Array<string> = JSON.parse(localStorage.getItem("currentRunner")).runnerId; 
+    userGroups: Array<string>;// = JSON.parse(localStorage.getItem("currentRunner")).runnerId; 
 
-    constructor (userImg: string, userName: string, userPhone: string) {
+    constructor (userImg: string, userName: string, userPhone: string, userGroups: Array<string>) {
         this.userImg = userImg;
         this.userName = userName;
         this.userPhone = userPhone;
+        this.userGroups = userGroups;
     }
 }
 
@@ -25,8 +26,9 @@ class ContactList {
                 const contactName: string = contactNameContainer.innerText;
                 const contactPhoneContainer: HTMLElement = contact.firstChild.parentElement.querySelector("#user_phone");
                 const contactPhone: string = contactPhoneContainer.innerText;    
+                const contactGroups: Array<string> = [];
 
-                contactToPush = new User(contactImg, contactName, contactPhone);
+                contactToPush = new User(contactImg, contactName, contactPhone, contactGroups);
                 
                 this.allContacts.push(contactToPush);
             });
@@ -40,15 +42,13 @@ class ContactList {
         return contact;
     }
 
-    addContact(contact: User) {
-        this.allContacts.push(contact);
-    }
+    // addContact(contact: User) {
+    //     this.allContacts.push(contact);
+    // }
 }
 
-console.log(JSON.parse(localStorage.getItem('contactList')));
-
 let allContacts: ContactList;
-if (JSON.parse(localStorage.getItem('contactList')) !== null) allContacts = new ContactList(JSON.parse(localStorage.getItem('ContactList')).allContacts);
+if (JSON.parse(localStorage.getItem('contactList')) !== null) allContacts = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 else {
     allContacts = new ContactList(null);
     localStorage.setItem('contactList',JSON.stringify(allContacts));
@@ -71,8 +71,9 @@ const userPicker = (ev: any) : void => {
     const userName: string = userNameContainer.innerText;
     const userPhoneContainer: HTMLElement = userContainer.querySelector("#user_phone");
     const userPhone: string = userPhoneContainer.innerText;    
+    const userGroups: Array<string> = allContacts.findContact(userPhone).userGroups;
     
-    const pickedUser: User = new User(userImg, userName, userPhone);
+    const pickedUser: User = new User(userImg, userName, userPhone, userGroups);
 
     localStorage.setItem('currentUser',JSON.stringify(pickedUser));
 }
