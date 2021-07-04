@@ -37,7 +37,7 @@ function logSubmit(event) {
     var obj = {};
     obj["message"] = message;
     obj["timeStamp"] = timeStamp;
-    thisContact[0].chats.unshift(obj);
+    thisContact[0].chats.push(obj);
     console.log("Time stamp: timeStamp" + message);
     event.preventDefault();
     event.target.reset();

@@ -112,18 +112,21 @@ const addToDom = (searchResults: Array<any>) => {
             throw new Error('No holder available!')
         }
         holder.innerHTML = ``;
+        
         if (searchResults.length === 0) { holder.innerHTML = 'no results available'; return; }
-        searchResults.forEach((contact) => holder.innerHTML += (
+        searchResults.forEach((contact) => {
+            let index = parseInt(contact.chats.length - 1)
+        holder.innerHTML += (
             `<div class="holder__contact">`+
             `<img class="holder__contact__image" src="${contact.imgUrl}">`+
             `<div class="holder__contact__name"><a href="./private-chat.html?contactId=${contact.contactId}">${contact.name}</a></div>`+
-            `<div class="holder__contact__chat">${contact.chats[0].message}</div>`+
-            `<div class="holder__contact__timestamp">${contact.chats[0].timeStamp}</div>`+
+            `<div class="holder__contact__chat">${contact.chats[index].message}</div>`+
+            `<div class="holder__contact__timestamp">${contact.chats[index].timeStamp}</div>`+
             `<div class="holder__contact__unread id="unread">6</div>`+
             `<div class="holder__contact__unread id="delete" onclick="deleteContact('${contact.contactId}')">x</div>`+
         `</div>`
         )
-        )
+        })
     } catch (e) {
         console.error(e)
     }

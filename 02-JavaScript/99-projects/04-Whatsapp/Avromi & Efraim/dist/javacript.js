@@ -97,14 +97,17 @@ var addToDom = function (searchResults) {
             holder_1.innerHTML = 'no results available';
             return;
         }
-        searchResults.forEach(function (contact) { return holder_1.innerHTML += ("<div class=\"holder__contact\">" +
-            ("<img class=\"holder__contact__image\" src=\"" + contact.imgUrl + "\">") +
-            ("<div class=\"holder__contact__name\"><a href=\"./private-chat.html?contactId=" + contact.contactId + "\">" + contact.name + "</a></div>") +
-            ("<div class=\"holder__contact__chat\">" + contact.chats[0].message + "</div>") +
-            ("<div class=\"holder__contact__timestamp\">" + contact.chats[0].timeStamp + "</div>") +
-            "<div class=\"holder__contact__unread id=\"unread\">6</div>" +
-            ("<div class=\"holder__contact__unread id=\"delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
-            "</div>"); });
+        searchResults.forEach(function (contact) {
+            var index = parseInt(contact.chats.length - 1);
+            holder_1.innerHTML += ("<div class=\"holder__contact\">" +
+                ("<img class=\"holder__contact__image\" src=\"" + contact.imgUrl + "\">") +
+                ("<div class=\"holder__contact__name\"><a href=\"./private-chat.html?contactId=" + contact.contactId + "\">" + contact.name + "</a></div>") +
+                ("<div class=\"holder__contact__chat\">" + contact.chats[index].message + "</div>") +
+                ("<div class=\"holder__contact__timestamp\">" + contact.chats[index].timeStamp + "</div>") +
+                "<div class=\"holder__contact__unread id=\"unread\">6</div>" +
+                ("<div class=\"holder__contact__unread id=\"delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
+                "</div>");
+        });
     }
     catch (e) {
         console.error(e);
