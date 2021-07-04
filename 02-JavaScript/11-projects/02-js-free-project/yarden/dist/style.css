@@ -1,0 +1,261 @@
+@-webkit-keyframes bg-pan-left {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@keyframes bg-pan-left {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@-webkit-keyframes shadow-inset-center {
+  0% {
+    -webkit-box-shadow: inset 0 0 0 0 transparent;
+    box-shadow: inset 0 0 0 0 transparent;
+  }
+  100% {
+    -webkit-box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes shadow-inset-center {
+  0% {
+    -webkit-box-shadow: inset 0 0 0 0 transparent;
+    box-shadow: inset 0 0 0 0 transparent;
+  }
+  100% {
+    -webkit-box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+  }
+}
+@-webkit-keyframes blink-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes blink-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes blink-1 {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
+@keyframes blink-1 {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
+* {
+  scroll-behavior: auto;
+}
+
+.bg-pan-left {
+  -webkit-animation: bg-pan-left 8s infinite both;
+  animation: bg-pan-left 8s infinite both;
+}
+
+body {
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-image: linear-gradient(94.3deg, #12193a 10.9%, #515473 87.1%);
+  margin: 1rem;
+  border: 0.1px solid rgba(255, 255, 255, 0.116);
+  border-radius: 4%;
+  padding: 1rem;
+}
+
+.navbar {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+.navbar__item {
+  list-style-type: none;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-left: 1.5px solid rgba(255, 255, 255, 0.116);
+}
+.navbar__item a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.3rem;
+}
+.navbar__item a:hover {
+  -webkit-animation: blink-2 0.9s both;
+  animation: blink-2 0.9s both;
+  color: coral;
+}
+.navbar #rocket {
+  width: 4%;
+  height: 2%;
+  fill: white;
+}
+
+main {
+  padding: 0.5rem;
+  border: rgba(255, 255, 255, 0.116) 1px solid;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+}
+main .left-side {
+  width: 50%;
+}
+main .left-side .starTop__starName {
+  color: mediumpurple;
+  width: fit-content;
+}
+main .left-side .starTop--distButton {
+  background-color: #924f30;
+  padding: 0.2rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  margin: 1rem;
+  border-radius: 10%;
+}
+main .left-side .starMain__button {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-weight: bold;
+  background-color: mediumpurple;
+  color: black;
+}
+main .left-side .starMain__button:hover {
+  color: whitesmoke;
+  cursor: pointer;
+}
+main .left-side .starMain__date {
+  margin-left: 1rem;
+  background-color: #924f30;
+  font-family: Arial, Helvetica, sans-serif;
+  color: whitesmoke;
+  border: none;
+  padding: 0.2rem;
+  border-radius: 6%;
+}
+main .left-side .starFooter {
+  display: flex;
+}
+main .left-side .starFooter__left {
+  margin-right: 2rem;
+}
+main .left-side h6 {
+  font-size: 1rem;
+}
+main .right-side {
+  width: 50%;
+}
+main .right-side .planetPic {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .right-side .planetPic > img {
+  width: 60%;
+}
+
+.footer {
+  border: rgba(255, 255, 255, 0.116) 1px solid;
+}
+.footer__starList {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.footer__starList__option {
+  border: 1.5px solid rgba(255, 255, 255, 0.116);
+  display: flex;
+  flex-direction: column;
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #a86e3896 46%, #977027 100%);
+  height: 11rem;
+  width: 25%;
+  padding: 1rem;
+}
+.footer__starList__option:hover {
+  -webkit-animation: shadow-inset-center 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: shadow-inset-center 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.footer__starList__option__headline {
+  width: 70%;
+  font-size: 2rem;
+}
+.footer__starList__option__button {
+  position: absolute;
+  align-self: flex-end;
+  background-color: #bb8064;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.footer__starList__option__button:hover {
+  -webkit-animation: blink-1 0.6s both;
+  animation: blink-1 0.6s both;
+  color: white;
+}
+
+.form-page-container {
+  display: flex;
+  align-items: center;
+}
+.form-page-container .expedition-form {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 2rem;
+}
+.form-page-container .expedition-form fieldset {
+  padding: 1em;
+}
+.form-page-container .expedition-form fieldset legend {
+  color: #bb8064;
+}
+.form-page-container .expedition-form fieldset input, .form-page-container .expedition-form fieldset select {
+  padding: 0.5rem;
+  background-color: #977027;
+  color: whitesmoke;
+}
+.form-page-container .expedition-form button {
+  margin: 2rem auto;
+  width: 50%;
+  padding: 1rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-size: 1.5rem;
+  background-color: mediumpurple;
+}
+.form-page-container iframe {
+  border-radius: 3%;
+}

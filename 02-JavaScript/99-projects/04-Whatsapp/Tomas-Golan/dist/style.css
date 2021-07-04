@@ -1,0 +1,161 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: "Roboto", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #090E11;
+}
+
+h1 {
+  font-size: 4rem;
+  color: #b6b5b5;
+}
+
+h3 {
+  font-size: 2rem;
+  color: #b6b5b5;
+}
+
+h4 {
+  font-size: 1.7rem;
+  color: #b6b5b5;
+}
+
+p {
+  font-size: 1.5rem;
+  color: #b6b5b5;
+}
+
+a {
+  text-decoration: none;
+  color: #b6b5b5;
+}
+
+.container {
+  width: 40%;
+}
+.container .header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2A2F32;
+}
+.container .header .header_img_profile {
+  width: 6.5rem;
+  height: 6rem;
+  position: relative;
+  left: 3rem;
+}
+.container .header .header_icon {
+  position: relative;
+  top: 2rem;
+  right: 3rem;
+}
+.container .header .header_icon .btn_icons {
+  color: #e9e9e9;
+}
+.container .header .header_icon .header_icon_item--add {
+  margin-right: 2rem;
+}
+.container .header .header_icon .header_icon_item--group {
+  margin-right: 2rem;
+}
+.container .form_search {
+  border: 1px solid #b6b5b5;
+}
+.container .form_search .form_search_contact {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.container .form_search .form_search_contact #searchContact {
+  border-radius: 20px;
+  background-color: #2A2F32;
+  color: white;
+}
+.container .form_search .form_search_contact .search_icon {
+  color: #e9e9e9;
+}
+.container .contacts .contacts_chat {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background-color: #2D3134;
+  border-top: 0.5px solid #b6b5b5;
+  color: white;
+  font-size: 400;
+}
+.container .contacts .contacts_chat .contacts_info {
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  top: 1rem;
+}
+.container .contacts .contacts_chat .contacts_img {
+  width: 6.5rem;
+  height: 6rem;
+  position: relative;
+  left: 2rem;
+  border-radius: 50%;
+  padding: 1rem;
+}
+.container .contacts .contacts_chat .contacts_icon {
+  position: relative;
+  top: 2rem;
+  right: 3rem;
+  color: #e9e9e9;
+}
+.container .contacts .contacts_chat:hover {
+  background-color: #4f5355;
+}
+.container .background_chats {
+  display: flex;
+  flex-direction: column;
+  background-color: #353030;
+  position: fixed;
+}
+.container .modal {
+  border: solid 2px black;
+}
+.container .modal .modal-header {
+  background-color: #353030;
+  color: #e9e9e9;
+}
+.container .modal .modal-body {
+  background-color: #353030;
+  color: #e9e9e9;
+}
+.container .modal .modal-body .form_modal {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 770px) {
+  body {
+    width: 100%;
+  }
+
+  .container {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1050px) {
+  body {
+    width: 100%;
+  }
+
+  .container {
+    width: 100%;
+  }
+}

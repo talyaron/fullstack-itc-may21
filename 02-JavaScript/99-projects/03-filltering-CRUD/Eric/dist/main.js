@@ -11,6 +11,8 @@ var Origin = document.querySelector(".product-origin"); //YS: You dont need the 
 var Quantity = document.querySelector(".product-quantity"); //YS: You dont need the first and last parenthesis
 //filter
 var selector = document.querySelector(".selector");
+//edit
+var updateElement;
 var Product = /** @class */ (function () {
     function Product(ProductName, Type, Description, Origin, Quantity) {
         this.ProductName = ProductName; //YS: These varbiables shouldnt be capitalized.
@@ -67,7 +69,6 @@ var Products = /** @class */ (function () {
         });
         return ProductId;
     };
-    //filtar
     Products.prototype.editProduct = function (product, productId) {
         try {
             this.products.forEach(function (element) {
@@ -86,13 +87,28 @@ var Products = /** @class */ (function () {
             console.log(e);
         }
     };
+    Products.prototype.bringInfo = function (productId) {
+        updateElement = productId;
+    };
+    Products.prototype.editElement = function (event) {
+        try {
+            var productName = event.target.elements.name.value;
+            var edit = this.products.find(function (element) { return element.ProductId === updateElement; });
+            edit.ProductName = name;
+            this.bringInfo(event);
+            this.renderProducts();
+        }
+        catch (error) {
+            alert(error);
+        }
+    };
     Products.prototype.renderProducts = function () {
         var html = "";
         try {
             this.products.forEach(function (product) {
                 if (!table)
                     throw new Error("Imposible render");
-                html += "<tbody>\n       <tr>\n        <td>" + product.ProductName + "</td>\n        <td>" + product.Type + "</td> \n        <td>" + product.Description + "</td> \n        <td>" + product.Origin + "</td> \n        <td>" + product.Quantity + "</td> \n        <td> <i onclick='handleGet(\"" + product.ProductId + "\")' class=\"fas fa-pencil-alt\"></i></td>\n        <td> <i onclick='handleDelete(\"" + product.ProductId + "\")'id=\"del\" class=\"fas fa-trash\"></i></td>\n        </tr>";
+                html += "<tbody>\n       <tr>\n        <td>" + product.ProductName + "</td>\n        <td>" + product.Type + "</td> \n        <td>" + product.Description + "</td> \n        <td>" + product.Origin + "</td> \n        <td>" + product.Quantity + "</td> \n        <td> <i onclick='handleGet(\"" + product.ProductId + "\")' class=\"fas fa-pencil-alt\"></i></td>\n        <td> <i onclick='handleDelete(\"" + product.ProductId + "\")'id=\"del\" class=\"fas fa-trash\"></i></td>\n        <td><button type=\"button\" class=\"btn btn-primary itemInfo\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-bs-whatever=\"@getbootstrap\" onclick='editItem(\"" + product.ProductId + "\")' checked>Edit</button>\n        </td>\n        </tr>";
             });
             table.innerHTML = html;
         }
@@ -123,7 +139,7 @@ var handleSubmit = function (ev) {
     products.renderProducts();
     ev.target.reset();
 };
-var handleEdit = function (ev) {
+var handleE = function (ev) {
     ev.preventDefault();
     var p = ProductN.value;
     var t = Type.value;
@@ -158,3 +174,8 @@ function handleKeyUp() {
         console.log(e);
     }
 }
+var handleEdit = function (event) {
+    event.preventDefault();
+    products.editElement(event);
+    event.target.reset();
+};

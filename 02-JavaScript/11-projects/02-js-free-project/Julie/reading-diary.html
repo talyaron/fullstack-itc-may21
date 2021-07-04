@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Julie's Reading Diary</title>
+    <link rel="stylesheet" href="dist/reading-diary.css" />
+  </head>
+  <body>
+    <div class="nav-bar">
+      <nav>
+        <a href="books-list.html">Go to my Book Diary</a>
+      </nav>
+    </div>
+    <div class="big-container">
+      <div class="form-wrapper">
+        <div>
+          <h1>Reading Diary</h1>
+        </div>
+        <form onsubmit="handleSubmit(event)">
+          <div>
+            <label for="bookName">What was the last book you read?</label>
+            <input
+              type="text"
+              id="bookName"
+              name="bookName"
+              placeholder="Name of Book"
+            />
+          </div>
+
+          <div>
+            <label for="author">Who wrote it?</label>
+            <input type="text" id="author" name="author" placeholder="Author" />
+          </div>
+
+          <div>
+            <label for="pubYear">When was it published?</label>
+            <input
+              type="number"
+              min="1000"
+              max="2022"
+              id="pubYear"
+              name="pubYear"
+              placeholder="Year of Publication"
+            />
+          </div>
+          <div>
+            <label for="dateStarted">When did you start reading it?</label>
+            <input
+              type="date"
+              id="dateStarted"
+              name="dateStarted"
+              placeholder="Date Started"
+            />
+          </div>
+          <div>
+            <label for="dateFinished">When did you finish reading it?</label>
+            <input
+              type="date"
+              id="dateFinished"
+              name="dateFinished"
+              placeholder="Date Finished"
+            />
+          </div>
+
+          <div>
+            <label for="summary">What did you think of it?</label>
+            <input
+              type=""
+              id="summry"
+              name="summary"
+              placeholder="Summary of Book"
+            />
+          </div>
+
+          <div>
+            <label for="number">Marks out of ten?</label>
+            <input
+              type="number"
+              min="0"
+              max="10"
+              id="mark"
+              name="mark"
+              placeholder="Marks out of Ten"
+            />
+          </div>
+
+          <div>
+            <label for="submit-button"
+              >Log the Book in your reading diary</label
+            >
+            <input
+              type="submit"
+              id="submit-button"
+              name="submit-button"
+              value="Submit"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="dist/reading-diary.js"></script>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../whatsapp.png" />
+    <link rel="stylesheet" href="dist/chat.css">
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <title>Chat</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="container__header">
+                <div class="container__header__left">
+                    <i class="fas fa-arrow-left container__header__left--arrowleft"></i>
+                    <img src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" alt="" srcset="">
+                    <!--img array in class Person-->
+                    <div class="container__header__left__text">
+                        <!-- a board for put the spans-->
+                        <span class="container__header__left__text--first">Jony Nisen</span>
+                        <!--span array in class Person-->
+                        <span class="container__header__left__text--second">Jessi, +972 054-736-1131</span>
+                        <!--span array in class Person-->
+                        <!--check if input number is valid-->
+                    </div>
+                </div>
+                <div class="container__header__right">
+                    <div class="container__header__right__search">
+                        <label>
+                            <input type="text" name="filtermsg" id="filtermsg">
+                            <i class="fas fa-search container__header__right__search--gray-color"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="container__chat-box"></section>
+        <!--messages shows-->
+        <footer class="container__chat-footer">
+            <i class="far fa-smile container__chat-footer--smile"></i>
+            <input type="text" name="writemsg" id="writemsg" placeholder="Escriba un mensaje aqui">
+            <i class="fas fa-arrow-alt-circle-right container__chat-footer--entermsg"></i>
+        </footer>
+    </div>
+
+    <div class="modal-bg">
+        <div class="modal">
+            <!--actual box on the screen-->
+            
+                <label class ="emoji_text">Emojis</label>
+                    <div class="modal-grid">
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😀">
+                        <span>😀</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😄">
+                        <span>😄</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😅">
+                        <span>😅</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😍">
+                        <span>😍</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🤬">
+                        <span>🤬</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😂">
+                        <span>😂</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😊">
+                        <span>😊</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="👿">
+                        <span>👿</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="👻">
+                        <span>👻</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🥶">
+                        <span>🥶</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😷">
+                        <span>😷</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="👹">
+                        <span>👹</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🤡">
+                        <span>🤡</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🤢">
+                        <span>🤢</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😵">
+                        <span>😵</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="👽">
+                        <span>👽</span>
+                    </label>
+                </div>
+            
+            <span class="modal-close">✖️</span>
+        </div>
+    </div>
+
+    <script src="./dist/chat.js"></script>
+</body>
+
+</html>

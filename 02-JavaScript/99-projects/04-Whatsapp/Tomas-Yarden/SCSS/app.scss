@@ -1,0 +1,9 @@
+/*BASE*/
+@import "base/normalize";
+@import "base/variables";
+@import "base/mixins";
+@import "base/globals";
+
+/*Layout*/
+@import 'layout/chat';
+@import 'layout/user';

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/main.css">
+    <title>MyBook App</title>
+</head>
+<body>
+    <form class="form" onsubmit='handleSubmit(ev)'>
+        <input class="form__item" type="text" name="imgUrl" placeholder="Enter Image URL" minlength="10"></input>
+        <textarea class="form__item" type="text" name="desc" minlength="10" maxlength="150" rows="3">Enter description (up to 150 characters)</textarea>
+        <input class="form__item form__item--add" type="submit" value="ADD"></input>
+    </form>
+    <section class="articles">
+        
+    </section>
+    <script src="dist/script.js"></script>
+</body>
+</html>

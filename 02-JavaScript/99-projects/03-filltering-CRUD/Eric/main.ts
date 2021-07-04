@@ -14,7 +14,8 @@ const Quantity = (<HTMLInputElement>document.querySelector(".product-quantity"))
 
 //filter
 const selector:any = document.querySelector(".selector");
-
+//edit
+let updateElement;
 
 
 interface ProductsInterface {
@@ -76,7 +77,7 @@ class Products {
         this.products = this.products.filter((prod) => prod.ProductId !== ProductId); //YS:  Nice
         this.renderProducts();
     }
-
+    
 //editar
     getProduct(ProductId: string):string{  //YS: Nice! 
         this.products.forEach(element => {
@@ -91,9 +92,6 @@ class Products {
         });
         return ProductId
     }
-
-//filtar
-
 
     editProduct(product: Product, productId){
 
@@ -115,6 +113,31 @@ class Products {
     }
     }
 
+    bringInfo(productId: string) {
+        updateElement = productId;
+          }
+
+    editElement(event) {
+        try {
+    
+     
+          const productName: string = event.target.elements.name.value;
+         
+        
+          const edit = this.products.find((element) => element.ProductId === updateElement); 
+      
+          edit.ProductName = name;
+          this.bringInfo(event);
+      
+          this.renderProducts()
+          
+        } catch (error) {
+          alert(error)
+        }
+      
+      }
+    
+
     renderProducts() {
         let html: string = "";
         try {
@@ -129,6 +152,8 @@ class Products {
         <td>${product.Quantity}</td> 
         <td> <i onclick='handleGet("${product.ProductId}")' class="fas fa-pencil-alt"></i></td>
         <td> <i onclick='handleDelete("${product.ProductId}")'id="del" class="fas fa-trash"></i></td>
+        <td><button type="button" class="btn btn-primary itemInfo" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" onclick='editItem("${product.ProductId}")' checked>Edit</button>
+        </td>
         </tr>`;
         });
     
@@ -162,7 +187,7 @@ const handleSubmit = (ev: any): void => {
     ev.target.reset()
 }
 
-const handleEdit = (ev: any): void => {
+const handleE = (ev: any): void => {
     ev.preventDefault();
     const p: string =  ProductN.value;
     const t:string = Type.value;
@@ -199,3 +224,9 @@ function handleKeyUp() {
 }   
 }
 
+const handleEdit = (event) => {
+    event.preventDefault();
+    products.editElement(event);
+  event.target.reset();
+  };
+  
