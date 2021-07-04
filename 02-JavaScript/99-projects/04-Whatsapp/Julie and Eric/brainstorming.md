@@ -13,8 +13,10 @@ start with the design of the classes, BEM
 
     brainstorming 
 
-    Rsponsive
+    Responsive
 
+
+    BEM models (we need to create a class), also in scss
 
     search
 
