@@ -1,0 +1,35 @@
+html {
+    width: 90vw;
+    margin: auto;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+        margin:5px;
+        padding: 5px;
+        border-radius: 15px;
+        resize: none;
+
+        &--add {
+            background-color: darkcyan;
+            border: 0;
+            font-weight: bold;
+            &:hover {
+                background-color: rgb(3, 189, 189);
+            }
+            &:active {
+                background-color: rgb(0, 107, 107);
+                color: white;
+            }
+        }
+    }
+}
+
+.articles {
+
+    &__item {
+
+    }
+}

@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+}
+
+div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+div__input {
+  margin-bottom: 10px;
+}
+
+.add {
+  width: 12%;
+}
+/*# sourceMappingURL=project.css.map */

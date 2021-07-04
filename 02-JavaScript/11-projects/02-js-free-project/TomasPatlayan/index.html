@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/SCSS/app.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>App</title>
+  </head>
+  <body>
+    <h1>CV Generator</h1>
+
+    <form class="container" onsubmit="handleSubmit(event)">
+      <legend>Fill the Form</legend>
+      <fieldset>
+      <div class="input-container__name">
+        <label>Full Name</label>
+        <input type="text" name="name" placeholder="Put your Full Name"/>
+      </div>
+      <div class="input-container__working">
+        <label>Currently Working</label>
+        <input type="text" name="currentlyWorking" placeholder="Put your Currently Working"/>
+      </div>
+      <div class="input-container__personal-profile">
+        <label >Personal Profile</label>
+        <textarea  name="personalPrfile" placeholder="Put your Personal Prfile"></textarea>
+      </div>
+
+      <div class="input-container__skills">
+        <label>Skills</label>
+        <input  name="skill1" placeholder="Put your Skill"></input>
+        <input  name="skill2" placeholder="Put your Skill"></input>
+        <input  name="skill3" placeholder="Put your Skill"></input>
+        <input  name="skill4" placeholder="Put your Skill"></input>
+
+      </div>
+
+      <div class="input-container__contact">
+        <label>Contact</label>
+        <input type="text" name="contactLin" placeholder="Put your linkedin"/>
+        <input type="email" name="contactMail" placeholder="Put your E-mail"/>
+        <input type="number" name="contactPhone" placeholder="Put your Phone"/>
+      </div>
+
+      <div class="input-container__work-experience">
+        <label>Work Experience</label>
+        <input type="text" name="work1" placeholder="Put your projects"></input>
+        <input type="text" name="work2" placeholder="Put your projects"></input>
+        <input type="text" name="work3" placeholder="Put your projects"></input>
+        <input type="text" name="work4" placeholder="Put your projects"></input>
+      </div>
+
+      <div class="input-container__education">
+<label>Education</label>
+        <input type="text" name="education1" placeholder="Put your education"/>
+        <input type="text" name="education2" placeholder="Put your education"/>
+        <input type="text" name="education3" placeholder="Put your education"/>
+ 
+      </div>
+          
+      <button type="submit" value="Send">Send</button>
+
+    </fieldset>
+    </form>
+
+
+    <script
+      src="https://kit.fontawesome.com/3d37771d36.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./TS/main.js"></script>
+  </body>
+</html>

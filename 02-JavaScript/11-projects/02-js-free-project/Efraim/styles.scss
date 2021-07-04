@@ -1,0 +1,163 @@
+body {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right,
+            #f9fd02 0%,
+            #f7e817 50%,
+            #000000 50%,
+            #1b1a1a 100%);
+}
+
+.nav {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    z-index: 10;
+
+
+    &__cart,
+    &__checkout {
+        float: right;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 7px 8px;
+        text-decoration: none;
+    }
+
+    &__cart {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    &__checkout {
+        color: black;
+        background-color: gray;
+        text-align: center;
+        align-self: center;
+        height: 2.1rem;
+        border-radius: 5px;
+    }
+}
+
+.opener {
+    width: 100vw;
+    height: 700px;
+    background-image: url("https://cdn.newsapi.com.au/image/v1/af711d3e42345f3514e64a578ddb1574");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -5;
+    position: relative;
+    margin: 0;
+
+
+    &__x {
+        width: 100px;
+        height: 100px;
+        animation: x 13s linear infinite alternate;
+
+
+        &__football {
+            width: 100px;
+            height: 100px;
+            border-radius: 20%;
+            animation: y 7s linear infinite alternate, rotation 8s infinite linear;
+        }
+    }
+
+    &__fanclub {
+        height: 15vh;
+        width: 500px;
+        align-items: center;
+        z-index: 5;
+        position: absolute;
+        margin: 0;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+}
+
+.merchandise {
+    margin-bottom: 5rem;
+    font-size: 50px;
+    font: 900 10vmin/7vh cookie, cursive;
+    font-style: italic;
+    margin-top: 5rem;
+    color: white;
+    filter: drop-shadow(.05em .05em rgb(255, 38, 0));
+}
+
+.shopping-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row wrap;
+    justify-content: center;
+
+
+    &__item-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin: 5rem;
+
+
+
+        &__item-image {
+            width: 350px;
+            height: 400px;
+            border-radius: 5px;
+        }
+
+        &__item-image:hover {
+            transform: scale(1.1);
+        }
+
+        &__item-name {
+            font-size: 1rem;
+            margin-top: 20px;
+            color: red;
+
+
+        }
+
+        &__item-price {
+            font-size: 1rem;
+            color: red;
+
+
+        }
+
+        &__add {
+            width: 100px;
+            background-color: white;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin: auto;
+        }
+
+        &__add:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+@keyframes x {
+    100% {
+        transform: translateX(calc(100vw - 100px));
+    }
+}
+
+@keyframes y {
+    100% {
+        transform: translateY(calc(95vh - 100px));
+    }
+}
