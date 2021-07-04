@@ -1,3 +1,8 @@
+body {
+    display: flex;
+    justify-content: space-between;
+}
+
 //////////////////////////MODAL////////////////////////
 .modal {
     display: none;
@@ -21,9 +26,9 @@
         padding: 20px;
         border: 1px solid #888;
         width: 80%;
+        background-color: green; 
     };
 };
-
 
 /* The Close Button */
 .close {
@@ -33,3 +38,26 @@
     font-weight: bold;
     cursor: pointer;
 };
+
+.form__input--image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+///////////////////////////////////////////////////////
+.user__info {
+    display: flex;
+    border-top: 1px solid grey;
+    padding: 15px;
+
+    &__picture {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    };
+
+    &__name {
+        font-size: 23px;
+    }
+}
