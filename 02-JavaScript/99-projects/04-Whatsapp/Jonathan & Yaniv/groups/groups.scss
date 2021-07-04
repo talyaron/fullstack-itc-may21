@@ -179,8 +179,6 @@ body {
 
 .new_conversation {
     width: 600px;
-    overflow: hidden;
-    overflow-y: auto;
     position: fixed;
     left: 600px;
     top: 0;
@@ -203,6 +201,7 @@ body {
                 #new_group_logo {
                     grid-area: img;
                     padding: 0 5px;
+                    margin: 0;
                     border-radius: 50px;
                     width: 50px;
                     height: 50px;
@@ -210,6 +209,7 @@ body {
 
                 #new_group {
                     grid-area: title;
+                    margin: 0;
                     font-weight: normal;
                     color: black;
                 }
@@ -227,6 +227,7 @@ body {
                 .new_chat_contact_img {
                     grid-area: img;
                     padding: 0 5px;
+                    margin: 0;
                     border-radius: 50px;
                     width: 50px;
                     height: 50px;
@@ -234,12 +235,14 @@ body {
 
                 .new_chat_contact_name {
                     grid-area: title;
+                    margin: 0;
                     font-weight: normal;
                     color: black;
                 }
 
                 .new_chat_status {
                     grid-area: status;
+                    margin: 0;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                 }
@@ -250,10 +253,10 @@ body {
     }
 
     &__item {
-        padding: 5px 0;
-
+        
         &--title {
-            background-color: #009688;
+            background-color: #00BFA5;
+            height: 10vh;
 
             .title {
                 display: flex;
@@ -268,6 +271,7 @@ body {
             }
 
             #search {
+                background-color: #F6F6F6;
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
@@ -276,6 +280,9 @@ body {
 
         &--body {
             background-color: white;
+            height: 90vh;
+            overflow: hidden;
+            overflow-y: auto;        
         }
     }
 }

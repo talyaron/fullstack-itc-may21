@@ -152,8 +152,6 @@ body {
 
 .new_conversation {
   width: 600px;
-  overflow: hidden;
-  overflow-y: auto;
   position: fixed;
   left: 600px;
   top: 0;
@@ -173,12 +171,14 @@ body {
 .new_conversation .options__item--group #new_group_logo {
   grid-area: img;
   padding: 0 5px;
+  margin: 0;
   border-radius: 50px;
   width: 50px;
   height: 50px;
 }
 .new_conversation .options__item--group #new_group {
   grid-area: title;
+  margin: 0;
   font-weight: normal;
   color: black;
 }
@@ -192,25 +192,26 @@ body {
 .new_conversation .options__item--contact .new_chat_contact_img {
   grid-area: img;
   padding: 0 5px;
+  margin: 0;
   border-radius: 50px;
   width: 50px;
   height: 50px;
 }
 .new_conversation .options__item--contact .new_chat_contact_name {
   grid-area: title;
+  margin: 0;
   font-weight: normal;
   color: black;
 }
 .new_conversation .options__item--contact .new_chat_status {
   grid-area: status;
+  margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.new_conversation__item {
-  padding: 5px 0;
-}
 .new_conversation__item--title {
-  background-color: #009688;
+  background-color: #00BFA5;
+  height: 10vh;
 }
 .new_conversation__item--title .title {
   display: flex;
@@ -222,10 +223,14 @@ body {
   padding: 0 5px;
 }
 .new_conversation__item--title #search {
+  background-color: #F6F6F6;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 .new_conversation__item--body {
   background-color: white;
+  height: 90vh;
+  overflow: hidden;
+  overflow-y: auto;
 }
