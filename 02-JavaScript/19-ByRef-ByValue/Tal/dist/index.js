@@ -1,9 +1,9 @@
 //primitives are copied by value
 //primitives: string, number, undefined, boolean;
-// by value: that we copy only the value
+// by value: we copy only the value
 //objects are copied by reference
 // objects are: object, array, function
-// by refernce: means it is the same object, and we point to specific place in memory
+// by refernce: means that the varibles pointing to the same location in memory
 var x = { a: 1 };
 var y = x;
 console.log(y.a); // 1
