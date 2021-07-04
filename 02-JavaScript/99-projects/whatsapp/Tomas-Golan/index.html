@@ -80,18 +80,20 @@
                 </form> 
           </div>
         </div>
-            <form class="form_modal" action="" onsubmit="handleGroup(event)">
+            <form class="form_modal"  onsubmit="handleGroup(event)">
                 <label class="formulario_item--modal" for="name-modal">Name of group:</label>
                 <input class="formulario_item--modal" type="text" name="nameGroup" />
                 <label class="formulario_item--modal" for="imgGroup">Profile image Group:</label>
                 <input class="formulario_item--modal" type="url" name="imgGroup" placeholder="url here..."/>
+
+                <form action=""></form>
                 <label for="selectContact">Select Contacts:</label>
 
                 <div id="contacts_group">
 
                 </div>
 
-                <input class="btn btn-primary" style="margin-top: 5px; font-size: 1.2rem;" type="submit" value="Create Group"  data-bs-dismiss="modal"></input>
+                <input class="btn btn-primary" style="margin-top: 5px; font-size: 1.2rem;" type="submit" onclick="getNames(); return false;" value="Create Group"  data-bs-dismiss="modal"></input>
             </form>
         </div>
       </div>

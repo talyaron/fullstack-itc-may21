@@ -22,7 +22,7 @@ function renderModalGroupData() {
                 <h3 class="contacts_name_modal">${el.name}</h3>
                 <p>${el.phone}</p>
             </div>
-            <input type="radio" class="radio_group" value="${el.id}">
+            <input type="checkbox" class="check" value="${el.name}">
         </div>`
     });
     containerContact.innerHTML = modalContact;
@@ -33,12 +33,27 @@ renderModalGroupData();
 const handleGroup = (ev)=>{
     ev.preventDefault();
 
-    const name: string = ev.target.elements.nameContact.value;
-    const phone: number = ev.target.elements.phoneContact.value;
-    const profileImg: string = ev.target.elements.imgContact.value;
-    
-    const newContacto = new Contact(name, phone, profileImg);
-    allContacts.unshift(newContacto);
-    localStorage.setItem("contactos", JSON.stringify(allContacts));
-    renderData();
+    const nameGroup: string = ev.target.elements.nameGroup.value;
+    const GroupImg: string = ev.target.elements.imgGroup.value;
+
+
+
+    // const newContacto = new Contact(name, phone, profileImg);
+    // allContacts.unshift(newContacto);
+    // localStorage.setItem("contactos", JSON.stringify(allContacts));
+    // renderData();
 }
+
+// const getNames = ()=>{
+//     let checks = document.querySelector('.check');
+//     let str = "";
+
+//     for(let i = 0;i < 2000; i++ ){
+//         if(checks[i].checked === true){
+//             str += checks[i].value + " ";
+//             console.log(str);
+//         }
+
+        
+//     }
+// }
