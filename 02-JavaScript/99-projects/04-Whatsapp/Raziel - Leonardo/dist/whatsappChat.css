@@ -49,6 +49,7 @@ a {
   grid-template-columns: 41rem 1fr;
   grid-column: 1/-1;
   grid-row: 1/-1;
+  width: 50rem;
   background-image: url(https://preview.redd.it/qwd83nc4xxf41.jpg?width=640&crop=smart&auto=webp&s=e82767fdf47158e80604f407ce4938e44afc6c25);
   margin: 2rem auto;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -60,6 +61,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 49.5rem;
   height: 6rem;
   padding: 1rem 2rem;
   background: #ededed;
@@ -90,4 +92,16 @@ a {
 
 .chat-window-menu-icon {
   margin-left: 2rem;
+}
+
+.type-message-bar {
+  position: absolute;
+  bottom: 0;
+  width: 50rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f0f0f0;
+  padding: 1rem 2rem;
+  border: 2px solid red;
 }
