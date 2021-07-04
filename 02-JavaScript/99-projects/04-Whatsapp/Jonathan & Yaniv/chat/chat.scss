@@ -93,25 +93,39 @@
         align-items: flex-end;
 
         &__messages {
+            background-color: black;
+            display: flex;
+            align-items: flex-end;
+            border-radius: 20px;
+
 
             margin: 7px 10px;
 
             &--content {
                 color: white;
                 margin-right: 10px;
-                z-index: 1;
+                font-size: 1.4rem;
             }
 
             &--datemsg {
                 color: white;
                 margin-right: 10px;
-                z-index: 1;
+                font-size: 0.7rem;
+                
             }
 
             &--doubleclick {
                 color: lightskyblue;
                 margin-right: 10px;
-                z-index: 1;
+                font-size: 0.7rem;
+                
+            }
+
+            &--trash {
+                color: lightpink;
+                margin-right: 10px;
+                font-size: 0.7rem;
+                
             }
 
 
@@ -189,6 +203,7 @@
     cursor: pointer;
 }
 
+
 .modal-bg {
     position: fixed;
     top: 0;
@@ -203,7 +218,7 @@
     visibility: hidden;
     /*to see nothing at the beginning*/
     opacity: 0;
-    transition: visibility 0s, opacity 2s;
+    transition: visibility 0s, opacity 0.5s;
 }
 
 .bg-active {
@@ -220,7 +235,7 @@
     background-color: black;
 
 
-    form {
+ 
 
         .emoji_text{
             display: block;
@@ -240,7 +255,7 @@
             margin-top: 0.5rem;
             cursor: pointer;
         }
-    }
+    
 
     .modal-close {
         position: absolute;

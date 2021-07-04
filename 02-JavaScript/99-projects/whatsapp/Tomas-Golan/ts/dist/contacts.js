@@ -23,12 +23,14 @@ function renderData() {
     var html = "";
     var render = JSON.parse(localStorage.getItem("contactos"));
     render.forEach(function (element) {
-        html += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.profileImg + "\" alt=\"\">\n            <a href=\"\">\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.name + "</h3>\n                    <p>" + element.phone + "</p>\n                </div>\n            </a>\n            <i onclick='deleteChat(\"" + element.id + "\")' class=\"fas fa-trash fa-2x contacts_icon\"></i>\n        </div>";
+        html += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.profileImg + "\" alt=\"\">\n            <a href=\"\">\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.name + "</h3>\n                    <p>" + element.phone + "</p>\n                </div>\n            </a>\n            <i onclick='deleteChat(\"" + element.id + "\")' class=\"fas fa-trash fa-lg contacts_icon\"></i>\n        </div>";
     });
     containerData.innerHTML = html;
 }
+renderData();
 var deleteChat = function (id) {
-    var deleteChats = allContacts.filter(function (chat) { return chat.id !== id; });
+    var contactsDelete = JSON.parse(localStorage.getItem("contactos"));
+    var deleteChats = contactsDelete.filter(function (chat) { return chat.id !== id; });
     allContacts = deleteChats;
     localStorage.setItem("contactos", JSON.stringify(allContacts));
     renderData();
