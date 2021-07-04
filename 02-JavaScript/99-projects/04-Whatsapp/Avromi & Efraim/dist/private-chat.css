@@ -6,15 +6,14 @@ body {
   background-color: #128C7E;
   color: white;
   height: 15vh;
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  position: fixed;
 }
 .nav i {
   height: 2rem;
   width: 3rem;
-}
-.nav p {
-  margin-top: -8%;
 }
 .nav__wrapper {
   display: flex;
@@ -31,12 +30,19 @@ body {
   margin-left: 1rem;
 }
 
-.input__send__wrapper {
-  position: absolute;
+.messages {
+  margin-bottom: 10px;
+}
+.messages .single__message {
+  background-color: #DCF8C6;
+}
+
+.input__send__wrapper .form {
+  position: fixed;
   bottom: 2vh;
   display: flex;
 }
-.input__send__wrapper .input__container {
+.input__send__wrapper .form .input__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,31 +51,30 @@ body {
   height: 10vh;
   width: 92.5vw;
 }
-.input__send__wrapper .input__container--left {
+.input__send__wrapper .form .input__container--left {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.input__send__wrapper .input__container--right {
+.input__send__wrapper .form .input__container--right {
   border: 3px solid red;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
 }
-.input__send__wrapper .input__container img {
-  height: 2.5rem;
-  width: 2.5rem;
+.input__send__wrapper .form .input__container .i {
+  opacity: 30%;
+  margin: 15px;
 }
-.input__send__wrapper .input__container #input {
+.input__send__wrapper .form .input__container #input {
   border: none;
   height: 50%;
   width: 80vw;
+  outline: none;
 }
-.input__send__wrapper .mic__or__send__button {
+.input__send__wrapper .form .mic__or__send__button {
   display: flex;
   align-items: center;
 }
-.input__send__wrapper .mic__or__send__button .fas {
+.input__send__wrapper .form .mic__or__send__button .fas {
   display: flex;
   justify-content: center;
   align-items: center;

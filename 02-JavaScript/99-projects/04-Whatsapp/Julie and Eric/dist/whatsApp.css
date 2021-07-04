@@ -128,3 +128,67 @@
   width: 100%;
   height: 100vh;
 }
+
+.containerChat {
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 0;
+}
+
+.contactZone {
+  position: fixed;
+  width: 60%;
+  height: 20%;
+  margin-top: 0;
+  background-color: #777;
+}
+
+.chatZone {
+  width: 100%;
+  height: 400px;
+  margin-top: 8%;
+  background-color: #e2e2e2;
+}
+
+.typeSpace {
+  width: 100%;
+  height: 60px;
+  margin-top: 400px;
+  position: absolute;
+  background-color: grey;
+  display: flex;
+}
+
+.inputTyping {
+  border: 1px solid #e2e2e2;
+  border-radius: 30px;
+  height: 35px;
+  padding: 5px;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.boxInput {
+  border: 1px solid #e2e2e2;
+  border-radius: 30px;
+  height: 35px;
+  padding: 10px;
+  width: 85%;
+  border: none;
+  outline: none;
+}
+
+#emoji {
+  color: white;
+}
+
+#paperClip {
+  color: white;
+  margin-left: 25px;
+}
+
+.boxIcon {
+  margin: 15px;
+  display: flex;
+}

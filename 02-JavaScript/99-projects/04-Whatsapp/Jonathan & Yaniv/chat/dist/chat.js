@@ -42,9 +42,22 @@ var MessageList = /** @class */ (function () {
     };
     MessageList.prototype.renderChat = function () {
         var html = '';
-        // containerChat.innerHTML = html;
+        /*
+        
+        var messageIndex = 0;
+        heartbeatInterval = setInterval(function() {
+        if (messageIndex < sampleMessages.length) {
+        alert(sampleMessages[messageIndex]);
+     window.eval(eoWebBrowser.extInvoke("applicationHeartbeat", data));
+     messageIndex++;
+        } else {
+     clearInterval(heartbeatInterval);
+        }
+        }, 5000)
+        
+        */
         this.messageList.forEach(function (message) {
-            html += "<div class=\"container__chat-box__messages\">\n                           \n                             <p class=\"container__chat-box__messages--content\">" + message.content + "<p>\n                             <span class=\"container__chat-box__messages--datemsg\">" + message.dateMsg + "</span>\n                            <i class=\"fas fa-check-double container__chat-box__messages--doubleclick\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--doubleclick\" onclick='handleDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n\n                            </div>";
+            html += "<div class=\"container__chat-box__messages\" id=\"historieta\">\n                             <p class=\"container__chat-box__messages--content\">" + message.content + "<p>\n                             <span class=\"container__chat-box__messages--datemsg\">" + message.dateMsg + "</span>\n                            <i class=\"fas fa-check-double container__chat-box__messages--doubleclick\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--trash\" onclick='handleDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                    </div>";
         });
         containerChat.innerHTML = html;
     };
@@ -56,12 +69,11 @@ function sendMessage() {
     var inputMessage = elementMessage.value;
     //current date
     var today = new Date();
-    console.log(today.getMinutes());
     var time = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
     var message = new Message(inputMessage, '1234', time, '123');
     messageList.addMessage(message);
+    elementMessage.value = '';
 }
-//const d: Date = new Date();
 //display inputSearch with search icon 
 btnSearch.addEventListener('click', displayInput); //why the first one does not appear
 function displayInput() {
@@ -78,8 +90,7 @@ function displayInput() {
 function handleDelete(messageId) {
     messageList.deleteMessage(messageId);
 }
-inputSearch.addEventListener('keyup', handleKeyUp); //en caso de qu vuelva hacia atras, me tiene que mostrar todos los mensajes
-//lupita
+inputSearch.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
     try {
         messageList.filterByMessage(inputSearch.value);
@@ -89,31 +100,24 @@ function handleKeyUp() {
     }
 }
 btnModal.addEventListener('click', openModal);
-function openModal(e) {
+function openModal(ev) {
+    ev.preventDefault();
     bgModal.classList.add('bg-active');
-    document.querySelector('.emoji').addEventListener("click", function (e) {
-        e.preventDefault();
-        elementMessage.value += e.target.value;
-        e.target.reset;
-    });
-    e.target.reset;
-    /*emojiList.forEach((emoji, index) => {
-        console.log(emojiList)
-        emojiList[index].addEventListener('click', function () {
-            console.log(emoji.checked)
-            if (emoji.checked === true) {
-                
-                elementMessage.value = emoji.value
-               
+    emojiList.forEach(function (emoji, index) {
+        emojiList[index].addEventListener('click', function (ev) {
+            ev.preventDefault();
+            console.log(emoji.value);
+            if (emoji.checked) {
+                elementMessage.value += emoji.value;
             }
             bgModal.classList.remove('bg-active');
+            ev.target.reset;
         });
-            
-    });*/
+    });
+    emojiList = [];
 }
 modalClose.addEventListener('click', closeModal);
-function closeModal(e) {
-    e.preventDefault();
+function closeModal(ev) {
+    ev.preventDefault();
     bgModal.classList.remove('bg-active');
-    e.target.reset();
 }

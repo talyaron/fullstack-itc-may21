@@ -8,6 +8,8 @@ make it look as similar as you can to the real Whatsapp
 
 Work in a group.
 start with the design of the classes, BEM */
+var searchName = document.querySelector("#search");
+var nextPage = document.querySelector('#chat'); //change the name later
 var Message = /** @class */ (function () {
     function Message(text) {
         this.text = text;
@@ -31,6 +33,7 @@ var User = /** @class */ (function () {
 var UserList = /** @class */ (function () {
     function UserList() {
         this.userList = [];
+        this.filterUser = [];
     }
     //Every time that I add a new contact, I will use this method, this add a new user to the array "userList"   
     UserList.prototype.addUser = function (user) {
@@ -38,7 +41,7 @@ var UserList = /** @class */ (function () {
             if (!user)
                 throw new Error('The user it doesn´t exist!');
             this.userList.push(user);
-            this.renderContacts();
+            this.renderContacts(this.userList);
             modal.style.display = "none";
         }
         catch (error) {
@@ -47,20 +50,28 @@ var UserList = /** @class */ (function () {
     };
     ;
     //To Show the contacts in the page
-    UserList.prototype.renderContacts = function () {
+    UserList.prototype.renderContacts = function (userFilter) {
+        var arrayToRender = userFilter ? userFilter : this.userList;
         try {
-            var showContact = document.querySelector('#showContacts');
+            var showContact = document.querySelector('#chats');
             if (!showContact)
                 throw new Error('The element where to show the contacts doesn´t exist!');
             //Doing a loop to show the contacts
-            var html = this.userList.map(function (element) {
-                return ("<div class=\"user__info\" id=\"" + element.number + "\" onclick='passInformation(\"" + element.number + "\")'>\n                    <div><img class=\"user__info__picture\" src=\"" + element.picture + "\" alt=\"\"></div>\n                    <div class=\"user__info__name\">" + element.name + "</div>\n                    <div>" + element.message[0].text + "</b></div>\n                    </div>");
+            var html = arrayToRender.map(function (element) {
+                return ("<div class=\"chat\" id=\"chat\" onclick='passInformation(\"" + element.number + "\")'\n                >\n                <div class=\"chat__left\">\n                    <img src=\"" + element.picture + "\" alt=\"\">\n                </div>\n                <div class=\"chat__right\">\n                    <div class=\"chat__right--top\">\n                        <span class=\"chat__right--top__contact-name\">" + element.name + "</span>\n                        <span class=\"chat__right--top__phone-number\">Phone Number: " + element.number + "</span>\n\n                    </div>\n                    <div class=\"chat__right--bottom\">\n                        <div class=\"chat__right--bottom--left\">\n                            <img class=\"double-check-mark\" src=\"Img_whatsapp/double-check-seen.svg\" alt=\"\">\n                            <span>Raziel is typing...</span> \n                        </div>\n                    </div>\n\n                </div>\n            </div>");
             }).join('');
             showContact.innerHTML = html;
         }
         catch (error) {
             console.error(error);
         }
+    };
+    UserList.prototype.searchContact = function (name) {
+        var regEx = "" + name; //YS: You dont need template literals here. 
+        var searchName = new RegExp(regEx, 'i');
+        this.filterUser = this.userList.filter(function (elem) { return searchName.test(elem.name); });
+        console.log(this.filterUser);
+        this.renderContacts(this.filterUser);
     };
     return UserList;
 }());
@@ -113,11 +124,16 @@ function passInformation(userNumber) {
 //Function to redirect to the user Chat
 function redirect() {
     try {
-        window.location.href = '/Chat/chat.html';
+        window.location.href = './whatsappChat.html';
         if (!window.location.href)
             throw new Error('The page where you want to redirect it doesn´t exist!');
     }
     catch (error) {
         console.error(error);
     }
+}
+// nextPage.addEventListener('onclick',passInformation('')); //fix it later
+searchName.addEventListener('keyup', handleKeyUp);
+function handleKeyUp() {
+    userList.searchContact(searchName.value);
 }
