@@ -6,15 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsApp</title>
-    <link rel="shortcut icon" href="img/logoWhatsApp.gif" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/logoWhatsApp.gif" type="image/x-icon" />
     <link rel="stylesheet" href="dist/style.min.css">
 </head>
 
 <body>
 
-    <button class="top-submenu-button" id="button">
-        Add a new contact
-    </button>
+<div>
+    <button class="top-submenu-button" id="button"><img src="../img/buttonAddNewContact.jpg" alt=""></button>
+
+    <form onkeyup="handleSearch(event)">
+        <input class="form__search" type="text" name="search" id="search" placeholder="Search by chat or initiate a new one" />
+    </form>
+
+    <div id="showContacts"></div>
 
     <!-- Modal to add a user -->
     <div id="modal" class="modal">
@@ -38,9 +43,14 @@
             </form>
         </div>
     </div>
+    
+</div>
 
-    <script src="dist/helperModals.js"></script>
+<div style="background-color: blue; width: 70%; height: 550px;">Cuadrado azul</div>
+
     <script src="dist/script.js"></script>
+    <script src="dist/helperModals.js"></script>
+
 </body>
 
 </html>

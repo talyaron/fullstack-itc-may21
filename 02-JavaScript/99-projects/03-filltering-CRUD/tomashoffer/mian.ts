@@ -39,8 +39,8 @@ class Producto {
 }
 
 // EVENTS LISTENERS
-select.addEventListener('change', selectFilter); //YS: Nice! 
-searchBar.addEventListener('keyup', search);
+// select.addEventListener('change', selectFilter); //YS: Nice! 
+// searchBar.addEventListener('keyup', search);
 
 // FUNCTIONS
 // ADD JSON TO LIST ARRAY
@@ -72,58 +72,38 @@ function edit(id) { //YS: Is this function really necessary?
     updateID = id;
 }
 
-// FILTER BY SELECTS OPTIONS [see event]
-function selectFilter() {
-    try {
-        const selectedValue = Number(select.value);
-        if (selectedValue > 300) throw new Error('You have an error in your value');
-        console.log(typeof selectedValue); //YS: No console logs. 
-        let arr = [];
-        arr = list;
-        let arr2 = [];
-        arr2 = list;
-        let arr3 = [];
-        arr3 = list;
-        //YS: DRY! You shouldve made this into a function and passed different parameters
-        if (selectedValue === 100) {
-            let priceFilter = arr.filter((prod) => prod.price >= selectedValue); 
-            arr = priceFilter;
-            renderData(arr);
-        }
-        else if (selectedValue === 200) {
-            let priceFilter1 = arr2.filter((prod) => prod.price >= selectedValue);
-            arr2 = priceFilter1;
-            renderData(arr2);
-        }
-        else if (selectedValue === 0) {
-            renderData(list);
-        }
-        else {
-            let priceFilter2 = arr3.filter((prod) => prod.price >= selectedValue);
-            arr3 = priceFilter2;
-            renderData(arr3);
-        }
-    } catch (e) {
-        console.error(e);
-    }
-}
+// TAKING FILTERS VALUES 
+const filters = (event) =>{
+    event.preventDefault();
+    const parentElements = event.target.parentElement.parentElement.parentElement.elements;
+    const selectPrice = parentElements.select.value;
+    const searchBar = parentElements.searchBar.value;
 
-// TAKING VALUE FROM INPUT FOR USE IT AT searchRegEx()
-function search(e) {
-    try {
-        searchValue = e.target.value;
-        searchRegEx(searchValue);
-    } catch (e) {
-        console.error(e);
-    }
+    filterFunction(selectPrice, searchBar);
+    console.log(selectPrice, searchBar);
+    
 }
+const formElement = document.querySelector("#filterForm");
+formElement.addEventListener('change', filters);
+formElement.addEventListener('keyup', filters);
 
-// RegEx FOR FILTER BY PRODUCTS NAME
-function searchRegEx(inputSearch: string) { //YS: Nice
-    const regExp: string = `^${inputSearch}`
-    const searchTermReg: RegExp = new RegExp(regExp, 'i');
-    const filterSearch = list.filter(elem => searchTermReg.test(elem.product))
-    renderData(filterSearch);
+
+// LINKING FILTERS
+const filterFunction = (selectPrice, searchBar) =>{
+    let filterArray = list;
+    if(searchBar){
+        const regExp: string = `^${searchBar}`;
+        const searchTermReg: RegExp = new RegExp(regExp, 'i');
+        filterArray = filterArray.filter(elem => searchTermReg.test(elem.product) && elem.price >= selectPrice)
+        renderData(filterArray);
+    }
+    if(selectPrice !== 'allproducts'){
+        filterArray = filterArray.filter((prod) => prod.price >= selectPrice); 
+        renderData(filterArray);
+    }else{
+        renderData(list);
+    }
+
 }
 
 // RENDER DATA

@@ -35,14 +35,14 @@ a {
 /*App Background*/
 .top {
     background-color: #009688; //
-    grid-column: 2/-2;
+    grid-column: 1/-1;
     grid-row: 1/2;
   
 }
 
 .bottom {
     background-color: #d7dbd6;
-    grid-column: 2/-2;
+    grid-column: 1/-1;
     grid-row: 2/-1;
     border: 2px solid black;
   
@@ -50,10 +50,9 @@ a {
 /*The app window*/
 .app {
     display: grid;
-    grid-template-columns: 40rem 1fr;
+    grid-template-columns: 41rem 1fr;
     grid-column: 1/-1;
     grid-row: 1/-1;
-    width:40.5rem;
     margin: 2rem auto;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 1rem 0.05rem rgba(0, 0, 0, 0.2);
@@ -251,3 +250,5 @@ a {
 .chat:hover {
     background: #f5f5f5;
 }
+
+
