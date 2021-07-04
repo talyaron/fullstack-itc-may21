@@ -13,7 +13,7 @@ console.log(firstPerson, secondPerson);
 var obj = ['a', 'b', 'c'];
 var firstOne = obj[0], secondOne = obj[1], third = obj[2], fourth = obj[3];
 console.log(firstOne, secondOne);
-var sizes = [{ height: 2, width: 2, depth: 2 }];
+var sizes = { height: 2, width: 43, depth: 2 };
 function cubicVolume(_a) {
     var height = _a.height, width = _a.width, depth = _a.depth;
     var x = height * width * depth;
@@ -21,3 +21,4 @@ function cubicVolume(_a) {
 }
 console.log(cubicVolume({ height: 2, width: 2, depth: 2 }));
 console.log(cubicVolume({ height: 6, width: 2, depth: 9 }));
+console.log(cubicVolume(sizes));

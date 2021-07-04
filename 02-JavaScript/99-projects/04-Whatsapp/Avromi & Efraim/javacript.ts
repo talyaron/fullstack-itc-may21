@@ -2,7 +2,7 @@ class Contact {
     name: string ;
     imgUrl: string;
     phone: number;
-    chats: Array<string>;
+    chats: Array<object>;
     contactId: string;
     constructor(name, imgUrl, phone, chats){
         this.name = name;
@@ -33,7 +33,7 @@ class Contact {
                     return (
                         `<div class="holder__contact" id="${contact.contactId}">`+
                     `<img class="holder__contact__image" src="${contact.imgUrl}">`+
-                    `<div class="holder__contact__name">${contact.name}</div>`+
+                    `<div class="holder__contact__name"><a href="./private-chat.html?contactId=${contact.contactId}">${contact.name}</a></div>`+
                     `<div class="holder__contact__chat">New Converstion ${contact.chats}</div>`+
                     `<div class="holder__contact__timestamp">5:20pm</div>`+
                     `<div class="holder__contact__unread" id="unread">6</div>`+
@@ -53,7 +53,9 @@ class Contact {
         }
 }
 
+
 const contacts: Contacts = new Contacts();
+
 function handleSubmit(ev): any {
     ev.preventDefault();
     try {
@@ -110,7 +112,7 @@ const addToDom = (searchResults: Array<any>) => {
         searchResults.forEach((contact) => holder.innerHTML += (
             `<div class="holder__contact">`+
             `<img class="holder__contact__image" src="${contact.imgUrl}">`+
-            `<div class="holder__contact__name">${contact.name}</div>`+
+            `<div class="holder__contact__name"><a href="./private-chat.html?contactId=${contact.contactId}">${contact.name}</a></div>`+
             `<div class="holder__contact__chat">${contact.chats}</div>`+
             `<div class="holder__contact__timestamp">5:20pm</div>`+
             `<div class="holder__contact__unread id="unread">6</div>`+
