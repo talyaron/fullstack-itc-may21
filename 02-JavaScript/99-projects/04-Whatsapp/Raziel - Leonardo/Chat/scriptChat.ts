@@ -1,5 +1,5 @@
 const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-const root: HTMLElement = document.querySelector('#root');
+const root: HTMLElement = document.querySelector('#main');
 
 //Render the chat of the User
 function renderChat(userInfo): void {
@@ -7,11 +7,19 @@ function renderChat(userInfo): void {
         let html: string = userInfo.map(element => {
             console.log(element.message);
             return (
-                `<div class="user__chat">
-                <div><img class="user__chat__image" src="${element.picture}" alt=""></div>
-                <div >${element.name}</div>
+                `<div class="chat-window__header" onclick='redirectBack()'>
+                <div class="chat-window__header--left">
+                    <img   class="chat-window__contact--img" src="${element.picture}">
+                    <div class="contact-name-and-phone">
+                        <span class="chat-window__name">${element.name}</span>
+                        <span class="chat-window__phone">${element.number}</span>
+                    </div>
                 </div>
-                <div>${element.message}</div>`
+                <div class="chat-window__header--left">
+                    <img class="chat-window-search-icon" src="Img_whatsapp/search-icon.svg">
+                    <img class="chat-window-menu-icon"  src="Img_whatsapp/menu-icon.svg">
+                </div>
+            </div>`
             )
         }).join('');
         if (!html) throw new Error('An error happens when you want to render the user chat!')
@@ -36,6 +44,15 @@ const handleSubmitMessage = (ev: any): void => {
         ev.target.reset();
 
         if (!userInfo) throw new Error('The user doesn´t exist!')
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function redirectBack(): void {
+    try {
+        window.location.href ='./whatsapp.html'
+        if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
     } catch (error) {
         console.error(error);
     }

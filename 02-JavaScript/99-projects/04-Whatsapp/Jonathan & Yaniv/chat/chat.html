@@ -41,11 +41,9 @@
         <section class="container__chat-box"></section>
         <!--messages shows-->
         <footer class="container__chat-footer">
-            <!--<i class="far fa-smile container__chat-footer--smile"></i>-->
-            <p class='container__chat-footer--smile'>😀</p>
-            <form action="">
-                <input type="text" name="writemsg" id="writemsg" placeholder="Escriba un mensaje aqui">
-                <i class="fas fa-arrow-alt-circle-right container__chat-footer--entermsg"></i>
+            <i class="far fa-smile container__chat-footer--smile"></i>
+            <input type="text" name="writemsg" id="writemsg" placeholder="Escriba un mensaje aqui">
+            <i class="fas fa-arrow-alt-circle-right container__chat-footer--entermsg"></i>
         </footer>
     </div>
 
@@ -53,34 +51,79 @@
         <div class="modal">
             <!--actual box on the screen-->
             <form>
-                <label>Emoji:
+                <label class ="emoji_text">Emojis</label>
+                    <div class="modal-grid">
                     <label>
-                    <input type="radio" name="smile" class="emoji" value="😀">
-                    <span>😀</span>
-                </label>
-                <label>
-                    <input type="radio" name="happy" class="emoji" value="😄">
-                    <span>😄</span>
-                </label>
-                <label>
-                    <input type="radio" name="happywater" class="emoji" value="😅">
-                    <span>😅</span>
-                </label>
-                <label>
-                    <input type="radio" name="love" class="emoji"  value="😍" >
-                    <span>😍</span>
-                </label>
-                <label>
-                    <input type="radio" name="angry" class="emoji"  value="🤬">
-                    <span>🤬</span>
-                </label>
-                <button type="submit" class="btn-modal">Suscribe</button>
+                        <input type="radio" name="choice" class="emoji" value="😀">
+                        <span>😀</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😄">
+                        <span>😄</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😅">
+                        <span>😅</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😍">
+                        <span>😍</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🤬">
+                        <span>🤬</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😂">
+                        <span>😂</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😊">
+                        <span>😊</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="👿">
+                        <span>👿</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="👻">
+                        <span>👻</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🥶">
+                        <span>🥶</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😷">
+                        <span>😷</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="👹">
+                        <span>👹</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🤡">
+                        <span>🤡</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🤢">
+                        <span>🤢</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="😵">
+                        <span>😵</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="👽">
+                        <span>👽</span>
+                    </label>
+                </div>
             </form>
-            <span class="modal-close">X</span>
+            <span class="modal-close">✖️</span>
         </div>
     </div>
 
-    <script src="../dist/whatsapp.js"></script>
+    <script src="./dist/chat.js"></script>
 </body>
 
 </html>
