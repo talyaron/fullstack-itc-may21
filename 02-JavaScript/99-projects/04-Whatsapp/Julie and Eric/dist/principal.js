@@ -33,7 +33,7 @@ var Contacts = /** @class */ (function () {
     Contacts.prototype.renderContacts = function () {
         var html = "";
         this.contacts.forEach(function (element) {
-            html += "<div><div class=\"chat1\" onclick=\"redirect()\">\n\n      <img src=\"" + element.image + "\" alt=\"\" class=\"photo2\"> \n\n      <h4 class=\"nameContact\">" + element.contactName + "</h4>\n      </div>\n      <div>\n      <i class=\"far fa-trash-alt\" id=\"delete\" ></i>\n      </div>\n      </div>";
+            html += "<div>\n      <div class=\"chat1\" onclick=\"redirect()\">\n\n      <img src=\"" + element.image + "\" alt=\"\" class=\"photo2\"> \n\n      <h4 class=\"nameContact\">" + element.contactName + "</h4>\n      </div>\n      <div>\n      <i onclick='handleDelete(\"" + element.contactId + "\")' class=\"far fa-trash-alt\" id=\"delete\" > </i>\n      </div>\n      </div>";
         });
         render.innerHTML = html;
         console.log(html);
@@ -54,7 +54,7 @@ function handleDelete(contactId) {
     });
     console.log(reducedContacts);
     contacts = reducedContacts;
-    renderContacts(reducedContacts);
+    renderContacts();
 }
 var contacts = new Contacts();
 contacts.renderContacts();
