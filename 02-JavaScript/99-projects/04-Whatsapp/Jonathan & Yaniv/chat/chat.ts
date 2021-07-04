@@ -66,28 +66,14 @@ class MessageList {
     renderChat() {
         let html: string = '';
 
-
-        /* 
-        
-        var messageIndex = 0;
-        heartbeatInterval = setInterval(function() {
-        if (messageIndex < sampleMessages.length) {
-        alert(sampleMessages[messageIndex]);
-     window.eval(eoWebBrowser.extInvoke("applicationHeartbeat", data));
-     messageIndex++;
-        } else {
-     clearInterval(heartbeatInterval);
-        }
-        }, 5000)
-        
-        */
-
         this.messageList.forEach(message => { 
-            html += `<div class="container__chat-box__messages" id="historieta">
+
+            
+            html += `<div class="container__chat-box__messages">
                              <p class="container__chat-box__messages--content">${message.content}<p>
                              <span class="container__chat-box__messages--datemsg">${message.dateMsg}</span>
-                            <i class="fas fa-check-double container__chat-box__messages--doubleclick"></i>
-                            <i class="fa fa-trash container__chat-box__messages--trash" onclick='handleDelete("${message.msgID}")' title="Delete Item"></i>
+                             <i class="fas fa-check-double container__chat-box__messages--doubleclick"></i>
+                             <i class="fa fa-trash container__chat-box__messages--trash" onclick='handleDelete("${message.msgID}")' title="Delete Item"></i>
                     </div>`
         });
         
@@ -162,8 +148,7 @@ function openModal(ev) {
             ev.preventDefault()
             console.log(emoji.value)
             if (emoji.checked) {
-                elementMessage.value += emoji.value
-                
+                elementMessage.value += emoji.value   
             }   
             bgModal.classList.remove('bg-active');
             ev.target.reset
