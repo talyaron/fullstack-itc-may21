@@ -27,7 +27,14 @@ body {
   background-image: url("https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png");
 }
 
-.search_icon {
+.search {
+  background-color: #F6F6F6;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px 0;
+}
+.search .search_icon {
   cursor: pointer;
   -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: white;
@@ -35,11 +42,10 @@ body {
   padding: 10px 15px;
   border-radius: 50px 0 0 50px;
 }
-
-.search_form {
+.search .search_form {
   width: 80%;
 }
-.search_form .search_in_groups {
+.search .search_form .search_in_groups {
   font-size: 1rem;
   width: 100%;
   padding: 10px 10px;
@@ -92,12 +98,6 @@ body {
 .header__item {
   padding: 5px 0;
 }
-.header__item--search {
-  background-color: #F6F6F6;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
 
 .groups {
   display: flex;
@@ -110,6 +110,7 @@ body {
   grid-template-rows: 25px 25px;
   grid-template-areas: "img title time" "img msg delete";
   padding: 10px;
+  border-bottom: 1px solid #F6F6F6;
 }
 .groups .group__item {
   margin: 0;
@@ -166,7 +167,11 @@ body {
 .new_conversation .options__item {
   margin: 0;
   color: #BABABA;
-  border-bottom: 1px solid #BABABA;
+  border-bottom: 1px solid #F6F6F6;
+}
+.new_conversation .options__item:hover {
+  cursor: pointer;
+  background-color: #F6F6F6;
 }
 .new_conversation .options__item--group {
   display: grid;
@@ -234,11 +239,4 @@ body {
 }
 .new_conversation__item--header .title__item {
   padding: 0 5px;
-}
-.new_conversation__item--header #search {
-  background-color: #F6F6F6;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 5px 0;
 }
