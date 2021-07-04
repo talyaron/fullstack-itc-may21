@@ -104,11 +104,13 @@ main {
     & .contact-container {
         display: flex;
         margin: 0.4em;
+        height: 65px;
 
         &__contact-image {
             width: 15%;
             border-radius: 50%;
             margin-right: 0.2em;
+            object-fit: cover;
         }
         &__info-container {
             flex-flow: column nowrap;
