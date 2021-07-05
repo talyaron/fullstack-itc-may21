@@ -54,7 +54,7 @@
         <div class="new_group">
             <div class="new_group__item new_group__item--header">
                 <div class="title">
-                    <h3 class="title__item title__item--cancel_btn">🡠</h3>
+                    <h3 class="title__item title__item--back_btn">🡠</h3>
                     <h3 class="title__item">Add Contacts to Group</h3>
                 </div>
                 <div class="search">
@@ -66,8 +66,16 @@
                 </div>
             </div>
             <div class="new_group__item new_group__item--body">
-                <form class="">
-
+                <form class="options" id="add_group_form">
+                    <div class="options__item options__item--group_img">
+                        <label for="group_img_form" id="add_photo">Add Group<br /> Image</label>
+                        <input type="file" name="groupImg" id="group_img_form" onchange="readURL(this);" style="display:none" />
+                        <img id="groupImg" src="https://www.pngkit.com/png/full/44-443934_post-navigation-people-icon-grey.png">
+                    </div>
+                    <div class="options__item">
+                        <label for="group_name_form">Group Name</label>
+                        <input type="text" maxlength="25" placeholder="Group's Topic" name="groupName" id="group_name_form" />
+                    </div>
                 </form>
             </div>
         </div>
