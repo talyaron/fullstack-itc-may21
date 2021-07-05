@@ -29,6 +29,8 @@ var ContactList = /** @class */ (function () {
 }());
 var allContacts = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 var loggedInUser = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
+var pageTitle = document.querySelector('title');
+pageTitle.innerText = loggedInUser.userName + "'s groups";
 var addChatBtn = document.querySelector('.controls__item--plus');
 addChatBtn.addEventListener('click', function (ev) { return showNewChatMenu(ev); });
 var showNewChatMenu = function (ev) {

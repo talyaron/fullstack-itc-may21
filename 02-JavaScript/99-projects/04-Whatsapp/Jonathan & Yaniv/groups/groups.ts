@@ -43,6 +43,9 @@ const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
 
+const pageTitle: HTMLElement = document.querySelector('title');
+pageTitle.innerText = `${loggedInUser.userName}'s groups`;
+
 const addChatBtn: HTMLElement = document.querySelector('.controls__item--plus');
 
 addChatBtn.addEventListener('click', ev => showNewChatMenu(ev));
