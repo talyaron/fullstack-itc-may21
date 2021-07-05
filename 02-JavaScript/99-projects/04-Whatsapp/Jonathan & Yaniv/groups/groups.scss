@@ -1,3 +1,5 @@
+@-webkit-keyframes slide-in-left{0%{-webkit-transform:translateX(-1000px);transform:translateX(-1000px);opacity:0}100%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}@keyframes slide-in-left{0%{-webkit-transform:translateX(-1000px);transform:translateX(-1000px);opacity:0}100%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}
+
 * {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -181,15 +183,18 @@ body {
     }
 }
 
-.new_conversation {
+.new_chat {
+    display: none;
     width: 600px;
     height: 100vh;
     position: fixed;
-    left: 600px;
+    left: 0;
     top: 0;
     background-color: white;
     overflow: hidden;
-    overflow-y: auto; 
+    overflow-y: auto;
+    -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
     .options {
         &__item {
@@ -223,7 +228,7 @@ body {
                     height: 34px;
                 }
 
-                #new_group {
+                #new_group_title {
                     grid-area: title;
                     margin: 0;
                     font-weight: normal;
@@ -240,7 +245,7 @@ body {
                     "img status";
                 padding: 10px;
 
-                .new_chat_contact_img {
+                .new_contact_img {
                     grid-area: img;
                     padding: 0 5px;
                     margin: 0;
@@ -249,14 +254,14 @@ body {
                     height: 50px;
                 }
 
-                .new_chat_contact_name {
+                .new_contact_name {
                     grid-area: title;
                     margin: 0;
                     font-weight: normal;
                     color: black;
                 }
 
-                .new_chat_status {
+                .new_contact_status {
                     grid-area: status;
                     margin: 0;
                     text-overflow: ellipsis;
@@ -285,9 +290,26 @@ body {
                 
                 &__item {
                     padding: 0 5px;
+
+                    &--cancel_btn {
+                        cursor: pointer;
+                    }
                 }
 
             }
         }
     }
+}
+.new_group {
+    display: none;
+    width: 600px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: white;
+    overflow: hidden;
+    overflow-y: auto;
+    -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }

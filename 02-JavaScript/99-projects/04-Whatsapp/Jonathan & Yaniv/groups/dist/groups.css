@@ -1,3 +1,27 @@
+@-webkit-keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 * {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
@@ -154,26 +178,29 @@ body {
   background-color: #F6F6F6;
 }
 
-.new_conversation {
+.new_chat {
+  display: none;
   width: 600px;
   height: 100vh;
   position: fixed;
-  left: 600px;
+  left: 0;
   top: 0;
   background-color: white;
   overflow: hidden;
   overflow-y: auto;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-.new_conversation .options__item {
+.new_chat .options__item {
   margin: 0;
   color: #BABABA;
   border-bottom: 1px solid #F6F6F6;
 }
-.new_conversation .options__item:hover {
+.new_chat .options__item:hover {
   cursor: pointer;
   background-color: #F6F6F6;
 }
-.new_conversation .options__item--group {
+.new_chat .options__item--group {
   display: grid;
   grid-template-columns: 1fr 7fr;
   grid-template-rows: 25px 25px;
@@ -181,7 +208,7 @@ body {
   padding: 10px;
   align-items: center;
 }
-.new_conversation .options__item--group #new_group_logo {
+.new_chat .options__item--group #new_group_logo {
   grid-area: img;
   padding: 8px;
   margin: 0 5px;
@@ -191,20 +218,20 @@ body {
   width: 34px;
   height: 34px;
 }
-.new_conversation .options__item--group #new_group {
+.new_chat .options__item--group #new_group_title {
   grid-area: title;
   margin: 0;
   font-weight: normal;
   color: black;
 }
-.new_conversation .options__item--contact {
+.new_chat .options__item--contact {
   display: grid;
   grid-template-columns: 1fr 7fr;
   grid-template-rows: 25px 25px;
   grid-template-areas: "img title" "img status";
   padding: 10px;
 }
-.new_conversation .options__item--contact .new_chat_contact_img {
+.new_chat .options__item--contact .new_contact_img {
   grid-area: img;
   padding: 0 5px;
   margin: 0;
@@ -212,24 +239,24 @@ body {
   width: 50px;
   height: 50px;
 }
-.new_conversation .options__item--contact .new_chat_contact_name {
+.new_chat .options__item--contact .new_contact_name {
   grid-area: title;
   margin: 0;
   font-weight: normal;
   color: black;
 }
-.new_conversation .options__item--contact .new_chat_status {
+.new_chat .options__item--contact .new_contact_status {
   grid-area: status;
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.new_conversation__item--header {
+.new_chat__item--header {
   position: sticky;
   top: 0;
   z-index: 10;
 }
-.new_conversation__item--header .title {
+.new_chat__item--header .title {
   background-color: #00BFA5;
   display: flex;
   flex-direction: row;
@@ -237,6 +264,23 @@ body {
   align-items: flex-end;
   height: 100px;
 }
-.new_conversation__item--header .title__item {
+.new_chat__item--header .title__item {
   padding: 0 5px;
+}
+.new_chat__item--header .title__item--cancel_btn {
+  cursor: pointer;
+}
+
+.new_group {
+  display: none;
+  width: 600px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: white;
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }

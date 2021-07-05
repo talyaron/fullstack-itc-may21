@@ -40,6 +40,12 @@ function renderMessages(arrToRender: Array<Contact>) {
     })
 
 }
+function setScrollHeight(){
+const messagesDiv = document.querySelector(".messages")
+messagesDiv.scrollTop = messagesDiv.clientHeight
+}
+setScrollHeight()
+
 
 function openCamera() {
     console.log("open the camera");

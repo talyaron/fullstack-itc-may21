@@ -139,7 +139,7 @@ function redirect(userNumber): void {
     localStorage.setItem('userInfo', JSON.stringify(userList));
     localStorage.setItem('numberToSearch', userNumber);
     try {
-        window.location.href = './whatsappChat.html'
+        window.location.href = '../Chat/whatsappChat.html'
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
     } catch (error) {
         console.error(error);
