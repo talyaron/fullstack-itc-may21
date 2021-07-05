@@ -23,7 +23,7 @@ const hideNewChatMenu = (ev: any): void => {
 const newChatOptions: HTMLElement = document.querySelector('.options');
 
 newChatOptions.addEventListener('click', ev => directToChat(ev));
-newChatOptions.addEventListener('click', ev => showNewGroupForm(ev));
+newChatOptions.addEventListener('click', ev => showNewGroupMenu(ev));
 
 const directToChat = (ev: any): void => {
 
@@ -43,18 +43,38 @@ const directToChat = (ev: any): void => {
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList',JSON.stringify(loggedInUser));
-    
+
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
 }
 
-const showNewGroupForm = (ev: any): void => {
+const showNewGroupMenu = (ev: any): void => {
 
-    let newGroupForm: HTMLElement;
     if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1)) return;
-    if (ev.target.id.indexOf('new_group_') !== -1) newGroupForm = ev.target.parentElement;
-    else newGroupForm = ev.target;
-    console.log(newGroupForm);
+    const newGroupMenu: HTMLElement = document.querySelector('.new_group');
+    allContacts.renderContactsToNewGroupMenu();
+    newGroupMenu.style.display = 'unset';
 }
+
+const backToNewChatMenuBtn: HTMLElement = document.querySelector('.title__item--back_btn');
+
+backToNewChatMenuBtn.addEventListener('click', ev => hideNewGroupMenu(ev));
+
+const hideNewGroupMenu = (ev: any): void => {
+    const newGroupMenu: HTMLElement = document.querySelector('.new_group');
+    newGroupMenu.style.display = 'none';
+}
+
+const readURL = (input: any) => { // CREDIT TO LEONARDO FOR THIS ONE!!
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+  
+      reader.onload = (e)=> {
+       document.querySelector('#groupImg').setAttribute("src", `${e.target.result}`);
+        return e.target.result
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 
 const logOutBtn = document.querySelector('.controls__item--ellipsis');
 
