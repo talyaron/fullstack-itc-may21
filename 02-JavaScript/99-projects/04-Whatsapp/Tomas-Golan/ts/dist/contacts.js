@@ -15,7 +15,6 @@ var addLocalContacts = function (localChat) {
     localChat.forEach(function (contact) {
         var add = new Contact(contact.name, contact.phone, contact.profileImg);
         allContacts.push(add);
-        render();
     });
 };
 addLocalContacts(chats);
@@ -45,7 +44,7 @@ var handleContact = function (ev) {
     var phone = ev.target.elements.phoneContact.value;
     var profileImg = ev.target.elements.imgContact.value;
     var newContacto = new Contact(name, phone, profileImg);
-    allContacts.unshift(newContacto);
+    allContacts.push(newContacto);
     localStorage.setItem("contactos", JSON.stringify(allContacts));
     render();
 };

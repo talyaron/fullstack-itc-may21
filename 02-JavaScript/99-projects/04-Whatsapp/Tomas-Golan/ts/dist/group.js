@@ -36,10 +36,9 @@ document.getElementById('btn').onclick = function () {
         var checkbox = markedCheckbox_1[_i];
         arraysOfNames.push(checkbox.value);
     }
-    var contactsGroup = arraysOfNames;
-    var newGroup = new Group(nameGroup, GroupImg, contactsGroup);
-    console.log(newGroup);
-    groups.unshift(newGroup);
+    var newGroup = new Group(nameGroup, GroupImg, arraysOfNames);
+    arraysOfNames = [];
+    groups.push(newGroup);
     localStorage.setItem("groups", JSON.stringify(groups));
     render();
 };
