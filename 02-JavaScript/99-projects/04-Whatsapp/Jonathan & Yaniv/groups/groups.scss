@@ -153,7 +153,24 @@ body {
         }
 
         &--group_img {
+            display: flex;
+            justify-content: center;
+            align-content: center;
             text-align: center;
+            color: white;
+            background-color: #858585;
+            border-radius: 50px;
+            height: 100px;
+            width: 100px;
+
+            &:hover {
+                background-color: #858585;
+            }
+            
+            img {
+                height: 100%;
+                width: 100%;
+            }
         }
     }
 }

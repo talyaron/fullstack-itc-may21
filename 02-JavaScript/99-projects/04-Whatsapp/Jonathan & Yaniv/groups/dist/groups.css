@@ -153,7 +153,22 @@ body {
   white-space: nowrap;
 }
 .options__item--group_img {
+  display: flex;
+  justify-content: center;
+  align-content: center;
   text-align: center;
+  color: white;
+  background-color: #858585;
+  border-radius: 50px;
+  height: 100px;
+  width: 100px;
+}
+.options__item--group_img:hover {
+  background-color: #858585;
+}
+.options__item--group_img img {
+  height: 100%;
+  width: 100%;
 }
 
 .header {

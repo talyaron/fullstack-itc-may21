@@ -88,7 +88,7 @@ var ContactList = /** @class */ (function () {
                 return 0;
             });
             var newGroupContactsContainer_1 = document.querySelector("#add_group_form");
-            newGroupContactsContainer_1.innerHTML = "\n            <div class=\"options__item\">\n                <label for=\"group_img_form\" id=\"add_photo\">Add<br /> Group<br /> Image</label>\n                <input type=\"file\" name=\"groupImg\" id=\"group_img_form\" onchange=\"readURL(this);\" style=\"display:none\" />\n                <img id=\"groupImg\">\n            </div>\n            <div class=\"options__item\">\n                <label for=\"group_name_form\">Group Name</label>\n                <input type=\"text\" name=\"groupName\" id=\"group_name_form\" />\n            </div>";
+            newGroupContactsContainer_1.innerHTML = "\n            <div class=\"options__item options__item--group_img\">\n                <label for=\"group_img_form\" id=\"add_photo\">Add Group<br /> Image</label>\n                <input type=\"file\" name=\"groupImg\" id=\"group_img_form\" onchange=\"readURL(this);\" style=\"display:none\" />\n                <img id=\"groupImg\" src=\"https://www.pngkit.com/png/full/44-443934_post-navigation-people-icon-grey.png\">\n            </div>\n            <div class=\"options__item\">\n                <label for=\"group_name_form\">Group Name</label>\n                <input type=\"text\" maxlength=\"25\" placeholder=\"Group's Topic\" name=\"groupName\" id=\"group_name_form\" />\n            </div>";
             this.allContacts.forEach(function (contact) {
                 if (contact.userPhone === loggedInUser.userPhone)
                     return;

@@ -110,14 +110,14 @@ class ContactList {
             });
             const newGroupContactsContainer: HTMLElement = document.querySelector("#add_group_form");
             newGroupContactsContainer.innerHTML = `
-            <div class="options__item">
-                <label for="group_img_form" id="add_photo">Add<br /> Group<br /> Image</label>
+            <div class="options__item options__item--group_img">
+                <label for="group_img_form" id="add_photo">Add Group<br /> Image</label>
                 <input type="file" name="groupImg" id="group_img_form" onchange="readURL(this);" style="display:none" />
-                <img id="groupImg">
+                <img id="groupImg" src="https://www.pngkit.com/png/full/44-443934_post-navigation-people-icon-grey.png">
             </div>
             <div class="options__item">
                 <label for="group_name_form">Group Name</label>
-                <input type="text" name="groupName" id="group_name_form" />
+                <input type="text" maxlength="25" placeholder="Group's Topic" name="groupName" id="group_name_form" />
             </div>`;
             this.allContacts.forEach((contact) => {
                 if (contact.userPhone === loggedInUser.userPhone) return;
