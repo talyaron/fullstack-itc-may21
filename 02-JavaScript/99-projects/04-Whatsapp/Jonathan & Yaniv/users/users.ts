@@ -17,7 +17,7 @@ class ContactList {
 
     constructor (allContacts: Array<User>) {
         if (allContacts === null) {
-            this.allContacts = []; 
+            this.allContacts = [];
             const userItemsElements: NodeList = document.querySelectorAll('.users__item');
             let contactToPush: User;
             userItemsElements.forEach(contact => {
@@ -26,11 +26,18 @@ class ContactList {
                 const contactName: string = contactNameContainer.innerText;
                 const contactPhoneContainer: HTMLElement = contact.firstChild.parentElement.querySelector("#user_phone");
                 const contactPhone: string = contactPhoneContainer.innerText;    
-                const contactGroups: Array<string> = [];
+                const contactGroups: Array<Group> = [];
 
                 contactToPush = new User(contactImg, contactName, contactPhone, contactGroups);
                 
                 this.allContacts.push(contactToPush);
+                this.allContacts = this.allContacts.sort((a: User, b: User) => {
+                    const aName = a.userName;
+                    const bName = b.userName;
+                    if (aName < bName) {return -1;}
+                    if (aName > bName) {return 1;}
+                    return 0;
+                });
             });
             return;
         }

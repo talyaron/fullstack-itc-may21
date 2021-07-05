@@ -67,16 +67,48 @@ const hideNewGroupMenu = (ev: any): void => {
     newGroupMenu.style.display = 'none';
 }
 
-const readURL = (input: any) => { // CREDIT TO LEONARDO FOR THIS ONE!!
+const newGroupSubmit: HTMLElement = document.querySelector('.options__item--submit');
+
+newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
+
+const createNewGroup = (ev: any): void => {
+    try {
+        ev.preventDefault();
+        console.log(ev.target.elements);
+        ev.target.reset();
+return;
+        const groupId: string = "group" + Math.random().toString(16).slice(2);
+    
+        const groupImg: string = ev.target.elements.groupImg.value; // ??
+        const groupName: string = ev.target.elements.groupName.value;
+        // const groupUsers: Array<string> = ev.target.elements.??.value;
+        // const groupMsgs: Array<Message> = ev.target.elements.??.value;
+    
+        // const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
+        // loggedInUser.addGroupIfNew(group.groupId);
+        // localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
+        // allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        // localStorage.setItem('contactList',JSON.stringify(loggedInUser));
+        
+        ev.target.reset();
+      } catch (er) {
+        console.error(er);
+      }
+    }
+
+const readURL = (input: any) => {
     if (input.files && input.files[0]) {
       let reader = new FileReader();
   
       reader.onload = (e)=> {
         const label: HTMLElement = document.querySelector('#add_photo');
-        const img: HTMLElement = document.querySelector('#groupImg');
-        label.style.display = 'none';
-        img.style.display = 'unset';
-        img.setAttribute("src", `${e.target.result}`);
+        label.setAttribute('alt',`${e.target.result}`);
+        label.style.backgroundImage = `url("${e.target.result}")`;
+        label.style.backgroundSize = '100% 100%';
+        label.innerText = '';
+        label.style.padding = '0';
+        label.style.height = '200px';
+        label.style.width = '200px';
         return e.target.result
       }
       reader.readAsDataURL(input.files[0]);
