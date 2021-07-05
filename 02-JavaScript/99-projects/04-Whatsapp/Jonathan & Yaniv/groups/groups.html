@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <section class="groups_section">
+    <section class="chats_section">
         <header class="header">
             <div class="header__item controls">
                 <img class="controls__item controls__item--profile_img"
@@ -23,22 +23,22 @@
             <div class="header__item search">
                 <i class="search_icon fas fa-search"></i>
                 <form class="search_form">
-                    <input type="search" name="searchInGroups" class="search_in_groups"
+                    <input type="search" name="searchInChats" class="search_input" id="search_in_chats"
                         placeholder="Search or start a new chat" />
                 </form>
             </div>
         </header>
-        <main class="groups">
-            <div class="groups__item group">
-                <img class="group__item group__item--img"
+        <main class="chats">
+            <div class="chats__item chat">
+                <img class="chat__item chat__item--img"
                     src="https://www.acervoyatasto.com/media/website/default-avatar-9.png" />
-                <h3 class="group__item group__item--name">name of group/contact</h2>
-                    <p class="group__item group__item--last_msg_time">time</p>
+                <h3 class="chat__item chat__item--name">name of chat/contact</h2>
+                    <p class="chat__item chat__item--last_msg_time">time</p>
                     <!-- if today: hour; if this week: day; if before: DD.MM.YYYY -->
-                    <p class="group__item group__item--last_msg_content"><span class="grp_member_name">name:</span>
+                    <p class="chat__item chat__item--last_msg_content"><span class="grp_member_name">name:</span>
                         <!-- only if not currentUser -->
                         last message</p>
-                    <i class="group__item group__item--delete fas fa-trash"></i>
+                    <i class="chat__item chat__item--delete fas fa-trash"></i>
             </div>
         </main>
         <div class="new_chat">
@@ -50,7 +50,7 @@
                 <div class="search">
                     <i class="search_icon fas fa-search"></i>
                     <form class="search_form">
-                        <input type="search" name="searchInGroups" class="search_in_groups"
+                        <input type="search" name="searchContacts" class="search_input" id="search_contacts"
                             placeholder="Search contacts" />
                     </form>
                 </div>
@@ -66,22 +66,26 @@
             <div class="new_group__item new_group__item--header">
                 <div class="title">
                     <h3 class="title__item title__item--cancel_btn">🡠</h3>
-                    <h3 class="title__item">Add Group Contacts</h3>
+                    <h3 class="title__item">Add Contacts to Group</h3>
                 </div>
                 <div class="search">
                     <i class="search_icon fas fa-search"></i>
                     <form class="search_form">
-                        <input type="search" name="searchInGroups" class="search_in_groups"
+                        <input type="search" name="searchContactsForGroup" class="search_input" id="search_in_groups"
                             placeholder="Insert Contact Name" />
                     </form>
                 </div>
             </div>
-            <div class="new_group__item new_group__item--body options">     
+            <div class="new_group__item new_group__item--body">
+                <form class="">
+
+                </form>
             </div>
         </div>
     </section>
     <section class="chat_section">This is where private chats are shown</section>
     <script src="dist/groups.js"></script>
+    <script src="dist/helpers.js"></script>
 </body>
 
 </html>
