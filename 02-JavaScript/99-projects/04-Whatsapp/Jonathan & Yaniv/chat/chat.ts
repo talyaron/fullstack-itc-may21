@@ -28,19 +28,21 @@ class Message {
     dateMsg: string;
     groupID: string;
     msgID: string;
+    lastMessageName:string;
 
-    constructor(content: string, userPhone: string, dateMsg: string, groupID: string) {
+    constructor(content: string, userPhone: string, dateMsg: string, groupID: string, lastMessageName:string) {
         this.content = content;
         this.userPhone = userPhone;
         this.dateMsg = dateMsg;
         this.groupID = groupID;
+        this.lastMessageName = lastMessageName;
         this.msgID = "id" + Math.random().toString(16).slice(2);
     }
 }
 
 
 class MessageList {
-    messageList: Array<Message> = []
+    messageList: Array<Message> = [] //maybe we can took from this array the last message
     messageListFilter: Array<Message> = []
 
     addMessage(message: Message) {
@@ -106,7 +108,7 @@ function sendMessage() {
     let today = new Date();
     let time = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes())
 
-    const message = new Message(inputMessage, '1234', time, '123')
+    const message = new Message(inputMessage, '1234', time, '123', inputMessage) //last one is the lastmessagename
 
     messageList.addMessage(message)
 
@@ -147,7 +149,6 @@ function handleEditDelete(messageId: string) {
 
 inputSearch.addEventListener('keyup', handleKeyUp)
 
-
 function handleKeyUp() {
     try {
         messageList.filterByMessage(inputSearch.value)
@@ -155,6 +156,16 @@ function handleKeyUp() {
         console.log(e)
     }
 }
+
+
+function handleReturn(){
+
+    const pickedUser = JSON.parse(localStorage.getItem("currentUser"))
+    window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
+}
+
+
+
 
 
 

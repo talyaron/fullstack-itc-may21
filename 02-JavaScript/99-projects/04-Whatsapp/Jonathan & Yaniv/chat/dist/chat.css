@@ -26,6 +26,7 @@
 .container .container__header__left--arrowleft {
   color: #6E7377;
   margin-right: 10px;
+  cursor: pointer;
 }
 .container .container__header__left img {
   border-radius: 50%;
