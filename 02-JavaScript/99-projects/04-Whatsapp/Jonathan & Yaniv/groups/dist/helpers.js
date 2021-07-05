@@ -53,7 +53,11 @@ var readURL = function (input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            document.querySelector('#groupImg').setAttribute("src", "" + e.target.result);
+            var label = document.querySelector('#add_photo');
+            var img = document.querySelector('#groupImg');
+            label.style.display = 'none';
+            img.style.display = 'unset';
+            img.setAttribute("src", "" + e.target.result);
             return e.target.result;
         };
         reader.readAsDataURL(input.files[0]);

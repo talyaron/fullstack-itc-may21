@@ -111,9 +111,9 @@ class ContactList {
             const newGroupContactsContainer: HTMLElement = document.querySelector("#add_group_form");
             newGroupContactsContainer.innerHTML = `
             <div class="options__item options__item--group_img">
-                <label for="group_img_form" id="add_photo">Add Group<br /> Image</label>
+                <label for="group_img_form" id="add_photo">Add Group Image</label>
                 <input type="file" name="groupImg" id="group_img_form" onchange="readURL(this);" style="display:none" />
-                <img id="groupImg" src="https://www.pngkit.com/png/full/44-443934_post-navigation-people-icon-grey.png">
+                <img id="groupImg" style="display:none">
             </div>
             <div class="options__item">
                 <label for="group_name_form">Group Name</label>
