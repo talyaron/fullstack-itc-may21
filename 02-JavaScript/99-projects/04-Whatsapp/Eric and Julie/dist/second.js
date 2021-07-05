@@ -1,31 +1,49 @@
+var savedContacts = JSON.parse(localStorage.getItem("contactsData"));
+console.log(savedContacts);
 var conversation = (document.querySelector(".envelope__typing--input-entry"));
-var Message = /** @class */ (function () {
-    function Message(content, phone) {
-        this.content = content;
-        this.phone = phone;
-        this.msgID = "id" + Math.random().toString(16).slice(2);
-    }
-    return Message;
-}());
-var MessageList = /** @class */ (function () {
-    function MessageList() {
-        this.messageList = [];
-    }
-    MessageList.prototype.addMessage = function (message) {
-        this.messageList.push(message);
-        this.renderChat();
-    };
-    MessageList.prototype.renderChat = function () {
-        var html = "";
-        this.messageList.forEach(function (message) {
-            html += "<div class=\"container__chat-box__messages\">\n                             <p class=\"container__chat-box__messages--content\">" + message.content + "<p>\n                             <span class=\"container__chat-box__messages--datemsg\">" + message.dateMsg + "</span>\n                             <i class=\"fas fa-check-double container__chat-box__messages--doubleclick\"></i>\n                             <i class=\"fa fa-trash container__chat-box__messages--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                    </div>";
-        });
-        containerChat.innerHTML = html;
-    };
-    return MessageList;
-}());
+console.log(window.location.href);
+var currentUrl = window.location.href;
+var idIndex = currentUrl.indexOf("id=");
+var id = currentUrl.slice(idIndex + 3);
+// Understand this bit
+var currentUser = savedContacts.find(function (contact) { return contact.contactId === id; });
+var chatContainer = document.querySelector(".envelope__chat");
+var send = document.querySelector("#send");
+send.addEventListener("click", sendMessage);
+function sendMessage() {
+    var messagesArray = [];
+    var message = conversation.value;
+    messagesArray.push(message);
+    messagesArray.forEach(function (msg) {
+        var messageElement = "<div>" + msg + "</div> ";
+        chatContainer.insertAdjacentHTML("beforeend", messageElement);
+    });
+}
+console.log(conversation);
+// class Message {
+//   content: string;
+//   msgID: string;
+//   constructor(content: string, phone: number) {
+//     this.content = content;
+//     this.msgID = "id" + Math.random().toString(16).slice(2);
+//   }
+// }
+// class MessageList {
+//   messageList: Array<Message> = [];
+//   addMessage(message: Message) {
+//     this.messageList.push(message);
+// this.renderChat();
+// }
+// renderChat() {
+//   let html: string = "";
+//   this.messageList.forEach((message) => {
+//     html +=
+//   });
+//   containerChat.innerHTML = html;
+// }
+// }
 var messageList = new MessageList();
-btnMessage.addEventListener("click", sendMessage);
+// btnMessage.addEventListener("click", sendMessage);
 function sendConversation() {
     var inputMessage = conversation.value;
     var message = new Message(inputMessage, "1234");

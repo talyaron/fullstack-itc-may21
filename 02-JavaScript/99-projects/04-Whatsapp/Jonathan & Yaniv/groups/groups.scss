@@ -30,6 +30,24 @@ body {
     background-image: url('https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png');
 }
 
+.title {
+    background-color: #00BFA5;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    align-items: flex-end;
+    height: 100px;
+    
+    &__item {
+        padding: 0 5px;
+
+        &--cancel_btn, &--back_btn {
+            cursor: pointer;
+        }
+    }
+
+}
+
 .search {
     background-color: #F6F6F6;
     display: flex;
@@ -55,6 +73,114 @@ body {
             padding: 10px 10px;
             border: 0;
             border-radius: 0 50px 50px 0;
+        }
+    }
+}
+
+
+.options {
+    &__item {
+        margin: 0;
+        color: #BABABA;
+        border-bottom: 1px solid #F6F6F6;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #F6F6F6;
+        }
+
+        &--group {
+            display: grid;
+            grid-template-columns: 1fr 7fr;
+            grid-template-rows: 25px 25px;
+            grid-template-areas:
+                "img title"
+                "img title";
+            padding: 10px;
+            align-items: center;
+
+            #new_group_logo {
+                grid-area: img;
+                padding: 8px;
+                margin: 0 5px;
+                filter: invert(1); 
+                background-color: #FF6977;
+                border-radius: 50px;
+                width: 34px;
+                height: 34px;
+            }
+
+            #new_group_title {
+                grid-area: title;
+                margin: 0;
+                font-weight: normal;
+                color: black;
+            }
+        }
+
+        &--contact {
+            display: grid;
+            grid-template-columns: 1fr 7fr;
+            grid-template-rows: 25px 25px;
+            grid-template-areas:
+                "img title"
+                "img status";
+            padding: 10px;
+
+            .new_contact_img {
+                grid-area: img;
+                padding: 0 5px;
+                margin: 0;
+                border-radius: 50px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .new_contact_name {
+                grid-area: title;
+                margin: 0;
+                font-weight: normal;
+                color: black;
+            }
+
+            .new_contact_status {
+                grid-area: status;
+                margin: 0;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+        }
+
+        &--group_img {
+            display: flex;
+            align-items: flex-end;
+            align-content: flex-end;
+            justify-content: center;
+            border-radius: 300px;
+            background-color: #858585;
+            background-image: url('../images/group_img.png');
+            background-size: cover;
+            height: 300px;
+            width: 300px;
+            margin: auto;
+
+            label {
+                text-align: center;
+                color: white;
+                padding: 120px;
+            }
+
+            img {
+                border-radius: 300px;
+                border: 0;
+                height: 300px;
+                width: 300px;
+            }
+
+            &:hover {
+                background-color: #858585;
+            }
         }
     }
 }
@@ -196,110 +322,16 @@ body {
     -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
-    .options {
-        &__item {
-            margin: 0;
-            color: #BABABA;
-            border-bottom: 1px solid #F6F6F6;
-
-            &:hover {
-                cursor: pointer;
-                background-color: #F6F6F6;
-            }
-
-            &--group {
-                display: grid;
-                grid-template-columns: 1fr 7fr;
-                grid-template-rows: 25px 25px;
-                grid-template-areas:
-                    "img title"
-                    "img title";
-                padding: 10px;
-                align-items: center;
-
-                #new_group_logo {
-                    grid-area: img;
-                    padding: 8px;
-                    margin: 0 5px;
-                    filter: invert(1); 
-                    background-color: #FF6977;
-                    border-radius: 50px;
-                    width: 34px;
-                    height: 34px;
-                }
-
-                #new_group_title {
-                    grid-area: title;
-                    margin: 0;
-                    font-weight: normal;
-                    color: black;
-                }
-            }
-
-            &--contact {
-                display: grid;
-                grid-template-columns: 1fr 7fr;
-                grid-template-rows: 25px 25px;
-                grid-template-areas:
-                    "img title"
-                    "img status";
-                padding: 10px;
-
-                .new_contact_img {
-                    grid-area: img;
-                    padding: 0 5px;
-                    margin: 0;
-                    border-radius: 50px;
-                    width: 50px;
-                    height: 50px;
-                }
-
-                .new_contact_name {
-                    grid-area: title;
-                    margin: 0;
-                    font-weight: normal;
-                    color: black;
-                }
-
-                .new_contact_status {
-                    grid-area: status;
-                    margin: 0;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-
-            }
-
-        }
-    }
-
     &__item {
         
         &--header {
             position: sticky;
             top: 0;
             z-index: 10;
-            
-            .title {
-                background-color: #00BFA5;
-                display: flex;
-                flex-direction: row;
-                color: white;
-                align-items: flex-end;
-                height: 100px;
-                
-                &__item {
-                    padding: 0 5px;
-
-                    &--cancel_btn {
-                        cursor: pointer;
-                    }
-                }
-
-            }
         }
     }
 }
+
 .new_group {
     display: none;
     width: 600px;
@@ -312,4 +344,13 @@ body {
     overflow-y: auto;
     -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+        &__item {
+        
+            &--header {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
+    }
 }

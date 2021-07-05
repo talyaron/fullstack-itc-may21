@@ -80,6 +80,7 @@ a {
   background-color: #E5DDD5;
   background-image: url(https://theabbie.github.io/blog/assets/official-whatsapp-background-image.jpg);
   display: flex;
+  height: 50rem;
 }
 .container .chat_wrapper--user1 {
   background-color: #FFFFFF;

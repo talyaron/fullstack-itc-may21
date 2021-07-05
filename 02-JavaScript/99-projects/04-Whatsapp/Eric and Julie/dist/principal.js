@@ -33,7 +33,7 @@ var Contacts = /** @class */ (function () {
     Contacts.prototype.renderContacts = function () {
         var html = "";
         this.contacts.forEach(function (element) {
-            html += "\n      <div class=\"chat1\" onclick=\"redirect()\">\n\n      <img src=\"" + element.image + "\" alt=\"\" class=\"chat1__photo\"> \n\n      <h4 class=\"chat1__name\">" + element.contactName + "</h4>\n      \n      <i onclick='handleDelete(\"" + element.contactId + "\")' class=\"far fa-trash-alt\" id=\"chat1__delete\" > </i>\n      </div>\n      ";
+            html += "\n      <div class=\"chat1\" onclick=redirect(\"" + element.contactId + "\")>\n\n      <img src=\"" + element.image + "\" alt=\"\" class=\"chat1__photo\"> \n\n      <h4 class=\"chat1__name\">" + element.contactName + "</h4>\n      \n      <i onclick='handleDelete(\"" + element.contactId + "\")' class=\"far fa-trash-alt\" id=\"chat1__delete\" > </i>\n      </div>\n      ";
         });
         render.innerHTML = html;
     };
@@ -48,7 +48,6 @@ var Contacts = /** @class */ (function () {
     return Contacts;
 }());
 function handleDelete(contactId) {
-    this.conta;
     var reducedContacts = contacts.contacts.filter(function (contact) { return contactId !== contact.contactId; });
     console.log(reducedContacts);
     contacts.contacts = reducedContacts;
@@ -66,9 +65,10 @@ function handleKeyUp() {
         console.log(e);
     }
 }
-function redirect() {
+function redirect(contactId) {
     try {
-        window.location.href = "chat.html";
+        localStorage.setItem("contactsData", JSON.stringify(contacts.contacts));
+        window.location.href = "chat.html?id=" + contactId;
         if (!window.location.href)
             throw new Error("The page where you want to redirect it doesn´t exist!");
     }
@@ -76,3 +76,5 @@ function redirect() {
         console.error(error);
     }
 }
+// You have to either pass the contactid or the contact name, and then on the other page use the contact id to find the contact in the list, and display the name. Need to get contacts list on second page by setting it on local storage.
+// YOu can set the aray wherever you have ot, and then grab is
