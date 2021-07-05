@@ -173,6 +173,9 @@ function handleKeyUp() {
 function handleReturn() {
 
     localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
+
+    
+
     const pickedUser = JSON.parse(localStorage.getItem("currentUser"))
     window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
 }

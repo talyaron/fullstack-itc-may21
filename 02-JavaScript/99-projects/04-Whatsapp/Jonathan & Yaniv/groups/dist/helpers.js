@@ -15,7 +15,7 @@ var hideNewChatMenu = function (ev) {
 };
 var newChatOptions = document.querySelector('.options');
 newChatOptions.addEventListener('click', function (ev) { return directToChat(ev); });
-newChatOptions.addEventListener('click', function (ev) { return showNewGroupMenu(ev); });
+newChatOptions.addEventListener('click', function (ev) { return showNewGroupForm(ev); });
 var directToChat = function (ev) {
     var contactToChat;
     if ((ev.target.className !== 'options__item options__item--contact') && (ev.target.className.indexOf('new_contact_') === -1))
@@ -39,32 +39,15 @@ var directToChat = function (ev) {
     localStorage.setItem("contactId", JSON.stringify(contactToChat.id));
     window.location.href = "../chat/chat.html?" + loggedInUser.userPhone + "&" + contactToChat.id;
 };
-var showNewGroupMenu = function (ev) {
+var showNewGroupForm = function (ev) {
+    var newGroupForm;
     if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1))
         return;
-    var newGroupMenu = document.querySelector('.new_group');
-    allContacts.renderContactsToNewGroupMenu();
-    newGroupMenu.style.display = 'unset';
-};
-var backToNewChatMenuBtn = document.querySelector('.title__item--back_btn');
-backToNewChatMenuBtn.addEventListener('click', function (ev) { return hideNewGroupMenu(ev); });
-var hideNewGroupMenu = function (ev) {
-    var newGroupMenu = document.querySelector('.new_group');
-    newGroupMenu.style.display = 'none';
-};
-var readURL = function (input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var label = document.querySelector('#add_photo');
-            var img = document.querySelector('#groupImg');
-            label.style.display = 'none';
-            img.style.display = 'unset';
-            img.setAttribute("src", "" + e.target.result);
-            return e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
+    if (ev.target.id.indexOf('new_group_') !== -1)
+        newGroupForm = ev.target.parentElement;
+    else
+        newGroupForm = ev.target;
+    console.log(newGroupForm);
 };
 var logOutBtn = document.querySelector('.controls__item--ellipsis');
 logOutBtn.addEventListener('click', function (ev) { return logOut(ev); });
