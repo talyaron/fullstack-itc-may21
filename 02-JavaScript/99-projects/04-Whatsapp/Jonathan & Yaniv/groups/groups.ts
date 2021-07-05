@@ -117,7 +117,7 @@ class ContactList {
             <div class="options__item options__item--group_name">
                 <input type="text" maxlength="25" placeholder="Group's Topic" name="groupName" id="group_name_form" required />
             </div>
-            <input class="options__item options__item--submit" type="submit" name="submit" value="✓" />`;
+            <input class="options__item options__item--submit" type="submit" name="submit" value="✓" />`; // issues with fetching the submit button, as it is created only when contacts are rendered to the form
             this.allContacts.forEach((contact) => {
                 if (contact.userPhone === loggedInUser.userPhone) return;
                 const contactHTML: string = `
