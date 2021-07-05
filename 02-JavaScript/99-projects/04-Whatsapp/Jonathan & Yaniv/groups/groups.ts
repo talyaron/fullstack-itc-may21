@@ -112,13 +112,12 @@ class ContactList {
             newGroupContactsContainer.innerHTML = `
             <div class="options__item options__item--group_img">
                 <label for="group_img_form" id="add_photo">Add Group Image</label>
-                <input type="file" name="groupImg" id="group_img_form" onchange="readURL(this);" style="display:none" />
-                <img id="groupImg" style="display:none">
+                <input type="file" name="groupImg" id="group_img_form" onchange="readURL(this);" style="display:none" required />
             </div>
-            <div class="options__item">
-                <label for="group_name_form">Group Name</label>
-                <input type="text" maxlength="25" placeholder="Group's Topic" name="groupName" id="group_name_form" />
-            </div>`;
+            <div class="options__item options__item--group_name">
+                <input type="text" maxlength="25" placeholder="Group's Topic" name="groupName" id="group_name_form" required />
+            </div>
+            <input class="options__item options__item--submit" type="submit" name="submit" value="✓" />`; // issues with fetching the submit button, as it is created only when contacts are rendered to the form
             this.allContacts.forEach((contact) => {
                 if (contact.userPhone === loggedInUser.userPhone) return;
                 const contactHTML: string = `
@@ -130,10 +129,6 @@ class ContactList {
                 </div>`;
                 newGroupContactsContainer.insertAdjacentHTML('afterbegin',contactHTML);
             });
-
-            const submitHTML: string = `<input class="options__item options__item--submit" type="submit" name="submit"
-            value="🡢" />`;
-            newGroupContactsContainer.insertAdjacentHTML('beforeend',submitHTML);
 
           } catch (er) {
             console.error(er);
