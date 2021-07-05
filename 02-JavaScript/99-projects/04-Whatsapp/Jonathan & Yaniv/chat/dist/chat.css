@@ -5,10 +5,10 @@
 }
 
 .container {
-  width: 70vw;
+  width: 100vw;
   height: 100vh;
-  position: relative;
-  left: 30vw;
+  /*position: relative;
+  /left: 30vw;*/
 }
 .container .container__header {
   background-color: #292E31;
@@ -26,6 +26,7 @@
 .container .container__header__left--arrowleft {
   color: #6E7377;
   margin-right: 10px;
+  cursor: pointer;
 }
 .container .container__header__left img {
   border-radius: 50%;
@@ -68,36 +69,64 @@
 .container__chat-box {
   width: 100%;
   height: 78vh;
-  background-image: url("https://i.pinimg.com/564x/90/c8/25/90c82542390749123628bea9cd1c1132.jpg");
+  background-image: url("https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png");
   display: flex;
   overflow: hidden;
   overflow-y: auto;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
 }
-.container__chat-box__messages {
+.container__chat-box__messages--user {
   background-color: black;
   display: flex;
   align-items: flex-end;
   border-radius: 20px;
   margin: 7px 10px;
 }
-.container__chat-box__messages--content {
+.container__chat-box__messages--user--content {
   color: white;
   margin-right: 10px;
   font-size: 1.4rem;
 }
-.container__chat-box__messages--datemsg {
+.container__chat-box__messages--user--datemsg {
   color: white;
   margin-right: 10px;
   font-size: 0.7rem;
 }
-.container__chat-box__messages--doubleclick {
+.container__chat-box__messages--user--doubleclick {
   color: lightskyblue;
   margin-right: 10px;
   font-size: 0.7rem;
 }
-.container__chat-box__messages--trash {
+.container__chat-box__messages--user--trash {
+  color: lightpink;
+  margin-right: 10px;
+  font-size: 0.7rem;
+}
+.container__chat-box__messages--contact {
+  background-color: black;
+  position: relative;
+  left: 85%;
+  border-radius: 20px;
+  align-items: flex-end;
+  margin: 7px 10px;
+}
+.container__chat-box__messages--contact--content {
+  color: white;
+  margin-right: 10px;
+  font-size: 1.4rem;
+}
+.container__chat-box__messages--contact--datemsg {
+  color: white;
+  margin-right: 10px;
+  font-size: 0.7rem;
+}
+.container__chat-box__messages--contact--doubleclick {
+  color: lightskyblue;
+  margin-right: 10px;
+  font-size: 0.7rem;
+}
+.container__chat-box__messages--contact--trash {
   color: lightpink;
   margin-right: 10px;
   font-size: 0.7rem;

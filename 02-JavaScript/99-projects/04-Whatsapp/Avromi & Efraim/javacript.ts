@@ -4,14 +4,13 @@ interface Message {
 
 }
 
-console.log('javascript')
 class Contact {
     name: string;
     imgUrl: string;
     phone: number;
     chats: Array<Message>;
     contactId: string;
-    constructor(name, imgUrl, phone, chats = [{ message: "New Message", timeStamp: new Date }]) {
+    constructor(name, imgUrl, phone, chats = [{ message: "New Conversation", timeStamp: new Date }]) {
         this.name = name;
         this.imgUrl = imgUrl;
         this.phone = phone;
@@ -37,11 +36,11 @@ class Contacts {
         }
     };
 
-    renderProducts(domElement: Element) {
+    renderContacts(domElement: Element) {
         try {
             let html: string = this.contacts.map(contact => {
                 return (
-                    `<div class="holder__contact" id="${contact.contactId}" onclick="hRef('${contact.contactId}')">` +
+                    `<div class="holder__contact" id="${contact.contactId}" onclick="moveToPrivateChat('${contact.contactId}')">` +
                     `<img class="holder__contact__image" src="${contact.imgUrl}">` +
                     `<div class="holder__contact__name">${contact.name}</div>` +
                     `<div class="holder__contact__chat">${contact.chats[0].message}</div>` +
@@ -58,54 +57,58 @@ class Contacts {
         }
     }
     findIndexes(contactID: string) {
-        const index = this.contacts.findIndex(cnt => cnt.contactId === contactID)
-        return index;
+        try {
+            const index = this.contacts.findIndex(cnt => cnt.contactId === contactID)
+            return index;
+        } catch (e) {
+            console.error(e)
+        }
     }
 }
 
 
 const contacts: Contacts = new Contacts();
 
-function hRef(id) {
-    window.location.href = `./private-chat.html?contactId=${id}`
-}
-
-
-function handleSubmit(ev): any {
-    ev.preventDefault();
+function moveToPrivateChat(id) {
     try {
-        let imgUrl: string = ev.target.children.photo.value;
-        let name: string = ev.target.children.name.value;
-        let phoneNumber: number = ev.target.children.number.value;
-        const holder = document.querySelector('.holder');
-        if (!holder) {
-            throw new Error('No holder!')
-        }
-        contacts.addContact(new Contact(`${name}`, `${imgUrl}`, phoneNumber));
-        contacts.renderProducts(holder);
-        localStorage.setItem('contacts', JSON.stringify(contacts.contacts))
-        closeForm()
-        ev.target.reset();
+        window.location.href = `./private-chat.html?contactId=${id}`
     } catch (e) {
         console.error(e)
     }
 }
 
 
+function handleSubmit(ev): any {
+    ev.preventDefault();
+    try {
+        const imgUrl = URL.createObjectURL(ev.target.children.files);
+        const name: string = ev.target.children.name.value;
+        const phoneNumber: number = ev.target.children.number.value;
+        const holder = document.querySelector('.holder');
+        if (!holder) {
+            throw new Error('No holder!')
+        }
+        contacts.addContact(new Contact(name, imgUrl, phoneNumber));
+        contacts.renderContacts(holder);
+        localStorage.setItem('contacts', JSON.stringify(contacts.contacts))
+        document.getElementById("myForm").style.display = "none";
+        ev.target.reset();
+        
+    } catch (e) {
+        console.error(e)
+    }
+}
+
 const deleteContact = (conatctID: string) => {
     try {
         window.event.cancelBubble = true
-        const holder: Element = document.querySelector('.holder');
-        if (!holder) {
-            throw new Error('No shopping list detected!')
-        }
+        contacts.contacts = JSON.parse(localStorage.getItem('contacts'));
         const index = contacts.findIndexes(conatctID)
         if (!contacts) {
             throw new Error('No product list detected!')
         }
-        contacts.contacts.splice(index, 1); //YS: Why do you need two different arrays? You can use the same one and filter. 
-        contacts.renderProducts(holder);
-        console.log(contacts)
+        contacts.contacts.splice(index, 1); 
+        addToDomWithArray(contacts.contacts);
         localStorage.setItem('contacts', JSON.stringify(contacts.contacts))
     } catch (e) {
         console.error(e)
@@ -113,11 +116,7 @@ const deleteContact = (conatctID: string) => {
 };
 
 
-
-
-
-
-const addToDom = (searchResults: Array<any>) => {
+const addToDomWithArray = (searchResults: Array<any>) => {
     try {
         const holder: HTMLElement = document.querySelector('.holder');
         if (!holder) {
@@ -129,9 +128,9 @@ const addToDom = (searchResults: Array<any>) => {
         searchResults.forEach((contact) => {
             let index = parseInt(contact.chats.length - 1)
             holder.innerHTML += (
-                `<div class="holder__contact" id="${contact.contactId}" onclick="hRef('${contact.contactId}')">` +
+                `<div class="holder__contact" id="${contact.contactId}" onclick="moveToPrivateChat('${contact.contactId}')">` +
                 `<img class="holder__contact__image" src="${contact.imgUrl}">` +
-                `<div class="holder__contact__name"><a href="./private-chat.html?contactId=${contact.contactId}">${contact.name}</a></div>` +
+                `<div class="holder__contact__name">${contact.name}</a></div>` +
                 `<div class="holder__contact__chat">${contact.chats[index].message}</div>` +
                 `<div class="holder__contact__timestamp">${contact.chats[index].timeStamp}</div>` +
                 `<div class="holder__contact__unread id="unread">6</div>` +
@@ -162,17 +161,17 @@ const findTextInMessages = (searchTerm: string): Array<Message> => {
         const termRegEx: RegExp = new RegExp(searchTerm, 'i');
 
         let searchedMessages = contacts.contacts.map(contact => {
-           
-            
 
-            const x = contact.chats.filter(message =>{ 
-               
+
+
+            const x = contact.chats.filter(message => {
+
                 let msg = message.message;
                 const tst = termRegEx.test(msg);
                 console.log(msg, tst)
                 return tst
             })
-            ;
+                ;
             console.log(x)
             return x
         }).flat()
@@ -191,38 +190,64 @@ const handleKeyUp = (ev: any) => {
         }
         const results = findContactSearch(contacts.contacts, searchTerm);
         const searchMessages = findTextInMessages(searchTerm)
-        addToDom(results);
+        addToDomWithArray(results);
     } catch (er) {
         console.error(er)
     }
 }
 
-function checkEdits() {
-    const render: any = JSON.parse(localStorage.getItem('contacts'))
-    if (render != null) {
-        addToDom(render)
-        contacts.contacts = render
-
-        console.log(contacts.contacts.map(c => console.log(c.chats)))
+function renderContactsFromLocalStorage() {
+    try {
+        window.addEventListener('load', ()=>{
+        const render: any = JSON.parse(localStorage.getItem('contacts'))
+        if (render != null) {
+            addToDomWithArray(render)
+            contacts.contacts = render
+        }})
+    } catch (e) {
+        console.error(e)
     }
 }
+renderContactsFromLocalStorage()
 
 
 function openForm() {
-    document.getElementById("myForm").style.display = "block";
-}
-
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-}
-
-function edit() {
-    let indices = document.querySelectorAll("#delete")
-    let unread: Array<HTMLElement> = document.querySelectorAll("#delete");
-    for (let i = 0; i <= indices.length; i++) {
-        if (unread[i].style.display = "none") {
-            unread[i].style.display = "block"
-        }
+    try {
+        const formOpen = document.querySelector(".header__new-convo");
+        formOpen.addEventListener('click', ()=>{
+        document.getElementById("myForm").style.display = "block";
+    })} catch (e) {
+        console.error(e)
     }
 }
+openForm()
+
+function closeForm() {
+    try {
+        const formClose = document.querySelector(".button--cancel");
+        formClose.addEventListener('click', ()=>{
+        document.getElementById("myForm").style.display = "none";
+    })} catch (e) {
+        console.error(e)
+    }
+}
+closeForm()
+
+function editButtonRevealAndHide() {
+    try {
+        const editButton = document.querySelector(".header__edit");
+        editButton.addEventListener("click", ()=>{
+        let indices = document.querySelectorAll("#delete")
+        let unread: Array<HTMLElement> = document.querySelectorAll("#delete");
+        for (let i = 0; i <= indices.length; i++) {
+            if (unread[i].style.display = "none") {
+                unread[i].style.display = "block"
+            }
+        }})
+    } catch (e) {
+        console.error(e)
+    }
+}
+editButtonRevealAndHide();
+
 
