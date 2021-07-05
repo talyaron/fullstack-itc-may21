@@ -1,6 +1,7 @@
 // VARIABLES GLOBALES
 let allContacts:Array<Contact> = [];
-render();
+let allContactsForSearch:Array<Contact> = [];
+render(chats);
 // QUERIES
 const searchBar = document.getElementById("searchbar");
 const formSearchBar = document.querySelector("#form_searchBar"); 
@@ -31,16 +32,20 @@ const addLocalContacts = (localChat) => {
     localChat.forEach(contact => {
        let add = new Contact(contact.name, contact.phone, contact.profileImg); 
         allContacts.push(add);
-        
+        allContactsForSearch.push(add);
+        localStorage.setItem("contactos", JSON.stringify(allContacts));
+        let renderJSON = JSON.parse(localStorage.getItem("contactos"));
+        render(renderJSON);
+
     })
 }
 addLocalContacts(chats);
 
-function render() {
+function render(array) {
     const containerData: HTMLElement = document.querySelector(".contacts")
     let html: string = "";
-    let render = JSON.parse(localStorage.getItem("contactos"));
-    render.forEach((element) => {
+    // let render = JSON.parse(localStorage.getItem("contactos"));
+    array.forEach((element) => {
         html += `
         <div class="contacts_chat">
             <img class="contacts_img" src="${element.profileImg}" alt="">
@@ -75,8 +80,11 @@ const deleteChat = (id) =>{
     let contactsDelete = JSON.parse(localStorage.getItem("contactos"));
     const deleteChats = contactsDelete.filter((chat) => chat.id !== id);
     allContacts = deleteChats;
+    allContactsForSearch = deleteChats;
     localStorage.setItem("contactos", JSON.stringify(allContacts));
-    render()
+    let renderDelete = JSON.parse(localStorage.getItem("contactos"));
+    render(renderDelete);
+
 
 }
 
@@ -89,26 +97,27 @@ const handleContact = (ev)=>{
     
     const newContacto = new Contact(name, phone, profileImg);
     allContacts.push(newContacto);
+    allContactsForSearch.push(newContacto);
     localStorage.setItem("contactos", JSON.stringify(allContacts));
-    render()
+    let renderContact = JSON.parse(localStorage.getItem("contactos"));
+    render(renderContact);
+
 }
 
 const searchContact = (searchBar)=>{
     const regExp: string = `^${searchBar}`;
     const searchTermReg: RegExp = new RegExp(regExp, 'i');
-    allContacts = allContacts.filter(elem => searchTermReg.test(elem.name))
-    localStorage.setItem("contactos", JSON.stringify(allContacts));
-    render()
+    allContacts = allContactsForSearch.filter(elem => searchTermReg.test(elem.name));
+    render(allContacts);
 }
 
 
 const filters = (ev) =>{
     ev.preventDefault();
 
-    const searchBar =  ev.target.elements.searchBar.value;
+    const searchBar =  ev.target.parentElement.elements.searchBar.value;
     console.log(searchBar);
     searchContact(searchBar);
-    
 }
 
 // EVENTLISTENERS
