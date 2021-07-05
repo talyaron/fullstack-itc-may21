@@ -203,3 +203,8 @@
   margin: 10px;
   margin-top: 20px;
 }
+
+#send:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
