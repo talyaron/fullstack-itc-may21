@@ -66,6 +66,9 @@ class MessageList {
     renderChat() {
         let html: string = '';
 
+        // dobleclick 
+        // click
+
         this.messageList.forEach(message => { 
 
             
