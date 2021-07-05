@@ -30,6 +30,7 @@
   height: 10px;
   text-align: left;
   margin-left: 15%;
+  border: 3px solid green;
 }
 
 .box > i {
@@ -46,23 +47,52 @@
   padding-left: 5px;
 }
 
+.chat1-wrapper {
+  border: 1px solid blue;
+}
+
 .chat1 {
   height: 12vh;
   background-color: white;
   border-bottom: 1px solid rgb(237, 237, 237);
   border-top: 1px solid rgb(237, 237, 237);
   display: flex;
+  flex-direction: row;
   cursor: pointer;
   overflow: hidden;
   width: 95%;
-  display: flex;
+  border: 3px solid red;
+  &:hover {
+    opacity: 0.8;
+  }
+  &__photo {
+    text-align: left;
+    width: 7vh;
+    height: 6vh;
+    margin-left: 10px;
+    margin-top: 20px;
+    border-radius: 50%;
+    border: 3px solid black;
+  }
+  &__name {
+    text-align: left;
+    font-size: 15px;
+    font-weight: lighter;
+    margin-top: 35px;
+    margin-left: 10px;
+    border: 3px solid green;
+  }
 }
-.chat1:hover {
-  opacity: 0.8;
+#chat1__delete {
+  margin-top: 35px;
+  margin-left: 350px;
+  border: 3px solid yellow;
 }
 
-#delete {
-  margin-top: 30px;
+// I couldn't nest this delete. I tried making it into a class rather than an id but I think it creates a problem with the font awesome icon.
+
+#filterN {
+  border: 3px solid black;
 }
 
 .green-background {
@@ -76,13 +106,6 @@
   height: 100vh;
 }
 
-.nameContact {
-  text-align: left;
-  font-size: 15px;
-  font-weight: lighter;
-  margin-top: 30px;
-}
-
 .photo1 {
   text-align: left;
   width: 7vh;
@@ -90,14 +113,6 @@
   margin-top: 5px;
   border-radius: 50%;
   cursor: pointer;
-}
-.photo2 {
-  text-align: left;
-  width: 7vh;
-  height: 6vh;
-  margin-left: 10px;
-  margin-top: 20px;
-  border-radius: 50%;
 }
 
 .photo1:hover {
@@ -107,76 +122,32 @@
 .wrapper {
   height: 100%;
   width: 100%;
-  &__container {
-    position: absolute;
-    margin-left: 30%;
-    margin-top: 25px;
-    width: 40%;
-    background-color: white;
-    height: 112vh;
-  }
-  &--profile {
-    height: 8vh;
-    background-color: rgb(218, 219, 212);
-  }
-  &--search {
-    height: 8vh;
-    background-color: rgb(226, 226, 226);
-  }
 }
+.wrapper__container {
+  position: absolute;
+  margin-left: 30%;
+  margin-top: 25px;
+  width: 40%;
+  background-color: white;
+  height: 112vh;
+}
+.wrapper__container--profile {
+  height: 8vh;
+  background-color: rgb(218, 219, 212);
+}
+
+.wrapper__container--search {
+  height: 8vh;
+  background-color: rgb(226, 226, 226);
+}
+
 //2nd page
 
 .envelope {
   width: 60%;
   margin-left: 20%;
   margin-top: 0;
-  &__contact {
-    position: fixed;
-    width: 60%;
-    height: 15%;
-    margin-top: 0;
-    background-color: #777;
-  }
-  &__chat {
-    width: 100%;
-    height: 420px;
-    margin-top: 0%;
-    background-color: rgb(226, 226, 226);
-  }
-  &__typing {
-    width: 100%;
-    height: 60px;
-    margin-top: 400px;
-    position: absolute;
-    background-color: grey;
-    display: flex;
-    &--boxicon {
-      margin: 15px;
-      display: flex;
-    }
-    &--input {
-      border: 1px solid rgb(226, 226, 226);
-      border-radius: 30px;
-      margin-top: 3px;
-      height: 35px;
-      padding: 10px;
-      width: 85%;
-      border: none;
-      outline: none;
-    }
-    &--input-entry {
-      border: 1px solid rgb(226, 226, 226);
-      border-radius: 30px;
-      height: 35px;
-      padding: 5px;
-      width: 100%;
-      border: none;
-      outline: none;
-    }
-  }
-}
-
-// Actually, input entry is inside input, so I need to nest it, but I don't know how to nest beyond three elements
+<
 
 #emoji {
   color: white;
@@ -187,6 +158,10 @@
   margin-left: 25px;
 }
 
+.boxIcon {
+  margin: 15px;
+  display: flex;
+}
 #arrow {
   color: white;
   margin: 10px;
