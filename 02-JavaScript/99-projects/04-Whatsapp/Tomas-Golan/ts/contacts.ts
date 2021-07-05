@@ -27,7 +27,7 @@ const addLocalContacts = (localChat) => {
     localChat.forEach(contact => {
        let add = new Contact(contact.name, contact.phone, contact.profileImg); 
         allContacts.push(add);
-        render()
+        
     })
 }
 addLocalContacts(chats);
@@ -84,9 +84,8 @@ const handleContact = (ev)=>{
     const profileImg: string = ev.target.elements.imgContact.value;
     
     const newContacto = new Contact(name, phone, profileImg);
-    allContacts.unshift(newContacto);
+    allContacts.push(newContacto);
     localStorage.setItem("contactos", JSON.stringify(allContacts));
     render()
-
 }
 
