@@ -51,6 +51,21 @@ body {
   background-image: url("https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png");
 }
 
+.title {
+  background-color: #00BFA5;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  align-items: flex-end;
+  height: 100px;
+}
+.title__item {
+  padding: 0 5px;
+}
+.title__item--cancel_btn, .title__item--back_btn {
+  cursor: pointer;
+}
+
 .search {
   background-color: #F6F6F6;
   display: flex;
@@ -75,6 +90,70 @@ body {
   padding: 10px 10px;
   border: 0;
   border-radius: 0 50px 50px 0;
+}
+
+.options__item {
+  margin: 0;
+  color: #BABABA;
+  border-bottom: 1px solid #F6F6F6;
+}
+.options__item:hover {
+  cursor: pointer;
+  background-color: #F6F6F6;
+}
+.options__item--group {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  grid-template-rows: 25px 25px;
+  grid-template-areas: "img title" "img title";
+  padding: 10px;
+  align-items: center;
+}
+.options__item--group #new_group_logo {
+  grid-area: img;
+  padding: 8px;
+  margin: 0 5px;
+  filter: invert(1);
+  background-color: #FF6977;
+  border-radius: 50px;
+  width: 34px;
+  height: 34px;
+}
+.options__item--group #new_group_title {
+  grid-area: title;
+  margin: 0;
+  font-weight: normal;
+  color: black;
+}
+.options__item--contact {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  grid-template-rows: 25px 25px;
+  grid-template-areas: "img title" "img status";
+  padding: 10px;
+}
+.options__item--contact .new_contact_img {
+  grid-area: img;
+  padding: 0 5px;
+  margin: 0;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+.options__item--contact .new_contact_name {
+  grid-area: title;
+  margin: 0;
+  font-weight: normal;
+  color: black;
+}
+.options__item--contact .new_contact_status {
+  grid-area: status;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.options__item--group_img {
+  text-align: center;
 }
 
 .header {
@@ -191,84 +270,10 @@ body {
   -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-.new_chat .options__item {
-  margin: 0;
-  color: #BABABA;
-  border-bottom: 1px solid #F6F6F6;
-}
-.new_chat .options__item:hover {
-  cursor: pointer;
-  background-color: #F6F6F6;
-}
-.new_chat .options__item--group {
-  display: grid;
-  grid-template-columns: 1fr 7fr;
-  grid-template-rows: 25px 25px;
-  grid-template-areas: "img title" "img title";
-  padding: 10px;
-  align-items: center;
-}
-.new_chat .options__item--group #new_group_logo {
-  grid-area: img;
-  padding: 8px;
-  margin: 0 5px;
-  filter: invert(1);
-  background-color: #FF6977;
-  border-radius: 50px;
-  width: 34px;
-  height: 34px;
-}
-.new_chat .options__item--group #new_group_title {
-  grid-area: title;
-  margin: 0;
-  font-weight: normal;
-  color: black;
-}
-.new_chat .options__item--contact {
-  display: grid;
-  grid-template-columns: 1fr 7fr;
-  grid-template-rows: 25px 25px;
-  grid-template-areas: "img title" "img status";
-  padding: 10px;
-}
-.new_chat .options__item--contact .new_contact_img {
-  grid-area: img;
-  padding: 0 5px;
-  margin: 0;
-  border-radius: 50px;
-  width: 50px;
-  height: 50px;
-}
-.new_chat .options__item--contact .new_contact_name {
-  grid-area: title;
-  margin: 0;
-  font-weight: normal;
-  color: black;
-}
-.new_chat .options__item--contact .new_contact_status {
-  grid-area: status;
-  margin: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 .new_chat__item--header {
   position: sticky;
   top: 0;
   z-index: 10;
-}
-.new_chat__item--header .title {
-  background-color: #00BFA5;
-  display: flex;
-  flex-direction: row;
-  color: white;
-  align-items: flex-end;
-  height: 100px;
-}
-.new_chat__item--header .title__item {
-  padding: 0 5px;
-}
-.new_chat__item--header .title__item--cancel_btn {
-  cursor: pointer;
 }
 
 .new_group {
@@ -283,4 +288,9 @@ body {
   overflow-y: auto;
   -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.new_group__item--header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }

@@ -41,7 +41,7 @@ class User {
             const ChatsContainer: HTMLElement = document.querySelector(".chats");
             ChatsContainer.innerHTML = ``;
             this.userGroups.forEach((group) => {
-                const contactHTML = `
+                const groupHTML: string = `
                 <div class="chats__item chat" id="${group.groupId}">
                 <img class="chat__item chat__item--img" src="${group.groupImg}" />
                 <h3 class="chat__item chat__item--name">${group.groupName}</h2>
@@ -49,7 +49,7 @@ class User {
                     <p class="chat__item chat__item--last_msg_content">${group.groupMsgs[group.groupMsgs.length -1].content}</p>
                     <i class="chat__item chat__item--delete fas fa-trash"></i>
             </div>`;
-            ChatsContainer.insertAdjacentHTML('beforeend',contactHTML);
+            ChatsContainer.insertAdjacentHTML('beforeend',groupHTML);
             });
           } catch (er) {
             console.error(er);
@@ -86,7 +86,7 @@ class ContactList {
                 </div>`;
             this.allContacts.forEach((contact) => {
                 if (contact.userPhone === loggedInUser.userPhone) return;
-                const contactHTML = `
+                const contactHTML: string = `
                 <div class="options__item options__item--contact" id="${contact.userPhone}">
                     <img class="new_contact_img" src="${contact.userImg}">
                     <h3 class="new_contact_name">${contact.userName}</h3>
@@ -98,61 +98,49 @@ class ContactList {
             console.error(er);
           }
     }
+
+    renderContactsToNewGroupMenu() {
+        try {
+            this.allContacts = this.allContacts.sort((a: User, b: User) => {
+                const aName = a.userName;
+                const bName = b.userName;
+                if (aName < bName) {return -1;}
+                if (aName > bName) {return 1;}
+                return 0;
+            });
+            const newGroupContactsContainer: HTMLElement = document.querySelector("#add_group_form");
+            newGroupContactsContainer.innerHTML = `
+            <div class="options__item">
+                <label for="group_img_form" id="add_photo">Add<br /> Group<br /> Image</label>
+                <input type="file" name="groupImg" id="group_img_form" onchange="readURL(this);" style="display:none" />
+                <img id="groupImg">
+            </div>
+            <div class="options__item">
+                <label for="group_name_form">Group Name</label>
+                <input type="text" name="groupName" id="group_name_form" />
+            </div>`;
+            this.allContacts.forEach((contact) => {
+                if (contact.userPhone === loggedInUser.userPhone) return;
+                const contactHTML: string = `
+                <div class="options__item options__item--contact" id="${contact.userPhone}">
+                    <img class="new_contact_img" src="${contact.userImg}">
+                    <h3 class="new_contact_name">${contact.userName}</h3>
+                    <p class="new_contact_status">The world is awesome</p>
+                    <input type="checkbox" id="${contact.userPhone}" name="${contact.userPhone}" value="${contact.userPhone}">
+                </div>`;
+                newGroupContactsContainer.insertAdjacentHTML('afterbegin',contactHTML);
+            });
+
+            const submitHTML: string = `<input class="options__item options__item--submit" type="submit" name="submit"
+            value="🡢" />`;
+            newGroupContactsContainer.insertAdjacentHTML('beforeend',submitHTML);
+
+          } catch (er) {
+            console.error(er);
+          }
+    }
 }
 
 const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
-
-const pageTitle: HTMLElement = document.querySelector('title');
-pageTitle.innerText = `${loggedInUser.userName}'s groups`;
-
-const addChatBtn: HTMLElement = document.querySelector('.controls__item--plus');
-
-addChatBtn.addEventListener('click', ev => showNewChatMenu(ev));
-
-const showNewChatMenu = (ev: any): void => {
-    const newChatMenu: HTMLElement = document.querySelector('.new_chat');
-    allContacts.renderContactsToNewChatMenu();
-    newChatMenu.style.display = 'unset';
-    
-    
-}
-
-const cancelChatBtn: HTMLElement = document.querySelector('.title__item--cancel_btn');
-
-cancelChatBtn.addEventListener('click', ev => hideNewChatMenu(ev));
-
-const hideNewChatMenu = (ev: any): void => {
-    const newChatMenu: HTMLElement = document.querySelector('.new_chat');
-    newChatMenu.style.display = 'none';
-}
-
-const newChatOptions: HTMLElement = document.querySelector('.options');
-
-newChatOptions.addEventListener('click', ev => directToChat(ev));
-newChatOptions.addEventListener('click', ev => showNewGroupForm(ev));
-
-const directToChat = (ev: any): void => {
-
-    let contactToChat: HTMLElement;
-    if ((ev.target.className !== 'options__item options__item--contact') && (ev.target.className.indexOf('new_contact_') === -1)) return;
-    if (ev.target.className.indexOf('new_contact_') !== -1) contactToChat = ev.target.parentElement;
-    else contactToChat = ev.target;
-
-    //JN
-    //I will need allcontact list eventually
-    
-    localStorage.setItem("contactId", JSON.stringify(contactToChat.id))
-
-    window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
-}
-
-const showNewGroupForm = (ev: any): void => {
-
-    let newGroupForm: HTMLElement;
-    if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1)) return;
-    if (ev.target.id.indexOf('new_group_') !== -1) newGroupForm = ev.target.parentElement;
-    else newGroupForm = ev.target;
-    console.log(newGroupForm);
-}
