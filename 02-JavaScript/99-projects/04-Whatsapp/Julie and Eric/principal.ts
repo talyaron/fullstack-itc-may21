@@ -53,7 +53,7 @@ class Contacts {
     let html: string = "";
 
     this.contacts.forEach((element) => {
-      html += `<div>
+      html += `<div class="boxChat">
       <div class="chat1" onclick="redirect()">
 
       <img src="${element.image}" alt="" class="photo2"> 
