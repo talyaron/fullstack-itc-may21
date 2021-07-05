@@ -1,4 +1,4 @@
-class LoggedInUser {
+class User {
     userImg: string;
     userName: string;
     userPhone: string;
@@ -15,43 +15,72 @@ class LoggedInUser {
 class ContactList {
     allContacts: Array<User>;
 
-    findContact(contactPhone) {
-        const contact = this.allContacts.find(contactItem => contactItem.userPhone === contactPhone);
-        return contact;
+    constructor (allContacts: Array<User>) {
+        this.allContacts = allContacts;
+    }
+
+    renderContactsToNewChatMenu() {
+        try {
+            const newChatContactsContainer: HTMLElement = document.querySelector(".options");
+            
+            this.allContacts.forEach((contact) => {
+                if (contact.userPhone === loggedInUser.userPhone) return;
+                const contactHTML = `
+                <div class="options__item options__item--contact" id="${contact.userPhone}">
+                    <img src="${contact.userImg}" class="new_contact_img">
+                    <h3 class="new_contact_name">${contact.userName}</h3>
+                    <p class="new_contact_status">The world is awesome</p>
+                </div>`;
+                newChatContactsContainer.insertAdjacentHTML('beforeend',contactHTML);
+            });
+          } catch (er) {
+            console.error(er);
+          }
     }
 }
 
-const allContacts: ContactList = JSON.parse(localStorage.getItem('contactList'));
+const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 
-const loggedInUser: LoggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
 
+const addChatBtn: HTMLElement = document.querySelector('.controls__item--plus');
 
+addChatBtn.addEventListener('click', ev => showNewChatMenu(ev));
 
+const showNewChatMenu = (ev: any): void => {
+    const newChatMenu: HTMLElement = document.querySelector('.new_chat');
+    allContacts.renderContactsToNewChatMenu();
+    newChatMenu.style.display = 'unset';
+}
 
+const cancelChatBtn: HTMLElement = document.querySelector('.title__item--cancel_btn');
 
-const usersContainer: HTMLElement = document.querySelector('.users');
+cancelChatBtn.addEventListener('click', ev => hideNewChatMenu(ev));
 
-usersContainer.addEventListener('click', ev => userPicker(ev));
+const hideNewChatMenu = (ev: any): void => {
+    const newChatMenu: HTMLElement = document.querySelector('.new_chat');
+    newChatMenu.style.display = 'none';
+}
 
-const userPicker = (ev: any) : void => {
+const newChatOptions: HTMLElement = document.querySelector('.options');
 
-    if (ev.target.className === 'users') return;
-    
-    let userContainer: HTMLElement;
-    if (ev.target.id.indexOf('user_') === -1) userContainer = ev.target;
-    else userContainer = ev.target.parentElement;
-    
-    const userImg: string = userContainer.querySelector("#user_img").getAttribute('src');
-    const userNameContainer: HTMLElement = userContainer.querySelector("#user_name");
-    const userName: string = userNameContainer.innerText;
-    const userPhoneContainer: HTMLElement = userContainer.querySelector("#user_phone");
-    const userPhone: string = userPhoneContainer.innerText;    
-    const userGroups: Array<string> = allContacts.findContact(userPhone).userGroups;
-    
-    const pickedUser: User = new User(userImg, userName, userPhone, userGroups);
+newChatOptions.addEventListener('click', ev => directToChat(ev));
+newChatOptions.addEventListener('click', ev => showNewGroupForm(ev));
 
-    localStorage.setItem('currentUser',JSON.stringify(pickedUser));
+const directToChat = (ev: any): void => {
 
-    window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
+    let contactToChat: HTMLElement;
+    if ((ev.target.className !== 'options__item options__item--contact') && (ev.target.className.indexOf('new_contact_') === -1)) return;
+    if (ev.target.className.indexOf('new_contact_') !== -1) contactToChat = ev.target.parentElement;
+    else contactToChat = ev.target;
+    window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
+}
 
+const showNewGroupForm = (ev: any): void => {
+
+    let newGroupForm: HTMLElement;
+    if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1)) return;
+    if (ev.target.id.indexOf('new_group_') !== -1) newGroupForm = ev.target.parentElement;
+    else newGroupForm = ev.target;
+    console.log(newGroupForm);
 }

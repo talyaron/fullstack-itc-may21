@@ -1,40 +1,67 @@
-var LoggedInUser = /** @class */ (function () {
-    function LoggedInUser(userImg, userName, userPhone, userGroups) {
+var User = /** @class */ (function () {
+    function User(userImg, userName, userPhone, userGroups) {
         this.userImg = userImg;
         this.userName = userName;
         this.userPhone = userPhone;
         this.userGroups = userGroups;
     }
-    return LoggedInUser;
+    return User;
 }());
 var ContactList = /** @class */ (function () {
-    function ContactList() {
+    function ContactList(allContacts) {
+        this.allContacts = allContacts;
     }
-    ContactList.prototype.findContact = function (contactPhone) {
-        var contact = this.allContacts.find(function (contactItem) { return contactItem.userPhone === contactPhone; });
-        return contact;
+    ContactList.prototype.renderContactsToNewChatMenu = function () {
+        try {
+            var newChatContactsContainer_1 = document.querySelector(".options");
+            this.allContacts.forEach(function (contact) {
+                if (contact.userPhone === loggedInUser.userPhone)
+                    return;
+                var contactHTML = "\n                <div class=\"options__item options__item--contact\" id=\"" + contact.userPhone + "\">\n                    <img src=\"" + contact.userImg + "\" class=\"new_contact_img\">\n                    <h3 class=\"new_contact_name\">" + contact.userName + "</h3>\n                    <p class=\"new_contact_status\">The world is awesome</p>\n                </div>";
+                newChatContactsContainer_1.insertAdjacentHTML('beforeend', contactHTML);
+            });
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
     return ContactList;
 }());
-var allContacts = JSON.parse(localStorage.getItem('contactList'));
-var loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
-var usersContainer = document.querySelector('.users');
-usersContainer.addEventListener('click', function (ev) { return userPicker(ev); });
-var userPicker = function (ev) {
-    if (ev.target.className === 'users')
+var allContacts = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
+var loggedInUser = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
+var addChatBtn = document.querySelector('.controls__item--plus');
+addChatBtn.addEventListener('click', function (ev) { return showNewChatMenu(ev); });
+var showNewChatMenu = function (ev) {
+    var newChatMenu = document.querySelector('.new_chat');
+    allContacts.renderContactsToNewChatMenu();
+    newChatMenu.style.display = 'unset';
+};
+var cancelChatBtn = document.querySelector('.title__item--cancel_btn');
+cancelChatBtn.addEventListener('click', function (ev) { return hideNewChatMenu(ev); });
+var hideNewChatMenu = function (ev) {
+    var newChatMenu = document.querySelector('.new_chat');
+    newChatMenu.style.display = 'none';
+};
+var newChatOptions = document.querySelector('.options');
+newChatOptions.addEventListener('click', function (ev) { return directToChat(ev); });
+newChatOptions.addEventListener('click', function (ev) { return showNewGroupForm(ev); });
+var directToChat = function (ev) {
+    var contactToChat;
+    if ((ev.target.className !== 'options__item options__item--contact') && (ev.target.className.indexOf('new_contact_') === -1))
         return;
-    var userContainer;
-    if (ev.target.id.indexOf('user_') === -1)
-        userContainer = ev.target;
+    if (ev.target.className.indexOf('new_contact_') !== -1)
+        contactToChat = ev.target.parentElement;
     else
-        userContainer = ev.target.parentElement;
-    var userImg = userContainer.querySelector("#user_img").getAttribute('src');
-    var userNameContainer = userContainer.querySelector("#user_name");
-    var userName = userNameContainer.innerText;
-    var userPhoneContainer = userContainer.querySelector("#user_phone");
-    var userPhone = userPhoneContainer.innerText;
-    var userGroups = allContacts.findContact(userPhone).userGroups;
-    var pickedUser = new User(userImg, userName, userPhone, userGroups);
-    localStorage.setItem('currentUser', JSON.stringify(pickedUser));
-    window.location.href = "../groups/groups.html?" + pickedUser.userPhone;
+        contactToChat = ev.target;
+    window.location.href = "../chat/chat.html?" + loggedInUser.userPhone + "&" + contactToChat.id;
+};
+var showNewGroupForm = function (ev) {
+    var newGroupForm;
+    if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1))
+        return;
+    if (ev.target.id.indexOf('new_group_') !== -1)
+        newGroupForm = ev.target.parentElement;
+    else
+        newGroupForm = ev.target;
+    console.log(newGroupForm);
 };
