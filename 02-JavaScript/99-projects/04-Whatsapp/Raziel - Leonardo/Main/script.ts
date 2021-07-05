@@ -57,11 +57,12 @@ const handleSubmitNewUser = (ev: any): void => {
 
         const image: string = document.querySelector('#previewImage').getAttribute("src");
         const message = [new Message('')];
-
+        
         const user = new User(name, number, image, message);
         addUser(user);
+        numberValidation(number);
         ev.target.reset();
-
+          
         if (!user) throw new Error('The user doesn´t exist!')
     } catch (error) {
         console.error(error);
@@ -174,3 +175,24 @@ function removeChat(chatNumber: number) {
         console.error(error);
     }
 };
+function numberValidation(numberFromArray){
+
+ const validNumber=userList.includes( numberFromArray);
+
+console.log(validNumber);
+console.log(numberFromArray);
+ 
+ if(validNumber){
+    
+     alert("The number is already taken!!")
+    //  const element = <HTMLInputElement> document.getElementById("disable");
+    //  element.disabled = true;
+     
+ }
+ else{
+    // const element = <HTMLInputElement> document.getElementById("disable");
+    // element.disabled = false; 
+ }
+ console.log(validNumber);
+}
+    

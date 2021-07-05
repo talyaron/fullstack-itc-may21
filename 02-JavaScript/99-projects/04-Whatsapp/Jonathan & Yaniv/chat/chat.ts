@@ -80,13 +80,14 @@ class MessageList {
         this.renderChat()
     }
 
-    renderChat() {
+    renderChat():Array<any> {
         let html: string = '';
         const random: number = (Math.random() < 0.5) ? contactList : contactUser;
 
 
-
         this.messageList.forEach(message => {
+
+
 
             html += `<div class="container__chat-box__messages--user">
                         <p class="container__chat-box__messages--user--content">${message.content}<p>
@@ -96,8 +97,10 @@ class MessageList {
                         </div>`
             
         });
-
+        
         containerChat.innerHTML = html;
+
+        return this.messageList
     }
 
     
@@ -169,6 +172,10 @@ function handleKeyUp() {
 
 function handleReturn() {
 
+    localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
+
+    
+
     const pickedUser = JSON.parse(localStorage.getItem("currentUser"))
     window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
 }
@@ -236,11 +243,13 @@ class ContactMessage {
     }
 }
 
-const contactChat = JSON.parse(localStorage.getItem("contactList"))
+const contactChat = JSON.parse(localStorage.getItem("contactListUser"))
 const contactList = JSON.parse(localStorage.getItem("contactId"))
 const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone
 
-let chatUser = Object.values(Object.values(Object.values(contactChat))[0])
+let chatUser = Object.values(Object.values(contactChat)[1])
+
+//let chatUser = Object.values(Object.values(Object.values(contactChat))[0])
 
 chatUser.find(function (chat) {
     if (contactList === chat.userPhone) {
