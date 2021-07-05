@@ -32,7 +32,9 @@ var Contacts = /** @class */ (function () {
     };
     Contacts.prototype.renderContacts = function () {
         var html = "";
-        this.contacts.forEach(function (element) { });
+        this.contacts.forEach(function (element) {
+            html += "\n      <div class=\"chat1\" onclick=\"redirect()\">\n\n      <img src=\"" + element.image + "\" alt=\"\" class=\"chat1__photo\"> \n\n      <h4 class=\"chat1__name\">" + element.contactName + "</h4>\n      \n      <i onclick='handleDelete(\"" + element.contactId + "\")' class=\"far fa-trash-alt\" id=\"chat1__delete\" > </i>\n      </div>\n      ";
+        });
         render.innerHTML = html;
     };
     Contacts.prototype.searchContact = function (inputFilter) {

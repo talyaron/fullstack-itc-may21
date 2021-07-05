@@ -13,18 +13,19 @@ var emojiList = document.querySelectorAll('.emoji');
 //clicked
 var isClicked = false;
 var Message = /** @class */ (function () {
-    function Message(content, userPhone, dateMsg, groupID) {
+    function Message(content, userPhone, dateMsg, groupID, lastMessageName) {
         this.content = content;
         this.userPhone = userPhone;
         this.dateMsg = dateMsg;
         this.groupID = groupID;
+        this.lastMessageName = lastMessageName;
         this.msgID = "id" + Math.random().toString(16).slice(2);
     }
     return Message;
 }());
 var MessageList = /** @class */ (function () {
     function MessageList() {
-        this.messageList = [];
+        this.messageList = []; //maybe we can took from this array the last message
         this.messageListFilter = [];
     }
     MessageList.prototype.addMessage = function (message) {
@@ -67,7 +68,7 @@ function sendMessage() {
     //current date
     var today = new Date();
     var time = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
-    var message = new Message(inputMessage, '1234', time, '123');
+    var message = new Message(inputMessage, '1234', time, '123', inputMessage); //last one is the lastmessagename
     messageList.addMessage(message);
     elementMessage.value = '';
 }
@@ -102,6 +103,10 @@ function handleKeyUp() {
     catch (e) {
         console.log(e);
     }
+}
+function handleReturn() {
+    var pickedUser = JSON.parse(localStorage.getItem("currentUser"));
+    window.location.href = "../groups/groups.html?" + pickedUser.userPhone;
 }
 btnModal.addEventListener('click', openModal);
 function openModal(ev) {

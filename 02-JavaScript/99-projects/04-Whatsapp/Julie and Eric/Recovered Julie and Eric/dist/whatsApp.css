@@ -5,8 +5,6 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-//first page style
-
 #addGroup {
   color: white;
   margin-left: 75%;
@@ -54,54 +52,54 @@
 .chat1 {
   height: 12vh;
   background-color: white;
-  border-bottom: 1px solid rgb(237, 237, 237);
-  border-top: 1px solid rgb(237, 237, 237);
+  border-bottom: 1px solid #ededed;
+  border-top: 1px solid #ededed;
   display: flex;
   flex-direction: row;
   cursor: pointer;
   overflow: hidden;
   width: 95%;
   border: 3px solid red;
-  &:hover {
-    opacity: 0.8;
-  }
-  &__photo {
-    text-align: left;
-    width: 7vh;
-    height: 6vh;
-    margin-left: 10px;
-    margin-top: 20px;
-    border-radius: 50%;
-    border: 3px solid black;
-  }
-  &__name {
-    text-align: left;
-    font-size: 15px;
-    font-weight: lighter;
-    margin-top: 35px;
-    margin-left: 10px;
-    border: 3px solid green;
-  }
 }
+.chat1:hover {
+  opacity: 0.8;
+}
+.chat1__photo {
+  text-align: left;
+  width: 7vh;
+  height: 6vh;
+  margin-left: 10px;
+  margin-top: 20px;
+  border-radius: 50%;
+  border: 3px solid black;
+}
+.chat1__name {
+  text-align: left;
+  font-size: 15px;
+  font-weight: lighter;
+  margin-top: 35px;
+  margin-left: 10px;
+  border: 3px solid green;
+}
+
 #chat1__delete {
   margin-top: 35px;
   margin-left: 350px;
   border: 3px solid yellow;
 }
 
-// I couldn't nest this delete. I tried making it into a class rather than an id but I think it creates a problem with the font awesome icon.
-
 #filterN {
   border: 3px solid black;
 }
 
 .green-background {
-  background-color: rgb(0, 150, 136);
+  background-color: #009688;
   width: 100%;
   height: 20vh;
 }
+
 .grey-background {
-  background-color: rgb(218, 219, 212);
+  background-color: #dadbd4;
   width: 100%;
   height: 100vh;
 }
@@ -131,23 +129,65 @@
   background-color: white;
   height: 112vh;
 }
-.wrapper__container--profile {
+.wrapper--profile {
   height: 8vh;
-  background-color: rgb(218, 219, 212);
+  background-color: #dadbd4;
 }
-
-.wrapper__container--search {
+.wrapper--search {
   height: 8vh;
-  background-color: rgb(226, 226, 226);
+  background-color: #e2e2e2;
 }
-
-//2nd page
 
 .envelope {
   width: 60%;
   margin-left: 20%;
   margin-top: 0;
-<
+}
+.envelope__contact {
+  position: fixed;
+  width: 60%;
+  height: 15%;
+  margin-top: 0;
+  background-color: #777;
+}
+.envelope__chat {
+  background: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+  width: 100%;
+  height: 420px;
+  margin-top: 0%;
+  background-color: #e2e2e2;
+}
+.envelope__typing {
+  width: 100%;
+  height: 60px;
+  margin-top: 400px;
+  position: absolute;
+  background-color: grey;
+  display: flex;
+}
+.envelope__typing--boxicon {
+  margin: 15px;
+  display: flex;
+}
+.envelope__typing--input {
+  border: 1px solid #e2e2e2;
+  border-radius: 30px;
+  margin-top: 3px;
+  height: 35px;
+  padding: 10px;
+  width: 85%;
+  border: none;
+  outline: none;
+}
+.envelope__typing--input-entry {
+  border: 1px solid #e2e2e2;
+  border-radius: 30px;
+  height: 35px;
+  padding: 5px;
+  width: 100%;
+  border: none;
+  outline: none;
+}
 
 #emoji {
   color: white;
@@ -158,10 +198,6 @@
   margin-left: 25px;
 }
 
-.boxIcon {
-  margin: 15px;
-  display: flex;
-}
 #arrow {
   color: white;
   margin: 10px;
