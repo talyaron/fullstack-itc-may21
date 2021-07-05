@@ -54,7 +54,7 @@ class Contacts {
 
     this.contacts.forEach((element) => {
       html += `
-      <div class="chat1" onclick="redirect()">
+      <div class="chat1" onclick=redirect("${element.contactId}")>
 
       <img src="${element.image}" alt="" class="chat1__photo"> 
 
@@ -78,7 +78,6 @@ class Contacts {
 }
 
 function handleDelete(contactId) {
-  this.conta;
   const reducedContacts = contacts.contacts.filter(
     (contact) => contactId !== contact.contactId
   );
@@ -101,12 +100,17 @@ function handleKeyUp() {
   }
 }
 
-function redirect() {
+function redirect(contactId) {
   try {
-    window.location.href = "chat.html";
+    localStorage.setItem("contactsData", JSON.stringify(contacts.contacts));
+
+    window.location.href = `chat.html?id=${contactId}`;
     if (!window.location.href)
       throw new Error("The page where you want to redirect it doesn´t exist!");
   } catch (error) {
     console.error(error);
   }
 }
+
+// You have to either pass the contactid or the contact name, and then on the other page use the contact id to find the contact in the list, and display the name. Need to get contacts list on second page by setting it on local storage.
+// YOu can set the aray wherever you have ot, and then grab is

@@ -69,7 +69,11 @@ const readURL = (input: any) => { // CREDIT TO LEONARDO FOR THIS ONE!!
       let reader = new FileReader();
   
       reader.onload = (e)=> {
-       document.querySelector('#groupImg').setAttribute("src", `${e.target.result}`);
+        const label: HTMLElement = document.querySelector('#add_photo');
+        const img: HTMLElement = document.querySelector('#groupImg');
+        label.style.display = 'none';
+        img.style.display = 'unset';
+        img.setAttribute("src", `${e.target.result}`);
         return e.target.result
       }
       reader.readAsDataURL(input.files[0]);

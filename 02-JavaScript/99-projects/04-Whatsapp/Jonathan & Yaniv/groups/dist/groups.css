@@ -154,21 +154,30 @@ body {
 }
 .options__item--group_img {
   display: flex;
+  align-items: flex-end;
+  align-content: flex-end;
   justify-content: center;
-  align-content: center;
+  border-radius: 300px;
+  background-color: #858585;
+  background-image: url("../images/group_img.png");
+  background-size: cover;
+  height: 300px;
+  width: 300px;
+  margin: auto;
+}
+.options__item--group_img label {
   text-align: center;
   color: white;
-  background-color: #858585;
-  border-radius: 50px;
-  height: 100px;
-  width: 100px;
+  padding: 120px;
+}
+.options__item--group_img img {
+  border-radius: 300px;
+  border: 0;
+  height: 300px;
+  width: 300px;
 }
 .options__item--group_img:hover {
   background-color: #858585;
-}
-.options__item--group_img img {
-  height: 100%;
-  width: 100%;
 }
 
 .header {
