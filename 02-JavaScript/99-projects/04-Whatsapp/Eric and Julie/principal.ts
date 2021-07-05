@@ -53,16 +53,15 @@ class Contacts {
     let html: string = "";
 
     this.contacts.forEach((element) => {
-      html += `
-      <div class="chat1" onclick=redirect("${element.contactId}")>
-
-      <img src="${element.image}" alt="" class="chat1__photo"> 
-
-      <h4 class="chat1__name">${element.contactName}</h4>
-      
-      <i onclick='handleDelete("${element.contactId}")' class="far fa-trash-alt" id="chat1__delete" > </i>
-      </div>
-      `;
+      html += `<div class="containerChat">
+                  <div class="chat1" onclick=redirect("${element.contactId}")>
+                    <img src="${element.image}" alt="" class="chat1__photo"> 
+                    <h4 class="chat1__name">${element.contactName}</h4>
+                  </div>
+                  <div>
+                    <i onclick='handleDelete("${element.contactId}")' class="far fa-trash-alt" id="delete"> </i>
+                  </div>
+              </div>`;
     });
     render.innerHTML = html;
   }
@@ -81,7 +80,6 @@ function handleDelete(contactId) {
   const reducedContacts = contacts.contacts.filter(
     (contact) => contactId !== contact.contactId
   );
-  console.log(reducedContacts);
   contacts.contacts = reducedContacts;
   contacts.renderContacts();
 }

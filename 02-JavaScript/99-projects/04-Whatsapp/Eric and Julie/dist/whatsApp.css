@@ -45,21 +45,15 @@
   padding-left: 5px;
 }
 
-.chat1-wrapper {
-  border: 3px solid blue;
+.containerChat {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid black;
 }
 
 .chat1 {
   height: 12vh;
-  background-color: white;
-  border-bottom: 1px solid #ededed;
-  border-top: 1px solid #ededed;
-  display: flex;
-  flex-direction: row;
-  cursor: pointer;
-  overflow: hidden;
-  width: 95%;
-  border: 3px solid red;
+  border: 2px solid orange;
 }
 .chat1:hover {
   opacity: 0.8;
@@ -77,15 +71,29 @@
   text-align: left;
   font-size: 15px;
   font-weight: lighter;
-  margin-top: 35px;
-  margin-left: 10px;
+  margin-bottom: 10%;
+  margin-left: 80px;
   border: 3px solid green;
 }
 
-#chat1__delete {
+.wrapper__container--chats {
+  margin-top: 10%;
+}
+
+.hh {
+  border: 2px solid violet;
+}
+
+#delete {
+  width: 50%;
   margin-top: 35px;
   margin-left: 350px;
   border: 3px solid yellow;
+  cursor: pointer;
+}
+
+#delete:hover {
+  opacity: 0.8;
 }
 
 #filterN {
