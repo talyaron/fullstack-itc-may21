@@ -1,0 +1,243 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: "Roboto", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #DBDBDB;
+}
+
+h1 {
+  font-size: 4rem;
+  color: #3d3d3d;
+}
+
+h3 {
+  font-size: 2rem;
+  color: #3d3d3d;
+}
+
+h4 {
+  font-size: 1.7rem;
+  color: #3d3d3d;
+}
+
+p {
+  font-size: 1.5rem;
+  color: #3d3d3d;
+}
+
+a {
+  text-decoration: none;
+  color: #3d3d3d;
+}
+
+CONTENT .greenHeader {
+  background-color: #009688;
+  height: 12rem;
+  width: 100%;
+  position: absolute;
+}
+
+.container {
+  width: 40%;
+  position: relative;
+  top: 3rem;
+}
+.container .header {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  background-color: #DBDBDB;
+}
+.container .header .header_img_profile {
+  width: 6.5rem;
+  height: 6rem;
+  position: relative;
+  left: 3rem;
+}
+.container .header .header_icon {
+  position: relative;
+  top: 2rem;
+  right: 3rem;
+}
+.container .header .header_icon .btn_icons {
+  color: #3d3d3d;
+}
+.container .header .header_icon .header_icon_item--add {
+  margin-right: 2rem;
+}
+.container .header .header_icon .header_icon_item--group {
+  margin-right: 2rem;
+}
+.container .chat_wrapper {
+  background-color: #E5DDD5;
+  background-image: url(https://theabbie.github.io/blog/assets/official-whatsapp-background-image.jpg);
+  display: flex;
+}
+.container .chat_wrapper--user1 {
+  background-color: #FFFFFF;
+  margin: 0 0 0 0;
+  border-radius: 1rem;
+  margin: 1rem;
+  padding: 0.5rem;
+  width: 50%;
+  position: relative;
+}
+.container .chat_wrapper--user2 {
+  background-color: #4FCC66;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  width: 50%;
+  position: absolute;
+  right: 0;
+}
+.container .search_wrapper {
+  width: 100%;
+  height: 4rem;
+  background: #fbfbfb;
+  display: flex;
+}
+.container .search_wrapper .search {
+  border: 5px solid black;
+  width: 85%;
+  height: 3rem;
+  margin: auto;
+  border: 1px solid #cac9c9;
+  border-radius: 5rem;
+  display: flex;
+}
+.container .search_wrapper .search .search_icon {
+  color: #aaaaaa;
+  text-align: center;
+  width: 6rem;
+  margin: auto;
+  color: #aaaaaa;
+}
+.container .search_wrapper .search .search_input {
+  width: 90%;
+  height: 90%;
+  position: relative;
+  top: 0.1rem;
+  right: 0.2rem;
+  border: none;
+  font-size: 1.3rem;
+}
+.container .search_wrapper .search .search_input:focus {
+  outline: none;
+}
+.container .search_wrapper .search:hover {
+  border: gray solid 1px;
+}
+.container .contacts .contacts_chat {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background-color: #FFFFFF;
+  border-top: 0.5px solid #b6b5b5;
+  color: white;
+  font-size: 400;
+}
+.container .contacts .contacts_chat .contacts_info {
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  top: 1rem;
+}
+.container .contacts .contacts_chat .contacts_img {
+  width: 6.5rem;
+  height: 6rem;
+  position: relative;
+  left: 2rem;
+  border-radius: 50%;
+  padding: 1rem;
+}
+.container .contacts .contacts_chat .contacts_icon {
+  position: relative;
+  top: 3rem;
+  right: 3rem;
+  color: #777777;
+}
+.container .contacts .contacts_chat:hover {
+  background-color: #F5F5F5;
+}
+.container .background_chats {
+  display: flex;
+  flex-direction: column;
+  background-color: #fbfbfb;
+  position: fixed;
+}
+.container .modal {
+  border: solid 2px black;
+}
+.container .modal .modal-header {
+  background-color: #fbfbfb;
+  color: #3d3d3d;
+}
+.container .modal .modal-body {
+  background-color: #fbfbfb;
+  color: #3d3d3d;
+}
+.container .modal .modal-body .form_modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.contacts_chat_modal {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background-color: #FFFFFF;
+  border-top: 0.5px solid #b6b5b5;
+  color: white;
+  font-size: 400;
+}
+.contacts_chat_modal .contacts_info_modal {
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  top: 1rem;
+}
+.contacts_chat_modal .contacts_img_modal {
+  width: 6.5rem;
+  height: 6rem;
+  position: relative;
+  left: 2rem;
+  border-radius: 50%;
+  padding: 1rem;
+}
+
+.contacts_chat_modal:hover {
+  background-color: #F5F5F5;
+}
+
+@media only screen and (max-width: 770px) {
+  body {
+    width: 100%;
+  }
+
+  .container {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1050px) {
+  body {
+    width: 100%;
+  }
+
+  .container {
+    width: 100%;
+  }
+}
