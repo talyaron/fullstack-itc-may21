@@ -28,13 +28,12 @@ class User {
     name: string;
     number: number; //This is going to be like the ID
     picture: string;
-    message: Array<Message>;
+    message: Array<Message> = [];
 
-    constructor(name: string, number: number, picture: string, message: Array<Message>) {
+    constructor(name: string, number: number, picture: string) {
         this.name = name;
         this.number = number;
         this.picture = picture;
-        this.message = message;
     };
 };
 
@@ -56,10 +55,8 @@ const handleSubmitNewUser = (ev: any): void => {
         const number: number = ev.target.elements.number.valueAsNumber;
 
         const image: string = document.querySelector('#previewImage').getAttribute("src");
-        const message = [new Message('')];
 
         const validateNumber = document.querySelector('#number');
-
         validateNumber.addEventListener('blur', () => {
             userList.forEach(element => {
                 if (element.number == validateNumber.value) {
@@ -70,7 +67,7 @@ const handleSubmitNewUser = (ev: any): void => {
             })
         })
 
-        const user = new User(name, number, image, message);
+        const user = new User(name, number, image);
         addUser(user);
         ev.target.reset();
 
@@ -95,6 +92,7 @@ function addUser(user: User): void {
 
 //To Show the contacts in the page
 function renderContacts(arrayUser: Array<User>): void {
+    console.log(userList);
     try {
         const showContact: HTMLElement = document.querySelector('#chats');
         if (!showContact) throw new Error('The element where to show the contacts doesn´t exist!')
