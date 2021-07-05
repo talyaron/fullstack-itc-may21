@@ -1,5 +1,7 @@
 var pageTitle = document.querySelector('title');
 pageTitle.innerText = loggedInUser.userName + "'s chats";
+var profileImg = document.querySelector('.controls__item--profile_img');
+profileImg.setAttribute('src', loggedInUser.userImg);
 var addChatBtn = document.querySelector('.controls__item--plus');
 addChatBtn.addEventListener('click', function (ev) { return showNewChatMenu(ev); });
 var showNewChatMenu = function (ev) {

@@ -1,6 +1,9 @@
 const pageTitle: HTMLElement = document.querySelector('title');
 pageTitle.innerText = `${loggedInUser.userName}'s chats`;
 
+const profileImg: HTMLElement = document.querySelector('.controls__item--profile_img');
+profileImg.setAttribute('src',loggedInUser.userImg)
+
 const addChatBtn: HTMLElement = document.querySelector('.controls__item--plus');
 
 addChatBtn.addEventListener('click', ev => showNewChatMenu(ev));
