@@ -17,7 +17,6 @@ class Group{
     }
 }
 
-
 function renderModalGroupData() {
     const containerContact: HTMLElement = document.querySelector("#contacts_group");
     let modalContact: string = "";
@@ -37,48 +36,26 @@ function renderModalGroupData() {
 }
 renderModalGroupData();  
 
-
-// function renderGroups() {
-//     const containerData: HTMLElement = document.querySelector(".contacts")
-//     let htmlGroup: string = "";
-//     let renderGroup = JSON.parse(localStorage.getItem("groups"));
-//     renderGroup.forEach((element) => {
-//         htmlGroup += `
-//         <div class="contacts_chat">
-//             <img class="contacts_img" src="${element.groupIMG}" alt="">
-//             <a href="">
-//                 <div class="contacts_info">
-//                     <h3 class="contacts_name">${element.groupName}</h3>
-//                     <p>${element.contactsOfGroup + " "}</p>
-//                 </div>
-//             </a>
-//             <i onclick='deleteGroup("${element.id}")' class="fas fa-trash fa-lg contacts_icon"></i>
-//         </div>`
-//     });
-//     containerData.innerHTML += htmlGroup;
-// }
-
 const deleteGroup = (id) =>{
     let groupDelete = JSON.parse(localStorage.getItem("groups"));
     const deleteGroup = groupDelete.filter((group) => group.id !== id);
     groups = deleteGroup;
     localStorage.setItem("groups", JSON.stringify(groups));
     render()
- 
 }
 
 document.getElementById('btn').onclick = function() { 
     const nameGroup: string = document.querySelector("#nameGroup").value;
     const GroupImg: string = document.querySelector("#imgGroup").value; 
-    var markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');  
-    for (var checkbox of markedCheckbox) {  
-        arraysOfNames.push(checkbox.value);  
-        // localStorage.setItem("contactos", JSON.stringify(allContacts))
+    let markedCheckbox:any = document.querySelectorAll('input[type="checkbox"]:checked');  
+
+    for (let checkbox of markedCheckbox) {  
+        arraysOfNames.push(checkbox.value);
     }  
-    const contactsGroup:Array<string> = arraysOfNames;
-    const newGroup = new Group(nameGroup, GroupImg, contactsGroup);
-        console.log(newGroup);
-    groups.unshift(newGroup);
+    const newGroup = new Group(nameGroup, GroupImg, arraysOfNames);
+    arraysOfNames = [];
+
+    groups.push(newGroup);
     localStorage.setItem("groups", JSON.stringify(groups));
     render()
   }  

@@ -46,7 +46,7 @@
 }
 
 .chat1-wrapper {
-  border: 1px solid blue;
+  border: 3px solid blue;
 }
 
 .chat1 {
@@ -121,7 +121,6 @@
   height: 100%;
   width: 100%;
 }
-
 .wrapper__container {
   position: absolute;
   margin-left: 30%;
@@ -130,13 +129,11 @@
   background-color: white;
   height: 112vh;
 }
-
-.wrapper__container--profile {
+.wrapper--profile {
   height: 8vh;
   background-color: #dadbd4;
 }
-
-.wrapper__container--search {
+.wrapper--search {
   height: 8vh;
   background-color: #e2e2e2;
 }
@@ -146,7 +143,6 @@
   margin-left: 20%;
   margin-top: 0;
 }
-
 .envelope__contact {
   position: fixed;
   width: 60%;
@@ -154,7 +150,6 @@
   margin-top: 0;
   background-color: #777;
 }
-
 .envelope__chat {
   background: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
   width: 100%;
@@ -162,7 +157,6 @@
   margin-top: 0%;
   background-color: #e2e2e2;
 }
-
 .envelope__typing {
   width: 100%;
   height: 60px;
@@ -171,17 +165,10 @@
   background-color: grey;
   display: flex;
 }
-
-.envelope__typing--input-entry {
-  border: 1px solid #e2e2e2;
-  border-radius: 30px;
-  height: 35px;
-  padding: 5px;
-  width: 100%;
-  border: none;
-  outline: none;
+.envelope__typing--boxicon {
+  margin: 15px;
+  display: flex;
 }
-
 .envelope__typing--input {
   border: 1px solid #e2e2e2;
   border-radius: 30px;
@@ -189,6 +176,15 @@
   height: 35px;
   padding: 10px;
   width: 85%;
+  border: none;
+  outline: none;
+}
+.envelope__typing--input-entry {
+  border: 1px solid #e2e2e2;
+  border-radius: 30px;
+  height: 35px;
+  padding: 5px;
+  width: 100%;
   border: none;
   outline: none;
 }
@@ -200,11 +196,6 @@
 #paperClip {
   color: white;
   margin-left: 25px;
-}
-
-.boxIcon {
-  margin: 15px;
-  display: flex;
 }
 
 #arrow {

@@ -5,7 +5,7 @@ const userNumber = localStorage.getItem('numberToSearch');
 const userfiltered = userInfo.filter(element => (element.number == userNumber));
 
 //Render the chat of the User
-function renderChat(userfiltered): void {
+function renderChat(): void {
     try {
         let html: string = userfiltered.map(element => {
             return (
@@ -48,7 +48,7 @@ function renderChat(userfiltered): void {
 };
 
 //Call this functions to render the user
-renderChat(userfiltered);
+renderChat();
 
 //With this function I handle the form:
 const handleSubmitMessage = (ev: any): void => {
@@ -86,6 +86,7 @@ sendButton.addEventListener('click', () => {
     userfiltered.forEach(element => {
         element.message.push(message);
     });
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
     renderInsideChat(message);
 });
 
@@ -98,3 +99,11 @@ function renderInsideChat(message) {
         console.error(error);
     };
 };
+
+function renderOldConversation(){
+    userfiltered[0].message.forEach(element => {
+        renderInsideChat(element)
+    });
+}
+
+renderOldConversation();

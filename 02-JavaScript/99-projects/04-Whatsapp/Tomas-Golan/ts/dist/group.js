@@ -21,25 +21,6 @@ function renderModalGroupData() {
     containerContact.innerHTML = modalContact;
 }
 renderModalGroupData();
-// function renderGroups() {
-//     const containerData: HTMLElement = document.querySelector(".contacts")
-//     let htmlGroup: string = "";
-//     let renderGroup = JSON.parse(localStorage.getItem("groups"));
-//     renderGroup.forEach((element) => {
-//         htmlGroup += `
-//         <div class="contacts_chat">
-//             <img class="contacts_img" src="${element.groupIMG}" alt="">
-//             <a href="">
-//                 <div class="contacts_info">
-//                     <h3 class="contacts_name">${element.groupName}</h3>
-//                     <p>${element.contactsOfGroup + " "}</p>
-//                 </div>
-//             </a>
-//             <i onclick='deleteGroup("${element.id}")' class="fas fa-trash fa-lg contacts_icon"></i>
-//         </div>`
-//     });
-//     containerData.innerHTML += htmlGroup;
-// }
 var deleteGroup = function (id) {
     var groupDelete = JSON.parse(localStorage.getItem("groups"));
     var deleteGroup = groupDelete.filter(function (group) { return group.id !== id; });
@@ -54,12 +35,10 @@ document.getElementById('btn').onclick = function () {
     for (var _i = 0, markedCheckbox_1 = markedCheckbox; _i < markedCheckbox_1.length; _i++) {
         var checkbox = markedCheckbox_1[_i];
         arraysOfNames.push(checkbox.value);
-        // localStorage.setItem("contactos", JSON.stringify(allContacts))
     }
-    var contactsGroup = arraysOfNames;
-    var newGroup = new Group(nameGroup, GroupImg, contactsGroup);
-    console.log(newGroup);
-    groups.unshift(newGroup);
+    var newGroup = new Group(nameGroup, GroupImg, arraysOfNames);
+    arraysOfNames = [];
+    groups.push(newGroup);
     localStorage.setItem("groups", JSON.stringify(groups));
     render();
 };
