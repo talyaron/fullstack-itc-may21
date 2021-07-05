@@ -53,20 +53,18 @@ class Contacts {
     let html: string = "";
 
     this.contacts.forEach((element) => {
-      html += `<div>
+      html += `
       <div class="chat1" onclick="redirect()">
 
-      <img src="${element.image}" alt="" class="photo2"> 
+      <img src="${element.image}" alt="" class="chat1__photo"> 
 
-      <h4 class="nameContact">${element.contactName}</h4>
+      <h4 class="chat1__name">${element.contactName}</h4>
+      
+      <i onclick='handleDelete("${element.contactId}")' class="far fa-trash-alt" id="chat1__delete" > </i>
       </div>
-      <div>
-      <i onclick='handleDelete("${element.contactId}")' class="far fa-trash-alt" id="delete" > </i>
-      </div>
-      </div>`;
+      `;
     });
     render.innerHTML = html;
-
   }
 
   searchContact(inputFilter: string) {
@@ -80,8 +78,10 @@ class Contacts {
 }
 
 function handleDelete(contactId) {
-  this.conta
-  const reducedContacts = contacts.contacts.filter(contact => contactId !== contact.contactId);
+  this.conta;
+  const reducedContacts = contacts.contacts.filter(
+    (contact) => contactId !== contact.contactId
+  );
   console.log(reducedContacts);
   contacts.contacts = reducedContacts;
   contacts.renderContacts();
