@@ -65,7 +65,7 @@ var RunsPool = /** @class */ (function () {
                 run.runMatch = true;
                 var currentRunIndex = this.allRuns.findIndex(function (runItem) { return runItem.runId === run.runId; }); //YS: Find would be better than findIndex. YA: Don't see how find helps here. Can you explain?
                 this.allRuns[currentRunIndex].runMatch = true;
-                this.showMatchesOnDON(runMatches);
+                this.showMatchesOnDOM(runMatches);
             }
             return run.runMatch;
         }
@@ -73,7 +73,7 @@ var RunsPool = /** @class */ (function () {
             console.error(er);
         }
     };
-    RunsPool.prototype.showMatchesOnDON = function (runMatches) {
+    RunsPool.prototype.showMatchesOnDOM = function (runMatches) {
         // in the future - the method will add a button to show matches to the run box, in case available.
         // clicking will open a modal of the matches
     };

@@ -20,10 +20,10 @@
                 <i class="controls__item controls__item--plus fas fa-2x fa-plus"></i>
                 <i class="controls__item controls__item--ellipsis fas fa-2x fa-ellipsis-h"></i>
             </div>
-            <div class="header__item header__item--search">
-                <i id="search_icon" class="fas fa-search"></i>
-                <form id="search_form">
-                    <input type="search" name="searchInGroups" id="search_in_groups"
+            <div class="header__item search">
+                <i class="search_icon fas fa-search"></i>
+                <form class="search_form">
+                    <input type="search" name="searchInGroups" class="search_in_groups"
                         placeholder="Search or start a new chat" />
                 </form>
             </div>
@@ -41,21 +41,42 @@
                     <i class="group__item group__item--delete fas fa-trash"></i>
             </div>
         </main>
-        <div class="new_conversation">
-            <div class="new_conversation__item new_conversation__item--title">
-                <div id="back">🡰</div>
-                <h2 id="title">New Chat</h2>
+        <div class="new_chat">
+            <div class="new_chat__item new_chat__item--header">
+                <div class="title">
+                    <h3 class="title__item title__item--cancel_btn">🡠</h3>
+                    <h3 class="title__item">New Chat</h3>
+                </div>
+                <div class="search">
+                    <i class="search_icon fas fa-search"></i>
+                    <form class="search_form">
+                        <input type="search" name="searchInGroups" class="search_in_groups"
+                            placeholder="Search contacts" />
+                    </form>
+                </div>
             </div>
-            <div class="new_conversation__item new_conversation__item--body options">
+            <div class="new_chat__item new_chat__item--body options">
                 <div class="options__item options__item--group">
-                    <img id="new_group_logo" src="">
-                    <div id="new_group">New Group</div>
+                    <img id="new_group_logo" src="https://static.thenounproject.com/png/61728-200.png">
+                    <h3 id="new_group_title">New Group</h3>
+                </div>                
+            </div>
+        </div>
+        <div class="new_group">
+            <div class="new_group__item new_group__item--header">
+                <div class="title">
+                    <h3 class="title__item title__item--cancel_btn">🡠</h3>
+                    <h3 class="title__item">Add Group Contacts</h3>
                 </div>
-                <div class="options__item">
-                    <img class="new_chat_contact_img">
-                    <div class="new_chat_contact_name">Name</div>
-                    <div class="new_chat_status">The world is awesome</div>
+                <div class="search">
+                    <i class="search_icon fas fa-search"></i>
+                    <form class="search_form">
+                        <input type="search" name="searchInGroups" class="search_in_groups"
+                            placeholder="Insert Contact Name" />
+                    </form>
                 </div>
+            </div>
+            <div class="new_group__item new_group__item--body options">     
             </div>
         </div>
     </section>

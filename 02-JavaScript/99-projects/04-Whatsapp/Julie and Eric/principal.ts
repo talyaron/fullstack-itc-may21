@@ -66,7 +66,7 @@ class Contacts {
       </div>`;
     });
     render.innerHTML = html;
-    console.log(html);
+
   }
 
   searchContact(inputFilter: string) {
@@ -80,12 +80,11 @@ class Contacts {
 }
 
 function handleDelete(contactId) {
-  const reducedContacts = contacts.filter((contact) => {
-    return contactId !== contact.contactId;
-  });
+  this.conta
+  const reducedContacts = contacts.contacts.filter(contact => contactId !== contact.contactId);
   console.log(reducedContacts);
-  contacts = reducedContacts;
-  renderContacts();
+  contacts.contacts = reducedContacts;
+  contacts.renderContacts();
 }
 
 const contacts = new Contacts();
