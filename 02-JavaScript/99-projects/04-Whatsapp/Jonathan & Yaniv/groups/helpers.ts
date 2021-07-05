@@ -31,7 +31,19 @@ const directToChat = (ev: any): void => {
     if ((ev.target.className !== 'options__item options__item--contact') && (ev.target.className.indexOf('new_contact_') === -1)) return;
     if (ev.target.className.indexOf('new_contact_') !== -1) contactToChat = ev.target.parentElement;
     else contactToChat = ev.target;
-    loggedInUser.addGroup(contactToChat.id);
+
+    const contactToChatPhone: string = contactToChat.id;
+    const contactToChatImg: string = contactToChat.querySelector('.new_contact_img').getAttribute('src');
+    const contactToChatNameContainer: HTMLElement = contactToChat.querySelector('.new_contact_name');
+    const contactToChatName: string = contactToChatNameContainer.innerText;
+    const chatUsers: Array<string> = [loggedInUser.userPhone, contactToChat.id];
+    
+    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
+    loggedInUser.addGroupIfNew(group.groupId);
+    localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
+    allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+    localStorage.setItem('contactList',JSON.stringify(loggedInUser));
+    
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
 }
 

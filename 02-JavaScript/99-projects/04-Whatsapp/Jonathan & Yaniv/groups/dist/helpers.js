@@ -24,7 +24,16 @@ var directToChat = function (ev) {
         contactToChat = ev.target.parentElement;
     else
         contactToChat = ev.target;
-    loggedInUser.addGroup(contactToChat.id);
+    var contactToChatPhone = contactToChat.id;
+    var contactToChatImg = contactToChat.querySelector('.new_contact_img').getAttribute('src');
+    var contactToChatNameContainer = contactToChat.querySelector('.new_contact_name');
+    var contactToChatName = contactToChatNameContainer.innerText;
+    var chatUsers = [loggedInUser.userPhone, contactToChat.id];
+    var group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
+    loggedInUser.addGroupIfNew(group.groupId);
+    localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+    allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+    localStorage.setItem('contactList', JSON.stringify(loggedInUser));
     window.location.href = "../chat/chat.html?" + loggedInUser.userPhone + "&" + contactToChat.id;
 };
 var showNewGroupForm = function (ev) {

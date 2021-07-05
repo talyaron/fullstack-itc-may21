@@ -1,11 +1,16 @@
 class Group {
+    groupId: string; // userPhone or "group" + Math.random().toString(16).slice(2);
     groupImg: string;
     groupName: string;
     groupUsers: Array<string> // userPhone numbers
-    groupId: string;
     groupMsgs: Array<Message>;
 
-    constructor ()
+    constructor (groupId: string, groupImg: string, groupName: string, groupUsers: Array<string>) {
+        this.groupId = groupId;
+        this.groupImg = groupImg;
+        this.groupName = groupName;
+        this.groupUsers = groupUsers;
+    }
 }
 
 class User {
@@ -21,9 +26,11 @@ class User {
         this.userGroups = userGroups;
     }
 
-    addGroup() {
+    addGroupIfNew(groupId: string) {
         try {
-            this.userGroups.push()
+            const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
+            if (groupIndex !== -1) return;
+            this.userGroups.push();
           } catch (er) {
             console.error(er);
           }
@@ -57,8 +64,20 @@ class ContactList {
         this.allContacts = allContacts;
     }
 
+    findContactIndex(contactPhone) {
+        const contactIndex = this.allContacts.findIndex(contactItem => contactItem.userPhone === contactPhone);
+        return contactIndex;
+    }
+
     renderContactsToNewChatMenu() {
         try {
+            this.allContacts = this.allContacts.sort((a: User, b: User) => {
+                const aName = a.userName;
+                const bName = b.userName;
+                if (aName < bName) {return -1;}
+                if (aName > bName) {return 1;}
+                return 0;
+            });
             const newChatContactsContainer: HTMLElement = document.querySelector(".options");
             newChatContactsContainer.innerHTML = `
             <div class="options__item options__item--group">
@@ -69,7 +88,7 @@ class ContactList {
                 if (contact.userPhone === loggedInUser.userPhone) return;
                 const contactHTML = `
                 <div class="options__item options__item--contact" id="${contact.userPhone}">
-                    <img src="${contact.userImg}" class="new_contact_img">
+                    <img class="new_contact_img" src="${contact.userImg}">
                     <h3 class="new_contact_name">${contact.userName}</h3>
                     <p class="new_contact_status">The world is awesome</p>
                 </div>`;
