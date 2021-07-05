@@ -1,6 +1,10 @@
 // VARIABLES GLOBALES
 let allContacts:Array<Contact> = [];
 render();
+// QUERIES
+const searchBar = document.getElementById("searchbar");
+const formSearchBar = document.querySelector("#form_searchBar"); 
+
 
 // CLASSES
 interface LocalContact{
@@ -89,3 +93,24 @@ const handleContact = (ev)=>{
     render()
 }
 
+const searchContact = (searchBar)=>{
+    const regExp: string = `^${searchBar}`;
+    const searchTermReg: RegExp = new RegExp(regExp, 'i');
+    allContacts = allContacts.filter(elem => searchTermReg.test(elem.name))
+    localStorage.setItem("contactos", JSON.stringify(allContacts));
+    render()
+}
+
+
+const filters = (ev) =>{
+    ev.preventDefault();
+
+    const searchBar =  ev.target.elements.searchBar.value;
+    console.log(searchBar);
+    searchContact(searchBar);
+    
+}
+
+// EVENTLISTENERS
+
+formSearchBar.addEventListener('keyup', filters);

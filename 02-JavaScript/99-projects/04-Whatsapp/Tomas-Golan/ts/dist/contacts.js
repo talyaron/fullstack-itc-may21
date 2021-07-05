@@ -1,6 +1,9 @@
 // VARIABLES GLOBALES
 var allContacts = [];
 render();
+// QUERIES
+var searchBar = document.getElementById("searchbar");
+var formSearchBar = document.querySelector("#form_searchBar");
 var Contact = /** @class */ (function () {
     function Contact(name, phone, profileImg) {
         this.name = name;
@@ -48,3 +51,18 @@ var handleContact = function (ev) {
     localStorage.setItem("contactos", JSON.stringify(allContacts));
     render();
 };
+var searchContact = function (searchBar) {
+    var regExp = "^" + searchBar;
+    var searchTermReg = new RegExp(regExp, 'i');
+    allContacts = allContacts.filter(function (elem) { return searchTermReg.test(elem.name); });
+    localStorage.setItem("contactos", JSON.stringify(allContacts));
+    render();
+};
+var filters = function (ev) {
+    ev.preventDefault();
+    var searchBar = ev.target.elements.searchBar.value;
+    console.log(searchBar);
+    searchContact(searchBar);
+};
+// EVENTLISTENERS
+formSearchBar.addEventListener('keyup', filters);
