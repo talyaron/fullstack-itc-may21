@@ -1,3 +1,4 @@
+console.log('javascript');
 var Contact = /** @class */ (function () {
     function Contact(name, imgUrl, phone, chats) {
         if (chats === void 0) { chats = [{ message: "New Message", timeStamp: new Date }]; }
@@ -72,6 +73,7 @@ function handleSubmit(ev) {
 }
 var deleteContact = function (conatctID) {
     try {
+        window.event.cancelBubble = true;
         var holder = document.querySelector('.holder');
         if (!holder) {
             throw new Error('No shopping list detected!');
@@ -102,7 +104,7 @@ var addToDom = function (searchResults) {
         }
         searchResults.forEach(function (contact) {
             var index = parseInt(contact.chats.length - 1);
-            holder_1.innerHTML += ("<div class=\"holder__contact\">" +
+            holder_1.innerHTML += ("<div class=\"holder__contact\" id=\"" + contact.contactId + "\" onclick=\"hRef('" + contact.contactId + "')\">" +
                 ("<img class=\"holder__contact__image\" src=\"" + contact.imgUrl + "\">") +
                 ("<div class=\"holder__contact__name\"><a href=\"./private-chat.html?contactId=" + contact.contactId + "\">" + contact.name + "</a></div>") +
                 ("<div class=\"holder__contact__chat\">" + contact.chats[index].message + "</div>") +
@@ -116,20 +118,34 @@ var addToDom = function (searchResults) {
         console.error(e);
     }
 };
-var findProductbySearchTerm = function (chatSearch, searchTerm) {
+var findContactSearch = function (chatSearch, searchTerm) {
     try {
+        console.log('chatSearch');
+        console.log(chatSearch);
         var userRegEx_1 = new RegExp(searchTerm, 'gmi');
-        // let indexArray: Array<any> = contacts.contacts.reduce(function (acc, contactName, index) { //YS: THere are better methods to use than reduce: find or findIndex
-        //     if (userRegEx.test(contactName.name)) {
-        //         acc.push(index);
-        //     }
-        //     return acc;
-        // }, []);
-        var searchResults = chatSearch.filter(function (contactName) { return userRegEx_1.test(contactName.name); });
-        // for (let i = 0; i < indexArray.length; i++) { //YS: Use forEach loop. 
-        //     searchResults[i].description = nameUpdate[indexArray[i]]
-        // }
-        return searchResults;
+        var searchedUsers = chatSearch.filter(function (contactName) { return userRegEx_1.test(contactName.name); });
+        return searchedUsers;
+    }
+    catch (e) {
+        console.error(e);
+    }
+};
+var findTextInMessages = function (searchTerm) {
+    try {
+        console.log(searchTerm);
+        var termRegEx_1 = new RegExp(searchTerm, 'i');
+        var searchedMessages = contacts.contacts.map(function (contact) {
+            var x = contact.chats.filter(function (message) {
+                var msg = message.message;
+                var tst = termRegEx_1.test(msg);
+                console.log(msg, tst);
+                return tst;
+            });
+            console.log(x);
+            return x;
+        }).flat();
+        console.log(searchedMessages);
+        return searchedMessages;
     }
     catch (e) {
         console.error(e);
@@ -142,12 +158,9 @@ var handleKeyUp = function (ev) {
         if (!searchTerm) {
             throw new Error('No value being read for search term!');
         }
-        var results = findProductbySearchTerm(contacts.contacts, searchTerm);
+        var results = findContactSearch(contacts.contacts, searchTerm);
+        var searchMessages = findTextInMessages(searchTerm);
         addToDom(results);
-        if (searchTerm === '') {
-            addToDom(contacts.contacts);
-        }
-        console.log(results);
     }
     catch (er) {
         console.error(er);
@@ -158,6 +171,7 @@ function checkEdits() {
     if (render != null) {
         addToDom(render);
         contacts.contacts = render;
+        console.log(contacts.contacts.map(function (c) { return console.log(c.chats); }));
     }
 }
 function openForm() {

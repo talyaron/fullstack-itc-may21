@@ -1,5 +1,5 @@
 //render in the first page
-var render = document.querySelector(".chats");
+var render = document.querySelector(".wrapper__container--chats");
 //search-regrex first page, take id from the input search
 var inputFilter = document.querySelector("#filterN");
 var ContactGenerator = /** @class */ (function () {
@@ -8,7 +8,6 @@ var ContactGenerator = /** @class */ (function () {
         this.image = image;
         this.phone = phone;
         this.contactId = Math.random().toString(16).slice(2);
-        ;
     }
     return ContactGenerator;
 }());
@@ -34,23 +33,31 @@ var Contacts = /** @class */ (function () {
     Contacts.prototype.renderContacts = function () {
         var html = "";
         this.contacts.forEach(function (element) {
-            html += "<div class=\"chat1\" onclick=\"redirect()\"><img src=\"" + element.image + "\" alt=\"\" class=\"photo2\"> <h4 class=\"nameContact\">" + element.contactName + "</h4><i class=\"far fa-trash-alt\" id=\"delete\"></i></div>";
+            html += "<div>\n      <div class=\"chat1\" onclick=\"redirect()\">\n\n      <img src=\"" + element.image + "\" alt=\"\" class=\"photo2\"> \n\n      <h4 class=\"nameContact\">" + element.contactName + "</h4>\n      </div>\n      <div>\n      <i onclick='handleDelete(\"" + element.contactId + "\")' class=\"far fa-trash-alt\" id=\"delete\" > </i>\n      </div>\n      </div>";
         });
         render.innerHTML = html;
-        console.log(html);
     };
     Contacts.prototype.searchContact = function (inputFilter) {
         var regrExp = inputFilter;
-        var searchTermReg = new RegExp(regrExp, 'i');
-        this.contacts = this.contactsFilter.filter(function (elem) { return searchTermReg.test(elem.contactName); });
+        var searchTermReg = new RegExp(regrExp, "i");
+        this.contacts = this.contactsFilter.filter(function (elem) {
+            return searchTermReg.test(elem.contactName);
+        });
         this.renderContacts();
     };
     return Contacts;
 }());
+function handleDelete(contactId) {
+    this.conta;
+    var reducedContacts = contacts.contacts.filter(function (contact) { return contactId !== contact.contactId; });
+    console.log(reducedContacts);
+    contacts.contacts = reducedContacts;
+    contacts.renderContacts();
+}
 var contacts = new Contacts();
 contacts.renderContacts();
 contacts.addList(contactsData);
-inputFilter.addEventListener('keyup', handleKeyUp);
+inputFilter.addEventListener("keyup", handleKeyUp);
 function handleKeyUp() {
     try {
         contacts.searchContact(inputFilter.value);
@@ -61,9 +68,9 @@ function handleKeyUp() {
 }
 function redirect() {
     try {
-        window.location.href = 'chat.html';
+        window.location.href = "chat.html";
         if (!window.location.href)
-            throw new Error('The page where you want to redirect it doesn´t exist!');
+            throw new Error("The page where you want to redirect it doesn´t exist!");
     }
     catch (error) {
         console.error(error);

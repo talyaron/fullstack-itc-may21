@@ -67,15 +67,15 @@ const runnerSubmit = (ev: any) => {
 
       const passRegExRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/;
       const passRegEx = new RegExp(passRegExRule,'gm');
-      // if (!passRegEx.test(runnerPassword)) {
-      //   alert('Your password must contain 8-10 characters, at least one uppercase letter, one lowercase letter, one number and one special character. Please try again');
-      //   throw new Error('Password not secured enough');
-      // }
+      if (!passRegEx.test(runnerPassword)) {
+        alert('Your password must contain 8-10 characters, at least one uppercase letter, one lowercase letter, one number and one special character. Please try again');
+        throw new Error('Password not secured enough');
+      }
 
-      // if (runnerPassword != runnerPasswordVerify) {
-      //   alert('You entered a different password in you verification field. Please try again');
-      //   throw new Error('Password verification failed');
-      // }
+      if (runnerPassword != runnerPasswordVerify) {
+        alert('You entered a different password in you verification field. Please try again');
+        throw new Error('Password verification failed');
+      }
 
       const runner = new newRunner(runnerName, runnerEmail, runnerPassword, runnerGender, runnerAgeGroup, runnerChat, runnerProfImg);
       localStorage.setItem("currentRunner", JSON.stringify(runner));
