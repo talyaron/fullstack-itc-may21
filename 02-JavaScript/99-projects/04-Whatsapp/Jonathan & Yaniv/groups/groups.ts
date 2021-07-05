@@ -54,6 +54,8 @@ const showNewChatMenu = (ev: any): void => {
     const newChatMenu: HTMLElement = document.querySelector('.new_chat');
     allContacts.renderContactsToNewChatMenu();
     newChatMenu.style.display = 'unset';
+    
+    
 }
 
 const cancelChatBtn: HTMLElement = document.querySelector('.title__item--cancel_btn');
@@ -76,6 +78,12 @@ const directToChat = (ev: any): void => {
     if ((ev.target.className !== 'options__item options__item--contact') && (ev.target.className.indexOf('new_contact_') === -1)) return;
     if (ev.target.className.indexOf('new_contact_') !== -1) contactToChat = ev.target.parentElement;
     else contactToChat = ev.target;
+
+    //JN
+    //I will need allcontact list eventually
+    
+    localStorage.setItem("contactId", JSON.stringify(contactToChat.id))
+
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
 }
 

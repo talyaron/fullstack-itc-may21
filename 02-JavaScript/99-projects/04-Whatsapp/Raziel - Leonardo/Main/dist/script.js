@@ -83,7 +83,7 @@ function renderContacts(arrayUser) {
             throw new Error('The element where to show the contacts doesn´t exist!');
         //Doing a loop to show the contacts
         var html = arrayUser.map(function (element) {
-            return ("<div class=\"chat\" id=\"chat\" onclick='redirect(\"" + element.number + "\")'\n            >\n            <div class=\"chat__left\">\n                <img src=\"" + element.picture + "\" alt=\"\">\n            </div>\n            <div class=\"chat__right\">\n                <div class=\"chat__right--top\">\n                    <span class=\"chat__right--top__contact-name\">" + element.name + "</span>\n                    <span class=\"chat__right--top__phone-number\">Phone Number: " + element.number + "</span>\n\n                </div>\n                <div class=\"chat__right--bottom\">\n                    <div class=\"chat__right--bottom--left\">\n                        <img class=\"double-check-mark\" src=\"Img_whatsapp/double-check-seen.svg\" alt=\"\">\n                        <span>Raziel is typing...</span> \n                    </div>\n                </div>\n\n            </div>\n        </div>");
+            return ("<div class=\"chat\" id=\"chat\" onclick='redirect(\"" + element.number + "\")'\n            >\n            <div class=\"chat__left\">\n                <img src=\"" + element.picture + "\" alt=\"\">\n            </div>\n            <div class=\"chat__right\">\n                <div class=\"chat__right--top\">\n                    <span class=\"chat__right--top__contact-name\">" + element.name + "</span>\n                    <span class=\"chat__right--top__phone-number\">Phone Number: " + element.number + "</span>\n\n                </div>\n                <div class=\"chat__right--bottom\">\n                    <div class=\"chat__right--bottom--left\">\n                        <img class=\"double-check-mark\" src=\"Img_whatsapp/double-check-seen.svg\" alt=\"\">\n                        <span>Raziel is typing...</span>\n                    </div>\n                </div>\n\n            </div>\n        </div>");
         }).join('');
         showContact.innerHTML = html;
     }
@@ -114,7 +114,7 @@ function redirect(userNumber) {
     localStorage.setItem('userInfo', JSON.stringify(userList));
     localStorage.setItem('numberToSearch', userNumber);
     try {
-        window.location.href = './whatsappChat.html';
+        window.location.href = '../Chat/whatsappChat.html';
         if (!window.location.href)
             throw new Error('The page where you want to redirect it doesn´t exist!');
     }

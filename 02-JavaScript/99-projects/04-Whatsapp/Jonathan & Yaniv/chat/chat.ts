@@ -3,6 +3,7 @@ const inputSearch = <HTMLInputElement>document.querySelector('#filtermsg')
 const btnMessage = <HTMLElement>document.querySelector('.container__chat-footer--entermsg')
 const elementMessage = <HTMLInputElement>document.querySelector('#writemsg')
 const containerChat = <HTMLElement>document.querySelector('.container__chat-box')
+const containerContactUser = <HTMLElement>document.querySelector('.container__header__left')
 
 
 
@@ -88,10 +89,6 @@ class MessageList {
                              <i class="fa fa-trash container__chat-box__messages--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item"></i>
                     </div>`
         });
-
-        console.log(html)
-
-
 
         containerChat.innerHTML = html;
     }
@@ -199,21 +196,46 @@ class ContactMessage { //I'm going to use
     userImg: string; //image grab into the page
     userName: string; //name grab into the name
     userPhone: string; // is the id
-    userGroups: Array<string>; //list of groups
+    //userGroups: Array<string>; //list of groups
 
-    constructor (userImg: string, userName: string, userPhone: string, userGroups: Array<string>) {
+    constructor (userImg: string, userName: string, userPhone: string) {
         this.userImg = userImg;
         this.userName = userName;
         this.userPhone = userPhone;
-        this.userGroups = userGroups;
+      //  this.userGroups = userGroups;
     }
 
     renderUserChat(){
+        let html:string = ''
 
+        html+= `<i class="fas fa-arrow-left container__header__left--arrowleft"></i>
+                <img src="${this.userImg}" alt="" srcset="">
+                <div class="container__header__left__text">
+                <span class="container__header__left__text--first">${this.userName}</span>
+                <span class="container__header__left__text--second">${this.userPhone}</span>
+                </div>`
+        
+        containerContactUser.innerHTML = html;
     }
 }
 
+const contactChat = JSON.parse(localStorage.getItem("contactList"))
+const contactList = JSON.parse(localStorage.getItem("contactId"))
 
+let value = Object.values(contactChat)
+let values = Object.values(value)
+let valores = Object.values(values[0])
+
+
+valores.find(function (item) {
+    if (contactList === item.userPhone) {
+        const contactUser = new ContactMessage(item.userImg, item.userName, item.userPhone)
+        contactUser.renderUserChat()
+    }
+});
+//const contactUser = new ContactMessage(contactChat.userImg, contactChat.userName, contactChat.userPhone)
+
+//contactUser.renderUserChat()
 
 
 

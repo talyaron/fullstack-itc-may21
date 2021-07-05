@@ -55,6 +55,9 @@ var directToChat = function (ev) {
         contactToChat = ev.target.parentElement;
     else
         contactToChat = ev.target;
+    //JN
+    //I will need allcontact list eventually
+    localStorage.setItem("contactId", JSON.stringify(contactToChat.id));
     window.location.href = "../chat/chat.html?" + loggedInUser.userPhone + "&" + contactToChat.id;
 };
 var showNewGroupForm = function (ev) {
