@@ -102,7 +102,7 @@ function renderContacts(arrayUser: Array<User>): void {
                 </div>
                 <div class="chat__right--bottom">
                     <div class="chat__right--bottom--left">
-                        <img class="double-check-mark" src="Img_whatsapp/double-check-seen.svg" alt="">
+                        <img class="double-check-mark" src="../Img_whatsapp/double-check-seen.svg" alt="">
                         <span>Raziel is typing...</span>
                     </div>
                 </div>
