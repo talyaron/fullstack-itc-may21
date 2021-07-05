@@ -74,7 +74,7 @@ class RunsPool {
         run.runMatch = true;
         const currentRunIndex: number = this.allRuns.findIndex((runItem) => runItem.runId === run.runId); //YS: Find would be better than findIndex. YA: Don't see how find helps here. Can you explain?
         this.allRuns[currentRunIndex].runMatch = true;
-        this.showMatchesOnDON(runMatches);
+        this.showMatchesOnDOM(runMatches);
       }
       return run.runMatch;
     } catch (er) {
@@ -82,7 +82,7 @@ class RunsPool {
     }
   }
 
-  showMatchesOnDON(runMatches: Array<Run>) {
+  showMatchesOnDOM(runMatches: Array<Run>) {
     // in the future - the method will add a button to show matches to the run box, in case available.
     // clicking will open a modal of the matches
   }
