@@ -76,43 +76,42 @@ a {
 .container .header .header_icon .header_icon_item--group {
   margin-right: 2rem;
 }
+.container .chat_wrapper {
+  background-color: #E5DDD5;
+  background-image: url(https://theabbie.github.io/blog/assets/official-whatsapp-background-image.jpg);
+  display: flex;
+}
+.container .chat_wrapper--user1 {
+  background-color: #FFFFFF;
+  border-radius: 1rem;
+  margin: 1rem;
+  padding: 0.5rem;
+  width: 50%;
+}
+.container .chat_wrapper--user2 {
+  background-color: #4FCC66;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  width: 50%;
+  position: absolute;
+  right: 0;
+}
 .container .search_wrapper {
   width: 100%;
   height: 4rem;
-  background: #fbfbfb;
+  background-color: #DBDBDB;
   display: flex;
 }
 .container .search_wrapper .search {
-  width: 85%;
+  width: 95%;
   height: 3rem;
   margin: auto;
-  border: 1px solid #cac9c9;
   border-radius: 5rem;
   display: flex;
-}
-.container .search_wrapper .search .search_icon {
-  color: #aaaaaa;
   text-align: center;
-  width: 6rem;
-  margin: auto;
-  color: #aaaaaa;
 }
-.container .search_wrapper .search .search_input {
-  width: 90%;
-  height: 90%;
-  position: relative;
-  top: 0.1rem;
-  right: 0.2rem;
-  border: none;
-  font-size: 1.3rem;
-}
-.container .search_wrapper .search .search_input:focus {
-  outline: none;
-}
-.container .search_wrapper .search:hover {
-  border: gray solid 1px;
-}
-.container .contacts .contacts_chat {
+.container .search_wrapper .contacts .contacts_chat {
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -121,7 +120,7 @@ a {
   color: white;
   font-size: 400;
 }
-.container .contacts .contacts_chat .contacts_info {
+.container .search_wrapper .contacts .contacts_chat .contacts_info {
   padding: 0.3rem;
   display: flex;
   flex-direction: column;
@@ -129,7 +128,7 @@ a {
   position: relative;
   top: 1rem;
 }
-.container .contacts .contacts_chat .contacts_img {
+.container .search_wrapper .contacts .contacts_chat .contacts_img {
   width: 6.5rem;
   height: 6rem;
   position: relative;
@@ -137,38 +136,37 @@ a {
   border-radius: 50%;
   padding: 1rem;
 }
-.container .contacts .contacts_chat .contacts_icon {
+.container .search_wrapper .contacts .contacts_chat .contacts_icon {
   position: relative;
   top: 3rem;
   right: 3rem;
   color: #777777;
 }
-.container .contacts .contacts_chat:hover {
+.container .search_wrapper .contacts .contacts_chat:hover {
   background-color: #F5F5F5;
 }
-.container .background_chats {
+.container .search_wrapper .background_chats {
   display: flex;
   flex-direction: column;
   background-color: #fbfbfb;
   position: fixed;
 }
-.container .modal {
+.container .search_wrapper .modal {
   border: solid 2px black;
 }
-.container .modal .modal-header {
+.container .search_wrapper .modal .modal-header {
   background-color: #fbfbfb;
   color: #3d3d3d;
 }
-.container .modal .modal-body {
+.container .search_wrapper .modal .modal-body {
   background-color: #fbfbfb;
   color: #3d3d3d;
 }
-.container .modal .modal-body .form_modal {
+.container .search_wrapper .modal .modal-body .form_modal {
   display: flex;
   flex-direction: column;
 }
-
-.contacts_chat_modal {
+.container .contacts_chat_modal {
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -177,7 +175,7 @@ a {
   color: white;
   font-size: 400;
 }
-.contacts_chat_modal .contacts_info_modal {
+.container .contacts_chat_modal .contacts_info_modal {
   padding: 0.3rem;
   display: flex;
   flex-direction: column;
@@ -185,7 +183,7 @@ a {
   position: relative;
   top: 1rem;
 }
-.contacts_chat_modal .contacts_img_modal {
+.container .contacts_chat_modal .contacts_img_modal {
   width: 6.5rem;
   height: 6rem;
   position: relative;
@@ -193,26 +191,22 @@ a {
   border-radius: 50%;
   padding: 1rem;
 }
-
-.contacts_chat_modal:hover {
+.container .contacts_chat_modal:hover {
   background-color: #F5F5F5;
 }
-
 @media only screen and (max-width: 770px) {
-  body {
+  .container body {
     width: 100%;
   }
-
-  .container {
+  .container .container {
     width: 100%;
   }
 }
 @media only screen and (max-width: 1050px) {
-  body {
+  .container body {
     width: 100%;
   }
-
-  .container {
+  .container .container {
     width: 100%;
   }
 }

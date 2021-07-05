@@ -4,7 +4,6 @@ const btnMessage = <HTMLElement>document.querySelector('.container__chat-footer-
 const elementMessage = <HTMLInputElement>document.querySelector('#writemsg')
 const containerChat = <HTMLElement>document.querySelector('.container__chat-box')
 const containerContactUser = <HTMLElement>document.querySelector('.container__header__left')
-//const btnReturn = <HTMLElement>document.querySelector('.container__header__left--arrowleft')
 
 
 
@@ -204,10 +203,10 @@ function closeModal(ev) {
 
 //User
 
-class ContactMessage { 
-    userImg: string; 
-    userName: string; 
-    userPhone: string; 
+class ContactMessage { //I'm going to use 
+    userImg: string; //image grab into the page
+    userName: string; //name grab into the name
+    userPhone: string; // is the id
     //userGroups: Array<string>; //list of groups
 
     constructor (userImg: string, userName: string, userPhone: string) {
@@ -220,7 +219,7 @@ class ContactMessage {
     renderUserChat(){
         let html:string = ''
 
-        html+= `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
+        html+= `<i class="fas fa-arrow-left container__header__left--arrowleft"></i>
                 <img src="${this.userImg}" alt="" srcset="">
                 <div class="container__header__left__text">
                 <span class="container__header__left__text--first">${this.userName}</span>
@@ -234,15 +233,20 @@ class ContactMessage {
 const contactChat = JSON.parse(localStorage.getItem("contactList"))
 const contactList = JSON.parse(localStorage.getItem("contactId"))
 
-let chatUser = Object.values(Object.values(Object.values(contactChat))[0])
+let value = Object.values(contactChat)
+let values = Object.values(value)
+let valores = Object.values(values[0])
 
-chatUser.find(function (chat) {
-    if (contactList === chat.userPhone) {
-        const contactUser = new ContactMessage(chat.userImg, chat.userName, chat.userPhone)
+
+valores.find(function (item) {
+    if (contactList === item.userPhone) {
+        const contactUser = new ContactMessage(item.userImg, item.userName, item.userPhone)
         contactUser.renderUserChat()
     }
 });
+//const contactUser = new ContactMessage(contactChat.userImg, contactChat.userName, contactChat.userPhone)
 
+//contactUser.renderUserChat()
 
 
 

@@ -4,7 +4,6 @@ var btnMessage = document.querySelector('.container__chat-footer--entermsg');
 var elementMessage = document.querySelector('#writemsg');
 var containerChat = document.querySelector('.container__chat-box');
 var containerContactUser = document.querySelector('.container__header__left');
-//const btnReturn = <HTMLElement>document.querySelector('.container__header__left--arrowleft')
 //modal
 var btnModal = document.querySelector('.container__chat-footer--smile');
 var bgModal = document.querySelector('.modal-bg');
@@ -142,17 +141,21 @@ var ContactMessage = /** @class */ (function () {
     }
     ContactMessage.prototype.renderUserChat = function () {
         var html = '';
-        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.userImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.userName + "</span>\n                <span class=\"container__header__left__text--second\">" + this.userPhone + "</span>\n                </div>";
+        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\"></i>\n                <img src=\"" + this.userImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.userName + "</span>\n                <span class=\"container__header__left__text--second\">" + this.userPhone + "</span>\n                </div>";
         containerContactUser.innerHTML = html;
     };
     return ContactMessage;
 }());
 var contactChat = JSON.parse(localStorage.getItem("contactList"));
 var contactList = JSON.parse(localStorage.getItem("contactId"));
-var chatUser = Object.values(Object.values(Object.values(contactChat))[0]);
-chatUser.find(function (chat) {
-    if (contactList === chat.userPhone) {
-        var contactUser = new ContactMessage(chat.userImg, chat.userName, chat.userPhone);
+var value = Object.values(contactChat);
+var values = Object.values(value);
+var valores = Object.values(values[0]);
+valores.find(function (item) {
+    if (contactList === item.userPhone) {
+        var contactUser = new ContactMessage(item.userImg, item.userName, item.userPhone);
         contactUser.renderUserChat();
     }
 });
+//const contactUser = new ContactMessage(contactChat.userImg, contactChat.userName, contactChat.userPhone)
+//contactUser.renderUserChat()
