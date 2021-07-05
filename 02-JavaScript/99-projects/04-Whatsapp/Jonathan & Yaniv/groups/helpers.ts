@@ -23,7 +23,7 @@ const hideNewChatMenu = (ev: any): void => {
 const newChatOptions: HTMLElement = document.querySelector('.options');
 
 newChatOptions.addEventListener('click', ev => directToChat(ev));
-newChatOptions.addEventListener('click', ev => showNewGroupMenu(ev));
+newChatOptions.addEventListener('click', ev => showNewGroupForm(ev));
 
 const directToChat = (ev: any): void => {
 
@@ -44,41 +44,22 @@ const directToChat = (ev: any): void => {
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList',JSON.stringify(loggedInUser));
 
+    //JN
+    localStorage.setItem("contactListUser", JSON.stringify(allContacts))
+    localStorage.setItem("contactId", JSON.stringify(contactToChat.id))
+    
+    
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
 }
 
-const showNewGroupMenu = (ev: any): void => {
+const showNewGroupForm = (ev: any): void => {
 
+    let newGroupForm: HTMLElement;
     if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1)) return;
-    const newGroupMenu: HTMLElement = document.querySelector('.new_group');
-    allContacts.renderContactsToNewGroupMenu();
-    newGroupMenu.style.display = 'unset';
+    if (ev.target.id.indexOf('new_group_') !== -1) newGroupForm = ev.target.parentElement;
+    else newGroupForm = ev.target;
+    console.log(newGroupForm);
 }
-
-const backToNewChatMenuBtn: HTMLElement = document.querySelector('.title__item--back_btn');
-
-backToNewChatMenuBtn.addEventListener('click', ev => hideNewGroupMenu(ev));
-
-const hideNewGroupMenu = (ev: any): void => {
-    const newGroupMenu: HTMLElement = document.querySelector('.new_group');
-    newGroupMenu.style.display = 'none';
-}
-
-const readURL = (input: any) => { // CREDIT TO LEONARDO FOR THIS ONE!!
-    if (input.files && input.files[0]) {
-      let reader = new FileReader();
-  
-      reader.onload = (e)=> {
-        const label: HTMLElement = document.querySelector('#add_photo');
-        const img: HTMLElement = document.querySelector('#groupImg');
-        label.style.display = 'none';
-        img.style.display = 'unset';
-        img.setAttribute("src", `${e.target.result}`);
-        return e.target.result
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
 
 const logOutBtn = document.querySelector('.controls__item--ellipsis');
 

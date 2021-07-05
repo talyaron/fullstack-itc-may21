@@ -61,6 +61,7 @@ var MessageList = /** @class */ (function () {
             html += "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "<p>\n                        <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                        <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\"></i>\n                        <i class=\"fa fa-trash container__chat-box__messages--user--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                        </div>";
         });
         containerChat.innerHTML = html;
+        return this.messageList;
     };
     return MessageList;
 }());
@@ -109,6 +110,7 @@ function handleKeyUp() {
     }
 }
 function handleReturn() {
+    localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()));
     var pickedUser = JSON.parse(localStorage.getItem("currentUser"));
     window.location.href = "../groups/groups.html?" + pickedUser.userPhone;
 }
@@ -150,10 +152,11 @@ var ContactMessage = /** @class */ (function () {
     };
     return ContactMessage;
 }());
-var contactChat = JSON.parse(localStorage.getItem("contactList"));
+var contactChat = JSON.parse(localStorage.getItem("contactListUser"));
 var contactList = JSON.parse(localStorage.getItem("contactId"));
 var contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
-var chatUser = Object.values(Object.values(Object.values(contactChat))[0]);
+var chatUser = Object.values(Object.values(contactChat)[1]);
+//let chatUser = Object.values(Object.values(Object.values(contactChat))[0])
 chatUser.find(function (chat) {
     if (contactList === chat.userPhone) {
         var contactUser_1 = new ContactMessage(chat.userImg, chat.userName, chat.userPhone);
