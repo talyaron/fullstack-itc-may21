@@ -78,8 +78,6 @@ var ContactList = /** @class */ (function () {
 }());
 var allContacts = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 var loggedInUser = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
-<<<<<<< HEAD
-=======
 var pageTitle = document.querySelector('title');
 pageTitle.innerText = loggedInUser.userName + "'s groups";
 var addChatBtn = document.querySelector('.controls__item--plus');
@@ -121,4 +119,3 @@ var showNewGroupForm = function (ev) {
         newGroupForm = ev.target;
     console.log(newGroupForm);
 };
->>>>>>> 817925d947fe5b23df08477ec4b89a77a340f5e3

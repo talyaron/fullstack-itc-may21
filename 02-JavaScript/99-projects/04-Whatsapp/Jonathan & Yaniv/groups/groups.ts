@@ -104,8 +104,6 @@ const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
 
-<<<<<<< HEAD
-=======
 const pageTitle: HTMLElement = document.querySelector('title');
 pageTitle.innerText = `${loggedInUser.userName}'s groups`;
 
@@ -158,4 +156,3 @@ const showNewGroupForm = (ev: any): void => {
     else newGroupForm = ev.target;
     console.log(newGroupForm);
 }
->>>>>>> 817925d947fe5b23df08477ec4b89a77a340f5e3
