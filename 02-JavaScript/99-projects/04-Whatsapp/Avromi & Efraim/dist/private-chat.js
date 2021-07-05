@@ -28,6 +28,11 @@ function renderMessages(arrToRender) {
         messagesDiv.innerHTML = html;
     });
 }
+function setScrollHeight() {
+    var messagesDiv = document.querySelector(".messages");
+    messagesDiv.scrollTop = messagesDiv.clientHeight;
+}
+setScrollHeight();
 function openCamera() {
     console.log("open the camera");
 }

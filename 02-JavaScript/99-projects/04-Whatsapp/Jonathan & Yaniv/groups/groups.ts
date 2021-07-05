@@ -104,3 +104,58 @@ const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
 
+<<<<<<< HEAD
+=======
+const pageTitle: HTMLElement = document.querySelector('title');
+pageTitle.innerText = `${loggedInUser.userName}'s groups`;
+
+const addChatBtn: HTMLElement = document.querySelector('.controls__item--plus');
+
+addChatBtn.addEventListener('click', ev => showNewChatMenu(ev));
+
+const showNewChatMenu = (ev: any): void => {
+    const newChatMenu: HTMLElement = document.querySelector('.new_chat');
+    allContacts.renderContactsToNewChatMenu();
+    newChatMenu.style.display = 'unset';
+    
+    
+}
+
+const cancelChatBtn: HTMLElement = document.querySelector('.title__item--cancel_btn');
+
+cancelChatBtn.addEventListener('click', ev => hideNewChatMenu(ev));
+
+const hideNewChatMenu = (ev: any): void => {
+    const newChatMenu: HTMLElement = document.querySelector('.new_chat');
+    newChatMenu.style.display = 'none';
+}
+
+const newChatOptions: HTMLElement = document.querySelector('.options');
+
+newChatOptions.addEventListener('click', ev => directToChat(ev));
+newChatOptions.addEventListener('click', ev => showNewGroupForm(ev));
+
+const directToChat = (ev: any): void => {
+
+    let contactToChat: HTMLElement;
+    if ((ev.target.className !== 'options__item options__item--contact') && (ev.target.className.indexOf('new_contact_') === -1)) return;
+    if (ev.target.className.indexOf('new_contact_') !== -1) contactToChat = ev.target.parentElement;
+    else contactToChat = ev.target;
+
+    //JN
+    //I will need allcontact list eventually
+    
+    localStorage.setItem("contactId", JSON.stringify(contactToChat.id))
+
+    window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
+}
+
+const showNewGroupForm = (ev: any): void => {
+
+    let newGroupForm: HTMLElement;
+    if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1)) return;
+    if (ev.target.id.indexOf('new_group_') !== -1) newGroupForm = ev.target.parentElement;
+    else newGroupForm = ev.target;
+    console.log(newGroupForm);
+}
+>>>>>>> 817925d947fe5b23df08477ec4b89a77a340f5e3

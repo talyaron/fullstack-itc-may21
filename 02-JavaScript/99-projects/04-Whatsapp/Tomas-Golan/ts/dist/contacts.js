@@ -1,5 +1,6 @@
 // VARIABLES GLOBALES
 var allContacts = [];
+render();
 var Contact = /** @class */ (function () {
     function Contact(name, phone, profileImg) {
         this.name = name;
@@ -14,24 +15,29 @@ var addLocalContacts = function (localChat) {
     localChat.forEach(function (contact) {
         var add = new Contact(contact.name, contact.phone, contact.profileImg);
         allContacts.push(add);
-        renderData();
+        render();
     });
 };
 addLocalContacts(chats);
-function renderData() {
+function render() {
     var containerData = document.querySelector(".contacts");
     var html = "";
     var render = JSON.parse(localStorage.getItem("contactos"));
     render.forEach(function (element) {
-        html += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.profileImg + "\" alt=\"\">\n            <a href=\"\">\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.name + "</h3>\n                    <p>" + element.phone + "</p>\n                </div>\n            </a>\n            <i onclick='deleteChat(\"" + element.id + "\")' class=\"fas fa-trash fa-2x contacts_icon\"></i>\n        </div>";
+        html += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.profileImg + "\" alt=\"\">\n            <a href=\"\">\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.name + "</h3>\n                    <p>" + element.phone + "</p>\n                </div>\n            </a>\n            <i onclick='deleteChat(\"" + element.id + "\")' class=\"fas fa-trash fa-lg contacts_icon\"></i>\n        </div>";
+    });
+    var renderGroup = JSON.parse(localStorage.getItem("groups"));
+    renderGroup.forEach(function (element) {
+        html += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.groupIMG + "\" alt=\"\">\n            <a href=\"\">\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.groupName + "</h3>\n                    <p>" + (element.contactsOfGroup + " ") + "</p>\n                </div>\n            </a>\n            <i onclick='deleteGroup(\"" + element.id + "\")' class=\"fas fa-trash fa-lg contacts_icon\"></i>\n        </div>";
     });
     containerData.innerHTML = html;
 }
 var deleteChat = function (id) {
-    var deleteChats = allContacts.filter(function (chat) { return chat.id !== id; });
+    var contactsDelete = JSON.parse(localStorage.getItem("contactos"));
+    var deleteChats = contactsDelete.filter(function (chat) { return chat.id !== id; });
     allContacts = deleteChats;
     localStorage.setItem("contactos", JSON.stringify(allContacts));
-    renderData();
+    render();
 };
 var handleContact = function (ev) {
     ev.preventDefault();
@@ -41,5 +47,5 @@ var handleContact = function (ev) {
     var newContacto = new Contact(name, phone, profileImg);
     allContacts.unshift(newContacto);
     localStorage.setItem("contactos", JSON.stringify(allContacts));
-    renderData();
+    render();
 };
