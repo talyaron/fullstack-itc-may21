@@ -9,10 +9,12 @@ var bgModal = document.querySelector('.modal-bg');
 var modalClose = document.querySelector('.modal-close');
 //Ratio
 var emojiList = document.querySelectorAll('.emoji');
+//clicked
+var isClicked = false;
 var Message = /** @class */ (function () {
-    function Message(content, personID, dateMsg, groupID) {
+    function Message(content, userPhone, dateMsg, groupID) {
         this.content = content;
-        this.personID = personID;
+        this.userPhone = userPhone;
         this.dateMsg = dateMsg;
         this.groupID = groupID;
         this.msgID = "id" + Math.random().toString(16).slice(2);
@@ -29,6 +31,14 @@ var MessageList = /** @class */ (function () {
         this.messageListFilter.push(message);
         this.renderChat();
     };
+    MessageList.prototype.editMessage = function (messagePassId) {
+        this.messageList.find(function (message) {
+            if (messagePassId === message.msgID) {
+                message.content = "<i class=\"fas fa-ban a\"></i>you deleted this message";
+            }
+        });
+        this.renderChat();
+    };
     MessageList.prototype.deleteMessage = function (messagePassId) {
         this.messageList = this.messageList.filter(function (message) { return messagePassId !== message.msgID; });
         this.messageListFilter = this.messageListFilter.filter(function (message) { return messagePassId !== message.msgID; });
@@ -42,11 +52,10 @@ var MessageList = /** @class */ (function () {
     };
     MessageList.prototype.renderChat = function () {
         var html = '';
-        // dobleclick 
-        // click
         this.messageList.forEach(function (message) {
-            html += "<div class=\"container__chat-box__messages\">\n                             <p class=\"container__chat-box__messages--content\">" + message.content + "<p>\n                             <span class=\"container__chat-box__messages--datemsg\">" + message.dateMsg + "</span>\n                             <i class=\"fas fa-check-double container__chat-box__messages--doubleclick\"></i>\n                             <i class=\"fa fa-trash container__chat-box__messages--trash\" onclick='handleDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                    </div>";
+            html += "<div class=\"container__chat-box__messages\">\n                             <p class=\"container__chat-box__messages--content\">" + message.content + "<p>\n                             <span class=\"container__chat-box__messages--datemsg\">" + message.dateMsg + "</span>\n                             <i class=\"fas fa-check-double container__chat-box__messages--doubleclick\"></i>\n                             <i class=\"fa fa-trash container__chat-box__messages--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                    </div>";
         });
+        console.log(html);
         containerChat.innerHTML = html;
     };
     return MessageList;
@@ -75,8 +84,15 @@ function displayInput() {
         inputSearch.value = "";
     }
 }
-function handleDelete(messageId) {
-    messageList.deleteMessage(messageId);
+function handleEditDelete(messageId) {
+    if (isClicked === false) {
+        messageList.editMessage(messageId);
+        isClicked = true;
+    }
+    else {
+        messageList.deleteMessage(messageId);
+        isClicked = false;
+    }
 }
 inputSearch.addEventListener('keyup', handleKeyUp);
 function handleKeyUp() {
@@ -109,3 +125,15 @@ function closeModal(ev) {
     ev.preventDefault();
     bgModal.classList.remove('bg-active');
 }
+//User
+var ContactMessage = /** @class */ (function () {
+    function ContactMessage(userImg, userName, userPhone, userGroups) {
+        this.userImg = userImg;
+        this.userName = userName;
+        this.userPhone = userPhone;
+        this.userGroups = userGroups;
+    }
+    ContactMessage.prototype.renderUserChat = function () {
+    };
+    return ContactMessage;
+}());
