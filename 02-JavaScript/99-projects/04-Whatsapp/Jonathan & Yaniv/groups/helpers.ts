@@ -26,7 +26,7 @@ const hideNewChatMenu = (ev: any): void => {
 const newChatOptions: HTMLElement = document.querySelector('.options');
 
 newChatOptions.addEventListener('click', ev => directToChat(ev));
-newChatOptions.addEventListener('click', ev => showNewGroupForm(ev));
+newChatOptions.addEventListener('click', ev => showNewGroupMenu(ev));
 
 const directToChat = (ev: any): void => {
 
@@ -47,21 +47,15 @@ const directToChat = (ev: any): void => {
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList',JSON.stringify(loggedInUser));
 
-    //JN
-    localStorage.setItem("contactListUser", JSON.stringify(allContacts))
-    localStorage.setItem("contactId", JSON.stringify(contactToChat.id))
-    
-    
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
 }
 
-const showNewGroupForm = (ev: any): void => {
+const showNewGroupMenu = (ev: any): void => {
 
-    let newGroupForm: HTMLElement;
     if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1)) return;
-    if (ev.target.id.indexOf('new_group_') !== -1) newGroupForm = ev.target.parentElement;
-    else newGroupForm = ev.target;
-    console.log(newGroupForm);
+    const newGroupMenu: HTMLElement = document.querySelector('.new_group');
+    allContacts.renderContactsToNewGroupMenu();
+    newGroupMenu.style.display = 'unset';
 }
 
 const backToNewChatMenuBtn: HTMLElement = document.querySelector('.title__item--back_btn');

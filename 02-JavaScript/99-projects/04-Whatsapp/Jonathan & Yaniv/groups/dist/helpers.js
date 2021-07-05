@@ -17,7 +17,7 @@ var hideNewChatMenu = function (ev) {
 };
 var newChatOptions = document.querySelector('.options');
 newChatOptions.addEventListener('click', function (ev) { return directToChat(ev); });
-newChatOptions.addEventListener('click', function (ev) { return showNewGroupForm(ev); });
+newChatOptions.addEventListener('click', function (ev) { return showNewGroupMenu(ev); });
 var directToChat = function (ev) {
     var contactToChat;
     if ((ev.target.className !== 'options__item options__item--contact') && (ev.target.className.indexOf('new_contact_') === -1))
@@ -36,20 +36,14 @@ var directToChat = function (ev) {
     localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList', JSON.stringify(loggedInUser));
-    //JN
-    localStorage.setItem("contactListUser", JSON.stringify(allContacts));
-    localStorage.setItem("contactId", JSON.stringify(contactToChat.id));
     window.location.href = "../chat/chat.html?" + loggedInUser.userPhone + "&" + contactToChat.id;
 };
-var showNewGroupForm = function (ev) {
-    var newGroupForm;
+var showNewGroupMenu = function (ev) {
     if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1))
         return;
-    if (ev.target.id.indexOf('new_group_') !== -1)
-        newGroupForm = ev.target.parentElement;
-    else
-        newGroupForm = ev.target;
-    console.log(newGroupForm);
+    var newGroupMenu = document.querySelector('.new_group');
+    allContacts.renderContactsToNewGroupMenu();
+    newGroupMenu.style.display = 'unset';
 };
 var backToNewChatMenuBtn = document.querySelector('.title__item--back_btn');
 backToNewChatMenuBtn.addEventListener('click', function (ev) { return hideNewGroupMenu(ev); });
