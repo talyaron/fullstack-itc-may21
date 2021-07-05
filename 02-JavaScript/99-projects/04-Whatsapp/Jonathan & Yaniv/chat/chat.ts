@@ -4,6 +4,7 @@ const btnMessage = <HTMLElement>document.querySelector('.container__chat-footer-
 const elementMessage = <HTMLInputElement>document.querySelector('#writemsg')
 const containerChat = <HTMLElement>document.querySelector('.container__chat-box')
 const containerContactUser = <HTMLElement>document.querySelector('.container__header__left')
+//const btnReturn = <HTMLElement>document.querySelector('.container__header__left--arrowleft')
 
 
 
@@ -28,19 +29,21 @@ class Message {
     dateMsg: string;
     groupID: string;
     msgID: string;
+    lastMessageName:string;
 
-    constructor(content: string, userPhone: string, dateMsg: string, groupID: string) {
+    constructor(content: string, userPhone: string, dateMsg: string, groupID: string, lastMessageName:string) {
         this.content = content;
         this.userPhone = userPhone;
         this.dateMsg = dateMsg;
         this.groupID = groupID;
+        this.lastMessageName = lastMessageName;
         this.msgID = "id" + Math.random().toString(16).slice(2);
     }
 }
 
 
 class MessageList {
-    messageList: Array<Message> = []
+    messageList: Array<Message> = [] //maybe we can took from this array the last message
     messageListFilter: Array<Message> = []
 
     addMessage(message: Message) {
@@ -106,7 +109,7 @@ function sendMessage() {
     let today = new Date();
     let time = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes())
 
-    const message = new Message(inputMessage, '1234', time, '123')
+    const message = new Message(inputMessage, '1234', time, '123', inputMessage) //last one is the lastmessagename
 
     messageList.addMessage(message)
 
@@ -147,7 +150,6 @@ function handleEditDelete(messageId: string) {
 
 inputSearch.addEventListener('keyup', handleKeyUp)
 
-
 function handleKeyUp() {
     try {
         messageList.filterByMessage(inputSearch.value)
@@ -155,6 +157,16 @@ function handleKeyUp() {
         console.log(e)
     }
 }
+
+
+function handleReturn(){
+
+    const pickedUser = JSON.parse(localStorage.getItem("currentUser"))
+    window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
+}
+
+
+
 
 
 
@@ -192,10 +204,10 @@ function closeModal(ev) {
 
 //User
 
-class ContactMessage { //I'm going to use 
-    userImg: string; //image grab into the page
-    userName: string; //name grab into the name
-    userPhone: string; // is the id
+class ContactMessage { 
+    userImg: string; 
+    userName: string; 
+    userPhone: string; 
     //userGroups: Array<string>; //list of groups
 
     constructor (userImg: string, userName: string, userPhone: string) {
@@ -208,7 +220,7 @@ class ContactMessage { //I'm going to use
     renderUserChat(){
         let html:string = ''
 
-        html+= `<i class="fas fa-arrow-left container__header__left--arrowleft"></i>
+        html+= `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
                 <img src="${this.userImg}" alt="" srcset="">
                 <div class="container__header__left__text">
                 <span class="container__header__left__text--first">${this.userName}</span>
@@ -222,20 +234,15 @@ class ContactMessage { //I'm going to use
 const contactChat = JSON.parse(localStorage.getItem("contactList"))
 const contactList = JSON.parse(localStorage.getItem("contactId"))
 
-let value = Object.values(contactChat)
-let values = Object.values(value)
-let valores = Object.values(values[0])
+let chatUser = Object.values(Object.values(Object.values(contactChat))[0])
 
-
-valores.find(function (item) {
-    if (contactList === item.userPhone) {
-        const contactUser = new ContactMessage(item.userImg, item.userName, item.userPhone)
+chatUser.find(function (chat) {
+    if (contactList === chat.userPhone) {
+        const contactUser = new ContactMessage(chat.userImg, chat.userName, chat.userPhone)
         contactUser.renderUserChat()
     }
 });
-//const contactUser = new ContactMessage(contactChat.userImg, contactChat.userName, contactChat.userPhone)
 
-//contactUser.renderUserChat()
 
 
 
