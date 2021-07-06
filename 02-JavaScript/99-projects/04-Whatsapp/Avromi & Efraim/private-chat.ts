@@ -1,16 +1,21 @@
-const scrollBox = document.querySelector(".messages");
-scrollBox.scrollTop = scrollBox.scrollHeight;
+function setScrollHeight() {
+    const messagesDiv = document.querySelector(".messages")
+    messagesDiv.scrollTop = messagesDiv.scrollHeight
+}
+window.onload = (event) => {
+    setScrollHeight()
+}
 
 function goBack() {
     window.location.href = "index.html"
 }
+
 // Get Params From Query 
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 //Get Array From Storage
 const allContacts = JSON.parse(localStorage.getItem('contacts'));
-// console.log(params.contactId);
-// console.log(allContacts);
+
 
 //Filter Array by Params
 const thisContact = allContacts.filter(contact => contact.contactId === params.contactId);
@@ -25,6 +30,7 @@ alt = "" >`
 
 function updateLastSent() {
     const lastSent = document.querySelector(".nav__contact p")
+    thisContact[0].chats.reverse()
     lastSent.innerHTML = `Last Sent: ${thisContact[0].chats[0].timeStamp} `
 }
 
@@ -40,6 +46,8 @@ function renderMessages(arrToRender: Array<Contact>) {
     })
 
 }
+
+
 
 function openCamera() {
     console.log("open the camera");
@@ -60,6 +68,7 @@ function logSubmit(event) {
     event.target.reset();
     renderMessages(thisContact)
     updateLastSent()
+    setScrollHeight()
     console.log(thisContact);
     console.log(allContacts);
     localStorage.setItem('contacts', JSON.stringify(allContacts))

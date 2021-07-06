@@ -11,6 +11,7 @@ body {
   justify-content: space-between;
   position: fixed;
   top: 0;
+  left: 0;
 }
 .nav i {
   height: 2rem;
@@ -37,8 +38,15 @@ body {
   margin-top: 15vh;
   height: 72vh;
 }
+.messages::-webkit-scrollbar {
+  display: none;
+}
 .messages .single__message {
   background-color: #DCF8C6;
+}
+.messages .single__message__timestamp {
+  text-align: right;
+  color: #9b9898;
 }
 
 .input__send__wrapper .form {

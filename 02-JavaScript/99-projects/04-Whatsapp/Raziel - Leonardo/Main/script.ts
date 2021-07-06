@@ -9,8 +9,9 @@ make it look as similar as you can to the real Whatsapp
 Work in a group.
 start with the design of the classes, BEM */
 
+let arrayName: Array<User> = JSON.parse(localStorage.getItem('userInfo'));
 const searchName = (<HTMLInputElement>document.querySelector("#search"));
-const nextPage:HTMLElement=document.querySelector('#chat'); //change the name later
+
 class Message {
     id: string;
     text: string;
@@ -20,93 +21,31 @@ class Message {
         this.text = text;
         this.time = new Date();
         this.id = Math.random().toString(16).slice(2);
-    }
+    };
 };
 
 class User {
     name: string;
     number: number; //This is going to be like the ID
     picture: string;
-    message: Array<Message>;
+    message: Array<Message> = [];
 
-    constructor(name: string, number: number, picture: string, message: Array<Message>) {
+    constructor(name: string, number: number, picture: string) {
         this.name = name;
         this.number = number;
         this.picture = picture;
-        this.message = message;
     };
 };
 
 class UserList {
     userList: Array<User> = [];
-    filterUser:Array<User>=[];
-
-    //Every time that I add a new contact, I will use this method, this add a new user to the array "userList"   
-    addUser(user: User): void {
-        try {
-            if (!user) throw new Error('The user it doesn´t exist!');
-            this.userList.push(user);
-            this.renderContacts(this.userList);
-            modal.style.display = "none";
-
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    //To Show the contacts in the page
-    renderContacts(userFilter:Array<User>): void {
-        const arrayToRender = userFilter ? userFilter : this.userList;
-        try {
-            const showContact: HTMLElement = document.querySelector('#chats');
-            if (!showContact) throw new Error('The element where to show the contacts doesn´t exist!')
-            //Doing a loop to show the contacts
-            let html: any = arrayToRender.map(element => {
-                return (
-                `<div class="chat" id="chat" onclick='passInformation("${element.number}")'
-                >
-                <div class="chat__left">
-                    <img src="${element.picture}" alt="">
-                </div>
-                <div class="chat__right">
-                    <div class="chat__right--top">
-                        <span class="chat__right--top__contact-name">${element.name}</span>
-                        <span class="chat__right--top__phone-number">Phone Number: ${element.number}</span>
-
-                    </div>
-                    <div class="chat__right--bottom">
-                        <div class="chat__right--bottom--left">
-                            <img class="double-check-mark" src="Img_whatsapp/double-check-seen.svg" alt="">
-                            <span>Raziel is typing...</span> 
-                        </div>
-                    </div>
-
-                </div>
-            </div>`
-                )
-            }).join('');
-            showContact.innerHTML = html;
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-
-    searchContact(name:string){
-        
-        const regEx: string = `${name}`; //YS: You dont need template literals here. 
-
-        const searchName: RegExp = new RegExp(regEx, 'i');
-
-        this.filterUser = this.userList.filter(elem => searchName.test(elem.name))
-         console.log(this.filterUser);
-        this.renderContacts(this.filterUser);
-    }
-
+    filterUser: Array<User> = [];
 };
 
-//Initialice a new array that will contains all the users:
-const userList = new UserList();
+let userList: Array<User> = [];
+if (arrayName != null) {
+    userList = arrayName;
+};
 
 //With this function I handle the form:
 const handleSubmitNewUser = (ev: any): void => {
@@ -114,12 +53,13 @@ const handleSubmitNewUser = (ev: any): void => {
     try {
         const name: string = ev.target.elements.name.value;
         const number: number = ev.target.elements.number.valueAsNumber;
-
         const image: string = document.querySelector('#previewImage').getAttribute("src");
-        const message = [{ text: '', id: Math.random().toString(16).slice(2), time: new Date() }]
 
-        const user = new User(name, number, image, message);
-        userList.addUser(user);
+        //This function is to validate that the number is not already taken
+        validator(ev, userList);
+
+        const user = new User(name, number, image);
+        addUser(user);
         ev.target.reset();
 
         if (!user) throw new Error('The user doesn´t exist!')
@@ -127,6 +67,57 @@ const handleSubmitNewUser = (ev: any): void => {
         console.error(error);
     }
 }
+
+//Every time that I add a new contact, I will use this method, this add a new user to the array "userList"
+function addUser(user: User): void {
+    try {
+        if (!user) throw new Error('The user it doesn´t exist!');
+        userList.push(user);
+        renderContacts(userList);
+        document.querySelector('#previewImage').setAttribute('src', "../Img_whatsapp/profile.png");
+        modal.style.display = "none";
+
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+//To Show the contacts in the page
+function renderContacts(arrayUser: Array<User>): void {
+    try {
+        const showContact: HTMLElement = document.querySelector('#chats');
+        if (!showContact) throw new Error('The element where to show the contacts doesn´t exist!')
+        //Doing a loop to show the contacts
+        let html: any = arrayUser.map(element => {
+            if (element.picture === null) {
+                element.picture = "../Img_whatsapp/profile.png";
+            };
+            return (
+                `<div class="chat" id="chat">
+                <div class="chat__left">
+                    <img src="${element.picture}" alt="">
+                </div>
+                <div class="chat__right" onclick='redirect("${element.number}")'>
+                    <div class="chat__right--top">
+                        <span class="chat__right--top__contact-name">${element.name}</span>
+                        <span class="chat__right--top__phone-number">Phone Number: ${element.number}</span>
+                    </div>
+                    <div class="chat__right--bottom">
+                        <div class="chat__right--bottom--left">
+                            <img class="double-check-mark" src="../Img_whatsapp/double-check-seen.svg" alt="">
+                            <span>Raziel is typing...</span>
+                        </div>
+                    </div>
+                </div>
+                <i class="fas fa-trash table__remove" onclick='removeChat("${element.number}")'></i>
+            </div>`
+            )
+        }).join('');
+        showContact.innerHTML = html;
+    } catch (error) {
+        console.error(error);
+    };
+};
 
 //Function to show the previous image in the form:
 function readURL(input): void {
@@ -139,31 +130,78 @@ function readURL(input): void {
             } catch (error) {
                 console.error(error);
             }
-            return e.target.result
+            return e.target.result;
         }
         reader.readAsDataURL(input.files[0]);
     };
 };
 
-//Method to pass information to another page when you click the User
-function passInformation(userNumber) {
-    const userInfo = userList.userList.filter(element => (element.number == userNumber));
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
-    redirect();
-};
-
 //Function to redirect to the user Chat
-function redirect(): void {
+function redirect(userNumber): void {
     try {
-        window.location.href ='./whatsappChat.html'
+        localStorage.setItem('userInfo', JSON.stringify(userList));
+        localStorage.setItem('numberToSearch', userNumber);
+        window.location.href = '../Chat/whatsappChat.html'
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
     } catch (error) {
         console.error(error);
-    }
-}
-// nextPage.addEventListener('onclick',passInformation('')); //fix it later
-searchName.addEventListener('keyup', handleKeyUp)
+    };
+};
 
-function handleKeyUp() {
-    userList.searchContact(searchName .value)   
-}
+//Function to do a filter in the search input
+searchName.addEventListener('keyup', () => {
+    try {
+        const regEx: string = searchName.value;
+        const searching: RegExp = new RegExp(regEx, 'i');
+
+        this.filterUser = userList.filter(elem => searching.test(elem.name))
+        renderContacts(this.filterUser);
+    } catch (error) {
+        console.error(error);
+    };
+});
+
+//Function when I come back from the chat to the main page, render the saved information from the localstorage
+function checkStorage(): void {
+    try {
+        if (arrayName) {
+            renderContacts(arrayName);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+checkStorage();
+
+//To delete a Chat
+function removeChat(chatNumber: number): void {
+    try {
+        const option = confirm(`Are you sure do you want to delete this chat?`);
+        if (option) {
+            const chatIndex = userList.findIndex((element: User) => element.number === chatNumber);
+            userList.splice(chatIndex, 1);
+            renderContacts(userList);
+        }
+    } catch (error) {
+        console.error(error);
+    };
+};
+
+//Function to do a validator (numer is no taken)
+function validator(ev, userList: Array<User>): void {
+    try {
+        const validateNumber: any = document.querySelector('#number');
+        validateNumber.addEventListener('blur', () => {
+            userList.forEach(element => {
+                if (element.number == validateNumber.value) {
+                    alert('The number is already taken');
+                    ev.target.reset();
+                    throw new Error('The number is already taken');
+                };
+            })
+        })
+    } catch (error) {
+        console.error(error);
+    };
+};
