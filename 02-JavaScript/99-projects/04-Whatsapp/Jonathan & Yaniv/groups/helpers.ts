@@ -77,8 +77,8 @@ const createNewGroup = (ev: any): void => {
         console.log(ev.target.elements);
 
         const groupId: string = "group" + Math.random().toString(16).slice(2);
-    
-        const groupImg: string = ev.target.elements.groupImg.value; // ??
+        const imgLabel: HTMLElement = document.querySelector('#add_photo');
+        const groupImg: string = imgLabel.getAttribute('alt');
         const groupName: string = ev.target.elements.groupName.value;
         // const groupUsers: Array<string> = ev.target.elements.??.value; // how to fetch only checked checkboxes?
     
