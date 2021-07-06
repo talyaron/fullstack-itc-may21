@@ -45,7 +45,7 @@ const directToChat = (ev: any): void => {
     loggedInUser.addGroupIfNew(group.groupId);
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-    localStorage.setItem('contactList',JSON.stringify(loggedInUser));
+    localStorage.setItem('contactList',JSON.stringify(allContacts));
 
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
 }
@@ -80,15 +80,15 @@ const createNewGroup = (ev: any): void => {
         const imgLabel: HTMLElement = document.querySelector('#add_photo');
         const groupImg: string = imgLabel.getAttribute('alt');
         const groupName: string = ev.target.elements.groupName.value;
-        const contactsCheckboxes: Array<HTMLInputElement> = Array.from(ev.target.getElementsByClassName('options__item--contact'));
+        const contactsCheckboxes: Array<HTMLInputElement> = ev.target.querySelectorAll('.checkbox'); // doesn't wort. this is not really an array of HTMLInputElement
         const groupUsers: Array<string> = [];
         contactsCheckboxes.forEach(contact => {if (contact.checked) groupUsers.push(contact.value);})
     
-        // const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
-        // loggedInUser.addGroupIfNew(group.groupId);
-        // localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
-        // allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-        // localStorage.setItem('contactList',JSON.stringify(loggedInUser));
+        const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
+        loggedInUser.addGroupIfNew(group.groupId);
+        localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
+        allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        localStorage.setItem('contactList',JSON.stringify(allContacts));
         
         ev.target.reset();
     } catch (er) {

@@ -124,7 +124,7 @@ class ContactList {
                     <img class="new_contact_img" src="${contact.userImg}">
                     <h3 class="new_contact_name">${contact.userName}</h3>
                     <p class="new_contact_status">The world is awesome</p>
-                    <input type="checkbox" id="${contact.userPhone}" name="${contact.userPhone}" value="${contact.userPhone}">
+                    <input type="checkbox" class="checkbox" id="${contact.userPhone}" name="${contact.userPhone}" value="${contact.userPhone}">
                 </div>`;
                 newGroupContactsContainer.insertAdjacentHTML('afterbegin',contactHTML);
             });

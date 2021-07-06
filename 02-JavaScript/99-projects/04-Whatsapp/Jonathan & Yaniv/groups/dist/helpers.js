@@ -35,7 +35,7 @@ var directToChat = function (ev) {
     loggedInUser.addGroupIfNew(group.groupId);
     localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-    localStorage.setItem('contactList', JSON.stringify(loggedInUser));
+    localStorage.setItem('contactList', JSON.stringify(allContacts));
     window.location.href = "../chat/chat.html?" + loggedInUser.userPhone + "&" + contactToChat.id;
 };
 var showNewGroupMenu = function (ev) {
@@ -61,15 +61,15 @@ var createNewGroup = function (ev) {
         var imgLabel = document.querySelector('#add_photo');
         var groupImg = imgLabel.getAttribute('alt');
         var groupName = ev.target.elements.groupName.value;
-        var contactsCheckboxes = Array.from(ev.target.getElementsByClassName('options__item--contact'));
+        var contactsCheckboxes = ev.target.querySelectorAll('.checkbox'); // doesn't wort. this is not really an array of HTMLInputElement
         var groupUsers_1 = [];
         contactsCheckboxes.forEach(function (contact) { if (contact.checked)
             groupUsers_1.push(contact.value); });
-        // const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
-        // loggedInUser.addGroupIfNew(group.groupId);
-        // localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
-        // allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-        // localStorage.setItem('contactList',JSON.stringify(loggedInUser));
+        var group = new Group(groupId, groupImg, groupName, groupUsers_1);
+        loggedInUser.addGroupIfNew(group.groupId);
+        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+        allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        localStorage.setItem('contactList', JSON.stringify(allContacts));
         ev.target.reset();
     }
     catch (er) {
