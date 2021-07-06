@@ -49,4 +49,3 @@ const contacts: Array<LocalContact> = [
     }
 ]
 
-localStorage.setItem("contactos", JSON.stringify(contacts));

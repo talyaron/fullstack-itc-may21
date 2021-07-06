@@ -47,9 +47,15 @@ body {
     overflow-y:auto;
     margin-top: 15vh;
     height: 72vh;
+    &::-webkit-scrollbar {
+        display: none;
+      }
     .single__message{
         background-color: #DCF8C6;
-        
+        &__timestamp{
+            text-align: right;
+            color: rgb(155, 152, 152);
+        }
     }
 }
 .input__send__wrapper .form {
