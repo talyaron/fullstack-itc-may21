@@ -28,13 +28,12 @@ class User {
     name: string;
     number: number; //This is going to be like the ID
     picture: string;
-    message: Array<Message>;
+    message: Array<Message> = [];
 
-    constructor(name: string, number: number, picture: string, message: Array<Message>) {
+    constructor(name: string, number: number, picture: string) {
         this.name = name;
         this.number = number;
         this.picture = picture;
-        this.message = message;
     };
 };
 
@@ -56,13 +55,22 @@ const handleSubmitNewUser = (ev: any): void => {
         const number: number = ev.target.elements.number.valueAsNumber;
 
         const image: string = document.querySelector('#previewImage').getAttribute("src");
-        const message = [new Message('')];
-        
-        const user = new User(name, number, image, message);
+
+        const validateNumber = document.querySelector('#number');
+        validateNumber.addEventListener('blur', () => {
+            userList.forEach(element => {
+                if (element.number == validateNumber.value) {
+                    alert('The number is already taken');
+                    ev.target.reset();
+                    throw new Error('The number is already taken');
+                };
+            })
+        })
+
+        const user = new User(name, number, image);
         addUser(user);
-        numberValidation(number);
         ev.target.reset();
-          
+
         if (!user) throw new Error('The user doesn´t exist!')
     } catch (error) {
         console.error(error);
@@ -84,13 +92,14 @@ function addUser(user: User): void {
 
 //To Show the contacts in the page
 function renderContacts(arrayUser: Array<User>): void {
+    console.log(userList);
     try {
         const showContact: HTMLElement = document.querySelector('#chats');
         if (!showContact) throw new Error('The element where to show the contacts doesn´t exist!')
         //Doing a loop to show the contacts
         let html: any = arrayUser.map(element => {
             return (
-            `<div class="chat" id="chat">
+                `<div class="chat" id="chat">
                 <div class="chat__left">
                     <img src="${element.picture}" alt="">
                 </div>
@@ -175,24 +184,3 @@ function removeChat(chatNumber: number) {
         console.error(error);
     }
 };
-function numberValidation(numberFromArray){
-
- const validNumber=userList.includes( numberFromArray);
-
-console.log(validNumber);
-console.log(numberFromArray);
- 
- if(validNumber){
-    
-     alert("The number is already taken!!")
-    //  const element = <HTMLInputElement> document.getElementById("disable");
-    //  element.disabled = true;
-     
- }
- else{
-    // const element = <HTMLInputElement> document.getElementById("disable");
-    // element.disabled = false; 
- }
- console.log(validNumber);
-}
-    

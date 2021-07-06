@@ -248,3 +248,9 @@ a {
   height: 60px;
   border-radius: 50%;
 }
+
+@media screen and (max-width: 600px) {
+  .app {
+    grid-template-columns: 35rem 1fr;
+  }
+}

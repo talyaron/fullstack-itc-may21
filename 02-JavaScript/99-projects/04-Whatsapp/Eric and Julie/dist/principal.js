@@ -33,7 +33,7 @@ var Contacts = /** @class */ (function () {
     Contacts.prototype.renderContacts = function () {
         var html = "";
         this.contacts.forEach(function (element) {
-            html += "\n      <div class=\"chat1\" onclick=redirect(\"" + element.contactId + "\")>\n\n      <img src=\"" + element.image + "\" alt=\"\" class=\"chat1__photo\"> \n\n      <h4 class=\"chat1__name\">" + element.contactName + "</h4>\n      \n      <i onclick='handleDelete(\"" + element.contactId + "\")' class=\"far fa-trash-alt\" id=\"chat1__delete\" > </i>\n      </div>\n      ";
+            html += "<div class=\"containerChat\">\n                  <div class=\"chat1\" onclick=redirect(\"" + element.contactId + "\")>\n                    <img src=\"" + element.image + "\" alt=\"\" class=\"chat1__photo\"> \n                    <h4 class=\"chat1__name\">" + element.contactName + "</h4>\n                  </div>\n                  <div>\n                    <i onclick='handleDelete(\"" + element.contactId + "\")' class=\"far fa-trash-alt\" id=\"delete\"> </i>\n                  </div>\n              </div>";
         });
         render.innerHTML = html;
     };
@@ -49,7 +49,6 @@ var Contacts = /** @class */ (function () {
 }());
 function handleDelete(contactId) {
     var reducedContacts = contacts.contacts.filter(function (contact) { return contactId !== contact.contactId; });
-    console.log(reducedContacts);
     contacts.contacts = reducedContacts;
     contacts.renderContacts();
 }

@@ -94,7 +94,8 @@ const sendButton = document.querySelector('#sendButton');
 
 
 sendButton.addEventListener('click', () => {
-    const message = {
+    const message: Message = 
+    {
         text: texting.value,
         id: Math.random().toString(16).slice(2),
         time: new Date()
