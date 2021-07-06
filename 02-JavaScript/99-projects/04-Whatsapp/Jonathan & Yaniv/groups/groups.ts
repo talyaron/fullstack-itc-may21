@@ -42,7 +42,7 @@ class User {
             //
             ChatsContainer.innerHTML = ``;
 
-            const contactList = JSON.parse(localStorage.getItem('contactList'))
+            //const contactList = JSON.parse(localStorage.getItem('contactList'))
             const message = JSON.parse(localStorage.getItem("currentMessage"));
             
             this.userGroups.forEach((group) => {

@@ -30,7 +30,7 @@ var User = /** @class */ (function () {
             //JN
             //
             ChatsContainer_1.innerHTML = "";
-            var contactList = JSON.parse(localStorage.getItem('contactList'));
+            //const contactList = JSON.parse(localStorage.getItem('contactList'))
             var message_1 = JSON.parse(localStorage.getItem("currentMessage"));
             this.userGroups.forEach(function (group) {
                 var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h2>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + message_1[message_1.length - 1].content + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + message_1[message_1.length - 1].dateMsg + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>"; // for lines 47-48 - add "$" before "{" once the Message class is linked
