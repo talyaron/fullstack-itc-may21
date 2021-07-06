@@ -153,10 +153,10 @@ function removeChat(chatNumber) {
 }
 ;
 function numberValidation(numberFromArray) {
-    var validNumber = userList.includes(numberFromArray);
-    console.log(validNumber);
+    //  const validNumber=userList.some( elem=>elem.number===numberFromArray);
+    // console.log(validNumber);
     console.log(numberFromArray);
-    if (validNumber) {
+    if (userList.includes(numberFromArray) == number) {
         alert("The number is already taken!!");
         //  const element = <HTMLInputElement> document.getElementById("disable");
         //  element.disabled = true;
@@ -165,5 +165,5 @@ function numberValidation(numberFromArray) {
         // const element = <HTMLInputElement> document.getElementById("disable");
         // element.disabled = false; 
     }
-    console.log(validNumber);
+    //  console.log(validNumber);
 }

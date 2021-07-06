@@ -177,12 +177,12 @@ function removeChat(chatNumber: number) {
 };
 function numberValidation(numberFromArray){
 
- const validNumber=userList.includes( numberFromArray);
+//  const validNumber=userList.some( elem=>elem.number===numberFromArray);
 
-console.log(validNumber);
+// console.log(validNumber);
 console.log(numberFromArray);
  
- if(validNumber){
+ if(userList.includes(numberFromArray)==number){
     
      alert("The number is already taken!!")
     //  const element = <HTMLInputElement> document.getElementById("disable");
@@ -190,9 +190,10 @@ console.log(numberFromArray);
      
  }
  else{
+   
     // const element = <HTMLInputElement> document.getElementById("disable");
     // element.disabled = false; 
  }
- console.log(validNumber);
+//  console.log(validNumber);
 }
     
