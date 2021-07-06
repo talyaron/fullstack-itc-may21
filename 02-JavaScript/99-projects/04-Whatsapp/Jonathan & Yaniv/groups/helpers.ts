@@ -67,7 +67,7 @@ const hideNewGroupMenu = (ev: any): void => {
     newGroupMenu.style.display = 'none';
 }
 
-const newGroupSubmit: HTMLElement = document.querySelector('.options__item--submit');
+const newGroupSubmit: HTMLElement = document.querySelector('#new_group_submit');
 
 newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
 
@@ -80,7 +80,9 @@ const createNewGroup = (ev: any): void => {
         const imgLabel: HTMLElement = document.querySelector('#add_photo');
         const groupImg: string = imgLabel.getAttribute('alt');
         const groupName: string = ev.target.elements.groupName.value;
-        // const groupUsers: Array<string> = ev.target.elements.??.value; // how to fetch only checked checkboxes?
+        const contactsCheckboxes: Array<HTMLInputElement> = Array.from(ev.target.getElementsByClassName('options__item--contact'));
+        const groupUsers: Array<string> = [];
+        contactsCheckboxes.forEach(contact => {if (contact.checked) groupUsers.push(contact.value);})
     
         // const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
         // loggedInUser.addGroupIfNew(group.groupId);
@@ -89,30 +91,11 @@ const createNewGroup = (ev: any): void => {
         // localStorage.setItem('contactList',JSON.stringify(loggedInUser));
         
         ev.target.reset();
-      } catch (er) {
+    } catch (er) {
         console.error(er);
-      }
     }
-
-const readURL = (input: any) => {
-    if (input.files && input.files[0]) {
-      let reader = new FileReader();
-  
-      reader.onload = (e)=> {
-        const label: HTMLElement = document.querySelector('#add_photo');
-        label.setAttribute('alt',`${e.target.result}`);
-        label.style.backgroundImage = `url("${e.target.result}")`;
-        label.style.backgroundSize = '100% 100%';
-        label.innerText = '';
-        label.style.padding = '0';
-        label.style.height = '200px';
-        label.style.width = '200px';
-        return e.target.result
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
+}
+    
 const logOutBtn = document.querySelector('.controls__item--ellipsis');
 
 logOutBtn.addEventListener('click', ev => logOut(ev));

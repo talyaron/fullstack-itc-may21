@@ -51,7 +51,7 @@ var hideNewGroupMenu = function (ev) {
     var newGroupMenu = document.querySelector('.new_group');
     newGroupMenu.style.display = 'none';
 };
-var newGroupSubmit = document.querySelector('.options__item--submit');
+var newGroupSubmit = document.querySelector('#new_group_submit');
 newGroupSubmit.addEventListener('submit', function (ev) { return createNewGroup(ev); });
 var createNewGroup = function (ev) {
     try {
@@ -61,7 +61,10 @@ var createNewGroup = function (ev) {
         var imgLabel = document.querySelector('#add_photo');
         var groupImg = imgLabel.getAttribute('alt');
         var groupName = ev.target.elements.groupName.value;
-        // const groupUsers: Array<string> = ev.target.elements.??.value; // how to fetch only checked checkboxes?
+        var contactsCheckboxes = Array.from(ev.target.getElementsByClassName('options__item--contact'));
+        var groupUsers_1 = [];
+        contactsCheckboxes.forEach(function (contact) { if (contact.checked)
+            groupUsers_1.push(contact.value); });
         // const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
         // loggedInUser.addGroupIfNew(group.groupId);
         // localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
@@ -71,23 +74,6 @@ var createNewGroup = function (ev) {
     }
     catch (er) {
         console.error(er);
-    }
-};
-var readURL = function (input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var label = document.querySelector('#add_photo');
-            label.setAttribute('alt', "" + e.target.result);
-            label.style.backgroundImage = "url(\"" + e.target.result + "\")";
-            label.style.backgroundSize = '100% 100%';
-            label.innerText = '';
-            label.style.padding = '0';
-            label.style.height = '200px';
-            label.style.width = '200px';
-            return e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
     }
 };
 var logOutBtn = document.querySelector('.controls__item--ellipsis');
