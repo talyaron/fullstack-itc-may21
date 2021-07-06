@@ -40,6 +40,7 @@ var handleSubmitMessage = function (ev) {
         console.error(error);
     }
 };
+//This function redirect back to the main page
 function redirectBack() {
     try {
         window.location.href = '../Main/whatsapp.html';
@@ -50,20 +51,27 @@ function redirectBack() {
         console.error(error);
     }
 }
+//Declare this variables to do the function to send the message
 var texting = document.querySelector('#texting');
 var sendButton = document.querySelector('#sendButton');
-sendButton.addEventListener('click', function () {
-    var message = {
-        text: texting.value,
-        id: Math.random().toString(16).slice(2),
-        time: new Date()
-    };
-    userfiltered.forEach(function (element) {
-        element.message.push(message);
+try {
+    sendButton.addEventListener('click', function () {
+        var message = {
+            text: texting.value,
+            id: Math.random().toString(16).slice(2),
+            time: new Date()
+        };
+        userfiltered.forEach(function (element) {
+            element.message.push(message);
+        });
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        renderInsideChat(message);
     });
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
-    renderInsideChat(message);
-});
+}
+catch (error) {
+    console.error(error);
+}
+//Function to render the information inside the chat
 function renderInsideChat(message) {
     try {
         var chatArea = document.querySelector('.chat-box');
@@ -77,9 +85,16 @@ function renderInsideChat(message) {
     ;
 }
 ;
+//With this function we render the old messages for the conversation at the beginning
 function renderOldConversation() {
-    userfiltered[0].message.forEach(function (element) {
-        renderInsideChat(element);
-    });
+    try {
+        userfiltered[0].message.forEach(function (element) {
+            renderInsideChat(element);
+        });
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
+//Call the function
 renderOldConversation();

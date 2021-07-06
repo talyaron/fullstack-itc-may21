@@ -9,7 +9,7 @@ make it look as similar as you can to the real Whatsapp
 Work in a group.
 start with the design of the classes, BEM */
 
-let arrayName = JSON.parse(localStorage.getItem('userInfo'));
+let arrayName: Array<User> = JSON.parse(localStorage.getItem('userInfo'));
 const searchName = (<HTMLInputElement>document.querySelector("#search"));
 
 class Message {
@@ -21,7 +21,7 @@ class Message {
         this.text = text;
         this.time = new Date();
         this.id = Math.random().toString(16).slice(2);
-    }
+    };
 };
 
 class User {
@@ -45,7 +45,7 @@ class UserList {
 let userList: Array<User> = [];
 if (arrayName != null) {
     userList = arrayName;
-}
+};
 
 //With this function I handle the form:
 const handleSubmitNewUser = (ev: any): void => {
@@ -53,19 +53,10 @@ const handleSubmitNewUser = (ev: any): void => {
     try {
         const name: string = ev.target.elements.name.value;
         const number: number = ev.target.elements.number.valueAsNumber;
-
         const image: string = document.querySelector('#previewImage').getAttribute("src");
 
-        const validateNumber = document.querySelector('#number');
-        validateNumber.addEventListener('blur', () => {
-            userList.forEach(element => {
-                if (element.number == validateNumber.value) {
-                    alert('The number is already taken');
-                    ev.target.reset();
-                    throw new Error('The number is already taken');
-                };
-            })
-        })
+        //This function is to validate that the number is not already taken
+        validator(ev, userList);
 
         const user = new User(name, number, image);
         addUser(user);
@@ -83,6 +74,7 @@ function addUser(user: User): void {
         if (!user) throw new Error('The user it doesn´t exist!');
         userList.push(user);
         renderContacts(userList);
+        document.querySelector('#previewImage').setAttribute('src', "../Img_whatsapp/profile.png");
         modal.style.display = "none";
 
     } catch (error) {
@@ -92,12 +84,14 @@ function addUser(user: User): void {
 
 //To Show the contacts in the page
 function renderContacts(arrayUser: Array<User>): void {
-    console.log(userList);
     try {
         const showContact: HTMLElement = document.querySelector('#chats');
         if (!showContact) throw new Error('The element where to show the contacts doesn´t exist!')
         //Doing a loop to show the contacts
         let html: any = arrayUser.map(element => {
+            if (element.picture === null) {
+                element.picture = "../Img_whatsapp/profile.png";
+            };
             return (
                 `<div class="chat" id="chat">
                 <div class="chat__left">
@@ -122,8 +116,8 @@ function renderContacts(arrayUser: Array<User>): void {
         showContact.innerHTML = html;
     } catch (error) {
         console.error(error);
-    }
-}
+    };
+};
 
 //Function to show the previous image in the form:
 function readURL(input): void {
@@ -136,7 +130,7 @@ function readURL(input): void {
             } catch (error) {
                 console.error(error);
             }
-            return e.target.result
+            return e.target.result;
         }
         reader.readAsDataURL(input.files[0]);
     };
@@ -144,35 +138,44 @@ function readURL(input): void {
 
 //Function to redirect to the user Chat
 function redirect(userNumber): void {
-    localStorage.setItem('userInfo', JSON.stringify(userList));
-    localStorage.setItem('numberToSearch', userNumber);
     try {
+        localStorage.setItem('userInfo', JSON.stringify(userList));
+        localStorage.setItem('numberToSearch', userNumber);
         window.location.href = '../Chat/whatsappChat.html'
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
     } catch (error) {
         console.error(error);
-    }
-}
+    };
+};
 
-//Function to do a filter
+//Function to do a filter in the search input
 searchName.addEventListener('keyup', () => {
-    const regEx: string = searchName.value;
-    const searching: RegExp = new RegExp(regEx, 'i');
+    try {
+        const regEx: string = searchName.value;
+        const searching: RegExp = new RegExp(regEx, 'i');
 
-    this.filterUser = userList.filter(elem => searching.test(elem.name))
-    renderContacts(this.filterUser);
-})
+        this.filterUser = userList.filter(elem => searching.test(elem.name))
+        renderContacts(this.filterUser);
+    } catch (error) {
+        console.error(error);
+    };
+});
 
-function checkStorage() {
-    if (arrayName) {
-        renderContacts(arrayName);
+//Function when I come back from the chat to the main page, render the saved information from the localstorage
+function checkStorage(): void {
+    try {
+        if (arrayName) {
+            renderContacts(arrayName);
+        }
+    } catch (error) {
+        console.error(error);
     }
 };
 
 checkStorage();
 
 //To delete a Chat
-function removeChat(chatNumber: number) {
+function removeChat(chatNumber: number): void {
     try {
         const option = confirm(`Are you sure do you want to delete this chat?`);
         if (option) {
@@ -182,5 +185,23 @@ function removeChat(chatNumber: number) {
         }
     } catch (error) {
         console.error(error);
-    }
+    };
+};
+
+//Function to do a validator (numer is no taken)
+function validator(ev, userList: Array<User>): void {
+    try {
+        const validateNumber: any = document.querySelector('#number');
+        validateNumber.addEventListener('blur', () => {
+            userList.forEach(element => {
+                if (element.number == validateNumber.value) {
+                    alert('The number is already taken');
+                    ev.target.reset();
+                    throw new Error('The number is already taken');
+                };
+            })
+        })
+    } catch (error) {
+        console.error(error);
+    };
 };

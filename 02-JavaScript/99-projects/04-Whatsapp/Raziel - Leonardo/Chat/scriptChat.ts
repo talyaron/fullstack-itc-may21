@@ -3,6 +3,7 @@ const root: HTMLElement = document.querySelector('#main');
 
 const userNumber = localStorage.getItem('numberToSearch');
 const userfiltered = userInfo.filter(element => (element.number == userNumber));
+
 //Render the chat of the User
 function renderChat(): void {
     try {
@@ -68,47 +69,51 @@ const handleSubmitMessage = (ev: any): void => {
             id: Math.random().toString(16).slice(2),
             time: new Date()
         };
-
         userInfo.forEach(element => {
             element.message.push(text)
         });
         ev.target.reset();
-
         if (!userInfo) throw new Error('The user doesn´t exist!')
     } catch (error) {
         console.error(error);
     }
 }
 
+//This function redirect back to the main page
 function redirectBack(): void {
     try {
         window.location.href = '../Main/whatsapp.html'
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!');
-
     } catch (error) {
         console.error(error);
     }
 }
 
-const texting: HTMLElement = document.querySelector('#texting');
-const sendButton = document.querySelector('#sendButton');
 
+//Declare this variables to do the function to send the message
+const texting: any = document.querySelector('#texting');
+const sendButton: HTMLElement = document.querySelector('#sendButton');
 
-sendButton.addEventListener('click', () => {
-    const message: Message = 
-    {
-        text: texting.value,
-        id: Math.random().toString(16).slice(2),
-        time: new Date()
-    }
-    userfiltered.forEach(element => {
-        element.message.push(message);
+try {
+    sendButton.addEventListener('click', () => {
+        const message: Message =
+        {
+            text: texting.value,
+            id: Math.random().toString(16).slice(2),
+            time: new Date()
+        }
+        userfiltered.forEach(element => {
+            element.message.push(message);
+        });
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        renderInsideChat(message);
     });
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
-    renderInsideChat(message);
-});
+} catch (error) {
+    console.error(error);
+}
 
-function renderInsideChat(message) {
+//Function to render the information inside the chat
+function renderInsideChat(message: Message): void {
     try {
         let chatArea = document.querySelector('.chat-box');
         let temp = `
@@ -129,10 +134,17 @@ function renderInsideChat(message) {
     };
 };
 
-function renderOldConversation() {
-    userfiltered[0].message.forEach(element => {
-        renderInsideChat(element)
-    });
+//With this function we render the old messages for the conversation at the beginning
+function renderOldConversation(): void {
+    try {
+        userfiltered[0].message.forEach(element => {
+            renderInsideChat(element)
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }
+
+//Call the function
 renderOldConversation();
 
