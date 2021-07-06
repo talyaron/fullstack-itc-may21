@@ -41,11 +41,10 @@ function renderModalGroupData() {
 renderModalGroupData();  
 
 const deleteGroup = (id) =>{
-    let groupDelete = JSON.parse(localStorage.getItem("groups"));
-    const deleteGroup = groupDelete.filter((group) => group.id !== id);
+    const deleteGroup = groups.filter((group) => group.id !== id);
     groups = deleteGroup;
     localStorage.setItem("groups", JSON.stringify(groups));
-    render()
+    render();
 }
 
 document.getElementById('btn').onclick = function() { 
@@ -61,7 +60,7 @@ document.getElementById('btn').onclick = function() {
 
     groups.push(newGroup);
     localStorage.setItem("groups", JSON.stringify(groups));
-    render()
+    render();
   }  
 
 

@@ -1,9 +1,15 @@
 //method to add individual msg
 var Mensaje = /** @class */ (function () {
-    function Mensaje(text, textId) {
+<<<<<<< Updated upstream
+    function Mensaje(text) {
         this.textId = "id" + Math.random().toString(16).slice(2);
         this.text = text;
-        this.textId = textId;
+=======
+    function Mensaje(text, textId) {
+        this.text = text;
+        this.id = Math.random().toString(16).slice(2);
+        ;
+>>>>>>> Stashed changes
     }
     return Mensaje;
 }());
@@ -19,25 +25,21 @@ var TodosLosMensajes = /** @class */ (function () {
     };
     return TodosLosMensajes;
 }());
+var allOfMsgs = new TodosLosMensajes();
 //function for collecting text input 
 //options: maybe try arrow function later + make it work by icon click
 function handleSubmit(ev) {
     ev.preventDefault();
-    console.log(ev, 'should catch event upon submit');
     var text = ev.target.elements.text.value;
-    console.log(text, 'should catch text');
-    var textId = ev.target.elements.textId.value;
-    var msg = new Mensaje(text, textId);
-    console.log(msg, 'should display msg');
+    var msg = new Mensaje(text);
     allOfMsgs.addNewMsg(msg);
 }
 // render on DOM
 function renderOnDOM() {
-    var AllMsgs = JSON.parse(localStorage.getItem('TodosLosMensajes'));
     var data = document.querySelector(".data");
-    AllMsgs.forEach(function (msg) {
-        data.insertAdjacentHTML += "<div class=\"allmsgs\">" + msg.text + "</div>";
+    allOfMsgs.msgs.forEach(function (msg) {
+        data.insertAdjacentHTML('beforeend', "<div class=\"allmsgs chat_wrapper--user1\"><p>" + msg.text + "</p></div>");
+        // data.innerHTML += `<div class="allmsgs chat_wrapper--user1">${msg.text}</div>`;
     });
 }
-var allOfMsgs = new TodosLosMensajes();
 renderOnDOM();

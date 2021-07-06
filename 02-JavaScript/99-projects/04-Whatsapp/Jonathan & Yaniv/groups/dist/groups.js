@@ -1,11 +1,10 @@
 var Group = /** @class */ (function () {
-    function Group(groupId, groupImg, groupName, groupUsers, groupMsgs) {
-        this.groupMsgs = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
+    function Group(groupId, groupImg, groupName, groupUsers) {
+        this.groupMsgs = [];
         this.groupId = groupId ? groupId : "group" + Math.random().toString(16).slice(2);
         this.groupImg = groupImg;
         this.groupName = groupName;
         this.groupUsers = groupUsers;
-        this.groupMsgs = groupMsgs;
     }
     return Group;
 }());
@@ -28,20 +27,19 @@ var User = /** @class */ (function () {
     User.prototype.renderChatsToChatsList = function () {
         try {
             var ChatsContainer_1 = document.querySelector(".chats");
+            //JN
+            //
             ChatsContainer_1.innerHTML = "";
+            //const contactList = JSON.parse(localStorage.getItem('contactList'))
+            var message_1 = JSON.parse(localStorage.getItem("currentMessage"));
             this.userGroups.forEach(function (group) {
-                var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h2>\n                    <p class=\"chat__item chat__item--last_msg_time\">{group.groupMsgs[group.groupMsgs.length -1].dateMsg}</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">{group.groupMsgs[group.groupMsgs.length -1].content}</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>"; // for lines 47-48 - add "$" before "{" once the Message class is linked
+                var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h2>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + message_1[message_1.length - 1].content + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + message_1[message_1.length - 1].dateMsg + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>"; // for lines 47-48 - add "$" before "{" once the Message class is linked
                 ChatsContainer_1.insertAdjacentHTML('beforeend', groupHTML);
             });
         }
         catch (er) {
             console.error(er);
         }
-    };
-    User.prototype.addMessages = function () {
-        var messageChat = JSON.parse(localStorage.getItem("messageChat"));
-        this.userGroups[0].groupMsgs.push(messageChat);
-        console.log(this.userGroups);
     };
     return User;
 }());

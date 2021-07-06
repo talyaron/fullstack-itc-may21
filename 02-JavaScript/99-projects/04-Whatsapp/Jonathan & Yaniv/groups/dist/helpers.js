@@ -34,7 +34,7 @@ var directToChat = function (ev) {
     var contactToChatNameContainer = contactToChat.querySelector('.new_contact_name');
     var contactToChatName = contactToChatNameContainer.innerText;
     var chatUsers = [loggedInUser.userPhone, contactToChat.id];
-    var group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers, messageChat);
+    var group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
     loggedInUser.addGroup(group);
     localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
@@ -55,9 +55,9 @@ var hideNewGroupMenu = function (ev) {
     var newGroupMenu = document.querySelector('.new_group');
     newGroupMenu.style.display = 'none';
 };
-var newGroupSubmit = document.querySelector('#new_group_submit');
-newGroupSubmit.addEventListener('submit', function (ev) { return createNewGroup(ev); });
-var createNewGroup = function (ev) {
+//const newGroupSubmit: HTMLElement = document.querySelector('#new_group_submit');
+//newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
+function createNewGroup(ev) {
     try {
         ev.preventDefault();
         var groupId = null;
@@ -70,7 +70,7 @@ var createNewGroup = function (ev) {
             if (contact.checked)
                 groupUsers_1.push(contact.value);
         });
-        var group = new Group(groupId, groupImg, groupName, groupUsers_1, messageChat);
+        var group = new Group(groupId, groupImg, groupName, groupUsers_1);
         loggedInUser.addGroup(group);
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
@@ -82,7 +82,7 @@ var createNewGroup = function (ev) {
     catch (er) {
         console.error(er);
     }
-};
+}
 var logOutBtn = document.querySelector('.controls__item--ellipsis');
 logOutBtn.addEventListener('click', function (ev) { return logOut(ev); });
 var logOut = function (ev) {

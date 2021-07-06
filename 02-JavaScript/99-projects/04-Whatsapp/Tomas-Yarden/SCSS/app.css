@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*BASE*/
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
@@ -359,9 +360,6 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
-  background-image: url("/images/background-image.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 p {
@@ -412,99 +410,137 @@ h3 {
 }
 
 /*Layout*/
-@media (max-width: 480px) {
-  .header {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    padding: 1rem;
-    background-color: #128c7e;
-  }
-  .header__left {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 2rem;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    text-align: center;
-  }
-  .header__left__profile img {
-    width: 30px;
-    border-radius: 50%;
-  }
-  .header__left__name h3 {
-    font-size: 1.6rem;
-    font-weight: 400;
-    margin: 0;
-  }
-  .header__right {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 1rem;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .content {
-    max-height: 0;
-  }
-  .content__full-chat-block {
-    width: 100%;
-    text-align: center;
-    overflow: auto;
-    scrollbar-width: none;
-    height: -webkit-max-content;
-    height: -moz-max-content;
-    height: max-content;
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1rem;
+  background-color: #128c7e;
+}
+
+.header__left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+.header__left__profile img {
+  width: 30px;
+  border-radius: 50%;
+}
+
+.header__left__name h3 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.header__left__search input {
+  display: none;
+}
+
+.header__right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.content {
+  max-height: 0;
+}
+
+.content__full-chat-block {
+  width: 100%;
+  background-image: url("/02-JavaScript-projects-WhatsappTomas-Yardenimages஬kground-image.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  overflow: auto;
+  scrollbar-width: none;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.content__full-chat-block__outer-container {
+  min-height: 755px;
+  position: relative;
+  bottom: 0%;
+}
+
+.content__full-chat-block__outer-container__chat-container {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  scroll-behavior: smooth;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+}
+
+.content__full-chat-block__outer-container__chat-container::-webkit-scrollbar {
+  display: none;
+}
+
+.content .chat-bar-input-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.content .chat-bar-input-block .chat-bar-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+}
+
+.content .chat-bar-input-block #userInput {
+  width: 75%;
+}
+
+.content .chat-bar-input-block #userInput .input-box {
+  border-radius: 1rem 1rem;
+  width: 100%;
+  outline: none;
+}
+
+@media (min-width: 480px) {
+  .container {
+    max-width: 80vw;
   }
   .content__full-chat-block__outer-container {
-    min-height: 500px;
+    min-height: 95vh;
     position: relative;
     bottom: 0%;
   }
-  .content__full-chat-block__outer-container__chat-container {
-    max-height: 500px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    scroll-behavior: smooth;
-    -webkit-hyphens: auto;
-        -ms-hyphens: auto;
-            hyphens: auto;
-  }
-  .content__full-chat-block__outer-container__chat-container::-webkit-scrollbar {
+  .content__full-chat-block__chat-container::-webkit-scrollbar {
     display: none;
   }
-  .content .chat-bar-input-block {
+  .header__left__search input {
+    display: block;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .content .chat-bar-input-block .chat-bar-icons {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 1rem;
-  }
-  .content .chat-bar-input-block #userInput {
-    width: 75%;
-  }
-  .content .chat-bar-input-block #userInput .input-box {
-    border-radius: 1rem 1rem;
-    width: 100%;
-    outline: none;
+    text-align: right;
   }
 }
 
@@ -586,6 +622,12 @@ h3 {
     -webkit-transform: translateY(0px);
             transform: translateY(0px);
     opacity: 1;
+  }
+}
+
+@media (min-width: 480px) {
+  .userText {
+    width: 90%;
   }
 }
 /*# sourceMappingURL=app.css.map */

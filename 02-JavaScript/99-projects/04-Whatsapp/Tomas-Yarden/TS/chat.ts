@@ -1,4 +1,22 @@
+// Create a Whatsapp application with two pages. 
+// 1st page: the chatGroups
+// 2nd page: chat
+
+// use classes, destructors, spread, typescript
+// use BEM model
+// make it look as similar as you can to the real Whatsapp
+
+// Work in a group.
+// start with the design of the classes, BEM
+
+//Global Variables
 const messageValue: any = document.getElementById("text-input");
+
+
+//Listeners
+
+
+
 
 // interface RespondsInterface {
 //   message:string;
@@ -6,9 +24,11 @@ const messageValue: any = document.getElementById("text-input");
 
 class Chat {
   message: string;
+  id:string;
 
   constructor(message: string) {
     this.message = message;
+    this.id = Math.random().toString(16).slice(2);
   }
 }
 
@@ -37,74 +57,75 @@ class ChatProfile {
 
   // this.renderUser()
   // }
-  renderUser() {
+
+
+deleteText(id:string){
+this.arrayChat = this.arrayChat.filter((element)=> element.id !== id);
+  this.renderUser()
+}
+
+
+  renderUser(arr?:Array<Chat>) {
+
+    const arrayRender = arr ? arr : this.arrayChat;
     const getUser: HTMLElement = document.querySelector("#chat-box");
     // const respon = String(messageValue.value);
     let html: string = "";
     console.log(this.arrayChat);
-    this.arrayChat.forEach((element) => {
+    arrayRender.forEach((element) => {
 
       console.log(element.message)
 
 
       html += `
-      <p class="userText">
-      <span>${element.message}</span>
+      <p class="userText" onclick='HanldeDelete("${element.id}")'>
+      <span >${element.message}<i class="fas fa-chevron-down  arrow-down" ></i></span>
       </p>
      
      `
-      if (element.message.includes("Hola")) {
+      if (element.message.includes("Hi")) {
         html += `
            <p class="botText">
-            <span>Hola</span>
+            <span>Hello<i class="fas fa-chevron-down  arrow-down"></i></span>
              </p>
              `;
       }
-      else if (element.message.includes("Como Estas?")) {
+      else if (element.message.includes("How are you?")) {
         html += `
                  <p class="botText">
-                  <span>Bien</span>
+                  <span>Preatty good <i class="fas fa-chevron-down arrow-down "></i></span>
+                   </p>
+                   `;
+
+
+                
+
+      }
+      else if (element.message.includes("Hello there")) {
+        html += `
+                 <p class="botText">
+                  <span>General Kenobi! <i class="fas fa-chevron-down arrow-down "></i></span>
                    </p>
                    `;
 
       }
-      setTimeout(() => {
+      else if (element.message.includes("How old are you?")) {
+        html += `
+                 <p class="botText">
+                  <span>I'm 20 <i class="fas fa-chevron-down arrow-down "></i></span>
+                   </p>
+                   `;
 
-        getUser.innerHTML = html;
-      }, 1000);
+      }
+     
+    
+    });
+    
+    setTimeout(() => {
 
-    })
+      getUser.innerHTML = html;
+    }, 1000);
 
-
-    // renderBot(){
-    //   const respon = String(messageValue.value);
-
-    //   if(respon === 'Hola') {
-    // this.arrayChat = this.arrayChat.filter((element) => element.message ===respon)
-    // this.renderUser()
-    //   }
-    // }
-
-    // respondBot() {
-    //   const respon = String(messageValue.value);
-    //   // const arrLength = this.arrayChat.length
-    //   const getBot: HTMLElement = document.querySelector(".botText");
-    //   let htmlBot = "";
-    //   this.arrayChat.forEach(() => {
-    //     if (respon.includes("Hola")) {
-    //       htmlBot += `
-    //       <div class="botText">
-    //       <span>Hola</span>
-    //       </div>
-    //       `;
-
-    //     }
-    //   });
-
-    //   setTimeout(() => {
-    //     getBot.innerHTML = htmlBot;
-    //   }, 1000);
-    // }
   }
 }
 
@@ -120,4 +141,9 @@ const sendBtn = (event) => {
   chatProfile.add(generate);
   event.target.reset();
 };
+
+const HanldeDelete =(id:string) => {
+chatProfile.deleteText(id)
+  
+}
 

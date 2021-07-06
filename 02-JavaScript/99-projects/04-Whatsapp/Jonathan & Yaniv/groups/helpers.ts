@@ -49,13 +49,13 @@ const directToChat = (ev: any): void => {
     const contactToChatName: string = contactToChatNameContainer.innerText;
     const chatUsers: Array<string> = [loggedInUser.userPhone, contactToChat.id];
 
-    
-    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers, messageChat);
+   
+    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
+
     loggedInUser.addGroup(group);
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList',JSON.stringify(allContacts));
-
     localStorage.setItem('contactId',JSON.stringify(contactToChat.id))
 
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
@@ -78,15 +78,16 @@ const hideNewGroupMenu = (ev: any): void => {
     newGroupMenu.style.display = 'none';
 }
 
-const newGroupSubmit: HTMLElement = document.querySelector('#new_group_submit');
+//const newGroupSubmit: HTMLElement = document.querySelector('#new_group_submit');
 
-newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
+//newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
 
-const createNewGroup = (ev: any): void => {
+function createNewGroup (ev: any): void {
     try {
         ev.preventDefault();
-
+       
         const groupId: string = null;
+        
         const imgLabel: HTMLElement = document.querySelector('#add_photo');
         const groupImg: string = imgLabel.getAttribute('alt');
         const groupName: string = ev.target.elements.groupName.value;
@@ -96,8 +97,7 @@ const createNewGroup = (ev: any): void => {
             if (contact.checked) groupUsers.push(contact.value);
         });
 
-    
-        const group: Group = new Group(groupId, groupImg, groupName, groupUsers,messageChat);
+        const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
 
         loggedInUser.addGroup(group);
         localStorage.setItem('currentUser',JSON.stringify(loggedInUser));

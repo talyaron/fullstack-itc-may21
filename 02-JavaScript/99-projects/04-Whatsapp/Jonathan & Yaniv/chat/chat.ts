@@ -31,14 +31,16 @@ class Message {
     msgID: string;
     lastMessageName: string;
     timeMsgSec : number;
+    contactPhone:string;
 
-    constructor(content: string, userPhone: string, dateMsg: string, groupID: string, lastMessageName: string, timeMsgSec:number) {
+    constructor(content: string, userPhone: string, dateMsg: string, groupID: string, lastMessageName: string, timeMsgSec:number,contactPhone:string) {
         this.content = content;
         this.userPhone = userPhone;
         this.dateMsg = dateMsg;
         this.groupID = groupID;
         this.lastMessageName = lastMessageName;
         this.timeMsgSec = timeMsgSec;
+        this.contactPhone = contactPhone;
         this.msgID = "id" + Math.random().toString(16).slice(2);
     }
 }
@@ -102,6 +104,45 @@ class MessageList {
     
 }
 
+class Group {
+    groupId: string; // userPhone or "group" + Math.random().toString(16).slice(2);
+    groupImg: string;
+    groupName: string;
+    groupUsers: Array<string> // userPhone numbers
+    groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
+
+    renderMsgs(){
+        //show all past group messages from LocalStorage
+    }
+
+}
+
+class User {
+    userImg: string;
+    userName: string;
+    userPhone: string;
+    userGroups: Array<Group>;
+
+    constructor (userImg: string, userName: string, userPhone: string, userGroups: Array<Group>) {
+        this.userImg = userImg;
+        this.userName = userName;
+        this.userPhone = userPhone;
+        this.userGroups = userGroups;
+    }
+
+    addMessages(newMess:Message){
+        this.userGroups[0].groupMsgs.push(newMess)
+        console.log(this.userGroups[0].groupMsgs)
+        return this.userGroups[0].groupMsgs
+        
+    }
+
+}
+
+const loggedInUser: User = new User (JSON.parse(localStorage.getItem("currentUser")).userImg,JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups)
+
+
+
 const messageList = new MessageList();
 
 
@@ -115,11 +156,16 @@ function sendMessage() {
     let timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes())
     let timeHMS = (today.getTime())
    
-    const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage,timeHMS) //last one is the lastmessagename
+    const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage,timeHMS, contactList) //last one is the lastmessagename
 
     messageList.addMessage(message)
 
-    //localStorage.setItem("messageChat", JSON.stringify(message))
+    let messagesUser = loggedInUser.addMessages(message)
+
+    localStorage.setItem("currentMessage", JSON.stringify(messagesUser))
+
+    //localStorage.setItem("currentUser", JSON.stringify(loggedInUser))
+    //localStorage.setItem("contactList", JSON.stringify(message.contactPhone))
 
     elementMessage.value = '';
 
@@ -171,11 +217,15 @@ function handleKeyUp() {
 
 function handleReturn() {
 
-    localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
+    //localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
 
-    const pickedUser = JSON.parse(localStorage.getItem("currentUser"))
-   
-   window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
+    let pickedUser = JSON.parse(localStorage.getItem("currentUser"))
+
+    //pickedUser = pickedUser.userGroups[0].groupMsgs = messageList.renderChat()
+
+    //localStorage.setItem('currentUser', JSON.stringify(pickedUser))
+    
+    window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
 }
 
 
@@ -255,6 +305,11 @@ chatUser.find(function (chat) {
         contactUser.renderUserChat()
     }
 });
+
+//User
+
+
+
 
 
 
