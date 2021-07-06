@@ -20,6 +20,7 @@ var User = /** @class */ (function () {
             if (groupIndex !== -1)
                 return;
             this.userGroups.push();
+            this.renderChatsToChatsList();
         }
         catch (er) {
             console.error(er);

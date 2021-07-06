@@ -31,6 +31,7 @@ class User {
             const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
             if (groupIndex !== -1) return;
             this.userGroups.push();
+            this.renderChatsToChatsList();
           } catch (er) {
             console.error(er);
           }
