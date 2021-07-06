@@ -53,24 +53,21 @@ var Cars = /** @class */ (function () {
         this.cars = carIndex;
         this.renderCars(this.cars);
     };
-    Cars.prototype.filter = function (mpgValue, cylindersValue, originValue) {
+    Cars.prototype.filter = function (nameValue, mpgValue, cylindersValue, originValue) {
         var filteredArray = this.cars;
+        if (nameValue) {
+            var simpleSearch_1 = new RegExp(nameValue, "gmi");
+            filteredArray = filteredArray.filter(function (car) { return simpleSearch_1.test(car.Name); });
+        }
         if (mpgValue !== "undefined") {
-            console.log(filteredArray);
             filteredArray = filteredArray.filter(function (car) { return car.Miles_per_Gallon === Number(mpgValue); });
-            console.log(filteredArray);
         }
         if (cylindersValue !== "undefined") {
-            console.log(filteredArray);
             filteredArray = filteredArray.filter(function (car) { return car.Cylinders === parseFloat(cylindersValue); });
-            console.log(filteredArray);
         }
         if (originValue !== "undefined") {
-            console.log(filteredArray);
             filteredArray = filteredArray.filter(function (car) { return car.Origin === originValue; });
-            console.log(filteredArray);
         }
-        console.log(filteredArray);
         this.renderCars(filteredArray);
     };
     // filterByOrigin(value) {  /*YS: DRY, all of these filter functions are basically the same. The only thing 
@@ -116,18 +113,15 @@ var cars = new Cars();
 cars.getCarsFromStorage();
 cars.addCars(carsData);
 cars.renderCars(cars.cars);
-function handleKeyUp(event) {
-    console.log(event.key);
-    // event.key
-}
 var handleSelectedFilter = function (event) {
     event.preventDefault();
     var formElement = event.target.parentElement.parentElement.parentElement.parentElement.parentElement.elements;
+    var nameValue = formElement.name.value;
     var mpgValue = formElement.milesPerGallon.value;
     var cylindersValue = formElement.cylinders.value;
     var originValue = formElement.origin.value;
-    console.log(mpgValue, cylindersValue, originValue);
-    cars.filter(mpgValue, cylindersValue, originValue);
+    console.log(nameValue, mpgValue, cylindersValue, originValue);
+    cars.filter(nameValue, mpgValue, cylindersValue, originValue);
 };
 var handleEdit = function (carName) {
     console.log(carName); //YS: console.log

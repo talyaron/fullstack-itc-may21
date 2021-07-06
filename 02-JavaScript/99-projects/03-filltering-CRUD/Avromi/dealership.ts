@@ -67,24 +67,23 @@ class Cars {
         this.renderCars(this.cars);
     }
 
-    filter(mpgValue, cylindersValue, originValue) {
+    filter(nameValue, mpgValue, cylindersValue, originValue) {
         let filteredArray = this.cars
+        if (nameValue){
+            const simpleSearch = new RegExp(nameValue, `gmi`)
+            filteredArray = filteredArray.filter(car => simpleSearch.test(car.Name))
+        }
         if (mpgValue !== "undefined") {
-            console.log(filteredArray);
             filteredArray = filteredArray.filter(car => car.Miles_per_Gallon === Number(mpgValue))
-            console.log(filteredArray);
         }
         if (cylindersValue !== "undefined") {
-            console.log(filteredArray);
             filteredArray = filteredArray.filter(car => car.Cylinders === parseFloat(cylindersValue))
-            console.log(filteredArray);
         }
         if (originValue !== "undefined") {
-            console.log(filteredArray);
-            filteredArray= filteredArray.filter(car => car.Origin === originValue)
-            console.log(filteredArray);
+            filteredArray = filteredArray.filter(car => car.Origin === originValue)
         }
-        console.log(filteredArray);
+
+
         this.renderCars(filteredArray)
     }
 
@@ -125,10 +124,10 @@ class Cars {
     renderCars(arrToRender: Array<Car>) {
 
         const table: HTMLElement = document.querySelector(".table")
-        let html ="";
+        let html = "";
         arrToRender.forEach((car) => { //YS: In this case its better to use forEach since you dont need to return an array (map returns an array)
 
-             html += `<tbody>
+            html += `<tbody>
        <tr>
         <td>${car.Name}</td>
         <td>${car.Miles_per_Gallon}</td> 
@@ -139,7 +138,7 @@ class Cars {
         <td>${car.Origin}</td>
         <td> <i onclick='handleDelete("${car.carId}")' class="fas fa-trash"></i></td>
       </tr>`;
-            
+
 
         });
         table.innerHTML = html
@@ -175,20 +174,18 @@ cars.addCars(carsData)
 
 cars.renderCars(cars.cars);
 
-function handleKeyUp(event) {
-    console.log(event.key);
-    // event.key
-}
-
 const handleSelectedFilter = (event) => {
     event.preventDefault()
     const formElement = event.target.parentElement.parentElement.parentElement.parentElement.parentElement.elements
+    const nameValue = formElement.name.value;
     const mpgValue = formElement.milesPerGallon.value;
     const cylindersValue = formElement.cylinders.value;
     const originValue = formElement.origin.value;
+    
 
-    console.log(mpgValue, cylindersValue, originValue);
-    cars.filter(mpgValue, cylindersValue, originValue)
+
+    console.log(nameValue, mpgValue, cylindersValue, originValue);
+    cars.filter(nameValue, mpgValue, cylindersValue, originValue)
 }
 
 const handleEdit = (carName) => {

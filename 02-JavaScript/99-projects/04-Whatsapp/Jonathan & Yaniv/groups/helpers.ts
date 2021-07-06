@@ -4,6 +4,8 @@ pageTitle.innerText = `${loggedInUser.userName}'s chats`;
 const profileImg: HTMLElement = document.querySelector('.controls__item--profile_img');
 profileImg.setAttribute('src',loggedInUser.userImg)
 
+loggedInUser.renderChatsToChatsList();
+
 const addChatBtn: HTMLElement = document.querySelector('.controls__item--plus');
 
 addChatBtn.addEventListener('click', ev => showNewChatMenu(ev));
@@ -42,10 +44,13 @@ const directToChat = (ev: any): void => {
     const chatUsers: Array<string> = [loggedInUser.userPhone, contactToChat.id];
     
     const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
-    loggedInUser.addGroupIfNew(group.groupId);
+    loggedInUser.addGroup(group);
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList',JSON.stringify(allContacts));
+
+    localStorage.setItem('contactListUser', JSON.stringify(allContacts))
+    localStorage.setItem('contactId',JSON.stringify(contactToChat.id))
 
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
 }
@@ -74,21 +79,24 @@ newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
 const createNewGroup = (ev: any): void => {
     try {
         ev.preventDefault();
-        console.log(ev.target.elements);
 
-        const groupId: string = "group" + Math.random().toString(16).slice(2);
+        const groupId: string = null;
         const imgLabel: HTMLElement = document.querySelector('#add_photo');
         const groupImg: string = imgLabel.getAttribute('alt');
         const groupName: string = ev.target.elements.groupName.value;
-        const contactsCheckboxes: Array<HTMLInputElement> = ev.target.querySelectorAll('.checkbox'); // doesn't wort. this is not really an array of HTMLInputElement
+        const contactsCheckboxes: Array<HTMLInputElement> = ev.target.querySelectorAll('.checkbox');
         const groupUsers: Array<string> = [];
-        contactsCheckboxes.forEach(contact => {if (contact.checked) groupUsers.push(contact.value);})
+        contactsCheckboxes.forEach(contact => {
+            if (contact.checked) groupUsers.push(contact.value);
+        });
     
         const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
-        loggedInUser.addGroupIfNew(group.groupId);
+        loggedInUser.addGroup(group);
         localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
         allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
         localStorage.setItem('contactList',JSON.stringify(allContacts));
+        hideNewGroupMenu(ev);
+        hideNewChatMenu(ev);
         
         ev.target.reset();
     } catch (er) {
