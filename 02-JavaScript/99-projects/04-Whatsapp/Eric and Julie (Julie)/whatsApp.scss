@@ -16,14 +16,16 @@
 //   margin-top: 5px;
 // }
 
-// What is add group? If I comment it out nothing happens
+// What is add group? If I comment it out nothing happens. I assume it is for the future?
 
 .addChat:hover {
   opacity: 0.8;
 }
 
-// This box is the oval shaped one at the top, which you have now got into the top.
+// Box is the oval shaped one at the top,
+// It is actually nested inside wrapper__container--search
 // It contains filterN and Fa fa search
+
 .box {
   background-color: white;
   position: absolute;
@@ -59,7 +61,7 @@
   border: 2px solid blue;
 }
 
-// Container chat is the bit that wraps around each chat. It is the flex container.
+// Container chat is the bit that wraps around each chat. It is the flex container. ITs flex children should be: the
 
 // chat 1 is an empy box and I don't understand why it's there
 .chat1 {
