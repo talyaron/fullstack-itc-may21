@@ -86,8 +86,11 @@ body {
 }
 
 
-#delete {
+.delete {
     display: none;
+}
+.display {
+    display: block;
 }
 
 .chats {
@@ -100,7 +103,7 @@ body {
     border: none;
     width: 94vw;
     background-color: rgb(238, 236, 236);
-    color: rgb(216, 216, 216);
+    color: rgb(165, 165, 165);
     font-size: 1rem;
     margin-top: none;
     margin-left: 3vw;

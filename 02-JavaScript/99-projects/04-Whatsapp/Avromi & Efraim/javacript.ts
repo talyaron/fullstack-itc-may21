@@ -1,5 +1,5 @@
 interface Message {
-    message: string,
+    message: any,
     timeStamp: Date
 
 }
@@ -149,7 +149,7 @@ const addToDomWithArray = (searchResults: Array<any>) => {
                 `<div class="holder__contact__name">${contact.name}</a></div>` +
                 `<div class="holder__contact__chat">${contact.chats[index].message}</div>` +
                 `<div class="holder__contact__timestamp">${contact.chats[index].timeStamp}</div>` +
-                `<div class="holder__contact__unread id="delete" onclick="deleteContact('${contact.contactId}')">x</div>` +
+                `<div class="holder__contact__unread delete" onclick="deleteContact('${contact.contactId}')">x</div>` +
                 `</div>`
             )
         })
@@ -170,24 +170,11 @@ const findContactSearch = (chatSearch: Array<any>, searchTerm: string) => {
 
 const findTextInMessages = (searchTerm: string): Array<Message> => {
     try {
-        console.log(searchTerm)
+       
         const termRegEx: RegExp = new RegExp(searchTerm, 'i');
 
-        let searchedMessages = contacts.contacts.map(contact => {
-
-
-
-            const x = contact.chats.filter(message => {
-
-                let msg = message.message;
-                const tst = termRegEx.test(msg);
-                console.log(msg, tst)
-                return tst
-            })
-                ;
-            return x
-        }).flat()
-        console.log(searchedMessages)
+        let searchedMessages = contacts.contacts.map(contact =>  contact.chats.filter(message => termRegEx.test(message.message))).flat()
+      
         return searchedMessages
     } catch (e) {
         console.error(e)
@@ -197,12 +184,12 @@ const handleKeyUp = (ev: any) => {
     try {
         ev.preventDefault();
         let searchTerm: string = ev.target.value;
-        if (!searchTerm) {
-            throw new Error('No value being read for search term!')
-        }
         const results: Array<any> = findContactSearch(contacts.contacts, searchTerm);
         const searchMessages = findTextInMessages(searchTerm)
         addToDomWithArray(results);
+        if(searchTerm.length == 0){
+           addToDomWithArray(contacts.contacts)
+        }
     } catch (er) {
         console.error(er)
     }
@@ -244,22 +231,22 @@ function closeForm() {
     }
 }
 closeForm()
-
+let x = false
 function editButtonRevealAndHide() {
     try {
         const editButton: HTMLElement = document.querySelector(".header__edit");
         editButton.addEventListener("click", ()=>{
-        let indices = document.querySelectorAll("#delete")
-        let unread: Array<HTMLElement> = document.querySelectorAll("#delete");
+        let indices = document.querySelectorAll(".holder__contact__unread")
+        let unread: Array<HTMLElement> = document.querySelectorAll(".holder__contact__unread");
         for (let i = 0; i <= indices.length; i++) {
             if (unread[i].style.display = "none") {
                 unread[i].style.display = "block"
-                return
+               
             }else {
                 unread[i].style.display = "none"
-                return
+               
             }
-        }console.log("fuck")
+        }
     } ) 
     } catch (e) {
         console.error(e)
