@@ -8,7 +8,7 @@
     <title>WhatsApp</title>
     <link rel="shortcut icon" href="https://web.whatsapp.com/favicon-64x64.ico" type="image/x-icon">
 </head>
-<body onmouseup="closeMenuModal(event)">
+<body onmouseout="closeMenuModal(event)">
     <nav>
         <div class="top-container">
             <h1 class="headline">WhatsApp</h1>
@@ -39,9 +39,9 @@
     </nav>
     
     <main>
-       <div class="contact-container">
+       <div class="contact-container" >
            <img class="contact-container__contact-image" src="/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/images/pp.jpeg">
-           <div class="contact-container__info-container">
+           <div class="contact-container__info-container" ondblclick="handlDoubleClick(event)">
                 <div class="contact-container__info-container__inner-container">
                     <div class="contact-name">Tomas Leon Patlayan</div>
                     <div class="time">12:14</div>
