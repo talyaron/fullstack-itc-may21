@@ -8,15 +8,24 @@
     <link rel="stylesheet" href="dist/whatsappChat.css">
     <title>WhatsApp</title>
     <link rel="shortcut icon" href="../Img_whatsapp/favicon.ico" type="image/x-icon" />
-
+    <a href="https://icons8.com/icon/93218/send-comment"></a>
+    <link rel="stylesheet" href="../Emojies/emojionearea.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../Emojies/emojionearea.min.js"></script>
 </head>
 
 <body>
     <div class="container" id="main">
 		
 	</div>
-   
+   <script>
+       $(document).ready(function(){
+           $('#texting').emojioneArea();
+          
+       })
+   </script>
     <script src="dist/scriptChat.js"></script>
+    
 </body>
 
 </html>

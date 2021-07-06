@@ -43,7 +43,8 @@ function renderChat(): void {
                         <img src="../Img_whatsapp/attach file.png">
                         <img src="../Img_whatsapp/camera.png">
                     </div>
-                    <img src="../Img_whatsapp/mic.png" class="mic" id="sendButton">
+                    
+                    <img src="https://img.icons8.com/material-outlined/50/000000/send-comment.png"/ id="sendButton">
                 </div>
             </div>`
             )
