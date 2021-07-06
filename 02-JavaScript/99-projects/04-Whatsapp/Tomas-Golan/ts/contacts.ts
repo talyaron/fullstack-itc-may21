@@ -1,20 +1,20 @@
 // VARIABLES GLOBALES
-let allContacts:Array<Contact> = [];
-let allContactsForSearch:Array<Contact> = [];
+let allContacts: Array<Contact> = [];
+let allContactsForSearch: Array<Contact> = [];
 // render(chats);
 // QUERIES
 const searchBar = document.getElementById("searchbar");
-const formSearchBar = document.querySelector("#form_searchBar"); 
+const formSearchBar = document.querySelector("#form_searchBar");
 
 
 // CLASSES
-interface LocalContact{
+interface LocalContact {
     name: string;
     phone: number;
     profileImg: string;
 }
 
-class Contact{
+class Contact {
     name: string;
     phone: number;
     profileImg: string;
@@ -30,19 +30,23 @@ class Contact{
 // FUNCTIONS
 const addLocalContacts = (localChat) => {
     localChat.forEach(contact => {
-       let add = new Contact(contact.name, contact.phone, contact.profileImg); 
+        let add = new Contact(contact.name, contact.phone, contact.profileImg);
         allContacts.push(add);
         allContactsForSearch.push(add);
         render();
 
     })
 }
-addLocalContacts(chats);
+addLocalContacts(contacts);
+
 
 function render() {
+
     const containerData: HTMLElement = document.querySelector(".contacts")
     let html: string = "";
     let renderContact = JSON.parse(localStorage.getItem("contactos"));
+    console.log(renderContact);
+    
     renderContact.forEach((element) => {
         html += `
         <div class="contacts_chat">
@@ -57,6 +61,8 @@ function render() {
         </div>`
     });
     let renderGroup = JSON.parse(localStorage.getItem("groups"));
+    console.log(renderGroup);
+    if (!renderGroup) return
     renderGroup.forEach((element) => {
         html += `
         <div class="contacts_chat">
@@ -74,7 +80,7 @@ function render() {
     containerData.innerHTML = html;
 }
 
-const deleteChat = (id) =>{
+const deleteChat = (id) => {
     let contactsDelete = JSON.parse(localStorage.getItem("contactos"));
     const deleteChats = contactsDelete.filter((chat) => chat.id !== id);
     allContacts = deleteChats;
@@ -83,13 +89,13 @@ const deleteChat = (id) =>{
     render();
 }
 
-const handleContact = (ev)=>{
+const handleContact = (ev) => {
     ev.preventDefault();
 
     const name: string = ev.target.elements.nameContact.value;
     const phone: number = ev.target.elements.phoneContact.value;
     const profileImg: string = ev.target.elements.imgContact.value;
-    
+
     const newContacto = new Contact(name, phone, profileImg);
     allContacts.push(newContacto);
     allContactsForSearch.push(newContacto);
@@ -97,7 +103,7 @@ const handleContact = (ev)=>{
     render();
 }
 
-const searchContact = (searchBar)=>{
+const searchContact = (searchBar) => {
     const regExp: string = `^${searchBar}`;
     const searchTermReg: RegExp = new RegExp(regExp, 'i');
     allContacts = allContactsForSearch.filter(elem => searchTermReg.test(elem.name));
@@ -105,10 +111,10 @@ const searchContact = (searchBar)=>{
 }
 
 
-const filters = (ev) =>{
+const filters = (ev) => {
     ev.preventDefault();
 
-    const searchBar =  ev.target.parentElement.elements.searchBar.value;
+    const searchBar = ev.target.parentElement.elements.searchBar.value;
     searchContact(searchBar);
 }
 
