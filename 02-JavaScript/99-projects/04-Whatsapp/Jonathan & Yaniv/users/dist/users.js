@@ -70,5 +70,5 @@ var userPicker = function (ev) {
     var userGroups = allContacts.findContact(userPhone).userGroups;
     var pickedUser = new User(userImg, userName, userPhone, userGroups);
     localStorage.setItem('currentUser', JSON.stringify(pickedUser));
-    window.location.href = "../groups/groups.html?" + pickedUser.userPhone;
+    window.location.href = "../groups/groups.html?userid=" + pickedUser.userPhone;
 };

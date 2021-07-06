@@ -6,7 +6,7 @@ const pageTitle: HTMLElement = document.querySelector('title');
 pageTitle.innerText = `${loggedInUser.userName}'s chats`;
 
 const profileImg: HTMLElement = document.querySelector('.controls__item--profile_img');
-profileImg.setAttribute('src',loggedInUser.userImg)
+profileImg.setAttribute('src', loggedInUser.userImg)
 
 loggedInUser.renderChatsToChatsList();
 
@@ -30,8 +30,11 @@ const hideNewChatMenu = (ev: any): void => {
 }
 
 const newChatOptions: HTMLElement = document.querySelector('.options');
+const existingChatList: HTMLElement = document.querySelector('.chats')
+
 
 newChatOptions.addEventListener('click', ev => directToChat(ev));
+existingChatList.addEventListener('click', ev => directToGroup(ev));
 newChatOptions.addEventListener('click', ev => showNewGroupMenu(ev));
 
 
@@ -49,17 +52,63 @@ const directToChat = (ev: any): void => {
     const contactToChatName: string = contactToChatNameContainer.innerText;
     const chatUsers: Array<string> = [loggedInUser.userPhone, contactToChat.id];
 
-   
+
     const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
 
-    loggedInUser.addGroup(group);
-    localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
-    allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-    localStorage.setItem('contactList',JSON.stringify(allContacts));
-    localStorage.setItem('contactId',JSON.stringify(contactToChat.id))
+    const isNewGroup: boolean = loggedInUser.addGroupIfNew(group);
 
-    window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
+    if (isNewGroup) {
+        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+        allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        localStorage.setItem('contactList', JSON.stringify(allContacts));
+        localStorage.setItem('contactId', JSON.stringify(contactToChat.id))
+    }
+
+    window.location.href = `../chat/chat.html?groupid=${contactToChat.id}`;
 }
+
+
+const directToGroup = (ev: any): void => {
+
+   
+
+    let existingGroup: HTMLElement;
+
+    if ((ev.target.className !== 'chats__item chat') && (ev.target.className.indexOf('chat_item') !== -1)) return; //CHECK
+    
+    if (ev.target.className.indexOf('chat_item') === -1) existingGroup = ev.target.parentElement;
+    else existingGroup = ev.target;
+    
+    console.log(existingGroup)
+    
+    const groupID: string = existingGroup.id;
+
+    /*const groupImg: string = existingGroup.querySelector('.chat__item--img').getAttribute('src');
+    const groupNameContainer: HTMLElement = existingGroup.querySelector('.chat__item--name');
+    const groupName: string = groupNameContainer.innerText;*/
+    //const groupDetails: Array<string> = loggedInUser.extractGroup(groupID);
+
+
+    const group: Group = loggedInUser.extractGroup(groupID);
+
+    console.log(existingGroup.id)
+
+    //loggedInUser.addGroup(group);
+    //localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
+    //allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+    //localStorage.setItem('contactList',JSON.stringify(allContacts));
+    //localStorage.setItem('contactId',JSON.stringify(existingGroup.id))
+
+    window.location.href = `../chat/chat.html?groupid=${existingGroup.id}`;
+}
+
+
+
+
+
+
+
+
 
 const showNewGroupMenu = (ev: any): void => {
 
@@ -82,12 +131,12 @@ const hideNewGroupMenu = (ev: any): void => {
 
 //newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
 
-function createNewGroup (ev: any): void {
+function createNewGroup(ev: any): void {
     try {
         ev.preventDefault();
-       
+
         const groupId: string = null;
-        
+
         const imgLabel: HTMLElement = document.querySelector('#add_photo');
         const groupImg: string = imgLabel.getAttribute('alt');
         const groupName: string = ev.target.elements.groupName.value;
@@ -100,23 +149,23 @@ function createNewGroup (ev: any): void {
         const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
 
         loggedInUser.addGroup(group);
-        localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
+        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-        localStorage.setItem('contactList',JSON.stringify(allContacts));
+        localStorage.setItem('contactList', JSON.stringify(allContacts));
         hideNewGroupMenu(ev);
         hideNewChatMenu(ev);
-        
+
         ev.target.reset();
     } catch (er) {
         console.error(er);
     }
 }
-    
+
 const logOutBtn = document.querySelector('.controls__item--ellipsis');
 
 logOutBtn.addEventListener('click', ev => logOut(ev));
 
 const logOut = (ev: any): void => {
-    localStorage.setItem('currentUser',null);
+    localStorage.setItem('currentUser', null);
     window.location.href = `../users/users.html`;
 }

@@ -96,7 +96,7 @@ class MessageList {
             
         });
         
-        containerChat.innerHTML = html;
+        containerChat.insertAdjacentHTML('beforeend', html);
 
         return this.messageList
     }
@@ -111,9 +111,7 @@ class Group {
     groupUsers: Array<string> // userPhone numbers
     groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
 
-    renderMsgs(){
-        //show all past group messages from LocalStorage
-    }
+    
 
 }
 
@@ -130,20 +128,61 @@ class User {
         this.userGroups = userGroups;
     }
 
-    addMessages(newMess:Message){
-        this.userGroups[0].groupMsgs.push(newMess)
-        console.log(this.userGroups[0].groupMsgs)
-        return this.userGroups[0].groupMsgs
+    addMessages(newMess:Message,groupId:string){
+
+        const groupIndex = this.userGroups.findIndex(group=>group.groupId === groupId)
+        this.userGroups[groupIndex].groupMsgs.push(newMess)
+        return this.userGroups[groupIndex].groupMsgs
         
+    }
+
+    renderMsgs(groupid: string){
+
+        let html: string = '';
+
+        const groupIndex = this.userGroups.findIndex(group=>group.groupId === groupId)
+
+        this.userGroups[groupIndex].groupMsgs.forEach(message => {
+
+            html += `<div class="container__chat-box__messages--user">
+                        <p class="container__chat-box__messages--user--content">${message.content}/p>
+                        <p>
+                             <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
+                                <i class="fas fa-check-double container__chat-box__messages--user--doubleclick" aria-hidden="true"></i>
+                         <i class="fa fa-trash container__chat-box__messages--user--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
+                        </p>
+                    </div>`
+            
+        });
+        
+        containerChat.innerHTML = html;
+
     }
 
 }
 
+class ContactList {
+    allContacts: Array<User>;
+
+    constructor (allContacts: Array<User>) {
+        this.allContacts = allContacts;
+    }
+
+    findContactIndex(contactPhone) {
+        const contactIndex = this.allContacts.findIndex(contactItem => contactItem.userPhone === contactPhone);
+        return contactIndex;
+    }
+}
+
 const loggedInUser: User = new User (JSON.parse(localStorage.getItem("currentUser")).userImg,JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups)
 
-
-
 const messageList = new MessageList();
+
+const params = new URLSearchParams(window.location.search)
+const groupId = params.get('groupid')
+
+
+loggedInUser.renderMsgs(groupId);
 
 
 btnMessage.addEventListener('click', sendMessage)
@@ -160,12 +199,14 @@ function sendMessage() {
 
     messageList.addMessage(message)
 
-    let messagesUser = loggedInUser.addMessages(message)
+    loggedInUser.addMessages(message,groupId)
 
-    localStorage.setItem("currentMessage", JSON.stringify(messagesUser))
+    localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
+    contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+    localStorage.setItem('contactList',JSON.stringify(contactList));
 
-    //localStorage.setItem("currentUser", JSON.stringify(loggedInUser))
-    //localStorage.setItem("contactList", JSON.stringify(message.contactPhone))
+   
+    
 
     elementMessage.value = '';
 
@@ -225,7 +266,7 @@ function handleReturn() {
 
     //localStorage.setItem('currentUser', JSON.stringify(pickedUser))
     
-    window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
+    window.location.href = `../groups/groups.html?userid=${pickedUser.userPhone}`;
 }
 
 
@@ -292,7 +333,7 @@ class ContactMessage {
 }
 
 const contactChat = JSON.parse(localStorage.getItem("contactList"))
-const contactList = JSON.parse(localStorage.getItem("contactId"))
+const contactList:ContactList = JSON.parse(localStorage.getItem("contactId"))
 const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone
 
 let chatUser = Object.values(Object.values(contactChat)[1])
