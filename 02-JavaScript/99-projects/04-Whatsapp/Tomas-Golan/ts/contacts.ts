@@ -34,6 +34,7 @@ const addLocalContacts = (localChat) => {
         let add = new Contact(contact.name, contact.phone, contact.profileImg);
         allContacts.push(add);
         allContactsForSearch.push(add);
+        localStorage.setItem("contactos", JSON.stringify(allContacts));
         render();
 
     })
@@ -43,11 +44,9 @@ addLocalContacts(contacts);
 
 function render() {
 
-    const containerData: HTMLElement = document.querySelector(".contacts")
+    const containerData: HTMLElement = document.querySelector(".contacts");
     let html: string = "";
     let renderContact = JSON.parse(localStorage.getItem("contactos"));
-    console.log(renderContact);
-    
     renderContact.forEach((element) => {
         html += `
         <div class="contacts_chat">
@@ -82,8 +81,8 @@ function render() {
 }
 
 const deleteChat = (id) => {
-    let contactsDelete = JSON.parse(localStorage.getItem("contactos"));
-    const deleteChats = contactsDelete.filter((chat) => chat.id !== id);
+    let getContact = JSON.parse(localStorage.getItem("contactos"));
+    const deleteChats = getContact.filter((chat) => chat.id !== id);
     allContacts = deleteChats;
     allContactsForSearch = deleteChats;
     localStorage.setItem("contactos", JSON.stringify(allContacts));
@@ -100,15 +99,16 @@ const handleContact = (ev) => {
     const newContacto = new Contact(name, phone, profileImg);
     allContacts.push(newContacto);
     localStorage.setItem("contactos", JSON.stringify(allContacts));
-    allContactsForSearch.push(newContacto);
-
     render();
+    allContactsForSearch.push(newContacto);
+ 
 }
 
 const searchContact = (searchBar) => {
     const regExp: string = `^${searchBar}`;
     const searchTermReg: RegExp = new RegExp(regExp, 'i');
     allContacts = allContactsForSearch.filter(elem => searchTermReg.test(elem.name));
+    localStorage.setItem("contactos", JSON.stringify(allContacts));
     render();
 }
 

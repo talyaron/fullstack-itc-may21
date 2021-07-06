@@ -20,6 +20,7 @@ var addLocalContacts = function (localChat) {
         var add = new Contact(contact.name, contact.phone, contact.profileImg);
         allContacts.push(add);
         allContactsForSearch.push(add);
+        localStorage.setItem("contactos", JSON.stringify(allContacts));
         render();
     });
 };
@@ -28,7 +29,6 @@ function render() {
     var containerData = document.querySelector(".contacts");
     var html = "";
     var renderContact = JSON.parse(localStorage.getItem("contactos"));
-    console.log(renderContact);
     renderContact.forEach(function (element) {
         html += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.profileImg + "\" alt=\"\">\n            <a href=\"\">\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.name + "</h3>\n                    <p>" + element.phone + "</p>\n                </div>\n            </a>\n            <i onclick='deleteChat(\"" + element.id + "\")' class=\"fas fa-trash fa-lg contacts_icon\"></i>\n        </div>";
     });
@@ -42,8 +42,8 @@ function render() {
     containerData.innerHTML = html;
 }
 var deleteChat = function (id) {
-    var contactsDelete = JSON.parse(localStorage.getItem("contactos"));
-    var deleteChats = contactsDelete.filter(function (chat) { return chat.id !== id; });
+    var getContact = JSON.parse(localStorage.getItem("contactos"));
+    var deleteChats = getContact.filter(function (chat) { return chat.id !== id; });
     allContacts = deleteChats;
     allContactsForSearch = deleteChats;
     localStorage.setItem("contactos", JSON.stringify(allContacts));
@@ -57,13 +57,14 @@ var handleContact = function (ev) {
     var newContacto = new Contact(name, phone, profileImg);
     allContacts.push(newContacto);
     localStorage.setItem("contactos", JSON.stringify(allContacts));
-    allContactsForSearch.push(newContacto);
     render();
+    allContactsForSearch.push(newContacto);
 };
 var searchContact = function (searchBar) {
     var regExp = "^" + searchBar;
     var searchTermReg = new RegExp(regExp, 'i');
     allContacts = allContactsForSearch.filter(function (elem) { return searchTermReg.test(elem.name); });
+    localStorage.setItem("contactos", JSON.stringify(allContacts));
     render();
 };
 var filters = function (ev) {
