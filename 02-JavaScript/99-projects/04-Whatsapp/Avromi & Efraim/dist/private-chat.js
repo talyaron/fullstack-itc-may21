@@ -28,12 +28,21 @@ function renderMessages(arrToRender) {
     var messagesDiv = document.querySelector(".messages");
     var html = "";
     thisContact[0].chats.forEach(function (chat) {
-        html += "<div class=\"single__message\" oncontextmenu = \"javascript:alert('success!');return false;\" >\n    <p>" + chat.message + " </p>\n        <div class=\"single__message__timestamp\"> " + chat.timeStamp + " </div>\n            </div>";
+        html += "<div class=\"single__message\" oncontextmenu = \"contextHandler();return false;\" >\n    <p>" + chat.message + " </p>\n        <div class=\"single__message__timestamp\"> " + chat.timeStamp + " </div>\n            </div>";
         messagesDiv.innerHTML = html;
     });
 }
 function openCamera() {
     console.log("open the camera");
+}
+function contextHandler() {
+    document.getElementById("contextMenu").style.display = "block";
+    // alert('my alert ')
+}
+var doc = document.querySelector('html');
+doc.addEventListener("click", closeContext);
+function closeContext() {
+    document.getElementById("contextMenu").style.display = "none";
 }
 var form = document.querySelector('.form');
 form.addEventListener('submit', logSubmit);

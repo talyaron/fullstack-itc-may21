@@ -38,7 +38,7 @@ function renderMessages(arrToRender: Array<Contact>) {
     const messagesDiv = document.querySelector(".messages")
     let html = "";
     thisContact[0].chats.forEach((chat) => {
-        html += `<div class="single__message" oncontextmenu = "javascript:alert('success!');return false;" >
+        html += `<div class="single__message" oncontextmenu = "contextHandler();return false;" >
     <p>${chat.message} </p>
         <div class="single__message__timestamp"> ${chat.timeStamp} </div>
             </div>`
@@ -51,6 +51,17 @@ function renderMessages(arrToRender: Array<Contact>) {
 
 function openCamera() {
     console.log("open the camera");
+}
+
+function contextHandler(){
+    document.getElementById("contextMenu").style.display = "block";
+    // alert('my alert ')
+}
+const doc = document.querySelector('html')
+doc.addEventListener(`click`, closeContext )
+
+function closeContext(){
+    document.getElementById("contextMenu").style.display = "none";
 }
 
 
