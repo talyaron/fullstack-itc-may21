@@ -39,7 +39,9 @@ var Contacts = /** @class */ (function () {
             });
             rootDiv.innerHTML = htmlPattern_1;
         }
-        catch (error) { } //YS: And? Wheres the error handling? 
+        catch (error) {
+            console.error(error);
+        }
     };
     return Contacts;
 }());

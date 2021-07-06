@@ -60,7 +60,10 @@ render() {
     </div>`
       });
       rootDiv.innerHTML = htmlPattern;
-    } catch (error) { } //YS: And? Wheres the error handling? 
+    } catch (error) {
+        console.error(error);
+        
+     }
   }
 }
 
