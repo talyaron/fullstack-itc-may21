@@ -31,6 +31,7 @@ class User {
             const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
             if (groupIndex !== -1) return;
             this.userGroups.push();
+            this.renderChatsToChatsList();
           } catch (er) {
             console.error(er);
           }
@@ -108,7 +109,7 @@ class ContactList {
                 if (aName > bName) {return 1;}
                 return 0;
             });
-            const newGroupContactsContainer: HTMLElement = document.querySelector("#add_group_form");
+            const newGroupContactsContainer: HTMLElement = document.querySelector("#add_group_controls");
             newGroupContactsContainer.innerHTML = `
             <div class="options__item options__item--group_img">
                 <label for="group_img_form" id="add_photo">Add Group Image</label>
@@ -116,8 +117,7 @@ class ContactList {
             </div>
             <div class="options__item options__item--group_name">
                 <input type="text" maxlength="25" placeholder="Group's Topic" name="groupName" id="group_name_form" required />
-            </div>
-            <input class="options__item options__item--submit" type="submit" name="submit" value="✓" />`; // issues with fetching the submit button, as it is created only when contacts are rendered to the form
+            </div>`;
             this.allContacts.forEach((contact) => {
                 if (contact.userPhone === loggedInUser.userPhone) return;
                 const contactHTML: string = `
@@ -125,7 +125,7 @@ class ContactList {
                     <img class="new_contact_img" src="${contact.userImg}">
                     <h3 class="new_contact_name">${contact.userName}</h3>
                     <p class="new_contact_status">The world is awesome</p>
-                    <input type="checkbox" id="${contact.userPhone}" name="${contact.userPhone}" value="${contact.userPhone}">
+                    <input type="checkbox" class="checkbox" id="${contact.userPhone}" name="${contact.userPhone}" value="${contact.userPhone}">
                 </div>`;
                 newGroupContactsContainer.insertAdjacentHTML('afterbegin',contactHTML);
             });
@@ -139,3 +139,21 @@ class ContactList {
 const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
+
+const readURL = (input: any) => {
+    if (input.files && input.files[0]) {
+        let reader = new FileReader();
+        reader.onload = (e)=> {
+            const label: HTMLElement = document.querySelector('#add_photo');
+            label.setAttribute('alt',`${e.target.result}`);
+            label.style.backgroundImage = `url("${e.target.result}")`;
+            label.style.backgroundSize = '100% 100%';
+            label.innerText = '';
+            label.style.padding = '0';
+            label.style.height = '200px';
+            label.style.width = '200px';
+            return e.target.result
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+}

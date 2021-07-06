@@ -20,6 +20,7 @@ var User = /** @class */ (function () {
             if (groupIndex !== -1)
                 return;
             this.userGroups.push();
+            this.renderChatsToChatsList();
         }
         catch (er) {
             console.error(er);
@@ -87,12 +88,12 @@ var ContactList = /** @class */ (function () {
                 }
                 return 0;
             });
-            var newGroupContactsContainer_1 = document.querySelector("#add_group_form");
-            newGroupContactsContainer_1.innerHTML = "\n            <div class=\"options__item options__item--group_img\">\n                <label for=\"group_img_form\" id=\"add_photo\">Add Group Image</label>\n                <input type=\"file\" name=\"groupImg\" id=\"group_img_form\" onchange=\"readURL(this);\" style=\"display:none\" required />\n            </div>\n            <div class=\"options__item options__item--group_name\">\n                <input type=\"text\" maxlength=\"25\" placeholder=\"Group's Topic\" name=\"groupName\" id=\"group_name_form\" required />\n            </div>\n            <input class=\"options__item options__item--submit\" type=\"submit\" name=\"submit\" value=\"\u2713\" />"; // issues with fetching the submit button, as it is created only when contacts are rendered to the form
+            var newGroupContactsContainer_1 = document.querySelector("#add_group_controls");
+            newGroupContactsContainer_1.innerHTML = "\n            <div class=\"options__item options__item--group_img\">\n                <label for=\"group_img_form\" id=\"add_photo\">Add Group Image</label>\n                <input type=\"file\" name=\"groupImg\" id=\"group_img_form\" onchange=\"readURL(this);\" style=\"display:none\" required />\n            </div>\n            <div class=\"options__item options__item--group_name\">\n                <input type=\"text\" maxlength=\"25\" placeholder=\"Group's Topic\" name=\"groupName\" id=\"group_name_form\" required />\n            </div>";
             this.allContacts.forEach(function (contact) {
                 if (contact.userPhone === loggedInUser.userPhone)
                     return;
-                var contactHTML = "\n                <div class=\"options__item options__item--contact\" id=\"" + contact.userPhone + "\">\n                    <img class=\"new_contact_img\" src=\"" + contact.userImg + "\">\n                    <h3 class=\"new_contact_name\">" + contact.userName + "</h3>\n                    <p class=\"new_contact_status\">The world is awesome</p>\n                    <input type=\"checkbox\" id=\"" + contact.userPhone + "\" name=\"" + contact.userPhone + "\" value=\"" + contact.userPhone + "\">\n                </div>";
+                var contactHTML = "\n                <div class=\"options__item options__item--contact\" id=\"" + contact.userPhone + "\">\n                    <img class=\"new_contact_img\" src=\"" + contact.userImg + "\">\n                    <h3 class=\"new_contact_name\">" + contact.userName + "</h3>\n                    <p class=\"new_contact_status\">The world is awesome</p>\n                    <input type=\"checkbox\" class=\"checkbox\" id=\"" + contact.userPhone + "\" name=\"" + contact.userPhone + "\" value=\"" + contact.userPhone + "\">\n                </div>";
                 newGroupContactsContainer_1.insertAdjacentHTML('afterbegin', contactHTML);
             });
         }
@@ -104,3 +105,20 @@ var ContactList = /** @class */ (function () {
 }());
 var allContacts = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 var loggedInUser = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
+var readURL = function (input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var label = document.querySelector('#add_photo');
+            label.setAttribute('alt', "" + e.target.result);
+            label.style.backgroundImage = "url(\"" + e.target.result + "\")";
+            label.style.backgroundSize = '100% 100%';
+            label.innerText = '';
+            label.style.padding = '0';
+            label.style.height = '200px';
+            label.style.width = '200px';
+            return e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+};
