@@ -26,15 +26,13 @@ function handleSubmit(ev) {
     var text = ev.target.elements.text.value;
     var msg = new Mensaje(text);
     allOfMsgs.addNewMsg(msg);
-    console.log(text, 'should catch text');
-    console.log(msg, 'should display msg');
 }
 // render on DOM
 function renderOnDOM() {
     var data = document.querySelector(".data");
     allOfMsgs.msgs.forEach(function (msg) {
-        data.insertAdjacentHTML('beforeend', "<div class=\"allmsgs\">" + msg.text + "</div>");
-        // data.innerHTML += `<div class="allmsgs">${msg.text}</div>`;
+        data.insertAdjacentHTML('beforeend', "<div class=\"allmsgs chat_wrapper--user1\"><p>" + msg.text + "</p></div>");
+        // data.innerHTML += `<div class="allmsgs chat_wrapper--user1">${msg.text}</div>`;
     });
 }
 renderOnDOM();
