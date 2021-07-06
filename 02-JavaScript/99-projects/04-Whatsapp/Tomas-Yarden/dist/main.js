@@ -2,18 +2,33 @@
 with modals and the option to add contact*/
 //Top modal:
 var openMenuModal = function (event) {
-    var topModal = document.querySelector('.top-modal');
-    topModal.style.display = "block";
+    try {
+        var topModal = document.querySelector('.top-modal');
+        topModal.style.display = "block";
+    }
+    catch (error) {
+        console.error(error);
+    }
 };
 var closeMenuModal = function (event) {
-    var body = document.getElementsByName('body');
-    var topModal = document.querySelector('.top-modal');
-    topModal.style.display = "none";
+    try {
+        var body = document.getElementsByName('body');
+        var topModal = document.querySelector('.top-modal');
+        topModal.style.display = "none";
+    }
+    catch (error) {
+        console.error(error);
+    }
 };
 //Add contact modal form:
 var openBottomModal = function (event) {
-    var bottomModal = document.querySelector('.add-contact');
-    bottomModal.style.display = "flex";
+    try {
+        var bottomModal = document.querySelector('.add-contact');
+        bottomModal.style.display = "flex";
+    }
+    catch (error) {
+        console.error(error);
+    }
 };
 var Contact = /** @class */ (function () {
     function Contact(image, name, message, time) {
@@ -47,15 +62,29 @@ var Contacts = /** @class */ (function () {
 }());
 var whatsAppContacts = new Contacts();
 var handleSubmit = function (event) {
-    event.preventDefault();
-    var img = event.target[0].value;
-    var name = event.target[1].value;
-    var message = event.target[2].value;
-    var time = event.target[3].value;
-    var newContact = new Contact(img, name, message, time);
-    whatsAppContacts.contacts.push(newContact);
-    whatsAppContacts.render();
-    event.target.reset();
-    var bottomModal = document.querySelector('.add-contact');
-    bottomModal.style.display = "none";
+    try {
+        event.preventDefault();
+        var img = event.target[0].value;
+        var name = event.target[1].value;
+        var message = event.target[2].value;
+        var time = event.target[3].value;
+        var newContact = new Contact(img, name, message, time);
+        whatsAppContacts.contacts.push(newContact);
+        whatsAppContacts.render();
+        event.target.reset();
+        var bottomModal = document.querySelector('.add-contact');
+        bottomModal.style.display = "none";
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+var handlDoubleClick = function (event) {
+    try {
+        console.log('asdfasdf');
+        console.dir(event.target);
+    }
+    catch (error) {
+        console.error(error);
+    }
 };

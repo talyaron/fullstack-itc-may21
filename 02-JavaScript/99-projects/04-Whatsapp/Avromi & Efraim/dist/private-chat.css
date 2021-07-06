@@ -17,6 +17,9 @@ body {
   height: 2rem;
   width: 3rem;
 }
+.nav .fa-arrow-left:hover {
+  cursor: pointer;
+}
 .nav__wrapper {
   display: flex;
   justify-content: space-around;
@@ -97,4 +100,13 @@ body {
   border-radius: 100px;
   background-color: #128C7E;
   color: white;
+}
+.input__send__wrapper .form .mic__or__send__button .fa-paper-plane {
+  display: none;
+}
+
+#contextMenu {
+  z-index: 18;
+  position: absolute;
+  display: none;
 }

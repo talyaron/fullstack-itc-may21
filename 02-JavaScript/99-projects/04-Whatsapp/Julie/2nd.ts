@@ -14,8 +14,8 @@ function renderChats(): void {
 
       html += `<div class="renderSecond">
                 
-                 <img src="${element.image}" alt="" class="chat1__photo">              
-                 <h4 class="chat1__name">${element.contactName}</h4>
+                 <img src="${element.image}" alt="" class="renderSecond__imageA">              
+                 <h4 class="renderSecond__nameA">${element.contactName}</h4>
 
                     
               </div> `
