@@ -3,7 +3,6 @@ const root: HTMLElement = document.querySelector('#main');
 
 const userNumber = localStorage.getItem('numberToSearch');
 const userfiltered = userInfo.filter(element => (element.number == userNumber));
-
 //Render the chat of the User
 function renderChat(): void {
     try {
@@ -37,6 +36,7 @@ function renderChat(): void {
             </div>
         </div></div>
                 <div class="chat-footer">
+                
                     <img src="../Img_whatsapp/emo.png" class="emo" id="emo">
                     <input type="text" placeholder="Type a message" id="texting"></input>
                     <div class="icons">
