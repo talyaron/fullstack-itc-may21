@@ -27,7 +27,7 @@ var Message = /** @class */ (function () {
 }());
 var MessageList = /** @class */ (function () {
     function MessageList() {
-        this.messageList = []; //maybe we can took from this array the last message
+        this.messageList = [];
         this.messageListFilter = [];
     }
     MessageList.prototype.addMessage = function (message) {
@@ -56,7 +56,6 @@ var MessageList = /** @class */ (function () {
     };
     MessageList.prototype.renderChat = function () {
         var html = '';
-        var random = (Math.random() < 0.5) ? contactList : contactUser;
         this.messageList.forEach(function (message) {
             html += "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "<p>\n                        <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                        <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\"></i>\n                        <i class=\"fa fa-trash container__chat-box__messages--user--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                        </div>";
         });
@@ -75,6 +74,7 @@ function sendMessage() {
     var timeHMS = (today.getTime());
     var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS); //last one is the lastmessagename
     messageList.addMessage(message);
+    //localStorage.setItem("messageChat", JSON.stringify(message))
     elementMessage.value = '';
 }
 //display inputSearch with search icon 
@@ -152,7 +152,7 @@ var ContactMessage = /** @class */ (function () {
     };
     return ContactMessage;
 }());
-var contactChat = JSON.parse(localStorage.getItem("contactListUser"));
+var contactChat = JSON.parse(localStorage.getItem("contactList"));
 var contactList = JSON.parse(localStorage.getItem("contactId"));
 var contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
 var chatUser = Object.values(Object.values(contactChat)[1]);

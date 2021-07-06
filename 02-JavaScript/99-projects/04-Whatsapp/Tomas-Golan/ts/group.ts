@@ -1,7 +1,8 @@
 // VARIABLES GLOBALES
-let contactsGroup = JSON.parse(localStorage.getItem("contactos"));
+const contactsGroup = JSON.parse(localStorage.getItem("contactos"));
 let arraysOfNames:Array<any> = [];
 let groups:Array<Group> = [];
+const iconGroup = document.querySelector("#iconGroup");
 
 // CLASS GROUP
 class Group{
@@ -17,10 +18,13 @@ class Group{
     }
 }
 
+iconGroup.addEventListener('click', renderModalGroupData);
+
 function renderModalGroupData() {
     const containerContact: HTMLElement = document.querySelector("#contacts_group");
     let modalContact: string = "";
-    contactsGroup.forEach((el) => {
+    const jsonGroup = JSON.parse(localStorage.getItem("contactos"));
+    jsonGroup.forEach((el) => {
         modalContact += `
         <div class="contacts_chat_modal">
             <img class="contacts_img_modal" src="${el.profileImg}" alt="">
