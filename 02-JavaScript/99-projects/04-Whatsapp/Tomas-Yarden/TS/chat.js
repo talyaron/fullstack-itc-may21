@@ -65,14 +65,8 @@ var ChatProfile = /** @class */ (function () {
             else if (element.message.includes("Hello there")) {
                 html += "\n                 <p class=\"botText\">\n                  <span>General Kenobi! <i class=\"fas fa-chevron-down arrow-down \"></i></span>\n                   </p>\n                   ";
             }
-            else if (element.message.includes("Como Estas?")) {
-                html += "\n                 <p class=\"botText\">\n                  <span>Bien <i class=\"fas fa-chevron-down arrow-down \"></i></span>\n                   </p>\n                   ";
-            }
-            else if (element.message.includes("Como Estas?")) {
-                html += "\n                 <p class=\"botText\">\n                  <span>Bien <i class=\"fas fa-chevron-down arrow-down \"></i></span>\n                   </p>\n                   ";
-            }
-            else if (element.message.includes("Como Estas?")) {
-                html += "\n                 <p class=\"botText\">\n                  <span>Bien <i class=\"fas fa-chevron-down arrow-down \"></i></span>\n                   </p>\n                   ";
+            else if (element.message.includes("How old are you?")) {
+                html += "\n                 <p class=\"botText\">\n                  <span>I'm 20 <i class=\"fas fa-chevron-down arrow-down \"></i></span>\n                   </p>\n                   ";
             }
         });
         setTimeout(function () {
