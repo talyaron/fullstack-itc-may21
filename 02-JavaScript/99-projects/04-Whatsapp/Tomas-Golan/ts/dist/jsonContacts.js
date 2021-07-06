@@ -45,4 +45,3 @@ var contacts = [
         "profileImg": "img/tomas.jpg"
     }
 ];
-localStorage.setItem("contactos", JSON.stringify(contacts));
