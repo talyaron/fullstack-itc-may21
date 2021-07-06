@@ -47,6 +47,9 @@ const directToChat = (ev: any): void => {
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList',JSON.stringify(loggedInUser));
 
+    localStorage.setItem('contactListUser', JSON.stringify(allContacts))
+    localStorage.setItem('contactId',JSON.stringify(contactToChat.id))
+
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
 }
 
