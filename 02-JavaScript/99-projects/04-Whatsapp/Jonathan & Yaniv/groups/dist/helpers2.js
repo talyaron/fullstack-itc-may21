@@ -1,5 +1,3 @@
-//JN
-// const messageChat = JSON.parse(localStorage.getItem("messageChat"))
 var pageTitle = document.querySelector('title');
 pageTitle.innerText = loggedInUser.userName + "'s chats";
 var profileImg = document.querySelector('.controls__item--profile_img');
@@ -34,12 +32,11 @@ var directToChat = function (ev) {
     var contactToChatNameContainer = contactToChat.querySelector('.new_contact_name');
     var contactToChatName = contactToChatNameContainer.innerText;
     var chatUsers = [loggedInUser.userPhone, contactToChat.id];
-    var group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers); //messageChat
+    var group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
     loggedInUser.addGroup(group);
     localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList', JSON.stringify(allContacts));
-    // localStorage.setItem('contactId',JSON.stringify(contactToChat.id))
     window.location.href = "../chat/chat.html?" + loggedInUser.userPhone + "&" + contactToChat.id;
 };
 var showNewGroupMenu = function (ev) {
@@ -70,7 +67,7 @@ var createNewGroup = function (ev) {
             if (contact.checked)
                 groupUsers_1.push(contact.value);
         });
-        var group = new Group(groupId, groupImg, groupName, groupUsers_1); //messageChat
+        var group = new Group(groupId, groupImg, groupName, groupUsers_1);
         loggedInUser.addGroup(group);
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
