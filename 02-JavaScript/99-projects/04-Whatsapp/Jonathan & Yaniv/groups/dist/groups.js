@@ -24,22 +24,44 @@ var User = /** @class */ (function () {
             console.error(er);
         }
     };
+    User.prototype.addGroupIfNew = function (groupToCheck) {
+        try {
+            var existingGroup = this.userGroups.find(function (group) { return group.groupId === groupToCheck.groupId; });
+            if (existingGroup === undefined) {
+                this.userGroups.push(groupToCheck);
+                this.renderChatsToChatsList();
+            }
+            if (existingGroup === undefined)
+                return true;
+            else
+                return false;
+        }
+        catch (er) {
+            console.error(er);
+        }
+    };
     User.prototype.renderChatsToChatsList = function () {
         try {
             var ChatsContainer_1 = document.querySelector(".chats");
-            //JN
-            //
             ChatsContainer_1.innerHTML = "";
-            //const contactList = JSON.parse(localStorage.getItem('contactList'))
-            var message_1 = JSON.parse(localStorage.getItem("currentMessage"));
+            //const message = JSON.parse(localStorage.getItem("currentMessage"));
+            //console.log(message)
             this.userGroups.forEach(function (group) {
-                var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h2>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + message_1[message_1.length - 1].content + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + message_1[message_1.length - 1].dateMsg + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>"; // for lines 47-48 - add "$" before "{" once the Message class is linked
+                var datemsg = group.groupMsgs[group.groupMsgs.length - 1] ? group.groupMsgs[group.groupMsgs.length - 1].dateMsg : "";
+                console.log(datemsg);
+                var content = group.groupMsgs[group.groupMsgs.length - 1] ? group.groupMsgs[group.groupMsgs.length - 1].content : "";
+                console.log(content);
+                var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h3>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + datemsg + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + content + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>"; // for lines 47-48 - add "$" before "{" once the Message class is linked
                 ChatsContainer_1.insertAdjacentHTML('beforeend', groupHTML);
             });
         }
         catch (er) {
             console.error(er);
         }
+    };
+    User.prototype.extractGroup = function (groupId) {
+        var existingGroup = this.userGroups.find(function (group) { return group.groupId === groupId; });
+        return existingGroup;
     };
     return User;
 }());
@@ -64,7 +86,7 @@ var ContactList = /** @class */ (function () {
                 }
                 return 0;
             });
-            var newChatContactsContainer_1 = document.querySelector(".options");
+            var newChatContactsContainer_1 = document.querySelector(".new_chat__item--body");
             newChatContactsContainer_1.innerHTML = "\n            <div class=\"options__item options__item--group\">\n                    <img id=\"new_group_logo\" src=\"https://static.thenounproject.com/png/61728-200.png\">\n                    <h3 id=\"new_group_title\">New Group</h3>\n                </div>";
             this.allContacts.forEach(function (contact) {
                 if (contact.userPhone === loggedInUser.userPhone)

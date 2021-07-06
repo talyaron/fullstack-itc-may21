@@ -84,6 +84,6 @@ const userPicker = (ev: any) : void => {
 
     localStorage.setItem('currentUser',JSON.stringify(pickedUser));
 
-    window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
+    window.location.href = `../groups/groups.html?userid=${pickedUser.userPhone}`;
 
 }

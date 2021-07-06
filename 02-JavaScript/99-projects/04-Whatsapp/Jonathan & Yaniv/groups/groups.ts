@@ -35,24 +35,44 @@ class User {
           }
     }
 
+    addGroupIfNew(groupToCheck:Group){
+        try {
+
+            const existingGroup = this.userGroups.find(group=>group.groupId === groupToCheck.groupId);
+
+            if(existingGroup === undefined){
+                 this.userGroups.push(groupToCheck);
+                 this.renderChatsToChatsList();
+            }
+          
+            if(existingGroup === undefined) return true;
+            else return false;
+       
+    } catch (er) {
+            console.error(er);
+          }
+
+    }
+
     renderChatsToChatsList() {
         try {
             const ChatsContainer: HTMLElement = document.querySelector(".chats");
-            //JN
-            //
             ChatsContainer.innerHTML = ``;
-
-            //const contactList = JSON.parse(localStorage.getItem('contactList'))
-            const message = JSON.parse(localStorage.getItem("currentMessage"));
-            
+            //const message = JSON.parse(localStorage.getItem("currentMessage"));
+            //console.log(message)
             this.userGroups.forEach((group) => {
-                
+
+                const datemsg = group.groupMsgs[group.groupMsgs.length-1] ? group.groupMsgs[group.groupMsgs.length-1].dateMsg : "" ;    
+                console.log(datemsg)       
+                const content = group.groupMsgs[group.groupMsgs.length-1] ? group.groupMsgs[group.groupMsgs.length-1].content : "" ; 
+                console.log(content)
+
                 const groupHTML: string = `
                 <div class="chats__item chat" id="${group.groupId}">
                 <img class="chat__item chat__item--img" src="${group.groupImg}" />
-                <h3 class="chat__item chat__item--name">${group.groupName}</h2>
-                    <p class="chat__item chat__item--last_msg_time">${message[message.length-1].content}</p>
-                    <p class="chat__item chat__item--last_msg_content">${message[message.length-1].dateMsg}</p>
+                <h3 class="chat__item chat__item--name">${group.groupName}</h3>
+                    <p class="chat__item chat__item--last_msg_time">${datemsg}</p>
+                    <p class="chat__item chat__item--last_msg_content">${content}</p>
                     <i class="chat__item chat__item--delete fas fa-trash"></i>
             </div>`; // for lines 47-48 - add "$" before "{" once the Message class is linked
             ChatsContainer.insertAdjacentHTML('beforeend',groupHTML);
@@ -61,6 +81,14 @@ class User {
             console.error(er);
           }
     }
+
+    extractGroup(groupId:string){
+        const existingGroup = this.userGroups.find(group=>group.groupId === groupId)
+        return existingGroup;
+
+    }
+        
+    
     
 }
 
@@ -87,7 +115,7 @@ class ContactList {
                 if (aName > bName) {return 1;}
                 return 0;
             });
-            const newChatContactsContainer: HTMLElement = document.querySelector(".options");
+            const newChatContactsContainer: HTMLElement = document.querySelector(".new_chat__item--body");
             newChatContactsContainer.innerHTML = `
             <div class="options__item options__item--group">
                     <img id="new_group_logo" src="https://static.thenounproject.com/png/61728-200.png">
