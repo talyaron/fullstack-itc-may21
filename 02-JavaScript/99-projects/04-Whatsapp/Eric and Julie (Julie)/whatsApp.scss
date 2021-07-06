@@ -9,17 +9,21 @@
 
 // Give it a "min height" min-hright:
 
-#addGroup {
-  color: white;
-  margin-left: 75%;
-  cursor: pointer;
-  margin-top: 5px;
-}
+// #addGroup {
+//   color: white;
+//   margin-left: 75%;
+//   cursor: pointer;
+//   margin-top: 5px;
+// }
+
+// What is add group? If I comment it out nothing happens
 
 .addChat:hover {
   opacity: 0.8;
 }
 
+// This box is the oval shaped one at the top, which you have now got into the top.
+// It contains filterN and Fa fa search
 .box {
   background-color: white;
   position: absolute;
@@ -52,20 +56,23 @@
 .containerChat {
   display: flex;
   justify-content: space-between;
-  border: 2px solid black;
+  border: 2px solid blue;
 }
 
-.chat1 {
-  height: 12vh;
-  border: 2px solid orange;
+// Container chat is the bit that wraps around each chat. It is the flex container.
 
+// chat 1 is an empy box and I don't understand why it's there
+.chat1 {
+  height: 20px;
+  border: 2px solid orange;
+  // Here we have the photo, in a black circle, the name, in a green box,
   &:hover {
     opacity: 0.8;
   }
   &__photo {
     text-align: left;
-    width: 7vh;
-    height: 6vh;
+    width: 45px;
+    height: 39px;
     margin-left: 10px;
     margin-top: 20px;
     border-radius: 50%;
@@ -80,13 +87,18 @@
     border: 3px solid green;
   }
 }
+
+// This is the one that holds all the chats
 .wrapper__container--chats {
   margin-top: 10%;
+  border: 3px solid purple;
 }
 
 .hh {
   border: 2px solid violet;
 }
+
+// What is this? I don't see any violet on the page
 
 #delete {
   width: 50%;
@@ -99,8 +111,9 @@
   opacity: 0.8;
 }
 
-// I couldn't nest this delete. I tried making it into a class rather than an id but I think it creates a problem with the font awesome icon.
+// The delete id
 
+// filterN is where it says "search or start a new chat". IT's being grabbed in principal.ts
 #filterN {
   border: 3px solid black;
 }
@@ -110,28 +123,26 @@
   width: 100%;
   height: 20vh;
 }
+
+// Need to make this so that the height is fixed
 .grey-background {
-  background-color: rgb(218, 219, 212);
+  background: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
   width: 100%;
   height: 100vh;
-}
-
-.photo1 {
-  text-align: left;
-  width: 7vh;
-  height: 6vh;
-  margin-top: 5px;
-  border-radius: 50%;
-  cursor: pointer;
 }
 
 .photo1:hover {
   opacity: 0.8;
 }
+// The wrapper is the whole page (turquise) why can't I see it all
+// The wrapper container goes all the way to the bottom. It would be good if it simply encapsulated the chats and then we could see the fun background.
+// wrapper container profile currently contains the picture of Eric
+// I fixed the sass here, it was wrong
 
 .wrapper {
   height: 100%;
   width: 100%;
+  border: 3px solid turquoise;
   &__container {
     position: absolute;
     margin-left: 30%;
@@ -139,15 +150,27 @@
     width: 40%;
     background-color: white;
     height: 112vh;
+    border: 3px solid violet;
+    &--profile {
+      height: 8vh;
+      background-color: rgb(218, 219, 212);
+      border: 3px solid yellow;
+    }
+    &--search {
+      height: 8vh;
+      background-color: rgb(226, 226, 226);
+      border: 3px solid rgb(0, 150, 136);
+    }
   }
-  &--profile {
-    height: 8vh;
-    background-color: rgb(218, 219, 212);
-  }
-  &--search {
-    height: 8vh;
-    background-color: rgb(226, 226, 226);
-  }
+}
+
+.wrapper__container--profile-image {
+  text-align: left;
+  width: 7vh;
+  height: 6vh;
+  margin-top: 5px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 //2nd page
 
