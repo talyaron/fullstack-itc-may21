@@ -2,6 +2,7 @@
 var contactsGroup = JSON.parse(localStorage.getItem("contactos"));
 var arraysOfNames = [];
 var groups = [];
+var iconGroup = document.querySelector("#iconGroup");
 // CLASS GROUP
 var Group = /** @class */ (function () {
     function Group(groupName, groupIMG, contactsOfGroup) {
@@ -12,10 +13,12 @@ var Group = /** @class */ (function () {
     }
     return Group;
 }());
+iconGroup.addEventListener('click', renderModalGroupData);
 function renderModalGroupData() {
     var containerContact = document.querySelector("#contacts_group");
     var modalContact = "";
-    contactsGroup.forEach(function (el) {
+    var jsonGroup = JSON.parse(localStorage.getItem("contactos"));
+    jsonGroup.forEach(function (el) {
         modalContact += "\n        <div class=\"contacts_chat_modal\">\n            <img class=\"contacts_img_modal\" src=\"" + el.profileImg + "\" alt=\"\">\n  \n            <div class=\"contacts_info_modal\">\n                <h3 class=\"contacts_name_modal\">" + el.name + "</h3>\n                <p>" + el.phone + "</p>\n            </div>\n            <input type=\"checkbox\" class=\"check\" value=\"" + el.name + "\">\n        </div>";
     });
     containerContact.innerHTML = modalContact;
