@@ -1,5 +1,5 @@
 //JN
-const messageChat = JSON.parse(localStorage.getItem("messageChat"))
+// const messageChat = JSON.parse(localStorage.getItem("messageChat"))
 
 
 const pageTitle: HTMLElement = document.querySelector('title');
@@ -55,8 +55,8 @@ const directToChat = (ev: any): void => {
     loggedInUser.addGroup(group);
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-    localStorage.setItem('contactList',JSON.stringify(allContacts));
-    localStorage.setItem('contactId',JSON.stringify(contactToChat.id))
+    // localStorage.setItem('contactList',JSON.stringify(allContacts));
+    // localStorage.setItem('contactId',JSON.stringify(contactToChat.id))
 
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
 }
