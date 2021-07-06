@@ -80,7 +80,7 @@ function logSubmit(event) {
     renderMessages(thisContact)
     updateLastSent()
     setScrollHeight()
-    const microphone = document.querySelector(".fa-microphone");
+    const microphone:any = document.querySelector(".fa-microphone");
     microphone.style.display= "block";
     const plane: any = document.querySelector(".fa-paper-plane");
     plane.style.display = "none"

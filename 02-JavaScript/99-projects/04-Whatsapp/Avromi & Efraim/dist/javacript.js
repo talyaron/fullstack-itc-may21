@@ -30,7 +30,6 @@ var Contacts = /** @class */ (function () {
                     ("<div class=\"holder__contact__name\">" + contact.name + "</div>") +
                     ("<div class=\"holder__contact__chat\">" + contact.chats[0].message + "</div>") +
                     ("<div class=\"holder__contact__timestamp\">" + contact.chats[0].timeStamp + "</div>") +
-                    "<div class=\"holder__contact__unread\" id=\"unread\">6</div>" +
                     ("<div class=\"holder__contact__unread\" id=\"delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
                     "</div>");
             }).join('');
@@ -134,7 +133,6 @@ var addToDomWithArray = function (searchResults) {
                 ("<div class=\"holder__contact__name\">" + contact.name + "</a></div>") +
                 ("<div class=\"holder__contact__chat\">" + contact.chats[index].message + "</div>") +
                 ("<div class=\"holder__contact__timestamp\">" + contact.chats[index].timeStamp + "</div>") +
-                "<div class=\"holder__contact__unread id=\"unread\">6</div>" +
                 ("<div class=\"holder__contact__unread id=\"delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
                 "</div>");
         });
@@ -236,11 +234,14 @@ function editButtonRevealAndHide() {
             for (var i = 0; i <= indices.length; i++) {
                 if (unread[i].style.display = "none") {
                     unread[i].style.display = "block";
+                    return;
                 }
                 else {
                     unread[i].style.display = "none";
+                    return;
                 }
             }
+            console.log("fuck");
         });
     }
     catch (e) {

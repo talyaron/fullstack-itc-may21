@@ -65,7 +65,6 @@ body {
   background-color: red;
 }
 
-#unread,
 #delete {
   display: none;
 }
