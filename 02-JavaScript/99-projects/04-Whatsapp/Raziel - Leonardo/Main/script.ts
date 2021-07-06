@@ -183,30 +183,4 @@ function removeChat(chatNumber: number) {
     } catch (error) {
         console.error(error);
     }
-<<<<<<< HEAD
 };
-function numberValidation(numberFromArray){
-
-//  const validNumber=userList.some( elem=>elem.number===numberFromArray);
-
-// console.log(validNumber);
-console.log(numberFromArray);
- 
- if(userList.includes(numberFromArray)==number){
-    
-     alert("The number is already taken!!")
-    //  const element = <HTMLInputElement> document.getElementById("disable");
-    //  element.disabled = true;
-     
- }
- else{
-   
-    // const element = <HTMLInputElement> document.getElementById("disable");
-    // element.disabled = false; 
- }
-//  console.log(validNumber);
-}
-    
-=======
-};
->>>>>>> 29402225067a91caef7e0a2a79c11673786945c2
