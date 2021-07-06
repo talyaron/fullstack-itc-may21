@@ -1,15 +1,19 @@
+
+
+
 class Group {
     groupId: string; // userPhone or "group" + Math.random().toString(16).slice(2);
     groupImg: string;
     groupName: string;
     groupUsers: Array<string> // userPhone numbers
-    // groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
+    groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
 
-    constructor (groupId: string, groupImg: string, groupName: string, groupUsers: Array<string>) {
+    constructor (groupId: string, groupImg: string, groupName: string, groupUsers: Array<string>, groupMsgs: Array<Message>) {
         this.groupId = groupId ? groupId : "group" + Math.random().toString(16).slice(2);
         this.groupImg = groupImg;
         this.groupName = groupName;
         this.groupUsers = groupUsers;
+        this.groupMsgs = groupMsgs;
     }
 }
 
@@ -54,7 +58,16 @@ class User {
             console.error(er);
           }
     }
+    addMessages(){
+
+        const messageChat = JSON.parse(localStorage.getItem("messageChat"))
+
+        this.userGroups[0].groupMsgs.push(messageChat)
+        console.log(this.userGroups)
+    }
 }
+
+
 
 class ContactList {
     allContacts: Array<User>;
@@ -137,6 +150,8 @@ class ContactList {
 const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
+
+
 
 const readURL = (input: any) => {
     if (input.files && input.files[0]) {

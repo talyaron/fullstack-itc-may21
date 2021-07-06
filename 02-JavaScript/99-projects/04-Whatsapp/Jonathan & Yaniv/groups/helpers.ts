@@ -1,3 +1,7 @@
+//JN
+const messageChat = JSON.parse(localStorage.getItem("messageChat"))
+
+
 const pageTitle: HTMLElement = document.querySelector('title');
 pageTitle.innerText = `${loggedInUser.userName}'s chats`;
 
@@ -30,6 +34,8 @@ const newChatOptions: HTMLElement = document.querySelector('.options');
 newChatOptions.addEventListener('click', ev => directToChat(ev));
 newChatOptions.addEventListener('click', ev => showNewGroupMenu(ev));
 
+
+
 const directToChat = (ev: any): void => {
 
     let contactToChat: HTMLElement;
@@ -42,14 +48,14 @@ const directToChat = (ev: any): void => {
     const contactToChatNameContainer: HTMLElement = contactToChat.querySelector('.new_contact_name');
     const contactToChatName: string = contactToChatNameContainer.innerText;
     const chatUsers: Array<string> = [loggedInUser.userPhone, contactToChat.id];
+
     
-    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
+    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers, messageChat);
     loggedInUser.addGroup(group);
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList',JSON.stringify(allContacts));
 
-    localStorage.setItem('contactListUser', JSON.stringify(allContacts))
     localStorage.setItem('contactId',JSON.stringify(contactToChat.id))
 
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
@@ -89,8 +95,10 @@ const createNewGroup = (ev: any): void => {
         contactsCheckboxes.forEach(contact => {
             if (contact.checked) groupUsers.push(contact.value);
         });
+
     
-        const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
+        const group: Group = new Group(groupId, groupImg, groupName, groupUsers,messageChat);
+
         loggedInUser.addGroup(group);
         localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
         allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
