@@ -2,9 +2,16 @@
 //method to add individual msg
 class Mensaje {
     text: string;
+<<<<<<< Updated upstream
     textId: string = "id" + Math.random().toString(16).slice(2);
     constructor(text: string) {
         this.text = text;
+=======
+    id: string;
+    constructor(text: string, textId: string) {
+        this.text = text;
+        this.id = Math.random().toString(16).slice(2);;
+>>>>>>> Stashed changes
     }
 }
 //class to provide an array of all texts to local storage

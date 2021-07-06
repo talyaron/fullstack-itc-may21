@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--cdn for icons, also here we can add font styles-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!--whatsApp icon tab browser-->
+    <link rel="icon" href="images copy/logo.png" />
+    <!--style scss-->
+    <link rel="stylesheet" href="dist/whats.css" />
+    <title>Chats</title>
+</head>
+
+<body>
+    <div class="envelope">
+        <div class="envelope__contact">
+         <div>
+            <div class="renderFirst" onclick="redirect2()">
+                <i class="fas fa-arrow-left fa-2x" id="arrow" onclick="redirect2()"></i>
+
+            </div>
+            <div class="envelope__chat">
+                <div class="envelope__typing">
+                    <div class="envelope__typing--boxicon">
+                        <i class="far fa-laugh fa-2x" id="emoji"></i>
+                        <a href = "#"><i class="fas fa-paperclip fa-2x" id="paperClip" onclick="abrir()"></i></a>
+                        <input type = "file" id="file" hidden />
+                    </div>
+                    <div class="envelope__typing--input">
+                        <input type="text" name="" id="" placeholder="Type a message"
+                            class="envelope__typing--input-entry" />
+                        <i class="fa fa-paper-plane fa-2x" aria-hidden="true" id="send"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./dist/json.js"></script>
+    <script src="./dist/2nd.js"></script>
+</body>
+
+</html>

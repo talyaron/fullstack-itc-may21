@@ -25,8 +25,7 @@ function renderModalGroupData() {
 }
 renderModalGroupData();
 var deleteGroup = function (id) {
-    var groupDelete = JSON.parse(localStorage.getItem("groups"));
-    var deleteGroup = groupDelete.filter(function (group) { return group.id !== id; });
+    var deleteGroup = groups.filter(function (group) { return group.id !== id; });
     groups = deleteGroup;
     localStorage.setItem("groups", JSON.stringify(groups));
     render();

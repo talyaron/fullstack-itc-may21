@@ -5,6 +5,13 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+#addGroup {
+  color: white;
+  margin-left: 75%;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
 .addChat:hover {
   opacity: 0.8;
 }
@@ -50,6 +57,7 @@
 }
 .chat1:hover {
   opacity: 0.8;
+  cursor: pointer;
 }
 .chat1__photo {
   text-align: left;
@@ -60,6 +68,10 @@
   border-radius: 50%;
   border: 3px solid black;
 }
+.chat1__photo:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
 .chat1__name {
   text-align: left;
   font-size: 15px;
@@ -67,6 +79,10 @@
   margin-bottom: 10%;
   margin-left: 80px;
   border: 3px solid green;
+}
+.chat1__name:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .wrapper__container--chats {
@@ -165,6 +181,7 @@
   position: absolute;
   background-color: grey;
   display: flex;
+  justify-content: space-between;
 }
 .envelope__typing--boxicon {
   margin: 15px;
@@ -179,6 +196,7 @@
   width: 85%;
   border: none;
   outline: none;
+  display: flex;
 }
 .envelope__typing--input-entry {
   border: 1px solid #e2e2e2;
@@ -201,11 +219,32 @@
 
 #arrow {
   color: white;
-  margin: 10px;
-  margin-top: 20px;
+}
+
+#arrow:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+#emoji:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+#paperClip:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+#send {
+  color: white;
 }
 
 #send:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+.renderSecond {
+  display: flex;
 }
