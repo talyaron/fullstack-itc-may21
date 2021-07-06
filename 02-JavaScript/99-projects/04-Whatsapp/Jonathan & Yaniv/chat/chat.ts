@@ -31,14 +31,16 @@ class Message {
     msgID: string;
     lastMessageName: string;
     timeMsgSec : number;
+    contactPhone:string;
 
-    constructor(content: string, userPhone: string, dateMsg: string, groupID: string, lastMessageName: string, timeMsgSec:number) {
+    constructor(content: string, userPhone: string, dateMsg: string, groupID: string, lastMessageName: string, timeMsgSec:number,contactPhone:string) {
         this.content = content;
         this.userPhone = userPhone;
         this.dateMsg = dateMsg;
         this.groupID = groupID;
         this.lastMessageName = lastMessageName;
         this.timeMsgSec = timeMsgSec;
+        this.contactPhone = contactPhone;
         this.msgID = "id" + Math.random().toString(16).slice(2);
     }
 }
@@ -109,6 +111,9 @@ class Group {
     groupUsers: Array<string> // userPhone numbers
     groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
 
+    renderMsgs(){
+        //show all past group messages from LocalStorage
+    }
 
 }
 
@@ -127,8 +132,9 @@ class User {
 
     addMessages(newMess:Message){
         this.userGroups[0].groupMsgs.push(newMess)
-        localStorage.setItem("currentMessage", JSON.stringify(this.userGroups[0].groupMsgs))
-
+        console.log(this.userGroups[0].groupMsgs)
+        return this.userGroups[0].groupMsgs
+        
     }
 
 }
@@ -150,12 +156,16 @@ function sendMessage() {
     let timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes())
     let timeHMS = (today.getTime())
    
-    const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage,timeHMS) //last one is the lastmessagename
+    const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage,timeHMS, contactList) //last one is the lastmessagename
 
     messageList.addMessage(message)
 
-    loggedInUser.addMessages(message)
+    let messagesUser = loggedInUser.addMessages(message)
 
+    localStorage.setItem("currentMessage", JSON.stringify(messagesUser))
+
+    localStorage.setItem("currentUser", JSON.stringify(loggedInUser))
+    localStorage.setItem("contactList", JSON.stringify(message.contactPhone))
 
     elementMessage.value = '';
 

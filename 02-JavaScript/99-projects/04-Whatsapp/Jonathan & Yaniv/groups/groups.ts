@@ -38,9 +38,15 @@ class User {
     renderChatsToChatsList() {
         try {
             const ChatsContainer: HTMLElement = document.querySelector(".chats");
+            //JN
+            //
             ChatsContainer.innerHTML = ``;
+
+            const contactList = JSON.parse(localStorage.getItem('contactList'))
             const message = JSON.parse(localStorage.getItem("currentMessage"));
+            
             this.userGroups.forEach((group) => {
+                
                 const groupHTML: string = `
                 <div class="chats__item chat" id="${group.groupId}">
                 <img class="chat__item chat__item--img" src="${group.groupImg}" />
