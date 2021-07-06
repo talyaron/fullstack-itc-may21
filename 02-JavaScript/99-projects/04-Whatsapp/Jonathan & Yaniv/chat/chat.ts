@@ -164,8 +164,8 @@ function sendMessage() {
 
     localStorage.setItem("currentMessage", JSON.stringify(messagesUser))
 
-    localStorage.setItem("currentUser", JSON.stringify(loggedInUser))
-    localStorage.setItem("contactList", JSON.stringify(message.contactPhone))
+    //localStorage.setItem("currentUser", JSON.stringify(loggedInUser))
+    //localStorage.setItem("contactList", JSON.stringify(message.contactPhone))
 
     elementMessage.value = '';
 
