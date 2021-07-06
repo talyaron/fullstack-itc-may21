@@ -49,9 +49,7 @@
   padding-left: 5px;
 }
 
-
-
-.containerChat{
+.containerChat {
   display: flex;
   justify-content: space-between;
   border: 2px solid black;
@@ -60,8 +58,6 @@
 .chat1 {
   height: 12vh;
   border: 2px solid orange;
-
-
 
   &:hover {
     opacity: 0.8;
@@ -84,14 +80,13 @@
     border: 3px solid green;
   }
 }
-.wrapper__container--chats{
+.wrapper__container--chats {
   margin-top: 10%;
 }
 
-.hh{
+.hh {
   border: 2px solid violet;
 }
-
 
 #delete {
   width: 50%;
@@ -100,7 +95,7 @@
   border: 3px solid yellow;
   cursor: pointer;
 }
-#delete:hover{
+#delete:hover {
   opacity: 0.8;
 }
 
@@ -226,5 +221,5 @@
 #send:hover {
   cursor: pointer;
   opacity: 0.8;
- }
+}
 //Add this cursor to the other icons too.
