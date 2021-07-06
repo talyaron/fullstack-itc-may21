@@ -1,6 +1,7 @@
 var Group = /** @class */ (function () {
+    // groupMsgs: Array<Message>;
     function Group(groupId, groupImg, groupName, groupUsers) {
-        this.groupId = groupId;
+        this.groupId = groupId ? groupId : "group" + Math.random().toString(16).slice(2);
         this.groupImg = groupImg;
         this.groupName = groupName;
         this.groupUsers = groupUsers;
@@ -14,12 +15,9 @@ var User = /** @class */ (function () {
         this.userPhone = userPhone;
         this.userGroups = userGroups;
     }
-    User.prototype.addGroupIfNew = function (groupId) {
+    User.prototype.addGroup = function (newGroup) {
         try {
-            var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
-            if (groupIndex !== -1)
-                return;
-            this.userGroups.push();
+            this.userGroups.push(newGroup);
             this.renderChatsToChatsList();
         }
         catch (er) {
@@ -31,7 +29,7 @@ var User = /** @class */ (function () {
             var ChatsContainer_1 = document.querySelector(".chats");
             ChatsContainer_1.innerHTML = "";
             this.userGroups.forEach(function (group) {
-                var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h2>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + group.groupMsgs[group.groupMsgs.length - 1].dateMsg + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + group.groupMsgs[group.groupMsgs.length - 1].content + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>";
+                var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h2>\n                    <p class=\"chat__item chat__item--last_msg_time\">group.groupMsgs[group.groupMsgs.length -1].dateMsg</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">group.groupMsgs[group.groupMsgs.length -1].content</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>";
                 ChatsContainer_1.insertAdjacentHTML('beforeend', groupHTML);
             });
         }

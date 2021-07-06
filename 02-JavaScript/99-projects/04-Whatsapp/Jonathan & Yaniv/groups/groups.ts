@@ -3,10 +3,10 @@ class Group {
     groupImg: string;
     groupName: string;
     groupUsers: Array<string> // userPhone numbers
-    groupMsgs: Array<Message>;
+    // groupMsgs: Array<Message>;
 
     constructor (groupId: string, groupImg: string, groupName: string, groupUsers: Array<string>) {
-        this.groupId = groupId;
+        this.groupId = groupId ? groupId : "group" + Math.random().toString(16).slice(2);
         this.groupImg = groupImg;
         this.groupName = groupName;
         this.groupUsers = groupUsers;
@@ -26,11 +26,9 @@ class User {
         this.userGroups = userGroups;
     }
 
-    addGroupIfNew(groupId: string) {
+    addGroup(newGroup: Group) {
         try {
-            const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
-            if (groupIndex !== -1) return;
-            this.userGroups.push();
+            this.userGroups.push(newGroup);
             this.renderChatsToChatsList();
           } catch (er) {
             console.error(er);
@@ -46,8 +44,8 @@ class User {
                 <div class="chats__item chat" id="${group.groupId}">
                 <img class="chat__item chat__item--img" src="${group.groupImg}" />
                 <h3 class="chat__item chat__item--name">${group.groupName}</h2>
-                    <p class="chat__item chat__item--last_msg_time">${group.groupMsgs[group.groupMsgs.length -1].dateMsg}</p>
-                    <p class="chat__item chat__item--last_msg_content">${group.groupMsgs[group.groupMsgs.length -1].content}</p>
+                    <p class="chat__item chat__item--last_msg_time">group.groupMsgs[group.groupMsgs.length -1].dateMsg</p>
+                    <p class="chat__item chat__item--last_msg_content">group.groupMsgs[group.groupMsgs.length -1].content</p>
                     <i class="chat__item chat__item--delete fas fa-trash"></i>
             </div>`;
             ChatsContainer.insertAdjacentHTML('beforeend',groupHTML);
