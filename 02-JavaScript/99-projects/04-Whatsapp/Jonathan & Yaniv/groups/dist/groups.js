@@ -38,10 +38,8 @@ var User = /** @class */ (function () {
             console.error(er);
         }
     };
-    User.prototype.addMessages = function () {
-        var messageChat = JSON.parse(localStorage.getItem("messageChat"));
-        this.userGroups[0].groupMsgs.push(messageChat);
-        console.log(this.userGroups);
+    User.prototype.addMessages = function (newMess) {
+        //this.userGroups[0].groupMsgs.push(newMess)
     };
     return User;
 }());

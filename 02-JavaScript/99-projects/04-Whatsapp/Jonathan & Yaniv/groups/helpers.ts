@@ -51,11 +51,11 @@ const directToChat = (ev: any): void => {
 
     
     const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers, messageChat);
+
     loggedInUser.addGroup(group);
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList',JSON.stringify(allContacts));
-
     localStorage.setItem('contactId',JSON.stringify(contactToChat.id))
 
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
@@ -96,7 +96,7 @@ const createNewGroup = (ev: any): void => {
             if (contact.checked) groupUsers.push(contact.value);
         });
 
-    
+
         const group: Group = new Group(groupId, groupImg, groupName, groupUsers,messageChat);
 
         loggedInUser.addGroup(group);

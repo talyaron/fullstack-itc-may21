@@ -58,12 +58,10 @@ class User {
             console.error(er);
           }
     }
-    addMessages(){
+    addMessages(newMess:Message){
 
-        const messageChat = JSON.parse(localStorage.getItem("messageChat"))
-
-        this.userGroups[0].groupMsgs.push(messageChat)
-        console.log(this.userGroups)
+        //this.userGroups[0].groupMsgs.push(newMess)
+        
     }
 }
 

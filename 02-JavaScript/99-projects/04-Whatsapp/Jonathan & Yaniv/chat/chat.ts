@@ -119,7 +119,6 @@ function sendMessage() {
 
     messageList.addMessage(message)
 
-    //localStorage.setItem("messageChat", JSON.stringify(message))
 
     elementMessage.value = '';
 
@@ -171,11 +170,15 @@ function handleKeyUp() {
 
 function handleReturn() {
 
-    localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
+    //localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
 
-    const pickedUser = JSON.parse(localStorage.getItem("currentUser"))
-   
-   window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
+    let pickedUser = JSON.parse(localStorage.getItem("currentUser"))
+
+    //pickedUser = pickedUser.userGroups[0].groupMsgs = messageList.renderChat()
+
+    //localStorage.setItem('currentUser', JSON.stringify(pickedUser))
+    
+    window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
 }
 
 

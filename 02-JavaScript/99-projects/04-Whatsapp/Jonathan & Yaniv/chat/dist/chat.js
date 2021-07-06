@@ -74,7 +74,6 @@ function sendMessage() {
     var timeHMS = (today.getTime());
     var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS); //last one is the lastmessagename
     messageList.addMessage(message);
-    //localStorage.setItem("messageChat", JSON.stringify(message))
     elementMessage.value = '';
 }
 //display inputSearch with search icon 
@@ -110,8 +109,10 @@ function handleKeyUp() {
     }
 }
 function handleReturn() {
-    localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()));
+    //localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
     var pickedUser = JSON.parse(localStorage.getItem("currentUser"));
+    //pickedUser = pickedUser.userGroups[0].groupMsgs = messageList.renderChat()
+    //localStorage.setItem('currentUser', JSON.stringify(pickedUser))
     window.location.href = "../groups/groups.html?" + pickedUser.userPhone;
 }
 btnModal.addEventListener('click', openModal);
