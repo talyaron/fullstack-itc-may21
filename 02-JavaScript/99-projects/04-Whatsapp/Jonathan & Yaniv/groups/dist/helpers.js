@@ -55,9 +55,9 @@ var hideNewGroupMenu = function (ev) {
     var newGroupMenu = document.querySelector('.new_group');
     newGroupMenu.style.display = 'none';
 };
-var newGroupSubmit = document.querySelector('#new_group_submit');
-newGroupSubmit.addEventListener('submit', function (ev) { return createNewGroup(ev); });
-var createNewGroup = function (ev) {
+//const newGroupSubmit: HTMLElement = document.querySelector('#new_group_submit');
+//newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
+function createNewGroup(ev) {
     try {
         ev.preventDefault();
         var groupId = null;
@@ -82,7 +82,7 @@ var createNewGroup = function (ev) {
     catch (er) {
         console.error(er);
     }
-};
+}
 var logOutBtn = document.querySelector('.controls__item--ellipsis');
 logOutBtn.addEventListener('click', function (ev) { return logOut(ev); });
 var logOut = function (ev) {

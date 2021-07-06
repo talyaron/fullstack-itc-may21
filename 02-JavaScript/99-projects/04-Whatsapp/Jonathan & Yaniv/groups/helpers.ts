@@ -49,7 +49,7 @@ const directToChat = (ev: any): void => {
     const contactToChatName: string = contactToChatNameContainer.innerText;
     const chatUsers: Array<string> = [loggedInUser.userPhone, contactToChat.id];
 
-    
+   
     const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
 
     loggedInUser.addGroup(group);
@@ -78,15 +78,16 @@ const hideNewGroupMenu = (ev: any): void => {
     newGroupMenu.style.display = 'none';
 }
 
-const newGroupSubmit: HTMLElement = document.querySelector('#new_group_submit');
+//const newGroupSubmit: HTMLElement = document.querySelector('#new_group_submit');
 
-newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
+//newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
 
-const createNewGroup = (ev: any): void => {
+function createNewGroup (ev: any): void {
     try {
         ev.preventDefault();
        
         const groupId: string = null;
+        
         const imgLabel: HTMLElement = document.querySelector('#add_photo');
         const groupImg: string = imgLabel.getAttribute('alt');
         const groupName: string = ev.target.elements.groupName.value;
