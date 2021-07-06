@@ -70,7 +70,7 @@ var createNewGroup = function (ev) {
             if (contact.checked)
                 groupUsers_1.push(contact.value);
         });
-        var group = new Group(groupId, groupImg, groupName, groupUsers_1, messageChat);
+        var group = new Group(groupId, groupImg, groupName, groupUsers_1);
         loggedInUser.addGroup(group);
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;

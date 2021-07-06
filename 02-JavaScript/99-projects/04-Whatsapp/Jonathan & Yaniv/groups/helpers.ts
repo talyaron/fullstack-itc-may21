@@ -97,7 +97,7 @@ const createNewGroup = (ev: any): void => {
         });
 
 
-        const group: Group = new Group(groupId, groupImg, groupName, groupUsers,messageChat);
+        const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
 
         loggedInUser.addGroup(group);
         localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
