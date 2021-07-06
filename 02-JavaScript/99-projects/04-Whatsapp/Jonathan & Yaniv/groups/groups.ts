@@ -65,8 +65,6 @@ class User {
     }
 }
 
-
-
 class ContactList {
     allContacts: Array<User>;
 
@@ -148,8 +146,6 @@ class ContactList {
 const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
-
-
 
 const readURL = (input: any) => {
     if (input.files && input.files[0]) {

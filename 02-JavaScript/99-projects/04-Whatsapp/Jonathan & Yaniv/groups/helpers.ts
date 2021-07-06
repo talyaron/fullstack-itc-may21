@@ -50,7 +50,7 @@ const directToChat = (ev: any): void => {
     const chatUsers: Array<string> = [loggedInUser.userPhone, contactToChat.id];
 
     
-    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers, messageChat);
+    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers); //messageChat
 
     loggedInUser.addGroup(group);
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
@@ -97,7 +97,7 @@ const createNewGroup = (ev: any): void => {
         });
 
 
-        const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
+        const group: Group = new Group(groupId, groupImg, groupName, groupUsers); //messageChat
 
         loggedInUser.addGroup(group);
         localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
