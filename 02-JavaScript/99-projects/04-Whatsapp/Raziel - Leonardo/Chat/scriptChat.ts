@@ -38,8 +38,8 @@ function renderChat(): void {
         </div></div>
                 <div class="chat-footer">
                 
-                    <img src="../Img_whatsapp/emo.png" class="emo" id="emo">
-                    <input type="text" placeholder="Type a message" id="texting"></input>
+                    <img src="../Img_whatsapp/emo.png" class="emo" id="emoji-button">
+                    <input type="text" placeholder="Type a message" id="input"></input>
                     <div class="icons">
                         <img src="../Img_whatsapp/attach file.png">
                         <img src="../Img_whatsapp/camera.png">
@@ -91,7 +91,7 @@ function redirectBack(): void {
 
 
 //Declare this variables to do the function to send the message
-const texting: any = document.querySelector('#texting');
+const texting: any = document.querySelector('#input');
 const sendButton: HTMLElement = document.querySelector('#sendButton');
 
 try {
@@ -148,3 +148,13 @@ function renderOldConversation(): void {
 //Call the function
 renderOldConversation();
 
+//Function to add the emojis in the chat
+const button = document.querySelector('#emoji-button');
+
+const picker = new EmojiButton();
+picker.on('emoji', emoji => {
+    document.querySelector('#input').value += emoji;
+  });
+button.addEventListener('click', () => {
+  picker.togglePicker(button);
+});
