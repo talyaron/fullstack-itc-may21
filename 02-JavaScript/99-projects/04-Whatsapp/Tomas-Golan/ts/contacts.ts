@@ -33,8 +33,8 @@ const addLocalContacts = (localChat) => {
         let add = new Contact(contact.name, contact.phone, contact.profileImg);
         allContacts.push(add);
         allContactsForSearch.push(add);
-
         render();
+
     })
 }
 addLocalContacts(contacts);
@@ -45,6 +45,7 @@ function render() {
     const containerData: HTMLElement = document.querySelector(".contacts")
     let html: string = "";
     let renderContact = JSON.parse(localStorage.getItem("contactos"));
+    console.log(renderContact);
     
     renderContact.forEach((element) => {
         html += `
@@ -59,8 +60,8 @@ function render() {
             <i onclick='deleteChat("${element.id}")' class="fas fa-trash fa-lg contacts_icon"></i>
         </div>`
     });
-    
     let renderGroup = JSON.parse(localStorage.getItem("groups"));
+    console.log(renderGroup);
     if (!renderGroup) return
     renderGroup.forEach((element) => {
         html += `
