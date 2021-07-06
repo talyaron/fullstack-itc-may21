@@ -1,4 +1,4 @@
-const chats: Array<LocalContact> = [
+const contacts: Array<LocalContact> = [
     {
     "name": "Leo Paredes",
     "phone": 1130561780,
@@ -48,3 +48,5 @@ const chats: Array<LocalContact> = [
         "profileImg": "img/tomas.jpg",
     }
 ]
+
+localStorage.setItem("contactos", JSON.stringify(contacts));

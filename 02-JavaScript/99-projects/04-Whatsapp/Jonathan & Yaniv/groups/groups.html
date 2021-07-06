@@ -65,21 +65,13 @@
                     </form>
                 </div>
             </div>
-            <div class="new_group__item new_group__item--body">
-                <form class="options" id="add_group_form">
-                    <div class="options__item options__item--group_img">
-                        <label for="group_img_form" id="add_photo">Add Group<br /> Image</label>
-                        <input type='file' name="groupImg" id="group_img_form" onchange="readURL(this);" style="display:none">
-                        <img id="groupImg" style="display:none">
-                    </div>
-                    <div class="options__item">
-                        <label for="group_name_form">Group Name</label>
-                        <input type="text" maxlength="25" placeholder="Group's Topic" name="groupName" id="group_name_form" />
-                    </div>
-                </form>
-            </div>
+            <form class="new_group__item new_group__item--body" onsubmit="createNewGroup(event)">
+                <div class="options" id="add_group_controls">
+                </div>
+                <input id="new_group_submit" type="submit" name="submit" value="✓" />
+            </form>
         </div>
-    </section>
+    </section> 
     <section class="chat_section">This is where private chats are shown</section>
     <script src="dist/groups.js"></script>
     <script src="dist/helpers.js"></script>

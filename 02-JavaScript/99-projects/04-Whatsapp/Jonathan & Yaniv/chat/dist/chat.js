@@ -27,7 +27,7 @@ var Message = /** @class */ (function () {
 }());
 var MessageList = /** @class */ (function () {
     function MessageList() {
-        this.messageList = []; //maybe we can took from this array the last message
+        this.messageList = [];
         this.messageListFilter = [];
     }
     MessageList.prototype.addMessage = function (message) {
@@ -56,7 +56,6 @@ var MessageList = /** @class */ (function () {
     };
     MessageList.prototype.renderChat = function () {
         var html = '';
-        var random = (Math.random() < 0.5) ? contactList : contactUser;
         this.messageList.forEach(function (message) {
             html += "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "<p>\n                        <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                        <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\"></i>\n                        <i class=\"fa fa-trash container__chat-box__messages--user--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                        </div>";
         });
@@ -65,6 +64,25 @@ var MessageList = /** @class */ (function () {
     };
     return MessageList;
 }());
+var Group = /** @class */ (function () {
+    function Group() {
+        this.groupMsgs = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
+    }
+    return Group;
+}());
+var User = /** @class */ (function () {
+    function User(userImg, userName, userPhone, userGroups) {
+        this.userImg = userImg;
+        this.userName = userName;
+        this.userPhone = userPhone;
+        this.userGroups = userGroups;
+    }
+    User.prototype.addMessages = function (newMess) {
+        this.userGroups[0].groupMsgs.push(newMess);
+    };
+    return User;
+}());
+var loggedInUser = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups);
 var messageList = new MessageList();
 btnMessage.addEventListener('click', sendMessage);
 function sendMessage() {
@@ -75,6 +93,7 @@ function sendMessage() {
     var timeHMS = (today.getTime());
     var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS); //last one is the lastmessagename
     messageList.addMessage(message);
+    loggedInUser.addMessages(message);
     elementMessage.value = '';
 }
 //display inputSearch with search icon 
@@ -110,8 +129,10 @@ function handleKeyUp() {
     }
 }
 function handleReturn() {
-    localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()));
+    //localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
     var pickedUser = JSON.parse(localStorage.getItem("currentUser"));
+    //pickedUser = pickedUser.userGroups[0].groupMsgs = messageList.renderChat()
+    //localStorage.setItem('currentUser', JSON.stringify(pickedUser))
     window.location.href = "../groups/groups.html?" + pickedUser.userPhone;
 }
 btnModal.addEventListener('click', openModal);
@@ -152,7 +173,7 @@ var ContactMessage = /** @class */ (function () {
     };
     return ContactMessage;
 }());
-var contactChat = JSON.parse(localStorage.getItem("contactListUser"));
+var contactChat = JSON.parse(localStorage.getItem("contactList"));
 var contactList = JSON.parse(localStorage.getItem("contactId"));
 var contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
 var chatUser = Object.values(Object.values(contactChat)[1]);
@@ -163,3 +184,4 @@ chatUser.find(function (chat) {
         contactUser_1.renderUserChat();
     }
 });
+//User

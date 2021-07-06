@@ -8,7 +8,7 @@ const inputFilter = <HTMLInputElement>document.querySelector("#filterN");
 
 interface ContactsInterface {
   contactName: string;
-  image: string;
+  // image: string; Why is this a string?
   phone: number;
 }
 
@@ -103,6 +103,12 @@ function redirect(contactId) {
     localStorage.setItem("contactsData", JSON.stringify(contacts.contacts));
 
     window.location.href = `chat.html?id=${contactId}`;
+    // This is the redirect. This one of the built in methods on the window object (?)
+    // The question mark is the start of the query
+    // Id is just a name you're giving it, and then = and the value.
+    // id is the key and contactId is the value
+    // The question mark allows you to add things onto the end of a URL. By pputting the equals sign you make it a key-value pair.
+    // Where is it getting the id from?
     if (!window.location.href)
       throw new Error("The page where you want to redirect it doesn´t exist!");
   } catch (error) {

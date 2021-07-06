@@ -1,5 +1,10 @@
-var scrollBox = document.querySelector(".messages");
-scrollBox.scrollTop = scrollBox.scrollHeight;
+function setScrollHeight() {
+    var messagesDiv = document.querySelector(".messages");
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+window.onload = function (event) {
+    setScrollHeight();
+};
 function goBack() {
     window.location.href = "index.html";
 }
@@ -8,8 +13,6 @@ var urlSearchParams = new URLSearchParams(window.location.search);
 var params = Object.fromEntries(urlSearchParams.entries());
 //Get Array From Storage
 var allContacts = JSON.parse(localStorage.getItem('contacts'));
-// console.log(params.contactId);
-// console.log(allContacts);
 //Filter Array by Params
 var thisContact = allContacts.filter(function (contact) { return contact.contactId === params.contactId; });
 var contactName = document.querySelector(".nav__contact h2");
@@ -18,6 +21,7 @@ var contactImg = document.querySelector(".nav__img__wrapper");
 contactImg.innerHTML = "<img class=\"nav__img\"\nsrc=\"" + thisContact[0].imgUrl + "\"\nalt = \"\" >";
 function updateLastSent() {
     var lastSent = document.querySelector(".nav__contact p");
+    thisContact[0].chats.reverse();
     lastSent.innerHTML = "Last Sent: " + thisContact[0].chats[0].timeStamp + " ";
 }
 function renderMessages(arrToRender) {
@@ -28,11 +32,6 @@ function renderMessages(arrToRender) {
         messagesDiv.innerHTML = html;
     });
 }
-function setScrollHeight() {
-    var messagesDiv = document.querySelector(".messages");
-    messagesDiv.scrollTop = messagesDiv.clientHeight;
-}
-setScrollHeight();
 function openCamera() {
     console.log("open the camera");
 }
@@ -50,6 +49,7 @@ function logSubmit(event) {
     event.target.reset();
     renderMessages(thisContact);
     updateLastSent();
+    setScrollHeight();
     console.log(thisContact);
     console.log(allContacts);
     localStorage.setItem('contacts', JSON.stringify(allContacts));

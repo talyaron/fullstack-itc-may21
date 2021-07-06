@@ -1,13 +1,45 @@
-//grab info from contacts page
-function showOnDOM() {
-    const allUsers = JSON.parse(localStorage.getItem('AllUsers'));
-    const lastUserIndex = allUsers.length - 1;
-    const lastUser = allUsers[lastUserIndex];
-    const data = document.querySelector(".data");
-    console.log(lastUser);
-    data.innerHTML = `<div>Hi ${lastUser.name}, thanks for signing up! Your details are ${lastUser.email}, ${lastUser.phone}. We'll be in touch soon!</div>`;
 
+//method to add individual msg
+class Mensaje {
+    text: string;
+    textId: string = "id" + Math.random().toString(16).slice(2);
+    constructor(text: string) {
+        this.text = text;
+    }
+}
+//class to provide an array of all texts to local storage
+class TodosLosMensajes {
+    msgs: Array<Mensaje> = JSON.parse(localStorage.getItem('TodosLosMensajes')) ? JSON.parse(localStorage.getItem('TodosLosMensajes')) : [];
+    //method to push new msg to the array
+    addNewMsg(msg) {
+        this.msgs.push(msg);
+        localStorage.setItem("TodosLosMensajes", JSON.stringify(this.msgs));
+        
+    }
+}
+const allOfMsgs = new TodosLosMensajes();
+//function for collecting text input 
+//options: maybe try arrow function later + make it work by icon click
+function handleSubmit(ev) {
+    ev.preventDefault();
+    const text = ev.target.elements.text.value;
+    const msg: Mensaje = new Mensaje(text);
+    allOfMsgs.addNewMsg(msg);
+    
+    console.log(text, 'should catch text');
+    console.log(msg, 'should display msg');
+    
+    
+}
+// render on DOM
+function renderOnDOM() {
+    const data :HTMLElement = document.querySelector(".data");
+    allOfMsgs.msgs.forEach(msg => {
+        data.insertAdjacentHTML('beforeend',`<div class="allmsgs">${msg.text}</div>`);
+        // data.innerHTML += `<div class="allmsgs">${msg.text}</div>`;
+    });
+    
 }
 
-showOnDOM();
-//grab info from chat-bar and display as a message
+
+renderOnDOM();

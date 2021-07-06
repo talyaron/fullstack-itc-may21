@@ -1,5 +1,3 @@
-//JN
-var messageChat = JSON.parse(localStorage.getItem("messageChat"));
 var pageTitle = document.querySelector('title');
 pageTitle.innerText = loggedInUser.userName + "'s chats";
 var profileImg = document.querySelector('.controls__item--profile_img');
@@ -39,7 +37,6 @@ var directToChat = function (ev) {
     localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList', JSON.stringify(allContacts));
-    localStorage.setItem('contactId', JSON.stringify(contactToChat.id));
     window.location.href = "../chat/chat.html?" + loggedInUser.userPhone + "&" + contactToChat.id;
 };
 var showNewGroupMenu = function (ev) {
@@ -55,9 +52,9 @@ var hideNewGroupMenu = function (ev) {
     var newGroupMenu = document.querySelector('.new_group');
     newGroupMenu.style.display = 'none';
 };
-//const newGroupSubmit: HTMLElement = document.querySelector('#new_group_submit');
-//newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
-function createNewGroup(ev) {
+var newGroupSubmit = document.querySelector('#new_group_submit');
+newGroupSubmit.addEventListener('submit', function (ev) { return createNewGroup(ev); });
+var createNewGroup = function (ev) {
     try {
         ev.preventDefault();
         var groupId = null;
@@ -82,7 +79,7 @@ function createNewGroup(ev) {
     catch (er) {
         console.error(er);
     }
-}
+};
 var logOutBtn = document.querySelector('.controls__item--ellipsis');
 logOutBtn.addEventListener('click', function (ev) { return logOut(ev); });
 var logOut = function (ev) {

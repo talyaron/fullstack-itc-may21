@@ -1,7 +1,3 @@
-//JN
-const messageChat = JSON.parse(localStorage.getItem("messageChat"))
-
-
 const pageTitle: HTMLElement = document.querySelector('title');
 pageTitle.innerText = `${loggedInUser.userName}'s chats`;
 
@@ -49,18 +45,16 @@ const directToChat = (ev: any): void => {
     const contactToChatName: string = contactToChatNameContainer.innerText;
     const chatUsers: Array<string> = [loggedInUser.userPhone, contactToChat.id];
 
-   
-    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
 
+    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
+    
     loggedInUser.addGroup(group);
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
     allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     localStorage.setItem('contactList',JSON.stringify(allContacts));
-    localStorage.setItem('contactId',JSON.stringify(contactToChat.id))
 
     window.location.href = `../chat/chat.html?${loggedInUser.userPhone}&${contactToChat.id}`;
 }
-
 const showNewGroupMenu = (ev: any): void => {
 
     if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1)) return;
@@ -78,16 +72,15 @@ const hideNewGroupMenu = (ev: any): void => {
     newGroupMenu.style.display = 'none';
 }
 
-//const newGroupSubmit: HTMLElement = document.querySelector('#new_group_submit');
+const newGroupSubmit: HTMLElement = document.querySelector('#new_group_submit');
 
-//newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
+newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
 
-function createNewGroup (ev: any): void {
+const createNewGroup = (ev: any): void => {
     try {
         ev.preventDefault();
-       
+
         const groupId: string = null;
-        
         const imgLabel: HTMLElement = document.querySelector('#add_photo');
         const groupImg: string = imgLabel.getAttribute('alt');
         const groupName: string = ev.target.elements.groupName.value;
@@ -97,6 +90,7 @@ function createNewGroup (ev: any): void {
             if (contact.checked) groupUsers.push(contact.value);
         });
 
+
         const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
 
         loggedInUser.addGroup(group);
@@ -105,7 +99,7 @@ function createNewGroup (ev: any): void {
         localStorage.setItem('contactList',JSON.stringify(allContacts));
         hideNewGroupMenu(ev);
         hideNewChatMenu(ev);
-        
+
         ev.target.reset();
     } catch (er) {
         console.error(er);
@@ -119,4 +113,4 @@ logOutBtn.addEventListener('click', ev => logOut(ev));
 const logOut = (ev: any): void => {
     localStorage.setItem('currentUser',null);
     window.location.href = `../users/users.html`;
-}
+} 
