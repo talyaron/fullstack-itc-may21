@@ -102,6 +102,44 @@ class MessageList {
     
 }
 
+class Group {
+    groupId: string; // userPhone or "group" + Math.random().toString(16).slice(2);
+    groupImg: string;
+    groupName: string;
+    groupUsers: Array<string> // userPhone numbers
+    groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
+
+    
+
+}
+
+class User {
+    userImg: string;
+    userName: string;
+    userPhone: string;
+    userGroups: Array<Group>;
+
+    constructor (userImg: string, userName: string, userPhone: string, userGroups: Array<Group>) {
+        this.userImg = userImg;
+        this.userName = userName;
+        this.userPhone = userPhone;
+        this.userGroups = userGroups;
+    }
+
+    
+    addMessages(newMess:Message){
+
+        this.userGroups[0].groupMsgs.push(newMess)
+        
+    }
+}
+
+const loggedInUser: User = new User (JSON.parse(localStorage.getItem("currentUser")).userImg,JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups)
+
+
+
+
+
 const messageList = new MessageList();
 
 
@@ -118,6 +156,8 @@ function sendMessage() {
     const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage,timeHMS) //last one is the lastmessagename
 
     messageList.addMessage(message)
+
+    loggedInUser.addMessages(message)
 
 
     elementMessage.value = '';
@@ -258,6 +298,11 @@ chatUser.find(function (chat) {
         contactUser.renderUserChat()
     }
 });
+
+//User
+
+
+
 
 
 

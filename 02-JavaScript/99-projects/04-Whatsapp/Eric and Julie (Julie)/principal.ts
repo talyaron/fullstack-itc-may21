@@ -8,7 +8,7 @@ const inputFilter = <HTMLInputElement>document.querySelector("#filterN");
 
 interface ContactsInterface {
   contactName: string;
-  image: string;
+  // image: string; Why is this a string?
   phone: number;
 }
 

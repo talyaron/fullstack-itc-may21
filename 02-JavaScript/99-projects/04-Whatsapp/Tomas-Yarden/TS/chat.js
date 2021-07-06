@@ -1,10 +1,21 @@
+// Create a Whatsapp application with two pages. 
+// 1st page: the chatGroups
+// 2nd page: chat
+// use classes, destructors, spread, typescript
+// use BEM model
+// make it look as similar as you can to the real Whatsapp
+// Work in a group.
+// start with the design of the classes, BEM
+//Global Variables
 var messageValue = document.getElementById("text-input");
+//Listeners
 // interface RespondsInterface {
 //   message:string;
 // }
 var Chat = /** @class */ (function () {
     function Chat(message) {
         this.message = message;
+        this.id = Math.random().toString(16).slice(2);
     }
     return Chat;
 }());
@@ -17,34 +28,10 @@ var Chat = /** @class */ (function () {
 var ChatProfile = /** @class */ (function () {
     function ChatProfile() {
         this.arrayChat = [];
-        // renderBot(){
-        //   const respon = String(messageValue.value);
-        //   if(respon === 'Hola') {
-        // this.arrayChat = this.arrayChat.filter((element) => element.message ===respon)
-        // this.renderUser()
-        //   }
-        // }
-        // respondBot() {
-        //   const respon = String(messageValue.value);
-        //   // const arrLength = this.arrayChat.length
-        //   const getBot: HTMLElement = document.querySelector(".botText");
-        //   let htmlBot = "";
-        //   this.arrayChat.forEach(() => {
-        //     if (respon.includes("Hola")) {
-        //       htmlBot += `
-        //       <div class="botText">
-        //       <span>Hola</span>
-        //       </div>
-        //       `;
-        //     }
-        //   });
-        //   setTimeout(() => {
-        //     getBot.innerHTML = htmlBot;
-        //   }, 1000);
-        // }
     }
     // arrayBot:Array<Bot> =[];
     ChatProfile.prototype.add = function (add) {
+        console.log('new chat');
         this.arrayChat.push(add);
         this.renderUser();
         // this.respondBot();
@@ -56,18 +43,36 @@ var ChatProfile = /** @class */ (function () {
     // });
     // this.renderUser()
     // }
-    ChatProfile.prototype.renderUser = function () {
+    ChatProfile.prototype.deleteText = function (id) {
+        this.arrayChat = this.arrayChat.filter(function (element) { return element.id !== id; });
+        this.renderUser();
+    };
+    ChatProfile.prototype.renderUser = function (arr) {
+        var arrayRender = arr ? arr : this.arrayChat;
         var getUser = document.querySelector("#chat-box");
-        var respon = String(messageValue.value);
+        // const respon = String(messageValue.value);
         var html = "";
         console.log(this.arrayChat);
-        this.arrayChat.forEach(function (element) {
-            html += "\n      <p class=\"userText\">\n      <span>" + element.message + "</span>\n      </p>\n     \n     ";
-            if (respon.includes("Hola")) {
-                html += "\n           <p class=\"botText\">\n            <span>Hola</span>\n             </p>\n             ";
+        arrayRender.forEach(function (element) {
+            console.log(element.message);
+            html += "\n      <p class=\"userText\" onclick='HanldeDelete(\"" + element.id + "\")'>\n      <span >" + element.message + "<i class=\"fas fa-chevron-down  arrow-down\" ></i></span>\n      </p>\n     \n     ";
+            if (element.message.includes("Hi")) {
+                html += "\n           <p class=\"botText\">\n            <span>Hello<i class=\"fas fa-chevron-down  arrow-down\"></i></span>\n             </p>\n             ";
             }
-            else if (respon.includes("Como Estas?")) {
-                html += "\n               <p class=\"botText\">\n                <span>Bien</span>\n                 </p>\n                 ";
+            else if (element.message.includes("How are you?")) {
+                html += "\n                 <p class=\"botText\">\n                  <span>Preatty good <i class=\"fas fa-chevron-down arrow-down \"></i></span>\n                   </p>\n                   ";
+            }
+            else if (element.message.includes("Hello there")) {
+                html += "\n                 <p class=\"botText\">\n                  <span>General Kenobi! <i class=\"fas fa-chevron-down arrow-down \"></i></span>\n                   </p>\n                   ";
+            }
+            else if (element.message.includes("Como Estas?")) {
+                html += "\n                 <p class=\"botText\">\n                  <span>Bien <i class=\"fas fa-chevron-down arrow-down \"></i></span>\n                   </p>\n                   ";
+            }
+            else if (element.message.includes("Como Estas?")) {
+                html += "\n                 <p class=\"botText\">\n                  <span>Bien <i class=\"fas fa-chevron-down arrow-down \"></i></span>\n                   </p>\n                   ";
+            }
+            else if (element.message.includes("Como Estas?")) {
+                html += "\n                 <p class=\"botText\">\n                  <span>Bien <i class=\"fas fa-chevron-down arrow-down \"></i></span>\n                   </p>\n                   ";
             }
         });
         setTimeout(function () {
@@ -84,4 +89,7 @@ var sendBtn = function (event) {
     console.log(generate);
     chatProfile.add(generate);
     event.target.reset();
+};
+var HanldeDelete = function (id) {
+    chatProfile.deleteText(id);
 };
