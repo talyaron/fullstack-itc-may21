@@ -6,30 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dist/styles.min.css">
 </head>
 
-<body onload="checkEdits()">
+<body>
     <div class="header">
-        <div class="header__edit" onclick="edit()">Edit</div>
-        <button class="header__new-convo" onclick="openForm()">O</button>
-            <div class="header__new-convo__form-popup" id="myForm">
-                <form onsubmit="handleSubmit(event)" class="header__new-convo__form-popup__form-container">
-                  <h1>Add Contact</h1>
-                  <label for="fullname"><b>Fullname:</b></label>
-                  <input type="text" placeholder="Enter Full Name" name="name" required>
-              
-                  <label for="number"><b>Number</b></label>
-                  <input type="number" placeholder="Enter Phone Number" name="number" required>
+        <div class="header__edit">Edit</div>
+        <button class="header__new-convo">O</button>
+        <div class="header__form-popup" id="myForm">
+            <form onsubmit="handleSubmit(event)" class="header__form-popup__form-container">
+                <h1>Add Contact</h1>
+                <label for="fullname"><b>Fullname:</b></label>
+                <input type="text" placeholder="Enter Full Name" name="name" required>
 
-                  <label for="photo"><b>Upload Profile Photo</b></label>
-                  <input type="text" placeholder="Upload Photo URL" name="photo" required>
-              
-                  <button type="submit" class="header__new-convo__form-popup__form-container__btn">ADD</button>
-                  <button type="submit" class="header__new-convo__form-popup__form-container__btn button--cancel" onclick="closeForm()">Close</button>
-                </form>
-              </div>
+                <label for="number"><b>Phone No. (10 digits):</b></label>
+                <input type="tel" placeholder="Enter Phone Number" name="number" pattern="[0-9]{10}" required>
+
+                <label for="photo"><b>Upload Profile Photo:</b></label>
+                <input type="file" class="header__form-popup__form-container__form" id="file" placeholder="Upload Photo" name="photo" required>
+
+                <button type="submit" class="header__form-popup__form-container__btn">ADD</button>
+                <button type="submit" class="header__form-popup__form-container__btn button--cancel">Close</button>
+            </form>
         </div>
+    </div>
     </div>
     <h1 class="chats">Chats</h1>
     <div>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="holder">
-      
+
     </div>
 
 

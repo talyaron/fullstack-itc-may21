@@ -1,5 +1,11 @@
 // VARIABLES GLOBALES
 let allContacts:Array<Contact> = [];
+let allContactsForSearch:Array<Contact> = [];
+render(chats);
+// QUERIES
+const searchBar = document.getElementById("searchbar");
+const formSearchBar = document.querySelector("#form_searchBar"); 
+
 
 // CLASSES
 interface LocalContact{
@@ -26,16 +32,20 @@ const addLocalContacts = (localChat) => {
     localChat.forEach(contact => {
        let add = new Contact(contact.name, contact.phone, contact.profileImg); 
         allContacts.push(add);
-        renderData();
+        allContactsForSearch.push(add);
+        localStorage.setItem("contactos", JSON.stringify(allContacts));
+        let renderJSON = JSON.parse(localStorage.getItem("contactos"));
+        render(renderJSON);
+
     })
 }
 addLocalContacts(chats);
 
-function renderData() {
+function render(array) {
     const containerData: HTMLElement = document.querySelector(".contacts")
     let html: string = "";
-    let render = JSON.parse(localStorage.getItem("contactos"));
-    render.forEach((element) => {
+    // let render = JSON.parse(localStorage.getItem("contactos"));
+    array.forEach((element) => {
         html += `
         <div class="contacts_chat">
             <img class="contacts_img" src="${element.profileImg}" alt="">
@@ -45,17 +55,37 @@ function renderData() {
                     <p>${element.phone}</p>
                 </div>
             </a>
-            <i onclick='deleteChat("${element.id}")' class="fas fa-trash fa-2x contacts_icon"></i>
+            <i onclick='deleteChat("${element.id}")' class="fas fa-trash fa-lg contacts_icon"></i>
         </div>`
     });
+    let renderGroup = JSON.parse(localStorage.getItem("groups"));
+    renderGroup.forEach((element) => {
+        html += `
+        <div class="contacts_chat">
+            <img class="contacts_img" src="${element.groupIMG}" alt="">
+            <a href="">
+                <div class="contacts_info">
+                    <h3 class="contacts_name">${element.groupName}</h3>
+                    <p>${element.contactsOfGroup + " "}</p>
+                </div>
+            </a>
+            <i onclick='deleteGroup("${element.id}")' class="fas fa-trash fa-lg contacts_icon"></i>
+        </div>`
+    });
+
     containerData.innerHTML = html;
 }
 
 const deleteChat = (id) =>{
-    const deleteChats = allContacts.filter((chat) => chat.id !== id);
+    let contactsDelete = JSON.parse(localStorage.getItem("contactos"));
+    const deleteChats = contactsDelete.filter((chat) => chat.id !== id);
     allContacts = deleteChats;
+    allContactsForSearch = deleteChats;
     localStorage.setItem("contactos", JSON.stringify(allContacts));
-    renderData();
+    let renderDelete = JSON.parse(localStorage.getItem("contactos"));
+    render(renderDelete);
+
+
 }
 
 const handleContact = (ev)=>{
@@ -66,10 +96,30 @@ const handleContact = (ev)=>{
     const profileImg: string = ev.target.elements.imgContact.value;
     
     const newContacto = new Contact(name, phone, profileImg);
-    allContacts.unshift(newContacto);
+    allContacts.push(newContacto);
+    allContactsForSearch.push(newContacto);
     localStorage.setItem("contactos", JSON.stringify(allContacts));
-    renderData();
+    let renderContact = JSON.parse(localStorage.getItem("contactos"));
+    render(renderContact);
+
+}
+
+const searchContact = (searchBar)=>{
+    const regExp: string = `^${searchBar}`;
+    const searchTermReg: RegExp = new RegExp(regExp, 'i');
+    allContacts = allContactsForSearch.filter(elem => searchTermReg.test(elem.name));
+    render(allContacts);
 }
 
 
+const filters = (ev) =>{
+    ev.preventDefault();
 
+    const searchBar =  ev.target.parentElement.elements.searchBar.value;
+    console.log(searchBar);
+    searchContact(searchBar);
+}
+
+// EVENTLISTENERS
+
+formSearchBar.addEventListener('keyup', filters);

@@ -1,13 +1,12 @@
 var userInfo = JSON.parse(localStorage.getItem('userInfo'));
 var root = document.querySelector('#main');
-var chatRoot = document.querySelector('#insideMain');
 var userNumber = localStorage.getItem('numberToSearch');
 var userfiltered = userInfo.filter(function (element) { return (element.number == userNumber); });
 //Render the chat of the User
-function renderChat(userfiltered) {
+function renderChat() {
     try {
         var html = userfiltered.map(function (element) {
-            return ("<div class=\"chat-window__header\" onclick='redirectBack()'>\n                <div class=\"chat-window__header--left\">\n                    <img   class=\"chat-window__contact--img\" src=\"" + element.picture + "\">\n                    <div class=\"contact-name-and-phone\">\n                        <span class=\"chat-window__name\">" + element.name + "</span>\n                        <span class=\"chat-window__phone\">" + element.number + "</span>\n                    </div>\n                </div>\n                <div class=\"chat-window__header--left\">\n                    <img class=\"chat-window-search-icon\" src=\"Img_whatsapp/search-icon.svg\">\n                    <img class=\"chat-window-menu-icon\"  src=\"Img_whatsapp/menu-icon.svg\">\n                </div>\n            </div>\n            <div class=\"chat-window__header\">\n            <div class=\"chat-window__header--left\">\n        \n        <div class=\"chat-window\">\n            <div class=\"type-message-bar\">\n                <div class=\"type-message-bar__left\">\n                    <img src=\"Img_whatsapp/icons.svg\" alt=\"\">\n                    <img src=\"Img_whatsapp/attach-icon.svg\">\n    \n                </div>\n                <div class=\"type-message-bar__center\">\n                    <input id=\"texting\" type=\"text\" placeholder=\"Type something\">\n                </div>\n                <div id=\"sendButton\" class=\"type-message-bar__right\">\n                    <img src=\"Img_whatsapp/audio-icon.svg\" alt=\"\">\n                </div>\n            </div>\n        </div>");
+            return ("<div class=\"chat\">\n                <div class=\"chat-header\" onclick=\"redirectBack()\">\n                    <div class=\"profile\">\n                        <div class=\"left\">\n                            <img src=\"../Img_whatsapp/arrow.png\" class=\"arrow\">\n                            <img src=\"" + element.picture + "\" class=\"pp\">\n                            <h2>" + element.name + "</h2>\n                            <span>Phone Number: " + element.number + "</span>\n                        </div>\n                        <div class=\"right\">\n                            <img src=\"../Img_whatsapp/video.png\" class=\"icon\">\n                            <img src=\"../Img_whatsapp/phone.png\" class=\"icon\">\n                            <!-- <img src=\"../Img_whatsapp/camera.png\" class=\"icon\"> -->\n                        </div>\n                    </div>\n                </div>\n                <div class=\"chat-box\">\n                <div class=\"chat-r\">\n                <div class=\"sp\"></div>\n                <div class=\"mess mess-r\">\n                    <p>\n                       Sup bro?\n                    </p>\n                    \n                </div>\n            </div>\n        </div></div>\n                <div class=\"chat-footer\">\n                \n                    <img src=\"../Img_whatsapp/emo.png\" class=\"emo\" id=\"emo\">\n                    <input type=\"text\" placeholder=\"Type a message\" id=\"texting\"></input>\n                    <div class=\"icons\">\n                        <img src=\"../Img_whatsapp/attach file.png\">\n                        <img src=\"../Img_whatsapp/camera.png\">\n                    </div>\n                    \n                    <img src=\"https://img.icons8.com/material-outlined/50/000000/send-comment.png\"/ id=\"sendButton\">\n                </div>\n            </div>");
         }).join('');
         if (!html)
             throw new Error('An error happens when you want to render the user chat!');
@@ -20,12 +19,16 @@ function renderChat(userfiltered) {
 }
 ;
 //Call this functions to render the user
-renderChat(userfiltered);
+renderChat();
 //With this function I handle the form:
 var handleSubmitMessage = function (ev) {
     ev.preventDefault();
     try {
-        var text_1 = { text: ev.target.elements.chat.value, id: Math.random().toString(16).slice(2), time: new Date() };
+        var text_1 = {
+            text: ev.target.elements.chat.value,
+            id: Math.random().toString(16).slice(2),
+            time: new Date()
+        };
         userInfo.forEach(function (element) {
             element.message.push(text_1);
         });
@@ -39,7 +42,7 @@ var handleSubmitMessage = function (ev) {
 };
 function redirectBack() {
     try {
-        window.location.href = './whatsapp.html';
+        window.location.href = '../Main/whatsapp.html';
         if (!window.location.href)
             throw new Error('The page where you want to redirect it doesn´t exist!');
     }
@@ -50,17 +53,23 @@ function redirectBack() {
 var texting = document.querySelector('#texting');
 var sendButton = document.querySelector('#sendButton');
 sendButton.addEventListener('click', function () {
-    var message = { text: texting.value, id: Math.random().toString(16).slice(2), time: new Date() };
+    var message = {
+        text: texting.value,
+        id: Math.random().toString(16).slice(2),
+        time: new Date()
+    };
     userfiltered.forEach(function (element) {
         element.message.push(message);
     });
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
     renderInsideChat(message);
 });
 function renderInsideChat(message) {
     try {
-        var newTag = document.createElement("div");
-        newTag.innerHTML = "<div class=\"chat-window__name\" id=\"" + message.id + "\">" + message.text + "</div>";
-        chatRoot.appendChild(newTag);
+        var chatArea = document.querySelector('.chat-box');
+        var temp = "\n                \n        <div class=\"chat-r\" " + message.id + ">\n            <div class=\"sp\"></div>\n            <div class=\"mess mess-r\">\n                <p>\n                   " + message.text + "\n                </p>\n            </div>\n        </div>\n    </div>";
+        chatArea.insertAdjacentHTML("beforeend", temp);
+        texting.value = " ";
     }
     catch (error) {
         console.error(error);
@@ -68,3 +77,9 @@ function renderInsideChat(message) {
     ;
 }
 ;
+function renderOldConversation() {
+    userfiltered[0].message.forEach(function (element) {
+        renderInsideChat(element);
+    });
+}
+renderOldConversation();

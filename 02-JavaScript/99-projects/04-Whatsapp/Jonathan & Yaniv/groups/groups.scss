@@ -17,7 +17,7 @@ body {
         "grps chts";
 }
 
-.groups_section {
+.chats_section {
     grid-area: grps;
     max-width: 600px;
     min-width: 320px;
@@ -28,6 +28,24 @@ body {
 .chat_section {
     grid-area: chts;
     background-image: url('https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png');
+}
+
+.title {
+    background-color: #00BFA5;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    align-items: flex-end;
+    height: 100px;
+    
+    &__item {
+        padding: 0 5px;
+
+        &--cancel_btn, &--back_btn {
+            cursor: pointer;
+        }
+    }
+
 }
 
 .search {
@@ -49,12 +67,130 @@ body {
     .search_form {
         width: 80%;
     
-        .search_in_groups {
+        .search_input {
             font-size: 1rem;
             width: 100%;
             padding: 10px 10px;
             border: 0;
             border-radius: 0 50px 50px 0;
+        }
+    }
+}
+
+
+.options {
+    background-color: #F6F6F6;
+
+    &__item {
+        color: #BABABA;
+        border-bottom: 1px solid #F6F6F6;
+        padding: 10px;
+        margin: 0;
+
+        &--group {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 1fr 7fr;
+            grid-template-rows: 25px 25px;
+            grid-template-areas:
+                "img title"
+                "img title";
+            background-color: white;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #F6F6F6;
+            }
+
+            #new_group_logo {
+                grid-area: img;
+                padding: 8px;
+                margin: 0 5px;
+                filter: invert(1); 
+                background-color: #FF6977;
+                border-radius: 50px;
+                width: 34px;
+                height: 34px;
+            }
+
+            #new_group_title {
+                grid-area: title;
+                margin: 0;
+                font-weight: normal;
+                color: black;
+            }
+        }
+
+        &--contact {
+            display: grid;
+            grid-template-columns: 1fr 7fr;
+            grid-template-rows: 25px 25px;
+            grid-template-areas:
+                "img title"
+                "img status";
+            background-color: white;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #F6F6F6;
+            }
+
+            .new_contact_img {
+                grid-area: img;
+                padding: 0 5px;
+                margin: 0;
+                border-radius: 50px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .new_contact_name {
+                grid-area: title;
+                margin: 0;
+                font-weight: normal;
+                color: black;
+            }
+
+            .new_contact_status {
+                grid-area: status;
+                margin: 0;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+        }
+
+        &--group_img {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            background-image: url('../images/group_img.png');
+            background-size: cover;
+            height: 200px;
+            width: 200px;
+            margin: auto;
+
+            label {
+                cursor: pointer;
+                border-radius: 200px;
+                background-color: #858585;
+                text-align: center;
+                color: white;
+                padding: 75px;
+            }
+        }
+
+        &--group_name {
+            margin: auto;
+
+            input {
+                font-size: 1rem;
+                background-color: #F6F6F6;
+                border: 0;
+                border-bottom: 2px solid #00BFA5;
+                width: 100%;
+            }
         }
     }
 }
@@ -114,12 +250,12 @@ body {
     }
 }
 
-.groups {
+.chats {
     display: flex;
     flex-direction: column;
     border-right: 5px solid white;
 
-    .group {
+    .chat {
         display: grid;
         grid-template-columns: 1fr 4fr 1fr;
         grid-template-rows: 25px 25px;
@@ -190,88 +326,11 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    background-color: white;
+    background-color: #F6F6F6;
     overflow: hidden;
     overflow-y: auto;
     -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-
-    .options {
-        &__item {
-            margin: 0;
-            color: #BABABA;
-            border-bottom: 1px solid #F6F6F6;
-
-            &:hover {
-                cursor: pointer;
-                background-color: #F6F6F6;
-            }
-
-            &--group {
-                display: grid;
-                grid-template-columns: 1fr 7fr;
-                grid-template-rows: 25px 25px;
-                grid-template-areas:
-                    "img title"
-                    "img title";
-                padding: 10px;
-                align-items: center;
-
-                #new_group_logo {
-                    grid-area: img;
-                    padding: 8px;
-                    margin: 0 5px;
-                    filter: invert(1); 
-                    background-color: #FF6977;
-                    border-radius: 50px;
-                    width: 34px;
-                    height: 34px;
-                }
-
-                #new_group_title {
-                    grid-area: title;
-                    margin: 0;
-                    font-weight: normal;
-                    color: black;
-                }
-            }
-
-            &--contact {
-                display: grid;
-                grid-template-columns: 1fr 7fr;
-                grid-template-rows: 25px 25px;
-                grid-template-areas:
-                    "img title"
-                    "img status";
-                padding: 10px;
-
-                .new_contact_img {
-                    grid-area: img;
-                    padding: 0 5px;
-                    margin: 0;
-                    border-radius: 50px;
-                    width: 50px;
-                    height: 50px;
-                }
-
-                .new_contact_name {
-                    grid-area: title;
-                    margin: 0;
-                    font-weight: normal;
-                    color: black;
-                }
-
-                .new_contact_status {
-                    grid-area: status;
-                    margin: 0;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-
-            }
-
-        }
-    }
 
     &__item {
         
@@ -279,27 +338,10 @@ body {
             position: sticky;
             top: 0;
             z-index: 10;
-            
-            .title {
-                background-color: #00BFA5;
-                display: flex;
-                flex-direction: row;
-                color: white;
-                align-items: flex-end;
-                height: 100px;
-                
-                &__item {
-                    padding: 0 5px;
-
-                    &--cancel_btn {
-                        cursor: pointer;
-                    }
-                }
-
-            }
         }
     }
 }
+
 .new_group {
     display: none;
     width: 600px;
@@ -307,9 +349,37 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    background-color: white;
+    background-color: #F6F6F6;
     overflow: hidden;
     overflow-y: auto;
     -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+        &__item {
+        
+            &--header {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
+
+            &--body {
+                display: flex;
+                flex-direction: column;
+                
+                #new_group_submit {
+                    text-align: center;
+                    cursor: pointer;
+                    font-size: 1.5rem;
+                    background-color: #09E85E;
+                    border: 0;
+                    border-radius: 46px;
+                    width: 46px;
+                    height: 46px;
+                    color: white;
+                    box-shadow: 1px 1px #D5D5D5;
+                    margin: 25px auto;
+                }
+            }
+    }
 }

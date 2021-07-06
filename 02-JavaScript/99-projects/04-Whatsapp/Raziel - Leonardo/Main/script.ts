@@ -28,13 +28,12 @@ class User {
     name: string;
     number: number; //This is going to be like the ID
     picture: string;
-    message: Array<Message>;
+    message: Array<Message> = [];
 
-    constructor(name: string, number: number, picture: string, message: Array<Message>) {
+    constructor(name: string, number: number, picture: string) {
         this.name = name;
         this.number = number;
         this.picture = picture;
-        this.message = message;
     };
 };
 
@@ -56,9 +55,19 @@ const handleSubmitNewUser = (ev: any): void => {
         const number: number = ev.target.elements.number.valueAsNumber;
 
         const image: string = document.querySelector('#previewImage').getAttribute("src");
-        const message = [{ text: '', id: Math.random().toString(16).slice(2), time: new Date() }]
 
-        const user = new User(name, number, image, message);
+        const validateNumber = document.querySelector('#number');
+        validateNumber.addEventListener('blur', () => {
+            userList.forEach(element => {
+                if (element.number == validateNumber.value) {
+                    alert('The number is already taken');
+                    ev.target.reset();
+                    throw new Error('The number is already taken');
+                };
+            })
+        })
+
+        const user = new User(name, number, image);
         addUser(user);
         ev.target.reset();
 
@@ -83,32 +92,31 @@ function addUser(user: User): void {
 
 //To Show the contacts in the page
 function renderContacts(arrayUser: Array<User>): void {
+    console.log(userList);
     try {
         const showContact: HTMLElement = document.querySelector('#chats');
         if (!showContact) throw new Error('The element where to show the contacts doesn´t exist!')
         //Doing a loop to show the contacts
         let html: any = arrayUser.map(element => {
             return (
-                `<div class="chat" id="chat" onclick='redirect("${element.number}")'
-            >
-            <div class="chat__left">
-                <img src="${element.picture}" alt="">
-            </div>
-            <div class="chat__right">
-                <div class="chat__right--top">
-                    <span class="chat__right--top__contact-name">${element.name}</span>
-                    <span class="chat__right--top__phone-number">Phone Number: ${element.number}</span>
-
+                `<div class="chat" id="chat">
+                <div class="chat__left">
+                    <img src="${element.picture}" alt="">
                 </div>
-                <div class="chat__right--bottom">
-                    <div class="chat__right--bottom--left">
-                        <img class="double-check-mark" src="Img_whatsapp/double-check-seen.svg" alt="">
-                        <span>Raziel is typing...</span>
+                <div class="chat__right" onclick='redirect("${element.number}")'>
+                    <div class="chat__right--top">
+                        <span class="chat__right--top__contact-name">${element.name}</span>
+                        <span class="chat__right--top__phone-number">Phone Number: ${element.number}</span>
+                    </div>
+                    <div class="chat__right--bottom">
+                        <div class="chat__right--bottom--left">
+                            <img class="double-check-mark" src="../Img_whatsapp/double-check-seen.svg" alt="">
+                            <span>Raziel is typing...</span>
+                        </div>
                     </div>
                 </div>
-
-            </div>
-        </div>`
+                <i class="fas fa-trash table__remove" onclick='removeChat("${element.number}")'></i>
+            </div>`
             )
         }).join('');
         showContact.innerHTML = html;
@@ -139,7 +147,7 @@ function redirect(userNumber): void {
     localStorage.setItem('userInfo', JSON.stringify(userList));
     localStorage.setItem('numberToSearch', userNumber);
     try {
-        window.location.href = './whatsappChat.html'
+        window.location.href = '../Chat/whatsappChat.html'
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
     } catch (error) {
         console.error(error);
@@ -162,3 +170,17 @@ function checkStorage() {
 };
 
 checkStorage();
+
+//To delete a Chat
+function removeChat(chatNumber: number) {
+    try {
+        const option = confirm(`Are you sure do you want to delete this chat?`);
+        if (option) {
+            const chatIndex = userList.findIndex((element: User) => element.number === chatNumber);
+            userList.splice(chatIndex, 1);
+            renderContacts(userList);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};

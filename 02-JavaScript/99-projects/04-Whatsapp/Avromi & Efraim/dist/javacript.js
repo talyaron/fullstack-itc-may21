@@ -1,7 +1,6 @@
-console.log('javascript');
 var Contact = /** @class */ (function () {
     function Contact(name, imgUrl, phone, chats) {
-        if (chats === void 0) { chats = [{ message: "New Message", timeStamp: new Date }]; }
+        if (chats === void 0) { chats = [{ message: "New Conversation", timeStamp: new Date }]; }
         this.name = name;
         this.imgUrl = imgUrl;
         this.phone = phone;
@@ -23,10 +22,10 @@ var Contacts = /** @class */ (function () {
         }
     };
     ;
-    Contacts.prototype.renderProducts = function (domElement) {
+    Contacts.prototype.renderContacts = function (domElement) {
         try {
             var html = this.contacts.map(function (contact) {
-                return ("<div class=\"holder__contact\" id=\"" + contact.contactId + "\" onclick=\"hRef('" + contact.contactId + "')\">" +
+                return ("<div class=\"holder__contact\" id=\"" + contact.contactId + "\" onclick=\"moveToPrivateChat('" + contact.contactId + "')\">" +
                     ("<img class=\"holder__contact__image\" src=\"" + contact.imgUrl + "\">") +
                     ("<div class=\"holder__contact__name\">" + contact.name + "</div>") +
                     ("<div class=\"holder__contact__chat\">" + contact.chats[0].message + "</div>") +
@@ -42,29 +41,59 @@ var Contacts = /** @class */ (function () {
         }
     };
     Contacts.prototype.findIndexes = function (contactID) {
-        var index = this.contacts.findIndex(function (cnt) { return cnt.contactId === contactID; });
-        return index;
+        try {
+            var index = this.contacts.findIndex(function (cnt) { return cnt.contactId === contactID; });
+            return index;
+        }
+        catch (e) {
+            console.error(e);
+        }
     };
     return Contacts;
 }());
 var contacts = new Contacts();
-function hRef(id) {
-    window.location.href = "./private-chat.html?contactId=" + id;
+function moveToPrivateChat(id) {
+    try {
+        window.location.href = "./private-chat.html?contactId=" + id;
+    }
+    catch (e) {
+        console.error(e);
+    }
 }
+var image = '';
+function getImgData() {
+    try {
+        var chooseFile_1 = document.getElementById("file");
+        chooseFile_1.addEventListener('change', function () {
+            var files = chooseFile_1.files[0];
+            if (files) {
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(files);
+                fileReader.addEventListener("load", function () {
+                    image = this.result;
+                });
+            }
+        });
+    }
+    catch (e) {
+        console.error(e);
+    }
+}
+getImgData();
 function handleSubmit(ev) {
     ev.preventDefault();
     try {
-        var imgUrl = ev.target.children.photo.value;
+        var imgUrl = image;
         var name = ev.target.children.name.value;
         var phoneNumber = ev.target.children.number.value;
         var holder = document.querySelector('.holder');
         if (!holder) {
             throw new Error('No holder!');
         }
-        contacts.addContact(new Contact("" + name, "" + imgUrl, phoneNumber));
-        contacts.renderProducts(holder);
+        contacts.addContact(new Contact(name, imgUrl, phoneNumber));
+        contacts.renderContacts(holder);
         localStorage.setItem('contacts', JSON.stringify(contacts.contacts));
-        closeForm();
+        document.getElementById("myForm").style.display = "none";
         ev.target.reset();
     }
     catch (e) {
@@ -74,24 +103,20 @@ function handleSubmit(ev) {
 var deleteContact = function (conatctID) {
     try {
         window.event.cancelBubble = true;
-        var holder = document.querySelector('.holder');
-        if (!holder) {
-            throw new Error('No shopping list detected!');
-        }
+        contacts.contacts = JSON.parse(localStorage.getItem('contacts'));
         var index = contacts.findIndexes(conatctID);
         if (!contacts) {
             throw new Error('No product list detected!');
         }
-        contacts.contacts.splice(index, 1); //YS: Why do you need two different arrays? You can use the same one and filter. 
-        contacts.renderProducts(holder);
-        console.log(contacts);
+        contacts.contacts.splice(index, 1);
+        addToDomWithArray(contacts.contacts);
         localStorage.setItem('contacts', JSON.stringify(contacts.contacts));
     }
     catch (e) {
         console.error(e);
     }
 };
-var addToDom = function (searchResults) {
+var addToDomWithArray = function (searchResults) {
     try {
         var holder_1 = document.querySelector('.holder');
         if (!holder_1) {
@@ -104,9 +129,9 @@ var addToDom = function (searchResults) {
         }
         searchResults.forEach(function (contact) {
             var index = parseInt(contact.chats.length - 1);
-            holder_1.innerHTML += ("<div class=\"holder__contact\" id=\"" + contact.contactId + "\" onclick=\"hRef('" + contact.contactId + "')\">" +
+            holder_1.innerHTML += ("<div class=\"holder__contact\" id=\"" + contact.contactId + "\" onclick=\"moveToPrivateChat('" + contact.contactId + "')\">" +
                 ("<img class=\"holder__contact__image\" src=\"" + contact.imgUrl + "\">") +
-                ("<div class=\"holder__contact__name\"><a href=\"./private-chat.html?contactId=" + contact.contactId + "\">" + contact.name + "</a></div>") +
+                ("<div class=\"holder__contact__name\">" + contact.name + "</a></div>") +
                 ("<div class=\"holder__contact__chat\">" + contact.chats[index].message + "</div>") +
                 ("<div class=\"holder__contact__timestamp\">" + contact.chats[index].timeStamp + "</div>") +
                 "<div class=\"holder__contact__unread id=\"unread\">6</div>" +
@@ -120,8 +145,6 @@ var addToDom = function (searchResults) {
 };
 var findContactSearch = function (chatSearch, searchTerm) {
     try {
-        console.log('chatSearch');
-        console.log(chatSearch);
         var userRegEx_1 = new RegExp(searchTerm, 'gmi');
         var searchedUsers = chatSearch.filter(function (contactName) { return userRegEx_1.test(contactName.name); });
         return searchedUsers;
@@ -141,7 +164,6 @@ var findTextInMessages = function (searchTerm) {
                 console.log(msg, tst);
                 return tst;
             });
-            console.log(x);
             return x;
         }).flat();
         console.log(searchedMessages);
@@ -160,32 +182,69 @@ var handleKeyUp = function (ev) {
         }
         var results = findContactSearch(contacts.contacts, searchTerm);
         var searchMessages = findTextInMessages(searchTerm);
-        addToDom(results);
+        addToDomWithArray(results);
     }
     catch (er) {
         console.error(er);
     }
 };
-function checkEdits() {
-    var render = JSON.parse(localStorage.getItem('contacts'));
-    if (render != null) {
-        addToDom(render);
-        contacts.contacts = render;
-        console.log(contacts.contacts.map(function (c) { return console.log(c.chats); }));
+function renderContactsFromLocalStorage() {
+    try {
+        window.addEventListener('load', function () {
+            var render = JSON.parse(localStorage.getItem('contacts'));
+            if (render != null) {
+                addToDomWithArray(render);
+                contacts.contacts = render;
+            }
+        });
+    }
+    catch (e) {
+        console.error(e);
     }
 }
+renderContactsFromLocalStorage();
 function openForm() {
-    document.getElementById("myForm").style.display = "block";
-}
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-}
-function edit() {
-    var indices = document.querySelectorAll("#delete");
-    var unread = document.querySelectorAll("#delete");
-    for (var i = 0; i <= indices.length; i++) {
-        if (unread[i].style.display = "none") {
-            unread[i].style.display = "block";
-        }
+    try {
+        var formOpen = document.querySelector(".header__new-convo");
+        formOpen.addEventListener('click', function () {
+            document.getElementById("myForm").style.display = "block";
+        });
+    }
+    catch (e) {
+        console.error(e);
     }
 }
+openForm();
+function closeForm() {
+    try {
+        var formClose = document.querySelector(".button--cancel");
+        formClose.addEventListener('click', function () {
+            document.getElementById("myForm").style.display = "none";
+        });
+    }
+    catch (e) {
+        console.error(e);
+    }
+}
+closeForm();
+function editButtonRevealAndHide() {
+    try {
+        var editButton = document.querySelector(".header__edit");
+        editButton.addEventListener("click", function () {
+            var indices = document.querySelectorAll("#delete");
+            var unread = document.querySelectorAll("#delete");
+            for (var i = 0; i <= indices.length; i++) {
+                if (unread[i].style.display = "none") {
+                    unread[i].style.display = "block";
+                }
+                else {
+                    unread[i].style.display = "none";
+                }
+            }
+        });
+    }
+    catch (e) {
+        console.error(e);
+    }
+}
+editButtonRevealAndHide();

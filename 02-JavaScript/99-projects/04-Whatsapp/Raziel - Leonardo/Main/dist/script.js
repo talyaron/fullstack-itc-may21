@@ -21,11 +21,11 @@ var Message = /** @class */ (function () {
 }());
 ;
 var User = /** @class */ (function () {
-    function User(name, number, picture, message) {
+    function User(name, number, picture) {
+        this.message = [];
         this.name = name;
         this.number = number;
         this.picture = picture;
-        this.message = message;
     }
     ;
     return User;
@@ -50,8 +50,18 @@ var handleSubmitNewUser = function (ev) {
         var name = ev.target.elements.name.value;
         var number = ev.target.elements.number.valueAsNumber;
         var image = document.querySelector('#previewImage').getAttribute("src");
-        var message = [{ text: '', id: Math.random().toString(16).slice(2), time: new Date() }];
-        var user = new User(name, number, image, message);
+        var validateNumber_1 = document.querySelector('#number');
+        validateNumber_1.addEventListener('blur', function () {
+            userList.forEach(function (element) {
+                if (element.number == validateNumber_1.value) {
+                    alert('The number is already taken');
+                    ev.target.reset();
+                    throw new Error('The number is already taken');
+                }
+                ;
+            });
+        });
+        var user = new User(name, number, image);
         addUser(user);
         ev.target.reset();
         if (!user)
@@ -77,13 +87,14 @@ function addUser(user) {
 ;
 //To Show the contacts in the page
 function renderContacts(arrayUser) {
+    console.log(userList);
     try {
         var showContact = document.querySelector('#chats');
         if (!showContact)
             throw new Error('The element where to show the contacts doesn´t exist!');
         //Doing a loop to show the contacts
         var html = arrayUser.map(function (element) {
-            return ("<div class=\"chat\" id=\"chat\" onclick='redirect(\"" + element.number + "\")'\n            >\n            <div class=\"chat__left\">\n                <img src=\"" + element.picture + "\" alt=\"\">\n            </div>\n            <div class=\"chat__right\">\n                <div class=\"chat__right--top\">\n                    <span class=\"chat__right--top__contact-name\">" + element.name + "</span>\n                    <span class=\"chat__right--top__phone-number\">Phone Number: " + element.number + "</span>\n\n                </div>\n                <div class=\"chat__right--bottom\">\n                    <div class=\"chat__right--bottom--left\">\n                        <img class=\"double-check-mark\" src=\"Img_whatsapp/double-check-seen.svg\" alt=\"\">\n                        <span>Raziel is typing...</span> \n                    </div>\n                </div>\n\n            </div>\n        </div>");
+            return ("<div class=\"chat\" id=\"chat\">\n                <div class=\"chat__left\">\n                    <img src=\"" + element.picture + "\" alt=\"\">\n                </div>\n                <div class=\"chat__right\" onclick='redirect(\"" + element.number + "\")'>\n                    <div class=\"chat__right--top\">\n                        <span class=\"chat__right--top__contact-name\">" + element.name + "</span>\n                        <span class=\"chat__right--top__phone-number\">Phone Number: " + element.number + "</span>\n                    </div>\n                    <div class=\"chat__right--bottom\">\n                        <div class=\"chat__right--bottom--left\">\n                            <img class=\"double-check-mark\" src=\"../Img_whatsapp/double-check-seen.svg\" alt=\"\">\n                            <span>Raziel is typing...</span>\n                        </div>\n                    </div>\n                </div>\n                <i class=\"fas fa-trash table__remove\" onclick='removeChat(\"" + element.number + "\")'></i>\n            </div>");
         }).join('');
         showContact.innerHTML = html;
     }
@@ -114,7 +125,7 @@ function redirect(userNumber) {
     localStorage.setItem('userInfo', JSON.stringify(userList));
     localStorage.setItem('numberToSearch', userNumber);
     try {
-        window.location.href = './whatsappChat.html';
+        window.location.href = '../Chat/whatsappChat.html';
         if (!window.location.href)
             throw new Error('The page where you want to redirect it doesn´t exist!');
     }
@@ -136,3 +147,18 @@ function checkStorage() {
 }
 ;
 checkStorage();
+//To delete a Chat
+function removeChat(chatNumber) {
+    try {
+        var option = confirm("Are you sure do you want to delete this chat?");
+        if (option) {
+            var chatIndex = userList.findIndex(function (element) { return element.number === chatNumber; });
+            userList.splice(chatIndex, 1);
+            renderContacts(userList);
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+;
