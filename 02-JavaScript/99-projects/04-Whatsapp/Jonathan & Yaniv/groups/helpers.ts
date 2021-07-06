@@ -50,7 +50,7 @@ const directToChat = (ev: any): void => {
     const chatUsers: Array<string> = [loggedInUser.userPhone, contactToChat.id];
 
     
-    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers, messageChat);
+    const group: Group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
 
     loggedInUser.addGroup(group);
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
@@ -85,7 +85,7 @@ newGroupSubmit.addEventListener('submit', ev => createNewGroup(ev));
 const createNewGroup = (ev: any): void => {
     try {
         ev.preventDefault();
-
+       
         const groupId: string = null;
         const imgLabel: HTMLElement = document.querySelector('#add_photo');
         const groupImg: string = imgLabel.getAttribute('alt');
@@ -96,8 +96,7 @@ const createNewGroup = (ev: any): void => {
             if (contact.checked) groupUsers.push(contact.value);
         });
 
-
-        const group: Group = new Group(groupId, groupImg, groupName, groupUsers,messageChat);
+        const group: Group = new Group(groupId, groupImg, groupName, groupUsers);
 
         loggedInUser.addGroup(group);
         localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
