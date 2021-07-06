@@ -20,6 +20,7 @@ var Contacts = /** @class */ (function () {
         this.contacts.push(add);
         this.renderContacts();
         this.contactsFilter.push(add);
+        localStorage.setItem('contactsData', JSON.stringify(this.contacts));
     };
     Contacts.prototype.addList = function (addlist) {
         var _this = this;
@@ -33,7 +34,7 @@ var Contacts = /** @class */ (function () {
     Contacts.prototype.renderContacts = function () {
         var html = "";
         this.contacts.forEach(function (element) {
-            html += "<div class=\"containerChat\">\n                  <div class=\"chat1\" onclick=redirect(\"" + element.contactId + "\")>\n                    <img src=\"" + element.image + "\" alt=\"\" class=\"chat1__photo\"> \n                    <h4 class=\"chat1__name\">" + element.contactName + "</h4>\n                  </div>\n                  <div>\n                    <i onclick='handleDelete(\"" + element.contactId + "\")' class=\"far fa-trash-alt\" id=\"delete\"> </i>\n                  </div>\n              </div>";
+            html += "<div class=\"containerChat\">\n                    <div class=\"chat1\" onclick=redirect(\"" + element.contactId + "\")>\n                      <img src=\"" + element.image + "\" alt=\"\" class=\"chat1__photo\"> \n                      <h4 class=\"chat1__name\">" + element.contactName + "</h4>\n                    </div>\n                    <div>\n                      <i onclick='handleDelete(\"" + element.contactId + "\")' class=\"far fa-trash-alt\" id=\"delete\"> </i>\n                    </div>\n                </div>";
         });
         render.innerHTML = html;
     };
@@ -67,13 +68,8 @@ function handleKeyUp() {
 function redirect(contactId) {
     try {
         localStorage.setItem("contactsData", JSON.stringify(contacts.contacts));
-        window.location.href = "chat.html?id=" + contactId;
-        // This is the redirect. This one of the built in methods on the window object (?)
-        // The question mark is the start of the query
-        // Id is just a name you're giving it, and then = and the value.
-        // id is the key and contactId is the value
-        // The question mark allows you to add things onto the end of a URL. By pputting the equals sign you make it a key-value pair.
-        // Where is it getting the id from?
+        localStorage.setItem("contactID", contactId);
+        window.location.href = "second.html?id=" + contactId;
         if (!window.location.href)
             throw new Error("The page where you want to redirect it doesn´t exist!");
     }

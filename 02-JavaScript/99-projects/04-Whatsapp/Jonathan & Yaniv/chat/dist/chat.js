@@ -14,13 +14,14 @@ var emojiList = document.querySelectorAll('.emoji');
 //clicked
 var isClicked = false;
 var Message = /** @class */ (function () {
-    function Message(content, userPhone, dateMsg, groupID, lastMessageName, timeMsgSec) {
+    function Message(content, userPhone, dateMsg, groupID, lastMessageName, timeMsgSec, contactPhone) {
         this.content = content;
         this.userPhone = userPhone;
         this.dateMsg = dateMsg;
         this.groupID = groupID;
         this.lastMessageName = lastMessageName;
         this.timeMsgSec = timeMsgSec;
+        this.contactPhone = contactPhone;
         this.msgID = "id" + Math.random().toString(16).slice(2);
     }
     return Message;
@@ -68,6 +69,9 @@ var Group = /** @class */ (function () {
     function Group() {
         this.groupMsgs = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
     }
+    Group.prototype.renderMsgs = function () {
+        //show all past group messages from LocalStorage
+    };
     return Group;
 }());
 var User = /** @class */ (function () {
@@ -79,7 +83,8 @@ var User = /** @class */ (function () {
     }
     User.prototype.addMessages = function (newMess) {
         this.userGroups[0].groupMsgs.push(newMess);
-        localStorage.setItem("currentMessage", JSON.stringify(this.userGroups[0].groupMsgs));
+        console.log(this.userGroups[0].groupMsgs);
+        return this.userGroups[0].groupMsgs;
     };
     return User;
 }());
@@ -92,9 +97,12 @@ function sendMessage() {
     var today = new Date();
     var timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
     var timeHMS = (today.getTime());
-    var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS); //last one is the lastmessagename
+    var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS, contactList); //last one is the lastmessagename
     messageList.addMessage(message);
-    loggedInUser.addMessages(message);
+    var messagesUser = loggedInUser.addMessages(message);
+    localStorage.setItem("currentMessage", JSON.stringify(messagesUser));
+    //localStorage.setItem("currentUser", JSON.stringify(loggedInUser))
+    //localStorage.setItem("contactList", JSON.stringify(message.contactPhone))
     elementMessage.value = '';
 }
 //display inputSearch with search icon 
