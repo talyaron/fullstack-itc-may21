@@ -102,12 +102,6 @@ renderMessages(thisContact)
 
 const microphone: any = document.querySelector(".fa-microphone");
 microphone.disabled = "true" 
-// const textInput = document.querySelector("#input")
-// textInput.addEventListener("keyup", myClassChange);
-// function myClassChange(event) {
-//     console.log(event.key);
-//     const sendButton:HTMLElement = document.querySelector('.sendButton')
-//     sendButton.style.display === "none"
-// }
+
 
 
