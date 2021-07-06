@@ -56,8 +56,8 @@ var handleContact = function (ev) {
     var profileImg = ev.target.elements.imgContact.value;
     var newContacto = new Contact(name, phone, profileImg);
     allContacts.push(newContacto);
-    allContactsForSearch.push(newContacto);
     localStorage.setItem("contactos", JSON.stringify(allContacts));
+    allContactsForSearch.push(newContacto);
     render();
 };
 var searchContact = function (searchBar) {

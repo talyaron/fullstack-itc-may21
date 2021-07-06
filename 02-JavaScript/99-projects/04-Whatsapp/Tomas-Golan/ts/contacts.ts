@@ -12,6 +12,7 @@ interface LocalContact {
     name: string;
     phone: number;
     profileImg: string;
+    id: string;
 }
 
 class Contact {
@@ -98,8 +99,9 @@ const handleContact = (ev) => {
 
     const newContacto = new Contact(name, phone, profileImg);
     allContacts.push(newContacto);
-    allContactsForSearch.push(newContacto);
     localStorage.setItem("contactos", JSON.stringify(allContacts));
+    allContactsForSearch.push(newContacto);
+
     render();
 }
 

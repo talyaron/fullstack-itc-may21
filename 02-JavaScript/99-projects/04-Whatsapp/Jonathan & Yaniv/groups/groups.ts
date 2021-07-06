@@ -1,12 +1,10 @@
 
-
-
 class Group {
     groupId: string; // userPhone or "group" + Math.random().toString(16).slice(2);
     groupImg: string;
     groupName: string;
     groupUsers: Array<string> // userPhone numbers // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
-
+    groupMsgs: Array<Message> = []
     constructor (groupId: string, groupImg: string, groupName: string, groupUsers: Array<string>) {
         this.groupId = groupId ? groupId : "group" + Math.random().toString(16).slice(2);
         this.groupImg = groupImg;
@@ -41,13 +39,14 @@ class User {
         try {
             const ChatsContainer: HTMLElement = document.querySelector(".chats");
             ChatsContainer.innerHTML = ``;
+            const message = JSON.parse(localStorage.getItem("currentMessage"));
             this.userGroups.forEach((group) => {
                 const groupHTML: string = `
                 <div class="chats__item chat" id="${group.groupId}">
                 <img class="chat__item chat__item--img" src="${group.groupImg}" />
                 <h3 class="chat__item chat__item--name">${group.groupName}</h2>
-                    <p class="chat__item chat__item--last_msg_time">{group.groupMsgs[group.groupMsgs.length -1].dateMsg}</p>
-                    <p class="chat__item chat__item--last_msg_content">{group.groupMsgs[group.groupMsgs.length -1].content}</p>
+                    <p class="chat__item chat__item--last_msg_time">${message[message.length-1].content}</p>
+                    <p class="chat__item chat__item--last_msg_content">${message[message.length-1].dateMsg}</p>
                     <i class="chat__item chat__item--delete fas fa-trash"></i>
             </div>`; // for lines 47-48 - add "$" before "{" once the Message class is linked
             ChatsContainer.insertAdjacentHTML('beforeend',groupHTML);

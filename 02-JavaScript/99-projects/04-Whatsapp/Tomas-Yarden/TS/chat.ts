@@ -109,30 +109,15 @@ this.arrayChat = this.arrayChat.filter((element)=> element.id !== id);
                    `;
 
       }
-      else if (element.message.includes("Como Estas?")) {
+      else if (element.message.includes("How old are you?")) {
         html += `
                  <p class="botText">
-                  <span>Bien <i class="fas fa-chevron-down arrow-down "></i></span>
+                  <span>I'm 20 <i class="fas fa-chevron-down arrow-down "></i></span>
                    </p>
                    `;
 
       }
-      else if (element.message.includes("Como Estas?")) {
-        html += `
-                 <p class="botText">
-                  <span>Bien <i class="fas fa-chevron-down arrow-down "></i></span>
-                   </p>
-                   `;
-
-      }
-      else if (element.message.includes("Como Estas?")) {
-        html += `
-                 <p class="botText">
-                  <span>Bien <i class="fas fa-chevron-down arrow-down "></i></span>
-                   </p>
-                   `;
-
-      }
+     
     
     });
     
