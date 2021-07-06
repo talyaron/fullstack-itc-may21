@@ -44,14 +44,11 @@ function logSubmit(event) {
     obj["message"] = message;
     obj["timeStamp"] = timeStamp;
     thisContact[0].chats.push(obj);
-    console.log("Time stamp: timeStamp" + message);
     event.preventDefault();
     event.target.reset();
     renderMessages(thisContact);
     updateLastSent();
     setScrollHeight();
-    console.log(thisContact);
-    console.log(allContacts);
     localStorage.setItem('contacts', JSON.stringify(allContacts));
 }
 updateLastSent();
