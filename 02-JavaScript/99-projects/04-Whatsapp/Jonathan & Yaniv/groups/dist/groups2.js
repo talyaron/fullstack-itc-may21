@@ -5,7 +5,6 @@ var Group = /** @class */ (function () {
         this.groupImg = groupImg;
         this.groupName = groupName;
         this.groupUsers = groupUsers;
-        // this.groupMsgs = groupMsgs;
     }
     return Group;
 }());

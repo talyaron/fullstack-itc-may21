@@ -5,12 +5,11 @@ class Group {
     groupUsers: Array<string> // userPhone numbers
     // groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
 
-    constructor (groupId: string, groupImg: string, groupName: string, groupUsers: Array<string>) { // groupMsgs: Array<Message>
+    constructor (groupId: string, groupImg: string, groupName: string, groupUsers: Array<string>) {
         this.groupId = groupId ? groupId : "group" + Math.random().toString(16).slice(2);
         this.groupImg = groupImg;
         this.groupName = groupName;
         this.groupUsers = groupUsers;
-        // this.groupMsgs = groupMsgs;
     }
 }
 
@@ -55,11 +54,6 @@ class User {
             console.error(er);
           }
     }
-    // addMessages(newMess:Message){
-
-    //     //this.userGroups[0].groupMsgs.push(newMess)
-        
-    // }
 }
 
 class ContactList {
@@ -73,7 +67,6 @@ class ContactList {
         const contactIndex = this.allContacts.findIndex(contactItem => contactItem.userPhone === contactPhone);
         return contactIndex;
     }
-
     renderContactsToNewChatMenu() {
         try {
             this.allContacts = this.allContacts.sort((a: User, b: User) => {
@@ -139,7 +132,6 @@ class ContactList {
           }
     }
 }
-
 const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
@@ -160,4 +152,3 @@ const readURL = (input: any) => {
       }
       reader.readAsDataURL(input.files[0]);
     }
-}

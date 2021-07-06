@@ -45,7 +45,7 @@ class Message {
 
 
 class MessageList {
-    messageList: Array<Message> = [] //maybe we can took from this array the last message
+    messageList: Array<Message> = [] 
     messageListFilter: Array<Message> = []
 
     addMessage(message: Message) {
@@ -82,12 +82,8 @@ class MessageList {
 
     renderChat():Array<any> {
         let html: string = '';
-        const random: number = (Math.random() < 0.5) ? contactList : contactUser;
-
 
         this.messageList.forEach(message => {
-
-
 
             html += `<div class="container__chat-box__messages--user">
                         <p class="container__chat-box__messages--user--content">${message.content}<p>
@@ -113,16 +109,16 @@ btnMessage.addEventListener('click', sendMessage)
 
 function sendMessage() {
     const inputMessage = elementMessage.value;
-
+    
     //current date
     let today = new Date();
     let timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes())
     let timeHMS = (today.getTime())
    
-
     const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage,timeHMS) //last one is the lastmessagename
 
     messageList.addMessage(message)
+
 
     elementMessage.value = '';
 
@@ -170,13 +166,18 @@ function handleKeyUp() {
 }
 
 
+
+
 function handleReturn() {
 
-    localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
+    //localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
 
+    let pickedUser = JSON.parse(localStorage.getItem("currentUser"))
+
+    //pickedUser = pickedUser.userGroups[0].groupMsgs = messageList.renderChat()
+
+    //localStorage.setItem('currentUser', JSON.stringify(pickedUser))
     
-
-    const pickedUser = JSON.parse(localStorage.getItem("currentUser"))
     window.location.href = `../groups/groups.html?${pickedUser.userPhone}`;
 }
 
@@ -243,7 +244,7 @@ class ContactMessage {
     }
 }
 
-const contactChat = JSON.parse(localStorage.getItem("contactListUser"))
+const contactChat = JSON.parse(localStorage.getItem("contactList"))
 const contactList = JSON.parse(localStorage.getItem("contactId"))
 const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone
 
