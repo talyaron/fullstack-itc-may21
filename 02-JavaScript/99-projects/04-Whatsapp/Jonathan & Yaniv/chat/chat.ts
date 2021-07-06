@@ -109,7 +109,6 @@ class Group {
     groupUsers: Array<string> // userPhone numbers
     groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
 
-    
 
 }
 
@@ -126,17 +125,15 @@ class User {
         this.userGroups = userGroups;
     }
 
-    
     addMessages(newMess:Message){
-
         this.userGroups[0].groupMsgs.push(newMess)
-        
+        localStorage.setItem("currentMessage", JSON.stringify(this.userGroups[0].groupMsgs))
+
     }
+
 }
 
 const loggedInUser: User = new User (JSON.parse(localStorage.getItem("currentUser")).userImg,JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups)
-
-
 
 
 

@@ -79,6 +79,7 @@ var User = /** @class */ (function () {
     }
     User.prototype.addMessages = function (newMess) {
         this.userGroups[0].groupMsgs.push(newMess);
+        localStorage.setItem("currentMessage", JSON.stringify(this.userGroups[0].groupMsgs));
     };
     return User;
 }());
