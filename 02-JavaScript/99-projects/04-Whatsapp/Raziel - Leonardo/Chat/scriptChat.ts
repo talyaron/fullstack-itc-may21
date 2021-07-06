@@ -3,7 +3,6 @@ const root: HTMLElement = document.querySelector('#main');
 
 const userNumber = localStorage.getItem('numberToSearch');
 const userfiltered = userInfo.filter(element => (element.number == userNumber));
-
 //Render the chat of the User
 function renderChat(): void {
     try {
@@ -37,13 +36,15 @@ function renderChat(): void {
             </div>
         </div></div>
                 <div class="chat-footer">
+                
                     <img src="../Img_whatsapp/emo.png" class="emo" id="emo">
                     <input type="text" placeholder="Type a message" id="texting"></input>
                     <div class="icons">
                         <img src="../Img_whatsapp/attach file.png">
                         <img src="../Img_whatsapp/camera.png">
                     </div>
-                    <img src="../Img_whatsapp/mic.png" class="mic" id="sendButton">
+                    
+                    <img src="https://img.icons8.com/material-outlined/50/000000/send-comment.png"/ id="sendButton">
                 </div>
             </div>`
             )
@@ -94,7 +95,8 @@ const sendButton = document.querySelector('#sendButton');
 
 
 sendButton.addEventListener('click', () => {
-    const message = {
+    const message: Message = 
+    {
         text: texting.value,
         id: Math.random().toString(16).slice(2),
         time: new Date()

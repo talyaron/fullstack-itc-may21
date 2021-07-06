@@ -11,7 +11,7 @@
 .chat {
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
+	height: 90vh;
 	background: #f1f0e8;
 }
 .chat-header {
@@ -126,6 +126,8 @@
 	border-radius: 60px;
 	position: relative;
 	cursor: pointer;
+    margin-top: 10px;
+	margin-bottom: 10px;
 }
 .chat-footer input {
 	display: block;
@@ -170,3 +172,8 @@
     margin-left: 5px;
 }
 
+@media screen and (max-width: 600px) {
+	.container {
+		width: 100%;
+	}
+}

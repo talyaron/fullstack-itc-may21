@@ -21,11 +21,11 @@ var Message = /** @class */ (function () {
 }());
 ;
 var User = /** @class */ (function () {
-    function User(name, number, picture, message) {
+    function User(name, number, picture) {
+        this.message = [];
         this.name = name;
         this.number = number;
         this.picture = picture;
-        this.message = message;
     }
     ;
     return User;
@@ -50,10 +50,19 @@ var handleSubmitNewUser = function (ev) {
         var name = ev.target.elements.name.value;
         var number = ev.target.elements.number.valueAsNumber;
         var image = document.querySelector('#previewImage').getAttribute("src");
-        var message = [new Message('')];
-        var user = new User(name, number, image, message);
+        var validateNumber_1 = document.querySelector('#number');
+        validateNumber_1.addEventListener('blur', function () {
+            userList.forEach(function (element) {
+                if (element.number == validateNumber_1.value) {
+                    alert('The number is already taken');
+                    ev.target.reset();
+                    throw new Error('The number is already taken');
+                }
+                ;
+            });
+        });
+        var user = new User(name, number, image);
         addUser(user);
-        numberValidation(number);
         ev.target.reset();
         if (!user)
             throw new Error('The user doesn´t exist!');
@@ -78,6 +87,7 @@ function addUser(user) {
 ;
 //To Show the contacts in the page
 function renderContacts(arrayUser) {
+    console.log(userList);
     try {
         var showContact = document.querySelector('#chats');
         if (!showContact)
@@ -152,18 +162,3 @@ function removeChat(chatNumber) {
     }
 }
 ;
-function numberValidation(numberFromArray) {
-    var validNumber = userList.includes(numberFromArray);
-    console.log(validNumber);
-    console.log(numberFromArray);
-    if (validNumber) {
-        alert("The number is already taken!!");
-        //  const element = <HTMLInputElement> document.getElementById("disable");
-        //  element.disabled = true;
-    }
-    else {
-        // const element = <HTMLInputElement> document.getElementById("disable");
-        // element.disabled = false; 
-    }
-    console.log(validNumber);
-}

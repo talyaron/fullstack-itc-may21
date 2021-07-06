@@ -27,6 +27,7 @@ function sendMessage() {
     const messageElement = `<div>${msg}</div> `;
     chatContainer.insertAdjacentHTML("beforeend", messageElement);
   });
+  conversation.value="" //serves for refresh and delete what you typed before in the input bar
 }
 
 console.log(conversation);
@@ -71,4 +72,13 @@ function sendConversation() {
   messageList.addMessage(message);
 
   conversation.value = "";
+}
+
+function redirect2() {
+  try {
+      window.location.href = 'index.html'
+      if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!');
+  } catch (error) {
+      console.error(error)
+  }
 }
