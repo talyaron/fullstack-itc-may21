@@ -111,6 +111,7 @@ body {
 }
 .holder__contact:hover {
   background-color: lightgray;
+  cursor: pointer;
 }
 .holder__contact {
   padding-top: 25px;

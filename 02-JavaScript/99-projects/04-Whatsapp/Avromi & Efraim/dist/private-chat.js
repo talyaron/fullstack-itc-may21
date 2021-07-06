@@ -21,8 +21,8 @@ var contactImg = document.querySelector(".nav__img__wrapper");
 contactImg.innerHTML = "<img class=\"nav__img\"\nsrc=\"" + thisContact[0].imgUrl + "\"\nalt = \"\" >";
 function updateLastSent() {
     var lastSent = document.querySelector(".nav__contact p");
-    thisContact[0].chats.reverse();
-    lastSent.innerHTML = "Last Sent: " + thisContact[0].chats[0].timeStamp + " ";
+    var index = parseInt(thisContact[0].chats.length - 1);
+    lastSent.innerHTML = "Last Sent: " + thisContact[0].chats[index].timeStamp + " ";
 }
 function renderMessages(arrToRender) {
     var messagesDiv = document.querySelector(".messages");
@@ -58,10 +58,26 @@ function logSubmit(event) {
     renderMessages(thisContact);
     updateLastSent();
     setScrollHeight();
+    var microphone = document.querySelector(".fa-microphone");
+    microphone.style.display = "block";
+    var plane = document.querySelector(".fa-paper-plane");
+    plane.style.display = "none";
     localStorage.setItem('contacts', JSON.stringify(allContacts));
 }
+function removeMic() {
+    var input = document.getElementById("input");
+    input.addEventListener("keyup", function () {
+        var mic = document.querySelector(".fa-microphone");
+        mic.style.display = "none";
+        var plane = document.querySelector(".fa-paper-plane");
+        plane.style.display = "block";
+    });
+}
+removeMic();
 updateLastSent();
 renderMessages(thisContact);
+var microphone = document.querySelector(".fa-microphone");
+microphone.disabled = "true";
 // const textInput = document.querySelector("#input")
 // textInput.addEventListener("keyup", myClassChange);
 // function myClassChange(event) {

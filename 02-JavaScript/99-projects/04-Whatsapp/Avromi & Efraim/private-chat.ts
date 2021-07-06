@@ -30,8 +30,9 @@ alt = "" >`
 
 function updateLastSent() {
     const lastSent = document.querySelector(".nav__contact p")
-    thisContact[0].chats.reverse()
-    lastSent.innerHTML = `Last Sent: ${thisContact[0].chats[0].timeStamp} `
+    let index: number = parseInt(thisContact[0].chats.length - 1);
+
+    lastSent.innerHTML = `Last Sent: ${thisContact[0].chats[index].timeStamp} `
 }
 
 function renderMessages(arrToRender: Array<Contact>) {
@@ -79,12 +80,28 @@ function logSubmit(event) {
     renderMessages(thisContact)
     updateLastSent()
     setScrollHeight()
+    const microphone = document.querySelector(".fa-microphone");
+    microphone.style.display= "block";
+    const plane: any = document.querySelector(".fa-paper-plane");
+    plane.style.display = "none"
     localStorage.setItem('contacts', JSON.stringify(allContacts))
 }
+
+
+function removeMic(){
+    const input = document.getElementById("input")
+    input.addEventListener("keyup",()=>{
+    const mic: any = document.querySelector(".fa-microphone");
+    mic.style.display = "none"
+    const plane: any = document.querySelector(".fa-paper-plane");
+    plane.style.display = "block"
+})}
+removeMic()
 updateLastSent()
 renderMessages(thisContact)
 
-
+const microphone: any = document.querySelector(".fa-microphone");
+microphone.disabled = "true" 
 // const textInput = document.querySelector("#input")
 // textInput.addEventListener("keyup", myClassChange);
 // function myClassChange(event) {

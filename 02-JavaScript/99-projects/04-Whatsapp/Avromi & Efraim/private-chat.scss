@@ -23,7 +23,10 @@ body {
     // p {
     //     // margin-top: -8%;
     // }
+    .fa-arrow-left:hover{
+        cursor: pointer;
 
+    }
     &__wrapper {
         display: flex;
         justify-content: space-around;
@@ -120,7 +123,7 @@ body {
         }
         .fa-paper-plane{
              
-            // display: none;
+            display: none;
         }
     }
 }
