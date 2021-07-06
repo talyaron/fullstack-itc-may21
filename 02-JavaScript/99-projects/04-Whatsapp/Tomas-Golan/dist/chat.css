@@ -91,7 +91,6 @@ a {
   width: 100%;
   display: grid;
   height: 5vh;
-  transform: translateY(1300%);
 }
 .container .chat_wrapper--user2 {
   background-color: #E1FFC7;
