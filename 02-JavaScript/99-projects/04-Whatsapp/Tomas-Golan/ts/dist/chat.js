@@ -1,8 +1,15 @@
 //method to add individual msg
 var Mensaje = /** @class */ (function () {
+<<<<<<< Updated upstream
     function Mensaje(text) {
         this.textId = "id" + Math.random().toString(16).slice(2);
         this.text = text;
+=======
+    function Mensaje(text, textId) {
+        this.text = text;
+        this.id = Math.random().toString(16).slice(2);
+        ;
+>>>>>>> Stashed changes
     }
     return Mensaje;
 }());
