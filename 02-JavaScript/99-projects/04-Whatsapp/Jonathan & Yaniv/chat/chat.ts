@@ -414,10 +414,3 @@ if (isChatOrGroup === 0) {
 
     groupChat.renderGroupChat();
 }
-
-
-
-
-
-
-
