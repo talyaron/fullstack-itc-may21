@@ -168,8 +168,8 @@ function handleKeyUp() {
     try {
         messageList.filterByMessage(inputSearch.value);
     }
-    catch (e) {
-        console.log(e);
+    catch (er) {
+        console.error(er);
     }
 }
 function handleReturn() {
