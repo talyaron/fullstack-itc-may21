@@ -30,9 +30,9 @@ class Message {
     groupID: string;
     msgID: string;
     lastMessageName: string;
-    timeMsgSec : number;
+    timeMsgSec: number;
 
-    constructor(content: string, userPhone: string, dateMsg: string, groupID: string, lastMessageName: string, timeMsgSec:number) {
+    constructor(content: string, userPhone: string, dateMsg: string, groupID: string, lastMessageName: string, timeMsgSec: number) {
         this.content = content;
         this.userPhone = userPhone;
         this.dateMsg = dateMsg;
@@ -45,7 +45,7 @@ class Message {
 
 
 class MessageList {
-    messageList: Array<Message> = [] 
+    messageList: Array<Message> = []
     messageListFilter: Array<Message> = []
 
     addMessage(message: Message) {
@@ -80,7 +80,7 @@ class MessageList {
         this.renderChat()
     }
 
-    renderChat():Array<any> {
+    renderChat(): Array<any> {
         let html: string = '';
 
         this.messageList.forEach(message => {
@@ -91,15 +91,15 @@ class MessageList {
                         <i class="fas fa-check-double container__chat-box__messages--user--doubleclick"></i>
                         <i class="fa fa-trash container__chat-box__messages--user--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item"></i>
                         </div>`
-            
+
         });
-        
+
         containerChat.insertAdjacentHTML('beforeend', html);
 
         return this.messageList
     }
 
-    
+
 }
 
 class Group {
@@ -110,15 +110,17 @@ class Group {
     groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
     groupMyPhone: string;
 
-    constructor  (groupImg: string, groupName: string,groupUsers: Array<string>, groupMyPhone: string) {
+    constructor(groupImg: string, groupName: string, groupUsers: Array<string>, groupMyPhone: string) {
         this.groupImg = groupImg;
         this.groupName = groupName;
-        this.groupUsers = groupUsers 
+        this.groupUsers = groupUsers
         this.groupMyPhone = groupMyPhone;
     }
 
-    renderGrpupChat() {
+    renderGroupChat() {
+
         let html: string = ''
+
 
         html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
                 <img src="${this.groupImg}" alt="" srcset="">
@@ -128,8 +130,9 @@ class Group {
                 </div>`
 
         containerContactUser.innerHTML = html;
+
     }
-    
+
 
 }
 
@@ -139,26 +142,26 @@ class User {
     userPhone: string;
     userGroups: Array<Group>;
 
-    constructor (userImg: string, userName: string, userPhone: string, userGroups: Array<Group>) {
+    constructor(userImg: string, userName: string, userPhone: string, userGroups: Array<Group>) {
         this.userImg = userImg;
         this.userName = userName;
         this.userPhone = userPhone;
         this.userGroups = userGroups;
     }
 
-    addMessages(newMess:Message,groupId:string){
+    addMessages(newMess: Message, groupId: string) {
 
-        const groupIndex = this.userGroups.findIndex(group=>group.groupId === groupId)
+        const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId)
         this.userGroups[groupIndex].groupMsgs.push(newMess)
         return this.userGroups[groupIndex].groupMsgs
-        
+
     }
 
-    renderMsgs(groupid: string){
+    renderMsgs(groupid: string) {
 
         let html: string = '';
 
-        const groupIndex = this.userGroups.findIndex(group=>group.groupId === groupId)
+        const groupIndex = this.userGroups.findIndex(group => group.groupId === groupid)
 
         this.userGroups[groupIndex].groupMsgs.forEach(message => {
 
@@ -170,9 +173,9 @@ class User {
                          <i class="fa fa-trash container__chat-box__messages--user--trash"  onclick='handleEditDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
                         </p>
                     </div>`
-            
+
         });
-        
+
         containerChat.innerHTML = html;
 
     }
@@ -182,7 +185,7 @@ class User {
 class ContactList {
     allContacts: Array<User>;
 
-    constructor (allContacts: Array<User>) {
+    constructor(allContacts: Array<User>) {
         this.allContacts = allContacts;
     }
 
@@ -192,7 +195,7 @@ class ContactList {
     }
 }
 
-const loggedInUser: User = new User (JSON.parse(localStorage.getItem("currentUser")).userImg,JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups)
+const loggedInUser: User = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups)
 
 const messageList = new MessageList();
 
@@ -207,32 +210,27 @@ btnMessage.addEventListener('click', sendMessage)
 
 function sendMessage() {
     const inputMessage = elementMessage.value;
-    
-    //current date
+
     let today = new Date();
     let timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes())
     let timeHMS = (today.getTime())
-   
-    const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage,timeHMS) //last one is the lastmessagename
+
+    const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS)
 
     messageList.addMessage(message)
 
-    loggedInUser.addMessages(message,groupId)
+    loggedInUser.addMessages(message, groupId)
 
-    localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
+    localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
     contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-    localStorage.setItem('contactList',JSON.stringify(contactList));
-
-   
-    
+    localStorage.setItem('contactList', JSON.stringify(contactList));
 
     elementMessage.value = '';
 
 }
 
 
-//display inputSearch with search icon 
-btnSearch.addEventListener('click', displayInput) //why the first one does not appear
+btnSearch.addEventListener('click', displayInput)
 
 function displayInput() {
     if (inputSearch.style.display === 'none') {
@@ -257,8 +255,6 @@ function handleEditDelete(messageId: string) {
         isClicked = false
     }
 
-
-
 }
 
 inputSearch.addEventListener('keyup', handleKeyUp)
@@ -276,10 +272,8 @@ function handleKeyUp() {
 
 function handleReturn() {
 
-
     let pickedUser = JSON.parse(localStorage.getItem("currentUser"))
 
-    
     window.location.href = `../groups/groups.html?userid=${pickedUser.userPhone}`;
 }
 
@@ -322,17 +316,20 @@ class ContactMessage {
     userImg: string;
     userName: string;
     userPhone: string;
-    //userGroups: Array<string>; //list of groups
+    userGroups: Array<string>; //list of groups
 
-    constructor(userImg: string, userName: string, userPhone: string) {
+    constructor(userImg: string, userName: string, userPhone: string, userGroups: Array<string>) {
         this.userImg = userImg;
         this.userName = userName;
         this.userPhone = userPhone;
-        //  this.userGroups = userGroups;
+        this.userGroups = userGroups;
     }
 
     renderUserChat() {
+
         let html: string = ''
+
+        containerContactUser.innerHTML = html
 
         html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
                 <img src="${this.userImg}" alt="" srcset="">
@@ -346,27 +343,29 @@ class ContactMessage {
 }
 
 const contactChat = JSON.parse(localStorage.getItem("contactList"))
-const contactList:ContactList = JSON.parse(localStorage.getItem("contactId"))
+const contactList: ContactList = JSON.parse(localStorage.getItem("contactId"))
+const isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"))
+console.log(localStorage.getItem("IsChatOrGroup"))
 const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone
 
-const currentGroup = JSON.parse(localStorage.getItem("currentGroup"))
+if (isChatOrGroup === 0) {
 
+    let chatUser = Object.values(Object.values(contactChat)[1])
 
+    chatUser.find(function (chat) {
+        if (contactList === chat.userPhone) {
+            const contactUser = new ContactMessage(chat.userImg, chat.userName, chat.userPhone, chat.userGroups)
+            contactUser.renderUserChat()
+        }
+    });
+} else {
 
-let chatUser = Object.values(Object.values(contactChat)[1])
+    const currentGroup = JSON.parse(localStorage.getItem("currentGroup"))
+    
+    const groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser)
 
-chatUser.find(function (chat) {
-    if (contactList === chat.userPhone) {
-        const contactUser = new ContactMessage(chat.userImg, chat.userName, chat.userPhone)
-        contactUser.renderUserChat()
-    }
-});
-
-
-const groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser)
-
-
-groupChat.renderGrpupChat()
+    groupChat.renderGroupChat()
+}
 
 
 

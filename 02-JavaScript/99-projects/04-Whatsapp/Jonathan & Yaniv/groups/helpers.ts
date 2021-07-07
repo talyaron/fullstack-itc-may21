@@ -62,6 +62,7 @@ const directToChat = (ev: any): void => {
         allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
         localStorage.setItem('contactList', JSON.stringify(allContacts));
         localStorage.setItem('contactId', JSON.stringify(contactToChat.id))
+        localStorage.setItem('IsChatOrGroup', JSON.stringify(0))
     }
 
     window.location.href = `../chat/chat.html?groupid=${contactToChat.id}`;
@@ -98,7 +99,7 @@ const directToGroup = (ev: any): void => {
     //localStorage.setItem('contactId',JSON.stringify(existingGroup.id))
 
     localStorage.setItem('currentGroup',JSON.stringify(group))
-
+    localStorage.setItem('IsChatOrGroup', JSON.stringify(1))
 
    window.location.href = `../chat/chat.html?groupid=${existingGroup.id}`;
 }
