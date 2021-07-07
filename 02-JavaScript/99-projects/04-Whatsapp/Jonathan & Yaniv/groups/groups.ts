@@ -230,8 +230,6 @@ const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
 
-
-
 const readURL = (input: any) => {
     try {
         if (input.files && input.files[0]) {
