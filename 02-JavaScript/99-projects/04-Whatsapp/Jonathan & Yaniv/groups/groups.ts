@@ -66,18 +66,22 @@ class User {
     }
 
     filterGroups(groupFilter: string) {
-        let filteredGroups: Array<Group> = this.userGroups;
-        const groupRegEx = groupFilter ? new RegExp(groupFilter,'gmi') : undefined;
-    
-        if (groupFilter !== "") {
-            filteredGroups = filteredGroups.filter(group => {
-                ((group.groupMsgs.find(msg=>groupRegEx.test(msg.content)) !== undefined) ||
-                (groupRegEx.test(group.groupName)) ||
-                (group.groupUsers.find(user=>groupRegEx.test(user)) !== undefined)) // not by users name, only phone numbers
-            });
-        }
+        try {
+            let filteredGroups: Array<Group> = this.userGroups;
+            const groupRegEx = groupFilter ? new RegExp(groupFilter,'gmi') : undefined;
+        
+            if (groupFilter !== "") {
+                filteredGroups = filteredGroups.filter(group => {
+                    ((group.groupMsgs.find(msg=>groupRegEx.test(msg.content)) !== undefined) ||
+                    (groupRegEx.test(group.groupName)) ||
+                    (group.groupUsers.find(user=>groupRegEx.test(user)) !== undefined)) // not by users name, only phone numbers
+                });
+            }
 
-        this.renderChatsToChatsList(filteredGroups)
+            this.renderChatsToChatsList(filteredGroups)
+        } catch (er) {
+            console.error(er);
+          }  
     }
 
     renderChatsToChatsList(FilteredGroupsToRender: Array<Group>) {
@@ -109,9 +113,12 @@ class User {
     }
 
     extractGroup(groupId:string){
-        const existingGroup = this.userGroups.find(group=>group.groupId === groupId)
-        return existingGroup;
-
+        try {
+            const existingGroup = this.userGroups.find(group=>group.groupId === groupId)
+            return existingGroup;
+        } catch (er) {
+            console.error(er);
+          }
     }
         
     
@@ -128,23 +135,31 @@ class ContactList {
     }
 
     findContactIndex(contactPhone) {
-        const contactIndex = this.allContacts.findIndex(contactItem => contactItem.userPhone === contactPhone);
-        return contactIndex;
+        try {
+            const contactIndex = this.allContacts.findIndex(contactItem => contactItem.userPhone === contactPhone);
+            return contactIndex;
+        } catch (er) {
+            console.error(er);
+        }
     }
 
     filterContacts(contactFilter: string,type: string) {
-        let filteredContacts: Array<User> = this.allContacts;
-        const contactRegEx = contactFilter ? new RegExp(contactFilter,'gmi') : undefined;
-    
-        if (contactFilter !== "") {
-            filteredContacts = filteredContacts.filter(contact => {
-                ((contactRegEx.test(contact.userName)) ||
-                (contactRegEx.test(contact.userPhone)))
-            });
-        }
+        try {
+            let filteredContacts: Array<User> = this.allContacts;
+            const contactRegEx = contactFilter ? new RegExp(contactFilter,'gmi') : undefined;
+        
+            if (contactFilter !== "") {
+                filteredContacts = filteredContacts.filter(contact => {
+                    ((contactRegEx.test(contact.userName)) ||
+                    (contactRegEx.test(contact.userPhone)))
+                });
+            }
 
-        if (type === 'privateChat') this.renderContactsToNewChatMenu(filteredContacts);
-        if (type === 'groupChat') this.renderContactsToNewGroupMenu(filteredContacts);
+            if (type === 'privateChat') this.renderContactsToNewChatMenu(filteredContacts);
+            if (type === 'groupChat') this.renderContactsToNewGroupMenu(filteredContacts);
+        } catch (er) {
+            console.error(er);
+          }
     }
 
     renderContactsToNewChatMenu(FilteredContactsToRender: Array<User>) {
@@ -225,19 +240,23 @@ const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser
 
 
 const readURL = (input: any) => {
-    if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.onload = (e)=> {
-            const label: HTMLElement = document.querySelector('#add_photo');
-            label.setAttribute('alt',`${e.target.result}`);
-            label.style.backgroundImage = `url("${e.target.result}")`;
-            label.style.backgroundSize = '100% 100%';
-            label.innerText = '';
-            label.style.padding = '0';
-            label.style.height = '200px';
-            label.style.width = '200px';
-            return e.target.result
+    try {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = (e)=> {
+                const label: HTMLElement = document.querySelector('#add_photo');
+                label.setAttribute('alt',`${e.target.result}`);
+                label.style.backgroundImage = `url("${e.target.result}")`;
+                label.style.backgroundSize = '100% 100%';
+                label.innerText = '';
+                label.style.padding = '0';
+                label.style.height = '200px';
+                label.style.width = '200px';
+                return e.target.result
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    } catch (er) {
+        console.error(er);
       }
-      reader.readAsDataURL(input.files[0]);
-    }
 }
