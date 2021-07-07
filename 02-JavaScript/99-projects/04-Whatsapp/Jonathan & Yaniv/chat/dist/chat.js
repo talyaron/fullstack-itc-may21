@@ -75,7 +75,14 @@ var Group = /** @class */ (function () {
     Group.prototype.renderGroupChat = function () {
         var html = '';
         var groupUser = this.groupUsers.filter(function (group) { return !group.match(contactUser); });
-        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.groupImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.groupName + "</span>\n                <span class=\"container__header__left__text--second\">You," + groupUser + " </span>\n                </div>";
+        var showGroupUser;
+        if (groupUser.length === 2) {
+            showGroupUser = "You," + groupUser;
+        }
+        else {
+            showGroupUser = this.groupUsers.filter(function (group) { return !group.match(contactUser); });
+        }
+        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.groupImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.groupName + "</span>\n                <span class=\"container__header__left__text--second\">" + showGroupUser + "</span>\n                </div>";
         containerContactUser.innerHTML = html;
     };
     return Group;
@@ -197,8 +204,7 @@ var ContactMessage = /** @class */ (function () {
     }
     ContactMessage.prototype.renderUserChat = function () {
         var html = '';
-        containerContactUser.innerHTML = html;
-        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.userImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.userName + "</span>\n                <span class=\"container__header__left__text--second\">You," + this.userPhone + "</span>\n                </div>";
+        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.userImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.userName + "</span>\n                <span class=\"container__header__left__text--second\">" + this.userPhone + "</span>\n                </div>";
         containerContactUser.innerHTML = html;
     };
     return ContactMessage;

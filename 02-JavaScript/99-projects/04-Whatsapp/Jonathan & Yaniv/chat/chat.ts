@@ -122,12 +122,18 @@ class Group {
         let html: string = ''
 
         const groupUser = this.groupUsers.filter(group=>!group.match(contactUser))
+        let showGroupUser;
+        if (groupUser.length === 2){
+            showGroupUser = `You,${groupUser}`
+        }else{
+            showGroupUser = this.groupUsers.filter(group=>!group.match(contactUser))
+        }
 
         html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
                 <img src="${this.groupImg}" alt="" srcset="">
                 <div class="container__header__left__text">
                 <span class="container__header__left__text--first">${this.groupName}</span>
-                <span class="container__header__left__text--second">You,${groupUser} </span>
+                <span class="container__header__left__text--second">${showGroupUser}</span>
                 </div>`
 
         containerContactUser.innerHTML = html;
@@ -330,13 +336,15 @@ class ContactMessage {
 
         let html: string = ''
 
-        containerContactUser.innerHTML = html
+        
+
+
 
         html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
                 <img src="${this.userImg}" alt="" srcset="">
                 <div class="container__header__left__text">
                 <span class="container__header__left__text--first">${this.userName}</span>
-                <span class="container__header__left__text--second">You,${this.userPhone}</span>
+                <span class="container__header__left__text--second">${this.userPhone}</span>
                 </div>`
 
         containerContactUser.innerHTML = html;
