@@ -71,14 +71,15 @@ class User {
             const groupRegEx = groupFilter ? new RegExp(groupFilter,'gmi') : undefined;
         
             if (groupFilter !== "") {
-                filteredGroups = filteredGroups.filter(group => {
-                    ((group.groupMsgs.find(msg=>groupRegEx.test(msg.content)) !== undefined) ||
-                    (groupRegEx.test(group.groupName)) ||
-                    (group.groupUsers.find(user=>groupRegEx.test(user)) !== undefined)) // not by users name, only phone numbers
-                });
+                const byMsg: Array<Group> = this.userGroups.filter(group => group.groupMsgs.find(msg=>groupRegEx.test(msg.content)) !== undefined);
+                const byName: Array<Group> = this.userGroups.filter(group => groupRegEx.test(group.groupName));
+                const byUser: Array<Group> = this.userGroups.filter(group => group.groupUsers.find(user=>groupRegEx.test(user)) !== undefined); // not by users name, only phone numbers
+                filteredGroups = [...byMsg,...byName,...byUser];
+                filteredGroups = filteredGroups.filter((v,i,a)=>a.findIndex(t=>(t.groupId === v.groupId))===i);
             }
 
-            this.renderChatsToChatsList(filteredGroups)
+            this.renderChatsToChatsList(filteredGroups);
+
         } catch (er) {
             console.error(er);
           }  
@@ -142,10 +143,10 @@ class ContactList {
             const contactRegEx = contactFilter ? new RegExp(contactFilter,'gmi') : undefined;
         
             if (contactFilter !== "") {
-                filteredContacts = filteredContacts.filter(contact => {
-                    ((contactRegEx.test(contact.userName)) ||
-                    (contactRegEx.test(contact.userPhone)))
-                });
+                const byName: Array<User> = this.allContacts.filter(contact => contactRegEx.test(contact.userName));
+                const byPhone: Array<User> = this.allContacts.filter(contact => contactRegEx.test(contact.userPhone));
+                filteredContacts = [...byName,...byPhone];
+                filteredContacts = filteredContacts.filter((v,i,a)=>a.findIndex(t=>(t.userPhone === v.userPhone))===i);
             }
 
             if (type === 'privateChat') this.renderContactsToNewChatMenu(filteredContacts);

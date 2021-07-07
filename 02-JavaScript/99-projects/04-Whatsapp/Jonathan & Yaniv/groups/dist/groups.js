@@ -1,3 +1,10 @@
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 var Message = /** @class */ (function () {
     function Message() {
     }
@@ -50,11 +57,11 @@ var User = /** @class */ (function () {
             var filteredGroups = this.userGroups;
             var groupRegEx_1 = groupFilter ? new RegExp(groupFilter, 'gmi') : undefined;
             if (groupFilter !== "") {
-                filteredGroups = filteredGroups.filter(function (group) {
-                    ((group.groupMsgs.find(function (msg) { return groupRegEx_1.test(msg.content); }) !== undefined) ||
-                        (groupRegEx_1.test(group.groupName)) ||
-                        (group.groupUsers.find(function (user) { return groupRegEx_1.test(user); }) !== undefined)); // not by users name, only phone numbers
-                });
+                var byMsg = this.userGroups.filter(function (group) { return group.groupMsgs.find(function (msg) { return groupRegEx_1.test(msg.content); }) !== undefined; });
+                var byName = this.userGroups.filter(function (group) { return groupRegEx_1.test(group.groupName); });
+                var byUser = this.userGroups.filter(function (group) { return group.groupUsers.find(function (user) { return groupRegEx_1.test(user); }) !== undefined; }); // not by users name, only phone numbers
+                filteredGroups = __spreadArrays(byMsg, byName, byUser);
+                filteredGroups = filteredGroups.filter(function (v, i, a) { return a.findIndex(function (t) { return (t.groupId === v.groupId); }) === i; });
             }
             this.renderChatsToChatsList(filteredGroups);
         }
@@ -107,10 +114,10 @@ var ContactList = /** @class */ (function () {
             var filteredContacts = this.allContacts;
             var contactRegEx_1 = contactFilter ? new RegExp(contactFilter, 'gmi') : undefined;
             if (contactFilter !== "") {
-                filteredContacts = filteredContacts.filter(function (contact) {
-                    ((contactRegEx_1.test(contact.userName)) ||
-                        (contactRegEx_1.test(contact.userPhone)));
-                });
+                var byName = this.allContacts.filter(function (contact) { return contactRegEx_1.test(contact.userName); });
+                var byPhone = this.allContacts.filter(function (contact) { return contactRegEx_1.test(contact.userPhone); });
+                filteredContacts = __spreadArrays(byName, byPhone);
+                filteredContacts = filteredContacts.filter(function (v, i, a) { return a.findIndex(function (t) { return (t.userPhone === v.userPhone); }) === i; });
             }
             if (type === 'privateChat')
                 this.renderContactsToNewChatMenu(filteredContacts);
