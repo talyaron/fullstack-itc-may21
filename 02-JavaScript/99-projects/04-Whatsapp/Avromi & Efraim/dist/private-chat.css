@@ -11,10 +11,14 @@ body {
   justify-content: space-between;
   position: fixed;
   top: 0;
+  left: 0;
 }
 .nav i {
   height: 2rem;
   width: 3rem;
+}
+.nav .fa-arrow-left:hover {
+  cursor: pointer;
 }
 .nav__wrapper {
   display: flex;
@@ -37,8 +41,19 @@ body {
   margin-top: 15vh;
   height: 72vh;
 }
+.messages::-webkit-scrollbar {
+  display: none;
+}
 .messages .single__message {
   background-color: #DCF8C6;
+  border-radius: 10px;
+  display: table;
+  margin: 2rem;
+  padding: 0 1rem;
+}
+.messages .single__message__timestamp {
+  text-align: right;
+  color: #9b9898;
 }
 
 .input__send__wrapper .form {
@@ -61,7 +76,6 @@ body {
   align-items: center;
 }
 .input__send__wrapper .form .input__container--right {
-  border: 3px solid red;
   display: flex;
 }
 .input__send__wrapper .form .input__container .i {
@@ -89,4 +103,13 @@ body {
   border-radius: 100px;
   background-color: #128C7E;
   color: white;
+}
+.input__send__wrapper .form .mic__or__send__button .fa-paper-plane {
+  display: none;
+}
+
+#contextMenu {
+  z-index: 18;
+  position: absolute;
+  display: none;
 }

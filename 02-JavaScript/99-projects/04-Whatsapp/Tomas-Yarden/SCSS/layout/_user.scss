@@ -1,50 +1,62 @@
 
-.userText {
-  color: #000000;
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  span {
-    line-height: 1.5rem;
-    display: inline-block;
-    background-color: #dcf8c6;
-    padding: 1rem;
-    border-radius: 1rem;
-    max-width: 80%;
-    margin: 1rem;
-    animation: floatup 0.5s forwards;
-    word-break: break-all;
+  .userText {
+    color: #000000;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  
+    span {
+      line-height: 1.5rem;
+      display: inline-block;
+      background-color: #dcf8c6;
+      padding: 1rem;
+      border-radius: 1rem;
+      max-width: 80%;
+      margin: 1rem;
+      animation: floatup 0.5s forwards;
+      word-break: break-all;
+    }
   }
-}
-
-.botText {
-  color: #000000;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  span {
-    line-height: 1.5rem;
-    display: inline-block;
-    background-color: #e5ddd5;
-    padding: 1rem;
-    border-radius: 1rem;
-    max-width: 80%;
-    margin: 1rem;
-    animation: floatup 0.5s forwards;
+  
+  .botText {
+    color: #000000;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  
+    span {
+      line-height: 1.5rem;
+      display: inline-block;
+      background-color: #e5ddd5;
+      padding: 1rem;
+      border-radius: 1rem;
+      max-width: 80%;
+      margin: 1rem;
+      animation: floatup 0.5s forwards;
+    }
   }
-}
+  
+  @keyframes floatup {
+    from {
+      transform: translateY(14px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+  
+  @include telefono{
+  
+    .userText{
+    width: 90%;
+  }
 
-@keyframes floatup {
-  from {
-    transform: translateY(14px);
-    opacity: 0;
+  
   }
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-}
+ 
+
+

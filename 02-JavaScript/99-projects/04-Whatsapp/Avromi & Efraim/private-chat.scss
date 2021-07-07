@@ -12,17 +12,17 @@ body {
     justify-content: space-between;
     position: fixed;
     top: 0;
+    left:0;
 
-    // align-items: center;
     i {
         height: 2rem;
         width: 3rem;
     }
 
-    // p {
-    //     // margin-top: -8%;
-    // }
+    .fa-arrow-left:hover{
+        cursor: pointer;
 
+    }
     &__wrapper {
         display: flex;
         justify-content: space-around;
@@ -46,9 +46,19 @@ body {
     overflow-y:auto;
     margin-top: 15vh;
     height: 72vh;
+    &::-webkit-scrollbar {
+        display: none;
+      }
     .single__message{
         background-color: #DCF8C6;
-        
+        border-radius: 10px;
+        display: table;
+        margin: 2rem;
+        padding: 0 1rem;
+        &__timestamp{
+            text-align: right;
+            color: rgb(155, 152, 152);
+        }
     }
 }
 .input__send__wrapper .form {
@@ -73,11 +83,8 @@ body {
         }
 
         &--right {
-            border: 3px solid red;
            display: flex;
          
-           
-
         }
 
         .i {
@@ -113,7 +120,13 @@ body {
         }
         .fa-paper-plane{
              
-            // display: none;
+            display: none;
         }
     }
+}
+
+#contextMenu{
+    z-index: 18;
+    position: absolute;
+    display:none;
 }

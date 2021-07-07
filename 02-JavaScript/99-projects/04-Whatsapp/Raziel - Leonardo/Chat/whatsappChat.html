@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/whatsappChat.css">
+    <title>WhatsApp</title>
+    <link rel="shortcut icon" href="../Img_whatsapp/favicon.ico" type="image/x-icon" />
+    <a href="https://icons8.com/icon/93218/send-comment"></a>
+</head>
+
+<body>
+    <div class="container" id="main">
+    </div>
+
+    <!-- Modal to add a user -->
+    <div id="modal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="close" class="close">&times;</span>
+            <div class="contentarea">
+                <div class="camera">
+                    <video id="video">Video stream not available.</video>
+                </div>
+                <div><button id="startbutton">Take photo</button></div>
+                <canvas id="canvas"></canvas>
+                <div class="output">
+                    <img id="photo" alt="The screen capture will appear in this box.">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
+    <script src="dist/scriptChat.js"></script>
+    <script src="dist/helperWebCam.js"></script>
+
+</body>
+
+</html>

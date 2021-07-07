@@ -23,6 +23,17 @@ var ContactList = /** @class */ (function () {
                 var contactGroups = [];
                 contactToPush_1 = new User(contactImg, contactName, contactPhone, contactGroups);
                 _this.allContacts.push(contactToPush_1);
+                _this.allContacts = _this.allContacts.sort(function (a, b) {
+                    var aName = a.userName;
+                    var bName = b.userName;
+                    if (aName < bName) {
+                        return -1;
+                    }
+                    if (aName > bName) {
+                        return 1;
+                    }
+                    return 0;
+                });
             });
             return;
         }
@@ -59,5 +70,5 @@ var userPicker = function (ev) {
     var userGroups = allContacts.findContact(userPhone).userGroups;
     var pickedUser = new User(userImg, userName, userPhone, userGroups);
     localStorage.setItem('currentUser', JSON.stringify(pickedUser));
-    window.location.href = "../groups/groups.html?" + pickedUser.userPhone;
+    window.location.href = "../groups/groups.html?userid=" + pickedUser.userPhone;
 };
