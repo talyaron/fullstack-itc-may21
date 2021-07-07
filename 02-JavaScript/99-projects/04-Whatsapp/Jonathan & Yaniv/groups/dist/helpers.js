@@ -1,15 +1,13 @@
-//JN
-var messageChat = JSON.parse(localStorage.getItem("messageChat"));
 var pageTitle = document.querySelector('title');
 pageTitle.innerText = loggedInUser.userName + "'s chats";
 var profileImg = document.querySelector('.controls__item--profile_img');
 profileImg.setAttribute('src', loggedInUser.userImg);
-loggedInUser.renderChatsToChatsList();
+loggedInUser.renderChatsToChatsList(null);
 var addChatBtn = document.querySelector('.controls__item--plus');
 addChatBtn.addEventListener('click', function (ev) { return showNewChatMenu(ev); });
 var showNewChatMenu = function (ev) {
     var newChatMenu = document.querySelector('.new_chat');
-    allContacts.renderContactsToNewChatMenu();
+    allContacts.renderContactsToNewChatMenu(null);
     newChatMenu.style.display = 'unset';
 };
 var cancelChatBtn = document.querySelector('.title__item--cancel_btn');
@@ -74,7 +72,7 @@ var showNewGroupMenu = function (ev) {
     if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1))
         return;
     var newGroupMenu = document.querySelector('.new_group');
-    allContacts.renderContactsToNewGroupMenu();
+    allContacts.renderContactsToNewGroupMenu(null);
     newGroupMenu.style.display = 'unset';
 };
 var backToNewChatMenuBtn = document.querySelector('.title__item--back_btn');
@@ -116,4 +114,36 @@ logOutBtn.addEventListener('click', function (ev) { return logOut(ev); });
 var logOut = function (ev) {
     localStorage.setItem('currentUser', null);
     window.location.href = "../users/users.html";
+};
+var groupsSearch = document.querySelector('#search_in_chats_form');
+var contactsSearch = document.querySelector('#search_contacts_form');
+var contactsForGroupSearch = document.querySelector('#search_in_groups_form');
+groupsSearch.addEventListener('keyup', function (ev) { return filterKeyUp(ev); });
+contactsSearch.addEventListener('keyup', function (ev) { return filterKeyUp(ev); });
+contactsForGroupSearch.addEventListener('keyup', function (ev) { return filterKeyUp(ev); });
+var filterKeyUp = function (ev) {
+    try {
+        ev.preventDefault();
+        var filterFormElements = ev.target.parentElement.elements;
+        var searchFilter = void 0;
+        switch (ev.target.parentElement) {
+            case groupsSearch:
+                if (loggedInUser.userGroups.length === 0)
+                    return;
+                searchFilter = filterFormElements.searchInChats.value;
+                loggedInUser.filterGroups(searchFilter);
+                break;
+            case contactsSearch:
+                searchFilter = filterFormElements.searchContacts.value;
+                allContacts.filterContacts(searchFilter, 'privateChat');
+                break;
+            case contactsForGroupSearch:
+                searchFilter = filterFormElements.searchContactsForGroup.value;
+                allContacts.filterContacts(searchFilter, 'groupChat');
+                break;
+        }
+    }
+    catch (er) {
+        console.error(er);
+    }
 };

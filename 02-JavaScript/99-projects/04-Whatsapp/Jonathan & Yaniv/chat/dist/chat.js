@@ -33,20 +33,17 @@ var MessageList = /** @class */ (function () {
     MessageList.prototype.addMessage = function (message) {
         this.messageList.push(message);
         this.messageListFilter.push(message);
-        this.renderChat();
+        this.renderChat(message);
     };
     MessageList.prototype.editMessage = function (messagePassId) {
-        this.messageList.find(function (message) {
-            if (messagePassId === message.msgID) {
-                message.content = "<i class=\"fas fa-ban a\"></i>you deleted this message";
-            }
-        });
-        this.renderChat();
+        var myMessageToEdit = this.messageList.find(function (message) { return messagePassId === message.msgID; });
+        myMessageToEdit.content = "<i class=\"fas fa-ban a\"></i>you deleted this message";
+        this.renderAllMessage(this.messageList);
     };
     MessageList.prototype.deleteMessage = function (messagePassId) {
         this.messageList = this.messageList.filter(function (message) { return messagePassId !== message.msgID; });
         this.messageListFilter = this.messageListFilter.filter(function (message) { return messagePassId !== message.msgID; });
-        this.renderChat();
+        this.renderAllMessage(this.messageList);
     };
     MessageList.prototype.filterByMessage = function (inputMessageFilter) {
         var regrExp = "^" + inputMessageFilter;
@@ -54,11 +51,18 @@ var MessageList = /** @class */ (function () {
         this.messageList = this.messageListFilter.filter(function (elem) { return searchTermReg.test(elem.content); });
         this.renderChat();
     };
-    MessageList.prototype.renderChat = function () {
+    MessageList.prototype.renderAllMessage = function (arrayToRender) {
         var html = '';
-        this.messageList.forEach(function (message) {
-            html += "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "<p>\n                        <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                        <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\"></i>\n                        <i class=\"fa fa-trash container__chat-box__messages--user--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                        </div>";
+        // const arrayToRender = message ? message: this.messageList
+        arrayToRender.forEach(function (message) {
+            html = "<div class=\"container__chat-box__messages--user\">\n            <p class=\"container__chat-box__messages--user--content\">" + message.content + "<p>\n            <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n            <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\"></i>\n            <i class=\"fa fa-trash container__chat-box__messages--user--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n            </div>";
         });
+        containerChat.innerHTML = html;
+    };
+    MessageList.prototype.renderChat = function (message) {
+        var html = '';
+        // const arrayToRender = message ? message: this.messageList
+        html = "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "<p>\n                        <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                        <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\"></i>\n                        <i class=\"fa fa-trash container__chat-box__messages--user--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                        </div>";
         containerChat.insertAdjacentHTML('beforeend', html);
         return this.messageList;
     };
@@ -97,7 +101,6 @@ var User = /** @class */ (function () {
     User.prototype.addMessages = function (newMess, groupId) {
         var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
         this.userGroups[groupIndex].groupMsgs.push(newMess);
-        return this.userGroups[groupIndex].groupMsgs;
     };
     User.prototype.renderMsgs = function (groupid) {
         var html = '';
@@ -165,8 +168,8 @@ function handleKeyUp() {
     try {
         messageList.filterByMessage(inputSearch.value);
     }
-    catch (e) {
-        console.log(e);
+    catch (er) {
+        console.error(er);
     }
 }
 function handleReturn() {

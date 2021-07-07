@@ -1,3 +1,14 @@
+class Message {
+    content: string;
+    userPhone: string; // this is the phone number // localstorage tiene los dos celulares, ver como se conectan con css
+    //para un lado y el otro para el otro lado con este id
+    dateMsg: string;
+    groupID: string;
+    msgID: string;
+    lastMessageName: string;
+    timeMsgSec : number;
+    contactPhone:string;
+}
 
 class Group {
     groupId: string; // userPhone or "group" + Math.random().toString(16).slice(2);
@@ -29,7 +40,7 @@ class User {
     addGroup(newGroup: Group) {
         try {
             this.userGroups.push(newGroup);
-            this.renderChatsToChatsList();
+            this.renderChatsToChatsList(null);
           } catch (er) {
             console.error(er);
           }
@@ -54,13 +65,28 @@ class User {
 
     }
 
-    renderChatsToChatsList() {
+    filterGroups(groupFilter: string) {
+        let filteredGroups: Array<Group> = this.userGroups;
+        const groupRegEx = groupFilter ? new RegExp(groupFilter,'gmi') : undefined;
+    
+        if (groupFilter !== "") {
+            filteredGroups = filteredGroups.filter(group => {
+                ((group.groupMsgs.find(msg=>groupRegEx.test(msg.content)) !== undefined) ||
+                (groupRegEx.test(group.groupName)) ||
+                (group.groupUsers.find(user=>groupRegEx.test(user)) !== undefined)) // not by users name, only phone numbers
+            });
+        }
+
+        this.renderChatsToChatsList(filteredGroups)
+    }
+
+    renderChatsToChatsList(FilteredGroupsToRender: Array<Group>) {
         try {
             const ChatsContainer: HTMLElement = document.querySelector(".chats");
             ChatsContainer.innerHTML = ``;
-            //const message = JSON.parse(localStorage.getItem("currentMessage"));
-            //console.log(message)
-            this.userGroups.forEach((group) => {
+            
+            const groupsToRender: Array<Group> = FilteredGroupsToRender ? FilteredGroupsToRender : this.userGroups;
+            groupsToRender.forEach((group) => {
 
                 const datemsg = group.groupMsgs[group.groupMsgs.length-1] ? group.groupMsgs[group.groupMsgs.length-1].dateMsg : "" ;    
                 console.log(datemsg)       
@@ -106,22 +132,39 @@ class ContactList {
         return contactIndex;
     }
 
-    renderContactsToNewChatMenu() {
+    filterContacts(contactFilter: string,type: string) {
+        let filteredContacts: Array<User> = this.allContacts;
+        const contactRegEx = contactFilter ? new RegExp(contactFilter,'gmi') : undefined;
+    
+        if (contactFilter !== "") {
+            filteredContacts = filteredContacts.filter(contact => {
+                ((contactRegEx.test(contact.userName)) ||
+                (contactRegEx.test(contact.userPhone)))
+            });
+        }
+
+        if (type === 'privateChat') this.renderContactsToNewChatMenu(filteredContacts);
+        if (type === 'groupChat') this.renderContactsToNewGroupMenu(filteredContacts);
+    }
+
+    renderContactsToNewChatMenu(FilteredContactsToRender: Array<User>) {
         try {
-            this.allContacts = this.allContacts.sort((a: User, b: User) => {
+            const contactsToRender: Array<User> = FilteredContactsToRender ? FilteredContactsToRender : this.allContacts;
+
+            contactsToRender.sort((a: User, b: User) => {
                 const aName = a.userName;
                 const bName = b.userName;
                 if (aName < bName) {return -1;}
                 if (aName > bName) {return 1;}
                 return 0;
             });
-            const newChatContactsContainer: HTMLElement = document.querySelector(".new_chat__item--body");
+            const newChatContactsContainer: HTMLElement = document.querySelector(".options");
             newChatContactsContainer.innerHTML = `
             <div class="options__item options__item--group">
                     <img id="new_group_logo" src="https://static.thenounproject.com/png/61728-200.png">
                     <h3 id="new_group_title">New Group</h3>
                 </div>`;
-            this.allContacts.forEach((contact) => {
+                contactsToRender.forEach((contact) => {
                 if (contact.userPhone === loggedInUser.userPhone) return;
                 const contactHTML: string = `
                 <div class="options__item options__item--contact" id="${contact.userPhone}">
@@ -136,15 +179,18 @@ class ContactList {
           }
     }
 
-    renderContactsToNewGroupMenu() {
+    renderContactsToNewGroupMenu(FilteredContactsToRender: Array<User>) {
         try {
-            this.allContacts = this.allContacts.sort((a: User, b: User) => {
+            const contactsToRender: Array<User> = FilteredContactsToRender ? FilteredContactsToRender : this.allContacts;
+
+            contactsToRender.sort((a: User, b: User) => {
                 const aName = a.userName;
                 const bName = b.userName;
                 if (aName < bName) {return -1;}
                 if (aName > bName) {return 1;}
                 return 0;
             });
+
             const newGroupContactsContainer: HTMLElement = document.querySelector("#add_group_controls");
             newGroupContactsContainer.innerHTML = `
             <div class="options__item options__item--group_img">
@@ -154,7 +200,7 @@ class ContactList {
             <div class="options__item options__item--group_name">
                 <input type="text" maxlength="25" placeholder="Group's Topic" name="groupName" id="group_name_form" required />
             </div>`;
-            this.allContacts.forEach((contact) => {
+            contactsToRender.forEach((contact) => {
                 if (contact.userPhone === loggedInUser.userPhone) return;
                 const contactHTML: string = `
                 <div class="options__item options__item--contact" id="${contact.userPhone}">

@@ -51,25 +51,23 @@ class MessageList {
     addMessage(message: Message) {
         this.messageList.push(message)
         this.messageListFilter.push(message)
-        this.renderChat()
+        this.renderChat(message)
     }
 
 
     editMessage(messagePassId: string) {
 
-        this.messageList.find(function (message) {
-            if (messagePassId === message.msgID) {
-                message.content = `<i class="fas fa-ban a"></i>you deleted this message`;
-            }
-        });
+       const myMessageToEdit = this.messageList.find(message=> messagePassId === message.msgID)
 
-        this.renderChat()
+       myMessageToEdit.content = `<i class="fas fa-ban a"></i>you deleted this message`;
+
+        this.renderAllMessage(this.messageList)
     }
 
     deleteMessage(messagePassId: string) {
         this.messageList = this.messageList.filter(message => messagePassId !== message.msgID)
         this.messageListFilter = this.messageListFilter.filter(message => messagePassId !== message.msgID)
-        this.renderChat()
+        this.renderAllMessage(this.messageList)
     }
 
     filterByMessage(inputMessageFilter: string) {
@@ -80,22 +78,43 @@ class MessageList {
         this.renderChat()
     }
 
-    renderChat(): Array<any> {
+    renderAllMessage(arrayToRender:Array<any>){
         let html: string = '';
 
-        this.messageList.forEach(message => {
+        // const arrayToRender = message ? message: this.messageList
+         
+        arrayToRender.forEach(message => {
+            html = `<div class="container__chat-box__messages--user">
+            <p class="container__chat-box__messages--user--content">${message.content}<p>
+            <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
+            <i class="fas fa-check-double container__chat-box__messages--user--doubleclick"></i>
+            <i class="fa fa-trash container__chat-box__messages--user--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item"></i>
+            </div>`
+        });
+            
+        
+         containerChat.innerHTML = html
+ 
 
-            html += `<div class="container__chat-box__messages--user">
+    }
+
+    renderChat(message?): Array<any> {
+        let html: string = '';
+
+       // const arrayToRender = message ? message: this.messageList
+        
+            html = `<div class="container__chat-box__messages--user">
                         <p class="container__chat-box__messages--user--content">${message.content}<p>
                         <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
                         <i class="fas fa-check-double container__chat-box__messages--user--doubleclick"></i>
                         <i class="fa fa-trash container__chat-box__messages--user--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item"></i>
                         </div>`
 
-        });
+        
 
         containerChat.insertAdjacentHTML('beforeend', html);
 
+       
         return this.messageList
     }
 
@@ -160,7 +179,7 @@ class User {
 
         const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId)
         this.userGroups[groupIndex].groupMsgs.push(newMess)
-        return this.userGroups[groupIndex].groupMsgs
+        
 
     }
 
@@ -254,9 +273,12 @@ function displayInput() {
 
 function handleEditDelete(messageId: string) {
 
+
     if (isClicked === false) {
         messageList.editMessage(messageId)
         isClicked = true
+
+    
     } else {
         messageList.deleteMessage(messageId)
         isClicked = false
@@ -269,8 +291,8 @@ inputSearch.addEventListener('keyup', handleKeyUp)
 function handleKeyUp() {
     try {
         messageList.filterByMessage(inputSearch.value)
-    } catch (e) {
-        console.log(e)
+    } catch (er) {
+        console.error(er)
     }
 }
 
@@ -335,10 +357,6 @@ class ContactMessage {
     renderUserChat() {
 
         let html: string = ''
-
-        
-
-
 
         html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
                 <img src="${this.userImg}" alt="" srcset="">
