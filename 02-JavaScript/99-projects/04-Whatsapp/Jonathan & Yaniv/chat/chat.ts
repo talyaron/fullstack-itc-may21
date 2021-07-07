@@ -15,7 +15,7 @@ const modalClose = document.querySelector('.modal-close')
 let emojiList = <any>document.querySelectorAll('.emoji')
 
 //clicked
-let isClicked: boolean = false;
+//let isClicked: boolean = false;
 
 class Message {
     content: string;
@@ -46,13 +46,14 @@ class MessageList {
         try {
             this.messageList.push(message);
             this.messageListFilter.push(message);
+            
             this.renderChat(message);
         } catch (er) {
             console.error(er);
         }
     }
 
-    editMessage(messagePassId: string) {
+    /*editMessage(messagePassId: string) {
         try {
             const myMessageToEdit = this.messageList.find(message=> messagePassId === message.msgID);
 
@@ -62,12 +63,25 @@ class MessageList {
         } catch (er) {
             console.error(er);
         }
-    }
+    }*/
 
     deleteMessage(messagePassId: string) {
         try {
+
+            console.log('1', this.messageList)
             this.messageList = this.messageList.filter(message => messagePassId !== message.msgID);
             this.messageListFilter = this.messageListFilter.filter(message => messagePassId !== message.msgID);
+            
+           
+           
+            const groupIndex = loggedInUser.userGroups.findIndex(group => group.groupId === groupId)
+
+             loggedInUser.userGroups[groupIndex].groupMsgs = this.messageList
+           
+            localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+
+            console.log(loggedInUser)
+           
             this.renderAllMessage(this.messageList);
         } catch (er) {
             console.error(er);
@@ -267,11 +281,20 @@ function sendMessage() {
 
         const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS);
 
-        messageList.addMessage(message)
-
         loggedInUser.addMessages(message, groupId)
 
-        console.log(loggedInUser)
+
+        const groupIndex = loggedInUser.userGroups.findIndex(group => group.groupId === groupId)
+
+        const arrayMessages = loggedInUser.userGroups[groupIndex].groupMsgs
+
+        containerChat.innerHTML = '';
+
+        arrayMessages.forEach(message => {
+            messageList.addMessage(message)
+        });
+
+
         elementMessage.value = '';
         
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
@@ -303,13 +326,13 @@ function displayInput() {
 
 function handleEditDelete(messageId: string) {
     try {
-        if (isClicked === false) {
+        /*if (isClicked === false) {
             messageList.editMessage(messageId);
             isClicked = true;
-        } else {
+        } else {*/
             messageList.deleteMessage(messageId);
-            isClicked = false;
-        }
+            //isClicked = false;
+        //}
     } catch (er) {
         console.error(er);
     }
