@@ -1,6 +1,5 @@
 .header {
   display: flex;
-  color: white;
   justify-content: space-between;
   padding: 1rem;
   background-color: #128c7e;
@@ -10,6 +9,13 @@
     gap: 2rem;
     align-items: center;
     text-align: center;
+    // &___arrow{
+    //  i{
+    //    .ap{
+    //      background-color: red;
+    //    }
+    //  }
+    // }
     &__profile {
       img {
         width: 30px;
@@ -37,14 +43,16 @@
     align-items: center;
   }
 }
-
+.header__left__arrow:hover {
+  background-color: #ffffff;
+ }
 .content {
   max-height: 0;
  
   // overflow: hidden;
   &__full-chat-block {
     width: 100%;
-    background-image: url("/02-JavaScript\99-projects\04-Whatsapp\Tomas-Yarden\images\background-image.jpg");
+    background-image: url("/images/background-image.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     text-align: center;

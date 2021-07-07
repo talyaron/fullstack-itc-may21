@@ -44,7 +44,7 @@ class ChatProfile {
   // arrayBot:Array<Bot> =[];
 
   add(add: Chat) {
-    console.log('new chat')
+ 
     this.arrayChat.push(add);
     this.renderUser();
     // this.respondBot();
