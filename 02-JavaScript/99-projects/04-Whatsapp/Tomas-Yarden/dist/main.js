@@ -72,6 +72,7 @@ var Contacts = /** @class */ (function () {
     return Contacts;
 }());
 var whatsAppContacts = new Contacts();
+//Adding a new contact:
 var handleSubmit = function (event) {
     try {
         event.preventDefault();
@@ -81,8 +82,16 @@ var handleSubmit = function (event) {
         var time = event.target[3].value;
         var newContact = new Contact(img, name, message, time);
         whatsAppContacts.contacts.push(newContact);
+        //Save in local storage:
+        var contactSerialized = JSON.stringify(newContact);
+        console.log(newContact);
+        console.log(contactSerialized);
+        localStorage.setItem("whatsAppContact", contactSerialized);
+        var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContact"));
+        console.log(contactDeserialized);
+        //Refresh contacts list
         whatsAppContacts.render();
-        event.target.reset();
+        event.target.reset(); //Now just close the modal:
         var bottomModal = document.querySelector('.add-contact');
         bottomModal.style.display = "none";
     }
