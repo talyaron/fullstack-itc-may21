@@ -85,28 +85,41 @@ var bgModal = document.querySelector('.modal-bg');
 var modalClose = document.querySelector('.modal-close');
 var inputName = document.querySelector('#name');
 var inputPhone = document.querySelector('#phone');
-var btnModalInput = document.querySelector('.btn-modal');
-var boardRoot = document.querySelector('#board');
+//const btnModalInput = (<HTMLButtonElement>document.querySelector('.btn-modal'))
+//const boardRoot:HTMLElement = document.querySelector('#board')
 var faPlus = document.querySelector('.fa-plus');
 var btnsub = document.querySelector('.btn-modal');
-btnsub.addEventListener('submit'());
+var handleSubmit = function (event) {
+    event.preventDefault();
+    try {
+        var contactName = event.target.elements.name.value;
+        var image = event.target.elements.image.value;
+        var phone = event.target.elements.phone.value;
+        if (contactName === "")
+            throw Error("Put a contact name");
+        if (phone === null)
+            throw Error("Put a number");
+        var generator = new ContactGenerator(contactName, image, phone);
+        console.log(generator);
+        contacts.add(generator);
+        contacts.renderContacts();
+    }
+    catch (error) {
+        alert(error);
+    }
+    event.target.reset();
+};
 faPlus.addEventListener('click', function (e) { return openModal(e); });
+//open modal window
 function openModal(e) {
     e.preventDefault();
     bgModal.classList.add('bg-active');
     console.log("hi");
-    //set
 }
+//close modal windows
 modalClose.addEventListener('click', closeModal);
 function closeModal() {
     bgModal.classList.remove('bg-active');
 }
-btnModalInput.addEventListener('click', putInputOnDOM);
-function putInputOnDOM() {
-    var html = "";
-    console.log(inputEmail.value);
-    console.log(inputName.value);
-    html += "<p> " + inputName.value + "</p>\n                <p> " + inputEmail.value + "</p>";
-    boardRoot.insertAdjacentHTML('afterend', html);
-    bgModal.classList.remove('bg-active');
-}
+//boardRoot.insertAdjacentHTML('afterend',html)
+//bgModal.classList.remove('bg-active')
