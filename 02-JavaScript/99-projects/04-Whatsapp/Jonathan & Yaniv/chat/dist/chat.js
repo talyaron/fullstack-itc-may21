@@ -12,7 +12,7 @@ var modalClose = document.querySelector('.modal-close');
 //Ratio
 var emojiList = document.querySelectorAll('.emoji');
 //clicked
-var isClicked = false;
+//let isClicked: boolean = false;
 var Message = /** @class */ (function () {
     function Message(content, userPhone, dateMsg, groupID, lastMessageName, timeMsgSec) {
         this.content = content;
@@ -40,20 +40,26 @@ var MessageList = /** @class */ (function () {
             console.error(er);
         }
     };
-    MessageList.prototype.editMessage = function (messagePassId) {
+    /*editMessage(messagePassId: string) {
         try {
-            var myMessageToEdit = this.messageList.find(function (message) { return messagePassId === message.msgID; });
-            myMessageToEdit.content = "<i class=\"fas fa-ban a\"></i>you deleted this message";
+            const myMessageToEdit = this.messageList.find(message=> messagePassId === message.msgID);
+
+            myMessageToEdit.content = `<i class="fas fa-ban a"></i>you deleted this message`;
+
             this.renderAllMessage(this.messageList);
-        }
-        catch (er) {
+        } catch (er) {
             console.error(er);
         }
-    };
+    }*/
     MessageList.prototype.deleteMessage = function (messagePassId) {
         try {
+            console.log('1', this.messageList);
             this.messageList = this.messageList.filter(function (message) { return messagePassId !== message.msgID; });
             this.messageListFilter = this.messageListFilter.filter(function (message) { return messagePassId !== message.msgID; });
+            var groupIndex = loggedInUser.userGroups.findIndex(function (group) { return group.groupId === groupId; });
+            loggedInUser.userGroups[groupIndex].groupMsgs = this.messageList;
+            localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+            console.log(loggedInUser);
             this.renderAllMessage(this.messageList);
         }
         catch (er) {
@@ -194,9 +200,13 @@ function sendMessage() {
         var timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
         var timeHMS = (today.getTime());
         var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS);
-        messageList.addMessage(message);
         loggedInUser.addMessages(message, groupId);
-        console.log(loggedInUser);
+        var groupIndex = loggedInUser.userGroups.findIndex(function (group) { return group.groupId === groupId; });
+        var arrayMessages = loggedInUser.userGroups[groupIndex].groupMsgs;
+        containerChat.innerHTML = '';
+        arrayMessages.forEach(function (message) {
+            messageList.addMessage(message);
+        });
         elementMessage.value = '';
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
@@ -225,14 +235,13 @@ function displayInput() {
 }
 function handleEditDelete(messageId) {
     try {
-        if (isClicked === false) {
+        /*if (isClicked === false) {
             messageList.editMessage(messageId);
             isClicked = true;
-        }
-        else {
-            messageList.deleteMessage(messageId);
-            isClicked = false;
-        }
+        } else {*/
+        messageList.deleteMessage(messageId);
+        //isClicked = false;
+        //}
     }
     catch (er) {
         console.error(er);

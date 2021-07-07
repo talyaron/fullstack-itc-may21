@@ -8,12 +8,6 @@ const conversation = <HTMLInputElement>(
 
 const envelope__contact = document.querySelector(".renderFirst");
 
-
-
-
-
-
-
 function renderChats(): void {
   let html: string = "";
 
@@ -62,7 +56,7 @@ function sendMessage() {
   const message = conversation.value;
   messagesArray.push(message);
   messagesArray.forEach((msg) => {
-    const messageElement = `<div>${msg}</div> `;
+    const messageElement = `<div class= "message-bubble"><div class="message-text">${msg}</div></div> `;
     chatContainer.insertAdjacentHTML("beforeend", messageElement);
   });
   conversation.value = ""; //serves for refresh and delete what you typed before in the input bar
