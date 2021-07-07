@@ -90,11 +90,11 @@ render() {
         console.error(error);
     }
   }
-
 }
 
 let whatsAppContacts = new Contacts();
 
+//Adding a new contact:
 const handleSubmit = (event) => {
     try {
         event.preventDefault()
@@ -107,9 +107,19 @@ const handleSubmit = (event) => {
             img, name, message, time
         )
         whatsAppContacts.contacts.push(newContact)
+
+        //Save in local storage:
+        let contactSerialized = JSON.stringify(newContact)
+        console.log(newContact);
+        console.log(contactSerialized);
+        localStorage.setItem("whatsAppContact", contactSerialized)
+        let contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContact"))
+        console.log(contactDeserialized);
+        
+        //Refresh contacts list
         whatsAppContacts.render()
 
-        event.target.reset();
+        event.target.reset(); //Now just close the modal:
         const bottomModal:any = document.querySelector('.add-contact')
         bottomModal.style.display="none"
     } catch (error) {

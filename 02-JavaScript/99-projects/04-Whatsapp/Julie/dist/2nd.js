@@ -6,7 +6,7 @@ var envelope__contact = document.querySelector('.renderFirst');
 function renderChats() {
     var html = "";
     userFilter.forEach(function (element) {
-        html += "<div class=\"renderSecond\">\n                \n                 <img src=\"" + element.image + "\" alt=\"\" class=\"renderSecond__imageA\">              \n                 <h4 class=\"renderSecond__nameA\">" + element.contactName + "</h4>\n\n                    \n              </div> ";
+        html += "<div class=\"renderSecond\">\n                 <img src=\"" + element.image + "\" alt=\"\" class=\"renderSecond__imageA\">              \n                 <h4 class=\"renderSecond__nameA\">" + element.contactName + "</h4>                    \n              </div> ";
     });
     try {
         envelope__contact.innerHTML = html;
@@ -56,42 +56,3 @@ function redirect2() {
 function abrir() {
     var file = document.getElementById("file").click();
 }
-var input2 = document.querySelector('input[type="file"]');
-input2.addEventListener('change', function (e) {
-    console.log(input.files);
-}, false);
-// class Message {
-//   content: string;
-//   msgID: string;
-//   constructor(content: string, phone: number) {
-//     this.content = content;
-//     this.msgID = "id" + Math.random().toString(16).slice(2);
-//   }
-// }
-// class MessageList {
-//   messageList: Array<Message> = [];
-//   addMessage(message: Message) {
-//     this.messageList.push(message);
-// this.renderChat();
-// }
-// renderChat() {
-//   let html: string = "";
-//   this.messageList.forEach((message) => {
-//     html +=
-//   });
-//   containerChat.innerHTML = html;
-// }
-// }
-/*const messageList = new MessageList();
-
-// btnMessage.addEventListener("click", sendMessage);
-
-function sendConversation() {
-  const inputMessage = conversation.value;
-
-  const message = new Message(inputMessage, "1234");
-
-  messageList.addMessage(message);
-
-  conversation.value = "";
-}*/
