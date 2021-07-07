@@ -142,12 +142,18 @@ var User = /** @class */ (function () {
             console.error(er);
         }
     };
+    User.prototype.handleDelete = function (messageId, groupid) {
+        var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
+        this.userGroups[groupIndex].groupMsgs = this.userGroups[groupIndex].groupMsgs.filter(function (message) { return messageId !== message.msgID; });
+        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+        this.renderMsgs(groupid);
+    };
     User.prototype.renderMsgs = function (groupid) {
         try {
             var html_2 = '';
             var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupid; });
             this.userGroups[groupIndex].groupMsgs.forEach(function (message) {
-                html_2 += "<div class=\"container__chat-box__messages--user\">\n                            <p class=\"container__chat-box__messages--user--content\">" + message.content + "</p>\n                            <p>\n                                <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                                    <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\" aria-hidden=\"true\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--user--trash\"  onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\" aria-hidden=\"true\"></i><span class=\"sr-only\">Delete Item</span>\n                            </p>\n                        </div>";
+                html_2 += "<div class=\"container__chat-box__messages--user\">\n                            <p class=\"container__chat-box__messages--user--content\">" + message.content + "</p>\n                            <p>\n                                <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                                    <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\" aria-hidden=\"true\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--user--trash\"  onclick='handleDelete(\"" + message.msgID + "\")' title=\"Delete Item\" aria-hidden=\"true\"></i><span class=\"sr-only\">Delete Item</span>\n                            </p>\n                        </div>";
             });
             containerChat.innerHTML = html_2;
         }
@@ -157,6 +163,9 @@ var User = /** @class */ (function () {
     };
     return User;
 }());
+function handleDelete(messageId) {
+    loggedInUser.handleDelete(messageId, groupId);
+}
 var ContactList = /** @class */ (function () {
     function ContactList(allContacts) {
         this.allContacts = allContacts;
@@ -187,10 +196,11 @@ function sendMessage() {
         var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS);
         messageList.addMessage(message);
         loggedInUser.addMessages(message, groupId);
+        console.log(loggedInUser);
+        elementMessage.value = '';
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
         localStorage.setItem('contactList', JSON.stringify(contactList));
-        elementMessage.value = '';
     }
     catch (er) {
         console.error(er);
