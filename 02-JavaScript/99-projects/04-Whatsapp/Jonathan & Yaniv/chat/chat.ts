@@ -31,16 +31,14 @@ class Message {
     msgID: string;
     lastMessageName: string;
     timeMsgSec : number;
-    contactPhone:string;
 
-    constructor(content: string, userPhone: string, dateMsg: string, groupID: string, lastMessageName: string, timeMsgSec:number,contactPhone:string) {
+    constructor(content: string, userPhone: string, dateMsg: string, groupID: string, lastMessageName: string, timeMsgSec:number) {
         this.content = content;
         this.userPhone = userPhone;
         this.dateMsg = dateMsg;
         this.groupID = groupID;
         this.lastMessageName = lastMessageName;
         this.timeMsgSec = timeMsgSec;
-        this.contactPhone = contactPhone;
         this.msgID = "id" + Math.random().toString(16).slice(2);
     }
 }
@@ -110,7 +108,27 @@ class Group {
     groupName: string;
     groupUsers: Array<string> // userPhone numbers
     groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
+    groupMyPhone: string;
 
+    constructor  (groupImg: string, groupName: string,groupUsers: Array<string>, groupMyPhone: string) {
+        this.groupImg = groupImg;
+        this.groupName = groupName;
+        this.groupUsers = groupUsers 
+        this.groupMyPhone = groupMyPhone;
+    }
+
+    renderGrpupChat() {
+        let html: string = ''
+
+        html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
+                <img src="${this.groupImg}" alt="" srcset="">
+                <div class="container__header__left__text">
+                <span class="container__header__left__text--first">${this.groupName}</span>
+                <span class="container__header__left__text--second">${this.groupUsers},${this.groupMyPhone}</span>
+                </div>`
+
+        containerContactUser.innerHTML = html;
+    }
     
 
 }
@@ -145,11 +163,11 @@ class User {
         this.userGroups[groupIndex].groupMsgs.forEach(message => {
 
             html += `<div class="container__chat-box__messages--user">
-                        <p class="container__chat-box__messages--user--content">${message.content}/p>
+                        <p class="container__chat-box__messages--user--content">${message.content}</p>
                         <p>
                              <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
                                 <i class="fas fa-check-double container__chat-box__messages--user--doubleclick" aria-hidden="true"></i>
-                         <i class="fa fa-trash container__chat-box__messages--user--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
+                         <i class="fa fa-trash container__chat-box__messages--user--trash"  onclick='handleEditDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
                         </p>
                     </div>`
             
@@ -195,7 +213,7 @@ function sendMessage() {
     let timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes())
     let timeHMS = (today.getTime())
    
-    const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage,timeHMS, contactList) //last one is the lastmessagename
+    const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage,timeHMS) //last one is the lastmessagename
 
     messageList.addMessage(message)
 
@@ -258,13 +276,9 @@ function handleKeyUp() {
 
 function handleReturn() {
 
-    //localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
 
     let pickedUser = JSON.parse(localStorage.getItem("currentUser"))
 
-    //pickedUser = pickedUser.userGroups[0].groupMsgs = messageList.renderChat()
-
-    //localStorage.setItem('currentUser', JSON.stringify(pickedUser))
     
     window.location.href = `../groups/groups.html?userid=${pickedUser.userPhone}`;
 }
@@ -282,7 +296,6 @@ function openModal(ev) {
     emojiList.forEach((emoji, index) => {
         emojiList[index].addEventListener('click', function (ev) {
             ev.preventDefault()
-            console.log(emoji.value)
             if (emoji.checked) {
                 elementMessage.value += emoji.value
             }
@@ -336,9 +349,11 @@ const contactChat = JSON.parse(localStorage.getItem("contactList"))
 const contactList:ContactList = JSON.parse(localStorage.getItem("contactId"))
 const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone
 
-let chatUser = Object.values(Object.values(contactChat)[1])
+const currentGroup = JSON.parse(localStorage.getItem("currentGroup"))
 
-//let chatUser = Object.values(Object.values(Object.values(contactChat))[0])
+
+
+let chatUser = Object.values(Object.values(contactChat)[1])
 
 chatUser.find(function (chat) {
     if (contactList === chat.userPhone) {
@@ -347,10 +362,11 @@ chatUser.find(function (chat) {
     }
 });
 
-//User
+
+const groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser)
 
 
-
+groupChat.renderGrpupChat()
 
 
 

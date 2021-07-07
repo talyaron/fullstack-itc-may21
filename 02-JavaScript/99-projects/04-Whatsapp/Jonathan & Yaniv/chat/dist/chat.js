@@ -14,14 +14,13 @@ var emojiList = document.querySelectorAll('.emoji');
 //clicked
 var isClicked = false;
 var Message = /** @class */ (function () {
-    function Message(content, userPhone, dateMsg, groupID, lastMessageName, timeMsgSec, contactPhone) {
+    function Message(content, userPhone, dateMsg, groupID, lastMessageName, timeMsgSec) {
         this.content = content;
         this.userPhone = userPhone;
         this.dateMsg = dateMsg;
         this.groupID = groupID;
         this.lastMessageName = lastMessageName;
         this.timeMsgSec = timeMsgSec;
-        this.contactPhone = contactPhone;
         this.msgID = "id" + Math.random().toString(16).slice(2);
     }
     return Message;
@@ -66,9 +65,18 @@ var MessageList = /** @class */ (function () {
     return MessageList;
 }());
 var Group = /** @class */ (function () {
-    function Group() {
+    function Group(groupImg, groupName, groupUsers, groupMyPhone) {
         this.groupMsgs = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
+        this.groupImg = groupImg;
+        this.groupName = groupName;
+        this.groupUsers = groupUsers;
+        this.groupMyPhone = groupMyPhone;
     }
+    Group.prototype.renderGrpupChat = function () {
+        var html = '';
+        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.groupImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.groupName + "</span>\n                <span class=\"container__header__left__text--second\">" + this.groupUsers + "," + this.groupMyPhone + "</span>\n                </div>";
+        containerContactUser.innerHTML = html;
+    };
     return Group;
 }());
 var User = /** @class */ (function () {
@@ -87,7 +95,7 @@ var User = /** @class */ (function () {
         var html = '';
         var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
         this.userGroups[groupIndex].groupMsgs.forEach(function (message) {
-            html += "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "/p>\n                        <p>\n                             <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                                <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\" aria-hidden=\"true\"></i>\n                         <i class=\"fa fa-trash container__chat-box__messages--user--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\" aria-hidden=\"true\"></i><span class=\"sr-only\">Delete Item</span>\n                        </p>\n                    </div>";
+            html += "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "</p>\n                        <p>\n                             <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                                <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\" aria-hidden=\"true\"></i>\n                         <i class=\"fa fa-trash container__chat-box__messages--user--trash\"  onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\" aria-hidden=\"true\"></i><span class=\"sr-only\">Delete Item</span>\n                        </p>\n                    </div>";
         });
         containerChat.innerHTML = html;
     };
@@ -115,7 +123,7 @@ function sendMessage() {
     var today = new Date();
     var timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
     var timeHMS = (today.getTime());
-    var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS, contactList); //last one is the lastmessagename
+    var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS); //last one is the lastmessagename
     messageList.addMessage(message);
     loggedInUser.addMessages(message, groupId);
     localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
@@ -156,10 +164,7 @@ function handleKeyUp() {
     }
 }
 function handleReturn() {
-    //localStorage.setItem("messageChat", JSON.stringify(messageList.renderChat()))
     var pickedUser = JSON.parse(localStorage.getItem("currentUser"));
-    //pickedUser = pickedUser.userGroups[0].groupMsgs = messageList.renderChat()
-    //localStorage.setItem('currentUser', JSON.stringify(pickedUser))
     window.location.href = "../groups/groups.html?userid=" + pickedUser.userPhone;
 }
 btnModal.addEventListener('click', openModal);
@@ -169,7 +174,6 @@ function openModal(ev) {
     emojiList.forEach(function (emoji, index) {
         emojiList[index].addEventListener('click', function (ev) {
             ev.preventDefault();
-            console.log(emoji.value);
             if (emoji.checked) {
                 elementMessage.value += emoji.value;
             }
@@ -203,12 +207,13 @@ var ContactMessage = /** @class */ (function () {
 var contactChat = JSON.parse(localStorage.getItem("contactList"));
 var contactList = JSON.parse(localStorage.getItem("contactId"));
 var contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
+var currentGroup = JSON.parse(localStorage.getItem("currentGroup"));
 var chatUser = Object.values(Object.values(contactChat)[1]);
-//let chatUser = Object.values(Object.values(Object.values(contactChat))[0])
 chatUser.find(function (chat) {
     if (contactList === chat.userPhone) {
         var contactUser_1 = new ContactMessage(chat.userImg, chat.userName, chat.userPhone);
         contactUser_1.renderUserChat();
     }
 });
-//User
+var groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser);
+groupChat.renderGrpupChat();
