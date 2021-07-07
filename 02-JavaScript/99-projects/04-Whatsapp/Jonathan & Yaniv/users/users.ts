@@ -52,6 +52,8 @@ class ContactList {
     // addContact(contact: User) {
     //     this.allContacts.push(contact);
     // }
+
+    
 }
 
 let allContacts: ContactList;

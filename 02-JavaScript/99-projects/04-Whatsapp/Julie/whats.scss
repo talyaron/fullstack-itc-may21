@@ -1,26 +1,10 @@
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 
-
-
-
-// @media only screen and (max-width: 900px) {
-
-//   .wrapper__container {
-//       width: 800px;
-//    //   margin: auto;
-//   }
-// }
-
-
-
-
-
-//cambiar position absolute
 .box {
   background-color: white;
   position: absolute;
@@ -36,12 +20,12 @@
   border: 1px solid grey;
 }
 
-.box > i {
+.box>i {
   font-size: 15px;
   color: #777;
 }
 
-.box > input {
+.box>input {
   flex: 1;
   height: 20px;
   border: none;
@@ -76,6 +60,7 @@
     margin-left: 10px;
     margin-top: 20px;
     border-radius: 50%;
+
     &:hover {
       opacity: 0.8;
       cursor: pointer;
@@ -89,6 +74,7 @@
     margin-left: 10px;
     height: 20px;
     margin-top: 16px;
+
     &:hover {
       opacity: 0.8;
       cursor: pointer;
@@ -96,11 +82,12 @@
   }
 }
 
-.btn_icons{  
+.btn_icons {
   color: #777;
   margin-left: 300px;
   cursor: pointer;
 }
+
 .btn_icons:hover {
   opacity: 0.8;
 }
@@ -118,9 +105,6 @@
 #delete:hover {
   opacity: 0.8;
 }
-
-// I couldn't nest this delete. I tried making it into a class rather than an id but I think it creates a problem with the font awesome icon.
-
 
 
 .green-background {
@@ -149,7 +133,7 @@
   opacity: 0.8;
 }
 
-.modal-body{
+.modal-body {
   display: none;
 }
 
@@ -157,22 +141,18 @@
   height: 100%;
   width: 100%;
 
-
   &__container {
-    
     position: absolute;
     margin-left: 450px;
     margin-top: 25px;
     width: 400px;
     background-color: white;
-    height: 950px;
-    }
-
+    height: 965px;
+  }
 
   &--profile {
     height: 8vh;
     background-color: rgb(218, 219, 212);
-    
   }
 
   &--search {
@@ -181,47 +161,47 @@
   }
 }
 
-
 //popup add new contact
-.modal-bg{
+.modal-bg {
   position: fixed;
-
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 100vh; /*cover the all things*/
-  background-color: rgba(0,0,0,0.5);
+  height: 100vh;
+  /*cover the all things*/
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: hidden; /*to see nothing at the beginning*/
+  visibility: hidden;
+  /*to see nothing at the beginning*/
   opacity: 0;
   transition: visibility 0s, opacity 2s;
 }
 
-.bg-active{
+.bg-active {
   visibility: visible;
   opacity: 1;
-
 }
-h3{
+
+h3 {
   text-align: center;
   margin-top: 5px;
 }
 
-.modalContainer{
+.modalContainer {
   text-align: center;
   height: 60%;
-  
 }
-.inputAdd{
+
+.inputAdd {
   margin: 10px;
-  border: 1px solid gray;
+  border: 1px soid grey;
   border-radius: 3px;
   text-align: center;
 }
 
-.modal{
+.modal {
   position: relative;
   background-color: white;
   margin-left: 35px;
@@ -229,32 +209,35 @@ h3{
   height: 30%;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   flex-direction: column;
   border-radius: 10px;
 
-  .btn-modal{
-      padding: 0.5rem;
-      background-color: rgb(0, 150, 136);
-      color:white;
-      border-radius: 12%;
-      margin-top: 0.3rem;
-      cursor: pointer;
-      margin-left: 130px;
+  .btn-modal {
+    padding: 0.5rem;
+    background-color: rgb(0, 150, 136);
+    color: white;
+    border-radius: 12%;
+    margin-left: 130px;
+    margin-top: 0.5rem;
+    cursor: pointer;
   }
 
-  span{
-      position: absolute;
-      top:10px;
-      right:10px;
-      font-weight: bold;
-      cursor: pointer;
+  span {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: bold;
+    cursor: pointer;
   }
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
+
 
 //2nd page
 
@@ -263,7 +246,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin-top: 20px;
   margin-left: 330px;
 
-  
   &__contact {
     position: fixed;
     width: 600px;
@@ -275,9 +257,9 @@ input[type=number]::-webkit-outer-spin-button {
     background: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
     width: 600px;
     height: 400px;
-    text-align: right;
- 
- 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 
   &__typing {
@@ -307,11 +289,9 @@ input[type=number]::-webkit-outer-spin-button {
       border: none;
       outline: none;
       display: flex;
-
     }
 
     &--input-entry {
-
       border: 1px solid rgb(226, 226, 226);
       border-radius: 30px;
       height: 20px;
@@ -323,9 +303,6 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
-
-
-// Actually, "input-entry" is inside "input", so I need to nest it, but I don't know how to nest beyond three elements
 
 #emoji {
   color: white;
@@ -357,7 +334,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 #send {
   color: white;
-  
 }
 
 #send:hover {
@@ -377,6 +353,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin-left: 10px;
   border-radius: 50%;
   margin-top: 10px;
+
   &:hover {
     opacity: 0.8;
     cursor: pointer;
@@ -391,9 +368,20 @@ input[type=number]::-webkit-outer-spin-button {
   margin-left: 10px;
   height: 20px;
   margin-top: 28px;
+
   &:hover {
     opacity: 0.8;
     cursor: pointer;
   }
 }
 
+.message-bubble {
+  background-color: palegoldenrod;
+  border-radius: 7px;
+  box-shadow: 1px 1px #888888;
+  display: flex;
+  justify-content: flex-end;
+  border: 1px solid #888888;
+  margin-top: 3px;
+  width: 300px;
+}

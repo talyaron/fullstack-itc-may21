@@ -21,7 +21,6 @@ function renderChat(): void {
                         <div class="right">
                             <img src="../Img_whatsapp/video.png" class="icon">
                             <img src="../Img_whatsapp/phone.png" class="icon">
-                            <!-- <img src="../Img_whatsapp/camera.png" class="icon"> -->
                         </div>
                     </div>
                 </div>
@@ -42,7 +41,7 @@ function renderChat(): void {
                     <input type="text" placeholder="Type a message" id="input"></input>
                     <div class="icons">
                         <img src="../Img_whatsapp/attach file.png">
-                        <img src="../Img_whatsapp/camera.png">
+                        <img src="../Img_whatsapp/camera.png" id="buttonCam">
                     </div>
                     
                     <img src="https://img.icons8.com/material-outlined/50/000000/send-comment.png"/ id="sendButton">
@@ -154,7 +153,7 @@ const button = document.querySelector('#emoji-button');
 const picker = new EmojiButton();
 picker.on('emoji', emoji => {
     document.querySelector('#input').value += emoji;
-  });
+});
 button.addEventListener('click', () => {
-  picker.togglePicker(button);
+    picker.togglePicker(button);
 });
