@@ -38,13 +38,20 @@ class Contacts {
 
     renderContacts(domElement: Element) {
         try {
+            
             let html: string = this.contacts.map(contact => {
+                const timeHoursAndMinutes = new Date (contact.chats[0].timeStamp)
+            const hrs:number = timeHoursAndMinutes.getHours()
+            let min:any = timeHoursAndMinutes.getMinutes()
+            if (min < 10) {
+                min = `0${min}`
+            }
                 return (
                     `<div class="holder__contact" id="${contact.contactId}" onclick="moveToPrivateChat('${contact.contactId}')">` +
                     `<img class="holder__contact__image" src="${contact.imgUrl}">` +
                     `<div class="holder__contact__name">${contact.name}</div>` +
                     `<div class="holder__contact__chat">${contact.chats[0].message}</div>` +
-                    `<div class="holder__contact__timestamp">${contact.chats[0].timeStamp}</div>` +
+                    `<div class="holder__contact__timestamp">${hrs}:${min}</div>` +
                     `<div class="holder__contact__unread" id="delete" onclick="deleteContact('${contact.contactId}')">x</div>` +
                     `</div>`
                 )
@@ -142,13 +149,20 @@ const addToDomWithArray = (searchResults: Array<any>) => {
 
         if (searchResults.length === 0) { holder.innerHTML = 'no results available'; return; }
         searchResults.forEach((contact) => {
-            let index: number = parseInt(contact.chats.length - 1)
+            const index: number = parseInt(contact.chats.length - 1)
+            const timeHoursAndMinutes = new Date (contact.chats[index].timeStamp)
+            const hrs:number = timeHoursAndMinutes.getHours()
+            let min:any = timeHoursAndMinutes.getMinutes()
+            if (min < 10) {
+                min = `0${min}`
+            }
+
             holder.innerHTML += (
                 `<div class="holder__contact" id="${contact.contactId}" onclick="moveToPrivateChat('${contact.contactId}')">` +
                 `<img class="holder__contact__image" src="${contact.imgUrl}">` +
                 `<div class="holder__contact__name">${contact.name}</a></div>` +
                 `<div class="holder__contact__chat">${contact.chats[index].message}</div>` +
-                `<div class="holder__contact__timestamp">${contact.chats[index].timeStamp}</div>` +
+                `<div class="holder__contact__timestamp">${hrs}:${min}</div>` +
                 `<div class="holder__contact__unread delete" onclick="deleteContact('${contact.contactId}')">x</div>` +
                 `</div>`
             )
@@ -157,10 +171,10 @@ const addToDomWithArray = (searchResults: Array<any>) => {
         console.error(e)
     }
 }
-const findContactSearch = (chatSearch: Array<any>, searchTerm: string) => {
+const findContactSearch = (chatSearch: Array<Contact>, searchTerm: string):Array<Contact> => {
     try {
         const userRegEx: RegExp = new RegExp(searchTerm, 'gmi');
-        const searchedUsers: Array<any> = chatSearch.filter(contactName => userRegEx.test(contactName.name));
+        const searchedUsers: Array<Contact> = chatSearch.filter(contactName => userRegEx.test(contactName.name));
 
         return searchedUsers;
     } catch (e) {
@@ -168,14 +182,15 @@ const findContactSearch = (chatSearch: Array<any>, searchTerm: string) => {
     }
 }
 
-const findTextInMessages = (searchTerm: string): Array<Message> => {
+const findTextInMessages = (searchTerm: string): Array<Contact> => {
     try {
        
         const termRegEx: RegExp = new RegExp(searchTerm, 'i');
 
-        let searchedMessages = contacts.contacts.map(contact =>  contact.chats.filter(message => termRegEx.test(message.message))).flat()
-      
-        return searchedMessages
+        let searchedMessages = contacts.contacts.filter(contact =>  contact.chats.some(message => termRegEx.test(message.message)))
+   
+      return searchedMessages
+        
     } catch (e) {
         console.error(e)
     }
@@ -184,9 +199,16 @@ const handleKeyUp = (ev: any) => {
     try {
         ev.preventDefault();
         let searchTerm: string = ev.target.value;
-        const results: Array<any> = findContactSearch(contacts.contacts, searchTerm);
-        const searchMessages = findTextInMessages(searchTerm)
-        addToDomWithArray(results);
+        const results: Array<Contact> = findContactSearch(contacts.contacts, searchTerm);
+        const searchMessages: Array<Contact> = findTextInMessages(searchTerm)
+        let finalSearchArrayResults: Array<Contact> = results.concat(searchMessages)
+        var obj = {};
+        for ( var i=0; i < finalSearchArrayResults.length; i++ )
+            obj[finalSearchArrayResults[i]['name']] = finalSearchArrayResults[i];
+            finalSearchArrayResults= new Array();
+        for ( var key in obj )
+        finalSearchArrayResults.push(obj[key]);
+        addToDomWithArray(finalSearchArrayResults)
         if(searchTerm.length == 0){
            addToDomWithArray(contacts.contacts)
         }

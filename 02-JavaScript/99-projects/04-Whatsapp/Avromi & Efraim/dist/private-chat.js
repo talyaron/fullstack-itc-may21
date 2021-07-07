@@ -15,6 +15,7 @@ var params = Object.fromEntries(urlSearchParams.entries());
 var allContacts = JSON.parse(localStorage.getItem('contacts'));
 //Filter Array by Params
 var thisContact = allContacts.filter(function (contact) { return contact.contactId === params.contactId; });
+var index = allContacts.findIndex(function (cont) { return cont.contactId === params.contactId; });
 // let OurUse = thisContact.pop()
 // console.log(OurUse); Would it have been better to work on this as an object?
 var contactName = document.querySelector(".nav__contact h2");
@@ -68,6 +69,8 @@ function logSubmit(event) {
     microphone.style.display = "block";
     var plane = document.querySelector(".fa-paper-plane");
     plane.style.display = "none";
+    allContacts.splice(index, 1);
+    allContacts.unshift(thisContact[0]);
     localStorage.setItem('contacts', JSON.stringify(allContacts));
 }
 function removeMic() {
