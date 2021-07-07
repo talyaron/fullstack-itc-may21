@@ -191,6 +191,14 @@ class User {
         }
     }
 
+    handleDelete(messageId:string,groupid: string){
+        
+        const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
+        this.userGroups[groupIndex].groupMsgs = this.userGroups[groupIndex].groupMsgs.filter(message => messageId !== message.msgID);
+        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+        this.renderMsgs(groupid)
+    }
+ 
     renderMsgs(groupid: string) {
         try {
             let html: string = '';
@@ -204,7 +212,7 @@ class User {
                             <p>
                                 <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
                                     <i class="fas fa-check-double container__chat-box__messages--user--doubleclick" aria-hidden="true"></i>
-                            <i class="fa fa-trash container__chat-box__messages--user--trash"  onclick='handleEditDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
+                            <i class="fa fa-trash container__chat-box__messages--user--trash"  onclick='handleDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
                             </p>
                         </div>`
 
@@ -215,6 +223,10 @@ class User {
             console.error(er);
         }
         }
+}
+
+function handleDelete(messageId:string){
+    loggedInUser.handleDelete(messageId,groupId)
 }
 
 class ContactList {
@@ -259,11 +271,14 @@ function sendMessage() {
 
         loggedInUser.addMessages(message, groupId)
 
+        console.log(loggedInUser)
+        elementMessage.value = '';
+        
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
         localStorage.setItem('contactList', JSON.stringify(contactList));
 
-        elementMessage.value = '';
+        
     } catch (er) {
         console.error(er);
     }
