@@ -15,6 +15,8 @@ var params = Object.fromEntries(urlSearchParams.entries());
 var allContacts = JSON.parse(localStorage.getItem('contacts'));
 //Filter Array by Params
 var thisContact = allContacts.filter(function (contact) { return contact.contactId === params.contactId; });
+// let OurUse = thisContact.pop()
+// console.log(OurUse); Would it have been better to work on this as an object?
 var contactName = document.querySelector(".nav__contact h2");
 contactName.innerHTML = "" + thisContact[0].name;
 var contactImg = document.querySelector(".nav__img__wrapper");
@@ -28,7 +30,13 @@ function renderMessages(arrToRender) {
     var messagesDiv = document.querySelector(".messages");
     var html = "";
     thisContact[0].chats.forEach(function (chat) {
-        html += "<div class=\"single__message\" oncontextmenu = \"contextHandler();return false;\" >\n    <p>" + chat.message + " </p>\n        <div class=\"single__message__timestamp\"> " + chat.timeStamp + " </div>\n            </div>";
+        chat.timeStamp = new Date(chat.timeStamp);
+        var hrs = chat.timeStamp.getHours();
+        var min = chat.timeStamp.getMinutes();
+        if (min < 10) {
+            min = "0" + min;
+        }
+        html += "<div class=\"single__message\" oncontextmenu = \"contextHandler();return false;\" >\n    <p>" + chat.message + " </p>\n        <div class=\"single__message__timestamp\"> " + hrs + ":" + min + " </div>\n            </div>";
         messagesDiv.innerHTML = html;
     });
 }
@@ -37,12 +45,10 @@ function openCamera() {
 }
 function contextHandler() {
     document.getElementById("contextMenu").style.display = "block";
-    // alert('my alert ')
-}
-var doc = document.querySelector('html');
-doc.addEventListener("click", closeContext);
-function closeContext() {
-    document.getElementById("contextMenu").style.display = "none";
+    var doc = document.querySelector('html');
+    doc.addEventListener("click", function () {
+        document.getElementById("contextMenu").style.display = "none";
+    });
 }
 var form = document.querySelector('.form');
 form.addEventListener('submit', logSubmit);
@@ -72,9 +78,9 @@ function removeMic() {
         var plane = document.querySelector(".fa-paper-plane");
         plane.style.display = "block";
     });
+    var microphone = document.querySelector(".fa-microphone");
+    microphone.disabled = "true";
 }
 removeMic();
 updateLastSent();
 renderMessages(thisContact);
-var microphone = document.querySelector(".fa-microphone");
-microphone.disabled = "true";

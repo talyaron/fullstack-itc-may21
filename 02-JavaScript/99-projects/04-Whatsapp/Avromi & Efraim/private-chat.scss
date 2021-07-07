@@ -14,15 +14,11 @@ body {
     top: 0;
     left:0;
 
-    // align-items: center;
     i {
         height: 2rem;
         width: 3rem;
     }
 
-    // p {
-    //     // margin-top: -8%;
-    // }
     .fa-arrow-left:hover{
         cursor: pointer;
 
@@ -55,6 +51,9 @@ body {
       }
     .single__message{
         background-color: #DCF8C6;
+        display: table;
+        margin: 2rem;
+        padding: 0 1rem;
         &__timestamp{
             text-align: right;
             color: rgb(155, 152, 152);
@@ -83,11 +82,8 @@ body {
         }
 
         &--right {
-            border: 3px solid red;
            display: flex;
          
-           
-
         }
 
         .i {
