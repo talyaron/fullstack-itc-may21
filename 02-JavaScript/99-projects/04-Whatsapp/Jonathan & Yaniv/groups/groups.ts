@@ -93,9 +93,7 @@ class User {
             groupsToRender.forEach((group) => {
 
                 const datemsg = group.groupMsgs[group.groupMsgs.length-1] ? group.groupMsgs[group.groupMsgs.length-1].dateMsg : "" ;    
-                console.log(datemsg)       
                 const content = group.groupMsgs[group.groupMsgs.length-1] ? group.groupMsgs[group.groupMsgs.length-1].content : "" ; 
-                console.log(content)
 
                 const groupHTML: string = `
                 <div class="chats__item chat" id="${group.groupId}">

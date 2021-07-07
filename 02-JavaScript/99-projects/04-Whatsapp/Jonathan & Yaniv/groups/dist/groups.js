@@ -69,9 +69,7 @@ var User = /** @class */ (function () {
             var groupsToRender = FilteredGroupsToRender ? FilteredGroupsToRender : this.userGroups;
             groupsToRender.forEach(function (group) {
                 var datemsg = group.groupMsgs[group.groupMsgs.length - 1] ? group.groupMsgs[group.groupMsgs.length - 1].dateMsg : "";
-                console.log(datemsg);
                 var content = group.groupMsgs[group.groupMsgs.length - 1] ? group.groupMsgs[group.groupMsgs.length - 1].content : "";
-                console.log(content);
                 var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h3>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + datemsg + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + content + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>"; // for lines 47-48 - add "$" before "{" once the Message class is linked
                 ChatsContainer_1.insertAdjacentHTML('beforeend', groupHTML);
             });
