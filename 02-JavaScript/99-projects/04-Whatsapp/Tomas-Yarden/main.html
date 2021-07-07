@@ -15,7 +15,7 @@
         <div class="top-container">
             <h1 class="headline">WhatsApp</h1>
             <div class="top-container__search-menu-container">
-                <i class="fas fa-search"></i>
+                <i class="fas fa-search" onclick="openSearch(event)"></i>
                 <i class="fas fa-ellipsis-v" onclick="openMenuModal(event)"></i>
                 <div class="top-modal">
                     <ul>
@@ -71,6 +71,13 @@
             </div>
         </div>
     </nav>
+    <!-- The search navbar -->
+    <div id="search-nav" style="display: none;">
+        <div class="backArrow"><i onclick="returnToMainNav(event)" class="fas fa-arrow-left"></i></div>
+        <div class="box">
+            <input type="text" placeholder="Search..." id="search"/>
+          </div>
+    </div>
     <!-- Contacts section -->
     <main>
        <div class="saved-contacts-root"></div>

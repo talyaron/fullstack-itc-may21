@@ -3,6 +3,9 @@ var getID = localStorage.getItem("contactID");
 var userFilter = savedContacts.filter(function (el) { return el.contactId === getID; });
 var conversation = (document.querySelector(".envelope__typing--input-entry"));
 var envelope__contact = document.querySelector(".renderFirst");
+var chatContainer = document.querySelector(".envelope__chat");
+var send = document.querySelector("#send");
+var input = (document.querySelector(".envelope__typing--input-entry"));
 envelope__contact.addEventListener('click', redirect2);
 function renderChats() {
     var html = "";
@@ -22,11 +25,7 @@ var currentUrl = window.location.href;
 var idIndex = currentUrl.indexOf("id=");
 var id = currentUrl.slice(idIndex + 3);
 renderChats();
-// Understand this bit
 var currentUser = savedContacts.find(function (contact) { return contact.contactId === id; });
-var chatContainer = document.querySelector(".envelope__chat");
-var send = document.querySelector("#send");
-var input = (document.querySelector(".envelope__typing--input-entry"));
 send.addEventListener("click", sendMessage);
 //press enter and send a msg
 input.addEventListener("keyup", function (e) {
@@ -54,8 +53,9 @@ function redirect2() {
         console.error(error);
     }
 }
-function abrir() {
+//open paperClip to add files
+var paperClip = document.querySelector('.paper');
+function open() {
     var file = document.getElementById("file").click();
 }
-var paperClip = document.querySelector('.paper');
-paperClip.addEventListener('click', abrir);
+paperClip.addEventListener('click', open);

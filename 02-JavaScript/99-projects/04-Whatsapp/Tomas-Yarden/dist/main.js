@@ -1,35 +1,11 @@
-/*This is the main WhatsApp page,
-with modals and the option to add contact*/
-//Top modal:
-var openMenuModal = function (event) {
-    try {
-        var topModal = document.querySelector('.top-modal');
-        topModal.style.display = "block";
-    }
-    catch (error) {
-        console.error(error);
-    }
-};
-var closeMenuModal = function (event) {
-    try {
-        var body = document.getElementsByName('body');
-        var topModal = document.querySelector('.top-modal');
-        topModal.style.display = "none";
-    }
-    catch (error) {
-        console.error(error);
-    }
-};
-//Add contact modal form:
-var openBottomModal = function (event) {
-    try {
-        var bottomModal = document.querySelector('.add-contact');
-        bottomModal.style.display = "flex";
-    }
-    catch (error) {
-        console.error(error);
-    }
-};
+/*This is the main WhatsApp page.
+Features:
+Top modal to simulate the WhatsApp menu;
+search area (for now, unfunctional) navbar;
+bottom modal for adding contacts with form;
+when clicking the image, the 2nd navbar pops up (cloned from WhatsApp) with the option to delete;
+when clicking the info section of a message, user is redirected to the chat page
+*/
 var Contact = /** @class */ (function () {
     function Contact(image, name, message, time) {
         this.image = image;
@@ -102,6 +78,60 @@ var handleSubmit = function (event) {
         console.error(error);
     }
 };
+//Delete contact onclick:
+var handleDelete = function (id) {
+    try {
+        if (whatsAppContacts === null) {
+            throw new Error("Must have the contacts array!");
+        }
+        whatsAppContacts.remove(id);
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+/* Modal and helper functions */
+//Top modal:
+var openMenuModal = function (event) {
+    try {
+        var topModal = document.querySelector('.top-modal');
+        topModal.style.display = "block";
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+var closeMenuModal = function (event) {
+    try {
+        var body = document.getElementsByName('body');
+        var topModal = document.querySelector('.top-modal');
+        topModal.style.display = "none";
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+//Add contact modal form:
+var openBottomModal = function (event) {
+    try {
+        var bottomModal = document.querySelector('.add-contact');
+        bottomModal.style.display = "flex";
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+var openSearch = function (event) {
+    try {
+        var menu = document.querySelector("nav");
+        menu.hidden = true;
+        var searchMenu = document.querySelector('#search-nav');
+        searchMenu.attributes[1].value = "display: flex";
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
 //Alternate between the main and edit navbars:
 var showEditNav = function (event) {
     try {
@@ -117,7 +147,9 @@ var showEditNav = function (event) {
 //Close bottom modal after adding contact:
 var returnToMainNav = function (event) {
     try {
+        var searchMenu = document.querySelector('#search-nav');
         var editMenu = document.querySelector("#editNav");
+        searchMenu.attributes[1].value = "display: none";
         editMenu.attributes[1].value = "display: none";
         var menu = document.querySelector("nav");
         menu.hidden = false;
@@ -126,18 +158,12 @@ var returnToMainNav = function (event) {
         console.error(error);
     }
 };
-//Delete contact onclick:
-var handleDelete = function (id) {
+//Redirection to the chat when clicking the info section of a contact:
+var goToChat = function (event) {
     try {
-        if (whatsAppContacts === null) {
-            throw new Error("Must have the contacts array!");
-        }
-        whatsAppContacts.remove(id);
+        window.location.href = "/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/index.html";
     }
     catch (error) {
         console.error(error);
     }
-};
-var goToChat = function (event) {
-    window.location.href = "/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/index.html";
 };

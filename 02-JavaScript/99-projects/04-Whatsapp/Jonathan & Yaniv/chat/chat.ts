@@ -133,6 +133,10 @@ class User {
 
             myMessageToEdit[0].content = `you deleted this message`;
 
+            const myMessageToEditNew = this.userGroupNew[groupIndex].groupMsgs.filter(message => messageId === message.msgID);
+
+            myMessageToEditNew[0].content = `you deleted this message`;
+
            this.renderMsgs(groupId);
         } catch (er) {
             console.error(er);
@@ -143,6 +147,7 @@ class User {
         
         const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
         this.userGroups[groupIndex].groupMsgs = this.userGroups[groupIndex].groupMsgs.filter(message => message.content !== "you deleted this message");
+        this.userGroupNew[groupIndex].groupMsgs = this.userGroupNew[groupIndex].groupMsgs.filter(message => message.content !== "you deleted this message");
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         this.renderMsgs(groupid)
     }

@@ -90,6 +90,8 @@ var User = /** @class */ (function () {
             var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupid; });
             var myMessageToEdit = this.userGroups[groupIndex].groupMsgs.filter(function (message) { return messageId === message.msgID; });
             myMessageToEdit[0].content = "you deleted this message";
+            var myMessageToEditNew = this.userGroupNew[groupIndex].groupMsgs.filter(function (message) { return messageId === message.msgID; });
+            myMessageToEditNew[0].content = "you deleted this message";
             this.renderMsgs(groupId);
         }
         catch (er) {
@@ -99,6 +101,7 @@ var User = /** @class */ (function () {
     User.prototype.handleDelete = function (messageId, groupid) {
         var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
         this.userGroups[groupIndex].groupMsgs = this.userGroups[groupIndex].groupMsgs.filter(function (message) { return message.content !== "you deleted this message"; });
+        this.userGroupNew[groupIndex].groupMsgs = this.userGroupNew[groupIndex].groupMsgs.filter(function (message) { return message.content !== "you deleted this message"; });
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         this.renderMsgs(groupid);
     };

@@ -3,7 +3,6 @@ var render = document.querySelector(".wrapper__container--chats");
 //popup to add a new contact
 var btnModal = document.querySelector('.modal-btn');
 var bgModal = document.querySelector('.modal-bg');
-var btnModalClose = document.querySelector('.modal-btn');
 var modalClose = document.querySelector('.modal-close');
 var inputName = document.querySelector('#name');
 var inputPhone = document.querySelector('#phone');
@@ -85,8 +84,6 @@ function redirect(contactId) {
         console.error(error);
     }
 }
-// You have to either pass the contactid or the contact name, and then on the other page use the contact id to find the contact in the list, and display the name. Need to get contacts list on second page by setting it on local storage.
-// YOu can set the aray wherever you have ot, and then grab is
 var handleSubmit = function (event) {
     event.preventDefault();
     try {
@@ -98,7 +95,6 @@ var handleSubmit = function (event) {
         if (phone === null)
             throw Error("Put a number");
         var generator = new ContactGenerator(contactName, image, phone);
-        console.log(generator);
         contacts.add(generator);
         contacts.renderContacts();
         cerrar();
@@ -116,14 +112,9 @@ faPlus.addEventListener('click', function (e) { return openModal(e); });
 function openModal(e) {
     e.preventDefault();
     bgModal.classList.add('bg-active');
-    console.log("hi");
 }
 //close modal windows
 modalClose.addEventListener('click', closeModal);
-btnModalClose.addEventListener('click', closeAddModal);
-function closeAddModal() {
-    btnModalClose.classList.remove('bg-active');
-}
 function closeModal() {
     bgModal.classList.remove('bg-active');
 }

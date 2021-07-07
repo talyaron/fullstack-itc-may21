@@ -101,7 +101,7 @@ class User {
                 <h3 class="chat__item chat__item--name">${group.groupName}</h3>
                     <p class="chat__item chat__item--last_msg_time">${datemsg}</p>
                     <p class="chat__item chat__item--last_msg_content">${content}</p>
-                    <i class="chat__item chat__item--delete fas fa-trash" onclick='handleDelete("${group.groupId}")'></i>
+                    <i class="chat__item chat__item--delete fas fa-trash"></i>
             </div>`; // for lines 47-48 - add "$" before "{" once the Message class is linked
             ChatsContainer.insertAdjacentHTML('beforeend',groupHTML);
             });
@@ -122,11 +122,8 @@ class User {
     //JN
     deleteGroup(groupID:string){
         try {
-
-            console.log(groupID)
-
-            this.userGroups = this.userGroups.filter(group=>group.groupId !== groupID)
-            this.renderChatsToChatsList(this.userGroups)
+            const existingGroup = this.userGroups.find(group=>group.groupId === groupID)
+            return existingGroup;
 
         } catch (er) {
             console.error(er);
@@ -266,10 +263,4 @@ const readURL = (input: any) => {
     } catch (er) {
         console.error(er);
       }
-}
-
-//JN
-
-function handleDelete(groupId:string){
-    loggedInUser.deleteGroup(groupId)
 }
