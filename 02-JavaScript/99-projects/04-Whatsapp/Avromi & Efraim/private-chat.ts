@@ -19,7 +19,8 @@ const allContacts = JSON.parse(localStorage.getItem('contacts'));
 
 //Filter Array by Params
 const thisContact = allContacts.filter(contact => contact.contactId === params.contactId);
-
+// let OurUse = thisContact.pop()
+// console.log(OurUse); Would it have been better to work on this as an object?
 
 const contactName = document.querySelector(".nav__contact h2")
 contactName.innerHTML = `${thisContact[0].name}`
@@ -31,7 +32,6 @@ alt = "" >`
 function updateLastSent() {
     const lastSent = document.querySelector(".nav__contact p")
     let index: number = parseInt(thisContact[0].chats.length - 1);
-
     lastSent.innerHTML = `Last Sent: ${thisContact[0].chats[index].timeStamp} `
 }
 
@@ -39,9 +39,16 @@ function renderMessages(arrToRender: Array<Contact>) {
     const messagesDiv = document.querySelector(".messages")
     let html = "";
     thisContact[0].chats.forEach((chat) => {
+
+        chat.timeStamp = new Date(chat.timeStamp)
+        const hrs = chat.timeStamp.getHours()
+        let min = chat.timeStamp.getMinutes()
+        if (min < 10) {
+            min = `0${min}`
+        }
         html += `<div class="single__message" oncontextmenu = "contextHandler();return false;" >
     <p>${chat.message} </p>
-        <div class="single__message__timestamp"> ${chat.timeStamp} </div>
+        <div class="single__message__timestamp"> ${hrs}:${min} </div>
             </div>`
         messagesDiv.innerHTML = html
     })
@@ -54,16 +61,14 @@ function openCamera() {
     console.log("open the camera");
 }
 
-function contextHandler(){
+function contextHandler() {
     document.getElementById("contextMenu").style.display = "block";
-    // alert('my alert ')
+    const doc = document.querySelector('html')
+    doc.addEventListener(`click`, () => {
+        document.getElementById("contextMenu").style.display = "none";
+    });
 }
-const doc = document.querySelector('html')
-doc.addEventListener(`click`, closeContext )
 
-function closeContext(){
-    document.getElementById("contextMenu").style.display = "none";
-}
 
 
 const form = document.querySelector('.form')
@@ -80,28 +85,30 @@ function logSubmit(event) {
     renderMessages(thisContact)
     updateLastSent()
     setScrollHeight()
-    const microphone:any = document.querySelector(".fa-microphone");
-    microphone.style.display= "block";
+    const microphone: any = document.querySelector(".fa-microphone");
+    microphone.style.display = "block";
     const plane: any = document.querySelector(".fa-paper-plane");
     plane.style.display = "none"
     localStorage.setItem('contacts', JSON.stringify(allContacts))
 }
 
 
-function removeMic(){
+function removeMic() {
     const input = document.getElementById("input")
-    input.addEventListener("keyup",()=>{
-    const mic: any = document.querySelector(".fa-microphone");
-    mic.style.display = "none"
-    const plane: any = document.querySelector(".fa-paper-plane");
-    plane.style.display = "block"
-})}
+    input.addEventListener("keyup", () => {
+        const mic: any = document.querySelector(".fa-microphone");
+        mic.style.display = "none"
+        const plane: any = document.querySelector(".fa-paper-plane");
+        plane.style.display = "block"
+    });
+    const microphone: any = document.querySelector(".fa-microphone");
+    microphone.disabled = "true"
+}
 removeMic()
 updateLastSent()
 renderMessages(thisContact)
 
-const microphone: any = document.querySelector(".fa-microphone");
-microphone.disabled = "true" 
+
 
 
 
