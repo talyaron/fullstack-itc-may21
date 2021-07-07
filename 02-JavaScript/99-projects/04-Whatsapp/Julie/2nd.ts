@@ -13,11 +13,8 @@ function renderChats(): void {
   userFilter.forEach(element => {
 
       html += `<div class="renderSecond">
-                
                  <img src="${element.image}" alt="" class="renderSecond__imageA">              
-                 <h4 class="renderSecond__nameA">${element.contactName}</h4>
-
-                    
+                 <h4 class="renderSecond__nameA">${element.contactName}</h4>                    
               </div> `
   });
   try {
@@ -83,62 +80,5 @@ function abrir() {
 }
 
 
-const input2 = document.querySelector('input[type="file"]')
-input2.addEventListener('change', function(e){
-  console.log(input.files)
-},false)
 
-
-
-
-
-
-
-
-
-
-
-
-
-// class Message {
-//   content: string;
-//   msgID: string;
-
-//   constructor(content: string, phone: number) {
-//     this.content = content;
-//     this.msgID = "id" + Math.random().toString(16).slice(2);
-//   }
-// }
-
-// class MessageList {
-//   messageList: Array<Message> = [];
-
-//   addMessage(message: Message) {
-//     this.messageList.push(message);
-// this.renderChat();
-// }
-
-// renderChat() {
-//   let html: string = "";
-
-//   this.messageList.forEach((message) => {
-//     html +=
-//   });
-//   containerChat.innerHTML = html;
-// }
-// }
-
-/*const messageList = new MessageList();
-
-// btnMessage.addEventListener("click", sendMessage);
-
-function sendConversation() {
-  const inputMessage = conversation.value;
-
-  const message = new Message(inputMessage, "1234");
-
-  messageList.addMessage(message);
-
-  conversation.value = "";
-}*/
 
