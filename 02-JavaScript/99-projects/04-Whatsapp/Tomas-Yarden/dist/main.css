@@ -169,3 +169,12 @@ main .contact-container__info-container .last-message {
   background-color: #128c7e;
   color: white;
 }
+
+.fa-trash::before {
+  color: rgba(255, 255, 255, 0.747);
+}
+.fa-trash::before:hover {
+  display: none;
+  color: red;
+  opacity: 100;
+}

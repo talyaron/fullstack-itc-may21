@@ -1,76 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!--add buttom popup-->
-    <!-- <link rel="stylesheet" type="text/css" href="style.css">-->
-    <!--cdn for icons, also here we can add font styles-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
-    <!--whatsApp icon tab browser-->
-    <link rel="icon" href="images copy/logo.png" />
-    <!--style scss-->
-    <link rel="stylesheet" href="dist/whats.css" />
-    <title>Whatsapp</title>
-  </head>
 
-  <body>
-    <div class="wrapper">
-      <div class="wrapper__container">
-        <div class="wrapper__container--profile">
-          <img src="images copy/IMG_5787.JPG" alt="" class="photo1" />
-          <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn_icons"  href=""><i class="fas fa-plus fa-2x "></i></a>
-        </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Contact</h5>
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-              </div>
-              <div class="modal-body">
-                  <form class="form_modal" action="" onsubmit="handleContact(event)">
-                      <label class="formulario_item--modal" for="contactName">Name:</label>
-                      <input class="formulario_item--modal" type="text" name="contactName" required/>
-                      <label class="formulario_item--modal" for="phone">Phone:</label>
-                      <input class="formulario_item--modal" type="number" name="phone" required/>
-                      <label class="formulario_item--modal" for="image">Profile Image:</label>
-                      <input class="formulario_item--modal" type="url" name="image" placeholder="enter url..."/>
-                      <input class="btn btn-primary" style="margin-top: 5px; font-size: 1.2rem;" data-bs-dismiss="modal" type="submit" value="Create Chat"></input>
-                  </form>
-              </div>
-            </div>
-          </div>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--add buttom popup-->
+  <!-- <link rel="stylesheet" type="text/css" href="style.css">-->
+  <!--cdn for icons, also here we can add font styles-->
+  <link rel="stylesheet" type="text/css"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <!--whatsApp icon tab browser-->
+  <link rel="icon" href="images copy/logo.png" />
+  <!--style scss-->
+  <link rel="stylesheet" href="dist/whats.css" />
+  <title>Whatsapp</title>
+</head>
 
-        <div class="wrapper__container--search">
-          <div class="box">
-            <i class="fa fa-search" aria-hidden="true"></i>
-            <input
-              type="text"
-              placeholder="    Search or start a new chat"
-              id="filterN"
-            />
-          </div>
-        </div>
-
-        <div class="wrapper__container--chats"></div>
+<body>
+  <div class="wrapper">
+    <div class="wrapper__container">
+      <div class="wrapper__container--profile">
+        <img src="images copy/IMG_5787.JPG" alt="" class="photo1" />
+        <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn_icons" href=""><i
+            class="fas fa-plus fa-2x " ><!--<button type="submit" class="modal-btn">Add</button>-->
+          </i></a>
       </div>
+
+      <!--mantener los mismos nombres de clases que en JSON para cada input-->
+      <div class="modal-bg">
+        <div class="modal">
+          <!--actual box on the screen-->
+          <h2>Add contact</h2>
+          <label for="name">Name: </label>
+          <input type="text" name="name" id="name">
+          <label for="phone">Phone: </label>
+          <input type="number" name="phone" id="phone">
+          <button type="submit" class="btn-modal">Add</button>
+          <span class="modal-close">X</span>
+        </div>
+      </div>
+      <div class="wrapper__container--search">
+        <div class="box">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input type="text" placeholder="    Search or start a new chat" id="filterN" />
+        </div>
+      </div>
+
+      <div class="wrapper__container--chats"></div>
     </div>
-    <div class="green-background"></div>
-    <div class="grey-background"></div>
-    <script src="./dist/json.js"></script>
-    <script src="./dist/first.js"></script>
-  </body>
+  </div>
+  <div class="green-background"></div>
+  <div class="grey-background"></div>
+  <script src="./dist/json.js"></script>
+  <script src="./dist/first.js"></script>
+  <script src="./dist/popupAdd.js"></script>
+</body>
+
 </html>

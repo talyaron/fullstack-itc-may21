@@ -31,10 +31,6 @@ nav {
             display: flex;
             justify-content: space-between;
             width: 15%;
-
-            & .fa-search {
-    
-            }
             & .fa-ellipsis-v {
                 justify-self: flex-end;
     
@@ -189,5 +185,15 @@ main {
     & #submit {
         background-color: $whatsApp-green;
         color: white;
+    }
+}
+
+.fa-trash::before {
+    color: rgba(255, 255, 255, 0.747);    
+
+    &:hover {
+        display: none;
+        color: red;
+        opacity: 100;    
     }
 }
