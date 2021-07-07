@@ -76,6 +76,9 @@ const directToGroup = (ev: any): void => {
     if ((ev.target.className !== 'chats__item chat') && (ev.target.className.indexOf('chat_item') !== -1)) return; //CHECK
     
     if (ev.target.className.indexOf('chat_item') === -1) existingGroup = ev.target.parentElement;
+
+    
+    
     else existingGroup = ev.target;
 
     

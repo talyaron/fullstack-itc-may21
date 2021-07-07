@@ -94,6 +94,16 @@ var User = /** @class */ (function () {
             console.error(er);
         }
     };
+    //JN
+    User.prototype.deleteGroup = function (groupID) {
+        try {
+            var existingGroup = this.userGroups.find(function (group) { return group.groupId === groupID; });
+            return existingGroup;
+        }
+        catch (er) {
+            console.error(er);
+        }
+    };
     return User;
 }());
 var ContactList = /** @class */ (function () {

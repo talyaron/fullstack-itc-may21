@@ -4,7 +4,7 @@ const btnMessage = <HTMLElement>document.querySelector('.container__chat-footer-
 const elementMessage = <HTMLInputElement>document.querySelector('#writemsg')
 const containerChat = <HTMLElement>document.querySelector('.container__chat-box')
 const containerContactUser = <HTMLElement>document.querySelector('.container__header__left')
-//const btnReturn = <HTMLElement>document.querySelector('.container__header__left--arrowleft')
+
 
 //modal
 const btnModal = <HTMLElement>document.querySelector('.container__chat-footer--smile')
@@ -15,12 +15,11 @@ const modalClose = document.querySelector('.modal-close')
 let emojiList = <any>document.querySelectorAll('.emoji')
 
 //clicked
-//let isClicked: boolean = false;
+let isClicked: boolean = false;
 
 class Message {
     content: string;
-    userPhone: string; // this is the phone number // localstorage tiene los dos celulares, ver como se conectan con css
-    //para un lado y el otro para el otro lado con este id
+    userPhone: string; 
     dateMsg: string;
     groupID: string;
     msgID: string;
@@ -38,116 +37,13 @@ class Message {
     }
 }
 
-class MessageList {
-    messageList: Array<Message> = [];
-    messageListFilter: Array<Message> = [];
-
-    addMessage(message: Message) {
-        try {
-            this.messageList.push(message);
-            this.messageListFilter.push(message);
-            
-            this.renderChat(message);
-        } catch (er) {
-            console.error(er);
-        }
-    }
-
-    /*editMessage(messagePassId: string) {
-        try {
-            const myMessageToEdit = this.messageList.find(message=> messagePassId === message.msgID);
-
-            myMessageToEdit.content = `<i class="fas fa-ban a"></i>you deleted this message`;
-
-            this.renderAllMessage(this.messageList);
-        } catch (er) {
-            console.error(er);
-        }
-    }*/
-
-    deleteMessage(messagePassId: string) {
-        try {
-
-            console.log('1', this.messageList)
-            this.messageList = this.messageList.filter(message => messagePassId !== message.msgID);
-            this.messageListFilter = this.messageListFilter.filter(message => messagePassId !== message.msgID);
-            
-           
-           
-            const groupIndex = loggedInUser.userGroups.findIndex(group => group.groupId === groupId)
-
-             loggedInUser.userGroups[groupIndex].groupMsgs = this.messageList
-           
-            localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-
-            console.log(loggedInUser)
-           
-            this.renderAllMessage(this.messageList);
-        } catch (er) {
-            console.error(er);
-        }
-    }
-
-    filterByMessage(inputMessageFilter: string) {
-        try {
-            const regrExp: string = `^${inputMessageFilter}`;
-            const searchTermReg: RegExp = new RegExp(regrExp, 'i');
-            this.messageList = this.messageListFilter.filter(elem => searchTermReg.test(elem.content));
-            this.renderChat();
-        } catch (er) {
-            console.error(er);
-        }
-    }
-
-    renderAllMessage(arrayToRender:Array<any>){
-        try {
-            let html: string = '';
-
-            // const arrayToRender = message ? message: this.messageList
-            
-            arrayToRender.forEach(message => {
-                html = `<div class="container__chat-box__messages--user">
-                <p class="container__chat-box__messages--user--content">${message.content}<p>
-                <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
-                <i class="fas fa-check-double container__chat-box__messages--user--doubleclick"></i>
-                <i class="fa fa-trash container__chat-box__messages--user--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item"></i>
-                </div>`;
-            });
-            
-            containerChat.innerHTML = html;
-        } catch (er) {
-            console.error(er);
-        }
-    }
-
-    renderChat(message?): Array<any> {
-        try {
-            let html: string = '';
-
-        // const arrayToRender = message ? message: this.messageList
-            
-            html = `<div class="container__chat-box__messages--user">
-                        <p class="container__chat-box__messages--user--content">${message.content}<p>
-                        <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
-                        <i class="fas fa-check-double container__chat-box__messages--user--doubleclick"></i>
-                        <i class="fa fa-trash container__chat-box__messages--user--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item"></i>
-                    </div>`;
-
-            containerChat.insertAdjacentHTML('beforeend', html);
-        
-            return this.messageList;
-        } catch (er) {
-            console.error(er);
-        }
-    }
-}
 
 class Group {
     groupId: string; // userPhone or "group" + Math.random().toString(16).slice(2);
     groupImg: string;
     groupName: string;
-    groupUsers: Array<string> // userPhone numbers
-    groupMsgs: Array<Message> = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
+    groupUsers: Array<string> 
+    groupMsgs: Array<Message> = []; 
     groupMyPhone: string;
 
     constructor(groupImg: string, groupName: string, groupUsers: Array<string>, groupMyPhone: string) {
@@ -160,6 +56,9 @@ class Group {
     renderGroupChat() {
         try {
             let html: string = ''
+
+            if(!containerContactUser) throw new Error('It cant show it')
+            
 
             const groupUser = this.groupUsers.filter(group=>!group.match(contactUser))
             let showGroupUser;
@@ -188,18 +87,57 @@ class User {
     userName: string;
     userPhone: string;
     userGroups: Array<Group>;
+    userGroupNew:Array<Group>;
+    
 
-    constructor(userImg: string, userName: string, userPhone: string, userGroups: Array<Group>) {
+    constructor(userImg: string, userName: string, userPhone: string, userGroups: Array<Group>, userGroupNew : Array<Group>) {
         this.userImg = userImg;
         this.userName = userName;
         this.userPhone = userPhone;
         this.userGroups = userGroups;
+        this.userGroupNew = userGroupNew;
     }
 
     addMessages(newMess: Message, groupId: string) {
         try {
             const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
             this.userGroups[groupIndex].groupMsgs.push(newMess);
+            this.userGroupNew[groupIndex].groupMsgs.push(newMess);
+            this.renderMsgs(groupId)
+        } catch (er) {
+            console.error(er);
+        }
+    }
+
+     filterByMessage(inputMessageFilter: string, groupid:string) {
+        try {
+
+
+            const groupIndex = this.userGroupNew.findIndex(group => group.groupId === groupid);
+            const regrExp: string = `^${inputMessageFilter}`;
+            const searchTermReg: RegExp = new RegExp(regrExp, 'i');
+
+            this.userGroups[groupIndex].groupMsgs = this.userGroupNew[groupIndex].groupMsgs.filter(elem => searchTermReg.test(elem.content));
+            this.renderMsgs(groupid);
+        } catch (er) {
+            console.error(er);
+        }
+    }
+
+    editMessage(messageId: string, groupid:string) {
+        try {
+
+            const groupIndex = this.userGroups.findIndex(group => group.groupId === groupid);
+
+            const myMessageToEdit = this.userGroups[groupIndex].groupMsgs.filter(message => messageId === message.msgID);
+
+            myMessageToEdit[0].content = `you deleted this message`;
+
+            const myMessageToEditNew = this.userGroupNew[groupIndex].groupMsgs.filter(message => messageId === message.msgID);
+
+            myMessageToEditNew[0].content = `you deleted this message`;
+
+           this.renderMsgs(groupId);
         } catch (er) {
             console.error(er);
         }
@@ -208,7 +146,8 @@ class User {
     handleDelete(messageId:string,groupid: string){
         
         const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
-        this.userGroups[groupIndex].groupMsgs = this.userGroups[groupIndex].groupMsgs.filter(message => messageId !== message.msgID);
+        this.userGroups[groupIndex].groupMsgs = this.userGroups[groupIndex].groupMsgs.filter(message => message.content !== "you deleted this message");
+        this.userGroupNew[groupIndex].groupMsgs = this.userGroupNew[groupIndex].groupMsgs.filter(message => message.content !== "you deleted this message");
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         this.renderMsgs(groupid)
     }
@@ -217,6 +156,7 @@ class User {
         try {
             let html: string = '';
 
+            if(!containerChat) throw new Error('It cant show it')
             const groupIndex = this.userGroups.findIndex(group => group.groupId === groupid)
 
             this.userGroups[groupIndex].groupMsgs.forEach(message => {
@@ -226,9 +166,10 @@ class User {
                             <p>
                                 <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
                                     <i class="fas fa-check-double container__chat-box__messages--user--doubleclick" aria-hidden="true"></i>
-                            <i class="fa fa-trash container__chat-box__messages--user--trash"  onclick='handleDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
+                            <i class="fa fa-trash container__chat-box__messages--user--trash"  onclick='handleEditDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
                             </p>
-                        </div>`
+                        </div>
+                        `
 
             });
 
@@ -239,9 +180,6 @@ class User {
         }
 }
 
-function handleDelete(messageId:string){
-    loggedInUser.handleDelete(messageId,groupId)
-}
 
 class ContactList {
     allContacts: Array<User>;
@@ -260,9 +198,8 @@ class ContactList {
     }
 }
 
-const loggedInUser: User = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups)
+const loggedInUser: User = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups,JSON.parse(localStorage.getItem("currentUser")).userGroups)
 
-const messageList = new MessageList();
 
 const params = new URLSearchParams(window.location.search);
 const groupId = params.get('groupid');
@@ -282,18 +219,7 @@ function sendMessage() {
         const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS);
 
         loggedInUser.addMessages(message, groupId)
-
-
-        const groupIndex = loggedInUser.userGroups.findIndex(group => group.groupId === groupId)
-
-        const arrayMessages = loggedInUser.userGroups[groupIndex].groupMsgs
-
-        containerChat.innerHTML = '';
-
-        arrayMessages.forEach(message => {
-            messageList.addMessage(message)
-        });
-
+        
 
         elementMessage.value = '';
         
@@ -326,13 +252,13 @@ function displayInput() {
 
 function handleEditDelete(messageId: string) {
     try {
-        /*if (isClicked === false) {
-            messageList.editMessage(messageId);
+        if (isClicked === false) {
+            loggedInUser.editMessage(messageId,groupId)
             isClicked = true;
-        } else {*/
-            messageList.deleteMessage(messageId);
-            //isClicked = false;
-        //}
+        } else {
+            loggedInUser.handleDelete(messageId,groupId)
+            isClicked = false;
+        }
     } catch (er) {
         console.error(er);
     }
@@ -342,7 +268,7 @@ inputSearch.addEventListener('keyup', handleKeyUp);
 
 function handleKeyUp() {
     try {
-        messageList.filterByMessage(inputSearch.value)
+        loggedInUser.filterByMessage(inputSearch.value,groupId)
     } catch (er) {
         console.error(er)
     }
@@ -350,6 +276,11 @@ function handleKeyUp() {
 
 function handleReturn() {
     try {
+
+        localStorage.setItem('contactId', JSON.stringify(null));
+        localStorage.setItem('IsChatOrGroup', JSON.stringify(null));
+        localStorage.setItem('currentGroup', JSON.stringify(null));
+
         let pickedUser = JSON.parse(localStorage.getItem("currentUser"));
 
         window.location.href = `../groups/groups.html?userid=${pickedUser.userPhone}`;
@@ -363,9 +294,9 @@ btnModal.addEventListener('click', openModal)
 function openModal(ev) {
     try {
         ev.preventDefault()
+        
+        if (!bgModal) throw new Error("Something is not working");
         bgModal.classList.add('bg-active')
-
-
         emojiList.forEach((emoji, index) => {
             emojiList[index].addEventListener('click', function (ev) {
                 ev.preventDefault();
@@ -388,7 +319,9 @@ modalClose.addEventListener('click', closeModal);
 function closeModal(ev) {
     try{
         ev.preventDefault();
+        if (!bgModal) throw new Error("Something is not working");
         bgModal.classList.remove('bg-active');
+
     } catch (er) {
         console.error(er);
     }
@@ -411,6 +344,7 @@ class ContactMessage {
     renderUserChat() {
         try {
             let html: string = '';
+            if(!containerContactUser) throw new Error('The container is not working')
 
             html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
                     <img src="${this.userImg}" alt="" srcset="">
@@ -430,7 +364,6 @@ class ContactMessage {
 const contactChat = JSON.parse(localStorage.getItem("contactList"));
 const contactList: ContactList = JSON.parse(localStorage.getItem("contactId"));
 const isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"));
-console.log(localStorage.getItem("IsChatOrGroup"));
 const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
 
 if (isChatOrGroup === 0) {
