@@ -22,26 +22,8 @@
       <div class="wrapper__container--profile">
         <img src="images copy/IMG_5787.JPG" alt="" class="photo1" />
         <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn_icons" href=""><i
-            class="fas fa-plus fa-2x " ><!--<button type="submit" class="modal-btn">Add</button>-->
+            class="fas fa-plus fa-2x " >
           </i></a>
-      </div>
-
-      <!--mantener los mismos nombres de clases que en JSON para cada input-->
-      <div class="modal-bg">
-        <div class="modal">
-          <!--actual box on the screen-->
-          <form onsubmit="handleSubmit(event)">
-          <h2>Add contact</h2>
-          <label for="name">Name: </label>
-          <input type="text" name="name" id="name">
-          <label for="phone">Phone: </label>
-          <input type="number" name="phone" id="phone">
-          <label for="image">ImageURL: </label>
-          <input type="text" name="image" id="image">          
-          <button type="submit" class="btn-modal">Add</button>
-          <span class="modal-close">X</span>
-        </form>
-        </div>
       </div>
       <div class="wrapper__container--search">
         <div class="box">
@@ -49,7 +31,20 @@
           <input type="text" placeholder="    Search or start a new chat" id="filterN" />
         </div>
       </div>
-
+      <div class="modal-bg">
+        <div class="modal">
+          <form onsubmit="handleSubmit(event)">
+          <h3>Add contact</h3>
+          <div class="modalContainer">
+          <input type="text" name="name" id="name" placeholder="Enter contact name">
+          <input type="number" name="phone" id="phone" placeholder="Enter new phone">
+          <input type="text" name="image" id="image" placeholder="Enter image URL">          
+        </div>
+          <button type="submit" class="btn-modal">Add</button>
+          <span class="modal-close">X</span>
+        </form>
+        </div>
+      </div>
       <div class="wrapper__container--chats"></div>
     </div>
   </div>

@@ -53,7 +53,7 @@ class User {
 
             if(existingGroup === undefined){
                  this.userGroups.push(groupToCheck);
-                 this.renderChatsToChatsList();
+                 this.renderChatsToChatsList(null);
             }
           
             if(existingGroup === undefined) return true;
@@ -118,12 +118,7 @@ class User {
             console.error(er);
           }
     }
-        
-    
-    
 }
-
-
 
 class ContactList {
     allContacts: Array<User>;
@@ -234,8 +229,6 @@ class ContactList {
 const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
-
-
 
 const readURL = (input: any) => {
     try {
