@@ -93,6 +93,8 @@
         overflow-y: auto;
         flex-direction: column;
         align-items: flex-start;
+        position: sticky;
+        bottom: 0;
 
         &__messages--user {
             background-color: black;

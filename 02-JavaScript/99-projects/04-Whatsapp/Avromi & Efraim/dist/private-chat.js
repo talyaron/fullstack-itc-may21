@@ -21,19 +21,28 @@ var contactImg = document.querySelector(".nav__img__wrapper");
 contactImg.innerHTML = "<img class=\"nav__img\"\nsrc=\"" + thisContact[0].imgUrl + "\"\nalt = \"\" >";
 function updateLastSent() {
     var lastSent = document.querySelector(".nav__contact p");
-    thisContact[0].chats.reverse();
-    lastSent.innerHTML = "Last Sent: " + thisContact[0].chats[0].timeStamp + " ";
+    var index = parseInt(thisContact[0].chats.length - 1);
+    lastSent.innerHTML = "Last Sent: " + thisContact[0].chats[index].timeStamp + " ";
 }
 function renderMessages(arrToRender) {
     var messagesDiv = document.querySelector(".messages");
     var html = "";
     thisContact[0].chats.forEach(function (chat) {
-        html += "<div class=\"single__message\" oncontextmenu = \"javascript:alert('success!');return false;\" >\n    <p>" + chat.message + " </p>\n        <div class=\"single__message__timestamp\"> " + chat.timeStamp + " </div>\n            </div>";
+        html += "<div class=\"single__message\" oncontextmenu = \"contextHandler();return false;\" >\n    <p>" + chat.message + " </p>\n        <div class=\"single__message__timestamp\"> " + chat.timeStamp + " </div>\n            </div>";
         messagesDiv.innerHTML = html;
     });
 }
 function openCamera() {
     console.log("open the camera");
+}
+function contextHandler() {
+    document.getElementById("contextMenu").style.display = "block";
+    // alert('my alert ')
+}
+var doc = document.querySelector('html');
+doc.addEventListener("click", closeContext);
+function closeContext() {
+    document.getElementById("contextMenu").style.display = "none";
 }
 var form = document.querySelector('.form');
 form.addEventListener('submit', logSubmit);
@@ -44,22 +53,28 @@ function logSubmit(event) {
     obj["message"] = message;
     obj["timeStamp"] = timeStamp;
     thisContact[0].chats.push(obj);
-    console.log("Time stamp: timeStamp" + message);
     event.preventDefault();
     event.target.reset();
     renderMessages(thisContact);
     updateLastSent();
     setScrollHeight();
-    console.log(thisContact);
-    console.log(allContacts);
+    var microphone = document.querySelector(".fa-microphone");
+    microphone.style.display = "block";
+    var plane = document.querySelector(".fa-paper-plane");
+    plane.style.display = "none";
     localStorage.setItem('contacts', JSON.stringify(allContacts));
 }
+function removeMic() {
+    var input = document.getElementById("input");
+    input.addEventListener("keyup", function () {
+        var mic = document.querySelector(".fa-microphone");
+        mic.style.display = "none";
+        var plane = document.querySelector(".fa-paper-plane");
+        plane.style.display = "block";
+    });
+}
+removeMic();
 updateLastSent();
 renderMessages(thisContact);
-// const textInput = document.querySelector("#input")
-// textInput.addEventListener("keyup", myClassChange);
-// function myClassChange(event) {
-//     console.log(event.key);
-//     const sendButton:HTMLElement = document.querySelector('.sendButton')
-//     sendButton.style.display === "none"
-// }
+var microphone = document.querySelector(".fa-microphone");
+microphone.disabled = "true";

@@ -6,7 +6,7 @@ var envelope__contact = document.querySelector('.renderFirst');
 function renderChats() {
     var html = "";
     userFilter.forEach(function (element) {
-        html += "<div class=\"renderSecond\">\n                \n                 <img src=\"" + element.image + "\" alt=\"\" class=\"chat1__photo\">              \n                 <h4 class=\"chat1__name\">" + element.contactName + "</h4>\n\n                    \n              </div> ";
+        html += "<div class=\"renderSecond\">\n                \n                 <img src=\"" + element.image + "\" alt=\"\" class=\"renderSecond__imageA\">              \n                 <h4 class=\"renderSecond__nameA\">" + element.contactName + "</h4>\n\n                    \n              </div> ";
     });
     try {
         envelope__contact.innerHTML = html;

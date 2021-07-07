@@ -3,18 +3,32 @@ with modals and the option to add contact*/
 
 //Top modal:
 const openMenuModal = (event) => {
-    const topModal:any = document.querySelector('.top-modal')
-    topModal.style.display="block"
+    try {
+        const topModal:any = document.querySelector('.top-modal')
+        topModal.style.display="block"
+    } catch (error) {
+        console.error(error)
+    }
+    
 }
 const closeMenuModal = (event) => {
-    const body:any = document.getElementsByName('body')
-    const topModal:any = document.querySelector('.top-modal')
-    topModal.style.display="none"
+    try {
+        const body:any = document.getElementsByName('body')
+        const topModal:any = document.querySelector('.top-modal')
+        topModal.style.display="none"
+    } catch (error) {
+        console.error(error)
+    }
+    
 }
 //Add contact modal form:
 const openBottomModal = (event) => {
-    const bottomModal:any = document.querySelector('.add-contact')
-    bottomModal.style.display="flex"
+    try {
+        const bottomModal:any = document.querySelector('.add-contact')
+        bottomModal.style.display="flex"
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 
@@ -62,7 +76,6 @@ render() {
       rootDiv.innerHTML = htmlPattern;
     } catch (error) {
         console.error(error);
-        
      }
   }
 }
@@ -70,19 +83,36 @@ render() {
 let whatsAppContacts = new Contacts();
 
 const handleSubmit = (event) => {
-    event.preventDefault()
-    const img = event.target[0].value
-    const name = event.target[1].value
-    const message = event.target[2].value
-    const time = event.target[3].value
+    try {
+        event.preventDefault()
+        const img = event.target[0].value
+        const name = event.target[1].value
+        const message = event.target[2].value
+        const time = event.target[3].value
 
-    const newContact = new Contact(
-        img, name, message, time
-    )
-    whatsAppContacts.contacts.push(newContact)
-    whatsAppContacts.render()
+        const newContact = new Contact(
+            img, name, message, time
+        )
+        whatsAppContacts.contacts.push(newContact)
+        whatsAppContacts.render()
 
-    event.target.reset();
-    const bottomModal:any = document.querySelector('.add-contact')
-    bottomModal.style.display="none"
+        event.target.reset();
+        const bottomModal:any = document.querySelector('.add-contact')
+        bottomModal.style.display="none"
+    } catch (error) {
+        console.error(error);        
+    }
+    
+}
+
+const handlDoubleClick = (event) => {
+   try {
+    console.log('asdfasdf');
+    console.dir(event.target)
+   } catch (error) {
+       console.error(error);
+       
+   }
+
+    
 }
