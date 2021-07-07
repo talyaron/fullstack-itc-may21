@@ -1,7 +1,6 @@
 class Message {
     content: string;
-    userPhone: string; // this is the phone number // localstorage tiene los dos celulares, ver como se conectan con css
-    //para un lado y el otro para el otro lado con este id
+    userPhone: string; 
     dateMsg: string;
     groupID: string;
     msgID: string;
@@ -102,7 +101,7 @@ class User {
                 <h3 class="chat__item chat__item--name">${group.groupName}</h3>
                     <p class="chat__item chat__item--last_msg_time">${datemsg}</p>
                     <p class="chat__item chat__item--last_msg_content">${content}</p>
-                    <i class="chat__item chat__item--delete fas fa-trash"></i>
+                    <i class="chat__item chat__item--delete fas fa-trash" onclick='handleDelete("${group.groupId}")'></i>
             </div>`; // for lines 47-48 - add "$" before "{" once the Message class is linked
             ChatsContainer.insertAdjacentHTML('beforeend',groupHTML);
             });
@@ -119,6 +118,22 @@ class User {
             console.error(er);
           }
     }
+
+    //JN
+    deleteGroup(groupID:string){
+        try {
+
+            console.log(groupID)
+
+            this.userGroups = this.userGroups.filter(group=>group.groupId !== groupID)
+            this.renderChatsToChatsList(this.userGroups)
+
+        } catch (er) {
+            console.error(er);
+          }
+    }
+
+    //
 }
 
 class ContactList {
@@ -251,4 +266,10 @@ const readURL = (input: any) => {
     } catch (er) {
         console.error(er);
       }
+}
+
+//JN
+
+function handleDelete(groupId:string){
+    loggedInUser.deleteGroup(groupId)
 }

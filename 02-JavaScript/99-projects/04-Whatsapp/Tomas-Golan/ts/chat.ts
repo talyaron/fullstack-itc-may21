@@ -1,4 +1,4 @@
-
+let getContactSelected = [];
 //method to add individual msg
 class Mensaje {
     text: string;
@@ -37,9 +37,17 @@ function renderOnDOM() {
         data.insertAdjacentHTML('beforeend',`<div class="allmsgs chat_wrapper--user1"><p>${msg.text}</p></div>`);
         
     });
-
-
+    let contactForChat = JSON.parse(localStorage.getItem("contactForChat"));
+    console.log(contactForChat);
+    // const titleContact = document.querySelector(".title_contact");
+    const headerContact = document.querySelector(".header_profile");
     
+    headerContact.insertAdjacentHTML('beforeend',`<div class="headrestyle"><img style="width: 6.5rem; height: 6rem; position: relative; left: 3rem;" class="header_img_profile"
+    src="${contactForChat.profileImg}"
+    alt=""><h1>${contactForChat.name}</h1></div>`);
+    // imgContact.insertAdjacentHTML('beforeend',`<img class="header_img_profile"
+    // src="${contactForChat.profileImg}"
+    // alt="">`);
 }
 
 // function showPersonaOnDOM() {
@@ -56,32 +64,42 @@ renderOnDOM();
 function idContactForChat(id){
     let getContactChat = JSON.parse(localStorage.getItem("contactos"));
     const idContact = getContactChat.find((contact) => contact.id === id);
-    getContactSelected.push(idContact);
-
-    renderContactInChat(getContactSelected);
+    // renderContactInChat(getContactSelected);
     console.log(idContact);
     console.log(idContact.name);
+    localStorage.setItem("contactForChat", JSON.stringify(idContact));
 }
 
-function renderContactInChat(element) {
-    const containerChat: HTMLElement = document.querySelector(".header_chat");
-    // containerChat.appendChild(div)
-    let htmlChat= "";
+// function renderContactInChat() {
+//     // const containerChat: HTMLElement = document.querySelector(".header_profile");
+//     let contactForChat = JSON.parse(localStorage.getItem("contactForChat"));
+//     console.log(contactForChat);
+//     // containerChat.appendChild(div)
+//     // let htmlChat= "";
  
-        htmlChat += `
-        <img class="header_img_profile"
-        src="${element.profileImg}"
-        alt="">
-      <h1>${element.name}</h1>
-      <div class="header_icon">
-        <a class="btn_icons" href=""><i
-            class="fa fa-search fa fa-2x search_icon"></i></a>
-        <a class="btn_icons" href=""><i class="fas fa-ellipsis-v fa-2x"></i></a>
-      </div>`
+//     //     htmlChat += `
+//     //     <img class="header_img_profile"
+//     //     src="${contactForChat.profileImg}"
+//     //     alt="">
+//     //   <h1>${contactForChat.name}</h1>
+//     //   <div class="header_icon">
+//     //     <a class="btn_icons" href=""><i
+//     //         class="fa fa-search fa fa-2x search_icon"></i></a>
+//     //     <a class="btn_icons" href=""><i class="fas fa-ellipsis-v fa-2x"></i></a>
+//     //   </div>`
 
-      containerChat.innerHTML = htmlChat;
+//       const titleContact = document.querySelector(".title_contact");
+//       const imgContact = document.querySelector(".header_profile");
+      
+//       titleContact.insertAdjacentHTML('beforeend',`<h1>${contactForChat.name}</h1>`);
+//       imgContact.insertAdjacentHTML('beforeend',`<img class="header_img_profile"
+//       src="${contactForChat.profileImg}"
+//       alt="">`);
+//       console.log(contactForChat.name)
 
-}
+//     //   containerChat.innerHTML = htmlChat;
+
+// }
 
 
     

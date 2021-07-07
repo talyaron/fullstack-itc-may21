@@ -92,7 +92,7 @@
         overflow: hidden;
         overflow-y: auto;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-end;
         position: sticky;
         bottom: 0;
 
@@ -143,7 +143,7 @@
             margin: 7px 10px;
 
             &--content {
-                color: white;
+                color: lightgray;
                 margin-right: 10px;
                 font-size: 1.4rem;
             }
@@ -163,7 +163,7 @@
             }
 
             &--trash {
-                color: lightpink;
+                color: black;
                 margin-right: 10px;
                 font-size: 0.7rem;
 
