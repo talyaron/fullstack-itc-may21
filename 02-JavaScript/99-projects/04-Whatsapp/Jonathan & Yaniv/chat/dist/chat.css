@@ -79,10 +79,11 @@
   bottom: 0;
 }
 .container__chat-box__messages--user {
-  background-color: black;
+  background-color: #015d52;
   display: flex;
   align-items: flex-end;
-  border-radius: 20px;
+  padding: 0.5rem;
+  border-radius: 10px;
   margin: 7px 10px;
 }
 .container__chat-box__messages--user--content {
@@ -101,7 +102,7 @@
   font-size: 0.7rem;
 }
 .container__chat-box__messages--user--trash {
-  color: lightpink;
+  color: black;
   margin-right: 10px;
   font-size: 0.7rem;
 }
@@ -205,19 +206,13 @@
   opacity: 0;
   transition: visibility 0s, opacity 0.5s;
 }
-
-.bg-active {
-  visibility: visible;
-  opacity: 1;
-}
-
-.modal {
+.modal-bg__modal {
   position: relative;
   width: 30%;
   height: 30%;
   background-color: black;
 }
-.modal .emoji_text {
+.modal-bg__modal__emoji_text {
   display: block;
   text-align: center;
   color: white;
@@ -226,7 +221,15 @@
   text-transform: uppercase;
   letter-spacing: 0.2rem;
 }
-.modal .btn-modal {
+.modal-bg__modal__emoji_text__modal-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 3fr 3fr 3fr 3fr;
+  grid-row-gap: 10px;
+  text-align: center;
+}
+.modal-bg__modal .btn-modal {
   padding: 0.5rem;
   background-color: lightslategray;
   color: white;
@@ -234,7 +237,7 @@
   margin-top: 0.5rem;
   cursor: pointer;
 }
-.modal .modal-close {
+.modal-bg .modal-close {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -243,15 +246,7 @@
   font-size: small;
 }
 
-.modal-grid {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 3fr 3fr 3fr 3fr;
-  grid-row-gap: 10px;
-  text-align: center;
-}
-
-.a {
-  color: aqua;
+.bg-active {
+  visibility: visible;
+  opacity: 1;
 }
