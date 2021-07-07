@@ -61,8 +61,8 @@ render() {
       let htmlPattern = "";
       this.contacts.forEach((contact) => {
         htmlPattern += `<div class="contact-container">
-        <img class="contact-container__contact-image" src="${contact.image}">
-        <div class="contact-container__info-container" onclick="showEditNav(event)">
+        <img class="contact-container__contact-image" onclick="showEditNav(event)" src="${contact.image}">
+        <div class="contact-container__info-container" onclick="goToChat(event)">
              <div class="contact-container__info-container__inner-container">
                  <div class="contact-name">${contact.name}</div>
                  <div class="time">${contact.time}</div>
@@ -85,7 +85,7 @@ render() {
       );
       this.contacts.splice(indexToRemove, 1);
       this.render();
-      returnToMainNav(id)
+      returnToMainNav(id) //Update local storage:
       let contactSerialized = JSON.stringify(whatsAppContacts)
         localStorage.setItem("whatsAppContacts", contactSerialized)
         let contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"))
@@ -100,6 +100,9 @@ let whatsAppContacts = new Contacts();
 //Adding a new contact:
 const handleSubmit = (event) => {
     try {
+        if (whatsAppContacts === null) {
+            throw new Error("Must have the contacts array!")
+        }
         event.preventDefault()
         const img = event.target[0].value
         const name = event.target[1].value
@@ -111,7 +114,7 @@ const handleSubmit = (event) => {
         )
         whatsAppContacts.contacts.push(newContact)
 
-        //Save in local storage:
+        //Update local storage:
         let contactSerialized = JSON.stringify(whatsAppContacts)
         localStorage.setItem("whatsAppContacts", contactSerialized)
         let contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"))
@@ -124,13 +127,11 @@ const handleSubmit = (event) => {
         bottomModal.style.display="none"
     } catch (error) {
         console.error(error);        
-    }
-    
+    } 
 }
-
+//Alternate between the main and edit navbars:
 const showEditNav = (event) => {
    try {
-    console.dir(whatsAppContacts)
     const menu = document.querySelector("nav")
     menu.hidden=true
     const editMenu = document.querySelector("#editNav")
@@ -142,7 +143,7 @@ const showEditNav = (event) => {
 
     
 }
-
+//Close bottom modal after adding contact:
 const returnToMainNav = (event) => {
     try {
         const editMenu = document.querySelector("#editNav")
@@ -153,11 +154,17 @@ const returnToMainNav = (event) => {
         console.error(error);
     }
 }
-
+//Delete contact onclick:
 const handleDelete = (id) => {
     try {
+        if (whatsAppContacts === null) {
+            throw new Error("Must have the contacts array!")}
         whatsAppContacts.remove(id);
     } catch (error) {
         console.error(error);
     }    
+}
+
+const goToChat = (event) => {
+    window.location.href = "/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/index.html"
 }

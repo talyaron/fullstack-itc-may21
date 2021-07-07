@@ -1,5 +1,13 @@
 //render in the first page
 var render = document.querySelector(".wrapper__container--chats");
+//popup to add a new contact
+var btnModal = document.querySelector('.modal-btn');
+var bgModal = document.querySelector('.modal-bg');
+var btnModalClose = document.querySelector('.modal-btn');
+var modalClose = document.querySelector('.modal-close');
+var inputName = document.querySelector('#name');
+var inputPhone = document.querySelector('#phone');
+var faPlus = document.querySelector('.fa-plus');
 //search-regrex first page, take id from the input search
 var inputFilter = document.querySelector("#filterN");
 var ContactGenerator = /** @class */ (function () {
@@ -79,16 +87,6 @@ function redirect(contactId) {
 }
 // You have to either pass the contactid or the contact name, and then on the other page use the contact id to find the contact in the list, and display the name. Need to get contacts list on second page by setting it on local storage.
 // YOu can set the aray wherever you have ot, and then grab is
-//popup to add a new contact
-var btnModal = document.querySelector('.modal-btn');
-var bgModal = document.querySelector('.modal-bg');
-var modalClose = document.querySelector('.modal-close');
-var inputName = document.querySelector('#name');
-var inputPhone = document.querySelector('#phone');
-//const btnModalInput = (<HTMLButtonElement>document.querySelector('.btn-modal'))
-//const boardRoot:HTMLElement = document.querySelector('#board')
-var faPlus = document.querySelector('.fa-plus');
-var btnsub = document.querySelector('.btn-modal');
 var handleSubmit = function (event) {
     event.preventDefault();
     try {
@@ -103,12 +101,16 @@ var handleSubmit = function (event) {
         console.log(generator);
         contacts.add(generator);
         contacts.renderContacts();
+        cerrar();
     }
     catch (error) {
         alert(error);
     }
     event.target.reset();
 };
+function cerrar() {
+    window.close();
+}
 faPlus.addEventListener('click', function (e) { return openModal(e); });
 //open modal window
 function openModal(e) {
@@ -118,8 +120,10 @@ function openModal(e) {
 }
 //close modal windows
 modalClose.addEventListener('click', closeModal);
+btnModalClose.addEventListener('click', closeAddModal);
+function closeAddModal() {
+    btnModalClose.classList.remove('bg-active');
+}
 function closeModal() {
     bgModal.classList.remove('bg-active');
 }
-//boardRoot.insertAdjacentHTML('afterend',html)
-//bgModal.classList.remove('bg-active')
