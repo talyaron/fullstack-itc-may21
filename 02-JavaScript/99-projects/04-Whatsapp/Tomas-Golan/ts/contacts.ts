@@ -28,6 +28,7 @@ class Contact {
     }
 }
 
+
 // FUNCTIONS
 const addLocalContacts = (localChat) => {
     localChat.forEach(contact => {
@@ -51,7 +52,7 @@ function render() {
         html += `
         <div class="contacts_chat">
             <img class="contacts_img" src="${element.profileImg}" alt="">
-            <a href="">
+            <a href="chat.html" onclick='idContactForChat("${element.id}")'>
                 <div class="contacts_info">
                     <h3 class="contacts_name">${element.name}</h3>
                     <p>${element.phone}</p>
@@ -61,7 +62,8 @@ function render() {
         </div>`
     });
     let renderGroup = JSON.parse(localStorage.getItem("groups"));
-    console.log(renderGroup);
+    // console.log(renderGroup);
+    // href="chat.html"
     if (!renderGroup) return
     renderGroup.forEach((element) => {
         html += `
@@ -123,3 +125,5 @@ const filters = (ev) => {
 // EVENTLISTENERS
 
 formSearchBar.addEventListener('keyup', filters);
+
+
