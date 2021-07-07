@@ -1,4 +1,4 @@
-// Create a Whatsapp application with two pages. 
+// Create a Whatsapp application with two pages.
 // 1st page: the chatGroups
 // 2nd page: chat
 // use classes, destructors, spread, typescript
@@ -8,10 +8,6 @@
 // start with the design of the classes, BEM
 //Global Variables
 var messageValue = document.getElementById("text-input");
-//Listeners
-// interface RespondsInterface {
-//   message:string;
-// }
 var Chat = /** @class */ (function () {
     function Chat(message) {
         this.message = message;
@@ -31,7 +27,10 @@ var ChatProfile = /** @class */ (function () {
     }
     // arrayBot:Array<Bot> =[];
     ChatProfile.prototype.add = function (add) {
+        var currentLocal = JSON.parse(localStorage.getItem("chat"));
+        currentLocal.push(add);
         this.arrayChat.push(add);
+        localStorage.setItem("chat", JSON.stringify(currentLocal));
         this.renderUser();
         // this.respondBot();
     };
@@ -47,12 +46,13 @@ var ChatProfile = /** @class */ (function () {
         this.renderUser();
     };
     ChatProfile.prototype.renderUser = function (arr) {
-        var arrayRender = arr ? arr : this.arrayChat;
+        var getLocal = JSON.parse(localStorage.getItem("chat"));
+        // const arrayRender = arr ? arr : getLocal;
         var getUser = document.querySelector("#chat-box");
         // const respon = String(messageValue.value);
         var html = "";
         console.log(this.arrayChat);
-        arrayRender.forEach(function (element) {
+        getLocal.forEach(function (element) {
             console.log(element.message);
             html += "\n      <p class=\"userText\" onclick='HanldeDelete(\"" + element.id + "\")'>\n      <span >" + element.message + "<i class=\"fas fa-chevron-down  arrow-down\" ></i></span>\n      </p>\n     \n     ";
             if (element.message.includes("Hi")) {
@@ -75,6 +75,13 @@ var ChatProfile = /** @class */ (function () {
     return ChatProfile;
 }());
 var chatProfile = new ChatProfile();
+window.onload = function () {
+    var saveLocal = JSON.parse(localStorage.getItem("chat"));
+    console.log(saveLocal);
+    // localStorage.setItem("chat", JSON.stringify(chatProfile.arrayChat));
+    console.log(saveLocal.length);
+    saveLocal.length > 0 ? chatProfile.renderUser() : null;
+};
 var sendBtn = function (event) {
     event.preventDefault();
     var message = event.target.elements.message.value;

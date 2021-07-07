@@ -1,5 +1,13 @@
 //render in the first page
 var render = document.querySelector(".wrapper__container--chats");
+//popup to add a new contact
+var btnModal = document.querySelector('.modal-btn');
+var bgModal = document.querySelector('.modal-bg');
+var btnModalClose = document.querySelector('.modal-btn');
+var modalClose = document.querySelector('.modal-close');
+var inputName = document.querySelector('#name');
+var inputPhone = document.querySelector('#phone');
+var faPlus = document.querySelector('.fa-plus');
 //search-regrex first page, take id from the input search
 var inputFilter = document.querySelector("#filterN");
 var ContactGenerator = /** @class */ (function () {
@@ -79,34 +87,43 @@ function redirect(contactId) {
 }
 // You have to either pass the contactid or the contact name, and then on the other page use the contact id to find the contact in the list, and display the name. Need to get contacts list on second page by setting it on local storage.
 // YOu can set the aray wherever you have ot, and then grab is
-//popup to add a new contact
-var btnModal = document.querySelector('.modal-btn');
-var bgModal = document.querySelector('.modal-bg');
-var modalClose = document.querySelector('.modal-close');
-var inputName = document.querySelector('#name');
-var inputPhone = document.querySelector('#phone');
-var btnModalInput = document.querySelector('.btn-modal');
-var boardRoot = document.querySelector('#board');
-var faPlus = document.querySelector('.fa-plus');
-var btnsub = document.querySelector('.btn-modal');
-btnsub.addEventListener('submit'());
+var handleSubmit = function (event) {
+    event.preventDefault();
+    try {
+        var contactName = event.target.elements.name.value;
+        var image = event.target.elements.image.value;
+        var phone = event.target.elements.phone.value;
+        if (contactName === "")
+            throw Error("Put a contact name");
+        if (phone === null)
+            throw Error("Put a number");
+        var generator = new ContactGenerator(contactName, image, phone);
+        console.log(generator);
+        contacts.add(generator);
+        contacts.renderContacts();
+        cerrar();
+    }
+    catch (error) {
+        alert(error);
+    }
+    event.target.reset();
+};
+function cerrar() {
+    window.close();
+}
 faPlus.addEventListener('click', function (e) { return openModal(e); });
+//open modal window
 function openModal(e) {
     e.preventDefault();
     bgModal.classList.add('bg-active');
     console.log("hi");
-    //set
 }
+//close modal windows
 modalClose.addEventListener('click', closeModal);
-function closeModal() {
-    bgModal.classList.remove('bg-active');
+btnModalClose.addEventListener('click', closeAddModal);
+function closeAddModal() {
+    btnModalClose.classList.remove('bg-active');
 }
-btnModalInput.addEventListener('click', putInputOnDOM);
-function putInputOnDOM() {
-    var html = "";
-    console.log(inputEmail.value);
-    console.log(inputName.value);
-    html += "<p> " + inputName.value + "</p>\n                <p> " + inputEmail.value + "</p>";
-    boardRoot.insertAdjacentHTML('afterend', html);
+function closeModal() {
     bgModal.classList.remove('bg-active');
 }

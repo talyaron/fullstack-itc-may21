@@ -31,36 +31,70 @@ var MessageList = /** @class */ (function () {
         this.messageListFilter = [];
     }
     MessageList.prototype.addMessage = function (message) {
-        this.messageList.push(message);
-        this.messageListFilter.push(message);
-        this.renderChat();
+        try {
+            this.messageList.push(message);
+            this.messageListFilter.push(message);
+            this.renderChat(message);
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
     MessageList.prototype.editMessage = function (messagePassId) {
-        this.messageList.find(function (message) {
-            if (messagePassId === message.msgID) {
-                message.content = "<i class=\"fas fa-ban a\"></i>you deleted this message";
-            }
-        });
-        this.renderChat();
+        try {
+            var myMessageToEdit = this.messageList.find(function (message) { return messagePassId === message.msgID; });
+            myMessageToEdit.content = "<i class=\"fas fa-ban a\"></i>you deleted this message";
+            this.renderAllMessage(this.messageList);
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
     MessageList.prototype.deleteMessage = function (messagePassId) {
-        this.messageList = this.messageList.filter(function (message) { return messagePassId !== message.msgID; });
-        this.messageListFilter = this.messageListFilter.filter(function (message) { return messagePassId !== message.msgID; });
-        this.renderChat();
+        try {
+            this.messageList = this.messageList.filter(function (message) { return messagePassId !== message.msgID; });
+            this.messageListFilter = this.messageListFilter.filter(function (message) { return messagePassId !== message.msgID; });
+            this.renderAllMessage(this.messageList);
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
     MessageList.prototype.filterByMessage = function (inputMessageFilter) {
-        var regrExp = "^" + inputMessageFilter;
-        var searchTermReg = new RegExp(regrExp, 'i');
-        this.messageList = this.messageListFilter.filter(function (elem) { return searchTermReg.test(elem.content); });
-        this.renderChat();
+        try {
+            var regrExp = "^" + inputMessageFilter;
+            var searchTermReg_1 = new RegExp(regrExp, 'i');
+            this.messageList = this.messageListFilter.filter(function (elem) { return searchTermReg_1.test(elem.content); });
+            this.renderChat();
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
-    MessageList.prototype.renderChat = function () {
-        var html = '';
-        this.messageList.forEach(function (message) {
-            html += "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "<p>\n                        <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                        <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\"></i>\n                        <i class=\"fa fa-trash container__chat-box__messages--user--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                        </div>";
-        });
-        containerChat.insertAdjacentHTML('beforeend', html);
-        return this.messageList;
+    MessageList.prototype.renderAllMessage = function (arrayToRender) {
+        try {
+            var html_1 = '';
+            // const arrayToRender = message ? message: this.messageList
+            arrayToRender.forEach(function (message) {
+                html_1 = "<div class=\"container__chat-box__messages--user\">\n                <p class=\"container__chat-box__messages--user--content\">" + message.content + "<p>\n                <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\"></i>\n                <i class=\"fa fa-trash container__chat-box__messages--user--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                </div>";
+            });
+            containerChat.innerHTML = html_1;
+        }
+        catch (er) {
+            console.error(er);
+        }
+    };
+    MessageList.prototype.renderChat = function (message) {
+        try {
+            var html = '';
+            // const arrayToRender = message ? message: this.messageList
+            html = "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "<p>\n                        <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                        <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\"></i>\n                        <i class=\"fa fa-trash container__chat-box__messages--user--trash\" onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\"></i>\n                    </div>";
+            containerChat.insertAdjacentHTML('beforeend', html);
+            return this.messageList;
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
     return MessageList;
 }());
@@ -73,17 +107,22 @@ var Group = /** @class */ (function () {
         this.groupMyPhone = groupMyPhone;
     }
     Group.prototype.renderGroupChat = function () {
-        var html = '';
-        var groupUser = this.groupUsers.filter(function (group) { return !group.match(contactUser); });
-        var showGroupUser;
-        if (groupUser.length === 2) {
-            showGroupUser = "You," + groupUser;
+        try {
+            var html = '';
+            var groupUser = this.groupUsers.filter(function (group) { return !group.match(contactUser); });
+            var showGroupUser = void 0;
+            if (groupUser.length === 2) {
+                showGroupUser = "You," + groupUser;
+            }
+            else {
+                showGroupUser = this.groupUsers.filter(function (group) { return !group.match(contactUser); });
+            }
+            html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                    <img src=\"" + this.groupImg + "\" alt=\"\" srcset=\"\">\n                    <div class=\"container__header__left__text\">\n                    <span class=\"container__header__left__text--first\">" + this.groupName + "</span>\n                    <span class=\"container__header__left__text--second\">" + showGroupUser + "</span>\n                    </div>";
+            containerContactUser.innerHTML = html;
         }
-        else {
-            showGroupUser = this.groupUsers.filter(function (group) { return !group.match(contactUser); });
+        catch (er) {
+            console.error(er);
         }
-        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.groupImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.groupName + "</span>\n                <span class=\"container__header__left__text--second\">" + showGroupUser + "</span>\n                </div>";
-        containerContactUser.innerHTML = html;
     };
     return Group;
 }());
@@ -95,27 +134,50 @@ var User = /** @class */ (function () {
         this.userGroups = userGroups;
     }
     User.prototype.addMessages = function (newMess, groupId) {
+        try {
+            var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
+            this.userGroups[groupIndex].groupMsgs.push(newMess);
+        }
+        catch (er) {
+            console.error(er);
+        }
+    };
+    User.prototype.handleDelete = function (messageId, groupid) {
         var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
-        this.userGroups[groupIndex].groupMsgs.push(newMess);
-        return this.userGroups[groupIndex].groupMsgs;
+        this.userGroups[groupIndex].groupMsgs = this.userGroups[groupIndex].groupMsgs.filter(function (message) { return messageId !== message.msgID; });
+        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+        this.renderMsgs(groupid);
     };
     User.prototype.renderMsgs = function (groupid) {
-        var html = '';
-        var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupid; });
-        this.userGroups[groupIndex].groupMsgs.forEach(function (message) {
-            html += "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "</p>\n                        <p>\n                             <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                                <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\" aria-hidden=\"true\"></i>\n                         <i class=\"fa fa-trash container__chat-box__messages--user--trash\"  onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\" aria-hidden=\"true\"></i><span class=\"sr-only\">Delete Item</span>\n                        </p>\n                    </div>";
-        });
-        containerChat.innerHTML = html;
+        try {
+            var html_2 = '';
+            var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupid; });
+            this.userGroups[groupIndex].groupMsgs.forEach(function (message) {
+                html_2 += "<div class=\"container__chat-box__messages--user\">\n                            <p class=\"container__chat-box__messages--user--content\">" + message.content + "</p>\n                            <p>\n                                <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                                    <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\" aria-hidden=\"true\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--user--trash\"  onclick='handleDelete(\"" + message.msgID + "\")' title=\"Delete Item\" aria-hidden=\"true\"></i><span class=\"sr-only\">Delete Item</span>\n                            </p>\n                        </div>";
+            });
+            containerChat.innerHTML = html_2;
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
     return User;
 }());
+function handleDelete(messageId) {
+    loggedInUser.handleDelete(messageId, groupId);
+}
 var ContactList = /** @class */ (function () {
     function ContactList(allContacts) {
         this.allContacts = allContacts;
     }
     ContactList.prototype.findContactIndex = function (contactPhone) {
-        var contactIndex = this.allContacts.findIndex(function (contactItem) { return contactItem.userPhone === contactPhone; });
-        return contactIndex;
+        try {
+            var contactIndex = this.allContacts.findIndex(function (contactItem) { return contactItem.userPhone === contactPhone; });
+            return contactIndex;
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
     return ContactList;
 }());
@@ -126,38 +188,54 @@ var groupId = params.get('groupid');
 loggedInUser.renderMsgs(groupId);
 btnMessage.addEventListener('click', sendMessage);
 function sendMessage() {
-    var inputMessage = elementMessage.value;
-    var today = new Date();
-    var timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
-    var timeHMS = (today.getTime());
-    var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS);
-    messageList.addMessage(message);
-    loggedInUser.addMessages(message, groupId);
-    localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-    contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-    localStorage.setItem('contactList', JSON.stringify(contactList));
-    elementMessage.value = '';
+    try {
+        var inputMessage = elementMessage.value;
+        var today = new Date();
+        var timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
+        var timeHMS = (today.getTime());
+        var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS);
+        messageList.addMessage(message);
+        loggedInUser.addMessages(message, groupId);
+        console.log(loggedInUser);
+        elementMessage.value = '';
+        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+        contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        localStorage.setItem('contactList', JSON.stringify(contactList));
+    }
+    catch (er) {
+        console.error(er);
+    }
 }
 btnSearch.addEventListener('click', displayInput);
 function displayInput() {
-    if (inputSearch.style.display === 'none') {
-        inputSearch.style.display = 'inline-block';
-        inputSearch.style.outline = "none";
-        inputSearch.style.textIndent = "0.2rem";
+    try {
+        if (inputSearch.style.display === 'none') {
+            inputSearch.style.display = 'inline-block';
+            inputSearch.style.outline = "none";
+            inputSearch.style.textIndent = "0.2rem";
+        }
+        else {
+            inputSearch.style.display = 'none';
+            inputSearch.value = "";
+        }
     }
-    else {
-        inputSearch.style.display = 'none';
-        inputSearch.value = "";
+    catch (er) {
+        console.error(er);
     }
 }
 function handleEditDelete(messageId) {
-    if (isClicked === false) {
-        messageList.editMessage(messageId);
-        isClicked = true;
+    try {
+        if (isClicked === false) {
+            messageList.editMessage(messageId);
+            isClicked = true;
+        }
+        else {
+            messageList.deleteMessage(messageId);
+            isClicked = false;
+        }
     }
-    else {
-        messageList.deleteMessage(messageId);
-        isClicked = false;
+    catch (er) {
+        console.error(er);
     }
 }
 inputSearch.addEventListener('keyup', handleKeyUp);
@@ -165,36 +243,50 @@ function handleKeyUp() {
     try {
         messageList.filterByMessage(inputSearch.value);
     }
-    catch (e) {
-        console.log(e);
+    catch (er) {
+        console.error(er);
     }
 }
 function handleReturn() {
-    var pickedUser = JSON.parse(localStorage.getItem("currentUser"));
-    window.location.href = "../groups/groups.html?userid=" + pickedUser.userPhone;
+    try {
+        var pickedUser = JSON.parse(localStorage.getItem("currentUser"));
+        window.location.href = "../groups/groups.html?userid=" + pickedUser.userPhone;
+    }
+    catch (er) {
+        console.error(er);
+    }
 }
 btnModal.addEventListener('click', openModal);
 function openModal(ev) {
-    ev.preventDefault();
-    bgModal.classList.add('bg-active');
-    emojiList.forEach(function (emoji, index) {
-        emojiList[index].addEventListener('click', function (ev) {
-            ev.preventDefault();
-            if (emoji.checked) {
-                elementMessage.value += emoji.value;
-            }
-            bgModal.classList.remove('bg-active');
-            ev.target.reset;
+    try {
+        ev.preventDefault();
+        bgModal.classList.add('bg-active');
+        emojiList.forEach(function (emoji, index) {
+            emojiList[index].addEventListener('click', function (ev) {
+                ev.preventDefault();
+                if (emoji.checked) {
+                    elementMessage.value += emoji.value;
+                }
+                bgModal.classList.remove('bg-active');
+                ev.target.reset;
+            });
         });
-    });
-    emojiList = [];
+        emojiList = [];
+    }
+    catch (er) {
+        console.error(er);
+    }
 }
 modalClose.addEventListener('click', closeModal);
 function closeModal(ev) {
-    ev.preventDefault();
-    bgModal.classList.remove('bg-active');
+    try {
+        ev.preventDefault();
+        bgModal.classList.remove('bg-active');
+    }
+    catch (er) {
+        console.error(er);
+    }
 }
-//User
 var ContactMessage = /** @class */ (function () {
     function ContactMessage(userImg, userName, userPhone, userGroups) {
         this.userImg = userImg;
@@ -203,9 +295,14 @@ var ContactMessage = /** @class */ (function () {
         this.userGroups = userGroups;
     }
     ContactMessage.prototype.renderUserChat = function () {
-        var html = '';
-        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.userImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.userName + "</span>\n                <span class=\"container__header__left__text--second\">" + this.userPhone + "</span>\n                </div>";
-        containerContactUser.innerHTML = html;
+        try {
+            var html = '';
+            html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                    <img src=\"" + this.userImg + "\" alt=\"\" srcset=\"\">\n                    <div class=\"container__header__left__text\">\n                    <span class=\"container__header__left__text--first\">" + this.userName + "</span>\n                    <span class=\"container__header__left__text--second\">" + this.userPhone + "</span>\n                    </div>";
+            containerContactUser.innerHTML = html;
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
     return ContactMessage;
 }());
