@@ -46,6 +46,9 @@ body {
 }
 .messages .single__message {
   background-color: #DCF8C6;
+  display: table;
+  margin: 2rem;
+  padding: 0 1rem;
 }
 .messages .single__message__timestamp {
   text-align: right;
@@ -72,7 +75,6 @@ body {
   align-items: center;
 }
 .input__send__wrapper .form .input__container--right {
-  border: 3px solid red;
   display: flex;
 }
 .input__send__wrapper .form .input__container .i {

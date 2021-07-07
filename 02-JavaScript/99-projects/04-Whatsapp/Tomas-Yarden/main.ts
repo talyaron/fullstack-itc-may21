@@ -86,6 +86,9 @@ render() {
       this.contacts.splice(indexToRemove, 1);
       this.render();
       returnToMainNav(id)
+      let contactSerialized = JSON.stringify(whatsAppContacts)
+        localStorage.setItem("whatsAppContacts", contactSerialized)
+        let contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"))
     } catch (error) {
         console.error(error);
     }
@@ -109,12 +112,9 @@ const handleSubmit = (event) => {
         whatsAppContacts.contacts.push(newContact)
 
         //Save in local storage:
-        let contactSerialized = JSON.stringify(newContact)
-        console.log(newContact);
-        console.log(contactSerialized);
-        localStorage.setItem("whatsAppContact", contactSerialized)
-        let contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContact"))
-        console.log(contactDeserialized);
+        let contactSerialized = JSON.stringify(whatsAppContacts)
+        localStorage.setItem("whatsAppContacts", contactSerialized)
+        let contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"))
         
         //Refresh contacts list
         whatsAppContacts.render()

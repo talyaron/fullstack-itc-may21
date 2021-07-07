@@ -64,6 +64,9 @@ var Contacts = /** @class */ (function () {
             this.contacts.splice(indexToRemove, 1);
             this.render();
             returnToMainNav(id);
+            var contactSerialized = JSON.stringify(whatsAppContacts);
+            localStorage.setItem("whatsAppContacts", contactSerialized);
+            var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"));
         }
         catch (error) {
             console.error(error);
@@ -83,12 +86,9 @@ var handleSubmit = function (event) {
         var newContact = new Contact(img, name, message, time);
         whatsAppContacts.contacts.push(newContact);
         //Save in local storage:
-        var contactSerialized = JSON.stringify(newContact);
-        console.log(newContact);
-        console.log(contactSerialized);
-        localStorage.setItem("whatsAppContact", contactSerialized);
-        var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContact"));
-        console.log(contactDeserialized);
+        var contactSerialized = JSON.stringify(whatsAppContacts);
+        localStorage.setItem("whatsAppContacts", contactSerialized);
+        var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"));
         //Refresh contacts list
         whatsAppContacts.render();
         event.target.reset(); //Now just close the modal:

@@ -116,23 +116,65 @@ const render: HTMLElement = document.querySelector(
   }
 
 
-//   const handleContact = (ev) => {
-//     ev.preventDefault();
-
-//     const contactName: string = ev.target.elements.contactName.value;
-//     const image: string = ev.target.elements.image.value;
-//     const phone: number = ev.target.elements.phone.value;
-
-//     const newC = new ContactGenerator(contactName, image, phone);
-//     contacts.push(newC);
-//     localStorage.setItem("contactsData", JSON.stringify(contacts));
-//     renderContacts();
-//     contactsFilter.push(newC);
- 
-//     console.log(newC)
-// }
 
   
   // You have to either pass the contactid or the contact name, and then on the other page use the contact id to find the contact in the list, and display the name. Need to get contacts list on second page by setting it on local storage.
   // YOu can set the aray wherever you have ot, and then grab is
   
+
+
+  //popup to add a new contact
+const btnModal = (<HTMLButtonElement>document.querySelector('.modal-btn'))
+const bgModal =  document.querySelector('.modal-bg')
+const modalClose = document.querySelector('.modal-close')
+const inputName = (<HTMLInputElement>document.querySelector('#name'))
+const inputPhone = (<HTMLInputElement>document.querySelector('#phone'))
+//const btnModalInput = (<HTMLButtonElement>document.querySelector('.btn-modal'))
+//const boardRoot:HTMLElement = document.querySelector('#board')
+const faPlus = (<HTMLButtonElement>document.querySelector('.fa-plus'))
+const btnsub=(<HTMLButtonElement>document.querySelector('.btn-modal'));
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  try {
+    const contactName: string = event.target.elements.name.value;
+    const image: string = event.target.elements.image.value;
+    const phone: number = event.target.elements.phone.value;
+    if (contactName === "") throw Error("Put a contact name");
+    if (phone === null ) throw Error("Put a number");
+    
+    const generator = new ContactGenerator(contactName, image, phone);
+    console.log(generator); 
+    contacts.add(generator);
+    contacts.renderContacts();
+  } catch (error) {
+    alert(error);
+  }
+
+  event.target.reset();
+};
+
+
+faPlus.addEventListener('click', (e)=> openModal(e))
+
+
+//open modal window
+function openModal(e){
+    e.preventDefault()
+    bgModal.classList.add('bg-active')
+    console.log("hi")   
+}
+
+
+//close modal windows
+modalClose.addEventListener('click', closeModal)
+
+function closeModal(){
+    bgModal.classList.remove('bg-active')
+}
+
+//boardRoot.insertAdjacentHTML('afterend',html)
+
+//bgModal.classList.remove('bg-active')
+
+

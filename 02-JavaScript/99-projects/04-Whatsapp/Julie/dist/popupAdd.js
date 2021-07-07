@@ -6,6 +6,8 @@ var inputPhone = document.querySelector('#phone');
 var btnModalInput = document.querySelector('.btn-modal');
 var boardRoot = document.querySelector('#board');
 var faPlus = document.querySelector('.fa-plus');
+var btnsub = document.querySelector('.btn-modal');
+btnsub.addEventListener('submit'());
 faPlus.addEventListener('click', function (e) { return openModal(e); });
 function openModal(e) {
     e.preventDefault();
