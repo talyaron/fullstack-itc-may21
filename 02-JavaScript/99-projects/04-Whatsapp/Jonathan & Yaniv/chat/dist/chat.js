@@ -27,7 +27,7 @@ var Message = /** @class */ (function () {
 }());
 var Group = /** @class */ (function () {
     function Group(groupImg, groupName, groupUsers, groupMyPhone) {
-        this.groupMsgs = []; // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
+        this.groupMsgs = [];
         this.groupImg = groupImg;
         this.groupName = groupName;
         this.groupUsers = groupUsers;
