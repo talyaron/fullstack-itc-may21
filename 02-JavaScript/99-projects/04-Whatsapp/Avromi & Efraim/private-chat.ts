@@ -19,6 +19,7 @@ const allContacts = JSON.parse(localStorage.getItem('contacts'));
 
 //Filter Array by Params
 const thisContact = allContacts.filter(contact => contact.contactId === params.contactId);
+const index = allContacts.findIndex(cont => cont.contactId === params.contactId)
 // let OurUse = thisContact.pop()
 // console.log(OurUse); Would it have been better to work on this as an object?
 
@@ -89,6 +90,8 @@ function logSubmit(event) {
     microphone.style.display = "block";
     const plane: any = document.querySelector(".fa-paper-plane");
     plane.style.display = "none"
+    allContacts.splice(index,1)
+    allContacts.unshift(thisContact[0])
     localStorage.setItem('contacts', JSON.stringify(allContacts))
 }
 

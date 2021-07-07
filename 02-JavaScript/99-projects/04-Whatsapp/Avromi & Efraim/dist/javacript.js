@@ -25,11 +25,17 @@ var Contacts = /** @class */ (function () {
     Contacts.prototype.renderContacts = function (domElement) {
         try {
             var html = this.contacts.map(function (contact) {
+                var timeHoursAndMinutes = new Date(contact.chats[0].timeStamp);
+                var hrs = timeHoursAndMinutes.getHours();
+                var min = timeHoursAndMinutes.getMinutes();
+                if (min < 10) {
+                    min = "0" + min;
+                }
                 return ("<div class=\"holder__contact\" id=\"" + contact.contactId + "\" onclick=\"moveToPrivateChat('" + contact.contactId + "')\">" +
                     ("<img class=\"holder__contact__image\" src=\"" + contact.imgUrl + "\">") +
                     ("<div class=\"holder__contact__name\">" + contact.name + "</div>") +
                     ("<div class=\"holder__contact__chat\">" + contact.chats[0].message + "</div>") +
-                    ("<div class=\"holder__contact__timestamp\">" + contact.chats[0].timeStamp + "</div>") +
+                    ("<div class=\"holder__contact__timestamp\">" + hrs + ":" + min + "</div>") +
                     ("<div class=\"holder__contact__unread\" id=\"delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
                     "</div>");
             }).join('');
@@ -128,11 +134,17 @@ var addToDomWithArray = function (searchResults) {
         }
         searchResults.forEach(function (contact) {
             var index = parseInt(contact.chats.length - 1);
+            var timeHoursAndMinutes = new Date(contact.chats[index].timeStamp);
+            var hrs = timeHoursAndMinutes.getHours();
+            var min = timeHoursAndMinutes.getMinutes();
+            if (min < 10) {
+                min = "0" + min;
+            }
             holder_1.innerHTML += ("<div class=\"holder__contact\" id=\"" + contact.contactId + "\" onclick=\"moveToPrivateChat('" + contact.contactId + "')\">" +
                 ("<img class=\"holder__contact__image\" src=\"" + contact.imgUrl + "\">") +
                 ("<div class=\"holder__contact__name\">" + contact.name + "</a></div>") +
                 ("<div class=\"holder__contact__chat\">" + contact.chats[index].message + "</div>") +
-                ("<div class=\"holder__contact__timestamp\">" + contact.chats[index].timeStamp + "</div>") +
+                ("<div class=\"holder__contact__timestamp\">" + hrs + ":" + min + "</div>") +
                 ("<div class=\"holder__contact__unread delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
                 "</div>");
         });
@@ -154,7 +166,7 @@ var findContactSearch = function (chatSearch, searchTerm) {
 var findTextInMessages = function (searchTerm) {
     try {
         var termRegEx_1 = new RegExp(searchTerm, 'i');
-        var searchedMessages = contacts.contacts.map(function (contact) { return contact.chats.filter(function (message) { return termRegEx_1.test(message.message); }); }).flat();
+        var searchedMessages = contacts.contacts.filter(function (contact) { return contact.chats.some(function (message) { return termRegEx_1.test(message.message); }); });
         return searchedMessages;
     }
     catch (e) {
@@ -167,7 +179,14 @@ var handleKeyUp = function (ev) {
         var searchTerm = ev.target.value;
         var results = findContactSearch(contacts.contacts, searchTerm);
         var searchMessages = findTextInMessages(searchTerm);
-        addToDomWithArray(results);
+        var finalSearchArrayResults = results.concat(searchMessages);
+        var obj = {};
+        for (var i = 0; i < finalSearchArrayResults.length; i++)
+            obj[finalSearchArrayResults[i]['name']] = finalSearchArrayResults[i];
+        finalSearchArrayResults = new Array();
+        for (var key in obj)
+            finalSearchArrayResults.push(obj[key]);
+        addToDomWithArray(finalSearchArrayResults);
         if (searchTerm.length == 0) {
             addToDomWithArray(contacts.contacts);
         }
