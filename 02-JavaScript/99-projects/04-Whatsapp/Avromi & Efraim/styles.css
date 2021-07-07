@@ -1,0 +1,234 @@
+body {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  font-family: sans-serif;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.header__edit {
+  margin-left: 3vw;
+  font-size: 1.25rem;
+  color: #4242ff;
+}
+
+.header__edit:hover, .header__new-convo:hover,
+.header #delete:hover {
+  cursor: pointer;
+}
+
+.header__new-convo {
+  margin-left: auto;
+  margin-right: 3vw;
+  font-size: 1.25rem;
+  color: #4242ff;
+}
+
+.header__new-convo:hover {
+  opacity: 1;
+}
+
+.header__form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+.header__form-popup__form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+.header__form-popup__form-container input[type=text],
+.header__form-popup__form-container input[type=tel],
+.header__form-popup__form-container input[type=file] {
+  width: 250px;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.header__form-popup__form-container input[type=text]:focus,
+.header__form-popup__form-container input[type=tel]:focus, .header__form-popup__form-container input[type=file]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.header__form-popup__form-container__btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 1;
+}
+
+.button--cancel {
+  background-color: red;
+}
+
+.delete {
+  display: none;
+}
+
+.display {
+  display: block;
+}
+
+.chats {
+  margin-left: 3vw;
+  font-size: 2.5rem;
+}
+
+.search {
+  border-radius: 10px;
+  border: none;
+  width: 94vw;
+  background-color: #eeecec;
+  color: #a5a5a5;
+  font-size: 1rem;
+  margin-top: none;
+  margin-left: 3vw;
+  padding: 7px 0 7px 0;
+}
+
+.groups {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eeecec;
+}
+
+.groups__new-group {
+  margin-left: auto;
+  margin-right: 3vw;
+  font-size: 1.25rem;
+  color: #4242ff;
+}
+
+.groups__broadcast {
+  margin-left: 3vw;
+  font-size: 1.25rem;
+  color: #4242ff;
+}
+
+.holder {
+  overflow-y: auto;
+  height: 55vh;
+}
+
+.holder__contact:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.holder__contact {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-left: 3vw;
+  margin-right: 2vw;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 14vw 70vw 10vw;
+      grid-template-columns: 14vw 70vw 10vw;
+  -ms-grid-rows: 3rem 7rem;
+      grid-template-rows: 3rem 7rem;
+}
+
+.holder__contact__image {
+  border-radius: 100%;
+  height: 90%;
+  width: 70%;
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 1;
+  -ms-grid-row: 1;
+      grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.holder__contact__name {
+  font-weight: bold;
+  font-size: 2rem;
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  grid-column-end: 2;
+  -ms-grid-row: 1;
+      grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.holder__contact__chat {
+  color: #d8d8d8;
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  grid-column-end: 2;
+  -ms-grid-row: 2;
+      grid-row-start: 2;
+  grid-row-end: 3;
+  border-bottom: 1px solid #eeecec;
+}
+
+.holder__contact__timestamp {
+  color: #4242ff;
+  -ms-grid-column: 3;
+      grid-column-start: 3;
+  grid-column-end: 3;
+  -ms-grid-row: 1;
+      grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.holder__contact__unread {
+  -ms-grid-column: 3;
+      grid-column-start: 3;
+  grid-column-end: 3;
+  -ms-grid-row: 2;
+      grid-row-start: 2;
+  grid-row-end: 2;
+  font-size: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  color: white;
+  background-color: red;
+  border-radius: 100%;
+  text-align: center;
+}
+
+.footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 5vh;
+  background-color: #f3f3f3;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #969696;
+}
+
+.fas fa-phone-alt {
+  margin-left: 10px;
+}
+/*# sourceMappingURL=styles.css.map */

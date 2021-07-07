@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CAAC;EACD,SAAS,EAAE,IAAI;EACf,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;EACZ,UAAU,EAAE,EAAE;CACjB;;AAED,AAAA,OAAO,CAAC;EACJ,gBAAgB,EAAE,OAAkB;CAGvC;;AAED,AAAA,iBAAiB,CAAC;EACd,KAAK,EAAE,OAAe;CACzB;;AAED,AAAA,KAAK,CAAC;EACF,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,MAAM;CACpB",
+    "sources": [
+        "bank.scss"
+    ],
+    "names": [],
+    "file": "bank.css"
+}

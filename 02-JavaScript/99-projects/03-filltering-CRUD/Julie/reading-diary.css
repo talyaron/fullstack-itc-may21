@@ -1,0 +1,58 @@
+.big-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+body {
+  background-image: url("https://images.freeimages.com/images/large-previews/1f6/books-4-1421569.jpg");
+}
+
+#booksRoot {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+div {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+}
+
+.form-wrapper {
+  background-color: #67c0c5;
+  border: 3px solid black;
+  width: 250px;
+}
+
+.form-wrapper-random {
+  background-color: #67c0c5;
+  border: 3px solid black;
+  width: 250px;
+}
+
+.title,
+.author,
+.year,
+.country {
+  font-weight: 700;
+}
+
+.search {
+  border: 3px solid black;
+  font-size: larger;
+}
+/*# sourceMappingURL=reading-diary.css.map */

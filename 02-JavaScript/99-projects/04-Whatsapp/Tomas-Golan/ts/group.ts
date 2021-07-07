@@ -1,14 +1,14 @@
 // VARIABLES GLOBALES
 const contactsGroup = JSON.parse(localStorage.getItem("contactos"));
-let arraysOfNames:Array<any> = [];
-let groups:Array<Group> = [];
+let arraysOfNames: Array<any> = [];
+let groups: Array<Group> = [];
 const iconGroup = document.querySelector("#iconGroup");
 
 // CLASS GROUP
-class Group{
+class Group {
     groupName: string;
     groupIMG: string;
-    contactsOfGroup: Array<string>; 
+    contactsOfGroup: Array<string>;
     id: string;
     constructor(groupName: string, groupIMG: string, contactsOfGroup: Array<string>) {
         this.groupName = groupName;
@@ -17,10 +17,11 @@ class Group{
         this.id = Math.random().toString(16).slice(2);
     }
 }
-
+// EVENT LISTENER
 iconGroup.addEventListener('click', renderModalGroupData);
 
 function renderModalGroupData() {
+
     const containerContact: HTMLElement = document.querySelector("#contacts_group");
     let modalContact: string = "";
     const jsonGroup = JSON.parse(localStorage.getItem("contactos"));
@@ -38,30 +39,33 @@ function renderModalGroupData() {
     });
     containerContact.innerHTML = modalContact;
 }
-renderModalGroupData();  
+renderModalGroupData();
 
-const deleteGroup = (id) =>{
-    const deleteGroup = groups.filter((group) => group.id !== id);
-    groups = deleteGroup;
-    localStorage.setItem("groups", JSON.stringify(groups));
-    render();
+const deleteGroup = (id) => {
+    try {
+        const deleteGroup = groups.filter((group) => group.id !== id);
+        groups = deleteGroup;
+        localStorage.setItem("groups", JSON.stringify(groups));
+        render(groups);
+    } catch (e) {
+        console.error(e)
+    }
 }
 
-document.getElementById('btn').onclick = function() { 
+document.getElementById('btn').onclick = function () {
     const nameGroup: string = document.querySelector("#nameGroup").value;
-    const GroupImg: string = document.querySelector("#imgGroup").value; 
-    let markedCheckbox:any = document.querySelectorAll('input[type="checkbox"]:checked');  
+    const GroupImg: string = document.querySelector("#imgGroup").value;
+    let markedCheckbox: any = document.querySelectorAll('input[type="checkbox"]:checked');
 
-    for (let checkbox of markedCheckbox) {  
+    for (let checkbox of markedCheckbox) {
         arraysOfNames.push(checkbox.value);
-    }  
+    }
     const newGroup = new Group(nameGroup, GroupImg, arraysOfNames);
     arraysOfNames = [];
 
     groups.push(newGroup);
     localStorage.setItem("groups", JSON.stringify(groups));
-    render();
-  }  
+    render(groups);
+}
 
 
- 
