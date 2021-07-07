@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload='renderEncryptedSentence()'>
+    <div ><span>The encrypted sentence is:</span> <span id="encryptedSentence"></span></div>
+    <input type='text' placeholder="enter your encrypted sentence" onkeyup='handleEncryptSentence(event)'>
+    <br>
+    <a href='./encrypt.html'>Look at the decrypted sentence</a>
+
+    
+    <script src='./dist/cryptomaze.js'></script>
+    <script src="./dist/index.js"></script>
+   
+</body>
+</html>

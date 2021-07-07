@@ -31,10 +31,10 @@ class Contacts {
     contacts: Array<Contact> = []
 
 //Adding a new contact
-render() {
+render():void {
     try {
-      let rootDiv = document.querySelector(".saved-contacts-root");
-      let htmlPattern = "";
+      let rootDiv:HTMLDivElement = document.querySelector(".saved-contacts-root");
+      let htmlPattern:string = "";
       this.contacts.forEach((contact) => {
         htmlPattern += `<div class="contact-container">
         <img class="contact-container__contact-image" onclick="showEditNav(event)" src="${contact.image}">
@@ -56,15 +56,15 @@ render() {
 
   remove(id: string): void {
     try {
-      const indexToRemove = this.contacts.findIndex(
+      const indexToRemove:number = this.contacts.findIndex(
         (element) => element.id === id
       );
       this.contacts.splice(indexToRemove, 1);
       this.render();
       returnToMainNav(id) //Update local storage:
-      let contactSerialized = JSON.stringify(whatsAppContacts)
+      let contactSerialized:string = JSON.stringify(whatsAppContacts)
         localStorage.setItem("whatsAppContacts", contactSerialized)
-        let contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"))
+        let contactDeserialized:string = JSON.parse(localStorage.getItem("whatsAppContacts"))
     } catch (error) {
         console.error(error);
     }
@@ -74,16 +74,16 @@ render() {
 let whatsAppContacts = new Contacts()
 
 //Adding a new contact:
-const handleSubmit = (event) => {
+const handleSubmit = (event:any):void => {
     try {
         if (whatsAppContacts === null) {
             throw new Error("Must have the contacts array!")
         }
         event.preventDefault()
-        const img = event.target[0].value
-        const name = event.target[1].value
-        const message = event.target[2].value
-        const time = event.target[3].value
+        const img:string = event.target[0].value
+        const name:string = event.target[1].value
+        const message:string = event.target[2].value
+        const time:Date = event.target[3].value
 
         const newContact = new Contact(
             img, name, message, time
@@ -91,16 +91,16 @@ const handleSubmit = (event) => {
         whatsAppContacts.contacts.push(newContact)
 
         //Update local storage:
-        let contactSerialized = JSON.stringify(whatsAppContacts)
+        let contactSerialized:string = JSON.stringify(whatsAppContacts)
         
         localStorage.setItem("whatsAppContacts", contactSerialized)
-        let contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"))
+        let contactDeserialized:string = JSON.parse(localStorage.getItem("whatsAppContacts"))
         
         //Refresh contacts list
         whatsAppContacts.render()
 
         event.target.reset(); //Now just close the modal:
-        const bottomModal:any = document.querySelector('.add-contact')
+        const bottomModal:HTMLFormElement = document.querySelector('.add-contact')
         bottomModal.style.display="none"
     } catch (error) {
         console.error(error);        
@@ -108,7 +108,7 @@ const handleSubmit = (event) => {
 }
 
 //Delete contact onclick:
-const handleDelete = (id) => {
+const handleDelete = (id:string):void => {
     try {
         if (whatsAppContacts === null) {
             throw new Error("Must have the contacts array!")}
@@ -122,19 +122,19 @@ const handleDelete = (id) => {
 /* Modal and helper functions */
 
 //Top modal:
-const openMenuModal = (event) => {
+const openMenuModal = (event:MouseEvent):void => {
     try {
-        const topModal:any = document.querySelector('.top-modal')
+        const topModal:HTMLDivElement = document.querySelector('.top-modal')
         topModal.style.display="block"
     } catch (error) {
         console.error(error)
     }
     
 }
-const closeMenuModal = (event) => {
+const closeMenuModal = (event:MouseEvent):void => {
     try {
         const body:any = document.getElementsByName('body')
-        const topModal:any = document.querySelector('.top-modal')
+        const topModal:HTMLDivElement = document.querySelector('.top-modal')
         topModal.style.display="none"
     } catch (error) {
         console.error(error)
@@ -142,20 +142,20 @@ const closeMenuModal = (event) => {
     
 }
 //Add contact modal form:
-const openBottomModal = (event) => {
+const openBottomModal = (event:MouseEvent):void => {
     try {
-        const bottomModal:any = document.querySelector('.add-contact')
+        const bottomModal:HTMLFormElement = document.querySelector('.add-contact')
         bottomModal.style.display="flex"
     } catch (error) {
         console.error(error)
     }
 }
 
-const openSearch = (event) => {
+const openSearch = (event:MouseEvent):void => {
     try {
-        const menu = document.querySelector("nav")
+        const menu:HTMLElement = document.querySelector("nav")
         menu.hidden=true
-        const searchMenu = document.querySelector('#search-nav')
+        const searchMenu:HTMLDivElement = document.querySelector('#search-nav')
         searchMenu.attributes[1].value = "display: flex"
 
     } catch (error) {
@@ -165,11 +165,11 @@ const openSearch = (event) => {
 }
 
 //Alternate between the main and edit navbars:
-const showEditNav = (event) => {
+const showEditNav = (event:MouseEvent):void => {
     try {
-     const menu = document.querySelector("nav")
+     const menu:HTMLElement = document.querySelector("nav")
      menu.hidden=true
-     const editMenu = document.querySelector("#editNav")
+     const editMenu:HTMLElement = document.querySelector("#editNav")
      editMenu.attributes[1].value = "display: block"
      
     } catch (error) {
@@ -179,13 +179,13 @@ const showEditNav = (event) => {
      
  }
  //Close bottom modal after adding contact:
- const returnToMainNav = (event) => {
+ const returnToMainNav = (event:any):void => {
      try {
-         const searchMenu = document.querySelector('#search-nav')
-         const editMenu = document.querySelector("#editNav")
+         const searchMenu:HTMLDivElement = document.querySelector('#search-nav')
+         const editMenu:HTMLElement = document.querySelector("#editNav")
          searchMenu.attributes[1].value = "display: none"
          editMenu.attributes[1].value = "display: none"
-         const menu = document.querySelector("nav")
+         const menu:HTMLElement = document.querySelector("nav")
          menu.hidden=false
      } catch (error) {
          console.error(error);
@@ -193,7 +193,7 @@ const showEditNav = (event) => {
  }
 
 //Redirection to the chat when clicking the info section of a contact:
-const goToChat = (event) => {
+const goToChat = (event:MouseEvent):void => {
     try {
         window.location.href = "/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/index.html"   
     } catch (error) {
