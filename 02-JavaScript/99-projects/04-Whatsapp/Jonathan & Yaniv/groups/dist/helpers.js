@@ -43,6 +43,7 @@ var directToChat = function (ev) {
         allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
         localStorage.setItem('contactList', JSON.stringify(allContacts));
         localStorage.setItem('contactId', JSON.stringify(contactToChat.id));
+        localStorage.setItem('IsChatOrGroup', JSON.stringify(0));
     }
     window.location.href = "../chat/chat.html?groupid=" + contactToChat.id;
 };
@@ -66,6 +67,7 @@ var directToGroup = function (ev) {
     //localStorage.setItem('contactList',JSON.stringify(allContacts));
     //localStorage.setItem('contactId',JSON.stringify(existingGroup.id))
     localStorage.setItem('currentGroup', JSON.stringify(group));
+    localStorage.setItem('IsChatOrGroup', JSON.stringify(1));
     window.location.href = "../chat/chat.html?groupid=" + existingGroup.id;
 };
 var showNewGroupMenu = function (ev) {

@@ -72,9 +72,10 @@ var Group = /** @class */ (function () {
         this.groupUsers = groupUsers;
         this.groupMyPhone = groupMyPhone;
     }
-    Group.prototype.renderGrpupChat = function () {
+    Group.prototype.renderGroupChat = function () {
         var html = '';
-        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.groupImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.groupName + "</span>\n                <span class=\"container__header__left__text--second\">" + this.groupUsers + "," + this.groupMyPhone + "</span>\n                </div>";
+        var groupUser = this.groupUsers.filter(function (group) { return !group.match(contactUser); });
+        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.groupImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.groupName + "</span>\n                <span class=\"container__header__left__text--second\">You," + groupUser + " </span>\n                </div>";
         containerContactUser.innerHTML = html;
     };
     return Group;
@@ -93,7 +94,7 @@ var User = /** @class */ (function () {
     };
     User.prototype.renderMsgs = function (groupid) {
         var html = '';
-        var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
+        var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupid; });
         this.userGroups[groupIndex].groupMsgs.forEach(function (message) {
             html += "<div class=\"container__chat-box__messages--user\">\n                        <p class=\"container__chat-box__messages--user--content\">" + message.content + "</p>\n                        <p>\n                             <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                                <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\" aria-hidden=\"true\"></i>\n                         <i class=\"fa fa-trash container__chat-box__messages--user--trash\"  onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\" aria-hidden=\"true\"></i><span class=\"sr-only\">Delete Item</span>\n                        </p>\n                    </div>";
         });
@@ -119,11 +120,10 @@ loggedInUser.renderMsgs(groupId);
 btnMessage.addEventListener('click', sendMessage);
 function sendMessage() {
     var inputMessage = elementMessage.value;
-    //current date
     var today = new Date();
     var timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
     var timeHMS = (today.getTime());
-    var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS); //last one is the lastmessagename
+    var message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS);
     messageList.addMessage(message);
     loggedInUser.addMessages(message, groupId);
     localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
@@ -131,8 +131,7 @@ function sendMessage() {
     localStorage.setItem('contactList', JSON.stringify(contactList));
     elementMessage.value = '';
 }
-//display inputSearch with search icon 
-btnSearch.addEventListener('click', displayInput); //why the first one does not appear
+btnSearch.addEventListener('click', displayInput);
 function displayInput() {
     if (inputSearch.style.display === 'none') {
         inputSearch.style.display = 'inline-block';
@@ -190,30 +189,36 @@ function closeModal(ev) {
 }
 //User
 var ContactMessage = /** @class */ (function () {
-    //userGroups: Array<string>; //list of groups
-    function ContactMessage(userImg, userName, userPhone) {
+    function ContactMessage(userImg, userName, userPhone, userGroups) {
         this.userImg = userImg;
         this.userName = userName;
         this.userPhone = userPhone;
-        //  this.userGroups = userGroups;
+        this.userGroups = userGroups;
     }
     ContactMessage.prototype.renderUserChat = function () {
         var html = '';
-        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.userImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.userName + "</span>\n                <span class=\"container__header__left__text--second\">" + this.userPhone + "</span>\n                </div>";
+        containerContactUser.innerHTML = html;
+        html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                <img src=\"" + this.userImg + "\" alt=\"\" srcset=\"\">\n                <div class=\"container__header__left__text\">\n                <span class=\"container__header__left__text--first\">" + this.userName + "</span>\n                <span class=\"container__header__left__text--second\">You," + this.userPhone + "</span>\n                </div>";
         containerContactUser.innerHTML = html;
     };
     return ContactMessage;
 }());
 var contactChat = JSON.parse(localStorage.getItem("contactList"));
 var contactList = JSON.parse(localStorage.getItem("contactId"));
+var isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"));
+console.log(localStorage.getItem("IsChatOrGroup"));
 var contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
-var currentGroup = JSON.parse(localStorage.getItem("currentGroup"));
-var chatUser = Object.values(Object.values(contactChat)[1]);
-chatUser.find(function (chat) {
-    if (contactList === chat.userPhone) {
-        var contactUser_1 = new ContactMessage(chat.userImg, chat.userName, chat.userPhone);
-        contactUser_1.renderUserChat();
-    }
-});
-var groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser);
-groupChat.renderGrpupChat();
+if (isChatOrGroup === 0) {
+    var chatUser = Object.values(Object.values(contactChat)[1]);
+    chatUser.find(function (chat) {
+        if (contactList === chat.userPhone) {
+            var contactUser_1 = new ContactMessage(chat.userImg, chat.userName, chat.userPhone, chat.userGroups);
+            contactUser_1.renderUserChat();
+        }
+    });
+}
+else {
+    var currentGroup = JSON.parse(localStorage.getItem("currentGroup"));
+    var groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser);
+    groupChat.renderGroupChat();
+}
