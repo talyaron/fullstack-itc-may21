@@ -1,18 +1,12 @@
 const savedContacts = JSON.parse(localStorage.getItem("contactsData"));
 const getID = localStorage.getItem("contactID");
-
 const userFilter = savedContacts.filter((el) => el.contactId === getID);
-const conversation = <HTMLInputElement>(
-  document.querySelector(".envelope__typing--input-entry")
-);
-
+const conversation = <HTMLInputElement>(document.querySelector(".envelope__typing--input-entry"));
 const envelope__contact = document.querySelector(".renderFirst");
-
-
-
-
-
-
+const chatContainer: any = document.querySelector(".envelope__chat");
+const send = <HTMLInputElement>document.querySelector("#send");
+const input = <HTMLInputElement>(document.querySelector(".envelope__typing--input-entry"));
+envelope__contact.addEventListener('click', redirect2);
 
 function renderChats(): void {
   let html: string = "";
@@ -37,16 +31,7 @@ const id = currentUrl.slice(idIndex + 3);
 
 renderChats();
 
-// Understand this bit
-
 const currentUser = savedContacts.find((contact) => contact.contactId === id);
-
-const chatContainer: any = document.querySelector(".envelope__chat");
-
-const send = <HTMLInputElement>document.querySelector("#send");
-const input = <HTMLInputElement>(
-  document.querySelector(".envelope__typing--input-entry")
-);
 
 send.addEventListener("click", sendMessage);
 
@@ -62,11 +47,12 @@ function sendMessage() {
   const message = conversation.value;
   messagesArray.push(message);
   messagesArray.forEach((msg) => {
-    const messageElement = `<div>${msg}</div> `;
+    const messageElement = `<div class="message-bubble"><div class="message-text">${msg}</div></div> `;
     chatContainer.insertAdjacentHTML("beforeend", messageElement);
   });
   conversation.value = ""; //serves for refresh and delete what you typed before in the input bar
 }
+
 
 function redirect2() {
   try {
@@ -78,6 +64,12 @@ function redirect2() {
   }
 }
 
-function abrir() {
+//open paperClip to add files
+const paperClip = document.querySelector('.paper')
+
+function open() {
   let file = document.getElementById("file").click();
 }
+
+paperClip.addEventListener('click', open)
+

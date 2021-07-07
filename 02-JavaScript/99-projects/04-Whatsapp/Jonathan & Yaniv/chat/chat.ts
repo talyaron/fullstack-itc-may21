@@ -4,7 +4,7 @@ const btnMessage = <HTMLElement>document.querySelector('.container__chat-footer-
 const elementMessage = <HTMLInputElement>document.querySelector('#writemsg')
 const containerChat = <HTMLElement>document.querySelector('.container__chat-box')
 const containerContactUser = <HTMLElement>document.querySelector('.container__header__left')
-//const btnReturn = <HTMLElement>document.querySelector('.container__header__left--arrowleft')
+
 
 //modal
 const btnModal = <HTMLElement>document.querySelector('.container__chat-footer--smile')
@@ -56,6 +56,9 @@ class Group {
     renderGroupChat() {
         try {
             let html: string = ''
+
+            if(!containerContactUser) throw new Error('It cant show it')
+            
 
             const groupUser = this.groupUsers.filter(group=>!group.match(contactUser))
             let showGroupUser;
@@ -109,13 +112,10 @@ class User {
      filterByMessage(inputMessageFilter: string, groupid:string) {
         try {
 
-            console.log(groupid)
 
             const groupIndex = this.userGroupNew.findIndex(group => group.groupId === groupid);
             const regrExp: string = `^${inputMessageFilter}`;
             const searchTermReg: RegExp = new RegExp(regrExp, 'i');
-
-            console.log(this.userGroupNew)
 
             this.userGroups[groupIndex].groupMsgs = this.userGroupNew[groupIndex].groupMsgs.filter(elem => searchTermReg.test(elem.content));
             this.renderMsgs(groupid);
@@ -133,7 +133,9 @@ class User {
 
             myMessageToEdit[0].content = `you deleted this message`;
 
-            console.log(myMessageToEdit)
+            const myMessageToEditNew = this.userGroupNew[groupIndex].groupMsgs.filter(message => messageId === message.msgID);
+
+            myMessageToEditNew[0].content = `you deleted this message`;
 
            this.renderMsgs(groupId);
         } catch (er) {
@@ -145,7 +147,7 @@ class User {
         
         const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
         this.userGroups[groupIndex].groupMsgs = this.userGroups[groupIndex].groupMsgs.filter(message => message.content !== "you deleted this message");
-        console.log(this.userGroups[groupIndex].groupMsgs)
+        this.userGroupNew[groupIndex].groupMsgs = this.userGroupNew[groupIndex].groupMsgs.filter(message => message.content !== "you deleted this message");
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         this.renderMsgs(groupid)
     }
@@ -154,6 +156,7 @@ class User {
         try {
             let html: string = '';
 
+            if(!containerChat) throw new Error('It cant show it')
             const groupIndex = this.userGroups.findIndex(group => group.groupId === groupid)
 
             this.userGroups[groupIndex].groupMsgs.forEach(message => {
@@ -165,7 +168,8 @@ class User {
                                     <i class="fas fa-check-double container__chat-box__messages--user--doubleclick" aria-hidden="true"></i>
                             <i class="fa fa-trash container__chat-box__messages--user--trash"  onclick='handleEditDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
                             </p>
-                        </div>`
+                        </div>
+                        `
 
             });
 
@@ -290,9 +294,9 @@ btnModal.addEventListener('click', openModal)
 function openModal(ev) {
     try {
         ev.preventDefault()
+        
+        if (!bgModal) throw new Error("Something is not working");
         bgModal.classList.add('bg-active')
-
-
         emojiList.forEach((emoji, index) => {
             emojiList[index].addEventListener('click', function (ev) {
                 ev.preventDefault();
@@ -315,7 +319,9 @@ modalClose.addEventListener('click', closeModal);
 function closeModal(ev) {
     try{
         ev.preventDefault();
+        if (!bgModal) throw new Error("Something is not working");
         bgModal.classList.remove('bg-active');
+
     } catch (er) {
         console.error(er);
     }
@@ -338,6 +344,7 @@ class ContactMessage {
     renderUserChat() {
         try {
             let html: string = '';
+            if(!containerContactUser) throw new Error('The container is not working')
 
             html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
                     <img src="${this.userImg}" alt="" srcset="">
@@ -357,7 +364,6 @@ class ContactMessage {
 const contactChat = JSON.parse(localStorage.getItem("contactList"));
 const contactList: ContactList = JSON.parse(localStorage.getItem("contactId"));
 const isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"));
-console.log(localStorage.getItem("IsChatOrGroup"));
 const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
 
 if (isChatOrGroup === 0) {

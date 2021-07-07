@@ -1,7 +1,6 @@
 class Message {
     content: string;
-    userPhone: string; // this is the phone number // localstorage tiene los dos celulares, ver como se conectan con css
-    //para un lado y el otro para el otro lado con este id
+    userPhone: string; 
     dateMsg: string;
     groupID: string;
     msgID: string;
@@ -119,6 +118,19 @@ class User {
             console.error(er);
           }
     }
+
+    //JN
+    deleteGroup(groupID:string){
+        try {
+            const existingGroup = this.userGroups.find(group=>group.groupId === groupID)
+            return existingGroup;
+
+        } catch (er) {
+            console.error(er);
+          }
+    }
+
+    //
 }
 
 class ContactList {

@@ -30,10 +30,11 @@ function render() {
     var html = "";
     var renderContact = JSON.parse(localStorage.getItem("contactos"));
     renderContact.forEach(function (element) {
-        html += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.profileImg + "\" alt=\"\">\n            <a href=\"\">\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.name + "</h3>\n                    <p>" + element.phone + "</p>\n                </div>\n            </a>\n            <i onclick='deleteChat(\"" + element.id + "\")' class=\"fas fa-trash fa-lg contacts_icon\"></i>\n        </div>";
+        html += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.profileImg + "\" alt=\"\">\n            <a href=\"chat.html\" onclick='idContactForChat(\"" + element.id + "\")'>\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.name + "</h3>\n                    <p>" + element.phone + "</p>\n                </div>\n            </a>\n            <i onclick='deleteChat(\"" + element.id + "\")' class=\"fas fa-trash fa-lg contacts_icon\"></i>\n        </div>";
     });
     var renderGroup = JSON.parse(localStorage.getItem("groups"));
-    console.log(renderGroup);
+    // console.log(renderGroup);
+    // href="chat.html"
     if (!renderGroup)
         return;
     renderGroup.forEach(function (element) {

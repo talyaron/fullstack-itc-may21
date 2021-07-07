@@ -1,6 +1,10 @@
 function setScrollHeight() {
-    const messagesDiv = document.querySelector(".messages")
-    messagesDiv.scrollTop = messagesDiv.scrollHeight
+    try {
+        const messagesDiv = document.querySelector(".messages")
+        messagesDiv.scrollTop = messagesDiv.scrollHeight
+    } catch (error) {
+        console.error(error)
+    }
 }
 window.onload = (event) => {
     setScrollHeight()
@@ -31,28 +35,36 @@ src="${thisContact[0].imgUrl}"
 alt = "" >`
 
 function updateLastSent() {
-    const lastSent = document.querySelector(".nav__contact p")
-    let index: number = parseInt(thisContact[0].chats.length - 1);
-    lastSent.innerHTML = `Last Sent: ${thisContact[0].chats[index].timeStamp} `
+    try {
+        const lastSent = document.querySelector(".nav__contact p")
+        let index: number = parseInt(thisContact[0].chats.length - 1);
+        lastSent.innerHTML = `Last Sent: ${thisContact[0].chats[index].timeStamp} `
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 function renderMessages(arrToRender: Array<Contact>) {
-    const messagesDiv = document.querySelector(".messages")
-    let html = "";
-    thisContact[0].chats.forEach((chat) => {
+    try {
+        const messagesDiv = document.querySelector(".messages")
+        let html = "";
+        thisContact[0].chats.forEach((chat) => {
 
-        chat.timeStamp = new Date(chat.timeStamp)
-        const hrs = chat.timeStamp.getHours()
-        let min = chat.timeStamp.getMinutes()
-        if (min < 10) {
-            min = `0${min}`
-        }
-        html += `<div class="single__message" oncontextmenu = "contextHandler();return false;" >
+            chat.timeStamp = new Date(chat.timeStamp)
+            const hrs = chat.timeStamp.getHours()
+            let min = chat.timeStamp.getMinutes()
+            if (min < 10) {
+                min = `0${min}`
+            }
+            html += `<div class="single__message" oncontextmenu = "contextHandler();return false;" >
     <p>${chat.message} </p>
         <div class="single__message__timestamp"> ${hrs}:${min} </div>
             </div>`
-        messagesDiv.innerHTML = html
-    })
+            messagesDiv.innerHTML = html
+        });
+    } catch (error) {
+        console.error(error)
+    }
 
 }
 
@@ -63,11 +75,15 @@ function openCamera() {
 }
 
 function contextHandler() {
-    document.getElementById("contextMenu").style.display = "block";
-    const doc = document.querySelector('html')
-    doc.addEventListener(`click`, () => {
-        document.getElementById("contextMenu").style.display = "none";
-    });
+    try {
+        document.getElementById("contextMenu").style.display = "block";
+        const doc = document.querySelector('html')
+        doc.addEventListener(`click`, () => {
+            document.getElementById("contextMenu").style.display = "none";
+        });
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 
@@ -75,24 +91,28 @@ function contextHandler() {
 const form = document.querySelector('.form')
 form.addEventListener('submit', logSubmit);
 function logSubmit(event) {
-    const message = event.target.elements.message.value;
-    const timeStamp = new Date()
-    const obj = {};
-    obj["message"] = message;
-    obj["timeStamp"] = timeStamp;
-    thisContact[0].chats.push(obj)
-    event.preventDefault();
-    event.target.reset();
-    renderMessages(thisContact)
-    updateLastSent()
-    setScrollHeight()
-    const microphone: any = document.querySelector(".fa-microphone");
-    microphone.style.display = "block";
-    const plane: any = document.querySelector(".fa-paper-plane");
-    plane.style.display = "none"
-    allContacts.splice(index,1)
-    allContacts.unshift(thisContact[0])
-    localStorage.setItem('contacts', JSON.stringify(allContacts))
+    try {
+        const message = event.target.elements.message.value;
+        const timeStamp = new Date()
+        const obj = {};
+        obj["message"] = message;
+        obj["timeStamp"] = timeStamp;
+        thisContact[0].chats.push(obj)
+        event.preventDefault();
+        event.target.reset();
+        renderMessages(thisContact)
+        updateLastSent()
+        setScrollHeight()
+        const microphone: any = document.querySelector(".fa-microphone");
+        microphone.style.display = "block";
+        const plane: any = document.querySelector(".fa-paper-plane");
+        plane.style.display = "none"
+        allContacts.splice(index, 1)
+        allContacts.unshift(thisContact[0])
+        localStorage.setItem('contacts', JSON.stringify(allContacts))
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 

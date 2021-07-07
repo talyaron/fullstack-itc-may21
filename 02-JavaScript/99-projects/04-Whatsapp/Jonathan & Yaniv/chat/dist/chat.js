@@ -4,7 +4,6 @@ var btnMessage = document.querySelector('.container__chat-footer--entermsg');
 var elementMessage = document.querySelector('#writemsg');
 var containerChat = document.querySelector('.container__chat-box');
 var containerContactUser = document.querySelector('.container__header__left');
-//const btnReturn = <HTMLElement>document.querySelector('.container__header__left--arrowleft')
 //modal
 var btnModal = document.querySelector('.container__chat-footer--smile');
 var bgModal = document.querySelector('.modal-bg');
@@ -36,6 +35,8 @@ var Group = /** @class */ (function () {
     Group.prototype.renderGroupChat = function () {
         try {
             var html = '';
+            if (!containerContactUser)
+                throw new Error('It cant show it');
             var groupUser = this.groupUsers.filter(function (group) { return !group.match(contactUser); });
             var showGroupUser = void 0;
             if (groupUser.length === 2) {
@@ -74,11 +75,9 @@ var User = /** @class */ (function () {
     };
     User.prototype.filterByMessage = function (inputMessageFilter, groupid) {
         try {
-            console.log(groupid);
             var groupIndex = this.userGroupNew.findIndex(function (group) { return group.groupId === groupid; });
             var regrExp = "^" + inputMessageFilter;
             var searchTermReg_1 = new RegExp(regrExp, 'i');
-            console.log(this.userGroupNew);
             this.userGroups[groupIndex].groupMsgs = this.userGroupNew[groupIndex].groupMsgs.filter(function (elem) { return searchTermReg_1.test(elem.content); });
             this.renderMsgs(groupid);
         }
@@ -91,7 +90,8 @@ var User = /** @class */ (function () {
             var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupid; });
             var myMessageToEdit = this.userGroups[groupIndex].groupMsgs.filter(function (message) { return messageId === message.msgID; });
             myMessageToEdit[0].content = "you deleted this message";
-            console.log(myMessageToEdit);
+            var myMessageToEditNew = this.userGroupNew[groupIndex].groupMsgs.filter(function (message) { return messageId === message.msgID; });
+            myMessageToEditNew[0].content = "you deleted this message";
             this.renderMsgs(groupId);
         }
         catch (er) {
@@ -101,16 +101,18 @@ var User = /** @class */ (function () {
     User.prototype.handleDelete = function (messageId, groupid) {
         var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
         this.userGroups[groupIndex].groupMsgs = this.userGroups[groupIndex].groupMsgs.filter(function (message) { return message.content !== "you deleted this message"; });
-        console.log(this.userGroups[groupIndex].groupMsgs);
+        this.userGroupNew[groupIndex].groupMsgs = this.userGroupNew[groupIndex].groupMsgs.filter(function (message) { return message.content !== "you deleted this message"; });
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
         this.renderMsgs(groupid);
     };
     User.prototype.renderMsgs = function (groupid) {
         try {
             var html_1 = '';
+            if (!containerChat)
+                throw new Error('It cant show it');
             var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupid; });
             this.userGroups[groupIndex].groupMsgs.forEach(function (message) {
-                html_1 += "<div class=\"container__chat-box__messages--user\">\n                            <p class=\"container__chat-box__messages--user--content\">" + message.content + "</p>\n                            <p>\n                                <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                                    <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\" aria-hidden=\"true\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--user--trash\"  onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\" aria-hidden=\"true\"></i><span class=\"sr-only\">Delete Item</span>\n                            </p>\n                        </div>";
+                html_1 += "<div class=\"container__chat-box__messages--user\">\n                            <p class=\"container__chat-box__messages--user--content\">" + message.content + "</p>\n                            <p>\n                                <span class=\"container__chat-box__messages--user--datemsg\">" + message.dateMsg + "</span>\n                                    <i class=\"fas fa-check-double container__chat-box__messages--user--doubleclick\" aria-hidden=\"true\"></i>\n                            <i class=\"fa fa-trash container__chat-box__messages--user--trash\"  onclick='handleEditDelete(\"" + message.msgID + "\")' title=\"Delete Item\" aria-hidden=\"true\"></i><span class=\"sr-only\">Delete Item</span>\n                            </p>\n                        </div>\n                        ";
             });
             containerChat.innerHTML = html_1;
         }
@@ -214,6 +216,8 @@ btnModal.addEventListener('click', openModal);
 function openModal(ev) {
     try {
         ev.preventDefault();
+        if (!bgModal)
+            throw new Error("Something is not working");
         bgModal.classList.add('bg-active');
         emojiList.forEach(function (emoji, index) {
             emojiList[index].addEventListener('click', function (ev) {
@@ -235,6 +239,8 @@ modalClose.addEventListener('click', closeModal);
 function closeModal(ev) {
     try {
         ev.preventDefault();
+        if (!bgModal)
+            throw new Error("Something is not working");
         bgModal.classList.remove('bg-active');
     }
     catch (er) {
@@ -251,6 +257,8 @@ var ContactMessage = /** @class */ (function () {
     ContactMessage.prototype.renderUserChat = function () {
         try {
             var html = '';
+            if (!containerContactUser)
+                throw new Error('The container is not working');
             html += "<i class=\"fas fa-arrow-left container__header__left--arrowleft\" onclick='handleReturn()'\"></i>\n                    <img src=\"" + this.userImg + "\" alt=\"\" srcset=\"\">\n                    <div class=\"container__header__left__text\">\n                    <span class=\"container__header__left__text--first\">" + this.userName + "</span>\n                    <span class=\"container__header__left__text--second\">" + this.userPhone + "</span>\n                    </div>";
             containerContactUser.innerHTML = html;
         }
@@ -263,7 +271,6 @@ var ContactMessage = /** @class */ (function () {
 var contactChat = JSON.parse(localStorage.getItem("contactList"));
 var contactList = JSON.parse(localStorage.getItem("contactId"));
 var isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"));
-console.log(localStorage.getItem("IsChatOrGroup"));
 var contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
 if (isChatOrGroup === 0) {
     var chatUser = Object.values(Object.values(contactChat)[1]);
