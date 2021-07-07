@@ -4,7 +4,9 @@ pageTitle.innerText = `${loggedInUser.userName}'s chats`;
 const profileImg: HTMLElement = document.querySelector('.controls__item--profile_img');
 profileImg.setAttribute('src',loggedInUser.userImg)
 
-loggedInUser.renderChatsToChatsList();
+// YA this is newww ************************************************* start
+loggedInUser.renderChatsToChatsList(null);
+// YA this is newww ************************************************* end
 
 const addChatBtn: HTMLElement = document.querySelector('.controls__item--plus');
 
@@ -12,7 +14,9 @@ addChatBtn.addEventListener('click', ev => showNewChatMenu(ev));
 
 const showNewChatMenu = (ev: any): void => {
     const newChatMenu: HTMLElement = document.querySelector('.new_chat');
-    allContacts.renderContactsToNewChatMenu();
+// YA this is newww ************************************************* start
+    allContacts.renderContactsToNewChatMenu(null);
+// YA this is newww ************************************************* end
     newChatMenu.style.display = 'unset';
 }
 
@@ -29,8 +33,6 @@ const newChatOptions: HTMLElement = document.querySelector('.options');
 
 newChatOptions.addEventListener('click', ev => directToChat(ev));
 newChatOptions.addEventListener('click', ev => showNewGroupMenu(ev));
-
-
 
 const directToChat = (ev: any): void => {
 
@@ -59,7 +61,9 @@ const showNewGroupMenu = (ev: any): void => {
 
     if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1)) return;
     const newGroupMenu: HTMLElement = document.querySelector('.new_group');
-    allContacts.renderContactsToNewGroupMenu();
+// YA this is newww ************************************************* start
+    allContacts.renderContactsToNewGroupMenu(null);
+// YA this is newww ************************************************* end
     newGroupMenu.style.display = 'unset';
 }
 
@@ -114,3 +118,48 @@ const logOut = (ev: any): void => {
     localStorage.setItem('currentUser',null);
     window.location.href = `../users/users.html`;
 } 
+
+
+// YA this is newww ************************************************* start
+
+const groupsSearch = document.querySelector('#search_in_chats_form');
+const contactsSearch = document.querySelector('#search_contacts_form');
+const contactsForGroupSearch = document.querySelector('#search_in_groups_form');
+
+groupsSearch.addEventListener('keyup', ev => filterKeyUp(ev));
+contactsSearch.addEventListener('keyup', ev => filterKeyUp(ev));
+contactsForGroupSearch.addEventListener('keyup', ev => filterKeyUp(ev));
+
+const filterKeyUp = (ev: any) => {
+  try {
+    ev.preventDefault();
+
+    const filterFormElements: HTMLFormElement = ev.target.parentElement.elements;
+    let searchFilter: string;
+    switch (ev.target.parentElement) {
+        case groupsSearch:
+            if (loggedInUser.userGroups.length === 0) return;
+            searchFilter = filterFormElements.searchInChats.value;
+            loggedInUser.filterGroups(searchFilter);
+
+            break;
+        case contactsSearch:
+            searchFilter = filterFormElements.searchContacts.value;
+            allContacts.filterContacts(searchFilter,'privateChat');
+            
+            break;
+        case contactsForGroupSearch:
+            searchFilter = filterFormElements.searchContactsForGroup.value;
+            allContacts.filterContacts(searchFilter,'groupChat');
+
+            break;
+        
+    }
+
+
+  } catch (er) {
+    console.error(er);
+  }
+};
+
+// YA this is newww ************************************************* end

@@ -30,7 +30,6 @@ var Contacts = /** @class */ (function () {
                     ("<div class=\"holder__contact__name\">" + contact.name + "</div>") +
                     ("<div class=\"holder__contact__chat\">" + contact.chats[0].message + "</div>") +
                     ("<div class=\"holder__contact__timestamp\">" + contact.chats[0].timeStamp + "</div>") +
-                    "<div class=\"holder__contact__unread\" id=\"unread\">6</div>" +
                     ("<div class=\"holder__contact__unread\" id=\"delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
                     "</div>");
             }).join('');
@@ -134,8 +133,7 @@ var addToDomWithArray = function (searchResults) {
                 ("<div class=\"holder__contact__name\">" + contact.name + "</a></div>") +
                 ("<div class=\"holder__contact__chat\">" + contact.chats[index].message + "</div>") +
                 ("<div class=\"holder__contact__timestamp\">" + contact.chats[index].timeStamp + "</div>") +
-                "<div class=\"holder__contact__unread id=\"unread\">6</div>" +
-                ("<div class=\"holder__contact__unread id=\"delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
+                ("<div class=\"holder__contact__unread delete\" onclick=\"deleteContact('" + contact.contactId + "')\">x</div>") +
                 "</div>");
         });
     }
@@ -155,18 +153,8 @@ var findContactSearch = function (chatSearch, searchTerm) {
 };
 var findTextInMessages = function (searchTerm) {
     try {
-        console.log(searchTerm);
         var termRegEx_1 = new RegExp(searchTerm, 'i');
-        var searchedMessages = contacts.contacts.map(function (contact) {
-            var x = contact.chats.filter(function (message) {
-                var msg = message.message;
-                var tst = termRegEx_1.test(msg);
-                console.log(msg, tst);
-                return tst;
-            });
-            return x;
-        }).flat();
-        console.log(searchedMessages);
+        var searchedMessages = contacts.contacts.map(function (contact) { return contact.chats.filter(function (message) { return termRegEx_1.test(message.message); }); }).flat();
         return searchedMessages;
     }
     catch (e) {
@@ -177,12 +165,12 @@ var handleKeyUp = function (ev) {
     try {
         ev.preventDefault();
         var searchTerm = ev.target.value;
-        if (!searchTerm) {
-            throw new Error('No value being read for search term!');
-        }
         var results = findContactSearch(contacts.contacts, searchTerm);
         var searchMessages = findTextInMessages(searchTerm);
         addToDomWithArray(results);
+        if (searchTerm.length == 0) {
+            addToDomWithArray(contacts.contacts);
+        }
     }
     catch (er) {
         console.error(er);
@@ -227,12 +215,13 @@ function closeForm() {
     }
 }
 closeForm();
+var x = false;
 function editButtonRevealAndHide() {
     try {
         var editButton = document.querySelector(".header__edit");
         editButton.addEventListener("click", function () {
-            var indices = document.querySelectorAll("#delete");
-            var unread = document.querySelectorAll("#delete");
+            var indices = document.querySelectorAll(".holder__contact__unread");
+            var unread = document.querySelectorAll(".holder__contact__unread");
             for (var i = 0; i <= indices.length; i++) {
                 if (unread[i].style.display = "none") {
                     unread[i].style.display = "block";

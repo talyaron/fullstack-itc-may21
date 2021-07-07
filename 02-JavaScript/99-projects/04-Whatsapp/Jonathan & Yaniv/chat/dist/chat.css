@@ -75,6 +75,8 @@
   overflow-y: auto;
   flex-direction: column;
   align-items: flex-start;
+  position: sticky;
+  bottom: 0;
 }
 .container__chat-box__messages--user {
   background-color: black;

@@ -65,9 +65,12 @@ body {
   background-color: red;
 }
 
-#unread,
-#delete {
+.delete {
   display: none;
+}
+
+.display {
+  display: block;
 }
 
 .chats {
@@ -80,7 +83,7 @@ body {
   border: none;
   width: 94vw;
   background-color: #eeecec;
-  color: #d8d8d8;
+  color: #a5a5a5;
   font-size: 1rem;
   margin-top: none;
   margin-left: 3vw;
@@ -111,6 +114,7 @@ body {
 }
 .holder__contact:hover {
   background-color: lightgray;
+  cursor: pointer;
 }
 .holder__contact {
   padding-top: 25px;

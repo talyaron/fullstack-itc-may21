@@ -77,5 +77,17 @@ function redirect(contactId) {
         console.error(error);
     }
 }
+var handleContact = function (ev) {
+    ev.preventDefault();
+    var contactName = ev.target.elements.contactName.value;
+    var image = ev.target.elements.image.value;
+    var phone = ev.target.elements.phone.value;
+    var newC = new ContactGenerator(contactName, image, phone);
+    contacts.push(newC);
+    localStorage.setItem("contactsData", JSON.stringify(contacts));
+    renderContacts();
+    contactsFilter.push(newC);
+    console.log(newC);
+};
 // You have to either pass the contactid or the contact name, and then on the other page use the contact id to find the contact in the list, and display the name. Need to get contacts list on second page by setting it on local storage.
 // YOu can set the aray wherever you have ot, and then grab is

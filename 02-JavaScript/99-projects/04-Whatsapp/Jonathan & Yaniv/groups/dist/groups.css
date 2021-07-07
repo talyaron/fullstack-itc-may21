@@ -280,11 +280,11 @@ body {
 }
 .chats .chat__item--delete {
   grid-area: delete;
-  color: white;
+  color: #BABABA;
   text-align: right;
 }
 .chats .chat__item--delete:hover {
-  color: #BABABA;
+  color: #858585;
 }
 .chats__item:hover {
   cursor: pointer;
@@ -293,7 +293,9 @@ body {
 
 .new_chat {
   display: none;
-  width: 600px;
+  width: 30vw;
+  max-width: 600px;
+  min-width: 320px;
   height: 100vh;
   position: fixed;
   left: 0;
@@ -312,7 +314,9 @@ body {
 
 .new_group {
   display: none;
-  width: 600px;
+  width: 30vw;
+  max-width: 600px;
+  min-width: 320px;
   height: 100vh;
   position: fixed;
   left: 0;
