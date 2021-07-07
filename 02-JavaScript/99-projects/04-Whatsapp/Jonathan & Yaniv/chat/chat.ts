@@ -6,9 +6,6 @@ const containerChat = <HTMLElement>document.querySelector('.container__chat-box'
 const containerContactUser = <HTMLElement>document.querySelector('.container__header__left')
 //const btnReturn = <HTMLElement>document.querySelector('.container__header__left--arrowleft')
 
-
-
-
 //modal
 const btnModal = <HTMLElement>document.querySelector('.container__chat-footer--smile')
 const bgModal = document.querySelector('.modal-bg')
@@ -19,8 +16,6 @@ let emojiList = <any>document.querySelectorAll('.emoji')
 
 //clicked
 let isClicked: boolean = false;
-
-
 
 class Message {
     content: string;
@@ -43,82 +38,94 @@ class Message {
     }
 }
 
-
 class MessageList {
-    messageList: Array<Message> = []
-    messageListFilter: Array<Message> = []
+    messageList: Array<Message> = [];
+    messageListFilter: Array<Message> = [];
 
     addMessage(message: Message) {
-        this.messageList.push(message)
-        this.messageListFilter.push(message)
-        this.renderChat(message)
+        try {
+            this.messageList.push(message);
+            this.messageListFilter.push(message);
+            this.renderChat(message);
+        } catch (er) {
+            console.error(er);
+        }
     }
 
-
     editMessage(messagePassId: string) {
+        try {
+            const myMessageToEdit = this.messageList.find(message=> messagePassId === message.msgID);
 
-       const myMessageToEdit = this.messageList.find(message=> messagePassId === message.msgID)
+            myMessageToEdit.content = `<i class="fas fa-ban a"></i>you deleted this message`;
 
-       myMessageToEdit.content = `<i class="fas fa-ban a"></i>you deleted this message`;
-
-        this.renderAllMessage(this.messageList)
+            this.renderAllMessage(this.messageList);
+        } catch (er) {
+            console.error(er);
+        }
     }
 
     deleteMessage(messagePassId: string) {
-        this.messageList = this.messageList.filter(message => messagePassId !== message.msgID)
-        this.messageListFilter = this.messageListFilter.filter(message => messagePassId !== message.msgID)
-        this.renderAllMessage(this.messageList)
+        try {
+            this.messageList = this.messageList.filter(message => messagePassId !== message.msgID);
+            this.messageListFilter = this.messageListFilter.filter(message => messagePassId !== message.msgID);
+            this.renderAllMessage(this.messageList);
+        } catch (er) {
+            console.error(er);
+        }
     }
 
     filterByMessage(inputMessageFilter: string) {
-
-        const regrExp: string = `^${inputMessageFilter}`
-        const searchTermReg: RegExp = new RegExp(regrExp, 'i');
-        this.messageList = this.messageListFilter.filter(elem => searchTermReg.test(elem.content))
-        this.renderChat()
+        try {
+            const regrExp: string = `^${inputMessageFilter}`;
+            const searchTermReg: RegExp = new RegExp(regrExp, 'i');
+            this.messageList = this.messageListFilter.filter(elem => searchTermReg.test(elem.content));
+            this.renderChat();
+        } catch (er) {
+            console.error(er);
+        }
     }
 
     renderAllMessage(arrayToRender:Array<any>){
-        let html: string = '';
+        try {
+            let html: string = '';
 
-        // const arrayToRender = message ? message: this.messageList
-         
-        arrayToRender.forEach(message => {
-            html = `<div class="container__chat-box__messages--user">
-            <p class="container__chat-box__messages--user--content">${message.content}<p>
-            <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
-            <i class="fas fa-check-double container__chat-box__messages--user--doubleclick"></i>
-            <i class="fa fa-trash container__chat-box__messages--user--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item"></i>
-            </div>`
-        });
+            // const arrayToRender = message ? message: this.messageList
             
-        
-         containerChat.innerHTML = html
- 
-
+            arrayToRender.forEach(message => {
+                html = `<div class="container__chat-box__messages--user">
+                <p class="container__chat-box__messages--user--content">${message.content}<p>
+                <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
+                <i class="fas fa-check-double container__chat-box__messages--user--doubleclick"></i>
+                <i class="fa fa-trash container__chat-box__messages--user--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item"></i>
+                </div>`;
+            });
+            
+            containerChat.innerHTML = html;
+        } catch (er) {
+            console.error(er);
+        }
     }
 
     renderChat(message?): Array<any> {
-        let html: string = '';
+        try {
+            let html: string = '';
 
-       // const arrayToRender = message ? message: this.messageList
-        
+        // const arrayToRender = message ? message: this.messageList
+            
             html = `<div class="container__chat-box__messages--user">
                         <p class="container__chat-box__messages--user--content">${message.content}<p>
                         <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
                         <i class="fas fa-check-double container__chat-box__messages--user--doubleclick"></i>
                         <i class="fa fa-trash container__chat-box__messages--user--trash" onclick='handleEditDelete("${message.msgID}")' title="Delete Item"></i>
-                        </div>`
+                    </div>`;
 
+            containerChat.insertAdjacentHTML('beforeend', html);
         
-
-        containerChat.insertAdjacentHTML('beforeend', html);
-
-       
-        return this.messageList
+            return this.messageList;
+        } catch (er) {
+            console.error(er);
+        }
     }
-
-
 }
 
 class Group {
@@ -137,29 +144,29 @@ class Group {
     }
 
     renderGroupChat() {
+        try {
+            let html: string = ''
 
-        let html: string = ''
+            const groupUser = this.groupUsers.filter(group=>!group.match(contactUser))
+            let showGroupUser;
+            if (groupUser.length === 2){
+                showGroupUser = `You,${groupUser}`
+            } else {
+                showGroupUser = this.groupUsers.filter(group=>!group.match(contactUser))
+            }
 
-        const groupUser = this.groupUsers.filter(group=>!group.match(contactUser))
-        let showGroupUser;
-        if (groupUser.length === 2){
-            showGroupUser = `You,${groupUser}`
-        }else{
-            showGroupUser = this.groupUsers.filter(group=>!group.match(contactUser))
+            html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
+                    <img src="${this.groupImg}" alt="" srcset="">
+                    <div class="container__header__left__text">
+                    <span class="container__header__left__text--first">${this.groupName}</span>
+                    <span class="container__header__left__text--second">${showGroupUser}</span>
+                    </div>`
+
+            containerContactUser.innerHTML = html;
+        } catch (er) {
+            console.error(er);
         }
-
-        html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
-                <img src="${this.groupImg}" alt="" srcset="">
-                <div class="container__header__left__text">
-                <span class="container__header__left__text--first">${this.groupName}</span>
-                <span class="container__header__left__text--second">${showGroupUser}</span>
-                </div>`
-
-        containerContactUser.innerHTML = html;
-
     }
-
-
 }
 
 class User {
@@ -176,36 +183,38 @@ class User {
     }
 
     addMessages(newMess: Message, groupId: string) {
-
-        const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId)
-        this.userGroups[groupIndex].groupMsgs.push(newMess)
-        
-
+        try {
+            const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
+            this.userGroups[groupIndex].groupMsgs.push(newMess);
+        } catch (er) {
+            console.error(er);
+        }
     }
 
     renderMsgs(groupid: string) {
+        try {
+            let html: string = '';
 
-        let html: string = '';
+            const groupIndex = this.userGroups.findIndex(group => group.groupId === groupid)
 
-        const groupIndex = this.userGroups.findIndex(group => group.groupId === groupid)
+            this.userGroups[groupIndex].groupMsgs.forEach(message => {
 
-        this.userGroups[groupIndex].groupMsgs.forEach(message => {
+                html += `<div class="container__chat-box__messages--user">
+                            <p class="container__chat-box__messages--user--content">${message.content}</p>
+                            <p>
+                                <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
+                                    <i class="fas fa-check-double container__chat-box__messages--user--doubleclick" aria-hidden="true"></i>
+                            <i class="fa fa-trash container__chat-box__messages--user--trash"  onclick='handleEditDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
+                            </p>
+                        </div>`
 
-            html += `<div class="container__chat-box__messages--user">
-                        <p class="container__chat-box__messages--user--content">${message.content}</p>
-                        <p>
-                             <span class="container__chat-box__messages--user--datemsg">${message.dateMsg}</span>
-                                <i class="fas fa-check-double container__chat-box__messages--user--doubleclick" aria-hidden="true"></i>
-                         <i class="fa fa-trash container__chat-box__messages--user--trash"  onclick='handleEditDelete("${message.msgID}")' title="Delete Item" aria-hidden="true"></i><span class="sr-only">Delete Item</span>
-                        </p>
-                    </div>`
+            });
 
-        });
-
-        containerChat.innerHTML = html;
-
-    }
-
+            containerChat.innerHTML = html;
+        } catch (er) {
+            console.error(er);
+        }
+        }
 }
 
 class ContactList {
@@ -216,8 +225,12 @@ class ContactList {
     }
 
     findContactIndex(contactPhone) {
-        const contactIndex = this.allContacts.findIndex(contactItem => contactItem.userPhone === contactPhone);
-        return contactIndex;
+        try {
+            const contactIndex = this.allContacts.findIndex(contactItem => contactItem.userPhone === contactPhone);
+            return contactIndex;
+        } catch (er) {
+            console.error(er);
+        }
     }
 }
 
@@ -225,68 +238,69 @@ const loggedInUser: User = new User(JSON.parse(localStorage.getItem("currentUser
 
 const messageList = new MessageList();
 
-const params = new URLSearchParams(window.location.search)
-const groupId = params.get('groupid')
-
+const params = new URLSearchParams(window.location.search);
+const groupId = params.get('groupid');
 
 loggedInUser.renderMsgs(groupId);
 
-
-btnMessage.addEventListener('click', sendMessage)
+btnMessage.addEventListener('click', sendMessage);
 
 function sendMessage() {
-    const inputMessage = elementMessage.value;
+    try {
+        const inputMessage = elementMessage.value;
 
-    let today = new Date();
-    let timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes())
-    let timeHMS = (today.getTime())
+        let today = new Date();
+        let timeHM = ((today.getHours() < 10 ? "0" : "") + today.getHours()) + ":" + ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
+        let timeHMS = (today.getTime());
 
-    const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS)
+        const message = new Message(inputMessage, contactUser, timeHM, '123', inputMessage, timeHMS);
 
-    messageList.addMessage(message)
+        messageList.addMessage(message)
 
-    loggedInUser.addMessages(message, groupId)
+        loggedInUser.addMessages(message, groupId)
 
-    localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-    contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-    localStorage.setItem('contactList', JSON.stringify(contactList));
+        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+        contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        localStorage.setItem('contactList', JSON.stringify(contactList));
 
-    elementMessage.value = '';
-
+        elementMessage.value = '';
+    } catch (er) {
+        console.error(er);
+    }
 }
 
-
-btnSearch.addEventListener('click', displayInput)
+btnSearch.addEventListener('click', displayInput);
 
 function displayInput() {
-    if (inputSearch.style.display === 'none') {
-        inputSearch.style.display = 'inline-block';
-        inputSearch.style.outline = "none";
-        inputSearch.style.textIndent = "0.2rem"
-    } else {
-        inputSearch.style.display = 'none';
-        inputSearch.value = "";
+    try {
+        if (inputSearch.style.display === 'none') {
+            inputSearch.style.display = 'inline-block';
+            inputSearch.style.outline = "none";
+            inputSearch.style.textIndent = "0.2rem";
+        } else {
+            inputSearch.style.display = 'none';
+            inputSearch.value = "";
+        }
+    } catch (er) {
+        console.error(er);
     }
 }
-
-
 
 function handleEditDelete(messageId: string) {
-
-
-    if (isClicked === false) {
-        messageList.editMessage(messageId)
-        isClicked = true
-
-    
-    } else {
-        messageList.deleteMessage(messageId)
-        isClicked = false
+    try {
+        if (isClicked === false) {
+            messageList.editMessage(messageId);
+            isClicked = true;
+        } else {
+            messageList.deleteMessage(messageId);
+            isClicked = false;
+        }
+    } catch (er) {
+        console.error(er);
     }
-
 }
 
-inputSearch.addEventListener('keyup', handleKeyUp)
+inputSearch.addEventListener('keyup', handleKeyUp);
 
 function handleKeyUp() {
     try {
@@ -296,50 +310,52 @@ function handleKeyUp() {
     }
 }
 
-
-
-
 function handleReturn() {
+    try {
+        let pickedUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    let pickedUser = JSON.parse(localStorage.getItem("currentUser"))
-
-    window.location.href = `../groups/groups.html?userid=${pickedUser.userPhone}`;
+        window.location.href = `../groups/groups.html?userid=${pickedUser.userPhone}`;
+    } catch (er) {
+        console.error(er);
+    }
 }
-
-
 
 btnModal.addEventListener('click', openModal)
 
 function openModal(ev) {
+    try {
+        ev.preventDefault()
+        bgModal.classList.add('bg-active')
 
-    ev.preventDefault()
-    bgModal.classList.add('bg-active')
 
+        emojiList.forEach((emoji, index) => {
+            emojiList[index].addEventListener('click', function (ev) {
+                ev.preventDefault();
+                if (emoji.checked) {
+                    elementMessage.value += emoji.value;
+                }
+                bgModal.classList.remove('bg-active');
+                ev.target.reset;
+            });
 
-    emojiList.forEach((emoji, index) => {
-        emojiList[index].addEventListener('click', function (ev) {
-            ev.preventDefault()
-            if (emoji.checked) {
-                elementMessage.value += emoji.value
-            }
-            bgModal.classList.remove('bg-active');
-            ev.target.reset
         });
-
-    });
-    emojiList = [];
+        emojiList = [];
+    } catch (er) {
+        console.error(er);
+    }
 }
 
-modalClose.addEventListener('click', closeModal)
+modalClose.addEventListener('click', closeModal);
 
 function closeModal(ev) {
-    ev.preventDefault()
-    bgModal.classList.remove('bg-active')
+    try{
+        ev.preventDefault();
+        bgModal.classList.remove('bg-active');
+    } catch (er) {
+        console.error(er);
+    }
 
 }
-
-
-//User
 
 class ContactMessage {
     userImg: string;
@@ -355,48 +371,46 @@ class ContactMessage {
     }
 
     renderUserChat() {
+        try {
+            let html: string = '';
 
-        let html: string = ''
+            html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
+                    <img src="${this.userImg}" alt="" srcset="">
+                    <div class="container__header__left__text">
+                    <span class="container__header__left__text--first">${this.userName}</span>
+                    <span class="container__header__left__text--second">${this.userPhone}</span>
+                    </div>`
 
-        html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
-                <img src="${this.userImg}" alt="" srcset="">
-                <div class="container__header__left__text">
-                <span class="container__header__left__text--first">${this.userName}</span>
-                <span class="container__header__left__text--second">${this.userPhone}</span>
-                </div>`
-
-        containerContactUser.innerHTML = html;
+            containerContactUser.innerHTML = html;
+        }
+        catch (er) {
+            console.error(er);
+        }
     }
 }
 
-const contactChat = JSON.parse(localStorage.getItem("contactList"))
-const contactList: ContactList = JSON.parse(localStorage.getItem("contactId"))
-const isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"))
-console.log(localStorage.getItem("IsChatOrGroup"))
-const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone
+const contactChat = JSON.parse(localStorage.getItem("contactList"));
+const contactList: ContactList = JSON.parse(localStorage.getItem("contactId"));
+const isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"));
+console.log(localStorage.getItem("IsChatOrGroup"));
+const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
 
 if (isChatOrGroup === 0) {
 
-    let chatUser = Object.values(Object.values(contactChat)[1])
+    let chatUser = Object.values(Object.values(contactChat)[1]);
 
     chatUser.find(function (chat) {
         if (contactList === chat.userPhone) {
-            const contactUser = new ContactMessage(chat.userImg, chat.userName, chat.userPhone, chat.userGroups)
-            contactUser.renderUserChat()
+            const contactUser = new ContactMessage(chat.userImg, chat.userName, chat.userPhone, chat.userGroups);
+            contactUser.renderUserChat();
         }
     });
+
 } else {
 
-    const currentGroup = JSON.parse(localStorage.getItem("currentGroup"))
+    const currentGroup = JSON.parse(localStorage.getItem("currentGroup"));
     
-    const groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser)
+    const groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser);
 
-    groupChat.renderGroupChat()
+    groupChat.renderGroupChat();
 }
-
-
-
-
-
-
-

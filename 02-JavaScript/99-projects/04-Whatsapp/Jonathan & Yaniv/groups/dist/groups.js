@@ -34,7 +34,7 @@ var User = /** @class */ (function () {
             var existingGroup = this.userGroups.find(function (group) { return group.groupId === groupToCheck.groupId; });
             if (existingGroup === undefined) {
                 this.userGroups.push(groupToCheck);
-                this.renderChatsToChatsList();
+                this.renderChatsToChatsList(null);
             }
             if (existingGroup === undefined)
                 return true;
@@ -46,16 +46,21 @@ var User = /** @class */ (function () {
         }
     };
     User.prototype.filterGroups = function (groupFilter) {
-        var filteredGroups = this.userGroups;
-        var groupRegEx = groupFilter ? new RegExp(groupFilter, 'gmi') : undefined;
-        if (groupFilter !== "") {
-            filteredGroups = filteredGroups.filter(function (group) {
-                ((group.groupMsgs.find(function (msg) { return groupRegEx.test(msg.content); }) !== undefined) ||
-                    (groupRegEx.test(group.groupName)) ||
-                    (group.groupUsers.find(function (user) { return groupRegEx.test(user); }) !== undefined)); // not by users name, only phone numbers
-            });
+        try {
+            var filteredGroups = this.userGroups;
+            var groupRegEx_1 = groupFilter ? new RegExp(groupFilter, 'gmi') : undefined;
+            if (groupFilter !== "") {
+                filteredGroups = filteredGroups.filter(function (group) {
+                    ((group.groupMsgs.find(function (msg) { return groupRegEx_1.test(msg.content); }) !== undefined) ||
+                        (groupRegEx_1.test(group.groupName)) ||
+                        (group.groupUsers.find(function (user) { return groupRegEx_1.test(user); }) !== undefined)); // not by users name, only phone numbers
+                });
+            }
+            this.renderChatsToChatsList(filteredGroups);
         }
-        this.renderChatsToChatsList(filteredGroups);
+        catch (er) {
+            console.error(er);
+        }
     };
     User.prototype.renderChatsToChatsList = function (FilteredGroupsToRender) {
         try {
@@ -64,9 +69,7 @@ var User = /** @class */ (function () {
             var groupsToRender = FilteredGroupsToRender ? FilteredGroupsToRender : this.userGroups;
             groupsToRender.forEach(function (group) {
                 var datemsg = group.groupMsgs[group.groupMsgs.length - 1] ? group.groupMsgs[group.groupMsgs.length - 1].dateMsg : "";
-                console.log(datemsg);
                 var content = group.groupMsgs[group.groupMsgs.length - 1] ? group.groupMsgs[group.groupMsgs.length - 1].content : "";
-                console.log(content);
                 var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h3>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + datemsg + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + content + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>"; // for lines 47-48 - add "$" before "{" once the Message class is linked
                 ChatsContainer_1.insertAdjacentHTML('beforeend', groupHTML);
             });
@@ -76,8 +79,13 @@ var User = /** @class */ (function () {
         }
     };
     User.prototype.extractGroup = function (groupId) {
-        var existingGroup = this.userGroups.find(function (group) { return group.groupId === groupId; });
-        return existingGroup;
+        try {
+            var existingGroup = this.userGroups.find(function (group) { return group.groupId === groupId; });
+            return existingGroup;
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
     return User;
 }());
@@ -86,22 +94,32 @@ var ContactList = /** @class */ (function () {
         this.allContacts = allContacts;
     }
     ContactList.prototype.findContactIndex = function (contactPhone) {
-        var contactIndex = this.allContacts.findIndex(function (contactItem) { return contactItem.userPhone === contactPhone; });
-        return contactIndex;
+        try {
+            var contactIndex = this.allContacts.findIndex(function (contactItem) { return contactItem.userPhone === contactPhone; });
+            return contactIndex;
+        }
+        catch (er) {
+            console.error(er);
+        }
     };
     ContactList.prototype.filterContacts = function (contactFilter, type) {
-        var filteredContacts = this.allContacts;
-        var contactRegEx = contactFilter ? new RegExp(contactFilter, 'gmi') : undefined;
-        if (contactFilter !== "") {
-            filteredContacts = filteredContacts.filter(function (contact) {
-                ((contactRegEx.test(contact.userName)) ||
-                    (contactRegEx.test(contact.userPhone)));
-            });
+        try {
+            var filteredContacts = this.allContacts;
+            var contactRegEx_1 = contactFilter ? new RegExp(contactFilter, 'gmi') : undefined;
+            if (contactFilter !== "") {
+                filteredContacts = filteredContacts.filter(function (contact) {
+                    ((contactRegEx_1.test(contact.userName)) ||
+                        (contactRegEx_1.test(contact.userPhone)));
+                });
+            }
+            if (type === 'privateChat')
+                this.renderContactsToNewChatMenu(filteredContacts);
+            if (type === 'groupChat')
+                this.renderContactsToNewGroupMenu(filteredContacts);
         }
-        if (type === 'privateChat')
-            this.renderContactsToNewChatMenu(filteredContacts);
-        if (type === 'groupChat')
-            this.renderContactsToNewGroupMenu(filteredContacts);
+        catch (er) {
+            console.error(er);
+        }
     };
     ContactList.prototype.renderContactsToNewChatMenu = function (FilteredContactsToRender) {
         try {
@@ -162,19 +180,24 @@ var ContactList = /** @class */ (function () {
 var allContacts = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 var loggedInUser = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
 var readURL = function (input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var label = document.querySelector('#add_photo');
-            label.setAttribute('alt', "" + e.target.result);
-            label.style.backgroundImage = "url(\"" + e.target.result + "\")";
-            label.style.backgroundSize = '100% 100%';
-            label.innerText = '';
-            label.style.padding = '0';
-            label.style.height = '200px';
-            label.style.width = '200px';
-            return e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
+    try {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var label = document.querySelector('#add_photo');
+                label.setAttribute('alt', "" + e.target.result);
+                label.style.backgroundImage = "url(\"" + e.target.result + "\")";
+                label.style.backgroundSize = '100% 100%';
+                label.innerText = '';
+                label.style.padding = '0';
+                label.style.height = '200px';
+                label.style.width = '200px';
+                return e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    catch (er) {
+        console.error(er);
     }
 };
