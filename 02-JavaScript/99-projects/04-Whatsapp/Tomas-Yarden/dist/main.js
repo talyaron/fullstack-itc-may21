@@ -139,5 +139,5 @@ var handleDelete = function (id) {
     }
 };
 var goToChat = function (event) {
-    window.location.href = '.02-JavaScript\99-projects\04-Whatsapp\Tomas-Yarden\index.html';
+    window.location.href = "/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/index.html";
 };
