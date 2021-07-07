@@ -118,12 +118,7 @@ class User {
             console.error(er);
           }
     }
-        
-    
-    
 }
-
-
 
 class ContactList {
     allContacts: Array<User>;
