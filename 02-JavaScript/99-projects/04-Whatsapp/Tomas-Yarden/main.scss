@@ -167,7 +167,8 @@ main {
 
 .add-contact {
     background-color: white;
-    border: white 1px solid;
+    border: rgba(0, 0, 0, 0.582) 1px solid;
+    padding: 0.3em;
     
     margin: 0.2em;
     position: absolute;
@@ -189,11 +190,5 @@ main {
 }
 
 .fa-trash::before {
-    color: rgba(255, 255, 255, 0.747);    
-
-    &:hover {
-        display: none;
-        color: red;
-        opacity: 100;    
+    color: rgba(255, 255, 255, 0.747);      
     }
-}
