@@ -1,35 +1,11 @@
-/*This is the main WhatsApp page, 
-with modals and the option to add contact*/
-
-//Top modal:
-const openMenuModal = (event) => {
-    try {
-        const topModal:any = document.querySelector('.top-modal')
-        topModal.style.display="block"
-    } catch (error) {
-        console.error(error)
-    }
-    
-}
-const closeMenuModal = (event) => {
-    try {
-        const body:any = document.getElementsByName('body')
-        const topModal:any = document.querySelector('.top-modal')
-        topModal.style.display="none"
-    } catch (error) {
-        console.error(error)
-    }
-    
-}
-//Add contact modal form:
-const openBottomModal = (event) => {
-    try {
-        const bottomModal:any = document.querySelector('.add-contact')
-        bottomModal.style.display="flex"
-    } catch (error) {
-        console.error(error)
-    }
-}
+/*This is the main WhatsApp page. 
+Features:
+Top modal to simulate the WhatsApp menu; 
+search area (for now, unfunctional) navbar;
+bottom modal for adding contacts with form;
+when clicking the image, the 2nd navbar pops up (cloned from WhatsApp) with the option to delete;
+when clicking the info section of a message, user is redirected to the chat page
+*/
 
 class Contact {
     image:string
@@ -52,7 +28,7 @@ class Contact {
 }
 
 class Contacts {
-    contacts: Array<Contact> = [];
+    contacts: Array<Contact> = []
 
 //Adding a new contact
 render() {
@@ -95,7 +71,7 @@ render() {
   }
 }
 
-let whatsAppContacts = new Contacts();
+let whatsAppContacts = new Contacts()
 
 //Adding a new contact:
 const handleSubmit = (event) => {
@@ -116,6 +92,7 @@ const handleSubmit = (event) => {
 
         //Update local storage:
         let contactSerialized = JSON.stringify(whatsAppContacts)
+        
         localStorage.setItem("whatsAppContacts", contactSerialized)
         let contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"))
         
@@ -129,31 +106,7 @@ const handleSubmit = (event) => {
         console.error(error);        
     } 
 }
-//Alternate between the main and edit navbars:
-const showEditNav = (event) => {
-   try {
-    const menu = document.querySelector("nav")
-    menu.hidden=true
-    const editMenu = document.querySelector("#editNav")
-    editMenu.attributes[1].value = "display: block"
-    
-   } catch (error) {
-       console.error(error);     
-   }
 
-    
-}
-//Close bottom modal after adding contact:
-const returnToMainNav = (event) => {
-    try {
-        const editMenu = document.querySelector("#editNav")
-        editMenu.attributes[1].value = "display: none"
-        const menu = document.querySelector("nav")
-        menu.hidden=false
-    } catch (error) {
-        console.error(error);
-    }
-}
 //Delete contact onclick:
 const handleDelete = (id) => {
     try {
@@ -165,6 +118,85 @@ const handleDelete = (id) => {
     }    
 }
 
+
+/* Modal and helper functions */
+
+//Top modal:
+const openMenuModal = (event) => {
+    try {
+        const topModal:any = document.querySelector('.top-modal')
+        topModal.style.display="block"
+    } catch (error) {
+        console.error(error)
+    }
+    
+}
+const closeMenuModal = (event) => {
+    try {
+        const body:any = document.getElementsByName('body')
+        const topModal:any = document.querySelector('.top-modal')
+        topModal.style.display="none"
+    } catch (error) {
+        console.error(error)
+    }
+    
+}
+//Add contact modal form:
+const openBottomModal = (event) => {
+    try {
+        const bottomModal:any = document.querySelector('.add-contact')
+        bottomModal.style.display="flex"
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const openSearch = (event) => {
+    try {
+        const menu = document.querySelector("nav")
+        menu.hidden=true
+        const searchMenu = document.querySelector('#search-nav')
+        searchMenu.attributes[1].value = "display: flex"
+
+    } catch (error) {
+        console.error(error);
+        
+    }
+}
+
+//Alternate between the main and edit navbars:
+const showEditNav = (event) => {
+    try {
+     const menu = document.querySelector("nav")
+     menu.hidden=true
+     const editMenu = document.querySelector("#editNav")
+     editMenu.attributes[1].value = "display: block"
+     
+    } catch (error) {
+        console.error(error);     
+    }
+ 
+     
+ }
+ //Close bottom modal after adding contact:
+ const returnToMainNav = (event) => {
+     try {
+         const searchMenu = document.querySelector('#search-nav')
+         const editMenu = document.querySelector("#editNav")
+         searchMenu.attributes[1].value = "display: none"
+         editMenu.attributes[1].value = "display: none"
+         const menu = document.querySelector("nav")
+         menu.hidden=false
+     } catch (error) {
+         console.error(error);
+     }
+ }
+
+//Redirection to the chat when clicking the info section of a contact:
 const goToChat = (event) => {
-    window.location.href = "/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/index.html"
+    try {
+        window.location.href = "/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/index.html"   
+    } catch (error) {
+        console.error(error);
+    }
 }
