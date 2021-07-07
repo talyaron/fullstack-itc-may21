@@ -134,9 +134,9 @@ const filterKeyUp = (ev: any) => {
   try {
     ev.preventDefault();
 
-    const filterFormElements: HTMLFormElement = ev.target.elements;
+    const filterFormElements: HTMLFormElement = ev.target.parentElement.elements;
     let searchFilter: string;
-    switch (ev.target) {
+    switch (ev.target.parentElement) {
         case groupsSearch:
             if (loggedInUser.userGroups.length === 0) return;
             searchFilter = filterFormElements.searchInChats.value;
