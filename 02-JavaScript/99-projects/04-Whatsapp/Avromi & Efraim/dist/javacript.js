@@ -234,7 +234,7 @@ function closeForm() {
     }
 }
 closeForm();
-var x = false;
+// the one thing we couldnt get to work how we wanted :((((
 function editButtonRevealAndHide() {
     try {
         var editButton = document.querySelector(".header__edit");

@@ -77,7 +77,7 @@ var User = /** @class */ (function () {
             groupsToRender.forEach(function (group) {
                 var datemsg = group.groupMsgs[group.groupMsgs.length - 1] ? group.groupMsgs[group.groupMsgs.length - 1].dateMsg : "";
                 var content = group.groupMsgs[group.groupMsgs.length - 1] ? group.groupMsgs[group.groupMsgs.length - 1].content : "";
-                var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h3>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + datemsg + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + content + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>"; // for lines 47-48 - add "$" before "{" once the Message class is linked
+                var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h3>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + datemsg + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + content + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\" onclick='handleDelete(\"" + group.groupId + "\")'></i>\n            </div>"; // for lines 47-48 - add "$" before "{" once the Message class is linked
                 ChatsContainer_1.insertAdjacentHTML('beforeend', groupHTML);
             });
         }
@@ -89,6 +89,17 @@ var User = /** @class */ (function () {
         try {
             var existingGroup = this.userGroups.find(function (group) { return group.groupId === groupId; });
             return existingGroup;
+        }
+        catch (er) {
+            console.error(er);
+        }
+    };
+    //JN
+    User.prototype.deleteGroup = function (groupID) {
+        try {
+            console.log(groupID);
+            this.userGroups = this.userGroups.filter(function (group) { return group.groupId !== groupID; });
+            this.renderChatsToChatsList(this.userGroups);
         }
         catch (er) {
             console.error(er);
@@ -208,3 +219,7 @@ var readURL = function (input) {
         console.error(er);
     }
 };
+//JN
+function handleDelete(groupId) {
+    loggedInUser.deleteGroup(groupId);
+}

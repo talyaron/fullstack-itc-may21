@@ -3,6 +3,7 @@ var getID = localStorage.getItem("contactID");
 var userFilter = savedContacts.filter(function (el) { return el.contactId === getID; });
 var conversation = (document.querySelector(".envelope__typing--input-entry"));
 var envelope__contact = document.querySelector(".renderFirst");
+envelope__contact.addEventListener('click', redirect2);
 function renderChats() {
     var html = "";
     userFilter.forEach(function (element) {
@@ -38,7 +39,7 @@ function sendMessage() {
     var message = conversation.value;
     messagesArray.push(message);
     messagesArray.forEach(function (msg) {
-        var messageElement = "<div>" + msg + "</div> ";
+        var messageElement = "<div class=\"message-bubble\"><div class=\"message-text\">" + msg + "</div></div> ";
         chatContainer.insertAdjacentHTML("beforeend", messageElement);
     });
     conversation.value = ""; //serves for refresh and delete what you typed before in the input bar
@@ -56,3 +57,5 @@ function redirect2() {
 function abrir() {
     var file = document.getElementById("file").click();
 }
+var paperClip = document.querySelector('.paper');
+paperClip.addEventListener('click', abrir);
