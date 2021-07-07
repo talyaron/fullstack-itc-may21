@@ -99,15 +99,20 @@ function logSubmit(event) {
     }
 }
 function removeMic() {
-    var input = document.getElementById("input");
-    input.addEventListener("keyup", function () {
-        var mic = document.querySelector(".fa-microphone");
-        mic.style.display = "none";
-        var plane = document.querySelector(".fa-paper-plane");
-        plane.style.display = "block";
-    });
-    var microphone = document.querySelector(".fa-microphone");
-    microphone.disabled = "true";
+    try {
+        var input = document.getElementById("input");
+        input.addEventListener("keyup", function () {
+            var mic = document.querySelector(".fa-microphone");
+            mic.style.display = "none";
+            var plane = document.querySelector(".fa-paper-plane");
+            plane.style.display = "block";
+        });
+        var microphone = document.querySelector(".fa-microphone");
+        microphone.disabled = "true";
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 removeMic();
 updateLastSent();

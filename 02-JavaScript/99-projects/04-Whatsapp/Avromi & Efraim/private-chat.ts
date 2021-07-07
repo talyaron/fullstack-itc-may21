@@ -117,6 +117,7 @@ function logSubmit(event) {
 
 
 function removeMic() {
+    try{
     const input = document.getElementById("input")
     input.addEventListener("keyup", () => {
         const mic: any = document.querySelector(".fa-microphone");
@@ -126,6 +127,9 @@ function removeMic() {
     });
     const microphone: any = document.querySelector(".fa-microphone");
     microphone.disabled = "true"
+}catch (error) {
+    console.error(error)
+}
 }
 removeMic()
 updateLastSent()
