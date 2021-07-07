@@ -34,7 +34,7 @@ var User = /** @class */ (function () {
             var existingGroup = this.userGroups.find(function (group) { return group.groupId === groupToCheck.groupId; });
             if (existingGroup === undefined) {
                 this.userGroups.push(groupToCheck);
-                this.renderChatsToChatsList();
+                this.renderChatsToChatsList(null);
             }
             if (existingGroup === undefined)
                 return true;

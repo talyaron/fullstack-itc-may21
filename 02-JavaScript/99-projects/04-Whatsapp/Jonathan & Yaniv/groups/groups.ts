@@ -53,7 +53,7 @@ class User {
 
             if(existingGroup === undefined){
                  this.userGroups.push(groupToCheck);
-                 this.renderChatsToChatsList();
+                 this.renderChatsToChatsList(null);
             }
           
             if(existingGroup === undefined) return true;
