@@ -8,7 +8,7 @@ const conversation = <HTMLInputElement>(
 
 const envelope__contact = document.querySelector(".renderFirst");
 
-
+envelope__contact.addEventListener('click', redirect2);
 
 
 
@@ -62,11 +62,13 @@ function sendMessage() {
   const message = conversation.value;
   messagesArray.push(message);
   messagesArray.forEach((msg) => {
-    const messageElement = `<div>${msg}</div> `;
+    const messageElement = `<div class="message-bubble"><div class="message-text">${msg}</div></div> `;
     chatContainer.insertAdjacentHTML("beforeend", messageElement);
   });
   conversation.value = ""; //serves for refresh and delete what you typed before in the input bar
 }
+
+ 
 
 function redirect2() {
   try {
@@ -81,3 +83,7 @@ function redirect2() {
 function abrir() {
   let file = document.getElementById("file").click();
 }
+
+const paperClip=document.querySelector('.paper')
+paperClip.addEventListener('click', abrir)
+
