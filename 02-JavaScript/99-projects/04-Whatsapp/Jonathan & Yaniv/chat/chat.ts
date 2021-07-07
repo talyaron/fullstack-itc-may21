@@ -121,12 +121,13 @@ class Group {
 
         let html: string = ''
 
+        const groupUser = this.groupUsers.filter(group=>!group.match(contactUser))
 
         html += `<i class="fas fa-arrow-left container__header__left--arrowleft" onclick='handleReturn()'"></i>
                 <img src="${this.groupImg}" alt="" srcset="">
                 <div class="container__header__left__text">
                 <span class="container__header__left__text--first">${this.groupName}</span>
-                <span class="container__header__left__text--second">${this.groupUsers},${this.groupMyPhone}</span>
+                <span class="container__header__left__text--second">You,${groupUser} </span>
                 </div>`
 
         containerContactUser.innerHTML = html;
@@ -335,7 +336,7 @@ class ContactMessage {
                 <img src="${this.userImg}" alt="" srcset="">
                 <div class="container__header__left__text">
                 <span class="container__header__left__text--first">${this.userName}</span>
-                <span class="container__header__left__text--second">${this.userPhone}</span>
+                <span class="container__header__left__text--second">You,${this.userPhone}</span>
                 </div>`
 
         containerContactUser.innerHTML = html;
