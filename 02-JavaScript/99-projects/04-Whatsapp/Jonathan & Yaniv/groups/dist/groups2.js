@@ -38,7 +38,7 @@ var User = /** @class */ (function () {
         var filteredGroups = this.userGroups;
         var groupRegEx = groupFilter ? new RegExp(groupFilter, 'gmi') : undefined;
         if (groupFilter !== "") {
-            filteredGroups = this.userGroups.filter(function (group) {
+            filteredGroups = filteredGroups.filter(function (group) {
                 ((group.groupMsgs.find(function (msg) { return groupRegEx.test(msg.content); }) !== undefined) ||
                     (groupRegEx.test(group.groupName)) ||
                     (group.groupUsers.find(function (user) { return groupRegEx.test(user); }) !== undefined)); // not by users name, only phone numbers
@@ -76,7 +76,7 @@ var ContactList = /** @class */ (function () {
         var filteredContacts = this.allContacts;
         var contactRegEx = contactFilter ? new RegExp(contactFilter, 'gmi') : undefined;
         if (contactFilter !== "") {
-            filteredContacts = this.allContacts.filter(function (contact) {
+            filteredContacts = filteredContacts.filter(function (contact) {
                 ((contactRegEx.test(contact.userName)) ||
                     (contactRegEx.test(contact.userPhone)));
             });

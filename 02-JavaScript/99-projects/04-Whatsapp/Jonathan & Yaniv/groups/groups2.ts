@@ -57,7 +57,7 @@ class User {
         const groupRegEx = groupFilter ? new RegExp(groupFilter,'gmi') : undefined;
     
         if (groupFilter !== "") {
-            filteredGroups = this.userGroups.filter(group => {
+            filteredGroups = filteredGroups.filter(group => {
                 ((group.groupMsgs.find(msg=>groupRegEx.test(msg.content)) !== undefined) ||
                 (groupRegEx.test(group.groupName)) ||
                 (group.groupUsers.find(user=>groupRegEx.test(user)) !== undefined)) // not by users name, only phone numbers
@@ -111,7 +111,7 @@ class ContactList {
         const contactRegEx = contactFilter ? new RegExp(contactFilter,'gmi') : undefined;
     
         if (contactFilter !== "") {
-            filteredContacts = this.allContacts.filter(contact => {
+            filteredContacts = filteredContacts.filter(contact => {
                 ((contactRegEx.test(contact.userName)) ||
                 (contactRegEx.test(contact.userPhone)))
             });
