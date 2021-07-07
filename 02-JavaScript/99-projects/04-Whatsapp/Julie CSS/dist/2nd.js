@@ -38,7 +38,7 @@ function sendMessage() {
     var message = conversation.value;
     messagesArray.push(message);
     messagesArray.forEach(function (msg) {
-        var messageElement = "<div>" + msg + "</div> ";
+        var messageElement = "<div class= \"message-bubble\"><div class=\"message-text\">" + msg + "</div></div> ";
         chatContainer.insertAdjacentHTML("beforeend", messageElement);
     });
     conversation.value = ""; //serves for refresh and delete what you typed before in the input bar

@@ -234,7 +234,9 @@
     background: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
     width: 600px;
     height: 400px;
-    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   &__typing {
@@ -347,4 +349,19 @@
     opacity: 0.8;
     cursor: pointer;
   }
+}
+
+.message-bubble {
+  background-color: palegoldenrod;
+  border-radius: 7px;
+  box-shadow: 1px 1px #888888;
+  display: flex;
+  justify-content: flex-end;
+  border: 1px solid #888888;
+  margin-top: 3px;
+  width: 300px;
+}
+
+.message-text {
+  border: 1px solid magenta;
 }
