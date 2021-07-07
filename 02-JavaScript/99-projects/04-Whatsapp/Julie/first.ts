@@ -3,6 +3,16 @@ const render: HTMLElement = document.querySelector(
     ".wrapper__container--chats"
   );
   
+  //popup to add a new contact
+const btnModal = (<HTMLButtonElement>document.querySelector('.modal-btn'))
+const bgModal =  document.querySelector('.modal-bg')
+const btnModalClose =  document.querySelector('.modal-btn')
+
+const modalClose = document.querySelector('.modal-close')
+const inputName = (<HTMLInputElement>document.querySelector('#name'))
+const inputPhone = (<HTMLInputElement>document.querySelector('#phone'))
+const faPlus = (<HTMLButtonElement>document.querySelector('.fa-plus'))
+  
   //search-regrex first page, take id from the input search
   const inputFilter = <HTMLInputElement>document.querySelector("#filterN");
   
@@ -114,25 +124,9 @@ const render: HTMLElement = document.querySelector(
       console.error(error);
     }
   }
-
-
-
-  
+ 
   // You have to either pass the contactid or the contact name, and then on the other page use the contact id to find the contact in the list, and display the name. Need to get contacts list on second page by setting it on local storage.
   // YOu can set the aray wherever you have ot, and then grab is
-  
-
-
-  //popup to add a new contact
-const btnModal = (<HTMLButtonElement>document.querySelector('.modal-btn'))
-const bgModal =  document.querySelector('.modal-bg')
-const modalClose = document.querySelector('.modal-close')
-const inputName = (<HTMLInputElement>document.querySelector('#name'))
-const inputPhone = (<HTMLInputElement>document.querySelector('#phone'))
-//const btnModalInput = (<HTMLButtonElement>document.querySelector('.btn-modal'))
-//const boardRoot:HTMLElement = document.querySelector('#board')
-const faPlus = (<HTMLButtonElement>document.querySelector('.fa-plus'))
-const btnsub=(<HTMLButtonElement>document.querySelector('.btn-modal'));
 
 const handleSubmit = (event) => {
   event.preventDefault();
@@ -147,13 +141,16 @@ const handleSubmit = (event) => {
     console.log(generator); 
     contacts.add(generator);
     contacts.renderContacts();
+    cerrar();
   } catch (error) {
     alert(error);
   }
-
   event.target.reset();
 };
 
+function cerrar() {
+  window.close();
+}
 
 faPlus.addEventListener('click', (e)=> openModal(e))
 
@@ -168,13 +165,14 @@ function openModal(e){
 
 //close modal windows
 modalClose.addEventListener('click', closeModal)
+btnModalClose.addEventListener('click', closeAddModal)
+
+function closeAddModal(){
+  btnModalClose.classList.remove('bg-active')
+}
 
 function closeModal(){
     bgModal.classList.remove('bg-active')
 }
-
-//boardRoot.insertAdjacentHTML('afterend',html)
-
-//bgModal.classList.remove('bg-active')
 
 

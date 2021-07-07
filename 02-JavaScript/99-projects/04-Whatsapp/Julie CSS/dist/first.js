@@ -20,7 +20,7 @@ var Contacts = /** @class */ (function () {
         this.contacts.push(add);
         this.renderContacts();
         this.contactsFilter.push(add);
-        localStorage.setItem('contactsData', JSON.stringify(this.contacts));
+        localStorage.setItem("contactsData", JSON.stringify(this.contacts));
     };
     Contacts.prototype.addList = function (addlist) {
         var _this = this;
@@ -80,15 +80,15 @@ function redirect(contactId) {
 // You have to either pass the contactid or the contact name, and then on the other page use the contact id to find the contact in the list, and display the name. Need to get contacts list on second page by setting it on local storage.
 // YOu can set the aray wherever you have ot, and then grab is
 //popup to add a new contact
-var btnModal = document.querySelector('.modal-btn');
-var bgModal = document.querySelector('.modal-bg');
-var modalClose = document.querySelector('.modal-close');
-var inputName = document.querySelector('#name');
-var inputPhone = document.querySelector('#phone');
+var btnModal = document.querySelector(".modal-btn");
+var bgModal = document.querySelector(".modal-bg");
+var modalClose = document.querySelector(".modal-close");
+var inputName = document.querySelector("#name");
+var inputPhone = document.querySelector("#phone");
 //const btnModalInput = (<HTMLButtonElement>document.querySelector('.btn-modal'))
 //const boardRoot:HTMLElement = document.querySelector('#board')
-var faPlus = document.querySelector('.fa-plus');
-var btnsub = document.querySelector('.btn-modal');
+var faPlus = document.querySelector(".fa-plus");
+var btnsub = document.querySelector(".btn-modal");
 var handleSubmit = function (event) {
     event.preventDefault();
     try {
@@ -109,17 +109,17 @@ var handleSubmit = function (event) {
     }
     event.target.reset();
 };
-faPlus.addEventListener('click', function (e) { return openModal(e); });
+faPlus.addEventListener("click", function (e) { return openModal(e); });
 //open modal window
 function openModal(e) {
     e.preventDefault();
-    bgModal.classList.add('bg-active');
+    bgModal.classList.add("bg-active");
     console.log("hi");
 }
 //close modal windows
-modalClose.addEventListener('click', closeModal);
+modalClose.addEventListener("click", closeModal);
 function closeModal() {
-    bgModal.classList.remove('bg-active');
+    bgModal.classList.remove("bg-active");
 }
 //boardRoot.insertAdjacentHTML('afterend',html)
 //bgModal.classList.remove('bg-active')

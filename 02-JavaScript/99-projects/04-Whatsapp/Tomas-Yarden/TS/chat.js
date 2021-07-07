@@ -8,6 +8,7 @@
 // start with the design of the classes, BEM
 //Global Variables
 var messageValue = document.getElementById("text-input");
+// const renderPost = JSON.parse(localStorage.getItem("completeCv"));
 //Listeners
 // interface RespondsInterface {
 //   message:string;

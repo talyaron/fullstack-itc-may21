@@ -11,6 +11,7 @@
 
 //Global Variables
 const messageValue: any = document.getElementById("text-input");
+// const renderPost = JSON.parse(localStorage.getItem("completeCv"));
 
 
 //Listeners

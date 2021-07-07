@@ -236,7 +236,7 @@
     height: 400px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
   }
 
   &__typing {
@@ -360,8 +360,4 @@
   border: 1px solid #888888;
   margin-top: 3px;
   width: 300px;
-}
-
-.message-text {
-  border: 1px solid magenta;
 }
