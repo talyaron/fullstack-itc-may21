@@ -150,7 +150,8 @@ main .contact-container__info-container .last-message {
 
 .add-contact {
   background-color: white;
-  border: white 1px solid;
+  border: rgba(0, 0, 0, 0.582) 1px solid;
+  padding: 0.3em;
   margin: 0.2em;
   position: absolute;
   bottom: 0;
@@ -172,9 +173,4 @@ main .contact-container__info-container .last-message {
 
 .fa-trash::before {
   color: rgba(255, 255, 255, 0.747);
-}
-.fa-trash::before:hover {
-  display: none;
-  color: red;
-  opacity: 100;
 }
