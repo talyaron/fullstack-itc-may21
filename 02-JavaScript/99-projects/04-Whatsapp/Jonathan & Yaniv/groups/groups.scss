@@ -301,11 +301,11 @@ body {
 
             &--delete {
                 grid-area: delete;
-                color: white;
+                color: #BABABA;
                 text-align: right;
 
                 &:hover {
-                    color: #BABABA;
+                    color: #858585;
                 }
             }
         }

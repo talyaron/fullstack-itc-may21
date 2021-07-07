@@ -280,11 +280,11 @@ body {
 }
 .chats .chat__item--delete {
   grid-area: delete;
-  color: white;
+  color: #BABABA;
   text-align: right;
 }
 .chats .chat__item--delete:hover {
-  color: #BABABA;
+  color: #858585;
 }
 .chats__item:hover {
   cursor: pointer;
