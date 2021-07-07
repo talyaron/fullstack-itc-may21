@@ -102,9 +102,9 @@ contactsForGroupSearch.addEventListener('keyup', function (ev) { return filterKe
 var filterKeyUp = function (ev) {
     try {
         ev.preventDefault();
-        var filterFormElements = ev.target.elements;
+        var filterFormElements = ev.target.parentElement.elements;
         var searchFilter = void 0;
-        switch (ev.target) {
+        switch (ev.target.parentElement) {
             case groupsSearch:
                 if (loggedInUser.userGroups.length === 0)
                     return;

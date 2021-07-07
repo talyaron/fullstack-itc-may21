@@ -78,8 +78,7 @@ const directToGroup = (ev: any): void => {
     
     if (ev.target.className.indexOf('chat_item') === -1) existingGroup = ev.target.parentElement;
     else existingGroup = ev.target;
-    
-    console.log(existingGroup)
+
     
     const groupID: string = existingGroup.id;
 
@@ -91,7 +90,6 @@ const directToGroup = (ev: any): void => {
 
     const group: Group = loggedInUser.extractGroup(groupID);
 
-    console.log(existingGroup.id)
 
     //loggedInUser.addGroup(group);
     //localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
@@ -99,7 +97,10 @@ const directToGroup = (ev: any): void => {
     //localStorage.setItem('contactList',JSON.stringify(allContacts));
     //localStorage.setItem('contactId',JSON.stringify(existingGroup.id))
 
-    window.location.href = `../chat/chat.html?groupid=${existingGroup.id}`;
+    localStorage.setItem('currentGroup',JSON.stringify(group))
+
+
+   window.location.href = `../chat/chat.html?groupid=${existingGroup.id}`;
 }
 
 

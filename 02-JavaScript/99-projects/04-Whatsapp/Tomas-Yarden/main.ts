@@ -31,7 +31,6 @@ const openBottomModal = (event) => {
     }
 }
 
-
 class Contact {
     image:string
     name:string
@@ -63,7 +62,7 @@ render() {
       this.contacts.forEach((contact) => {
         htmlPattern += `<div class="contact-container">
         <img class="contact-container__contact-image" src="${contact.image}">
-        <div class="contact-container__info-container">
+        <div class="contact-container__info-container" onclick="showEditNav(event)">
              <div class="contact-container__info-container__inner-container">
                  <div class="contact-name">${contact.name}</div>
                  <div class="time">${contact.time}</div>
@@ -78,6 +77,20 @@ render() {
         console.error(error);
      }
   }
+
+  remove(id: string): void {
+    try {
+      const indexToRemove = this.contacts.findIndex(
+        (element) => element.id === id
+      );
+      this.contacts.splice(indexToRemove, 1);
+      this.render();
+      returnToMainNav(id)
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
 }
 
 let whatsAppContacts = new Contacts();
@@ -105,14 +118,36 @@ const handleSubmit = (event) => {
     
 }
 
-const handlDoubleClick = (event) => {
+const showEditNav = (event) => {
    try {
-    console.log('asdfasdf');
-    console.dir(event.target)
+    console.dir(whatsAppContacts)
+    const menu = document.querySelector("nav")
+    menu.hidden=true
+    const editMenu = document.querySelector("#editNav")
+    editMenu.attributes[1].value = "display: block"
+    
    } catch (error) {
-       console.error(error);
-       
+       console.error(error);     
    }
 
     
+}
+
+const returnToMainNav = (event) => {
+    try {
+        const editMenu = document.querySelector("#editNav")
+        editMenu.attributes[1].value = "display: none"
+        const menu = document.querySelector("nav")
+        menu.hidden=false
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const handleDelete = (id) => {
+    try {
+        whatsAppContacts.remove(id);
+    } catch (error) {
+        console.error(error);
+    }    
 }

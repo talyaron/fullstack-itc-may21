@@ -54,19 +54,18 @@ var directToGroup = function (ev) {
         existingGroup = ev.target.parentElement;
     else
         existingGroup = ev.target;
-    console.log(existingGroup);
     var groupID = existingGroup.id;
     /*const groupImg: string = existingGroup.querySelector('.chat__item--img').getAttribute('src');
     const groupNameContainer: HTMLElement = existingGroup.querySelector('.chat__item--name');
     const groupName: string = groupNameContainer.innerText;*/
     //const groupDetails: Array<string> = loggedInUser.extractGroup(groupID);
     var group = loggedInUser.extractGroup(groupID);
-    console.log(existingGroup.id);
     //loggedInUser.addGroup(group);
     //localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
     //allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
     //localStorage.setItem('contactList',JSON.stringify(allContacts));
     //localStorage.setItem('contactId',JSON.stringify(existingGroup.id))
+    localStorage.setItem('currentGroup', JSON.stringify(group));
     window.location.href = "../chat/chat.html?groupid=" + existingGroup.id;
 };
 var showNewGroupMenu = function (ev) {

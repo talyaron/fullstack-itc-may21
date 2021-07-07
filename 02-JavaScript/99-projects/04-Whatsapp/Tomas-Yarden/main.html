@@ -8,7 +8,9 @@
     <title>WhatsApp</title>
     <link rel="shortcut icon" href="https://web.whatsapp.com/favicon-64x64.ico" type="image/x-icon">
 </head>
+
 <body onmouseout="closeMenuModal(event)">
+    <!-- The main navbar -->
     <nav>
         <div class="top-container">
             <h1 class="headline">WhatsApp</h1>
@@ -35,41 +37,49 @@
                 <p class="calls">CALLS</p>
             </div>
         </div>
-        
     </nav>
-    
+    <!-- This is the onClick navbar for delete function -->
+    <nav id="editNav" style="display: none;">
+        <div class="top-container">
+                <div class="backArrow"><i onclick="returnToMainNav(event)" class="fas fa-arrow-left"></i></div>
+                <div class="number" style="font-weight: bold;">1</div>
+                <div class="pin"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle-fill" viewBox="0 0 16 16">
+                    <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z"/>
+                  </svg></div>
+                <div class="delete"><i class="fas fa-trash" onclick="handleDelete(event)"></i></div>
+                <div class="mute"><i class="fas fa-bell-slash"></i></div>
+                <div class="archive"><i class="fas fa-inbox"></i></div>
+                <i class="fas fa-ellipsis-v" onclick="openMenuModal(event)"></i>
+                <div class="top-modal">
+                    <ul>
+                        <li>New group</li>
+                        <li>New broadcast</li>
+                        <li>WhatsApp Web</li>
+                        <li>Starred messages</li>
+                        <li>Settings</li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="bottom-container">
+            <i class="fas fa-camera fa-lg"></i>
+            <div class="bottom-container__inner-container">
+                <p class="chats">CHATS</p>
+                <p class="status">STATUS</p>
+                <p class="calls">CALLS</p>
+            </div>
+        </div>
+    </nav>
+    <!-- Contacts section -->
     <main>
-       <div class="contact-container" >
-           <img class="contact-container__contact-image" src="/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/images/pp.jpeg">
-           <div class="contact-container__info-container" ondblclick="handlDoubleClick(event)">
-                <div class="contact-container__info-container__inner-container">
-                    <div class="contact-name">Tomas Leon Patlayan</div>
-                    <div class="time">12:14</div>
-                </div>
-                
-                <p class="last-message"><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7"/></svg></span>¡Hóla pepe! ¿Quieres comer algo?? 🤤</p>
-            </div>
-           </div>
-       </div>
-       <svg class="new-message" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50"><path fill="white" d="M19.005 3.175H4.674C3.642 3.175 3 3.789 3 4.821V21.02l3.544-3.514h12.461c1.033 0 2.064-1.06 2.064-2.093V4.821c-.001-1.032-1.032-1.646-2.064-1.646zm-4.989 9.869H7.041V11.1h6.975v1.944zm3-4H7.041V7.1h9.975v1.944z"></path></svg>    
-       <div class="contact-container">
-           <img class="contact-container__contact-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStpy5AJ7T5ogRTjgXmakPRf0SaxtG5fA-7YtfI7aqZKjBCSi7R" alt="contact-image">
-           <div class="contact-container__info-container">
-                <div class="contact-container__info-container__inner-container">
-                    <div class="contact-name">Johny</div>
-                    <div class="time">08:39</div>
-                </div>
-                <p class="last-message"><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7"/></svg></span>Thanks, it was nice</p>
-            </div>
-           </div>
-       </div>
        <div class="saved-contacts-root"></div>
        <svg onclick="openBottomModal(event)" class="new-message" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50"><path fill="white" d="M19.005 3.175H4.674C3.642 3.175 3 3.789 3 4.821V21.02l3.544-3.514h12.461c1.033 0 2.064-1.06 2.064-2.093V4.821c-.001-1.032-1.032-1.646-2.064-1.646zm-4.989 9.869H7.041V11.1h6.975v1.944zm3-4H7.041V7.1h9.975v1.944z"></path></svg>
        <form onsubmit="handleSubmit(event)" class="add-contact">
            <p class="add-contact__headline">Add contact:</p>
-           <input type="text" name="image" id="image" placeholder="Image URL">
-           <input type="text" name="name" id="name" placeholder="Name">
-           <input type="text" name="message" id="message" placeholder="Message">
+           <input type="text" name="image" id="image" placeholder="Image URL" required>
+           <input type="text" name="name" id="name" placeholder="Name" required>
+           <input type="text" name="message" id="message" placeholder="Message" required>
            <input type="time" name="time" id="time" value="12:00">
            <input type="submit" value="Add" id="submit">
        </form> 

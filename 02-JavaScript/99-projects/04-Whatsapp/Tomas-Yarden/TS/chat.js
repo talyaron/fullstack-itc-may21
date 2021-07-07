@@ -31,7 +31,6 @@ var ChatProfile = /** @class */ (function () {
     }
     // arrayBot:Array<Bot> =[];
     ChatProfile.prototype.add = function (add) {
-        console.log('new chat');
         this.arrayChat.push(add);
         this.renderUser();
         // this.respondBot();
