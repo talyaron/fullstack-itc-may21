@@ -29,6 +29,7 @@ const render: HTMLElement = document.querySelector(
   class Contacts {
     contacts: Array<ContactGenerator> = [];
     contactsFilter: Array<ContactGenerator> = [];
+    
   
     add(add: ContactGenerator): void {
       this.contacts.push(add);
@@ -115,21 +116,21 @@ const render: HTMLElement = document.querySelector(
   }
 
 
-  const handleContact = (ev) => {
-    ev.preventDefault();
+//   const handleContact = (ev) => {
+//     ev.preventDefault();
 
-    const contactName: string = ev.target.elements.contactName.value;
-    const image: string = ev.target.elements.image.value;
-    const phone: number = ev.target.elements.phone.value;
+//     const contactName: string = ev.target.elements.contactName.value;
+//     const image: string = ev.target.elements.image.value;
+//     const phone: number = ev.target.elements.phone.value;
 
-    const newC = new ContactGenerator(contactName, image, phone);
-    contacts.push(newC);
-    localStorage.setItem("contactsData", JSON.stringify(contacts));
-    renderContacts();
-    contactsFilter.push(newC);
+//     const newC = new ContactGenerator(contactName, image, phone);
+//     contacts.push(newC);
+//     localStorage.setItem("contactsData", JSON.stringify(contacts));
+//     renderContacts();
+//     contactsFilter.push(newC);
  
-    console.log(newC)
-}
+//     console.log(newC)
+// }
 
   
   // You have to either pass the contactid or the contact name, and then on the other page use the contact id to find the contact in the list, and display the name. Need to get contacts list on second page by setting it on local storage.

@@ -5,9 +5,13 @@ var inputName = document.querySelector('#name');
 var inputPhone = document.querySelector('#phone');
 var btnModalInput = document.querySelector('.btn-modal');
 var boardRoot = document.querySelector('#board');
-btnModal.addEventListener('click', openModal);
-function openModal() {
+var faPlus = document.querySelector('.fa-plus');
+faPlus.addEventListener('click', function (e) { return openModal(e); });
+function openModal(e) {
+    e.preventDefault();
     bgModal.classList.add('bg-active');
+    console.log("hi");
+    //set
 }
 modalClose.addEventListener('click', closeModal);
 function closeModal() {

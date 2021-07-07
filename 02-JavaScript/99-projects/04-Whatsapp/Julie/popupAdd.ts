@@ -5,11 +5,14 @@ const inputName = (<HTMLInputElement>document.querySelector('#name'))
 const inputPhone = (<HTMLInputElement>document.querySelector('#phone'))
 const btnModalInput = (<HTMLButtonElement>document.querySelector('.btn-modal'))
 const boardRoot:HTMLElement = document.querySelector('#board')
+const faPlus = (<HTMLButtonElement>document.querySelector('.fa-plus'))
+faPlus.addEventListener('click', (e)=> openModal(e))
 
-btnModal.addEventListener('click', openModal)
-
-function openModal(){
+function openModal(e){
+    e.preventDefault()
     bgModal.classList.add('bg-active')
+    console.log("hi")   
+    //set
 }
 
 modalClose.addEventListener('click', closeModal)
