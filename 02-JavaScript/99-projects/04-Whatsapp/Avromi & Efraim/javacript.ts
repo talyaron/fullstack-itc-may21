@@ -256,7 +256,7 @@ closeForm()
 
 
 // the one thing we couldnt get to work how we wanted :((((
-let x = false
+
 function editButtonRevealAndHide() {
     try {
         const editButton: HTMLElement = document.querySelector(".header__edit");
