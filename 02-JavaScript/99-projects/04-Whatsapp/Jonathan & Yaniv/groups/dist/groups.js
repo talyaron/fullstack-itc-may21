@@ -1,3 +1,10 @@
+// YA this is newww ************************************************* start 
+var Message = /** @class */ (function () {
+    function Message() {
+    }
+    return Message;
+}());
+// YA this is newww ************************************************* end
 var Group = /** @class */ (function () {
     function Group(groupId, groupImg, groupName, groupUsers) {
         this.groupMsgs = [];

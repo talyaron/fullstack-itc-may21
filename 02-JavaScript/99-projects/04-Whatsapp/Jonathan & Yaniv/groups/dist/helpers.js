@@ -1,5 +1,3 @@
-//JN
-var messageChat = JSON.parse(localStorage.getItem("messageChat"));
 var pageTitle = document.querySelector('title');
 pageTitle.innerText = loggedInUser.userName + "'s chats";
 var profileImg = document.querySelector('.controls__item--profile_img');

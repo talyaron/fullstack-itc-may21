@@ -1,3 +1,18 @@
+// YA this is newww ************************************************* start 
+class Message {
+    content: string;
+    userPhone: string; // this is the phone number // localstorage tiene los dos celulares, ver como se conectan con css
+    //para un lado y el otro para el otro lado con este id
+    dateMsg: string;
+    groupID: string;
+    msgID: string;
+    lastMessageName: string;
+    timeMsgSec : number;
+    contactPhone:string;
+}
+// YA this is newww ************************************************* end
+
+
 
 class Group {
     groupId: string; // userPhone or "group" + Math.random().toString(16).slice(2);

@@ -1,5 +1,3 @@
-//JN
-const messageChat = JSON.parse(localStorage.getItem("messageChat"))
 
 
 const pageTitle: HTMLElement = document.querySelector('title');
