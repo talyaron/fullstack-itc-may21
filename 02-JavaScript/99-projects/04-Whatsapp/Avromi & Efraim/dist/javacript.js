@@ -234,6 +234,7 @@ function closeForm() {
     }
 }
 closeForm();
+// the one thing we couldnt get to work how we wanted :((((
 var x = false;
 function editButtonRevealAndHide() {
     try {
