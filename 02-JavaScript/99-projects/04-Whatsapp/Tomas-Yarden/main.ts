@@ -53,7 +53,7 @@ render():void {
         console.error(error);
      }
   }
-
+//Removing a contact - works :)
   remove(id:string):void {
     try {
       const indexToRemove:number = this.contacts.findIndex(
@@ -69,22 +69,20 @@ render():void {
         console.error(error);
     }
   }
+  //Editing a contact - does not work ):
   edit(id:string):void {
       try {
         const indexToEdit:number = this.contacts.findIndex(
             (element) => element.id === id
         )
-        console.dir(this.contacts[indexToEdit]);
+        console.log(indexToEdit);
         
-        // const editedName:string = this.contacts.
         
         this.render();
         returnToMainNav(id)
         let contactSerialized:string = JSON.stringify(whatsAppContacts)
         localStorage.setItem("whatsAppContacts", contactSerialized)
         let contactDeserialized:string = JSON.parse(localStorage.getItem("whatsAppContacts"))
-        
-
       } catch (error) {
           console.error(error);
           
@@ -226,7 +224,7 @@ const showEditNav = (event:MouseEvent):void => {
 //Redirection to the chat when clicking the info section of a contact:
 const goToChat = (event:MouseEvent):void => {
     try {
-        window.location.href = "/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/index.html"   
+        window.location.href = "./index.html"   
     } catch (error) {
         console.error(error);
     }

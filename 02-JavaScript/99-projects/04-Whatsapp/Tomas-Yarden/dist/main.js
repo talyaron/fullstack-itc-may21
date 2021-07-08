@@ -34,6 +34,7 @@ var ContactList = /** @class */ (function () {
             console.error(error);
         }
     };
+    //Removing a contact - works :)
     ContactList.prototype.remove = function (id) {
         try {
             var indexToRemove = this.contacts.findIndex(function (element) { return element.id === id; });
@@ -48,11 +49,11 @@ var ContactList = /** @class */ (function () {
             console.error(error);
         }
     };
+    //Editing a contact - does not work ):
     ContactList.prototype.edit = function (id) {
         try {
             var indexToEdit = this.contacts.findIndex(function (element) { return element.id === id; });
-            console.dir(this.contacts[indexToEdit]);
-            // const editedName:string = this.contacts.
+            console.log(indexToEdit);
             this.render();
             returnToMainNav(id);
             var contactSerialized = JSON.stringify(whatsAppContacts);
@@ -187,7 +188,7 @@ var returnToMainNav = function (event) {
 //Redirection to the chat when clicking the info section of a contact:
 var goToChat = function (event) {
     try {
-        window.location.href = "/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/index.html";
+        window.location.href = "./index.html";
     }
     catch (error) {
         console.error(error);
