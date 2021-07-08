@@ -45,10 +45,10 @@ function renderOnDOM() {
         var groupForChat = JSON.parse(localStorage.getItem("groupForChat"));
         console.log(contactForChat);
         var headerContact = document.querySelector(".header_chat");
-        if (contactForChat) {
+        if (contactForChat && !groupForChat) {
             headerContact.insertAdjacentHTML('afterbegin', "<div class=\"info_chat\"><img class=\"header_img_profile\"\n      src=\"" + contactForChat.profileImg + "\"\n      alt=\"\"><h1 class=\"title_chat\">" + contactForChat.name + "</h1><a href=\"index.html\"><i class=\"far fa-arrow-alt-circle-left fa-4x arrow_icon\"></i></a></div>");
         }
-        else if (groupForChat) {
+        if (groupForChat && !contactForChat) {
             headerContact.insertAdjacentHTML('afterbegin', "<div class=\"info_chat\"><img class=\"header_img_profile\"\n      src=\"" + groupForChat.groupIMG + "\"\n      alt=\"\"><h1 class=\"title_chat\">" + groupForChat.groupName + "</h1><a href=\"index.html\"><i class=\"far fa-arrow-alt-circle-left fa-4x arrow_icon\"></i></a></div>");
         }
     }

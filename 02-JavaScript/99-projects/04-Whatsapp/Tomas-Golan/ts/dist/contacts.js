@@ -35,7 +35,7 @@ function render(arr) {
         if (!renderGroup)
             return;
         renderGroup.forEach(function (element) {
-            html_1 += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.groupIMG + "\" alt=\"\">\n            <a href=\"chat.html\" onclick='idContactForChat(\"" + element.id + "\")'>\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.groupName + "</h3>\n                    <p>" + (element.contactsOfGroup + " ") + "</p>\n                </div>\n            </a>\n            <i onclick='deleteGroup(\"" + element.id + "\")' class=\"fas fa-trash fa-lg contacts_icon\"></i>\n        </div>";
+            html_1 += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.groupIMG + "\" alt=\"\">\n            <a href=\"chat.html\" onclick='idGroupForChat(\"" + element.id + "\")'>\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.groupName + "</h3>\n                    <p>" + (element.contactsOfGroup + " ") + "</p>\n                </div>\n            </a>\n            <i onclick='deleteGroup(\"" + element.id + "\")' class=\"fas fa-trash fa-lg contacts_icon\"></i>\n        </div>";
         });
         containerData.innerHTML = html_1;
     }
