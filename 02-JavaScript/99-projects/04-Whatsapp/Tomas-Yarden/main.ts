@@ -1,4 +1,4 @@
-/*This is the main WhatsApp page. 
+/*This is the main WhatsApp page.
 Features:
 Top modal to simulate the WhatsApp menu; 
 search area (for now, unfunctional) navbar;
@@ -27,7 +27,7 @@ class Contact {
     }
 }
 
-class Contacts {
+class ContactList {
     contacts: Array<Contact> = []
 
 //Adding a new contact
@@ -54,7 +54,7 @@ render():void {
      }
   }
 
-  remove(id: string): void {
+  remove(id:string):void {
     try {
       const indexToRemove:number = this.contacts.findIndex(
         (element) => element.id === id
@@ -69,9 +69,30 @@ render():void {
         console.error(error);
     }
   }
+  edit(id:string):void {
+      try {
+        const indexToEdit:number = this.contacts.findIndex(
+            (element) => element.id === id
+        )
+        console.dir(this.contacts[indexToEdit]);
+        
+        // const editedName:string = this.contacts.
+        
+        this.render();
+        returnToMainNav(id)
+        let contactSerialized:string = JSON.stringify(whatsAppContacts)
+        localStorage.setItem("whatsAppContacts", contactSerialized)
+        let contactDeserialized:string = JSON.parse(localStorage.getItem("whatsAppContacts"))
+        
+
+      } catch (error) {
+          console.error(error);
+          
+      }
+  }
 }
 
-let whatsAppContacts = new Contacts()
+let whatsAppContacts = new ContactList()
 
 //Adding a new contact:
 const handleSubmit = (event:any):void => {
@@ -118,6 +139,16 @@ const handleDelete = (id:string):void => {
     }    
 }
 
+const handleEdit = (id:string):void => {
+try {
+    if (whatsAppContacts === null) {
+        throw new Error("Must have the contacts array!")}
+    whatsAppContacts.edit(id)
+} catch (error) {
+    console.error(error);
+    
+}
+}
 
 /* Modal and helper functions */
 
