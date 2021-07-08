@@ -96,6 +96,7 @@ main .contact-container__contact-image {
   border-radius: 50%;
   margin-right: 0.2em;
   object-fit: cover;
+  max-width: 50px;
 }
 main .contact-container__info-container {
   flex-flow: column nowrap;
@@ -172,6 +173,10 @@ main .contact-container__info-container .last-message {
 }
 
 .fa-trash::before {
+  color: rgba(255, 255, 255, 0.747);
+}
+
+.fa-edit::before {
   color: rgba(255, 255, 255, 0.747);
 }
 

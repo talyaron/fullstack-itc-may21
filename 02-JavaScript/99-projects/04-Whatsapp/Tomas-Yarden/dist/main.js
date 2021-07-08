@@ -16,12 +16,12 @@ var Contact = /** @class */ (function () {
     }
     return Contact;
 }());
-var Contacts = /** @class */ (function () {
-    function Contacts() {
+var ContactList = /** @class */ (function () {
+    function ContactList() {
         this.contacts = [];
     }
     //Adding a new contact
-    Contacts.prototype.render = function () {
+    ContactList.prototype.render = function () {
         try {
             var rootDiv = document.querySelector(".saved-contacts-root");
             var htmlPattern_1 = "";
@@ -34,7 +34,7 @@ var Contacts = /** @class */ (function () {
             console.error(error);
         }
     };
-    Contacts.prototype.remove = function (id) {
+    ContactList.prototype.remove = function (id) {
         try {
             var indexToRemove = this.contacts.findIndex(function (element) { return element.id === id; });
             this.contacts.splice(indexToRemove, 1);
@@ -48,9 +48,24 @@ var Contacts = /** @class */ (function () {
             console.error(error);
         }
     };
-    return Contacts;
+    ContactList.prototype.edit = function (id) {
+        try {
+            var indexToEdit = this.contacts.findIndex(function (element) { return element.id === id; });
+            console.dir(this.contacts[indexToEdit]);
+            // const editedName:string = this.contacts.
+            this.render();
+            returnToMainNav(id);
+            var contactSerialized = JSON.stringify(whatsAppContacts);
+            localStorage.setItem("whatsAppContacts", contactSerialized);
+            var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"));
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
+    return ContactList;
 }());
-var whatsAppContacts = new Contacts();
+var whatsAppContacts = new ContactList();
 //Adding a new contact:
 var handleSubmit = function (event) {
     try {
@@ -85,6 +100,17 @@ var handleDelete = function (id) {
             throw new Error("Must have the contacts array!");
         }
         whatsAppContacts.remove(id);
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+var handleEdit = function (id) {
+    try {
+        if (whatsAppContacts === null) {
+            throw new Error("Must have the contacts array!");
+        }
+        whatsAppContacts.edit(id);
     }
     catch (error) {
         console.error(error);
