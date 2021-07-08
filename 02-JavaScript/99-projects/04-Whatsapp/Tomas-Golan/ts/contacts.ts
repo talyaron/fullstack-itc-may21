@@ -65,7 +65,7 @@ function render(arr) {
             html += `
         <div class="contacts_chat">
             <img class="contacts_img" src="${element.groupIMG}" alt="">
-            <a href="chat.html" onclick='idContactForChat("${element.id}")'>
+            <a href="chat.html" onclick='idGroupForChat("${element.id}")'>
                 <div class="contacts_info">
                     <h3 class="contacts_name">${element.groupName}</h3>
                     <p>${element.contactsOfGroup + " "}</p>
