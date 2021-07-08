@@ -1,0 +1,74 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  /*cover the all things*/
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  visibility: hidden;
+  /*to see nothing at the beginning*/
+  opacity: 0;
+  -webkit-transition: visibility 0s, opacity 2s;
+  transition: visibility 0s, opacity 2s;
+}
+
+.bg-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal {
+  position: relative;
+  background-color: white;
+  width: 30%;
+  height: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 10px;
+}
+
+.modal .btn-modal {
+  padding: 0.5rem;
+  background-color: lightslategray;
+  color: white;
+  border-radius: 12%;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.modal span {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+/*# sourceMappingURL=popUp.css.map */

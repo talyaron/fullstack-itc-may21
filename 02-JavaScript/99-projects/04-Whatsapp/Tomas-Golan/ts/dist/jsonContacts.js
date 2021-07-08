@@ -24,7 +24,7 @@ var contacts = [
         "id": Math.random().toString(16).slice(2)
     },
     {
-        "name": "Jonathan Nisembaum",
+        "name": "Jonathan Nisen",
         "phone": 1130564379,
         "profileImg": "img/joni.jpg",
         "id": Math.random().toString(16).slice(2)
