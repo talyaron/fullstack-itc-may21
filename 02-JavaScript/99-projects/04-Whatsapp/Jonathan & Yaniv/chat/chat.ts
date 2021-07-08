@@ -188,7 +188,7 @@ class ContactList {
         this.allContacts = allContacts;
     }
 
-    findContactIndex(contactPhone) {
+    findContactIndex(contactPhone: string) {
         try {
             const contactIndex = this.allContacts.findIndex(contactItem => contactItem.userPhone === contactPhone);
             return contactIndex;
@@ -197,6 +197,8 @@ class ContactList {
         }
     }
 }
+
+const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 
 const loggedInUser: User = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups,JSON.parse(localStorage.getItem("currentUser")).userGroups)
 
@@ -224,8 +226,8 @@ function sendMessage() {
         elementMessage.value = '';
         
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-        contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-        localStorage.setItem('contactList', JSON.stringify(contactList));
+        allContacts.allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        localStorage.setItem('contactList', JSON.stringify(allContacts));
 
         
     } catch (er) {
@@ -332,9 +334,9 @@ class ContactMessage {
     userImg: string;
     userName: string;
     userPhone: string;
-    userGroups: Array<string>; //list of groups
+    userGroups: Array<Group>;
 
-    constructor(userImg: string, userName: string, userPhone: string, userGroups: Array<string>) {
+    constructor(userImg: string, userName: string, userPhone: string, userGroups: Array<Group>) {
         this.userImg = userImg;
         this.userName = userName;
         this.userPhone = userPhone;
@@ -361,27 +363,20 @@ class ContactMessage {
     }
 }
 
-const contactChat = JSON.parse(localStorage.getItem("contactList"));
-const contactList: ContactList = JSON.parse(localStorage.getItem("contactId"));
+const contactId = JSON.parse(localStorage.getItem("contactId"));
 const isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"));
 const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
 
+console.log(isChatOrGroup);
 if (isChatOrGroup === 0) {
 
-    let chatUser = Object.values(Object.values(contactChat)[1]);
+    let chatUser = allContacts.allContacts[allContacts.findContactIndex(contactId)];
 
-    chatUser.find(function (chat) {
-        if (contactList === chat.userPhone) {
-            const contactUser = new ContactMessage(chat.userImg, chat.userName, chat.userPhone, chat.userGroups);
-            contactUser.renderUserChat();
-        }
-    });
+    const contactUser = new ContactMessage(chatUser.userImg, chatUser.userName, chatUser.userPhone, chatUser.userGroups);
+    contactUser.renderUserChat();
 
 } else {
-
     const currentGroup = JSON.parse(localStorage.getItem("currentGroup"));
-    
     const groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser);
-
     groupChat.renderGroupChat();
 }
