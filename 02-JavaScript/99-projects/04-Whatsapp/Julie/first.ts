@@ -37,9 +37,10 @@ class Contacts {
   contactsFilter: Array<ContactGenerator> = [];
 
 
-  add(add: ContactGenerator): void {
+  add(add: ContactGenerator, joni2:Array<any>): void {
+    this.contacts = joni2
     this.contacts.push(add);
-    this.renderContacts();
+    
     this.contactsFilter.push(add);
     localStorage.setItem('contactsData', JSON.stringify(this.contacts));
 
@@ -60,8 +61,8 @@ class Contacts {
 
   renderContacts() {
     let html: string = "";
-
-    this.contacts.forEach((element) => {
+    const joni = JSON.parse(localStorage.getItem('contactsData'))
+    joni.forEach((element) => {
       html += `<div class="containerChat">
                     <div class="chat1" onclick=redirect("${element.contactId}")>
                       <img src="${element.image}" alt="" class="chat1__photo"> 
@@ -109,7 +110,6 @@ function handleKeyUp() {
 
 function redirect(contactId) {
   try {
-    localStorage.setItem("contactsData", JSON.stringify(contacts.contacts));
     localStorage.setItem("contactID", contactId);
 
     window.location.href = `second.html?id=${contactId}`;
@@ -120,7 +120,7 @@ function redirect(contactId) {
     console.error(error);
   }
 }
-
+console.log(contacts)
 const handleSubmit = (event) => {
   event.preventDefault();
   try {
@@ -131,9 +131,18 @@ const handleSubmit = (event) => {
     if (phone === null) throw Error("Put a number");
 
     const generator = new ContactGenerator(contactName, image, phone);
-    contacts.add(generator);
+
+    const joni2 = JSON.parse(localStorage.getItem('contactsData'))
+
+    contacts.add(generator, joni2);
+
+    
+    console.log("a",joni2)
+
     contacts.renderContacts();
-    cerrar();
+    console.log(contacts)
+
+    closeModal();
   } catch (error) {
     alert(error);
   }
