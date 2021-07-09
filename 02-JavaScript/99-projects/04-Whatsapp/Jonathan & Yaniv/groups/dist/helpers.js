@@ -20,53 +20,71 @@ var newChatOptions = document.querySelector('.options');
 var existingChatList = document.querySelector('.chats');
 newChatOptions.addEventListener('click', function (ev) { return directToChat(ev); });
 existingChatList.addEventListener('click', function (ev) { return directToGroup(ev); });
+existingChatList.addEventListener('click', function (ev) { return deleteGroup(ev); });
 newChatOptions.addEventListener('click', function (ev) { return showNewGroupMenu(ev); });
 var directToChat = function (ev) {
-    var contactToChat;
-    if ((ev.target.className !== 'options__item options__item--contact') && (ev.target.className.indexOf('new_contact_') === -1))
-        return;
-    if (ev.target.className.indexOf('new_contact_') !== -1)
-        contactToChat = ev.target.parentElement;
-    else
-        contactToChat = ev.target;
-    var contactToChatPhone = contactToChat.id;
-    var contactToChatImg = contactToChat.querySelector('.new_contact_img').getAttribute('src');
-    var contactToChatNameContainer = contactToChat.querySelector('.new_contact_name');
-    var contactToChatName = contactToChatNameContainer.innerText;
-    var chatUsers = [loggedInUser.userPhone, contactToChat.id];
-    var group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
-    var isNewGroup = loggedInUser.addGroupIfNew(group);
-    if (isNewGroup) {
-        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-        allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-        localStorage.setItem('contactList', JSON.stringify(allContacts));
-        localStorage.setItem('contactId', JSON.stringify(contactToChat.id));
-        localStorage.setItem('IsChatOrGroup', JSON.stringify(0));
+    try {
+        var contactToChat = void 0;
+        if ((ev.target.className !== 'options__item options__item--contact') && (ev.target.className.indexOf('new_contact_') === -1))
+            return;
+        if (ev.target.className.indexOf('new_contact_') !== -1)
+            contactToChat = ev.target.parentElement;
+        else
+            contactToChat = ev.target;
+        var contactToChatPhone = contactToChat.id;
+        var contactToChatImg = contactToChat.querySelector('.new_contact_img').getAttribute('src');
+        var contactToChatNameContainer = contactToChat.querySelector('.new_contact_name');
+        var contactToChatName = contactToChatNameContainer.innerText;
+        var chatUsers = [loggedInUser.userPhone, contactToChat.id];
+        var group = new Group(contactToChatPhone, contactToChatImg, contactToChatName, chatUsers);
+        var isNewGroup = loggedInUser.addGroupIfNew(group);
+        if (isNewGroup) {
+            localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+            allContacts.allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+            localStorage.setItem('contactList', JSON.stringify(allContacts));
+            localStorage.setItem('contactId', JSON.stringify(contactToChat.id));
+            localStorage.setItem('IsChatOrGroup', JSON.stringify(0));
+        }
+        window.location.href = "../chat/chat.html?groupid=" + contactToChat.id;
     }
-    window.location.href = "../chat/chat.html?groupid=" + contactToChat.id;
+    catch (er) {
+        console.error(er);
+    }
 };
 var directToGroup = function (ev) {
-    var existingGroup;
-    if ((ev.target.className !== 'chats__item chat') && (ev.target.className.indexOf('chat_item') !== -1))
-        return; //CHECK
-    if (ev.target.className.indexOf('chat_item') === -1)
-        existingGroup = ev.target.parentElement;
-    else
-        existingGroup = ev.target;
-    var groupID = existingGroup.id;
-    /*const groupImg: string = existingGroup.querySelector('.chat__item--img').getAttribute('src');
-    const groupNameContainer: HTMLElement = existingGroup.querySelector('.chat__item--name');
-    const groupName: string = groupNameContainer.innerText;*/
-    //const groupDetails: Array<string> = loggedInUser.extractGroup(groupID);
-    var group = loggedInUser.extractGroup(groupID);
-    //loggedInUser.addGroup(group);
-    //localStorage.setItem('currentUser',JSON.stringify(loggedInUser));
-    //allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-    //localStorage.setItem('contactList',JSON.stringify(allContacts));
-    //localStorage.setItem('contactId',JSON.stringify(existingGroup.id))
-    localStorage.setItem('currentGroup', JSON.stringify(group));
-    localStorage.setItem('IsChatOrGroup', JSON.stringify(1));
-    window.location.href = "../chat/chat.html?groupid=" + existingGroup.id;
+    try {
+        var existingGroup = void 0;
+        if ((ev.target.className === 'chat__item chat__item--delete fas fa-trash') ||
+            ((ev.target.className !== 'chats__item chat') && (ev.target.className.indexOf('chat_item') !== -1)))
+            return;
+        if (ev.target.className.indexOf('chat_item') === -1)
+            existingGroup = ev.target.parentElement;
+        else
+            existingGroup = ev.target;
+        var groupID = existingGroup.id;
+        var group = loggedInUser.extractGroup(groupID);
+        localStorage.setItem('currentGroup', JSON.stringify(group));
+        localStorage.setItem('IsChatOrGroup', JSON.stringify(1));
+        window.location.href = "../chat/chat.html?groupid=" + existingGroup.id;
+    }
+    catch (er) {
+        console.error(er);
+    }
+};
+var deleteGroup = function (ev) {
+    try {
+        if (ev.target.className !== 'chat__item chat__item--delete fas fa-trash')
+            return;
+        var groupToDelete = ev.target.parentElement;
+        var groupID = groupToDelete.id;
+        loggedInUser.deleteGroup(groupID);
+        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+        allContacts.allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        localStorage.setItem('contactList', JSON.stringify(allContacts));
+    }
+    catch (er) {
+        console.error(er);
+    }
 };
 var showNewGroupMenu = function (ev) {
     if ((ev.target.className !== 'options__item options__item--group') && (ev.target.id.indexOf('new_group_') === -1))
@@ -99,7 +117,7 @@ function createNewGroup(ev) {
         var group = new Group(groupId, groupImg, groupName, groupUsers_1);
         loggedInUser.addGroup(group);
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-        allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        allContacts.allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
         localStorage.setItem('contactList', JSON.stringify(allContacts));
         hideNewGroupMenu(ev);
         hideNewChatMenu(ev);

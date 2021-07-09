@@ -44,11 +44,11 @@ function renderOnDOM() {
         console.log(contactForChat);
         const headerContact = document.querySelector(".header_chat");
 
-        if (contactForChat) {
+        if (contactForChat && !groupForChat) {
             headerContact.insertAdjacentHTML('afterbegin', `<div class="info_chat"><img class="header_img_profile"
       src="${contactForChat.profileImg}"
       alt=""><h1 class="title_chat">${contactForChat.name}</h1><a href="index.html"><i class="far fa-arrow-alt-circle-left fa-4x arrow_icon"></i></a></div>`);
-        } else if (groupForChat) {
+        } if (groupForChat && !contactForChat) {
             headerContact.insertAdjacentHTML('afterbegin', `<div class="info_chat"><img class="header_img_profile"
       src="${groupForChat.groupIMG}"
       alt=""><h1 class="title_chat">${groupForChat.groupName}</h1><a href="index.html"><i class="far fa-arrow-alt-circle-left fa-4x arrow_icon"></i></a></div>`);
