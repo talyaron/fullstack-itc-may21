@@ -1,5 +1,5 @@
 interface Message {
-    message: any,
+    message: any, //YS: Why any and not string?
     timeStamp: Date
 
 }
@@ -23,7 +23,7 @@ class Contact {
 
 class Contacts {
     contacts: Array<Contact> = [];
-    constructor() {
+    constructor() {   //YS: Empty constuctor? Your contacts array should go inside.
 
     }
 
@@ -92,18 +92,18 @@ function getImgData() {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(files);
       fileReader.addEventListener("load", function () {
-        image = this.result 
+        image = this.result //YS: Here you should return image
       });    
     }
   })}catch (e) {
     console.error(e)
 }}
 
-  getImgData()
+getImgData()
 function handleSubmit(ev): any {
     ev.preventDefault();
     try {
-        let imgUrl = image
+        let imgUrl = image //YS: Here you should use your getImgData which returns the image: < let imgUrl = getImageData() >
        
         const name: string = ev.target.children.name.value;
         const phoneNumber: number = ev.target.children.number.value;
@@ -112,7 +112,7 @@ function handleSubmit(ev): any {
             throw new Error('No holder!')
         }
         contacts.addContact(new Contact(name, imgUrl, phoneNumber));
-        contacts.renderContacts(holder);
+        contacts.renderContacts(holder); //YS: Why are you passing the holder as a parameter, it is uncessary. You can just select it in your renderContacts function. 
         localStorage.setItem('contacts', JSON.stringify(contacts.contacts))
         document.getElementById("myForm").style.display = "none";
         ev.target.reset();
@@ -139,7 +139,7 @@ const deleteContact = (conatctID: string) => {
 };
 
 
-const addToDomWithArray = (searchResults: Array<any>) => {
+const addToDomWithArray = (searchResults: Array<any>) => { //Why do you have the same function as renderContacts? DRY
     try {
         const holder: HTMLElement = document.querySelector('.holder');
         if (!holder) {
@@ -150,9 +150,9 @@ const addToDomWithArray = (searchResults: Array<any>) => {
         if (searchResults.length === 0) { holder.innerHTML = 'no results available'; return; }
         searchResults.forEach((contact) => {
             const index: number = parseInt(contact.chats.length - 1)
-            const timeHoursAndMinutes = new Date (contact.chats[index].timeStamp)
+            const timeHoursAndMinutes = new Date (contact.chats[index].timeStamp)  //YS; You could have made this into a function since its the second time you are using it.
             const hrs:number = timeHoursAndMinutes.getHours()
-            let min:any = timeHoursAndMinutes.getMinutes()
+            let min:any = timeHoursAndMinutes.getMinutes() 
             if (min < 10) {
                 min = `0${min}`
             }
@@ -204,7 +204,8 @@ const handleKeyUp = (ev: any) => {
         let finalSearchArrayResults: Array<Contact> = results.concat(searchMessages)
         var obj = {};
         for ( var i=0; i < finalSearchArrayResults.length; i++ )
-            obj[finalSearchArrayResults[i]['name']] = finalSearchArrayResults[i];
+            obj[finalSearchArrayResults[i]['name']] = finalSearchArrayResults[i];   /* YS: You are over complicating yourself here. Not sure why you did all of this -  also causing problems in search.
+                                                                                        All you needed was the findContactsSearch. Also - please dont use var keyword. */
             finalSearchArrayResults= new Array();
         for ( var key in obj )
         finalSearchArrayResults.push(obj[key]);
@@ -217,7 +218,7 @@ const handleKeyUp = (ev: any) => {
     }
 }
 
-function renderContactsFromLocalStorage() {
+function renderContactsFromLocalStorage() { //YS: This is your third render function - should be just 1. 
     try {
         window.addEventListener('load', ()=>{
         const render: Array<any> = JSON.parse(localStorage.getItem('contacts'))
@@ -234,7 +235,7 @@ renderContactsFromLocalStorage()
 
 function openForm() {
     try {
-        const formOpen: HTMLElement = document.querySelector(".header__new-convo");
+        const formOpen: HTMLElement = document.querySelector(".header__new-convo"); //YS: It is not intuitive that this is the button to add a new contact
         formOpen.addEventListener('click', ()=>{
         document.getElementById("myForm").style.display = "block";
     })} catch (e) {

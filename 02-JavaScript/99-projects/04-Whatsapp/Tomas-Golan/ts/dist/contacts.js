@@ -16,7 +16,7 @@ var Contact = /** @class */ (function () {
 // FUNCTIONS
 var addLocalContacts = function (localChat) {
     localChat.forEach(function (contact) {
-        var add = new Contact(contact.name, contact.phone, contact.profileImg);
+        var add = new Contact(contact.name, contact.phone, contact.profileImg); //YS: Should change the variable name to 'contact' or something other than 'add'.
         allContacts.push(add);
         allContactsForSearch.push(add);
         localStorage.setItem("contactos", JSON.stringify(allContacts));
@@ -26,10 +26,12 @@ var addLocalContacts = function (localChat) {
 addLocalContacts(contacts);
 function render(arr) {
     try {
-        var containerData = document.querySelector(".contacts");
+        var containerData = document.querySelector(".contacts"); /* YS: Your <a> tags link (href) is not 100% correct. Should be: chat.html?id={element.id}
+                                                                                      you should pass the ID and on the second page grab the id from the URL and find the contact in the contacts
+                                                                                      list using the id (like you did). */
         var html_1 = "";
         arr.forEach(function (element) {
-            html_1 += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.profileImg + "\" alt=\"\">\n            <a href=\"chat.html\" onclick='idContactForChat(\"" + element.id + "\")'>\n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.name + "</h3>\n                    <p>" + element.phone + "</p>\n                </div>\n            </a>\n            <i onclick='deleteChat(\"" + element.id + "\")' class=\"fas fa-trash fa-lg contacts_icon\"></i>\n        </div>";
+            html_1 += "\n        <div class=\"contacts_chat\">\n            <img class=\"contacts_img\" src=\"" + element.profileImg + "\" alt=\"\">\n            <a href=\"chat.html\" onclick='idContactForChat(\"" + element.id + "\")'>    \n                <div class=\"contacts_info\">\n                    <h3 class=\"contacts_name\">" + element.name + "</h3>\n                    <p>" + element.phone + "</p>\n                </div>\n            </a>\n            <i onclick='deleteChat(\"" + element.id + "\")' class=\"fas fa-trash fa-lg contacts_icon\"></i>\n        </div>";
         });
         var renderGroup = JSON.parse(localStorage.getItem("groups"));
         if (!renderGroup)
@@ -75,7 +77,7 @@ var handleContact = function (ev) {
 var searchContact = function (searchBar) {
     try {
         var regExp = "^" + searchBar;
-        var searchTermReg_1 = new RegExp(regExp, 'i');
+        var searchTermReg_1 = new RegExp(regExp, 'i'); 
         allContacts = allContactsForSearch.filter(function (elem) { return searchTermReg_1.test(elem.name); });
         localStorage.setItem("contactos", JSON.stringify(allContacts));
         render(allContacts);

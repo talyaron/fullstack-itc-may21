@@ -55,7 +55,7 @@ class User {
                  this.renderChatsToChatsList(null);
             }
           
-            if(existingGroup === undefined) return true;
+            if(existingGroup === undefined) return true;  //YS: You have the same condition here and above/ 
             else return false;
        
     } catch (er) {
@@ -73,7 +73,7 @@ class User {
                 const byMsg: Array<Group> = this.userGroups.filter(group => group.groupMsgs.find(msg=>groupRegEx.test(msg.content)) !== undefined);
                 const byName: Array<Group> = this.userGroups.filter(group => groupRegEx.test(group.groupName));
                 const byUser: Array<Group> = this.userGroups.filter(group => group.groupUsers.find(user=>groupRegEx.test(user)) !== undefined); // not by users name, only phone numbers
-                filteredGroups = [...byMsg,...byName,...byUser];
+                filteredGroups = [...byMsg,...byName,...byUser]; //YS: Nice!!
                 filteredGroups = filteredGroups.filter((v,i,a)=>a.findIndex(t=>(t.groupId === v.groupId))===i);
             }
 
@@ -241,7 +241,7 @@ class ContactList {
 
 const allContacts: ContactList = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
 
-const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
+const loggedInUser: User = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups); //YS: Separate this into more readable code.
 
 const readURL = (input: any) => {
     try {

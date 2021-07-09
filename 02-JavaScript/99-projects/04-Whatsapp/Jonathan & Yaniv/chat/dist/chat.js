@@ -64,7 +64,7 @@ var User = /** @class */ (function () {
     }
     User.prototype.addMessages = function (newMess, groupId) {
         try {
-            var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
+            var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; }); //YS: You should use find instead of findIndex
             this.userGroups[groupIndex].groupMsgs.push(newMess);
             this.userGroupNew[groupIndex].groupMsgs.push(newMess);
             this.renderMsgs(groupId);
@@ -137,7 +137,7 @@ var ContactList = /** @class */ (function () {
     };
     return ContactList;
 }());
-var loggedInUser = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups, JSON.parse(localStorage.getItem("currentUser")).userGroups);
+var loggedInUser = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups, JSON.parse(localStorage.getItem("currentUser")).userGroups); //YS: Separate this into more readable code
 var params = new URLSearchParams(window.location.search);
 var groupId = params.get('groupid');
 loggedInUser.renderMsgs(groupId);
@@ -283,6 +283,6 @@ if (isChatOrGroup === 0) {
 }
 else {
     var currentGroup = JSON.parse(localStorage.getItem("currentGroup"));
-    var groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser);
+    var groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser); //YS: This is how it should be done. 
     groupChat.renderGroupChat();
 }

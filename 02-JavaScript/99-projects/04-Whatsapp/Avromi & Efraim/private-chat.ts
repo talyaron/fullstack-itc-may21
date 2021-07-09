@@ -16,19 +16,19 @@ function goBack() {
 
 // Get Params From Query 
 const urlSearchParams = new URLSearchParams(window.location.search);
-const params = Object.fromEntries(urlSearchParams.entries());
+const params = Object.fromEntries(urlSearchParams.entries()); //YS: Better to use searchParams.get('contactId')
 //Get Array From Storage
 const allContacts = JSON.parse(localStorage.getItem('contacts'));
 
 
 //Filter Array by Params
-const thisContact = allContacts.filter(contact => contact.contactId === params.contactId);
+const thisContact = allContacts.filter(contact => contact.contactId === params.contactId); //YS: Why not use find instead of filter? 
 const index = allContacts.findIndex(cont => cont.contactId === params.contactId)
 // let OurUse = thisContact.pop()
 // console.log(OurUse); Would it have been better to work on this as an object?
 
 const contactName = document.querySelector(".nav__contact h2")
-contactName.innerHTML = `${thisContact[0].name}`
+contactName.innerHTML = `${thisContact[0].name}` //YS: You dont need template literals here. 
 const contactImg = document.querySelector(".nav__img__wrapper")
 contactImg.innerHTML = `<img class="nav__img"
 src="${thisContact[0].imgUrl}"
@@ -70,11 +70,11 @@ function renderMessages(arrToRender: Array<Contact>) {
 
 
 
-function openCamera() {
+function openCamera() { //YS: What is this for?
     console.log("open the camera");
 }
 
-function contextHandler() {
+function contextHandler() { //YS: What is this for?
     try {
         document.getElementById("contextMenu").style.display = "block";
         const doc = document.querySelector('html')

@@ -100,7 +100,7 @@ class User {
 
     addMessages(newMess: Message, groupId: string) {
         try {
-            const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId);
+            const groupIndex = this.userGroups.findIndex(group => group.groupId === groupId); //YS: You should use find instead of findIndex
             this.userGroups[groupIndex].groupMsgs.push(newMess);
             this.userGroupNew[groupIndex].groupMsgs.push(newMess);
             this.renderMsgs(groupId)
@@ -198,7 +198,7 @@ class ContactList {
     }
 }
 
-const loggedInUser: User = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups,JSON.parse(localStorage.getItem("currentUser")).userGroups)
+const loggedInUser: User = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups,JSON.parse(localStorage.getItem("currentUser")).userGroups) //YS: Separate this into more readable code
 
 
 const params = new URLSearchParams(window.location.search);
@@ -208,7 +208,7 @@ loggedInUser.renderMsgs(groupId);
 
 btnMessage.addEventListener('click', sendMessage);
 
-function sendMessage() {
+function sendMessage() { //YS: What if the user only presses send without typing anything? 
     try {
         const inputMessage = elementMessage.value;
 
@@ -370,7 +370,7 @@ if (isChatOrGroup === 0) {
 
     let chatUser = Object.values(Object.values(contactChat)[1]);
 
-    chatUser.find(function (chat) {
+    chatUser.find(function (chat) { //YS: Incorrect use of find, this should be a variable: const chatUser = chatUser.find(...)
         if (contactList === chat.userPhone) {
             const contactUser = new ContactMessage(chat.userImg, chat.userName, chat.userPhone, chat.userGroups);
             contactUser.renderUserChat();
@@ -381,7 +381,7 @@ if (isChatOrGroup === 0) {
 
     const currentGroup = JSON.parse(localStorage.getItem("currentGroup"));
     
-    const groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser);
+    const groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser); //YS: This is how it should be done. 
 
     groupChat.renderGroupChat();
 }
