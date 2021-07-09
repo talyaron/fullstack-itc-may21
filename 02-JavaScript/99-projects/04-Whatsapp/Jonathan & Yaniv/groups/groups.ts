@@ -13,8 +13,8 @@ class Group {
     groupId: string; // userPhone or "group" + Math.random().toString(16).slice(2);
     groupImg: string;
     groupName: string;
-    groupUsers: Array<string> // userPhone numbers // in User class - add a method to push new messages, like this: this.userGroups.groupMsgs.push(newMsg: Message). After calling this method - currentUser and contactList in the localStorage should be updated. When entering the Chat page, a new localStorage item should be set: currentGroup. The Group Class on the chat.ts file should include a renderMsgs() method to show all past group messages from localStorage.
-    groupMsgs: Array<Message> = []
+    groupUsers: Array<string>;
+    groupMsgs: Array<Message> = [];
     constructor (groupId: string, groupImg: string, groupName: string, groupUsers: Array<string>) {
         this.groupId = groupId ? groupId : "group" + Math.random().toString(16).slice(2);
         this.groupImg = groupImg;
@@ -97,12 +97,12 @@ class User {
 
                 const groupHTML: string = `
                 <div class="chats__item chat" id="${group.groupId}">
-                <img class="chat__item chat__item--img" src="${group.groupImg}" />
-                <h3 class="chat__item chat__item--name">${group.groupName}</h3>
+                    <img class="chat__item chat__item--img" src="${group.groupImg}" />
+                    <h3 class="chat__item chat__item--name">${group.groupName}</h3>
                     <p class="chat__item chat__item--last_msg_time">${datemsg}</p>
                     <p class="chat__item chat__item--last_msg_content">${content}</p>
                     <i class="chat__item chat__item--delete fas fa-trash"></i>
-            </div>`; // for lines 47-48 - add "$" before "{" once the Message class is linked
+                </div>`;
             ChatsContainer.insertAdjacentHTML('beforeend',groupHTML);
             });
           } catch (er) {
@@ -112,7 +112,7 @@ class User {
 
     extractGroup(groupId:string){
         try {
-            const existingGroup = this.userGroups.find(group=>group.groupId === groupId)
+            const existingGroup = this.userGroups.find(group=>group.groupId === groupId);
             return existingGroup;
         } catch (er) {
             console.error(er);
@@ -122,9 +122,11 @@ class User {
     //JN
     deleteGroup(groupID:string){
         try {
-            const existingGroup = this.userGroups.find(group=>group.groupId === groupID)
-            return existingGroup;
-
+            const existingGroup = this.userGroups.filter(group=>group.groupId === groupID);
+            const groupToDeleteIndex: number = this.userGroups.findIndex(group => group.groupId === groupID);
+            this.userGroups.splice(groupToDeleteIndex,1);
+            this.renderChatsToChatsList(null);
+        
         } catch (er) {
             console.error(er);
           }

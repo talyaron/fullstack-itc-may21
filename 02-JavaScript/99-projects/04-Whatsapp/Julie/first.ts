@@ -61,8 +61,8 @@ class Contacts {
   renderContacts() { /* YS: It would have been a lot better/easier and programatically correct to pass an array as a parameter in this function and then render that array. 
                         instead of always rendering your this.contacts array  */
     let html: string = "";
-
-    this.contacts.forEach((element) => {
+    const joni = JSON.parse(localStorage.getItem('contactsData'))
+    joni.forEach((element) => {
       html += `<div class="containerChat">
                     <div class="chat1" onclick=redirect("${element.contactId}")>
                       <img src="${element.image}" alt="" class="chat1__photo"> 
@@ -110,7 +110,6 @@ function handleKeyUp() {
 
 function redirect(contactId) {
   try {
-    localStorage.setItem("contactsData", JSON.stringify(contacts.contacts));
     localStorage.setItem("contactID", contactId);
 
     window.location.href = `second.html?id=${contactId}`;
@@ -121,7 +120,7 @@ function redirect(contactId) {
     console.error(error);
   }
 }
-
+console.log(contacts)
 const handleSubmit = (event) => {
   event.preventDefault();
   try {
@@ -132,7 +131,14 @@ const handleSubmit = (event) => {
     if (phone === null) throw Error("Put a number"); //YS: Should be: if(!phone)
 
     const generator = new ContactGenerator(contactName, image, phone);
-    contacts.add(generator);
+
+    const joni2 = JSON.parse(localStorage.getItem('contactsData'))
+
+    contacts.add(generator, joni2);
+
+    
+    console.log("a",joni2)
+
     contacts.renderContacts();
     cerrar(); //YS: You already have a closeModal function. 
   } catch (error) {

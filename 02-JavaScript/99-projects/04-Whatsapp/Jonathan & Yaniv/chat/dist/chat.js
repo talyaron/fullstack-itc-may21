@@ -152,8 +152,8 @@ function sendMessage() {
         loggedInUser.addMessages(message, groupId);
         elementMessage.value = '';
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-        contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-        localStorage.setItem('contactList', JSON.stringify(contactList));
+        allContacts.allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        localStorage.setItem('contactList', JSON.stringify(allContacts));
     }
     catch (er) {
         console.error(er);
@@ -268,18 +268,14 @@ var ContactMessage = /** @class */ (function () {
     };
     return ContactMessage;
 }());
-var contactChat = JSON.parse(localStorage.getItem("contactList"));
-var contactList = JSON.parse(localStorage.getItem("contactId"));
+var contactId = JSON.parse(localStorage.getItem("contactId"));
 var isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"));
 var contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
+console.log(isChatOrGroup);
 if (isChatOrGroup === 0) {
-    var chatUser = Object.values(Object.values(contactChat)[1]);
-    chatUser.find(function (chat) {
-        if (contactList === chat.userPhone) {
-            var contactUser_1 = new ContactMessage(chat.userImg, chat.userName, chat.userPhone, chat.userGroups);
-            contactUser_1.renderUserChat();
-        }
-    });
+    var chatUser = allContacts.allContacts[allContacts.findContactIndex(contactId)];
+    var contactUser_1 = new ContactMessage(chatUser.userImg, chatUser.userName, chatUser.userPhone, chatUser.userGroups);
+    contactUser_1.renderUserChat();
 }
 else {
     var currentGroup = JSON.parse(localStorage.getItem("currentGroup"));

@@ -188,7 +188,7 @@ class ContactList {
         this.allContacts = allContacts;
     }
 
-    findContactIndex(contactPhone) {
+    findContactIndex(contactPhone: string) {
         try {
             const contactIndex = this.allContacts.findIndex(contactItem => contactItem.userPhone === contactPhone);
             return contactIndex;
@@ -224,8 +224,8 @@ function sendMessage() { //YS: What if the user only presses send without typing
         elementMessage.value = '';
         
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-        contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-        localStorage.setItem('contactList', JSON.stringify(contactList));
+        allContacts.allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        localStorage.setItem('contactList', JSON.stringify(allContacts));
 
         
     } catch (er) {
@@ -332,9 +332,9 @@ class ContactMessage {
     userImg: string;
     userName: string;
     userPhone: string;
-    userGroups: Array<string>; //list of groups
+    userGroups: Array<Group>;
 
-    constructor(userImg: string, userName: string, userPhone: string, userGroups: Array<string>) {
+    constructor(userImg: string, userName: string, userPhone: string, userGroups: Array<Group>) {
         this.userImg = userImg;
         this.userName = userName;
         this.userPhone = userPhone;
@@ -361,14 +361,14 @@ class ContactMessage {
     }
 }
 
-const contactChat = JSON.parse(localStorage.getItem("contactList"));
-const contactList: ContactList = JSON.parse(localStorage.getItem("contactId"));
+const contactId = JSON.parse(localStorage.getItem("contactId"));
 const isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"));
 const contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
 
+console.log(isChatOrGroup);
 if (isChatOrGroup === 0) {
 
-    let chatUser = Object.values(Object.values(contactChat)[1]);
+    let chatUser = allContacts.allContacts[allContacts.findContactIndex(contactId)];
 
     chatUser.find(function (chat) { //YS: Incorrect use of find, this should be a variable: const chatUser = chatUser.find(...)
         if (contactList === chat.userPhone) {
@@ -378,7 +378,6 @@ if (isChatOrGroup === 0) {
     });
 
 } else {
-
     const currentGroup = JSON.parse(localStorage.getItem("currentGroup"));
     
     const groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser); //YS: This is how it should be done. 
