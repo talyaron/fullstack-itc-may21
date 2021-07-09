@@ -90,7 +90,7 @@ function redirectBack(): void {
 
 
 //Declare this variables to do the function to send the message
-const texting: any = document.querySelector('#input');
+const texting: any = document.querySelector('#input'); //YS: Good
 const sendButton: HTMLElement = document.querySelector('#sendButton');
 
 try {
@@ -112,7 +112,7 @@ try {
 }
 
 //Function to render the information inside the chat
-function renderInsideChat(message: Message): void {
+function renderInsideChat(message: Message): void { //YS: Good
     try {
         let chatArea = document.querySelector('.chat-box');
         let temp = `
@@ -134,7 +134,7 @@ function renderInsideChat(message: Message): void {
 };
 
 //With this function we render the old messages for the conversation at the beginning
-function renderOldConversation(): void {
+function renderOldConversation(): void { 
     try {
         userfiltered[0].message.forEach(element => {
             renderInsideChat(element)
@@ -148,9 +148,9 @@ function renderOldConversation(): void {
 renderOldConversation();
 
 //Function to add the emojis in the chat
-const button = document.querySelector('#emoji-button');
+const button = document.querySelector('#emoji-button'); 
 
-const picker = new EmojiButton();
+const picker = new EmojiButton(); //YS: Nice
 picker.on('emoji', emoji => {
     document.querySelector('#input').value += emoji;
 });

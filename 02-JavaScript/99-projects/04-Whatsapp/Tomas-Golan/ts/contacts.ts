@@ -31,7 +31,7 @@ class Contact {
 // FUNCTIONS
 const addLocalContacts = (localChat) => {
     localChat.forEach(contact => {
-        let add = new Contact(contact.name, contact.phone, contact.profileImg);
+        let add = new Contact(contact.name, contact.phone, contact.profileImg); //YS: Should change the variable name to 'contact' or something other than 'add'.
         allContacts.push(add);
         allContactsForSearch.push(add);
         localStorage.setItem("contactos", JSON.stringify(allContacts));
@@ -42,15 +42,17 @@ const addLocalContacts = (localChat) => {
 addLocalContacts(contacts);
 
 
-function render(arr) {
+function render(arr) {   //YS: Why was this function not separated? 
     try {
-        const containerData: HTMLElement = document.querySelector(".contacts");
+        const containerData: HTMLElement = document.querySelector(".contacts");   /* YS: Your <a> tags link (href) is not 100% correct. Should be: chat.html?id={element.id} 
+                                                                                      you should pass the ID and on the second page grab the id from the URL and find the contact in the contacts 
+                                                                                      list using the id (like you did). */
         let html: string = "";
         arr.forEach((element) => {
             html += `
         <div class="contacts_chat">
             <img class="contacts_img" src="${element.profileImg}" alt="">
-            <a href="chat.html" onclick='idContactForChat("${element.id}")'>
+            <a href="chat.html" onclick='idContactForChat("${element.id}")'>    
                 <div class="contacts_info">
                     <h3 class="contacts_name">${element.name}</h3>
                     <p>${element.phone}</p>
@@ -115,7 +117,7 @@ const handleContact = (ev) => {
 const searchContact = (searchBar) => {
     try {
         const regExp: string = `^${searchBar}`;
-        const searchTermReg: RegExp = new RegExp(regExp, 'i');
+        const searchTermReg: RegExp = new RegExp(regExp, 'i');  //YS:  This should be gmi(global, multiline, case-insensitve) instaed of just i. 
         allContacts = allContactsForSearch.filter(elem => searchTermReg.test(elem.name));
         localStorage.setItem("contactos", JSON.stringify(allContacts));
         render(allContacts);

@@ -1,0 +1,91 @@
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+html {
+  margin: 0;
+}
+
+.flex_row_center {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.main .groups {
+  flex-direction: row;
+  width: 90vw;
+}
+.main .groups .group {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  width: 30vw;
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 10px;
+}
+.main .groups .group .member {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 25px 25px;
+  grid-template-areas: "img title" "img title";
+  padding: 10px;
+}
+.main .groups .group .member__item {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin: 0;
+  color: #BABABA;
+}
+.main .groups .group .member__item--img {
+  grid-area: img;
+  padding: 0 5px;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+.main .groups .group .member__item--name {
+  grid-area: title;
+  font-weight: normal;
+  text-align: left;
+  justify-content: flex-start;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.main .groups__item:hover {
+  cursor: pointer;
+  background-color: #F6F6F6;
+}
+.main__item--header {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  background-image: linear-gradient(to bottom, white, lightgrey);
+}
+
+@media only screen and (max-width: 833px) {
+  .main .groups {
+    flex-wrap: wrap;
+  }
+}
+@media only screen and (max-width: 556px) {
+  .main .groups {
+    flex-direction: column;
+  }
+}

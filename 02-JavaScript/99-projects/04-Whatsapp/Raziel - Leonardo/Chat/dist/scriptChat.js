@@ -52,7 +52,7 @@ function redirectBack() {
     }
 }
 //Declare this variables to do the function to send the message
-var texting = document.querySelector('#input');
+var texting = document.querySelector('#input'); //YS: Good
 var sendButton = document.querySelector('#sendButton');
 try {
     sendButton.addEventListener('click', function () {
@@ -100,7 +100,7 @@ function renderOldConversation() {
 renderOldConversation();
 //Function to add the emojis in the chat
 var button = document.querySelector('#emoji-button');
-var picker = new EmojiButton();
+var picker = new EmojiButton(); //YS: Nice
 picker.on('emoji', function (emoji) {
     document.querySelector('#input').value += emoji;
 });

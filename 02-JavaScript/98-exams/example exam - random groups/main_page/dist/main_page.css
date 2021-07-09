@@ -1,0 +1,119 @@
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+html {
+  margin: 0;
+}
+
+.flex_row_center {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  background-image: linear-gradient(to bottom, white, lightgrey);
+}
+.header .add_members_form__item--img {
+  margin: 75px;
+}
+.header .add_members_form__item--img label {
+  cursor: pointer;
+  border-radius: 200px;
+  background-image: url("https://i1.wp.com/researchictafrica.net/wp/wp-content/uploads/2016/10/default-profile-pic.jpg");
+  background-size: 100% 100%;
+  padding: 75px 25px;
+}
+.header__item {
+  margin: 10px;
+}
+
+.main .create_random_groups_form #random_group_membersPerGroup {
+  width: 250px;
+}
+.main .members {
+  display: flex;
+  flex-direction: column;
+  border-right: 5px solid white;
+}
+.main .members .member {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 25px 25px;
+  grid-template-areas: "img title delete" "img title delete";
+  padding: 10px;
+  border-bottom: 1px solid #F6F6F6;
+}
+.main .members .member__item {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin: 0;
+  color: #BABABA;
+}
+.main .members .member__item--img {
+  grid-area: img;
+  padding: 0 5px;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+.main .members .member__item--name {
+  grid-area: title;
+  font-weight: normal;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.main .members .member__item--delete {
+  grid-area: delete;
+  color: #BABABA;
+  text-align: right;
+}
+.main .members .member__item--delete:hover {
+  color: #858585;
+}
+.main .members__item:hover {
+  cursor: pointer;
+  background-color: #F6F6F6;
+}
+.main__item--header {
+  position: sticky;
+  top: 338.194px;
+  background-color: white;
+}
+
+input, label {
+  margin: 5px;
+}
+
+.submit {
+  cursor: pointer;
+  background-color: greenyellow;
+  border: 0;
+  border-radius: 50px;
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+}
+.submit:hover {
+  background-color: #c7ff73;
+}
+.submit:active {
+  background-color: #86c725;
+}
+
+.required {
+  color: red;
+  font-size: 0.8rem;
+}

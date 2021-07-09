@@ -43,7 +43,7 @@ var ContactList = /** @class */ (function () {
             returnToMainNav(id); //Update local storage:
             var contactSerialized = JSON.stringify(whatsAppContacts);
             localStorage.setItem("whatsAppContacts", contactSerialized);
-            var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"));
+            var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts")); //YS: This is not being used.
         }
         catch (error) {
             console.error(error);
@@ -52,7 +52,9 @@ var ContactList = /** @class */ (function () {
     //Editing a contact - does not work ):
     ContactList.prototype.edit = function (id) {
         try {
-            var indexToEdit = this.contacts.findIndex(function (element) { return element.id === id; });
+            var indexToEdit = this.contacts.findIndex(
+            //YS: Use find
+            function (element) { return element.id === id; });
             console.log(indexToEdit);
             this.render();
             returnToMainNav(id);
@@ -79,15 +81,15 @@ var handleSubmit = function (event) {
         var message = event.target[2].value;
         var time = event.target[3].value;
         var newContact = new Contact(img, name, message, time);
-        whatsAppContacts.contacts.push(newContact);
+        whatsAppContacts.contacts.push(newContact); //YS: Why dont you have an addContact method in your ContactList?
         //Update local storage:
         var contactSerialized = JSON.stringify(whatsAppContacts);
         localStorage.setItem("whatsAppContacts", contactSerialized);
-        var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"));
+        var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts")); //YS: This is not being used
         //Refresh contacts list
         whatsAppContacts.render();
         event.target.reset(); //Now just close the modal:
-        var bottomModal = document.querySelector('.add-contact');
+        var bottomModal = document.querySelector(".add-contact");
         bottomModal.style.display = "none";
     }
     catch (error) {
@@ -98,6 +100,7 @@ var handleSubmit = function (event) {
 var handleDelete = function (id) {
     try {
         if (whatsAppContacts === null) {
+            //YS: if (!whatsAppContacts)
             throw new Error("Must have the contacts array!");
         }
         whatsAppContacts.remove(id);
@@ -120,8 +123,9 @@ var handleEdit = function (id) {
 /* Modal and helper functions */
 //Top modal:
 var openMenuModal = function (event) {
+    //YS: You are not using the event, you dont need it
     try {
-        var topModal = document.querySelector('.top-modal');
+        var topModal = document.querySelector(".top-modal");
         topModal.style.display = "block";
     }
     catch (error) {
@@ -129,9 +133,10 @@ var openMenuModal = function (event) {
     }
 };
 var closeMenuModal = function (event) {
+    //YS: You are not using the event, you dont need it
     try {
-        var body = document.getElementsByName('body');
-        var topModal = document.querySelector('.top-modal');
+        var body = document.getElementsByName("body"); //YS: not being used
+        var topModal = document.querySelector(".top-modal");
         topModal.style.display = "none";
     }
     catch (error) {
@@ -140,8 +145,9 @@ var closeMenuModal = function (event) {
 };
 //Add contact modal form:
 var openBottomModal = function (event) {
+    //YS: You are not using the event, you dont need it
     try {
-        var bottomModal = document.querySelector('.add-contact');
+        var bottomModal = document.querySelector(".add-contact");
         bottomModal.style.display = "flex";
     }
     catch (error) {
@@ -152,7 +158,7 @@ var openSearch = function (event) {
     try {
         var menu = document.querySelector("nav");
         menu.hidden = true;
-        var searchMenu = document.querySelector('#search-nav');
+        var searchMenu = document.querySelector("#search-nav");
         searchMenu.attributes[1].value = "display: flex";
     }
     catch (error) {
@@ -165,7 +171,7 @@ var showEditNav = function (event) {
         var menu = document.querySelector("nav");
         menu.hidden = true;
         var editMenu = document.querySelector("#editNav");
-        editMenu.attributes[1].value = "display: block";
+        editMenu.attributes[1].value = "display: block"; //YS: You can also do: editMenu.getAttribute('style')
     }
     catch (error) {
         console.error(error);
@@ -173,8 +179,9 @@ var showEditNav = function (event) {
 };
 //Close bottom modal after adding contact:
 var returnToMainNav = function (event) {
+    //YS: Good, no event needed
     try {
-        var searchMenu = document.querySelector('#search-nav');
+        var searchMenu = document.querySelector("#search-nav");
         var editMenu = document.querySelector("#editNav");
         searchMenu.attributes[1].value = "display: none";
         editMenu.attributes[1].value = "display: none";
@@ -188,7 +195,7 @@ var returnToMainNav = function (event) {
 //Redirection to the chat when clicking the info section of a contact:
 var goToChat = function (event) {
     try {
-        window.location.href = "./index.html";
+        window.location.href = "./index.html"; //YS: This is not taking you to the contacts chat, its always taking you to the same place. Should be: "./index.html?id=${contactId}"
     }
     catch (error) {
         console.error(error);
