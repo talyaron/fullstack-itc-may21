@@ -10,7 +10,7 @@ body {
 
 
     &__edit {
-        margin-left: 3vw;
+        margin-left: 3vw;  //YS: px or %
         font-size: 1.25rem;
         color: rgb(66, 66, 255);
     }
@@ -24,7 +24,7 @@ body {
 
     &__new-convo {
         margin-left: auto;
-        margin-right: 3vw;
+        margin-right: 3vw; //YS: px or %
         font-size: 1.25rem;
         color: rgb(66, 66, 255);
     }
@@ -36,7 +36,7 @@ body {
 
     &__form-popup {
         display: none;
-        position: fixed;
+        position: fixed; //YS: Shouldnt have to use this
         bottom: 0;
         right: 15px;
         border: 3px solid #f1f1f1;
@@ -229,4 +229,4 @@ body {
 
 
 
-}
+} 
