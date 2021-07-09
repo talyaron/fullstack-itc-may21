@@ -39,6 +39,7 @@ var Cars = /** @class */ (function () {
         addNewMpg();
         console.log(cars); //YS: Dont leave console.logs in your code. 
         localStorage.setItem("cars", JSON.stringify(cars));
+        return this;
     };
     ;
     Cars.prototype.addCars = function (carsArray) {
@@ -47,6 +48,7 @@ var Cars = /** @class */ (function () {
             var newCar = new Car(car.Name, car.Miles_per_Gallon, car.Cylinders, car.Horsepower, car.Weight_in_lbs, car.Year, car.Origin);
             _this.cars.push(newCar);
         });
+        return this;
     };
     Cars.prototype.removeCar = function (carId) {
         var carIndex = this.cars.filter(function (c) { return c.carId !== carId; });
@@ -153,7 +155,6 @@ var handleSubmit = function (ev) {
     var Year = ev.target.elements.Year.value;
     var Origin = ev.target.elements.Origin.value;
     var car = new Car(Name, Miles_per_Gallon, Cylinders, Horsepower, Weight_in_lbs, Year, Origin);
-    cars.add(car);
-    cars.renderCars(cars.cars);
+    cars.add(car).renderCars(cars.cars);
     ev.target.reset();
 };
