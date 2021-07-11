@@ -25,7 +25,6 @@ var deleteMember = function (ev) {
         var memberId = memberToDelete.id;
         membersPool.deleteMember(memberId);
         localStorage.setItem('membersPool', JSON.stringify(membersPool));
-        membersPool.renderMembers();
     }
     catch (er) {
         console.error(er);

@@ -23,10 +23,9 @@ class MembersPool {
             console.error(er);
         }
     }
-
+    
     deleteMember(memberId:string){
         try {
-            const existingMember = this.membersPool.filter(member => member.memberId === memberId);
             const memberToDeleteIndex: number = this.membersPool.findIndex(member => member.memberId === memberId);
             this.membersPool.splice(memberToDeleteIndex,1);
             this.renderMembers();
@@ -52,7 +51,7 @@ class MembersPool {
             let splitedMembers: Array<Array<GroupMember>> = randomizedMembers.reduce((splitedGroup, item, index: number) => {
                 const chunkIndex = Math.floor(index/membersPerGroup)
               
-                if(!splitedGroup[chunkIndex]) {
+                if (!splitedGroup[chunkIndex]) {
                     splitedGroup[chunkIndex] = [];
                 }
               
@@ -94,7 +93,6 @@ class MembersPool {
 }
 
 const membersPool: MembersPool = localStorage.getItem('membersPool') ? new MembersPool(JSON.parse(localStorage.getItem('membersPool')).membersPool) : new MembersPool([]);
-
 
 class RandomGroups {
     randomGroups: Array<Array<GroupMember>>;

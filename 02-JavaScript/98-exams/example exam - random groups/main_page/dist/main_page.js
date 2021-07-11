@@ -20,7 +20,6 @@ var MembersPool = /** @class */ (function () {
     };
     MembersPool.prototype.deleteMember = function (memberId) {
         try {
-            var existingMember = this.membersPool.filter(function (member) { return member.memberId === memberId; });
             var memberToDeleteIndex = this.membersPool.findIndex(function (member) { return member.memberId === memberId; });
             this.membersPool.splice(memberToDeleteIndex, 1);
             this.renderMembers();
