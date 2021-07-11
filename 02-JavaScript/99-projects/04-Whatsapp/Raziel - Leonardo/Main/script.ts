@@ -62,7 +62,7 @@ const handleSubmitNewUser = (ev: any): void => {
         addUser(user);
         ev.target.reset();
 
-        if (!user) throw new Error('The user doesn´t exist!')
+        if (!user) throw new Error('The user doesn´t exist!') //YS: This should go after you define user. 
     } catch (error) {
         console.error(error);
     }
@@ -89,7 +89,7 @@ function renderContacts(arrayUser: Array<User>): void {
         if (!showContact) throw new Error('The element where to show the contacts doesn´t exist!')
         //Doing a loop to show the contacts
         let html: any = arrayUser.map(element => {
-            if (element.picture === null) {
+            if (element.picture === null) { //YS: if (!element.picture)
                 element.picture = "../Img_whatsapp/profile.png";
             };
             return (
@@ -113,14 +113,14 @@ function renderContacts(arrayUser: Array<User>): void {
             </div>`
             )
         }).join('');
-        showContact.innerHTML = html;
+        showContact.innerHTML = html;  //YS: Look up using insertAdjacentHTML instead of  innerHTML 
     } catch (error) {
         console.error(error);
     };
 };
 
 //Function to show the previous image in the form:
-function readURL(input): void {
+function readURL(input): void {   //YS: Nice
     if (input.files && input.files[0]) {
         let reader: FileReader = new FileReader();
 
@@ -141,7 +141,9 @@ function redirect(userNumber): void {
     try {
         localStorage.setItem('userInfo', JSON.stringify(userList));
         localStorage.setItem('numberToSearch', userNumber);
-        window.location.href = '../Chat/whatsappChat.html'
+        window.location.href = '../Chat/whatsappChat.html'   
+        /*YS: This link is incorrect, you are always redirecting to the same page. You want to re-direct to the specific users page. 
+        The correct way to link would be: 'whatsapp.html?userphone=${userNumber}'. */
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
     } catch (error) {
         console.error(error);
@@ -179,7 +181,7 @@ function removeChat(chatNumber: number): void {
     try {
         const option = confirm(`Are you sure do you want to delete this chat?`);
         if (option) {
-            const chatIndex = userList.findIndex((element: User) => element.number === chatNumber);
+            const chatIndex = userList.findIndex((element: User) => element.number === chatNumber); //YS: I would reccommend you to use filter instead of splice. 
             userList.splice(chatIndex, 1);
             renderContacts(userList);
         }
@@ -189,7 +191,7 @@ function removeChat(chatNumber: number): void {
 };
 
 //Function to do a validator (numer is no taken)
-function validator(ev, userList: Array<User>): void {
+function validator(ev, userList: Array<User>): void {  //YS: Very nice! 
     try {
         const validateNumber: any = document.querySelector('#number');
         validateNumber.addEventListener('blur', () => {
