@@ -34,7 +34,7 @@ var MembersPool = /** @class */ (function () {
             var randomizedMembers = this.membersPool;
             var currentIndex = randomizedMembers.length;
             var randomIndex = void 0;
-            while (0 !== currentIndex) {
+            while (currentIndex !== 0) {
                 randomIndex = Math.floor(Math.random() * currentIndex);
                 currentIndex--;
                 _a = [randomizedMembers[randomIndex], randomizedMembers[currentIndex]], randomizedMembers[currentIndex] = _a[0], randomizedMembers[randomIndex] = _a[1];

@@ -41,7 +41,7 @@ class MembersPool {
             let currentIndex: number = randomizedMembers.length;
             let randomIndex: number;
 
-            while (0 !== currentIndex) {
+            while (currentIndex !== 0) {
                 randomIndex = Math.floor(Math.random() * currentIndex);
                 currentIndex--;
 
