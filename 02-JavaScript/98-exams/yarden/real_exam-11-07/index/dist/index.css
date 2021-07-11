@@ -1,0 +1,66 @@
+body {
+  font-family: fantasy;
+  background-color: #4158d0;
+  background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+}
+
+h1 {
+  color: brown;
+  background-color: aliceblue;
+  font-size: 2.5rem;
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
+}
+
+h1,
+p {
+  text-align: center;
+}
+
+.body-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  background-color: palegoldenrod;
+  padding: 5% 0 80% 0;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+}
+.form__input {
+  margin: 0 1em;
+  padding: 0.4em;
+  cursor: pointer;
+}
+.form__button {
+  color: tomato;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.form__button:hover {
+  background-color: peru;
+  color: white;
+}
+
+.color-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.color-wrapper__color {
+  width: 50%;
+  height: 50px;
+  margin: 0.6em;
+  border: 1px solid rgba(0, 0, 0, 0.63);
+}
+.color-wrapper__color:hover {
+  opacity: 85%;
+  cursor: pointer;
+}
+.color-wrapper svg {
+  cursor: pointer;
+}
+.color-wrapper svg:hover {
+  fill-opacity: 30%;
+}
