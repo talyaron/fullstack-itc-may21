@@ -15,8 +15,27 @@
     <div class="container" id="main">
     </div>
 
+    <!-- Modal to add a user -->
+    <div id="modal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="close" class="close">&times;</span>
+            <div class="contentarea">
+                <div class="camera">
+                    <video id="video">Video stream not available.</video>
+                </div>
+                <div><button id="startbutton">Take photo</button></div>
+                <canvas id="canvas"></canvas>
+                <div class="output">
+                    <img id="photo" alt="The screen capture will appear in this box.">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
     <script src="dist/scriptChat.js"></script>
+    <script src="dist/helperWebCam.js"></script>
 
 </body>
 

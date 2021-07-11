@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Document</title> <!-- YS: Give your page a title -->
     <link rel="stylesheet" href="dist/styles.min.css">
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
 </head>
@@ -15,7 +14,7 @@
         <div class="header__edit">Edit</div>
         <button class="header__new-convo">O</button>
         <div class="header__form-popup" id="myForm">
-            <form onsubmit="handleSubmit(event)" class="header__form-popup__form-container">
+            <form onsubmit="handleSubmit(event)" class="header__form-popup__form-container"> <!-- YS: This event handler should be in your JS -->
                 <h1>Add Contact</h1>
                 <label for="fullname"><b>Fullname:</b></label>
                 <input type="text" placeholder="Enter Full Name" name="name" required>
@@ -35,7 +34,7 @@
     <h1 class="chats">Chats</h1>
     <div>
         <input class="search" type="search" name="search" id="searching" placeholder="  Search"
-            onkeyup="handleKeyUp(event)">
+            onkeyup="handleKeyUp(event)">  <!-- YS: This event handler should be in your JS -->
     </div>
     <div class="groups">
         <div class="groups__broadcast">Broadcast Lists</div>

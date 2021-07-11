@@ -2,12 +2,12 @@
 const render: HTMLElement = document.querySelector(".wrapper__container--chats");
 
 //popup to add a new contact
-const btnModal = (<HTMLButtonElement>document.querySelector('.modal-btn'))
+const btnModal = (<HTMLButtonElement>document.querySelector('.modal-btn')) //YS: You dont need the outer parenthesis: < const btnModal = <HTMLButtonElement>document.querySelector('.modal-btn') > 
 const bgModal = document.querySelector('.modal-bg')
 const modalClose = document.querySelector('.modal-close')
-const inputName = (<HTMLInputElement>document.querySelector('#name'))
-const inputPhone = (<HTMLInputElement>document.querySelector('#phone'))
-const faPlus = (<HTMLButtonElement>document.querySelector('.fa-plus'))
+const inputName = (<HTMLInputElement>document.querySelector('#name'))   //YS: Same as above
+const inputPhone = (<HTMLInputElement>document.querySelector('#phone')) //YS: Same as above
+const faPlus = (<HTMLButtonElement>document.querySelector('.fa-plus'))  //YS: Same as above
 
 //search-regrex first page, take id from the input search
 const inputFilter = <HTMLInputElement>document.querySelector("#filterN");
@@ -37,9 +37,9 @@ class Contacts {
   contactsFilter: Array<ContactGenerator> = [];
 
 
-  add(add: ContactGenerator): void {
+  add(add: ContactGenerator): void { //YS: Better name than add? Ex. newContact. 
     this.contacts.push(add);
-    this.renderContacts();
+    this.renderContacts(); //YS: You are rendering your contacts here and also after you use this function in line 135 - you only need one. 
     this.contactsFilter.push(add);
     localStorage.setItem('contactsData', JSON.stringify(this.contacts));
 
@@ -58,10 +58,11 @@ class Contacts {
     this.renderContacts();
   }
 
-  renderContacts() {
+  renderContacts() { /* YS: It would have been a lot better/easier and programatically correct to pass an array as a parameter in this function and then render that array. 
+                        instead of always rendering your this.contacts array  */
     let html: string = "";
-
-    this.contacts.forEach((element) => {
+    const joni = JSON.parse(localStorage.getItem('contactsData'))
+    joni.forEach((element) => {
       html += `<div class="containerChat">
                     <div class="chat1" onclick=redirect("${element.contactId}")>
                       <img src="${element.image}" alt="" class="chat1__photo"> 
@@ -89,8 +90,8 @@ function handleDelete(contactId) {
   const reducedContacts = contacts.contacts.filter(
     (contact) => contactId !== contact.contactId
   );
-  contacts.contacts = reducedContacts;
-  contacts.renderContacts();
+  contacts.contacts = reducedContacts; //YS: When you refresh the contacts are not deleted since you are not adding this to localstorage. 
+  contacts.renderContacts(); //YS: Should be: contacts.renderContacts(reducedContacts)
 }
 
 const contacts = new Contacts();
@@ -109,7 +110,6 @@ function handleKeyUp() {
 
 function redirect(contactId) {
   try {
-    localStorage.setItem("contactsData", JSON.stringify(contacts.contacts));
     localStorage.setItem("contactID", contactId);
 
     window.location.href = `second.html?id=${contactId}`;
@@ -120,20 +120,27 @@ function redirect(contactId) {
     console.error(error);
   }
 }
-
+console.log(contacts)
 const handleSubmit = (event) => {
   event.preventDefault();
   try {
     const contactName: string = event.target.elements.name.value;
     const image: string = event.target.elements.image.value;
     const phone: number = event.target.elements.phone.value;
-    if (contactName === "") throw Error("Put a contact name");
-    if (phone === null) throw Error("Put a number");
+    if (contactName === "") throw Error("Put a contact name"); //YS: Incorrect syntax: throw new Error()
+    if (phone === null) throw Error("Put a number"); //YS: Should be: if(!phone)
 
     const generator = new ContactGenerator(contactName, image, phone);
-    contacts.add(generator);
+
+    const joni2 = JSON.parse(localStorage.getItem('contactsData'))
+
+    contacts.add(generator, joni2);
+
+    
+    console.log("a",joni2)
+
     contacts.renderContacts();
-    cerrar();
+    cerrar(); //YS: You already have a closeModal function. 
   } catch (error) {
     alert(error);
   }

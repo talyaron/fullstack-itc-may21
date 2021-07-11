@@ -10,17 +10,17 @@ body {
     width:100%;
     display: flex;
     justify-content: space-between;
-    position: fixed;
+    position: fixed;  //YS: Not good
     top: 0;
     left:0;
 
     i {
-        height: 2rem;
-        width: 3rem;
+        height: 2rem;  //YS: Height should not be in rem
+        width: 3rem;  //YS: Width should not be in rem
     }
 
     .fa-arrow-left:hover{
-        cursor: pointer;
+        cursor: pointer; //YS: Nice! 
 
     }
     &__wrapper {
@@ -44,13 +44,14 @@ body {
 .messages{
     margin-bottom:10px ;
     overflow-y:auto;
-    margin-top: 15vh;
+    margin-top: 15vh; //YS: Margin should not be in VH
     height: 72vh;
     &::-webkit-scrollbar {
         display: none;
       }
     .single__message{
         background-color: #DCF8C6;
+        border-radius: 10px;
         display: table;
         margin: 2rem;
         padding: 0 1rem;
@@ -61,8 +62,8 @@ body {
     }
 }
 .input__send__wrapper .form {
-    position: fixed;
-    bottom: 2vh;
+    position: fixed;  //YS: Not good
+    bottom: 2vh; //YS: Shouldnt be VH
     display: flex;
 
 
@@ -72,8 +73,8 @@ body {
         justify-content: space-between;
         background-color: rgb(255, 255, 255);
         border-radius: 20px;
-        height: 10vh;
-        width: 92.5vw;
+        height: 10vh;  //YS: px or %
+        width: 92.5vw; //YS: px or %
 
         &--left {
             display: flex;

@@ -44,7 +44,7 @@ var User = /** @class */ (function () {
                 this.renderChatsToChatsList(null);
             }
             if (existingGroup === undefined)
-                return true;
+                return true; //YS: You have the same condition here and above/ 
             else
                 return false;
         }
@@ -60,7 +60,7 @@ var User = /** @class */ (function () {
                 var byMsg = this.userGroups.filter(function (group) { return group.groupMsgs.find(function (msg) { return groupRegEx_1.test(msg.content); }) !== undefined; });
                 var byName = this.userGroups.filter(function (group) { return groupRegEx_1.test(group.groupName); });
                 var byUser = this.userGroups.filter(function (group) { return group.groupUsers.find(function (user) { return groupRegEx_1.test(user); }) !== undefined; }); // not by users name, only phone numbers
-                filteredGroups = __spreadArrays(byMsg, byName, byUser);
+                filteredGroups = __spreadArrays(byMsg, byName, byUser); //YS: Nice!!
                 filteredGroups = filteredGroups.filter(function (v, i, a) { return a.findIndex(function (t) { return (t.groupId === v.groupId); }) === i; });
             }
             this.renderChatsToChatsList(filteredGroups);
@@ -77,7 +77,7 @@ var User = /** @class */ (function () {
             groupsToRender.forEach(function (group) {
                 var datemsg = group.groupMsgs[group.groupMsgs.length - 1] ? group.groupMsgs[group.groupMsgs.length - 1].dateMsg : "";
                 var content = group.groupMsgs[group.groupMsgs.length - 1] ? group.groupMsgs[group.groupMsgs.length - 1].content : "";
-                var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h3>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + datemsg + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + content + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n            </div>"; // for lines 47-48 - add "$" before "{" once the Message class is linked
+                var groupHTML = "\n                <div class=\"chats__item chat\" id=\"" + group.groupId + "\">\n                    <img class=\"chat__item chat__item--img\" src=\"" + group.groupImg + "\" />\n                    <h3 class=\"chat__item chat__item--name\">" + group.groupName + "</h3>\n                    <p class=\"chat__item chat__item--last_msg_time\">" + datemsg + "</p>\n                    <p class=\"chat__item chat__item--last_msg_content\">" + content + "</p>\n                    <i class=\"chat__item chat__item--delete fas fa-trash\"></i>\n                </div>";
                 ChatsContainer_1.insertAdjacentHTML('beforeend', groupHTML);
             });
         }
@@ -97,8 +97,10 @@ var User = /** @class */ (function () {
     //JN
     User.prototype.deleteGroup = function (groupID) {
         try {
-            var existingGroup = this.userGroups.find(function (group) { return group.groupId === groupID; });
-            return existingGroup;
+            var existingGroup = this.userGroups.filter(function (group) { return group.groupId === groupID; });
+            var groupToDeleteIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupID; });
+            this.userGroups.splice(groupToDeleteIndex, 1);
+            this.renderChatsToChatsList(null);
         }
         catch (er) {
             console.error(er);
@@ -195,7 +197,7 @@ var ContactList = /** @class */ (function () {
     return ContactList;
 }());
 var allContacts = new ContactList(JSON.parse(localStorage.getItem('contactList')).allContacts);
-var loggedInUser = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups);
+var loggedInUser = new User(JSON.parse(localStorage.getItem('currentUser')).userImg, JSON.parse(localStorage.getItem('currentUser')).userName, JSON.parse(localStorage.getItem('currentUser')).userPhone, JSON.parse(localStorage.getItem('currentUser')).userGroups); //YS: Separate this into more readable code.
 var readURL = function (input) {
     try {
         if (input.files && input.files[0]) {

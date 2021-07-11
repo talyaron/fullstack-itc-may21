@@ -1,0 +1,65 @@
+* {
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-image: url("https://res.cloudinary.com/practicaldev/image/fetch/s--WAKqnINn--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/tw0nawnvo0zpgm5nx4fp.png");
+}
+
+.users {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.users__item {
+  cursor: pointer;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-columns: 200px;
+      grid-template-columns: 200px;
+  -ms-grid-rows: 200px 50px 50px;
+      grid-template-rows: 200px 50px 50px;
+      grid-template-areas: "img" "username" "phone";
+  background-color: white;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+  padding: 20px;
+  border-radius: 50px;
+  margin: 50px;
+}
+
+.users__item #user_img {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: img;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+}
+
+.users__item #user_name {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: username;
+}
+
+.users__item #user_phone {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: phone;
+}
+/*# sourceMappingURL=users.css.map */

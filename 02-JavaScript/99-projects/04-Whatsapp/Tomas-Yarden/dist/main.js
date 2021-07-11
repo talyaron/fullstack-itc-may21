@@ -1,35 +1,11 @@
-/*This is the main WhatsApp page,
-with modals and the option to add contact*/
-//Top modal:
-var openMenuModal = function (event) {
-    try {
-        var topModal = document.querySelector('.top-modal');
-        topModal.style.display = "block";
-    }
-    catch (error) {
-        console.error(error);
-    }
-};
-var closeMenuModal = function (event) {
-    try {
-        var body = document.getElementsByName('body');
-        var topModal = document.querySelector('.top-modal');
-        topModal.style.display = "none";
-    }
-    catch (error) {
-        console.error(error);
-    }
-};
-//Add contact modal form:
-var openBottomModal = function (event) {
-    try {
-        var bottomModal = document.querySelector('.add-contact');
-        bottomModal.style.display = "flex";
-    }
-    catch (error) {
-        console.error(error);
-    }
-};
+/*This is the main WhatsApp page.
+Features:
+Top modal to simulate the WhatsApp menu;
+search area (for now, unfunctional) navbar;
+bottom modal for adding contacts with form;
+when clicking the image, the 2nd navbar pops up (cloned from WhatsApp) with the option to delete;
+when clicking the info section of a message, user is redirected to the chat page
+*/
 var Contact = /** @class */ (function () {
     function Contact(image, name, message, time) {
         this.image = image;
@@ -40,12 +16,12 @@ var Contact = /** @class */ (function () {
     }
     return Contact;
 }());
-var Contacts = /** @class */ (function () {
-    function Contacts() {
+var ContactList = /** @class */ (function () {
+    function ContactList() {
         this.contacts = [];
     }
     //Adding a new contact
-    Contacts.prototype.render = function () {
+    ContactList.prototype.render = function () {
         try {
             var rootDiv = document.querySelector(".saved-contacts-root");
             var htmlPattern_1 = "";
@@ -58,12 +34,30 @@ var Contacts = /** @class */ (function () {
             console.error(error);
         }
     };
-    Contacts.prototype.remove = function (id) {
+    //Removing a contact - works :)
+    ContactList.prototype.remove = function (id) {
         try {
             var indexToRemove = this.contacts.findIndex(function (element) { return element.id === id; });
             this.contacts.splice(indexToRemove, 1);
             this.render();
             returnToMainNav(id); //Update local storage:
+            var contactSerialized = JSON.stringify(whatsAppContacts);
+            localStorage.setItem("whatsAppContacts", contactSerialized);
+            var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts")); //YS: This is not being used.
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
+    //Editing a contact - does not work ):
+    ContactList.prototype.edit = function (id) {
+        try {
+            var indexToEdit = this.contacts.findIndex(
+            //YS: Use find
+            function (element) { return element.id === id; });
+            console.log(indexToEdit);
+            this.render();
+            returnToMainNav(id);
             var contactSerialized = JSON.stringify(whatsAppContacts);
             localStorage.setItem("whatsAppContacts", contactSerialized);
             var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"));
@@ -72,9 +66,9 @@ var Contacts = /** @class */ (function () {
             console.error(error);
         }
     };
-    return Contacts;
+    return ContactList;
 }());
-var whatsAppContacts = new Contacts();
+var whatsAppContacts = new ContactList();
 //Adding a new contact:
 var handleSubmit = function (event) {
     try {
@@ -87,16 +81,85 @@ var handleSubmit = function (event) {
         var message = event.target[2].value;
         var time = event.target[3].value;
         var newContact = new Contact(img, name, message, time);
-        whatsAppContacts.contacts.push(newContact);
+        whatsAppContacts.contacts.push(newContact); //YS: Why dont you have an addContact method in your ContactList?
         //Update local storage:
         var contactSerialized = JSON.stringify(whatsAppContacts);
         localStorage.setItem("whatsAppContacts", contactSerialized);
-        var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts"));
+        var contactDeserialized = JSON.parse(localStorage.getItem("whatsAppContacts")); //YS: This is not being used
         //Refresh contacts list
         whatsAppContacts.render();
         event.target.reset(); //Now just close the modal:
-        var bottomModal = document.querySelector('.add-contact');
+        var bottomModal = document.querySelector(".add-contact");
         bottomModal.style.display = "none";
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+//Delete contact onclick:
+var handleDelete = function (id) {
+    try {
+        if (whatsAppContacts === null) {
+            //YS: if (!whatsAppContacts)
+            throw new Error("Must have the contacts array!");
+        }
+        whatsAppContacts.remove(id);
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+var handleEdit = function (id) {
+    try {
+        if (whatsAppContacts === null) {
+            throw new Error("Must have the contacts array!");
+        }
+        whatsAppContacts.edit(id);
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+/* Modal and helper functions */
+//Top modal:
+var openMenuModal = function (event) {
+    //YS: You are not using the event, you dont need it
+    try {
+        var topModal = document.querySelector(".top-modal");
+        topModal.style.display = "block";
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+var closeMenuModal = function (event) {
+    //YS: You are not using the event, you dont need it
+    try {
+        var body = document.getElementsByName("body"); //YS: not being used
+        var topModal = document.querySelector(".top-modal");
+        topModal.style.display = "none";
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+//Add contact modal form:
+var openBottomModal = function (event) {
+    //YS: You are not using the event, you dont need it
+    try {
+        var bottomModal = document.querySelector(".add-contact");
+        bottomModal.style.display = "flex";
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+var openSearch = function (event) {
+    try {
+        var menu = document.querySelector("nav");
+        menu.hidden = true;
+        var searchMenu = document.querySelector("#search-nav");
+        searchMenu.attributes[1].value = "display: flex";
     }
     catch (error) {
         console.error(error);
@@ -108,7 +171,7 @@ var showEditNav = function (event) {
         var menu = document.querySelector("nav");
         menu.hidden = true;
         var editMenu = document.querySelector("#editNav");
-        editMenu.attributes[1].value = "display: block";
+        editMenu.attributes[1].value = "display: block"; //YS: You can also do: editMenu.getAttribute('style')
     }
     catch (error) {
         console.error(error);
@@ -116,8 +179,11 @@ var showEditNav = function (event) {
 };
 //Close bottom modal after adding contact:
 var returnToMainNav = function (event) {
+    //YS: Good, no event needed
     try {
+        var searchMenu = document.querySelector("#search-nav");
         var editMenu = document.querySelector("#editNav");
+        searchMenu.attributes[1].value = "display: none";
         editMenu.attributes[1].value = "display: none";
         var menu = document.querySelector("nav");
         menu.hidden = false;
@@ -126,18 +192,12 @@ var returnToMainNav = function (event) {
         console.error(error);
     }
 };
-//Delete contact onclick:
-var handleDelete = function (id) {
+//Redirection to the chat when clicking the info section of a contact:
+var goToChat = function (event) {
     try {
-        if (whatsAppContacts === null) {
-            throw new Error("Must have the contacts array!");
-        }
-        whatsAppContacts.remove(id);
+        window.location.href = "./index.html"; //YS: This is not taking you to the contacts chat, its always taking you to the same place. Should be: "./index.html?id=${contactId}"
     }
     catch (error) {
         console.error(error);
     }
-};
-var goToChat = function (event) {
-    window.location.href = "/02-JavaScript/99-projects/04-Whatsapp/Tomas-Yarden/index.html";
 };

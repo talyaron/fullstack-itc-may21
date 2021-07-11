@@ -96,6 +96,7 @@ main .contact-container__contact-image {
   border-radius: 50%;
   margin-right: 0.2em;
   object-fit: cover;
+  max-width: 50px;
 }
 main .contact-container__info-container {
   flex-flow: column nowrap;
@@ -153,7 +154,7 @@ main .contact-container__info-container .last-message {
   border: rgba(0, 0, 0, 0.582) 1px solid;
   padding: 0.3em;
   margin: 0.2em;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   display: none;
   flex-direction: column;
@@ -173,4 +174,22 @@ main .contact-container__info-container .last-message {
 
 .fa-trash::before {
   color: rgba(255, 255, 255, 0.747);
+}
+
+.fa-edit::before {
+  color: rgba(255, 255, 255, 0.747);
+}
+
+#search-nav {
+  align-items: center;
+  justify-content: center;
+  padding: 0.3em;
+}
+#search-nav input {
+  padding: 0.5em;
+  margin: 2em;
+  border: grey 1px solid;
+}
+#search-nav.fa-arrow-left {
+  justify-self: left;
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dist/main_page.css">
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <title>Groups Randomizer</title>
+</head>
+<body class="flex_row_center">
+
+    <header class="header flex_row_center">
+        <h1 class="header__item header__item--title">Welcome to the Groups Randomizer!</h1>
+        <form class="header__item header__item--form add_members_form" onsubmit="addMemberSubmit(event)">
+            <div class="add_members_form__item">
+                <label for="member_name_form">Member Name <span class="required">*</span></label>
+                <input type="string" minlength="2" maxlength="30" name="memberName" placeholder="enter name" title="2-30 characters"
+                    required id="member_name_form" />
+            </div>
+            <div class="add_members_form__item add_members_form__item--img">
+                <label for="member_img_form" id="add_photo" alt="https://i1.wp.com/researchictafrica.net/wp/wp-content/uploads/2016/10/default-profile-pic.jpg">Member Image</label>
+                <input type="file" name="memberImg" id="member_img_form" onchange="readURL(this);" style="display:none" />
+            </div>
+            <input class="add_members_form__item add_members_form__item--submit submit" type="submit" name="submit" value="✓" />
+        </form>
+    </header>
+
+    <main class="main flex_row_center">
+        <section class="main__item main__item--header">
+            <h2 id="main_form_title">Set & Randomize</h2>
+            <form id="main_form" class="create_random_groups_form" onsubmit="randomizeGroupsSubmit(event)">
+                <div class="create_random_groups_form__item create_random_groups_form__item--membersPerGroup">
+                    <label for="random_group_membersPerGroup">Members per Group <span class="required">*</span></label>
+                    <input type="number" min="1" name="membersPerGroup" placeholder="how many members per group?" title="1-∞" required id="random_group_membersPerGroup" />
+                </div>
+                <input class="create_random_groups_form__item create_random_groups_form__item--submit submit" type="submit" name="submit" value="✓" />
+            </form>
+        </section>
+        <section class="main__item main__item--members members">
+        </section>
+    </main>
+
+    <script src="./dist/main_page.js"></script>
+    <script src="./dist/helpers.js"></script>
+</body>
+</html>

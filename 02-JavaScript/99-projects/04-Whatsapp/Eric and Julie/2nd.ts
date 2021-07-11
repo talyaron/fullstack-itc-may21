@@ -1,6 +1,6 @@
 const savedContacts = JSON.parse(localStorage.getItem("contactsData"));
 const getID = localStorage.getItem("contactID");
-const userFilter = savedContacts.filter((el) => el.contactId === getID);
+const userFilter = savedContacts.filter((el) => el.contactId === getID); //YS: Why is this up here? 
 const conversation = <HTMLInputElement>(document.querySelector(".envelope__typing--input-entry"));
 const envelope__contact = document.querySelector(".renderFirst");
 const chatContainer: any = document.querySelector(".envelope__chat");
@@ -15,7 +15,7 @@ function renderChats(): void {
     html += `<div class="renderSecond">
                  <img src="${element.image}" alt="" class="renderSecond__imageA">              
                  <h4 class="renderSecond__nameA">${element.contactName}</h4>                    
-              </div> `;
+              </div> `; //YS: Why did you leave the alt empty in your image. It is important to always have an alt in case your image does not load (alt shoud be text)
   });
   try {
     envelope__contact.innerHTML = html;
@@ -31,12 +31,12 @@ const id = currentUrl.slice(idIndex + 3);
 
 renderChats();
 
-const currentUser = savedContacts.find((contact) => contact.contactId === id);
+const currentUser = savedContacts.find(contact => contact.contactId === id); //YS: This is the same as your userFilter in line 3.  
 
 send.addEventListener("click", sendMessage);
 
 //press enter and send a msg
-input.addEventListener("keyup", (e) => {
+input.addEventListener("keyup", (e) => { //YS: Nice! 
   if (e.keyCode === 13) {
     sendMessage();
   }
@@ -54,7 +54,7 @@ function sendMessage() {
 }
 
 
-function redirect2() {
+function redirect2() { //YS: Bad naming - should be goBack or something else
   try {
     window.location.href = "first.html";
     if (!window.location.href)
@@ -65,7 +65,7 @@ function redirect2() {
 }
 
 //open paperClip to add files
-const paperClip = document.querySelector('.paper')
+const paperClip = document.querySelector('.paper')    //YS: Dont leave unfinished code. 
 
 function open() {
   let file = document.getElementById("file").click();

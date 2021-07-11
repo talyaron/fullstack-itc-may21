@@ -14,92 +14,70 @@ class TodosLosMensajes {
     addNewMsg(msg) {
         this.msgs.push(msg);
         localStorage.setItem("TodosLosMensajes", JSON.stringify(this.msgs));
-        
+
     }
 }
 const allOfMsgs = new TodosLosMensajes();
 //function for collecting text input 
 //options: maybe try arrow function later + make it work by icon click
 function handleSubmit(ev) {
-    ev.preventDefault();
-    const text = ev.target.elements.text.value;
-    const msg: Mensaje = new Mensaje(text);
-    allOfMsgs.addNewMsg(msg);
-    window.location.reload();
-    
-    
-    
+    try {
+        ev.preventDefault();
+        const text = ev.target.elements.text.value;
+        const msg: Mensaje = new Mensaje(text);
+        allOfMsgs.addNewMsg(msg);
+        window.location.reload();
+    } catch (e) {
+        console.error(e)
+    }
 }
 // render on DOM
 function renderOnDOM() {
-    const data :HTMLElement = document.querySelector(".data");
-    allOfMsgs.msgs.forEach(msg => {
-        data.insertAdjacentHTML('beforeend',`<div class="allmsgs chat_wrapper--user1"><p>${msg.text}</p></div>`);
-        
-    });
-    let contactForChat = JSON.parse(localStorage.getItem("contactForChat"));
-    console.log(contactForChat);
-    // const titleContact = document.querySelector(".title_contact");
-    const headerContact = document.querySelector(".header_profile");
-    
-    headerContact.insertAdjacentHTML('beforeend',`<div class="headrestyle"><img style="width: 6.5rem; height: 6rem; position: relative; left: 3rem;" class="header_img_profile"
-    src="${contactForChat.profileImg}"
-    alt=""><h1>${contactForChat.name}</h1></div>`);
-    // imgContact.insertAdjacentHTML('beforeend',`<img class="header_img_profile"
-    // src="${contactForChat.profileImg}"
-    // alt="">`);
-}
+    try {
+        const data: HTMLElement = document.querySelector(".data");
+        allOfMsgs.msgs.forEach(msg => {
+            data.insertAdjacentHTML('beforeend', `<div class="allmsgs chat_wrapper--user1"><p>${msg.text}</p></div>`);
 
-// function showPersonaOnDOM() {
-//     const allPpl = JSON.parse(localStorage.getItem('contactos'));
-//     // const lastPersonaIndex = allPpl.length - 1;
-//     const lastPersona = allPpl[personClicked];
-//     const data = document.querySelector(".data");
-//     data.insertAdjacentHTML('beforeend',`<div class="allmsgs chat_wrapper--user1"><p>${msg.text}</p></div>`);
-// }
+        });
+        let contactForChat = JSON.parse(localStorage.getItem("contactForChat"));
+        let groupForChat = JSON.parse(localStorage.getItem("groupForChat"));
+        console.log(contactForChat);
+        const headerContact = document.querySelector(".header_chat");
+
+        if (contactForChat && !groupForChat) {
+            headerContact.insertAdjacentHTML('afterbegin', `<div class="info_chat"><img class="header_img_profile"
+      src="${contactForChat.profileImg}"
+      alt=""><h1 class="title_chat">${contactForChat.name}</h1><a href="index.html"><i class="far fa-arrow-alt-circle-left fa-4x arrow_icon"></i></a></div>`);
+        } if (groupForChat && !contactForChat) {
+            headerContact.insertAdjacentHTML('afterbegin', `<div class="info_chat"><img class="header_img_profile"
+      src="${groupForChat.groupIMG}"
+      alt=""><h1 class="title_chat">${groupForChat.groupName}</h1><a href="index.html"><i class="far fa-arrow-alt-circle-left fa-4x arrow_icon"></i></a></div>`);
+        }
+    } catch (e) {
+        console.error(e)
+    }
+}
 
 renderOnDOM();
-// showPersonaOnDOM();
 
-function idContactForChat(id){
-    let getContactChat = JSON.parse(localStorage.getItem("contactos"));
-    const idContact = getContactChat.find((contact) => contact.id === id);
-    // renderContactInChat(getContactSelected);
-    console.log(idContact);
-    console.log(idContact.name);
-    localStorage.setItem("contactForChat", JSON.stringify(idContact));
+function idContactForChat(id) {
+    try {
+        let getContactChat = JSON.parse(localStorage.getItem("contactos"));
+        const idContact = getContactChat.find((contact) => contact.id === id);
+        localStorage.setItem("contactForChat", JSON.stringify(idContact));
+    } catch (e) {
+        console.error(e)
+    }
 }
 
-// function renderContactInChat() {
-//     // const containerChat: HTMLElement = document.querySelector(".header_profile");
-//     let contactForChat = JSON.parse(localStorage.getItem("contactForChat"));
-//     console.log(contactForChat);
-//     // containerChat.appendChild(div)
-//     // let htmlChat= "";
- 
-//     //     htmlChat += `
-//     //     <img class="header_img_profile"
-//     //     src="${contactForChat.profileImg}"
-//     //     alt="">
-//     //   <h1>${contactForChat.name}</h1>
-//     //   <div class="header_icon">
-//     //     <a class="btn_icons" href=""><i
-//     //         class="fa fa-search fa fa-2x search_icon"></i></a>
-//     //     <a class="btn_icons" href=""><i class="fas fa-ellipsis-v fa-2x"></i></a>
-//     //   </div>`
-
-//       const titleContact = document.querySelector(".title_contact");
-//       const imgContact = document.querySelector(".header_profile");
-      
-//       titleContact.insertAdjacentHTML('beforeend',`<h1>${contactForChat.name}</h1>`);
-//       imgContact.insertAdjacentHTML('beforeend',`<img class="header_img_profile"
-//       src="${contactForChat.profileImg}"
-//       alt="">`);
-//       console.log(contactForChat.name)
-
-//     //   containerChat.innerHTML = htmlChat;
-
-// }
+function idGroupForChat(id) {
+    try {
+        let getGroupChat = JSON.parse(localStorage.getItem("grups"));
+        const idGroup = getGroupChat.find((group) => group.id === id);
+        localStorage.setItem("groupForChat", JSON.stringify(idGroup));
+    } catch (e) {
+        console.error(e)
+    }
+}
 
 
-    

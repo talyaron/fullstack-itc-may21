@@ -46,6 +46,7 @@ body {
 }
 .messages .single__message {
   background-color: #DCF8C6;
+  border-radius: 10px;
   display: table;
   margin: 2rem;
   padding: 0 1rem;

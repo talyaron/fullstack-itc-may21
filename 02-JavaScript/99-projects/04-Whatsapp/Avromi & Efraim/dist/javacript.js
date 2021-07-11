@@ -75,7 +75,7 @@ function getImgData() {
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL(files);
                 fileReader.addEventListener("load", function () {
-                    image = this.result;
+                    image = this.result; //YS: Here you should return image
                 });
             }
         });
@@ -88,7 +88,7 @@ getImgData();
 function handleSubmit(ev) {
     ev.preventDefault();
     try {
-        var imgUrl = image;
+        var imgUrl = image; //YS: Here you should use your getImgData which returns the image: < let imgUrl = getImageData() >
         var name = ev.target.children.name.value;
         var phoneNumber = ev.target.children.number.value;
         var holder = document.querySelector('.holder');
@@ -96,7 +96,7 @@ function handleSubmit(ev) {
             throw new Error('No holder!');
         }
         contacts.addContact(new Contact(name, imgUrl, phoneNumber));
-        contacts.renderContacts(holder);
+        contacts.renderContacts(holder); //YS: Why are you passing the holder as a parameter, it is uncessary. You can just select it in your renderContacts function. 
         localStorage.setItem('contacts', JSON.stringify(contacts.contacts));
         document.getElementById("myForm").style.display = "none";
         ev.target.reset();
@@ -134,7 +134,7 @@ var addToDomWithArray = function (searchResults) {
         }
         searchResults.forEach(function (contact) {
             var index = parseInt(contact.chats.length - 1);
-            var timeHoursAndMinutes = new Date(contact.chats[index].timeStamp);
+            var timeHoursAndMinutes = new Date(contact.chats[index].timeStamp); //YS; You could have made this into a function since its the second time you are using it.
             var hrs = timeHoursAndMinutes.getHours();
             var min = timeHoursAndMinutes.getMinutes();
             if (min < 10) {
@@ -182,7 +182,8 @@ var handleKeyUp = function (ev) {
         var finalSearchArrayResults = results.concat(searchMessages);
         var obj = {};
         for (var i = 0; i < finalSearchArrayResults.length; i++)
-            obj[finalSearchArrayResults[i]['name']] = finalSearchArrayResults[i];
+            obj[finalSearchArrayResults[i]['name']] = finalSearchArrayResults[i]; /* YS: You are over complicating yourself here. Not sure why you did all of this -  also causing problems in search.
+                                                                                    All you needed was the findContactsSearch. Also - please dont use var keyword. */
         finalSearchArrayResults = new Array();
         for (var key in obj)
             finalSearchArrayResults.push(obj[key]);
@@ -212,7 +213,7 @@ function renderContactsFromLocalStorage() {
 renderContactsFromLocalStorage();
 function openForm() {
     try {
-        var formOpen = document.querySelector(".header__new-convo");
+        var formOpen = document.querySelector(".header__new-convo"); //YS: It is not intuitive that this is the button to add a new contact
         formOpen.addEventListener('click', function () {
             document.getElementById("myForm").style.display = "block";
         });

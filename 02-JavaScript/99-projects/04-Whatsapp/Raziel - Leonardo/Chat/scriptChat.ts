@@ -21,7 +21,6 @@ function renderChat(): void {
                         <div class="right">
                             <img src="../Img_whatsapp/video.png" class="icon">
                             <img src="../Img_whatsapp/phone.png" class="icon">
-                            <!-- <img src="../Img_whatsapp/camera.png" class="icon"> -->
                         </div>
                     </div>
                 </div>
@@ -42,7 +41,7 @@ function renderChat(): void {
                     <input type="text" placeholder="Type a message" id="input"></input>
                     <div class="icons">
                         <img src="../Img_whatsapp/attach file.png">
-                        <img src="../Img_whatsapp/camera.png">
+                        <img src="../Img_whatsapp/camera.png" id="buttonCam">
                     </div>
                     
                     <img src="https://img.icons8.com/material-outlined/50/000000/send-comment.png"/ id="sendButton">
@@ -91,7 +90,7 @@ function redirectBack(): void {
 
 
 //Declare this variables to do the function to send the message
-const texting: any = document.querySelector('#input');
+const texting: any = document.querySelector('#input'); //YS: Good
 const sendButton: HTMLElement = document.querySelector('#sendButton');
 
 try {
@@ -113,7 +112,7 @@ try {
 }
 
 //Function to render the information inside the chat
-function renderInsideChat(message: Message): void {
+function renderInsideChat(message: Message): void { //YS: Good
     try {
         let chatArea = document.querySelector('.chat-box');
         let temp = `
@@ -135,7 +134,7 @@ function renderInsideChat(message: Message): void {
 };
 
 //With this function we render the old messages for the conversation at the beginning
-function renderOldConversation(): void {
+function renderOldConversation(): void { 
     try {
         userfiltered[0].message.forEach(element => {
             renderInsideChat(element)
@@ -149,12 +148,12 @@ function renderOldConversation(): void {
 renderOldConversation();
 
 //Function to add the emojis in the chat
-const button = document.querySelector('#emoji-button');
+const button = document.querySelector('#emoji-button'); 
 
-const picker = new EmojiButton();
+const picker = new EmojiButton(); //YS: Nice
 picker.on('emoji', emoji => {
     document.querySelector('#input').value += emoji;
-  });
+});
 button.addEventListener('click', () => {
-  picker.togglePicker(button);
+    picker.togglePicker(button);
 });
