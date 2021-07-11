@@ -17,7 +17,6 @@ class Contact {
         this.chats = chats;
         this.contactId = Math.random().toString(16).slice(2);
 
-
     }
 }
 
