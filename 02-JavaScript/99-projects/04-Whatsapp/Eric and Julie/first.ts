@@ -108,18 +108,18 @@ function handleKeyUp() {
   }
 }
 
-function redirect(contactId) {
-  try {
-    localStorage.setItem("contactID", contactId);
+      function redirect(contactId) {
+        try {
+          localStorage.setItem("contactID", contactId);
 
-    window.location.href = `second.html?id=${contactId}`;
+          window.location.href = `second.html?id=${contactId}`;
 
-    if (!window.location.href)
-      throw new Error("The page where you want to redirect it doesn´t exist!");
-  } catch (error) {
-    console.error(error);
-  }
-}
+          if (!window.location.href)
+            throw new Error("The page where you want to redirect it doesn´t exist!");
+        } catch (error) {
+          console.error(error);
+        }
+      }
 console.log(contacts)
 const handleSubmit = (event) => {
   event.preventDefault();

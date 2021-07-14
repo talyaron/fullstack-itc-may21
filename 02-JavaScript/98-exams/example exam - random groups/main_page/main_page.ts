@@ -65,8 +65,9 @@ class MembersPool {
         } catch (er) {
             console.error(er);
         }
-    }
 
+    }
+    
     renderMembers() {
         try {
             this.membersPool.sort((a: GroupMember, b: GroupMember) => {
