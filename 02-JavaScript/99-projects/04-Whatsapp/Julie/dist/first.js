@@ -23,9 +23,9 @@ var Contacts = /** @class */ (function () {
         this.contacts = [];
         this.contactsFilter = [];
     }
-    Contacts.prototype.add = function (add) {
+    Contacts.prototype.add = function (add, joni2) {
+        this.contacts = joni2;
         this.contacts.push(add);
-        this.renderContacts();
         this.contactsFilter.push(add);
         localStorage.setItem('contactsData', JSON.stringify(this.contacts));
     };
@@ -40,7 +40,8 @@ var Contacts = /** @class */ (function () {
     };
     Contacts.prototype.renderContacts = function () {
         var html = "";
-        this.contacts.forEach(function (element) {
+        var joni = JSON.parse(localStorage.getItem('contactsData'));
+        joni.forEach(function (element) {
             html += "<div class=\"containerChat\">\n                    <div class=\"chat1\" onclick=redirect(\"" + element.contactId + "\")>\n                      <img src=\"" + element.image + "\" alt=\"\" class=\"chat1__photo\"> \n                      <h4 class=\"chat1__name\">" + element.contactName + "</h4>\n                    </div>\n                    <div>\n                      <i onclick='handleDelete(\"" + element.contactId + "\")' class=\"far fa-trash-alt\" id=\"delete\"> </i>\n                    </div>\n                </div>";
         });
         render.innerHTML = html;
@@ -74,7 +75,6 @@ function handleKeyUp() {
 }
 function redirect(contactId) {
     try {
-        localStorage.setItem("contactsData", JSON.stringify(contacts.contacts));
         localStorage.setItem("contactID", contactId);
         window.location.href = "second.html?id=" + contactId;
         if (!window.location.href)
@@ -84,6 +84,7 @@ function redirect(contactId) {
         console.error(error);
     }
 }
+console.log(contacts);
 var handleSubmit = function (event) {
     event.preventDefault();
     try {
@@ -95,9 +96,12 @@ var handleSubmit = function (event) {
         if (phone === null)
             throw Error("Put a number");
         var generator = new ContactGenerator(contactName, image, phone);
-        contacts.add(generator);
+        var joni2 = JSON.parse(localStorage.getItem('contactsData'));
+        contacts.add(generator, joni2);
+        console.log("a", joni2);
         contacts.renderContacts();
-        cerrar();
+        console.log(contacts);
+        closeModal();
     }
     catch (error) {
         alert(error);

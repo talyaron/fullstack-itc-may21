@@ -50,7 +50,7 @@ class ContactList {
     }
 
     // addContact(contact: User) {
-    //     this.allContacts.push(contact);
+    //     this.allContacts.push(contact);           YS: No commented code. 
     // }
 
     

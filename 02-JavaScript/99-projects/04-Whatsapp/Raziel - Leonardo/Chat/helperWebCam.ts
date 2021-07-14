@@ -30,7 +30,7 @@ window.onclick = function (event) {
 
 const pictureLogo = document.querySelector('#buttonCam');
 
-pictureLogo.addEventListener('click', startup);
+pictureLogo.addEventListener('click', startup);  //YS: Good, why didnt you make all eventlisteners like that instead of object notation? 
 
 const width = 320; // We will scale the photo width to this
 let height = 0; // This will be computed based on the input stream
@@ -42,7 +42,7 @@ let canvas = null;
 let photo = null;
 let startbutton = null;
 
-function startup() {
+function startup() {  //YS: EXCELLENT WORK! 
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');

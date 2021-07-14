@@ -205,9 +205,10 @@ main .contact-container__info-container .last-message {
 
 .add-contact {
   background-color: white;
-  border: white 1px solid;
+  border: rgba(0, 0, 0, 0.582) 1px solid;
+  padding: 0.3em;
   margin: 0.2em;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   display: none;
   -webkit-box-orient: vertical;
@@ -229,5 +230,30 @@ main .contact-container__info-container .last-message {
 .add-contact #submit {
   background-color: #128c7e;
   color: white;
+}
+
+.fa-trash::before {
+  color: rgba(255, 255, 255, 0.747);
+}
+
+#search-nav {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0.3em;
+}
+
+#search-nav input {
+  padding: 0.5em;
+  margin: 2em;
+  border: grey 1px solid;
+}
+
+#search-nav.fa-arrow-left {
+  -ms-grid-column-align: left;
+      justify-self: left;
 }
 /*# sourceMappingURL=main.css.map */

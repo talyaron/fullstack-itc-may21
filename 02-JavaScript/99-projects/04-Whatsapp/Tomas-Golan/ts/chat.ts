@@ -14,46 +14,70 @@ class TodosLosMensajes {
     addNewMsg(msg) {
         this.msgs.push(msg);
         localStorage.setItem("TodosLosMensajes", JSON.stringify(this.msgs));
-        
+
     }
 }
 const allOfMsgs = new TodosLosMensajes();
 //function for collecting text input 
 //options: maybe try arrow function later + make it work by icon click
 function handleSubmit(ev) {
-    ev.preventDefault();
-    const text = ev.target.elements.text.value;
-    const msg: Mensaje = new Mensaje(text);
-    allOfMsgs.addNewMsg(msg);
-    window.location.reload();
-    
+    try {
+        ev.preventDefault();
+        const text = ev.target.elements.text.value;
+        const msg: Mensaje = new Mensaje(text);
+        allOfMsgs.addNewMsg(msg);
+        window.location.reload();
+    } catch (e) {
+        console.error(e)
+    }
 }
 // render on DOM
 function renderOnDOM() {
-    const data :HTMLElement = document.querySelector(".data");
-    allOfMsgs.msgs.forEach(msg => {
-        data.insertAdjacentHTML('beforeend',`<div class="allmsgs chat_wrapper--user1"><p>${msg.text}</p></div>`);
-        
-    });
-    let contactForChat = JSON.parse(localStorage.getItem("contactForChat"));
-    console.log(contactForChat);
-    const headerContact = document.querySelector(".header_chat");
-      
-      headerContact.insertAdjacentHTML('beforeend',`<img class="header_img_profile"
+    try {
+        const data: HTMLElement = document.querySelector(".data");
+        allOfMsgs.msgs.forEach(msg => {
+            data.insertAdjacentHTML('beforeend', `<div class="allmsgs chat_wrapper--user1"><p>${msg.text}</p></div>`);
+
+        });
+        let contactForChat = JSON.parse(localStorage.getItem("contactForChat"));
+        let groupForChat = JSON.parse(localStorage.getItem("groupForChat"));
+        console.log(contactForChat);
+        const headerContact = document.querySelector(".header_chat");
+
+        if (contactForChat && !groupForChat) {
+            headerContact.insertAdjacentHTML('afterbegin', `<div class="info_chat"><img class="header_img_profile"
       src="${contactForChat.profileImg}"
-      alt=""><h1>${contactForChat.name}</h1>`);
+      alt=""><h1 class="title_chat">${contactForChat.name}</h1><a href="index.html"><i class="far fa-arrow-alt-circle-left fa-4x arrow_icon"></i></a></div>`);
+        } if (groupForChat && !contactForChat) {
+            headerContact.insertAdjacentHTML('afterbegin', `<div class="info_chat"><img class="header_img_profile"
+      src="${groupForChat.groupIMG}"
+      alt=""><h1 class="title_chat">${groupForChat.groupName}</h1><a href="index.html"><i class="far fa-arrow-alt-circle-left fa-4x arrow_icon"></i></a></div>`);
+        }
+    } catch (e) {
+        console.error(e)
+    }
 }
 
 renderOnDOM();
 
-function idContactForChat(id){
-    let getContactChat = JSON.parse(localStorage.getItem("contactos"));
-    const idContact = getContactChat.find((contact) => contact.id === id);
-    console.log(idContact);
-    console.log(idContact.name);
-    localStorage.setItem("contactForChat", JSON.stringify(idContact));
+function idContactForChat(id) {
+    try {
+        let getContactChat = JSON.parse(localStorage.getItem("contactos"));
+        const idContact = getContactChat.find((contact) => contact.id === id);
+        localStorage.setItem("contactForChat", JSON.stringify(idContact));
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+function idGroupForChat(id) {
+    try {
+        let getGroupChat = JSON.parse(localStorage.getItem("grups"));
+        const idGroup = getGroupChat.find((group) => group.id === id);
+        localStorage.setItem("groupForChat", JSON.stringify(idGroup));
+    } catch (e) {
+        console.error(e)
+    }
 }
 
 
-
-    

@@ -1,0 +1,142 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  -webkit-animation: body 5s linear infinite alternate both;
+          animation: body 5s linear infinite alternate both;
+}
+
+@-webkit-keyframes body {
+  0% {
+    background: #5b84f5;
+  }
+  100% {
+    background: #fafafc;
+  }
+}
+
+@keyframes body {
+  0% {
+    background: #5b84f5;
+  }
+  100% {
+    background: #fafafc;
+  }
+}
+
+.container {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  margin: auto;
+  width: 70%;
+}
+
+.container .head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#product-form {
+  margin-top: 10px;
+  width: 100%;
+}
+
+#product-form legend {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#product-form input {
+  text-align: center;
+  background-color: white;
+}
+
+#product-form .btn-product {
+  background-color: green;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+#product-form .btn-product:disabled {
+  cursor: not-allowed;
+}
+
+#product-form .btn-product:hover {
+  opacity: 0.6;
+}
+
+#product-form .btn-product {
+  -webkit-animation: btn-product 3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: btn-product 3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+@-webkit-keyframes btn-product {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+}
+
+@keyframes btn-product {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+}
+
+#product-form fieldset {
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.table-product {
+  margin: auto;
+  width: 70%;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.editForm {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.editForm .btn-productEdit {
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.editForm .btn-productEdit:hover {
+  opacity: 0.6;
+}
+/*# sourceMappingURL=crud.css.map */

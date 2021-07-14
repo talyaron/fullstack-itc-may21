@@ -1,14 +1,10 @@
-///NOTA PARA MANANA VER LOS DE CREAR UN RANDOM ID Y HACER LO DE INDEX PARA FILTAR Y BORRAR
-//PONER BIEN LOS NOMBRES LUEGO DE PASAR LA SECION DE PPRUEBA
-
-//  const filterOption:HTMLElement = document.querySelector('.filter-todo');
 let updateElement;
 let filterSearch;
 const show: HTMLElement = document.querySelector(".show");
-
 const select: any = document.querySelector(".filter-todo");
-
 const search = document.getElementById("search");
+let getLocal = JSON.parse(localStorage.getItem("savePokemon"));
+console.log(getLocal);
 
 // const inputName = <HTMLInputElement>document.getElementById("name");
 // const inputImageUrl = <HTMLInputElement>document.getElementById("imageUrl");
@@ -18,11 +14,11 @@ const search = document.getElementById("search");
 
 // filterOption.addEventListener('click', filterTodo)
 
-interface PersonaInterface {
-  name: string;
-  imageUrl: string;
-  pokeType: string;
-}
+// interface PersonaInterface {
+//   name: string;
+//   imageUrl: string;
+//   pokeType: string;
+// }
 
 class IdsGenerator {
   name: string;
@@ -42,20 +38,36 @@ class Ids {
 
   add(add: IdsGenerator): void {
     this.id.push(add);
-    this.render();
-  }
-  addList(addlist: Array<IdsGenerator | PersonaInterface>) {
-    addlist.forEach((element) => {
-      const pers = new IdsGenerator(
-        element.name,
-        element.imageUrl,
-        element.pokeType
-      );
-      this.id.push(pers);
-    });
 
+    localStorage.setItem("savePokemon", JSON.stringify(this.id));
     this.render();
   }
+  //? CON LOCAL STRAGE
+  addSavePoke(add: Array<IdsGenerator>) {
+    add.forEach((elements) => {
+      const poke = new IdsGenerator(
+        elements.name,
+        elements.imageUrl,
+        elements.pokeType
+      );
+      this.id.push(poke);
+      console.log(poke);
+    });
+  }
+
+  //!CON DB ESTATICA
+  // addList(addlist: Array<IdsGenerator | PersonaInterface>) {
+  //   addlist.forEach((element) => {
+  //     const pers = new IdsGenerator(
+  //       element.name,
+  //       element.imageUrl,
+  //       element.pokeType
+  //     );
+  //     this.id.push(pers);
+  //   });
+
+  //   this.render();
+  // }
 
   bringInfo(ident: string) {
     updateElement = ident;
@@ -88,7 +100,7 @@ class Ids {
       edit.imageUrl = imageUrl;
       edit.pokeType = pokeType;
       this.bringInfo(event);
-
+      localStorage.setItem("savePokemon", JSON.stringify(this.id));
       this.render();
       //YS: You couldve added a line here to close your modal after clicking the button.
     } catch (error) {
@@ -98,6 +110,7 @@ class Ids {
 
   deleteItem(ident: string) {
     this.id = this.id.filter((element) => element.ident !== ident);
+    
     this.render();
   }
 
@@ -105,23 +118,26 @@ class Ids {
     filterSearch = event.target.value;
 
     this.searchRegs(filterSearch);
-    this.render();
+    //! this.render();
     console.log(filterSearch); //YS: Dont leave console.logs
   }
 
   searchRegs(inputSearch: string) {
     const regExp: string = inputSearch;
     const searchTermReg: RegExp = new RegExp(regExp, "gmi");
-    this.id = this.id.filter((element) => searchTermReg.test(element.name));
+    const searchPoke = this.id.filter((element) =>
+      searchTermReg.test(element.name)
+    );
 
-    // this.render()
+    this.render(searchPoke);
   }
 
   fiterItem(pokeType: string) {
     //YS: Here you could have passed the selectValue as a parameter and had 1 function instead of repeating the same function 7 times! DRY
 
     try {
-      const arrPoke = this.id.filter( //COPIA
+      const arrPoke = this.id.filter(
+        //COPIA
         (element) => element.pokeType === pokeType
       );
       this.render(arrPoke);
@@ -130,19 +146,15 @@ class Ids {
 
   render(arr?: Array<IdsGenerator>) {
     //YS: In this case you couldve passed a list of a parameter, to render a different list depending on what you do
-   // let myArr;
-    const arrayRender = arr ? arr : this.id;
-    //  if(arr){
-    //   myArr  = arr;
-    //  }else{
-    //    myArr = this.id ;
-    //  }
+    // let myArr;
+       const arrayRender = arr ? arr : this.id;
+
     const show: HTMLElement = document.querySelector(".show");
     let html: string = "";
 
     console.log(this.id); //YS: dont leave console logs
 
-    arrayRender.forEach((element) => {
+     arrayRender.forEach((element) => {
       html += `
 <div class = "poke">
       <div class= "poke-image">
@@ -152,15 +164,41 @@ class Ids {
      <div class="poke-pokeType"> <h4>${element.pokeType}</h4></div>
       <button class ="btn btn-danger"  'delete' onclick='handleDelete("${element.ident}")'>X</button>
 <button type="button" class="btn btn-primary itemInfo" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" onclick='editItem("${element.ident}")' checked>Edit</button>
+<button class ="btn btn-success"   onclick='handleInfo("${element.ident}")'>Info</button>
      </div> `;
     });
 
-    show.innerHTML = html;
+      show.innerHTML = html;
   }
 }
 
 const ids = new Ids();
-ids.addList(peronas);
+
+window.onload = function render() {
+  const show: HTMLElement = document.querySelector(".show");
+  let html: string = "";
+
+  getLocal.forEach((element) => {
+    html += `
+<div class = "poke">
+    <div class= "poke-image">
+    <img src="${element.imageUrl}" alt="">
+    </div>
+    <div class ="poke-name" ><h2 contenteditable="true"> ${element.name}</h2>  </div>  
+   <div class="poke-pokeType"> <h4>${element.pokeType}</h4></div>
+    <button class ="btn btn-danger"  'delete' onclick='handleDelete("${element.ident}")'>X</button>
+<button type="button" class="btn btn-primary itemInfo" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" onclick='editItem("${element.ident}")' checked>Edit</button>
+<button class ="btn btn-success"   onclick='handleInfo("${element.ident}")'>Info</button>
+   </div> `;
+  });
+
+  show.innerHTML = html;
+};
+if (getLocal !== null) {
+  ids.addSavePoke(getLocal);
+}
+
+// !ids.addList(peronas);
 const handleSubmit = (event) => {
   event.preventDefault();
   try {
@@ -214,3 +252,10 @@ const handleEdit = (event) => {
 const searchBar = (event) => {
   ids.searchItem(event);
 };
+
+const handleInfo = (ident:string) => {
+localStorage.setItem("pokeID",ident);
+window.location.href = `info.html?id=${ident}`
+
+
+}

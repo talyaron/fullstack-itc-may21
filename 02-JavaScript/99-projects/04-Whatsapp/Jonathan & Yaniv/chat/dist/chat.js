@@ -64,7 +64,7 @@ var User = /** @class */ (function () {
     }
     User.prototype.addMessages = function (newMess, groupId) {
         try {
-            var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; });
+            var groupIndex = this.userGroups.findIndex(function (group) { return group.groupId === groupId; }); //YS: You should use find instead of findIndex
             this.userGroups[groupIndex].groupMsgs.push(newMess);
             this.userGroupNew[groupIndex].groupMsgs.push(newMess);
             this.renderMsgs(groupId);
@@ -137,7 +137,7 @@ var ContactList = /** @class */ (function () {
     };
     return ContactList;
 }());
-var loggedInUser = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups, JSON.parse(localStorage.getItem("currentUser")).userGroups);
+var loggedInUser = new User(JSON.parse(localStorage.getItem("currentUser")).userImg, JSON.parse(localStorage.getItem("currentUser")).userName, JSON.parse(localStorage.getItem("currentUser")).userPhone, JSON.parse(localStorage.getItem("currentUser")).userGroups, JSON.parse(localStorage.getItem("currentUser")).userGroups); //YS: Separate this into more readable code
 var params = new URLSearchParams(window.location.search);
 var groupId = params.get('groupid');
 loggedInUser.renderMsgs(groupId);
@@ -152,8 +152,8 @@ function sendMessage() {
         loggedInUser.addMessages(message, groupId);
         elementMessage.value = '';
         localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-        contactList[contactList.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
-        localStorage.setItem('contactList', JSON.stringify(contactList));
+        allContacts.allContacts[allContacts.findContactIndex(loggedInUser.userPhone)] = loggedInUser;
+        localStorage.setItem('contactList', JSON.stringify(allContacts));
     }
     catch (er) {
         console.error(er);
@@ -268,21 +268,17 @@ var ContactMessage = /** @class */ (function () {
     };
     return ContactMessage;
 }());
-var contactChat = JSON.parse(localStorage.getItem("contactList"));
-var contactList = JSON.parse(localStorage.getItem("contactId"));
+var contactId = JSON.parse(localStorage.getItem("contactId"));
 var isChatOrGroup = JSON.parse(localStorage.getItem("IsChatOrGroup"));
 var contactUser = JSON.parse(localStorage.getItem("currentUser")).userPhone;
+console.log(isChatOrGroup);
 if (isChatOrGroup === 0) {
-    var chatUser = Object.values(Object.values(contactChat)[1]);
-    chatUser.find(function (chat) {
-        if (contactList === chat.userPhone) {
-            var contactUser_1 = new ContactMessage(chat.userImg, chat.userName, chat.userPhone, chat.userGroups);
-            contactUser_1.renderUserChat();
-        }
-    });
+    var chatUser = allContacts.allContacts[allContacts.findContactIndex(contactId)];
+    var contactUser_1 = new ContactMessage(chatUser.userImg, chatUser.userName, chatUser.userPhone, chatUser.userGroups);
+    contactUser_1.renderUserChat();
 }
 else {
     var currentGroup = JSON.parse(localStorage.getItem("currentGroup"));
-    var groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser);
+    var groupChat = new Group(currentGroup.groupImg, currentGroup.groupName, currentGroup.groupUsers, contactUser); //YS: This is how it should be done. 
     groupChat.renderGroupChat();
 }

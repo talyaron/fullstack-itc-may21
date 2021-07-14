@@ -1,0 +1,429 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  font-size: 62%;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*Main Grid*/
+.grid {
+  display: -ms-grid;
+  display: grid;
+  height: 100%;
+  -ms-grid-columns: (1fr)[6];
+      grid-template-columns: repeat(6, 1fr);
+  -ms-grid-rows: 12.8rem 1fr;
+      grid-template-rows: 12.8rem 1fr;
+}
+
+/*App Background*/
+.top {
+  background-color: #009688;
+  grid-column: 1/-1;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+.bottom {
+  background-color: #d7dbd6;
+  grid-column: 1/-1;
+  grid-row: 2/-1;
+  border: 2px solid black;
+}
+
+/*The app window*/
+.app {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 41rem 1fr;
+      grid-template-columns: 41rem 1fr;
+  grid-column: 1/-1;
+  grid-row: 1/-1;
+  margin: 2rem auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 1rem 0.05rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 1rem 0.05rem rgba(0, 0, 0, 0.2);
+}
+
+.sidebar {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  background: #ffffff;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.sidebar__header {
+  background: #ededed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 6rem;
+  padding: 1rem 2rem;
+}
+
+.sidebar__header img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sidebar__header--icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  cursor: pointer;
+}
+
+.sidebar__header--icons img:active {
+  background: #d5d5d5;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 1px 8px #d5d5d5;
+          box-shadow: 0 0 1px 8px #d5d5d5;
+  margin: 1.5rem 1rem;
+}
+
+.sidebar__notifications {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #9de1fe;
+  height: 9rem;
+  padding: 0 2rem;
+  cursor: pointer;
+}
+
+.sidebar__notifications img {
+  margin-right: 2rem;
+}
+
+.sidebar__notifications--message {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.sidebar__notifications--message span {
+  font-size: 1.5rem;
+  color: rgba(48, 48, 48, 0.96);
+}
+
+.sidebar__notifications--message a {
+  font-size: 1.4rem;
+  color: rgba(48, 48, 48, 0.85);
+}
+
+.sidebar__notifications--message a:hover {
+  text-decoration: underline;
+}
+
+.sidebar__notifications--message img {
+  vertical-align: middle;
+}
+
+.search-chat {
+  background: #f6f6f6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #ededed;
+}
+
+.search-bar img {
+  width: 2.8rem;
+  background: white;
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  padding-left: 1rem;
+}
+
+.search-bar input {
+  outline: none;
+  border: none;
+  padding: 1rem 1rem 1rem 2rem;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+.search-bar input::-webkit-input-placeholder {
+  color: gray;
+}
+
+.search-bar input:-ms-input-placeholder {
+  color: gray;
+}
+
+.search-bar input::-ms-input-placeholder {
+  color: gray;
+}
+
+.search-bar input::placeholder {
+  color: gray;
+}
+
+/*chats*/
+.chats {
+  height: 48rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chats::-webkit-scrollbar {
+  width: 0.7rem;
+  height: 3rem;
+}
+
+.chats::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+}
+
+.chat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: white;
+  padding: 1rem 0 0 2rem;
+  cursor: pointer;
+}
+
+.chat__left img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+
+.chat__right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 1.5rem;
+  padding-right: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ededed;
+}
+
+.chat__right--top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.chat__right--top__contact-name {
+  font-size: 1.7rem;
+}
+
+.chat__right--top__phone-number {
+  font-size: 1.2rem;
+  color: gray;
+}
+
+.chat__right--bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.chat__right--bottom--left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.chat:hover {
+  background: #f5f5f5;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Modal Content */
+}
+
+.modal-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #d5d5d5;
+  border-radius: 10%;
+}
+
+.from {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.from h1 {
+  text-align: center;
+  font-size: 3rem;
+}
+
+label {
+  font-weight: 500;
+  opacity: 0.7;
+  font-size: 2rem;
+}
+
+.form--submit {
+  display: block;
+  width: 160px;
+  margin: 20px auto;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 10px;
+  border: 3px solid #fff;
+  border-radius: 25px;
+  color: #fff;
+  background: #000411;
+  cursor: pointer;
+  opacity: 0.8;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  outline: none;
+}
+
+.form--submit:hover {
+  opacity: 1;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="file"] {
+  color: #000;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 10px 18px;
+  margin: 12px 0;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  display: block;
+  outline: none;
+  border-radius: 25px;
+  border: none;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  top: 20px;
+}
+
+.form__input--image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .app {
+    -ms-grid-columns: 35rem 1fr;
+        grid-template-columns: 35rem 1fr;
+  }
+}
+/*# sourceMappingURL=whatsapp.css.map */

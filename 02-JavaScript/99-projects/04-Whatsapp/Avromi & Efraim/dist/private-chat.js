@@ -15,16 +15,16 @@ function goBack() {
 }
 // Get Params From Query 
 var urlSearchParams = new URLSearchParams(window.location.search);
-var params = Object.fromEntries(urlSearchParams.entries());
+var params = Object.fromEntries(urlSearchParams.entries()); //YS: Better to use searchParams.get('contactId')
 //Get Array From Storage
 var allContacts = JSON.parse(localStorage.getItem('contacts'));
 //Filter Array by Params
-var thisContact = allContacts.filter(function (contact) { return contact.contactId === params.contactId; });
+var thisContact = allContacts.filter(function (contact) { return contact.contactId === params.contactId; }); //YS: Why not use find instead of filter? 
 var index = allContacts.findIndex(function (cont) { return cont.contactId === params.contactId; });
 // let OurUse = thisContact.pop()
 // console.log(OurUse); Would it have been better to work on this as an object?
 var contactName = document.querySelector(".nav__contact h2");
-contactName.innerHTML = "" + thisContact[0].name;
+contactName.innerHTML = "" + thisContact[0].name; //YS: You dont need template literals here. 
 var contactImg = document.querySelector(".nav__img__wrapper");
 contactImg.innerHTML = "<img class=\"nav__img\"\nsrc=\"" + thisContact[0].imgUrl + "\"\nalt = \"\" >";
 function updateLastSent() {

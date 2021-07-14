@@ -48,6 +48,7 @@ class Cars {
         addNewMpg();
         console.log(cars); //YS: Dont leave console.logs in your code. 
         localStorage.setItem(`cars`, JSON.stringify(cars))
+        return this
     };
 
 
@@ -58,6 +59,7 @@ class Cars {
                 car.Weight_in_lbs, car.Year, car.Origin)
             this.cars.push(newCar);
         })
+        return this
 
     }
 
@@ -226,8 +228,7 @@ const handleSubmit = (ev: any): void => {
     const Origin: string = ev.target.elements.Origin.value;
 
     const car = new Car(Name, Miles_per_Gallon, Cylinders, Horsepower, Weight_in_lbs, Year, Origin)
-    cars.add(car);
-    cars.renderCars(cars.cars)
+    cars.add(car).renderCars(cars.cars)
     ev.target.reset()
 }
 

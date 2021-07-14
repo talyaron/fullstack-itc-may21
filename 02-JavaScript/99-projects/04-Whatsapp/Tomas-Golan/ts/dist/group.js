@@ -13,6 +13,7 @@ var Group = /** @class */ (function () {
     }
     return Group;
 }());
+// EVENT LISTENER
 iconGroup.addEventListener('click', renderModalGroupData);
 function renderModalGroupData() {
     var containerContact = document.querySelector("#contacts_group");
@@ -25,10 +26,15 @@ function renderModalGroupData() {
 }
 renderModalGroupData();
 var deleteGroup = function (id) {
-    var deleteGroup = groups.filter(function (group) { return group.id !== id; });
-    groups = deleteGroup;
-    localStorage.setItem("groups", JSON.stringify(groups));
-    render();
+    try {
+        var deleteGroup_1 = groups.filter(function (group) { return group.id !== id; });
+        groups = deleteGroup_1;
+        localStorage.setItem("groups", JSON.stringify(groups));
+        render(groups);
+    }
+    catch (e) {
+        console.error(e);
+    }
 };
 document.getElementById('btn').onclick = function () {
     var nameGroup = document.querySelector("#nameGroup").value;
@@ -42,5 +48,5 @@ document.getElementById('btn').onclick = function () {
     arraysOfNames = [];
     groups.push(newGroup);
     localStorage.setItem("groups", JSON.stringify(groups));
-    render();
+    render(groups);
 };

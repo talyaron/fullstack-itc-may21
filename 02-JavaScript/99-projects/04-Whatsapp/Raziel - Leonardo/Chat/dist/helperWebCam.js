@@ -21,7 +21,7 @@ window.onclick = function (event) {
 };
 //Functions to open the camera
 var pictureLogo = document.querySelector('#buttonCam');
-pictureLogo.addEventListener('click', startup);
+pictureLogo.addEventListener('click', startup); //YS: Good, why didnt you make all eventlisteners like that instead of object notation? 
 var width = 320; // We will scale the photo width to this
 var height = 0; // This will be computed based on the input stream
 var streaming = false;
