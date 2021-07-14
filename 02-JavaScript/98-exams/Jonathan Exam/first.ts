@@ -139,7 +139,7 @@ function nextPage(id: string, color: string) {
 
         const gridColor = [id, color]
         localStorage.setItem("arrayColor", JSON.stringify(gridColor))
-        window.location.href = `second.html?id=${id}`
+        window.location.href = `second.html?${id}`
         if (!window.location.href) throw new Error("The page does not exist");
     } catch (e) {
         alert(e)
