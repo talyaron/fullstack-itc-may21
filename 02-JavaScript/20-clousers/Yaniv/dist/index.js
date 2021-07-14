@@ -8,26 +8,46 @@
 // welcome('l')...
 // 3) create it for bulding A, and for bulding B;
 function welcome() {
-    var residents = [];
-    function personalWelcome(resident) {
-        if (resident === 'l')
-            return residents;
-        residents.push(resident);
-        return "Welcome " + resident + ", you are resident number " + residents.length;
+    try {
+        var residents_1 = [];
+        function personalWelcome(resident) {
+            try {
+                if (resident === "l")
+                    return residents_1;
+                residents_1.push(resident);
+                return "Welcome " + resident + ", you are resident number " + residents_1.length;
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        return personalWelcome;
     }
-    return personalWelcome;
+    catch (error) {
+        console.error(error);
+    }
 }
 var buildingA = welcome();
 var buildingB = welcome();
 function handleResidentBuildingA(ev) {
-    ev.preventDefault();
-    var resident = ev.target.elements.resident.value;
-    console.log(buildingA(resident));
-    ev.target.reset();
+    try {
+        ev.preventDefault();
+        var resident = ev.target.elements.resident.value;
+        console.log(buildingA(resident));
+        ev.target.reset();
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 function handleResidentBuildingB(ev) {
-    ev.preventDefault();
-    var resident = ev.target.elements.resident.value;
-    console.log(buildingB(resident));
-    ev.target.reset();
+    try {
+        ev.preventDefault();
+        var resident = ev.target.elements.resident.value;
+        console.log(buildingB(resident));
+        ev.target.reset();
+    }
+    catch (error) {
+        console.error(error);
+    }
 }

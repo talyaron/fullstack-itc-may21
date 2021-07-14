@@ -13,28 +13,44 @@
 // 3) create it for bulding A, and for bulding B;
 
 function welcome(): any {
+  try {
     let residents: Array<string> = [];
     function personalWelcome(resident: string): Array<string> | string {
-        if (resident === 'l') return residents;
+      try {
+        if (resident === "l") return residents;
         residents.push(resident);
         return `Welcome ${resident}, you are resident number ${residents.length}`;
+      } catch (error) {
+        console.error(error);
+      }
     }
     return personalWelcome;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 const buildingA = welcome();
 const buildingB = welcome();
 
 function handleResidentBuildingA(ev: any): void {
+  try {
     ev.preventDefault();
     const resident: string = ev.target.elements.resident.value;
     console.log(buildingA(resident));
     ev.target.reset();
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function handleResidentBuildingB(ev: any): void {
+  try {
     ev.preventDefault();
     const resident: string = ev.target.elements.resident.value;
     console.log(buildingB(resident));
-        ev.target.reset();
+    ev.target.reset();
+  } catch (error) {
+    console.error(error);
+  }
 }
