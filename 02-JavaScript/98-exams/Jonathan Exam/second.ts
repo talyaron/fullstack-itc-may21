@@ -3,17 +3,8 @@ const gridRoot = <HTMLElement>document.querySelector('.container__box')
 const btnBack = <HTMLElement>document.querySelector('.container__button--sumbit')
 
 
-class ColorSquare {
-
-    getColor(arrayToGrid: Array<String>) {
-        try {
-            this.render(arrayToGrid[1])
-        } catch (e) {
-            alert(e)
-        }
-    }
-
-    render(color: String) {
+    
+function renderSquareColor(color: String) {
 
         try {
 
@@ -36,12 +27,11 @@ class ColorSquare {
             alert(e)
         }
     }
-}
 
 
-const colorsquare = new ColorSquare()
+const [id, color] = arrayToGrid
 
-colorsquare.getColor(arrayToGrid)
+renderSquareColor(color)
 
 
 btnBack.addEventListener('click', backPage)
