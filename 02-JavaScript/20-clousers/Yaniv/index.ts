@@ -12,14 +12,14 @@
 
 // 3) create it for bulding A, and for bulding B;
 
-function welcome() {
+function welcome(): any {
     let residents: Array<string> = [];
-    function personalWelcome(resident: string) {
+    function personalWelcome(resident: string): Array<string> | string {
         if (resident === 'l') return residents;
         residents.push(resident);
         return `Welcome ${resident}, you are resident number ${residents.length}`;
     }
-    return personalWelcome
+    return personalWelcome;
 }
 
 
@@ -27,6 +27,7 @@ const buildingA = welcome();
 const buildingB = welcome();
 console.log(buildingA('Eric'));
 console.log(buildingA('Jonathan'));
+console.log(buildingA('l'));
 console.log(buildingA('Leonardo'));
 console.log(buildingA('Tomas'));
 console.log(buildingA('l'));
@@ -34,6 +35,7 @@ console.log(buildingA('l'));
 console.log(buildingB('Raziel'));
 console.log(buildingB('Yarden'));
 console.log(buildingB('Avromi'));
+console.log(buildingB('l'));
 console.log(buildingB('Julie'));
 console.log(buildingB('Efraim'));
 console.log(buildingB('Yaniv'));
