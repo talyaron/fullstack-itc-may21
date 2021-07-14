@@ -17,7 +17,7 @@ var buildingA = addResident(0);
 function handleResidentBA(ev) {
     try {
         ev.preventDefault();
-        var resident = ev.target.elements.resident.value;
+        var resident = ev.target.children.resident.value;
         var buildingADisplay = document.querySelector(".buildingA");
         buildingADisplay.innerHTML = buildingA(resident);
     }
@@ -31,7 +31,7 @@ var buildingB = addResident(0);
 function handleResidentBB(ev) {
     try {
         ev.preventDefault();
-        var resident = ev.target.elements.resident.value;
+        var resident = ev.target.children.resident.value;
         var buildingBDisplay = document.querySelector(".buildingB");
         buildingBDisplay.innerHTML = buildingB(resident);
     }

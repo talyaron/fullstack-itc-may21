@@ -16,7 +16,7 @@ const buildingA = addResident(0)
 function handleResidentBA(ev:any):void{
     try {
       ev.preventDefault()
-      const resident: string = ev.target.elements.resident.value;
+      const resident: string = ev.target.children.resident.value;
       const buildingADisplay:Element = document.querySelector(".buildingA")
       buildingADisplay.innerHTML = buildingA(resident)
     } catch (error) {
@@ -30,7 +30,7 @@ function handleResidentBA(ev:any):void{
   function handleResidentBB(ev:any):void{
       try {
         ev.preventDefault()
-        const resident: string = ev.target.elements.resident.value;
+        const resident: string = ev.target.children.resident.value;
         const buildingBDisplay:Element = document.querySelector(".buildingB")
         buildingBDisplay.innerHTML = buildingB(resident)
       } catch (error) {
