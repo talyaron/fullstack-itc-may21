@@ -22,21 +22,33 @@ function welcome(): any {
     return personalWelcome;
 }
 
-
 const buildingA = welcome();
 const buildingB = welcome();
-console.log(buildingA('Eric'));
-console.log(buildingA('Jonathan'));
-console.log(buildingA('l'));
-console.log(buildingA('Leonardo'));
-console.log(buildingA('Tomas'));
-console.log(buildingA('l'));
 
-console.log(buildingB('Raziel'));
-console.log(buildingB('Yarden'));
-console.log(buildingB('Avromi'));
-console.log(buildingB('l'));
-console.log(buildingB('Julie'));
-console.log(buildingB('Efraim'));
-console.log(buildingB('Yaniv'));
-console.log(buildingB('l'));
+function handleResidentBuildingA(ev: any): void {
+    ev.preventDefault();
+    const resident: string = ev.target.elements.resident.value;
+    console.log(buildingA(resident));
+    // console.log(buildingA('Eric'));
+    // console.log(buildingA('Jonathan'));
+    // console.log(buildingA('l'));
+    // console.log(buildingA('Leonardo'));
+    // console.log(buildingA('Tomas'));
+    // console.log(buildingA('l'));
+    ev.target.reset();
+}
+
+function handleResidentBuildingB(ev: any): void {
+    ev.preventDefault();
+    const resident: string = ev.target.elements.resident.value;
+    console.log(buildingB(resident));
+    // console.log(buildingB('Raziel'));
+    // console.log(buildingB('Yarden'));
+    // console.log(buildingB('Avromi'));
+    // console.log(buildingB('l'));
+    // console.log(buildingB('Julie'));
+    // console.log(buildingB('Efraim'));
+    // console.log(buildingB('Yaniv'));
+    // console.log(buildingB('l'));
+        ev.target.reset();
+}
