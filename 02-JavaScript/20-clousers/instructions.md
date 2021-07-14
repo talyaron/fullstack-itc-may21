@@ -10,4 +10,4 @@ the function will return "Hello <Name>, you are resident number X", and it will 
 if the input arguement is 'l' return an array with all the residents
 welcome('l')...
 
-3) create it for bulding A, and for bulding B;
+3) create it for building A, and for building B;
