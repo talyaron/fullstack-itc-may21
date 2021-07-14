@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./dist/index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="body-wrapper">
+      <h1>My color palette:</h1>
+      <p>Press on color to show the next page!</p>
+      <!-- Color form -->
+      <form class="form" onsubmit="handleSubmit(event)">
+        <input
+          class="form__input"
+          type="color"
+          name="color"
+          id="color"
+          value="#f6b73c"
+        />
+        <button class="form__button" type="submit">Add color</button>
+      </form>
+      <div class="color-root"></div>
+    </div>
+
+    <script src="./dist/index.js"></script>
+  </body>
+</html>

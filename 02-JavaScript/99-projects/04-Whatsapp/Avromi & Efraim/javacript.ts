@@ -17,7 +17,6 @@ class Contact {
         this.chats = chats;
         this.contactId = Math.random().toString(16).slice(2);
 
-
     }
 }
 
@@ -31,6 +30,7 @@ class Contacts {
     addContact(contacts: Contact) {
         try {
             this.contacts.unshift(contacts);
+            
         } catch (e) {
             console.error(e)
         }

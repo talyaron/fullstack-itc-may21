@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: wheat;
+
+.container {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+   
+
+    &__form {
+        margin-bottom: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        &__sumbit {
+            margin: 1em 0;
+            letter-spacing: 0.1em;
+            background-color: black;
+            color: wheat;
+            padding: 0.5em;
+            border-radius: 20px;
+        }
+
+        &__inputbox {
+
+            text-align: center;
+    
+            &--input {
+                font-weight: bold;
+                font-size: 1.125rem;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+        }
+    }
+
+    &__board {
+
+        &__color-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 1em;
+
+            &--trash {
+                color: black;
+                margin-top: 1em;
+            }
+        }
+
+
+    }
+
+}
+}
+

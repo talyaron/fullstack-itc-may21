@@ -1,0 +1,28 @@
+create a two-page app. 
+
+
+in the first page, you will insert colors (using input: color), to a list of colors on the DOM. 
+
+
+The user can delete a list item. 
+
+
+If the user clicks on the color on the first page, she will redirect to a second page, where she will see a grid of squares with the specific color.
+
+
+
+
+the main things here are:
+1. figure out how to generate a functional delete button (CRUD?) on 1st page (now-19:50)
+2. figure out how to generate a grid (maybe use the box asgmt I did/tal's example) with the color of my choice
+
+
+the main stuff to troubleshoot: (19:50-20:20)
+1. it did display on 1st page DOM but now it doesn't 
+2. grid related stuff.
+
+
+(20:20-21:00)
+if there's time left:
+-do grid in a nicer/cooler way
+-

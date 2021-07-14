@@ -34,7 +34,6 @@ const deleteMember = (ev: any): void => {
         membersPool.deleteMember(memberId);
 
         localStorage.setItem('membersPool', JSON.stringify(membersPool));
-        membersPool.renderMembers();
 
     } catch (er) {
         console.error(er);

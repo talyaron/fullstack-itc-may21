@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color selection app</title>
+    <link rel="stylesheet" href="./dist/style.css">
+</head>
+
+<body>
+    <div class="wrpr">
+        <div class="wrpr__logo">Color selection app</div>
+        <div class="wrpr__input">
+            <h1 class="wrpr__input--h1">Enter your name and selected color here</h1>
+            <form class="wrpr__input--form" action="" onsubmit="handleSubmit(event)">
+                <fieldset>
+                    <input type="text" class="search" name="name" id="name" placeholder="Type your name here"/>
+
+                    <input type="color" id="color" name="color"/>
+                    <button class="wrpr__input--button">Submit</button>
+                    <a href="./colors.html" class="wrpr__input--link">Go to page 2</a>
+            </form>
+        </div>
+    </div>
+    <div class="wrpr">
+        <div class="wrpr__dominput">
+            <div class="wrpr__submitted-grps">
+                <div class="wrpr__submitted-grps--ppl"></div>
+                
+            </div>
+</body>
+<script src="dist/index.js"></script>
+
+</html>
