@@ -1,13 +1,13 @@
-1) create a clouser function.
+1) create a closure function.
 the function will get the name of the resident
 
 welcome('Efraim')
 -> Hello Efraim, You are resident number 1
 
-the function will return "hello resdient <Name>, you are resident number X", and it will count the number of residents
+the function will return "hello resident <Name>, you are resident number X", and it will count the number of residents
 
-2) create a function closer the hols in its clouser, all the name of the residents.
-if the input arguement is 'l' retuen an array with all the residents
-welocome('l')...
+2) create a  closure function to the holds in its closure, all the names of the residents.
+if the input argument is 'l' return an array with all the residents
+welcome('l')...
 
-3) create it for bulding A, and for bulding B;
+3) create it for building A, and for building B;
