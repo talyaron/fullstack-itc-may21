@@ -1,0 +1,38 @@
+
+
+
+
+
+
+.colors {
+  
+    width: 250px;
+    height: 250px;
+
+    margin: 1rem 0;
+    text-align: center
+
+  
+}
+.show2{
+  @include grid(4,2rem);
+    .group-colors{
+        width: 250px;
+    height: 250px;
+
+  
+    }
+}
+
+
+        @include  telefono {
+            .show2{
+                display: block;
+                .group-colors{
+                    margin: 1rem 0;
+                }
+              
+            }
+            
+        }
+   
