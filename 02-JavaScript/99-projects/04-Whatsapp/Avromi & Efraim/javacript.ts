@@ -30,6 +30,7 @@ class Contacts {
     addContact(contacts: Contact) {
         try {
             this.contacts.unshift(contacts);
+            
         } catch (e) {
             console.error(e)
         }
