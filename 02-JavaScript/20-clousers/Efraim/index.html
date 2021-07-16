@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="dist/styles.min.css">
 </head>
+
 <body>
-    <form id="building-A">
-        <label for="residentA">Building A!</label>
-        <input type="text" name="resident" placeholder="Please enter name" />
-        <input type="submit" value="submit"/>
-    </form>
-    <div class="buildingA"></div>
+    <div class="wrapper">
+        <div class="wrapper__buildingA">
+        <form id="building-A">
+            <label for="residentA">Building A!</label>
+            <input type="text" name="resident" placeholder="Please enter name" />
+            <input type="submit" value="submit" />
+        </form>
+        <div class="buildingA"></div>
+        </div>
+   
+    <div class="wrapper__buildingB">
     <form id="building-B">
         <label for="residentB">Building B!</label>
         <input type="text" name="resident" placeholder="Please enter name" />
         <input type="submit" value="submit" />
     </form>
     <div class="buildingB"></div>
-    
+    </div>
+    </div>
 </body>
 <script src="dist/javascript.js"></script>
+
 </html>

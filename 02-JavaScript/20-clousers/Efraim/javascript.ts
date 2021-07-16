@@ -4,8 +4,11 @@ function addResident(residentNumber:number) {
         debugger;
         if(residentName === 'l'){
             return `Here Are a List of Current Residents: ${residentArray}`;
-        }else{
-        residentArray.push(residentName)
+        }else if (residentName === '') {
+          throw new Error ("No Name Entered")
+        }
+        else{
+        residentArray.push(` ${residentName}`)
         residentNumber++;
         return `Hello ${residentName}, you are resident number ${residentNumber}`
     }}
@@ -19,6 +22,7 @@ function handleResidentBA(ev:any):void{
       const resident: string = ev.target.children.resident.value;
       const buildingADisplay:Element = document.querySelector(".buildingA")
       buildingADisplay.innerHTML = buildingA(resident)
+      ev.target.reset();
     } catch (error) {
       console.error(error);
     }
@@ -33,6 +37,7 @@ function handleResidentBA(ev:any):void{
         const resident: string = ev.target.children.resident.value;
         const buildingBDisplay:Element = document.querySelector(".buildingB")
         buildingBDisplay.innerHTML = buildingB(resident)
+        ev.target.reset();
       } catch (error) {
         console.error(error);
       }
