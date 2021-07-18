@@ -1,0 +1,1 @@
+#list{display:none}#builidingRoot{display:flex;height:100vh;margin:0}#builidingRoot #buildingOne,#builidingRoot #buildingTwo{border:2px solid #000;margin:auto;width:40vw;height:80vh;align-items:flex-end}#form{display:flex;justify-content:center;margin:20px;padding:20px;background-color:#deb887}#form input[type=text]{width:15vw}

@@ -1,73 +1,69 @@
+const BuildingRoot: HTMLElement = document.querySelector("#builidingRoot")
+const listOfResidents: HTMLElement = document.querySelector("#listOfResidents")
+const closeButton: void = document.querySelector("#close").addEventListener('click', (){
+    listOfResidents.style.display = 'none'
+    BuildingRoot.style.display = 'flex'
+})
 
-function add(resident) {
-    let residentNumber = 0;
-    function _add(name: string) {
-
-        residentNumber++;
-        return `hello resdient ${name}, you are resident number ${residentNumber}`
-    }
-    return _add
+interface Resident {
+    name: string;
+    residentNumber: number;
+    building: string;
 }
+function addArrayOfResidemt(building: string) {
 
-
-const addResBldg1 = add("Building1");
-const addResBldg2 = add("building2");
-// console.log(addResBldg1("sam"));
-// console.log(addResBldg1("mitch"));
-// console.log(addResBldg1("abe"));
-// console.log(addResBldg2("mike"));
-// console.log(addResBldg2("jim"));
-// console.log(addResBldg2("steve"));
-
-// const addX = add(5);
-
-function someFnc(a) {
-    let something = "something";
-    function _insideSomeFnc(b) {
-        return something = b
-    }
-    return _insideSomeFnc
-
-}
-
-const someClosure = someFnc("hey")
-const someClosure2 = someFnc("hey")
-// console.log(someClosure("somethingElse"));
-// console.log(someClosure("somethingElseHere"));
-// console.log(someClosure2("somethin"));
-
-
-function addArrayOfResidemt() {
-
-    let residentNumber = 0;
-    let residentsArray = [];
-    console.log(residentsArray);
+    let residentNumber: number = 0;
+    let residentsArray: Array<Resident> = [];
     function _add(name: string) {
 
         if (name === "l") {
-            residentsArray.map(res => { console.log(`hello resdient ${res.name}, you are resident number ${res.residentNumber}`); })
+            const listRes: HTMLElement = document.querySelector("#listRes");
+            listOfResidents.style.display = 'block'
+            BuildingRoot.style.display = 'none'
+            let resHtml: string = "";
+            residentsArray.forEach(res => {
+                resHtml += `<div>hello resdient ${res.name}, you are 
+                resident number ${res.residentNumber} of ${res.building}</div>`
+            })
+            listRes.innerHTML = resHtml;
+
 
         }
         if (name !== "l") {
+            const bldgOne: HTMLElement = document.querySelector("#buildingOne");
+            const bldgTwo: HTMLElement = document.querySelector("#buildingTwo");
             residentNumber++;
-            residentsArray.push({ name, residentNumber })
-            return `hello resdient ${name}, you are resident number ${residentNumber}`
+            residentsArray.push({ name, residentNumber, building })
+            const residnetHtml: string = `<div>hello resdient ${name}, you are resident number ${residentNumber} of ${building}</div>`
+            if (building === "building one") {
+                bldgOne.insertAdjacentHTML("afterbegin", residnetHtml)
+            }
+            if (building === "building two") {
+                bldgTwo.insertAdjacentHTML("afterbegin", residnetHtml)
+            }
         }
     }
     return _add
 }
 
+const form = document.querySelector("#form").addEventListener('submit', handleSubmit);
+function handleSubmit(ev) {
+    ev.preventDefault();
+    const name = ev.target.elements.name.value;
+    const building = ev.target.elements.building.value;
+    if (building === "building one") {
+        addResToArray1(name)
+    }
+    if (building === "building two") {
+        addResToArray2(name)
+    }
 
-const addResToArray1 = addArrayOfResidemt()
-const addResToArray2 = addArrayOfResidemt()
-console.log(addResToArray1("AVROMI"));
-console.log(addResToArray1("SARAH"));
-console.log(addResToArray1("AMICHAI"));
-addResToArray1("l");
+    ev.target.reset();
 
-console.log(addResToArray2("Mike"));
-console.log(addResToArray2("David"));
-console.log(addResToArray2("Jim"));
-addResToArray2("l");
+}
+
+
+const addResToArray1 = addArrayOfResidemt("building one")
+const addResToArray2 = addArrayOfResidemt("building two")
 
 

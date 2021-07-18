@@ -1,55 +1,51 @@
-function add(resident) {
-    var residentNumber = 0;
-    function _add(name) {
-        residentNumber++;
-        return "hello resdient " + name + ", you are resident number " + residentNumber;
-    }
-    return _add;
-}
-var addResBldg1 = add("Building1");
-var addResBldg2 = add("building2");
-// console.log(addResBldg1("sam"));
-// console.log(addResBldg1("mitch"));
-// console.log(addResBldg1("abe"));
-// console.log(addResBldg2("mike"));
-// console.log(addResBldg2("jim"));
-// console.log(addResBldg2("steve"));
-// const addX = add(5);
-function someFnc(a) {
-    var something = "something";
-    function _insideSomeFnc(b) {
-        return something = b;
-    }
-    return _insideSomeFnc;
-}
-var someClosure = someFnc("hey");
-var someClosure2 = someFnc("hey");
-// console.log(someClosure("somethingElse"));
-// console.log(someClosure("somethingElseHere"));
-// console.log(someClosure2("somethin"));
-function addArrayOfResidemt() {
+var BuildingRoot = document.querySelector("#builidingRoot");
+var listOfResidents = document.querySelector("#listOfResidents");
+var closeButton = document.querySelector("#close").addEventListener('click', function () {
+    listOfResidents.style.display = 'none';
+    BuildingRoot.style.display = 'flex';
+});
+function addArrayOfResidemt(building) {
     var residentNumber = 0;
     var residentsArray = [];
-    console.log(residentsArray);
     function _add(name) {
         if (name === "l") {
-            residentsArray.map(function (res) { console.log("hello resdient " + res.name + ", you are resident number " + res.residentNumber); });
+            var listRes = document.querySelector("#listRes");
+            listOfResidents.style.display = 'block';
+            BuildingRoot.style.display = 'none';
+            var resHtml_1 = "";
+            residentsArray.forEach(function (res) {
+                resHtml_1 += "<div>hello resdient " + res.name + ", you are \n                resident number " + res.residentNumber + " of " + res.building + "</div>";
+            });
+            listRes.innerHTML = resHtml_1;
         }
         if (name !== "l") {
+            var bldgOne = document.querySelector("#buildingOne");
+            var bldgTwo = document.querySelector("#buildingTwo");
             residentNumber++;
-            residentsArray.push({ name: name, residentNumber: residentNumber });
-            return "hello resdient " + name + ", you are resident number " + residentNumber;
+            residentsArray.push({ name: name, residentNumber: residentNumber, building: building });
+            var residnetHtml = "<div>hello resdient " + name + ", you are resident number " + residentNumber + " of " + building + "</div>";
+            if (building === "building one") {
+                bldgOne.insertAdjacentHTML("afterbegin", residnetHtml);
+            }
+            if (building === "building two") {
+                bldgTwo.insertAdjacentHTML("afterbegin", residnetHtml);
+            }
         }
     }
     return _add;
 }
-var addResToArray1 = addArrayOfResidemt();
-var addResToArray2 = addArrayOfResidemt();
-console.log(addResToArray1("AVROMI"));
-console.log(addResToArray1("SARAH"));
-console.log(addResToArray1("AMICHAI"));
-addResToArray1("l");
-console.log(addResToArray2("Mike"));
-console.log(addResToArray2("David"));
-console.log(addResToArray2("Jim"));
-addResToArray2("l");
+var form = document.querySelector("#form").addEventListener('submit', handleSubmit);
+function handleSubmit(ev) {
+    ev.preventDefault();
+    var name = ev.target.elements.name.value;
+    var building = ev.target.elements.building.value;
+    if (building === "building one") {
+        addResToArray1(name);
+    }
+    if (building === "building two") {
+        addResToArray2(name);
+    }
+    ev.target.reset();
+}
+var addResToArray1 = addArrayOfResidemt("building one");
+var addResToArray2 = addArrayOfResidemt("building two");
