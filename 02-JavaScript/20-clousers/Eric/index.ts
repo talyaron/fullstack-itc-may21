@@ -36,22 +36,82 @@ miContador.valor()
 
 console.log(miContador.incrementar()) */
 
-function incrementar (){
-    let cont=0
-    function _valor(name:string){
+ function incrementar (){
+     let cont=0
+     function _valor(name:string){
         cont++;
-        return `name:${name},count ${cont}`
+         return `Hello ${name}, you are the number ${cont}`
 
-    }
-    return _valor
-}
+     }
+     return _valor
+ }
 
 const nuevo = incrementar()
-console.log(nuevo('Joni'))
-console.log(nuevo('Joni'))
+ console.log(nuevo('Joni'))
+ console.log(nuevo('Eric'))
+ console.log(nuevo('Leo'))
 
-const arrayName = ['joni', 'jo']
-for(let i=0; i<2; i++){
-    console.log(nuevo(arrayName[i]))
-}
+//  const arrayName = ['joni', 'jo']
+//  for(let i=0; i<2; i++){
+//      console.log(nuevo(arrayName[i]))
+//  }
 
+//  function resident(){
+  
+//      let counter = 0;
+//      function welcome(name){
+//          let nombreResidente = name;
+//          counter++;
+//          return 'Hello ' + nombreResidente + ', you are resident number ' + counter
+//      }
+//      return welcome;
+//  }
+
+//  const newResident = resident();
+//  console.log(newResident("Tomas"));
+// console.log(newResident('Matias'));
+
+
+
+//2 and 3
+
+
+function open(): any {
+
+      let residents: Array<string> = [];
+      function openResident(resident: string): Array<string> | string {
+        
+          if (resident === "l") return residents;
+          residents.push(resident);
+          return `Welcome ${resident}, you are resident number ${residents.length}`;
+        
+      }
+      return openResident;
+    
+  }
+  
+  const residentA = open();
+  const residentB = open();
+  
+  
+  function handleSubmitResidentA(ev: any): void {
+    try {
+      ev.preventDefault();
+      const resident: string = ev.target.elements.resident.value;
+      console.log(residentA(resident));
+      ev.target.reset();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function handleSubmitResidentB(ev: any): void {
+    try {
+      ev.preventDefault();
+      const resident: string = ev.target.elements.resident.value;
+      console.log(residentB(resident));
+      ev.target.reset();
+    } catch (error) {
+      console.error(error);
+    }
+  }
