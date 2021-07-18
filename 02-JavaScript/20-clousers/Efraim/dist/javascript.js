@@ -5,8 +5,11 @@ function addResident(residentNumber) {
         if (residentName === 'l') {
             return "Here Are a List of Current Residents: " + residentArray;
         }
+        else if (residentName === '') {
+            throw new Error("No Name Entered");
+        }
         else {
-            residentArray.push(residentName);
+            residentArray.push(" " + residentName);
             residentNumber++;
             return "Hello " + residentName + ", you are resident number " + residentNumber;
         }
@@ -20,6 +23,7 @@ function handleResidentBA(ev) {
         var resident = ev.target.children.resident.value;
         var buildingADisplay = document.querySelector(".buildingA");
         buildingADisplay.innerHTML = buildingA(resident);
+        ev.target.reset();
     }
     catch (error) {
         console.error(error);
@@ -34,6 +38,7 @@ function handleResidentBB(ev) {
         var resident = ev.target.children.resident.value;
         var buildingBDisplay = document.querySelector(".buildingB");
         buildingBDisplay.innerHTML = buildingB(resident);
+        ev.target.reset();
     }
     catch (error) {
         console.error(error);

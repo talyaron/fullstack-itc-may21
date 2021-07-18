@@ -1,4 +1,5 @@
 var getContactSelected = [];
+var headerContact = document.querySelector(".header_chat");
 //method to add individual msg
 var Mensaje = /** @class */ (function () {
     function Mensaje(text) {
@@ -43,8 +44,6 @@ function renderOnDOM() {
         });
         var contactForChat = JSON.parse(localStorage.getItem("contactForChat"));
         var groupForChat = JSON.parse(localStorage.getItem("groupForChat"));
-        console.log(contactForChat);
-        var headerContact = document.querySelector(".header_chat");
         if (contactForChat && !groupForChat) {
             headerContact.insertAdjacentHTML('afterbegin', "<div class=\"info_chat\"><img class=\"header_img_profile\"\n      src=\"" + contactForChat.profileImg + "\"\n      alt=\"\"><h1 class=\"title_chat\">" + contactForChat.name + "</h1><a href=\"index.html\"><i class=\"far fa-arrow-alt-circle-left fa-4x arrow_icon\"></i></a></div>");
         }
