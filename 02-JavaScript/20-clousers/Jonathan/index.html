@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/index.min.css">
+    <link rel="shortcut icon"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png" />
+    <title>Clousers</title>
+</head>
+
+<body class="indexbody">
+    <div class="wrapper">
+        <input type="reset" value="X" class="container--reset" title="RESET">
+        <header>
+            <h1>CLOUSERS</h1>
+        </header>
+        <div class="container">
+            <form id="form" class="container__form">
+                <label for="name" class="container__form__label">Enter your name:
+                    <input type="text" name="name" id="name" class="container__form__label--input">
+                </label>
+                <input type="submit" value="GET RESIDENT" class="container__form--resident">
+            </form>
+            <div class="container__exercises">
+                <fieldset class="container__exercises__fieldset">
+                    <legend>Exercise</legend>
+                    <input type="button" value="FIRST"
+                        class="container__exercises__fieldset--btn container__exercises__fieldset--first">
+                    <input type="button" value="SECOND"
+                        class="container__exercises__fieldset--btn container__exercises__fieldset--second"
+                        title="Only is available when you enter l in the input" disabled>
+                    <input type="button" value="THIRD"
+                        class="container__exercises__fieldset--btn container__exercises__fieldset--third"
+                        title="Only is available when you enter l in the input" disabled>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <script src="dist/index.js"></script>
+</body>
+
+</html>
