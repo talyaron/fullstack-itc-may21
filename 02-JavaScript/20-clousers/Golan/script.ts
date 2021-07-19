@@ -12,14 +12,34 @@
 
 // 3) create it for building A, and for building B;
 
-
-function hello(): any {
-    try {
-        function helloWelcome() {
-
-        }
-        return helloWelcome;
-    } catch (error) {
-        console.error(error);
+class Tenant {
+    name: string;
+    building: string;
+    Id: string = "id" + Math.random().toString(16).slice(2);
+    constructor(name: string, building: string) {
+        this.name = name;
+        this.building = building;
+        
     }
 }
+//class to push every person to an array in local storage
+class AllTenants {
+    tenants: Array<Tenant> = JSON.parse(localStorage.getItem('AllTenants')) ? JSON.parse(localStorage.getItem('AllTenants')) : []; 
+
+    addNewTenant(tenant) {
+        this.tenants.push(tenant);
+        localStorage.setItem("AllPpl", JSON.stringify(this.tenants));
+        alert(`Hello ${tenant.name}, you are resident number ${tenant.length}`);
+
+    }
+}
+// function hello(): any {
+//     try {
+//         function helloWelcome() {
+
+//         }
+//         return helloWelcome;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
