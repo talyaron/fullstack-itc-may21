@@ -18,7 +18,7 @@ console.log(addResBldg2("steve"));
 function someFnc(a) {
     var something = "something";
     function _insideSomeFnc(b) {
-        return something = b;
+        return (something = b);
     }
     return _insideSomeFnc;
 }
