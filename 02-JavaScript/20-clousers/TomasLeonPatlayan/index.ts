@@ -25,6 +25,7 @@ const handleSubmitB = (event) => {
     event.preventDefault();
     const name = event.target.elements.name.value;
     console.log(buildingB(name));
+    
   };
   
 // const handleSubmitB = (event) => {
