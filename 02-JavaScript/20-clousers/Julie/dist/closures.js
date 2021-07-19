@@ -1,9 +1,15 @@
-var nameA = document.querySelector("#nameA");
-var nameB = document.querySelector("#nameB");
+// console.log(nameA);
+// This gives the whole element, so need to get element.value...
 var submitA = document.querySelector("#submitA");
 var submitB = document.querySelector("#submitB");
-submitA.addEventListener("click", handleSubmitA);
-submitB.addEventListener("click", handleSubmitB);
+submitA.addEventListener("click", getInputValueA);
+submitA.addEventListener("click", getInputValueB);
+function getInputValueA() {
+    var nameAvalue = document.querySelector("#nameA").value;
+}
+function getInputValueB() {
+    var nameBvalue = document.querySelector("#nameB").value;
+}
 function outsideFunction(building) {
     var residentNumber = 0;
     var residentsArray = [];
@@ -25,19 +31,15 @@ function outsideFunction(building) {
 // const list2 = outsideFunction("building two");
 var buildingOne = outsideFunction("building one");
 var buildingTwo = outsideFunction("building two");
+// let addedA = ev.target.elements.nameA.value;
+// let addedB = ev.target.elements.nameB.value;
+console.log(buildingOne(addedA));
+console.log(buildingOne(addedB));
 // submitA.addEventListener("submit", buildingOne);
 // submitA.addEventListener("submit", buildingTwo);
 // console.log(buildingOne(`${residentName.value}`));
 // console.log(buildingOne(`${nameB.value}`));
-function handleSubmitA(ev) {
-    console.log(nameA.value);
-}
-function handleSubmitB(ev) {
-    var nameB = ev.target.elements.nameB.value;
-    console.log(buildingOne(nameB.va));
-    ev.target.reset();
-}
-// Two small forms. First I have to call outsideFUnction (on the click) with the input that you get for building (either one or two)
+// Two small forms. First I have to call outsideFunction (on the click) with the input that you get for building (either one or two)
 // AND THEN you have to do the same as this, below, but instead of the names, hardcoded, you wilp have input.value.
 // The form to take in the names and the answers in the DOM
 // on submit call "building One"
