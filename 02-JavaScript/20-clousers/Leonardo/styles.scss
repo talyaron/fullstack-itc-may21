@@ -1,0 +1,87 @@
+html {
+    background: green;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: white;
+    width: 75%;
+    height: 100vh;
+    background-image: url(../img/backgroundGold.jpg);
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    margin-top: 15px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.building {
+    &__picture {
+        width: 300px;
+        height: 200px;
+        opacity: 1;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__wrapper {
+        text-align: center;
+
+        &:first-child {
+            border-right: 5px black dotted;
+            padding-right: 70px;
+        }
+    }
+
+    &__submit {
+        background-color: #4CAF50;
+        border: none;
+        font-size: 14px;
+        color: #FFFFFF;
+        padding: 20px;
+        width: 200px;
+        text-decoration: none;
+        overflow: hidden;
+        cursor: pointer;
+        margin-top: 15px;
+
+        &:hover {
+            background-color: whitesmoke;
+            color: black;
+        }
+    }
+}
+
+.instructions {
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    position: relative;
+    top: 15%;
+    border-radius: 50px;
+    cursor: no-drop;
+    padding: 10px;
+
+    &:hover {
+        background-color: grey;
+    }
+}
