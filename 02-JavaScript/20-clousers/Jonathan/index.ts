@@ -19,7 +19,7 @@ const previousEnters = JSON.parse(localStorage.getItem("exercise"))
 
 if (previousEnters !== null) {
     previousEnters.forEach(element => {
-        ResidentList.push({ "name": element.name, "building": element.building})
+        ResidentList.push({ "name": element.name, "building": element.building })
     });
 }
 
@@ -31,8 +31,9 @@ function handleSubmit(ev: any): void {
     try {
 
         const name = ev.target.elements.name.value;
-        
-        if(!name) throw new Error('You have to enter a name first')
+
+        if (!name) throw new Error('You have to enter a name first')
+
 
         if (name === 'l') {
             btnSecond.disabled = false;
@@ -62,7 +63,12 @@ function handleSubmit(ev: any): void {
 
 btnFirst.addEventListener('click', firstExercise)
 function firstExercise() {
-    window.location.href = "first.html"
+    try {
+        if(ResidentList.length === 0) throw new Error('You have at least enter a new resident')
+        window.location.href = "first.html"
+    } catch (e) {
+        alert(e)
+    }
 }
 
 btnSecond.addEventListener('click', secondExercise)
@@ -77,7 +83,7 @@ function thirdExercise() {
 
 btnReset.addEventListener('click', resetLocalStorage)
 
-function resetLocalStorage(){
+function resetLocalStorage() {
     localStorage.clear()
     ResidentList = []
 }

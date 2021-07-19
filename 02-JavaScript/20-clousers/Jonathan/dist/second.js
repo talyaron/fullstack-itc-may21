@@ -13,12 +13,12 @@ function renderExerciseTwo(arrayToRenderTwo) {
                 return arrayNames;
             };
         }
-        var welcomeResident2 = getResidents();
+        var welcomeResident = getResidents();
         var result = void 0;
         var html_1 = '';
         for (var i = 0; i < arrayToRenderTwo.length; i++) {
             var name = arrayToRenderTwo[i].name;
-            result = (welcomeResident2("" + name));
+            result = (welcomeResident("" + name));
         }
         result.forEach(function (element) {
             html_1 += "<div class=\"boardSecond--resident\">" + element + "</div>";

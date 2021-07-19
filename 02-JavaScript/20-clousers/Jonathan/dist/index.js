@@ -40,7 +40,14 @@ function handleSubmit(ev) {
 //btn
 btnFirst.addEventListener('click', firstExercise);
 function firstExercise() {
-    window.location.href = "first.html";
+    try {
+        if (ResidentList.length === 0)
+            throw new Error('You have at least enter a new resident');
+        window.location.href = "first.html";
+    }
+    catch (e) {
+        alert(e);
+    }
 }
 btnSecond.addEventListener('click', secondExercise);
 function secondExercise() {

@@ -22,14 +22,14 @@ function renderExerciseTwo(arrayToRenderTwo: Array<Resident>) {
 
         }
 
-        const welcomeResident2 = getResidents()
+        const welcomeResident = getResidents()
 
         let result;
         let html: string = ''
 
         for (let i = 0; i < arrayToRenderTwo.length; i++) {
             const { name } = arrayToRenderTwo[i]
-            result = (welcomeResident2(`${name}`))
+            result = (welcomeResident(`${name}`))
         }
 
         result.forEach(element => {
