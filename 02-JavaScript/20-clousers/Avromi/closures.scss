@@ -1,26 +1,31 @@
-#list{
+#list {
     display: none;
 }
-#builidingRoot{
+
+#builidingRoot {
     display: flex;
     height: 100vh;
     margin: 0px;
-    #buildingOne, #buildingTwo{
+
+    #buildingOne,
+    #buildingTwo {
         border: black 2px solid;
-        margin:auto;
+        margin: auto;
         width: 40vw;
         height: 80vh;
         align-items: flex-end;
     }
-    
+
 }
-#form{
+
+#form {
     display: flex;
     justify-content: center;
     margin: 20px;
     padding: 20px;
     background-color: burlywood;
-input[type=text] {
-    width:15vw;
-}
+
+    input[type=text] {
+        width: 15vw;
+    }
 }
