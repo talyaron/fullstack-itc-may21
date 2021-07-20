@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="handleA(event)">
+        <label for="residentA">Building A</label>
+        <input id="residentA" type="text" name="resident" max="20" placeholder="Enter  your name" />
+        <input id="submitA" type="submit" value="submit" />
+    </form>
+    <form  onsubmit="handleB(event)">
+        <label for="residentB"> Building B</label>
+        <input id="residentB" type="text" name="resident" max="20" placeholder="Enter  your name" />
+        <input id="submitB" type="submit" value="submit" />
+    </form>
+    <p>Open the console  for the output</p>
+    <script src="./dist/index.js"></script>
+</body>
+</html>
