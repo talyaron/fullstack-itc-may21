@@ -1,10 +1,16 @@
 "use strict";
 
+console.log("hi you foo");
+
 var http = require('http');
 
 var requestListener = function requestListener(req, res) {
   res.writeHead(200);
-  res.end('<header style="background-color:red"><h1>Hello <strong style="color:blue">World!</strong></h1></header>');
+
+  var fs = require('fs');
+
+  var file = fs.readFileSync('./index.html');
+  res.end(file);
 };
 
 var server = http.createServer(requestListener);
