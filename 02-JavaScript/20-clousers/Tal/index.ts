@@ -1,26 +1,32 @@
 
 
-function add(z) {
-    let b = 55;
-    function _add(x: number) {
-        debugger;
+function welcomeResidnet() {
+    let count = 0;
+    const residents:Array<string> = [];
+    function _welcomeResidnet(name: string) {
+       
+       
+        count++;
         
-        z++;
-        return x + z;
+        if(name === 'l'){
+            return residents
+        }
+        residents.push(name);
+        return `Welcome ${name}, you are resident number ${count}`;
     }
-    return _add
+    return _welcomeResidnet
 }
 
 
-const addZ = add(10);
-const addX = add(5);
-console.log(addZ(2));
-console.log(addZ(20));
-console.log(addZ(2));
-console.log(addZ(20));
+const welcomeA = welcomeResidnet();
+console.log(welcomeA('Moshe'));
+console.log(welcomeA('Yonatan'));
+console.log(welcomeA('Mor'));
+console.log(welcomeA('l'))
 
-console.log(addX(1));
-console.log(addX(1));
-console.log(addX(1));
-console.log(addX(1));
-console.log(addX(1));
+const welcomeB = welcomeResidnet();
+console.log(welcomeB('Joni'));
+console.log(welcomeB('Yoni'));
+console.log(welcomeB('Joathan'));
+console.log(welcomeB('l'))
+

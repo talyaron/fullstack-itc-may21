@@ -1,20 +1,23 @@
-function add(z) {
-    var b = 55;
-    function _add(x) {
-        debugger;
-        z++;
-        return x + z;
+function welcomeResidnet() {
+    var count = 0;
+    var residents = [];
+    function _welcomeResidnet(name) {
+        count++;
+        if (name === 'l') {
+            return residents;
+        }
+        residents.push(name);
+        return "Welcome " + name + ", you are resident number " + count;
     }
-    return _add;
+    return _welcomeResidnet;
 }
-var addZ = add(10);
-var addX = add(5);
-console.log(addZ(2));
-console.log(addZ(20));
-console.log(addZ(2));
-console.log(addZ(20));
-console.log(addX(1));
-console.log(addX(1));
-console.log(addX(1));
-console.log(addX(1));
-console.log(addX(1));
+var welcomeA = welcomeResidnet();
+console.log(welcomeA('Moshe'));
+console.log(welcomeA('Yonatan'));
+console.log(welcomeA('Mor'));
+console.log(welcomeA('l'));
+var welcomeB = welcomeResidnet();
+console.log(welcomeB('Joni'));
+console.log(welcomeB('Yoni'));
+console.log(welcomeB('Joathan'));
+console.log(welcomeB('l'));
