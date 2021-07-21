@@ -12,70 +12,36 @@ If the input argument is 'l', return an array with all residents --- welcome(l)
 3)Create it for building A and building B.
 */
 
-
-class Resident {
-    name:string
-    id:string
-    constructor(name:string) {
-        this.name = name
-        this.id = "id" + Math.random().toString(16).slice(2)
-    }
-}
-
-
-const addResident = (resident:Resident):void => {
-    try {
-        if(!resident) throw new Error("No resident found");
-        
-        this.residentList.unshift(resident)   
-    
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-
-function residentCounter() {
-    let count = 0;
-    return function() {
-        count++
-    }
-}
-
-const residentListA = residentCounter()
-const residentListB = residentCounter()
-
-
-const displayResidents = () => {
-    const residentList:Array<Resident> = [];
-    const residentsInBuilding = (resident: Resident) => {
-        if (resident.name === 'l') {
-            alert(`Persons residing here: ${residentList}`)
-            return
-        }
-       return residentsInBuilding 
-    }
-}
-
 //Handle submit functions:
-function handleSubmitA(event:any) {
-        event.preventDefault()
-        const residentName:string = event.target[0].value
-
-        const newResident = new Resident(residentName)
-        
-        residentListA.addResident(newResident)
-        event.target.reset()
-        alert(`Hello, ${residentName}. You are resident number ${residentListA.residentList.length}`)
+const handleSubmitWest = (event): void => {
+    event.preventDefault();
+    const name: string = event.target[0].value;
+    westWingList(name);
+    event.target.reset();
+}
+const handleSubmitEast = (event): void => {
+    event.preventDefault();
+    const name: string = event.target[0].value;
+    eastWingList(name);
+    event.target.reset();
 }
 
-function handleSubmitB(event:any) {
-    event.preventDefault()
-    const residentName:string = event.target[0].value
-    
-    const newResident = new Resident(residentName)
-    
-    residentListB.addResident(newResident)
-    event.target.reset()
-    alert(`Hello, ${residentName}. You are resident number ${residentListB.residentList.length}`)
+//The main closure function where the inner func uses a constant from the outer func's scope:
+function greet(): Function {
+    const residentsList: Array<string> = [];
+    //Listing or greeting section:
+    function residentCounter(residentName: string) {
+        if (residentName === 'l') { alert(`Residing in this wing: ${residentsList}.`); }
+        else {
+            residentsList.unshift(residentName);
+            alert(`Welcome, ${residentName}. You are resident number ${residentsList.length}`);
+        }
+
+
+    }
+    return residentCounter;
 }
+
+//Instances of the closure function for both buildings:
+const westWingList: Function = greet();
+const eastWingList: Function = greet();

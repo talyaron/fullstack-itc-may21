@@ -11,56 +11,34 @@ If the input argument is 'l', return an array with all residents --- welcome(l)
 
 3)Create it for building A and building B.
 */
-var _this = this;
-var Resident = /** @class */ (function () {
-    function Resident(name) {
-        this.name = name;
-        this.id = "id" + Math.random().toString(16).slice(2);
-    }
-    return Resident;
-}());
-var addResident = function (resident) {
-    try {
-        if (!resident)
-            throw new Error("No resident found");
-        _this.residentList.unshift(resident);
-    }
-    catch (error) {
-        console.error(error);
-    }
-};
-function residentCounter() {
-    var count = 0;
-    return function () {
-        count++;
-    };
-}
-var residentListA = residentCounter();
-var residentListB = residentCounter();
-var displayResidents = function () {
-    var residentList = [];
-    var residentsInBuilding = function (resident) {
-        if (resident.name === 'l') {
-            alert("Persons residing here: " + residentList);
-            return;
-        }
-        return residentsInBuilding;
-    };
-};
 //Handle submit functions:
-function handleSubmitA(event) {
+var handleSubmitWest = function (event) {
     event.preventDefault();
-    var residentName = event.target[0].value;
-    var newResident = new Resident(residentName);
-    residentListA.addResident(newResident);
+    var name = event.target[0].value;
+    westWingList(name);
     event.target.reset();
-    alert("Hello, " + residentName + ". You are resident number " + residentListA.residentList.length);
-}
-function handleSubmitB(event) {
+};
+var handleSubmitEast = function (event) {
     event.preventDefault();
-    var residentName = event.target[0].value;
-    var newResident = new Resident(residentName);
-    residentListB.addResident(newResident);
+    var name = event.target[0].value;
+    eastWingList(name);
     event.target.reset();
-    alert("Hello, " + residentName + ". You are resident number " + residentListB.residentList.length);
+};
+//The main closure function where the inner func uses a constant from the outer func's scope:
+function greet() {
+    var residentsList = [];
+    //Listing or greeting section:
+    function residentCounter(residentName) {
+        if (residentName === 'l') {
+            alert("Residing in this wing: " + residentsList + ".");
+        }
+        else {
+            residentsList.unshift(residentName);
+            alert("Welcome, " + residentName + ". You are resident number " + residentsList.length);
+        }
+    }
+    return residentCounter;
 }
+//Instances of the closure function for both buildings:
+var westWingList = greet();
+var eastWingList = greet();
