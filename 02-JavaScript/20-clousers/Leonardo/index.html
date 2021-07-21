@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condominium association</title>
+    <link rel="stylesheet" href="dist/styles.min.css">
+    <link href="img/favicon.ico" rel="icon" type="image/x-icon" />
+</head>
+
+<body>
+    <h1>Please enter your name where do you want to live</h1>
+    <div class="wrapper">
+        <div class="building__wrapper">
+            <img class="building__picture" src="img/mountainHouse.jpg" alt="Building in mountains">
+            <form onsubmit="handleSubmitBuildingA(event)">
+                <label for="personA">Enter your name: </label>
+                <input type="text" name="person" id="personA" maxlength="20" required>
+
+                <input class="building__submit" type="submit" value="Living in the mountains">
+            </form>
+        </div>
+        <div class="building__wrapper">
+            <img class="building__picture" src="img/beachHouse.jpg" alt="Building at the beach">
+            <form onsubmit="handleSubmitBuildingB(event)">
+                <label for="personB">Enter your name: </label>
+                <input type="text" name="person" id="personB" maxlength="20" required>
+
+                <input class="building__submit" type="submit" value="Living at the beach">
+            </form>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <h2>Instructions: Please enter your name and click the button, if you want to see all the residents of that building type the letter "l"</h2>
+    </div>
+
+    <script src="dist/script.js"></script>
+</body>
+
+</html>

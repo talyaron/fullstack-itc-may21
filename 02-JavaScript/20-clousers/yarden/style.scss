@@ -1,0 +1,84 @@
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.body-wrapper {
+    background: url('https://media.architecturaldigest.com/photos/5dcdd4d89f913a0008d45394/16:9/w_1280,c_limit/Grantley_Hall_Exterior_Twilight%2520lr.jpg');
+    width: 70%;
+    margin: 2em auto;
+    padding: 2em 2em;
+    border: 1px solid firebrick;
+    text-align: center;
+    // background: rgba(74, 99, 167, 0.411);
+    color: rgb(255, 255, 255);
+    text-shadow: rgb(0, 0, 0) 3px 2px 2px;
+
+    &__headline {
+        font-size: 3.2rem;
+        background: rgba(65, 105, 225, 0.623);
+    }
+}
+
+.inner-wrapper {
+    display: flex;
+    justify-content: space-around;
+
+    & h2 {
+        padding: .5em;
+        font-size: 2rem;
+    }
+
+    & label {
+        font-size: 1.4rem;
+    }
+
+    & input {
+        padding: .5em;
+        background-color: rgba(65, 105, 225, 0.523);
+
+        &:focus {
+            background-color: rgba(65, 105, 225, 0.923);
+        }
+    }
+
+    & button {
+        border-radius: 4px;
+        padding: 0 15px;
+        cursor: pointer;
+        height: 32px;
+        font-size: 14px;
+        background-position: center;
+        transition: background 0.8s;
+        background-color: rgb(65, 105, 225);
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(94, 129, 233);
+        }
+
+        &:active {
+            box-shadow: 1px 1px 0 #ffffff;
+            top: 3px;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 1220px) {
+    .inner-wrapper {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+   .body-wrapper__headline {
+        font-size: 2rem;
+   }
+
+   .inner-wrapper {
+        flex-direction: column;
+        &    h2 {
+            font-size: 1.2rem;
+        }
+   }
+}

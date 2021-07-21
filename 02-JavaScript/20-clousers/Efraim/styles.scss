@@ -1,0 +1,19 @@
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+#building-A, #building-B{
+    display: flex;
+    flex-direction: column;
+    
+}
+label{
+    font-size: 2rem;
+}
+.buildingA, .buildingB {
+    width: 150px;
+    height: fit-content;
+    margin-top: 1rem;
+    text-align: center;
+}

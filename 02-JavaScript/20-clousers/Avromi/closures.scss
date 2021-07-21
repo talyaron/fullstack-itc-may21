@@ -1,0 +1,31 @@
+#list {
+    display: none;
+}
+
+#builidingRoot {
+    display: flex;
+    height: 100vh;
+    margin: 0px;
+
+    #buildingOne,
+    #buildingTwo {
+        border: black 2px solid;
+        margin: auto;
+        width: 40vw;
+        height: 80vh;
+        align-items: flex-end;
+    }
+
+}
+
+#form {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: burlywood;
+
+    input[type=text] {
+        width: 15vw;
+    }
+}
