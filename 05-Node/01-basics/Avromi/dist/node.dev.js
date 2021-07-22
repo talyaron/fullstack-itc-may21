@@ -10,6 +10,7 @@ var requestListener = function requestListener(req, res) {
   var fs = require('fs');
 
   var file = fs.readFileSync('./index.html');
+  console.log(file);
   res.end(file);
 };
 
