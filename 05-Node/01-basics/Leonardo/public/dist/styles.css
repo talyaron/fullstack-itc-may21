@@ -1,0 +1,107 @@
+html {
+  background: burlywood;
+  padding: 10px;
+}
+
+body {
+  width: 70%;
+  margin: auto;
+}
+
+.title {
+  background-color: brown;
+  padding: 1px;
+  color: white;
+  justify-content: space-around;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+}
+.title__profile {
+  height: 100px;
+  border-radius: 50px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  font-style: oblique;
+  /* PERSONAL INFORMATION */
+}
+.main__personal {
+  background-color: midnightblue;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  text-align: center;
+  color: whitesmoke;
+  padding: 0 10px;
+}
+.main__personal__information {
+  margin: 55px 0;
+}
+.main__personal__profile {
+  margin: 170px 0;
+}
+.main__personal__contact {
+  margin: 120px 0;
+}
+.main__personal--title {
+  color: firebrick;
+  font-style: normal;
+}
+
+/* MAIN INFORMATION */
+.main__information {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  padding-top: 50px;
+  padding-left: 30px;
+  background: white;
+  margin-bottom: 0;
+}
+.main__information__skills--wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: max-content;
+}
+.main__information--title {
+  color: black;
+  font-style: normal;
+}
+.main__information__education {
+  border-bottom: 4px solid red;
+}
+.main__information__skills {
+  border-bottom: 4px solid red;
+}
+.main__information__skills--language {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+}
+.main__information__education--picture {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+}
+.main__information__experience--wrapper {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+}
+
+.title__skills {
+  margin-bottom: 0;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+img {
+  height: 35px;
+  margin-right: 10px;
+}
