@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/2cade589f3.js" crossorigin="anonymous"></script>
+    <title>Raziel</title>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+
+        }
+
+        body {
+            background: #585c68;
+            font-size: 14px;
+            line-height: 22px;
+            color: #555555;
+        }
+
+        .bold {
+            font-weight: 700;
+            font-size: 20px;
+            text-transform: uppercase;
+
+        }
+
+        .semi_bold {
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .resume {
+            width: 800px;
+            height: auto;
+            display: flex;
+            margin: 50px auto;
+        }
+
+        .resume .resume_left {
+            width: 280px;
+            background: #0bb5f4;
+
+        }
+
+        .resume .resume_left .resume_profile {
+            width: 100%;
+            height: 280px;
+
+        }
+
+        .resume .resume_left .resume_profile img {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .resume .resume_left .resume_content {
+            padding: 0 25px;
+
+        }
+
+        .resume .title {
+            margin-bottom: 20px;
+
+        }
+
+        .resume .resume_left .bold {
+            color: #fff;
+
+        }
+
+        .resume .resume_left .regular {
+            color: #b1eaff;
+
+        }
+
+        .resume .resume_item {
+            padding: 25px;
+            border-bottom: 2px solid #b1eaff;
+
+        }
+
+        .resume .resume_left .resume_item:last-child,
+        .resume .resume_right .resume_item:last-child {
+ 
+            border-bottom: 0px;
+
+        }
+
+        .resume .resume_left ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .resume .resume_left ul li:last-child {
+
+            margin-bottom: 0;
+        }
+
+        .resume .resume_left ul li .icon {
+
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            color: #0bb5f4;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-size: 16px;
+            position: relative;
+        }
+
+        .resume .icon i,.resume .resume_right .resume_hobby ul li i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .resume .resume_left ul li .data {
+
+            color: #b1eaff;
+
+        }
+
+        .resume .resume_left .resume_skills ul li {
+
+            color: #b1eaff;
+            justify-content: space-between;
+
+
+        }
+
+        .resume .resume_left .resume_skills ul li .skill_name {
+
+            width: 25%;
+
+
+        }
+        .resume .resume_left .resume_skills ul li .skill_progress {
+
+        width:60%;
+        margin:  0 5px;
+        height: 5px;
+        background: #009fd9;
+        position: relative;
+
+
+        }
+        .resume .resume_left .resume_skills ul li .skill_per {
+
+width:15%;
+
+
+
+}
+.resume .resume_left .resume_skills ul li .skill_progress span{
+position: absolute;
+top: 0;
+left: 0;
+height: 100%;
+background: #fff;
+
+
+}
+.resume .resume_right{
+    width:530px;
+    background: #fff;
+    padding: 25px;
+}
+.resume .resume_right .bold{
+color: #0bb5f4;
+
+}
+.resume .resume_right .resume_work ul{
+
+    padding-left: 40px;
+    overflow: hidden;
+}
+
+.resume .resume_right .resume_education ul{
+
+padding-left: 40px;
+overflow: hidden;
+
+}
+.resume .resume_right ul li{
+    position: relative;
+}
+.resume .resume_right ul li .date{
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.resume .resume_right ul li .info{
+    
+    margin-bottom: 20px;
+}
+
+.resume .resume_right ul li:last-child .info{
+    margin-bottom: 0;
+}
+.resume .resume_right .resume_work ul li:before,
+.resume .resume_right .resume_education ul li:before{
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -25px;
+    width:6px;
+    height: 6px;
+    border-radius:50% ;
+    border: 2px solid #0bb5f4
+}
+
+.resume .resume_right .resume_work ul li:after,
+.resume .resume_right .resume_education ul li:after{
+ content: "";
+ position: absolute;
+ top: 14px;
+ left:-21px;
+ width: 3px;
+ height: 115px;
+ background: #0bb5f4;
+}
+.resume .resume_right .resume_hobby ul{
+display: flex;
+justify-content: space-between;
+
+}
+.resume .resume_right .resume_hobby ul li{
+width:80px;
+height: 80px;
+border: 2px solid #0bb5f4;
+border-radius: 50%;
+position: relative;
+color: #0bb5f4;
+
+}
+.resume .resume_right .resume_hobby ul li i{
+font-size: 30px;
+
+}
+.resume .resume_right .resume_hobby ul li:before{
+content: "";
+position: absolute;
+top:40px;
+right: -35.4px;;
+width: 35.4px;
+height: 2px;
+background: #0bb5f4;
+}
+.resume .resume_right .resume_hobby ul li:last-child:before{
+display: none;
+
+}
+
+    </style>
+
+    <div class="resume">
+        <div class="resume_left">
+            <div class="resume_profile">
+                <img src="https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg"
+                    alt="">
+            </div>
+            <div class="resume_content ">
+                <div class="resume_item resume_info">
+                    <div class="title">
+                        <p class="bold">Raziel Afandaev</p>
+                        <p class="regular">Couch potato</p>
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
+                            <div class="data">
+                                Shulamit Aloni 11,Rishon Lezion
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon"><i class="fas fa-at"></i></div>
+                            <div class="data">
+                                afandaev93@gmail.com
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon"><i class="fas fa-phone"></i></div>
+                            <div class="data">
+                                0528080069
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="resume_item resume_skills">
+                    <div class="title">
+                        <p class="bold">Skills</p>
+
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="skill_name">
+                                HTML
+                            </div>
+                            <div class="skill_progress">
+                                <span style="width:50%;"></span>
+                            </div>
+                            <div class="skill_per">50%</div>
+                        </li>
+                        <li>
+                            <div class="skill_name">
+                                CSS
+                            </div>
+                            <div class="skill_progress">
+                                <span style="width:50%;"></span>
+                            </div>
+                            <div class="skill_per">50%</div>
+                        </li>
+                        <li>
+                            <div class="skill_name">
+                                JS
+                            </div>
+                            <div class="skill_progress">
+                                <span style="width:40%;"></span>
+                            </div>
+                            <div class="skill_per">40%</div>
+                        </li>
+                        <li>
+                            <div class="skill_name">
+                                Node.Js
+                            </div>
+                            <div class="skill_progress">
+                                <span style="width:1%;"></span>
+                            </div>
+                            <div class="skill_per">1%</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="resume_item resime_social">
+                    <div class="title">
+                        <p class="bold">Social</p>
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="icon">
+                                <i class="fab fa-facebook-square"></i>
+                            </div>
+                            <div class="data">
+                                <p class="semi_bold">
+                                    FaceBook
+                                </p>
+                                <p>Raziel Afandaev</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <i class="fab fa-twitter-square"></i>
+                            </div>
+                            <div class="data">
+                                <p class="semi_bold">
+                                    Twitter
+                                </p>
+                                <p>Raziel Afandaev</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="resume_right">
+            <div class="resume_item resume_about">
+                <div class="title">
+                    <p class="bold">About me</p>
+                </div>
+                <p>I am 28 years old, student at ITC and the  Open University </p>
+            </div>
+            <div class="resume_item resume_work">
+                <div class="title">
+                    <p class="bold">Work Experience</p>
+                </div>
+                <ul>
+                    <li>
+                        <div class="date">2016-2017</div>
+                        <div class="info">
+                            <p class="semi-bol"> Technician</p>
+                            <p>Smartphone technician in Dynamica cellular.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="date">2018</div>
+                        <div class="info">
+                            <p class="semi-bold">Help Desk</p>
+                            <p>Matrix company project
+                                of operation and support of electronic applications of the Ministry of Education.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="date">2019-2020</div>
+                        <div class="info">
+                            <p class="semi-bold">Lorem ipsum dolor sit amet.</p>
+                            <p>CRM support at Bat Yam municipality.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="resume_item resume_education">
+                <div class="title">
+                    <p class="bold">Education</p>
+                </div>
+                <ul>
+                    <li>
+                        <div class="date">2018-2021</div>
+                        <div class="info">
+                            <p class="semi-bold">Lorem ipsum dolor sit amet.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At, sapiente.</p>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="date">2018-2021</div>
+                        <div class="info">
+                            <p class="semi-bold">Lorem ipsum dolor sit amet.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At, sapiente.</p>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="date">2018-2021</div>
+                        <div class="info">
+                            <p class="semi-bold">Lorem ipsum dolor sit amet.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At, sapiente.</p>
+                        </div>  
+                    </li>
+                </ul>
+            </div>
+            <div class="resume_item resume_hobby">
+                <div class="title">
+                    <p class="bold">Hobbies</p>
+                </div>
+                <ul>
+                    <li><i class="fas fa-book"></i></li>
+                    <li><i class="fab fa-pagelines"></i></li>
+                    <li><i class="fas fa-dumbbell"></i></li>
+                    <li><i class="fas fa-hiking"></i></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+ 
+</body>
+
+</html>
