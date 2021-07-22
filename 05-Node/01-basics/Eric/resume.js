@@ -10,9 +10,9 @@ serve the file using the server.
 add your image to the index.html
 
 +20 points
-*/ 
+*/
 
-  
+
 const express = require('express')
 
 // const http = require('http');
@@ -25,12 +25,11 @@ const express = require('express')
 //   });
 // }).listen(8080);
 
-const app=express()
+const app = express()
 
 const path = require('path')
 app.use(express.static(path.join(__dirname, 'public')))
-app.get('/', function(req,res){
+app.get('/', function (req, res) {
   res.sendFile(__dirname + "/resume.html")
 })
 app.listen(8080)
-
