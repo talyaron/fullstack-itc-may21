@@ -4,7 +4,7 @@ var http = require('http');
 
 var requestListener = function requestListener(req, res) {
   res.writeHead(200);
-  res.end('<header style="background-color:red"><h1>Hello <strong style="color:blue">World!</strong></h1></header>');
+  res.end("<header style=\"background-color:red\"><h1>Hello \n            <strong style=\"color:blue\">World!</strong>\n            </h1></header>");
 };
 
 var server = http.createServer(requestListener);
