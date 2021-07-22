@@ -43,15 +43,15 @@ body {
 .resume_right ul li {
   position: relative;
 }
-.resume_right ul li .date {
+.resume_right--date {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 15px;
 }
-.resume_right ul li .info {
+.resume_right--info {
   margin-bottom: 20px;
 }
-.resume_right ul li:last-child .info {
+ul li:last-child .resume_right--info {
   margin-bottom: 0;
 }
 .resume_left {

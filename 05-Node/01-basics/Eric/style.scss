@@ -35,6 +35,7 @@ body {
     &_item {
         padding: 25px 0;
         border-bottom: 2px solid #b1eaff;
+        
     }
 
     &_right {
@@ -46,17 +47,17 @@ body {
             position: relative;
         }
 
-        ul li .date {
+         &--date {
             font-size: 16px;
             font-weight: 500;
             margin-bottom: 15px;
         }
 
-        ul li .info {
+        &--info {
             margin-bottom: 20px;
         }
 
-        ul li:last-child .info {
+        ul li:last-child &--info {
             margin-bottom: 0;
         }
 
