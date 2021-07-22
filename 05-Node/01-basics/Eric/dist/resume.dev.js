@@ -13,16 +13,23 @@ add your image to the index.html
 
 +20 points
 */
-var http = require('http');
+var express = require('express'); // const http = require('http');
+// const fs = require('fs');
+// http.createServer(function (req, res) {
+//   fs.readFile('resume.html', function(err, data) {
+//     res.writeHead(200, {'Content-Type': 'text/html'});
+//     res.write(data);
+//     return res.end();
+//   });
+// }).listen(8080);
 
-var fs = require('fs');
 
-http.createServer(function (req, res) {
-  fs.readFile('resume.html', function (err, data) {
-    res.writeHead(200, {
-      'Content-Type': 'text/html'
-    });
-    res.write(data);
-    return res.end();
-  });
-}).listen(8080);
+var app = express();
+
+var path = require('path');
+
+app.use(express["static"](path.join(__dirname, 'public')));
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + "/resume.html");
+});
+app.listen(8080);
