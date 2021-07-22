@@ -1,8 +1,14 @@
 const http = require('http');
+const fs = require('fs');
 
 const requestListener = function (req, res) {
   res.writeHead(200);
-  res.end('<h1>Hello, World!</h1><h2>PEPE</h2>');
+  //read the file from the computer, and send it to the client
+  const file = fs.readFileSync('./index.html');
+  
+  res.end(file);
+
+  
 }
 
 const server = http.createServer(requestListener);
