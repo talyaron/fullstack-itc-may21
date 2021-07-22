@@ -1,54 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
-    <title>NodeJS Basics</title>
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" />
+    <title>NodeJs Basics</title>
 </head>
-<body class="body">
-    <header class="h2">
-        <h1>Curriculum Vitae</h1>
-    </header>
-    <section>
-        <h2>Datos Personales</h2> <!--border-->
-        <div>
-            <div>
-                <div>
-                    <span>Nombre y Apellidos</span>
-                    <span>Rocio Ayala Ruiz</span>
-                </div>
-                <div>
-                    <span>Direccion</span>
-                    <span>Calle Batuecas</span>
-                </div>
-                <div>
-                    <span>Telefono</span>
-                    <span>555555555</span>
-                </div>
-                <div>
-                    <span>Correo Electronico</span>
-                    <span>correo@electronico.es</span>
-                </div>
-                <div>
-                    <span>Fecha de Nacimiento</span>
-                    <span>22-05-1990</span>
-                </div>
-                <div>
-                    <span>DNI</span>
-                    <span>123146</span>
+
+<style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    width: 60%;
+    margin: 0 auto;
+}
+
+aside {
+    flex-basis: 35%;
+    background-color: whitesmoke;
+}
+
+main {
+    flex-basis: 65%;
+    background-color: #e8ded1;
+}
+
+.container__image {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+img {
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+}
+
+.container__perfil {
+    margin-top: 2em;
+}
+
+.container__perfil--span,
+.container__contacto--span {
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 0 0.3em;
+    letter-spacing: 0.2em;
+
+}
+
+.container__perfil--p {
+    font-size: 1rem;
+    margin-top: 1em;
+    text-align: justify;
+    padding: 0 0.3em;
+    
+}
+
+.container__contacto {
+    margin-top: 1em;
+}
+
+.container__contacto--icon {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: auto;
+    row-gap: 0.5em;
+    margin-top: 1em;
+    padding: 0 0.3em;
+}
+
+.container__main__character{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.container__main__character--name{
+    letter-spacing: 0.15em;
+}
+
+.container__main__section{
+    margin-top: 2em;
+    padding-left:2em;
+}
+.container__main__section--title{
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+}
+
+.container__main__skills--list,.container__main__education--list{
+    margin-top:0.5em;
+}
+
+.container__main__section--list{
+    margin-top:0.3em;
+    font-size: 0.9rem;
+    max-width: 90%;
+    margin-left: 1.1em;
+}
+.container__main__work--first{
+    margin-top: 0.3em;
+}
+.container__main__work--first--experience{
+    font-weight: 600;
+}
+
+@media screen and (max-width: 820px) {
+    .container__main__section{
+        margin-top: 1em;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .container{
+        display: block;
+        width: fit-content;
+    }
+
+    main {
+        border: 0;
+       
+    }
+}
+</style>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="container__image">
+                <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" alt="nodejs">
+            </div>
+            <div class="container__perfil">
+                <span class="container__perfil--span">Profile</span>
+                <p class="container__perfil--p">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim,
+                    explicabo voluptatibus commodi obcaecati quisquam dolores reprehenderit animi et? At sapiente eos
+                    itaque deserunt quisquam nobis porro, veritatis consequuntur eaque voluptatem!
+                </p>
+            </div>
+            <div class="container__contacto">
+                <span class="container__contacto--span">Contact</span>
+                <div class="container__contacto--icon">
+                    <i class="fas fa-map-marker-alt"></i><span>NodeJS, Javascript</span>
+                    <i class="fas fa-envelope-square"></i><span>node@nodejs.com</span>
+                    <i class="fas fa-phone-square-alt"></i><span>054-777-1212</span>
+                    <i class="fab fa-linkedin"></i></i><span>nodejs</span>
                 </div>
             </div>
-            <img src="#" alt="">
-        </div>
-    </section>
-    <section>
-        <h1>Formacion</h1>
-        <div>
+        </aside>
+        <main>
+            <div class="container__main__character">
+                <h1 class="container__main__character--name">Node JS</h1>
+                <h4>Javascript</h4>
+            </div>
+            <div class="container__main__section">
+                <span class="container__main__section--title"><i class="fas fa-brain"></i> Skills</span>
+                <div class="container__main__skills--list">
+                    <ul>
+                        <li class="container__main__section--list">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Facilis consectetur fugiat repudiandae iure at eos amet</li>
+                        <li class="container__main__section--list">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Facilis consectetur fugiat repudiandae iure at eos amet</li>
+                        <li class="container__main__section--list">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Facilis consectetur fugiat repudiandae iure at eos amet</li>
+                    </ul>
+                </div>
 
-        </div>
-    </section>
-    <script src="dist/nodejsbas.dev.js"></script>
+            </div>
+            <div class="container__main__section">
+                <span class="container__main__section--title"><i class="fas fa-briefcase"></i> Work Experience</span>
+                <div class="container__main__work--first">
+                    <span class="container__main__work--first--experience">ITC (2021 - Current)</span>
+                    <ul>
+                        <li class="container__main__section--list">LoLorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Facilis consectetur fugiat repudiandae iure at eos ametrem</li>
+                        <li class="container__main__section--list">LoLorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Facilis consectetur fugiat repudiandae iure at eos ametrem</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container__main__section">
+                <span class="container__main__section--title"><i class="fas fa-graduation-cap"></i> Education</span>
+                <div class="container__main__education--list">
+                    <ul>
+                        <li class="container__main__section--list">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Facilis consectetur fugiat repudiandae iure at eos amet</li>
+                        <li class="container__main__section--list">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Facilis consectetur fugiat repudiandae iure at eos amet</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
 </body>
+
 </html>
