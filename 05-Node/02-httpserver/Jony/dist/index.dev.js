@@ -2,47 +2,57 @@
 
 var http = require('http');
 
-var port = process.env.PORT || 3005;
-
 var fs = require('fs');
 
+var port = process.env.PORT || 8081;
 var server = http.createServer();
 server.on('request', function (req, res) {
   try {
     var method = req.method,
         url = req.url,
-        headers = req.headers;
+        headers = req.headers,
+        body = req.body;
+    console.log('url:', url);
+    console.log(method);
 
     switch (url) {
-      case '/':
+      case '/main':
         res.writeHead(200, {
           'Content-Type': 'text/html'
         });
-        var file = fs.readFileSync('index.html');
-        res.end(file);
+        var main = fs.readFileSync('./index.html');
+        res.end(main);
         break;
 
       case '/about':
         res.writeHead(200, {
           'Content-Type': 'text/html'
         });
-        var aboutfile = fs.readFileSync('about.html');
-        res.end(aboutfile);
+        var about = fs.readFileSync('./about.html');
+        res.end(about);
+        break;
+
+      case '/treee.jpg':
+        res.writeHead(200, {
+          'Content-Type': 'image/jpg'
+        });
+        var flower = fs.readFileSync('./tree.jpg');
+        res.end(flower);
         break;
 
       case '/contact':
         res.writeHead(200, {
           'Content-Type': 'text/html'
         });
-        var contactfile = fs.readFileSync('contact.html');
-        res.end(contactfile);
+        var contact = fs.readFileSync('./contact.html');
+        res.end(contact);
         break;
 
       default:
-        res.writeHead(200, {
+        res.writeHead(404, {
           'Content-Type': 'text/plain'
         });
-        res.end('OK 3');
+        res.end('The requested resource was not found');
     }
   } catch (e) {
     console.log(e);

@@ -2,7 +2,7 @@
 
 var http = require('http');
 
-var port = process.env.PORT || 3005;
+var port = process.env.PORT || 3001;
 
 var fs = require('fs');
 
@@ -16,29 +16,19 @@ server.on('request', function (req, res) {
     switch (url) {
       case '/':
         res.writeHead(200, {
-          'Content-Type': 'text/html'
+          'Content-Type': 'text/plain'
         });
-        var file = fs.readFileSync('index.html');
-        res.end(file);
-        break;
+        res.end('ello');
 
       case '/about':
         res.writeHead(200, {
           'Content-Type': 'text/html'
         });
-        var aboutfile = fs.readFileSync('about.html');
-        res.end(aboutfile);
-        break;
-
-      case '/contact':
-        res.writeHead(200, {
-          'Content-Type': 'text/html'
-        });
-        var contactfile = fs.readFileSync('contact.html');
-        res.end(contactfile);
-        break;
+        var file = fs.readFileSync('about.html');
+        res.end(file);
 
       default:
+        throw new Error("boooooooooooom");
         res.writeHead(200, {
           'Content-Type': 'text/plain'
         });

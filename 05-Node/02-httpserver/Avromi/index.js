@@ -1,7 +1,6 @@
 const http = require('http');
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 3001;
 const fs = require('fs');
-
 const server = http.createServer();
 
 server.on('request', (req, res) => {
@@ -14,32 +13,27 @@ server.on('request', (req, res) => {
         } = req;
 
         switch (url) {
-
             case '/':
                 res.writeHead(200, {
-                    'Content-Type': 'text/html'
-                })
-                const file = fs.readFileSync('index.html');
-                res.end(file);
-                break;
+                    'Content-Type': 'text/plain'
+                });
+                res.end('ello')
             case '/about':
                 res.writeHead(200, {
                     'Content-Type': 'text/html'
-                })
-                const aboutfile = fs.readFileSync('about.html');
-                res.end(aboutfile);
-                break;
+                });
+                const file = fs.readFileSync('about.html')
+                res.end(file)
             case '/contact':
                 res.writeHead(200, {
                     'Content-Type': 'text/html'
-                })
-                const contactfile = fs.readFileSync('contact.html');
-                res.end(contactfile);
-                break;
+                });
+                const file = fs.readFileSync('contact.html')
+                res.end(file)
 
 
             default:
-
+                throw new Error("boooooooooooom");
                 res.writeHead(200, {
                     'Content-Type': 'text/plain'
                 });
