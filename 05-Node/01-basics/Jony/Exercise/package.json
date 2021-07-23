@@ -10,6 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "image-downloader": "^4.0.3",
     "index": "^0.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
