@@ -3,11 +3,8 @@
 var express = require('express');
 
 var app = express();
-
-var path = require('path');
-
-var port = 3025;
-app.use('/public', express["static"]('cv')); // app.use(express.static(__dirname));
+var port = process.env.PORT || 3000;
+app.use('/public', express["static"]('public')); // app.use(express.static(__dirname));
 // app.get('/', (req, res) => {
 //     res.sendFile('./cv/cv.html', {root: __dirname});
 // });

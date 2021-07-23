@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
-const path = require('path');
-const port = 3025;
+const port = process.env.PORT || 3000;
 
-app.use('/public', express.static('cv'));
+app.use('/public', express.static('public'));
 // app.use(express.static(__dirname));
 
 // app.get('/', (req, res) => {
