@@ -1,6 +1,6 @@
 const http = require('http');
 const fs = require('fs');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8081;
 
 const server = http.createServer();
 
@@ -17,26 +17,33 @@ server.on('request', (req, res) => {
         console.log('url:', url)
         console.log(method)
 
+
         switch (url) {
 
-            case '/':
+            case '/main':
                 res.writeHead(200, { 'Content-Type': 'text/html' });
                 const main = fs.readFileSync('./index.html')
                 res.end(main)
                 break;
-
-            case '/nodejs.png':
-                res.writeHead(200, { 'Content-Type': 'image/png' });
-                const nodejs = fs.readFileSync('./logo.png')
-                res.end(nodejs)
-                break
                 
-            case '/indexnode.css':
-                res.writeHead(200, { 'Content-Type': 'text/css' });
-                const style = fs.readFileSync('./index.css')
-                res.end(style)
-                break
+            case '/about':
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                const about = fs.readFileSync('./about.html')
+                res.end(about)
+                break;
 
+            case '/treee.jpg':
+                res.writeHead(200, { 'Content-Type': 'image/jpg' });
+                const flower = fs.readFileSync('./tree.jpg')
+                res.end(flower)
+                break 
+
+            case '/contact':
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                const contact = fs.readFileSync('./contact.html')
+                res.end(contact)
+                break;
+                
 
             default:
                 res.writeHead(404, { 'Content-Type': 'text/plain' });

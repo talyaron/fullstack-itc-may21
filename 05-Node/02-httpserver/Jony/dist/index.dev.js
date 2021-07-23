@@ -4,7 +4,7 @@ var http = require('http');
 
 var fs = require('fs');
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8081;
 var server = http.createServer();
 server.on('request', function (req, res) {
   try {
@@ -16,7 +16,7 @@ server.on('request', function (req, res) {
     console.log(method);
 
     switch (url) {
-      case '/':
+      case '/main':
         res.writeHead(200, {
           'Content-Type': 'text/html'
         });
@@ -24,20 +24,28 @@ server.on('request', function (req, res) {
         res.end(main);
         break;
 
-      case '/nodejs.png':
+      case '/about':
         res.writeHead(200, {
-          'Content-Type': 'image/png'
+          'Content-Type': 'text/html'
         });
-        var nodejs = fs.readFileSync('./logo.png');
-        res.end(nodejs);
+        var about = fs.readFileSync('./about.html');
+        res.end(about);
         break;
 
-      case '/indexnode.css':
+      case '/treee.jpg':
         res.writeHead(200, {
-          'Content-Type': 'text/css'
+          'Content-Type': 'image/jpg'
         });
-        var style = fs.readFileSync('./index.css');
-        res.end(style);
+        var flower = fs.readFileSync('./tree.jpg');
+        res.end(flower);
+        break;
+
+      case '/contact':
+        res.writeHead(200, {
+          'Content-Type': 'text/html'
+        });
+        var contact = fs.readFileSync('./contact.html');
+        res.end(contact);
         break;
 
       default:
