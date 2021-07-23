@@ -27,7 +27,7 @@ server.on('request', function (req, res) {
         res.end(nodejs);
         break;
 
-      case '/indexnode':
+      case '/style':
         res.writeHead(200, {
           'Content-Type': 'text/css'
         });

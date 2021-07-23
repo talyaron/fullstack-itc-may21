@@ -23,7 +23,7 @@ server.on('request', (req, res) => {
                 res.end(nodejs)
                 break
 
-            case '/indexnode':
+            case '/style':
                 res.writeHead(200, { 'Content-Type': 'text/css' });
                 const style = fs.readFileSync('dist/index.css')
                 res.end(style)
