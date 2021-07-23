@@ -1,0 +1,10 @@
+.container .header {
+  display: flex;
+  text-align: center;
+}
+.container .all_information {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  text-align: center;
+}

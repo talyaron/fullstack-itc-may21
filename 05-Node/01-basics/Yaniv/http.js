@@ -7,7 +7,7 @@ const requestListener = function (req, res) {
   <h2>Hello, I'm an h2!</h2>
   <h3>Hello, I'm an h3!</h3>
   <p>Hello, I'm a p!</p>
-  <p style="font-color:pink">Hello, I'm a pink p!</p>
+  <p style="color:pink">Hello, I'm a pink p!</p>
   `);
 }
 
