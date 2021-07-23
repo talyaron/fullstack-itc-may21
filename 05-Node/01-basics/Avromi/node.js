@@ -1,18 +1,11 @@
-console.log("hi you foo");
 
-const http = require('http');
+const express = require('express')
+const app = express()
+const port = 3000
 
-
-
-const requestListener = function (req, res) {
-    
-  res.writeHead(200);
-  const fs = require('fs');
-  const file= fs.readFileSync('./index.html') 
-
-  res.end(file);
-}
+app.use('/public',express.static('public'))
 
 
-const server = http.createServer(requestListener);
-server.listen(3000,()=>{console.log('Listen on port 3000')});
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})

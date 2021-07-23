@@ -1,19 +1,10 @@
 "use strict";
 
-console.log("hi you foo");
+var express = require('express');
 
-var http = require('http');
-
-var requestListener = function requestListener(req, res) {
-  res.writeHead(200);
-
-  var fs = require('fs');
-
-  var file = fs.readFileSync('./index.html');
-  res.end(file);
-};
-
-var server = http.createServer(requestListener);
-server.listen(3000, function () {
-  console.log('Listen on port 3000');
+var app = express();
+var port = 3000;
+app.use('/public', express["static"]('public'));
+app.listen(port, function () {
+  console.log("Example app listening at http://localhost:".concat(port));
 });

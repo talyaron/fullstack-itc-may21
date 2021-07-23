@@ -1,7 +1,8 @@
 {
-  "name": "tal",
+  "name": "eric",
   "version": "1.0.0",
-  "main": "01-index.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -9,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "argv": "^0.0.2"
-  },
-  "description": ""
+    "argv": "^0.0.2",
+    "express": "^4.17.1"
+  }
 }

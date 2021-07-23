@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NODE JS</title>
+    <style>
+        html {
+            background: linear-gradient(90deg, rgba(223, 223, 223, 1) 0%, rgba(148, 187, 233, 1) 100%);
+        }
+
+        body {
+            max-width: 60%;
+            margin: 5% auto 5% auto;
+        }
+
+        .nav {
+            display: flex;
+        }
+
+        .nav__item--1 {
+            background-color: darkslategray;
+            margin: auto;
+            color: lightseagreen;
+            padding: 30px;
+            padding-left: 40px;
+            flex: 3;
+        }
+
+        span {
+            color: white;
+        }
+
+        h1 {
+            font-weight: 500;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .nav__item__p {
+            font-size: 1rem;
+        }
+
+        .nav__item--2 {
+            text-align: center;
+            flex: 1;
+        }
+
+        .main {
+            background: lightgray;
+            display: flex;
+            flex-flow: column;
+        }
+
+        .row__wrapper {
+            margin: 20px 40px 20px 40px;
+            display: flex;
+           
+        
+        }
+        .main__skills, .main__expertise, .main__education{
+            flex:1;
+            margin:5%;
+        }
+
+        .main__profile {
+            max-width: 70%;
+            margin-left: 5%;
+          
+        }
+        .main__contact{
+            
+            max-width: 20%;
+        }
+        .main__professional__experiance{
+            display:flex;
+          
+           
+        }
+        .main__professional__experiance__description{
+           margin-left: 20px;
+           align-self: flex-start;
+         
+        }
+        h2{
+            margin: 0;
+        }
+        .main__professional__experiance__time{
+            background-color: darkslategray;
+            color: white;
+            padding: 4px;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav__item--1">
+            <h1><span>AVROMI</span> RUSSELL</h1>
+            <p class="nav__item__p">FULL-STACK DEVELOPER</p>
+        </div>
+        <div class="nav__item--2">
+            <!-- <img class="nav__item__img"
+                src="https://media-exp1.licdn.com/dms/image/D4D35AQFRLNblkDJHiA/profile-framedphoto-shrink_400_400/0/1626683316187?e=1627030800&v=beta&t=yrWB1hNKccNvaWpIlcFMRsEZuCpXG3g0uB5aG03wuNU"
+                alt=""> -->
+            <img class="nav__item__img" src="http://localhost:3000/public/profile.png" alt="Profile">
+        </div>
+    </nav>
+    <div class="main">
+        <div class="row__wrapper">
+            <div class="main__contact">
+                <div class="main__conatct__title">
+                    <h2>Contact</h2>
+                    <hr>
+                </div>
+                <div class="main__conatct__item">
+                    <i></i><a href="tel:0584035799">058-403-5799</a>
+                </div>
+                <div class="main__conatct__item">
+                    <i></i><a href="mailto:avromirussell@gmail.com">avromirussell@gmail.com</a>
+                </div>
+                <div class="main__conatct__item">
+                    <i></i>
+                    <p>Central, Israel</p>
+                </div>
+                <div class="main__conatct__item">
+                    <i></i> <a href="https://www.linkedin.com/in/avromirussell/">LinkedIn Profile</a>
+                </div>
+            </div>
+            <div class="main__profile">
+                <h2>Profile</h2>
+                <hr>
+                <p>I have been involved in various businesses from as young as 12 years old when I started packing the
+                    vending route driver containers for Bottoms Up Vending after school on Sunday. I created systems and
+                    have continued to create systems to help every organization I’ve been involved
+                    with to do things more efficiently. I have used my computer skills to create spreadsheets that would
+                    send out inquiry emails to suppliers
+                    for an amazon reseller I worked for that essentially turned hours of work into the click of a button
+                    saving the company potentially thousands of dollars a year it would cost to have someone do it
+                    manually.
+                </p>
+
+            </div>
+        </div>
+        <div class="row__wrapper">
+            <div class="main__education">
+                <h2>Education</h2>
+                <hr>
+                <div class="main__education__item">
+                    <h3>Full-Stack Student</h3>
+                    <p>ITC</p>
+                    <p>May 2021- Jan 2022</p>
+                </div>
+                <div class="main__education__item">
+                    <h3>Talmudic Law</h3>
+                    <p>Neveh Zion Collage</p>
+                    <p>2011-2014</p>
+                </div>
+            </div>
+            <div class="main__expertise">
+                <h2>Expertise</h2>
+                <hr>
+                <p>Problem Solving</p>
+                <p>Adopting New Software</p>
+                <p>Efficiency-oriented</p>
+                <p>Team Player</p>
+            </div>
+            <div class="main__skills">
+                <h2>Skills</h2>
+                <hr>
+                <p>HTML</p>
+                <p>CSS</p>
+                <p>javaScript</p>
+                <p>typeScript</p>
+                <p>Node.js</p>
+            </div>
+        </div>
+        <div class="row__wrapper">
+            <div class="main__professional">
+                <div class="main__professional__experiance">
+                    <div class="main__professional__experiance__time">2003-2007</div>
+                    <div class="main__professional__experiance__description">
+                        <h2>Company Name </h2>
+                        <p>At company name I was successfull in .....</p>
+                    </div>
+                </div>
+                <div class="main__professional__experiance">
+                    <div class="main__professional__experiance__time">2003-2007</div>
+                    <div class="main__professional__experiance__description">
+                        <h2>Company Name </h2>
+                        <p>At company name I was successfull in .....</p>
+                    </div>
+                </div>
+                <div class="main__professional__experiance">
+                    <div class="main__professional__experiance__time">2003-2007</div>
+                    <div class="main__professional__experiance__description">
+                        <h2>Company Name </h2>
+                        <p>At company name I was successfull in .....</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
