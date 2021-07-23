@@ -9,3 +9,5 @@ serve the file using the server.
 add your image to the index.html
 
 +20 points
+
+https://stackoverflow.com/a/5826883/3940742
