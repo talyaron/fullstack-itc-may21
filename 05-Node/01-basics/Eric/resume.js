@@ -48,9 +48,9 @@ add your image to the index.html
      try {
  
          const {
-             
+             method,
              url,
-             
+             headers,
          } = req;
  
          switch (url) {
