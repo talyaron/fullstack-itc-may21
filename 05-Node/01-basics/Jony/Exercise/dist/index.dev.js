@@ -8,12 +8,7 @@ var port = process.env.PORT || 3000;
 var server = http.createServer();
 server.on('request', function (req, res) {
   try {
-    var method = req.method,
-        url = req.url,
-        headers = req.headers,
-        body = req.body;
-    console.log('url:', url);
-    console.log(method);
+    var url = req.url;
 
     switch (url) {
       case '/':
@@ -24,7 +19,7 @@ server.on('request', function (req, res) {
         res.end(main);
         break;
 
-      case '/nodejs.png':
+      case '/nodejs':
         res.writeHead(200, {
           'Content-Type': 'image/png'
         });
@@ -32,11 +27,11 @@ server.on('request', function (req, res) {
         res.end(nodejs);
         break;
 
-      case '/indexnode.css':
+      case '/indexnode':
         res.writeHead(200, {
           'Content-Type': 'text/css'
         });
-        var style = fs.readFileSync('./index.css');
+        var style = fs.readFileSync('dist/index.css');
         res.end(style);
         break;
 
