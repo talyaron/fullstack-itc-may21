@@ -7,15 +7,7 @@ const server = http.createServer();
 server.on('request', (req, res) => {
     try {
 
-        const {
-            method,
-            url,
-            headers,
-            body
-        } = req;
-
-        console.log('url:', url)
-        console.log(method)
+        const {url} = req;
 
         switch (url) {
 
@@ -25,29 +17,26 @@ server.on('request', (req, res) => {
                 res.end(main)
                 break;
 
-            case '/nodejs.png':
+            case '/nodejs':
                 res.writeHead(200, { 'Content-Type': 'image/png' });
                 const nodejs = fs.readFileSync('./logo.png')
                 res.end(nodejs)
                 break
-                
-            case '/indexnode.css':
+
+            case '/style':
                 res.writeHead(200, { 'Content-Type': 'text/css' });
-                const style = fs.readFileSync('./index.css')
+                const style = fs.readFileSync('dist/index.css')
                 res.end(style)
                 break
 
-
             default:
                 res.writeHead(404, { 'Content-Type': 'text/plain' });
-
                 res.end('The requested resource was not found');
         }
     } catch (e) {
         console.log(e);
 
         res.writeHead(500, { 'Content-Type': 'text/plain' });
-
         res.end(`There is a sever error: ${e.message}`);
     }
 
