@@ -1,39 +1,58 @@
 const http = require('http');
 const fs = require('fs');
+const port = process.env.PORT || 4000;
 
-http.createServer(function (req, res) {
+const server = http.createServer();
 
-    if(req.url.indexOf('.html') != -1){ //req.url has the pathname, check if it conatins '.html'
+server.on('request', (req, res) => {
+    try {
 
-      fs.readFile('./index.html', function (err, data) {
-        if (err) console.log(err);
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        res.end();
-      });
+        const {
+            method,
+            url,
+            headers,
+            body
+        } = req;
 
+        console.log('url:', url)
+        console.log(method)
+
+        switch (url) {
+
+            case '/':
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                const main = fs.readFileSync('./index.html')
+                res.end(main)
+                break;
+
+            case '/perfil.jpg':
+                res.writeHead(200, { 'Content-Type': 'image/jpg' });
+                const img = fs.readFileSync('./perfil.jpg')
+                res.end(img)
+                break
+                
+            case '/style.css':
+                res.writeHead(200, { 'Content-Type': 'text/css' });
+                const style = fs.readFileSync('./style.css')
+                res.end(style)
+                break
+
+
+            default:
+                res.writeHead(404, { 'Content-Type': 'text/plain' });
+
+                res.end('The requested resource was not found');
+        }
+    } catch (e) {
+        console.log(e);
+
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+
+        res.end(`There is a sever error: ${e.message}`);
     }
 
-    if(req.url.indexOf('.js') != -1){ //req.url has the pathname, check if it conatins '.js'
+})
 
-      fs.readFile('./script.js', function (err, data) {
-        if (err) console.log(err);
-        res.writeHead(200, {'Content-Type': 'text/javascript'});
-        res.write(data);
-        res.end();
-      });
-
-    }
-
-    if(req.url.indexOf('.css') != -1){ //req.url has the pathname, check if it conatins '.css'
-
-      fs.readFile('./style.css', function (err, data) {
-        if (err) console.log(err);
-        res.writeHead(200, {'Content-Type': 'text/css'});
-        res.write(data);
-        res.end();
-      });
-
-    }
-
-}).listen(3000);
+server.listen(port, () => {
+    console.log('Server listen on port', port)
+})
