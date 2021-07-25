@@ -1,5 +1,5 @@
 const http = require('http');
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 3006;
 const fs = require('fs');
 
 const server = http.createServer();
@@ -21,6 +21,7 @@ server.on('request', (req, res) => {
                 })
                 const file = fs.readFileSync('index.html');
                 res.end(file);
+                console.log("poo")
                 break;
             case '/about':
                 res.writeHead(200, {
@@ -36,8 +37,7 @@ server.on('request', (req, res) => {
                 const contactfile = fs.readFileSync('contact.html');
                 res.end(contactfile);
                 break;
-
-
+                
             default:
 
                 res.writeHead(200, {

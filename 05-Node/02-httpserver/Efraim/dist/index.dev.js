@@ -2,7 +2,7 @@
 
 var http = require('http');
 
-var port = process.env.PORT || 3005;
+var port = process.env.PORT || 3006;
 
 var fs = require('fs');
 
@@ -20,6 +20,7 @@ server.on('request', function (req, res) {
         });
         var file = fs.readFileSync('index.html');
         res.end(file);
+        console.log("poo");
         break;
 
       case '/about':
