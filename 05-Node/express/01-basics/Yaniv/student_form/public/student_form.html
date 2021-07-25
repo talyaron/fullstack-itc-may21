@@ -8,9 +8,12 @@
     <title>Student Form</title>
 </head>
 <body>
-    <form>
+    <form id="student_form">
         <label for="student_name">Student Name</label>
-        <input type="text" id="student_name"
+        <input type="text" minlength="2" maxlength="20" id="student_name" name="studentName" />
+        <label for="student_id">Student ID</label>
+        <input type="number" min="0" id="student_id" name="studentId" />
+        <input type="submit" id="submit" value="Add Student" />
     </form>
 </body>
 </html>
