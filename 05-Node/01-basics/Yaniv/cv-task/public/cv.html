@@ -1,17 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost:3000/public/dist/cv.css">
+    <link rel="stylesheet" href="/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
     <title>Yaniv Aflalo - Full Stack Developer</title>
 </head>
+
 <body>
-    <h1>Yaniv Aflalo</h1>
-    <img src="http://localhost:3000/public/images/Yaniv.jpeg"/>
-    <a href="https://www.linkedin.com/in/yaniv-aflalo-8aa92386/"><i class="fab fa-2x fa-linkedin"></i></a>
+    <header class="header">
+        <img class="header__item header__item--img" src="yaniv.jpg" />
+        <h1 class="header__item header__item--name">Yaniv Aflalo</h1>
+        <a class="header__item header__item--linkedin" href="https://www.linkedin.com/in/yaniv-aflalo-8aa92386/"><i
+                class="fab fa-3x fa-linkedin"></i></a>
+        <a class="header__item header__item--mail" href="mailto:yanivaflalo@gmail.com"><i
+                class="fas fa-2x fa-envelope-square"></i><span class="hide">YanivAflalo@gmail.com</span></a>
+        <a class="header__item header__item--phone" href="tel:0544916104"><i
+                class="fas fa-2x fa-phone-square-alt"></i><span class="hide">054-4916-104</span></a>
+        <p class="header__item header__item--city"><span class="hide"><i class="fas fa-2x fa-map-marker-alt"></i></span>Be'er-Sheva</p>
+    </header>
+    <main class="main">
+        <section class="card">
+            <h2>Summary</h2>
+            <p class="emphasize">
+                I’m a self-learning, well organized analytical thinker. I’m passionate about using technology and
+                software to solve complex problems and translate innovative ideas to elegant tech solutions. My goal is
+                to constantly keep on learning and developing myself in the software industry. I’m looking for a
+                position as a software developer where I can leverage my skills and versatile background to do good.
+                Outside of work I enjoy running, drawing and travelling.
+            </p>
+        </section>
+        <section class="card">
+            <h2>Experience</h2>
+            <div class="logo_grid">
+                <p class="logo_grid__item logo_grid__item--when">
+                    Apr 2019 - today
+                </p>
+                <a class="logo_grid__item logo_grid__item--logo" href="https://danielzrihen.co.il">
+                    <img src="https://assets.goodfirms.co/services/general/daniel-zrihen-ltd.jpg" />
+                </a>
+                <div class="logo_grid__item logo_grid__item--title">
+                    <p class="bold">
+                        Solutions Developer & SEO Expert
+                    </p>
+                    <p class="emphasize">
+                        <a href="https://danielzrihen.co.il">danielzrihen.co.il</a> - Israel’s leading SEO agency
+                    </p>
+                </div>
+                <ul class="logo_grid__item logo_grid__item--details">
+                    <li>
+                        Developing data-based solutions and automation tools in Google Apps Script environment (JavaScript)
+                    </li>
+                    <li>
+                        Building and maintaining internal customer performance analytics and task management framework
+                    </li>
+                    <li>
+                        SEO research and content management on customer websites and promotion blogs
+                    </li>
+                    <li>
+                        Extensive experience with Google Apps, Google Sheets, WordPress and various SEO tools
+                    </li>
+                </ul>
+            </div>
+            <div class="logo_grid">
+                <p class="logo_grid__item logo_grid__item--when">
+                    Jul 2017 - Nov 2018
+                </p>
+                <a class="logo_grid__item logo_grid__item--logo" href="https://payboxapp.com/">
+                    <img src="data:image/png;base64,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" />
+                </a>
+                <div class="logo_grid__item logo_grid__item--title">
+                    <p class="bold">
+                        Operations & Customer Service Team Leader
+                    </p>
+                    <p class="emphasize">
+                        <a href="https://payboxapp.com/">PayBox</a> - mobile payments app
+                    </p>
+                </div>
+                <ul class="logo_grid__item logo_grid__item--details">
+                    <li>
+                        Leading a team of 3 customer service and operations managers, definition of team goals and
+                        tracking KPIs
+                    </li>
+                    <li>
+                        Communication with customers & service vendors, coordination with product and R&D
+                    </li>
+                    <li>
+                        Fraud management, enforcement of compliance regulations, analysis of financial reports and
+                        related investigations/handling
+                    </li>
+                </ul>
+            </div>
+            <div class="logo_grid">
+                <p class="logo_grid__item logo_grid__item--when">
+                    Apr 2016 - Jun 2017
+                </p>
+                <a class="logo_grid__item logo_grid__item--logo"  href="https://www.onehourtranslation.com/">
+                    <img src="https://media-exp1.licdn.com/dms/image/C560BAQFuJFXwoa7vTw/company-logo_200_200/0/1614092882153?e=2159024400&v=beta&t=UraLTjEH4ng2NCpbjknL9voKyAyCJ0pEnWrIMzW2erw"/>
+                </a>
+                <div class="logo_grid__item logo_grid__item--title">
+                    <p class="bold">
+                        Customer Support Group Manager
+                    </p>
+                    <p class="emphasize">
+                        <a href="https://www.onehourtranslation.com/">One Hour Translation</a> - online translation
+                        platform
+                    </p>
+                </div>
+                <ul class="logo_grid__item logo_grid__item--details">
+                    <li>
+                        Managing a global group of 4 teams (Israel, Ukraine and Romania), included recruiting, mentoring
+                        and professional guidance, and prioritization of ongoing customer cases
+                    </li>
+                    <li>
+                        Monitoring & continuous improvement of the team’s KPIs & processes
+                    </li>
+                    <li>
+                        Cooperation with senior management and other departments
+                    </li>
+                    <li>
+                        Awarded for professional excellence, based on a company-wide survey
+                    </li>
+                    <li>
+                        (2015) Handling customer cases, solving product issues as customer support representative
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="card">
+            <h2>Education</h2>
+            <div class="logo_grid">
+                <p class="logo_grid__item logo_grid__item--when">
+                    May 2021 - Jan 2022
+                </p>
+                <a class="logo_grid__item logo_grid__item--logo" href="https://www.itc.tech/">
+                    <img src="https://media-exp1.licdn.com/dms/image/C4E0BAQEb4Bzy9Upkog/company-logo_200_200/0/1519881137076?e=2159024400&v=beta&t=ngTfL9hZL0G1rfpmqo9yP23CkUBwuf16Ii1zHSfpHck"/>
+                </a>
+                <div class="logo_grid__item logo_grid__item--title">
+                    <p class="bold">
+                        Full-Stack Development
+                    </p>
+                    <p class="emphasize">
+                        <a href="https://www.itc.tech/">Israel Tech Challenge &lt;itc&gt;</a>
+                    </p>
+                </div>
+                <ul class="logo_grid__item logo_grid__item--details">
+                    <li>
+                        Frontend: HTML, SCSS, JavaScript, TypeScript. In the future: Bootstrap, React.js, Angular and more.
+                    </li>
+                    <li>
+                        Backend: Node.js. In the future: REST API, Express, MongoDB, Python and more.
+                    </li>
+                    <li>
+                        Mini-projects: Running app, WhatsApp Demo, Group Randomizer, Retro Arcade-like Game (TS/JS: http servers, OOP, CRUD, Classes, EventListeners and more; HTML: DOM, Forms, BEM model and more; SCSS: Responsive Design, Media Queries, Animations, Flex, Grid and more).
+                    </li>
+                </ul>
+            </div>
+            <div class="logo_grid">
+                <p class="logo_grid__item logo_grid__item--when">
+                    2014 - 2018
+                </p>
+                <a class="logo_grid__item logo_grid__item--logo" href="https://in.bgu.ac.il/en/Pages/default.aspx">
+                    <img src="data:image/jpeg;base64,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" />
+                </a>
+                <div class="logo_grid__item logo_grid__item--title">
+                    <p class="bold">
+                        M.Sc. in Environmental Engineering
+                    </p>
+                    <p class="emphasize">
+                        <a href="https://in.bgu.ac.il/en/Pages/default.aspx">Ben-Gurion University of the Negev</a>
+                    </p>
+                </div>
+                <ul class="logo_grid__item logo_grid__item--details">
+                    <li>
+                        Leading a team of 3 customer service and operations managers, definition of team goals and
+                        tracking KPIs
+                    </li>
+                    <li>
+                        Communication with customers & service vendors, coordination with product and R&D
+                    </li>
+                    <li>
+                        Fraud management, enforcement of compliance regulations, analysis of financial reports and
+                        related investigations/handling
+                    </li>
+                </ul>
+            </div>
+            <div class="logo_grid">
+                <p class="logo_grid__item logo_grid__item--when">
+                    2011 - 2014
+                </p>
+                <a class="logo_grid__item logo_grid__item--logo" href="https://in.bgu.ac.il/en/Pages/default.aspx">
+                    <img src="data:image/jpeg;base64,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" />
+                </a>
+                <div class="logo_grid__item logo_grid__item--title">
+                    <p class="bold">
+                        B.Sc. in Life Sciences
+                    </p>
+                    <p class="emphasize">
+                        <a href="https://in.bgu.ac.il/en/Pages/default.aspx">Ben-Gurion University of the Negev</a>
+                    </p>
+                </div>
+                <ul class="logo_grid__item logo_grid__item--details">
+                    <li>
+                        Average 93.5, graduated with honors
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="card">
+            <h2>Military Service</h2>
+            <div class="logo_grid">
+                <p class="logo_grid__item logo_grid__item--when">
+                    2007 - 2010
+                </p>
+                <a class="logo_grid__item logo_grid__item--logo" href="https://www.idf.il/en/minisites/military-intelligence-directorate/">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/AmanLogo.svg/1200px-AmanLogo.svg.png"/>
+                </a>
+                <div class="logo_grid__item logo_grid__item--title">
+                    <p class="bold">
+                        8200 Analyst
+                    </p>
+                    <p class="emphasize">
+                        <a href="https://www.itc.tech/">IDF Military Intelligence</a>
+                    </p>
+                </div>
+                <ul class="logo_grid__item logo_grid__item--details">
+                    <li>
+                        Intensive use of the Arabic language and designated computer tools, personal guidance, team work
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="card">
+            <h2>Skills, Tools & Languages</h2>
+            <ul>
+                <li>
+                    <strong class="emphasize">Programming:</strong> JavaScript, TypeScript, http servers, HTML, CSS & SCSS, RegEx, Visual Studios Code, Google Visualization API Query Language. In the future: Python
+                </li>
+                <li>
+                    <strong class="emphasize">Tools:</strong> Google Apps (including JavaScript coding in Google Apps Script application development platform), JIRA, Wordpress, Wix, ahrefs, SalesForce, Desk, Zendesk 
+                </li>
+                <li>
+                    <strong class="emphasize">Languages:</strong> Hebrew (native speaker), English (fluent), Arabic
+                </li>
+            </ul>
+        </section>
+        <section class="card">
+            <h2>Personal Project</h2>
+            <p>
+                <a href="https://gsuite.google.com/marketplace/app/neatext/249778043876"><strong class="emphasize">NeaText add-on for Google Docs:</strong></a> Allows automatic content optimization for SEO with a few clicks. Developed using JavaScript coding in Google Apps Script application development platform and managed via Google Cloud Console (self-taught).
+            </p>
+        </section>
+
+    </main>
 </body>
+
 </html>
