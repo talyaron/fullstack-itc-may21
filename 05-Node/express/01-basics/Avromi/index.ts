@@ -17,9 +17,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.get('/blabla', (req, res) => {
-    res.send('Bla bla!')
-})
+
 
 app.post('/addStudent', (req, res) => {
     try {
