@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-const bodyParser = require('body-parser');
+const bodyParser =require ('body-parser');
+const Ajv = require("ajv");
+const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
+const fs = require('fs');
+
+app.use(express.static('public'));
 
 class Students {
     list = [];
@@ -9,23 +14,51 @@ class Students {
         this.list.push(student)
     }
 }
-const students = new Students();
+const students:Students = new Students();
 
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    const form = fs.readFileSync('./public/index.html')
+    res.send(form)
 })
 
 
 
+app.post('/testPost',(req, res)=>{
+
+    console.log(req.body);
+    
+    res.send({ok:true})
+})
+
 app.post('/addStudent', (req, res) => {
     try {
 
+        const schema = {
+            type: "object",
+            properties: {
+                name: { type: "string" },
+                id: { type: "integer" }
+            },
+            required: ["name", "id"],
+            additionalProperties: false
+        }
+        const validate = ajv.compile(schema)
+
+
         const { body } = req;
 
-        const { name, id } = body;
-        if(!name || !id){throw new Error('No name or id in data')}
+        const valid = validate(body)
+        if (!valid) {
+            validate.errors.forEach(err =>
+                console.log(err.message)
+            )
+            throw new Error("Invalid data was transferd")
+        }
+
+        // const { name, id } = body;
+        // if (!name || !id) { throw new Error('No name or id in data') }
 
         students.addStudent(body);
 
