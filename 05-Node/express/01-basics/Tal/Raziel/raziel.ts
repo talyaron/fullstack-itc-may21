@@ -3,6 +3,8 @@ const app=express();
 const bodyParser = require('body-parser');
 const port=process.env.PORT || 3005;
 
+app.use(express.static('public'));
+
 class Person{
     arrayOfPerson=[];
     addPerson(person){
