@@ -1,43 +1,3 @@
-/*
-create a server
-create an HTML file with your CV (resume).
-Make it stylish and beautiful, as you deserve!
-serve the file using the server.
-
-80 points
-
-//top-notch:
-add your image to the index.html
-
-+20 points
-*/
-
-
-
-// const http = require('http');
-// const fs = require('fs');
-// http.createServer(function (req, res) {
-//   fs.readFile('resume.html', function(err, data) {
-//     res.writeHead(200, {'Content-Type': 'text/html'});
-//     res.write(data);
-//     return res.end();
-//   });
-// }).listen(8080);
-
-// const express = require('express')
-
-//  const app = express()
-
-//  const path = require('path')
-//  app.use(express.static(path.join(__dirname, 'public')))
-//  app.get('/', function (req, res) {
-//    res.sendFile(__dirname + "/resume.html")
-//  })
-//  app.listen(8080);
-
-
-
-
  const http = require('http');
  const port = process.env.PORT || 3005;
  const fs = require('fs')
@@ -95,4 +55,29 @@ add your image to the index.html
  
  server.listen(port, () => {
      console.log('Server listen on port', port)
- })
+ });
+
+
+
+
+ //with express:
+ // const http = require('http');
+// const fs = require('fs');
+// http.createServer(function (req, res) {
+//   fs.readFile('resume.html', function(err, data) {
+//     res.writeHead(200, {'Content-Type': 'text/html'});
+//     res.write(data);
+//     return res.end();
+//   });
+// }).listen(8080);
+
+// const express = require('express')
+
+//  const app = express()
+
+//  const path = require('path')
+//  app.use(express.static(path.join(__dirname, 'public')))
+//  app.get('/', function (req, res) {
+//    res.sendFile(__dirname + "/resume.html")
+//  })
+//  app.listen(8080);
