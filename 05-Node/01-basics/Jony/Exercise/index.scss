@@ -24,14 +24,14 @@
             margin-top: 1em;
 
             img {
-                width: 40%;
-                height: 40%;
+                width: 30%;
+                height: 30%;
                 border-radius: 50%;
             }
         }
 
         &__perfil {
-            margin-top: 2em;
+            margin-top: 1em;
 
             &--span {
                 font-size: 1.4rem;
@@ -48,6 +48,61 @@
 
             }
 
+        }
+
+
+        &__programming {
+            margin-top: 1em;
+
+            &--span {
+                font-size: 1.4rem;
+                font-weight: bold;
+                padding: 0 0.3em;
+                letter-spacing: 0.2em;
+
+            }
+
+            &__chart {
+                margin-top: 0.5em;
+                position: relative;
+                width: 200px;
+                padding: 0 0.5em;
+
+                &--languages {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: auto;
+
+                    span {
+                        margin-right: 10px;
+                    }
+
+                    &--bar {
+                        background: green;
+                        text-align: center;
+                        color: #333;
+                        height: 1em;
+                        border-radius: 10px;
+                        border-collapse: inherit;
+                        margin-bottom: 0.3em;
+
+                    }
+
+                    &--html{
+                        width: 90%;
+                        position: relative;
+                        left:10%;
+                    }
+                    &--css{
+                        width: 80%;
+                        position: relative;
+                        left:10%;
+                    }
+                    &--javascript{
+                        width: 65%;
+                    }
+                }
+            }
         }
 
         &__contacto {
@@ -77,32 +132,32 @@
     &__main {
         flex-basis: 65%;
         background-color: #e8ded1;
-    
+
         &__character {
             display: flex;
             justify-content: center;
             flex-direction: column;
             align-items: center;
             margin-top: 1em;
-    
+
             &--name {
                 letter-spacing: 0.15em;
             }
         }
-    
+
         &__skills {
             margin-top: 2em;
             padding-left: 2em;
-    
+
             &--title {
                 font-size: 1.6rem;
                 font-weight: bold;
                 letter-spacing: 0.2em;
             }
-    
+
             &__list {
                 margin-top: 0.5em;
-    
+
                 &--list {
                     margin-top: 0.3em;
                     font-size: 0.9rem;
@@ -111,24 +166,24 @@
                 }
             }
         }
-    
+
         &__work {
             margin-top: 2em;
             padding-left: 2em;
-    
+
             &--title {
                 font-size: 1.6rem;
                 font-weight: bold;
                 letter-spacing: 0.2em;
             }
-    
+
             &--first {
                 margin-top: 0.3em;
-    
+
                 &--experience {
                     font-weight: 600;
                 }
-    
+
                 &--list {
                     margin-top: 0.3em;
                     font-size: 0.9rem;
@@ -137,20 +192,20 @@
                 }
             }
         }
-    
+
         &__education {
             margin-top: 2em;
             padding-left: 2em;
-    
+
             &--title {
                 font-size: 1.6rem;
                 font-weight: bold;
                 letter-spacing: 0.2em;
             }
-    
+
             &__list {
                 margin-top: 0.5em;
-    
+
                 &--list {
                     margin-top: 0.3em;
                     font-size: 0.9rem;
@@ -159,11 +214,15 @@
                 }
             }
         }
-    
+
     }
 
 
 }
+
+
+
+
 
 
 
@@ -172,16 +231,29 @@
 
 
 @media screen and (max-width: 820px) {
-    .container__main__section {
-        margin-top: 1em;
+ 
+    .container{
+        height: 120vh;
     }
+
+
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 280px) {
+
     .container {
         display: block;
         width: fit-content;
 
+        &__aside{
+            display: grid;
+            place-items: center;
+
+            &__perfil{
+                display: grid;
+                place-items: center;
+            }
+        }
         &__main {
             border: 0;
 
