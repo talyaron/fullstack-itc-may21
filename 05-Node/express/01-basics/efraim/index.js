@@ -10,7 +10,6 @@ class Students {
     }
 }
 const students = new Students();
-
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
