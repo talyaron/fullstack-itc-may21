@@ -1,5 +1,6 @@
 const http = require('http');
 const port = process.env.PORT || 3001;
+const fs = require('fs');
 
 const server = http.createServer();
 
@@ -9,16 +10,44 @@ server.on('request', (req, res) => {
         const {
             method,
             url,
-            headers
+            headers, 
+            body
         } = req;
 
-        switch (url) {
+        console.log(method)
+        console.log('url:', url);
+        console.log(body);
 
-            default:
-                throw new Error("boom");
-                res.writeHead(200, { 'Content-Type': 'text/plain' });
+        if (method === 'GET') {
+            switch (url) {
+                case '/':
+                    res.writeHead(200, { 'Content-Type': 'text/plain' });
 
-                res.end('OK 3');
+                    res.end('Home Page');
+                
+                case '/about':
+                    res.writeHead(200, { 'Content-Type': 'text/html' });
+                    const file = fs.readFileSync('about.html');
+                    res.end(file);
+                case '/sdfgsdgdfhdfhftutyutyuty':
+                    res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+                    const flower = fs.readFileSync('flower.jpeg');
+                    res.end(flower)
+                default:
+                    res.writeHead(404, { 'Content-Type': 'text/plain' });
+
+                    res.end('The requested resource was not found');
+            }
+        } else if (method === 'POST') {
+           
+            req.on('data',(data)=>{
+                console.log('data;',data)
+            })
+
+            res.end('this was a post');
+        } else {
+            res.writeHead(400, { 'Content-Type': 'text/plain' })
+            res.end('Bad request')
         }
     } catch (e) {
         console.log(e);
