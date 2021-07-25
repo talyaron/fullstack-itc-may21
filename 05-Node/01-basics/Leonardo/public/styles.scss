@@ -316,3 +316,33 @@ img {
     transform: translateY(0vh) translateX(110vw) scale(0.45);
   }
 }
+
+//RESPONSIVE
+@media only screen and (max-width: 600px) {
+  body {
+    margin: 0;
+    width: 100%;
+  }
+
+  .main {
+    grid-template-columns: 1fr;
+
+    &__personal {
+      &__information {
+        margin: 0;
+      }
+
+      &__profile {
+        margin: 0;
+      }
+
+      &__contact {
+        margin: 0;
+      }
+    }
+  }
+
+  .title__name {
+    font-size: 15px;
+  }
+}

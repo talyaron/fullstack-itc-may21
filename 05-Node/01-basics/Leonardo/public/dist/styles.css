@@ -265,3 +265,26 @@ img {
     transform: translateY(0vh) translateX(110vw) scale(0.45);
   }
 }
+@media only screen and (max-width: 600px) {
+  body {
+    margin: 0;
+    width: 100%;
+  }
+
+  .main {
+    grid-template-columns: 1fr;
+  }
+  .main__personal__information {
+    margin: 0;
+  }
+  .main__personal__profile {
+    margin: 0;
+  }
+  .main__personal__contact {
+    margin: 0;
+  }
+
+  .title__name {
+    font-size: 15px;
+  }
+}
