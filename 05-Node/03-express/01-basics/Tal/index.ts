@@ -30,14 +30,10 @@ app.get('/blabla', (req, res) => {
     res.send('Bla bla!')
 })
 
-app.post('/testPost',(req, res)=>{
 
-    console.log(req.body);
-    
-    res.send({ok:true})
-})
 
 app.post('/addStudent', (req, res) => {
+
     try {
 
         const schema = {
@@ -69,7 +65,7 @@ app.post('/addStudent', (req, res) => {
 
         console.log(students.list);
 
-        res.send(req.body);
+        res.send(students.list);
     } catch (e) {
         console.log(e)
         res.status(400).send({ error: e.message });
