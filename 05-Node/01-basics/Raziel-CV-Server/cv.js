@@ -1,12 +1,43 @@
 const http = require('http');
 const fs = require('fs');
+const port = process.env.PORT || 3000;
 
-const requestListener = function (req, res) {
-    res.writeHead(200);
-    //read the file from the computer, and send it to the client
-    const file = fs.readFileSync("./cv.html");
-    res.end(file);
-}
+const server = http.createServer();
 
-const server = http.createServer(requestListener);
-server.listen(7800, () => { console.log('Listen on port 7800') });
+server.on('request', (req, res) => {
+    try {
+
+        const {url} = req;
+
+        switch (url) {
+
+            case '/':
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                const main = fs.readFileSync('./cv.html')
+                res.end(main)
+                break;
+
+            case '/nodejs':
+                res.writeHead(200, { 'Content-Type': 'image/png' });
+                const nodejs = fs.readFileSync('./profile.png')
+                res.end(nodejs)
+                break
+
+            
+
+            default:
+                res.writeHead(404, { 'Content-Type': 'text/plain' });
+                res.end('The requested resource was not found');
+        }
+    } catch (e) {
+        console.log(e);
+
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end(`There is a sever error: ${e.message}`);
+    }
+
+})
+
+server.listen(port, () => {
+    console.log('Server listen on port', port)
+})

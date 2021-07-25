@@ -1,0 +1,82 @@
+html {
+  background: linear-gradient(90deg, #dfdfdf 0%, #94bbe9 100%);
+}
+html body {
+  max-width: 60%;
+  margin: 5% auto 5% auto;
+}
+
+.nav {
+  display: flex;
+}
+.nav__item--1 {
+  background-color: darkslategray;
+  margin: auto;
+  color: lightseagreen;
+  padding: 30px;
+  padding-left: 40px;
+  flex: 3;
+}
+.nav__item__p {
+  font-size: 1rem;
+}
+.nav__item--2 {
+  text-align: center;
+  flex: 1;
+}
+
+span {
+  color: white;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.main {
+  background: lightgray;
+  display: flex;
+  flex-flow: column;
+}
+.main__skills, .main__expertise, .main__education {
+  flex: 1;
+  margin: 5%;
+}
+.main__profile {
+  max-width: 70%;
+  margin-left: 5%;
+}
+.main__contact {
+  max-width: 20%;
+}
+.main__contact__item {
+  display: flex;
+  padding: 3px;
+}
+.main__contact__item i {
+  margin-right: 4px;
+}
+.main__professional__experiance {
+  display: flex;
+}
+.main__professional__experiance__description {
+  margin-left: 20px;
+  align-self: flex-start;
+}
+.main__professional__experiance__time {
+  background-color: darkslategray;
+  color: white;
+  padding: 4px;
+  align-self: flex-start;
+}
+
+.row__wrapper {
+  margin: 20px 40px 20px 40px;
+  display: flex;
+}
+
+h2 {
+  margin: 0;
+}
