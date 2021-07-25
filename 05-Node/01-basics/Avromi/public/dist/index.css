@@ -51,6 +51,13 @@ h1 {
 .main__contact {
   max-width: 20%;
 }
+.main__contact__item {
+  display: flex;
+  padding: 3px;
+}
+.main__contact__item i {
+  margin-right: 4px;
+}
 .main__professional__experiance {
   display: flex;
 }

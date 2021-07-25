@@ -60,6 +60,13 @@ h1 {
     &__contact{
         
         max-width: 20%;
+        &__item{
+            display: flex;
+            padding:3px;
+           i{
+               margin-right:4px;
+           }
+        }
     }
     &__professional__experiance{
         display:flex;
