@@ -1,0 +1,230 @@
+@keyframes glow {
+  from {
+    -webkit-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+    box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+  }
+
+  to {
+    -webkit-box-shadow: 3px 3px 30px 0px #3d6ded;
+    -moz-box-shadow: 3px 3px 30px 0px #3d6ded;
+    box-shadow: 3px 3px 30px 0px #3d6ded;
+  }
+}
+
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
+html {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  // width: 90vw;
+}
+
+h1,
+h2 {
+  font-family: 'Rockwell', sans-serif;
+}
+
+h2 {
+  margin: 20px 0;
+  text-transform: uppercase;
+}
+
+i {
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: unset;
+}
+
+.emphasize {
+  color: #4472c4;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-image: url('https://cdn.pixabay.com/photo/2017/12/29/17/53/background-3048166_960_720.jpg');
+  background-size: cover;
+  width: 100%;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: repeat(4, fit-content);
+  grid-template-areas:
+    "img linkedin"
+    "img mail"
+    "img phone"
+    "myName city";
+
+  &__item {
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+
+    &--img {
+      grid-area: img;
+      border-radius: 100px;
+      margin: 0 auto;
+      height: 200px;
+      width: 200px;
+    }
+
+    &--name {
+      grid-area: myName;
+      height: 66.6px;
+      justify-content: center;
+    }
+
+    &--linkedin {
+      grid-area: linkedin;
+      color: #3467C2;
+    }
+
+    &--mail {
+      grid-area: mail;
+    }
+
+    &--phone {
+      grid-area: phone;
+    }
+
+    &--city {
+      grid-area: city;
+    }
+  }
+
+}
+
+main {
+  margin: 0 20px;
+}
+
+.card {
+  background-image: linear-gradient(to bottom right, white, lightgray);
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+  box-shadow: 4px 4px 40px 0px rgba(0, 0, 0, 1);
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+
+  &:hover {
+    animation: glow 1.2s infinite alternate;
+  }
+
+}
+
+.logo_grid {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: repeat(2, fit-content);
+  grid-template-areas:
+    "when title"
+    "logo details";
+
+  &__item {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+
+    &--when {
+      grid-area: when;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    &--logo {
+      grid-area: logo;
+      justify-content: center;
+
+      img {
+        border-radius: 1vw;
+        width: 8vw;
+        height: 8vw;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+        transition: 1s;
+      }
+    }
+
+    &--title {
+      grid-area: title;
+
+      .bold {
+        font-weight: bold;
+        margin-right: 10px;
+      }
+    }
+
+    &--details {
+      grid-area: details;
+      display: unset;
+    }
+
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hide {
+    display: none;
+  }
+
+  .card {
+    margin: 20px 0;
+  }
+
+  .header {
+    width: 100vw;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, fit-content);
+    grid-template-areas:
+      "img img img img"
+      "myName myName myName myName"
+      "linkedin mail phone city";
+  
+    &__item {
+
+      &--name {
+        height: unset;
+      }
+  
+      &--img {
+        height: 100px;
+        width: 100px;
+      }
+    }
+  }
+
+  .logo_grid {
+    grid-template-rows: repeat(3, fit-content);
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "title"
+      "when"
+      "details";
+
+      &__item {
+        &--logo {
+          display: none;
+        }
+      }
+  }
+}

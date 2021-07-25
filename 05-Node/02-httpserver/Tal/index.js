@@ -2,6 +2,7 @@ const http = require('http');
 const port = process.env.PORT || 3001;
 const fs = require('fs');
 
+
 const server = http.createServer();
 
 server.on('request', (req, res) => {
@@ -14,6 +15,7 @@ server.on('request', (req, res) => {
             body
         } = req;
 
+<<<<<<< HEAD
         console.log(method)
         console.log('url:', url);
         console.log(body);
@@ -22,6 +24,17 @@ server.on('request', (req, res) => {
             switch (url) {
                 case '/':
                     res.writeHead(200, { 'Content-Type': 'text/plain' });
+=======
+        switch (url) {
+            case '/':
+                res.writeHead(200, {'Content-Type': 'text/html'})
+                const file = fs.readFileSync('about.html');
+                res.end(file)
+
+            default:
+             
+                res.writeHead(200, { 'Content-Type': 'text/plain' });
+>>>>>>> main
 
                     res.end('Home Page');
                 
