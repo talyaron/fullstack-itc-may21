@@ -217,8 +217,8 @@ main {
     grid-template-rows: repeat(3, fit-content);
     grid-template-columns: 100%;
     grid-template-areas:
-      "when"
       "title"
+      "when"
       "details";
 
       &__item {

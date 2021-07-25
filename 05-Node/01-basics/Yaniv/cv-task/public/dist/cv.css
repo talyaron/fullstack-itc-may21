@@ -180,7 +180,7 @@ main {
   .logo_grid {
     grid-template-rows: repeat(3, fit-content);
     grid-template-columns: 100%;
-    grid-template-areas: "when" "title" "details";
+    grid-template-areas: "title" "when" "details";
   }
   .logo_grid__item--logo {
     display: none;
