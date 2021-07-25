@@ -1,28 +1,47 @@
-const path = require('path')
-const express = require('express')
-const app = express()
 const http = require('http');
 const fs = require('fs');
+const port = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, 'public')))
+const server = http.createServer();
 
-/*const requestListener = app.get('/', function (req, res) {
+server.on('request', (req, res) => {
+    try {
 
-    res.writeHead(200);
-    
-    const file = fs.readFileSync('./index.html');
-    res.end(file);
-    
+        const {url} = req;
+
+        switch (url) {
+
+            case '/':
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                const main = fs.readFileSync('./index.html')
+                res.end(main)
+                break;
+
+            case '/nodejs':
+                res.writeHead(200, { 'Content-Type': 'image/png' });
+                const nodejs = fs.readFileSync('./logo.png')
+                res.end(nodejs)
+                break
+
+            case '/style':
+                res.writeHead(200, { 'Content-Type': 'text/css' });
+                const style = fs.readFileSync('dist/index.css')
+                res.end(style)
+                break
+
+            default:
+                res.writeHead(404, { 'Content-Type': 'text/plain' });
+                res.end('The requested resource was not found');
+        }
+    } catch (e) {
+        console.log(e);
+
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end(`There is a sever error: ${e.message}`);
+    }
+
 })
 
-const server = http.createServer(requestListener);
-server.listen(3000, () => { console.log('Listen on port 3000') });*/
-
-app.get('/', function(req, res){
-
-    res.sendFile(__dirname + "/index.html");
-    
-});
-
-console.log('D')
-app.listen(3000, () => { console.log('Listen on port 3000') });
+server.listen(port, () => {
+    console.log('Server listen on port', port)
+})

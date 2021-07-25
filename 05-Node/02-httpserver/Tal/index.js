@@ -1,6 +1,7 @@
 const http = require('http');
 const port = process.env.PORT || 3001;
 
+
 const server = http.createServer();
 
 server.on('request', (req, res) => {
@@ -13,9 +14,13 @@ server.on('request', (req, res) => {
         } = req;
 
         switch (url) {
+            case '/':
+                res.writeHead(200, {'Content-Type': 'text/html'})
+                const file = fs.readFileSync('about.html');
+                res.end(file)
 
             default:
-                throw new Error("boom");
+             
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
 
                 res.end('OK 3');

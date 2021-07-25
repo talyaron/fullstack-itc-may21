@@ -3,6 +3,9 @@
 var http = require('http');
 
 var port = process.env.PORT || 3005;
+
+var fs = require('fs');
+
 var server = http.createServer();
 server.on('request', function (req, res) {
   try {
@@ -11,6 +14,30 @@ server.on('request', function (req, res) {
         headers = req.headers;
 
     switch (url) {
+      case '/':
+        res.writeHead(200, {
+          'Content-Type': 'text/html'
+        });
+        var file = fs.readFileSync('index.html');
+        res.end(file);
+        break;
+
+      case '/about':
+        res.writeHead(200, {
+          'Content-Type': 'text/html'
+        });
+        var aboutfile = fs.readFileSync('about.html');
+        res.end(aboutfile);
+        break;
+
+      case '/contact':
+        res.writeHead(200, {
+          'Content-Type': 'text/html'
+        });
+        var contactfile = fs.readFileSync('contact.html');
+        res.end(contactfile);
+        break;
+
       default:
         res.writeHead(200, {
           'Content-Type': 'text/plain'
