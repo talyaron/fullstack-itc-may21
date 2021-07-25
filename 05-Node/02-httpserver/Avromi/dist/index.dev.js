@@ -16,16 +16,35 @@ server.on('request', function (req, res) {
     switch (url) {
       case '/':
         res.writeHead(200, {
-          'Content-Type': 'text/plain'
+          'Content-Type': 'text/html'
         });
-        res.end('ello');
+        var homeFile = fs.readFileSync('./home.html');
+        res.end(homeFile);
+        break;
 
       case '/about':
         res.writeHead(200, {
           'Content-Type': 'text/html'
         });
-        var file = fs.readFileSync('about.html');
-        res.end(file);
+        var aboutFile = fs.readFileSync('./about.html');
+        res.end(aboutFile);
+        break;
+
+      case '/contact':
+        res.writeHead(200, {
+          'Content-Type': 'text/html'
+        });
+        var contactFile = fs.readFileSync("./contact.html");
+        res.end(contactFile);
+        break;
+
+      case '/profile.img':
+        res.writeHead(200, {
+          'Content-Type': 'image/png'
+        });
+        var imageFile = fs.readFileSync("./profile.png");
+        res.end(imageFile);
+        break;
 
       default:
         throw new Error("boooooooooooom");
