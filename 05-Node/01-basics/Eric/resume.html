@@ -2,221 +2,527 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <link rel="stylesheet" href="dist/style.css">
-    <title>Resume</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <link rel="stylesheet" href="/style">
+  <title>Resume</title>
 </head>
+<!-- <style>
+  @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  body {
+    background: #585c68;
+    font-size: 14px;
+    line-height: 22px;
+    color: #555555;
+  }
+
+  .resume {
+    width: 800px;
+    height: auto;
+    display: flex;
+    margin: 50px auto;
+  }
+
+  .resume__left {
+    width: 280px;
+    background: #0bb5f4;
+  }
+
+  .resume__left ul li {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .resume__left__profile {
+    width: 100%;
+    height: 280px;
+  }
+
+  .resume__left__profile img {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    margin: 25px;
+  }
+
+  .resume__left__content {
+    padding: 0 25px;
+  }
+
+  .resume__left__content__info {
+    padding: 25px 0;
+    border-bottom: 2px solid #b1eaff;
+  }
+
+  .resume__left__content__info__title {
+    margin-bottom: 20px;
+  }
+
+  .resume__left__content__info__title--bold {
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+
+  .resume__left__content__info__title--regular {
+    color: #b1eaff;
+  }
+
+  .resume__left__content__info__icon {
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    color: #0bb5f4;
+    border-radius: 50%;
+    margin-right: 15px;
+    font-size: 16px;
+    position: relative;
+  }
+
+  .resume__left__content__info__icon i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .resume__left__content__info__data {
+    color: #b1eaff;
+    width: 100%;
+  }
+
+  .resume__left__content__skills {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #b1eaff;
+  }
+
+  .resume__left__content__skills ul li {
+    display: flex;
+    margin-bottom: 10px;
+    color: #b1eaff;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .resume__left__content__skills__title {
+    margin-bottom: 10px;
+  }
+
+  .resume__left__content__skills__title--bold {
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .resume__left__content__skills__name {
+    width: 80%;
+  }
+
+  .resume__left__content__social__title {
+    margin-bottom: 20px;
+  }
+
+  .resume__left__content__social__title--bold {
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .resume__left__content__social__icon {
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    color: #0bb5f4;
+    border-radius: 50%;
+    margin-right: 15px;
+    font-size: 16px;
+    position: relative;
+  }
+
+  .resume__left__content__social__icon i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .resume__left__content__social__data--semi-bold {
+    color: #fff;
+    margin-bottom: 3px;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .resume__right {
+    width: 520px;
+    background: #fff;
+    padding: 25px;
+  }
+
+  .resume__right ul li {
+    position: relative;
+  }
+
+  .resume__right__itemAbout--title {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #0bb5f4;
+  }
+
+  .resume__right__work ul {
+    padding-left: 40px;
+    overflow: hidden;
+  }
+
+  .resume__right__work ul li:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -25px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 2px solid #0bb5f4;
+  }
+
+  .resume__right__work--title {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .resume__right__work--bold {
+    color: #0bb5f4;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+
+  .resume__right__work--date {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+
+  .resume__right__work--info {
+    margin-bottom: 20px;
+  }
+
+  .resume__right__work--semi-bold {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .resume__right__education {
+    border-bottom: 2px solid #b1eaff;
+  }
+
+  .resume__right__education ul {
+    padding-left: 40px;
+    overflow: hidden;
+  }
+
+  .resume__right__education ul li:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -25px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 2px solid #0bb5f4;
+  }
+
+  .resume__right__education--title {
+    margin-bottom: 20px;
+  }
+
+  .resume__right__education--bold {
+    color: #0bb5f4;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+
+  .resume__right__education--date {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+
+  .resume__right__education--info {
+    margin-bottom: 20px;
+  }
+
+  .resume__right__education--semi-bold {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .resume__right___hobby {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .resume__right___hobby ul {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+  }
+
+  .resume__right___hobby ul li i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .resume__right___hobby ul li {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #0bb5f4;
+    border-radius: 50%;
+    position: relative;
+    color: #0bb5f4;
+  }
+
+  .resume__right___hobby ul li i {
+    font-size: 30px;
+  }
+
+  .resume__right___hobby--bold {
+    color: #0bb5f4;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+</style> -->
 
 <body>
-    <div class="resume">
-        <div class="resume_left">
-            <div class="resume_profile">
-                <img src="profilePic.JPG" alt="profile_pic">
-            </div>
-            <div class="resume_content">
-                <div class="resume_item resume_info">
-                    <div class="title">
-                        <p class="bold">Eric Kobrinsky</p>
-                        <p class="regular">Industrial Engineer</p>
-                    </div>
-                    <ul>
-                        <li>
-                            <div class="icon">
-                                <i class="fas fa-map-signs"></i>
-                            </div>
-                            <div class="data">
-                                Gush Etsyon 97, Be'er Sheva, Israel.
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <div class="data">
-                                +972 546654316
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="data">
-                                kobrinskye@gmail.com
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="resume_item resume_skills">
-                    <div class="title">
-                        <p class="bold">skill's</p>
-                    </div>
-                    <ul>
-                        <li>
-                            <div class="skill_name">
-                                HTML
-                            </div>
-                        </li>
-                        <li>
-                            <div class="skill_name">
-                                CSS
-                            </div>
-                        </li>
-                        <li>
-                            <div class="skill_name">
-                                SASS
-                            </div>
-                        <li>
-                            <div class="skill_name">
-                                JS
-                            </div>
-                        </li>
-                        <li>
-                            <div class="skill_name">
-                                TypeScript
-                            </div>
-                        </li>
-                        <li>
-                            <div class="skill_name">
-                                JIRA & Confluence
-                            </div>
-                        </li>
-                        <li>
-                            <div class="skill_name">
-                                Microsoft Excel and Power BI
-                            </div>
-                        </li>
-                        <li>
-                            <div class="skill_name">
-                                Data analysis and Business Intelligence
-                            </div>
-                        </li>
-                        <li>
-                            <div class="skill_name">
-                                Process Improvement
-                            </div>
-                        </li>
-                        <li>
-                            <div class="skill_name">
-                                Budgeting and Cost Analysis
-                            </div>
-                        </li>
-                        <li>
-                            <div class="skill_name">
-                                Lean Canvas Model
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="resume_item resume_social">
-                    <div class="title">
-                        <p class="bold">Social</p>
-                    </div>
-                    <ul>
-                        <li>
-                            <div class="icon">
-                                <i class="fab fa-twitter-square"></i>
-                            </div>
-                            <div class="data">
-                                <p class="semi-bold">Twitter</p>
-                                <p>erickobrinsky@twitter</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon">
-                                <i class="fab fa-linkedin"></i>
-                            </div>
-                            <div class="data">
-                                <p class="semi-bold">Linkedin</p>
-                                <p>erickobrinsky@linkedin</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+  <div class="resume">
+    <div class="resume__left">
+      <div class="resume__left__profile">
+        <img src="/profile" alt="profile_pic" id="image">
+      </div>
+      <div class="resume__left__content">
+        <div class="resume__left__content__info">
+          <div class="resume__left__content__info__title">
+            <p class="resume__left__content__info__title--bold">Eric Kobrinsky</p>
+            <p class="resume__left__content__info__title--regular">Industrial Engineer</p>
+          </div>
+          <ul>
+            <li>
+              <div class="resume__left__content__info__icon">
+                <i class="fas fa-map-signs"></i>
+              </div>
+              <div class="resume__left__content__info__data">
+                Gush Etsyon 97, Be'er Sheva, Israel.
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__info__icon">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <div class="resume__left__content__info__data">
+                +972 546654316
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__info__icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="resume__left__content__info__data">
+                kobrinskye@gmail.com
+              </div>
+            </li>
+          </ul>
         </div>
-        <div class="resume_right">
-            <div class="resume_item resume_about">
-                <div class="title">
-                    <p class="bold">About me</p>
-                </div>
-                <p>Great ability to solve problems with a high sense of creativity, commitment and ingenuity, proactive
-                    and eager to learn. Easy teamwork and good interpersonal relationships that inspire others to
-                    perform.</p>
-            </div>
-            <div class="resume_item resume_work">
-                <div class="title">
-                    <p class="bold">Work Experience</p>
-                </div>
-                <ul>
-                    <li>
-                        <div class="date">2019 - 2020</div>
-                        <div class="info">
-                            <p class="semi-bold">Logistics and Supply Manager.</p>
-                            <p>Internal and external logistics coordinator, development, planning, implementation and
-                                monitoring of processes. Cost analysis, supplier evaluation, stock management and
-                                indicators generation.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="date">2018</div>
-                        <div class="info">
-                            <p class="semi-bold">Organizational development.</p>
-                            <p>Planning of agile methodologies, monitoring and improvement of balanced score card.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="date">2017</div>
-                        <div class="info">
-                            <p class="semi-bold">5S Support.</p>
-                            <p>Project coordinator, process implementation, and trainer of multidisciplinary teams.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="date">2015</div>
-                        <div class="info">
-                            <p class="semi-bold">Student Mentor.</p>
-                            <p>Accompanying and tutoring of engineering students in their beginnings, to reduce the rate
-                                of student dropout.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="resume_item resume_education">
-                <div class="title">
-                    <p class="bold">Education</p>
-                </div>
-                <ul>
-                    <li>
-                        <div class="date">2011 - 2019</div>
-                        <div class="info">
-                            <p class="semi-bold">Industrial Engineer.</p>
-                            <p>National University of Rosario (Argentina).</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="date">2021</div>
-                        <div class="info">
-                            <p class="semi-bold">Full Stack Development.</p>
-                            <p>Israel Tech Challenge (Israel).</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="resume_item resume_hobby">
-                <div class="title">
-                    <p class="bold">Hobby</p>
-                </div>
-                <ul>
-                    <li><i class="fas fa-book"></i></li>
-                    <li><i class="fas fa-hiking"></i></li>
-                    <li><i class="fas fa-table-tennis"></i></li>
-                </ul>
-            </div>
+        <div class="resume__left__content__skills">
+          <div class="resume__left__content__skills__title">
+            <p class="resume__left__content__skills__title--bold">skill's</p>
+          </div>
+          <ul>
+            <li>
+              <div class="resume__left__content__skills__name">
+                HTML
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__skills__name">
+                CSS
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__skills__name">
+                SASS
+              </div>
+            <li>
+              <div class="resume__left__content__skills__name">
+                JS
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__skills__name">
+                TypeScript
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__skills__name">
+                JIRA & Confluence
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__skills__name">
+                Microsoft Excel and Power BI
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__skills__name">
+                Data analysis and Business Intelligence
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__skills__name">
+                Process Improvement
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__skills__name">
+                Budgeting and Cost Analysis
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__skills__name">
+                Lean Canvas Model
+              </div>
+            </li>
+          </ul>
         </div>
+        <div class="resume__left__content__social">
+          <div class="resume__left__content__social__title">
+            <p class="resume__left__content__social__title--bold">Social</p>
+          </div>
+          <ul>
+            <li>
+              <div class="resume__left__content__social__icon">
+                <i class="fab fa-twitter-square"></i>
+              </div>
+              <div class="resume__left__content__social__data">
+                <p class="resume__left__content__social__data--semi-bold">Twitter</p>
+                <p>erickobrinsky@twitter</p>
+              </div>
+            </li>
+            <li>
+              <div class="resume__left__content__social__icon">
+                <i class="fab fa-linkedin"></i>
+              </div>
+              <div class="resume__left__content__social__data">
+                <p class="resume__left__content__social__data--semi-bold">Linkedin</p>
+                <p>erickobrinsky@linkedin</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+    <div class="resume__right">
+      <div class="resume__right__itemAbout">
+        <div class="resume__right__itemAbout--title">
+          <p class="resume__right__itemAbout--bold">About me</p>
+        </div>
+        <p>Great ability to solve problems with a high sense of creativity, commitment and ingenuity, proactive
+          and eager to learn. Easy teamwork and good interpersonal relationships that inspire others to
+          perform.</p>
+      </div>
+      <div class="resume__right__work">
+        <div class="resume__right__work--title">
+          <p class="resume__right__work--bold">Work Experience</p>
+        </div>
+        <ul>
+          <li>
+            <div class="resume__right__work--date">2019 - 2020</div>
+            <div class="resume__right__work--info">
+              <p class="resume__right__work--semi-bold">Logistics and Supply Manager.</p>
+              <p>Internal and external logistics coordinator, development, planning, implementation and
+                monitoring of processes. Cost analysis, supplier evaluation, stock management and
+                indicators generation.</p>
+            </div>
+          </li>
+          <li>
+            <div class="resume__right__work--date">2018</div>
+            <div class="resume__right__work--info">
+              <p class="resume__right__work--semi-bold">Organizational development.</p>
+              <p>Planning of agile methodologies, monitoring and improvement of balanced score card.</p>
+            </div>
+          </li>
+          <li>
+            <div class="resume__right__work--date">2017</div>
+            <div class="resume__right__work--info">
+              <p class="resume__right__work--semi-bold">5S Support.</p>
+              <p>Project coordinator, process implementation, and trainer of multidisciplinary teams.</p>
+            </div>
+          </li>
+          <li>
+            <div class="resume__right__work--date">2015</div>
+            <div class="resume__right__work--info">
+              <p class="resume__right__work--semi-bold">Student Mentor.</p>
+              <p>Accompanying and tutoring of engineering students in their beginnings, to reduce the rate
+                of student dropout.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="resume__right__education">
+        <div class="resume__right__education--title">
+          <p class="resume__right__education--bold">Education</p>
+        </div>
+        <ul>
+          <li>
+            <div class="resume__right__education--date">2011 - 2019</div>
+            <div class="resume__right__education--info">
+              <p class="resume__right__education--semi-bold">Industrial Engineer.</p>
+              <p>National University of Rosario (Argentina).</p>
+            </div>
+          </li>
+          <li>
+            <div class="resume__right__education--date">2021</div>
+            <div class="resume__right__education--info">
+              <p class="resume__right__education--semi-bold">Full Stack Development.</p>
+              <p>Israel Tech Challenge (Israel).</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="resume__right___hobby">
+        <div class="resume__right___hobby--title">
+          <p class="resume__right___hobby--bold">Hobby</p>
+        </div>
+        <ul>
+          <li><i class="fas fa-book"></i></li>
+          <li><i class="fas fa-hiking"></i></li>
+          <li><i class="fas fa-table-tennis"></i></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
 </body>
 

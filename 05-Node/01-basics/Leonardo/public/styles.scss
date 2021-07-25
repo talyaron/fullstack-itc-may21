@@ -1,0 +1,348 @@
+html {
+  background: burlywood;
+  padding: 10px;
+}
+
+body {
+  width: 70%;
+  margin: auto;
+}
+
+.title {
+  background-color: brown;
+  padding: 1px;
+  color: white;
+  justify-content: space-around;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+
+  &__profile {
+    height: 100px;
+    border-radius: 50px;
+
+    &:hover {
+      -webkit-transform: scale(2);
+      transform: scale(2);
+      position: relative;
+      top: 50px;
+      right: 10px;
+    }
+  }
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  font-style: oblique;
+
+  /* PERSONAL INFORMATION */
+  &__personal {
+    background-color: midnightblue;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    text-align: center;
+    color: whitesmoke;
+    padding: 0 10px;
+
+    &__information {
+      margin: 55px 0;
+    }
+
+    &__profile {
+      margin: 170px 0;
+    }
+
+    &__contact {
+      margin: 120px 0;
+    }
+
+    &--title {
+      color: firebrick;
+      font-style: normal;
+    }
+  }
+}
+
+/* MAIN INFORMATION */
+.main__information {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  padding-top: 50px;
+  padding-left: 30px;
+  background: white;
+  margin-bottom: 0;
+
+  &__skills--wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: max-content;
+  }
+
+  &--title {
+    color: black;
+    font-style: normal;
+  }
+
+  &__education {
+    border-bottom: 4px solid red;
+  }
+
+  &__skills {
+    border-bottom: 4px solid red;
+
+    &--language {
+      display: flex;
+      padding: 10px;
+      align-items: center;
+    }
+  }
+
+  &__education--picture {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+  }
+
+  &__experience--wrapper {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+  }
+}
+
+.title__skills {
+  margin-bottom: 0;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+img {
+  height: 35px;
+  margin-right: 10px;
+}
+
+//TO DO THE NEON EFECT:
+@font-face {
+  font-family: "Monoton";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Monoton"), local("Monoton-Regular"),
+    url(http://themes.googleusercontent.com/static/fonts/monoton/v4/AKI-lyzyNHXByGHeOcds_w.woff)
+      format("woff");
+}
+
+.title__name {
+  text-align: center;
+  font-size: 2em;
+  margin: 20px 0 20px 0;
+  color: white;
+  font-family: Monoton;
+
+  &--neon {
+    text-decoration: none;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+
+    &:hover {
+      -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+      -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+      animation: neon1 1.5s ease-in-out infinite alternate;
+    }
+  }
+}
+
+/*glow for webkit*/
+@-webkit-keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px yellow,
+      0 0 70px yellow, 0 0 80px yellow, 0 0 100px yellow, 0 0 150px yellow;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px green,
+      0 0 35px green, 0 0 40px green, 0 0 50px green, 0 0 75px green;
+  }
+}
+
+//THE NEXT ONE IS TO HAVE BIRDS IN THE HTML:
+@import url("https://fonts.googleapis.com/css?family=Arima+Madurai:300");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.bird {
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells-new.svg);
+  background-size: auto 100%;
+  width: 88px;
+  height: 125px;
+  will-change: background-position;
+
+  animation-name: fly-cycle;
+  animation-timing-function: steps(10);
+  animation-iteration-count: infinite;
+
+  &--one {
+    animation-duration: 1s;
+    animation-delay: -0.5s;
+  }
+
+  &--two {
+    animation-duration: 0.9s;
+    animation-delay: -0.75s;
+  }
+
+  &--three {
+    animation-duration: 1.25s;
+    animation-delay: -0.25s;
+  }
+
+  &--four {
+    animation-duration: 1.1s;
+    animation-delay: -0.5s;
+  }
+}
+
+.bird-container {
+  position: absolute;
+  top: 20%;
+  left: -10%;
+  transform: scale(0) translateX(-10vw);
+  will-change: transform;
+
+  animation-name: fly-right-one;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  &--one {
+    animation-duration: 15s;
+    animation-delay: 0;
+  }
+
+  &--two {
+    animation-duration: 16s;
+    animation-delay: 1s;
+  }
+
+  &--three {
+    animation-duration: 14.6s;
+    animation-delay: 9.5s;
+  }
+
+  &--four {
+    animation-duration: 16s;
+    animation-delay: 10.25s;
+  }
+}
+
+@keyframes fly-cycle {
+  100% {
+    background-position: -900px 0;
+  }
+}
+
+@keyframes fly-right-one {
+  0% {
+    transform: scale(0.3) translateX(-10vw);
+  }
+
+  10% {
+    transform: translateY(2vh) translateX(10vw) scale(0.4);
+  }
+
+  20% {
+    transform: translateY(0vh) translateX(30vw) scale(0.5);
+  }
+
+  30% {
+    transform: translateY(4vh) translateX(50vw) scale(0.6);
+  }
+
+  40% {
+    transform: translateY(2vh) translateX(70vw) scale(0.6);
+  }
+
+  50% {
+    transform: translateY(0vh) translateX(90vw) scale(0.6);
+  }
+
+  60% {
+    transform: translateY(0vh) translateX(110vw) scale(0.6);
+  }
+
+  100% {
+    transform: translateY(0vh) translateX(110vw) scale(0.6);
+  }
+}
+
+@keyframes fly-right-two {
+  0% {
+    transform: translateY(-2vh) translateX(-10vw) scale(0.5);
+  }
+
+  10% {
+    transform: translateY(0vh) translateX(10vw) scale(0.4);
+  }
+
+  20% {
+    transform: translateY(-4vh) translateX(30vw) scale(0.6);
+  }
+
+  30% {
+    transform: translateY(1vh) translateX(50vw) scale(0.45);
+  }
+
+  40% {
+    transform: translateY(-2.5vh) translateX(70vw) scale(0.5);
+  }
+
+  50% {
+    transform: translateY(0vh) translateX(90vw) scale(0.45);
+  }
+
+  51% {
+    transform: translateY(0vh) translateX(110vw) scale(0.45);
+  }
+
+  100% {
+    transform: translateY(0vh) translateX(110vw) scale(0.45);
+  }
+}
+
+//RESPONSIVE
+@media only screen and (max-width: 600px) {
+  body {
+    margin: 0;
+    width: 100%;
+  }
+
+  .main {
+    grid-template-columns: 1fr;
+
+    &__personal {
+      &__information {
+        margin: 0;
+      }
+
+      &__profile {
+        margin: 0;
+      }
+
+      &__contact {
+        margin: 0;
+      }
+    }
+  }
+
+  .title__name {
+    font-size: 15px;
+  }
+}
