@@ -27,10 +27,6 @@ app.get('/', function (req, res) {
 app.get('/blabla', function (req, res) {
     res.send('Bla bla!');
 });
-app.post('/testPost', function (req, res) {
-    console.log(req.body);
-    res.send({ ok: true });
-});
 app.post('/addStudent', function (req, res) {
     try {
         var schema = {
@@ -55,7 +51,7 @@ app.post('/addStudent', function (req, res) {
         // if (!name || !id) { throw new Error('No name or id in data') }
         students.addStudent(body);
         console.log(students.list);
-        res.send(req.body);
+        res.send(students.list);
     }
     catch (e) {
         console.log(e);
