@@ -13,39 +13,27 @@
 
 <body>
 
-    <form>
+    <form onsumbit='handleSumbit(event)''>
         <label for="name">Name</label>
         <input type="text" name="name" id="name">
-        <label for='id'>ID</label>
-        <input type="text" name="id" id="id">
-        <button type="submit" onSumb="handleSumbit(event)">SEND</button>
+        <label for=' id'>ID</label>
+        <input type="number" name="id" id="id">
+        <button type="submit">SEND</button>
     </form>
 
     <script>
 
-        class Student {
-            list = [];
-
-            constructor(id, name) {
-                this.id = id;
-                this.name = name;
-            }
-
-            addStudent(student) {
-                this.list.push(student)
-            }
-        }
-
-        
-
-        function handleSumbit(event){
+        function handleSumbit(event) {
 
             event.preventDefault()
 
-           
-            console.log(event.target.elements)
+            const name = event.target.elements.name.value
+            const id = event.target.elements.id.value
 
-           
+            axios.post('/testPost', { name, id }
+                .then(res =>{
+                    console.log(res)})
+                    )
         }
 
     </script>
