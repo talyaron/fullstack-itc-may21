@@ -32,7 +32,7 @@ app.delete(`/deleteFilm/:id`, (req, res) => {
   const { id } = req.params.id;
   const deleteFilm = films.filter((film) => film.id !== id);
   films = deleteFilm;
-  res.send({ deleteFilm });
+  res.send({ films });
 });
 
 //Listen
