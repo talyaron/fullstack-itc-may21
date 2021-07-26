@@ -13,7 +13,7 @@
 
 <body>
 
-    <form onsumbit='handleSumbit(event)''>
+    <form onsumbit='handleSumbit(event)'>
         <label for="name">Name</label>
         <input type="text" name="name" id="name">
         <label for=' id'>ID</label>
@@ -30,10 +30,7 @@
             const name = event.target.elements.name.value
             const id = event.target.elements.id.value
 
-            axios.post('/testPost', { name, id }
-                .then(res =>{
-                    console.log(res)})
-                    )
+           console.log(name)
         }
 
     </script>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>CRUD</title>
+</head>
+
+<body>
+    <form onsubmit="handleSumbit(event)">
+        <label for="id">ID</label>
+        <input type="number" name="id" id="id" class="id">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" class="name">
+        <button type="submit">ADD</button>
+    </form>
+
+    <button type="submit" class="getData">GetDATA</button>
+    <button type="submit" class="updateData">updateDATA</button>
+    <button type="submit" class="deleteData">DeleteData</button>
+    <input type="text" name="regrex" id="regrex" class='regrex'>
+    <div id="board"></div>
+
+    <script>
+
+        const btnGetData = document.querySelector('.getData')
+        const btnUpdateData = document.querySelector('.updateData')
+        const btnDeleteData = document.querySelector('.deleteData')
+        const boardRoot = document.querySelector('#board')
+        const inputName = document.querySelector('.name')
+        const inputID = document.querySelector('.id')
+        const inputRegrex = document.querySelector('.regrex')
+
+
+        btnGetData.addEventListener('click', getData)
+        btnUpdateData.addEventListener('click', updateData)
+        btnDeleteData.addEventListener('click', deleteData)
+
+        function getData() {
+            let html = ''
+            axios.get('/getAvengers')
+                .then(({ data }) => {
+                    data.forEach(elem => {
+                        html += `<div>${elem.id}-${elem.name}</div>`
+                    });
+                    boardRoot.innerHTML = html
+                })
+        }
+
+        function updateData() {
+            let html = ''
+            const name = inputName.value
+            const id = inputID.valueAsNumber
+            axios.put('/updateAvenger', {name, id } )
+                .then(({ data }) => {
+                    data.forEach(elem => {
+                        html += `<div>${elem.id}-${elem.name}</div>`
+                    });
+                    boardRoot.innerHTML = html
+                })
+
+        }
+
+        inputRegrex.addEventListener('keyup', getDataKeyUp)
+
+        function getDataKeyUp(){
+            let html = ''
+            const regrex = inputRegrex.value
+            axios.get(`/getAvengersbyName?name=${regrex}`)
+                .then(({ data }) => {
+                    data.forEach(elem => {
+                        html += `<div>${elem.id}-${elem.name}</div>`
+                    });
+                    boardRoot.innerHTML = html
+                })
+
+        }
+
+        function deleteData() {
+            let html = ''
+            const id = inputID.valueAsNumber
+            console.log(id)
+
+            axios.delete('/deleteAvenger', {data: {id:id}})
+            .then(({ data }) => {
+                    data.forEach(elem => {
+                        html += `<div>${elem.id}-${elem.name}</div>`
+                    });
+                    boardRoot.innerHTML = html
+                })
+        }
+
+        function handleSumbit(event) {
+
+            event.preventDefault();
+
+            try {
+                const name = event.target.elements.name.value
+                const id = event.target.elements.id.valueAsNumber
+
+                axios.post('/addAvenger', { name, id })
+                    .then(({ data }) => {
+                        console.log(data)
+                    })
+
+
+            } catch (e) {
+                console.log(e);
+            }
+
+        }
+    </script>
+</body>
+
+</html>
