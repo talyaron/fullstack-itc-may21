@@ -60,7 +60,7 @@ function addObject() {
 }
 addObject();
 
-// DELETE PRODUCTvariable
+// DELETE PRODUCT variable
 function remove(id) {
     const filtrado = list.filter((prod) => prod.id !== id);
     list = filtrado;
