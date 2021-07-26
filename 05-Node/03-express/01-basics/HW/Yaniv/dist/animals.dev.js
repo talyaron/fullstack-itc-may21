@@ -64,7 +64,8 @@ function () {
     if (animal.uuid) searchedAnimal = searchedAnimal.filter(function (animalItem) {
       return animalItem.uuid === animal.uuid;
     });
-    return searchedAnimal;
+    var result = searchedAnimal.length === 0 ? 'No animal found for your query' : searchedAnimal;
+    return result;
   };
 
   return Animals;
@@ -149,11 +150,10 @@ app.put('/update-animal', function (req, res) {
 app.get('/search-animal', function (req, res) {
   try {
     var query = req.query;
-    if (!query.uuid && !query.family && !query.species) throw new Error('There are no "uuid", "family" nor "species" keys in query');
-    if (query.family && typeof query.family !== 'string') throw new Error('"family" key value must be a string');
-    if (query.species && typeof query.species !== 'string') throw new Error('"species" key value must be a string');
-    if (query.uuid && typeof query.uuid !== 'string') throw new Error('"uuid" key value must be a string');
-    if (animals.searchAnimal(query) === null) throw new Error('No animal found for your query'); // are the typeof checks redundant since all queries have string values?
+    if (!query.uuid && !query.family && !query.species) throw new Error('There are no "uuid", "family" nor "species" keys in query'); // if ((query.family) && (typeof query.family !== 'string')) throw new Error('"family" key value must be a string');
+    // if ((query.species) && (typeof query.species !== 'string')) throw new Error('"species" key value must be a string');
+    // if ((query.uuid) && (typeof query.uuid !== 'string')) throw new Error('"uuid" key value must be a string');
+    // I think the typeof checks redundant since all queries have string values (right?)
 
     res.send(animals.searchAnimal(query));
   } catch (er) {
@@ -165,4 +165,10 @@ app.get('/search-animal', function (req, res) {
 });
 app.listen(port, function () {
   console.log("listening on port ".concat(port, "..."));
-});
+}); // animals cheatsheet:
+// cat Felidae
+// dog Canidae
+// ferret Mustelidae
+// goldfish Cyprinidae
+// grizzly Ursidae
+// seal Otariidae

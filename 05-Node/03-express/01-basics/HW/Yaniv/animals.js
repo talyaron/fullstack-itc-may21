@@ -33,7 +33,10 @@ const Animals = /** @class */ (function () {
         if (animal.species) searchedAnimal = searchedAnimal.filter(animalItem => animalItem.species === animal.species);
         if (animal.family) searchedAnimal = searchedAnimal.filter(animalItem => animalItem.family === animal.family);
         if (animal.uuid) searchedAnimal = searchedAnimal.filter(animalItem => animalItem.uuid === animal.uuid);
-        return searchedAnimal;
+
+        const result = (searchedAnimal.length === 0) ? 'No animal found for your query' : searchedAnimal;
+
+        return result;
     }
 
     return Animals;
@@ -123,11 +126,10 @@ app.get('/search-animal', (req, res)=> {
         const { query } = req;
 
         if (!query.uuid && !query.family && !query.species) throw new Error('There are no "uuid", "family" nor "species" keys in query');
-        if ((query.family) && (typeof query.family !== 'string')) throw new Error('"family" key value must be a string');
-        if ((query.species) && (typeof query.species !== 'string')) throw new Error('"species" key value must be a string');
-        if ((query.uuid) && (typeof query.uuid !== 'string')) throw new Error('"uuid" key value must be a string');
-        if (animals.searchAnimal(query) === null) throw new Error('No animal found for your query');
-        // are the typeof checks redundant since all queries have string values?
+        // if ((query.family) && (typeof query.family !== 'string')) throw new Error('"family" key value must be a string');
+        // if ((query.species) && (typeof query.species !== 'string')) throw new Error('"species" key value must be a string');
+        // if ((query.uuid) && (typeof query.uuid !== 'string')) throw new Error('"uuid" key value must be a string');
+        // I think the typeof checks redundant since all queries have string values (right?)
 
         res.send(animals.searchAnimal(query));
 
@@ -140,3 +142,11 @@ app.get('/search-animal', (req, res)=> {
 app.listen(port, () => {
     console.log(`listening on port ${port}...`);
 });
+
+// animals cheatsheet:
+// cat Felidae
+// dog Canidae
+// ferret Mustelidae
+// goldfish Cyprinidae
+// grizzly Ursidae
+// seal Otariidae
