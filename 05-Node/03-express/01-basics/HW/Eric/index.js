@@ -5,7 +5,7 @@
 // create a route for updating an item (method: PUT)
 // create a route to search items by name. id etc,  (method: GET)
 
-const fruits = []
+let fruits = []
 
 const express = require('express')
 const app = express()
@@ -47,17 +47,16 @@ app.put('/updateFruits/:id', (req, res)=>{
     const {name} = req.body;
     const fruitUpdate = fruits.find((fruit)=>fruit.id === id);
     if(name) fruitUpdate.name = name;
-    if(id) fruitUpdate.id = id;
 
     res.send(fruits)
 })
 
-app.delete('/deleteFruits/:name', (req, res)=>{
-    const {name} = req.params;
-    const deleteFruit = fruits.filter((fruit)=>fruit.name !== name);
-    fruits = deleteFruit;
-    res.send({deleteFruit})
-    console.log(`The fruit ${name} has been deleted`)
+app.delete('/deleteFruits', (req, res)=>{
+    const { body } = req;
+    const {id} = body;
+    fruits = fruits.filter((fruit)=>fruit.id !== id);
+    res.send({fruits})
+    console.log(`The fruit ${id} has been deleted`)
 })
 
 

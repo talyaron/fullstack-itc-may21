@@ -1,7 +1,5 @@
 "use strict";
 
-function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
-
 // create a list of your favorite list (books,uits);
 // Create a route for add an item
 // create a route for showing all items (method: GET)
@@ -51,19 +49,18 @@ app.put('/updateFruits/:id', function (req, res) {
     return fruit.id === id;
   });
   if (name) fruitUpdate.name = name;
-  if (id) fruitUpdate.id = id;
   res.send(fruits);
 });
-app["delete"]('/deleteFruits/:name', function (req, res) {
-  var name = req.params.name;
-  var deleteFruit = fruits.filter(function (fruit) {
-    return fruit.name !== name;
+app["delete"]('/deleteFruits', function (req, res) {
+  var body = req.body;
+  var id = body.id;
+  fruits = fruits.filter(function (fruit) {
+    return fruit.id !== id;
   });
-  fruits = (_readOnlyError("fruits"), deleteFruit);
   res.send({
-    deleteFruit: deleteFruit
+    fruits: fruits
   });
-  console.log("The fruit ".concat(name, " has been deleted"));
+  console.log("The fruit ".concat(id, " has been deleted"));
 });
 app.listen(port, function () {
   console.log("crud listening at http://localhost:".concat(port));
