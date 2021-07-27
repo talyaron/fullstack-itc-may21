@@ -29,24 +29,21 @@ const favouriteBooks = [
 
 //Create a route for add an item (method: POST)
 app.post('/addBook', (req, res) => {
-    try {
-        //I will recieve the data in destructuring const of data:
-        const { error, value } = validateBook(req.body.name);
 
-        if (!error) {
-            const book = {
-                id: favouriteBooks.length + 1,
-                name: value.name
-            }
-            favouriteBooks.push(book);
-            res.send(favouriteBooks);
-        } else {
-            const message = error.details[0].message;
-            res.status(400).send(message)
-        };
-    } catch (error) {
-        console.error(error);
-    };
+    //I will recieve the data in destructuring const of data:
+    const { error, value } = validateBook(req.body.name);
+
+    if (!error) {
+        const book = {
+            id: favouriteBooks.length + 1,
+            name: value.name
+        }
+        favouriteBooks.push(book);
+        res.send(favouriteBooks);
+    } else {
+        const msg = error.details[0].message;
+        res.status(400).send(msg)
+    }
 });
 
 //create a route for showing all items (method: GET)
@@ -54,7 +51,7 @@ app.get('/', (req, res) => {
     try {
         res.send(favouriteBooks)
     } catch (error) {
-        console.error(error);
+        res.send(error);
     };
 });
 
@@ -69,7 +66,7 @@ app.get('/getBook', (req, res) => {
         }
         res.send(searchedBooks)
     } catch (error) {
-        console.error(error);
+        res.send(error);
     };
 });
 
@@ -86,32 +83,28 @@ app.delete('/deleteBook/:id', (req, res) => {
         favouriteBooks.splice(index, 1);
         res.send(favouriteBooks);
     } catch (error) {
-        console.error(error);
+        res.send(error);
     };
 });
 
 //create a route for updating an item (method: PUT)
 app.put('/updateBook/:id', (req, res) => {
-    try {
-        let bookToUpdate = bookExist(req.params.id);
-        if (!bookToUpdate) {
-            res.status(404).send('The book it doesn`t exist!')
-            return;
-        };
-
-        //I will recieve the data in destructuring const of data:
-        const { error, value } = validateBook(req.body.name);
-
-        if (error) {
-            const mensaje = error.details[0].message;
-            res.status(400).send(mensaje)
-            return;
-        }
-        bookToUpdate.name = value.name;
-        res.send(favouriteBooks)
-    } catch (error) {
-        console.error(error);
+    let bookToUpdate = bookExist(req.params.id);
+    if (!bookToUpdate) {
+        res.status(404).send('The book it doesn`t exist!')
+        return;
     };
+
+    //I will recieve the data in destructuring const of data:
+    const { error, value } = validateBook(req.body.name);
+
+    if (error) {
+        const mensaje = error.details[0].message;
+        res.status(400).send(mensaje)
+        return;
+    }
+    bookToUpdate.name = value.name;
+    res.send(favouriteBooks)
 });
 
 app.listen(port, () => {
@@ -123,7 +116,7 @@ function bookExist(id) {
     try {
         return (favouriteBooks.find(book => book.id === parseInt(id)));
     } catch (error) {
-        console.error(error);
+        res.send(error);
     };
 };
 
@@ -132,9 +125,9 @@ function validateBook(nameBook) {
         const schema = Joi.object({
             //First I define the data that Im going to recieve, in this case should be "name"
             name: Joi.string().min(3).required(),
-        });
+        })
         return schema.validate({ name: nameBook });
     } catch (error) {
-        console.error(error);
-    };
+        res.send(error);
+    }
 };
