@@ -1,6 +1,6 @@
 "use strict";
 
-var fruit = [{
+var fruits = [{
   "name": "avatiaj",
   "id": "1"
 }, {
@@ -16,4 +16,4 @@ var fruit = [{
   "name": "tut",
   "id": "5"
 }];
-module.exports = fruit;
+module.exports = fruits;
