@@ -20,9 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/getStudents', (req, res) => {
-    res.send({
-        students
-    })
+    res.send({students})
 })
 
 //get by name
