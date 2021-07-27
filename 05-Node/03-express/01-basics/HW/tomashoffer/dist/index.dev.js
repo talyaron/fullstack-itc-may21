@@ -64,7 +64,7 @@ app["delete"]('/deleteFriends/:name', function (req, res) {
   });
   friends = deleteFriend;
   res.send({
-    deleteFriend: deleteFriend
+    friends: friends
   });
   console.log("The friend ".concat(name, " has been deleted"));
 }); // UPDATE FRIEND NAME AND AGE BY ID

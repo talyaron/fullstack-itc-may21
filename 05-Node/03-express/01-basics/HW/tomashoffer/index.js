@@ -44,7 +44,7 @@ app.delete('/deleteFriends/:name', (req, res)=>{
     const {name} = req.params;
     const deleteFriend = friends.filter((friend)=>friend.name !== name);
     friends = deleteFriend;
-    res.send({deleteFriend})
+    res.send({friends})
     console.log(`The friend ${name} has been deleted`)
 })
 
