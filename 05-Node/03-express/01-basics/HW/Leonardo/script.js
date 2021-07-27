@@ -11,11 +11,7 @@ const port = 3000;
 //Joi is to validate the data I enter:
 const Joi = require('joi');
 
-const fs = require('fs');
-
 app.use(express.json());
-
-//app.use(express.static('public'));
 
 //Define a new array that will contain all my favourite books:
 const favouriteBooks = [

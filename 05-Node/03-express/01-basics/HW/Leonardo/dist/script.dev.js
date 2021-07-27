@@ -13,10 +13,7 @@ var port = 3000; //Joi is to validate the data I enter:
 
 var Joi = require('joi');
 
-var fs = require('fs');
-
-app.use(express.json()); //app.use(express.static('public'));
-//Define a new array that will contain all my favourite books:
+app.use(express.json()); //Define a new array that will contain all my favourite books:
 
 var favouriteBooks = [{
   id: 1,
