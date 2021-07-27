@@ -7,26 +7,17 @@ var port = process.env.port || 8080;
 
 var path = require('path');
 
-app.use(express["static"](__dirname + 'public'));
-/*class Avenger {
-    avengerList = []
+var fs = require('fs');
 
-    //add avenger
-    addAvenger(avenger) {
-        this.avengerList.push(avenger)
-    }
-    
-
-}
-
-const avenger = new Avenger()*/
-
+app.use(express["static"]('public'));
 var avengerList = [];
 var avengerList2 = [];
 app.use(express.json()); //Create a route for add an item
 
 app.post('/addAvenger', function (req, res) {
   try {
+    avengerList = readJson();
+    avengerList2 = readJson();
     var body = req.body;
     var name = body.name,
         id = body.id;
@@ -45,6 +36,7 @@ app.post('/addAvenger', function (req, res) {
 
     avengerList.push(body);
     avengerList2.push(body);
+    fs.writeFileSync('./avenger.json', JSON.stringify(avengerList));
     res.send(avengerList);
   } catch (e) {
     res.status(500).send({
@@ -54,11 +46,14 @@ app.post('/addAvenger', function (req, res) {
 }); //create a route for showing all items 
 
 app.get('/getAvengers', function (req, res) {
+  avengerList = readJson();
+  avengerList2 = readJson();
   res.send(avengerList);
 }); //create a route for deleting an item
 
 app["delete"]('/deleteAvenger', function (req, res) {
   try {
+    avengerList = readJson();
     var body = req.body;
     var id = body.id;
     if (!id) throw new Error('The id does not exist in the list');
@@ -67,6 +62,7 @@ app["delete"]('/deleteAvenger', function (req, res) {
     });
     avengerList.splice(indexAvenger, 1);
     avengerList2.splice(indexAvenger, 1);
+    fs.writeFileSync('./avenger.json', JSON.stringify(avengerList));
     res.send(avengerList);
   } catch (e) {
     res.status(500).send({
@@ -77,6 +73,7 @@ app["delete"]('/deleteAvenger', function (req, res) {
 
 app.put('/updateAvenger', function (req, res) {
   try {
+    avengerList = readJson();
     var body = req.body;
     var id = body.id,
         name = body.name;
@@ -86,6 +83,7 @@ app.put('/updateAvenger', function (req, res) {
     });
     avengerList[index].name = name;
     avengerList2[index].name = name;
+    fs.writeFileSync('./avenger.json', JSON.stringify(avengerList));
     res.send(avengerList);
   } catch (e) {
     res.status(500).send({
@@ -96,8 +94,10 @@ app.put('/updateAvenger', function (req, res) {
 
 app.get('/getAvengersbyName', function (req, res) {
   try {
-    var regrExp = "^".concat(req.query.name);
+    var regrExp = "".concat(req.query.name);
     var searchTermReg = new RegExp(regrExp, 'i');
+    avengerList = readJson();
+    avengerList2 = readJson();
     avengerList = avengerList2.filter(function (avenger) {
       return searchTermReg.test(avenger.name);
     });
@@ -114,3 +114,8 @@ app.get('/', function (req, res) {
 app.listen(port, function () {
   console.log("Example app listening at http://localhost:".concat(port));
 });
+
+function readJson() {
+  var file = fs.readFileSync('./avenger.json');
+  return JSON.parse(file);
+}
