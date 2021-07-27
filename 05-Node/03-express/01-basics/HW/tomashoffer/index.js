@@ -3,9 +3,13 @@ const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
+const friendsJson = require('./friends');
 
+// PUSHING DEFAULT FRIEND OF OUR LIST
 let friends = [];
+friends.push(friendsJson);
 
+console.log(friends)
 // INITIALIZE BODYPARSER
 app.use(bodyParser.json());
 

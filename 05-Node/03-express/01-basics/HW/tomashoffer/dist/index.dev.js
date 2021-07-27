@@ -16,7 +16,12 @@ var bodyParser = require('body-parser');
 var _require = require('uuid'),
     uuidv4 = _require.v4;
 
-var friends = []; // INITIALIZE BODYPARSER
+var friendsJson = require('./friends'); // PUSHING DEFAULT FRIEND OF OUR LIST
+
+
+var friends = [];
+friends.push(friendsJson);
+console.log(friends); // INITIALIZE BODYPARSER
 
 app.use(bodyParser.json()); // INDEX
 
