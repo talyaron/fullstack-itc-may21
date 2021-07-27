@@ -4,9 +4,13 @@ const port = process.env.port || 8080
 const path = require('path')
 const fs = require('fs')
 
-
 app.use(express.static('public'));
 
+
+//for YS, in case you see it. I have wanted to go beyond the exercise by add the elements on the board. 
+//I realized that I have some troubles that I havent fixed yet
+//One is the ID unique, I use Math.Random or one nodejs library and when I click on the edit icon, I can update the element
+//but because I havent had time enough, i couldnt figure out why this problem
 
 let avengerList = []
 let avengerList2 = []
@@ -20,12 +24,16 @@ app.post('/addAvenger', (req, res) => {
         avengerList = readJson()
         avengerList2 = readJson()
         const { body } = req
-        const { name, id } = body
-        if (!name || !id) { throw new Error('Dont have name or id in the json object') }
-        const isFound = avengerList.some(avenger => avenger.id === id)
-        if (isFound) { throw new Error('This id is already in the list') }
+        const {name, id} = body
+        if (!name || !id) { throw new Error('Dont have name in the json object') }
+
+        const isFound = avengerList.some(elem=> elem.id == id)
+
+        if(isFound) throw new Error('This is id is already here')
+
         avengerList.push(body)
         avengerList2.push(body)
+
         fs.writeFileSync('./avenger.json', JSON.stringify(avengerList))
         res.send(avengerList)
 
@@ -67,9 +75,9 @@ app.put('/updateAvenger', (req, res) => {
         const { body } = req
         const { id, name } = body
         if (!id || !name) throw new Error('The id or name does not exist in the list')
-        const index = avengerList.findIndex(item => item.id === id)
-        avengerList[index].name = name
-        avengerList2[index].name = name
+        const nameAvenger = avengerList.find(avenger=>avenger.id === id)
+        nameAvenger.name = name
+
         fs.writeFileSync('./avenger.json', JSON.stringify(avengerList))
         res.send(avengerList)
     } catch (e) {
