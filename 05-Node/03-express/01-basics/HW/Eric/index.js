@@ -15,15 +15,8 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
 
-
-app.get('/', (req, res) =>{
-    res.send('Hello World');
-})
-
-
 app.get('/getFruits',(req,res)=>{
     res.send({fruits})
-    console.log(fruits)
 })
 
 app.post('/addFruits', (req, res) => {
@@ -34,6 +27,7 @@ app.post('/addFruits', (req, res) => {
         res.send(body);
 })
 
+//searh by bame
 app.get('/searchFruit/:name', (req, res)=>{
     const {name} = req.params;
     const searchFruit = fruits.filter((fruit)=>fruit.name === name);
@@ -51,12 +45,20 @@ app.put('/updateFruits/:id', (req, res)=>{
     res.send(fruits)
 })
 
-app.delete('/deleteFruits', (req, res)=>{
-    const { body } = req;
-    const {id} = body;
-    fruits = fruits.filter((fruit)=>fruit.id !== id);
+// app.delete('/deleteFruits/:id', (req, res)=>{
+//     const { body } = req.params;
+//     const {id} = body;
+//     fruits = fruits.filter((fruit)=>fruit.id !== id);
+//     res.send({fruits})
+//     console.log(`The fruit ${id} has been deleted`)
+// })
+
+app.delete('/deleteFruits/:name', (req, res)=>{
+    const {name} = req.params;
+    const deleteFruit = fruits.filter((fruit)=>fruit.name !== name);
+    fruits = deleteFruit;
     res.send({fruits})
-    console.log(`The fruit ${id} has been deleted`)
+    console.log(`The friend ${name} has been deleted`)
 })
 
 

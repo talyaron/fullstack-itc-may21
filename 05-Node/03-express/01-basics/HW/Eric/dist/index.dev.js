@@ -16,14 +16,10 @@ var port = process.env.PORT || 3003;
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
-app.get('/', function (req, res) {
-  res.send('Hello World');
-});
 app.get('/getFruits', function (req, res) {
   res.send({
     fruits: fruits
   });
-  console.log(fruits);
 });
 app.post('/addFruits', function (req, res) {
   var body = req.body;
@@ -31,7 +27,8 @@ app.post('/addFruits', function (req, res) {
       id = body.id;
   fruits.push(body);
   res.send(body);
-});
+}); //searh by bame
+
 app.get('/searchFruit/:name', function (req, res) {
   var name = req.params.name;
   var searchFruit = fruits.filter(function (fruit) {
@@ -50,17 +47,24 @@ app.put('/updateFruits/:id', function (req, res) {
   });
   if (name) fruitUpdate.name = name;
   res.send(fruits);
-});
-app["delete"]('/deleteFruits', function (req, res) {
-  var body = req.body;
-  var id = body.id;
-  fruits = fruits.filter(function (fruit) {
-    return fruit.id !== id;
+}); // app.delete('/deleteFruits/:id', (req, res)=>{
+//     const { body } = req.params;
+//     const {id} = body;
+//     fruits = fruits.filter((fruit)=>fruit.id !== id);
+//     res.send({fruits})
+//     console.log(`The fruit ${id} has been deleted`)
+// })
+
+app["delete"]('/deleteFruits/:name', function (req, res) {
+  var name = req.params.name;
+  var deleteFruit = fruits.filter(function (fruit) {
+    return fruit.name !== name;
   });
+  fruits = deleteFruit;
   res.send({
     fruits: fruits
   });
-  console.log("The fruit ".concat(id, " has been deleted"));
+  console.log("The friend ".concat(name, " has been deleted"));
 });
 app.listen(port, function () {
   console.log("crud listening at http://localhost:".concat(port));

@@ -48,37 +48,29 @@ var favouriteBooks = [{
 }]; //Create a route for add an item (method: POST)
 
 app.post('/addBook', function (req, res) {
-  try {
-    //I will recieve the data in destructuring const of data:
-    var _validateBook = validateBook(req.body.name),
-        error = _validateBook.error,
-        value = _validateBook.value;
+  //I will recieve the data in destructuring const of data:
+  var _validateBook = validateBook(req.body.name),
+      error = _validateBook.error,
+      value = _validateBook.value;
 
-    if (!error) {
-      var book = {
-        id: favouriteBooks.length + 1,
-        name: value.name
-      };
-      favouriteBooks.push(book);
-      res.send(favouriteBooks);
-    } else {
-      var message = error.details[0].message;
-      res.status(400).send(message);
-    }
-
-    ;
-  } catch (error) {
-    console.error(error);
+  if (!error) {
+    var book = {
+      id: favouriteBooks.length + 1,
+      name: value.name
+    };
+    favouriteBooks.push(book);
+    res.send(favouriteBooks);
+  } else {
+    var msg = error.details[0].message;
+    res.status(400).send(msg);
   }
-
-  ;
 }); //create a route for showing all items (method: GET)
 
 app.get('/', function (req, res) {
   try {
     res.send(favouriteBooks);
   } catch (error) {
-    console.error(error);
+    res.send(error);
   }
 
   ;
@@ -98,7 +90,7 @@ app.get('/getBook', function (req, res) {
 
     res.send(searchedBooks);
   } catch (error) {
-    console.error(error);
+    res.send(error);
   }
 
   ;
@@ -118,40 +110,34 @@ app["delete"]('/deleteBook/:id', function (req, res) {
     favouriteBooks.splice(index, 1);
     res.send(favouriteBooks);
   } catch (error) {
-    console.error(error);
+    res.send(error);
   }
 
   ;
 }); //create a route for updating an item (method: PUT)
 
 app.put('/updateBook/:id', function (req, res) {
-  try {
-    var bookToUpdate = bookExist(req.params.id);
+  var bookToUpdate = bookExist(req.params.id);
 
-    if (!bookToUpdate) {
-      res.status(404).send('The book it doesn`t exist!');
-      return;
-    }
-
-    ; //I will recieve the data in destructuring const of data:
-
-    var _validateBook2 = validateBook(req.body.name),
-        error = _validateBook2.error,
-        value = _validateBook2.value;
-
-    if (error) {
-      var mensaje = error.details[0].message;
-      res.status(400).send(mensaje);
-      return;
-    }
-
-    bookToUpdate.name = value.name;
-    res.send(favouriteBooks);
-  } catch (error) {
-    console.error(error);
+  if (!bookToUpdate) {
+    res.status(404).send('The book it doesn`t exist!');
+    return;
   }
 
-  ;
+  ; //I will recieve the data in destructuring const of data:
+
+  var _validateBook2 = validateBook(req.body.name),
+      error = _validateBook2.error,
+      value = _validateBook2.value;
+
+  if (error) {
+    var mensaje = error.details[0].message;
+    res.status(400).send(mensaje);
+    return;
+  }
+
+  bookToUpdate.name = value.name;
+  res.send(favouriteBooks);
 });
 app.listen(port, function () {
   console.log("The server is running at port:".concat(port));
@@ -163,7 +149,7 @@ function bookExist(id) {
       return book.id === parseInt(id);
     });
   } catch (error) {
-    console.error(error);
+    res.send(error);
   }
 
   ;
@@ -181,10 +167,8 @@ function validateBook(nameBook) {
       name: nameBook
     });
   } catch (error) {
-    console.error(error);
+    res.send(error);
   }
-
-  ;
 }
 
 ;
