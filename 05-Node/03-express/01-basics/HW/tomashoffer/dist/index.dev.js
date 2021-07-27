@@ -16,7 +16,12 @@ var bodyParser = require('body-parser');
 var _require = require('uuid'),
     uuidv4 = _require.v4;
 
-var friends = []; // INITIALIZE BODYPARSER
+var friendsJson = require('./friends'); // PUSHING DEFAULT FRIEND OF OUR LIST
+
+
+var friends = [];
+friends.push(friendsJson);
+console.log(friends); // INITIALIZE BODYPARSER
 
 app.use(bodyParser.json()); // INDEX
 
@@ -59,7 +64,7 @@ app["delete"]('/deleteFriends/:name', function (req, res) {
   });
   friends = deleteFriend;
   res.send({
-    deleteFriend: deleteFriend
+    friends: friends
   });
   console.log("The friend ".concat(name, " has been deleted"));
 }); // UPDATE FRIEND NAME AND AGE BY ID

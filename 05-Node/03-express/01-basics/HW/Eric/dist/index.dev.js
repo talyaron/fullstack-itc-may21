@@ -6,8 +6,6 @@
 // create a route for deleting an item (method: DELETE)
 // create a route for updating an item (method: PUT)
 // create a route to search items by name. id etc,  (method: GET)
-var fruits = [];
-
 var express = require('express');
 
 var app = express();
@@ -16,9 +14,7 @@ var port = process.env.PORT || 3003;
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
-app.get('/', function (req, res) {
-  res.send('Hello World');
-});
+var fruits = [];
 app.get('/getFruits', function (req, res) {
   res.send({
     fruits: fruits
@@ -31,7 +27,8 @@ app.post('/addFruits', function (req, res) {
       id = body.id;
   fruits.push(body);
   res.send(body);
-});
+}); //search by name
+
 app.get('/searchFruit/:name', function (req, res) {
   var name = req.params.name;
   var searchFruit = fruits.filter(function (fruit) {
@@ -51,9 +48,9 @@ app.put('/updateFruits/:id', function (req, res) {
   if (name) fruitUpdate.name = name;
   res.send(fruits);
 });
-app["delete"]('/deleteFruits', function (req, res) {
-  var body = req.body;
-  var id = body.id;
+app["delete"]('/deleteFruits/:id', function (req, res) {
+  var id = req.params.id;
+  var name = req.body.name;
   fruits = fruits.filter(function (fruit) {
     return fruit.id !== id;
   });
