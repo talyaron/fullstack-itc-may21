@@ -38,7 +38,7 @@ function addObject() {
     });
 }
 addObject();
-// DELETE PRODUCTvariable
+// DELETE PRODUCT variable
 function remove(id) {
     var filtrado = list.filter(function (prod) { return prod.id !== id; });
     list = filtrado;
