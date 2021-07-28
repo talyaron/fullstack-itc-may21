@@ -1,17 +1,1 @@
-<<<<<<< HEAD
-[{
-    "name": "studentB",
-    "id": "9d7eea33-722b-4268-9541-89e01eeacdf8"
-}, {
-    "name": "studentC",
-    "id": "29f6631c-41f9-4cf6-bce8-1c64009d90ab"
-}, {
-    "name": "studentD",
-    "id": "fabf6a8a-a7a3-46ba-b092-0a846e21b7aa"
-}, {
-    "name": "studentA",
-    "id": "ca189354-fd21-4d30-823a-29bccdfd35fe"
-}]
-=======
-[{"name":"Newname","id":"3848477"},{"name":"Avromii","id":"3848477"},{"id":"3567","name":"studentB"},{"name":"studentA","id":"2cfdc489-ca35-4096-967a-97a2e0ae62ec"},{"name":"agsag","id":"74b15b52-ca02-4244-9c64-c98b6526d249"}]
->>>>>>> c347afc173738aaea66ac149f3dfd0a28bec4354
+[]
