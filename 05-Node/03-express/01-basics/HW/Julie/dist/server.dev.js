@@ -49,8 +49,10 @@ app.put("/:id", function (req, res) {
   var requiredThing = allThings.find(function (thing) {
     return thing.id === id;
   });
-  var newName = req.body.newName;
-  requiredThing.name = req.body.newName;
+  var newName = req.body.newName; //YS: Why dont you use this in the line below? 
+
+  requiredThing.name = req.body.newName; //YS: Why are you using the req.body.newName if in the line before you already have the newName? Should be:  requiredThing.name = newName;
+
   fs.writeFileSync("./things.json", JSON.stringify(allThings));
   res.send("Thing updated");
 });

@@ -5,6 +5,9 @@ create a route for deleting an item (method: DELETE)
 create a route for updating an item (method: PUT)
 create a route to search items by name. id etc,  (method: GET) */
 
+
+//YS: This file should be called server.js instead of sript.js
+
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -35,7 +38,7 @@ app.post('/addBook', (req, res) => {
 
     if (!error) {
         const book = {
-            id: favouriteBooks.length + 1,
+            id: favouriteBooks.length + 1, //YS: Use the library uuidv4 to create ids. 
             name: value.name
         }
         favouriteBooks.push(book);
@@ -51,15 +54,15 @@ app.get('/', (req, res) => {
     try {
         res.send(favouriteBooks)
     } catch (error) {
-        res.send(error);
+        res.send(error); //YS: Also add status
     };
 });
 
 //create a route to search items by name. id etc (method: GET)
 //This will get a Book by a Name
-app.get('/getBook', (req, res) => {
+app.get('/getBook', (req, res) => { //YS: This route should be: /getBook/:id 
     try {
-        let searchedBooks = favouriteBooks.find(book => book.name === req.query.name);
+        let searchedBooks = favouriteBooks.find(book => book.name === req.query.name); //YS: Ok, you used res.query, but use req.params, and add the param to your route (it should also by by id, not name)
         if (!searchedBooks) {
             res.send('That book is not my favourite')
             return
@@ -71,7 +74,7 @@ app.get('/getBook', (req, res) => {
 });
 
 //create a route for deleting an item (method: DELETE)
-app.delete('/deleteBook/:id', (req, res) => {
+app.delete('/deleteBook/:id', (req, res) => { //YS: Great
     try {
         let bookToDelete = bookExist(req.params.id);
         if (!bookToDelete) {
@@ -79,7 +82,7 @@ app.delete('/deleteBook/:id', (req, res) => {
             return;
         };
 
-        const index = favouriteBooks.indexOf(bookToDelete);
+        const index = favouriteBooks.indexOf(bookToDelete); //YS: Use filter instead of  indexOf + splice. 
         favouriteBooks.splice(index, 1);
         res.send(favouriteBooks);
     } catch (error) {
@@ -111,7 +114,7 @@ app.listen(port, () => {
     console.log(`The server is running at port:${port}`)
 });
 
-//This function is to DRY:
+//This function is to DRY:  //YS: Very nice! These should be in a different file and then you should import them
 function bookExist(id) {
     try {
         return (favouriteBooks.find(book => book.id === parseInt(id)));
