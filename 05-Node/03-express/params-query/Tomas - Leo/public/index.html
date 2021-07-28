@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Colors</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
+
 <body id="root">
     <h1>Hi all</h1>
     <input type="color" name="" id="" onchange='handleChangeColor(event)'>
     <script>
         document.getElementById('root').style.background = 'red';
-        let color = ''; 
-        function handleChangeColor(ev){
+
+        function handleChangeColor(ev) {
             color = ev.target.value;
             document.getElementById('root').style.background = color;
-        }
 
-        export default color;
+            //get data from the form as an object
+            axios.post('/seeColor', { color })
+                    .then(({data}) => {
+                        console.log(data);
+                    })
+        }
     </script>
 </body>
+
 </html>
