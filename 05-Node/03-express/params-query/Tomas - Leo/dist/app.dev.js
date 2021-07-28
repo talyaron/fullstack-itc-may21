@@ -17,8 +17,13 @@ var fs = require('fs');
 app.use(express["static"]('public'));
 app.get('/', function (req, res) {
   var html = fs.readFileSync('index.html');
-  console.log("hola");
+  console.log(pepe);
   res.send(html);
+});
+app.post('/seeColor', function (req, res) {
+  var body = req.body;
+  console.log(body);
+  res.send(body);
 });
 app.listen(port, function () {
   console.log('Server listen on port', port);
