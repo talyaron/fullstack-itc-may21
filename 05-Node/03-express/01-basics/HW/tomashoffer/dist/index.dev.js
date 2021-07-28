@@ -20,12 +20,16 @@ var friendsJson = require('./friends'); // PUSHING DEFAULT FRIEND OF OUR LIST
 
 
 var friends = [];
-friends.push(friendsJson);
-console.log(friends); // INITIALIZE BODYPARSER
+friends.push(friendsJson); //YS: What is this for? 
 
-app.use(bodyParser.json()); // INDEX
+console.log(friends); //YS: ?
+// INITIALIZE BODYPARSER
+
+app.use(bodyParser.json()); ///YS: Instead of this use: app.use(express.json())
+// INDEX
 
 app.get('/', function (req, res) {
+  //YS: You dont really need this. 
   res.send('Hello World');
 }); // GET ALL FRIENDS
 
@@ -43,10 +47,11 @@ app.post('/postFriends', function (req, res) {
   res.send({
     friends: friends
   });
-  console.log("You had add a friend");
+  console.log("You had add a friend"); //YS: IF you want your user to know this, then you should send it in the app.send(`You had add a friend`) instead of console.logging 
 }); // SEARCH FRIEND BY NAME 
 
 app.get('/searchFriend/:name', function (req, res) {
+  //YS: This should be by ID instead of name: searchFriend/:id
   var name = req.params.name;
   var searchedFriend = friends.filter(function (friend) {
     return friend.name === name;
@@ -54,10 +59,11 @@ app.get('/searchFriend/:name', function (req, res) {
   res.send({
     searchedFriend: searchedFriend
   });
-  console.log("You have search to your friend: ".concat(name));
+  console.log("You have search to your friend: ".concat(name)); //YS: Same as before, console.logging wont do much. 
 }); // DELETE FRIEND BY NAME 
 
 app["delete"]('/deleteFriends/:name', function (req, res) {
+  //YS: Same as before, by ID
   var name = req.params.name;
   var deleteFriend = friends.filter(function (friend) {
     return friend.name !== name;
@@ -70,6 +76,7 @@ app["delete"]('/deleteFriends/:name', function (req, res) {
 }); // UPDATE FRIEND NAME AND AGE BY ID
 
 app.put('/updateFriends/:id', function (req, res) {
+  //YS: Nice
   var id = req.params.id;
   var _req$body = req.body,
       name = _req$body.name,

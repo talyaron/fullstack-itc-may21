@@ -1,9 +1,10 @@
-//form
-const form = document.getElementById('form')
+
+
 
 //btn
 const btnGetData = document.querySelector('.getData')
 const btnUpdateData = document.querySelector('.updateData')
+const btnADDdata = document.querySelector('.addData')
 
 //board
 const boardRoot = document.querySelector('#board')
@@ -13,21 +14,26 @@ const inputName = document.querySelector('.name')
 const inputID = document.querySelector('.id')
 const inputRegrex = document.querySelector('.regrex')
 
-//addEventListener
+
 btnGetData.addEventListener('click', getData)
 btnUpdateData.addEventListener('click', updateData)
-form.addEventListener('submit', handleSumbit)
+btnADDdata.addEventListener('click', addData)
 
-function getData() {
+
+let dataAvenger;
+
+function getData(ev) {
     let html = ''
+    ev.preventDefault()
     axios.get('/getAvengers')
         .then(({ data }) => {
             render(html, data)
         })
 }
 
-function updateData() {
+function updateData(ev) {
     let html = ''
+    ev.preventDefault()
     const name = inputName.value
     const id = inputID.valueAsNumber
     axios.put('/updateAvenger', { name, id })
@@ -39,8 +45,9 @@ function updateData() {
 
 inputRegrex.addEventListener('keyup', getDataKeyUp)
 
-function getDataKeyUp() {
+function getDataKeyUp(ev) {
     let html = ''
+    ev.preventDefault()
     const regrex = inputRegrex.value
     axios.get(`/getAvengersbyName?name=${regrex}`)
         .then(({ data }) => {
@@ -59,25 +66,38 @@ function deleteData(id) {
 
 
 
-function handleSumbit(event) {
+function addData(ev) {
 
-    event.preventDefault();
 
     try {
-        const name = event.target.elements.name.value
-        const id = event.target.elements.id.valueAsNumber;
+        ev.preventDefault()
+
+        const name = inputName.value
+        const id = inputID.valueAsNumber
+
+
         axios.post('/addAvenger', { name, id })
-        //
+
     } catch (e) {
         console.log(e);
     }
 
 }
 
-function render(html, data){
+function render(html, data) {
+    dataAvenger = data;
     data.forEach(elem => {
-        html += `<div class="container__board--element">ID: ${elem.id} - Name: ${elem.name}
-        <i class="fa fa-trash " onclick='deleteData("${elem.id}")' title="Delete Item"></i></div> `
+        html += `<div class="container__board--element">Name: ${elem.name}
+        <i class="fa fa-trash " onclick='deleteData("${elem.id}")' title="Delete Item"></i>
+        <i class="fas fa-edit " onclick='handleEdit("${elem.id}")' title="Click on the edit item and then edit"></i></div> `
     });
     boardRoot.innerHTML = html
+}
+
+function handleEdit(id) {
+    const avenger = dataAvenger.find(avenger => avenger.id = id)
+    inputName.value = avenger.name;
+    inputID.value = avenger.id;
+
+
 }

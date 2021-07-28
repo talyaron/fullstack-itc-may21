@@ -39,8 +39,8 @@ app.put("/:id", function (req, res) {
   const allThings = readFile();
   const { id } = req.params;
   const requiredThing = allThings.find((thing) => thing.id === id);
-  const { newName } = req.body;
-  requiredThing.name = req.body.newName;
+  const { newName } = req.body; //YS: Why dont you use this in the line below? 
+  requiredThing.name = req.body.newName; //YS: Why are you using the req.body.newName if in the line before you already have the newName? Should be:  requiredThing.name = newName;
   fs.writeFileSync("./things.json", JSON.stringify(allThings));
   res.send("Thing updated");
 });
