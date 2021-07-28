@@ -1,23 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body>
-   <h1 id='root'>Hi all</h1>
-   <input type="color" name="" id="" onchange='handleChangeColor(event)'>
-   <script>
-       document.getElementById('root').style.color = 'red';
 
-       function handleChangeColor(ev){
-          
-           const color = ev.target.value;
-           document.getElementById('root').style.color = color;
+<body onload='getColor()'>
+    <h1 id='root'>Hi all</h1>
+    <input type="color" name="" id="" onchange='handleChangeColor(event)'>
+    <script>
+        document.getElementById('root').style.color = 'red';
 
-       }
-   </script>
+       
+
+        function getColor() {
+
+            //get the color form the server
+
+            axios.get('/getColor')
+                .then(res => document.body.style.backgroundColor = res.data.color );
+
+            // fetch('/getColor') //GET
+            //     .then(r => r.json())
+            //     .then(data => {
+            //         console.log(data);
+            //         document.body.style.backgroundColor = data.color;
+            //         //stop
+            //     })
+
+
+        }
+
+        function handleChangeColor(ev) {
+
+            const color = ev.target.value;
+            document.body.style.backgroundColor = color;
+
+            //promises ( async functions)
+
+            axios.put('/setColor',{color})
+            .then(res=>{
+                console.log(res.data)
+            })
+            .catch(e=>{
+                console.error(e)
+            })
+
+            // fetch('/setColor', {
+            //     method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({ color })
+            // })
+            //     .then(res => res.json())
+            //     .then(data => console.log(data))
+
+
+        }
+
+    </script>
 </body>
+
 </html>
