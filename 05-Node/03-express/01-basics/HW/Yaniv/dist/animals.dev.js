@@ -6,11 +6,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var express = require("express");
+var express = require('express');
 
 var fs = require('fs');
 
-var _require = require("uuid"),
+var _require = require('uuid'),
     uuidv4 = _require.v4; //https://www.npmjs.com/package/uuid
 
 
@@ -45,13 +45,9 @@ function () {
     this.updateAnimalsJson();
   };
 
-  Animals.prototype.deleteAnimal = function (animal) {
-    if (animal.species) this.animalsArray = this.animalsArray.filter(function (animalItem) {
-      return animalItem.species !== animal.species;
-    }); //YS: Nice! :)
-
-    if (animal.family) this.animalsArray = this.animalsArray.filter(function (animalItem) {
-      return animalItem.family !== animal.family;
+  Animals.prototype.deleteAnimal = function (animalUuid) {
+    var animalToUpdateIndex = this.animalsArray.findIndex(function (animalItem) {
+      return animalItem.uuid === animalUuid;
     });
     if (animalToUpdateIndex === -1) return false;
     this.animalsArray = this.animalsArray.filter(function (animalItem) {
@@ -63,9 +59,9 @@ function () {
 
   Animals.prototype.updateAnimal = function (animalUuid, animal) {
     var animalToUpdateIndex = this.animalsArray.findIndex(function (animalItem) {
-      return animalItem.uuid === animal.uuid;
-    }); //YS: Use find instead of findIndex (its more straight to the point)
-
+      return animalItem.uuid === animalUuid;
+    });
+    if (animalToUpdateIndex === -1) return false;
     if (animal.species) this.animalsArray[animalToUpdateIndex].species = animal.species;
     if (animal.sound) this.animalsArray[animalToUpdateIndex].sound = animal.sound;
     this.updateAnimalsJson();
@@ -83,7 +79,7 @@ function () {
     if (animal.uuid) searchedAnimal = searchedAnimal.filter(function (animalItem) {
       return animalItem.uuid === animal.uuid;
     });
-    var result = searchedAnimal.length === 0 ? "No animal found for your query" : searchedAnimal;
+    var result = searchedAnimal.length === 0 ? 'No animal found for your query' : searchedAnimal;
     return result;
   };
 
@@ -92,10 +88,9 @@ function () {
 
 var animals = new Animals(); // create a route for add an item
 
-app.post("/add-animal", function (req, res) {
+app.post('/add-animal', function (req, res) {
   try {
     var schema = {
-      //YS: nice! This is called middleware and it should go in a separate folder, we will learn about middleware. But well done for using this.
       type: "object",
       properties: {
         species: {
@@ -114,33 +109,32 @@ app.post("/add-animal", function (req, res) {
 
     if (!valid) {
       // validate.errors.forEach(er => console.log(er.message));
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
 
     animals.addAnimal(body);
-    res.send(animals.animalsArray);
+    res.send("".concat(body.species, " added to the animals kingdom"));
   } catch (er) {
     console.error(er);
     res.status(400).send({
       error: er.message
-    }); //YS: Very good
+    });
   }
 }); // create a route for showing all items (method: GET)
 
-app.get("/all-animals", function (req, res) {
+app.get('/all-animals', function (req, res) {
   res.send(animals.animalsArray);
 }); // create a route for deleting an item (method: DELETE)
 
-app["delete"]("/delete-animal", function (req, res) {
+app["delete"]('/:uuid', function (req, res) {
   try {
-    var body = req.body; //YS: Ok, but start doing this like I showed you (using the ID and passing it through the URL)
-
-    if (!body.uuid && !body.family && !body.species) throw new Error('There are no "uuid", "family" nor "species" keys in JSON');
-    if (body.species && typeof body.species !== "string") throw new Error('"species" key value must be a string');
-    if (body.family && typeof body.family !== "string") throw new Error('"family" key value must be a string');
-    if (body.uuid && typeof body.uuid !== "string") throw new Error('"uuid" key value must be a string');
-    animals.deleteAnimal(body);
-    res.send("animal deleted successfully");
+    var body = req.body;
+    var uuid = req.params.uuid;
+    if (!uuid) throw new Error('Route is missing "uuid" data, please work with the route as follows: "http://localhost:3000/:uuid-to-delete');
+    if (Object.entries(body).length !== 0) throw new Error('Instead of JSON, please work with the route as follows: "http://localhost:3000/:uuid-to-delete');
+    var uuidIsFound = animals.deleteAnimal(uuid);
+    var domMsg = uuidIsFound ? "animal ".concat(uuid, " deleted successfully") : "".concat(uuid, " is not found");
+    res.send(domMsg);
   } catch (er) {
     console.error(er);
     res.status(400).send({
@@ -149,19 +143,18 @@ app["delete"]("/delete-animal", function (req, res) {
   }
 }); // create a route for updating an item (method: PUT)
 
-app.put("/update-animal", function (req, res) {
+app.put('/:uuid', function (req, res) {
   try {
     var body = req.body;
-    console.log(animals.animalsArray); //YS:  Same as in delete
-
-    if (!body.uuid && !body.family && !body.species) throw new Error('There are no "uuid", "family" nor "species" keys in JSON');
-    if (!body.uuid) throw new Error('There is no "id" key in JSON - cannot find animal');
-    if (!body.family && !body.species) throw new Error('There is no "family" nor "species" keys in JSON - no info to update for animal');
-    if (body.family && typeof body.family !== "string") throw new Error('"family" key value must be a string');
-    if (body.species && typeof body.species !== "string") throw new Error('"species" key value must be a string');
-    if (body.uuid && typeof body.uuid !== "string") throw new Error('"uuid" key value must be a string');
-    animals.updateAnimal(body);
-    res.send("animal ".concat(body.uuid, " updated successfully"));
+    var uuid = req.params.uuid;
+    if (!uuid) throw new Error('Route is missing "uuid" data, please work with the route as follows: "http://localhost:3000/:uuid-to-delete');
+    if (!body.sound && !body.species) throw new Error('There is no "sound" nor "species" keys in JSON - no info to update for animal');
+    if (body.sound && typeof body.sound !== 'string') throw new Error('"sound" key value must be a string');
+    if (body.species && typeof body.species !== 'string') throw new Error('"species" key value must be a string');
+    if (Object.entries(body).length > 2) throw new Error('Please only use "sound" and/or "species" keys in your JSON');
+    var uuidIsFound = animals.updateAnimal(uuid, body);
+    var domMsg = uuidIsFound ? "animal ".concat(uuid, " updated successfully") : "".concat(uuid, " is not found");
+    res.send(domMsg);
   } catch (er) {
     console.error(er);
     res.status(400).send({
@@ -170,11 +163,10 @@ app.put("/update-animal", function (req, res) {
   }
 }); // create a route to search items by name, id etc.  (method: GET)
 
-app.get("/search-animal", function (req, res) {
+app.get('/search-animal', function (req, res) {
   try {
-    var query = req.query; // YS: Ok, I see what you were doing here. Use the req.params instead of the req.query - it will make your life a lot easier for what we need.
-
-    if (!query.uuid && !query.family && !query.species) throw new Error('There are no "uuid", "family" nor "species" keys in query'); // if ((query.family) && (typeof query.family !== 'string')) throw new Error('"family" key value must be a string');
+    var query = req.query;
+    if (!query.uuid && !query.sound && !query.species) throw new Error('There are no "uuid", "sound" nor "species" keys in query'); // if ((query.sound) && (typeof query.sound !== 'string')) throw new Error('"sound" key value must be a string');
     // if ((query.species) && (typeof query.species !== 'string')) throw new Error('"species" key value must be a string');
     // if ((query.uuid) && (typeof query.uuid !== 'string')) throw new Error('"uuid" key value must be a string');
     // I think the typeof checks redundant since all queries have string values (right?)
