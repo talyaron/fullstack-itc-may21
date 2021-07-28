@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="dist/style.min.css">
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="favicon-96x96.png" />
+    <title>CRUD</title>
+</head>
+
+<body class="body">
+    <header>
+        <h2>CRUD<img src="favicon-96x96.png"></h2>
+    </header>
+    <div class="wrapper">
+        <section>
+            <h3>Instructions</h3>
+            <ol>
+                <li>Get old data</li>
+                <li>Complete data</li>
+                <li>Add data to the list</li>
+                <li>Get data and show it on gray board</li>
+                <li>Update data by completing the form with the id and the new name</li>
+                <li>Delete data by clicking the trash icon</li>
+            </ol>
+        </section>
+        <div class="container">
+            <form id="form">
+                <div class="container__action">
+                    <label>Search a specific name:
+                        <input type="text" name="regrex" id="regrex" class='regrex'>
+                    </label>
+                    <fieldset class="container__actions__addedit">
+                        <legend>Actions</legend>
+                        <button type="submit" class="getData">GET</button>
+                        <button type="submit" class="updateData">UPDATE</button>
+                    </fieldset>
+                </div>
+                <div class="container__center">
+                    <fieldset class="container__center__list">
+                        <legend>Personal Data</legend>
+                        <div class="container__center__list--inputs">
+                            <label for="id">ID:
+                                <input type="number" name="id" id="id" class="id" placeholder="Enter your id">
+                            </label>
+                            <label for="name">Name:
+                                <input type="text" name="name" id="name" class="name" placeholder="Enter your name">
+                            </label>
+                        </div>
+                        <button type="submit" class="addData">ADD DATA</button>
+
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="board" class="container__board"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>

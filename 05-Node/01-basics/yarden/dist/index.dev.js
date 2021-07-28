@@ -10,7 +10,7 @@ top-notch: add your image to the index.html
 var express = require('express');
 
 var app = express();
-var port = 2020;
+var port = 3000;
 app.use(express["static"]('./'));
 var server = app.listen(port, function () {
   return console.log("listening on port ".concat(port, "!"));

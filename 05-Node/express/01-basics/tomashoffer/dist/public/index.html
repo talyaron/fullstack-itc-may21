@@ -4,16 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studient Form`</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <title>Document</title>
 </head>
 <body>
-    <form action="" onsubmit="handleSubmit(event)">
-        <input type="number" name="" id="" placeholder="Enter student id">
-        <input type="text" name="" id="" placeholder="Enter student name">
-        <button onclick=""></button>
+    <h1>Studient Form</h1>
+    <form onsubmit="handleSubmit(e)">
+        <input type="text" placeholder="Name" name="name">
+        <input type="submit">
     </form>
-
+    <div class="content_studients">
+        
+    </div>
+    <script>
+       function handleSubmit(event){
+            //get data from the form as an object
+            axios.post('/index',{test:42})
+            .then(res=>{
+                console.log(res);
+            })
+        }
+    </script>
 </body>
 </html>
