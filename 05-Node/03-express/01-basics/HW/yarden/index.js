@@ -5,37 +5,51 @@
 // create a route for updating an item (method: PUT) *
 // create a route to search items by name. id etc,  (method: GET) *
 
-const fs = require('fs');
-const express = require('express');
+const fs = require('fs')
+const express = require('express')
+const {
+    v4: uuidv4
+} = require('uuid')
+const app = express()
+const PORT = process.env.PORT || 3000
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-const hobbies = ["music", "sports", "coffee", "books", "beer", "food", "weddings", "travel"];
-
-app.use(express.static('public'));
+app.use(express.static('public'))
 app.use(express.json())
 
-app.get('/hobbies', (req, res) => {
-    res.send(hobbies);
+const readFriends = () => {
+    const allFriends = fs.readFileSync('./hobbies.json')
+    return JSON.parse(allFriends)
+}
+
+//Read the whole array:
+app.get('/', (req, res) => {
+    const allFriends = readFriends()
+    res.send(allFriends)
 });
 
-app.get('/hobbies/:hobbyNumber', (req, res) => {
-    const hobby = req.params.hobbyNumber;
-    if (hobbies.length < hobby+1) {
-        res.sendStatus(404);
+//Post 
+app.post('/', (req, res) => {
+    const friend = req.body.friend
+
+    const FriendHobby = {
+        friend: friend,
+        id: uuidv4()
     }
-    res.send(hobbies[hobby]);
-});
+    const allFriends = readFriends()
+    allFriends.push(newFriend)
+    fs.writeFileSync('./friends.json', JSON.stringify(allFriends))
 
-app.post('/hobbies', (req, res) => {
-    const body = req.body
-    res.send(body);
-    console.log(body);
-});
+
+    res.send(allFriends)
+    console.log(body)
+})
+
+// Delete
+app.delete('/:id', (req, res) => {
+    req.params 
+})
 
 
 app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${PORT}`);
-});
-
+    console.log(`Example app listening at http://localhost:${PORT}`)
+})
