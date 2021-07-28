@@ -108,7 +108,6 @@ app.post('/add-animal', function (req, res) {
     var valid = validate(body);
 
     if (!valid) {
-      // validate.errors.forEach(er => console.log(er.message));
       throw new Error('Invalid data structure');
     }
 
