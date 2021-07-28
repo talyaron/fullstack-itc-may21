@@ -15,8 +15,14 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     const html = fs.readFileSync('index.html');
-    console.log("hola");
+    console.log(pepe);
     res.send(html);
+});
+
+app.post('/seeColor', (req, res) => {
+    let body = req.body;
+    console.log(body);
+    res.send(body);
 });
 
 
