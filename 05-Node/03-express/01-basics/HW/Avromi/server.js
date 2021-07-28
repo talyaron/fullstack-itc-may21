@@ -10,7 +10,6 @@ const {
 } = require('uuid');
 
 
-
 function read() {
     const file = fs.readFileSync('./students.json')
     return JSON.parse(file);

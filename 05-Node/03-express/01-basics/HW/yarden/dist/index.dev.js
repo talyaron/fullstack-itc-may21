@@ -10,27 +10,40 @@ var fs = require('fs');
 
 var express = require('express');
 
+var _require = require('uuid'),
+    uuidv4 = _require.v4;
+
 var app = express();
 var PORT = process.env.PORT || 3000;
-var hobbies = ["music", "sports", "coffee", "books", "beer", "food", "weddings", "travel"];
 app.use(express["static"]('public'));
 app.use(express.json());
-app.get('/hobbies', function (req, res) {
-  res.send(hobbies);
-});
-app.get('/hobbies/:hobbyNumber', function (req, res) {
-  var hobby = req.params.hobbyNumber;
 
-  if (hobbies.length < hobby + 1) {
-    res.sendStatus(404);
-  }
+var readFriends = function readFriends() {
+  var allFriends = fs.readFileSync('./hobbies.json');
+  return JSON.parse(allFriends);
+}; //Read the whole array:
 
-  res.send(hobbies[hobby]);
-});
-app.post('/hobbies', function (req, res) {
-  var body = req.body;
-  res.send(body);
+
+app.get('/', function (req, res) {
+  var allFriends = readFriends();
+  res.send(allFriends);
+}); //Post 
+
+app.post('/', function (req, res) {
+  var friend = req.body.friend;
+  var FriendHobby = {
+    friend: friend,
+    id: uuidv4()
+  };
+  var allFriends = readFriends();
+  allFriends.push(newFriend);
+  fs.writeFileSync('./friends.json', JSON.stringify(allFriends));
+  res.send(allFriends);
   console.log(body);
+}); // Delete
+
+app["delete"]('/:id', function (req, res) {
+  req.params;
 });
 app.listen(PORT, function () {
   console.log("Example app listening at http://localhost:".concat(PORT));
