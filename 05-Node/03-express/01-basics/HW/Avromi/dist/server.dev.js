@@ -20,25 +20,28 @@ function read() {
 
 app.use(express.json());
 app.get('/', function (req, res) {
-  res.send(students);
+  res.send(students); //YS: Where is this variable coming from? 
 });
 app.get('/getStudents', function (req, res) {
   res.send({
     students: students
-  });
+  }); //YS: Where is this variable coming from? 
 }); //get by name
 
 app.get('/getStudent', function (req, res) {
-  console.log(req.query);
+  console.log(req.query); //YS: You should be doing this by id and setting the route to:  /getStudent/:id
+
   var searchedStudents = students.filter(function (student) {
     return student.name === req.query.name;
-  });
+  }); //YS: Use find instead of filter. 
+
   res.send({
     ok: true,
     students: searchedStudents
   });
 });
 app.post('/getStudent', function (req, res) {
+  //YS: This route should be /addStudent
   var readData = read();
   console.log(readData);
   var name = req.body.name;
@@ -59,6 +62,7 @@ app.post('/getStudent', function (req, res) {
   }
 });
 app.put('/editStudent', function (req, res) {
+  //YS: This route should be /editStudent/:id  (I know that we did this together, but its better if you start using it this way)
   var readData = read();
   console.log(readData);
   var _req$body = req.body,
@@ -75,7 +79,8 @@ app.put('/editStudent', function (req, res) {
   } catch (error) {
     res.status(400).send(error.message);
   }
-}); // app.delete('/delStudent', (req, res)=>{
+}); // YS: Why wasnt this implemented? 
+// app.delete('/delStudent', (req, res)=>{
 //     console.log(req.query);
 //     let searchedStudents = students.filter(student=>student.name !== req.query.name);
 //     res.send({ok:true, students:searchedStudents})

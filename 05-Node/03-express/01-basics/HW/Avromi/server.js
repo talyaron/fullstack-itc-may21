@@ -16,24 +16,24 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
 
-    res.send(students)
+    res.send(students) //YS: Where is this variable coming from? 
 })
 
 app.get('/getStudents', (req, res) => {
-    res.send({students})
+    res.send({students}) //YS: Where is this variable coming from? 
 })
 
 //get by name
-app.get('/getStudent', (req, res) => {
-    console.log(req.query);
-    let searchedStudents = students.filter(student => student.name === req.query.name);
+app.get('/getStudent', (req, res) => { 
+    console.log(req.query); //YS: You should be doing this by id and setting the route to:  /getStudent/:id
+    let searchedStudents = students.filter(student => student.name === req.query.name); //YS: Use find instead of filter. 
     res.send({
         ok: true,
         students: searchedStudents
     })
 })
 
-app.post('/getStudent', (req, res) => {
+app.post('/getStudent', (req, res) => { //YS: This route should be /addStudent
     const readData = read()
     console.log(readData);
     const {name} = req.body
@@ -51,7 +51,7 @@ app.post('/getStudent', (req, res) => {
     }
 })
 
-app.put('/editStudent', (req, res) => {
+app.put('/editStudent', (req, res) => { //YS: This route should be /editStudent/:id  (I know that we did this together, but its better if you start using it this way)
     const readData = read()
     console.log(readData);
     const {id, newName} = req.body
@@ -65,9 +65,11 @@ app.put('/editStudent', (req, res) => {
            studentToEdit
         );
     } catch (error) {
-        res.status(400).send(error.message)
+        res.status(400).send(error.message)  
     }
 })
+
+// YS: Why wasnt this implemented? 
 
 // app.delete('/delStudent', (req, res)=>{
 //     console.log(req.query);

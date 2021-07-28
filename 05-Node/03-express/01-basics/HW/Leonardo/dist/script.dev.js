@@ -6,6 +6,7 @@ create a route for showing all items (method: GET)
 create a route for deleting an item (method: DELETE)
 create a route for updating an item (method: PUT)
 create a route to search items by name. id etc,  (method: GET) */
+//YS: This file should be called server.js instead of sript.js
 var express = require('express');
 
 var app = express();
@@ -56,6 +57,7 @@ app.post('/addBook', function (req, res) {
   if (!error) {
     var book = {
       id: favouriteBooks.length + 1,
+      //YS: Use the library uuidv4 to create ids. 
       name: value.name
     };
     favouriteBooks.push(book);
@@ -70,7 +72,7 @@ app.get('/', function (req, res) {
   try {
     res.send(favouriteBooks);
   } catch (error) {
-    res.send(error);
+    res.send(error); //YS: Also add status
   }
 
   ;
@@ -78,10 +80,11 @@ app.get('/', function (req, res) {
 //This will get a Book by a Name
 
 app.get('/getBook', function (req, res) {
+  //YS: This route should be: /getBook/:id 
   try {
     var searchedBooks = favouriteBooks.find(function (book) {
       return book.name === req.query.name;
-    });
+    }); //YS: Ok, you used res.query, but use req.params, and add the param to your route (it should also by by id, not name)
 
     if (!searchedBooks) {
       res.send('That book is not my favourite');
@@ -97,6 +100,7 @@ app.get('/getBook', function (req, res) {
 }); //create a route for deleting an item (method: DELETE)
 
 app["delete"]('/deleteBook/:id', function (req, res) {
+  //YS: Great
   try {
     var bookToDelete = bookExist(req.params.id);
 
@@ -106,7 +110,8 @@ app["delete"]('/deleteBook/:id', function (req, res) {
     }
 
     ;
-    var index = favouriteBooks.indexOf(bookToDelete);
+    var index = favouriteBooks.indexOf(bookToDelete); //YS: Use filter instead of  indexOf + splice. 
+
     favouriteBooks.splice(index, 1);
     res.send(favouriteBooks);
   } catch (error) {
@@ -141,7 +146,7 @@ app.put('/updateBook/:id', function (req, res) {
 });
 app.listen(port, function () {
   console.log("The server is running at port:".concat(port));
-}); //This function is to DRY:
+}); //This function is to DRY:  //YS: Very nice! These should be in a different file and then you should import them
 
 function bookExist(id) {
   try {

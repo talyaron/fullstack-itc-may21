@@ -10,7 +10,7 @@ let fruits = []
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3003
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')  //YS: You dont need body-parser, you can use this instead: app.use(expres.json())
 
 app.use(bodyParser.json())
 
@@ -21,14 +21,18 @@ app.get('/getFruits',(req,res)=>{
 
 app.post('/addFruits', (req, res) => {
 
-        const { body } = req;
-        const { name, id } = body;
-        fruits.push(body);
+        const { body } = req;  
+        const { name, id } = body; //YS: You are not using this
+        fruits.push(body); //YS: Instead of pushing the whole body, you should push an object which you create which has the name, and id (which you also create in the server):
+        /* const newFruit = {
+            name: name, 
+            id: uuidv4()
+        } */
         res.send(body);
 })
 
 //searh by bame
-app.get('/searchFruit/:name', (req, res)=>{
+app.get('/searchFruit/:name', (req, res)=>{ //YS: Good, although it should be be :id instad of :name
     const {name} = req.params;
     const searchFruit = fruits.filter((fruit)=>fruit.name === name);
     res.send({searchFruit})
@@ -53,7 +57,7 @@ app.put('/updateFruits/:id', (req, res)=>{
 //     console.log(`The fruit ${id} has been deleted`)
 // })
 
-app.delete('/deleteFruits/:name', (req, res)=>{
+app.delete('/deleteFruits/:name', (req, res)=>{ //YS: Good, but again, should be be id and you should search the fruit by id. 
     const {name} = req.params;
     const deleteFruit = fruits.filter((fruit)=>fruit.name !== name);
     fruits = deleteFruit;
