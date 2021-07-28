@@ -1,13 +1,14 @@
 const express = require('express');
 app = express();
 const port = process.env.PORT || 4000;
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
 app.use(express.static('public'));
 
-app.get('/addColor', (req, res)=>{
+app.post('/addColor', (req, res)=>{
     
     console.log(req.body);
-    res.send("students.list");
    
 })
 
