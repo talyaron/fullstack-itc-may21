@@ -17,7 +17,7 @@ app.get("/getFilms", (req, res) => {
   res.send(films);
 });
 
-app.get("/getFilmsByName/:name", (req, res) => {
+app.get("/getFilmsByName/:name", (req, res) => { //YS: Ok, but it should be by id instead of name. /getFilmsByName/:id
 
   const { name } = req.params;
 
@@ -31,9 +31,9 @@ app.post("/addFilm", (req, res) => {
     const { body } = req;
     const { name, id } = body;
     if (!name || !id) {
-      throw new Error("Escribilo bin");
+      throw new Error("Escribilo bin"); //YS: Haha
     }
-    const noRepeat = films.some((film) => film.id === id);
+    const noRepeat = films.some((film) => film.id === id); //YS: Nice! 
     if (noRepeat) {
       throw new Error("Ya esta");
     }
@@ -53,7 +53,7 @@ app.delete("/deleteFilm/:id", (req, res) => {
 
 app.put("/updateFilm/:id", (req, res) => {
   const { body } = req;
-  const { name, id } = body;
+  const { name, id } = body; //YS: Why are you sending an ID in the body and in the params too? Also, it should be destructured like this: const { name, id } = req.body
 
   const updateFilm = films.find((film) => film.id === id);
 

@@ -20,7 +20,8 @@ function read() {
 
 app.use(express.json());
 app.get('/', function (req, res) {
-  res.send(students);
+  var readData = read();
+  res.send(readData);
 });
 app.get('/getStudents', function (req, res) {
   res.send({
@@ -29,8 +30,8 @@ app.get('/getStudents', function (req, res) {
 }); //get by name
 
 app.get('/getStudent', function (req, res) {
-  console.log(req.query);
-  var searchedStudents = students.filter(function (student) {
+  var readData = read();
+  var searchedStudents = readData.filter(function (student) {
     return student.name === req.query.name;
   });
   res.send({
@@ -38,9 +39,8 @@ app.get('/getStudent', function (req, res) {
     students: searchedStudents
   });
 });
-app.post('/getStudent', function (req, res) {
+app.post('/addStudent', function (req, res) {
   var readData = read();
-  console.log(readData);
   var name = req.body.name;
   var student = {
     name: name,
@@ -60,7 +60,6 @@ app.post('/getStudent', function (req, res) {
 });
 app.put('/editStudent', function (req, res) {
   var readData = read();
-  console.log(readData);
   var _req$body = req.body,
       id = _req$body.id,
       newName = _req$body.newName;
@@ -75,12 +74,21 @@ app.put('/editStudent', function (req, res) {
   } catch (error) {
     res.status(400).send(error.message);
   }
-}); // app.delete('/delStudent', (req, res)=>{
-//     console.log(req.query);
-//     let searchedStudents = students.filter(student=>student.name !== req.query.name);
-//     res.send({ok:true, students:searchedStudents})
-// })
+});
+app["delete"]('/delStudent', function (req, res) {
+  var readData = read();
+  var studentId = req.query.id;
+  var newStudentData = readData.filter(function (student) {
+    return student.id !== studentId;
+  });
 
+  try {
+    fs.writeFileSync('./students.json', JSON.stringify(newStudentData));
+    res.status(200).send(newStudentData, 'student has been deleted');
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 app.listen(port, function () {
   console.log("Example app listening at http://localhost:".concat(port));
 });
