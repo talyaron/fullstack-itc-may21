@@ -5,7 +5,15 @@ const { v4: uuidv4 } = require("uuid"); //https://www.npmjs.com/package/uuid
 const Ajv = require("ajv");
 const ajv = new Ajv();
 
+const app = express();
+const port = process.env.PORT || 3000;
+
 app.use(express.json());
+
+const readJson = () => {
+    const animalsArray = fs.readFileSync('animals.json');
+    return JSON.parse(animalsArray);
+}
 
 // create a list of your favorite list (books, friends...); // a class defenition with js....
 const Animals = /** @class */ (function () {

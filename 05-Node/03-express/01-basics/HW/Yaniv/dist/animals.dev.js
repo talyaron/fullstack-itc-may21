@@ -8,8 +8,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var express = require("express");
 
-var app = express();
-var port = process.env.PORT || 3000;
+var fs = require('fs');
 
 var _require = require("uuid"),
     uuidv4 = _require.v4; //https://www.npmjs.com/package/uuid
@@ -18,19 +17,32 @@ var _require = require("uuid"),
 var Ajv = require("ajv");
 
 var ajv = new Ajv();
-app.use(express.json()); // create a list of your favorite list (books, friends...); // a class defenition with js....
+var app = express();
+var port = process.env.PORT || 3000;
+app.use(express.json());
+
+var readJson = function readJson() {
+  var animalsArray = fs.readFileSync('animals.json');
+  return JSON.parse(animalsArray);
+}; // create a list of your favorite list (books, friends...); // a class defenition with js....
+
 
 var Animals =
 /** @class */
 function () {
   function Animals() {
-    this.animalsArray = [];
+    this.animalsArray = readJson();
   }
+
+  Animals.prototype.updateAnimalsJson = function () {
+    fs.writeFileSync('animals.json', JSON.stringify(this.animalsArray));
+  };
 
   Animals.prototype.addAnimal = function (animal) {
     this.animalsArray.push(_objectSpread({}, animal, {
       uuid: uuidv4()
     }));
+    this.updateAnimalsJson();
   };
 
   Animals.prototype.deleteAnimal = function (animal) {
@@ -41,18 +53,23 @@ function () {
     if (animal.family) this.animalsArray = this.animalsArray.filter(function (animalItem) {
       return animalItem.family !== animal.family;
     });
-    if (animal.uuid) this.animalsArray = this.animalsArray.filter(function (animalItem) {
-      return animalItem.uuid !== animal.uuid;
+    if (animalToUpdateIndex === -1) return false;
+    this.animalsArray = this.animalsArray.filter(function (animalItem) {
+      return animalItem.uuid !== animalUuid;
     });
+    this.updateAnimalsJson();
+    return true;
   };
 
-  Animals.prototype.updateAnimal = function (animal) {
+  Animals.prototype.updateAnimal = function (animalUuid, animal) {
     var animalToUpdateIndex = this.animalsArray.findIndex(function (animalItem) {
       return animalItem.uuid === animal.uuid;
     }); //YS: Use find instead of findIndex (its more straight to the point)
 
     if (animal.species) this.animalsArray[animalToUpdateIndex].species = animal.species;
-    if (animal.family) this.animalsArray[animalToUpdateIndex].family = animal.family;
+    if (animal.sound) this.animalsArray[animalToUpdateIndex].sound = animal.sound;
+    this.updateAnimalsJson();
+    return true;
   };
 
   Animals.prototype.searchAnimal = function (animal) {
@@ -60,8 +77,8 @@ function () {
     if (animal.species) searchedAnimal = searchedAnimal.filter(function (animalItem) {
       return animalItem.species === animal.species;
     });
-    if (animal.family) searchedAnimal = searchedAnimal.filter(function (animalItem) {
-      return animalItem.family === animal.family;
+    if (animal.sound) searchedAnimal = searchedAnimal.filter(function (animalItem) {
+      return animalItem.sound === animal.sound;
     });
     if (animal.uuid) searchedAnimal = searchedAnimal.filter(function (animalItem) {
       return animalItem.uuid === animal.uuid;
@@ -84,11 +101,11 @@ app.post("/add-animal", function (req, res) {
         species: {
           type: "string"
         },
-        family: {
+        sound: {
           type: "string"
         }
       },
-      required: ["species", "family"],
+      required: ["species", "sound"],
       additionalProperties: false
     };
     var validate = ajv.compile(schema);
@@ -173,9 +190,12 @@ app.get("/search-animal", function (req, res) {
 app.listen(port, function () {
   console.log("listening on port ".concat(port, "..."));
 }); // animals cheatsheet:
-// cat Felidae
-// dog Canidae
-// ferret Mustelidae
-// goldfish Cyprinidae
-// grizzly Ursidae
-// seal Otariidae
+// cat miaw
+// dog wof
+// cow moo
+// sheep meee
+// fox:
+// option 1: Ring-ding-ding-ding-dingeringeding!
+// option 2: Wa-pa-pa-pa-pa-pa-pow!
+// option 3: Hatee-hatee-hatee-ho!
+// option 4: Joff-tchoff-tchoffo-tchoffo-tchoff!
