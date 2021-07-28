@@ -1,0 +1,1 @@
+"use strict";var express=require("express");app=express();var port=process.env.PORT||4e3;app.use(express.static("public")),app.get("/addColor",function(e,s){console.log(e.body),s.send("students.list")}),app.listen(port,function(){console.log("Server listen on port",port)});
