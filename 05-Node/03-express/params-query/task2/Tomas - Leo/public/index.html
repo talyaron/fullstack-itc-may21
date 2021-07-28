@@ -17,30 +17,30 @@
         <input type="text" name="joke" placeholder="Enter your joke">
         <input type="submit" value="Send Joke">
     </form>
+
+
+    <script>
+        const jokes = [{}];
+
+        function getJoke() {
+            axios.get('/getJoke')
+                .then(res => document.body = res.data);
+        }
+
+        function handleForm(ev) {
+            ev.preventDefault();
+            let joke = ev.target.elements.joke.value;
+            jokes.push(joke);
+
+            axios.post('/setJoke', {joke})
+                .then(res => {
+                    console.log(res.data)
+                })
+                .catch(e => {
+                    console.error(e)
+                })
+        }
+    </script>
 </body>
-<script>
-    const jokes = [{}];
-
-    function getColor() {
-        axios.get('/getJoke')
-            .then(res => document.body.style.backgroundColor = res.data.color);
-    }
-
-    function handleForm(ev) {
-        ev.preventDefault();
-        const joke = ev.target.elements.joke.value;
-        jokes.push(joke);
-
-        axios.post('/setJoke', {
-                joke
-            })
-            .then(res => {
-                console.log(res.data)
-            })
-            .catch(e => {
-                console.error(e)
-            })
-    }
-</script>
 
 </html>
