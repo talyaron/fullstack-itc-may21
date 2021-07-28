@@ -45,14 +45,6 @@ app.put('/updateFruits/:id', (req, res)=>{
     res.send(fruits)
 })
 
-// app.delete('/deleteFruits/:id', (req, res)=>{
-//     const { body } = req.params;
-//     const {id} = body;
-//     fruits = fruits.filter((fruit)=>fruit.id !== id);
-//     res.send({fruits})
-//     console.log(`The fruit ${id} has been deleted`)
-// })
-
 app.delete('/deleteFruits/:name', (req, res)=>{
     const {name} = req.params;
     const deleteFruit = fruits.filter((fruit)=>fruit.name !== name);
