@@ -1,0 +1,76 @@
+
+.containerPage{
+    margin: 10px;
+ 
+    margin-left: 250px;
+    padding: 5px;
+    display: flex;
+
+
+    &__containerForm1{
+
+        
+        &__form1{
+
+            border: 2px solid red;
+            
+            &--input{
+                margin: 10px;
+                display: flex;
+            }
+            &--submit{
+                margin-left: 45px;
+                
+                text-align: center;
+            }
+
+
+        }
+   
+
+
+
+}
+
+
+    &__containerForm2{
+        margin-left: 300px;
+        margin: 10px;
+        padding: 5px;
+    
+        &__form2{
+
+            display: flex;
+            &--input{
+                margin: 5px;
+                padding: 5px;   
+            }
+            &--submit{
+                margin: 5px;
+                padding: 5px;   
+            }
+
+
+            
+        }
+   
+
+}
+
+    &__containerDom{
+
+        margin-left: 300px;
+        margin: 10px;
+        padding: 5px;
+
+
+    &__title{
+        color: black;
+    }
+
+    &__root{
+        border: 2px solid red;
+    }
+}
+
+}
