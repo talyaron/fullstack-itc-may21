@@ -14,18 +14,22 @@
     <div class="containerPage">
         <div class="containerPage__containerForm1">
             <form class="containerPage__containerForm1__form1" onsubmit="handleSubmit(event)">
-                <input type="text" name="name" id="" placeholder="Enter your name" class="containerPage__containerForm1__form1--input">
-                <input type="number" name="age" id="" placeholder="Enter your age" class="containerPage__containerForm1__form1--input">
-                <input type="number" name="id" id="" placeholder="Enter your id" class="containerPage__containerForm1__form1--input">
-                <input type="number" name="avgGrade" id="" placeholder="Enter your average grade" class="containerPage__containerForm1__form1--input">
-                <input type="submit" name="submit" id="" value="Add students"  class="containerPage__containerForm1__form1--submit">
+                <input type="text" name="name" id="name" placeholder="Enter your name" class="containerPage__containerForm1__form1--input">
+                <input type="number" name="age" id="age" placeholder="Enter your age" class="containerPage__containerForm1__form1--input">
+                <input type="number" name="id" id="id" placeholder="Enter your id" class="containerPage__containerForm1__form1--input">
+                <input type="number" name="avgGrade" id="avgGrade" placeholder="Enter your average grade" class="containerPage__containerForm1__form1--input">
+                <input type="submit" name="submit" id="sumbit" value="Add students"  class="containerPage__containerForm1__form1--submit">
+                
+
             </form>
+            <input type="submit" name="submit" id="" value="Show students"  class="pepe">
         </div>
         <div class="containerPage__containerForm2">
                 <input type="text" studentId="" id="" placeholder="Enter ID" class="containerPage__containerForm2--input">
                 <input type="submit" name="" id="" value="Get by querys" class="containerPage__containerForm2--submit" onsubmit="handleGetParams(ev)">
                 <input type="submit" name="" id="" value="Get by params" class="containerPage__containerForm2--submit" onsubmit="handleGetQuery(ev)">
-        <div class="containerPage__containerDom">
+                
+                <div class="containerPage__containerDom">
             <h4 class="containerPage__containerDom__title">List of students</h4>
             <div class="containerPage__containerDom__root" id="root"></div>
         </div>

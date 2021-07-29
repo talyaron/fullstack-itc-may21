@@ -1,5 +1,6 @@
+const pepe = document.querySelector('.pepe')
 
-
+pepe.addEventListener('click', loadStudents)
 
 
 function handleSubmit(ev) {
@@ -9,23 +10,32 @@ function handleSubmit(ev) {
     const age = ev.target.age.value
     const id = ev.target.id.value
     const avgGrade = ev.target.avgGrade.value
-    console.log(name)
-    axios.post('/addStudent', {name, age, id, avgGrade})
-        .then((res) => {
-            console.log(res)
+    
+    axios.post('/aa', {
+            name,
+            age,
+            id,
+            avgGrade
         })
-
+        .then((res) => {
+            //console.log(res)
+        })
+    
 }
 
 
 
-function loadStudents(){
+function loadStudents(ev) {
+    let html = ''
+    ev.preventDefault()
     const list = document.getElementById("root")
-    axios.get('/getStudents')
-        // .then(res=>res.data.students.forEach(element => list.innerHTML += ` ${element.name} `))
-        .then(res=>list.innerText = res.data);
-        console.log(list);
-            
+    axios.get('/aa')
+    .then(({data} ) => {
+        data.forEach(element => {
+          html += `${element.name},`      
+        });
+        list.innerHTML = html
+    })
 }
 
 
