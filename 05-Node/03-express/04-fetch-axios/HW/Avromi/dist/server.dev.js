@@ -25,8 +25,17 @@ app.put('/newStudent', function (req, res) {
   var student = req.body.newStudent;
   addStudent(student);
   res.send({
+    student: student,
     send: "OK"
   });
+});
+app.get('/', function (req, res) {
+  var studentId = req.query.id.studentId;
+  res.send();
+});
+app.get('/:id', function (req, res) {
+  var id = req.params.id;
+  res.send(id);
 });
 app.listen(port, function () {
   console.log("Example app listening at http://localhost:".concat(port));

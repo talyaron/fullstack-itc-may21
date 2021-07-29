@@ -2,8 +2,10 @@
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-document.body.style.backgroundColor = 'lightgreen';
-var form = document.querySelector('form');
+document.body.style.backgroundColor = 'aqua';
+var formOne = document.querySelector('.formOne');
+var formTwo = document.querySelector('.formTwo');
+var paramButton = document.querySelector('#paramButton');
 
 var Student = function Student(name, age, grade) {
   _classCallCheck(this, Student);
@@ -14,7 +16,9 @@ var Student = function Student(name, age, grade) {
   this.id = Math.random().toString(16).slice(2);
 };
 
-form.addEventListener('submit', handleSubmit);
+formOne.addEventListener('submit', handleSubmit);
+formTwo.addEventListener('submit', handleSubmitFormTwo);
+paramButton.addEventListener('click', handleClick);
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -25,9 +29,27 @@ function handleSubmit(event) {
   axios.put('/newStudent', {
     newStudent: newStudent
   }).then(function (res) {
-    console.log(res.data);
+    console.log(res.data.student);
   })["catch"](function (e) {
     console.error(e);
   });
   event.target.reset();
+}
+
+function handleSubmitFormTwo(event) {
+  event.preventDefault();
+  var id = event.target.elements.id.value;
+  axios.get("/".concat(id)).then(function (res) {
+    console.dir(res.data);
+  });
+  event.target.reset();
+}
+
+function handleClick(event) {
+  var studentId = document.querySelector('#studentId');
+  var id = studentId.value;
+  axios.get("/".concat(id)).then(function (r) {
+    console.log(r.data);
+  });
+  formTwo.reset();
 }

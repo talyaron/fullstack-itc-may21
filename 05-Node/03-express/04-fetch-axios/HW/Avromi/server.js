@@ -13,8 +13,8 @@ function outer() {
             console.log(student)
         });
 
-}
-return inner
+    }
+    return inner
 }
 
 const addStudent = outer();
@@ -28,9 +28,24 @@ app.put('/newStudent', (req, res) => {
     addStudent(student)
 
     res.send({
+        student,
         send: "OK"
     })
 });
+
+app.get('/', (req, res) => {
+    const {studentId} = req.query.id
+    res.send(
+        // studentId
+    )
+})
+
+app.get('/:id', (req, res) => {
+    const id = req.params.id
+    res.send(
+        id
+    )
+})
 
 
 app.listen(port, () => {
