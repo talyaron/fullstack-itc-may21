@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/style.css">
+    <title>Fetch/Axios</title>
+    
+</head>
+
+<body>
+    <div class="containerPage">
+        <div class="containerPage__containerForm1">
+            <form class="containerPage__containerForm1__form1" onsubmit="handleSubmit(event)">
+                <input type="text" name="name" id="" placeholder="Enter your name" class="containerPage__containerForm1__form1--input">
+                <input type="number" name="age" id="" placeholder="Enter your age" class="containerPage__containerForm1__form1--input">
+                <input type="number" name="id" id="" placeholder="Enter your id" class="containerPage__containerForm1__form1--input">
+                <input type="number" name="avgGrade" id="" placeholder="Enter your average grade" class="containerPage__containerForm1__form1--input">
+                <input type="submit" name="submit" id="" value="Add students"  class="containerPage__containerForm1__form1--submit">
+            </form>
+        </div>
+        <div class="containerPage__containerForm2">
+                <input type="text" studentId="" id="" placeholder="Enter ID" class="containerPage__containerForm2--input">
+                <input type="submit" name="" id="" value="Get by querys" class="containerPage__containerForm2--submit" onsubmit="handleGetParams(ev)">
+                <input type="submit" name="" id="" value="Get by params" class="containerPage__containerForm2--submit" onsubmit="handleGetQuery(ev)">
+        <div class="containerPage__containerDom">
+            <h4 class="containerPage__containerDom__title">List of students</h4>
+            <div class="containerPage__containerDom__root" id="root"></div>
+        </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="scripts.js"></script>
+</html>
