@@ -8,9 +8,16 @@ app.use(express.static('public'));
 
 let students = []
 
+app.post('/addStudent', (req, res)=>{
+    students.push(req.body)
+    
+    console.log(students)
+})
 
 
+app.get('/getStudent', (req, res)=>{
+    res.send({students})
 
-
+})
 
 app.listen(port, ()=>{console.log(`Server listen on port ${port}`)})

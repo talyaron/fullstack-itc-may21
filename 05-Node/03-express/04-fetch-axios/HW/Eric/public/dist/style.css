@@ -20,14 +20,11 @@
   margin: 10px;
   padding: 5px;
 }
-.containerPage__containerForm2__form2 {
-  display: flex;
-}
-.containerPage__containerForm2__form2--input {
+.containerPage__containerForm2--input {
   margin: 5px;
   padding: 5px;
 }
-.containerPage__containerForm2__form2--submit {
+.containerPage__containerForm2--submit {
   margin: 5px;
   padding: 5px;
 }
