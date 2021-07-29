@@ -5,10 +5,15 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-app.post('/add', (req, res)=>{
-    
-    console.log(req.body);
+let jokesArray = []
+
+app.post('/addJoke', (req, res)=>{
+    jokesArray.push(req.body)
+    console.log(jokesArray);
    
+})
+app.get('/getJoke',(req, res)=>{
+    res.send({jokesArray})
 })
 
 
