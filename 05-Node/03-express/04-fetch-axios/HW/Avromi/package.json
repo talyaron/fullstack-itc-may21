@@ -1,5 +1,5 @@
 {
-  "name": "yarden",
+  "name": "Avromi",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "uuid": "^8.3.2"
+    "nodemon": "^2.0.12",
+    "save": "^2.4.0"
   }
 }

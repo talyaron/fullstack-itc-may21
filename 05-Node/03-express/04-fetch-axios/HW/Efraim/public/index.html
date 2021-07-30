@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+
+<body>
+    <form class="firstForm" onsubmit="handleStudent(event)">
+        <label for="name">Name of Student:</label>
+        <input type="text" name="name" placeholder="name of student" required>
+        <label for="age">Age of Student:</label>
+        <input type="number" name="age" placeholder="age of student" required>
+        <label for="studentID">StudentID of Student:</label>
+        <input type="number" name="studentID" placeholder="studentID" required>
+        <label for="averageGrade">Average Grade of Student:</label>
+        <input type="number" name="averageGrade" placeholder="average grade" min="0" max="100" required>
+        <input type="submit" value="SEND">
+    </form>
+    <div class="wrapper">
+    <form onsubmit="handleStudentSearchQuery(event)">
+        <input type="number" name="searchQuery" placeholder="query search" required>
+        <input type="submit" value="Query">
+    </form>
+
+
+    <form onsubmit="handleStudentSearchParam(event)">
+        <input type="number" name="searchParam" placeholder="param search" required>
+        <input type="submit" value="Param">
+    </form>
+</div>
+<div id="root"></div>
+
+
+
+
+    <script>
+
+        function handleStudent(ev) {
+            ev.preventDefault();
+            try{
+            let {
+                name,
+                age,
+                studentID,
+                averageGrade
+            } = ev.target.elements;
+            name = name.value;
+            age = age.valueAsNumber;
+            studentID = studentID.valueAsNumber;
+            averageGrade = averageGrade.valueAsNumber;
+            console.log(name, age);
+            axios.put('/addStudent', {
+                    name,
+                    age,
+                    studentID,
+                    averageGrade
+                })
+                .then(({
+                    data
+                }) => {
+                    console.log(data);
+                })
+
+            ev.target.reset();
+        }catch (e) {
+            console.error(e)
+        }}
+
+
+        function handleStudentSearchQuery(event) {
+            try{
+            event.preventDefault();
+            const list = document.querySelector("#root")
+            const searchQuery = event.target.children.searchQuery.valueAsNumber;
+            console.log(searchQuery)
+            axios.get(`/getStudentQuery?id=${searchQuery}`)
+                .then(({
+                    data
+                }) => {
+                    console.log(data);
+                })
+            event.target.reset();
+            axios.get('/getStud')
+                .then(res => list.innerHTML = res.data.html);
+        }catch (e) {
+            console.error(e)
+        }}
+
+
+        function handleStudentSearchParam(event){
+            event.preventDefault();
+            try{
+            const list = document.querySelector("#root")
+            const searchParam = event.target.children.searchParam.valueAsNumber;
+            console.log(searchParam)
+            axios.get(`/getStudentParam/${searchParam}`)
+                .then(({
+                    data
+                }) => {
+                    console.log(data);
+                })
+            event.target.reset();
+            axios.get('/getStud')
+                .then(res => list.innerHTML = res.data.html);
+        } catch (e) {
+            console.error(e)
+        }}
+        
+    </script>
+</body>
+
+</html>
