@@ -6,10 +6,16 @@ const fs = require('fs');
 app.use(express.static('public'));
 //read filefunction? // on load 
 
-app.get('/', (req, res) => {
-    const cocktails = fs.readFileSync('cocktails.json')
-    console.log(cocktails);
-    res.send('something' + cocktails);
+app.get('/getCocktails', (req, res) => {
+    console.log('get....');
+    const cocktails = JSON.parse( fs.readFileSync('./cocktails.json'));
+    let newCocktails = cocktails.map(cok => {
+        console.log(cok)
+        return ({ img: cok.strDrinkThumb, name: cok.strDrink })
+    })
+
+    console.log(newCocktails);
+    res.send(newCocktails);
 
 
 })
