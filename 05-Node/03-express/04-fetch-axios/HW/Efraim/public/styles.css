@@ -1,0 +1,26 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    justify-content: center;
+    margin: auto;
+}
+label {
+    margin: 0.3rem
+}
+input{
+    margin-top: 0.3rem;
+}
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#root{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 20vw;
+    margin: auto;
+    align-content: center;
+}
