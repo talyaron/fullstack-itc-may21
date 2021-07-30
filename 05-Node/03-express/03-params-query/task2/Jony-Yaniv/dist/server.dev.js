@@ -3,9 +3,16 @@
 var express = require('express');
 
 var app = express();
+
+var fs = require('fs');
+
 var port = process.env.PORT || 3000;
 app.use(express["static"]('public'));
 var jokes = [];
+app.get('/', function (req, res) {
+  var home = fs.readFileSync('index.html');
+  res.send(home);
+});
 app.post('/addJoke', function (req, res) {
   console.log(req.body); // const joke = req.body.joke;
   // jokes.push(joke);
