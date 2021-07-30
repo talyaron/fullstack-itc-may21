@@ -1,6 +1,3 @@
-
-
-
 //btn
 const btnGetData = document.querySelector('.getData')
 const btnUpdateData = document.querySelector('.updateData')
