@@ -25,7 +25,7 @@ function loadStudents(ev) {
   axios.get('/aa').then(function (_ref) {
     var data = _ref.data;
     data.forEach(function (element) {
-      html += "".concat(element.name, ",");
+      html += "<div>".concat(element.name, ", ").concat(element.id, ",<div>");
     });
     list.innerHTML = html;
   });
