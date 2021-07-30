@@ -19,6 +19,7 @@
   "homepage": "https://github.com/talyaron/fullstack-itc-may21#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "init": "^0.1.2",
     "nodemon": "^2.0.12",
     "uuid": "^8.3.2"
   }

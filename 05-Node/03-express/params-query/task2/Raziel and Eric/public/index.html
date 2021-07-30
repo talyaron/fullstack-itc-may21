@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Document</title>
 </head>
-<body>
+<body onload='getJokes()'>
     <form onsubmit="handleSubmit(event)">
         <input type="text" name="jokes" id="">
         <input type="submit" name="" id="">
@@ -22,7 +25,40 @@
             console.log(newJokes)
         }
 
-        
+        function getJokes() {
+
+
+axios.get('/getJokes')
+    .then(res => newJokes );
+
+}
+
+axios.post('/setJoke', {
+                joke
+            })
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(e => {
+                console.error(e)
+            })
+    
+
+
+// function handleChangeColor(ev) {
+
+// const color = ev.target.value;
+// document.body.style.backgroundColor = color;
+
+
+// axios.put('/setColor',{color})
+// .then(res=>{
+//     console.log(res.data)
+// })
+// .catch(e=>{
+//     console.error(e)
+// })
+
 
 
 
