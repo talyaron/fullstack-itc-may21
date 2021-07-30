@@ -1,0 +1,10 @@
+.formOne{
+    border: solid blue 3PX;
+    padding:20px;
+    text-align: center;
+}
+.formTwo{
+    border: solid rgb(120, 202, 120) 3PX;
+    padding:20px;
+    text-align: center;
+}
