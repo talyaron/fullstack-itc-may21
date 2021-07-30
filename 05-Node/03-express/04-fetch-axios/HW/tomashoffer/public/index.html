@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js" integrity="sha512-BCMqEPl2dokU3T/EFba7jrfL4FxgY6ryUh4rRC9feZw4yWUslZ3Uf/lPZ5/5UlEjn4prlQTRfIPYQkDrLCZJXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Studients Lists</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="university.jpg" alt="">
+        </header>
+        <div class="formulario">
+            <h3 class="title">LIST OF STUDIENTS IN NODE JS AND EXPRESS</h3>
+                <form onsubmit="handleSubmit(event)">
+                    <input class="input" placeholder="Name" type="text" name="name">
+                    <input class="input" placeholder="Age" type="number" name="age">
+                    <input class="input" placeholder="Average Grade" type="number" name="average">
+                    <input id="submitBtn" class="input btn btn-primary" type="submit" value="Add Studient">
+                </form>
+        </div>
+        <div class="requests">
+            <div class="requests_botones">
+                <button class="requests_botones_btn btn btn-secondary" id="getButton">Get Studients</button>
+                <button class="requests_botones_btn btn btn-secondary" id="postButton">Post Studients</button>
+            </div>
+            <div class="request_search">
+                <form action="">
+                    <input class="searchBtn" type="text" name="search" placeholder="Search Studient by Id">
+                </form>
+            </div>
+        </div>
+        <div class="listado">
+            <div class="listado_alert">
+
+            </div>
+            <div class="list-group">
+               
+            </div>    
+        </div>
+    </div>
+
+</body>
+<script>
+    let studients = [];
+  
+    // QUERY SELECTORS
+    const getBtn = document.querySelector('#getButton');        
+    const submitBtn = document.querySelector('#submitBtn');        
+    
+  // EVFENTLISTENERS
+    getBtn.addEventListener("click", getStudients);
+    getBtn.addEventListener("click", alertAll);
+    submitBtn.addEventListener("click", alertAdd);
+
+
+    // HANDLESUBMIT 
+function handleSubmit(e){
+    e.preventDefault();
+    let name = e.target.elements.name.value;
+    let age = e.target.elements.age.value;
+    let average = e.target.elements.average.value;
+    let id = uuidv4();
+    const studient = {name, age, average, id}
+    studients.push(studient);
+   
+    axios.post('/postStudents', studient)
+    .then(res=>{
+        console.log(res.data)
+    })
+    .catch(e=>{
+        console.error(e)
+    })
+    const root = document.querySelector('.list-group');
+    let html = '';
+    html += `<li href="#" class="list-group-item list-group-item-action list-group-item-primary">Name: ${studient.name} - Age: ${studient.age} - Average Grade: ${studient.average} - Id: ${studient.id}</li>`
+
+        root.innerHTML = html; 
+    }
+
+    // ALERTS
+function alertAdd(){
+    const root = document.querySelector('.listado_alert');
+    let html = '';
+     html += `<div class="alert alert-warning" role="alert">
+              You add a new Student to the list!
+            </div>`
+            root.innerHTML = html;
+        setTimeout(function(){root.innerHTML = ''},3000)
+}   
+function alertAll(){
+    const alertAllStudients = document.querySelector('.listado_alert');
+   let html = '';
+   html += `<div class="alert alert-success" role="alert">
+           This are all ours Studients in the University!
+         </div>`
+         alertAllStudients.innerHTML = html;
+     setTimeout(function(){alertAllStudients.innerHTML = ''},3000);
+}
+
+// GET LIST OF STUDIENTS
+function getStudients(){
+    axios.get('/getStudent', studients)
+     .then((res) =>{
+         getData = res.data;
+         console.log(getData)
+         const root = document.querySelector('.list-group');
+         let html = '';
+         getData.forEach((stud)=>{
+        html += `<li href="#" class="list-group-item list-group-item-action list-group-item-primary">Name: ${stud.student.name} - Age: ${stud.student.age} - Average Grade: ${stud.student.average} - Id: ${stud.student.id}</li>`
+    });
+        root.innerHTML = html;  
+  });
+}
+
+</script>
+</html>
