@@ -1,16 +1,10 @@
 const express = require('express');
 const app = express();
-const fs = require('fs');
 const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 
 const jokes = [];
-
-// app.get('/addJoke', (req, res) => {
-//     const home = fs.readFileSync('index.html');
-//     res.send(home);
-// });
 
 app.post('/addJoke', (req,res) => {
     console.log(req.body);
