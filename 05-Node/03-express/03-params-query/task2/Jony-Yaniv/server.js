@@ -7,7 +7,7 @@ app.use(express.static('public'));
 
 const jokes = [];
 
-app.get('/', (req, res) => {
+app.get('/addJoke', (req, res) => {
     const home = fs.readFileSync('index.html');
     res.send(home);
 });

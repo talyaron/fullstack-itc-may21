@@ -9,7 +9,7 @@ var fs = require('fs');
 var port = process.env.PORT || 3000;
 app.use(express["static"]('public'));
 var jokes = [];
-app.get('/', function (req, res) {
+app.get('/addJoke', function (req, res) {
   var home = fs.readFileSync('index.html');
   res.send(home);
 });
