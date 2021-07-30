@@ -36,22 +36,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function getInfo() {
     return __awaiter(this, void 0, void 0, function () {
-        var r, students, r2, joke;
+        var data, r, students, r2, joke;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, fetch('/getData')];
+                case 0: return [4 /*yield*/, axios.get('/getData')];
                 case 1:
+                    data = _a.sent();
+                    console.log(data);
+                    return [4 /*yield*/, fetch('/getData')];
+                case 2:
                     r = _a.sent();
                     console.log('waited');
                     return [4 /*yield*/, r.json()];
-                case 2:
+                case 3:
                     students = _a.sent();
                     console.log(students);
                     return [4 /*yield*/, fetch('https://api.chucknorris.io/jokes/random')];
-                case 3:
+                case 4:
                     r2 = _a.sent();
                     return [4 /*yield*/, r2.json()];
-                case 4:
+                case 5:
                     joke = _a.sent();
                     console.log(joke.value);
                     console.log('after fetch');
