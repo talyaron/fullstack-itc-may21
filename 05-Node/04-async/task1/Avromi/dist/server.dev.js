@@ -9,10 +9,18 @@ var fs = require('fs');
 
 app.use(express["static"]('public')); //read filefunction? // on load 
 
-app.get('/', function (req, res) {
-  var cocktails = fs.readFileSync('cocktails.json');
-  console.log(cocktails);
-  res.send('something' + cocktails);
+app.get('/getCocktails', function (req, res) {
+  console.log('get....');
+  var cocktails = JSON.parse(fs.readFileSync('./cocktails.json'));
+  var newCocktails = cocktails.map(function (cok) {
+    console.log(cok);
+    return {
+      img: cok.strDrinkThumb,
+      name: cok.strDrink
+    };
+  });
+  console.log(newCocktails);
+  res.send(newCocktails);
 });
 app.listen(port, function () {
   console.log("listening on port ".concat(port));
