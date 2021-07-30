@@ -34,67 +34,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function getInfo() {
+function getData() {
     return __awaiter(this, void 0, void 0, function () {
-        var students, joke, e_1;
+        var r, cocktails;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, getStudents()];
+                    console.log('start get data');
+                    return [4 /*yield*/, fetch('/getCocktails')];
                 case 1:
-                    students = _a.sent();
-                    return [4 /*yield*/, getJoke()];
+                    r = _a.sent();
+                    console.log('waited');
+                    return [4 /*yield*/, r.json()];
                 case 2:
-                    joke = _a.sent();
-                    console.log('after fetch');
-                    return [3 /*break*/, 4];
-                case 3:
-                    e_1 = _a.sent();
-                    console.error(e_1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    cocktails = _a.sent();
+                    console.log(cocktails);
+                    render(cocktails);
+                    return [2 /*return*/];
             }
         });
     });
 }
-//creating promises
-// create an promise
-function getStudents() {
-    return new Promise(function (resolve, reject) {
-        //resole = the will be retuned if the promise was allright
-        //reject = in error case the
-        // reject(new Error('error'))
-        fetch('/getData')
-            .then(function (r) { return r.json(); })
-            .then(function (students) {
-            resolve(students);
-        })["catch"](function (e) {
-            reject(e);
-        });
-    });
-}
-function getJoke() {
-    return new Promise(function (resolve, reject) {
-        //resole = the will be retuned if the promise was allright
-        //reject = in error case the
-        fetch('https://api.chucknorris.io/jokes/random')
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-            resolve(data.value);
-        })["catch"](function (e) {
-            reject(e);
-        });
-    });
-}
-//redner to the DOM
-getInfo();
-function renderStudents(data) {
-    console.log(data);
+getData();
+function render(data) {
     var html = '';
-    data.forEach(function (student) {
-        html += "<p>" + student.name + "</p>";
+    data.forEach(function (data) {
+        html += "<h4>" + data.name + "</h4>\n        <img src=\"" + data.img + "\" height=\"150px\">";
     });
-    document.getElementById('root').innerHTML = html;
+    document.querySelector(".coctails").innerHTML = html;
 }
-// renderStudents(students);

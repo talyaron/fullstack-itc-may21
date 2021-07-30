@@ -35,66 +35,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 function getInfo() {
-    return __awaiter(this, void 0, void 0, function () {
-        var students, joke, e_1;
+    return __awaiter(this, void 0, Promise, function () {
+        var beverages;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, getStudents()];
+                case 0: return [4 /*yield*/, getBeverages()];
                 case 1:
-                    students = _a.sent();
-                    return [4 /*yield*/, getJoke()];
-                case 2:
-                    joke = _a.sent();
-                    console.log('after fetch');
-                    return [3 /*break*/, 4];
-                case 3:
-                    e_1 = _a.sent();
-                    console.error(e_1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    beverages = _a.sent();
+                    renderData(beverages);
+                    return [2 /*return*/];
             }
-        });
-    });
-}
-//creating promises
-// create an promise
-function getStudents() {
-    return new Promise(function (resolve, reject) {
-        //resole = the will be retuned if the promise was allright
-        //reject = in error case the
-        // reject(new Error('error'))
-        fetch('/getData')
-            .then(function (r) { return r.json(); })
-            .then(function (students) {
-            resolve(students);
-        })["catch"](function (e) {
-            reject(e);
-        });
-    });
-}
-function getJoke() {
-    return new Promise(function (resolve, reject) {
-        //resole = the will be retuned if the promise was allright
-        //reject = in error case the
-        fetch('https://api.chucknorris.io/jokes/random')
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-            resolve(data.value);
-        })["catch"](function (e) {
-            reject(e);
         });
     });
 }
 //redner to the DOM
 getInfo();
-function renderStudents(data) {
-    console.log(data);
-    var html = '';
-    data.forEach(function (student) {
-        html += "<p>" + student.name + "</p>";
+function renderData(data) {
+    var root = document.querySelector(".beverages");
+    var html = "";
+    data.data.forEach(function (item) {
+        html += "<div class=\"beverages__item\">\n            <p id=\"" + item.name + "-name\">" + item.name + "</p>\n            <img id=\"" + item.name + "-img\" src=\"" + item.img + "\" style=\"width:100px;height:100px;\" />\n        </div>";
     });
-    document.getElementById('root').innerHTML = html;
+    root.insertAdjacentHTML("beforeend", html);
 }
-// renderStudents(students);

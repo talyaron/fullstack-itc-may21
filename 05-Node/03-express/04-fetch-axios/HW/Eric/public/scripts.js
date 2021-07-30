@@ -32,7 +32,7 @@ function loadStudents(ev) {
     axios.get('/aa')
     .then(({data} ) => {
         data.forEach(element => {
-          html += `${element.name},`      
+          html += `<div>${element.name}, ${element.id},<div>`      
         });
         list.innerHTML = html
     })
