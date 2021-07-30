@@ -13,6 +13,6 @@ app.post('/addJoke', (req,res) => {
     // console.log(jokes,joke);
 
     res.send({status:"Completed"});
-})
+});
 
 app.listen(port, ()=>{console.log(`listening on port ${port}...`)});
