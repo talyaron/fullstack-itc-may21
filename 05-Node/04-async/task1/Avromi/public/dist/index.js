@@ -34,44 +34,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function getInfo() {
+function getData() {
     return __awaiter(this, void 0, void 0, function () {
-        var data, r, students, r2, joke;
+        var r, cocktails;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios.get('/getData')];
+                case 0: return [4 /*yield*/, fetch('/')];
                 case 1:
-                    data = _a.sent();
-                    console.log(data);
-                    return [4 /*yield*/, fetch('/getData')];
-                case 2:
                     r = _a.sent();
                     console.log('waited');
                     return [4 /*yield*/, r.json()];
-                case 3:
-                    students = _a.sent();
-                    console.log(students);
-                    return [4 /*yield*/, fetch('https://api.chucknorris.io/jokes/random')];
-                case 4:
-                    r2 = _a.sent();
-                    return [4 /*yield*/, r2.json()];
-                case 5:
-                    joke = _a.sent();
-                    console.log(joke.value);
-                    console.log('after fetch');
+                case 2:
+                    cocktails = _a.sent();
+                    console.log(cocktails);
+                    render(cocktails);
                     return [2 /*return*/];
             }
         });
     });
 }
-//redner to the DOM
-getInfo();
-function renderStudents(data) {
-    console.log(data);
+getData();
+function render(data) {
     var html = '';
-    data.forEach(function (student) {
-        html += "<p>" + student.name + "</p>";
+    data.forEach(function (data) {
+        html += "<h4>" + data.strDrink + "</h4>\n        <img src=\"" + data.strDrinkThumb + "\">";
     });
-    document.getElementById('root').innerHTML = html;
+    document.querySelector(".coctails").innerHTML = html;
 }
-// renderStudents(students);
