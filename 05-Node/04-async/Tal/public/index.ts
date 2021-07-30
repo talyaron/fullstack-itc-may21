@@ -25,6 +25,9 @@ async function getInfo(){
        
     // })
 
+const data = await axios.get('/getData');
+console.log(data)
+
    const r = await fetch('/getData');
    console.log('waited')
    const students = await r.json();
