@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dist/style.min.css">
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="degree.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Student</title>
+</head>
+
+<body class="body">
+    <header>
+        <h2>STUDENT APP<span>👩‍🎓👨‍🎓</span></h2>
+    </header>
+    <div class="container">
+        <aside class="container__aside">
+            <form class="container__aside__form" onsubmit="handleSumbit(event)">
+                <fieldset class="container__aside__form__fieldset">
+                    <legend>Personal Information</legend>
+                    <label for="id">Mispar Zehut:</label>
+                    <input type="text" name="id" id="id">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name">
+                    <label for="age">Age:</label>
+                    <input type="text" name="age" id="age">
+                    <label for="avgrade">Average Grade:</label>
+                    <input type="number" name="avgrade" id="avgrader" min="0" max="10">
+                    <button type="sumbit" class="container__aside__form__fieldset--btn">Add Student</button>
+                </fieldset>
+            </form>
+        </aside>
+        <main class="container__main">
+            <div class="container__main__actions">
+                <button type="button" class="container__main__actions--getallstudents">All Students</button>
+                <div class="container__main__actions__search">
+                    <label for="id">Mispar Zehut:</label>
+                    <input type="text" name="searchid" id="searchid">
+                    <button type="button" class="container__main__actions__search--params">Params</button>
+                    <button type="button" class="container__main__actions__search--query">Query</button>
+                </div>
+            </div>
+            <div id="boardStudent" class="container__main--board"></div>
+        </main>
+    </div>
+<script src="script.js"></script>
+</body>
+
+</html>

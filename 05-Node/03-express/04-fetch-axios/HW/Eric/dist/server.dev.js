@@ -10,10 +10,9 @@ var fs = require('fs');
 app.use(express.json());
 app.use(express["static"]('public'));
 
-var readAllUsers = function readAllUsers() {
-  var allUsers = fs.readFileSync('./students.json'); //async     
-
-  return JSON.parse(allUsers); //original form
+var readallStudents = function readallStudents() {
+  var allStudents = fs.readFileSync('./students.json');
+  return JSON.parse(allStudents);
 };
 
 app.post('/aa', function (req, res) {
@@ -28,14 +27,14 @@ app.post('/aa', function (req, res) {
     age: age,
     avgGrade: avgGrade
   };
-  var allUsers = readAllUsers();
-  allUsers.push(newStudent);
-  fs.writeFileSync('./students.json', JSON.stringify(allUsers));
-  res.send(allUsers);
+  var allStudents = readallStudents();
+  allStudents.push(newStudent);
+  fs.writeFileSync('./students.json', JSON.stringify(allStudents));
+  res.send(allStudents);
 });
 app.get('/aa', function (req, res) {
-  var allUsers = readAllUsers();
-  res.send(allUsers);
+  var allStudents = readallStudents();
+  res.send(allStudents);
 });
 app.listen(port, function () {
   console.log("Server listen on port ".concat(port));

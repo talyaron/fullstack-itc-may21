@@ -10,6 +10,7 @@ label {
 }
 input{
     margin-top: 0.3rem;
+    width: 10vw;
 }
 .wrapper {
     display: flex;
