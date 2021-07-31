@@ -5,17 +5,32 @@
  
  
  
- function getInfo(){
-    fetch('/getData')
-    .then(r=>r.json())
-    .then(drinks=>{
-        console.log(drinks);
+//  function getInfo(){
+//     fetch('/getData')
+//     .then(r=>r.json())
+//     .then(drinks=>{
+//         console.log(drinks);
        
-        renderDrinks(drinks);
-})
+//         renderDrinks(drinks);
+// })
+// }
+async function get(){
+const drinks=await getInfo();
+console.log(drinks);
+}
+function getInfo(){
+    return new Promise((resolve, reject) => {
+  fetch('/getData')
+  .then(drinks=>{
+      resolve(drinks)
+  })
+  .catch(e=>{
+      reject(e); 
+  })
+    })
 }
 
-
+get();
 
 function renderDrinks(data){
     console.log(data)
@@ -27,9 +42,6 @@ function renderDrinks(data){
     document.getElementById('root').innerHTML = html;
 }
 
-getInfo();
 
-function then(arg0: (drinks: any) => void) {
-    throw new Error("Function not implemented.");
-}
+
 

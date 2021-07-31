@@ -25,7 +25,7 @@ const inputSearchStudenbyID = document.querySelector('#searchid')
 
 
 //addStudent
-function handleSumbit(ev) {
+async function handleSumbit(ev) {
     try {
         ev.preventDefault()
 
@@ -34,96 +34,171 @@ function handleSumbit(ev) {
         const age = ev.target.elements.age.value
         const avgrade = ev.target.elements.avgrade.value
 
-        axios.post('/addStudent', { id, name, age, avgrade })
+        const student = await addStudentPromise(id, name, age, avgrade)
+        
 
-        alert('Student Added')
-      
     } catch (e) {
         console.log(e);
     }
 }
 
 //getStudent
-function getAllStudent(ev) {
+async function getAllStudent(ev) {
 
     try {
-
         ev.preventDefault()
-        axios.get('/getAllStudents')
-            .then(({ data }) => {
-
-                if (data.length === 0) throw new Error('No student on the database')
-
-                render(data)
-
-            })
+        const allStudents = await getAllStudentsPromise()
+        if (allStudents.length === 0) throw new Error('No student on the database')
+        renderStudents(allStudents)
     } catch (e) {
         alert(e)
     }
 }
 
 //getIdParams
-function getStudentParams(ev) {
+async function getStudentParams(ev) {
+    try {
+
+        ev.preventDefault()
+        const student = await getStudentParamsPromise()
+        renderStudents(student)
+    } catch (e) {
+
+    }
+}
+
+//getIdQuery
+async function getStudentQuery(ev) {
 
     ev.preventDefault()
+    const student = await getStudentQueryPromise()
+    renderStudents(student)
+}
+
+
+
+async function deleteStudent(id) {
+    const student = await deleteStudentPromise(id)
+    renderStudents(student)
+
+}
+
+
+function addStudentPromise(id, name, age, avgrade) {
+    return new Promise((resolve, reject) => {
+        fetch('/addStudent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id, name, age, avgrade })
+        }).then(r => r.json())
+            .then(r=>alert(r.error))
+            .then(student => {resolve(student)})
+            .catch(e => {
+                reject(e)
+            })
+    })
+}
+
+
+
+function deleteStudentPromise(id) {
+    return new Promise((resolve, reject) => {
+        fetch(`/deleteStudent/${id}`, {
+            method: 'DELETE'
+        })
+        
+            .then(r => r.json())
+            .then(student => { resolve(student) })
+            .catch(e => {
+                reject(e)
+            })
+    })
+}
+
+
+
+
+
+
+
+function getStudentQueryPromise() {
     const id = inputSearchStudenbyID.value
-    axios.get(`/getStudentbyParam/${id}`)
-        .then(({ data }) => {
-            console.log(data)
-            render(data)
-        })
+    return new Promise((resolve, reject) => {
+        fetch(`/getStudentbyQuery?id=${id}`)
+            .then(r => r.json())
+
+            .then(student => { resolve(student) })
+            .catch(e => {
+                reject(e)
+            })
+    })
 }
 
-function getStudentQuery(ev) {
 
-    ev.preventDefault()
+function getStudentParamsPromise() {
     const id = inputSearchStudenbyID.value
-    axios.get(`/getStudentbyQuery?id=${id}`)
-        .then(({ data }) => {
-            console.log(data)
-            render(data)
-        })
-}
-
-function deleteStudent(id) {
-    console.log(id)
-
-    axios.delete(`/deleteStudent/${id}`)
-        .then(({ data }) => {
-            console.log(data)
-            render(data)
-            alert('Delete Student')
-
-        })
+    return new Promise((resolve, reject) => {
+        fetch(`/getStudentbyParam/${id}`)
+            .then(r => r.json())
+            
+            .then(student => { resolve(student) })
+            .catch(e => {
+                reject(e)
+            })
+    })
 }
 
 
-function render(data) {
+
+function getAllStudentsPromise() {
+    return new Promise((resolve, reject) => {
+        fetch('/getAllStudents')
+            .then(r => r.json())
+            .then(student => { resolve(student) })
+            .catch(e => {
+                reject(e)
+            })
+    })
+}
+
+
+
+
+function renderStudents(data) {
     let html = ''
 
-    html += `<table id="students">
+    if (data.length > 0) {
+        html += `<table id="students">
+        <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Age</th>
         <th>Average Grade</th>
         <th></th>
-    <tr>`
+    <tr>
+    </thead>
+    <tbody>`
 
 
-    data.forEach(elem => {
-        html += `<tr>
+        data.forEach(elem => {
+            html += `<tr>
                       <td>${elem.id}</td>
                         <td>${elem.name}</td>
                         <td>${elem.age}</td>
                         <td>${elem.avgrade}</td>
                         <td><i class="fa fa-trash " onclick='deleteStudent("${elem.id}")' title="Delete Item"></i></td>   
                  </tr> `
-    });
+        });
 
 
 
-    html += `</table>`
+        html += `</tbody></table>`
+    } else {
+        let html = ''
+    }
     boardStudent.innerHTML = html
 }
 

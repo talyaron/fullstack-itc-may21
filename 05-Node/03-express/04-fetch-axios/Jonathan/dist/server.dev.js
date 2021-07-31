@@ -17,6 +17,12 @@ var readAllStudents = function readAllStudents() {
 
 app.post("/addStudent", function (req, res) {
   try {
+    var getStudent = function getStudent() {
+      return function __getInfo(newStudent) {
+        return newStudent;
+      };
+    };
+
     var _req$body = req.body,
         id = _req$body.id,
         name = _req$body.name,
@@ -38,7 +44,10 @@ app.post("/addStudent", function (req, res) {
       return student.id == id;
     });
     if (isFound) throw new Error("This is id is already here");
-    allStudents.push(newStudent);
+
+    var _student = getStudent();
+
+    allStudents.push(_student(newStudent));
     fs.writeFileSync("./allstudents.json", JSON.stringify(allStudents));
     res.send("Student Added");
   } catch (e) {
@@ -54,7 +63,6 @@ app.get("/getAllStudents", function (req, res) {
 app["delete"]("/deleteStudent/:id", function (req, res) {
   try {
     var id = req.params.id;
-    if (!id) throw new Error("The id does not exist in the list");
     var allStudents = readAllStudents();
     id = parseInt(id);
     allStudents = allStudents.filter(function (student) {
@@ -75,11 +83,11 @@ app.get("/getStudentbyParam/:id", function (req, res) {
     if (!id) throw new Error("The id does not exist in the list");
     var allStudents = readAllStudents();
 
-    var _student = allStudents.find(function (student) {
+    var _student2 = allStudents.find(function (student) {
       return student.id === id;
     });
 
-    res.send([_student]);
+    res.send([_student2]);
   } catch (e) {
     res.status(500).send({
       error: "".concat(e)
@@ -90,6 +98,7 @@ app.get("/getStudentbyQuery", function (req, res) {
   try {
     var id = req.query.id;
     id = parseInt(id);
+    if (!id) throw new Error("The id does not exist in the list");
     var allStudents = readAllStudents();
     student = allStudents.find(function (student) {
       return student.id === id;
