@@ -14,7 +14,6 @@ function handleStudent(ev) {
     age = age.valueAsNumber;
     studentID = studentID.valueAsNumber;
     averageGrade = averageGrade.valueAsNumber;
-    console.log(name, age);
     axios.put('/addStudent', {
       name: name,
       age: age,
@@ -39,7 +38,6 @@ function handleStudentSearchQuery(event) {
     event.preventDefault();
     var list = document.querySelector(".holder");
     var searchQuery = event.target.children.searchQuery.valueAsNumber;
-    console.log(searchQuery);
     axios.get("/getStudentQuery?id=".concat(searchQuery)).then(function (_ref2) {
       var data = _ref2.data;
       console.log(data);
@@ -62,7 +60,6 @@ function handleStudentSearchParam(event) {
   try {
     var list = document.querySelector(".holder");
     var searchParam = event.target.children.searchParam.valueAsNumber;
-    console.log(searchParam);
     axios.get("/getStudentParam/".concat(searchParam)).then(function (_ref3) {
       var data = _ref3.data;
       console.log(data);
