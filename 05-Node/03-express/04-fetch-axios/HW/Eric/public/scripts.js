@@ -1,6 +1,29 @@
-const pepe = document.querySelector('.pepe')
+const stud = document.querySelector('.stud')
 
-pepe.addEventListener('click', loadStudents)
+//btn
+const btnGetDataQuery = document.querySelector('.containerPage__containerForm2--submitQuerys')
+const btnGetDataParams = document.querySelector('.containerPage__containerForm2--submitParams')
+
+//inputID
+const inputId = document.querySelector('.containerPage__containerForm2--input')
+
+
+// btnGetDataQuery.addEventListener('click', getDataQuery)
+// btnGetDataParams.addEventListener('click', getDataParam)
+stud.addEventListener('click', loadStudents)
+
+
+// function getDataQuery(ev) {
+//     let html = ''
+//     ev.preventDefault()
+//     const id = inputId.valueAsNumber
+//     axios.put('/updateAvenger', { id })
+//         .then(({ data }) => {
+//             render(html, data)
+//         })
+//         console.log('hola')
+// }
+
 
 
 function handleSubmit(ev) {
@@ -37,19 +60,3 @@ function loadStudents(ev) {
         list.innerHTML = html
     })
 }
-
-
-function handleGetParams(ev) {
-    ev.preventDefault()
-    const studentId = ev.target.studentId.value
-    console.log(studentId)
-
-}
-
-function handleGetQuery(ev) {
-    ev.preventDefault()
-    console.log('hola')
-
-}
-// handleGetQuery()
-// handleGetParams()

@@ -7,9 +7,9 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-const readAllUsers = () => {
-    const allUsers = fs.readFileSync('./students.json');  //async     
-    return JSON.parse(allUsers); //original form
+const readallStudents = () => {
+    const allStudents = fs.readFileSync('./students.json'); 
+    return JSON.parse(allStudents); 
 }
 
 app.post('/aa', (req, res)=>{
@@ -23,16 +23,16 @@ app.post('/aa', (req, res)=>{
         avgGrade : avgGrade
     }
 
-    const allUsers = readAllUsers();
-    allUsers.push(newStudent)
-    fs.writeFileSync('./students.json', JSON.stringify(allUsers))
-    res.send(allUsers)
+    const allStudents = readallStudents();
+    allStudents.push(newStudent)
+    fs.writeFileSync('./students.json', JSON.stringify(allStudents))
+    res.send(allStudents)
 })
 
 
 app.get('/aa', (req, res) => {
-    const allUsers = readAllUsers()
-    res.send(allUsers)
+    const allStudents = readallStudents()
+    res.send(allStudents)
 })
 
 

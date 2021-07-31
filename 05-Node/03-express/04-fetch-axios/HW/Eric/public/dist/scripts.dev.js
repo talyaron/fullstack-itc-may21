@@ -1,7 +1,23 @@
 "use strict";
 
-var pepe = document.querySelector('.pepe');
-pepe.addEventListener('click', loadStudents);
+var stud = document.querySelector('.stud'); //btn
+
+var btnGetDataQuery = document.querySelector('.containerPage__containerForm2--submitQuerys');
+var btnGetDataParams = document.querySelector('.containerPage__containerForm2--submitParams'); //inputID
+
+var inputId = document.querySelector('.containerPage__containerForm2--input'); // btnGetDataQuery.addEventListener('click', getDataQuery)
+// btnGetDataParams.addEventListener('click', getDataParam)
+
+stud.addEventListener('click', loadStudents); // function getDataQuery(ev) {
+//     let html = ''
+//     ev.preventDefault()
+//     const id = inputId.valueAsNumber
+//     axios.put('/updateAvenger', { id })
+//         .then(({ data }) => {
+//             render(html, data)
+//         })
+//         console.log('hola')
+// }
 
 function handleSubmit(ev) {
   ev.preventDefault();
@@ -30,15 +46,3 @@ function loadStudents(ev) {
     list.innerHTML = html;
   });
 }
-
-function handleGetParams(ev) {
-  ev.preventDefault();
-  var studentId = ev.target.studentId.value;
-  console.log(studentId);
-}
-
-function handleGetQuery(ev) {
-  ev.preventDefault();
-  console.log('hola');
-} // handleGetQuery()
-// handleGetParams()
