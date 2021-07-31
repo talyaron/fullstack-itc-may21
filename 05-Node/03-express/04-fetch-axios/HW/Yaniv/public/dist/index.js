@@ -34,27 +34,73 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function getInfo() {
+getData(null, null);
+var newStudentform = document.querySelector('#students-form');
+var searchStudentform = document.querySelector('#search-student-form');
+newStudentform.addEventListener('submit', function (ev) { return handleNewStudent(ev); });
+searchStudentform.addEventListener('submit', function (ev) { return handleSearchStudent(ev); });
+function handleNewStudent(ev) {
+    try {
+        ev.preventDefault();
+        var formElements = ev.target.elements;
+        var name = formElements.studentName.value;
+        var age = formElements.studentAge.valueAsNumber;
+        var gradesAvg = formElements.studentGradesAvg.valueAsNumber;
+        var student = { name: name, age: age, gradesAvg: gradesAvg };
+        postStudent(student);
+        getData(null, null);
+        ev.target.reset();
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+function handleSearchStudent(ev) {
+    try {
+        ev.preventDefault();
+        var formElements = ev.target.elements;
+        var studentUuid = formElements.studentUuid.value;
+        var searchType = formElements.searchType.value;
+        getData(searchType, studentUuid);
+        ev.target.reset();
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+function getData(searchType, studentUuid) {
     return __awaiter(this, void 0, Promise, function () {
-        var beverages;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, getBeverages()];
+        var dataToFetch, _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    if (!(searchType === null)) return [3 /*break*/, 2];
+                    return [4 /*yield*/, getStudents()];
                 case 1:
-                    beverages = _a.sent();
-                    renderData(beverages);
+                    _a = _b.sent();
+                    return [3 /*break*/, 4];
+                case 2: return [4 /*yield*/, getStudent(searchType, studentUuid)];
+                case 3:
+                    _a = _b.sent();
+                    _b.label = 4;
+                case 4:
+                    dataToFetch = _a;
+                    renderData(dataToFetch);
                     return [2 /*return*/];
             }
         });
     });
 }
-//redner to the DOM
-getInfo();
-function renderData(data) {
-    var root = document.querySelector(".beverages");
+function renderData(dataToRender) {
+    var root = document.querySelector(".students");
     var html = "";
-    data.data.forEach(function (item) {
-        html += "\n    <div class=\"beverages__item\">\n      <p id=\"" + item.name + "-name\">" + item.name + "</p>\n      <img id=\"" + item.name + "-img\" src=\"" + item.img + "\" style=\"width:100px;height:100px;\" />\n    </div>";
+    root.innerHTML = html;
+    if (typeof dataToRender.data === "string") {
+        root.innerHTML = dataToRender.data;
+        return;
+    }
+    dataToRender.data.forEach(function (student) {
+        html += "\n    <div class=\"students__item\">\n      <p id=\"" + student.uuid + "\">" + student.uuid + "</p>\n      <p id=\"" + student.uuid + "-name\">" + student.name + "</p>\n      <p id=\"" + student.uuid + "-age\">" + student.age + "</p>\n      <p id=\"" + student.uuid + "-gradesAvg\">" + student.gradesAvg + "</p>\n    </div>";
     });
-    root.insertAdjacentHTML("beforeend", html);
+    root.innerHTML = html;
 }
