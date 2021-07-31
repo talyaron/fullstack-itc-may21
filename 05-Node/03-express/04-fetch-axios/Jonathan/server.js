@@ -17,7 +17,7 @@ app.post("/addStudent", (req, res) => {
     try {
 
         const { id, name, age, avgrade } = req.body;
-        
+
         const newStudent = {
             id: parseInt(id),
             name: name,
@@ -34,7 +34,17 @@ app.post("/addStudent", (req, res) => {
 
         if (isFound) throw new Error("This is id is already here");
 
-        allStudents.push(newStudent);
+
+        function getStudent() {
+            return function __getInfo(newStudent) {
+                return newStudent
+            }
+        }
+
+        const student = getStudent()
+
+        allStudents.push(student(newStudent));
+
 
         fs.writeFileSync("./allstudents.json", JSON.stringify(allStudents));
 
@@ -56,7 +66,6 @@ app.get("/getAllStudents", (req, res) => {
 app.delete("/deleteStudent/:id", (req, res) => {
     try {
         let { id } = req.params
-        if (!id) throw new Error("The id does not exist in the list");
         let allStudents = readAllStudents();
         id = parseInt(id)
         allStudents = allStudents.filter(student => student.id !== id)
@@ -87,6 +96,7 @@ app.get("/getStudentbyQuery", (req, res) => {
     try {
         let { id } = req.query
         id = parseInt(id)
+        if (!id) throw new Error("The id does not exist in the list");
         const allStudents = readAllStudents();
         student = allStudents.find((student) => student.id === id)
         res.send([student]);

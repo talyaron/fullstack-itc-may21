@@ -7,6 +7,7 @@
 
 .body {
     background-image: linear-gradient(to right, #000428, #004e92);
+    background-attachment: fixed;
 }
 
 header {
@@ -27,17 +28,19 @@ header {
 
 .container {
     display: flex;
+    justify-content: space-between;
     margin-top: 1em;
 
     &__aside {
-        flex-basis: 10%;
+
 
         &__form {
 
             &__fieldset {
                 display: flex;
                 flex-direction: column;
-                padding: 1em 1em 110px 1em;
+                padding: 0.2em 0.5em;
+                height: 80vh;
                 margin: 0.5em 3em 0 4em;
 
                 legend {
@@ -54,7 +57,7 @@ header {
                 input {
                     margin-top: 10px;
                     border-radius: 10px;
-                    padding: 0.2em;
+                    padding: 0.4em;
                     text-indent: 0.2em;
                     text-align: center;
 
@@ -86,6 +89,9 @@ header {
     &__main {
 
         margin-top: 1em;
+        width: 60%;
+        position: relative;
+        right: 0%;
 
         &__actions {
             display: flex;
@@ -140,42 +146,116 @@ header {
 
         &--board {
             margin-top: 1em;
-            width: 900px;
-            height: 450px;
+            position: relative;
+            right: 12%;
+
+            #students {
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #students td,
+            #students th {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+
+            #students tr:nth-child(even) {
+                background-color: black;
+                color: whitesmoke;
+            }
+
+            #students tr:nth-child(odd) {
+                background-color: white;
+                color: black
+            }
+
+            /*#students tr:hover {background-color: #ddd;}*/
+
+            #students th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #1c89ff;
+                color: white;
+                text-align: center;
+            }
+
         }
     }
 }
 
-#students {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+
+@media screen and (max-width: 870px) {
+
+    .container {
+        &__main {
+            margin-top: 1em;
+            width: 60%;
+            position: relative;
+            right: 2%;
+            &--board {
+                position: relative;
+                right: 0%;
+            }
+        }
+
+    }
+
 }
 
-#students td,
-#students th {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
+@media screen and  (max-width: 360px){
 
-#students tr:nth-child(even) {
-    background-color: black;
-    color: whitesmoke;
-}
+    .container {
+        display: block;
+        position: relative;
+        left:-13%;
 
-#students tr:nth-child(odd) {
-    background-color: white;
-    color: black
-}
+        &__main {
+            position: relative;
+            left:50px;
+            &__actions {
+                display: block;
+                text-align: center;
+            }
+            &--board {
 
-/*#students tr:hover {background-color: #ddd;}*/
+                width: 260px;
+                j
+                table, thead, tbody, th, td, tr { 
+                    display: block; 
+                }
+                thead tr { 
+                    position: absolute;
+                    top: -9999px;
+                    left: -9999px;
+                }
+                tr { border: 1px solid #ccc; }
+                td { 
+                    border: none;
+                    border-bottom: 1px solid #eee; 
+                    position: relative;
+                    padding-left: 50%; 
+                }
+                td:before { 
+                 
+                    position: absolute;
+                    top: 6px;
+                    left: 0px;
+                    width: 45%; 
+                    padding-right: 15px; 
+                    white-space: nowrap;
+                }
+                td:nth-of-type(1):before { content: "ID"; }
+                td:nth-of-type(2):before { content: "Name"; }
+                td:nth-of-type(3):before { content: "Age"; }
+                td:nth-of-type(4):before { content: "Average Grade"; }
+                td:nth-of-type(5):before { content: ""; }
+            }
+        }
 
-#students th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #1c89ff;
-    color: white;
-    text-align: center;
+    }
+
 }

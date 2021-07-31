@@ -1,25 +1,25 @@
 
-async function getData(){
-
- const r = await fetch('/');
- console.log('waited');
- const cocktails = await r.json();
- console.log(cocktails);
-render(cocktails)
+async function getData() {
+    console.log('start get data');
+    const r = await fetch('/getCocktails');
+    console.log('waited');
+    const cocktails = await r.json();
+    console.log(cocktails);
+    render(cocktails)
 
 }
 
 
-    getData();
+getData();
 
 
-function render(data){
+function render(data) {
 
     let html = '';
-    data.forEach(data=>{
-        html += `<h4>${data.strDrink}</h4>
-        <img src="${data.strDrinkThumb}">`
+    data.forEach(data => {
+        html += `<h4>${data.name}</h4>
+        <img src="${data.img}" height="150px">`
     })
     document.querySelector(`.coctails`).innerHTML = html
-   
+
 }

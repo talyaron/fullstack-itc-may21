@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Students</title>
+</head>
+
+<body>
+    <h1>Students</h1>
+    <h2>Add a Student</h2>
+    <form id="students-form">
+        <label for="studentName">Name</label>
+        <input type="text" minlength="2" maxlength="20" name="studentName" id="student-name" required />
+        <label for="studentAge">Age</label>
+        <input type="number" min="18" max="45" name="studentAge" id="student-age" required />
+        <label for="studentGradesAvg">Grades Average</label>
+        <input type="number" min="0" max="100" name="studentGradesAvg" id="student-grades-avg" required />
+        <input type="submit" id="submit" value="Add" />
+    </form>
+    <h2>Search for a Student (by UUID)</h2>
+    <form id="search-student-form">
+        <label for="studentUuid">Student Uuid</label>
+        <input type="search" name="studentUuid" id="student-uuid" minlength="36" maxlength="36" required />
+        <label for="searchType">Search with...</label>
+        <label for="search-query">query</label>
+        <input type="radio" name="searchType" id="search-query" value="query" />
+        <label for="search-params">params</label>
+        <input type="radio" name="searchType" id="search-params" value="params" />
+        <input type="submit" id="submit" value="Search" />
+    </form>
+    <h2>Students List</h2>
+    <div class='students'>
+
+    </div>
+    <script src="./dist/helpers.js"></script>
+    <script src="./dist/index.js"></script>
+</body>
+
+</html>
