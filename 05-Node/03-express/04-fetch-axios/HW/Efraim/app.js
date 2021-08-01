@@ -96,11 +96,8 @@ app.put('/addStudent', (req, res) => {
             )
             throw new Error("Invalid data was transferd")
         }
-        console.log(body)
+        
         students.addStudent(new Student(body.name, body.age, body.studentID, body.averageGrade));
-
-        console.log(students);
-
         res.send(students);
     } catch (e) {
         console.log(e)

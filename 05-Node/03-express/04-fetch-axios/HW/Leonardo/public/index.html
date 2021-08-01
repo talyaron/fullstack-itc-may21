@@ -7,13 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Students Table</title>
     <link rel="shortcut icon" href="./img/studentFavicon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="./dist/styles.min.css">
 </head>
 
-<body>
+<body onload="getInfo()">
     <nav class="top-menu">
         <img class="top-menu__logo" src="./img/universityLeonardo.png" alt="Leonardo´s University" />
     </nav>
@@ -31,7 +33,7 @@
             <input class="form__search" type="text" name="searchId" id="searchId" placeholder="Search by id" />
         </form>
 
-        <button class="top-submenu-button" id="informationParams" >
+        <button class="top-submenu-button" id="informationParams">
             Get student information by "params"
         </button>
 
@@ -63,7 +65,7 @@
 
                 <div class="form__wrapper">
                     <label for="averageGrade">Average Grade:</label>
-                    <input type="number" name="averageGrade" id="averageGrade" min="0" max=10 required />
+                    <input type="number" name="averageGrade" id="averageGrade" min="0" max=10 step=".01" required />
                 </div>
 
                 <input class="form__input--submit" type="submit" value="Add student" />
@@ -78,6 +80,7 @@
             <th id="tblData__titles--lastname">Last Name</th>
             <th id="tblData__titles--age">Age</th>
             <th id="tblData__titles--average">Average Grade</th>
+            <th><i class="fas fa-wrench"></i></th>
         </tr>
         <tbody class="table"></tbody>
     </table>

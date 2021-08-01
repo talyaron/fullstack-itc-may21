@@ -1,3 +1,4 @@
+//For Yonotan: I finished assignment before fridays class which is why I didn't use the newest promise methods.. I will do from now on!
 function handleStudent(ev) {
     ev.preventDefault();
     try{
@@ -11,7 +12,6 @@ function handleStudent(ev) {
     age = age.valueAsNumber;
     studentID = studentID.valueAsNumber;
     averageGrade = averageGrade.valueAsNumber;
-    console.log(name, age);
     axios.put('/addStudent', {
             name,
             age,
@@ -23,19 +23,21 @@ function handleStudent(ev) {
         }) => {
             console.log(data);
         })
+        alert("Submitted Succesfuly!")
 
     ev.target.reset();
 }catch (e) {
     console.error(e)
 }}
+const firstForm = document.querySelector(".firstForm")
+firstForm.addEventListener("submit", handleStudent)
 
 
 function handleStudentSearchQuery(event) {
     try{
     event.preventDefault();
-    const list = document.querySelector("#root")
+    const list = document.querySelector(".holder")
     const searchQuery = event.target.children.searchQuery.valueAsNumber;
-    console.log(searchQuery)
     axios.get(`/getStudentQuery?id=${searchQuery}`)
         .then(({
             data
@@ -48,14 +50,15 @@ function handleStudentSearchQuery(event) {
 }catch (e) {
     console.error(e)
 }}
+const secondForm = document.querySelector(".secondForm")
+secondForm.addEventListener("submit", handleStudentSearchQuery)
 
 
 function handleStudentSearchParam(event){
     event.preventDefault();
     try{
-    const list = document.querySelector("#root")
+    const list = document.querySelector(".holder")
     const searchParam = event.target.children.searchParam.valueAsNumber;
-    console.log(searchParam)
     axios.get(`/getStudentParam/${searchParam}`)
         .then(({
             data
@@ -68,3 +71,5 @@ function handleStudentSearchParam(event){
 } catch (e) {
     console.error(e)
 }}
+const thirdForm = document.querySelector(".thirdForm")
+thirdForm.addEventListener("submit", handleStudentSearchParam)

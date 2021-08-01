@@ -127,7 +127,6 @@ table th:not(:last-child):hover {
 }
 .table__remove {
   cursor: pointer;
-  margin-left: 20px;
 }
 .table__remove:hover {
   color: #4caf50;
