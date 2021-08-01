@@ -12,16 +12,32 @@ getBeverage(); // async function getInfo() {
 // }   
 
 function getBeverage() {
-  var beve = new getBeve();
-  renderBeve(beve);
+  var beve;
+  return regeneratorRuntime.async(function getBeverage$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return regeneratorRuntime.awrap(getBeve());
+
+        case 2:
+          beve = _context.sent;
+          renderBeve(beve);
+
+        case 4:
+        case "end":
+          return _context.stop();
+      }
+    }
+  });
 }
 
 function getBeve() {
   return new Promise(function (resolve, reject) {
     fetch('/getBeve').then(function (r) {
       return r.json();
-    }).then(function (data) {
-      resolve(data);
+    }).then(function (beve) {
+      resolve(beve);
     })["catch"](function (e) {
       reject(e);
     });

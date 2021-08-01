@@ -10,10 +10,14 @@
 .containerPage__containerForm1__form1--input {
   margin: 10px;
   display: flex;
+  width: 90%;
 }
 .containerPage__containerForm1__form1--submit {
-  margin-left: 45px;
+  margin-left: 8px;
   text-align: center;
+}
+.containerPage__containerForm1__form1--stud {
+  margin-left: 8px;
 }
 .containerPage__containerForm2 {
   margin-left: 300px;
@@ -24,7 +28,11 @@
   margin: 5px;
   padding: 5px;
 }
-.containerPage__containerForm2--submit {
+.containerPage__containerForm2--submitParams {
+  margin: 5px;
+  padding: 5px;
+}
+.containerPage__containerForm2--submitQuerys {
   margin: 5px;
   padding: 5px;
 }

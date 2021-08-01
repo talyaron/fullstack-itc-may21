@@ -1,0 +1,275 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --background: #434343;
+  --resident: #cfdef3;
+  --building: #283E51;
+}
+
+.indexbody {
+  background-color: var(--background);
+  height: 80vh;
+  margin-top: 7em;
+}
+
+.indexbody .wrapper {
+  background: -webkit-gradient(linear, left top, right top, from(#e0eafc), to(#cfdef3));
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.indexbody header {
+  text-align: center;
+}
+
+.indexbody header h1 {
+  margin: 0.2em;
+}
+
+.indexbody .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.indexbody .container--reset {
+  position: relative;
+  left: 95%;
+  padding: 0 0.2em;
+  background-color: #00008b;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.indexbody .container--reset:hover {
+  opacity: 0.7;
+}
+
+.indexbody .container__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 4em;
+}
+
+.indexbody .container__form__label {
+  margin-top: 2em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.indexbody .container__form__label--input {
+  margin-bottom: 2em;
+  border-radius: 10px;
+  text-indent: 0.4rem;
+  padding: 0.2em;
+  border: 0;
+}
+
+.indexbody .container__form__label input:focus {
+  outline: none;
+}
+
+.indexbody .container__form--resident {
+  border-radius: 10px;
+  padding: 0.5em;
+  background-color: brown;
+  color: white;
+  cursor: pointer;
+}
+
+.indexbody .container__form--resident:hover {
+  background-color: #b94e48;
+}
+
+.indexbody .container__exercises__fieldset {
+  text-align: center;
+  padding: 1em;
+}
+
+.indexbody .container__exercises__fieldset legend {
+  font-size: larger;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.indexbody .container__exercises__fieldset--btn {
+  border-radius: 10px;
+  padding: 0.5em;
+  background-color: black;
+  color: white;
+}
+
+.indexbody .container__exercises__fieldset--btn:hover {
+  background-color: #414a4c;
+}
+
+.indexbody .container__exercises__fieldset--first {
+  cursor: pointer;
+}
+
+.indexbody .container__exercises__fieldset--second, .indexbody .container__exercises__fieldset--third {
+  cursor: not-allowed;
+}
+
+.indexbody .container__exercises__fieldset--second:disabled, .indexbody .container__exercises__fieldset--third:disabled {
+  opacity: 0.5;
+}
+
+/*first exercise*/
+.firstbody {
+  background-color: var(--background);
+}
+
+.firstbody header {
+  text-align: center;
+  margin-top: 2em;
+  color: whitesmoke;
+}
+
+.firstbody header input {
+  border-radius: 10px;
+  padding: 0.5em;
+  background-color: black;
+  color: white;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+
+.firstbody .boardFirst__resident {
+  background-color: var(--resident);
+  padding: 0.3em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+          box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  border-radius: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 1em auto;
+}
+
+.bodysecond {
+  background-color: var(--background);
+}
+
+.bodysecond header {
+  text-align: center;
+  margin-top: 2em;
+  color: whitesmoke;
+}
+
+.bodysecond header input {
+  border-radius: 10px;
+  padding: 0.5em;
+  background-color: black;
+  color: white;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+
+.bodysecond .boardSecond {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  margin-top: 2em;
+}
+
+.bodysecond .boardSecond--resident {
+  background-color: var(--resident);
+  padding: 0.3em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+          box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  border-radius: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 1em auto;
+}
+
+.bodythird {
+  background-color: var(--background);
+}
+
+.bodythird header {
+  text-align: center;
+  margin-top: 2em;
+  color: whitesmoke;
+}
+
+.bodythird header input {
+  border-radius: 10px;
+  padding: 0.5em;
+  background-color: black;
+  color: white;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+
+.bodythird .boardThird {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin-top: 1em;
+}
+
+.bodythird .boardThird__building {
+  background-color: var(--building);
+  color: whitesmoke;
+  padding: 0.3em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+          box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  border-radius: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 1em auto;
+  font-size: larger;
+}
+
+.bodythird .boardThird__building--resident {
+  background-color: var(--resident);
+  padding: 0.3em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+          box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  border-radius: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 1em auto;
+}
+/*# sourceMappingURL=index.css.map */

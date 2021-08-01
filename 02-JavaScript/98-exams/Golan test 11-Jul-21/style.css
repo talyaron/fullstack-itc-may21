@@ -1,0 +1,60 @@
+html * {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrpr {
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#c5c4d8), color-stop(35%, rgba(247, 214, 30, 0.443)), to(#879699));
+  background: linear-gradient(90deg, #c5c4d8 0%, rgba(247, 214, 30, 0.443) 35%, #879699 100%);
+  border: 1px solid black;
+}
+
+.wrpr__logo {
+  font-size: xx-large;
+  letter-spacing: 2rem;
+  color: salmon;
+}
+
+.wrpr__input--h1 {
+  size: 50%;
+}
+
+.wrpr__input--button {
+  border-radius: 10rem;
+}
+
+.wrpr__input--link {
+  text-decoration: none;
+  border-radius: 1rem;
+  border: 1px solid black;
+  background-color: salmon;
+}
+
+.wrpr__submitted-grps--ppl {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  -ms-grid-rows: (200px)[6];
+      grid-template-rows: repeat(6, 200px);
+  gap: 10px;
+      grid-template-areas: "main main . ." "main main . ." ". . . . " ". adv333 . ." ". adv333 . ." ". . . .";
+}
+
+.wrpr__submitted-grps--color {
+  margin: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: grid;
+          flex-direction: grid;
+}
+
+@media only screen and (min-width: 320px) {
+  body {
+    width: 90%;
+  }
+}
+/*# sourceMappingURL=style.css.map */

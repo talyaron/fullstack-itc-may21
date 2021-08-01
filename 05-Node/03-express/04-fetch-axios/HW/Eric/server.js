@@ -2,40 +2,54 @@ const express = require('express');
 app = express();
 const port = process.env.PORT || 5000;
 const fs = require('fs')
+const { v4: uuidv4 } = require('uuid');
+
+
 
 app.use(express.json());
 
 app.use(express.static('public'));
 
-const readAllUsers = () => {
-    const allUsers = fs.readFileSync('./students.json');  //async     
-    return JSON.parse(allUsers); //original form
+const readAllStudents = () => {
+    const allStudents = fs.readFileSync('./students.json'); 
+    return JSON.parse(allStudents); 
 }
+const allStudents = readAllStudents()
 
-app.post('/aa', (req, res)=>{
 
-    const {id, name, age, avgGrade} = req.body
+app.post('/postStudents', (req, res)=>{
 
+    const {name, age, avgGrade} = req.body
     const newStudent = {
-        id : id,
+    
         name : name,
         age : age,
-        avgGrade : avgGrade
+        avgGrade : avgGrade,
+        id : uuidv4()
     }
-
-    const allUsers = readAllUsers();
-    allUsers.push(newStudent)
-    fs.writeFileSync('./students.json', JSON.stringify(allUsers))
-    res.send(allUsers)
+    allStudents.push(newStudent)
+    fs.writeFileSync('./students.json', JSON.stringify(allStudents))
+    res.send(allStudents)
 })
 
-
-app.get('/aa', (req, res) => {
-    const allUsers = readAllUsers()
-    res.send(allUsers)
+app.get('/getAllStudents', (req, res) => {
+    res.send(allStudents)
 })
 
+ app.get(`/getStudents`, (req, res) => {
+    const id = req.query.id
+    const studentById = allStudents.find((element)=>element.id === id);
+    res.send(studentById)
+    req.send(studentById)
+ })
 
+app.get(`/getStudents/:id`, (req, res) => {
+    const {id} = req.params;
+    const studentByIdParams = allStudents.find((elements)=>elements.id === id);
+    res.send(studentByIdParams)
+    req.send(studentByIdParams)
+    console.log();
+})
 
 
 
