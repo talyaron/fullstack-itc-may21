@@ -24,6 +24,7 @@ function postStudent(student) {
     return new Promise(function (resolve, reject) {
         axios.post("/add-student", student)
             .then(function (student) {
+            console.log(student);
             resolve(student);
         })["catch"](function (err) {
             reject(err);

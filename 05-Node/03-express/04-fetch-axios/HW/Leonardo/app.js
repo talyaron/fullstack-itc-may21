@@ -42,7 +42,7 @@ app.post('/addStudent', (req, res) => {
         firstname: Joi.string().min(3).max(30).required(),
         lastname: Joi.string().min(3).max(30).required(),
         age: Joi.number().integer().min(1).max(99).required(),
-        averageGrade: Joi.number().integer().min(0).max(10).required()
+        averageGrade: Joi.number().min(0).max(10).required()
     });
     const { error, value } = schema.validate({ firstname: body.firstname, lastname: body.lastname, age: body.age, averageGrade: body.averageGrade });
     if (!error) {

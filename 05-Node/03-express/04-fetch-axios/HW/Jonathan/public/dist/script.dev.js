@@ -5,16 +5,12 @@ var form = document.querySelector('#form'); //btn
 
 var btnGetAllStudent = document.querySelector('.container__main__actions--getallstudents');
 var btnGetStudentParams = document.querySelector('.container__main__actions__search--params');
-var btnGetStudentQuery = document.querySelector('.container__main__actions__search--query'); //boardRoot
-
-var boardStudent = document.querySelector('#boardStudent'); //addEventListener
+var btnGetStudentQuery = document.querySelector('.container__main__actions__search--query'); //addEventListener
 
 btnGetAllStudent.addEventListener('click', getAllStudent);
 btnGetStudentParams.addEventListener('click', getStudentParams);
 btnGetStudentQuery.addEventListener('click', getStudentQuery);
-form.addEventListener('submit', handleSumbit); //input
-
-var inputSearchStudenbyID = document.querySelector('#searchid'); //addStudent
+form.addEventListener('submit', handleSumbit); //addStudent
 
 function handleSumbit(ev) {
   var id, name, age, avgrade, newStudent;
@@ -193,6 +189,7 @@ function deleteStudent(id) {
 }
 
 function renderStudents(data) {
+  var boardStudent = document.querySelector('#boardStudent');
   var html = '';
 
   if (data.length > 0) {

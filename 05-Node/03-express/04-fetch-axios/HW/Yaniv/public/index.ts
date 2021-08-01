@@ -9,7 +9,7 @@ newStudentform.addEventListener('submit', ev => handleNewStudent(ev));
 searchStudentform.addEventListener('submit', ev => handleSearchStudent(ev));
 resetBtn.addEventListener('click', ev => handleReset(ev));
 
-function handleNewStudent(ev) {
+async function handleNewStudent(ev) {
   try {
     ev.preventDefault();
     const formElements = ev.target.elements;
@@ -20,8 +20,8 @@ function handleNewStudent(ev) {
 
     const student = { name, age, gradesAvg };
 
-    postStudent(student);
-    getData(null, null);
+    await postStudent(student);
+    await getData(null, null);
 
     ev.target.reset();
 

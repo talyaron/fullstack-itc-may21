@@ -37,6 +37,7 @@ function deleteStudentPromise(id) {
 }
 
 function getOneStudent(howGetStudent) {
+  var inputSearchStudenbyID = document.querySelector('#searchid');
   var id = inputSearchStudenbyID.value;
   var route = howGetStudent === 'query' ? "/getStudentbyQuery?id=".concat(id) : "/getStudentbyParam/".concat(id);
   return new Promise(function (resolve, reject) {

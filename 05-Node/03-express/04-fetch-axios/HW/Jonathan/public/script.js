@@ -6,17 +6,12 @@ const btnGetAllStudent = document.querySelector('.container__main__actions--geta
 const btnGetStudentParams = document.querySelector('.container__main__actions__search--params')
 const btnGetStudentQuery = document.querySelector('.container__main__actions__search--query')
 
-//boardRoot
-const boardStudent = document.querySelector('#boardStudent')
 
 //addEventListener
 btnGetAllStudent.addEventListener('click', getAllStudent)
 btnGetStudentParams.addEventListener('click', getStudentParams)
 btnGetStudentQuery.addEventListener('click', getStudentQuery)
 form.addEventListener('submit', handleSumbit)
-
-//input
-const inputSearchStudenbyID = document.querySelector('#searchid')
 
 //addStudent
 async function handleSumbit(ev) {
@@ -96,6 +91,7 @@ async function deleteStudent(id) {
 
 
 function renderStudents(data) {
+    const boardStudent = document.querySelector('#boardStudent')
     let html = ''
 
     if (data.length > 0) {
