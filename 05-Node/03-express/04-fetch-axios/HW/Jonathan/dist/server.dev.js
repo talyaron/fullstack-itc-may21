@@ -11,7 +11,7 @@ app.use(express["static"]("public"));
 app.use(express.json());
 
 var readAllStudents = function readAllStudents() {
-  var allStudents = fs.readFileSync('./allstudents.json');
+  var allStudents = fs.readFileSync("./allstudents.json");
   return JSON.parse(allStudents);
 };
 
@@ -29,10 +29,10 @@ app.post("/addStudent", function (req, res) {
         age = _req$body.age,
         avgrade = _req$body.avgrade;
     var newStudent = {
-      id: parseInt(id),
-      name: name,
-      age: parseInt(age),
-      avgrade: parseInt(avgrade)
+      "id": id,
+      "name": name,
+      "age": age,
+      "avgrade": avgrade
     };
 
     if (!name || !id || !age || !avgrade) {
@@ -58,17 +58,23 @@ app.post("/addStudent", function (req, res) {
 });
 app.get("/getAllStudents", function (req, res) {
   var allStudents = readAllStudents();
+  allStudents.sort(function (a, b) {
+    return a.id - b.id;
+  });
   res.send(allStudents);
 });
 app["delete"]("/deleteStudent/:id", function (req, res) {
   try {
     var id = req.params.id;
     var allStudents = readAllStudents();
-    id = parseInt(id);
+    id = +id;
     allStudents = allStudents.filter(function (student) {
       return student.id !== id;
     });
     fs.writeFileSync("./allstudents.json", JSON.stringify(allStudents));
+    allStudents.sort(function (a, b) {
+      return a.id - b.id;
+    });
     res.send(allStudents);
   } catch (e) {
     res.status(500).send({
@@ -79,14 +85,14 @@ app["delete"]("/deleteStudent/:id", function (req, res) {
 app.get("/getStudentbyParam/:id", function (req, res) {
   try {
     var id = req.params.id;
-    id = parseInt(id);
-    if (!id) throw new Error("The id does not exist in the list");
+    id = +id;
     var allStudents = readAllStudents();
 
     var _student2 = allStudents.find(function (student) {
       return student.id === id;
     });
 
+    if (!_student2) throw new Error('This id does not exist');
     res.send([_student2]);
   } catch (e) {
     res.status(500).send({
@@ -97,12 +103,12 @@ app.get("/getStudentbyParam/:id", function (req, res) {
 app.get("/getStudentbyQuery", function (req, res) {
   try {
     var id = req.query.id;
-    id = parseInt(id);
-    if (!id) throw new Error("The id does not exist in the list");
+    id = +id;
     var allStudents = readAllStudents();
     student = allStudents.find(function (student) {
       return student.id === id;
     });
+    if (!student) throw new Error('This id does not exist');
     res.send([student]);
   } catch (e) {
     res.status(500).send({
