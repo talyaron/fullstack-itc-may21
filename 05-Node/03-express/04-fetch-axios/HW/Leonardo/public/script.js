@@ -21,7 +21,7 @@ function handleSubmit(event) {
         event.target.reset();
 
         //Get data from the form as an object
-        axios.post('/addStudent', { firstname, lastname, age, averageGrade }).then(({ data }) => { console.log(data); });
+        axios.post('/addStudent', { firstname, lastname, age, averageGrade });
     } catch (e) {
         console.error();
     }
@@ -58,16 +58,24 @@ function getAllStudents() {
 informationParams.addEventListener('click', getStudentParam);
 
 async function getStudentParam() {
-    const studentInfoParam = await axios.get(`/showStudentParam/${searchId.value}`);
-    render(studentInfoParam.data);
+    if (!searchId.value) {
+        alert('Please enter an ID')
+    } else {
+        const studentInfoParam = await axios.get(`/showStudentParam/${searchId.value}`);
+        studentInfoParam.data[0] === null ? alert('Please enter a valid ID') : render(studentInfoParam.data);
+    }
 }
 
 //To handle the button "by querys" and show the information of the student. DOING ASYNC-AWAIT:
 informationQuerys.addEventListener('click', getStudentQuery);
 
 async function getStudentQuery() {
-    const studentInfoQuery = await axios.get(`/showStudentQuery?id=${searchId.value}`);
-    render(studentInfoQuery.data);
+    if (!searchId.value) {
+        alert('Please enter an ID')
+    } else {
+        const studentInfoQuery = await axios.get(`/showStudentQuery?id=${searchId.value}`);
+        studentInfoQuery.data[0] === null ? alert('Please enter a valid ID') : render(studentInfoQuery.data);
+    }
 };
 
 //////////////////////////////////////////////////////
@@ -89,21 +97,26 @@ async function removeStudent(studentId, name) {
 
 //Function to render the user/s in the DOM
 function render(data) {
-    const table = document.querySelector(".table");
-    if (!table) throw new Error('There is a problem finding table from HTML');
-    let html = data.map(element => {
-        return (`
-        <tr>
-        <td>${element.id}</td>
-        <td>${element.firstname}</td>
-        <td>${element.lastname}</td> 
-        <td>${element.age}</td> 
-        <td>${element.averageGrade}</td> 
-        <td><i class="fas fa-trash table__remove" onclick='removeStudent("${element.id}", "${element.firstname}")' title="Remove"></i></td> 
-        </tr>`
-        )
-    }).join('');
-    table.innerHTML = html;
+    try {
+        const table = document.querySelector(".table");
+        if (!table) throw new Error('There is a problem finding table from HTML');
+        let html = data.map(element => {
+            return (`
+            <tr>
+            <td id=${element.id}>${element.id}
+            <button id="Element${element.id}" onclick='copyTextFromElement("${element.id}")'>Copy</button></td>
+            <td>${element.firstname}</td>
+            <td>${element.lastname}</td> 
+            <td>${element.age}</td> 
+            <td>${element.averageGrade}</td> 
+            <td><i class="fas fa-trash table__remove" onclick='removeStudent("${element.id}", "${element.firstname}")' title="Remove"></i></td> 
+            </tr>`
+            )
+        }).join('');
+        table.innerHTML = html;
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 //////////////////////////////////////////////////////
@@ -150,4 +163,24 @@ function getAllStudentsSorted(orderBy) {
                 reject(e)
             });
     });
+};
+
+////////////////////////////////////////////////////
+//Function to copy the ID
+function copyTextFromElement(elementID) {
+    try {
+        //Select the element
+        const element = document.getElementById(elementID);
+        //Get the text content from the element 
+        const elementText = element.textContent;
+        const textWantToCopy = elementText.split(" ");
+        //Copy the text to the clipboard
+        const successful = navigator.clipboard.writeText(textWantToCopy[0]);
+
+        const buttonCopy = document.querySelector(`#Element${elementID}`);
+        if (successful) buttonCopy.innerHTML = 'Copied!';
+        else buttonCopy.innerHTML = 'Unable to copy!';
+    } catch (error) {
+        console.error(error);
+    };
 };

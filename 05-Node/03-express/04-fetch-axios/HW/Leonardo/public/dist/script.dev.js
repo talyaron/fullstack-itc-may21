@@ -29,9 +29,6 @@ function handleSubmit(event) {
       lastname: lastname,
       age: age,
       averageGrade: averageGrade
-    }).then(function (_ref) {
-      var data = _ref.data;
-      console.log(data);
     });
   } catch (e) {
     console.error();
@@ -75,8 +72,8 @@ function getInfo() {
 
 function getAllStudents() {
   return new Promise(function (resolve, reject) {
-    axios.get('/getStudents').then(function (_ref2) {
-      var data = _ref2.data;
+    axios.get('/getStudents').then(function (_ref) {
+      var data = _ref.data;
       resolve(data);
     })["catch"](function (e) {
       reject(e);
@@ -95,14 +92,24 @@ function getStudentParam() {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
-          return regeneratorRuntime.awrap(axios.get("/showStudentParam/".concat(searchId.value)));
+          if (searchId.value) {
+            _context2.next = 4;
+            break;
+          }
 
-        case 2:
-          studentInfoParam = _context2.sent;
-          render(studentInfoParam.data);
+          alert('Please enter an ID');
+          _context2.next = 8;
+          break;
 
         case 4:
+          _context2.next = 6;
+          return regeneratorRuntime.awrap(axios.get("/showStudentParam/".concat(searchId.value)));
+
+        case 6:
+          studentInfoParam = _context2.sent;
+          studentInfoParam.data[0] === null ? alert('Please enter a valid ID') : render(studentInfoParam.data);
+
+        case 8:
         case "end":
           return _context2.stop();
       }
@@ -119,14 +126,24 @@ function getStudentQuery() {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          _context3.next = 2;
-          return regeneratorRuntime.awrap(axios.get("/showStudentQuery?id=".concat(searchId.value)));
+          if (searchId.value) {
+            _context3.next = 4;
+            break;
+          }
 
-        case 2:
-          studentInfoQuery = _context3.sent;
-          render(studentInfoQuery.data);
+          alert('Please enter an ID');
+          _context3.next = 8;
+          break;
 
         case 4:
+          _context3.next = 6;
+          return regeneratorRuntime.awrap(axios.get("/showStudentQuery?id=".concat(searchId.value)));
+
+        case 6:
+          studentInfoQuery = _context3.sent;
+          studentInfoQuery.data[0] === null ? alert('Please enter a valid ID') : render(studentInfoQuery.data);
+
+        case 8:
         case "end":
           return _context3.stop();
       }
@@ -179,12 +196,16 @@ function removeStudent(studentId, name) {
 //Function to render the user/s in the DOM
 
 function render(data) {
-  var table = document.querySelector(".table");
-  if (!table) throw new Error('There is a problem finding table from HTML');
-  var html = data.map(function (element) {
-    return "\n        <tr>\n        <td>".concat(element.id, "</td>\n        <td>").concat(element.firstname, "</td>\n        <td>").concat(element.lastname, "</td> \n        <td>").concat(element.age, "</td> \n        <td>").concat(element.averageGrade, "</td> \n        <td><i class=\"fas fa-trash table__remove\" onclick='removeStudent(\"").concat(element.id, "\", \"").concat(element.firstname, "\")' title=\"Remove\"></i></td> \n        </tr>");
-  }).join('');
-  table.innerHTML = html;
+  try {
+    var table = document.querySelector(".table");
+    if (!table) throw new Error('There is a problem finding table from HTML');
+    var html = data.map(function (element) {
+      return "\n            <tr>\n            <td id=".concat(element.id, ">").concat(element.id, "\n            <button id=\"Element").concat(element.id, "\" onclick='copyTextFromElement(\"").concat(element.id, "\")'>Copy</button></td>\n            <td>").concat(element.firstname, "</td>\n            <td>").concat(element.lastname, "</td> \n            <td>").concat(element.age, "</td> \n            <td>").concat(element.averageGrade, "</td> \n            <td><i class=\"fas fa-trash table__remove\" onclick='removeStudent(\"").concat(element.id, "\", \"").concat(element.firstname, "\")' title=\"Remove\"></i></td> \n            </tr>");
+    }).join('');
+    table.innerHTML = html;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 ; //////////////////////////////////////////////////////
@@ -250,13 +271,34 @@ function sortTable(orderBy) {
 
 function getAllStudentsSorted(orderBy) {
   return new Promise(function (resolve, reject) {
-    axios.get("/sortTable/".concat(orderBy)).then(function (_ref3) {
-      var data = _ref3.data;
+    axios.get("/sortTable/".concat(orderBy)).then(function (_ref2) {
+      var data = _ref2.data;
       resolve(data);
     })["catch"](function (e) {
       reject(e);
     });
   });
+}
+
+; ////////////////////////////////////////////////////
+//Function to copy the ID
+
+function copyTextFromElement(elementID) {
+  try {
+    //Select the element
+    var element = document.getElementById(elementID); //Get the text content from the element 
+
+    var elementText = element.textContent;
+    var textWantToCopy = elementText.split(" "); //Copy the text to the clipboard
+
+    var successful = navigator.clipboard.writeText(textWantToCopy[0]);
+    var buttonCopy = document.querySelector("#Element".concat(elementID));
+    if (successful) buttonCopy.innerHTML = 'Copied!';else buttonCopy.innerHTML = 'Unable to copy!';
+  } catch (error) {
+    console.error(error);
+  }
+
+  ;
 }
 
 ;

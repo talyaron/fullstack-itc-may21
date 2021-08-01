@@ -9,7 +9,7 @@ async function getData() {
 >>>>>>> 7e0786d6dba6a10c7af319c51126286f75c2114e
     console.log('waited');
     const cocktails = await r.json();
-    console.log(cocktails);
+ 
     render(cocktails)
 
 }

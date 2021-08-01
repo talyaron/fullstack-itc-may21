@@ -8,17 +8,11 @@ app.use(express.static('public'));
 
 app.get('/getCocktails', (req, res) => {
     console.log('get....');
-    const cocktails = JSON.parse( fs.readFileSync('./cocktails.json'));
-    let newCocktails = cocktails.map(cok => {
-        console.log(cok)
-        return ({ img: cok.strDrinkThumb, name: cok.strDrink })
-    })
+    const newCocktails = fs.readFileSync('./newCocktails.json');
 
-    console.log(newCocktails);
     res.send(newCocktails);
-
-
 })
+
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);

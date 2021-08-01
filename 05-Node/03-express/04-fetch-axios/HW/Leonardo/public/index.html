@@ -30,7 +30,7 @@
         </button>
 
         <form>
-            <input class="form__search" type="text" name="searchId" id="searchId" placeholder="Search by id" />
+            <input class="form__search" type="text" name="searchId" id="searchId" placeholder="Search by Id (press 'Copy')" />
         </form>
 
         <button class="top-submenu-button" id="informationParams">
@@ -50,22 +50,22 @@
             <form class="form">
                 <div class="form__wrapper">
                     <label for="firstname">First name:</label>
-                    <input type="text" name="firstname" id="firstname" maxlength="20" required />
+                    <input type="text" placeholder="More than 3 characters" name="firstname" id="firstname" maxlength="20" required />
                 </div>
 
                 <div class="form__wrapper">
                     <label for="lastname">Last name:</label>
-                    <input type="text" name="lastname" id="lastname" maxlength="20" required />
+                    <input type="text" placeholder="More than 3 characters" name="lastname" id="lastname" maxlength="20" required />
                 </div>
 
                 <div class="form__wrapper">
                     <label for="age">Age:</label>
-                    <input type="number" name="age" id="age" min="0" max=99 required />
+                    <input type="number" placeholder="Between 0 and 99" name="age" id="age" min="0" max=99 required />
                 </div>
 
                 <div class="form__wrapper">
                     <label for="averageGrade">Average Grade:</label>
-                    <input type="number" name="averageGrade" id="averageGrade" min="0" max=10 step=".01" required />
+                    <input type="number" placeholder="Between 0 and 10" name="averageGrade" id="averageGrade" min="0" max=10 step=".01" required />
                 </div>
 
                 <input class="form__input--submit" type="submit" value="Add student" />
