@@ -199,17 +199,10 @@ function render(data) {
   try {
     var table = document.querySelector(".table");
     if (!table) throw new Error('There is a problem finding table from HTML');
-
-    if (data.length === 0) {
-      var html = "<tr>\n            <td></td>\n            <td></td>\n            <td>Empty table</td> \n            <td></td> \n            <td></td> \n            <td></td> \n            </tr>";
-      table.innerHTML = html;
-    } else {
-      var _html = data.map(function (element) {
-        return "\n            <tr>\n            <td>".concat(element.id, "</td>\n            <td>").concat(element.firstname, "</td>\n            <td>").concat(element.lastname, "</td> \n            <td>").concat(element.age, "</td> \n            <td>").concat(element.averageGrade, "</td> \n            <td><i class=\"fas fa-trash table__remove\" onclick='removeStudent(\"").concat(element.id, "\", \"").concat(element.firstname, "\")' title=\"Remove\"></i></td> \n            </tr>");
-      }).join('');
-
-      table.innerHTML = _html;
-    }
+    var html = data.map(function (element) {
+      return "\n            <tr>\n            <td id=".concat(element.id, ">").concat(element.id, "\n            <button id=\"Element").concat(element.id, "\" onclick='copyTextFromElement(\"").concat(element.id, "\")'>Copy</button></td>\n            <td>").concat(element.firstname, "</td>\n            <td>").concat(element.lastname, "</td> \n            <td>").concat(element.age, "</td> \n            <td>").concat(element.averageGrade, "</td> \n            <td><i class=\"fas fa-trash table__remove\" onclick='removeStudent(\"").concat(element.id, "\", \"").concat(element.firstname, "\")' title=\"Remove\"></i></td> \n            </tr>");
+    }).join('');
+    table.innerHTML = html;
   } catch (error) {
     console.error(error);
   }
@@ -285,6 +278,27 @@ function getAllStudentsSorted(orderBy) {
       reject(e);
     });
   });
+}
+
+; ////////////////////////////////////////////////////
+//Function to copy the ID
+
+function copyTextFromElement(elementID) {
+  try {
+    //Select the element
+    var element = document.getElementById(elementID); //Get the text content from the element 
+
+    var elementText = element.textContent;
+    var textWantToCopy = elementText.split(" "); //Copy the text to the clipboard
+
+    var successful = navigator.clipboard.writeText(textWantToCopy[0]);
+    var buttonCopy = document.querySelector("#Element".concat(elementID));
+    if (successful) buttonCopy.innerHTML = 'Copied!';else buttonCopy.innerHTML = 'Unable to copy!';
+  } catch (error) {
+    console.error(error);
+  }
+
+  ;
 }
 
 ;
