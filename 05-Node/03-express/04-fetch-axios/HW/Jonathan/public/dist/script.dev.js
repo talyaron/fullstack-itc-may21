@@ -83,7 +83,7 @@ function getAllStudent(ev) {
             break;
           }
 
-          throw new Error('No student on the database');
+          throw new Error('No students on the database');
 
         case 7:
           renderStudents(allStudents);

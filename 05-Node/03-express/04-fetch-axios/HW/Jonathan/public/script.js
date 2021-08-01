@@ -52,7 +52,7 @@ async function getAllStudent(ev) {
     try {
         ev.preventDefault()
         const allStudents = await getAllStudentsPromise()
-        if (allStudents.length === 0) throw new Error('No student on the database')
+        if (allStudents.length === 0) throw new Error('No students on the database')
         renderStudents(allStudents)
     } catch (e) {
         alert(e)
