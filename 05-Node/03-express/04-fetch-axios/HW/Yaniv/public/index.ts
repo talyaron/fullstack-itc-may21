@@ -2,9 +2,12 @@ getData(null, null);
 
 const newStudentform: HTMLFormElement = document.querySelector('#students-form');
 const searchStudentform: HTMLFormElement = document.querySelector('#search-student-form');
+const resetBtn: HTMLElement = document.querySelector('#reset');
+
 
 newStudentform.addEventListener('submit', ev => handleNewStudent(ev));
 searchStudentform.addEventListener('submit', ev => handleSearchStudent(ev));
+resetBtn.addEventListener('click', ev => handleReset(ev));
 
 function handleNewStudent(ev) {
   try {
@@ -36,6 +39,7 @@ function handleSearchStudent(ev) {
     const searchType = formElements.searchType.value;
 
     getData(searchType, studentUuid);
+    resetBtn.style.display = 'unset';
 
     ev.target.reset();
 
@@ -69,4 +73,18 @@ function renderData(dataToRender: any): void {
   });
 
   root.innerHTML = html;
+}
+
+function handleReset(ev) {
+  try {
+    ev.preventDefault();
+
+    getData(null, null);
+    resetBtn.style.display = 'none';
+
+    ev.target.reset();
+
+  } catch (error) {
+    console.error(error);
+  }
 }
