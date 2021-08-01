@@ -1,7 +1,5 @@
 "use strict";
 
-//form
-//const form = document.getElementById('form')
 //btn
 var btnGetAllStudent = document.querySelector('.container__main__actions--getallstudents');
 var btnGetStudentParams = document.querySelector('.container__main__actions__search--params');
@@ -11,8 +9,7 @@ var boardStudent = document.querySelector('#boardStudent'); //addEventListener
 
 btnGetAllStudent.addEventListener('click', getAllStudent);
 btnGetStudentParams.addEventListener('click', getStudentParams);
-btnGetStudentQuery.addEventListener('click', getStudentQuery); //form.addEventListener('sumbitk', addStudentOnList)
-//input
+btnGetStudentQuery.addEventListener('click', getStudentQuery); //input
 
 var inputSearchStudenbyID = document.querySelector('#searchid'); //addStudent
 
@@ -205,10 +202,16 @@ function deleteStudentPromise(id) {
 function getStudentQueryPromise() {
   var id = inputSearchStudenbyID.value;
   return new Promise(function (resolve, reject) {
-    fetch("/getStudentbyQuery?id=".concat(id)).then(function (r) {
-      return r.json();
-    }).then(function (student) {
-      resolve(student);
+    fetch("/getStudentbyQuery?id=".concat(id)).then(function (res) {
+      if (res.status === 200 && res.ok) {
+        return res.json().then(function (student) {
+          resolve(student);
+        });
+      } else {
+        return res.json().then(function (student) {
+          alert(student.error);
+        });
+      }
     })["catch"](function (e) {
       reject(e);
     });
@@ -218,10 +221,16 @@ function getStudentQueryPromise() {
 function getStudentParamsPromise() {
   var id = inputSearchStudenbyID.value;
   return new Promise(function (resolve, reject) {
-    fetch("/getStudentbyParam/".concat(id)).then(function (r) {
-      return r.json();
-    }).then(function (student) {
-      resolve(student);
+    fetch("/getStudentbyParam/".concat(id)).then(function (res) {
+      if (res.status === 200 && res.ok) {
+        return res.json().then(function (student) {
+          resolve(student);
+        });
+      } else {
+        return res.json().then(function (student) {
+          alert(student.error);
+        });
+      }
     })["catch"](function (e) {
       reject(e);
     });
@@ -244,9 +253,13 @@ function renderStudents(data) {
   var html = '';
 
   if (data.length > 0) {
-    html += "<table id=\"students\">\n        <thead>\n    <tr>\n        <th>ID</th>\n        <th>Name</th>\n        <th>Age</th>\n        <th>Average Grade</th>\n        <th></th>\n    <tr>\n    </thead>\n    <tbody>";
+    html += "<table id=\"students\" class=\"container__main--board__student\">\n        <thead>\n    <tr>\n        <th>ID</th>\n        <th>Name</th>\n        <th>Age</th>\n        <th>Average Grade</th>\n        <th></th>\n    <tr>\n    </thead>\n    <tbody>";
     data.forEach(function (elem) {
-      html += "<tr>\n                      <td>".concat(elem.id, "</td>\n                        <td>").concat(elem.name, "</td>\n                        <td>").concat(elem.age, "</td>\n                        <td>").concat(elem.avgrade, "</td>\n                        <td><i class=\"fa fa-trash \" onclick='deleteStudent(\"").concat(elem.id, "\")' title=\"Delete Item\"></i></td>   \n                 </tr> ");
+      var id = elem.id,
+          name = elem.name,
+          age = elem.age,
+          avgrade = elem.avgrade;
+      html += "<tr>\n                      <td>".concat(id, "</td>\n                        <td>").concat(name, "</td>\n                        <td>").concat(age, "</td>\n                        <td>").concat(avgrade, "</td>\n                        <td><i class=\"fa fa-trash\" onclick='deleteStudent(\"").concat(id, "\")' title=\"Delete Item\" style=\"cursor:pointer\"></i></td>   \n                 </tr> ");
     });
     html += "</tbody></table>";
   } else {

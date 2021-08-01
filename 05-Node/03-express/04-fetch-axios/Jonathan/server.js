@@ -1,3 +1,4 @@
+const { throws } = require("assert");
 const express = require("express");
 const app = express();
 const port = process.env.port || 3000;
@@ -81,9 +82,9 @@ app.get("/getStudentbyParam/:id", (req, res) => {
     try {
         let { id } = req.params
         id = parseInt(id)
-        if (!id) throw new Error("The id does not exist in the list");
         const allStudents = readAllStudents();
         const student = allStudents.find(student => student.id === id)
+        if (!student) throw new Error ('This id does not exist')
         res.send([student]);
     } catch (e) {
         res.status(500).send({ error: `${e}` });
@@ -96,9 +97,9 @@ app.get("/getStudentbyQuery", (req, res) => {
     try {
         let { id } = req.query
         id = parseInt(id)
-        if (!id) throw new Error("The id does not exist in the list");
         const allStudents = readAllStudents();
         student = allStudents.find((student) => student.id === id)
+        if (!student) throw new Error ('This id does not exist')
         res.send([student]);
     } catch (e) {
         res.status(500).send({ error: `${e}` });

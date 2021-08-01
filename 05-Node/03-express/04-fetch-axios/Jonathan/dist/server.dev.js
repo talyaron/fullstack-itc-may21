@@ -1,5 +1,8 @@
 "use strict";
 
+var _require = require("assert"),
+    _throws = _require["throws"];
+
 var express = require("express");
 
 var app = express();
@@ -80,13 +83,13 @@ app.get("/getStudentbyParam/:id", function (req, res) {
   try {
     var id = req.params.id;
     id = parseInt(id);
-    if (!id) throw new Error("The id does not exist in the list");
     var allStudents = readAllStudents();
 
     var _student2 = allStudents.find(function (student) {
       return student.id === id;
     });
 
+    if (!_student2) throw new Error('This id does not exist');
     res.send([_student2]);
   } catch (e) {
     res.status(500).send({
@@ -98,11 +101,11 @@ app.get("/getStudentbyQuery", function (req, res) {
   try {
     var id = req.query.id;
     id = parseInt(id);
-    if (!id) throw new Error("The id does not exist in the list");
     var allStudents = readAllStudents();
     student = allStudents.find(function (student) {
       return student.id === id;
     });
+    if (!student) throw new Error('This id does not exist');
     res.send([student]);
   } catch (e) {
     res.status(500).send({
