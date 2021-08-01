@@ -4,31 +4,33 @@ var express = require('express');
 
 var app = express();
 var port = process.env.port || 3000; //dataBase 
+// const students = [];
 
-var students = []; // function outer() {
-//     const students = [];
-//     function inner(student) {
-//         if(student === "l"){
-//             const allStudents = students.map(stu)
-//             return allStudents
-//         }
-//         if(student !== "l"){
-//         students.push(student);
-//         // students.forEach(student => {
-//         //     console.log(student)
-//         // });
-//         }
-//     }
-//     return inner
-// }
-// const addStudent = outer();
+function outer() {
+  var students = [];
 
+  function inner(student) {
+    if (student === "l") {
+      return students;
+    }
+
+    students.push(student); // students.forEach(student => {
+    //     console.log(student)
+    // });
+
+    return students;
+  }
+
+  return inner;
+}
+
+var students = outer();
 app.use(express.json());
 app.use(express["static"]('public'));
 app.put('/newStudent', function (req, res) {
-  var student = req.body.newStudent; // addStudent(student)
+  var student = req.body.newStudent;
+  students(student); // students.push(student)
 
-  students.push(student);
   res.send({
     student: student,
     send: "OK"
@@ -36,7 +38,7 @@ app.put('/newStudent', function (req, res) {
 });
 app.get('/', function (req, res) {
   var studentId = req.query.id.studentId;
-  var searchedStudent = students.filter(function (student) {
+  var searchedStudent = students("l").filter(function (student) {
     return student.id === studentId;
   });
   res.send({
@@ -44,13 +46,21 @@ app.get('/', function (req, res) {
   });
 });
 app.get('/:id', function (req, res) {
-  var id = req.params.id;
-  var searchedStudent = students.filter(function (student) {
-    return student.id === id;
-  });
-  res.send({
-    searchedStudent: searchedStudent
-  });
+  try {
+    var id = req.params.id;
+    var searchedStudent = students("l").filter(function (student) {
+      return student.id === id;
+    });
+    var result = searchedStudent.length === 0 ? 'Student not Found' : searchedStudent;
+    res.send({
+      result: result
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).send({
+      error: error.message
+    });
+  }
 });
 app.listen(port, function () {
   console.log("Example app listening at http://localhost:".concat(port));

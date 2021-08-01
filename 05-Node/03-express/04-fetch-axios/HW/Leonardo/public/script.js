@@ -100,31 +100,20 @@ function render(data) {
     try {
         const table = document.querySelector(".table");
         if (!table) throw new Error('There is a problem finding table from HTML');
-        if (data.length === 0) {
-            let html = `<tr>
-            <td></td>
-            <td></td>
-            <td>Empty table</td> 
-            <td></td> 
-            <td></td> 
-            <td></td> 
-            </tr>`
-            table.innerHTML = html;
-        } else {
-            let html = data.map(element => {
-                return (`
+        let html = data.map(element => {
+            return (`
             <tr>
-            <td>${element.id}</td>
+            <td id=${element.id}>${element.id}
+            <button id="Element${element.id}" onclick='copyTextFromElement("${element.id}")'>Copy</button></td>
             <td>${element.firstname}</td>
             <td>${element.lastname}</td> 
             <td>${element.age}</td> 
             <td>${element.averageGrade}</td> 
             <td><i class="fas fa-trash table__remove" onclick='removeStudent("${element.id}", "${element.firstname}")' title="Remove"></i></td> 
             </tr>`
-                )
-            }).join('');
-            table.innerHTML = html;
-        }
+            )
+        }).join('');
+        table.innerHTML = html;
     } catch (error) {
         console.error(error);
     }
@@ -174,4 +163,24 @@ function getAllStudentsSorted(orderBy) {
                 reject(e)
             });
     });
+};
+
+////////////////////////////////////////////////////
+//Function to copy the ID
+function copyTextFromElement(elementID) {
+    try {
+        //Select the element
+        const element = document.getElementById(elementID);
+        //Get the text content from the element 
+        const elementText = element.textContent;
+        const textWantToCopy = elementText.split(" ");
+        //Copy the text to the clipboard
+        const successful = navigator.clipboard.writeText(textWantToCopy[0]);
+
+        const buttonCopy = document.querySelector(`#Element${elementID}`);
+        if (successful) buttonCopy.innerHTML = 'Copied!';
+        else buttonCopy.innerHTML = 'Unable to copy!';
+    } catch (error) {
+        console.error(error);
+    };
 };
