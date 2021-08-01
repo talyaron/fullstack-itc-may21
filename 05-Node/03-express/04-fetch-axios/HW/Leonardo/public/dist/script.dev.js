@@ -29,9 +29,6 @@ function handleSubmit(event) {
       lastname: lastname,
       age: age,
       averageGrade: averageGrade
-    }).then(function (_ref) {
-      var data = _ref.data;
-      console.log(data);
     });
   } catch (e) {
     console.error();
@@ -75,8 +72,8 @@ function getInfo() {
 
 function getAllStudents() {
   return new Promise(function (resolve, reject) {
-    axios.get('/getStudents').then(function (_ref2) {
-      var data = _ref2.data;
+    axios.get('/getStudents').then(function (_ref) {
+      var data = _ref.data;
       resolve(data);
     })["catch"](function (e) {
       reject(e);
@@ -250,8 +247,8 @@ function sortTable(orderBy) {
 
 function getAllStudentsSorted(orderBy) {
   return new Promise(function (resolve, reject) {
-    axios.get("/sortTable/".concat(orderBy)).then(function (_ref3) {
-      var data = _ref3.data;
+    axios.get("/sortTable/".concat(orderBy)).then(function (_ref2) {
+      var data = _ref2.data;
       resolve(data);
     })["catch"](function (e) {
       reject(e);

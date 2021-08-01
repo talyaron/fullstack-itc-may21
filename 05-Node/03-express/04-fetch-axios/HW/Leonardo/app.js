@@ -15,28 +15,49 @@ const port = process.env.PORT || 3000;
 //Joi is to validate the data I enter:
 const Joi = require('joi');
 //Uuidv4 is to generate a new ID
-const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
+uuidv4();
 
 app.use(express.json());
 app.use(express.static('public'));
 
 class Students {
     list = [];
+
     addStudent(student) {
         this.list.push(student)
-    }
+    };
+    searchStudent(queryOrParam) {
+        let searchedStudent = students.list.find(student => student.id === queryOrParam);
+        return searchedStudent;
+    };
+
 }
 const students = new Students();
 
 //This route is to create a new student
 app.post('/addStudent', (req, res) => {
-    try {
-        const { body } = req;
-        body.id = uuid();
-        students.addStudent(body);
+    const { body } = req;
+    const schema = Joi.object({
+        firstname: Joi.string().min(3).max(30).required(),
+        lastname: Joi.string().min(3).max(30).required(),
+        age: Joi.number().integer().min(1).max(99).required(),
+        averageGrade: Joi.number().integer().min(0).max(10).required()
+    });
+    const { error, value } = schema.validate({ firstname: body.firstname, lastname: body.lastname, age: body.age, averageGrade: body.averageGrade });
+    if (!error) {
+        const student = {
+            id: uuidv4(),
+            firstname: value.firstname,
+            lastname: value.lastname,
+            age: value.age,
+            averageGrade: value.averageGrade
+        }
+        students.addStudent(student);
         res.send(students.list);
-    } catch (e) {
-        res.status(400).send({ error: e.message });
+    } else {
+        const msg = error.details[0].message;
+        res.status(400).send(msg);
     }
 })
 
@@ -53,18 +74,18 @@ app.get('/getStudents', (req, res) => {
 //This route will redirect the user to see the information of a student by params
 app.get('/showStudentParam/:id', (req, res) => {
     try {
-        let searchedStudent = students.list.find(student => student.id === req.params.id);
-        res.send([searchedStudent]);
+        const studentFounded = students.searchStudent(req.params.id);
+        res.send([studentFounded]);
     } catch (error) {
-        res.status(400).send({ error: e.message });
+        res.status(400).send(error);
     }
 });
 
 //This route will redirect the user to see the information of a student by querys
 app.get('/showStudentQuery', (req, res) => {
     try {
-        let searchedStudent = students.list.find(student => student.id === req.query.id);
-        res.send([searchedStudent]);
+        const studentFounded = students.searchStudent(req.query.id)
+        res.send([studentFounded]);
     } catch (error) {
         res.status(400).send({ error: e.message });
     }

@@ -21,7 +21,7 @@ function handleSubmit(event) {
         event.target.reset();
 
         //Get data from the form as an object
-        axios.post('/addStudent', { firstname, lastname, age, averageGrade }).then(({ data }) => { console.log(data); });
+        axios.post('/addStudent', { firstname, lastname, age, averageGrade });
     } catch (e) {
         console.error();
     }
