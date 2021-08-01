@@ -29,10 +29,10 @@ function handleSumbit(ev) {
           age = ev.target.elements.age.valueAsNumber;
           avgrade = ev.target.elements.avgrade.valueAsNumber;
           newStudent = {
-            "id": id,
-            "name": name,
-            "age": age,
-            "avgrade": avgrade
+            id: id,
+            name: name,
+            age: age,
+            avgrade: avgrade
           };
 
           if (/^[a-zA-Z]+$/.test(name)) {
@@ -196,7 +196,7 @@ function renderStudents(data) {
   var html = '';
 
   if (data.length > 0) {
-    html += "<table id=\"students\" class=\"container__main--board__student\">\n        <thead>\n    <tr>\n        <th>ID</th>\n        <th>Name</th>\n        <th>Age</th>\n        <th>Average Grade</th>\n        <th></th>\n    <tr>\n    </thead>\n    <tbody>";
+    html += "<table id=\"students\" class=\"container__main--board__student\">\n        <thead>\n    <tr>\n        <th>Mispar Zehut</th>\n        <th>Name</th>\n        <th>Age</th>\n        <th>Average Grade</th>\n        <th></th>\n    <tr>\n    </thead>\n    <tbody>";
     data.forEach(function (elem) {
       var id = elem.id,
           name = elem.name,

@@ -94,7 +94,7 @@ app.get("/getStudentbyParam/:id", function (req, res) {
       return student.id === id;
     });
 
-    if (!_student2) throw new Error('This id does not exist');
+    if (!_student2) throw new Error('This Mispar Zehut does not exist');
     res.send([_student2]);
   } catch (e) {
     res.status(500).send({
@@ -110,7 +110,7 @@ app.get("/getStudentbyQuery", function (req, res) {
     student = allStudents.find(function (student) {
       return student.id === id;
     });
-    if (!student) throw new Error('This id does not exist');
+    if (!student) throw new Error('This Mispar Zehut does not exist');
     res.send([student]);
   } catch (e) {
     res.status(500).send({

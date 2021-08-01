@@ -29,10 +29,10 @@ async function handleSumbit(ev) {
         const avgrade = ev.target.elements.avgrade.valueAsNumber
 
         const newStudent = {
-            "id": id,
-            "name": name,
-            "age": age,
-            "avgrade": avgrade
+            id: id,
+            name: name,
+            age: age,
+            avgrade: avgrade
         }
 
         if (!(/^[a-zA-Z]+$/.test(name))) throw new Error('The name must be in text')
@@ -102,7 +102,7 @@ function renderStudents(data) {
         html += `<table id="students" class="container__main--board__student">
         <thead>
     <tr>
-        <th>ID</th>
+        <th>Mispar Zehut</th>
         <th>Name</th>
         <th>Age</th>
         <th>Average Grade</th>
