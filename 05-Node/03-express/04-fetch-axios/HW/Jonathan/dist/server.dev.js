@@ -29,10 +29,10 @@ app.post("/addStudent", function (req, res) {
         age = _req$body.age,
         avgrade = _req$body.avgrade;
     var newStudent = {
-      "id": id,
-      "name": name,
-      "age": age,
-      "avgrade": avgrade
+      id: id,
+      name: name,
+      age: age,
+      avgrade: avgrade
     };
 
     if (!name || !id || !age || !avgrade) {
@@ -43,13 +43,15 @@ app.post("/addStudent", function (req, res) {
     var isFound = allStudents.some(function (student) {
       return student.id == id;
     });
-    if (isFound) throw new Error("This is id is already here");
+    if (isFound) throw new Error("This Mispar Zehut is already here");
 
     var _student = getStudent();
 
     allStudents.push(_student(newStudent));
     fs.writeFileSync("./allstudents.json", JSON.stringify(allStudents));
-    res.send("Student Added");
+    res.send({
+      ok: "Added Student"
+    });
   } catch (e) {
     res.status(500).send({
       error: "".concat(e)
@@ -92,7 +94,7 @@ app.get("/getStudentbyParam/:id", function (req, res) {
       return student.id === id;
     });
 
-    if (!_student2) throw new Error('This id does not exist');
+    if (!_student2) throw new Error('This Mispar Zehut does not exist');
     res.send([_student2]);
   } catch (e) {
     res.status(500).send({
@@ -108,7 +110,7 @@ app.get("/getStudentbyQuery", function (req, res) {
     student = allStudents.find(function (student) {
       return student.id === id;
     });
-    if (!student) throw new Error('This id does not exist');
+    if (!student) throw new Error('This Mispar Zehut does not exist');
     res.send([student]);
   } catch (e) {
     res.status(500).send({

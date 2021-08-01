@@ -4,8 +4,7 @@ var express = require('express');
 
 var app = express();
 var port = process.env.PORT || 5000;
-var students = [];
-console.log(students); // READ JSON
+var students = []; // READ JSON
 
 app.use(express.json()); // READ PUBLIC 
 
@@ -16,23 +15,36 @@ app.get('/style.css', function (req, res) {
   res.send(css);
 }); // GET STUDENTS
 
-app.get('/getStudent', function (req, res) {
+app.get('/getAllStudent', function (req, res) {
   res.send(students);
 }); // POST STUDIENT WITH QUERY
 
 app.post('/postStudents', function (req, res) {
   var student = req.body;
+  console.log(students);
   students.push({
     student: student
   });
   res.send(student);
-  console.log(students);
-}); // GET SEARCHED STUDIENT WITH PARAM
+}); // GET SEARCHED STUDIENT WITH PARAMS ID
 
-app.get('/getColor', function (req, res) {
-  res.send({
-    color: color
+app.get('/searchParam/:id', function (req, res) {
+  var id = req.params.id;
+  var searchedStudent = students.find(function (stud) {
+    return stud.id === id;
   });
+  console.log(students);
+  res.send(searchedStudent);
+  console.log(searchedStudent);
+});
+app.get('/searchQuery', function (req, res) {
+  var id = req.query.id;
+  var searchedStudent = students.filter(function (stud) {
+    return stud.id === id;
+  });
+  console.log(students);
+  res.send(searchedStudent);
+  console.log(searchedStudent);
 });
 app.listen(port, function () {
   console.log('Server listen on port', port);

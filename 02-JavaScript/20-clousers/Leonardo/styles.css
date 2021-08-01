@@ -1,0 +1,97 @@
+html {
+  background: green;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: white;
+  width: 75%;
+  height: 100vh;
+  background-image: url(../img/backgroundGold.jpg);
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  margin-top: 15px;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.building__picture {
+  width: 300px;
+  height: 200px;
+  opacity: 1;
+}
+
+.building__picture:hover {
+  opacity: 0.8;
+}
+
+.building__wrapper {
+  text-align: center;
+}
+
+.building__wrapper:first-child {
+  border-right: 5px black dotted;
+  padding-right: 70px;
+}
+
+.building__submit {
+  background-color: #4CAF50;
+  border: none;
+  font-size: 14px;
+  color: #FFFFFF;
+  padding: 20px;
+  width: 200px;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.building__submit:hover {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.instructions {
+  background-color: green;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  width: 60%;
+  margin: auto;
+  position: relative;
+  top: 15%;
+  border-radius: 50px;
+  cursor: no-drop;
+  padding: 10px;
+}
+
+.instructions:hover {
+  background-color: grey;
+}
+/*# sourceMappingURL=styles.css.map */

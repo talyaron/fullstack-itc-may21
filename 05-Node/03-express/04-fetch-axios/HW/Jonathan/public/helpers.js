@@ -1,14 +1,14 @@
-function addStudentPromise(id, name, age, avgrade) {
+function addStudentPromise(newStudent) {
     return new Promise((resolve, reject) => {
         fetch('/addStudent', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id, name, age, avgrade })
+            body: JSON.stringify(newStudent)
         }).then(function (res) {
                 if (res.status === 200 && res.ok) {
-                    return res.json().then(student => { resolve(student) })
+                    return res.json().then(student => { alert(student.ok) });
                 } else {
                     return res.json().then(student => { alert(student.error) })
                 }
@@ -32,6 +32,7 @@ function deleteStudentPromise(id) {
 }
 
 function getOneStudent(howGetStudent) {
+    const inputSearchStudenbyID = document.querySelector('#searchid')
     const id = inputSearchStudenbyID.value
     const route = (howGetStudent === 'query') ? `/getStudentbyQuery?id=${id}` : `/getStudentbyParam/${id}`
     return new Promise((resolve, reject) => {

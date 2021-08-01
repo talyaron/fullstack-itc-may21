@@ -19,10 +19,10 @@ app.post("/addStudent", (req, res) => {
         const { id, name, age, avgrade } = req.body;
 
         const newStudent = {
-            "id": id,
-            "name": name,
-            "age": age,
-            "avgrade": avgrade
+            id: id,
+            name: name,
+            age: age,
+            avgrade: avgrade
         }
 
          if (!name || !id || !age || !avgrade) {
@@ -32,7 +32,7 @@ app.post("/addStudent", (req, res) => {
         const allStudents = readAllStudents();
         const isFound = allStudents.some((student) => student.id == id);
 
-        if (isFound) throw new Error("This is id is already here");
+        if (isFound) throw new Error("This Mispar Zehut is already here");
 
 
         function getStudent() {
@@ -48,7 +48,7 @@ app.post("/addStudent", (req, res) => {
 
         fs.writeFileSync("./allstudents.json", JSON.stringify(allStudents));
 
-        res.send("Student Added");
+        res.send({ ok: "Added Student" });
 
     } catch (e) {
         res.status(500).send({ error: `${e}` });
@@ -85,7 +85,7 @@ app.get("/getStudentbyParam/:id", (req, res) => {
         id = +id
         const allStudents = readAllStudents();
         const student = allStudents.find(student => student.id === id)
-        if (!student) throw new Error('This id does not exist')
+        if (!student) throw new Error('This Mispar Zehut does not exist')
         res.send([student]);
     } catch (e) {
         res.status(500).send({ error: `${e}` });
@@ -100,7 +100,7 @@ app.get("/getStudentbyQuery", (req, res) => {
         id = +id
         const allStudents = readAllStudents();
         student = allStudents.find((student) => student.id === id)
-        if (!student) throw new Error('This id does not exist')
+        if (!student) throw new Error('This Mispar Zehut does not exist')
         res.send([student]);
     } catch (e) {
         res.status(500).send({ error: `${e}` });

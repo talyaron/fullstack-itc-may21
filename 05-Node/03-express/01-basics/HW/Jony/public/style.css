@@ -1,0 +1,222 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.body {
+  background-color: burlywood;
+}
+
+header h2 {
+  text-align: center;
+  color: white;
+  background-color: black;
+  padding-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header img {
+  width: 50px;
+  height: 50px;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 1em;
+}
+
+form fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+form fieldset label {
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+form fieldset input {
+  margin-bottom: 0.5em;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.wrapper section {
+  margin-top: 1em;
+  text-align: center;
+  -ms-flex-preferred-size: 40%;
+      flex-basis: 40%;
+}
+
+.wrapper section h3 {
+  text-decoration: underline;
+  margin-bottom: 1em;
+}
+
+.wrapper section ol {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.wrapper .container {
+  -ms-flex-preferred-size: 40%;
+      flex-basis: 40%;
+}
+
+.wrapper .container__action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .container__action label {
+  margin-right: 1em;
+}
+
+.wrapper .container__action fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border-radius: 10px;
+  border: 2px dotted blue;
+}
+
+.wrapper .container__action fieldset legend {
+  text-align: center;
+}
+
+.wrapper .container__action fieldset button {
+  margin-right: 1em;
+  background-color: brown;
+  color: white;
+  padding: 0.5em;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.wrapper .container__action fieldset button:hover {
+  opacity: 0.7;
+}
+
+.wrapper .container__center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.wrapper .container__center__list {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 10px;
+  border: 2px solid brown;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.wrapper .container__center__list legend {
+  text-align: center;
+}
+
+.wrapper .container__center__list--inputs {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+}
+
+.wrapper .container__center__list button {
+  background-color: brown;
+  color: white;
+  padding: 0.3em;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  width: 20%;
+  margin: 0 auto;
+}
+
+.wrapper .container__center__list button:hover {
+  opacity: 0.7;
+}
+
+.container__board {
+  background-color: #b4b0b0;
+  border: 2px solid rgba(0, 0, 0, 0.808);
+  width: 100vh;
+  height: 40vh;
+  border-radius: 20px;
+  margin: 0 auto;
+}
+
+.container__board--element {
+  border-radius: 10px;
+  color: black;
+  background-color: lightblue;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 1em auto;
+  border: 2px solid black;
+  padding: 0.1em;
+}
+/*# sourceMappingURL=style.css.map */

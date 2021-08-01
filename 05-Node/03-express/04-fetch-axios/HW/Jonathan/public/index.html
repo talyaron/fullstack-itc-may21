@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="./dist/style.min.css">
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="student.svg" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Student</title>
 </head>
 
@@ -20,7 +17,7 @@
     </header>
     <div class="container">
         <aside class="container__aside">
-            <form class="container__aside__form" onsubmit="handleSumbit(event)" id="form">
+            <form class="container__aside__form" id="form">
                 <fieldset class="container__aside__form__fieldset">
                     <legend>Personal Information</legend>
                     <label for="id">Mispar Zehut:</label>
@@ -31,7 +28,7 @@
                     <input type="number" name="age" id="age" min="0" max="120" />
                     <label for="avgrade">Average Grade:</label>
                     <input type="number" name="avgrade" id="avgrader" min="0" max="10" step="any" />
-                    <button type="sumbit" class="container__aside__form__fieldset--btn">Add Student</button>
+                    <button type="submit" class="container__aside__form__fieldset--btn">Add Student</button>
                 </fieldset>
             </form>
         </aside>

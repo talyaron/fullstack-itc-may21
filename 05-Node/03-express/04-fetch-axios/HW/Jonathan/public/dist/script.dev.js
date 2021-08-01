@@ -1,21 +1,19 @@
 "use strict";
 
-form = document.querySelector('#id'); //btn
+//form
+var form = document.querySelector('#form'); //btn
 
 var btnGetAllStudent = document.querySelector('.container__main__actions--getallstudents');
 var btnGetStudentParams = document.querySelector('.container__main__actions__search--params');
-var btnGetStudentQuery = document.querySelector('.container__main__actions__search--query'); //boardRoot
-
-var boardStudent = document.querySelector('#boardStudent'); //addEventListener
+var btnGetStudentQuery = document.querySelector('.container__main__actions__search--query'); //addEventListener
 
 btnGetAllStudent.addEventListener('click', getAllStudent);
 btnGetStudentParams.addEventListener('click', getStudentParams);
-btnGetStudentQuery.addEventListener('click', getStudentQuery); //input
-
-var inputSearchStudenbyID = document.querySelector('#searchid'); //addStudent
+btnGetStudentQuery.addEventListener('click', getStudentQuery);
+form.addEventListener('submit', handleSumbit); //addStudent
 
 function handleSumbit(ev) {
-  var id, name, age, avgrade;
+  var id, name, age, avgrade, newStudent;
   return regeneratorRuntime.async(function handleSumbit$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -26,33 +24,39 @@ function handleSumbit(ev) {
           name = ev.target.elements.name.value;
           age = ev.target.elements.age.valueAsNumber;
           avgrade = ev.target.elements.avgrade.valueAsNumber;
+          newStudent = {
+            id: id,
+            name: name,
+            age: age,
+            avgrade: avgrade
+          };
 
           if (/^[a-zA-Z]+$/.test(name)) {
-            _context.next = 8;
+            _context.next = 9;
             break;
           }
 
           throw new Error('The name must be in text');
 
-        case 8:
-          _context.next = 10;
-          return regeneratorRuntime.awrap(addStudentPromise(id, name, age, avgrade));
+        case 9:
+          _context.next = 11;
+          return regeneratorRuntime.awrap(addStudentPromise(newStudent));
 
-        case 10:
-          _context.next = 15;
+        case 11:
+          _context.next = 16;
           break;
 
-        case 12:
-          _context.prev = 12;
+        case 13:
+          _context.prev = 13;
           _context.t0 = _context["catch"](0);
           alert(_context.t0);
 
-        case 15:
+        case 16:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 12]]);
+  }, null, null, [[0, 13]]);
 } //getStudent
 
 
@@ -75,7 +79,7 @@ function getAllStudent(ev) {
             break;
           }
 
-          throw new Error('No student on the database');
+          throw new Error('No students on the database');
 
         case 7:
           renderStudents(allStudents);
@@ -158,14 +162,25 @@ function deleteStudent(id) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          _context5.next = 2;
+          if (!confirm("Do you want to delete this student?")) {
+            _context5.next = 8;
+            break;
+          }
+
+          alert('Delete Student');
+          _context5.next = 4;
           return regeneratorRuntime.awrap(deleteStudentPromise(id));
 
-        case 2:
+        case 4:
           student = _context5.sent;
           renderStudents(student);
+          _context5.next = 9;
+          break;
 
-        case 4:
+        case 8:
+          alert('Delete Cancelled!');
+
+        case 9:
         case "end":
           return _context5.stop();
       }
@@ -174,10 +189,11 @@ function deleteStudent(id) {
 }
 
 function renderStudents(data) {
+  var boardStudent = document.querySelector('#boardStudent');
   var html = '';
 
   if (data.length > 0) {
-    html += "<table id=\"students\" class=\"container__main--board__student\">\n        <thead>\n    <tr>\n        <th>ID</th>\n        <th>Name</th>\n        <th>Age</th>\n        <th>Average Grade</th>\n        <th></th>\n    <tr>\n    </thead>\n    <tbody>";
+    html += "<table id=\"students\" class=\"container__main--board__student\">\n        <thead>\n    <tr>\n        <th>Mispar Zehut</th>\n        <th>Name</th>\n        <th>Age</th>\n        <th>Average Grade</th>\n        <th></th>\n    <tr>\n    </thead>\n    <tbody>";
     data.forEach(function (elem) {
       var id = elem.id,
           name = elem.name,
