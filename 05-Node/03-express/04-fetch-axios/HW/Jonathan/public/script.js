@@ -27,18 +27,18 @@ async function handleSumbit(ev) {
         const age = ev.target.elements.age.valueAsNumber
         const avgrade = ev.target.elements.avgrade.valueAsNumber
 
-        const newStudent ={
-            "id":id,
-            "name":name,
-            "age":age,
-            "avgrade":avgrade
+        const newStudent = {
+            "id": id,
+            "name": name,
+            "age": age,
+            "avgrade": avgrade
         }
 
         if (!(/^[a-zA-Z]+$/.test(name))) throw new Error('The name must be in text')
 
-         await addStudentPromise(newStudent)
+        await addStudentPromise(newStudent)
 
-     
+
 
     } catch (e) {
         alert(e);
@@ -82,11 +82,16 @@ async function getStudentQuery(ev) {
 
 
 async function deleteStudent(id) {
-    const student = await deleteStudentPromise(id)
-    renderStudents(student)
+    if (confirm("Do you want to delete this student?")) {
+        alert('Delete Student')
+        const student = await deleteStudentPromise(id)
+        renderStudents(student)
+    } else {
+        alert('Delete Cancelled!')
+    }
+
 
 }
-
 
 
 function renderStudents(data) {

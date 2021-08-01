@@ -164,14 +164,25 @@ function deleteStudent(id) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          _context5.next = 2;
+          if (!confirm("Do you want to delete this student?")) {
+            _context5.next = 8;
+            break;
+          }
+
+          alert('Delete Student');
+          _context5.next = 4;
           return regeneratorRuntime.awrap(deleteStudentPromise(id));
 
-        case 2:
+        case 4:
           student = _context5.sent;
           renderStudents(student);
+          _context5.next = 9;
+          break;
 
-        case 4:
+        case 8:
+          alert('Delete Cancelled!');
+
+        case 9:
         case "end":
           return _context5.stop();
       }
