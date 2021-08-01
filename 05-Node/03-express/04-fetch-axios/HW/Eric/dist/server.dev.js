@@ -36,19 +36,23 @@ app.post('/postStudents', function (req, res) {
 });
 app.get('/getAllStudents', function (req, res) {
   res.send(allStudents);
-}); // app.get(`getStudents/${id}`, (req, res) => {
-//     const student = {id: uuidv4()}
-//     res.send(students.id)
-// })
-
+});
 app.get("/getStudents", function (req, res) {
   var id = req.query.id;
   var studentById = allStudents.find(function (element) {
     return element.id === id;
   });
   res.send(studentById);
-  console.log(studentById);
   req.send(studentById);
+});
+app.get("/getStudents/:id", function (req, res) {
+  var id = req.params.id;
+  var studentByIdParams = allStudents.find(function (elements) {
+    return elements.id === id;
+  });
+  res.send(studentByIdParams);
+  req.send(studentByIdParams);
+  console.log();
 });
 app.listen(port, function () {
   console.log("Server listen on port ".concat(port));

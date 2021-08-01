@@ -36,18 +36,19 @@ app.get('/getAllStudents', (req, res) => {
     res.send(allStudents)
 })
 
-// app.get(`getStudents/${id}`, (req, res) => {
-//     const student = {id: uuidv4()}
-//     res.send(students.id)
-// })
-
-app.get(`/getStudents`, (req, res) => {
-   
+ app.get(`/getStudents`, (req, res) => {
     const id = req.query.id
     const studentById = allStudents.find((element)=>element.id === id);
     res.send(studentById)
-    console.log(studentById);
     req.send(studentById)
+ })
+
+app.get(`/getStudents/:id`, (req, res) => {
+    const {id} = req.params;
+    const studentByIdParams = allStudents.find((elements)=>elements.id === id);
+    res.send(studentByIdParams)
+    req.send(studentByIdParams)
+    console.log();
 })
 
 
