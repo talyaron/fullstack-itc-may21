@@ -32,8 +32,10 @@ app.post('/addStudent', function (req, res) {
     students: students
   });
 });
-app.post('/deleteStudent', function (req, res) {
-  var id = req.body.id;
+app["delete"]('/deleteStudent/:id', function (req, res) {
+  console.log(req.params);
+  var id = req.params.id;
+  console.log('id to delete', id);
   students = students.filter(function (student) {
     return student.id !== id;
   });

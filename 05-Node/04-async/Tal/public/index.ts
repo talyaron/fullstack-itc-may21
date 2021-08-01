@@ -8,37 +8,37 @@ async function getInfo() {
     try{
     //SIMPLE PROMISE:
 
-    // console.time('students')
-    // fetch('/getData')
-    // .then(r=>r.json())
-    // .then(students=>{
-    //     console.log(students);
-    //     console.timeEnd('students')
-    //     renderStudents(students);
+    console.time('students')
+    fetch('/getData')
+    .then(r=>r.json())
+    .then(students=>{
+        console.log(students);
+        console.timeEnd('students')
+        renderStudents(students);
 
-    //     //callback hell (or promise hell)
-    //     console.time('joke')
-    //     fetch('https://api.chucknorris.io/jokes/random')
-    //     .then(r=>r.json())
-    //     .then(joke=>{
-    //         console.log(joke.value);
+        //callback hell (or promise hell)
+        console.time('joke')
+        fetch('https://api.chucknorris.io/jokes/random')
+        .then(r=>r.json())
+        .then(joke=>{
+            console.log(joke.value);
 
-    //        console.timeEnd('joke');
-    //     })
+           console.timeEnd('joke');
+        })
 
-    // })
+    })
 
 
     //ASYNC AWAIT
 
-    // const r = await fetch('/getData');
-    // console.log('waited')
-    // const students = await r.json();
-    // console.log(students);
+    const r = await fetch('/getData');
+    console.log('waited')
+    const students = await r.json();
+    console.log(students);
 
-    // const r2 = await fetch('https://api.chucknorris.io/jokes/random')
-    // const joke = await r2.json();
-    // console.log(joke.value);
+    const r2 = await fetch('https://api.chucknorris.io/jokes/random')
+    const joke = await r2.json();
+    console.log(joke.value);
 
 
     const students = await getStudents();
@@ -92,6 +92,11 @@ function getJoke() {
             });
     })
 }
+
+async function getStudentAndAJoke(){
+    let students = await getStudents();
+    let joke = await getJoke();
+} 
 
 //redner to the DOM
 

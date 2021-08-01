@@ -32,15 +32,17 @@ app.post('/addStudent', function (req, res) {
     students: students
   });
 });
-app.post('/deleteStudent', function (req, res) {
+app["delete"]('/deleteStudent', function (req, res) {
   var id = req.body.id;
-  students = students.filter(function (student) {
-    return student.id !== id;
-  });
-  res.send({
-    message: 'one student record was deleted',
-    students: students
-  });
+  setTimeout(function () {
+    students = students.filter(function (student) {
+      return student.id !== id;
+    });
+    res.send({
+      message: 'one student record was deleted',
+      students: students
+    });
+  }, 2000);
 });
 app.put('/updateStudent', function (req, res) {
   var _req$body2 = req.body,

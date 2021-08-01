@@ -14,15 +14,17 @@ app.get('/getStudents', (req, res) => {
 app.post('/addStudent', (req, res) => {
     console.log(req.body);
     const { name, id } = req.body;
-    students.push({ name, id })
+    students.push({ name, id });
     res.send({ message: 'one person was added', students })
 })
 
-app.post('/deleteStudent', (req, res) => {
+app.delete('/deleteStudent', (req, res) => {
     const { id } = req.body;
+    setTimeout(() => {
+        students = students.filter(student => student.id !== id);
+        res.send({ message: 'one student record was deleted', students })
+    }, 2000)
 
-    students = students.filter(student => student.id !== id);
-    res.send({ message: 'one student record was deleted', students })
 })
 
 app.put('/updateStudent', (req, res) => {
@@ -31,9 +33,9 @@ app.put('/updateStudent', (req, res) => {
     const studentIndex = students.findIndex(student => student.id === id);
     if (studentIndex > -1) {
         students[studentIndex].name = name;
-        res.send({ message: 'one student was updated', students})
+        res.send({ message: 'one student was updated', students })
     } else {
-        res.send({ message: 'couldnt find the student', students})
+        res.send({ message: 'couldnt find the student', students })
     }
 
 })

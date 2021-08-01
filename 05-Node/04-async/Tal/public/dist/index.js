@@ -36,24 +36,56 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function getInfo() {
     return __awaiter(this, void 0, void 0, function () {
-        var students, joke, e_1;
+        var r, students, r2, joke, students, joke, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, getStudents()];
+                    _a.trys.push([0, 7, , 8]);
+                    //SIMPLE PROMISE:
+                    console.time('students');
+                    fetch('/getData')
+                        .then(function (r) { return r.json(); })
+                        .then(function (students) {
+                        console.log(students);
+                        console.timeEnd('students');
+                        renderStudents(students);
+                        //callback hell (or promise hell)
+                        console.time('joke');
+                        fetch('https://api.chucknorris.io/jokes/random')
+                            .then(function (r) { return r.json(); })
+                            .then(function (joke) {
+                            console.log(joke.value);
+                            console.timeEnd('joke');
+                        });
+                    });
+                    return [4 /*yield*/, fetch('/getData')];
                 case 1:
+                    r = _a.sent();
+                    console.log('waited');
+                    return [4 /*yield*/, r.json()];
+                case 2:
+                    students = _a.sent();
+                    console.log(students);
+                    return [4 /*yield*/, fetch('https://api.chucknorris.io/jokes/random')];
+                case 3:
+                    r2 = _a.sent();
+                    return [4 /*yield*/, r2.json()];
+                case 4:
+                    joke = _a.sent();
+                    console.log(joke.value);
+                    return [4 /*yield*/, getStudents()];
+                case 5:
                     students = _a.sent();
                     return [4 /*yield*/, getJoke()];
-                case 2:
+                case 6:
                     joke = _a.sent();
                     console.log('after fetch');
-                    return [3 /*break*/, 4];
-                case 3:
+                    return [3 /*break*/, 8];
+                case 7:
                     e_1 = _a.sent();
                     console.error(e_1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 8];
+                case 8: return [2 /*return*/];
             }
         });
     });
@@ -84,6 +116,22 @@ function getJoke() {
             resolve(data.value);
         })["catch"](function (e) {
             reject(e);
+        });
+    });
+}
+function getStudentAndAJoke() {
+    return __awaiter(this, void 0, void 0, function () {
+        var students, joke;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, getStudents()];
+                case 1:
+                    students = _a.sent();
+                    return [4 /*yield*/, getJoke()];
+                case 2:
+                    joke = _a.sent();
+                    return [2 /*return*/];
+            }
         });
     });
 }
