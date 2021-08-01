@@ -58,8 +58,12 @@ function getData() {
 getData();
 function render(data) {
     var html = '';
-    data.forEach(function (data) {
-        html += "<h4>" + data.name + "</h4>\n        <img src=\"" + data.img + "\" height=\"150px\">";
-    });
+    console.time('render');
+    for (var i = 0; i < 20; i++) {
+        data.forEach(function (data) {
+            html += "<h4>" + data.name + "</h4>\n        <img src=\"" + data.img + "\" height=\"150px\">";
+        });
+    }
     document.querySelector(".coctails").innerHTML = html;
+    console.timeEnd('render');
 }

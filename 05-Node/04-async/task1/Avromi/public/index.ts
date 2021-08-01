@@ -16,10 +16,14 @@ getData();
 function render(data) {
 
     let html = '';
-    data.forEach(data => {
-        html += `<h4>${data.name}</h4>
+    console.time('render')
+    for (let i: number = 0; i < 20; i++) {
+        data.forEach(data => {
+            html += `<h4>${data.name}</h4>
         <img src="${data.img}" height="150px">`
-    })
+        })
+    }
     document.querySelector(`.coctails`).innerHTML = html
+    console.timeEnd('render');
 
 }
