@@ -42,20 +42,34 @@ newStudentform.addEventListener('submit', function (ev) { return handleNewStuden
 searchStudentform.addEventListener('submit', function (ev) { return handleSearchStudent(ev); });
 resetBtn.addEventListener('click', function (ev) { return handleReset(ev); });
 function handleNewStudent(ev) {
-    try {
-        ev.preventDefault();
-        var formElements = ev.target.elements;
-        var name = formElements.studentName.value;
-        var age = formElements.studentAge.valueAsNumber;
-        var gradesAvg = formElements.studentGradesAvg.valueAsNumber;
-        var student = { name: name, age: age, gradesAvg: gradesAvg };
-        postStudent(student);
-        getData(null, null);
-        ev.target.reset();
-    }
-    catch (error) {
-        console.error(error);
-    }
+    return __awaiter(this, void 0, void 0, function () {
+        var formElements, name, age, gradesAvg, student, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    ev.preventDefault();
+                    formElements = ev.target.elements;
+                    name = formElements.studentName.value;
+                    age = formElements.studentAge.valueAsNumber;
+                    gradesAvg = formElements.studentGradesAvg.valueAsNumber;
+                    student = { name: name, age: age, gradesAvg: gradesAvg };
+                    return [4 /*yield*/, postStudent(student)];
+                case 1:
+                    _a.sent();
+                    return [4 /*yield*/, getData(null, null)];
+                case 2:
+                    _a.sent();
+                    ev.target.reset();
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_1 = _a.sent();
+                    console.error(error_1);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
 }
 function handleSearchStudent(ev) {
     try {
