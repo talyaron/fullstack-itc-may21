@@ -66,7 +66,7 @@ app.get('/getStudents', (req, res) => {
     try {
         res.send(students.list);
     } catch (error) {
-        res.status(400).send({ error: e.message });
+        res.status(400).send(error);
     }
 });
 
@@ -87,7 +87,7 @@ app.get('/showStudentQuery', (req, res) => {
         const studentFounded = students.searchStudent(req.query.id)
         res.send([studentFounded]);
     } catch (error) {
-        res.status(400).send({ error: e.message });
+        res.status(400).send(error);
     }
 })
 
@@ -98,7 +98,7 @@ app.delete('/deleteStudent/:id', (req, res) => {
         students.list = students.list.filter(student => student.id !== id);
         res.send(students.list);
     } catch (e) {
-        res.status(400).send({ error: e.message });
+        res.status(400).send(error);
     }
 });
 
@@ -166,7 +166,7 @@ app.listen(port, () => {
     try {
         console.log(`The server is running at port:${port}`)
     } catch (error) {
-        res.status(500).send({ error: 'There is an error in the port' });
+        res.status(500).send(error);
     }
 });
 

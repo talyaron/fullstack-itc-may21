@@ -92,14 +92,24 @@ function getStudentParam() {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
-          return regeneratorRuntime.awrap(axios.get("/showStudentParam/".concat(searchId.value)));
+          if (searchId.value) {
+            _context2.next = 4;
+            break;
+          }
 
-        case 2:
-          studentInfoParam = _context2.sent;
-          render(studentInfoParam.data);
+          alert('Please enter an ID');
+          _context2.next = 8;
+          break;
 
         case 4:
+          _context2.next = 6;
+          return regeneratorRuntime.awrap(axios.get("/showStudentParam/".concat(searchId.value)));
+
+        case 6:
+          studentInfoParam = _context2.sent;
+          studentInfoParam.data[0] === null ? alert('Please enter a valid ID') : render(studentInfoParam.data);
+
+        case 8:
         case "end":
           return _context2.stop();
       }
@@ -116,14 +126,24 @@ function getStudentQuery() {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          _context3.next = 2;
-          return regeneratorRuntime.awrap(axios.get("/showStudentQuery?id=".concat(searchId.value)));
+          if (searchId.value) {
+            _context3.next = 4;
+            break;
+          }
 
-        case 2:
-          studentInfoQuery = _context3.sent;
-          render(studentInfoQuery.data);
+          alert('Please enter an ID');
+          _context3.next = 8;
+          break;
 
         case 4:
+          _context3.next = 6;
+          return regeneratorRuntime.awrap(axios.get("/showStudentQuery?id=".concat(searchId.value)));
+
+        case 6:
+          studentInfoQuery = _context3.sent;
+          studentInfoQuery.data[0] === null ? alert('Please enter a valid ID') : render(studentInfoQuery.data);
+
+        case 8:
         case "end":
           return _context3.stop();
       }
@@ -176,12 +196,23 @@ function removeStudent(studentId, name) {
 //Function to render the user/s in the DOM
 
 function render(data) {
-  var table = document.querySelector(".table");
-  if (!table) throw new Error('There is a problem finding table from HTML');
-  var html = data.map(function (element) {
-    return "\n        <tr>\n        <td>".concat(element.id, "</td>\n        <td>").concat(element.firstname, "</td>\n        <td>").concat(element.lastname, "</td> \n        <td>").concat(element.age, "</td> \n        <td>").concat(element.averageGrade, "</td> \n        <td><i class=\"fas fa-trash table__remove\" onclick='removeStudent(\"").concat(element.id, "\", \"").concat(element.firstname, "\")' title=\"Remove\"></i></td> \n        </tr>");
-  }).join('');
-  table.innerHTML = html;
+  try {
+    var table = document.querySelector(".table");
+    if (!table) throw new Error('There is a problem finding table from HTML');
+
+    if (data.length === 0) {
+      var html = "<tr>\n            <td></td>\n            <td></td>\n            <td>Empty table</td> \n            <td></td> \n            <td></td> \n            <td></td> \n            </tr>";
+      table.innerHTML = html;
+    } else {
+      var _html = data.map(function (element) {
+        return "\n            <tr>\n            <td>".concat(element.id, "</td>\n            <td>").concat(element.firstname, "</td>\n            <td>").concat(element.lastname, "</td> \n            <td>").concat(element.age, "</td> \n            <td>").concat(element.averageGrade, "</td> \n            <td><i class=\"fas fa-trash table__remove\" onclick='removeStudent(\"").concat(element.id, "\", \"").concat(element.firstname, "\")' title=\"Remove\"></i></td> \n            </tr>");
+      }).join('');
+
+      table.innerHTML = _html;
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 ; //////////////////////////////////////////////////////
