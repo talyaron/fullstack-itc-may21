@@ -49,6 +49,9 @@ header span {
   text-indent: 0.2em;
   text-align: center;
 }
+.container__aside__form__fieldset input:focus {
+  outline: none;
+}
 .container__aside__form__fieldset--btn {
   position: relative;
   display: block;
@@ -101,6 +104,9 @@ header span {
   text-indent: 0.2em;
   text-align: center;
 }
+.container__main__actions__search input:focus {
+  outline: none;
+}
 .container__main__actions__search button {
   padding: 0.3em;
   border-radius: 10px;
@@ -118,7 +124,6 @@ header span {
   margin-top: 1em;
   position: relative;
   right: 12%;
-  /*#students tr:hover {background-color: #ddd;}*/
 }
 .container__main--board #students {
   font-family: Arial, Helvetica, sans-serif;
@@ -131,19 +136,19 @@ header span {
   padding: 8px;
   text-align: center;
 }
-.container__main--board #students tr:nth-child(even) {
-  background-color: black;
-  color: whitesmoke;
+.container__main--board #students tr {
+  background-color: lightgray;
+  color: #8B0000;
 }
-.container__main--board #students tr:nth-child(odd) {
-  background-color: white;
-  color: black;
+.container__main--board #students tr:hover {
+  background-color: lightgray;
+  color: green;
 }
 .container__main--board #students th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #1c89ff;
+  background-color: black;
   color: white;
   text-align: center;
 }
@@ -177,7 +182,12 @@ header span {
   .container__main--board {
     width: 260px;
   }
-  .container__main--board j table, .container__main--board thead, .container__main--board tbody, .container__main--board th, .container__main--board td, .container__main--board tr {
+  .container__main--board j table,
+.container__main--board thead,
+.container__main--board tbody,
+.container__main--board th,
+.container__main--board td,
+.container__main--board tr {
     display: block;
   }
   .container__main--board thead tr {
