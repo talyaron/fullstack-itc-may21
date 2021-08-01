@@ -37,8 +37,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 getData(null, null);
 var newStudentform = document.querySelector('#students-form');
 var searchStudentform = document.querySelector('#search-student-form');
+var resetBtn = document.querySelector('#reset');
 newStudentform.addEventListener('submit', function (ev) { return handleNewStudent(ev); });
 searchStudentform.addEventListener('submit', function (ev) { return handleSearchStudent(ev); });
+resetBtn.addEventListener('click', function (ev) { return handleReset(ev); });
 function handleNewStudent(ev) {
     try {
         ev.preventDefault();
@@ -62,6 +64,7 @@ function handleSearchStudent(ev) {
         var studentUuid = formElements.studentUuid.value;
         var searchType = formElements.searchType.value;
         getData(searchType, studentUuid);
+        resetBtn.style.display = 'unset';
         ev.target.reset();
     }
     catch (error) {
@@ -103,4 +106,15 @@ function renderData(dataToRender) {
         html += "\n    <div class=\"students__item\">\n      <p id=\"" + student.uuid + "\">" + student.uuid + "</p>\n      <p id=\"" + student.uuid + "-name\">" + student.name + "</p>\n      <p id=\"" + student.uuid + "-age\">" + student.age + "</p>\n      <p id=\"" + student.uuid + "-gradesAvg\">" + student.gradesAvg + "</p>\n    </div>";
     });
     root.innerHTML = html;
+}
+function handleReset(ev) {
+    try {
+        ev.preventDefault();
+        getData(null, null);
+        resetBtn.style.display = 'none';
+        ev.target.reset();
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
