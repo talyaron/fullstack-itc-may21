@@ -24,7 +24,11 @@
   margin: 5px;
   padding: 5px;
 }
-.containerPage__containerForm2--submit {
+.containerPage__containerForm2--submitParams {
+  margin: 5px;
+  padding: 5px;
+}
+.containerPage__containerForm2--submitQuerys {
   margin: 5px;
   padding: 5px;
 }

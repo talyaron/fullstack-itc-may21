@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Table</title>
+    <link rel="shortcut icon" href="./img/studentFavicon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="./dist/styles.min.css">
+</head>
+
+<body onload="getInfo()">
+    <nav class="top-menu">
+        <img class="top-menu__logo" src="./img/universityLeonardo.png" alt="Leonardo´s University" />
+    </nav>
+
+    <nav class="top-submenu">
+        <button class="top-submenu-button" id="buttonUpload">
+            Upload a new student
+        </button>
+
+        <button class="top-submenu-button" id="showStudents">
+            Show all the students
+        </button>
+
+        <form>
+            <input class="form__search" type="text" name="searchId" id="searchId" placeholder="Search by Id (press 'Copy')" />
+        </form>
+
+        <button class="top-submenu-button" id="informationParams">
+            Get student information by "params"
+        </button>
+
+        <button class="top-submenu-button" id="informationQuerys">
+            Get students information by "querys"
+        </button>
+    </nav>
+
+    <!-- Modal to upload a user -->
+    <div id="modalUpload" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeUpload" class="close">&times;</span>
+            <form class="form">
+                <div class="form__wrapper">
+                    <label for="firstname">First name:</label>
+                    <input type="text" placeholder="More than 3 characters" name="firstname" id="firstname" maxlength="20" required />
+                </div>
+
+                <div class="form__wrapper">
+                    <label for="lastname">Last name:</label>
+                    <input type="text" placeholder="More than 3 characters" name="lastname" id="lastname" maxlength="20" required />
+                </div>
+
+                <div class="form__wrapper">
+                    <label for="age">Age:</label>
+                    <input type="number" placeholder="Between 0 and 99" name="age" id="age" min="0" max=99 required />
+                </div>
+
+                <div class="form__wrapper">
+                    <label for="averageGrade">Average Grade:</label>
+                    <input type="number" placeholder="Between 0 and 10" name="averageGrade" id="averageGrade" min="0" max=10 step=".01" required />
+                </div>
+
+                <input class="form__input--submit" type="submit" value="Add student" />
+            </form>
+        </div>
+    </div>
+
+    <table id="tblData">
+        <tr id="tblData__titles">
+            <th id="tblData__titles--id">Id</th>
+            <th id="tblData__titles--firstname">First Name</th>
+            <th id="tblData__titles--lastname">Last Name</th>
+            <th id="tblData__titles--age">Age</th>
+            <th id="tblData__titles--average">Average Grade</th>
+            <th><i class="fas fa-wrench"></i></th>
+        </tr>
+        <tbody class="table"></tbody>
+    </table>
+
+    <div id="listStudent"></div>
+    <script src="script.js"></script>
+    <script src="helperModals.js"></script>
+</body>
+
+</html>

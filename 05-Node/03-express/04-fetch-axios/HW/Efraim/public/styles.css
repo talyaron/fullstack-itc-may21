@@ -1,27 +1,54 @@
-form {
+body {
+    font-family: sans-serif;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsCMiFgdPHR80TYbupsEUiKcpBRjUACPYJUQ&usqp=CAU");
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+}
+form, .holder__student {
+    background-color: whitesmoke;
     display: flex;
     flex-direction: column;
-    width: 20vw;
+    width: fit-content;
     justify-content: center;
     margin: auto;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 3px solid black;
 }
 label {
-    margin: 0.3rem
+    margin: 0.5rem;
+    font-weight: bold;
+    font-style: italic;
 }
 input{
     margin-top: 0.3rem;
     width: 10vw;
+    border-radius: 10px;
+    font-weight: bold;
 }
 .wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-#root{
+.holder{
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 20vw;
     margin: auto;
     align-content: center;
+}
+.button {
+   
+    width: fit-content;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: auto;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+.button:hover{
+    cursor: pointer;
 }

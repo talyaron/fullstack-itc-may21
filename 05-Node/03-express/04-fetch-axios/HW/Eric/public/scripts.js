@@ -1,6 +1,33 @@
-const pepe = document.querySelector('.pepe')
+const stud = document.querySelector('.stud')
+//btn
+const btnGetDataQuery = document.querySelector('.containerPage__containerForm2--submitQuerys')
+const btnGetDataParams = document.querySelector('.containerPage__containerForm2--submitParams')
+//inputID
+const inputId = document.querySelector('.containerPage__containerForm2--input')
+btnGetDataQuery.addEventListener('click', getDataQuery)
+btnGetDataParams.addEventListener('click', getDataParam)
 
-pepe.addEventListener('click', loadStudents)
+stud.addEventListener('click', loadStudents)
+
+ function getDataQuery(ev) {
+     let html = ''
+     ev.preventDefault()
+     const id = inputId.valueAsNumber
+     axios.get(`/aa?id=${id}`)
+        .then(({ data }) => {
+             render(html, data)
+         })
+ }
+
+ function getDataParam(ev) {
+    let html = ''
+    ev.preventDefault()
+    const id = inputId.valueAsNumber
+    axios.get(`/aa/${id}`)
+        .then(({ data }) => {
+            render(html, data)
+        })
+}
 
 
 function handleSubmit(ev) {
@@ -8,22 +35,18 @@ function handleSubmit(ev) {
 
     const name = ev.target.name.value
     const age = ev.target.age.value
-    const id = ev.target.id.value
     const avgGrade = ev.target.avgGrade.value
     
     axios.post('/aa', {
             name,
             age,
-            id,
             avgGrade
         })
         .then((res) => {
-            //console.log(res)
+            console.log(res)
         })
     
 }
-
-
 
 function loadStudents(ev) {
     let html = ''
@@ -32,24 +55,8 @@ function loadStudents(ev) {
     axios.get('/aa')
     .then(({data} ) => {
         data.forEach(element => {
-          html += `${element.name},`      
+          html += `<div>${element.name}, ${element.id},<div>`      
         });
         list.innerHTML = html
     })
 }
-
-
-function handleGetParams(ev) {
-    ev.preventDefault()
-    const studentId = ev.target.studentId.value
-    console.log(studentId)
-
-}
-
-function handleGetQuery(ev) {
-    ev.preventDefault()
-    console.log('hola')
-
-}
-// handleGetQuery()
-// handleGetParams()
