@@ -39,16 +39,13 @@ function getData() {
         var r, cocktails;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    console.log('start get data');
-                    return [4 /*yield*/, fetch('/getCocktails')];
+                case 0: return [4 /*yield*/, fetch('/')];
                 case 1:
                     r = _a.sent();
                     console.log('waited');
                     return [4 /*yield*/, r.json()];
                 case 2:
                     cocktails = _a.sent();
-                    console.log(cocktails);
                     render(cocktails);
                     return [2 /*return*/];
             }
@@ -58,8 +55,18 @@ function getData() {
 getData();
 function render(data) {
     var html = '';
+<<<<<<< HEAD
+    console.time('render');
+    for (var i = 0; i < 20; i++) {
+        data.forEach(function (data) {
+            html += "<h4>" + data.name + "</h4>\n        <img src=\"" + data.img + "\" height=\"150px\">";
+        });
+    }
+=======
     data.forEach(function (data) {
-        html += "<h4>" + data.name + "</h4>\n        <img src=\"" + data.img + "\" height=\"150px\">";
+        html += "<h4>" + data.strDrink + "</h4>\n        <img src=\"" + data.strDrinkThumb + "\">";
     });
+>>>>>>> main
     document.querySelector(".coctails").innerHTML = html;
+    console.timeEnd('render');
 }

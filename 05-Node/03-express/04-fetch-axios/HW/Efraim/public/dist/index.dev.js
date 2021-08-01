@@ -1,5 +1,6 @@
 "use strict";
 
+//For Yonotan: I finished assignment before fridays class which is why I didn't use the newest promise methods.. I will do from now on!
 function handleStudent(ev) {
   ev.preventDefault();
 
@@ -13,7 +14,6 @@ function handleStudent(ev) {
     age = age.valueAsNumber;
     studentID = studentID.valueAsNumber;
     averageGrade = averageGrade.valueAsNumber;
-    console.log(name, age);
     axios.put('/addStudent', {
       name: name,
       age: age,
@@ -23,18 +23,21 @@ function handleStudent(ev) {
       var data = _ref.data;
       console.log(data);
     });
+    alert("Submitted Succesfuly!");
     ev.target.reset();
   } catch (e) {
     console.error(e);
   }
 }
 
+var firstForm = document.querySelector(".firstForm");
+firstForm.addEventListener("submit", handleStudent);
+
 function handleStudentSearchQuery(event) {
   try {
     event.preventDefault();
-    var list = document.querySelector("#root");
+    var list = document.querySelector(".holder");
     var searchQuery = event.target.children.searchQuery.valueAsNumber;
-    console.log(searchQuery);
     axios.get("/getStudentQuery?id=".concat(searchQuery)).then(function (_ref2) {
       var data = _ref2.data;
       console.log(data);
@@ -48,13 +51,15 @@ function handleStudentSearchQuery(event) {
   }
 }
 
+var secondForm = document.querySelector(".secondForm");
+secondForm.addEventListener("submit", handleStudentSearchQuery);
+
 function handleStudentSearchParam(event) {
   event.preventDefault();
 
   try {
-    var list = document.querySelector("#root");
+    var list = document.querySelector(".holder");
     var searchParam = event.target.children.searchParam.valueAsNumber;
-    console.log(searchParam);
     axios.get("/getStudentParam/".concat(searchParam)).then(function (_ref3) {
       var data = _ref3.data;
       console.log(data);
@@ -67,3 +72,6 @@ function handleStudentSearchParam(event) {
     console.error(e);
   }
 }
+
+var thirdForm = document.querySelector(".thirdForm");
+thirdForm.addEventListener("submit", handleStudentSearchParam);

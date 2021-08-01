@@ -11,15 +11,7 @@ app.use(express["static"]('public')); //read filefunction? // on load
 
 app.get('/getCocktails', function (req, res) {
   console.log('get....');
-  var cocktails = JSON.parse(fs.readFileSync('./cocktails.json'));
-  var newCocktails = cocktails.map(function (cok) {
-    console.log(cok);
-    return {
-      img: cok.strDrinkThumb,
-      name: cok.strDrink
-    };
-  });
-  console.log(newCocktails);
+  var newCocktails = fs.readFileSync('./newCocktails.json');
   res.send(newCocktails);
 });
 app.listen(port, function () {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./app.css" />
+    <title>APP</title>
+  </head>
+  <body>
+    <h1>Student Register</h1>
+<header class="container header">
+  <form onsubmit="postStudents(event)">
+    <input type="text" name="name" />
+    <input type="number" name="id" />
+    <input type="number" name="age" />
+    <input type="number" name="avgrade" />
+    <button type="submit">Send</button>
+  </form>
+
+</header>
+
+    <button onclick="getStudents()">Get</button>
+
+    <div class="search-by-id">
+      <input type="number" name="searchBar" id="searchBar" />
+      <button type="submit" class="btnQuery">GetQuery</button>
+      <button type="submit" class="btnParams">GetParams</button>
+    </div>
+
+    <div id="root"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>

@@ -42,7 +42,8 @@ function handleSubmitFormTwo(event){
     const id = event.target.elements.id.value;
     axios.get(`/${id}`)
     .then(res=>{
-        console.dir(res.data);
+        const data = res.data.result
+        render(data)
     })
     event.target.reset();
 }
@@ -54,9 +55,25 @@ function handleClick(event) {
    
     axios.get(`/${id}`)
     .then(r=>{
-        console.log(r.data);
+      const data = r.data.result;
+      render(data)
+
     })
  
     formTwo.reset();
 }
 
+function render(data){
+    const rootData = document.querySelector('.rootData')
+    let html ="";
+   
+    if(typeof data === 'string'){
+        html += data
+      
+    }else{
+        
+    data.forEach(student =>{ 
+        html += `<p>${student.name}</p><p>${student.grade}</p><p>${student.age}</p>`
+    })}
+    rootData.innerHTML = html;
+}

@@ -9,7 +9,8 @@ var express = require('express');
 var app = express();
 var port = 3000;
 
-var bodyParser = require('body-parser');
+var bodyParser = require('body-parser'); // explanation....
+
 
 app.use(bodyParser.json());
 app.get('/', function (req, res) {

@@ -1,0 +1,308 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.body {
+    background-image: linear-gradient(to right, #000428, #004e92);
+    background-attachment: fixed;
+}
+
+header {
+    h2 {
+        text-align: center;
+        color: white;
+        background-color: blue;
+        padding: 0.2em;
+    }
+
+    span {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+
+    &__aside {
+
+
+        &__form {
+
+            &__fieldset {
+                display: flex;
+                flex-direction: column;
+                padding: 0.2em 0.5em;
+                height: 80vh;
+                margin: 0.5em 3em 0 4em;
+
+                legend {
+                    text-align: center;
+                    color: white;
+                }
+
+                label {
+                    text-align: center;
+                    margin-top: 20px;
+                    color: white;
+                }
+
+                input {
+                    margin-top: 10px;
+                    border-radius: 10px;
+                    padding: 0.4em;
+                    text-indent: 0.2em;
+                    text-align: center;
+
+                }
+
+                input:focus{
+                    outline: none;
+                }
+
+                &--btn {
+                    position: relative;
+                    display: block;
+                    width: 150px;
+                    height: 36px;
+                    border-radius: 18px;
+                    background-color: #1c89ff;
+                    border: solid 1px transparent;
+                    color: #fff;
+                    font-size: 18px;
+                    font-weight: 300;
+                    cursor: pointer;
+                    margin: 1.5em auto 0 auto;
+                    text-transform: uppercase;
+                }
+
+                &--btn:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+
+    &__main {
+
+        margin-top: 1em;
+        width: 60%;
+        position: relative;
+        right: 0%;
+
+        &__actions {
+            display: flex;
+
+            button {
+                padding: 0.3em;
+                border-radius: 10px;
+                text-transform: uppercase;
+                font-weight: bold;
+                background-color: #1c89ff;
+                border: solid 1px transparent;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            button:hover {
+                opacity: 0.7;
+            }
+
+            &__search {
+                margin-left: 2em;
+
+                label {
+                    color: white;
+                }
+
+
+                input {
+                    border-radius: 10px;
+                    padding: 0.2em;
+                    text-indent: 0.2em;
+                    text-align: center;
+                }
+                input:focus{
+                    outline: none;
+                }
+
+                button {
+                    padding: 0.3em;
+                    border-radius: 10px;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    background-color: #1c89ff;
+                    border: solid 1px transparent;
+                    color: #fff;
+                    cursor: pointer;
+                }
+
+                button:hover {
+                    opacity: 0.7;
+                }
+
+            }
+        }
+
+        &--board {
+            margin-top: 1em;
+            position: relative;
+            right: 12%;
+
+
+
+            #students {
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #students td,
+            #students th {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+
+           
+            #students tr {
+                background-color: lightgray;
+                color:#8B0000;
+            }
+
+            #students tr:hover {
+                background-color: lightgray;
+                color: green;
+            }
+
+            // #students tr:nth-child(odd):hover {
+            //     background-color: lightcyan;
+            //     color: blue;
+            // }
+
+            // #students tr:nth-child(even):hover {
+            //     background-color: lightblue;
+            //     color: blue;
+            // }
+
+            #students th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: black;
+                color: white;
+                text-align: center;
+            }
+
+        }
+    }
+}
+
+
+@media screen and (max-width: 870px) {
+
+    .container {
+        &__main {
+            margin-top: 1em;
+            width: 60%;
+            position: relative;
+            right: 2%;
+
+            &--board {
+                position: relative;
+                right: 0%;
+            }
+        }
+
+    }
+
+}
+
+@media screen and (max-width: 360px) {
+
+    .container {
+        display: block;
+        position: relative;
+        left: -13%;
+
+        &__main {
+            position: relative;
+            left: 50px;
+
+            &__actions {
+                display: block;
+                text-align: center;
+            }
+
+            &--board {
+
+                width: 260px;
+
+                j table,
+                thead,
+                tbody,
+                th,
+                td,
+                tr {
+                    display: block;
+                }
+
+                thead tr {
+                    position: absolute;
+                    top: -9999px;
+                    left: -9999px;
+                }
+
+                tr {
+                    border: 1px solid #ccc;
+                }
+
+                td {
+                    border: none;
+                    border-bottom: 1px solid #eee;
+                    position: relative;
+                    padding-left: 50%;
+                }
+
+                td:before {
+
+                    position: absolute;
+                    top: 6px;
+                    left: 0px;
+                    width: 45%;
+                    padding-right: 15px;
+                    white-space: nowrap;
+                }
+
+                td:nth-of-type(1):before {
+                    content: "ID";
+                }
+
+                td:nth-of-type(2):before {
+                    content: "Name";
+                }
+
+                td:nth-of-type(3):before {
+                    content: "Age";
+                }
+
+                td:nth-of-type(4):before {
+                    content: "Average Grade";
+                }
+
+                td:nth-of-type(5):before {
+                    content: "";
+                }
+            }
+        }
+
+    }
+
+}
