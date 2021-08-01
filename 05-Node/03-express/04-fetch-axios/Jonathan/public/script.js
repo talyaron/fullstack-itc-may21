@@ -1,5 +1,3 @@
-//form
-//const form = document.getElementById('form')
 
 //btn
 const btnGetAllStudent = document.querySelector('.container__main__actions--getallstudents')
@@ -9,16 +7,10 @@ const btnGetStudentQuery = document.querySelector('.container__main__actions__se
 //boardRoot
 const boardStudent = document.querySelector('#boardStudent')
 
-
-
-
 //addEventListener
-
 btnGetAllStudent.addEventListener('click', getAllStudent)
 btnGetStudentParams.addEventListener('click', getStudentParams)
 btnGetStudentQuery.addEventListener('click', getStudentQuery)
-//form.addEventListener('sumbitk', addStudentOnList)
-
 
 //input
 const inputSearchStudenbyID = document.querySelector('#searchid')
@@ -35,7 +27,7 @@ async function handleSumbit(ev) {
         const avgrade = ev.target.elements.avgrade.value
 
         const student = await addStudentPromise(id, name, age, avgrade)
-        
+
 
     } catch (e) {
         console.log(e);
@@ -93,8 +85,8 @@ function addStudentPromise(id, name, age, avgrade) {
             },
             body: JSON.stringify({ id, name, age, avgrade })
         }).then(r => r.json())
-            .then(r=>alert(r.error))
-            .then(student => {resolve(student)})
+            .then(r => alert(r.error))
+            .then(student => { resolve(student) })
             .catch(e => {
                 reject(e)
             })
@@ -108,7 +100,6 @@ function deleteStudentPromise(id) {
         fetch(`/deleteStudent/${id}`, {
             method: 'DELETE'
         })
-        
             .then(r => r.json())
             .then(student => { resolve(student) })
             .catch(e => {
@@ -127,9 +118,14 @@ function getStudentQueryPromise() {
     const id = inputSearchStudenbyID.value
     return new Promise((resolve, reject) => {
         fetch(`/getStudentbyQuery?id=${id}`)
-            .then(r => r.json())
+            .then(function (res) {
+                if (res.status === 200 && res.ok) {
+                    return res.json().then(student => { resolve(student) })
+                } else {
+                    return res.json().then(student => { alert(student.error) })
+                }
+            })
 
-            .then(student => { resolve(student) })
             .catch(e => {
                 reject(e)
             })
@@ -141,9 +137,13 @@ function getStudentParamsPromise() {
     const id = inputSearchStudenbyID.value
     return new Promise((resolve, reject) => {
         fetch(`/getStudentbyParam/${id}`)
-            .then(r => r.json())
-            
-            .then(student => { resolve(student) })
+            .then(function (res) {
+                if (res.status === 200 && res.ok) {
+                    return res.json().then(student => { resolve(student) })
+                } else {
+                    return res.json().then(student => { alert(student.error) })
+                }
+            })
             .catch(e => {
                 reject(e)
             })
@@ -170,7 +170,7 @@ function renderStudents(data) {
     let html = ''
 
     if (data.length > 0) {
-        html += `<table id="students">
+        html += `<table id="students" class="container__main--board__student">
         <thead>
     <tr>
         <th>ID</th>
@@ -184,12 +184,15 @@ function renderStudents(data) {
 
 
         data.forEach(elem => {
+
+            const { id, name, age, avgrade } = elem
+
             html += `<tr>
-                      <td>${elem.id}</td>
-                        <td>${elem.name}</td>
-                        <td>${elem.age}</td>
-                        <td>${elem.avgrade}</td>
-                        <td><i class="fa fa-trash " onclick='deleteStudent("${elem.id}")' title="Delete Item"></i></td>   
+                      <td>${id}</td>
+                        <td>${name}</td>
+                        <td>${age}</td>
+                        <td>${avgrade}</td>
+                        <td><i class="fa fa-trash" onclick='deleteStudent("${id}")' title="Delete Item" style="cursor:pointer"></i></td>   
                  </tr> `
         });
 

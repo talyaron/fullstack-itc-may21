@@ -149,6 +149,8 @@ header {
             position: relative;
             right: 12%;
 
+         
+
             #students {
                 font-family: Arial, Helvetica, sans-serif;
                 border-collapse: collapse;
@@ -172,7 +174,7 @@ header {
                 color: black
             }
 
-            /*#students tr:hover {background-color: #ddd;}*/
+            #students tr:hover {background-color: #ddd;}*/
 
             #students th {
                 padding-top: 12px;
