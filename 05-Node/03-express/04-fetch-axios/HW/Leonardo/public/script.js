@@ -123,7 +123,6 @@ function render(data) {
 
 //Function to sort the table in the DOM (I could do this directly in the client side, but I prefer to do it in the server so I can practice and if you refresh the page the data is going to be still there):
 
-
 try {
     const sortName = document.querySelector("#tblData__titles--firstname");
     if (!sortName) throw new Error('There is a problem sorting the name');
@@ -155,14 +154,18 @@ async function sortTable(orderBy) {
 };
 
 function getAllStudentsSorted(orderBy) {
-    return new Promise((resolve, reject) => {
-        axios.get(`/sortTable/${orderBy}`).then(({ data }) => {
-            resolve(data);
-        })
-            .catch(e => {
-                reject(e)
-            });
-    });
+    try {
+        return new Promise((resolve, reject) => {
+            axios.get(`/sortTable/${orderBy}`).then(({ data }) => {
+                resolve(data);
+            })
+                .catch(e => {
+                    reject(e)
+                });
+        });
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 ////////////////////////////////////////////////////
