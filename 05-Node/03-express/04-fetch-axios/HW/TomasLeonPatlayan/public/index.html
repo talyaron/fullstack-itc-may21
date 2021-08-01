@@ -9,18 +9,35 @@
   </head>
   <body>
     <h1>Student Register</h1>
-<header class="container header">
-  <form onsubmit="postStudents(event)">
-    <input type="text" name="name" />
-    <input type="number" name="id" />
-    <input type="number" name="age" />
-    <input type="number" name="avgrade" />
-    <button type="submit">Send</button>
-  </form>
+    <header class="container header">
+      <div class="register">
+        <form class="register__form" onsubmit="postStudents(event)">
+          <label>Name:</label>
+          <div class="register__form__input-name">
+            <input type="text" name="name" />
+          </div>
+          <label>Id:</label>
+          <div class="register__form__input-id">
+            <input type="number" name="id" />
+          </div>
+          <label>Age:</label>
+          <div class="register__form__input-age">
+            <input type="number" name="age" />
+          </div>
+          <label>AvGrade:</label>
+          <div class="register__form__input-avgrade">
+            <input type="number" name="avgrade" />
+          </div>
+          <div class="register__form__button">
+            <button type="submit">Send</button>
+          </div>
+        
+        </form>
+        <button onclick="getStudents()">Get Student</button>
+      </div>
+    </header>
 
-</header>
-
-    <button onclick="getStudents()">Get</button>
+   
 
     <div class="search-by-id">
       <input type="number" name="searchBar" id="searchBar" />

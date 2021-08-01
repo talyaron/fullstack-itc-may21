@@ -8,12 +8,20 @@ const url = " http://localhost:3500";
 
 const postStudents = (e) => {
   e.preventDefault();
-  let { name, id, age, avgrade } = e.target.elements;
+  try {
+    
+   
+
+    let { name, id, age, avgrade } = e.target.elements;
   name = name.value;
   id = id.value;
   age = age.value;
   avgrade = avgrade.value;
-
+  if(name ==="" || id==="" || age===""|| avgrade==="") throw new Error ('Please fill all the inputs')
+  const noRepeat = students.some((student) => student.id === id);
+    if(noRepeat){
+      throw new Error ("No repeat the ID please")
+    }
   axios({
     method: "post",
     url: `${url}/postStudents`,
@@ -32,6 +40,10 @@ const postStudents = (e) => {
       console.log(err);
     });
 
+  } catch (error) {
+    alert(error);
+  }
+  
   e.target.reset();
 };
 //!debo ccambiar el handle no puede ser el post deben estar separados
@@ -112,7 +124,6 @@ const promiseGetStudentQuery = async () => {
 btnGetByQuerry.addEventListener("click", promiseGetStudentQuery);
 
 function renderStudents(data) {
-  console.log(data);
   let html = "";
   data.forEach((student) => {
     html += `<p>${student.name}</p>
@@ -123,5 +134,4 @@ function renderStudents(data) {
 
   document.getElementById("root").innerHTML = html;
 }
-//!IMPORTASNTE: PREGUNTAR PORQUE NO FUNCIONA CON LOS LISTENERS
-//! DONDE PONER EL ASYNC SI ES CON ARROW FUNCTION
+

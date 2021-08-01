@@ -37,28 +37,34 @@ app.get("/getStudentParams/:id", (req, res) => {
 });
 
 app.post("/postStudents", (req, res) => {
-  const { name, id, age, avgrade } = req.body;
-
-  const addStudent = {
-    id: parseInt(id),
-    name: name,
-    age: parseInt(age),
-    avgrade: parseInt(avgrade),
-  };
-
-  const students = localJson();
-
-  function getStudent() {
-    return function __getInfo(addStudent) {
-      return addStudent;
+  try {
+    const { name, id, age, avgrade } = req.body;
+    const students = localJson();
+    
+    const addStudent = {
+      id: parseInt(id),
+      name: name,
+      age: parseInt(age),
+      avgrade: parseInt(avgrade),
     };
+  
+    
+  
+    // function getStudent() {
+    //   return function __getInfo(addStudent) {
+    //     return addStudent;
+    //   };
+    // }
+  
+    // const student = getStudent();
+  
+    students.push(addStudent);
+    fs.writeFileSync("./db-student.json", JSON.stringify(students));
+    res.send(students);
+  } catch (error) {
+    alert(error)
   }
 
-  const student = getStudent();
-
-  students.push(student(addStudent));
-  fs.writeFileSync("./db-student.json", JSON.stringify(students));
-  res.send(students);
 });
 
 app.delete("/deleteStudents/:id", (req, res) => {
