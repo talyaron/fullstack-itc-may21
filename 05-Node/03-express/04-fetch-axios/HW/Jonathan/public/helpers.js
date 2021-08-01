@@ -32,6 +32,7 @@ function deleteStudentPromise(id) {
 }
 
 function getOneStudent(howGetStudent) {
+    const inputSearchStudenbyID = document.querySelector('#searchid')
     const id = inputSearchStudenbyID.value
     const route = (howGetStudent === 'query') ? `/getStudentbyQuery?id=${id}` : `/getStudentbyParam/${id}`
     return new Promise((resolve, reject) => {
