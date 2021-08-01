@@ -29,7 +29,7 @@ async function handleSumbit(ev) {
 
         if (!(/^[a-zA-Z]+$/.test(name))) throw new Error('The name must be in text')
 
-        const student = await addStudentPromise(id, name, age, avgrade)
+         await addStudentPromise(id, name, age, avgrade)
 
      
 

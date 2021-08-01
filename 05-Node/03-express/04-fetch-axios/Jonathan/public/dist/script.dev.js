@@ -15,7 +15,7 @@ btnGetStudentQuery.addEventListener('click', getStudentQuery); //input
 var inputSearchStudenbyID = document.querySelector('#searchid'); //addStudent
 
 function handleSumbit(ev) {
-  var id, name, age, avgrade, student;
+  var id, name, age, avgrade;
   return regeneratorRuntime.async(function handleSumbit$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -39,21 +39,20 @@ function handleSumbit(ev) {
           return regeneratorRuntime.awrap(addStudentPromise(id, name, age, avgrade));
 
         case 10:
-          student = _context.sent;
-          _context.next = 16;
+          _context.next = 15;
           break;
 
-        case 13:
-          _context.prev = 13;
+        case 12:
+          _context.prev = 12;
           _context.t0 = _context["catch"](0);
           alert(_context.t0);
 
-        case 16:
+        case 15:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 13]]);
+  }, null, null, [[0, 12]]);
 } //getStudent
 
 
