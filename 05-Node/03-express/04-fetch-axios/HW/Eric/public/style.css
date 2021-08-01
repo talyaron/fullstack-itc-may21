@@ -16,11 +16,16 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 90%;
 }
 
 .containerPage__containerForm1__form1--submit {
-  margin-left: 45px;
+  margin-left: 8px;
   text-align: center;
+}
+
+.containerPage__containerForm1__form1--stud {
+  margin-left: 8px;
 }
 
 .containerPage__containerForm2 {
@@ -34,16 +39,12 @@
   padding: 5px;
 }
 
-<<<<<<< HEAD
 .containerPage__containerForm2--submitParams {
   margin: 5px;
   padding: 5px;
 }
 
 .containerPage__containerForm2--submitQuerys {
-=======
-.containerPage__containerForm2--submit {
->>>>>>> 1de9d0d138c902c8115ff0972b1fdffc7b6b19ae
   margin: 5px;
   padding: 5px;
 }
