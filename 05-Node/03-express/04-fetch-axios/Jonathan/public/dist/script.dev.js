@@ -1,6 +1,7 @@
 "use strict";
 
-//btn
+form = document.querySelector('#id'); //btn
+
 var btnGetAllStudent = document.querySelector('.container__main__actions--getallstudents');
 var btnGetStudentParams = document.querySelector('.container__main__actions__search--params');
 var btnGetStudentQuery = document.querySelector('.container__main__actions__search--query'); //boardRoot
@@ -21,29 +22,38 @@ function handleSumbit(ev) {
         case 0:
           _context.prev = 0;
           ev.preventDefault();
-          id = ev.target.elements.id.value;
+          id = ev.target.elements.id.valueAsNumber;
           name = ev.target.elements.name.value;
-          age = ev.target.elements.age.value;
-          avgrade = ev.target.elements.avgrade.value;
-          _context.next = 8;
-          return regeneratorRuntime.awrap(addStudentPromise(id, name, age, avgrade));
+          age = ev.target.elements.age.valueAsNumber;
+          avgrade = ev.target.elements.avgrade.valueAsNumber;
+
+          if (/^[a-zA-Z]+$/.test(name)) {
+            _context.next = 8;
+            break;
+          }
+
+          throw new Error('The name must be in text');
 
         case 8:
+          _context.next = 10;
+          return regeneratorRuntime.awrap(addStudentPromise(id, name, age, avgrade));
+
+        case 10:
           student = _context.sent;
-          _context.next = 14;
+          _context.next = 16;
           break;
 
-        case 11:
-          _context.prev = 11;
+        case 13:
+          _context.prev = 13;
           _context.t0 = _context["catch"](0);
-          console.log(_context.t0);
+          alert(_context.t0);
 
-        case 14:
+        case 16:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 11]]);
+  }, null, null, [[0, 13]]);
 } //getStudent
 
 
@@ -96,7 +106,7 @@ function getStudentParams(ev) {
           _context3.prev = 0;
           ev.preventDefault();
           _context3.next = 4;
-          return regeneratorRuntime.awrap(getStudentParamsPromise());
+          return regeneratorRuntime.awrap(getOneStudent('query'));
 
         case 4:
           student = _context3.sent;
@@ -125,13 +135,17 @@ function getStudentQuery(ev) {
         case 0:
           ev.preventDefault();
           _context4.next = 3;
-          return regeneratorRuntime.awrap(getStudentQueryPromise());
+          return regeneratorRuntime.awrap(getOneStudent('query'));
 
         case 3:
+          _context4.next = 5;
+          return regeneratorRuntime.awrap(getOneStudent('query'));
+
+        case 5:
           student = _context4.sent;
           renderStudents(student);
 
-        case 5:
+        case 7:
         case "end":
           return _context4.stop();
       }
@@ -157,95 +171,6 @@ function deleteStudent(id) {
           return _context5.stop();
       }
     }
-  });
-}
-
-function addStudentPromise(id, name, age, avgrade) {
-  return new Promise(function (resolve, reject) {
-    fetch('/addStudent', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id: id,
-        name: name,
-        age: age,
-        avgrade: avgrade
-      })
-    }).then(function (r) {
-      return r.json();
-    }).then(function (r) {
-      return alert(r.error);
-    }).then(function (student) {
-      resolve(student);
-    })["catch"](function (e) {
-      reject(e);
-    });
-  });
-}
-
-function deleteStudentPromise(id) {
-  return new Promise(function (resolve, reject) {
-    fetch("/deleteStudent/".concat(id), {
-      method: 'DELETE'
-    }).then(function (r) {
-      return r.json();
-    }).then(function (student) {
-      resolve(student);
-    })["catch"](function (e) {
-      reject(e);
-    });
-  });
-}
-
-function getStudentQueryPromise() {
-  var id = inputSearchStudenbyID.value;
-  return new Promise(function (resolve, reject) {
-    fetch("/getStudentbyQuery?id=".concat(id)).then(function (res) {
-      if (res.status === 200 && res.ok) {
-        return res.json().then(function (student) {
-          resolve(student);
-        });
-      } else {
-        return res.json().then(function (student) {
-          alert(student.error);
-        });
-      }
-    })["catch"](function (e) {
-      reject(e);
-    });
-  });
-}
-
-function getStudentParamsPromise() {
-  var id = inputSearchStudenbyID.value;
-  return new Promise(function (resolve, reject) {
-    fetch("/getStudentbyParam/".concat(id)).then(function (res) {
-      if (res.status === 200 && res.ok) {
-        return res.json().then(function (student) {
-          resolve(student);
-        });
-      } else {
-        return res.json().then(function (student) {
-          alert(student.error);
-        });
-      }
-    })["catch"](function (e) {
-      reject(e);
-    });
-  });
-}
-
-function getAllStudentsPromise() {
-  return new Promise(function (resolve, reject) {
-    fetch('/getAllStudents').then(function (r) {
-      return r.json();
-    }).then(function (student) {
-      resolve(student);
-    })["catch"](function (e) {
-      reject(e);
-    });
   });
 }
 

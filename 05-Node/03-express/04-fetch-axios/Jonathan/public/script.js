@@ -1,4 +1,6 @@
 
+form = document.querySelector('#id')
+
 //btn
 const btnGetAllStudent = document.querySelector('.container__main__actions--getallstudents')
 const btnGetStudentParams = document.querySelector('.container__main__actions__search--params')
@@ -15,22 +17,24 @@ btnGetStudentQuery.addEventListener('click', getStudentQuery)
 //input
 const inputSearchStudenbyID = document.querySelector('#searchid')
 
-
 //addStudent
 async function handleSumbit(ev) {
     try {
         ev.preventDefault()
 
-        const id = ev.target.elements.id.value
+        const id = ev.target.elements.id.valueAsNumber
         const name = ev.target.elements.name.value
-        const age = ev.target.elements.age.value
-        const avgrade = ev.target.elements.avgrade.value
+        const age = ev.target.elements.age.valueAsNumber
+        const avgrade = ev.target.elements.avgrade.valueAsNumber
+
+        if (!(/^[a-zA-Z]+$/.test(name))) throw new Error('The name must be in text')
 
         const student = await addStudentPromise(id, name, age, avgrade)
 
+     
 
     } catch (e) {
-        console.log(e);
+        alert(e);
     }
 }
 
@@ -52,7 +56,7 @@ async function getStudentParams(ev) {
     try {
 
         ev.preventDefault()
-        const student = await getStudentParamsPromise()
+        const student = await getOneStudent('query')
         renderStudents(student)
     } catch (e) {
 
@@ -63,7 +67,8 @@ async function getStudentParams(ev) {
 async function getStudentQuery(ev) {
 
     ev.preventDefault()
-    const student = await getStudentQueryPromise()
+    await getOneStudent('query')
+    const student = await getOneStudent('query')
     renderStudents(student)
 }
 
@@ -74,95 +79,6 @@ async function deleteStudent(id) {
     renderStudents(student)
 
 }
-
-
-function addStudentPromise(id, name, age, avgrade) {
-    return new Promise((resolve, reject) => {
-        fetch('/addStudent', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id, name, age, avgrade })
-        }).then(r => r.json())
-            .then(r => alert(r.error))
-            .then(student => { resolve(student) })
-            .catch(e => {
-                reject(e)
-            })
-    })
-}
-
-
-
-function deleteStudentPromise(id) {
-    return new Promise((resolve, reject) => {
-        fetch(`/deleteStudent/${id}`, {
-            method: 'DELETE'
-        })
-            .then(r => r.json())
-            .then(student => { resolve(student) })
-            .catch(e => {
-                reject(e)
-            })
-    })
-}
-
-
-
-
-
-
-
-function getStudentQueryPromise() {
-    const id = inputSearchStudenbyID.value
-    return new Promise((resolve, reject) => {
-        fetch(`/getStudentbyQuery?id=${id}`)
-            .then(function (res) {
-                if (res.status === 200 && res.ok) {
-                    return res.json().then(student => { resolve(student) })
-                } else {
-                    return res.json().then(student => { alert(student.error) })
-                }
-            })
-
-            .catch(e => {
-                reject(e)
-            })
-    })
-}
-
-
-function getStudentParamsPromise() {
-    const id = inputSearchStudenbyID.value
-    return new Promise((resolve, reject) => {
-        fetch(`/getStudentbyParam/${id}`)
-            .then(function (res) {
-                if (res.status === 200 && res.ok) {
-                    return res.json().then(student => { resolve(student) })
-                } else {
-                    return res.json().then(student => { alert(student.error) })
-                }
-            })
-            .catch(e => {
-                reject(e)
-            })
-    })
-}
-
-
-
-function getAllStudentsPromise() {
-    return new Promise((resolve, reject) => {
-        fetch('/getAllStudents')
-            .then(r => r.json())
-            .then(student => { resolve(student) })
-            .catch(e => {
-                reject(e)
-            })
-    })
-}
-
 
 
 

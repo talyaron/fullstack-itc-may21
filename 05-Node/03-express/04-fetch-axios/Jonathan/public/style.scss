@@ -63,6 +63,10 @@ header {
 
                 }
 
+                input:focus{
+                    outline: none;
+                }
+
                 &--btn {
                     position: relative;
                     display: block;
@@ -125,6 +129,9 @@ header {
                     text-indent: 0.2em;
                     text-align: center;
                 }
+                input:focus{
+                    outline: none;
+                }
 
                 button {
                     padding: 0.3em;
@@ -149,7 +156,7 @@ header {
             position: relative;
             right: 12%;
 
-         
+
 
             #students {
                 font-family: Arial, Helvetica, sans-serif;
@@ -164,23 +171,32 @@ header {
                 text-align: center;
             }
 
-            #students tr:nth-child(even) {
-                background-color: black;
-                color: whitesmoke;
+           
+            #students tr {
+                background-color: lightgray;
+                color:#8B0000;
             }
 
-            #students tr:nth-child(odd) {
-                background-color: white;
-                color: black
+            #students tr:hover {
+                background-color: lightgray;
+                color: green;
             }
 
-            #students tr:hover {background-color: #ddd;}*/
+            // #students tr:nth-child(odd):hover {
+            //     background-color: lightcyan;
+            //     color: blue;
+            // }
+
+            // #students tr:nth-child(even):hover {
+            //     background-color: lightblue;
+            //     color: blue;
+            // }
 
             #students th {
                 padding-top: 12px;
                 padding-bottom: 12px;
                 text-align: left;
-                background-color: #1c89ff;
+                background-color: black;
                 color: white;
                 text-align: center;
             }
@@ -198,6 +214,7 @@ header {
             width: 60%;
             position: relative;
             right: 2%;
+
             &--board {
                 position: relative;
                 right: 0%;
@@ -208,53 +225,81 @@ header {
 
 }
 
-@media screen and  (max-width: 360px){
+@media screen and (max-width: 360px) {
 
     .container {
         display: block;
         position: relative;
-        left:-13%;
+        left: -13%;
 
         &__main {
             position: relative;
-            left:50px;
+            left: 50px;
+
             &__actions {
                 display: block;
                 text-align: center;
             }
+
             &--board {
 
                 width: 260px;
-                j
-                table, thead, tbody, th, td, tr { 
-                    display: block; 
+
+                j table,
+                thead,
+                tbody,
+                th,
+                td,
+                tr {
+                    display: block;
                 }
-                thead tr { 
+
+                thead tr {
                     position: absolute;
                     top: -9999px;
                     left: -9999px;
                 }
-                tr { border: 1px solid #ccc; }
-                td { 
-                    border: none;
-                    border-bottom: 1px solid #eee; 
-                    position: relative;
-                    padding-left: 50%; 
+
+                tr {
+                    border: 1px solid #ccc;
                 }
-                td:before { 
-                 
+
+                td {
+                    border: none;
+                    border-bottom: 1px solid #eee;
+                    position: relative;
+                    padding-left: 50%;
+                }
+
+                td:before {
+
                     position: absolute;
                     top: 6px;
                     left: 0px;
-                    width: 45%; 
-                    padding-right: 15px; 
+                    width: 45%;
+                    padding-right: 15px;
                     white-space: nowrap;
                 }
-                td:nth-of-type(1):before { content: "ID"; }
-                td:nth-of-type(2):before { content: "Name"; }
-                td:nth-of-type(3):before { content: "Age"; }
-                td:nth-of-type(4):before { content: "Average Grade"; }
-                td:nth-of-type(5):before { content: ""; }
+
+                td:nth-of-type(1):before {
+                    content: "ID";
+                }
+
+                td:nth-of-type(2):before {
+                    content: "Name";
+                }
+
+                td:nth-of-type(3):before {
+                    content: "Age";
+                }
+
+                td:nth-of-type(4):before {
+                    content: "Average Grade";
+                }
+
+                td:nth-of-type(5):before {
+                    content: "";
+                }
             }
         }
 
