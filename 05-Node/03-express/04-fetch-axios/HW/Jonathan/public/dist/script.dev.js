@@ -15,7 +15,7 @@ btnGetStudentQuery.addEventListener('click', getStudentQuery); //input
 var inputSearchStudenbyID = document.querySelector('#searchid'); //addStudent
 
 function handleSumbit(ev) {
-  var id, name, age, avgrade;
+  var id, name, age, avgrade, newStudent;
   return regeneratorRuntime.async(function handleSumbit$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -26,33 +26,39 @@ function handleSumbit(ev) {
           name = ev.target.elements.name.value;
           age = ev.target.elements.age.valueAsNumber;
           avgrade = ev.target.elements.avgrade.valueAsNumber;
+          newStudent = {
+            "id": id,
+            "name": name,
+            "age": age,
+            "avgrade": avgrade
+          };
 
           if (/^[a-zA-Z]+$/.test(name)) {
-            _context.next = 8;
+            _context.next = 9;
             break;
           }
 
           throw new Error('The name must be in text');
 
-        case 8:
-          _context.next = 10;
-          return regeneratorRuntime.awrap(addStudentPromise(id, name, age, avgrade));
+        case 9:
+          _context.next = 11;
+          return regeneratorRuntime.awrap(addStudentPromise(newStudent));
 
-        case 10:
-          _context.next = 15;
+        case 11:
+          _context.next = 16;
           break;
 
-        case 12:
-          _context.prev = 12;
+        case 13:
+          _context.prev = 13;
           _context.t0 = _context["catch"](0);
           alert(_context.t0);
 
-        case 15:
+        case 16:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 12]]);
+  }, null, null, [[0, 13]]);
 } //getStudent
 
 

@@ -19,10 +19,10 @@ app.post("/addStudent", (req, res) => {
         const { id, name, age, avgrade } = req.body;
 
         const newStudent = {
-            "id": id,
-            "name": name,
-            "age": age,
-            "avgrade": avgrade
+            id: id,
+            name: name,
+            age: age,
+            avgrade: avgrade
         }
 
          if (!name || !id || !age || !avgrade) {
@@ -48,7 +48,7 @@ app.post("/addStudent", (req, res) => {
 
         fs.writeFileSync("./allstudents.json", JSON.stringify(allStudents));
 
-        res.send("Student Added");
+        res.send({ ok: "Added Student" });
 
     } catch (e) {
         res.status(500).send({ error: `${e}` });

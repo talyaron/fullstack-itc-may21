@@ -27,9 +27,16 @@ async function handleSumbit(ev) {
         const age = ev.target.elements.age.valueAsNumber
         const avgrade = ev.target.elements.avgrade.valueAsNumber
 
+        const newStudent ={
+            "id":id,
+            "name":name,
+            "age":age,
+            "avgrade":avgrade
+        }
+
         if (!(/^[a-zA-Z]+$/.test(name))) throw new Error('The name must be in text')
 
-         await addStudentPromise(id, name, age, avgrade)
+         await addStudentPromise(newStudent)
 
      
 
