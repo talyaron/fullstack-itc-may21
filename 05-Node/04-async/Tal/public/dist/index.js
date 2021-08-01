@@ -36,31 +36,54 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function getInfo() {
     return __awaiter(this, void 0, void 0, function () {
-        var data, r, students, r2, joke;
+        var students, joke, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios.get('/getData')];
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, getStudents()];
                 case 1:
-                    data = _a.sent();
-                    console.log(data);
-                    return [4 /*yield*/, fetch('/getData')];
-                case 2:
-                    r = _a.sent();
-                    console.log('waited');
-                    return [4 /*yield*/, r.json()];
-                case 3:
                     students = _a.sent();
-                    console.log(students);
-                    return [4 /*yield*/, fetch('https://api.chucknorris.io/jokes/random')];
-                case 4:
-                    r2 = _a.sent();
-                    return [4 /*yield*/, r2.json()];
-                case 5:
+                    return [4 /*yield*/, getJoke()];
+                case 2:
                     joke = _a.sent();
-                    console.log(joke.value);
                     console.log('after fetch');
-                    return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_1 = _a.sent();
+                    console.error(e_1);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
             }
+        });
+    });
+}
+//creating promises
+// create an promise
+function getStudents() {
+    return new Promise(function (resolve, reject) {
+        //resole = the will be retuned if the promise was allright
+        //reject = in error case the
+        // reject(new Error('error'))
+        fetch('/getData')
+            .then(function (r) { return r.json(); })
+            .then(function (students) {
+            resolve(students);
+        })["catch"](function (e) {
+            reject(e);
+        });
+    });
+}
+function getJoke() {
+    return new Promise(function (resolve, reject) {
+        //resole = the will be retuned if the promise was allright
+        //reject = in error case the
+        fetch('https://api.chucknorris.io/jokes/random')
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+            resolve(data.value);
+        })["catch"](function (e) {
+            reject(e);
         });
     });
 }

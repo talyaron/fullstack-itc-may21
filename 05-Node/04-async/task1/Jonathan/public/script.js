@@ -1,4 +1,3 @@
-
 getBeverage();
 
 // async function getInfo() {
@@ -13,9 +12,11 @@ getBeverage();
 //     .then(data=> renderBeve(data))
 // }   
 
-function getBeverage(){
-    const beve = new getBeve()
-    renderBeve(beve.)
+async function getBeverage(){
+    // const beve = new getBeve()
+    // beve.then(data=>renderBeve(data))
+    const beve = await getBeve()
+    renderBeve(beve)
 }
 
 
@@ -23,14 +24,12 @@ function getBeve(){
     return new Promise((resolve, reject)=>{
         fetch('/getBeve')
         .then(r=>r.json())
-        .then(data=> {resolve(data)})
+        .then(beve=> {resolve(beve)})
         .catch(e=> {
             reject(e)
         })
     })
 }
-
-
 
 
 function renderBeve(data) {
