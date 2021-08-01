@@ -77,8 +77,27 @@ function getDataQuery(ev) {
 }
 
 function getDataParam(ev) {
-  axios.get("/getStudents/".concat(inputId.value)).then(function (_ref2) {
-    var data = _ref2.data;
-    render([data]);
+  var data;
+  return regeneratorRuntime.async(function getDataParam$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return regeneratorRuntime.awrap(axios.get("/getStudents/".concat(inputId.value)));
+
+        case 2:
+          data = _context2.sent;
+          render([data.data]);
+
+        case 4:
+        case "end":
+          return _context2.stop();
+      }
+    }
   });
-}
+} //  function getDataParam(ev) {
+//         axios.get(`/getStudents/${inputId.value}`)
+//         .then(({ data }) => {
+//             render([data])
+//         })
+// }

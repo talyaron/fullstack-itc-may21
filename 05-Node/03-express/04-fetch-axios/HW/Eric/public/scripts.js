@@ -82,16 +82,22 @@ async function getDataQuery(ev) {
     render([data.data])
 
 }
+async function getDataParam(ev) {
 
+    const data = await axios.get(`/getStudents/${inputId.value}`)
 
- function getDataParam(ev) {
-
-        axios.get(`/getStudents/${inputId.value}`)
-        .then(({ data }) => {
-            render([data])
-
-        })
+    render([data.data])
 
 }
+
+//  function getDataParam(ev) {
+
+//         axios.get(`/getStudents/${inputId.value}`)
+//         .then(({ data }) => {
+//             render([data])
+
+//         })
+
+// }
 
 
