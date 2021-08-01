@@ -43,7 +43,7 @@ app.post("/addStudent", function (req, res) {
     var isFound = allStudents.some(function (student) {
       return student.id == id;
     });
-    if (isFound) throw new Error("This is id is already here");
+    if (isFound) throw new Error("This Mispar Zehut is already here");
 
     var _student = getStudent();
 

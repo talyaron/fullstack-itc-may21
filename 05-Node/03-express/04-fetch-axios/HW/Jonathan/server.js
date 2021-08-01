@@ -32,7 +32,7 @@ app.post("/addStudent", (req, res) => {
         const allStudents = readAllStudents();
         const isFound = allStudents.some((student) => student.id == id);
 
-        if (isFound) throw new Error("This is id is already here");
+        if (isFound) throw new Error("This Mispar Zehut is already here");
 
 
         function getStudent() {
