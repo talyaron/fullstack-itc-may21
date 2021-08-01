@@ -44,13 +44,8 @@ app.get('/getStudent', (req, res) => {
 app.post('/addStudent', (req, res) => {
     const readData = read()
 
-    const {
-        name
-    } = req.body
-    const student = {
-        name,
-        id: uuidv4()
-    }
+    const {name} = req.body
+    const student = {name, id: uuidv4()}
     readData.push(student);
     try {
 

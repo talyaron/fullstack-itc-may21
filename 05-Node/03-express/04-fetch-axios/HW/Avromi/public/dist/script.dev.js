@@ -40,7 +40,8 @@ function handleSubmitFormTwo(event) {
   event.preventDefault();
   var id = event.target.elements.id.value;
   axios.get("/".concat(id)).then(function (res) {
-    console.dir(res.data);
+    var data = res.data.searchedStudent;
+    render(data);
   });
   event.target.reset();
 }
@@ -49,7 +50,17 @@ function handleClick(event) {
   var studentId = document.querySelector('#studentId');
   var id = studentId.value;
   axios.get("/".concat(id)).then(function (r) {
-    console.log(r.data);
+    var data = r.data.searchedStudent;
+    render(data);
   });
   formTwo.reset();
+}
+
+function render(data) {
+  var rootData = document.querySelector('.rootData');
+  var html = "";
+  data.forEach(function (student) {
+    html += "<p>".concat(student.name, "</p><p>").concat(student.grade, "</p><p>").concat(student.age, "</p>");
+  });
+  rootData.innerHTML = html;
 }

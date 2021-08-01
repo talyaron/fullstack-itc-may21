@@ -54,7 +54,7 @@ function renderData(data) {
     var root = document.querySelector(".beverages");
     var html = "";
     data.data.forEach(function (item) {
-        html += "<div class=\"beverages__item\">\n            <p id=\"" + item.name + "-name\">" + item.name + "</p>\n            <img id=\"" + item.name + "-img\" src=\"" + item.img + "\" style=\"width:100px;height:100px;\" />\n        </div>";
+        html += "\n    <div class=\"beverages__item\">\n      <p id=\"" + item.name + "-name\">" + item.name + "</p>\n      <img id=\"" + item.name + "-img\" src=\"" + item.img + "\" style=\"width:100px;height:100px;\" />\n    </div>";
     });
     root.insertAdjacentHTML("beforeend", html);
 }
