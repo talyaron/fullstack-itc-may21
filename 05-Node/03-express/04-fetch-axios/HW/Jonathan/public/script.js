@@ -1,5 +1,5 @@
-
-form = document.querySelector('#id')
+//form
+const form = document.querySelector('#form')
 
 //btn
 const btnGetAllStudent = document.querySelector('.container__main__actions--getallstudents')
@@ -13,6 +13,7 @@ const boardStudent = document.querySelector('#boardStudent')
 btnGetAllStudent.addEventListener('click', getAllStudent)
 btnGetStudentParams.addEventListener('click', getStudentParams)
 btnGetStudentQuery.addEventListener('click', getStudentQuery)
+form.addEventListener('submit', handleSumbit)
 
 //input
 const inputSearchStudenbyID = document.querySelector('#searchid')

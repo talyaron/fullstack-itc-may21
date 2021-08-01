@@ -1,6 +1,7 @@
 "use strict";
 
-form = document.querySelector('#id'); //btn
+//form
+var form = document.querySelector('#form'); //btn
 
 var btnGetAllStudent = document.querySelector('.container__main__actions--getallstudents');
 var btnGetStudentParams = document.querySelector('.container__main__actions__search--params');
@@ -10,7 +11,8 @@ var boardStudent = document.querySelector('#boardStudent'); //addEventListener
 
 btnGetAllStudent.addEventListener('click', getAllStudent);
 btnGetStudentParams.addEventListener('click', getStudentParams);
-btnGetStudentQuery.addEventListener('click', getStudentQuery); //input
+btnGetStudentQuery.addEventListener('click', getStudentQuery);
+form.addEventListener('submit', handleSumbit); //input
 
 var inputSearchStudenbyID = document.querySelector('#searchid'); //addStudent
 
