@@ -42,7 +42,7 @@ function handleSubmitFormTwo(event){
     const id = event.target.elements.id.value;
     axios.get(`/${id}`)
     .then(res=>{
-        const data = res.data.searchedStudent
+        const data = res.data.result
         render(data)
     })
     event.target.reset();
@@ -55,7 +55,7 @@ function handleClick(event) {
    
     axios.get(`/${id}`)
     .then(r=>{
-      const data = r.data.searchedStudent;
+      const data = r.data.result;
       render(data)
 
     })
@@ -66,8 +66,14 @@ function handleClick(event) {
 function render(data){
     const rootData = document.querySelector('.rootData')
     let html ="";
+   
+    if(typeof data === 'string'){
+        html += data
+      
+    }else{
+        
     data.forEach(student =>{ 
         html += `<p>${student.name}</p><p>${student.grade}</p><p>${student.age}</p>`
-    })
+    })}
     rootData.innerHTML = html;
 }

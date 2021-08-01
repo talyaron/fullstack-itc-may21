@@ -1,5 +1,5 @@
-
-form = document.querySelector('#id')
+//form
+const form = document.querySelector('#form')
 
 //btn
 const btnGetAllStudent = document.querySelector('.container__main__actions--getallstudents')
@@ -13,6 +13,7 @@ const boardStudent = document.querySelector('#boardStudent')
 btnGetAllStudent.addEventListener('click', getAllStudent)
 btnGetStudentParams.addEventListener('click', getStudentParams)
 btnGetStudentQuery.addEventListener('click', getStudentQuery)
+form.addEventListener('submit', handleSumbit)
 
 //input
 const inputSearchStudenbyID = document.querySelector('#searchid')
@@ -27,11 +28,18 @@ async function handleSumbit(ev) {
         const age = ev.target.elements.age.valueAsNumber
         const avgrade = ev.target.elements.avgrade.valueAsNumber
 
+        const newStudent = {
+            id: id,
+            name: name,
+            age: age,
+            avgrade: avgrade
+        }
+
         if (!(/^[a-zA-Z]+$/.test(name))) throw new Error('The name must be in text')
 
-         await addStudentPromise(id, name, age, avgrade)
+        await addStudentPromise(newStudent)
 
-     
+
 
     } catch (e) {
         alert(e);
@@ -44,7 +52,7 @@ async function getAllStudent(ev) {
     try {
         ev.preventDefault()
         const allStudents = await getAllStudentsPromise()
-        if (allStudents.length === 0) throw new Error('No student on the database')
+        if (allStudents.length === 0) throw new Error('No students on the database')
         renderStudents(allStudents)
     } catch (e) {
         alert(e)
@@ -75,11 +83,16 @@ async function getStudentQuery(ev) {
 
 
 async function deleteStudent(id) {
-    const student = await deleteStudentPromise(id)
-    renderStudents(student)
+    if (confirm("Do you want to delete this student?")) {
+        alert('Delete Student')
+        const student = await deleteStudentPromise(id)
+        renderStudents(student)
+    } else {
+        alert('Delete Cancelled!')
+    }
+
 
 }
-
 
 
 function renderStudents(data) {
@@ -89,7 +102,7 @@ function renderStudents(data) {
         html += `<table id="students" class="container__main--board__student">
         <thead>
     <tr>
-        <th>ID</th>
+        <th>Mispar Zehut</th>
         <th>Name</th>
         <th>Age</th>
         <th>Average Grade</th>

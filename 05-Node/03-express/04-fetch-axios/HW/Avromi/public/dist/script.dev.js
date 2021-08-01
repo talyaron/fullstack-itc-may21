@@ -40,7 +40,7 @@ function handleSubmitFormTwo(event) {
   event.preventDefault();
   var id = event.target.elements.id.value;
   axios.get("/".concat(id)).then(function (res) {
-    var data = res.data.searchedStudent;
+    var data = res.data.result;
     render(data);
   });
   event.target.reset();
@@ -50,7 +50,7 @@ function handleClick(event) {
   var studentId = document.querySelector('#studentId');
   var id = studentId.value;
   axios.get("/".concat(id)).then(function (r) {
-    var data = r.data.searchedStudent;
+    var data = r.data.result;
     render(data);
   });
   formTwo.reset();
@@ -59,8 +59,14 @@ function handleClick(event) {
 function render(data) {
   var rootData = document.querySelector('.rootData');
   var html = "";
-  data.forEach(function (student) {
-    html += "<p>".concat(student.name, "</p><p>").concat(student.grade, "</p><p>").concat(student.age, "</p>");
-  });
+
+  if (typeof data === 'string') {
+    html += data;
+  } else {
+    data.forEach(function (student) {
+      html += "<p>".concat(student.name, "</p><p>").concat(student.grade, "</p><p>").concat(student.age, "</p>");
+    });
+  }
+
   rootData.innerHTML = html;
 }
