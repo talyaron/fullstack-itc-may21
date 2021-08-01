@@ -5,46 +5,50 @@ const fs = require('fs')
 const { v4: uuidv4 } = require('uuid');
 
 
+
 app.use(express.json());
 
 app.use(express.static('public'));
 
-const readallStudents = () => {
+const readAllStudents = () => {
     const allStudents = fs.readFileSync('./students.json'); 
     return JSON.parse(allStudents); 
 }
+const allStudents = readAllStudents()
 
-app.post('/aa', (req, res)=>{
+
+app.post('/postStudents', (req, res)=>{
 
     const {name, age, avgGrade} = req.body
     const newStudent = {
     
         name : name,
         age : age,
-        avgGrade : avgGrade
+        avgGrade : avgGrade,
+        id : uuidv4()
     }
-    const allStudents = readallStudents();
     allStudents.push(newStudent)
     fs.writeFileSync('./students.json', JSON.stringify(allStudents))
     res.send(allStudents)
 })
 
-app.get('/aa', (req, res) => {
-    const allStudents = readallStudents()
+app.get('/getAllStudents', (req, res) => {
     res.send(allStudents)
 })
 
-app.get(`aa/${id}`, (req, res) => {
-    const student = {id: uuidv4()}
-    res.send(students.id)
+// app.get(`getStudents/${id}`, (req, res) => {
+//     const student = {id: uuidv4()}
+//     res.send(students.id)
+// })
+
+app.get(`/getStudents`, (req, res) => {
+   
+    const id = req.query.id
+    const studentById = allStudents.find((element)=>element.id === id);
+    res.send(studentById)
+    console.log(studentById);
+    req.send(studentById)
 })
-
-app.get(`aa?id=${id}`, (req, res) => {
-    const student = {id: uuidv4()}
-    res.send(students.id)
-})
-
-
 
 
 
