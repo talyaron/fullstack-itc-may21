@@ -51,12 +51,20 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:id', (req, res) => {
+    try {
+        
     const id = req.params.id
     const searchedStudent = students("l").filter(student => student.id === id)
+    
+    const result = (searchedStudent.length === 0)?'Student not Found':searchedStudent
 
     res.send({
-        searchedStudent
+        result
     })
+} catch (error) {
+    console.log(error.message);
+    res.status(400).send({ error: error.message });
+}
 })
 
 

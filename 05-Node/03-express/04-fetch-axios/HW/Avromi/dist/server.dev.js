@@ -46,13 +46,21 @@ app.get('/', function (req, res) {
   });
 });
 app.get('/:id', function (req, res) {
-  var id = req.params.id;
-  var searchedStudent = students("l").filter(function (student) {
-    return student.id === id;
-  });
-  res.send({
-    searchedStudent: searchedStudent
-  });
+  try {
+    var id = req.params.id;
+    var searchedStudent = students("l").filter(function (student) {
+      return student.id === id;
+    });
+    var result = searchedStudent.length === 0 ? 'Student not Found' : searchedStudent;
+    res.send({
+      result: result
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).send({
+      error: error.message
+    });
+  }
 });
 app.listen(port, function () {
   console.log("Example app listening at http://localhost:".concat(port));
