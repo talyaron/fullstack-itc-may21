@@ -42,7 +42,7 @@ function handleSubmitFormTwo(event){
     const id = event.target.elements.id.value;
     axios.get(`/${id}`)
     .then(res=>{
-        const data = res.data.result
+        const data = res.data.result;
         render(data)
     })
     event.target.reset();
