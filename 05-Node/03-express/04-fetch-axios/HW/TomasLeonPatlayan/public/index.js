@@ -9,41 +9,38 @@ const url = " http://localhost:3500";
 const postStudents = (e) => {
   e.preventDefault();
   try {
-    
-   
-
     let { name, id, age, avgrade } = e.target.elements;
-  name = name.value;
-  id = id.value;
-  age = age.value;
-  avgrade = avgrade.value;
-  if(name ==="" || id==="" || age===""|| avgrade==="") throw new Error ('Please fill all the inputs')
-  const noRepeat = students.some((student) => student.id === id);
-    if(noRepeat){
-      throw new Error ("No repeat the ID please")
+    name = name.value;
+    id = id.value;
+    age = age.value;
+    avgrade = avgrade.value;
+    if (name === "" || id === "" || age === "" || avgrade === "")
+      throw new Error("Please fill all the inputs");
+    const noRepeat = students.some((student) => student.id === id); //YS: This is giving you an error! I cant add a student since students is undefined! 
+    if (noRepeat) {
+      throw new Error("No repeat the ID please");
     }
-  axios({
-    method: "post",
-    url: `${url}/postStudents`,
-    data: {
-      name,
-      id,
-      age,
-      avgrade,
-    },
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then(({ data }) => data)
-    .catch((err) => {
-      console.log(err);
-    });
-
+    axios({
+      method: "post",
+      url: `${url}/postStudents`,
+      data: {
+        name,
+        id,
+        age,
+        avgrade,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(({ data }) => data)
+      .catch((err) => {
+        console.log(err);
+      });
   } catch (error) {
     alert(error);
   }
-  
+
   e.target.reset();
 };
 //!debo ccambiar el handle no puede ser el post deben estar separados
@@ -123,15 +120,14 @@ const promiseGetStudentQuery = async () => {
 };
 btnGetByQuerry.addEventListener("click", promiseGetStudentQuery);
 
-function renderStudents(data) {
+function renderStudents(data) { 
   let html = "";
   data.forEach((student) => {
     html += `<p>${student.name}</p>
     <p>${student.age}</p>
     <p>${student.avgrade}</p>
-              <button onclick='deletePromise(${student.id})'>Delete</button>`;
+              <button onclick='deletePromise(${student.id})'>Delete</button>`; //YS: Very nice! 
   });
 
   document.getElementById("root").innerHTML = html;
 }
-

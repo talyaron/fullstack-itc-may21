@@ -49,7 +49,7 @@ function handleSearchStudent(ev) {
 }
 
 async function getData(searchType: string, studentUuid: string): Promise<any> {
-  const dataToFetch: any = (searchType === null) ? await getStudents() : await getStudent(searchType, studentUuid);
+  const dataToFetch: any = (searchType === null) ? await getStudents() : await getStudent(searchType, studentUuid); //YS: Nice! 
 
   renderData(dataToFetch);
 }
@@ -58,7 +58,7 @@ function renderData(dataToRender: any): void {
   const root: HTMLElement = document.querySelector(".students");
   let html: string = "";
   root.innerHTML = html;
-  if (typeof dataToRender.data === "string") {
+  if (typeof dataToRender.data === "string") { //YS: Good! 
     root.innerHTML = dataToRender.data;
     return;
   }

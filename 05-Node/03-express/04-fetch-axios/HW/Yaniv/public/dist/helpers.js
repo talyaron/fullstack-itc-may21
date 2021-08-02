@@ -9,7 +9,7 @@ function getStudents() {
     });
 }
 function getStudent(searchType, studentUuid) {
-    var route = (searchType === 'query') ? "/student?uuid=" + studentUuid : "/student/" + studentUuid;
+    var route = (searchType === 'query') ? "/student?uuid=" + studentUuid : "/student/" + studentUuid; //YS: Nice! 
     return new Promise(function (resolve, reject) {
         axios.get(route)
             .then(function (student) {

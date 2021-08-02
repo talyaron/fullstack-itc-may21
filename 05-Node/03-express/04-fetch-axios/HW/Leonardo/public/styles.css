@@ -2,8 +2,22 @@ body,
 html {
   margin: 0;
   padding: 0;
-  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(63%, #456185), color-stop(68%, #3c7195), to(#00d4ff));
-  background: linear-gradient(90deg, #020024 0%, #456185 63%, #3c7195 68%, #00d4ff 100%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#020024),
+    color-stop(63%, #456185),
+    color-stop(68%, #3c7195),
+    to(#00d4ff)
+  );
+  background: linear-gradient(
+    90deg,
+    #020024 0%,
+    #456185 63%,
+    #3c7195 68%,
+    #00d4ff 100%
+  );
 }
 
 .top-menu {
@@ -13,8 +27,8 @@ html {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .top-submenu {
@@ -24,7 +38,7 @@ html {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
   margin-bottom: 25px;
 }
 
@@ -38,7 +52,7 @@ html {
   width: 200px;
   text-align: center;
   -webkit-transition-duration: 0.4s;
-          transition-duration: 0.4s;
+  transition-duration: 0.4s;
   text-decoration: none;
   overflow: hidden;
   cursor: pointer;
@@ -93,11 +107,11 @@ html {
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
-      -ms-flex-direction: row-reverse;
-          flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
@@ -179,11 +193,11 @@ table th:not(:last-child):hover {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   background-color: steelblue;
   border-radius: 50px;
   color: white;
@@ -203,11 +217,11 @@ table th:not(:last-child):hover {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   text-align: center;
 }
 
@@ -235,21 +249,21 @@ table th:not(:last-child):hover {
   opacity: 1;
   z-index: 2;
   -webkit-animation: show 0.1s;
-          animation: show 0.1s;
+  animation: show 0.1s;
   -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
 }
 
 @-webkit-keyframes show {
   from {
     -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     opacity: 0;
     z-index: -1;
   }
   to {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     opacity: 1;
     z-index: 2;
   }
@@ -258,13 +272,13 @@ table th:not(:last-child):hover {
 @keyframes show {
   from {
     -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     opacity: 0;
     z-index: -1;
   }
   to {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     opacity: 1;
     z-index: 2;
   }

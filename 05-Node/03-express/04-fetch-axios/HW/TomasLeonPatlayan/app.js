@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const fs = require("fs");
-// const cors = require("cors");
+// const cors = require("cors");   YS: If you are not using this please remove it. 
 // app.use(cors());
 //JSON
 const localJson = () => {
@@ -38,11 +38,11 @@ app.get("/getStudentParams/:id", (req, res) => {
 
 app.post("/postStudents", (req, res) => {
   try {
-    const { name, id, age, avgrade } = req.body;
+    const { name, id, age, avgrade } = req.body; //YS: You shouldn't be sending the id in the body, you should be adding it with uuidv4(). The id is created in the server/database. 
     const students = localJson();
     
     const addStudent = {
-      id: parseInt(id),
+      id: parseInt(id), //YS: id: uuidv4(), 
       name: name,
       age: parseInt(age),
       avgrade: parseInt(avgrade),
@@ -51,7 +51,7 @@ app.post("/postStudents", (req, res) => {
     
   
     // function getStudent() {
-    //   return function __getInfo(addStudent) {
+    //   return function __getInfo(addStudent) {        YS: Please remove commented code 
     //     return addStudent;
     //   };
     // }
@@ -69,7 +69,7 @@ app.post("/postStudents", (req, res) => {
 
 app.delete("/deleteStudents/:id", (req, res) => {
   let { id } = req.params;
-  console.log(id);
+  console.log(id); //YS: Remove console.log
   id = parseInt(id);
   const students = localJson();
   const deleteStudent = students.filter((student) => student.id !== id);

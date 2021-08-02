@@ -26,7 +26,7 @@ const myStudents = new StudentsArray() //Instance creation
 app.post('/addStudent', (req, res) => {
     try {
         const { body } = req
-        body.id = uuidv4()
+        body.id = uuidv4() //YS: Very nice 
         myStudents.add(body)
         res.send(myStudents)
     } catch (er) {
@@ -41,7 +41,7 @@ app.get('/getStudents', (req, res) => {
 })
 
 // View student with params:
-app.get('/viewStudentWithParams', (req, res) => {
+app.get('/viewStudentWithParams', (req, res) => { //YS: Should be: `/viewStudentWithParams/:id`
     const chosenStudent = myStudents.list.find(s => student.id === req.params.id)
     res.send([chosenStudent])
 }) 

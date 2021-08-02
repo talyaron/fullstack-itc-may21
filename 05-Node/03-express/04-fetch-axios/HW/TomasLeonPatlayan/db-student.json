@@ -1,1 +1,1 @@
-[{"id":null,"name":"","age":null,"avgrade":null},{"id":null,"name":"","age":null,"avgrade":null},{"id":null,"name":"Tomas","age":null,"avgrade":null},{"id":null,"name":"","age":null,"avgrade":null},{"id":1,"name":"Tomas","age":23,"avgrade":12},{"id":1,"name":"Tomas","age":22,"avgrade":33},{"id":1,"name":"Tomas","age":23,"avgrade":43}]
+[{"id":1,"name":"Tomas","age":23,"avgrade":43},{"id":1,"name":"a","age":1,"avgrade":1},{"id":2,"name":"b","age":2,"avgrade":2},{"id":3,"name":"c","age":3,"avgrade":3}]

@@ -37,18 +37,18 @@ app.get('/getAllStudents', (req, res) => {
 })
 
  app.get(`/getStudents`, (req, res) => {
-    const id = req.query.id
+    const id = req.query.id //YS: Why dont you destructure here like in the params? 
     const studentById = allStudents.find((element)=>element.id === id);
     res.send(studentById)
-    req.send(studentById)
+    req.send(studentById) //YS: Why are you sending twice? 
  })
 
 app.get(`/getStudents/:id`, (req, res) => {
     const {id} = req.params;
     const studentByIdParams = allStudents.find((elements)=>elements.id === id);
     res.send(studentByIdParams)
-    req.send(studentByIdParams)
-    console.log();
+    req.send(studentByIdParams) //YS: Why are you sending twice? 
+    console.log(); //YS: ? 
 })
 
 

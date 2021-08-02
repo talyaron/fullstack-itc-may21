@@ -16,7 +16,7 @@ app.get('/getAllStudent', (req, res)=>{
 })
 // POST STUDIENT WITH QUERY
 app.post('/postStudents', (req, res)=>{
-    const student = req.body;
+    const student = req.body; //YS: You should be making a new object here and adding the ID here (not from the FE). 
     students.push(student);
     res.send(student);
 })

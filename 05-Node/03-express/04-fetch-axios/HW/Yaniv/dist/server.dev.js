@@ -20,7 +20,7 @@ function outerStudents() {
   try {
     var innerStudents = function innerStudents(student) {
       try {
-        if (student === "get") return _students;
+        if (student === "get") return _students; //YS: Nice
 
         _students.unshift(student);
 
@@ -52,7 +52,7 @@ function () {
     try {
       this.studentsArray(_objectSpread({}, student, {
         uuid: uuidv4()
-      }));
+      })); //YS: Very nice for adding the ID in the BE. We should also add a dateCreated key in the BE and set it to Date.now() or something similar)
     } catch (error) {
       console.error(error);
     }
@@ -70,7 +70,8 @@ function () {
   return Students;
 }();
 
-var students = new Students();
+var students = new Students(); //YS: Your routes look very good! 
+
 app.post('/add-student', function (req, res) {
   try {
     var body = req.body;

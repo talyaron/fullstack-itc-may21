@@ -26,6 +26,7 @@ function handleSumbit(ev) {
           avgrade = ev.target.elements.avgrade.valueAsNumber;
           newStudent = {
             id: id,
+            //YS: THis should be generated in the BE. 
             name: name,
             age: age,
             avgrade: avgrade
@@ -167,6 +168,7 @@ function deleteStudent(id) {
             break;
           }
 
+          //YS: Nice! 
           alert('Delete Student');
           _context5.next = 4;
           return regeneratorRuntime.awrap(deleteStudentPromise(id));

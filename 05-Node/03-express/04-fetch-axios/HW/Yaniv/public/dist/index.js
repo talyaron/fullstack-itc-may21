@@ -112,7 +112,7 @@ function renderData(dataToRender) {
     var root = document.querySelector(".students");
     var html = "";
     root.innerHTML = html;
-    if (typeof dataToRender.data === "string") {
+    if (typeof dataToRender.data === "string") { //YS: Good! 
         root.innerHTML = dataToRender.data;
         return;
     }

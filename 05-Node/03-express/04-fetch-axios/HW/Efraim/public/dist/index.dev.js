@@ -14,7 +14,8 @@ function handleStudent(ev) {
     age = age.valueAsNumber;
     studentID = studentID.valueAsNumber;
     averageGrade = averageGrade.valueAsNumber;
-    axios.put('/addStudent', {
+    axios.put("/addStudent", {
+      //POST! 
       name: name,
       age: age,
       studentID: studentID,
@@ -23,7 +24,8 @@ function handleStudent(ev) {
       var data = _ref.data;
       console.log(data);
     });
-    alert("Submitted Succesfuly!");
+    alert("Submitted Succesfuly!"); //YS: Good
+
     ev.target.reset();
   } catch (e) {
     console.error(e);
@@ -43,9 +45,9 @@ function handleStudentSearchQuery(event) {
       console.log(data);
     });
     event.target.reset();
-    axios.get('/getStud').then(function (res) {
+    axios.get("/getStud").then(function (res) {
       return list.innerHTML = res.data.html;
-    });
+    }); //YS: Why are you doing this? You should only have the get with Query, and then send the student back
   } catch (e) {
     console.error(e);
   }
@@ -65,9 +67,10 @@ function handleStudentSearchParam(event) {
       console.log(data);
     });
     event.target.reset();
-    axios.get('/getStud').then(function (res) {
+    axios.get("/getStud").then(function (res) {
       return list.innerHTML = res.data.html;
-    });
+    }); //YS: Same as above, you shouldnt be doing a second get request.
+    //You should just send back the student you looked for and display it in the DOM (with a render function)
   } catch (e) {
     console.error(e);
   }

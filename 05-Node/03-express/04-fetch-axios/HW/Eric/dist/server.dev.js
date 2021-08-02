@@ -38,12 +38,13 @@ app.get('/getAllStudents', function (req, res) {
   res.send(allStudents);
 });
 app.get("/getStudents", function (req, res) {
-  var id = req.query.id;
+  var id = req.query.id; //YS: Why dont you destructure here like in the params? 
+
   var studentById = allStudents.find(function (element) {
     return element.id === id;
   });
   res.send(studentById);
-  req.send(studentById);
+  req.send(studentById); //YS: Why are you sending twice? 
 });
 app.get("/getStudents/:id", function (req, res) {
   var id = req.params.id;
@@ -51,8 +52,9 @@ app.get("/getStudents/:id", function (req, res) {
     return elements.id === id;
   });
   res.send(studentByIdParams);
-  req.send(studentByIdParams);
-  console.log();
+  req.send(studentByIdParams); //YS: Why are you sending twice? 
+
+  console.log(); //YS: ? 
 });
 app.listen(port, function () {
   console.log("Server listen on port ".concat(port));

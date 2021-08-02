@@ -18,7 +18,9 @@ app.post("/addStudent", (req, res) => {
 
         const { id, name, age, avgrade } = req.body;
 
-        const newStudent = {
+        const newStudent = {  /* YS: Why are you doing this if newStudent will be the same as the req.body? DRY
+                                Also, you should be adding the ID here. The ID and another field called dateCreated should be
+                                managed by the BE*/
             id: id,
             name: name,
             age: age,
@@ -36,12 +38,14 @@ app.post("/addStudent", (req, res) => {
 
 
         function getStudent() {
-            return function __getInfo(newStudent) {
+            return function __getInfo(newStudent) { //YS: I didnt understand where you got the __getinfo function from...
                 return newStudent
             }
         }
 
         const student = getStudent()
+
+        console.log(student(newStudent))
 
         allStudents.push(student(newStudent));
 
@@ -59,7 +63,7 @@ app.post("/addStudent", (req, res) => {
 
 app.get("/getAllStudents", (req, res) => {
     const allStudents = readAllStudents();
-    allStudents.sort(function (a, b){return (a.id - b.id)})
+    allStudents.sort(function (a, b){return (a.id - b.id)}) //YS: Nice! 
     res.send(allStudents);
 });
 
@@ -68,7 +72,7 @@ app.delete("/deleteStudent/:id", (req, res) => {
     try {
         let { id } = req.params
         let allStudents = readAllStudents();
-        id = +id
+        id = +id //YS: Nice! 
         allStudents = allStudents.filter(student => student.id !== id)
         fs.writeFileSync("./allstudents.json", JSON.stringify(allStudents));
         allStudents.sort(function (a, b){return (a.id - b.id)})
