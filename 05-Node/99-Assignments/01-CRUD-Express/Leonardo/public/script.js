@@ -22,17 +22,49 @@ async function handleSubmit(event) {
 
 //Function to render the data of the tasks in the DOM
 async function renderTask(data) {
-    const html = data.map(task => {
-        return `<div class='tasks' draggable="true">
+    const htmlInProgress = data.map(task => {
+        if (task.status === 'inProgress') {
+            return `<div class='tasks' draggable="true">
                 <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
                     <h4> ${task.title} </h4>             
                     <p> ${task.description} </p>
                 </button>
                 <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
                 </div>`
+        }
     }).join('');
 
-    document.getElementById('toDo').innerHTML = html
+    document.getElementById('inProgress').innerHTML = htmlInProgress;
+
+    //////////////
+    const htmlDone = data.map(task => {
+        if (task.status === 'done') {
+            return `<div class='tasks' draggable="true">
+                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
+                    <h4> ${task.title} </h4>             
+                    <p> ${task.description} </p>
+                </button>
+                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
+                </div>`
+        }
+    }).join('');
+
+    document.getElementById('done').innerHTML = htmlDone
+
+    //////////////
+    const htmltoDo = data.map(task => {
+        if (task.status === 'toDo') {
+            return `<div class='tasks' draggable="true">
+                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
+                    <h4> ${task.title} </h4>             
+                    <p> ${task.description} </p>
+                </button>
+                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
+                </div>`
+        }
+    }).join('');
+
+    document.getElementById('toDo').innerHTML = htmltoDo
 };
 
 //Get the tasks information:
@@ -125,7 +157,7 @@ async function handleEdit(ev) {
 
         let tasksData = await axios.put(`/editTask/${taskIdEdit}`, { taskTitle, taskDescription, taskStatus });
         await location.reload();
-        
+
         /////////I DONT KNOW WHY ITS NOT WORKING///////////
         //await renderTask(tasksData.data.tasks);
 

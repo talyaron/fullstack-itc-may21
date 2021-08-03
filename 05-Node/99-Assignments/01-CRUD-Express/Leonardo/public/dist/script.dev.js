@@ -55,17 +55,33 @@ function handleSubmit(event) {
 ; //Function to render the data of the tasks in the DOM
 
 function renderTask(data) {
-  var html;
+  var htmlInProgress, htmlDone, htmltoDo;
   return regeneratorRuntime.async(function renderTask$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          html = data.map(function (task) {
-            return "<div class='tasks' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+          htmlInProgress = data.map(function (task) {
+            if (task.status === 'inProgress') {
+              return "<div class='tasks' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+            }
           }).join('');
-          document.getElementById('toDo').innerHTML = html;
+          document.getElementById('inProgress').innerHTML = htmlInProgress; //////////////
 
-        case 2:
+          htmlDone = data.map(function (task) {
+            if (task.status === 'done') {
+              return "<div class='tasks' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+            }
+          }).join('');
+          document.getElementById('done').innerHTML = htmlDone; //////////////
+
+          htmltoDo = data.map(function (task) {
+            if (task.status === 'toDo') {
+              return "<div class='tasks' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+            }
+          }).join('');
+          document.getElementById('toDo').innerHTML = htmltoDo;
+
+        case 6:
         case "end":
           return _context2.stop();
       }
