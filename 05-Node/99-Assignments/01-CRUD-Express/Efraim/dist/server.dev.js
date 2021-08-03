@@ -17,12 +17,12 @@ var Ajv = require("ajv");
 var ajv = new Ajv();
 app.use(express["static"]('public'));
 
-var toDOItems = function toDOItems(item, status) {
+var toDOItems = function toDOItems(item) {
   _classCallCheck(this, toDOItems);
 
   this.item = item;
   this.itemID = Math.random().toString(16).slice(2);
-  this.status = status;
+  this.status = "Incomplete";
 };
 
 var toDoList =
@@ -56,12 +56,9 @@ app.post('/addListItem', function (req, res) {
       properties: {
         task: {
           type: "string"
-        },
-        status: {
-          type: "string"
         }
       },
-      required: ["task", "status"],
+      required: ["task"],
       additionalProperties: false
     };
     var validate = ajv.compile(schema);
@@ -75,7 +72,7 @@ app.post('/addListItem', function (req, res) {
       throw new Error("Invalid data was transferd");
     }
 
-    list.addListItem(new toDOItems(body.task, body.status));
+    list.addListItem(new toDOItems(body.task));
     res.send(list);
   } catch (e) {
     console.log(e);

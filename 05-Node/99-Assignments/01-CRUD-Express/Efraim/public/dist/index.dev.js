@@ -19,15 +19,10 @@ function handleTask(ev) {
   ev.preventDefault();
 
   try {
-    var _ev$target$elements = ev.target.elements,
-        task = _ev$target$elements.task,
-        status = _ev$target$elements.status;
-    task = task.value;
-    status = "Incomplete";
+    var task = ev.target.elements.task.value;
     return new Promise(function (resolve, reject) {
       axios.post('/addListItem', {
-        task: task,
-        status: status
+        task: task
       }).then(function (data) {
         resolve(data.data.list);
         renderArrayToDom(data.data.list);

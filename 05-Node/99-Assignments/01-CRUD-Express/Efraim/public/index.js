@@ -19,17 +19,11 @@ window.addEventListener('load', () => {
 function handleTask(ev) {
     ev.preventDefault();
     try {
-        let {
-            task,
-            status
-        } = ev.target.elements;
-        task = task.value;
+        let task = ev.target.elements.task.value;
 
-        status = "Incomplete";
         return new Promise((resolve, reject) => {
             axios.post('/addListItem', {
-                    task,
-                    status
+                    task
                 })
                 .then(data => {
                     resolve(data.data.list)

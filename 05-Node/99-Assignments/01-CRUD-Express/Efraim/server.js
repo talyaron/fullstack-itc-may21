@@ -11,10 +11,10 @@ app.use(express.static('public'));
 
 class toDOItems {
 
-    constructor(item, status) {
+    constructor(item) {
         this.item = item;
         this.itemID = Math.random().toString(16).slice(2);
-        this.status = status
+        this.status = "Incomplete"
     }
 }
 
@@ -46,13 +46,9 @@ app.post('/addListItem', (req, res) => {
             properties: {
                 task: {
                     type: "string"
-                },
-               
-                status: {
-                    type: "string"
                 }
             },
-            required: ["task", "status"],
+            required: ["task"],
             additionalProperties: false
         }
         const validate = ajv.compile(schema)
@@ -70,7 +66,7 @@ app.post('/addListItem', (req, res) => {
             throw new Error("Invalid data was transferd")
         }
         
-        list.addListItem(new toDOItems(body.task, body.status));
+        list.addListItem(new toDOItems(body.task));
         res.send(list);
     } catch (e) {
         console.log(e)
@@ -83,7 +79,7 @@ app.post('/addListItem', (req, res) => {
 
 
 app.delete('/deleteTask/:ID', (req, res) => {
-    const ID = req.params.ID
+    const { ID } = req.params
         list.list = list.list.filter(list => list.itemID !== ID);
         res.send(list)
 })
