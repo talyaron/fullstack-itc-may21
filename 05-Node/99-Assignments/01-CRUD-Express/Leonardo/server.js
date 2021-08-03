@@ -12,48 +12,67 @@ order tasks
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+const fs = require("fs");
 
 //Uuidv4 is to generate a new ID
 const { v4: uuidv4 } = require('uuid');
 uuidv4();
 
+//Joi is to validate the data I enter:
+const Joi = require("joi");
+
 app.use(express.json());
 app.use(express.static('public'));
 
-class Tasks {
-    list = [];
-
-    addTaks(task) {
-        this.list.push(task)
-    };
-};
-
-const tasks = new Tasks();
-
-//Route to get all the Tasks
-app.get('/getAllTasks', (req, res) => {
-    res.send(tasks.list);
-});
+//This function is to read the array (I create this so the information will be kept even if I turn off the server)
+function readJsonAllTasks() {
+    const tasksList = fs.readFileSync("./allTasks.json");
+    return JSON.parse(tasksList);
+}
 
 //Route to create a Task
 app.post('/createTask', (req, res) => {
-    const { taskTitle, taskDescription } = req.body;
-    const task = {
-        id: uuidv4(),
-        title: taskTitle,
-        description: taskDescription,
-        status: 'toDo'
-    };
-    tasks.addTaks(task);
-    res.send({ message: 'A new Task was added', tasks: tasks.list });
+    const { body } = req;
+    const schema = Joi.object({
+        taskTitle: Joi.string().max(40).required(),
+        taskDescription: Joi.string().max(200).required(),
+    });
+    const { error, value } = schema.validate({
+        taskTitle: body.taskTitle,
+        taskDescription: body.taskDescription,
+    });
+    if (!error) {
+        const task = {
+            id: uuidv4(),
+            dateCreated: Date.now(),
+            title: value.taskTitle,
+            description: value.taskDescription,
+            status: 'toDo'
+        };
+        const allTasks = readJsonAllTasks();
+        allTasks.push(task);
+        fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
+        res.send({ message: 'A new Task was added', tasks: allTasks });
+    } else {
+        const msg = error.details[0].message;
+        res.status(400).send(msg);
+    }
+});
+
+//Route to get all the Tasks
+app.get('/getAllTasks', (req, res) => {
+    const allTasks = readJsonAllTasks();
+    res.send(allTasks);
 });
 
 //Route to delete a Task
 app.delete('/deleteTask/:id', (req, res) => {
     try {
-        const { id } = req.params
-        tasks.list = tasks.list.filter(task => task.id !== id);
-        res.send(({ message: 'A task was deleted', tasks: tasks.list }));
+        const { id } = req.params;
+        let allTasks = readJsonAllTasks();
+        allTasks = allTasks.filter(task => task.id !== id);
+        fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
+        res.send(({ message: 'A task was deleted', tasks: allTasks }));
     } catch (e) {
         res.status(400).send(error);
     }
@@ -64,16 +83,16 @@ app.put('/editTask/:id', (req, res) => {
     try {
         const { taskTitle, taskDescription, taskStatus } = req.body;
         const { id } = req.params;
-
-        const taskIndex = tasks.list.findIndex(task => task.id === id);
+        let allTasks = readJsonAllTasks();
+        const taskIndex = allTasks.findIndex(task => task.id === id);
         if (taskIndex > -1) {
-            tasks.list[taskIndex].title = taskTitle;
-            tasks.list[taskIndex].description = taskDescription;
-            tasks.list[taskIndex].status = taskStatus;
-            res.send(tasks.list);
-            res.send({ message: 'A task was updated', tasks: tasks.list })
+            allTasks[taskIndex].title = taskTitle;
+            allTasks[taskIndex].description = taskDescription;
+            allTasks[taskIndex].status = taskStatus;
+            fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
+            res.send({ message: 'A task was updated', tasks: allTasks })
         } else {
-            res.send({ message: 'Couldnt find a task to update', tasks: tasks.list })
+            res.send({ message: 'Couldnt find a task to update', tasks: allTasks })
         }
     } catch (e) {
         res.status(400).send(error);

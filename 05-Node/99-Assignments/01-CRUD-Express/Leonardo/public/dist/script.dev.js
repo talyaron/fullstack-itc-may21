@@ -52,32 +52,53 @@ function handleSubmit(event) {
   }, null, null, [[0, 15]]);
 }
 
+; //Function to render the data of the tasks in the DOM
+
+function renderTask(data) {
+  var html;
+  return regeneratorRuntime.async(function renderTask$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          html = data.map(function (task) {
+            return "<div class='tasks' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+          }).join('');
+          document.getElementById('toDo').innerHTML = html;
+
+        case 2:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  });
+}
+
 ; //Get the tasks information:
 
 function getAllTasks() {
   var tasksData;
-  return regeneratorRuntime.async(function getAllTasks$(_context2) {
+  return regeneratorRuntime.async(function getAllTasks$(_context3) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
-          _context2.prev = 0;
-          _context2.next = 3;
+          _context3.prev = 0;
+          _context3.next = 3;
           return regeneratorRuntime.awrap(axios.get('/getAllTasks'));
 
         case 3:
-          tasksData = _context2.sent;
-          renderTask(tasksData.data.tasks);
-          _context2.next = 10;
+          tasksData = _context3.sent;
+          renderTask(tasksData.data);
+          _context3.next = 10;
           break;
 
         case 7:
-          _context2.prev = 7;
-          _context2.t0 = _context2["catch"](0);
-          console.log(_context2.t0);
+          _context3.prev = 7;
+          _context3.t0 = _context3["catch"](0);
+          console.log(_context3.t0);
 
         case 10:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
     }
   }, null, null, [[0, 7]]);
@@ -87,37 +108,37 @@ function getAllTasks() {
 
 function deleteTask(id) {
   var option, tasksData;
-  return regeneratorRuntime.async(function deleteTask$(_context3) {
+  return regeneratorRuntime.async(function deleteTask$(_context4) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
-          _context3.prev = 0;
+          _context4.prev = 0;
           option = confirm("Are you sure do you want to delete this task?");
 
           if (!option) {
-            _context3.next = 7;
+            _context4.next = 7;
             break;
           }
 
-          _context3.next = 5;
+          _context4.next = 5;
           return regeneratorRuntime.awrap(axios["delete"]("/deleteTask/".concat(id)));
 
         case 5:
-          tasksData = _context3.sent;
+          tasksData = _context4.sent;
           renderTask(tasksData.data.tasks);
 
         case 7:
-          _context3.next = 12;
+          _context4.next = 12;
           break;
 
         case 9:
-          _context3.prev = 9;
-          _context3.t0 = _context3["catch"](0);
-          console.error(_context3.t0);
+          _context4.prev = 9;
+          _context4.t0 = _context4["catch"](0);
+          console.error(_context4.t0);
 
         case 12:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
     }
   }, null, null, [[0, 9]]);
@@ -130,14 +151,14 @@ var taskIdEdit = '';
 
 function uploadTask(id) {
   var formEdit, tasksData, html;
-  return regeneratorRuntime.async(function uploadTask$(_context4) {
+  return regeneratorRuntime.async(function uploadTask$(_context5) {
     while (1) {
-      switch (_context4.prev = _context4.next) {
+      switch (_context5.prev = _context5.next) {
         case 0:
-          _context4.prev = 0;
+          _context5.prev = 0;
 
           if (modalEdit) {
-            _context4.next = 3;
+            _context5.next = 3;
             break;
           }
 
@@ -149,39 +170,40 @@ function uploadTask(id) {
           formEdit = document.querySelector("#formEdit");
 
           if (formEdit) {
-            _context4.next = 8;
+            _context5.next = 8;
             break;
           }
 
           throw new Error('There is a problem finding form from HTML');
 
         case 8:
-          _context4.next = 10;
+          _context5.next = 10;
           return regeneratorRuntime.awrap(axios.get('/getAllTasks'));
 
         case 10:
-          tasksData = _context4.sent;
+          tasksData = _context5.sent;
           html = tasksData.data.map(function (element) {
             if (element.id === id) {
-              return "<h1>EDIT TASK</h1>\n                    \n                    <div class=\"form__wrapper\">\n                    <label for=\"title\">Title:</label>\n                    <input type=\"text\" name=\"title\" id=\"firstname\" maxlength=\"40\" value=".concat(element.title, " required>\n                    </div>\n    \n                    <div class=\"form__wrapper\">\n                    <label for=\"description\">Description:</label>\n                    <input type=\"text\" name=\"description\" id=\"description\" cols=\"30\" rows=\"10\"\n                    maxlength=\"200\" value=").concat(element.description, " required>\n                    </div>\n    \n                    <div>\n                        <label for=\"toDo\">To Do</label>\n                        <input type=\"radio\" id=\"toDo\" name=\"status\" value=\"toDo\" checked />\n    \n                        <label for=\"inProgress\">In Progress</label>\n                        <input type=\"radio\" id=\"inProgress\" name=\"status\" value=\"inProgress\" />\n    \n                        <label for=\"done\">Done</label>\n                        <input type=\"radio\" id=\"done\" name=\"status\" value=\"done\" />\n                    </div>\n                    <input class=\"form__input--submit\" type=\"submit\" value=\"Save changes\">");
+              console.log(element);
+              return "<h1>EDIT TASK</h1>\n                    \n                    <div class=\"form__wrapper\">\n                    <label for=\"title\">Title:</label>\n                    <input type=\"text\" name=\"title\" id=\"title\" maxlength=\"40\" value=\"".concat(element.title, "\" required>\n                    </div>\n    \n                    <div class=\"form__wrapper\">\n                    <label for=\"description\">Description:</label>\n                    <textarea type=\"text\" name=\"description\" id=\"description\" cols=\"30\" rows=\"10\"\n                    maxlength=\"200\" required>").concat(element.description, "</textarea>\n                    </div>\n    \n                    <div>\n                        <label for=\"toDo\">To Do</label>\n                        <input type=\"radio\" id=\"toDo\" name=\"status\" value=\"toDo\" checked />\n    \n                        <label for=\"inProgress\">In Progress</label>\n                        <input type=\"radio\" id=\"inProgress\" name=\"status\" value=\"inProgress\" />\n    \n                        <label for=\"done\">Done</label>\n                        <input type=\"radio\" id=\"done\" name=\"status\" value=\"done\" />\n                    </div>\n                    <input class=\"form__input--submit\" type=\"submit\" value=\"Save changes\">");
             }
           }).join('');
           formEdit.innerHTML = html;
           taskIdEdit = id;
-          _context4.next = 19;
+          _context5.next = 19;
           break;
 
         case 16:
-          _context4.prev = 16;
-          _context4.t0 = _context4["catch"](0);
-          console.error(_context4.t0);
+          _context5.prev = 16;
+          _context5.t0 = _context5["catch"](0);
+          console.error(_context5.t0);
 
         case 19:
           ;
 
         case 20:
         case "end":
-          return _context4.stop();
+          return _context5.stop();
       }
     }
   }, null, null, [[0, 16]]);
@@ -191,19 +213,19 @@ function uploadTask(id) {
 function handleEdit(ev) {
   var _ev$target$elements, title, description, status, tasksData;
 
-  return regeneratorRuntime.async(function handleEdit$(_context5) {
+  return regeneratorRuntime.async(function handleEdit$(_context6) {
     while (1) {
-      switch (_context5.prev = _context5.next) {
+      switch (_context6.prev = _context6.next) {
         case 0:
           ev.preventDefault();
-          _context5.prev = 1;
+          _context6.prev = 1;
           _ev$target$elements = ev.target.elements, title = _ev$target$elements.title, description = _ev$target$elements.description, status = _ev$target$elements.status;
           taskTitle = title.value;
           taskDescription = description.value;
           taskStatus = status.value;
 
           if (!(!taskTitle || !taskDescription || !taskStatus)) {
-            _context5.next = 8;
+            _context6.next = 8;
             break;
           }
 
@@ -211,7 +233,7 @@ function handleEdit(ev) {
 
         case 8:
           if (modalEdit) {
-            _context5.next = 10;
+            _context6.next = 10;
             break;
           }
 
@@ -220,7 +242,7 @@ function handleEdit(ev) {
         case 10:
           modalEdit.style.display = "none";
           ev.target.reset();
-          _context5.next = 14;
+          _context6.next = 14;
           return regeneratorRuntime.awrap(axios.put("/editTask/".concat(taskIdEdit), {
             taskTitle: taskTitle,
             taskDescription: taskDescription,
@@ -228,47 +250,28 @@ function handleEdit(ev) {
           }));
 
         case 14:
-          tasksData = _context5.sent;
-          //location.reload();
-          renderTask(tasksData.data.tasks);
-          _context5.next = 21;
+          tasksData = _context6.sent;
+          _context6.next = 17;
+          return regeneratorRuntime.awrap(location.reload());
+
+        case 17:
+          _context6.next = 22;
           break;
 
-        case 18:
-          _context5.prev = 18;
-          _context5.t0 = _context5["catch"](1);
-          console.error(_context5.t0);
-
-        case 21:
-          ;
+        case 19:
+          _context6.prev = 19;
+          _context6.t0 = _context6["catch"](1);
+          console.error(_context6.t0);
 
         case 22:
-        case "end":
-          return _context5.stop();
-      }
-    }
-  }, null, null, [[1, 18]]);
-}
+          ;
 
-; //Function to render the data of the tasks in the DOM
-
-function renderTask(data) {
-  var html;
-  return regeneratorRuntime.async(function renderTask$(_context6) {
-    while (1) {
-      switch (_context6.prev = _context6.next) {
-        case 0:
-          html = data.map(function (task) {
-            return "<button class='tasks' id='".concat(task.id, "name' draggable=\"true\" onclick=uploadTask(\"").concat(task.id, "\")>\n                    <div class='tasks__delete'>\n                        <h4> ").concat(task.title, " </h4>\n                        <td><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></td>             \n                    </div>\n                    <p> ").concat(task.description, " </p>\n                </button>");
-          }).join('');
-          document.getElementById('toDo').innerHTML = html;
-
-        case 2:
+        case 23:
         case "end":
           return _context6.stop();
       }
     }
-  });
+  }, null, null, [[1, 19]]);
 }
 
 ;
