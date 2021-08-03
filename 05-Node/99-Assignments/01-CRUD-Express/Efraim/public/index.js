@@ -20,7 +20,6 @@ function handleTask(ev) {
     ev.preventDefault();
     try {
         let task = ev.target.elements.task.value;
-
         return new Promise((resolve, reject) => {
             axios.post('/addListItem', {
                     task
@@ -110,11 +109,12 @@ function renderArrayToDom(listArray) {
 
         listArray.forEach((listItem) => {
             if (listItem.status === "Incomplete") {
+                
 
                 html += (
                     `<div class="holder__item" id='${listItem.itemID}'>
                 <div class="holder__item__header">Task:</div>
-                <div class="holder__item__taskDisplay">${listItem.item}</div>
+                <div class="holder__item__taskDisplay" style="color: red">${listItem.item}</div>
                 <input class="holder__item__task" id="${listItem.itemID}update" placeholder="Edit Task, Click Update!"  value="">
                 <div class='button button--update' onclick='updateTask("${listItem.itemID}")'>UPDATE</div>
                 <div class="holder__item__header">Status:</div>
@@ -127,9 +127,7 @@ function renderArrayToDom(listArray) {
                 html += (
                     `<div class="holder__item" id='${listItem.itemID}'>
                     <div class="holder__item__header">Task:</div>
-                    <div class="holder__item__taskDisplay">${listItem.item}</div>
-                    <input class="holder__item__task" id="${listItem.itemID}update" placeholder="Edit Task, Click Update!" value="">
-                    <div class='button button--update' onclick='updateTask("${listItem.itemID}")'>UPDATE</div>
+                    <div class="holder__item__taskDisplay" style="color: green">${listItem.item}</div>
                     <div class="holder__item__header">Status:</div>
                     <div class="green" id="${listItem.itemID}status">${listItem.status}</div>
                     <div class="button button--delete" onclick='deleteTask("${listItem.itemID}")'>DELETE</div>

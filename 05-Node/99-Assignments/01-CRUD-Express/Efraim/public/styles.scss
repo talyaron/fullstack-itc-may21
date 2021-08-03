@@ -74,13 +74,15 @@ input {
         width: fit-content;
         justify-content: center;
         margin: 1rem;
-        
+        height: fit-content;
         padding: 1rem;
         border-radius: 10px;
         border: 3px solid black;
         margin-bottom: 1rem;
 
-
+        &__taskDisplay{
+            font-style: italic;
+        }
         &__header {
             font-weight: bold;
             margin-top: 1vh;

@@ -73,10 +73,14 @@ input {
   width: fit-content;
   justify-content: center;
   margin: 1rem;
+  height: fit-content;
   padding: 1rem;
   border-radius: 10px;
   border: 3px solid black;
   margin-bottom: 1rem;
+}
+.holder__item__taskDisplay {
+  font-style: italic;
 }
 .holder__item__header {
   font-weight: bold;
