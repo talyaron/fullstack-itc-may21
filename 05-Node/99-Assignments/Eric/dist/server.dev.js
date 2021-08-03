@@ -1,7 +1,5 @@
 "use strict";
 
-function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
-
 /*You should have a list of tasks
 create a task
 update a task (done/not done/ update text)
@@ -64,17 +62,17 @@ app.put('/updateEmployes/:id', function (req, res) {
   if (name) employeUpdate.name = name;
   res.send(employeUpdate);
 });
-app["delete"]('/deleteEmployes', function (req, res) {
-  var id = req.body.id;
-  setTimeout(function () {
-    allEmployes = (_readOnlyError("allEmployes"), allEmployes.filter(function (employe) {
-      return employe.id !== id;
-    }));
-    res.send({
-      message: 'one student record was deleted',
-      allEmployes: allEmployes
-    });
-  }, 2000);
+app["delete"]('/deleteEmployes/:id', function (req, res) {
+  var id = req.params.id;
+  allEmployes = allEmployes.filter(function (employe) {
+    return employe.id !== id;
+  });
+  fs.writeFileSync("./employes.json", JSON.stringify(allEmployes));
+  res.send({
+    message: 'one student record was deleted',
+    allEmployes: allEmployes
+  });
+  console.log(allEmployes);
 });
 app.listen(port, function () {
   console.log("Server listening at http://localhost:".concat(port));
