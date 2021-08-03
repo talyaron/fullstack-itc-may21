@@ -17,11 +17,11 @@ var Ajv = require("ajv");
 var ajv = new Ajv();
 app.use(express["static"]('public'));
 
-var toDOItems = function toDOItems(item, itemID, status) {
+var toDOItems = function toDOItems(item, status) {
   _classCallCheck(this, toDOItems);
 
   this.item = item;
-  this.itemID = itemID;
+  this.itemID = Math.random().toString(16).slice(2);
   this.status = status;
 };
 
@@ -39,18 +39,7 @@ function () {
     value: function addListItem(list) {
       try {
         this.list.push(list);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  }, {
-    key: "renderArrayToDom",
-    value: function renderArrayToDom(listArray) {
-      try {
-        var _html = '';
-        listArray.forEach(function (listItem) {
-          _html += "<div class=\"holder__item\" id=\"".concat(listItem.itemId, "\">") + "<div class=\"holder__item__task\">".concat(listItem.item, "</div>") + "<div class=\"holder__item__ID\">".concat(listItem.itemID, "</div>") + "<div class=\"holder__item__status\">".concat(status, "</div>") + "<div class=\"holder__item__delete\" onclick=\"deleteitem('".concat(listItem.itemId, "')\">x</div>") + "</div>";
-        });
+        console.log(list);
       } catch (e) {
         console.error(e);
       }
@@ -75,22 +64,19 @@ function () {
 
 var list = new toDoList();
 var html = '';
-app.put('/addListItem', function (req, res) {
+app.post('/addListItem', function (req, res) {
   try {
     var schema = {
       type: "object",
       properties: {
-        item: {
+        task: {
           type: "string"
-        },
-        itemID: {
-          type: "integer"
         },
         status: {
           type: "string"
         }
       },
-      required: ["item", "itemID", "status"],
+      required: ["task", "status"],
       additionalProperties: false
     };
     var validate = ajv.compile(schema);
@@ -104,13 +90,60 @@ app.put('/addListItem', function (req, res) {
       throw new Error("Invalid data was transferd");
     }
 
-    list.addListItem(new toDOItems(body.item, body.itemID, body.status));
-    list.renderArrayToDom(list);
+    list.addListItem(new toDOItems(body.task, body.status));
     res.send(list);
   } catch (e) {
     console.log(e);
     res.status(400).send({
       error: e.message
+    });
+  }
+});
+app["delete"]('/deleteStudent/:ID', function (req, res) {
+  var ID = req.params.ID;
+  console.log(ID);
+  list.list = list.list.filter(function (list) {
+    return list.itemID !== ID;
+  });
+  res.send(list);
+});
+app.put('/updateStudent', function (req, res) {
+  var _req$body = req.body,
+      id = _req$body.id,
+      newTaskName = _req$body.newTaskName;
+  var listIndex = list.list.findIndex(function (list) {
+    return list.itemID === id;
+  });
+
+  if (listIndex > -1) {
+    list.list[listIndex].item = newTaskName;
+    res.send({
+      message: 'one list Item was updated',
+      list: list
+    });
+  } else {
+    res.send({
+      message: 'couldnt find the task Item!',
+      list: list
+    });
+  }
+});
+app.put('/updateStatus', function (req, res) {
+  var id = req.body.id;
+  var listIndex = list.list.findIndex(function (list) {
+    return list.itemID === id;
+  });
+
+  if (listIndex > -1) {
+    list.list[listIndex].status = "completed!";
+    res.send({
+      message: 'one list task status was updated',
+      list: list
+    });
+  } else {
+    res.send({
+      message: 'couldnt find the task Item!',
+      list: list
     });
   }
 });
@@ -125,11 +158,9 @@ app.get('/getListQuery', function (req, res) {
     console.error(e);
   }
 });
-app.get('/getListItem', function (req, res) {
+app.get('/getList', function (req, res) {
   try {
-    res.send({
-      html: html
-    });
+    res.send(list);
   } catch (e) {
     console.error(e);
   }

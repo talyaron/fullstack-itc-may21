@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dist/styles.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -14,17 +14,12 @@
 
 
 <body>
-    <form class="firstForm">
+    <form>
         <label for="name">Task Description:</label>
-        <input type="text" name="name" placeholder=" task description" required>
-        <label for="taskID">TaskID:</label>
-        <input type="number" name="taskID" placeholder=" taskID" required>
-        <input class="button" type="submit" value="SEND">
+        <input type="text" name="task" placeholder=" task description" required>
+        <input class="button" type="submit" value="POST">
     </form>
-    <form class="secondForm">
-        <input type="number" name="searchQuery" placeholder=" search with ID" required>
-        <input class="button" type="submit" value="Query">
-    </form>
+   
 
 
 <div class="holder"></div>
