@@ -143,7 +143,7 @@
 }
 .modal-bg__modal {
   position: relative;
-  background-color: black;
+  background-color: maroon;
   color: white;
   width: 40%;
   height: 80%;
@@ -211,9 +211,11 @@
 }
 .modal-bg__modal__form--buttons--add {
   background-color: red;
+  color: white;
 }
 .modal-bg__modal__form--buttons--edit {
   background-color: blue;
+  color: white;
 }
 .modal-bg__modal .modal-close {
   position: absolute;

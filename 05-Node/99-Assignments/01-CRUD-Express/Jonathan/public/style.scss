@@ -178,7 +178,7 @@
 
     &__modal {
         position: relative;
-        background-color: black;
+        background-color: maroon;
         color: white;
         width: 40%;
         height: 80%;
@@ -257,10 +257,12 @@
 
                 &--add {
                     background-color: red;
+                    color:white;
                 }
 
                 &--edit {
-                    background-color: blue
+                    background-color: blue;
+                    color:white;
                 }
             }
 
