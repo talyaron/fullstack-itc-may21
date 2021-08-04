@@ -1,0 +1,1 @@
+"use strict";var express=require("express"),app=express(),router=express.Router();app.use(sta),router.get("/",function(e,r){r.send("Wiki home page")}),router.get("/about",function(e,r){r.send("About this wiki")}),module.exports=router;
