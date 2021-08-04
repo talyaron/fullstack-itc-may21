@@ -1,18 +1,16 @@
 {
-  "name": "jonathan",
+  "name": "Raziel",
   "version": "1.0.0",
-  "description": "Student App",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Jony Nisen",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "fs": "0.0.1-security"
-  },
-  "devDependencies": {},
-  "keywords": []
+    "express": "^4.17.1"
+  }
 }
