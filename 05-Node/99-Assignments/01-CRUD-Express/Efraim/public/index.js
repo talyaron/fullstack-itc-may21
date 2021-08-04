@@ -47,7 +47,6 @@ function handleTask(ev) {
                 .then(data => {
                     resolve(data.list)
                     renderArrayToDom(data.list)
-                    alert("Submitted Succesfuly!")
                 })
                 .catch(e => {
                     reject(e)
@@ -89,7 +88,7 @@ function deleteTask(taskID) {
 function updateTask(taskID) {
     try {
         const newTaskName = document.getElementById(`${taskID}update`).value;
-        return new Promise((resolve, reject) => {
+        return new Promise(async(resolve, reject) => {
             fetch('/updateTask', {
                     method: 'PUT',
                     headers: {
@@ -104,7 +103,6 @@ function updateTask(taskID) {
                 .then(data => {
                     resolve(data.list.list)
                     renderArrayToDom(data.list.list)
-                    alert("updated succefully!")
                 })
                 .catch(e => {
                     reject(e)
