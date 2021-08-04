@@ -186,3 +186,11 @@ body {
 .content__done {
   height: 70vh;
 }
+
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    grid-template-rows: 33.3% 33.3% 33.4%;
+    grid-template-columns: none;
+    height: max-content;
+  }
+}

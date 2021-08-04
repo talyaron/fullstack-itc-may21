@@ -198,14 +198,23 @@ body {
   background-color: dodgerblue;
 }
 
-.content{
-  &__todo{
+.content {
+  &__todo {
     height: 70vh;
   }
-  &__inprogress{
+  &__inprogress {
     height: 70vh;
   }
-  &__done{
+  &__done {
     height: 70vh;
+  }
+}
+
+/////////////////////////////////////RESPONSIVE///////////////////////////////
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    grid-template-rows: 33.3% 33.3% 33.4%;
+    grid-template-columns: none;
+    height: max-content;
   }
 }
