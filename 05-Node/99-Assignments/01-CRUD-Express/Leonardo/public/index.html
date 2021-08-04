@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuesday.com</title>
+    <link rel="shortcut icon" href="./img/favicon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="dist/styles.min.css">
+</head>
+
+<body onload="getAllTasks()">
+    <nav class="top-menu">
+        <h1 class="top-menu__title">Organice your life...</h1>
+        <img class="top-menu__logo" src="./img/logoTuesday.jpg" alt="Logo tuesday.com" />
+    </nav>
+
+    <nav class="top-submenu">
+        <button class="top-submenu-button" id="buttonCreate">
+            Create a new task
+        </button>
+    </nav>
+
+    <!-- Modal to create a task -->
+    <div id="modalCreate" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <form class="form">
+                <div class="form__wrapper">
+                    <label for="taskTitle">Title:</label>
+                    <input class="form__input" type="text" name="taskTitle" id="taskTitle" maxlength="40" required />
+                </div>
+
+                <div class="form__wrapper">
+                    <label for="taskDescription">Description:</label>
+                    <textarea class="form__textarea" name="taskDescription" id="taskDescription" cols="30" rows="10"
+                        maxlength="200" required></textarea>
+                </div>
+
+                <input class="form__input--submit" type="submit" value="Create task" />
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal to edit a task -->
+    <div id="modalEdit" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeEdit" class="close">&times;</span>
+            <form class="formEdit" id="formEdit" onsubmit="handleEdit(event)"></form>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="wrapper__todo">
+            <h3>To do</h3>
+            <div class="content__todo" id="toDo"></div>
+        </div>
+        <div class="wrapper__inprogress">
+            <h3>In progress</h3>
+            <div class="content__inprogress" id="inProgress"></div>
+        </div>
+        <div class="wrapper__done">
+            <h3>Done</h3>
+            <div class="content__done" id="done"></div>
+        </div>
+    </div>
+
+    <script src="dist/helperModal.dev.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

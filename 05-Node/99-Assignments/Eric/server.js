@@ -23,12 +23,7 @@ const readAllEmployes = () => {
     const allEmployes = fs.readFileSync('./employes.json'); 
     return JSON.parse(allEmployes); 
 }
-const allEmployes = readAllEmployes()
-
-
-app.get('/getEmployes', (req, res) => {
-    res.send({ allEmployes })
-})
+let allEmployes = readAllEmployes()
 
 
 app.post('/addEmployes', (req, res)=>{
@@ -57,14 +52,21 @@ app.put('/updateEmployes/:id', (req, res)=>{
 })
 
 
-app.delete('/deleteEmployes', (req, res) => {
-    const { id } = req.body;
-    setTimeout(() => {
-        allEmployes = allEmployes.filter(employe => employe.id !== id);
+app.delete('/deleteEmployes/:id', (req, res) => {
+        let { id } = req.params
+    
+        allEmployes = allEmployes.filter((employe) => employe.id !== id);
+        fs.writeFileSync("./employes.json", JSON.stringify(allEmployes));
         res.send({ message: 'one student record was deleted', allEmployes })
-    }, 2000)
+        console.log(allEmployes)
+    
 
 })
+
+
+
+
+
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)

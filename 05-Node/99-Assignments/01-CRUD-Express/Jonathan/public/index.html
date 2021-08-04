@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/style.min.css">
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="notes.png" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>To Do List - Server CRUD</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__left">
+            <img src="notes.png" alt="NotesImg" class="header__left--img" />
+            <h1>Jony's Tasks</h1>
+        </div>
+        <div class="header__right">
+            <p>Status:
+                <select id="filterstatus">
+                    <option value="everything" selected="selected">All Task</option>
+                    <option value="important">Important</option>
+                    <option value="later">Later</option>
+                    <option value="done">Done</option>
+                </select>
+            </p>
+            <div class="header__right--color">
+                <label for="color">Select Color
+                    <input type="color" name="color" id="color">
+                </label>
+
+                <i class="fas fa-paint-roller header__right--color--paint"></i>
+            </div>
+        </div>
+    </header>
+    <section class="section">
+        <input type="button" value="ADD TASK" class="section--btn section--btn--add">
+        <input type="button" value="All TASK" class="section--btn section--btn--all">
+    </section>
+
+    <div id="boardData" class="boardData"></div>
+
+
+    <div class="modal-bg">
+        <div class="modal-bg__modal">
+            <form class="modal-bg__modal__form">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="3" cols="40"></textarea>
+                <label for="datetime">Until Time Task</label>
+                <input type="datetime-local" name="datetime" id="datetime">
+                <div class="modal-bg__modal__form--radio">
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🛒" checked>
+                        <span>🛒</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="✈️">
+                        <span>✈️</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🍻">
+                        <span>🍻</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="⚽️">
+                        <span>⚽️</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🐶">
+                        <span>🐶</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🎶">
+                        <span>🎶</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="🏡">
+                        <span>🏡</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="👔">
+                        <span>👔</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="choice" class="emoji" value="📓">
+                        <span>📓</span>
+                    </label>
+                </div>
+                <p>Status:
+                    <select id="status" required>
+                        <option value="important" selected="selected">Important</option>
+                        <option value="later">Later</option>
+                    </select>
+                </p>
+                <div class="modal-bg__modal__form--buttons">
+                    <button class="modal-bg__modal__form--buttons--btn-modal modal-bg__modal__form--buttons--add">ADD TASK</button>
+                    <button class="modal-bg__modal__form--buttons--btn-modal modal-bg__modal__form--buttons--edit">EDIT</button>
+                </div>
+            </form>
+            <span class="modal-close">✖️</span>
+
+        </div>
+    </div>
+    <script type='text/javascript' src='tinycolor.js'></script>
+    <script src="helpers.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

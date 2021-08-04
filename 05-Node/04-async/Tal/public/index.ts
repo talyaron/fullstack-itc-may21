@@ -4,41 +4,34 @@ interface Student {
 }
 
 
-async function getInfo() {
+async function getInfo():Promise<void> {
     try{
     //SIMPLE PROMISE:
 
-    console.time('students')
-    fetch('/getData')
-    .then(r=>r.json())
-    .then(students=>{
-        console.log(students);
-        console.timeEnd('students')
-        renderStudents(students);
+    // console.time('students')
+    // fetch('/getData')
+    // .then(r=>r.json())
+    // .then(students=>{
+    //     console.log(students);
+    //     console.timeEnd('students')
+    //     renderStudents(students);
 
-        //callback hell (or promise hell)
-        console.time('joke')
-        fetch('https://api.chucknorris.io/jokes/random')
-        .then(r=>r.json())
-        .then(joke=>{
-            console.log(joke.value);
+    //     //callback hell (or promise hell)
+    //     console.time('joke')
+    //     fetch('https://api.chucknorris.io/jokes/random')
+    //     .then(r=>r.json())
+    //     .then(joke=>{
+    //         console.log(joke.value);
 
-           console.timeEnd('joke');
-        })
+    //        console.timeEnd('joke');
+    //     })
 
-    })
+    // })
 
 
     //ASYNC AWAIT
 
-    const r = await fetch('/getData');
-    console.log('waited')
-    const students = await r.json();
-    console.log(students);
 
-    const r2 = await fetch('https://api.chucknorris.io/jokes/random')
-    const joke = await r2.json();
-    console.log(joke.value);
 
 
     const students = await getStudents();
@@ -61,7 +54,7 @@ async function getInfo() {
 function getStudents() {
 
     return new Promise((resolve, reject) => {
-        //resole = the will be retuned if the promise was allright
+        //resolve = this will be retuned if the promise was allright
         //reject = in error case the
 
         // reject(new Error('error'))
@@ -79,7 +72,7 @@ function getStudents() {
 
 function getJoke() {
 
-    return new Promise((resolve, reject) => {
+    return new Pro§mise((resolve, reject) => {
         //resole = the will be retuned if the promise was allright
         //reject = in error case the
         fetch('https://api.chucknorris.io/jokes/random')
