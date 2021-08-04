@@ -20,14 +20,14 @@ var readAllTasks = function readAllTasks() {
 
 app.post("/addTask", function (req, res) {
   try {
-    console.log(req.body);
     var _req$body = req.body,
         title = _req$body.title,
         description = _req$body.description,
         date = _req$body.date,
         min = _req$body.min,
         emoji = _req$body.emoji,
-        status = _req$body.status;
+        status = _req$body.status,
+        datetime = _req$body.datetime;
     var newTask = {
       id: uuidv4(),
       title: title,
@@ -35,7 +35,8 @@ app.post("/addTask", function (req, res) {
       date: date,
       min: min,
       emoji: emoji,
-      status: status
+      status: status,
+      datetime: datetime
     };
 
     if (!title || !description || !date || !min || !emoji || !status) {
@@ -146,6 +147,13 @@ app.get("/getPriority/:status", function (req, res) {
   } else {
     res.send(allTasks);
   }
+});
+app.get("/orderDate", function (req, res) {
+  var allTasks = readAllTasks();
+  allTasks.sort(function (a, b) {
+    return a.datetime < b.datetime ? -1 : a.datetime > b.datetime ? 1 : 0;
+  });
+  res.send(allTasks);
 });
 app.listen(port, function () {
   console.log("Example app listening at http://localhost:".concat(port));

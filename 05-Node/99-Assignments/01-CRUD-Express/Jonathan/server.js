@@ -16,8 +16,8 @@ const readAllTasks = () => {
 
 app.post("/addTask", (req, res) => {
     try {
-        console.log(req.body)
-        const { title, description, date, min, emoji, status } = req.body;
+        
+        const { title, description, date, min, emoji, status, datetime} = req.body;
 
         const newTask = {
             id: uuidv4(),
@@ -27,6 +27,7 @@ app.post("/addTask", (req, res) => {
             min: min,
             emoji: emoji,
             status: status,
+            datetime:datetime,
         }
 
         if (!title || !description || !date || !min || !emoji || !status) {
@@ -125,6 +126,11 @@ app.get("/getPriority/:status", (req, res) => {
     
 });
 
+app.get("/orderDate", (req, res) => {
+    const allTasks = readAllTasks();
+    allTasks.sort(function (a, b){return (a.datetime < b.datetime) ? -1 : (a.datetime > b.datetime) ? 1 : 0})
+    res.send(allTasks);
+});
 
 
 app.listen(port, () => {
