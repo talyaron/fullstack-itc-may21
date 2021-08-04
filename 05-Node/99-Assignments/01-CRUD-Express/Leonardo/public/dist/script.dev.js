@@ -55,26 +55,23 @@ function handleSubmit(event) {
 ; //Function to render the data of the tasks in the DOM
 
 function renderTask(data) {
-  var htmlInProgress = data.map(function (task) {
-    if (task.status === 'inProgress') {
-      return "<div class='tasks inProgress' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
-    }
-  }).join('');
-  document.getElementById('inProgress').innerHTML = htmlInProgress; //////////////
-
-  var htmlDone = data.map(function (task) {
-    if (task.status === 'done') {
-      return "<div class='tasks done' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
-    }
-  }).join('');
-  document.getElementById('done').innerHTML = htmlDone; //////////////
-
-  var htmltoDo = data.map(function (task) {
-    if (task.status === 'toDo') {
-      return "<div class='tasks toDo' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
-    }
-  }).join('');
+  var htmltoDo = renderThrough(data, 'toDo');
   document.getElementById('toDo').innerHTML = htmltoDo;
+  var htmlInProgress = renderThrough(data, 'inProgress');
+  document.getElementById('inProgress').innerHTML = htmlInProgress;
+  var htmlDone = renderThrough(data, 'done');
+  document.getElementById('done').innerHTML = htmlDone;
+}
+
+;
+
+function renderThrough(data, status) {
+  var toShow = data.map(function (task) {
+    if (task.status === status) {
+      return "<div class='tasks ".concat(status, "' draggable=\"true\">\n                <button class=\"tasks__edit\" id='").concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+    }
+  }).join('');
+  return toShow;
 }
 
 ; //Get the tasks information:
