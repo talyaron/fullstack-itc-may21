@@ -21,7 +21,7 @@ async function handleSubmit(event) {
 };
 
 //Function to render the data of the tasks in the DOM
-async function renderTask(data) {
+function renderTask(data) {
     const htmlInProgress = data.map(task => {
         if (task.status === 'inProgress') {
             return `<div class='tasks inProgress' draggable="true">
@@ -104,7 +104,6 @@ async function uploadTask(id) {
         const tasksData = await axios.get('/getAllTasks');
         let html = tasksData.data.map(element => {
             if (element.id === id) {
-                console.log(element);
                 return (
                     `<h1>EDIT TASK</h1>
                     
@@ -156,10 +155,10 @@ async function handleEdit(ev) {
         ev.target.reset();
 
         let tasksData = await axios.put(`/editTask/${taskIdEdit}`, { taskTitle, taskDescription, taskStatus });
-        await location.reload();
+        location.reload();
 
         /////////I DONT KNOW WHY ITS NOT WORKING///////////
-        //await renderTask(tasksData.data.tasks);
+        //renderTask(tasksData.data.tasks);
 
     } catch (error) {
         console.error(error);
