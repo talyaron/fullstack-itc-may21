@@ -129,13 +129,39 @@ function updateStatus(ID) {
   }
 }
 
+function editTaskKeepText(id) {
+  try {
+    return new Promise(function (resolve, reject) {
+      var edit = document.getElementById("".concat(id, "update"));
+      fetch('/getList').then(function (r) {
+        return r.json();
+      }).then(function (data) {
+        resolve(data.list);
+        var arrayElement = data.list.filter(function (find) {
+          return find.itemID === id;
+        });
+        edit.placeholder = "";
+        edit.value = arrayElement[0].item;
+      })["catch"](function (e) {
+        reject(e);
+      });
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 function dateUrgency(date) {
-  if ((new Date(date) - new Date()) / 1000 < 86400) {
-    return "red";
-  } else if ((new Date(date) - new Date()) / 1000 < 259200) {
-    return "rgb(220, 220, 2)";
-  } else {
-    return "blue";
+  try {
+    if ((new Date(date) - new Date()) / 1000 < 86400) {
+      return "red";
+    } else if ((new Date(date) - new Date()) / 1000 < 259200) {
+      return "rgb(220, 220, 2)";
+    } else {
+      return "blue";
+    }
+  } catch (e) {
+    console.error(e);
   }
 }
 
@@ -158,7 +184,7 @@ function renderArrayToDom(listArray) {
           return regeneratorRuntime.awrap(listArray.forEach(function (listItem) {
             if (listItem.status === "Incomplete") {
               var urgencyColor = dateUrgency(listItem.dueDate);
-              html += "<div class=\"holder__item\" id='".concat(listItem.itemID, "'>\n                <div class=\"holder__item__header\">Task:</div>\n                <div class=\"holder__item__taskDisplay\">").concat(listItem.item, "</div>\n                <input class=\"holder__item__task\" id=\"").concat(listItem.itemID, "update\" placeholder=\"Edit Task, Click Update!\"  value=\"\">\n                <div class='button button--update' onclick='updateTask(\"").concat(listItem.itemID, "\")'>UPDATE</div>\n                <div class=\"holder__item__header\">Due Date:</div>\n                <div class=\"holder__item__dueDate\" style=\"color: ").concat(urgencyColor, "\">").concat(listItem.dueDate, "</div>\n                <div class=\"holder__item__header\">Status:</div>\n                <div class=\"holder__item__status\" id=\"").concat(listItem.itemID, "status\">").concat(listItem.status, "</div>\n                <div class='button button--update-status' id=\"").concat(listItem.itemID, "status-button\" onclick='updateStatus(\"").concat(listItem.itemID, "\")'>Mark as Complete!</div>\n                <div class=\"button button--delete\" onclick='deleteTask(\"").concat(listItem.itemID, "\")'>DELETE</div>\n                </div>");
+              html += "<div class=\"holder__item\" id='".concat(listItem.itemID, "'>\n                <div class=\"holder__item__header\">Task:</div>\n                <div class=\"holder__item__taskDisplay\">").concat(listItem.item, "</div>\n                <input class=\"holder__item__task\" id=\"").concat(listItem.itemID, "update\" placeholder=\"Edit Task, Click Update!\"  value=\"\" onclick='editTaskKeepText(\"").concat(listItem.itemID, "\")'>\n                <div class='button button--update' onclick='updateTask(\"").concat(listItem.itemID, "\")'>UPDATE</div>\n                <div class=\"holder__item__header\">Due Date:</div>\n                <div class=\"holder__item__dueDate\" style=\"color: ").concat(urgencyColor, "\">").concat(listItem.dueDate, "</div>\n                <div class=\"holder__item__header\">Status:</div>\n                <div class=\"holder__item__status\" id=\"").concat(listItem.itemID, "status\">").concat(listItem.status, "</div>\n                <div class='button button--update-status' id=\"").concat(listItem.itemID, "status-button\" onclick='updateStatus(\"").concat(listItem.itemID, "\")'>Mark as Complete!</div>\n                <div class=\"button button--delete\" onclick='deleteTask(\"").concat(listItem.itemID, "\")'>DELETE</div>\n                </div>");
             } else {
               html += "<div class=\"holder__item\" id='".concat(listItem.itemID, "'>\n                    <div class=\"holder__item__header\">Task:</div>\n                    <div class=\"holder__item__taskDisplay\" style=\"color: green\">").concat(listItem.item, "</div>\n                    <div class=\"holder__item__header\">Due Date:</div>\n                    <div class=\"holder__item__dueDate\" style=\"color: green\">").concat(listItem.dueDate, "</div>\n                    <div class=\"holder__item__header\">Status:</div>\n                    <div class=\"green\" id=\"").concat(listItem.itemID, "status\">").concat(listItem.status, "</div>\n                    <div class=\"button button--delete\" onclick='deleteTask(\"").concat(listItem.itemID, "\")'>DELETE</div>\n                    </div>");
             }
