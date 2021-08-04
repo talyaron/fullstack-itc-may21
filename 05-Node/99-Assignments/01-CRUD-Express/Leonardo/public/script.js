@@ -20,11 +20,58 @@ async function handleSubmit(event) {
     }
 };
 
+//Function to render the data of the tasks in the DOM
+async function renderTask(data) {
+    const htmlInProgress = data.map(task => {
+        if (task.status === 'inProgress') {
+            return `<div class='tasks' draggable="true">
+                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
+                    <h4> ${task.title} </h4>             
+                    <p> ${task.description} </p>
+                </button>
+                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
+                </div>`
+        }
+    }).join('');
+
+    document.getElementById('inProgress').innerHTML = htmlInProgress;
+
+    //////////////
+    const htmlDone = data.map(task => {
+        if (task.status === 'done') {
+            return `<div class='tasks' draggable="true">
+                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
+                    <h4> ${task.title} </h4>             
+                    <p> ${task.description} </p>
+                </button>
+                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
+                </div>`
+        }
+    }).join('');
+
+    document.getElementById('done').innerHTML = htmlDone
+
+    //////////////
+    const htmltoDo = data.map(task => {
+        if (task.status === 'toDo') {
+            return `<div class='tasks' draggable="true">
+                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
+                    <h4> ${task.title} </h4>             
+                    <p> ${task.description} </p>
+                </button>
+                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
+                </div>`
+        }
+    }).join('');
+
+    document.getElementById('toDo').innerHTML = htmltoDo
+};
+
 //Get the tasks information:
 async function getAllTasks() {
     try {
         const tasksData = await axios.get('/getAllTasks');
-        renderTask(tasksData.data.tasks);
+        renderTask(tasksData.data);
     } catch (error) {
         console.log(error);
     }
@@ -57,18 +104,19 @@ async function uploadTask(id) {
         const tasksData = await axios.get('/getAllTasks');
         let html = tasksData.data.map(element => {
             if (element.id === id) {
+                console.log(element);
                 return (
                     `<h1>EDIT TASK</h1>
                     
                     <div class="form__wrapper">
                     <label for="title">Title:</label>
-                    <input type="text" name="title" id="firstname" maxlength="40" value=${element.title} required>
+                    <input type="text" name="title" id="title" maxlength="40" value="${element.title}" required>
                     </div>
     
                     <div class="form__wrapper">
                     <label for="description">Description:</label>
-                    <input type="text" name="description" id="description" cols="30" rows="10"
-                    maxlength="200" value=${element.description} required>
+                    <textarea type="text" name="description" id="description" cols="30" rows="10"
+                    maxlength="200" required>${element.description}</textarea>
                     </div>
     
                     <div>
@@ -107,26 +155,13 @@ async function handleEdit(ev) {
         modalEdit.style.display = "none";
         ev.target.reset();
 
-        const tasksData = await axios.put(`/editTask/${taskIdEdit}`, { taskTitle, taskDescription, taskStatus });
-        //location.reload();
-        renderTask(tasksData.data.tasks);
+        let tasksData = await axios.put(`/editTask/${taskIdEdit}`, { taskTitle, taskDescription, taskStatus });
+        await location.reload();
+
+        /////////I DONT KNOW WHY ITS NOT WORKING///////////
+        //await renderTask(tasksData.data.tasks);
 
     } catch (error) {
         console.error(error);
     };
-};
-
-//Function to render the data of the tasks in the DOM
-async function renderTask(data) {
-    const html = data.map(task => {
-        return `<button class='tasks' id='${task.id}name' draggable="true" onclick=uploadTask("${task.id}")>
-                    <div class='tasks__delete'>
-                        <h4> ${task.title} </h4>
-                        <td><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></td>             
-                    </div>
-                    <p> ${task.description} </p>
-                </button>`
-    }).join('');
-
-    document.getElementById('toDo').innerHTML = html
 };
