@@ -71,7 +71,6 @@ function handleTask(ev) {
       }).then(function (data) {
         resolve(data.list);
         renderArrayToDom(data.list);
-        alert("Submitted Succesfuly!");
       })["catch"](function (e) {
         reject(e);
       });
@@ -110,24 +109,34 @@ function deleteTask(taskID) {
 function updateTask(taskID) {
   try {
     var newTaskName = document.getElementById("".concat(taskID, "update")).value;
-    return new Promise(function (resolve, reject) {
-      fetch('/updateTask', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          id: taskID,
-          newTaskName: newTaskName
-        })
-      }).then(function (r) {
-        return r.json();
-      }).then(function (data) {
-        resolve(data.list.list);
-        renderArrayToDom(data.list.list);
-        alert("updated succefully!");
-      })["catch"](function (e) {
-        reject(e);
+    return new Promise(function _callee2(resolve, reject) {
+      return regeneratorRuntime.async(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              fetch('/updateTask', {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  id: taskID,
+                  newTaskName: newTaskName
+                })
+              }).then(function (r) {
+                return r.json();
+              }).then(function (data) {
+                resolve(data.list.list);
+                renderArrayToDom(data.list.list);
+              })["catch"](function (e) {
+                reject(e);
+              });
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
       });
     });
   } catch (e) {
@@ -162,37 +171,37 @@ function updateStatus(ID) {
 
 function editTaskKeepText(id) {
   var edit, list, arrayElement;
-  return regeneratorRuntime.async(function editTaskKeepText$(_context2) {
+  return regeneratorRuntime.async(function editTaskKeepText$(_context3) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
-          _context2.prev = 0;
+          _context3.prev = 0;
           edit = document.getElementById("".concat(id, "update"));
-          _context2.next = 4;
+          _context3.next = 4;
           return regeneratorRuntime.awrap(getFullTaskList());
 
         case 4:
-          list = _context2.sent;
-          _context2.next = 7;
+          list = _context3.sent;
+          _context3.next = 7;
           return regeneratorRuntime.awrap(list.filter(function (find) {
             return find.itemID === id;
           }));
 
         case 7:
-          arrayElement = _context2.sent;
+          arrayElement = _context3.sent;
           edit.placeholder = "";
           edit.value = arrayElement[0].item;
-          _context2.next = 15;
+          _context3.next = 15;
           break;
 
         case 12:
-          _context2.prev = 12;
-          _context2.t0 = _context2["catch"](0);
-          console.error(_context2.t0);
+          _context3.prev = 12;
+          _context3.t0 = _context3["catch"](0);
+          console.error(_context3.t0);
 
         case 15:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
     }
   }, null, null, [[0, 12]]);
@@ -203,6 +212,8 @@ function dateUrgency(date) {
     if ((new Date(date) - new Date()) / 1000 < 86400) {
       return "red";
     } else if ((new Date(date) - new Date()) / 1000 < 259200) {
+      return "orange";
+    } else if ((new Date(date) - new Date()) / 1000 < 604800) {
       return "rgb(220, 220, 2)";
     } else {
       return "blue";
@@ -214,20 +225,20 @@ function dateUrgency(date) {
 
 function renderArrayToDom(listArray) {
   var list, html;
-  return regeneratorRuntime.async(function renderArrayToDom$(_context3) {
+  return regeneratorRuntime.async(function renderArrayToDom$(_context4) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
-          _context3.prev = 0;
+          _context4.prev = 0;
           list = document.querySelector(".holder");
           html = '';
-          _context3.next = 5;
+          _context4.next = 5;
           return regeneratorRuntime.awrap(listArray.sort(function (a, b) {
             return new Date(a.dueDate) - new Date(b.dueDate);
           }));
 
         case 5:
-          _context3.next = 7;
+          _context4.next = 7;
           return regeneratorRuntime.awrap(listArray.forEach(function (listItem) {
             if (listItem.status === "Incomplete") {
               var urgencyColor = dateUrgency(listItem.dueDate);
@@ -239,17 +250,17 @@ function renderArrayToDom(listArray) {
 
         case 7:
           list.innerHTML = html;
-          _context3.next = 13;
+          _context4.next = 13;
           break;
 
         case 10:
-          _context3.prev = 10;
-          _context3.t0 = _context3["catch"](0);
-          console.error(_context3.t0);
+          _context4.prev = 10;
+          _context4.t0 = _context4["catch"](0);
+          console.error(_context4.t0);
 
         case 13:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
     }
   }, null, null, [[0, 10]]);

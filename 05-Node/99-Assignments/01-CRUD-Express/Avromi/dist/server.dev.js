@@ -23,7 +23,7 @@ var Task = function Task(title) {
 
 var tasks = [];
 app.post('/newTask', function (req, res) {
-  console.log(req.bosy);
+  console.log(req.body);
   var title = req.body.title;
   var task = new Task(title);
   res.send(task);
