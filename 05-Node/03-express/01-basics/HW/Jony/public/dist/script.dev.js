@@ -70,6 +70,9 @@ function addData(ev) {
     axios.post('/addAvenger', {
       name: name,
       id: id
+    }).then(function (_ref5) {
+      var data = _ref5.data;
+      render(html, data);
     });
   } catch (e) {
     console.log(e);

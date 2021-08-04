@@ -8,7 +8,7 @@ function addTaskPromise(newTask) {
             body: JSON.stringify(newTask)
         }).then(function (res) {
                 if (res.status === 200 && res.ok) {
-                    return res.json().then(task => { alert(task.ok) });
+                    return res.json().then(task => { resolve(task) });
                 } else {
                     return res.json().then(task => { alert(task.error) })
                 }

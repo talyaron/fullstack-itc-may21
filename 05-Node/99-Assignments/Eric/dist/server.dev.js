@@ -28,11 +28,6 @@ var readAllEmployes = function readAllEmployes() {
 };
 
 var allEmployes = readAllEmployes();
-app.get('/getEmployes', function (req, res) {
-  res.send({
-    allEmployes: allEmployes
-  });
-});
 app.post('/addEmployes', function (req, res) {
   var _req$body = req.body,
       name = _req$body.name,

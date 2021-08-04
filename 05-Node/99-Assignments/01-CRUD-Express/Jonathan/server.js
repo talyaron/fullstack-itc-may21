@@ -16,7 +16,7 @@ const readAllTasks = () => {
 
 app.post("/addTask", (req, res) => {
     try {
-
+        console.log(req.body)
         const { title, description, date, min, emoji, status } = req.body;
 
         const newTask = {
@@ -39,7 +39,7 @@ app.post("/addTask", (req, res) => {
 
         fs.writeFileSync("./task.json", JSON.stringify(allTasks));
 
-        res.send({ ok: "Added Task" });
+        res.send({ ok: "Added Task", task:allTasks });
 
     } catch (e) {
         res.status(500).send({ error: `${e}` });
@@ -48,7 +48,6 @@ app.post("/addTask", (req, res) => {
 
 app.get("/getAllTask", (req, res) => {
     const allTasks = readAllTasks();
-    console.log(allTasks);
     res.send(allTasks);
 });
 
@@ -71,7 +70,6 @@ app.put("/doneTask/:id", (req, res) => {
         let allTasks = readAllTasks();
         task = allTasks.find(task => task.id === id)
         task.status = 'done'
-        console.log(allTasks);
         fs.writeFileSync("./task.json", JSON.stringify(allTasks));
         //allStudents.sort(function (a, b){return (a.id - b.id)})
         res.send(allTasks);

@@ -23,23 +23,18 @@ $(document).ready(function () {
 });
 
 
-
-//Get
-const getStudents = () => {
-
-axios.get('/getEmployes')
-	.then(res => {
-		console.log(employes)
-		render(res.array.allEemployes)
-	})
-}
+window.onload = render()
 
 //render
 function render(array) {
-	let html = "";
-	const list = document.getElementById("root");
+	if($("#addEmployeeModal")){
+		$("#addEmployeeModal").modal("hide") //se agrega si esta vacio, modificarlo!!
+	}
 
-	if (array.length > 0) {
+	const root = document.querySelector(".root");
+	let html = "";
+
+	if (array && array.length > 0) {
 
 
 			html += `<table class="table table-striped table-hover">
@@ -84,18 +79,18 @@ function render(array) {
 				<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 				<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 			</td>
-		</tr>
-		
-	</tbody>
-</table>`
+		</tr>`
 		});
 
 		html += `</tbody></table>`
 
-	} else {
-		html += ""
-	}
-	list.innerHTML = html;
+	 }
+	
+	//else {
+	// 	let	html = ""
+	// }
+	root.innerHTML = html;
+	
 
 }
 
@@ -110,8 +105,8 @@ function handleSubmit(event) {
 
 	let {
 		name,
-		mail,
-		addreess,
+		email,
+		address,
 		phone
 		
 	} = event.target.elements;
@@ -133,8 +128,10 @@ function handleSubmit(event) {
 		  "Content-Type": "application/json",
 		},
 	  })
-		.then(({ data }) => data)
-}
+		.then(({ data: { allEmployes } }) => render(allEmployes))
+		.then(() => event.target.reset())
+
+	}
 
 //DELETE
 function deleteRecord(personId) {
