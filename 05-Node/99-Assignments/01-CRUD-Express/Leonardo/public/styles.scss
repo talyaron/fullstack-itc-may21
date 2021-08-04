@@ -67,7 +67,6 @@ body {
   display: grid;
   grid-template-columns: 33.3% 33.3% 33.4%;
   height: 100vh;
-  background-color: red;
 
   &__todo {
     background-color: green;
@@ -197,4 +196,25 @@ body {
 
 .inProgress {
   background-color: dodgerblue;
+}
+
+.content {
+  &__todo {
+    height: 70vh;
+  }
+  &__inprogress {
+    height: 70vh;
+  }
+  &__done {
+    height: 70vh;
+  }
+}
+
+/////////////////////////////////////RESPONSIVE///////////////////////////////
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    grid-template-rows: 33.3% 33.3% 33.4%;
+    grid-template-columns: none;
+    height: max-content;
+  }
 }
