@@ -9,6 +9,6 @@ function getImages(route) {
     } catch (err) { console.log(err); }
 }
 (async ()=>{
-    console.log(await getImages('/beaches'));
-    console.log(await getImages('/drinks'));
+    console.log(await getImages('/beaches/all'));
+    console.log(await getImages('/drinks/all'));
 })();

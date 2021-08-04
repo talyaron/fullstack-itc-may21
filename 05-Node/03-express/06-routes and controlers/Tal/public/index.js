@@ -53,11 +53,11 @@ function getImages(route) {
         switch (_e.label) {
             case 0:
                 _b = (_a = console).log;
-                return [4 /*yield*/, getImages('/beaches')];
+                return [4 /*yield*/, getImages('/beaches/all')];
             case 1:
                 _b.apply(_a, [_e.sent()]);
                 _d = (_c = console).log;
-                return [4 /*yield*/, getImages('/drinks')];
+                return [4 /*yield*/, getImages('/drinks/all')];
             case 2:
                 _d.apply(_c, [_e.sent()]);
                 return [2 /*return*/];
