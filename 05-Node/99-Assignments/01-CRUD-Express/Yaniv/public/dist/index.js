@@ -39,9 +39,20 @@ var newToDoform = document.querySelector('#todos-form');
 var searchToDosform = document.querySelector('#search-todos-form');
 var resetBtn = document.querySelector('#reset');
 // sorting should be on client side for quick response + not change the database order
+var toDoTimeInput = document.querySelector("#todo-due-date");
 newToDoform.addEventListener('submit', function (ev) { return handleNewToDo(ev); });
 searchToDosform.addEventListener('keyup', function (ev) { return handleToDoSearch(ev); });
 resetBtn.addEventListener('click', function (ev) { return handleReset(ev); });
+toDoTimeInput.addEventListener('click', function (ev) { return onlyFutureToDos(ev); });
+var onlyFutureToDos = function (ev) {
+    try {
+        var now = new Date();
+        ev.target.setAttribute("min", now.toISOString().substring(0, 16));
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
 function handleNewToDo(ev) {
     return __awaiter(this, void 0, void 0, function () {
         var formElements, content, dueDate, toDo, error_1;

@@ -4,10 +4,23 @@ const newToDoform: HTMLFormElement = document.querySelector('#todos-form');
 const searchToDosform: HTMLFormElement = document.querySelector('#search-todos-form');
 const resetBtn: HTMLElement = document.querySelector('#reset');
 // sorting should be on client side for quick response + not change the database order
+const toDoTimeInput: HTMLElement = document.querySelector(`#todo-due-date`);
+
 
 newToDoform.addEventListener('submit', ev => handleNewToDo(ev));
 searchToDosform.addEventListener('keyup', ev => handleToDoSearch(ev));
 resetBtn.addEventListener('click', ev => handleReset(ev));
+toDoTimeInput.addEventListener('click', ev => onlyFutureToDos(ev));
+
+const onlyFutureToDos = (ev): void => {
+  try {
+    const now: Date = new Date();
+    ev.target.setAttribute("min", now.toISOString().substring(0, 16));
+
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 async function handleNewToDo(ev) {
   try {
