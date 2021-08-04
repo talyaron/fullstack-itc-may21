@@ -5,7 +5,5 @@ const { v4: uuidv4 } = require('uuid');
 
 
 
-class Task{
-    constructor()
-}
+
 app.listen(port, () => { console.log('Server listen on port', port) })
