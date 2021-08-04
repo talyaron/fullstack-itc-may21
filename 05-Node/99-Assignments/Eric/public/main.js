@@ -1,34 +1,15 @@
-$(document).ready(function () {
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
-
-	// Select/Deselect checkboxes
-	const checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function () {
-		if (this.checked) {
-			checkbox.each(function () {
-				this.checked = true;
-			});
-		} else {
-			checkbox.each(function () {
-				this.checked = false;
-			});
-		}
-	});
-	checkbox.click(function () {
-		if (!this.checked) {
-			$("#selectAll").prop("checked", false);
-		}
-	});
-});
 
 
-window.onload = render()
+// window.onload = function () {
+
+// }
 
 //render
 function render(array) {
 	if($("#addEmployeeModal")){
-		$("#addEmployeeModal").modal("hide") //se agrega si esta vacio, modificarlo!!
+		$("#addEmployeeModal").modal("hide") 
+		
+		//se agrega si esta vacio, modificarlo!!
 	}
 
 	const root = document.querySelector(".root");
@@ -41,10 +22,7 @@ function render(array) {
 		<thead>
 			<tr>
 				<th>
-					<span class="custom-checkbox">
-						<input type="checkbox" id="selectAll">
-						<label for="selectAll"></label>
-					</span>
+				
 				</th>
 				<th>Name</th>
 				<th>Email</th>
@@ -65,12 +43,7 @@ function render(array) {
 			} = elem
 			
 			html += `<tr>
-			<td>
-				<span class="custom-checkbox">
-					<input type="checkbox" id="checkbox1" name="options[]" value="1">
-					<label for="checkbox1"></label>
-				</span>
-			</td>
+			<td></td>
 			<td>${name}</td>
 			<td>${email}</td>
 			<td>${address}</td>
@@ -86,9 +59,9 @@ function render(array) {
 
 	 }
 	
-	//else {
-	// 	let	html = ""
-	// }
+	else {
+	 	let	html = ""
+	 }
 	root.innerHTML = html;
 	
 
@@ -128,8 +101,9 @@ function handleSubmit(event) {
 		  "Content-Type": "application/json",
 		},
 	  })
+	  	
 		.then(({ data: { allEmployes } }) => render(allEmployes))
-		.then(() => event.target.reset())
+		.then(() => event.target.reset());
 
 	}
 
@@ -155,5 +129,6 @@ function updateEmploye(personId) {
 		.then(res => {
 			console.log(res.data.message)
 			render(res.array.allEmployes)
+		
 		})
 }
