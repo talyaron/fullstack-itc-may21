@@ -20,9 +20,11 @@ function handleTask(ev) {
     ev.preventDefault();
     try {
         let task = ev.target.elements.task.value;
+        let dueDate = ev.target.elements.dueDate.value
         return new Promise((resolve, reject) => {
             axios.post('/addListItem', {
-                    task
+                    task,
+                    dueDate
                 })
                 .then(data => {
                     resolve(data.data.list)
@@ -101,22 +103,39 @@ function updateStatus(ID) {
     }
 }
 
-
-function renderArrayToDom(listArray) {
+function dateUrgency(date){
+    if((new Date (date) - new Date())/1000 < 86400){
+        return "red"
+    }else if((new Date (date) - new Date())/1000 < 259200) {
+        return "rgb(220, 220, 2)"
+    }else{
+        return "blue"
+    }
+}
+async function renderArrayToDom(listArray) {
     try {
         const list = document.querySelector(".holder")
         let html = ''
 
-        listArray.forEach((listItem) => {
+       await listArray.sort(function(a,b){
+           console.log (new Date() - new Date(a.dueDate))
+            return new Date(a.dueDate) - new Date(b.dueDate);
+          });
+        
+
+       await listArray.forEach((listItem) => {
             if (listItem.status === "Incomplete") {
-                
+
+                let urgencyColor = dateUrgency(listItem.dueDate)
 
                 html += (
                     `<div class="holder__item" id='${listItem.itemID}'>
                 <div class="holder__item__header">Task:</div>
-                <div class="holder__item__taskDisplay" style="color: red">${listItem.item}</div>
+                <div class="holder__item__taskDisplay">${listItem.item}</div>
                 <input class="holder__item__task" id="${listItem.itemID}update" placeholder="Edit Task, Click Update!"  value="">
                 <div class='button button--update' onclick='updateTask("${listItem.itemID}")'>UPDATE</div>
+                <div class="holder__item__header">Due Date:</div>
+                <div class="holder__item__dueDate" style="color: ${urgencyColor}">${listItem.dueDate}</div>
                 <div class="holder__item__header">Status:</div>
                 <div class="holder__item__status" id="${listItem.itemID}status">${listItem.status}</div>
                 <div class='button button--update-status' id="${listItem.itemID}status-button" onclick='updateStatus("${listItem.itemID}")'>Mark as Complete!</div>
@@ -128,6 +147,8 @@ function renderArrayToDom(listArray) {
                     `<div class="holder__item" id='${listItem.itemID}'>
                     <div class="holder__item__header">Task:</div>
                     <div class="holder__item__taskDisplay" style="color: green">${listItem.item}</div>
+                    <div class="holder__item__header">Due Date:</div>
+                    <div class="holder__item__dueDate" style="color: green">${listItem.dueDate}</div>
                     <div class="holder__item__header">Status:</div>
                     <div class="green" id="${listItem.itemID}status">${listItem.status}</div>
                     <div class="button button--delete" onclick='deleteTask("${listItem.itemID}")'>DELETE</div>
