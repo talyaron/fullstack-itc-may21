@@ -2,18 +2,17 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const { beaches, drinks } = require('./model/dist/images');
-
 app.use(express.static('public'));
 
-app.get('/beaches', (req, res) => {
-  res.send(beaches);
-})
+//route
+const beachesRoute = require('./routes/routeBeaches');
+const drinksRoute = require('./routes/routeDrinks');
 
+app.use('/beaches', beachesRoute);
+app.use('/drinks', drinksRoute);
 
-app.get('/drinks', (req, res) => {
-  res.send(drinks);
-})
+//route
+
 
 app.listen(port, () => console.log('Server listen on port', port))
 

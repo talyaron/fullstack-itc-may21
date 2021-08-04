@@ -191,7 +191,7 @@ function uploadTask(id) {
           tasksData = _context4.sent;
           html = tasksData.data.map(function (element) {
             if (element.id === id) {
-              return "<h1>EDIT TASK</h1>\n                    \n                    <div class=\"form__wrapper\">\n                    <label for=\"title\">Title:</label>\n                    <input type=\"text\" name=\"title\" id=\"title\" maxlength=\"40\" value=\"".concat(element.title, "\" required>\n                    </div>\n    \n                    <div class=\"form__wrapper\">\n                    <label for=\"description\">Description:</label>\n                    <textarea type=\"text\" name=\"description\" id=\"description\" cols=\"30\" rows=\"10\"\n                    maxlength=\"200\" required>").concat(element.description, "</textarea>\n                    </div>\n    \n                    <div>\n                        <label for=\"toDo2\">To Do</label>\n                        <input type=\"radio\" id=\"toDo2\" name=\"status\" value=\"toDo\" checked />\n    \n                        <label for=\"inProgress2\">In Progress</label>\n                        <input type=\"radio\" id=\"inProgress2\" name=\"status\" value=\"inProgress\" />\n    \n                        <label for=\"done2\">Done</label>\n                        <input type=\"radio\" id=\"done2\" name=\"status\" value=\"done\" />\n                    </div>\n                    <input class=\"form__input--submit\" type=\"submit\" value=\"Save changes\">");
+              return "<h1>EDIT TASK</h1>\n                    \n                    <div class=\"form__wrapper\">\n                    <label for=\"title\">Title:</label>\n                    <input type=\"text\" name=\"title\" id=\"title\" maxlength=\"40\" value=\"".concat(element.title, "\" required>\n                    </div>\n    \n                    <div class=\"form__wrapper\">\n                    <label for=\"description\">Description:</label>\n                    <textarea type=\"text\" name=\"description\" id=\"description\" cols=\"30\" rows=\"10\"\n                    maxlength=\"200\" required>").concat(element.description, "</textarea>\n                    </div>\n    \n                    <div>\n                        <label for=\"toDo2\">To Do</label>\n                        <input type=\"radio\" id=\"toDo2\" name=\"status\" value=\"toDo\" checked />\n    \n                        <label for=\"inProgress\">In Progress</label>\n                        <input type=\"radio\" id=\"inProgress\" name=\"status\" value=\"inProgress\" />\n    \n                        <label for=\"done\">Done</label>\n                        <input type=\"radio\" id=\"done\" name=\"status\" value=\"done\" />\n                    </div>\n                    <input class=\"form__input--submit\" type=\"submit\" value=\"Save changes\">");
             }
           }).join('');
           formEdit.innerHTML = html;
@@ -257,25 +257,28 @@ function handleEdit(ev) {
 
         case 14:
           tasksData = _context5.sent;
+          // location.reload();
           tasks = tasksData.data.tasks;
+          console.log(tasks); /////////I DONT KNOW WHY ITS NOT WORKING///////////
+
           renderTask(tasks);
-          _context5.next = 22;
+          _context5.next = 23;
           break;
 
-        case 19:
-          _context5.prev = 19;
+        case 20:
+          _context5.prev = 20;
           _context5.t0 = _context5["catch"](1);
           console.error(_context5.t0);
 
-        case 22:
+        case 23:
           ;
 
-        case 23:
+        case 24:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[1, 19]]);
+  }, null, null, [[1, 20]]);
 }
 
 ;

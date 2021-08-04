@@ -12,6 +12,10 @@ const readAllTasks = () => {
     return JSON.parse(allTasks);
 }
 
+function getOrderTask(allTasks){
+    allTasks.sort(function (a, b){return (a.datetime < b.datetime) ? -1 : (a.datetime > b.datetime) ? 1 : 0})
+    return allTasks
+}
 
 
 app.post("/addTask", (req, res) => {
@@ -119,7 +123,7 @@ app.get("/getPriority/:status", (req, res) => {
     const allTasks = readAllTasks();
     if (status !== 'everything') {
         task = allTasks.filter(task => task.status === status)
-        res.send(task)
+        res.send(getOrderTask(task))
     }else{
         res.send(allTasks)
     }
@@ -128,8 +132,7 @@ app.get("/getPriority/:status", (req, res) => {
 
 app.get("/orderDate", (req, res) => {
     const allTasks = readAllTasks();
-    allTasks.sort(function (a, b){return (a.datetime < b.datetime) ? -1 : (a.datetime > b.datetime) ? 1 : 0})
-    res.send(allTasks);
+    res.send(getOrderTask(allTasks));
 });
 
 
