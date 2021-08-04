@@ -22,6 +22,7 @@ async function handleSubmit(event) {
 
 //Function to render the data of the tasks in the DOM
 function renderTask(data) {
+  
     const htmlInProgress = data.map(task => {
         if (task.status === 'inProgress') {
             return `<div class='tasks inProgress' draggable="true">
@@ -63,8 +64,10 @@ function renderTask(data) {
                 </div>`
         }
     }).join('');
-
-    document.getElementById('toDo').innerHTML = htmltoDo
+    const todoRoot = document.getElementById('toDo');
+    debugger;
+    console.dir(todoRoot);
+    todoRoot.innerHTML = htmltoDo
 };
 
 //Get the tasks information:
@@ -119,8 +122,8 @@ async function uploadTask(id) {
                     </div>
     
                     <div>
-                        <label for="toDo">To Do</label>
-                        <input type="radio" id="toDo" name="status" value="toDo" checked />
+                        <label for="toDo2">To Do</label>
+                        <input type="radio" id="toDo2" name="status" value="toDo" checked />
     
                         <label for="inProgress">In Progress</label>
                         <input type="radio" id="inProgress" name="status" value="inProgress" />
@@ -155,10 +158,12 @@ async function handleEdit(ev) {
         ev.target.reset();
 
         let tasksData = await axios.put(`/editTask/${taskIdEdit}`, { taskTitle, taskDescription, taskStatus });
-        location.reload();
-
+        // location.reload();
+        
+        const {tasks} = tasksData.data;
+        console.log(tasks);
         /////////I DONT KNOW WHY ITS NOT WORKING///////////
-        //renderTask(tasksData.data.tasks);
+        renderTask(tasks);
 
     } catch (error) {
         console.error(error);
