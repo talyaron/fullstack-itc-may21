@@ -68,7 +68,7 @@ function renderTask(data) {
 function renderThrough(data, status) {
   var toShow = data.map(function (task) {
     if (task.status === status) {
-      return "<div class='tasks ".concat(status, "' draggable=\"true\">\n                <button class=\"tasks__edit\" id='").concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+      return "<div class='tasks ".concat(status, "' id='").concat(task.id, "' draggable=\"true\" ondragstart=\"onDragStart(event)\">\n                <button class=\"tasks__edit\" id='").concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
     }
   }).join('');
   return toShow;
@@ -272,4 +272,20 @@ function handleEdit(ev) {
   }, null, null, [[1, 19]]);
 }
 
-;
+; ///////////////////
+
+function onDragStart(event) {
+  event.dataTransfer.setData('text/plain', event.target.id);
+}
+
+function onDragOver(event) {
+  event.preventDefault();
+}
+
+function onDrop(event) {
+  var id = event.dataTransfer.getData('text');
+  var draggableElement = document.getElementById(id);
+  var dropzone = event.target;
+  dropzone.appendChild(draggableElement);
+  event.dataTransfer.clearData();
+}

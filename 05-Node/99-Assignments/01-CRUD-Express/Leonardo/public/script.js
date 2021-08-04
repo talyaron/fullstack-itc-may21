@@ -35,7 +35,7 @@ function renderTask(data) {
 function renderThrough(data, status) {
     const toShow = data.map(task => {
         if (task.status === status) {
-            return `<div class='tasks ${status}' draggable="true">
+            return `<div class='tasks ${status}' id='${task.id}' draggable="true" ondragstart="onDragStart(event)">
                 <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
                     <h4> ${task.title} </h4>             
                     <p> ${task.description} </p>
@@ -143,3 +143,22 @@ async function handleEdit(ev) {
         console.error(error);
     };
 };
+
+
+
+///////////////////
+function onDragStart(event) {
+    event.dataTransfer.setData('text/plain', event.target.id);
+}
+
+function onDragOver(event) {
+    event.preventDefault();
+}
+
+function onDrop(event) {
+    const id = event.dataTransfer.getData('text');
+    const draggableElement = document.getElementById(id);
+    const dropzone = event.target;
+    dropzone.appendChild(draggableElement);
+    event.dataTransfer.clearData();
+}
