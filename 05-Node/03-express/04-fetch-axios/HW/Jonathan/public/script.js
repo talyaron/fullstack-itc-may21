@@ -24,7 +24,7 @@ async function handleSumbit(ev) {
         const avgrade = ev.target.elements.avgrade.valueAsNumber
 
         const newStudent = {
-            id: id,
+            id: id, //YS: THis should be generated in the BE. 
             name: name,
             age: age,
             avgrade: avgrade
@@ -78,7 +78,7 @@ async function getStudentQuery(ev) {
 
 
 async function deleteStudent(id) {
-    if (confirm("Do you want to delete this student?")) {
+    if (confirm("Do you want to delete this student?")) { //YS: Nice! 
         alert('Delete Student')
         const student = await deleteStudentPromise(id)
         renderStudents(student)

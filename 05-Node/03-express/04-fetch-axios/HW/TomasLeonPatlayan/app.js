@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const fs = require("fs");
-// const cors = require("cors");
+// const cors = require("cors");   YS: If you are not using this please remove it. 
 // app.use(cors());
 //JSON
 const localJson = () => {
@@ -37,33 +37,39 @@ app.get("/getStudentParams/:id", (req, res) => {
 });
 
 app.post("/postStudents", (req, res) => {
-  const { name, id, age, avgrade } = req.body;
-
-  const addStudent = {
-    id: parseInt(id),
-    name: name,
-    age: parseInt(age),
-    avgrade: parseInt(avgrade),
-  };
-
-  const students = localJson();
-
-  function getStudent() {
-    return function __getInfo(addStudent) {
-      return addStudent;
+  try {
+    const { name, id, age, avgrade } = req.body; //YS: You shouldn't be sending the id in the body, you should be adding it with uuidv4(). The id is created in the server/database. 
+    const students = localJson();
+    
+    const addStudent = {
+      id: parseInt(id), //YS: id: uuidv4(), 
+      name: name,
+      age: parseInt(age),
+      avgrade: parseInt(avgrade),
     };
+  
+    
+  
+    // function getStudent() {
+    //   return function __getInfo(addStudent) {        YS: Please remove commented code 
+    //     return addStudent;
+    //   };
+    // }
+  
+    // const student = getStudent();
+  
+    students.push(addStudent);
+    fs.writeFileSync("./db-student.json", JSON.stringify(students));
+    res.send(students);
+  } catch (error) {
+    alert(error)
   }
 
-  const student = getStudent();
-
-  students.push(student(addStudent));
-  fs.writeFileSync("./db-student.json", JSON.stringify(students));
-  res.send(students);
 });
 
 app.delete("/deleteStudents/:id", (req, res) => {
   let { id } = req.params;
-  console.log(id);
+  console.log(id); //YS: Remove console.log
   id = parseInt(id);
   const students = localJson();
   const deleteStudent = students.filter((student) => student.id !== id);

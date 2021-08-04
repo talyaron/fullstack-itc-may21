@@ -1,9 +1,9 @@
 "use strict";
 
-var express = require('express');
+var express = require("express");
 
 var app = express();
-var port = process.env.port || 3000; //dataBase 
+var port = process.env.port || 3000; //dataBase
 // const students = [];
 
 function outer() {
@@ -25,19 +25,24 @@ function outer() {
 }
 
 var students = outer();
-app.use(express.json());
-app.use(express["static"]('public'));
-app.put('/newStudent', function (req, res) {
+app.use(express.json()); //YS: This should be at the top 
+
+app.use(express["static"]("public")); //YS: This should be at the top 
+
+app.put("/newStudent", function (req, res) {
+  //YS: To add is POST, to edit is PUT
   var student = req.body.newStudent;
   students(student); // students.push(student)
 
   res.send({
     student: student,
-    send: "OK"
+    send: "OK" //YS: You dont have to send back the "ok" part, just the student is fine
+
   });
 });
-app.get('/', function (req, res) {
-  var studentId = req.query.id.studentId;
+app.get("/", function (req, res) {
+  var studentId = req.query.id.studentId; //YS: Incorrect destructuring 
+
   var searchedStudent = students("l").filter(function (student) {
     return student.id === studentId;
   });
@@ -45,13 +50,14 @@ app.get('/', function (req, res) {
     searchedStudent: searchedStudent
   });
 });
-app.get('/:id', function (req, res) {
+app.get("/:id", function (req, res) {
   try {
     var id = req.params.id;
-    var searchedStudent = students("l").filter(function (student) {
+    var searchedStudent = students("l").filter( //YS: You can use find instead of filter 
+    function (student) {
       return student.id === id;
     });
-    var result = searchedStudent.length === 0 ? 'Student not Found' : searchedStudent;
+    var result = searchedStudent.length === 0 ? "Student not Found" : searchedStudent;
     res.send({
       result: result
     });
@@ -59,7 +65,7 @@ app.get('/:id', function (req, res) {
     console.log(error.message);
     res.status(400).send({
       error: error.message
-    });
+    }); //YS: Nice
   }
 });
 app.listen(port, function () {

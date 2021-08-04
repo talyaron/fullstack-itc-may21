@@ -8,23 +8,16 @@ var students = []; // READ JSON
 
 app.use(express.json()); // READ PUBLIC 
 
-app.use(express["static"]('public')); // GET CSS
-
-app.get('/style.css', function (req, res) {
-  var css = fs.readFileSync('style.css');
-  res.send(css);
-}); // GET STUDENTS
+app.use(express["static"]('public')); // GET STUDENTS
 
 app.get('/getAllStudent', function (req, res) {
   res.send(students);
 }); // POST STUDIENT WITH QUERY
 
 app.post('/postStudents', function (req, res) {
-  var student = req.body;
-  console.log(students);
-  students.push({
-    student: student
-  });
+  var student = req.body; //YS: You should be making a new object here and adding the ID here (not from the FE). 
+
+  students.push(student);
   res.send(student);
 }); // GET SEARCHED STUDIENT WITH PARAMS ID
 
@@ -33,18 +26,14 @@ app.get('/searchParam/:id', function (req, res) {
   var searchedStudent = students.find(function (stud) {
     return stud.id === id;
   });
-  console.log(students);
   res.send(searchedStudent);
-  console.log(searchedStudent);
 });
 app.get('/searchQuery', function (req, res) {
   var id = req.query.id;
   var searchedStudent = students.filter(function (stud) {
     return stud.id === id;
   });
-  console.log(students);
   res.send(searchedStudent);
-  console.log(searchedStudent);
 });
 app.listen(port, function () {
   console.log('Server listen on port', port);

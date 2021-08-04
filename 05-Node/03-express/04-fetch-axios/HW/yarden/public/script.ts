@@ -65,7 +65,7 @@ try {
     addModal.classList.add('hide')
     ev.target.reset()
 
-    fetch('http://localhost:3000/addStudent',
+    fetch('http://localhost:3000/addStudent', //YS: Nice try
     {
         method: "POST",
         body: newStudent

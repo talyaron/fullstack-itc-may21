@@ -10,7 +10,7 @@ function getStudents() {
 }
 
 function getStudent(searchType, studentUuid) {
-    const route: string = (searchType === 'query') ? `/student?uuid=${studentUuid}` : `/student/${studentUuid}`;
+    const route: string = (searchType === 'query') ? `/student?uuid=${studentUuid}` : `/student/${studentUuid}`; //YS: Nice! 
     return new Promise((resolve,reject) => {
         axios.get(route)
         .then(student => {

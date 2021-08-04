@@ -1,21 +1,21 @@
 "use strict";
 
-var stud = document.querySelector('.containerPage__containerForm1__form1--stud'); //btn
+var stud = document.querySelector(".containerPage__containerForm1__form1--stud"); //btn
 
-var btnGetDataQuery = document.querySelector('.containerPage__containerForm2--submitQuerys');
-var btnGetDataParams = document.querySelector('.containerPage__containerForm2--submitParams'); //inputID
+var btnGetDataQuery = document.querySelector(".containerPage__containerForm2--submitQuerys");
+var btnGetDataParams = document.querySelector(".containerPage__containerForm2--submitParams"); //inputID
 
-var inputId = document.querySelector('.containerPage__containerForm2--input');
-btnGetDataQuery.addEventListener('click', getDataQuery);
-btnGetDataParams.addEventListener('click', getDataParam);
-stud.addEventListener('click', loadStudents);
+var inputId = document.querySelector(".containerPage__containerForm2--input");
+btnGetDataQuery.addEventListener("click", getDataQuery);
+btnGetDataParams.addEventListener("click", getDataParam);
+stud.addEventListener("click", loadStudents);
 
 function handleSubmit(ev) {
   ev.preventDefault();
   var name = ev.target.name.value;
   var age = ev.target.age.value;
   var avgGrade = ev.target.avgGrade.value;
-  axios.post('/postStudents', {
+  axios.post("/postStudents", {
     name: name,
     age: age,
     avgGrade: avgGrade
@@ -25,10 +25,11 @@ function handleSubmit(ev) {
 }
 
 function loadStudents(ev) {
-  var html = '';
+  //YS: Why do you have two functions that are exactly the same? 
+  var html = "";
   ev.preventDefault();
   var list = document.getElementById("root");
-  axios.get('/getAllStudents').then(function (_ref) {
+  axios.get("/getAllStudents").then(function (_ref) {
     var data = _ref.data;
     data.forEach(function (element) {
       html += "<div>".concat(element.name, ", ").concat(element.age, ",  ").concat(element.avgGrade, ", ").concat(element.id, "  <div>");
@@ -38,7 +39,8 @@ function loadStudents(ev) {
 }
 
 function render(array) {
-  var html = '';
+  //YS: Why do you have two functions that are exactly the same? 
+  var html = "";
   var list = document.getElementById("root");
   array.forEach(function (element) {
     html += "<div>".concat(element.name, ", ").concat(element.age, ",  ").concat(element.avgGrade, ", ").concat(element.id, "  <div>");
@@ -46,7 +48,8 @@ function render(array) {
   list.innerHTML = html;
 }
 
-render(); //axios
+render(); //YS: Commented code
+//axios    
 //   function getDataQuery(ev) {
 //      axios.get(`/getStudents?id=${inputId.value}`)
 //         .then(({ data }) => {

@@ -50,7 +50,8 @@ function () {
       try {
         var searchedStudents = this.students.filter(function (student) {
           return student.studentID === parseInt(stID);
-        });
+        }); //YS: Use find instead of filter -> Filter returns an array, and find returns the element. 
+
         html = "<div class=\"holder__student\" id=\"".concat(searchedStudents[0].studentID, "\">\n                <div class=\"holder__student__id\">Student ID: ").concat(searchedStudents[0].studentID, "</div>\n                <div class=\"holder__student__name\">Student Name: ").concat(searchedStudents[0].name, "</div>\n                <div class=\"holder__student__age\"> Student Age: ").concat(searchedStudents[0].age, "</div>\n                <div class=\"holder__student__averageGrade\"> Average Grade: ").concat(searchedStudents[0].averageGrade, "%</div>\n                </div>");
         return html;
       } catch (e) {
@@ -65,6 +66,7 @@ function () {
 var students = new Students();
 var html = '';
 app.put('/addStudent', function (req, res) {
+  //YS: To add an element we use POST, to edit we use PUT! 
   try {
     var schema = {
       type: "object",
@@ -85,7 +87,8 @@ app.put('/addStudent', function (req, res) {
       required: ["name", "age", "studentID", "averageGrade"],
       additionalProperties: false
     };
-    var validate = ajv.compile(schema);
+    var validate = ajv.compile(schema); //YS: Very nice! 
+
     var body = req.body;
     var valid = validate(body);
 
@@ -101,13 +104,15 @@ app.put('/addStudent', function (req, res) {
   } catch (e) {
     console.log(e);
     res.status(400).send({
+      //YS: Nice! 
       error: e.message
     });
   }
 });
 app.get('/getStudentQuery', function (req, res) {
   try {
-    var searchedID = req.query.id;
+    var searchedID = req.query.id; //YS: Why not destructure (you need to use the same name as the key if you will do that (id))
+
     var student = students.findStudentWithID(searchedID);
     res.send(student);
   } catch (e) {

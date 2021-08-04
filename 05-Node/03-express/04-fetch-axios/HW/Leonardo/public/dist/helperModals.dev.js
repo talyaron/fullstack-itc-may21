@@ -5,24 +5,22 @@ var modalUpload = document.getElementById("modalUpload"); // Get the button that
 
 var buttonUpload = document.getElementById("buttonUpload"); // Get the <span> element that closes the modal
 
-var closeUpload = document.getElementById("closeUpload"); // When the user clicks the button, open the modal 
+var closeUpload = document.getElementById("closeUpload"); // When the user clicks the button, open the modal
 
-buttonUpload.addEventListener('click', openModal);
+buttonUpload.addEventListener("click", openModal);
 
 function openModal() {
   modalUpload.style.display = "block";
   modalUpload.classList.add("showModal");
-}
+} // When the user clicks on <span> (x), close the modal
 
-; // When the user clicks on <span> (x), close the modal
 
-closeUpload.addEventListener('click', closeModal);
+closeUpload.addEventListener("click", closeModal);
 
 function closeModal() {
   modalUpload.style.display = "none";
-}
+} // When the user clicks anywhere outside of the modal, close it
 
-; // When the user clicks anywhere outside of the modal, close it
 
 window.onclick = function (event) {
   if (event.target === modalUpload) {

@@ -2,10 +2,10 @@
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-document.body.style.backgroundColor = 'aqua';
-var formOne = document.querySelector('.formOne');
-var formTwo = document.querySelector('.formTwo');
-var paramButton = document.querySelector('#paramButton');
+document.body.style.backgroundColor = "aqua";
+var formOne = document.querySelector(".formOne");
+var formTwo = document.querySelector(".formTwo");
+var paramButton = document.querySelector("#paramButton"); //YS: Where is the query button? 
 
 var Student = function Student(name, age, grade) {
   _classCallCheck(this, Student);
@@ -16,9 +16,9 @@ var Student = function Student(name, age, grade) {
   this.id = Math.random().toString(16).slice(2);
 };
 
-formOne.addEventListener('submit', handleSubmit);
-formTwo.addEventListener('submit', handleSubmitFormTwo);
-paramButton.addEventListener('click', handleClick);
+formOne.addEventListener("submit", handleSubmit);
+formTwo.addEventListener("submit", handleSubmitFormTwo);
+paramButton.addEventListener("click", handleClick);
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -26,10 +26,11 @@ function handleSubmit(event) {
   var age = event.target.elements.age.value;
   var grade = event.target.elements.grade.value;
   var newStudent = new Student(name, age, grade);
-  axios.put('/newStudent', {
+  axios.put("/newStudent", {
     newStudent: newStudent
-  }).then(function (res) {
-    console.log(res.data.student);
+  }) //YS: To add we use POST, to edit we use PUT
+  .then(function (res) {
+    console.log(res.data.student); //YS: Just console.log? You can add an alert saying Student added: ${res.data.student}
   })["catch"](function (e) {
     console.error(e);
   });
@@ -40,6 +41,7 @@ function handleSubmitFormTwo(event) {
   event.preventDefault();
   var id = event.target.elements.id.value;
   axios.get("/".concat(id)).then(function (res) {
+    //YS: This should have a query in the URL
     var data = res.data.result;
     render(data);
   });
@@ -47,7 +49,7 @@ function handleSubmitFormTwo(event) {
 }
 
 function handleClick(event) {
-  var studentId = document.querySelector('#studentId');
+  var studentId = document.querySelector("#studentId");
   var id = studentId.value;
   axios.get("/".concat(id)).then(function (r) {
     var data = r.data.result;
@@ -57,10 +59,10 @@ function handleClick(event) {
 }
 
 function render(data) {
-  var rootData = document.querySelector('.rootData');
+  var rootData = document.querySelector(".rootData");
   var html = "";
 
-  if (typeof data === 'string') {
+  if (typeof data === "string") {
     html += data;
   } else {
     data.forEach(function (student) {

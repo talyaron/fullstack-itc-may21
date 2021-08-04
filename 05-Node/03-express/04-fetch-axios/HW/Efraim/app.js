@@ -36,7 +36,7 @@ class Students {
     }
     findStudentWithID(stID) {
         try {
-            const searchedStudents = this.students.filter(student => student.studentID === parseInt(stID));
+            const searchedStudents = this.students.filter(student => student.studentID === parseInt(stID)); //YS: Use find instead of filter -> Filter returns an array, and find returns the element. 
 
 
             html =
@@ -59,7 +59,7 @@ class Students {
 const students = new Students();
 let html = ''
 
-app.put('/addStudent', (req, res) => {
+app.put('/addStudent', (req, res) => { //YS: To add an element we use POST, to edit we use PUT! 
 
     try {
 
@@ -82,7 +82,7 @@ app.put('/addStudent', (req, res) => {
             required: ["name", "age", "studentID", "averageGrade"],
             additionalProperties: false
         }
-        const validate = ajv.compile(schema)
+        const validate = ajv.compile(schema) //YS: Very nice! 
 
 
         const {
@@ -101,7 +101,7 @@ app.put('/addStudent', (req, res) => {
         res.send(students);
     } catch (e) {
         console.log(e)
-        res.status(400).send({
+        res.status(400).send({ //YS: Nice! 
             error: e.message
         });
     }
@@ -110,7 +110,7 @@ app.put('/addStudent', (req, res) => {
 
 app.get('/getStudentQuery', (req, res) => {
     try {
-        const searchedID = req.query.id;
+        const searchedID = req.query.id; //YS: Why not destructure (you need to use the same name as the key if you will do that (id))
         const student = students.findStudentWithID(searchedID)
         res.send(student)
     } catch (e) {
