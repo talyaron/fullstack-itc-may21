@@ -9,7 +9,13 @@
 //     const data = ev.dataTransfer.getData("text");
 //     ev.target.appendChild(document.getElementById(data));
 //   }
-var title = "title";
+var Title = /** @class */ (function () {
+    function Title(title) {
+        this.title = title;
+    }
+    return Title;
+}());
+var title = new Title('notwe one ');
 //create form handle to submit title....
 axios.post('/newTask', { title: title })
     .then(function (res) {
