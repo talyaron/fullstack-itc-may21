@@ -4,7 +4,7 @@ const fs = require("fs");
 
 //JSON
 const localJson = () => {
-  const fileJson = fs.readFileSync("./task.db.json");
+  const fileJson = fs.readFileSync("./task.json");
   return JSON.parse(fileJson);
 };
 //Settings
@@ -31,7 +31,8 @@ app.post("/addTask", (req, res) => {
   };
 
   task.push(addTask);
-  fs.writeFileSync("./task.db.json", JSON.stringify(task));
+  fs.writeFileSync("./task.json", JSON.stringify(task));
+  fs.readFileSync("./task.json");
   res.send(task);
 });
 
