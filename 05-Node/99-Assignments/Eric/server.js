@@ -26,11 +26,6 @@ const readAllEmployes = () => {
 let allEmployes = readAllEmployes()
 
 
-app.get('/getEmployes', (req, res) => {
-    res.send({ allEmployes })
-})
-
-
 app.post('/addEmployes', (req, res)=>{
 
     const {name, email,  address, phone} = req.body

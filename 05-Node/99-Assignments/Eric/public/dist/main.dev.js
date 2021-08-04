@@ -21,35 +21,33 @@ $(document).ready(function () {
       $("#selectAll").prop("checked", false);
     }
   });
-}); //Get
-
-var getStudents = function getStudents() {
-  axios.get('/getEmployes').then(function (res) {
-    console.log(employes);
-    render(res.array.allEemployes);
-  });
-}; //render
-
+});
+window.onload = render(); //render
 
 function render(array) {
-  var html = "";
-  var list = document.getElementById("root");
+  if ($("#addEmployeeModal")) {
+    $("#addEmployeeModal").modal("hide"); //se agrega si esta vacio, modificarlo!!
+  }
 
-  if (array.length > 0) {
+  var root = document.querySelector(".root");
+  var html = "";
+
+  if (array && array.length > 0) {
     html += "<table class=\"table table-striped table-hover\">\n\t\t<thead>\n\t\t\t<tr>\n\t\t\t\t<th>\n\t\t\t\t\t<span class=\"custom-checkbox\">\n\t\t\t\t\t\t<input type=\"checkbox\" id=\"selectAll\">\n\t\t\t\t\t\t<label for=\"selectAll\"></label>\n\t\t\t\t\t</span>\n\t\t\t\t</th>\n\t\t\t\t<th>Name</th>\n\t\t\t\t<th>Email</th>\n\t\t\t\t<th>Address</th>\n\t\t\t\t<th>Phone</th>\n\t\t\t\t<th>Actions</th>\n\t\t\t</tr>\n\t\t</thead>\n\t\t<tbody>";
     array.forEach(function (elem) {
       var name = elem.name,
           email = elem.email,
           address = elem.address,
           phone = elem.phone;
-      html += "<tr>\n\t\t\t<td>\n\t\t\t\t<span class=\"custom-checkbox\">\n\t\t\t\t\t<input type=\"checkbox\" id=\"checkbox1\" name=\"options[]\" value=\"1\">\n\t\t\t\t\t<label for=\"checkbox1\"></label>\n\t\t\t\t</span>\n\t\t\t</td>\n\t\t\t<td>".concat(name, "</td>\n\t\t\t<td>").concat(email, "</td>\n\t\t\t<td>").concat(address, "</td>\n\t\t\t<td>").concat(phone, "</td>\n\t\t\t<td>\n\t\t\t\t<a href=\"#editEmployeeModal\" class=\"edit\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Edit\">&#xE254;</i></a>\n\t\t\t\t<a href=\"#deleteEmployeeModal\" class=\"delete\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Delete\">&#xE872;</i></a>\n\t\t\t</td>\n\t\t</tr>\n\t\t\n\t</tbody>\n</table>");
+      html += "<tr>\n\t\t\t<td>\n\t\t\t\t<span class=\"custom-checkbox\">\n\t\t\t\t\t<input type=\"checkbox\" id=\"checkbox1\" name=\"options[]\" value=\"1\">\n\t\t\t\t\t<label for=\"checkbox1\"></label>\n\t\t\t\t</span>\n\t\t\t</td>\n\t\t\t<td>".concat(name, "</td>\n\t\t\t<td>").concat(email, "</td>\n\t\t\t<td>").concat(address, "</td>\n\t\t\t<td>").concat(phone, "</td>\n\t\t\t<td>\n\t\t\t\t<a href=\"#editEmployeeModal\" class=\"edit\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Edit\">&#xE254;</i></a>\n\t\t\t\t<a href=\"#deleteEmployeeModal\" class=\"delete\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Delete\">&#xE872;</i></a>\n\t\t\t</td>\n\t\t</tr>");
     });
     html += "</tbody></table>";
-  } else {
-    html += "";
-  }
+  } //else {
+  // 	let	html = ""
+  // }
 
-  list.innerHTML = html;
+
+  root.innerHTML = html;
 }
 
 render(); //POST
@@ -58,8 +56,8 @@ function handleSubmit(event) {
   event.preventDefault();
   var _event$target$element = event.target.elements,
       name = _event$target$element.name,
-      mail = _event$target$element.mail,
-      addreess = _event$target$element.addreess,
+      email = _event$target$element.email,
+      address = _event$target$element.address,
       phone = _event$target$element.phone;
   name = name.value;
   email = email.value;
@@ -78,8 +76,10 @@ function handleSubmit(event) {
       "Content-Type": "application/json"
     }
   }).then(function (_ref) {
-    var data = _ref.data;
-    return data;
+    var allEmployes = _ref.data.allEmployes;
+    return render(allEmployes);
+  }).then(function () {
+    return event.target.reset();
   });
 } //DELETE
 
