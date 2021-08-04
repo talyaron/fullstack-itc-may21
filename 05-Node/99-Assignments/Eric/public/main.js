@@ -24,15 +24,15 @@ $(document).ready(function () {
 
 
 
+//Get
+const getStudents = () => {
 
-
-//Get meter function
 axios.get('/getEmployes')
 	.then(res => {
 		console.log(employes)
 		render(res.array.allEemployes)
 	})
-
+}
 
 //render
 function render(array) {
@@ -104,26 +104,36 @@ render();
 
 
 //POST
-function handleSubmit(ev) {
-	ev.preventDefault();
+function handleSubmit(event) {
+	event.preventDefault();
+	
+
 	let {
 		name,
-		email,
-		address,
+		mail,
+		addreess,
 		phone
-	} = ev.target.elements;
+		
+	} = event.target.elements;
 	name = name.value;
 	email = email.value;
 	address = address.value;
 	phone = phone.value;
-	ev.target.reset();
-	axios.post('/addEmployes', {
-			name,
-			email,
-			address,
-			phone
-		})
-		.then(res => render(res.array.allEemployes))
+
+	axios({
+		method: "post",
+		url: `/addEmployes`,
+		data: {
+					name,
+			 		email,
+			 		address,
+			 		phone
+		},
+		headers: {
+		  "Content-Type": "application/json",
+		},
+	  })
+		.then(({ data }) => data)
 }
 
 //DELETE

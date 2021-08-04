@@ -21,12 +21,15 @@ $(document).ready(function () {
       $("#selectAll").prop("checked", false);
     }
   });
-}); //Get meter function
+}); //Get
 
-axios.get('/getEmployes').then(function (res) {
-  console.log(employes);
-  render(res.array.allEemployes);
-}); //render
+var getStudents = function getStudents() {
+  axios.get('/getEmployes').then(function (res) {
+    console.log(employes);
+    render(res.array.allEemployes);
+  });
+}; //render
+
 
 function render(array) {
   var html = "";
@@ -51,25 +54,32 @@ function render(array) {
 
 render(); //POST
 
-function handleSubmit(ev) {
-  ev.preventDefault();
-  var _ev$target$elements = ev.target.elements,
-      name = _ev$target$elements.name,
-      email = _ev$target$elements.email,
-      address = _ev$target$elements.address,
-      phone = _ev$target$elements.phone;
+function handleSubmit(event) {
+  event.preventDefault();
+  var _event$target$element = event.target.elements,
+      name = _event$target$element.name,
+      mail = _event$target$element.mail,
+      addreess = _event$target$element.addreess,
+      phone = _event$target$element.phone;
   name = name.value;
   email = email.value;
   address = address.value;
   phone = phone.value;
-  ev.target.reset();
-  axios.post('/addEmployes', {
-    name: name,
-    email: email,
-    address: address,
-    phone: phone
-  }).then(function (res) {
-    return render(res.array.allEemployes);
+  axios({
+    method: "post",
+    url: "/addEmployes",
+    data: {
+      name: name,
+      email: email,
+      address: address,
+      phone: phone
+    },
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(function (_ref) {
+    var data = _ref.data;
+    return data;
   });
 } //DELETE
 
