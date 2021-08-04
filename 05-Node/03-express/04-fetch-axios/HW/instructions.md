@@ -25,7 +25,7 @@ npm install
 If you have already pushed without this file, please create it as mentioned and run the following line in your folder:
 
 ```sh
-git rm --cached node_modules
+git rm -r --cached node_modules
 git add .
 git commit -m "Removed node_modules"
 ```
