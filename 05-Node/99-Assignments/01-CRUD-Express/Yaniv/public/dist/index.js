@@ -39,10 +39,10 @@ var newToDoform = document.querySelector('#todos-form');
 var searchToDosform = document.querySelector('#search-todos-form');
 var resetBtn = document.querySelector('#reset');
 // sorting should be on client side for quick response + not change the database order
-newToDoform.addEventListener('submit', function (ev) { return handleNewTodo(ev); });
+newToDoform.addEventListener('submit', function (ev) { return handleNewToDo(ev); });
 searchToDosform.addEventListener('keyup', function (ev) { return handleToDoSearch(ev); });
 resetBtn.addEventListener('click', function (ev) { return handleReset(ev); });
-function handleNewTodo(ev) {
+function handleNewToDo(ev) {
     return __awaiter(this, void 0, void 0, function () {
         var formElements, content, dueDate, toDo, error_1;
         return __generator(this, function (_a) {
@@ -114,8 +114,12 @@ function renderData(dataToRender) {
     try {
         var upcomingRoot = document.querySelector(".upcoming");
         var laterRoot = document.querySelector(".later");
-        var upcomingHtml_1 = "";
-        var laterHtml_1 = "";
+        var dateInThirtyDays = new Date();
+        dateInThirtyDays.setDate(dateInThirtyDays.getDate() + 30);
+        var options = { day: 'numeric', month: 'short' };
+        var upcomingLimit = dateInThirtyDays.toLocaleDateString('en-US', options);
+        var upcomingHtml_1 = "<h2 class=\"upcoming__item upcoming__item--header\">Todos due up to " + upcomingLimit + "</h2>";
+        var laterHtml_1 = "<h2 class=\"later__item later__item--header\">Todos due after " + upcomingLimit + "</h2>";
         upcomingRoot.innerHTML = upcomingHtml_1;
         laterRoot.innerHTML = laterHtml_1;
         if (typeof dataToRender.data === "string") {

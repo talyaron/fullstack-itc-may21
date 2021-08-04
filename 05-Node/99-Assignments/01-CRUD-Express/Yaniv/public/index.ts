@@ -5,11 +5,11 @@ const searchToDosform: HTMLFormElement = document.querySelector('#search-todos-f
 const resetBtn: HTMLElement = document.querySelector('#reset');
 // sorting should be on client side for quick response + not change the database order
 
-newToDoform.addEventListener('submit', ev => handleNewTodo(ev));
+newToDoform.addEventListener('submit', ev => handleNewToDo(ev));
 searchToDosform.addEventListener('keyup', ev => handleToDoSearch(ev));
 resetBtn.addEventListener('click', ev => handleReset(ev));
 
-async function handleNewTodo(ev) {
+async function handleNewToDo(ev) {
   try {
     ev.preventDefault();
     const formElements = ev.target.elements;
@@ -60,8 +60,13 @@ function renderData(dataToRender: any): void {
     const upcomingRoot: HTMLElement = document.querySelector(".upcoming");
     const laterRoot: HTMLElement = document.querySelector(".later");
 
-    let upcomingHtml: string = "";
-    let laterHtml: string = "";
+    const dateInThirtyDays = new Date();
+    dateInThirtyDays.setDate(dateInThirtyDays.getDate() + 30);
+    const options: object = {day: 'numeric', month: 'short'  };
+    const upcomingLimit: string = dateInThirtyDays.toLocaleDateString('en-US', options);
+
+    let upcomingHtml: string = `<h2 class="upcoming__item upcoming__item--header">Todos due up to ${upcomingLimit}</h2>`;
+    let laterHtml: string = `<h2 class="later__item later__item--header">Todos due after ${upcomingLimit}</h2>`;
 
     upcomingRoot.innerHTML = upcomingHtml;
     laterRoot.innerHTML = laterHtml;
