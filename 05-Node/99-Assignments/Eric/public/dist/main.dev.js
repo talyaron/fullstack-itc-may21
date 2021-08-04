@@ -21,30 +21,66 @@ $(document).ready(function () {
       $("#selectAll").prop("checked", false);
     }
   });
-}); //Get
+});
+window.onload = render(); //render
 
-axios.get('/getEmployes').then(function (res) {
-  console.log(employes); //renderData(res.data.employes)
-}); //POST
+function render(array) {
+  if ($("#addEmployeeModal")) {
+    $("#addEmployeeModal").modal("hide"); //se agrega si esta vacio, modificarlo!!
+  }
 
-function handleSubmit(ev) {
-  ev.preventDefault();
-  var _ev$target$elements = ev.target.elements,
-      name = _ev$target$elements.name,
-      email = _ev$target$elements.email,
-      address = _ev$target$elements.address,
-      phone = _ev$target$elements.phone;
+  var root = document.querySelector(".root");
+  var html = "";
+
+  if (array && array.length > 0) {
+    html += "<table class=\"table table-striped table-hover\">\n\t\t<thead>\n\t\t\t<tr>\n\t\t\t\t<th>\n\t\t\t\t\t<span class=\"custom-checkbox\">\n\t\t\t\t\t\t<input type=\"checkbox\" id=\"selectAll\">\n\t\t\t\t\t\t<label for=\"selectAll\"></label>\n\t\t\t\t\t</span>\n\t\t\t\t</th>\n\t\t\t\t<th>Name</th>\n\t\t\t\t<th>Email</th>\n\t\t\t\t<th>Address</th>\n\t\t\t\t<th>Phone</th>\n\t\t\t\t<th>Actions</th>\n\t\t\t</tr>\n\t\t</thead>\n\t\t<tbody>";
+    array.forEach(function (elem) {
+      var name = elem.name,
+          email = elem.email,
+          address = elem.address,
+          phone = elem.phone;
+      html += "<tr>\n\t\t\t<td>\n\t\t\t\t<span class=\"custom-checkbox\">\n\t\t\t\t\t<input type=\"checkbox\" id=\"checkbox1\" name=\"options[]\" value=\"1\">\n\t\t\t\t\t<label for=\"checkbox1\"></label>\n\t\t\t\t</span>\n\t\t\t</td>\n\t\t\t<td>".concat(name, "</td>\n\t\t\t<td>").concat(email, "</td>\n\t\t\t<td>").concat(address, "</td>\n\t\t\t<td>").concat(phone, "</td>\n\t\t\t<td>\n\t\t\t\t<a href=\"#editEmployeeModal\" class=\"edit\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Edit\">&#xE254;</i></a>\n\t\t\t\t<a href=\"#deleteEmployeeModal\" class=\"delete\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Delete\">&#xE872;</i></a>\n\t\t\t</td>\n\t\t</tr>");
+    });
+    html += "</tbody></table>";
+  } //else {
+  // 	let	html = ""
+  // }
+
+
+  root.innerHTML = html;
+}
+
+render(); //POST
+
+function handleSubmit(event) {
+  event.preventDefault();
+  var _event$target$element = event.target.elements,
+      name = _event$target$element.name,
+      email = _event$target$element.email,
+      address = _event$target$element.address,
+      phone = _event$target$element.phone;
   name = name.value;
   email = email.value;
   address = address.value;
   phone = phone.value;
-  ev.target.reset();
-  axios.post('/addEmployes', {
-    name: name,
-    email: email,
-    address: address,
-    phone: phone
-  }); //.then(res=>renderData(res.data.students))
+  axios({
+    method: "post",
+    url: "/addEmployes",
+    data: {
+      name: name,
+      email: email,
+      address: address,
+      phone: phone
+    },
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(function (_ref) {
+    var allEmployes = _ref.data.allEmployes;
+    return render(allEmployes);
+  }).then(function () {
+    return event.target.reset();
+  });
 } //DELETE
 
 
@@ -52,7 +88,8 @@ function deleteRecord(personId) {
   axios.post('/deleteEmploye', {
     id: personId
   }).then(function (res) {
-    console.log(employes); //renderData(res.data.students)
+    console.log(employes);
+    render(res.array.allEmployes);
   });
 } //UPDATE
 
@@ -65,6 +102,6 @@ function updateEmploye(personId) {
     name: newName
   }).then(function (res) {
     console.log(res.data.message);
-    renderData(res.data.allEmployes);
+    render(res.array.allEmployes);
   });
 }
