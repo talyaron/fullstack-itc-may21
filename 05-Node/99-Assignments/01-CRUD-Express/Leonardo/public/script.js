@@ -64,10 +64,7 @@ function renderTask(data) {
                 </div>`
         }
     }).join('');
-    const todoRoot = document.getElementById('toDo');
-    debugger;
-    console.dir(todoRoot);
-    todoRoot.innerHTML = htmltoDo
+    document.getElementById('toDo').innerHTML = htmltoDo
 };
 
 //Get the tasks information:

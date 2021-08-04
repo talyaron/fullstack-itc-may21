@@ -74,10 +74,7 @@ function renderTask(data) {
       return "<div class='tasks toDo' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
     }
   }).join('');
-  var todoRoot = document.getElementById('toDo');
-  debugger;
-  console.dir(todoRoot);
-  todoRoot.innerHTML = htmltoDo;
+  document.getElementById('toDo').innerHTML = htmltoDo;
 }
 
 ; //Get the tasks information:
