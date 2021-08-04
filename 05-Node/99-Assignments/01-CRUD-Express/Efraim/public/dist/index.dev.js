@@ -212,6 +212,8 @@ function dateUrgency(date) {
     if ((new Date(date) - new Date()) / 1000 < 86400) {
       return "red";
     } else if ((new Date(date) - new Date()) / 1000 < 259200) {
+      return "orange";
+    } else if ((new Date(date) - new Date()) / 1000 < 604800) {
       return "rgb(220, 220, 2)";
     } else {
       return "blue";
