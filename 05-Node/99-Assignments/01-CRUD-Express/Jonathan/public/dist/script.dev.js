@@ -6,8 +6,8 @@ var btnModal = document.querySelector('.section--btn--add'); //
 
 var bgModal = document.querySelector('.modal-bg');
 var modalClose = document.querySelector('.modal-close');
-var addTask = document.querySelector('.add');
-var editTask = document.querySelector('.edit');
+var addTask = document.querySelector('.modal-bg__modal__form--buttons--add');
+var editTask = document.querySelector('.modal-bg__modal__form--buttons--edit');
 var btnColor = document.querySelector('.header__right--color--paint');
 var inputSearch = document.querySelector('#filterstatus'); //addEventListner
 
@@ -103,7 +103,7 @@ function closeModal() {
 }
 
 function handleSumbit(ev) {
-  var newTask;
+  var newTask, response, ok, task;
   return regeneratorRuntime.async(function handleSumbit$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -116,25 +116,28 @@ function handleSumbit(ev) {
           return regeneratorRuntime.awrap(addTaskPromise(newTask));
 
         case 6:
-          _context2.next = 11;
+          response = _context2.sent;
+          ok = response.ok, task = response.task;
+          alert(ok);
+          renderTask(task);
+          _context2.next = 15;
           break;
 
-        case 8:
-          _context2.prev = 8;
+        case 12:
+          _context2.prev = 12;
           _context2.t0 = _context2["catch"](0);
           console.log(_context2.t0);
 
-        case 11:
+        case 15:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 8]]);
-} //getStudent
-
+  }, null, null, [[0, 12]]);
+}
 
 function getAllTask(ev) {
-  var allTask;
+  var response, allTask;
   return regeneratorRuntime.async(function getAllTask$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -142,61 +145,63 @@ function getAllTask(ev) {
           _context3.prev = 0;
           ev.preventDefault();
           _context3.next = 4;
-          return regeneratorRuntime.awrap(getAllTaskPromise());
+          return regeneratorRuntime.awrap(axios.get('/getAllTask'));
 
         case 4:
-          allTask = _context3.sent;
+          response = _context3.sent;
+          allTask = response.data;
 
           if (!(allTask.length === 0)) {
-            _context3.next = 7;
+            _context3.next = 8;
             break;
           }
 
           throw new Error('No task on the database');
 
-        case 7:
+        case 8:
           renderTask(allTask);
-          _context3.next = 13;
+          _context3.next = 14;
           break;
 
-        case 10:
-          _context3.prev = 10;
+        case 11:
+          _context3.prev = 11;
           _context3.t0 = _context3["catch"](0);
           alert(_context3.t0);
 
-        case 13:
+        case 14:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 10]]);
+  }, null, null, [[0, 11]]);
 }
 
 function deleteTask(id) {
-  var task;
+  var response, task;
   return regeneratorRuntime.async(function deleteTask$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           if (!confirm("Do you want to delete this task?")) {
-            _context4.next = 8;
+            _context4.next = 9;
             break;
           }
 
           alert('Delete task');
           _context4.next = 4;
-          return regeneratorRuntime.awrap(deleteTaskPromise(id));
+          return regeneratorRuntime.awrap(axios["delete"]("/deleteTask/".concat(id)));
 
         case 4:
-          task = _context4.sent;
+          response = _context4.sent;
+          task = response.data;
           renderTask(task);
-          _context4.next = 9;
+          _context4.next = 10;
           break;
 
-        case 8:
+        case 9:
           alert('Delete Cancelled!');
 
-        case 9:
+        case 10:
         case "end":
           return _context4.stop();
       }
@@ -330,10 +335,10 @@ function renderTask(allTask) {
         html += "<div class = \"boardData--item boardData--green\">";
       }
 
-      html += "<span>".concat(task.emoji, "</span>\n                    <table id=\"data\">\n                           <th>Title: </th>\n                           <td>").concat(task.title.charAt(0).toUpperCase() + task.title.slice(1), "</td>\n                        </tr>\n                        <tr>   \n                           <th>Description: </th>\n                           <td>").concat(task.description.charAt(0).toUpperCase() + task.description.slice(1), " </td>\n                        </tr>\n                        <tr>\n                           <th>Date: </th>\n                           <td>").concat(task.date, " </td>\n                         </tr>\n                         <tr>  \n                           <th>Time: </th>\n                           <td>").concat(task.min, " </td>\n                         </tr>\n                         <tr>\n                         <th>Priority: </th>\n                         <td>").concat(task.status.charAt(0).toUpperCase() + task.status.slice(1), "</td>\n                       </tr>\n                    </table>    \n                <div class=\"iconos\">\n                        <i class=\"fa fa-trash delete\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Delete Item\"></i>\n                        <i class=\"fas fa-edit edit\" onclick='getTaskToUpdate(\"").concat(task.id, "\")' title=\"Edit Task\"></i>");
+      html += "<span>".concat(task.emoji, "</span>\n                    <table id=\"data\">\n                           <th>Title: </th>\n                           <td>").concat(task.title.charAt(0).toUpperCase() + task.title.slice(1), "</td>\n                        </tr>\n                        <tr>   \n                           <th>Description: </th>\n                           <td>").concat(task.description.charAt(0).toUpperCase() + task.description.slice(1), " </td>\n                        </tr>\n                        <tr>\n                           <th>Date: </th>\n                           <td>").concat(task.date, " </td>\n                         </tr>\n                         <tr>  \n                           <th>Time: </th>\n                           <td>").concat(task.min, " </td>\n                         </tr>\n                         <tr>\n                         <th>Priority: </th>\n                         <td>").concat(task.status.charAt(0).toUpperCase() + task.status.slice(1), "</td>\n                       </tr>\n                    </table>    \n                <div class=\"boardData--item--icons\">\n                        <i class=\"fa fa-trash boardData--item--icons--delete\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Delete Item\"></i>\n                        <i class=\"fas fa-edit boardData--item--icons--edit\" onclick='getTaskToUpdate(\"").concat(task.id, "\")' title=\"Edit Task\"></i>");
 
       if (task.status !== 'done') {
-        html += "<i class=\"fas fa-check-circle done\" onclick='doneTask(\"".concat(task.id, "\")' title=\"Done Task\"></i>");
+        html += "<i class=\"fas fa-check-circle boardData--item--icons--done\" onclick='doneTask(\"".concat(task.id, "\")' title=\"Done Task\"></i>");
       } else {//class iconoos mover a la derecha
       }
 
@@ -344,4 +349,4 @@ function renderTask(allTask) {
   } catch (e) {
     alert(e);
   }
-} //<span> 👸</span>
+}

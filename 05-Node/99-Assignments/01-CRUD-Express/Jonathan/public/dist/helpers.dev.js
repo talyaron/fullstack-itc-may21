@@ -11,7 +11,7 @@ function addTaskPromise(newTask) {
     }).then(function (res) {
       if (res.status === 200 && res.ok) {
         return res.json().then(function (task) {
-          alert(task.ok);
+          resolve(task);
         });
       } else {
         return res.json().then(function (task) {

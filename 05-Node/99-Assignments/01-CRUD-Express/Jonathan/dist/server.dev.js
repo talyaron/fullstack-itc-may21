@@ -20,6 +20,7 @@ var readAllTasks = function readAllTasks() {
 
 app.post("/addTask", function (req, res) {
   try {
+    console.log(req.body);
     var _req$body = req.body,
         title = _req$body.title,
         description = _req$body.description,
@@ -45,7 +46,8 @@ app.post("/addTask", function (req, res) {
     allTasks.push(newTask);
     fs.writeFileSync("./task.json", JSON.stringify(allTasks));
     res.send({
-      ok: "Added Task"
+      ok: "Added Task",
+      task: allTasks
     });
   } catch (e) {
     res.status(500).send({
@@ -55,7 +57,6 @@ app.post("/addTask", function (req, res) {
 });
 app.get("/getAllTask", function (req, res) {
   var allTasks = readAllTasks();
-  console.log(allTasks);
   res.send(allTasks);
 });
 app["delete"]("/deleteTask/:id", function (req, res) {
@@ -82,7 +83,6 @@ app.put("/doneTask/:id", function (req, res) {
       return task.id === id;
     });
     task.status = 'done';
-    console.log(allTasks);
     fs.writeFileSync("./task.json", JSON.stringify(allTasks)); //allStudents.sort(function (a, b){return (a.id - b.id)})
 
     res.send(allTasks);
