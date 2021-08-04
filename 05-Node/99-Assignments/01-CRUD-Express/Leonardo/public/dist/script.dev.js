@@ -62,21 +62,21 @@ function renderTask(data) {
         case 0:
           htmlInProgress = data.map(function (task) {
             if (task.status === 'inProgress') {
-              return "<div class='tasks' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+              return "<div class='tasks inProgress' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
             }
           }).join('');
           document.getElementById('inProgress').innerHTML = htmlInProgress; //////////////
 
           htmlDone = data.map(function (task) {
             if (task.status === 'done') {
-              return "<div class='tasks' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+              return "<div class='tasks done' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
             }
           }).join('');
           document.getElementById('done').innerHTML = htmlDone; //////////////
 
           htmltoDo = data.map(function (task) {
             if (task.status === 'toDo') {
-              return "<div class='tasks' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+              return "<div class='tasks toDo' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
             }
           }).join('');
           document.getElementById('toDo').innerHTML = htmltoDo;

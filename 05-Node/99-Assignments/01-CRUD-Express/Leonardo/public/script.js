@@ -24,7 +24,7 @@ async function handleSubmit(event) {
 async function renderTask(data) {
     const htmlInProgress = data.map(task => {
         if (task.status === 'inProgress') {
-            return `<div class='tasks' draggable="true">
+            return `<div class='tasks inProgress' draggable="true">
                 <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
                     <h4> ${task.title} </h4>             
                     <p> ${task.description} </p>
@@ -39,7 +39,7 @@ async function renderTask(data) {
     //////////////
     const htmlDone = data.map(task => {
         if (task.status === 'done') {
-            return `<div class='tasks' draggable="true">
+            return `<div class='tasks done' draggable="true">
                 <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
                     <h4> ${task.title} </h4>             
                     <p> ${task.description} </p>
@@ -54,7 +54,7 @@ async function renderTask(data) {
     //////////////
     const htmltoDo = data.map(task => {
         if (task.status === 'toDo') {
-            return `<div class='tasks' draggable="true">
+            return `<div class='tasks toDo' draggable="true">
                 <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
                     <h4> ${task.title} </h4>             
                     <p> ${task.description} </p>
