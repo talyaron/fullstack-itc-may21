@@ -1,11 +1,15 @@
 "use strict";
 
+// For YS, I orginally used axios and the code was way shorter and cleaner.. 
+// assignment said to use promises so I changed it all to fetch and resolve and reject and seems a lot bulkier now..
 window.addEventListener('load', function () {
   try {
     return new Promise(function (resolve, reject) {
-      axios.get('/getList').then(function (data) {
-        resolve(data.data.list);
-        renderArrayToDom(data.data.list);
+      fetch('/getList').then(function (r) {
+        return r.json();
+      }).then(function (data) {
+        resolve(data.list);
+        renderArrayToDom(data.list);
       })["catch"](function (e) {
         reject(e);
       });
@@ -22,12 +26,20 @@ function handleTask(ev) {
     var task = ev.target.elements.task.value;
     var dueDate = ev.target.elements.dueDate.value;
     return new Promise(function (resolve, reject) {
-      axios.post('/addListItem', {
-        task: task,
-        dueDate: dueDate
+      fetch('/addListItem', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          task: task,
+          dueDate: dueDate
+        })
+      }).then(function (r) {
+        return r.json();
       }).then(function (data) {
-        resolve(data.data.list);
-        renderArrayToDom(data.data.list);
+        resolve(data.list);
+        renderArrayToDom(data.list);
         alert("Submitted Succesfuly!");
       })["catch"](function (e) {
         reject(e);
@@ -45,9 +57,16 @@ form.addEventListener("submit", handleTask);
 function deleteTask(taskID) {
   try {
     return new Promise(function (resolve, reject) {
-      axios["delete"]("/deleteTask/".concat(taskID)).then(function (data) {
-        resolve(data.data.list);
-        renderArrayToDom(data.data.list);
+      fetch("/deleteTask/".concat(taskID), {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (r) {
+        return r.json();
+      }).then(function (data) {
+        resolve(data.list);
+        renderArrayToDom(data.list);
       })["catch"](function (e) {
         reject(e);
       });
@@ -61,12 +80,20 @@ function updateTask(taskID) {
   try {
     var newTaskName = document.getElementById("".concat(taskID, "update")).value;
     return new Promise(function (resolve, reject) {
-      axios.put('/updateTask', {
-        id: taskID,
-        newTaskName: newTaskName
+      fetch('/updateTask', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: taskID,
+          newTaskName: newTaskName
+        })
+      }).then(function (r) {
+        return r.json();
       }).then(function (data) {
-        resolve(data.data.list.list);
-        renderArrayToDom(data.data.list.list);
+        resolve(data.list.list);
+        renderArrayToDom(data.list.list);
         alert("updated succefully!");
       })["catch"](function (e) {
         reject(e);
@@ -80,11 +107,19 @@ function updateTask(taskID) {
 function updateStatus(ID) {
   try {
     return new Promise(function (resolve, reject) {
-      axios.put('/updateStatus', {
-        id: ID
+      fetch('/updateStatus', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: ID
+        })
+      }).then(function (r) {
+        return r.json();
       }).then(function (data) {
-        resolve(data.data.list.list);
-        renderArrayToDom(data.data.list.list);
+        resolve(data.list.list);
+        renderArrayToDom(data.list.list);
       })["catch"](function (e) {
         reject(e);
       });
@@ -115,7 +150,6 @@ function renderArrayToDom(listArray) {
           html = '';
           _context.next = 5;
           return regeneratorRuntime.awrap(listArray.sort(function (a, b) {
-            console.log(new Date() - new Date(a.dueDate));
             return new Date(a.dueDate) - new Date(b.dueDate);
           }));
 

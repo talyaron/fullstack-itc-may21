@@ -1,10 +1,15 @@
+
+// For YS, I orginally used axios and the code was way shorter and cleaner.. 
+// assignment said to use promises so I changed it all to fetch and resolve and reject and seems a lot bulkier now..
+
 window.addEventListener('load', () => {
     try {
         return new Promise((resolve, reject) => {
-            axios.get('/getList')
+            fetch('/getList')
+                .then(r => r.json())
                 .then(data => {
-                    resolve(data.data.list)
-                    renderArrayToDom(data.data.list)
+                    resolve(data.list)
+                    renderArrayToDom(data.list)
                 })
                 .catch(e => {
                     reject(e)
@@ -22,13 +27,20 @@ function handleTask(ev) {
         let task = ev.target.elements.task.value;
         let dueDate = ev.target.elements.dueDate.value
         return new Promise((resolve, reject) => {
-            axios.post('/addListItem', {
-                    task,
-                    dueDate
+            fetch('/addListItem', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        task,
+                        dueDate
+                    }),
                 })
+                .then(r => r.json())
                 .then(data => {
-                    resolve(data.data.list)
-                    renderArrayToDom(data.data.list)
+                    resolve(data.list)
+                    renderArrayToDom(data.list)
                     alert("Submitted Succesfuly!")
                 })
                 .catch(e => {
@@ -47,10 +59,16 @@ form.addEventListener("submit", handleTask)
 function deleteTask(taskID) {
     try {
         return new Promise((resolve, reject) => {
-            axios.delete(`/deleteTask/${taskID}`)
+            fetch(`/deleteTask/${taskID}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(r => r.json())
                 .then(data => {
-                    resolve(data.data.list)
-                    renderArrayToDom(data.data.list)
+                    resolve(data.list)
+                    renderArrayToDom(data.list)
                 })
                 .catch(e => {
                     reject(e)
@@ -66,13 +84,20 @@ function updateTask(taskID) {
     try {
         const newTaskName = document.getElementById(`${taskID}update`).value;
         return new Promise((resolve, reject) => {
-            axios.put('/updateTask', {
-                    id: taskID,
-                    newTaskName: newTaskName
+            fetch('/updateTask', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: taskID,
+                        newTaskName: newTaskName
+                    }),
                 })
+                .then(r => r.json())
                 .then(data => {
-                    resolve(data.data.list.list)
-                    renderArrayToDom(data.data.list.list)
+                    resolve(data.list.list)
+                    renderArrayToDom(data.list.list)
                     alert("updated succefully!")
                 })
                 .catch(e => {
@@ -87,12 +112,19 @@ function updateTask(taskID) {
 function updateStatus(ID) {
     try {
         return new Promise((resolve, reject) => {
-            axios.put('/updateStatus', {
-                    id: ID
+            fetch('/updateStatus', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: ID
+                    }),
                 })
+                .then(r => r.json())
                 .then(data => {
-                    resolve(data.data.list.list)
-                    renderArrayToDom(data.data.list.list)
+                    resolve(data.list.list)
+                    renderArrayToDom(data.list.list)
                 })
                 .catch(e => {
                     reject(e)
@@ -103,12 +135,12 @@ function updateStatus(ID) {
     }
 }
 
-function dateUrgency(date){
-    if((new Date (date) - new Date())/1000 < 86400){
+function dateUrgency(date) {
+    if ((new Date(date) - new Date()) / 1000 < 86400) {
         return "red"
-    }else if((new Date (date) - new Date())/1000 < 259200) {
+    } else if ((new Date(date) - new Date()) / 1000 < 259200) {
         return "rgb(220, 220, 2)"
-    }else{
+    } else {
         return "blue"
     }
 }
@@ -117,13 +149,12 @@ async function renderArrayToDom(listArray) {
         const list = document.querySelector(".holder")
         let html = ''
 
-       await listArray.sort(function(a,b){
-           console.log (new Date() - new Date(a.dueDate))
+        await listArray.sort(function (a, b) {
             return new Date(a.dueDate) - new Date(b.dueDate);
-          });
-        
+        });
 
-       await listArray.forEach((listItem) => {
+
+        await listArray.forEach((listItem) => {
             if (listItem.status === "Incomplete") {
 
                 let urgencyColor = dateUrgency(listItem.dueDate)
