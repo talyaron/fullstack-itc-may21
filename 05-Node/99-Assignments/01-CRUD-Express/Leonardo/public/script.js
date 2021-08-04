@@ -149,6 +149,8 @@ async function handleEdit(ev) {
 ///////////////////
 function onDragStart(event) {
     event.dataTransfer.setData('text/plain', event.target.id);
+    event.currentTarget.style.backgroundColor = 'yellow';
+    event.currentTarget.style.borderRadius = '0px';
 }
 
 function onDragOver(event) {
@@ -156,9 +158,29 @@ function onDragOver(event) {
 }
 
 function onDrop(event) {
-    const id = event.dataTransfer.getData('text');
-    const draggableElement = document.getElementById(id);
+    const idDraggable = event.dataTransfer.getData('text');
+    const idDropeable = event.target.id;
+
+    const draggableElement = document.getElementById(idDraggable);
+    handleStyleBackground(draggableElement, idDropeable);
     const dropzone = event.target;
     dropzone.appendChild(draggableElement);
     event.dataTransfer.clearData();
 }
+
+function handleStyleBackground(draggableElement, idDropeable) {
+    switch (idDropeable) {
+        case 'toDo':
+            draggableElement.style.backgroundColor = '#32cd32';
+            draggableElement.style.borderRadius = '50px';
+            break;
+        case 'inProgress':
+            draggableElement.style.backgroundColor = '#1e90ff';
+            draggableElement.style.borderRadius = '50px';
+            break;
+        case 'done':
+            draggableElement.style.backgroundColor = 'violet';
+            draggableElement.style.borderRadius = '50px';
+            break;
+    }
+};
