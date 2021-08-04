@@ -2,8 +2,6 @@
 exports.__esModule = true;
 var express = require('express');
 var router = express.Router();
-var images_1 = require("../../model/images");
-router.get('/all', function (req, res) {
-    res.send(images_1.beaches);
-});
+var controlBeaches_1 = require("./controlBeaches");
+router.get('/all', controlBeaches_1.beachesCtl);
 module.exports = router;

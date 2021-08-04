@@ -2,10 +2,8 @@ export { };
 const express = require('express');
 const router = express.Router();
 
-import {beaches} from '../../model/images';
+import {beachesCtl} from './controlBeaches';
 
-router.get('/all', (req, res) => {
-    res.send(beaches);
-});
+router.get('/all', beachesCtl);
 
 module.exports = router;
