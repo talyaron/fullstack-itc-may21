@@ -134,14 +134,35 @@ function updateStatus(ID) {
         console.error(e)
     }
 }
-
+function editTaskKeepText(id){
+    try{
+    return new Promise((resolve, reject) => {
+    const edit = document.getElementById(`${id}update`);
+    fetch('/getList')
+    .then(r => r.json())
+    .then(data => {
+        resolve(data.list)
+        const arrayElement = data.list.filter(find => find.itemID === id)
+        edit.placeholder = ""
+        edit.value = arrayElement[0].item
+    })
+    .catch(e => {
+        reject(e)
+    });
+})} catch (e) {
+    console.error(e)
+}
+}
 function dateUrgency(date) {
+    try{
     if ((new Date(date) - new Date()) / 1000 < 86400) {
         return "red"
     } else if ((new Date(date) - new Date()) / 1000 < 259200) {
         return "rgb(220, 220, 2)"
     } else {
         return "blue"
+    }} catch (e) {
+        console.error(e)
     }
 }
 async function renderArrayToDom(listArray) {
@@ -163,7 +184,7 @@ async function renderArrayToDom(listArray) {
                     `<div class="holder__item" id='${listItem.itemID}'>
                 <div class="holder__item__header">Task:</div>
                 <div class="holder__item__taskDisplay">${listItem.item}</div>
-                <input class="holder__item__task" id="${listItem.itemID}update" placeholder="Edit Task, Click Update!"  value="">
+                <input class="holder__item__task" id="${listItem.itemID}update" placeholder="Edit Task, Click Update!"  value="" onclick='editTaskKeepText("${listItem.itemID}")'>
                 <div class='button button--update' onclick='updateTask("${listItem.itemID}")'>UPDATE</div>
                 <div class="holder__item__header">Due Date:</div>
                 <div class="holder__item__dueDate" style="color: ${urgencyColor}">${listItem.dueDate}</div>
