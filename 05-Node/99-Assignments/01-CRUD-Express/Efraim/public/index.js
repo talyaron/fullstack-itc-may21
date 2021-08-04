@@ -1,20 +1,26 @@
 
 // For YS, I orginally used axios and the code was way shorter and cleaner.. 
 // assignment said to use promises so I changed it all to fetch and resolve and reject and seems a lot bulkier now..
-
-window.addEventListener('load', () => {
+function getFullTaskList(){
     try {
         return new Promise((resolve, reject) => {
             fetch('/getList')
                 .then(r => r.json())
                 .then(data => {
                     resolve(data.list)
-                    renderArrayToDom(data.list)
                 })
                 .catch(e => {
                     reject(e)
                 });
         })
+    } catch (e) {
+        console.error(e)
+    }
+}
+window.addEventListener('load', async() => {
+    try {
+       const list = await getFullTaskList();
+       await renderArrayToDom(list)      
     } catch (e) {
         console.error(e)
     }
@@ -134,22 +140,14 @@ function updateStatus(ID) {
         console.error(e)
     }
 }
-function editTaskKeepText(id){
+async function editTaskKeepText(id){
     try{
-    return new Promise((resolve, reject) => {
-    const edit = document.getElementById(`${id}update`);
-    fetch('/getList')
-    .then(r => r.json())
-    .then(data => {
-        resolve(data.list)
-        const arrayElement = data.list.filter(find => find.itemID === id)
+        const edit = document.getElementById(`${id}update`);
+        const list = await getFullTaskList()
+        const arrayElement = await list.filter(find => find.itemID === id)
         edit.placeholder = ""
         edit.value = arrayElement[0].item
-    })
-    .catch(e => {
-        reject(e)
-    });
-})} catch (e) {
+} catch (e) {
     console.error(e)
 }
 }

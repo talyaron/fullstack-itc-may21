@@ -2,14 +2,13 @@
 
 // For YS, I orginally used axios and the code was way shorter and cleaner.. 
 // assignment said to use promises so I changed it all to fetch and resolve and reject and seems a lot bulkier now..
-window.addEventListener('load', function () {
+function getFullTaskList() {
   try {
     return new Promise(function (resolve, reject) {
       fetch('/getList').then(function (r) {
         return r.json();
       }).then(function (data) {
         resolve(data.list);
-        renderArrayToDom(data.list);
       })["catch"](function (e) {
         reject(e);
       });
@@ -17,6 +16,38 @@ window.addEventListener('load', function () {
   } catch (e) {
     console.error(e);
   }
+}
+
+window.addEventListener('load', function _callee() {
+  var list;
+  return regeneratorRuntime.async(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return regeneratorRuntime.awrap(getFullTaskList());
+
+        case 3:
+          list = _context.sent;
+          _context.next = 6;
+          return regeneratorRuntime.awrap(renderArrayToDom(list));
+
+        case 6:
+          _context.next = 11;
+          break;
+
+        case 8:
+          _context.prev = 8;
+          _context.t0 = _context["catch"](0);
+          console.error(_context.t0);
+
+        case 11:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[0, 8]]);
 });
 
 function handleTask(ev) {
@@ -130,25 +161,41 @@ function updateStatus(ID) {
 }
 
 function editTaskKeepText(id) {
-  try {
-    return new Promise(function (resolve, reject) {
-      var edit = document.getElementById("".concat(id, "update"));
-      fetch('/getList').then(function (r) {
-        return r.json();
-      }).then(function (data) {
-        resolve(data.list);
-        var arrayElement = data.list.filter(function (find) {
-          return find.itemID === id;
-        });
-        edit.placeholder = "";
-        edit.value = arrayElement[0].item;
-      })["catch"](function (e) {
-        reject(e);
-      });
-    });
-  } catch (e) {
-    console.error(e);
-  }
+  var edit, list, arrayElement;
+  return regeneratorRuntime.async(function editTaskKeepText$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          edit = document.getElementById("".concat(id, "update"));
+          _context2.next = 4;
+          return regeneratorRuntime.awrap(getFullTaskList());
+
+        case 4:
+          list = _context2.sent;
+          _context2.next = 7;
+          return regeneratorRuntime.awrap(list.filter(function (find) {
+            return find.itemID === id;
+          }));
+
+        case 7:
+          arrayElement = _context2.sent;
+          edit.placeholder = "";
+          edit.value = arrayElement[0].item;
+          _context2.next = 15;
+          break;
+
+        case 12:
+          _context2.prev = 12;
+          _context2.t0 = _context2["catch"](0);
+          console.error(_context2.t0);
+
+        case 15:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, null, null, [[0, 12]]);
 }
 
 function dateUrgency(date) {
@@ -167,20 +214,20 @@ function dateUrgency(date) {
 
 function renderArrayToDom(listArray) {
   var list, html;
-  return regeneratorRuntime.async(function renderArrayToDom$(_context) {
+  return regeneratorRuntime.async(function renderArrayToDom$(_context3) {
     while (1) {
-      switch (_context.prev = _context.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
-          _context.prev = 0;
+          _context3.prev = 0;
           list = document.querySelector(".holder");
           html = '';
-          _context.next = 5;
+          _context3.next = 5;
           return regeneratorRuntime.awrap(listArray.sort(function (a, b) {
             return new Date(a.dueDate) - new Date(b.dueDate);
           }));
 
         case 5:
-          _context.next = 7;
+          _context3.next = 7;
           return regeneratorRuntime.awrap(listArray.forEach(function (listItem) {
             if (listItem.status === "Incomplete") {
               var urgencyColor = dateUrgency(listItem.dueDate);
@@ -192,17 +239,17 @@ function renderArrayToDom(listArray) {
 
         case 7:
           list.innerHTML = html;
-          _context.next = 13;
+          _context3.next = 13;
           break;
 
         case 10:
-          _context.prev = 10;
-          _context.t0 = _context["catch"](0);
-          console.error(_context.t0);
+          _context3.prev = 10;
+          _context3.t0 = _context3["catch"](0);
+          console.error(_context3.t0);
 
         case 13:
         case "end":
-          return _context.stop();
+          return _context3.stop();
       }
     }
   }, null, null, [[0, 10]]);
