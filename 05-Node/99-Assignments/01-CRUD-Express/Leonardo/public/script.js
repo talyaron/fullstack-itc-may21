@@ -22,6 +22,7 @@ async function handleSubmit(event) {
 
 //Function to render the data of the tasks in the DOM
 function renderTask(data) {
+
     const htmlInProgress = data.map(task => {
         if (task.status === 'inProgress') {
             return `<div class='tasks inProgress' draggable="true">
@@ -63,8 +64,10 @@ function renderTask(data) {
                 </div>`
         }
     }).join('');
-
-    document.getElementById('toDo').innerHTML = htmltoDo
+    const todoRoot = document.getElementById('toDo');
+    debugger;
+    console.dir(todoRoot);
+    todoRoot.innerHTML = htmltoDo
 };
 
 //Get the tasks information:
@@ -119,14 +122,14 @@ async function uploadTask(id) {
                     </div>
     
                     <div>
-                        <label for="toDo">To Do</label>
-                        <input type="radio" id="toDo" name="status" value="toDo" checked />
+                        <label for="toDo2">To Do</label>
+                        <input type="radio" id="toDo2" name="status" value="toDo" checked />
     
-                        <label for="inProgress">In Progress</label>
-                        <input type="radio" id="inProgress" name="status" value="inProgress" />
+                        <label for="inProgress2">In Progress</label>
+                        <input type="radio" id="inProgress2" name="status" value="inProgress" />
     
-                        <label for="done">Done</label>
-                        <input type="radio" id="done" name="status" value="done" />
+                        <label for="done2">Done</label>
+                        <input type="radio" id="done2" name="status" value="done" />
                     </div>
                     <input class="form__input--submit" type="submit" value="Save changes">`
                 )
@@ -155,10 +158,9 @@ async function handleEdit(ev) {
         ev.target.reset();
 
         let tasksData = await axios.put(`/editTask/${taskIdEdit}`, { taskTitle, taskDescription, taskStatus });
-        location.reload();
 
-        /////////I DONT KNOW WHY ITS NOT WORKING///////////
-        //renderTask(tasksData.data.tasks);
+        const { tasks } = tasksData.data;
+        renderTask(tasks);
 
     } catch (error) {
         console.error(error);

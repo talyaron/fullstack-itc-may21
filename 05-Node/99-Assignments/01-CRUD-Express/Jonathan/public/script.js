@@ -225,45 +225,45 @@ function renderTask(allTask) {
 
         allTask.forEach(task => {
 
-            //const { id, name, age, avgrade } = elem
+            let {id, title, description, date, min,emoji, status } = task
 
-            if (task.status === 'important') {
+            if (status === 'important') {
                 html += `<div class = "boardData--item boardData--red">`
 
-            } else if (task.status === 'later') {
+            } else if (status === 'later') {
                 html += `<div class = "boardData--item boardData--yellow">`
             } else {
                 html += `<div class = "boardData--item boardData--green">`
 
             }
-            html += `<span>${task.emoji}</span>
+            html += `<span>${emoji}</span>
                     <table id="data">
                            <th>Title: </th>
-                           <td>${task.title.charAt(0).toUpperCase() + task.title.slice(1)}</td>
+                           <td>${title.charAt(0).toUpperCase() + title.slice(1)}</td>
                         </tr>
                         <tr>   
                            <th>Description: </th>
-                           <td>${task.description.charAt(0).toUpperCase() + task.description.slice(1)} </td>
+                           <td>${description.charAt(0).toUpperCase() + description.slice(1)} </td>
                         </tr>
                         <tr>
                            <th>Date: </th>
-                           <td>${task.date} </td>
+                           <td>${date} </td>
                          </tr>
                          <tr>  
                            <th>Time: </th>
-                           <td>${task.min} </td>
+                           <td>${min} </td>
                          </tr>
                          <tr>
                          <th>Priority: </th>
-                         <td>${task.status.charAt(0).toUpperCase() + task.status.slice(1)}</td>
+                         <td>${status.charAt(0).toUpperCase() + status.slice(1)}</td>
                        </tr>
                     </table>    
                 <div class="boardData--item--icons">
-                        <i class="fa fa-trash boardData--item--icons--delete" onclick='deleteTask("${task.id}")' title="Delete Item"></i>
-                        <i class="fas fa-edit boardData--item--icons--edit" onclick='getTaskToUpdate("${task.id}")' title="Edit Task"></i>`
+                        <i class="fa fa-trash boardData--item--icons--delete" onclick='deleteTask("${id}")' title="Delete Item"></i>
+                        <i class="fas fa-edit boardData--item--icons--edit" onclick='getTaskToUpdate("${id}")' title="Edit Task"></i>`
 
-            if (task.status !== 'done') {
-                html += `<i class="fas fa-check-circle boardData--item--icons--done" onclick='doneTask("${task.id}")' title="Done Task"></i>`
+            if (status !== 'done') {
+                html += `<i class="fas fa-check-circle boardData--item--icons--done" onclick='doneTask("${id}")' title="Done Task"></i>`
             } else {
                 //class iconoos mover a la derecha
             }

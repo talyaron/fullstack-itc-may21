@@ -18,6 +18,13 @@ var readAllTasks = function readAllTasks() {
   return JSON.parse(allTasks);
 };
 
+function getOrderTask(allTasks) {
+  allTasks.sort(function (a, b) {
+    return a.datetime < b.datetime ? -1 : a.datetime > b.datetime ? 1 : 0;
+  });
+  return allTasks;
+}
+
 app.post("/addTask", function (req, res) {
   try {
     var _req$body = req.body,
@@ -143,17 +150,14 @@ app.get("/getPriority/:status", function (req, res) {
     task = allTasks.filter(function (task) {
       return task.status === status;
     });
-    res.send(task);
+    res.send(getOrderTask(task));
   } else {
     res.send(allTasks);
   }
 });
 app.get("/orderDate", function (req, res) {
   var allTasks = readAllTasks();
-  allTasks.sort(function (a, b) {
-    return a.datetime < b.datetime ? -1 : a.datetime > b.datetime ? 1 : 0;
-  });
-  res.send(allTasks);
+  res.send(getOrderTask(allTasks));
 });
 app.listen(port, function () {
   console.log("Example app listening at http://localhost:".concat(port));
