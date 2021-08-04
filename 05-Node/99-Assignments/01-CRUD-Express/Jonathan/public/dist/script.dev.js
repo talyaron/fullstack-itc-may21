@@ -369,19 +369,26 @@ function renderTask(allTask) {
     var boardDataRoot = document.querySelector('#boardData');
     if (!boardDataRoot) throw new Error("This page cant render");
     allTask.forEach(function (task) {
-      //const { id, name, age, avgrade } = elem
-      if (task.status === 'important') {
+      var id = task.id,
+          title = task.title,
+          description = task.description,
+          date = task.date,
+          min = task.min,
+          emoji = task.emoji,
+          status = task.status;
+
+      if (status === 'important') {
         html += "<div class = \"boardData--item boardData--red\">";
-      } else if (task.status === 'later') {
+      } else if (status === 'later') {
         html += "<div class = \"boardData--item boardData--yellow\">";
       } else {
         html += "<div class = \"boardData--item boardData--green\">";
       }
 
-      html += "<span>".concat(task.emoji, "</span>\n                    <table id=\"data\">\n                           <th>Title: </th>\n                           <td>").concat(task.title.charAt(0).toUpperCase() + task.title.slice(1), "</td>\n                        </tr>\n                        <tr>   \n                           <th>Description: </th>\n                           <td>").concat(task.description.charAt(0).toUpperCase() + task.description.slice(1), " </td>\n                        </tr>\n                        <tr>\n                           <th>Date: </th>\n                           <td>").concat(task.date, " </td>\n                         </tr>\n                         <tr>  \n                           <th>Time: </th>\n                           <td>").concat(task.min, " </td>\n                         </tr>\n                         <tr>\n                         <th>Priority: </th>\n                         <td>").concat(task.status.charAt(0).toUpperCase() + task.status.slice(1), "</td>\n                       </tr>\n                    </table>    \n                <div class=\"boardData--item--icons\">\n                        <i class=\"fa fa-trash boardData--item--icons--delete\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Delete Item\"></i>\n                        <i class=\"fas fa-edit boardData--item--icons--edit\" onclick='getTaskToUpdate(\"").concat(task.id, "\")' title=\"Edit Task\"></i>");
+      html += "<span>".concat(emoji, "</span>\n                    <table id=\"data\">\n                           <th>Title: </th>\n                           <td>").concat(title.charAt(0).toUpperCase() + title.slice(1), "</td>\n                        </tr>\n                        <tr>   \n                           <th>Description: </th>\n                           <td>").concat(description.charAt(0).toUpperCase() + description.slice(1), " </td>\n                        </tr>\n                        <tr>\n                           <th>Date: </th>\n                           <td>").concat(date, " </td>\n                         </tr>\n                         <tr>  \n                           <th>Time: </th>\n                           <td>").concat(min, " </td>\n                         </tr>\n                         <tr>\n                         <th>Priority: </th>\n                         <td>").concat(status.charAt(0).toUpperCase() + status.slice(1), "</td>\n                       </tr>\n                    </table>    \n                <div class=\"boardData--item--icons\">\n                        <i class=\"fa fa-trash boardData--item--icons--delete\" onclick='deleteTask(\"").concat(id, "\")' title=\"Delete Item\"></i>\n                        <i class=\"fas fa-edit boardData--item--icons--edit\" onclick='getTaskToUpdate(\"").concat(id, "\")' title=\"Edit Task\"></i>");
 
-      if (task.status !== 'done') {
-        html += "<i class=\"fas fa-check-circle boardData--item--icons--done\" onclick='doneTask(\"".concat(task.id, "\")' title=\"Done Task\"></i>");
+      if (status !== 'done') {
+        html += "<i class=\"fas fa-check-circle boardData--item--icons--done\" onclick='doneTask(\"".concat(id, "\")' title=\"Done Task\"></i>");
       } else {//class iconoos mover a la derecha
       }
 
