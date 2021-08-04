@@ -2,6 +2,7 @@
 //section
 const btnTask = document.querySelector('.section--btn--all')
 const btnModal = document.querySelector('.section--btn--add')
+const btnOrderbyDate = document.querySelector('.section--btn--order')
 //
 
 const bgModal = document.querySelector('.modal-bg')
@@ -19,6 +20,7 @@ btnTask.addEventListener('click', getAllTask)
 editTask.addEventListener('click', updateTaskOnDOM)
 btnColor.addEventListener('click', setColor)
 inputSearch.addEventListener('change', searchPriorty)
+btnOrderbyDate.addEventListener('click', orderDate)
 
 
 
@@ -119,6 +121,19 @@ async function getAllTask(ev) {
     }
 }
 
+async function orderDate(ev) {
+
+    try {
+        ev.preventDefault()
+        const response = await axios.get('/orderDate')
+        const orderAllTask = response.data
+        if (orderAllTask.length === 0) throw new Error('No task on the database')
+        renderTask(orderAllTask)
+    } catch (e) {
+        alert(e)
+    }
+}
+
 async function deleteTask(id) {
     if (confirm("Do you want to delete this task?")) {
         alert('Delete task')
@@ -191,6 +206,7 @@ function getDataFromDOM() {
             min: min,
             emoji: inputEmoji,
             status: inputStatus,
+            datetime:inputDateTime,
 
         }
         

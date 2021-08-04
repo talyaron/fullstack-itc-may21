@@ -62,7 +62,7 @@
   opacity: 0.7;
   cursor: pointer;
 }
-.section--btn--add {
+.section--btn--add, .section--btn--all {
   margin-right: 1em;
 }
 
