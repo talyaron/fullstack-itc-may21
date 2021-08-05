@@ -35,7 +35,7 @@ const DELETE = "delete", EDIT = "edit";
 // updateUI();
 
 // EVENT LISTENERS
-expenseBtn.addEventListener("click", function(){
+expenseBtn.addEventListener("click",function(){
     show(expenseEl);
     hide( [incomeEl, allEl] );
     active( expenseBtn );
@@ -54,20 +54,25 @@ allBtn.addEventListener("click", function(){
     inactive( [incomeBtn, expenseBtn] );
 })
 
-addExpense.addEventListener("click", function(){
+addExpense.addEventListener("click",async  function(){
     // IF ONE OF THE INPUTS IS EMPTY => EXIT
-    if(!expenseTitle.value || !expenseAmount.value ) return;
+    try {
+        if(!expenseTitle.value || !expenseAmount.value ) return;
 
-    // SAVE THE ENTRY TO ENTRY_LIST
-    let expense = {
-        type : "expense",
-        title : expenseTitle.value,
-        amount : parseInt(expenseAmount.value)
+        // SAVE THE ENTRY TO ENTRY_LIST
+        let expense = {
+            type : "expense",
+            title : expenseTitle.value,
+            amount : parseInt(expenseAmount.value)
+        }
+        ENTRY_LIST.push(expense);
+          const expns=await axios('/createExpense',{expense});
+        updateUI();
+        clearInput( [expenseTitle, expenseAmount] )  
+    } catch (error) {
+        console.error(error)
     }
-    ENTRY_LIST.push(expense);
-
-    updateUI();
-    clearInput( [expenseTitle, expenseAmount] )
+    
 })
 
 addIncome.addEventListener("click", function(){

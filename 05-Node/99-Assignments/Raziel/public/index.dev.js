@@ -51,18 +51,52 @@ allBtn.addEventListener("click", function () {
   active(allBtn);
   inactive([incomeBtn, expenseBtn]);
 });
-addExpense.addEventListener("click", function () {
-  // IF ONE OF THE INPUTS IS EMPTY => EXIT
-  if (!expenseTitle.value || !expenseAmount.value) return; // SAVE THE ENTRY TO ENTRY_LIST
+addExpense.addEventListener("click", function _callee() {
+  var expense, expns;
+  return regeneratorRuntime.async(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
 
-  var expense = {
-    type: "expense",
-    title: expenseTitle.value,
-    amount: parseInt(expenseAmount.value)
-  };
-  ENTRY_LIST.push(expense);
-  updateUI();
-  clearInput([expenseTitle, expenseAmount]);
+          if (!(!expenseTitle.value || !expenseAmount.value)) {
+            _context.next = 3;
+            break;
+          }
+
+          return _context.abrupt("return");
+
+        case 3:
+          // SAVE THE ENTRY TO ENTRY_LIST
+          expense = {
+            type: "expense",
+            title: expenseTitle.value,
+            amount: parseInt(expenseAmount.value)
+          };
+          ENTRY_LIST.push(expense);
+          _context.next = 7;
+          return regeneratorRuntime.awrap(axios('/createExpense', {
+            expense: expense
+          }));
+
+        case 7:
+          expns = _context.sent;
+          updateUI();
+          clearInput([expenseTitle, expenseAmount]);
+          _context.next = 15;
+          break;
+
+        case 12:
+          _context.prev = 12;
+          _context.t0 = _context["catch"](0);
+          console.error(_context.t0);
+
+        case 15:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[0, 12]]);
 });
 addIncome.addEventListener("click", function () {
   // IF ONE OF THE INPUTS IS EMPTY => EXIT
