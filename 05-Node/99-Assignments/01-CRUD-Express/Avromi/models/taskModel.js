@@ -13,7 +13,7 @@ function getAllTasks() {
     return parsed
 }
 
-exports.getAllTasks = getAllTasks
+
 
 function addTask(title) {
 
@@ -29,4 +29,18 @@ function addTask(title) {
     return allTasks
 }
 
+function deleteTask(id) {
+
+    const allTasks = getAllTasks();
+
+    const filteredTasks = allTasks.filter(task => task.id !== id)
+
+    fs.writeFileSync(filePath, JSON.stringify(filteredTasks));
+    return filteredTasks
+}
+
+
+
+exports.getAllTasks = getAllTasks
 exports.addTask = addTask
+exports.deleteTask = deleteTask

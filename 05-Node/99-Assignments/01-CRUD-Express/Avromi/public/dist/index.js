@@ -34,46 +34,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-createSortable("divcont");
-function createSortable(selector) {
-    var newY, sortable = document.getElementById(selector);
-    Draggable.create(sortable.children, {
-        type: "y", bounds: "#divcont",
-        onPress: function () { newY = this.y; },
-        onDragEnd: function () {
-            var i = (sortable.children).length, dragIndex, targetIndex = $.inArray(this.target, sortable.children);
-            while (--i > -1) {
-                if (this.hitTest(sortable.children[i], "10%")) {
-                    TweenLite.to(sortable.children[i], 0.2, { y: newY });
-                    dropIndex = i;
-                }
-            }
-            if (typeof dropIndex !== "undefined") {
-                dragIndex = targetIndex < dropIndex ? dropIndex + 1 : dropIndex;
-                sortable.insertBefore(sortable.children[dropIndex], sortable.children[targetIndex]);
-                sortable.insertBefore(this.target, sortable.children[dragIndex]);
-            }
-        },
-        liveSnap: true, snap: function (endValue) { return Math.round(endValue / 40) * 40; }
-    });
-    TweenLite.set(sortable, { height: 40 * sortable.children.length });
-    for (var i = 0; i < sortable.children.length; i++) {
-        TweenLite.set(sortable.children[i], { y: 40 * i });
-    }
-}
-// const title = "new title"
-function addTask(title) {
+function getAllTask() {
     return __awaiter(this, void 0, void 0, function () {
         var res, allTasks, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, axios.post('/tasks/newTask', { title: title })];
+                    return [4 /*yield*/, axios.get('/tasks/')];
                 case 1:
                     res = _a.sent();
                     allTasks = res.data;
-                    console.log(allTasks);
+                    renderTasks(allTasks);
                     return [3 /*break*/, 3];
                 case 2:
                     error_1 = _a.sent();
@@ -84,6 +56,52 @@ function addTask(title) {
         });
     });
 }
+getAllTask();
+function addTask(title) {
+    return __awaiter(this, void 0, void 0, function () {
+        var res, allTasks, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.post('/tasks/newTask', { title: title })];
+                case 1:
+                    res = _a.sent();
+                    allTasks = res.data;
+                    renderTasks(allTasks);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_2 = _a.sent();
+                    console.log(error_2);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function deleteTask(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var res, allTasks, error_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios["delete"]("/tasks/delete?id=" + id)];
+                case 1:
+                    res = _a.sent();
+                    allTasks = res.data;
+                    renderTasks(allTasks);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_3 = _a.sent();
+                    console.log(error_3);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+//render allTasks to DOM with a click for edit and delete abd update task
 var form = document.querySelector(".main__form");
 form.addEventListener('submit', handleSubmit);
 function handleSubmit(ev) {
@@ -91,4 +109,18 @@ function handleSubmit(ev) {
     var task = ev.target.elements.task.value;
     addTask(task);
     ev.target.reset();
+}
+function handleDelete(id) {
+    deleteTask(id);
+}
+function handleEdit(id) {
+    console.log(id);
+}
+function renderTasks(data) {
+    var tasksDiv = document.querySelector("#divcont");
+    var html = "";
+    data.forEach(function (task) {
+        html += " <div class='tasks'><h3>" + task.title + "</h3>\n        <button onclick=\"handleDelete('" + task.id + "')\">Delete</button>\n        <button onclick=\"handleEdit('" + task.id + "')\">Edit</button>\n        <input type=\"checkbox\" name=\"done\">\n        </div>";
+    });
+    tasksDiv.innerHTML = html;
 }

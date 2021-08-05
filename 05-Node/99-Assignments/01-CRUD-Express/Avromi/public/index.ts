@@ -1,47 +1,43 @@
-createSortable("divcont");
-function createSortable(selector) {
-  var newY,sortable=document.getElementById(selector);
-  Draggable.create(sortable.children, {
-    type:"y",bounds:"#divcont",
-    onPress: function() { newY = this.y },
-    onDragEnd: function() {
-      var i =(sortable.children).length , dragIndex ,
-      targetIndex = $.inArray(this.target,sortable.children);
-      while (--i>-1){
-        if (this.hitTest(sortable.children[i],"10%")){
-          TweenLite.to(sortable.children[i], 0.2, { y: newY });
-          dropIndex = i;}
-      }      
-      if (typeof dropIndex !== "undefined") {
-        dragIndex = targetIndex < dropIndex ? dropIndex + 1: dropIndex;
-        sortable.insertBefore(sortable.children[dropIndex],sortable.children[targetIndex]);
-        sortable.insertBefore(this.target,sortable.children[dragIndex]) }   
+async function getAllTask() {
+    try {
+        const res = await axios.get('/tasks/')
+        const allTasks = res.data
+        renderTasks(allTasks);
+    } catch (error) {
+        console.log(error);
     }
-    ,liveSnap: true,snap:function(endValue){ return Math.round(endValue/40)*40}
-  });
-  TweenLite.set(sortable,{height:40*sortable.children.length});
-  for(var i=0;i<sortable.children.length;i++){ TweenLite.set(sortable.children[i],{y:40*i})}
 }
+getAllTask()
 
-// const title = "new title"
 
 async function addTask(title) {
     try {
         const res = await axios.post('/tasks/newTask', { title })
-      const allTasks = res.data
-      console.log(allTasks);
+        const allTasks = res.data
+        renderTasks(allTasks);
     } catch (error) {
         console.log(error);
     }
-
 }
+
+async function deleteTask(id) {
+    try {
+        const res = await axios.delete(`/tasks/delete?id=${id}`)
+        const allTasks = res.data
+        renderTasks(allTasks);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//render allTasks to DOM with a click for edit and delete abd update task
 
 
 
 const form = document.querySelector(".main__form")
 form.addEventListener('submit', handleSubmit);
 
-function handleSubmit(ev:any):any{
+function handleSubmit(ev: any): any {
     ev.preventDefault();
     const task = ev.target.elements.task.value;
     addTask(task)
@@ -49,6 +45,26 @@ function handleSubmit(ev:any):any{
     ev.target.reset();
 }
 
+function handleDelete(id): any {
+    deleteTask(id);
+}
+
+function handleEdit(id): any {
+    console.log(id);
+}
 
 
+function renderTasks(data) {
+    const tasksDiv = document.querySelector("#divcont")
+    let html = "";
+    data.forEach((task) => {
+        html += ` <div class='tasks'><h3>${task.title}</h3>
+        <button onclick="handleDelete('${task.id}')">Delete</button>
+        <button onclick="handleEdit('${task.id}')">Edit</button>
+        <input type="checkbox" name="done">
+        </div>`
+    })
+    tasksDiv.innerHTML = html
+
+}
 

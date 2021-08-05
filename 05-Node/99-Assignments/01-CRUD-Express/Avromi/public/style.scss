@@ -1,27 +1,11 @@
 #divcont{
-  display: inline-block;
+  display:flex;
+  flex-flow: wrap;
 }
-
-.sort{
-  width: 100px;
-  height: 30px;
-  font-size: 20px;
-  border-radius:5px;
-  background-color: #d5d8d2;
-  color: black;
-  position:absolute;
-  border:1px solid black;
-   box-sizing:border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
-  padding : 8px ;
-
- 
-  &:active { 
-    box-shadow: 5px 5px 5px 5px #2e2a2a;
-    background-color:#565c59;
-    color:white;
-  }
+.tasks{
+  border: solid black 2px;
+  margin: 5px;
+  padding: 3px;
 }
 
 
