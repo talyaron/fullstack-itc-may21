@@ -5,5 +5,9 @@ delete a task
 
 make it responsive, and look and feel of KEEP
 
+use asyc await and promises;
+
 //optional
 order tasks
+
+Do it a beutiful as you can, responsive, etc...

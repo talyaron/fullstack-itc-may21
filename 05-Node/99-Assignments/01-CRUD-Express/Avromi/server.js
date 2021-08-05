@@ -17,7 +17,7 @@ class Task {
 const tasks= [];
 
 app.post('/newTask', (req, res)=>{
-    console.log(req.bosy);
+    console.log(req.body);
     const title = req.body.title;
     const task = new Task(title)
     res.send(

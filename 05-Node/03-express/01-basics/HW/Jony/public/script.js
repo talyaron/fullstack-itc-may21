@@ -74,7 +74,9 @@ function addData(ev) {
 
 
         axios.post('/addAvenger', { name, id })
-
+        .then(({ data }) => {
+            render(html, data)
+        })
     } catch (e) {
         console.log(e);
     }

@@ -2,12 +2,13 @@
 
 //section
 var btnTask = document.querySelector('.section--btn--all');
-var btnModal = document.querySelector('.section--btn--add'); //
+var btnModal = document.querySelector('.section--btn--add');
+var btnOrderbyDate = document.querySelector('.section--btn--order'); //
 
 var bgModal = document.querySelector('.modal-bg');
 var modalClose = document.querySelector('.modal-close');
-var addTask = document.querySelector('.add');
-var editTask = document.querySelector('.edit');
+var addTask = document.querySelector('.modal-bg__modal__form--buttons--add');
+var editTask = document.querySelector('.modal-bg__modal__form--buttons--edit');
 var btnColor = document.querySelector('.header__right--color--paint');
 var inputSearch = document.querySelector('#filterstatus'); //addEventListner
 
@@ -17,7 +18,8 @@ addTask.addEventListener('click', handleSumbit);
 btnTask.addEventListener('click', getAllTask);
 editTask.addEventListener('click', updateTaskOnDOM);
 btnColor.addEventListener('click', setColor);
-inputSearch.addEventListener('change', searchPriorty); //id
+inputSearch.addEventListener('change', searchPriorty);
+btnOrderbyDate.addEventListener('click', orderDate); //id
 
 var idTask;
 
@@ -103,7 +105,7 @@ function closeModal() {
 }
 
 function handleSumbit(ev) {
-  var newTask;
+  var newTask, response, ok, task;
   return regeneratorRuntime.async(function handleSumbit$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -116,25 +118,28 @@ function handleSumbit(ev) {
           return regeneratorRuntime.awrap(addTaskPromise(newTask));
 
         case 6:
-          _context2.next = 11;
+          response = _context2.sent;
+          ok = response.ok, task = response.task;
+          alert(ok);
+          renderTask(task);
+          _context2.next = 15;
           break;
 
-        case 8:
-          _context2.prev = 8;
+        case 12:
+          _context2.prev = 12;
           _context2.t0 = _context2["catch"](0);
           console.log(_context2.t0);
 
-        case 11:
+        case 15:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 8]]);
-} //getStudent
-
+  }, null, null, [[0, 12]]);
+}
 
 function getAllTask(ev) {
-  var allTask;
+  var response, allTask;
   return regeneratorRuntime.async(function getAllTask$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -142,63 +147,105 @@ function getAllTask(ev) {
           _context3.prev = 0;
           ev.preventDefault();
           _context3.next = 4;
-          return regeneratorRuntime.awrap(getAllTaskPromise());
+          return regeneratorRuntime.awrap(axios.get('/getAllTask'));
 
         case 4:
-          allTask = _context3.sent;
+          response = _context3.sent;
+          allTask = response.data;
 
           if (!(allTask.length === 0)) {
-            _context3.next = 7;
+            _context3.next = 8;
             break;
           }
 
           throw new Error('No task on the database');
 
-        case 7:
+        case 8:
           renderTask(allTask);
-          _context3.next = 13;
+          _context3.next = 14;
           break;
 
-        case 10:
-          _context3.prev = 10;
+        case 11:
+          _context3.prev = 11;
           _context3.t0 = _context3["catch"](0);
           alert(_context3.t0);
 
-        case 13:
+        case 14:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 10]]);
+  }, null, null, [[0, 11]]);
 }
 
-function deleteTask(id) {
-  var task;
-  return regeneratorRuntime.async(function deleteTask$(_context4) {
+function orderDate(ev) {
+  var response, orderAllTask;
+  return regeneratorRuntime.async(function orderDate$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          if (!confirm("Do you want to delete this task?")) {
+          _context4.prev = 0;
+          ev.preventDefault();
+          _context4.next = 4;
+          return regeneratorRuntime.awrap(axios.get('/orderDate'));
+
+        case 4:
+          response = _context4.sent;
+          orderAllTask = response.data;
+
+          if (!(orderAllTask.length === 0)) {
             _context4.next = 8;
             break;
           }
 
-          alert('Delete task');
-          _context4.next = 4;
-          return regeneratorRuntime.awrap(deleteTaskPromise(id));
-
-        case 4:
-          task = _context4.sent;
-          renderTask(task);
-          _context4.next = 9;
-          break;
+          throw new Error('No task on the database');
 
         case 8:
-          alert('Delete Cancelled!');
+          renderTask(orderAllTask);
+          _context4.next = 14;
+          break;
 
-        case 9:
+        case 11:
+          _context4.prev = 11;
+          _context4.t0 = _context4["catch"](0);
+          alert(_context4.t0);
+
+        case 14:
         case "end":
           return _context4.stop();
+      }
+    }
+  }, null, null, [[0, 11]]);
+}
+
+function deleteTask(id) {
+  var response, task;
+  return regeneratorRuntime.async(function deleteTask$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          if (!confirm("Do you want to delete this task?")) {
+            _context5.next = 9;
+            break;
+          }
+
+          alert('Delete task');
+          _context5.next = 4;
+          return regeneratorRuntime.awrap(axios["delete"]("/deleteTask/".concat(id)));
+
+        case 4:
+          response = _context5.sent;
+          task = response.data;
+          renderTask(task);
+          _context5.next = 10;
+          break;
+
+        case 9:
+          alert('Delete Cancelled!');
+
+        case 10:
+        case "end":
+          return _context5.stop();
       }
     }
   });
@@ -206,28 +253,28 @@ function deleteTask(id) {
 
 function doneTask(id) {
   var allTask;
-  return regeneratorRuntime.async(function doneTask$(_context5) {
+  return regeneratorRuntime.async(function doneTask$(_context6) {
     while (1) {
-      switch (_context5.prev = _context5.next) {
+      switch (_context6.prev = _context6.next) {
         case 0:
-          _context5.prev = 0;
-          _context5.next = 3;
+          _context6.prev = 0;
+          _context6.next = 3;
           return regeneratorRuntime.awrap(getDoneTaskPromise(id));
 
         case 3:
-          allTask = _context5.sent;
+          allTask = _context6.sent;
           renderTask(allTask);
-          _context5.next = 10;
+          _context6.next = 10;
           break;
 
         case 7:
-          _context5.prev = 7;
-          _context5.t0 = _context5["catch"](0);
-          alert(_context5.t0);
+          _context6.prev = 7;
+          _context6.t0 = _context6["catch"](0);
+          alert(_context6.t0);
 
         case 10:
         case "end":
-          return _context5.stop();
+          return _context6.stop();
       }
     }
   }, null, null, [[0, 7]]);
@@ -235,38 +282,38 @@ function doneTask(id) {
 
 function getTaskToUpdate(id) {
   var getTask, inputTitle, inputDescription;
-  return regeneratorRuntime.async(function getTaskToUpdate$(_context6) {
+  return regeneratorRuntime.async(function getTaskToUpdate$(_context7) {
     while (1) {
-      switch (_context6.prev = _context6.next) {
+      switch (_context7.prev = _context7.next) {
         case 0:
-          _context6.prev = 0;
+          _context7.prev = 0;
           bgModal.classList.add('bg-active');
           addTask.disabled = true;
           editTask.disabled = false;
           addTask.style.backgroundColor = 'red';
           addTask.style.cursor = 'not-allowed';
           editTask.style.cursor = 'pointer';
-          _context6.next = 9;
+          _context7.next = 9;
           return regeneratorRuntime.awrap(getTaskPromise(id));
 
         case 9:
-          getTask = _context6.sent;
+          getTask = _context7.sent;
           inputTitle = document.querySelector("#title");
           inputDescription = document.querySelector("#description");
           inputTitle.value = getTask.title;
           inputDescription.value = getTask.description;
           idTask = id;
-          _context6.next = 20;
+          _context7.next = 20;
           break;
 
         case 17:
-          _context6.prev = 17;
-          _context6.t0 = _context6["catch"](0);
-          alert(_context6.t0);
+          _context7.prev = 17;
+          _context7.t0 = _context7["catch"](0);
+          alert(_context7.t0);
 
         case 20:
         case "end":
-          return _context6.stop();
+          return _context7.stop();
       }
     }
   }, null, null, [[0, 17]]);
@@ -274,23 +321,23 @@ function getTaskToUpdate(id) {
 
 function updateTaskOnDOM(ev) {
   var updateTask, updateTaskOnDom;
-  return regeneratorRuntime.async(function updateTaskOnDOM$(_context7) {
+  return regeneratorRuntime.async(function updateTaskOnDOM$(_context8) {
     while (1) {
-      switch (_context7.prev = _context7.next) {
+      switch (_context8.prev = _context8.next) {
         case 0:
           ev.preventDefault();
           updateTask = getDataFromDOM();
-          _context7.next = 4;
+          _context8.next = 4;
           return regeneratorRuntime.awrap(updateTaskPromise(idTask, updateTask));
 
         case 4:
-          updateTaskOnDom = _context7.sent;
+          updateTaskOnDom = _context8.sent;
           bgModal.classList.remove('bg-active');
           renderTask(updateTaskOnDom);
 
         case 7:
         case "end":
-          return _context7.stop();
+          return _context8.stop();
       }
     }
   });
@@ -310,7 +357,8 @@ function getDataFromDOM() {
     date: date,
     min: min,
     emoji: inputEmoji,
-    status: inputStatus
+    status: inputStatus,
+    datetime: inputDateTime
   };
   return Task;
 }
@@ -321,19 +369,26 @@ function renderTask(allTask) {
     var boardDataRoot = document.querySelector('#boardData');
     if (!boardDataRoot) throw new Error("This page cant render");
     allTask.forEach(function (task) {
-      //const { id, name, age, avgrade } = elem
-      if (task.status === 'important') {
+      var id = task.id,
+          title = task.title,
+          description = task.description,
+          date = task.date,
+          min = task.min,
+          emoji = task.emoji,
+          status = task.status;
+
+      if (status === 'important') {
         html += "<div class = \"boardData--item boardData--red\">";
-      } else if (task.status === 'later') {
+      } else if (status === 'later') {
         html += "<div class = \"boardData--item boardData--yellow\">";
       } else {
         html += "<div class = \"boardData--item boardData--green\">";
       }
 
-      html += "<span>".concat(task.emoji, "</span>\n                    <table id=\"data\">\n                           <th>Title: </th>\n                           <td>").concat(task.title.charAt(0).toUpperCase() + task.title.slice(1), "</td>\n                        </tr>\n                        <tr>   \n                           <th>Description: </th>\n                           <td>").concat(task.description.charAt(0).toUpperCase() + task.description.slice(1), " </td>\n                        </tr>\n                        <tr>\n                           <th>Date: </th>\n                           <td>").concat(task.date, " </td>\n                         </tr>\n                         <tr>  \n                           <th>Time: </th>\n                           <td>").concat(task.min, " </td>\n                         </tr>\n                         <tr>\n                         <th>Priority: </th>\n                         <td>").concat(task.status.charAt(0).toUpperCase() + task.status.slice(1), "</td>\n                       </tr>\n                    </table>    \n                <div class=\"iconos\">\n                        <i class=\"fa fa-trash delete\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Delete Item\"></i>\n                        <i class=\"fas fa-edit edit\" onclick='getTaskToUpdate(\"").concat(task.id, "\")' title=\"Edit Task\"></i>");
+      html += "<span>".concat(emoji, "</span>\n                    <table id=\"data\">\n                           <th>Title: </th>\n                           <td>").concat(title.charAt(0).toUpperCase() + title.slice(1), "</td>\n                        </tr>\n                        <tr>   \n                           <th>Description: </th>\n                           <td>").concat(description.charAt(0).toUpperCase() + description.slice(1), " </td>\n                        </tr>\n                        <tr>\n                           <th>Date: </th>\n                           <td>").concat(date, " </td>\n                         </tr>\n                         <tr>  \n                           <th>Time: </th>\n                           <td>").concat(min, " </td>\n                         </tr>\n                         <tr>\n                         <th>Priority: </th>\n                         <td>").concat(status.charAt(0).toUpperCase() + status.slice(1), "</td>\n                       </tr>\n                    </table>    \n                <div class=\"boardData--item--icons\">\n                        <i class=\"fa fa-trash boardData--item--icons--delete\" onclick='deleteTask(\"").concat(id, "\")' title=\"Delete Item\"></i>\n                        <i class=\"fas fa-edit boardData--item--icons--edit\" onclick='getTaskToUpdate(\"").concat(id, "\")' title=\"Edit Task\"></i>");
 
-      if (task.status !== 'done') {
-        html += "<i class=\"fas fa-check-circle done\" onclick='doneTask(\"".concat(task.id, "\")' title=\"Done Task\"></i>");
+      if (status !== 'done') {
+        html += "<i class=\"fas fa-check-circle boardData--item--icons--done\" onclick='doneTask(\"".concat(id, "\")' title=\"Done Task\"></i>");
       } else {//class iconoos mover a la derecha
       }
 
@@ -344,4 +399,4 @@ function renderTask(allTask) {
   } catch (e) {
     alert(e);
   }
-} //<span> 👸</span>
+}

@@ -8,7 +8,7 @@ function addTaskPromise(newTask) {
             body: JSON.stringify(newTask)
         }).then(function (res) {
                 if (res.status === 200 && res.ok) {
-                    return res.json().then(task => { alert(task.ok) });
+                    return res.json().then(task => { resolve(task) });
                 } else {
                     return res.json().then(task => { alert(task.error) })
                 }
@@ -16,16 +16,7 @@ function addTaskPromise(newTask) {
     })
 }
 
-function getAllTaskPromise() {
-    return new Promise((resolve, reject) => {
-        fetch('/getAllTask')
-            .then(r => r.json())
-            .then(task => { resolve(task) })
-            .catch(e => {
-                reject(e)
-            })
-    })
-}
+
 
 function getTaskPromise(id) {
     return new Promise((resolve, reject) => {
@@ -38,18 +29,7 @@ function getTaskPromise(id) {
     })
 }
 
-function deleteTaskPromise(id) {
-    return new Promise((resolve, reject) => {
-        fetch(`/deleteTask/${id}`, {
-            method: 'DELETE'
-        })
-            .then(r => r.json())
-            .then(task => { resolve(task) })
-            .catch(e => {
-                reject(e)
-            })
-    })
-}
+
 
 function getDoneTaskPromise(id) {
     return new Promise((resolve, reject) => {

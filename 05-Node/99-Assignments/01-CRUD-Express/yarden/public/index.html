@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dist/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/9e08100192.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="./images/list-ninja-favicon.ico" type="image/x-icon">
+    <title>List Ninja</title>
+</head>
+<body>
+<!-- Navbar -->
+    <nav>
+        <div class="left-wrapper">
+            <div class="left-wrapper__burger">
+                <i class="fas fa-bars fa-lg"></i>
+            </div>
+            <div class="left-wrapper__logo">
+                <i class="fas fa-user-ninja fa-3x"></i>
+            </div>
+            <h1 class="left-wrapper__headline">List Ninja</h1>
+        </div>
+        <div class="right-wrapper">
+            <div class="right-wrapper__search">
+                <i class="fas fa-search fa-lg"></i>
+            </div>
+            <div class="right-wrapper__settings animate__pulse">
+                <i class="fas fa-cog fa-lg"></i>
+                <div class="settings-modal hide">
+                    <p>Change appearance</p>
+                    <div class="settings-modal__toggle-display">
+                        <i class="fas fa-adjust fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="right-wrapper__notifications">
+                <i class="fas fa-bell fa-lg"></i>
+            </div>
+        </div>
+    </nav>
+    <h2 class="welcome-message">Welcome to your dojo.</h2>
+<!-- List starts here -->
+    <main>
+        <div class="list">
+            <div class="list__header">
+                <h3 class="list__header__headline">Perform these tasks, Ninja!</h3>
+            </div>
+            <div class="list__body">
+                <div class="task">
+                    <div class="task__done-button">
+                        <img src="./images/sword.png" alt="">
+                    </div>
+                    <p class="task__text">Lorem ipsum dolor sit amet</p>
+                    <div class="task__buttons-wrapper">
+                        <div class="edit-button-wrapper">
+                            <i class="fas fa-pencil-alt fa-lg"></i>
+                        </div>
+                        <div class="delete-button-wrapper">
+                            <i class="fas fa-trash fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="task">
+                    <div class="task__done-button">
+                        <img src="./images/sword.png" alt="">
+                    </div>
+                    <p class="task__text">Lorem ipsum dolor sit amet</p>
+                    <div class="task__buttons-wrapper">
+                        <div class="edit-button-wrapper">
+                            <i class="fas fa-pencil-alt fa-lg"></i>
+                        </div>
+                        <div class="delete-button-wrapper">
+                            <i class="fas fa-trash fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="button-wrapper">
+            <i class="fas fa-plus fa-3x"></i>
+        </div>
+        <div class="add-task-modal hide">
+            <i class="fas fa-user-ninja fa-3x"></i>
+            <h4>Sensei demands a new task!</h4>
+            <p>He does not take promises lightly.</p>
+            <form id="add-task-form">
+                <span>•</span>
+                <input type="text" name="task-text" id="task-text" placeholder="Show him your skills">
+                <button type="submit">Pledge</button>
+            </form>
+        </div>
+        <p>App by Yarden Tal for ITC Fullstack course</p>
+    </footer>
+    
+    <script src="./app.js"></script>
+    <script src="./helpers.js"></script>
+</body>
+</html>

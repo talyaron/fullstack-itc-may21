@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="dist/style.min.css">
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="notes.png" />
-    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>To Do List - Server CRUD</title>
 </head>
 
-<body>
+<body class="body">
     <header class="header">
         <div class="header__left">
             <img src="notes.png" alt="NotesImg" class="header__left--img" />
@@ -39,6 +39,7 @@
     <section class="section">
         <input type="button" value="ADD TASK" class="section--btn section--btn--add">
         <input type="button" value="All TASK" class="section--btn section--btn--all">
+        <input type="button" value="ORDER TASK" class="section--btn section--btn--order">
     </section>
 
     <div id="boardData" class="boardData"></div>
@@ -46,16 +47,16 @@
 
     <div class="modal-bg">
         <div class="modal-bg__modal">
-            <form id="form">
+            <form class="modal-bg__modal__form">
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title">
                 <label for="description">Description</label>
                 <textarea id="description" name="description" rows="3" cols="40"></textarea>
                 <label for="datetime">Until Time Task</label>
                 <input type="datetime-local" name="datetime" id="datetime">
-                <div class="pepe">
+                <div class="modal-bg__modal__form--radio">
                     <label>
-                        <input type="radio" name="choice" class="emoji" value="🛒">
+                        <input type="radio" name="choice" class="emoji" value="🛒" checked>
                         <span>🛒</span>
                     </label>
                     <label>
@@ -97,9 +98,9 @@
                         <option value="later">Later</option>
                     </select>
                 </p>
-                <div class="botones">
-                    <button class="btn-modal add">ADD TASK</button>
-                    <button class="btn-modal edit">EDIT</button>
+                <div class="modal-bg__modal__form--buttons">
+                    <button class="modal-bg__modal__form--buttons--btn-modal modal-bg__modal__form--buttons--add">ADD TASK</button>
+                    <button class="modal-bg__modal__form--buttons--btn-modal modal-bg__modal__form--buttons--edit">EDIT</button>
                 </div>
             </form>
             <span class="modal-close">✖️</span>

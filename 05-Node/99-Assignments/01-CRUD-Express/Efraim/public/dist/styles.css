@@ -81,6 +81,7 @@ input {
 }
 .holder__item__taskDisplay {
   font-style: italic;
+  margin-bottom: 0.5rem;
 }
 .holder__item__header {
   font-weight: bold;

@@ -11,7 +11,7 @@ function addTaskPromise(newTask) {
     }).then(function (res) {
       if (res.status === 200 && res.ok) {
         return res.json().then(function (task) {
-          alert(task.ok);
+          resolve(task);
         });
       } else {
         return res.json().then(function (task) {
@@ -22,35 +22,9 @@ function addTaskPromise(newTask) {
   });
 }
 
-function getAllTaskPromise() {
-  return new Promise(function (resolve, reject) {
-    fetch('/getAllTask').then(function (r) {
-      return r.json();
-    }).then(function (task) {
-      resolve(task);
-    })["catch"](function (e) {
-      reject(e);
-    });
-  });
-}
-
 function getTaskPromise(id) {
   return new Promise(function (resolve, reject) {
     fetch("/getTask/".concat(id)).then(function (r) {
-      return r.json();
-    }).then(function (task) {
-      resolve(task);
-    })["catch"](function (e) {
-      reject(e);
-    });
-  });
-}
-
-function deleteTaskPromise(id) {
-  return new Promise(function (resolve, reject) {
-    fetch("/deleteTask/".concat(id), {
-      method: 'DELETE'
-    }).then(function (r) {
       return r.json();
     }).then(function (task) {
       resolve(task);

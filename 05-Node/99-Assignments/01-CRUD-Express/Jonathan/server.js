@@ -12,12 +12,16 @@ const readAllTasks = () => {
     return JSON.parse(allTasks);
 }
 
+function getOrderTask(allTasks){
+    allTasks.sort(function (a, b){return (a.datetime < b.datetime) ? -1 : (a.datetime > b.datetime) ? 1 : 0})
+    return allTasks
+}
 
 
 app.post("/addTask", (req, res) => {
     try {
-
-        const { title, description, date, min, emoji, status } = req.body;
+        
+        const { title, description, date, min, emoji, status, datetime} = req.body;
 
         const newTask = {
             id: uuidv4(),
@@ -27,6 +31,7 @@ app.post("/addTask", (req, res) => {
             min: min,
             emoji: emoji,
             status: status,
+            datetime:datetime,
         }
 
         if (!title || !description || !date || !min || !emoji || !status) {
@@ -39,7 +44,7 @@ app.post("/addTask", (req, res) => {
 
         fs.writeFileSync("./task.json", JSON.stringify(allTasks));
 
-        res.send({ ok: "Added Task" });
+        res.send({ ok: "Added Task", task:allTasks });
 
     } catch (e) {
         res.status(500).send({ error: `${e}` });
@@ -48,7 +53,6 @@ app.post("/addTask", (req, res) => {
 
 app.get("/getAllTask", (req, res) => {
     const allTasks = readAllTasks();
-    console.log(allTasks);
     res.send(allTasks);
 });
 
@@ -58,7 +62,6 @@ app.delete("/deleteTask/:id", (req, res) => {
         let allTasks = readAllTasks();
         allTasks = allTasks.filter(task => task.id !== id)
         fs.writeFileSync("./task.json", JSON.stringify(allTasks));
-        //allStudents.sort(function (a, b){return (a.id - b.id)})
         res.send(allTasks);
     } catch (e) {
         res.status(500).send({ error: `${e}` });
@@ -71,10 +74,8 @@ app.put("/doneTask/:id", (req, res) => {
         let allTasks = readAllTasks();
         task = allTasks.find(task => task.id === id)
         task.status = 'done'
-        console.log(allTasks);
         fs.writeFileSync("./task.json", JSON.stringify(allTasks));
-        //allStudents.sort(function (a, b){return (a.id - b.id)})
-        res.send(allTasks);
+        res.send(getOrderTask(allTasks));
     } catch (e) {
         res.status(500).send({ error: `${e}` });
     }
@@ -101,7 +102,6 @@ app.put("/updateTask/:id", (req, res) => {
         task.min = min;
 
         fs.writeFileSync("./task.json", JSON.stringify(allTasks));
-        //allStudents.sort(function (a, b){return (a.id - b.id)})
         res.send(allTasks);
     } catch (e) {
         res.status(500).send({ error: `${e}` });
@@ -120,13 +120,17 @@ app.get("/getPriority/:status", (req, res) => {
     const allTasks = readAllTasks();
     if (status !== 'everything') {
         task = allTasks.filter(task => task.status === status)
-        res.send(task)
+        res.send(getOrderTask(task))
     }else{
         res.send(allTasks)
     }
     
 });
 
+app.get("/orderDate", (req, res) => {
+    const allTasks = readAllTasks();
+    res.send(getOrderTask(allTasks));
+});
 
 
 app.listen(port, () => {

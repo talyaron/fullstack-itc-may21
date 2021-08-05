@@ -1,55 +1,28 @@
-$(document).ready(function () {
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
-
-	// Select/Deselect checkboxes
-	const checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function () {
-		if (this.checked) {
-			checkbox.each(function () {
-				this.checked = true;
-			});
-		} else {
-			checkbox.each(function () {
-				this.checked = false;
-			});
-		}
-	});
-	checkbox.click(function () {
-		if (!this.checked) {
-			$("#selectAll").prop("checked", false);
-		}
-	});
-});
 
 
+// window.onload = function () {
 
-//Get
-const getStudents = () => {
-
-axios.get('/getEmployes')
-	.then(res => {
-		console.log(employes)
-		render(res.array.allEemployes)
-	})
-}
+// }
 
 //render
 function render(array) {
-	let html = "";
-	const list = document.getElementById("root");
+	if($("#addEmployeeModal")){
+		$("#addEmployeeModal").modal("hide") 
+		
+		//se agrega si esta vacio, modificarlo!!
+	}
 
-	if (array.length > 0) {
+	const root = document.querySelector(".root");
+	let html = "";
+
+	if (array && array.length > 0) {
 
 
 			html += `<table class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>
-					<span class="custom-checkbox">
-						<input type="checkbox" id="selectAll">
-						<label for="selectAll"></label>
-					</span>
+				
 				</th>
 				<th>Name</th>
 				<th>Email</th>
@@ -70,12 +43,7 @@ function render(array) {
 			} = elem
 			
 			html += `<tr>
-			<td>
-				<span class="custom-checkbox">
-					<input type="checkbox" id="checkbox1" name="options[]" value="1">
-					<label for="checkbox1"></label>
-				</span>
-			</td>
+			<td></td>
 			<td>${name}</td>
 			<td>${email}</td>
 			<td>${address}</td>
@@ -84,18 +52,18 @@ function render(array) {
 				<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 				<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 			</td>
-		</tr>
-		
-	</tbody>
-</table>`
+		</tr>`
 		});
 
 		html += `</tbody></table>`
 
-	} else {
-		html += ""
-	}
-	list.innerHTML = html;
+	 }
+	
+	else {
+	 	let	html = ""
+	 }
+	root.innerHTML = html;
+	
 
 }
 
@@ -110,8 +78,8 @@ function handleSubmit(event) {
 
 	let {
 		name,
-		mail,
-		addreess,
+		email,
+		address,
 		phone
 		
 	} = event.target.elements;
@@ -119,6 +87,10 @@ function handleSubmit(event) {
 	email = email.value;
 	address = address.value;
 	phone = phone.value;
+
+	if(name !== "" || email !== ""|| address !== "" || phone !==""){
+		
+	
 
 	axios({
 		method: "post",
@@ -133,12 +105,19 @@ function handleSubmit(event) {
 		  "Content-Type": "application/json",
 		},
 	  })
-		.then(({ data }) => data)
-}
+	  	
+		.then(({ data: { allEmployes } }) => render(allEmployes))
+		.then(() => event.target.reset());
+	} else{
+		alert('You need to complete at least one field')
+	}
+
+	
+	}
 
 //DELETE
 function deleteRecord(personId) {
-	axios.post('/deleteEmploye', {
+	axios.delete('/deleteEmployes', {
 			id: personId
 		})
 		.then(res => {
@@ -146,11 +125,19 @@ function deleteRecord(personId) {
 			render(res.array.allEmployes)
 		})
 }
+//tengo que guardar el id del que estoy clickeando para borrar y mandarlo a deleteRecord para eliminarlo
+function handleDelete(event){
+
+	event.preventDefault();
+	deleteRecord()
+	console.log('hio');
+
+}
+
 
 //UPDATE
 function updateEmploye(personId) {
 	const newName = document.getElementById(`${personId}name`).value;
-	console.dir(newName)
 	axios.put('/updateEmploye', {
 			id: personId,
 			name: newName
@@ -158,5 +145,28 @@ function updateEmploye(personId) {
 		.then(res => {
 			console.log(res.data.message)
 			render(res.array.allEmployes)
+		
 		})
 }
+
+function handleEdit(event){
+	event.preventDefault()
+
+
+
+
+	
+	updateEmploye()
+
+
+}
+
+//Get the employes information:
+async function getAllEmployes() {
+    try {
+        const employesData = await axios.get('/getEmployes');
+        render(employesData.data);
+    } catch (error) {
+        console.log(error);
+    }
+};

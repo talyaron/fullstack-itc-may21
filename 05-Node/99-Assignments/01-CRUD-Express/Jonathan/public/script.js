@@ -2,12 +2,13 @@
 //section
 const btnTask = document.querySelector('.section--btn--all')
 const btnModal = document.querySelector('.section--btn--add')
+const btnOrderbyDate = document.querySelector('.section--btn--order')
 //
 
 const bgModal = document.querySelector('.modal-bg')
 const modalClose = document.querySelector('.modal-close')
-let addTask = document.querySelector('.add')
-let editTask = document.querySelector('.edit')
+let addTask = document.querySelector('.modal-bg__modal__form--buttons--add')
+let editTask = document.querySelector('.modal-bg__modal__form--buttons--edit')
 const btnColor = document.querySelector('.header__right--color--paint')
 const inputSearch = document.querySelector('#filterstatus')
 
@@ -19,6 +20,7 @@ btnTask.addEventListener('click', getAllTask)
 editTask.addEventListener('click', updateTaskOnDOM)
 btnColor.addEventListener('click', setColor)
 inputSearch.addEventListener('change', searchPriorty)
+btnOrderbyDate.addEventListener('click', orderDate)
 
 
 
@@ -90,25 +92,43 @@ async function handleSumbit(ev) {
     try {
         ev.preventDefault()
 
-
         const newTask = getDataFromDOM()
 
         bgModal.classList.remove('bg-active')
-        await addTaskPromise(newTask)
+        const response = await addTaskPromise(newTask)
+
+        const {ok, task} = response
+        alert(ok)
+        renderTask(task)
 
     } catch (e) {
         console.log(e)
     }
 }
 
-//getStudent
+
+
 async function getAllTask(ev) {
 
     try {
         ev.preventDefault()
-        const allTask = await getAllTaskPromise()
+        const response = await axios.get('/getAllTask')
+        const allTask = response.data
         if (allTask.length === 0) throw new Error('No task on the database')
         renderTask(allTask)
+    } catch (e) {
+        alert(e)
+    }
+}
+
+async function orderDate(ev) {
+
+    try {
+        ev.preventDefault()
+        const response = await axios.get('/orderDate')
+        const orderAllTask = response.data
+        if (orderAllTask.length === 0) throw new Error('No task on the database')
+        renderTask(orderAllTask)
     } catch (e) {
         alert(e)
     }
@@ -117,7 +137,8 @@ async function getAllTask(ev) {
 async function deleteTask(id) {
     if (confirm("Do you want to delete this task?")) {
         alert('Delete task')
-        const task = await deleteTaskPromise(id)
+        const response = await axios.delete(`/deleteTask/${id}`)
+        const task = response.data
         renderTask(task)
     } else {
         alert('Delete Cancelled!')
@@ -168,26 +189,33 @@ async function updateTaskOnDOM(ev) {
 
 function getDataFromDOM() {
 
-    const inputTitle = document.querySelector('#title').value
-    const inputDescription = document.querySelector('#description').value
-    let inputDateTime = document.querySelector('#datetime').value
-    const inputEmoji = document.querySelector('input[name="choice"]:checked').value
-    const inputStatus = document.querySelector('#status').value
+  
+        const inputTitle = document.querySelector('#title').value
+        const inputDescription = document.querySelector('#description').value
+        let inputDateTime = document.querySelector('#datetime').value
+        const inputEmoji = document.querySelector('input[name="choice"]:checked').value
+        const inputStatus = document.querySelector('#status').value
 
-    const date = inputDateTime.substring(0, inputDateTime.indexOf('T'))
-    const min = inputDateTime.substring(inputDateTime.indexOf('T') + 1, inputDateTime.length)
+        const date = inputDateTime.substring(0, inputDateTime.indexOf('T'))
+        const min = inputDateTime.substring(inputDateTime.indexOf('T') + 1, inputDateTime.length)
 
-    const Task = {
-        title: inputTitle,
-        description: inputDescription,
-        date: date,
-        min: min,
-        emoji: inputEmoji,
-        status: inputStatus,
-    }
+        const Task = {
+            title: inputTitle,
+            description: inputDescription,
+            date: date,
+            min: min,
+            emoji: inputEmoji,
+            status: inputStatus,
+            datetime:inputDateTime,
 
-    return Task
+        }
+        
+        return Task
+ 
+ 
 }
+
+
 
 function renderTask(allTask) {
     try {
@@ -197,45 +225,45 @@ function renderTask(allTask) {
 
         allTask.forEach(task => {
 
-            //const { id, name, age, avgrade } = elem
+            let {id, title, description, date, min,emoji, status } = task
 
-            if (task.status === 'important') {
+            if (status === 'important') {
                 html += `<div class = "boardData--item boardData--red">`
 
-            } else if (task.status === 'later') {
+            } else if (status === 'later') {
                 html += `<div class = "boardData--item boardData--yellow">`
             } else {
                 html += `<div class = "boardData--item boardData--green">`
 
             }
-            html += `<span>${task.emoji}</span>
+            html += `<span>${emoji}</span>
                     <table id="data">
                            <th>Title: </th>
-                           <td>${task.title.charAt(0).toUpperCase() + task.title.slice(1)}</td>
+                           <td>${title.charAt(0).toUpperCase() + title.slice(1)}</td>
                         </tr>
                         <tr>   
                            <th>Description: </th>
-                           <td>${task.description.charAt(0).toUpperCase() + task.description.slice(1)} </td>
+                           <td>${description.charAt(0).toUpperCase() + description.slice(1)} </td>
                         </tr>
                         <tr>
                            <th>Date: </th>
-                           <td>${task.date} </td>
+                           <td>${date} </td>
                          </tr>
                          <tr>  
                            <th>Time: </th>
-                           <td>${task.min} </td>
+                           <td>${min} </td>
                          </tr>
                          <tr>
                          <th>Priority: </th>
-                         <td>${task.status.charAt(0).toUpperCase() + task.status.slice(1)}</td>
+                         <td>${status.charAt(0).toUpperCase() + status.slice(1)}</td>
                        </tr>
                     </table>    
-                <div class="iconos">
-                        <i class="fa fa-trash delete" onclick='deleteTask("${task.id}")' title="Delete Item"></i>
-                        <i class="fas fa-edit edit" onclick='getTaskToUpdate("${task.id}")' title="Edit Task"></i>`
+                <div class="boardData--item--icons">
+                        <i class="fa fa-trash boardData--item--icons--delete" onclick='deleteTask("${id}")' title="Delete Item"></i>
+                        <i class="fas fa-edit boardData--item--icons--edit" onclick='getTaskToUpdate("${id}")' title="Edit Task"></i>`
 
-            if (task.status !== 'done') {
-                html += `<i class="fas fa-check-circle done" onclick='doneTask("${task.id}")' title="Done Task"></i>`
+            if (status !== 'done') {
+                html += `<i class="fas fa-check-circle boardData--item--icons--done" onclick='doneTask("${id}")' title="Done Task"></i>`
             } else {
                 //class iconoos mover a la derecha
             }
@@ -254,4 +282,3 @@ function renderTask(allTask) {
     }
 }
 
-//<span> 👸</span>
