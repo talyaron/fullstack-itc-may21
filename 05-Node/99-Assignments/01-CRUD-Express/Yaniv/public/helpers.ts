@@ -8,8 +8,11 @@ async function getData(toDoContent: string, toDoStatus: string): Promise<any> {
   if (typeof dataToRender === "string") {
     upcomingRoot.innerHTML = `<h3>${dataToRender}</h3>`;
     laterRoot.innerHTML = '';
-    for (let i = 0; i < searchToDosform.children.length; i++) {
-      searchToDosform.children[i].disabled = true;
+
+    if (dataToRender !== 'Your to-do list is empty. Go do something you love 🤩') return;
+
+    for (let i = 0; i < searchToDosForm.children.length; i++) {
+      searchToDosForm.children[i].disabled = true;
     }
     return;
   }

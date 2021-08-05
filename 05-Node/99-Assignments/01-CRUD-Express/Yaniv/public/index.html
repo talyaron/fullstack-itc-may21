@@ -10,42 +10,47 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://kit.fontawesome.com/3d6c8f810b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./dist/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap" rel="stylesheet">
     <title>monday who? - to-do list</title>
 </head>
 
 <body>
-    <header>
+    <header class="header">
         <h1>monday who?</h1>
     </header>
     <main class='todos'>
+        <h3>Add To-do</h3>
         <form class="add-form" id="add-todo-form">
-            <input class="add-form__item add-form__item--content" type="text" placeholder="Add your to-do here" minlength="2" maxlength="80" name="toDoContent" id="add-todo-content" required />
-            <input class="add-form__item add-form__item--due-date" type="date" min="" name="toDoDueDate" id="add-todo-due-date" required />
-            <input class="add-form__item add-form__item--submit" type="submit" id="add-todo-submit" value="+" />
+            <input class="add-form__item add-form__item--content" type="text" placeholder="Add your to-do here" title="Add your to-do here" minlength="2" maxlength="80" name="toDoContent" id="add-todo-content" required />
+            <input class="add-form__item add-form__item--due-date" type="date" title="Due date" min="" name="toDoDueDate" id="add-todo-due-date" required />
+            <input class="add-form__item add-form__item--submit" type="submit" id="add-todo-submit" value="Add" />
         </form>
 
+        <h3>Search To-dos</h3>
         <form class="search-form" id="search-todos-form">
-            <input class="search-form__item search-form__item--content" type="text" placeholder="Search to-do" minlength="2" maxlength="80" name="toDoContent" id="search-todos-content" disabled />
-            <select class="search-form__item search-form__item--status" name="toDoStatus" id="search-todos-status" disabled>
+            <input class="search-form__item search-form__item--content" type="text" placeholder="Search to-dos" title="Search to-do" minlength="2" maxlength="80" name="toDoContent" id="search-todos-content" disabled />
+            <select class="search-form__item search-form__item--status" title="Status"  name="toDoStatus" id="search-todos-status" disabled>
                 <option value="">choose status</option>
                 <option value="Pending...">Pending...</option>
-                <option value="In Progress...">In Progress...</option>
+                <option value="In progress...">In progress...</option>
                 <option value="Stuck">Stuck</option>
                 <option value="Done">Done</option>
             </select>
-            <input class="search-form__item search-form__item--due-date" type="date" min="" name="toDoDueDate" id="search-todos-due-date" disabled />
         </form>
         <button type="button" id="reset" style="display:none">Reset</button>
 
         <div class="headers">
+            <h3 class="headers__item headers__item--content"></h3>
             <h3 class="headers__item headers__item--status">Status</h3>
             <h3 class="headers__item headers__item--due-date"><i class="fas fa-bell"></i> Date</h3>
+            <h3 class="headers__item headers__item--delete"></h3>
         </div>
 
-        <div class="todos__item upcoming">
+        <div class="todos__item todos__item--upcoming upcoming">
 
         </div>
-        <div class="todos__item later">
+        <div class="todos__item todos__item--later later">
 
         </div>
     </main>

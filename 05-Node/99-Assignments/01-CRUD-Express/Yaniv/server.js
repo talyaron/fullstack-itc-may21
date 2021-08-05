@@ -53,8 +53,18 @@ class ToDos {
     searchToDos(toDoContent,toDoStatus) {
         try {
             let searchedToDos = this.toDoList;
-            if (toDoContent !== '') this.toDoList.findIndex(toDo => toDo.content === toDoContent);
-            if (toDoStatus !== '') this.toDoList.findIndex(toDo => toDo.content === toDoStatus);
+            const toDoContentRegEx = new RegExp(toDoContent,'gmi');
+
+            if ((toDoContent === '') && (toDoStatus == '')) {
+                return searchedToDos;
+            }
+
+            if (toDoContent !== '') {
+                searchedToDos = this.toDoList.filter(toDo => toDoContentRegEx.test(toDo.content));
+            }
+            if (toDoStatus !== '') {
+                searchedToDos = this.toDoList.filter(toDo => toDo.status === toDoStatus);
+            }
 
             return searchedToDos;
 
@@ -140,7 +150,7 @@ app.post('/post-todo', (req, res) => {
     }
 });
 
-app.get('/todo?content=:content&status=:status', (req, res) => { // can search by content or status.
+app.get('/todo', (req, res) => {
     try {
         const {
             content,
@@ -149,7 +159,7 @@ app.get('/todo?content=:content&status=:status', (req, res) => { // can search b
 
         const searchedToDos = toDos.searchToDos(content,status);
 
-        const resToSent = (searchedToDos.length === 0) ? `No to-dos found` : searchedToDos; 
+        const resToSent = (searchedToDos.length === 0) ? `No to-dos found 👁‍🗨` : searchedToDos; 
         const terminalMsg = (searchedToDos.length === 0) ? `No to-dos found` : `${searchedToDos.length} to-dos found!`;
 
         console.log(terminalMsg);

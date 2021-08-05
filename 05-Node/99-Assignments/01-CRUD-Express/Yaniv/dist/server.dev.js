@@ -64,12 +64,24 @@ function () {
     value: function searchToDos(toDoContent, toDoStatus) {
       try {
         var searchedToDos = this.toDoList;
-        if (toDoContent !== '') this.toDoList.findIndex(function (toDo) {
-          return toDo.content === toDoContent;
-        });
-        if (toDoStatus !== '') this.toDoList.findIndex(function (toDo) {
-          return toDo.content === toDoStatus;
-        });
+        var toDoContentRegEx = new RegExp(toDoContent, 'gmi');
+
+        if (toDoContent === '' && toDoStatus == '') {
+          return searchedToDos;
+        }
+
+        if (toDoContent !== '') {
+          searchedToDos = this.toDoList.filter(function (toDo) {
+            return toDoContentRegEx.test(toDo.content);
+          });
+        }
+
+        if (toDoStatus !== '') {
+          searchedToDos = this.toDoList.filter(function (toDo) {
+            return toDo.status === toDoStatus;
+          });
+        }
+
         return searchedToDos;
       } catch (error) {
         console.error(error);
@@ -157,14 +169,13 @@ app.post('/post-todo', function (req, res) {
     });
   }
 });
-app.get('/todo?content=:content&status=:status', function (req, res) {
-  // can search by content or status.
+app.get('/todo', function (req, res) {
   try {
     var _req$query = req.query,
         content = _req$query.content,
         status = _req$query.status;
     var searchedToDos = toDos.searchToDos(content, status);
-    var resToSent = searchedToDos.length === 0 ? "No to-dos found" : searchedToDos;
+    var resToSent = searchedToDos.length === 0 ? "No to-dos found \uD83D\uDC41\u200D\uD83D\uDDE8" : searchedToDos;
     var terminalMsg = searchedToDos.length === 0 ? "No to-dos found" : "".concat(searchedToDos.length, " to-dos found!");
     console.log(terminalMsg);
     res.send(resToSent);
