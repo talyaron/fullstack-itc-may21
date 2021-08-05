@@ -66,7 +66,18 @@ addExpense.addEventListener("click",async  function(){
             amount : parseInt(expenseAmount.value)
         }
         ENTRY_LIST.push(expense);
-          const expns=await axios('/createExpense',{expense});
+        
+       const data = {type : "expense",tile :expenseTitle.value,amount : parseInt(expenseAmount.value)}
+       const options={
+           method:'POST',
+           headers: {
+            'Content-Type': 'application/json'
+           
+          },
+          body: JSON.stringify(data) // body data type must match "Content-Type" header
+
+       }
+       fetch('/addExpense',options);
         updateUI();
         clearInput( [expenseTitle, expenseAmount] )  
     } catch (error) {
@@ -86,7 +97,17 @@ addIncome.addEventListener("click", function(){
         amount : parseInt(incomeAmount.value)
     }
     ENTRY_LIST.push(income);
+    const data = {type : "income",tile :incomeTitle.value,amount : parseInt(incomeAmount.value)}
+       const options={
+           method:'POST',
+           headers: {
+            'Content-Type': 'application/json'
+           
+          },
+          body: JSON.stringify(data) // body data type must match "Content-Type" header
 
+       }
+       fetch('/addIncome',options);
     updateUI();
     clearInput( [incomeTitle, incomeAmount] )
 })
