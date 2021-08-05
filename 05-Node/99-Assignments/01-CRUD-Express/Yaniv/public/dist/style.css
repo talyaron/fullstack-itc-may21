@@ -86,6 +86,12 @@ button:hover {
   text-align: left;
   margin: 0;
 }
+.todos .upcoming__item--header-upcoming, .todos .later__item--header-upcoming {
+  color: #bae1ff;
+}
+.todos .upcoming__item--header-later, .todos .later__item--header-later {
+  color: #ffdfba;
+}
 .todos .upcoming .todo, .todos .later .todo {
   margin: 10px 0;
   display: flex;

@@ -96,6 +96,14 @@ button {
                 background-color: unset;
                 text-align: left;
                 margin: 0;
+
+                &-upcoming {
+                    color: #bae1ff;
+                }
+
+                &-later {
+                    color: #ffdfba;
+                }
             }
         }
         

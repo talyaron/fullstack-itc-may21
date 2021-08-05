@@ -61,8 +61,8 @@ var ToDos = /** @class */ (function () {
             for (var i = 0; i < searchToDosForm.children.length; i++) {
                 searchToDosForm.children[i].disabled = false;
             }
-            var upcomingHtml_1 = "<h2 class=\"upcoming__item upcoming__item--header\">Up to " + upcomingLimit + "</h2>";
-            var laterHtml_1 = "<h2 class=\"later__item later__item--header\">After " + upcomingLimit + "</h2>";
+            var upcomingHtml_1 = "<h2 class=\"upcoming__item upcoming__item--header upcoming__item--header-upcoming\">Up to " + upcomingLimit + "</h2>";
+            var laterHtml_1 = "<h2 class=\"later__item later__item--header later__item--header-later\">After " + upcomingLimit + "</h2>";
             upcomingRoot.innerHTML = upcomingHtml_1;
             laterRoot.innerHTML = laterHtml_1;
             this.toDoList = this.toDoList.sort(function (a, b) { return Date.parse(a.dueDate) - Date.parse(b.dueDate); });

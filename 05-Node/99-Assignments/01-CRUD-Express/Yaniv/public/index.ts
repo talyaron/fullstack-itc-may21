@@ -41,8 +41,8 @@ class ToDos {
         searchToDosForm.children[i].disabled = false;
       }
 
-      let upcomingHtml: string = `<h2 class="upcoming__item upcoming__item--header">Up to ${upcomingLimit}</h2>`;
-      let laterHtml: string = `<h2 class="later__item later__item--header">After ${upcomingLimit}</h2>`;
+      let upcomingHtml: string = `<h2 class="upcoming__item upcoming__item--header upcoming__item--header-upcoming">Up to ${upcomingLimit}</h2>`;
+      let laterHtml: string = `<h2 class="later__item later__item--header later__item--header-later">After ${upcomingLimit}</h2>`;
 
       upcomingRoot.innerHTML = upcomingHtml;
       laterRoot.innerHTML = laterHtml;
