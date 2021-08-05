@@ -1,8 +1,37 @@
 "use strict";
 
-// window.onload = function () {
-// }
-//render
+//Get the employes information:
+function getAllEmployes() {
+  var employesData;
+  return regeneratorRuntime.async(function getAllEmployes$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return regeneratorRuntime.awrap(axios.get('/getEmployes'));
+
+        case 3:
+          employesData = _context.sent;
+          render(employesData.data);
+          _context.next = 10;
+          break;
+
+        case 7:
+          _context.prev = 7;
+          _context.t0 = _context["catch"](0);
+          console.log(_context.t0);
+
+        case 10:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[0, 7]]);
+}
+
+; //render
+
 function render(array) {
   if ($("#addEmployeeModal")) {
     $("#addEmployeeModal").modal("hide"); //se agrega si esta vacio, modificarlo!!
@@ -17,8 +46,9 @@ function render(array) {
       var name = elem.name,
           email = elem.email,
           address = elem.address,
-          phone = elem.phone;
-      html += "<tr>\n\t\t\t<td></td>\n\t\t\t<td>".concat(name, "</td>\n\t\t\t<td>").concat(email, "</td>\n\t\t\t<td>").concat(address, "</td>\n\t\t\t<td>").concat(phone, "</td>\n\t\t\t<td>\n\t\t\t\t<a href=\"#editEmployeeModal\" class=\"edit\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Edit\">&#xE254;</i></a>\n\t\t\t\t<a href=\"#deleteEmployeeModal\" class=\"delete\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Delete\">&#xE872;</i></a>\n\t\t\t</td>\n\t\t</tr>");
+          phone = elem.phone,
+          id = elem.id;
+      html += "<tr>\n\t\t\t<td></td>\n\t\t\t<td>".concat(name, "</td>\n\t\t\t<td>").concat(email, "</td>\n\t\t\t<td>").concat(address, "</td>\n\t\t\t<td>").concat(phone, "</td>\n\t\t\t<td>\n\t\t\t\t<a href=\"#editEmployeeModal\" class=\"edit\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Edit\"  onclick='updateEmploye(\"").concat(id, "\")' >&#xE254;</i></a>\n\t\t\t\t<i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Delete\"  onclick='deleteEmploye(\"").concat(id, "\")' style=\"cursor:pointer\">&#xE872;</i>\n\t\t\t</td>\n\t\t</tr>");
     });
     html += "</tbody></table>";
   } else {
@@ -41,45 +71,83 @@ function handleSubmit(event) {
   email = email.value;
   address = address.value;
   phone = phone.value;
-  axios({
-    method: "post",
-    url: "/addEmployes",
-    data: {
-      name: name,
-      email: email,
-      address: address,
-      phone: phone
-    },
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(function (_ref) {
-    var allEmployes = _ref.data.allEmployes;
-    return render(allEmployes);
-  }).then(function () {
-    return event.target.reset();
-  });
-} //DELETE
 
-
-function deleteRecord(personId) {
-  axios.post('/deleteEmploye', {
-    id: personId
-  }).then(function (res) {
-    console.log(employes);
-    render(res.array.allEmployes);
-  });
-} //UPDATE
-
-
-function updateEmploye(personId) {
-  var newName = document.getElementById("".concat(personId, "name")).value;
-  console.dir(newName);
-  axios.put('/updateEmploye', {
-    id: personId,
-    name: newName
-  }).then(function (res) {
-    console.log(res.data.message);
-    render(res.array.allEmployes);
-  });
+  if (name !== "" || email !== "" || address !== "" || phone !== "") {
+    axios({
+      method: "post",
+      url: "/addEmployes",
+      data: {
+        name: name,
+        email: email,
+        address: address,
+        phone: phone
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(function (_ref) {
+      var allEmployes = _ref.data.allEmployes;
+      return render(allEmployes);
+    }).then(function () {
+      return event.target.reset();
+    });
+  } else {
+    alert('You need to complete at least one field');
+  }
 }
+
+function deleteEmploye(id) {
+  var option, employeData;
+  return regeneratorRuntime.async(function deleteEmploye$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          option = confirm("Are you sure do you want to delete this employe?");
+
+          if (!option) {
+            _context2.next = 7;
+            break;
+          }
+
+          _context2.next = 5;
+          return regeneratorRuntime.awrap(axios["delete"]("/deleteEmployes/".concat(id)));
+
+        case 5:
+          employeData = _context2.sent;
+          render(employeData.data.allEmployes);
+
+        case 7:
+          _context2.next = 12;
+          break;
+
+        case 9:
+          _context2.prev = 9;
+          _context2.t0 = _context2["catch"](0);
+          console.error(_context2.t0);
+
+        case 12:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, null, null, [[0, 9]]);
+}
+
+; //UPDATE
+
+function updateEmploye(id) {} // function updateEmploye(personId) {
+// 	const newName = document.getElementById(`${personId}name`).value;
+// 	axios.put('/updateEmploye', {
+// 			id: personId,
+// 			name: newName
+// 		})
+// 		.then(res => {
+// 			console.log(res.data.message)
+// 			render(res.array.allEmployes)
+// 		})
+// }
+// function handleEdit(event){
+// 	event.preventDefault()
+// 	updateEmploye()
+// }

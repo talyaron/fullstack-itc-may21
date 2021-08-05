@@ -1,11 +1,5 @@
 "use strict";
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -56,10 +50,11 @@ function () {
     key: "addToDo",
     value: function addToDo(toDo) {
       try {
-        this.toDoList(_objectSpread({}, toDo, {
-          uuid: uuidv4(),
-          dateCreated: new Date()
-        }));
+        toDo.uuid = uuidv4();
+        toDo.createdDate = new Date();
+        toDo.editedDate = null;
+        this.toDoList.push(toDo);
+        this.updateToDosJson();
       } catch (error) {
         console.error(error);
       }
@@ -88,15 +83,24 @@ function () {
           return toDoItem.uuid === toDoUuid;
         });
         if (toDoToUpdateIndex === -1) return [];
-        if (toDo.content !== '') this.toDoList.findIndex(function (toDoItem) {
-          return toDoItem.content === toDo.content;
-        });
-        if (toDo.status !== '') this.toDoList.findIndex(function (toDoItem) {
-          return toDoItem.content === toDo.status;
-        });
-        if (toDo.dueDate !== '') this.toDoList.findIndex(function (toDoItem) {
-          return toDoItem.uuid === toDo.dueDate;
-        });
+        var isEdited = false;
+
+        if (toDo.content !== '' && toDo.content !== this.toDoList[toDoToUpdateIndex].content) {
+          this.toDoList[toDoToUpdateIndex].content = toDo.content;
+          isEdited = true;
+        }
+
+        if (toDo.status !== '' && toDo.status !== this.toDoList[toDoToUpdateIndex].status) {
+          this.toDoList[toDoToUpdateIndex].status = toDo.status;
+          isEdited = true;
+        }
+
+        if (toDo.dueDate !== '' && toDo.dueDate !== this.toDoList[toDoToUpdateIndex].dueDate) {
+          this.toDoList[toDoToUpdateIndex].dueDate = toDo.dueDate;
+          isEdited = true;
+        }
+
+        if (isEdited) this.toDoList[toDoToUpdateIndex].editedDate = new Date();
         this.updateToDosJson();
         return [this.toDoList[toDoToUpdateIndex]];
       } catch (error) {
@@ -134,7 +138,7 @@ app.get('/todo-list', function (req, res) {
     var resToSent = toDos.toDoList.length === 0 ? "Your to-do list is empty. Go do something you love \uD83E\uDD29" : toDos.toDoList;
     res.send(resToSent);
   } catch (error) {
-    console.error(er);
+    console.error(error);
     res.status(400).send({
       error: er.message
     });
@@ -144,7 +148,7 @@ app.post('/post-todo', function (req, res) {
   try {
     var body = req.body;
     toDos.addToDo(body);
-    console.log("".concat(body.name, " added to to-do list!"));
+    console.log("".concat(body.content, " added to to-do list!"));
     res.send(toDos);
   } catch (er) {
     console.error(er);

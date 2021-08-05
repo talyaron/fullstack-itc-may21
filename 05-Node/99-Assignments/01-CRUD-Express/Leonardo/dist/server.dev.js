@@ -128,7 +128,6 @@ app.put('/editStatusTask/:id/:status', function (req, res) {
     var _req$params = req.params,
         id = _req$params.id,
         status = _req$params.status;
-    console.log(status);
     var allTasks = readJsonAllTasks();
     var taskIndex = allTasks.findIndex(function (task) {
       return task.id === id;
