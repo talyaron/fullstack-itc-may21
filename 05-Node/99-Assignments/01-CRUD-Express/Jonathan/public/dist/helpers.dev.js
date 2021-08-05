@@ -22,35 +22,9 @@ function addTaskPromise(newTask) {
   });
 }
 
-function getAllTaskPromise() {
-  return new Promise(function (resolve, reject) {
-    fetch('/getAllTask').then(function (r) {
-      return r.json();
-    }).then(function (task) {
-      resolve(task);
-    })["catch"](function (e) {
-      reject(e);
-    });
-  });
-}
-
 function getTaskPromise(id) {
   return new Promise(function (resolve, reject) {
     fetch("/getTask/".concat(id)).then(function (r) {
-      return r.json();
-    }).then(function (task) {
-      resolve(task);
-    })["catch"](function (e) {
-      reject(e);
-    });
-  });
-}
-
-function deleteTaskPromise(id) {
-  return new Promise(function (resolve, reject) {
-    fetch("/deleteTask/".concat(id), {
-      method: 'DELETE'
-    }).then(function (r) {
       return r.json();
     }).then(function (task) {
       resolve(task);
