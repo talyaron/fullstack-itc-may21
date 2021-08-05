@@ -1,5 +1,11 @@
 "use strict";
 
+/*  Questions and doubts: 
+1)How can I solve the problem add a new employe when you don't write anything in each input, now you can add employes without information
+2)How can I solve comunications with the client user when he want to edit each employe, I used try catch throw new error to stop editing if you don't put info in each input, but I want to pass the info from the de dom into the modal edit so the client don't need to add again each inputs
+3)Also I need one or two session to recap the routes, controllers and promises
+
+*/
 //Get the employes information:
 function getAllEmployes() {
   var employesData;
@@ -34,7 +40,7 @@ function getAllEmployes() {
 
 function render(array) {
   if ($("#addEmployeeModal")) {
-    $("#addEmployeeModal").modal("hide"); //se agrega si esta vacio, modificarlo!!
+    $("#addEmployeeModal").modal("hide");
   }
 
   var root = document.querySelector(".root");
@@ -169,7 +175,7 @@ function handleEdit(event) {
             break;
           }
 
-          throw new Error('data vacia');
+          throw new Error('Data not completed');
 
         case 10:
           console.log(_updateEmploye);
@@ -183,6 +189,7 @@ function handleEdit(event) {
 
           if ($("#aditEmployeeModal")) {
             $("#editEmployeeModal").modal("hide");
+            alert('You editted all info correctly');
           }
 
           _context3.next = 22;
