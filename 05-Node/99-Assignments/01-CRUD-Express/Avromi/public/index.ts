@@ -1,11 +1,11 @@
 // function allowDrop(ev) {
 //     ev.preventDefault();
 //   }
-  
+
 //   function drag(ev) {
 //     ev.dataTransfer.setData("text", ev.target.id);
 //   }
-  
+
 //   function drop(ev) {
 //     ev.preventDefault();
 //     const data = ev.dataTransfer.getData("text");
@@ -13,22 +13,22 @@
 //   }
 
 
-class Title{
-    title:string 
-    constructor(title:string){
-    this.title = title;
-}}
-const title = new Title( 'notwe one ');
+
+const title = "new title"
 
 
 
 
 //create form handle to submit title....
+async function addTask(title) {
+    try {
+        const res = await axios.post('/tasks/newTask', { title })
+      const allTasks = res.data
+      console.log(allTasks);
+    } catch (error) {
+        console.log(error);
+    }
 
-axios.post('/newTask',{title})
-.then(res=>{
-    console.log(res.data)
-})
-.catch(e=>{
-    console.error(e)
-})
+}
+
+addTask(title)

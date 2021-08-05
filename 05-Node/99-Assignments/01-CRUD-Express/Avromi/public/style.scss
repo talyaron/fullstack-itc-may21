@@ -1,49 +1,62 @@
 #div1 {
-    width: 350px;
-    height: 70px;
-    padding: 10px;
-    border: 1px solid #aaaaaa;
+  width: 350px;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+
+
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  // z-index: 1;
+  top: 90px;;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+/* Style sidebar links */
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+
+  :hover {
+    color: #f1f1f1;
   }
+}
 
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  // position: fixed;
+  background-color: #111;
+  padding: 20px;
+  margin: 0;
+  z-index: 1;
+  top: 0;
 
+}
+
+.main {
+  margin-left: 160px;
+  /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+/* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
+@media screen and (max-height: 450px) {
   .sidebar {
-    height: 100%;
-    width: 160px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 16px;
+    padding-top: 15px;
   }
-  
-  /* Style sidebar links */
+
   .sidebar a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #818181;
-    display: block;
-    :hover {
-        color: #f1f1f1;
-      }
+    font-size: 18px;
   }
-  .nav{
-    display: flex;
-    background-color: #111;
-    padding: 30px;
-    margin:0;
-    
-  }
-  
-  .main {
-    margin-left: 160px; /* Same as the width of the sidenav */
-    padding: 0px 10px;
-  }
-  
-  /* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
-  @media screen and (max-height: 450px) {
-    .sidebar {padding-top: 15px;}
-    .sidebar a {font-size: 18px;}
-  }
+}
