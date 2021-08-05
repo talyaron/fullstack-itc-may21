@@ -103,7 +103,6 @@ app.put('/editTask/:id', (req, res) => {
 app.put('/editStatusTask/:id/:status', (req, res) => {
     try {
         const { id, status } = req.params;
-        console.log(status);
         let allTasks = readJsonAllTasks();
         const taskIndex = allTasks.findIndex(task => task.id === id);
         if (taskIndex > -1) {
