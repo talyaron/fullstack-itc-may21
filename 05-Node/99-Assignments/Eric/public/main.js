@@ -88,6 +88,10 @@ function handleSubmit(event) {
 	address = address.value;
 	phone = phone.value;
 
+	if(name !== "" || email !== ""|| address !== "" || phone !==""){
+		
+	
+
 	axios({
 		method: "post",
 		url: `/addEmployes`,
@@ -104,12 +108,16 @@ function handleSubmit(event) {
 	  	
 		.then(({ data: { allEmployes } }) => render(allEmployes))
 		.then(() => event.target.reset());
+	} else{
+		alert('You need to complete at least one field')
+	}
 
+	
 	}
 
 //DELETE
 function deleteRecord(personId) {
-	axios.post('/deleteEmploye', {
+	axios.delete('/deleteEmployes', {
 			id: personId
 		})
 		.then(res => {
@@ -117,11 +125,19 @@ function deleteRecord(personId) {
 			render(res.array.allEmployes)
 		})
 }
+//tengo que guardar el id del que estoy clickeando para borrar y mandarlo a deleteRecord para eliminarlo
+function handleDelete(event){
+
+	event.preventDefault();
+	deleteRecord()
+	console.log('hio');
+
+}
+
 
 //UPDATE
 function updateEmploye(personId) {
 	const newName = document.getElementById(`${personId}name`).value;
-	console.dir(newName)
 	axios.put('/updateEmploye', {
 			id: personId,
 			name: newName
@@ -132,3 +148,25 @@ function updateEmploye(personId) {
 		
 		})
 }
+
+function handleEdit(event){
+	event.preventDefault()
+
+
+
+
+	
+	updateEmploye()
+
+
+}
+
+//Get the employes information:
+async function getAllEmployes() {
+    try {
+        const employesData = await axios.get('/getEmployes');
+        render(employesData.data);
+    } catch (error) {
+        console.log(error);
+    }
+};
