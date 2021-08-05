@@ -1,6 +1,3 @@
-// function allowDrop(ev) {
-//     ev.preventDefault();
-//   }
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -37,14 +34,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-//   function drag(ev) {
-//     ev.dataTransfer.setData("text", ev.target.id);
-//   }
-//   function drop(ev) {
-//     ev.preventDefault();
-//     const data = ev.dataTransfer.getData("text");
-//     ev.target.appendChild(document.getElementById(data));
-//   }
+createSortable("divcont");
+function createSortable(selector) {
+    var newY, sortable = document.getElementById(selector);
+    Draggable.create(sortable.children, {
+        type: "y", bounds: "#divcont",
+        onPress: function () { newY = this.y; },
+        onDragEnd: function () {
+            var i = (sortable.children).length, dragIndex, targetIndex = $.inArray(this.target, sortable.children);
+            while (--i > -1) {
+                if (this.hitTest(sortable.children[i], "10%")) {
+                    TweenLite.to(sortable.children[i], 0.2, { y: newY });
+                    dropIndex = i;
+                }
+            }
+            if (typeof dropIndex !== "undefined") {
+                dragIndex = targetIndex < dropIndex ? dropIndex + 1 : dropIndex;
+                sortable.insertBefore(sortable.children[dropIndex], sortable.children[targetIndex]);
+                sortable.insertBefore(this.target, sortable.children[dragIndex]);
+            }
+        },
+        liveSnap: true, snap: function (endValue) { return Math.round(endValue / 40) * 40; }
+    });
+    TweenLite.set(sortable, { height: 40 * sortable.children.length });
+    for (var i = 0; i < sortable.children.length; i++) {
+        TweenLite.set(sortable.children[i], { y: 40 * i });
+    }
+}
 // const title = "new title"
 function addTask(title) {
     return __awaiter(this, void 0, void 0, function () {

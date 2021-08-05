@@ -9,13 +9,20 @@
     <link rel="stylesheet" href="./dist/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.1/TweenMax.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.1/utils/Draggable.min.js"></script>
+
 </head>
 
 <body>
     <nav class="nav">
-        <div class="nav__item"><h1 style="color:white">Keep</h1></div>
+        <div class="nav__item">
+            <h1 style="color:white">Keep</h1>
+        </div>
         <div class="nav__item">
             <div class="nav__search__wrap"><input class="nav__search__input" type="search" placeholder="Search">
             </div>
@@ -27,14 +34,24 @@
         <a href="#clients"><i class="fa fa-fw fa-user"></i> Clients</a>
         <a href="#contact"><i class="fa fa-fw fa-envelope"></i> Trash</a>
     </div>
-    
-   
+
+
     <div class="main">
-       <form class="main__form">
-           <input type="text" placeholder="Enter Task...." name="task">
-           <input type="submit" value="Add Task">
-       </form>
-    
+        <form class="main__form">
+            <input type="text" placeholder="Enter Task...." name="task">
+            <input type="submit" value="Add Task">
+        </form>
+
+        <p>Drag the Task</p>
+        <div id="divcont">
+            <div class='sort'>&nbsp; 1</div>
+            <div class='sort'>&nbsp; 2</div>
+            <div class='sort'>&nbsp; 3</div>
+            <div class='sort'>&nbsp; 4</div>
+            <div class='sort'>&nbsp; 5</div>
+            <div class='sort'>&nbsp; 6</div>
+            <div class='sort'>&nbsp; 7</div>
+        </div>
 
     </div>
 
@@ -47,14 +64,6 @@
 
 
 
-    <!-- <p>Drag the Task</p>
-
-    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <p id="drag1" draggable="true" ondragstart="drag(event)" width="336" height="69">TextTWo</p>
-    </div>
-    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <p id="drag1" draggable="true" ondragstart="drag(event)" width="336" height="69">Text</p>
-    </div> -->
 
     <script src="./dist/index.js"></script>
 

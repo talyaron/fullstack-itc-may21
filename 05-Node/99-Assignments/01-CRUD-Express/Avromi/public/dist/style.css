@@ -1,8 +1,25 @@
-#div1 {
-  width: 350px;
-  height: 70px;
-  padding: 10px;
-  border: 1px solid #aaaaaa;
+#divcont {
+  display: inline-block;
+}
+
+.sort {
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: #d5d8d2;
+  color: black;
+  position: absolute;
+  border: 1px solid black;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 8px;
+}
+.sort:active {
+  box-shadow: 5px 5px 5px 5px #2e2a2a;
+  background-color: #565c59;
+  color: white;
 }
 
 .sidebar {
