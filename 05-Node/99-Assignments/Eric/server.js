@@ -19,11 +19,17 @@ app.use(express.static('public'));
 app.use(express.json());
 
 
+
 const readAllEmployes = () => {
     const allEmployes = fs.readFileSync('./employes.json'); 
     return JSON.parse(allEmployes); 
 }
 let allEmployes = readAllEmployes()
+
+
+app.get('/getEmployes', (req, res)=>{
+    res.send(allEmployes)
+})
 
 
 app.post('/addEmployes', (req, res)=>{
@@ -57,7 +63,7 @@ app.delete('/deleteEmployes/:id', (req, res) => {
     
         allEmployes = allEmployes.filter((employe) => employe.id !== id);
         fs.writeFileSync("./employes.json", JSON.stringify(allEmployes));
-        res.send({ message: 'one student record was deleted', allEmployes })
+        res.send({ message: 'one employe record was deleted', allEmployes })
         console.log(allEmployes)
     
 

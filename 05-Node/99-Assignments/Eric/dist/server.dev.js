@@ -28,6 +28,9 @@ var readAllEmployes = function readAllEmployes() {
 };
 
 var allEmployes = readAllEmployes();
+app.get('/getEmployes', function (req, res) {
+  res.send(allEmployes);
+});
 app.post('/addEmployes', function (req, res) {
   var _req$body = req.body,
       name = _req$body.name,
@@ -64,7 +67,7 @@ app["delete"]('/deleteEmployes/:id', function (req, res) {
   });
   fs.writeFileSync("./employes.json", JSON.stringify(allEmployes));
   res.send({
-    message: 'one student record was deleted',
+    message: 'one employe record was deleted',
     allEmployes: allEmployes
   });
   console.log(allEmployes);

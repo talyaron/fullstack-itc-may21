@@ -68,13 +68,25 @@ function renderTask(data) {
 function renderThrough(data, status) {
   var toShow = data.map(function (task) {
     if (task.status === status) {
-      return "<div class='tasks ".concat(status, "' id='").concat(task.id, "' draggable=\"true\" ondragstart=\"onDragStart(event)\">\n                <button class=\"tasks__edit\" id='").concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
+      var taskDateCreated = readableDate(task.dateCreated);
+      return "<div class='tasks ".concat(status, "' id='").concat(task.id, "' draggable=\"true\" ondragstart=\"onDragStart(event)\">\n                <button class=\"tasks__edit\" id='").concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <div class=\"tasks__info\">\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                <span class=\"tasks__info--date\">").concat(taskDateCreated, "</span>\n                </div>\n                </div>");
     }
   }).join('');
   return toShow;
 }
 
-; //Get the tasks information:
+;
+
+function readableDate(date) {
+  var today = new Date(date);
+  var options = {
+    day: 'numeric',
+    month: 'numeric',
+    year: '2-digit'
+  };
+  return today.toLocaleDateString('en-GB', options);
+} //Get the tasks information:
+
 
 function getAllTasks() {
   var tasksData;
@@ -185,7 +197,7 @@ function uploadTask(id) {
           tasksData = _context4.sent;
           html = tasksData.data.map(function (element) {
             if (element.id === id) {
-              return "<h1>EDIT TASK</h1>\n                    \n                    <div class=\"form__wrapper\">\n                    <label for=\"title\">Title:</label>\n                    <input type=\"text\" name=\"title\" id=\"title\" maxlength=\"40\" value=\"".concat(element.title, "\" required>\n                    </div>\n    \n                    <div class=\"form__wrapper\">\n                    <label for=\"description\">Description:</label>\n                    <textarea type=\"text\" name=\"description\" id=\"description\" cols=\"30\" rows=\"10\"\n                    maxlength=\"200\" required>").concat(element.description, "</textarea>\n                    </div>\n    \n                    <div>\n                        <label for=\"toDo2\">To Do</label>\n                        <input type=\"radio\" id=\"toDo2\" name=\"status\" value=\"toDo\" checked />\n    \n                        <label for=\"inProgress2\">In Progress</label>\n                        <input type=\"radio\" id=\"inProgress2\" name=\"status\" value=\"inProgress\" />\n    \n                        <label for=\"done2\">Done</label>\n                        <input type=\"radio\" id=\"done2\" name=\"status\" value=\"done\" />\n                    </div>\n                    <input class=\"form__input--submit\" type=\"submit\" value=\"Save changes\">");
+              return "<div class=\"form__wrapper\">\n                    <label for=\"title\">Title:</label>\n                    <input class=\"form__input\" type=\"text\" name=\"title\" id=\"title\" maxlength=\"40\" value=\"".concat(element.title, "\" required>\n                    </div>\n    \n                    <div class=\"form__wrapper\">\n                    <label for=\"description\">Description:</label>\n                    <textarea class=\"form__textarea\" type=\"text\" name=\"description\" id=\"description\" cols=\"30\" rows=\"10\"\n                    maxlength=\"200\" required>").concat(element.description, "</textarea>\n                    </div>\n    \n                    <div class=\"form__wrapper\">\n                    <label>Status:</label>\n                        <div class=\"form__radio\">\n                        <label for=\"toDo2\">To Do</label>\n                        <input type=\"radio\" id=\"toDo2\" name=\"status\" value=\"toDo\" checked />\n    \n                        <label for=\"inProgress2\">In Progress</label>\n                        <input type=\"radio\" id=\"inProgress2\" name=\"status\" value=\"inProgress\" />\n    \n                        <label for=\"done2\">Done</label>\n                        <input type=\"radio\" id=\"done2\" name=\"status\" value=\"done\" />\n                        </div>\n                    </div>\n                    <input class=\"form__input--submit\" type=\"submit\" value=\"Save changes\">");
             }
           }).join('');
           formEdit.innerHTML = html;

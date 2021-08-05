@@ -41,40 +41,51 @@ function handleSubmit(event) {
   email = email.value;
   address = address.value;
   phone = phone.value;
-  axios({
-    method: "post",
-    url: "/addEmployes",
-    data: {
-      name: name,
-      email: email,
-      address: address,
-      phone: phone
-    },
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(function (_ref) {
-    var allEmployes = _ref.data.allEmployes;
-    return render(allEmployes);
-  }).then(function () {
-    return event.target.reset();
-  });
+
+  if (name !== "" || email !== "" || address !== "" || phone !== "") {
+    axios({
+      method: "post",
+      url: "/addEmployes",
+      data: {
+        name: name,
+        email: email,
+        address: address,
+        phone: phone
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(function (_ref) {
+      var allEmployes = _ref.data.allEmployes;
+      return render(allEmployes);
+    }).then(function () {
+      return event.target.reset();
+    });
+  } else {
+    alert('You need to complete at least one field');
+  }
 } //DELETE
 
 
 function deleteRecord(personId) {
-  axios.post('/deleteEmploye', {
+  axios["delete"]('/deleteEmployes', {
     id: personId
   }).then(function (res) {
     console.log(employes);
     render(res.array.allEmployes);
   });
+} //tengo que guardar el id del que estoy clickeando para borrar y mandarlo a deleteRecord para eliminarlo
+
+
+function handleDelete(event) {
+  event.preventDefault();
+  deleteRecord();
+  console.log('hio');
 } //UPDATE
 
 
 function updateEmploye(personId) {
   var newName = document.getElementById("".concat(personId, "name")).value;
-  console.dir(newName);
   axios.put('/updateEmploye', {
     id: personId,
     name: newName
@@ -83,3 +94,40 @@ function updateEmploye(personId) {
     render(res.array.allEmployes);
   });
 }
+
+function handleEdit(event) {
+  event.preventDefault();
+  updateEmploye();
+} //Get the employes information:
+
+
+function getAllEmployes() {
+  var employesData;
+  return regeneratorRuntime.async(function getAllEmployes$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return regeneratorRuntime.awrap(axios.get('/getEmployes'));
+
+        case 3:
+          employesData = _context.sent;
+          render(employesData.data);
+          _context.next = 10;
+          break;
+
+        case 7:
+          _context.prev = 7;
+          _context.t0 = _context["catch"](0);
+          console.log(_context.t0);
+
+        case 10:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[0, 7]]);
+}
+
+;
