@@ -48,14 +48,26 @@ app.post('/addEmployes', (req, res)=>{
     res.send({ message: 'one person was added', allEmployes })
 })
 
-app.put('/updateEmployes/:id', (req, res)=>{
-    const {id} = req.params;
-    const {name} = req.body;
-    const employeUpdate = allEmployes.find((employe)=>employe.id === id);
-    if(name)
-    employeUpdate.name = name;
-    res.send(employeUpdate)
-})
+// app.put('/updateEmployes/:id', (req, res)=>{
+//     const {id} = req.params;
+//     const {name} = req.body;
+//     const employeUpdate = allEmployes.find((employe)=>employe.id === id);
+//     if(name)
+//     employeUpdate.name = name;
+//     res.send(employeUpdate)
+// })
+// UPDATE TASKS
+app.put('/updateEmployes', (req, res)=>{ 
+    const {nameEdit, emailEdit, addressEdit, phoneEdit, id} =  req.body; 
+    const employeUpdate = allEmployes.find(employe => employe.id === id)
+    employeUpdate.name = nameEdit;
+    employeUpdate.email = emailEdit;
+    employeUpdate.address = addressEdit;
+    employeUpdate.phone = phoneEdit;
+    employeUpdate.id = id;
+    console.log(allEmployes)
+    res.send(allEmployes);
+    })
 
 
 app.delete('/deleteEmployes/:id', (req, res) => {
