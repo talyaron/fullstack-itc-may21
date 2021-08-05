@@ -22,53 +22,40 @@ async function handleSubmit(event) {
 
 //Function to render the data of the tasks in the DOM
 function renderTask(data) {
+    const htmltoDo = renderThrough(data, 'toDo');
+    document.getElementById('toDo').innerHTML = htmltoDo;
 
-    const htmlInProgress = data.map(task => {
-        if (task.status === 'inProgress') {
-            return `<div class='tasks inProgress' draggable="true">
-                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
-                    <h4> ${task.title} </h4>             
-                    <p> ${task.description} </p>
-                </button>
-                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
-                </div>`
-        }
-    }).join('');
-
+    const htmlInProgress = renderThrough(data, 'inProgress');
     document.getElementById('inProgress').innerHTML = htmlInProgress;
 
-    //////////////
-    const htmlDone = data.map(task => {
-        if (task.status === 'done') {
-            return `<div class='tasks done' draggable="true">
-                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
-                    <h4> ${task.title} </h4>             
-                    <p> ${task.description} </p>
-                </button>
-                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
-                </div>`
-        }
-    }).join('');
-
-    document.getElementById('done').innerHTML = htmlDone
-
-    //////////////
-    const htmltoDo = data.map(task => {
-        if (task.status === 'toDo') {
-            return `<div class='tasks toDo' draggable="true">
-                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
-                    <h4> ${task.title} </h4>             
-                    <p> ${task.description} </p>
-                </button>
-                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
-                </div>`
-        }
-    }).join('');
-    const todoRoot = document.getElementById('toDo');
-    debugger;
-    console.dir(todoRoot);
-    todoRoot.innerHTML = htmltoDo
+    const htmlDone = renderThrough(data, 'done');
+    document.getElementById('done').innerHTML = htmlDone;
 };
+
+function renderThrough(data, status) {
+    const toShow = data.map(task => {
+        if (task.status === status) {
+            let taskDateCreated = readableDate(task.dateCreated);
+            return `<div class='tasks ${status}' id='${task.id}' draggable="true" ondragstart="onDragStart(event)">
+                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
+                    <h4> ${task.title} </h4>             
+                    <p> ${task.description} </p>
+                </button>
+                <div class="tasks__info">
+                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
+                <span class="tasks__info--date">${taskDateCreated}</span>
+                </div>
+                </div>`
+        }
+    }).join('');
+    return toShow;
+};
+
+function readableDate(date) {
+    const today = new Date(date);
+    const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
+    return today.toLocaleDateString('en-GB', options);
+}
 
 //Get the tasks information:
 async function getAllTasks() {
@@ -108,20 +95,20 @@ async function uploadTask(id) {
         let html = tasksData.data.map(element => {
             if (element.id === id) {
                 return (
-                    `<h1>EDIT TASK</h1>
-                    
-                    <div class="form__wrapper">
+                    `<div class="form__wrapper">
                     <label for="title">Title:</label>
-                    <input type="text" name="title" id="title" maxlength="40" value="${element.title}" required>
+                    <input class="form__input" type="text" name="title" id="title" maxlength="40" value="${element.title}" required>
                     </div>
     
                     <div class="form__wrapper">
                     <label for="description">Description:</label>
-                    <textarea type="text" name="description" id="description" cols="30" rows="10"
+                    <textarea class="form__textarea" type="text" name="description" id="description" cols="30" rows="10"
                     maxlength="200" required>${element.description}</textarea>
                     </div>
     
-                    <div>
+                    <div class="form__wrapper">
+                    <label>Status:</label>
+                        <div class="form__radio">
                         <label for="toDo2">To Do</label>
                         <input type="radio" id="toDo2" name="status" value="toDo" checked />
     
@@ -130,6 +117,7 @@ async function uploadTask(id) {
     
                         <label for="done2">Done</label>
                         <input type="radio" id="done2" name="status" value="done" />
+                        </div>
                     </div>
                     <input class="form__input--submit" type="submit" value="Save changes">`
                 )
