@@ -61,7 +61,6 @@ body {
   display: grid;
   grid-template-columns: 33.3% 33.3% 33.4%;
   height: 100vh;
-  background-color: red;
 }
 .wrapper__todo {
   background-color: green;
@@ -94,7 +93,9 @@ body {
   /* Modal Content */
 }
 .modal-content {
-  background: peru;
+  background: url(../img/backgroundModal.jpg);
+  background-size: cover;
+  background-repeat: round;
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
@@ -104,16 +105,34 @@ body {
   width: 80%;
 }
 
-.form__input {
+.form label,
+.form__wrapper label {
+  font-weight: bolder;
+}
+.form__input,
+.form__wrapper__input {
   width: 100%;
 }
-.form__input--submit {
+.form__input--submit,
+.form__wrapper__input--submit {
   display: flex;
   margin: auto;
   cursor: pointer;
+  background: lightblue;
 }
-.form__textarea {
+.form__input--submit:hover,
+.form__wrapper__input--submit:hover {
+  background: green;
+  color: white;
+}
+.form__textarea,
+.form__wrapper__textarea {
   width: 100%;
+}
+.form__radio,
+.form__wrapper__radio {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 /* Close Button */
@@ -133,7 +152,7 @@ body {
   background: lightsalmon;
   border-radius: 50px;
   margin: 10px;
-  word-break: break-all;
+  word-break: break-word;
   padding: 0 25px;
   justify-content: space-between;
 }
@@ -165,6 +184,16 @@ body {
 .tasks__delete--button:hover {
   color: white;
 }
+.tasks__info {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: flex-end;
+}
+.tasks__info--date {
+  word-break: normal;
+  font-size: 8px;
+}
 
 .toDo {
   background-color: limegreen;
@@ -176,4 +205,25 @@ body {
 
 .inProgress {
   background-color: dodgerblue;
+}
+
+.content__todo {
+  height: 70vh;
+}
+.content__inprogress {
+  height: 70vh;
+}
+.content__done {
+  height: 70vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    grid-template-rows: 33.3% 33.3% 33.4%;
+    grid-template-columns: none;
+    height: max-content;
+  }
+}
+.close {
+  left: 10px;
 }

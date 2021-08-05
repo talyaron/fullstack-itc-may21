@@ -74,8 +74,7 @@ app["delete"]("/deleteTask/:id", function (req, res) {
     allTasks = allTasks.filter(function (task) {
       return task.id !== id;
     });
-    fs.writeFileSync("./task.json", JSON.stringify(allTasks)); //allStudents.sort(function (a, b){return (a.id - b.id)})
-
+    fs.writeFileSync("./task.json", JSON.stringify(allTasks));
     res.send(allTasks);
   } catch (e) {
     res.status(500).send({
@@ -91,9 +90,8 @@ app.put("/doneTask/:id", function (req, res) {
       return task.id === id;
     });
     task.status = 'done';
-    fs.writeFileSync("./task.json", JSON.stringify(allTasks)); //allStudents.sort(function (a, b){return (a.id - b.id)})
-
-    res.send(allTasks);
+    fs.writeFileSync("./task.json", JSON.stringify(allTasks));
+    res.send(getOrderTask(allTasks));
   } catch (e) {
     res.status(500).send({
       error: "".concat(e)
@@ -125,8 +123,7 @@ app.put("/updateTask/:id", function (req, res) {
     task.status = status;
     task.date = date;
     task.min = min;
-    fs.writeFileSync("./task.json", JSON.stringify(allTasks)); //allStudents.sort(function (a, b){return (a.id - b.id)})
-
+    fs.writeFileSync("./task.json", JSON.stringify(allTasks));
     res.send(allTasks);
   } catch (e) {
     res.status(500).send({

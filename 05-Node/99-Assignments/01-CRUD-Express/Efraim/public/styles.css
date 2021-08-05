@@ -1,0 +1,146 @@
+body {
+  font-family: sans-serif;
+  background-image: url("https://thumbor.forbes.com/thumbor/fit-in/1200x0/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fdam%2Fimageserve%2F1092571024%2F0x0.jpg%3Ffit%3Dscale");
+  background-repeat: repeat;
+  background-size: 100vw 100vh;
+}
+
+form {
+  background-color: whitesmoke;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 3px solid black;
+  margin-bottom: 1rem;
+}
+
+label {
+  margin: 0.5rem;
+  font-weight: bold;
+  font-style: italic;
+}
+
+input {
+  margin: auto;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin: auto;
+  border: 1px solid black;
+  margin-top: 10px;
+  background-color: white;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.green {
+  color: green;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.holder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  text-align: center;
+}
+
+.holder__item {
+  background-color: whitesmoke;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 1rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 3px solid black;
+  margin-bottom: 1rem;
+}
+
+.holder__item__taskDisplay {
+  font-style: italic;
+}
+
+.holder__item__header {
+  font-weight: bold;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+.holder__item__status {
+  color: red;
+}
+
+@media only screen and (max-width: 900px) {
+  body {
+    background-size: 100vw 50vh;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-size: 100vw 30vh;
+  }
+}
+/*# sourceMappingURL=styles.css.map */

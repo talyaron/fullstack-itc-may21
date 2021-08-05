@@ -62,7 +62,6 @@ app.delete("/deleteTask/:id", (req, res) => {
         let allTasks = readAllTasks();
         allTasks = allTasks.filter(task => task.id !== id)
         fs.writeFileSync("./task.json", JSON.stringify(allTasks));
-        //allStudents.sort(function (a, b){return (a.id - b.id)})
         res.send(allTasks);
     } catch (e) {
         res.status(500).send({ error: `${e}` });
@@ -76,8 +75,7 @@ app.put("/doneTask/:id", (req, res) => {
         task = allTasks.find(task => task.id === id)
         task.status = 'done'
         fs.writeFileSync("./task.json", JSON.stringify(allTasks));
-        //allStudents.sort(function (a, b){return (a.id - b.id)})
-        res.send(allTasks);
+        res.send(getOrderTask(allTasks));
     } catch (e) {
         res.status(500).send({ error: `${e}` });
     }
@@ -104,7 +102,6 @@ app.put("/updateTask/:id", (req, res) => {
         task.min = min;
 
         fs.writeFileSync("./task.json", JSON.stringify(allTasks));
-        //allStudents.sort(function (a, b){return (a.id - b.id)})
         res.send(allTasks);
     } catch (e) {
         res.status(500).send({ error: `${e}` });
