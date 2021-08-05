@@ -1,8 +1,12 @@
-
-
-// window.onload = function () {
-
-// }
+//Get the employes information:
+async function getAllEmployes() {
+    try {
+        const employesData = await axios.get('/getEmployes');
+        render(employesData.data);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 //render
 function render(array) {
@@ -39,7 +43,8 @@ function render(array) {
 				name,
 				email,
 				address,
-				phone
+				phone,
+				id
 			} = elem
 			
 			html += `<tr>
@@ -49,8 +54,8 @@ function render(array) {
 			<td>${address}</td>
 			<td>${phone}</td>
 			<td>
-				<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-				<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+				<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit"  onclick='updateEmploye("${id}")' >&#xE254;</i></a>
+				<i class="material-icons" data-toggle="tooltip" title="Delete"  onclick='deleteEmploye("${id}")' style="cursor:pointer">&#xE872;</i>
 			</td>
 		</tr>`
 		});
@@ -115,58 +120,51 @@ function handleSubmit(event) {
 	
 	}
 
-//DELETE
-function deleteRecord(personId) {
-	axios.delete('/deleteEmployes', {
-			id: personId
-		})
-		.then(res => {
-			console.log(employes)
-			render(res.array.allEmployes)
-		})
-}
-//tengo que guardar el id del que estoy clickeando para borrar y mandarlo a deleteRecord para eliminarlo
-function handleDelete(event){
 
-	event.preventDefault();
-	deleteRecord()
-	console.log('hio');
+	async function deleteEmploye (id) {
+		try {
+			const option = confirm(`Are you sure do you want to delete this employe?`);
+			if (option) {
+				const employeData = await axios.delete(`/deleteEmployes/${id}`);
+				render(employeData.data.allEmployes);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
-}
 
 
 //UPDATE
-function updateEmploye(personId) {
-	const newName = document.getElementById(`${personId}name`).value;
-	axios.put('/updateEmploye', {
-			id: personId,
-			name: newName
-		})
-		.then(res => {
-			console.log(res.data.message)
-			render(res.array.allEmployes)
+
+ function updateEmploye (id){
+	 
+ }
+
+
+
+// function updateEmploye(personId) {
+// 	const newName = document.getElementById(`${personId}name`).value;
+// 	axios.put('/updateEmploye', {
+// 			id: personId,
+// 			name: newName
+// 		})
+// 		.then(res => {
+// 			console.log(res.data.message)
+// 			render(res.array.allEmployes)
 		
-		})
-}
+// 		})
+// }
 
-function handleEdit(event){
-	event.preventDefault()
-
-
+// function handleEdit(event){
+// 	event.preventDefault()
 
 
-	
-	updateEmploye()
 
 
-}
 
-//Get the employes information:
-async function getAllEmployes() {
-    try {
-        const employesData = await axios.get('/getEmployes');
-        render(employesData.data);
-    } catch (error) {
-        console.log(error);
-    }
-};
+// 	updateEmploye()
+
+
+// }
+
