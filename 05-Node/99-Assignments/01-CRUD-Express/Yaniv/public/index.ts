@@ -1,36 +1,135 @@
 getData(null, null);
 
-const newToDoform: HTMLFormElement = document.querySelector('#todos-form');
+const addToDoform: HTMLFormElement = document.querySelector('#add-todo-form');
 const searchToDosform: HTMLFormElement = document.querySelector('#search-todos-form');
+const editToDosAncestor: HTMLElement = document.querySelector('.todos');
+let editToDosform: HTMLFormElement;
 const resetBtn: HTMLElement = document.querySelector('#reset');
 // sorting should be on client side for quick response + not change the database order
-const toDoTimeInput: HTMLElement = document.querySelector(`#todo-due-date`);
+// sort onclick on todo table header (status/due date. no need to sort be content)
+const addToDoTimeInput: HTMLInputElement = document.querySelector(`#add-todo-due-date`);
 
+interface ToDo {
+  content: string;
+  status: string;
+  dueDate: any;
+  uuid: string;
+  createdDate: any;
+  editedDate: any;
+}
 
-newToDoform.addEventListener('submit', ev => handleNewToDo(ev));
-searchToDosform.addEventListener('keyup', ev => handleToDoSearch(ev));
-resetBtn.addEventListener('click', ev => handleReset(ev));
-toDoTimeInput.addEventListener('click', ev => onlyFutureToDos(ev));
+class ToDos {
+  toDoList: Array<ToDo>;
 
-const onlyFutureToDos = (ev): void => {
-  try {
-    const now: Date = new Date();
-    ev.target.setAttribute("min", now.toISOString().substring(0, 16));
-
-  } catch (error) {
-    console.error(error);
+  constructor (toDoList: Array<ToDo>) {
+    this.toDoList = toDoList;
   }
-};
 
-async function handleNewToDo(ev) {
+  renderToDos(): void {
+    try {
+      const upcomingRoot: HTMLElement = document.querySelector(".upcoming");
+      const laterRoot: HTMLElement = document.querySelector(".later");
+
+      const dateInThirtyDays: Date = new Date();
+      dateInThirtyDays.setDate(dateInThirtyDays.getDate() + 30);
+      let options: object = {day: 'numeric', month: 'long'  };
+      const upcomingLimit: string = dateInThirtyDays.toLocaleDateString('en-US', options);
+
+      for (let i = 0; i < searchToDosform.children.length; i++) {
+        searchToDosform.children[i].disabled = false;
+      }
+
+      let upcomingHtml: string = `<h2 class="upcoming__item upcoming__item--header">Before ${upcomingLimit}</h2>`;
+      let laterHtml: string = `<h2 class="later__item later__item--header">After ${upcomingLimit}</h2>`;
+
+      upcomingRoot.innerHTML = upcomingHtml;
+      laterRoot.innerHTML = laterHtml;
+
+      this.toDoList = this.toDoList.sort((a: ToDo, b: ToDo) => Date.parse(a.dueDate) - Date.parse(b.dueDate));
+      this.toDoList = this.toDoList.sort((a: ToDo, b: ToDo) => {
+        const aId = a.status;
+        const bId = b.status;
+        if (aId < bId) {return -1;}
+        if (aId > bId) {return 1;}
+        return 0;
+      });
+
+      this.toDoList.forEach((toDo: ToDo): void => {
+        const toDoDueDate: Date = new Date(toDo.dueDate);
+        options = {day: 'numeric', month: 'short', year: 'numeric'  };
+        const toDoDueDateString: string = toDoDueDate.toLocaleDateString('en-US', options);
+    
+
+        let statusClass: string = '';
+        switch (toDo.status) {
+          case 'Pending...':
+            statusClass = 'pending'; // background-color for scss: #E96C3F
+          break;
+          case 'Done':
+            statusClass = 'done'; // background-color for scss: #5FC57E
+          break;
+          case 'In progress...':
+            statusClass = 'in-progress'; // background-color for scss: #F0AD52
+          break;
+          case 'Stuck':
+            statusClass = 'stuck'; // background-color for scss: #D1505E
+          break;
+        }
+
+        const now: number = Date.now();
+        const toDoDueDateNumber: number = toDoDueDate.getTime();
+        const toDays: number = (1000 * 60 * 60 * 24);
+        const inHowManyDays: number = (toDoDueDateNumber - now) / toDays;
+
+        if ( inHowManyDays < 30) {
+          let dueDateClass: string = '';
+          if (inHowManyDays < 7) {
+            dueDateClass = (inHowManyDays > 0) ? ' soon' : ' passed' // for scss: font-weigth: bold : font-weigth: bold; color #D1505E
+          }
+
+          upcomingHtml += 
+          `<div class="upcoming__item todo" id="${toDo.uuid}">
+            <div class="todo__item todo__item--content">${toDo.content}</div>
+            <div class="todo__item todo__item--status ${statusClass}">${toDo.status}</div>
+            <div class="todo__item todo__item--due-date${dueDateClass}">${toDoDueDateString}</div>
+            <div class="todo__item todo__item--delete"><i class="fa fa-trash"></i></div>
+          </div>`;
+        }
+        else {
+          laterHtml += 
+          `<div class="later__item todo" id="${toDo.uuid}">
+            <div class="todo__item todo__item--content">${toDo.content}</div>
+            <div class="todo__item todo__item--status ${statusClass}">${toDo.status}</div>
+            <div class="todo__item todo__item--due-date">${toDoDueDateString}</div>
+            <div class="todo__item todo__item--delete"><i class="fa fa-trash"></i></div>
+          </div>`;
+        }
+      });
+
+      upcomingRoot.innerHTML = upcomingHtml;
+      laterRoot.innerHTML = laterHtml;
+      
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+
+addToDoform.addEventListener('submit', ev => handleAddToDo(ev));
+searchToDosform.addEventListener('keyup', ev => handleSearchToDo(ev));
+editToDosAncestor.addEventListener('click', ev => handleClickedToDo(ev));
+resetBtn.addEventListener('click', ev => handleReset(ev));
+addToDoTimeInput.addEventListener('click', ev => onlyFutureToDos(ev));
+
+const handleAddToDo = async (ev: any): Promise<void> => {
   try {
     ev.preventDefault();
     const formElements = ev.target.elements;
 
     const content: string = formElements.toDoContent.value;
-    const dueDate: number = Date.parse(formElements.toDoDueDate.value);
+    const dueDate: any = new Date(formElements.toDoDueDate.value);
 
-    const toDo = { content, status: 'Pending...', dueDate };
+    const toDo: ToDo = { content, status: 'Pending...', dueDate, uuid: null, createdDate: new Date(), editedDate: null};
 
     await postToDo(toDo);
     await getData(null, null);
@@ -42,7 +141,7 @@ async function handleNewToDo(ev) {
   }
 }
 
-function handleToDoSearch(ev) {
+const handleSearchToDo =  (ev: any): void => {
   try {
     ev.preventDefault();
     const formElements = ev.target.elements;
@@ -62,67 +161,42 @@ function handleToDoSearch(ev) {
   }
 }
 
-async function getData(toDoContent: string, toDoStatus: string): Promise<any> {
-  const dataToFetch: any = ((!toDoContent) && (!toDoStatus)) ? await getToDos() : await searchToDos(toDoContent, toDoStatus);
-
-  renderData(dataToFetch);
-}
-
-function renderData(dataToRender: any): void {
+const handleEditToDo = async (ev: any): Promise<void> => {
   try {
-    const upcomingRoot: HTMLElement = document.querySelector(".upcoming");
-    const laterRoot: HTMLElement = document.querySelector(".later");
+    ev.preventDefault();
+    const formElements = ev.target.elements;
 
-    const dateInThirtyDays = new Date();
-    dateInThirtyDays.setDate(dateInThirtyDays.getDate() + 30);
-    const options: object = {day: 'numeric', month: 'short'  };
-    const upcomingLimit: string = dateInThirtyDays.toLocaleDateString('en-US', options);
+    const uuid: string = ev.target.getAttribute("id").replace('-edit-form','');
+    const content: string = formElements.toDoContent.value;
+    const status: any = formElements.toDoStatus.value;
+    const dueDate: any = new Date(formElements.toDoDueDate.value);
 
-    let upcomingHtml: string = `<h2 class="upcoming__item upcoming__item--header">Todos due up to ${upcomingLimit}</h2>`;
-    let laterHtml: string = `<h2 class="later__item later__item--header">Todos due after ${upcomingLimit}</h2>`;
+    const toDo: ToDo = { content, status, dueDate, uuid, createdDate: null, editedDate: new Date()};
 
-    upcomingRoot.innerHTML = upcomingHtml;
-    laterRoot.innerHTML = laterHtml;
+    await putToDo(toDo);
+    await getData(null, null);
 
-    if (typeof dataToRender.data === "string") {
-      upcomingRoot.innerHTML = `<h3>${dataToRender.data}</h3>`;
-      return;
-    }
+    ev.target.reset();
 
-    const now: number = Date.now();
-
-    dataToRender.data.forEach((toDo) => {
-      if (((toDo.dueDate - now) * (1000 * 60 * 60 * 24)) < 30) {
-        upcomingHtml += 
-        `<div class="upcoming__item todo" id="${toDo.uuid}">
-          <div class="todo__item todo__item--content">${toDo.content}</div>
-          <div class="todo__item todo__item--status">${toDo.status}</div>
-          <div class="todo__item todo__item--due-date">${toDo.dueDate}</div>
-          <button class="todo__item todo__item--edit"><i class="fa fa-edit"></i>div>
-          <button class="todo__item todo__item--delete"><i class="fa fa-remove"></i>div>
-        </div>`;
-      }
-      else {
-        laterHtml += 
-        `<div class="later__item todo" id="${toDo.uuid}">
-          <div class="todo__item todo__item--content">${toDo.content}</div>
-          <div class="todo__item todo__item--status">${toDo.status}</div>
-          <div class="todo__item todo__item--due-date">${toDo.dueDate}</div>
-          <button class="todo__item todo__item--edit"><i class="fa fa-edit"></i>div>
-          <button class="todo__item todo__item--delete"><i class="fa fa-remove"></i>div>
-        </div>`;
-      }
-    });
-
-    upcomingRoot.innerHTML = upcomingHtml;
-    laterRoot.innerHTML = laterHtml;
-    
   } catch (error) {
     console.error(error);
-}
+  }
 }
 
-function handleReset(ev) {
+const handleDeleteToDo = async (ev: any): Promise<void> => {
+  try {
+    const toDoAnsestor: HTMLElement = (ev.target.className === 'fa fa-trash') ? ev.target.parentElement.parentElement : ev.target.parentElement;
+    const uuid: string = toDoAnsestor.getAttribute("id");
+    
+    await deleteToDo(uuid);
+    await getData(null, null);
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const handleReset =  (ev: any): void => {
   try {
     ev.preventDefault();
 
