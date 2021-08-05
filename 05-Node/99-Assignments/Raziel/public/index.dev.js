@@ -52,7 +52,7 @@ allBtn.addEventListener("click", function () {
   inactive([incomeBtn, expenseBtn]);
 });
 addExpense.addEventListener("click", function _callee() {
-  var expense, expns;
+  var expense, data, options;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -74,13 +74,20 @@ addExpense.addEventListener("click", function _callee() {
             amount: parseInt(expenseAmount.value)
           };
           ENTRY_LIST.push(expense);
-          _context.next = 7;
-          return regeneratorRuntime.awrap(axios('/createExpense', {
-            expense: expense
-          }));
+          data = {
+            type: "expense",
+            tile: expenseTitle.value,
+            amount: parseInt(expenseAmount.value)
+          };
+          options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
 
-        case 7:
-          expns = _context.sent;
+          };
+          fetch('/addExpense', options);
           updateUI();
           clearInput([expenseTitle, expenseAmount]);
           _context.next = 15;
@@ -108,6 +115,20 @@ addIncome.addEventListener("click", function () {
     amount: parseInt(incomeAmount.value)
   };
   ENTRY_LIST.push(income);
+  var data = {
+    type: "income",
+    tile: incomeTitle.value,
+    amount: parseInt(incomeAmount.value)
+  };
+  var options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+
+  };
+  fetch('/addIncome', options);
   updateUI();
   clearInput([incomeTitle, incomeAmount]);
 });
