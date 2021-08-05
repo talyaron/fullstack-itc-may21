@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const fs = require("fs");
-
+const { v4: uuidv4 } = require("uuid");
 //JSON
 const localJson = () => {
   const fileJson = fs.readFileSync("./task.json");
@@ -24,19 +24,44 @@ app.get("/getTask", (req, res) => {
 
 //TODO: POST
 app.post("/addTask", (req, res) => {
-  const { name } = req.body;
+  const { name,description } = req.body;
   const task = localJson();
   const addTask = {
+    id: uuidv4(),
     name: name,
+    description: description
   };
 
   task.push(addTask);
   fs.writeFileSync("./task.json", JSON.stringify(task));
-  fs.readFileSync("./task.json");
+  //   fs.readFileSync("./task.json");
   res.send(task);
 });
 
 app.use(express.static("public"));
+
+//! DELETE
+app.delete("/deleteTask/:id", (req, res) => {
+  let { id } = req.params;
+  const tasks = localJson();
+  const deleteTask = tasks.filter((task) => task.id !== id);
+  fs.writeFileSync("./task.json", JSON.stringify(deleteTask));
+  res.send([...deleteTask]);
+});
+
+//* PUT
+app.put("/updateTask/:id",(req,res) => {
+    let { id } = req.params;
+    const { name,description } = req.body;
+    const tasks = localJson();
+
+    const updateTask = tasks.find((task)=> task.id === id)
+
+    updateTask.name = name;
+    updateTask.description = description;
+
+    res.send(updateTask)
+})
 
 //Listen
 app.listen(app.get("port"), () => {
