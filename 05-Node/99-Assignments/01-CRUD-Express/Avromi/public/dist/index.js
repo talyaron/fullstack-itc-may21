@@ -45,8 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 //     const data = ev.dataTransfer.getData("text");
 //     ev.target.appendChild(document.getElementById(data));
 //   }
-var title = "new title";
-//create form handle to submit title....
+// const title = "new title"
 function addTask(title) {
     return __awaiter(this, void 0, void 0, function () {
         var res, allTasks, error_1;
@@ -69,4 +68,11 @@ function addTask(title) {
         });
     });
 }
-addTask(title);
+var form = document.querySelector(".main__form");
+form.addEventListener('submit', handleSubmit);
+function handleSubmit(ev) {
+    ev.preventDefault();
+    var task = ev.target.elements.task.value;
+    addTask(task);
+    ev.target.reset();
+}

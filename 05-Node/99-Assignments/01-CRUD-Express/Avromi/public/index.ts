@@ -14,12 +14,8 @@
 
 
 
-const title = "new title"
+// const title = "new title"
 
-
-
-
-//create form handle to submit title....
 async function addTask(title) {
     try {
         const res = await axios.post('/tasks/newTask', { title })
@@ -31,4 +27,19 @@ async function addTask(title) {
 
 }
 
-addTask(title)
+
+
+const form = document.querySelector(".main__form")
+form.addEventListener('submit', handleSubmit);
+
+function handleSubmit(ev:any):any{
+    ev.preventDefault();
+    const task = ev.target.elements.task.value;
+    addTask(task)
+
+    ev.target.reset();
+}
+
+
+
+
