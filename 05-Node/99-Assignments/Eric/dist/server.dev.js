@@ -28,6 +28,9 @@ var readAllEmployes = function readAllEmployes() {
 };
 
 var allEmployes = readAllEmployes();
+app.get('/getEmployes', function (req, res) {
+  res.send(allEmployes);
+});
 app.post('/addEmployes', function (req, res) {
   var _req$body = req.body,
       name = _req$body.name,
@@ -47,15 +50,33 @@ app.post('/addEmployes', function (req, res) {
     message: 'one person was added',
     allEmployes: allEmployes
   });
-});
-app.put('/updateEmployes/:id', function (req, res) {
-  var id = req.params.id;
-  var name = req.body.name;
+}); // app.put('/updateEmployes/:id', (req, res)=>{
+//     const {id} = req.params;
+//     const {name} = req.body;
+//     const employeUpdate = allEmployes.find((employe)=>employe.id === id);
+//     if(name)
+//     employeUpdate.name = name;
+//     res.send(employeUpdate)
+// })
+// UPDATE TASKS
+
+app.put('/updateEmployes', function (req, res) {
+  var _req$body2 = req.body,
+      nameEdit = _req$body2.nameEdit,
+      emailEdit = _req$body2.emailEdit,
+      addressEdit = _req$body2.addressEdit,
+      phoneEdit = _req$body2.phoneEdit,
+      id = _req$body2.id;
   var employeUpdate = allEmployes.find(function (employe) {
     return employe.id === id;
   });
-  if (name) employeUpdate.name = name;
-  res.send(employeUpdate);
+  employeUpdate.name = nameEdit;
+  employeUpdate.email = emailEdit;
+  employeUpdate.address = addressEdit;
+  employeUpdate.phone = phoneEdit;
+  employeUpdate.id = id;
+  console.log(allEmployes);
+  res.send(allEmployes);
 });
 app["delete"]('/deleteEmployes/:id', function (req, res) {
   var id = req.params.id;
@@ -64,7 +85,7 @@ app["delete"]('/deleteEmployes/:id', function (req, res) {
   });
   fs.writeFileSync("./employes.json", JSON.stringify(allEmployes));
   res.send({
-    message: 'one student record was deleted',
+    message: 'one employe record was deleted',
     allEmployes: allEmployes
   });
   console.log(allEmployes);

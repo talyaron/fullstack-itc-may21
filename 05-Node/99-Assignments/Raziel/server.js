@@ -1,11 +1,43 @@
 const express = require('express');
 const app = express();
-const port= process.env.const || 0007;
-const { v4: uuidv4 } = require('uuid');
+const port= process.env.const || 3500;
+const fs = require("fs");
+const {v4: uuidv4}=require("uuid");
+const path = require("path");
+const filepath= path.resolve(__dirname,"EntryList.json");
+app.use(express.static("public"));
+app.use(express.json());
 
-
-
-class Task{
-    constructor()
+const readAllEntery=() => {
+    const allEntery = fs.readFileSync(filepath);
+    console.log(allEntery);
+    return JSON.parse(allEntery);
 }
+
+const allEntery = fs.readFileSync(filepath);
+console.log(allEntery);
+app.post('/addExpense',(req, res) => {
+    try {
+        const {type, title,amount} = req.body;
+        
+    const newExpense={
+        type,
+        title,
+        amount,
+        id:uuidv4()
+    }
+    console.log(newExpense);
+    const allEntery=readAllEntery();
+    allEntery.push(newExpense);
+    console.log(allEntery);
+    fs.writeFileSync("./EntryList.json",JSON.stringify(allEntery));
+    res.send(allEntery)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+    
+
+})
+ 
+
 app.listen(port, () => { console.log('Server listen on port', port) })

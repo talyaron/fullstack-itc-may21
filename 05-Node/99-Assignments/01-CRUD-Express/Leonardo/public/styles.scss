@@ -67,7 +67,6 @@ body {
   display: grid;
   grid-template-columns: 33.3% 33.3% 33.4%;
   height: 100vh;
-  background-color: red;
 
   &__todo {
     background-color: green;
@@ -103,7 +102,9 @@ body {
 
   /* Modal Content */
   &-content {
-    background: peru;
+    background: url(../img/backgroundModal.jpg);
+    background-size: cover;
+    background-repeat: round;
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
@@ -114,7 +115,12 @@ body {
   }
 }
 
-.form {
+.form,
+.form__wrapper {
+  label {
+    font-weight: bolder;
+  }
+
   &__input {
     width: 100%;
 
@@ -122,11 +128,22 @@ body {
       display: flex;
       margin: auto;
       cursor: pointer;
+      background: lightblue;
+
+      &:hover {
+        background: green;
+        color: white;
+      }
     }
   }
 
   &__textarea {
     width: 100%;
+  }
+
+  &__radio {
+    display: flex;
+    justify-content: space-evenly;
   }
 }
 
@@ -147,7 +164,7 @@ body {
   background: lightsalmon;
   border-radius: 50px;
   margin: 10px;
-  word-break: break-all;
+  word-break: break-word;
   padding: 0 25px;
   justify-content: space-between;
 
@@ -185,6 +202,18 @@ body {
       }
     }
   }
+
+  &__info {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: flex-end;
+    
+    &--date {
+      word-break: normal;
+      font-size: 8px;
+    }
+  }
 }
 
 .toDo {
@@ -197,4 +226,29 @@ body {
 
 .inProgress {
   background-color: dodgerblue;
+}
+
+.content {
+  &__todo {
+    height: 70vh;
+  }
+  &__inprogress {
+    height: 70vh;
+  }
+  &__done {
+    height: 70vh;
+  }
+}
+
+/////////////////////////////////////RESPONSIVE///////////////////////////////
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    grid-template-rows: 33.3% 33.3% 33.4%;
+    grid-template-columns: none;
+    height: max-content;
+  }
+}
+
+.close {
+  left: 10px;
 }

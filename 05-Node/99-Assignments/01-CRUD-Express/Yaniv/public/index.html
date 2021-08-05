@@ -8,36 +8,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <title>Students</title>
+    <script src="https://kit.fontawesome.com/3d6c8f810b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./dist/style.css">
+    <title>monday who? - to-do list</title>
 </head>
 
 <body>
-    <h1>To-do List</h1>
-    <h2>Students List</h2>
-    <div class='students'>
-        <h2>Search for a Student (by UUID)</h2>
-        <form id="search-student-form">
-            <label for="studentUuid"></label>
-            <input type="search" name="studentUuid" id="student-uuid" minlength="36" maxlength="36" required />
-            <label for="studentUuid">Student Uuid</label>
-            <input type="search" name="studentUuid" id="student-uuid" minlength="36" maxlength="36" required />
-            <label for="studentUuid">Student Uuid</label>
-            <input type="search" name="studentUuid" id="student-uuid" minlength="36" maxlength="36" required />
-            <input type="submit" id="submit" value="Search" />
+    <header>
+        <h1>monday who?</h1>
+    </header>
+    <main class='todos'>
+        <form class="add-form" id="add-todo-form">
+            <input class="add-form__item add-form__item--content" type="text" placeholder="Add your to-do here" minlength="2" maxlength="80" name="toDoContent" id="add-todo-content" required />
+            <input class="add-form__item add-form__item--due-date" type="date" min="" name="toDoDueDate" id="add-todo-due-date" required />
+            <input class="add-form__item add-form__item--submit" type="submit" id="add-todo-submit" value="+" />
+        </form>
+
+        <form class="search-form" id="search-todos-form">
+            <input class="search-form__item search-form__item--content" type="text" placeholder="Search to-do" minlength="2" maxlength="80" name="toDoContent" id="search-todos-content" disabled />
+            <select class="search-form__item search-form__item--status" name="toDoStatus" id="search-todos-status" disabled>
+                <option value="">choose status</option>
+                <option value="Pending...">Pending...</option>
+                <option value="In Progress...">In Progress...</option>
+                <option value="Stuck">Stuck</option>
+                <option value="Done">Done</option>
+            </select>
+            <input class="search-form__item search-form__item--due-date" type="date" min="" name="toDoDueDate" id="search-todos-due-date" disabled />
         </form>
         <button type="button" id="reset" style="display:none">Reset</button>
-    </div>
-    <h2>Add a Student</h2>
-    <form id="students-form">
-        <label for="studentName">Name</label>
-        <input type="text" minlength="2" maxlength="20" name="studentName" id="student-name" required />
-        <label for="studentAge">Age</label>
-        <input type="number" min="18" max="45" name="studentAge" id="student-age" required />
-        <label for="studentGradesAvg">Grades Average</label>
-        <input type="number" min="0" max="100" name="studentGradesAvg" id="student-grades-avg" required />
-        <input type="submit" id="submit" value="Add" />
-    </form>
+
+        <div class="headers">
+            <h3 class="headers__item headers__item--status">Status</h3>
+            <h3 class="headers__item headers__item--due-date"><i class="fas fa-bell"></i> Date</h3>
+        </div>
+
+        <div class="todos__item upcoming">
+
+        </div>
+        <div class="todos__item later">
+
+        </div>
+    </main>
+
     <script src="./dist/helpers.js"></script>
+    <script src="./dist/helpers2.js"></script>
     <script src="./dist/index.js"></script>
 </body>
 

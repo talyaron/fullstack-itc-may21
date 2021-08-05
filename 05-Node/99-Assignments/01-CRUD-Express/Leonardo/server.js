@@ -99,6 +99,24 @@ app.put('/editTask/:id', (req, res) => {
     }
 });
 
+//Route to update the status of a Task with the Drag and Drop tool
+app.put('/editStatusTask/:id/:status', (req, res) => {
+    try {
+        const { id, status } = req.params;
+        let allTasks = readJsonAllTasks();
+        const taskIndex = allTasks.findIndex(task => task.id === id);
+        if (taskIndex > -1) {
+            allTasks[taskIndex].status = status;
+            fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
+            res.send({ message: 'The status of the task was updated', tasks: allTasks })
+        } else {
+            res.send({ message: 'Couldnt find a task to update', tasks: allTasks })
+        }
+    } catch (e) {
+        res.status(400).send(error);
+    }
+});
+
 //This function is to listen to the port
 app.listen(port, () => {
     try {

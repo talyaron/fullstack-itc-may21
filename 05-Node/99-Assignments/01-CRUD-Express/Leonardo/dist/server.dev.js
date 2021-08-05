@@ -121,6 +121,34 @@ app.put('/editTask/:id', function (req, res) {
   } catch (e) {
     res.status(400).send(error);
   }
+}); //Route to update the status of a Task with the Drag and Drop tool
+
+app.put('/editStatusTask/:id/:status', function (req, res) {
+  try {
+    var _req$params = req.params,
+        id = _req$params.id,
+        status = _req$params.status;
+    var allTasks = readJsonAllTasks();
+    var taskIndex = allTasks.findIndex(function (task) {
+      return task.id === id;
+    });
+
+    if (taskIndex > -1) {
+      allTasks[taskIndex].status = status;
+      fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
+      res.send({
+        message: 'The status of the task was updated',
+        tasks: allTasks
+      });
+    } else {
+      res.send({
+        message: 'Couldnt find a task to update',
+        tasks: allTasks
+      });
+    }
+  } catch (e) {
+    res.status(400).send(error);
+  }
 }); //This function is to listen to the port
 
 app.listen(port, function () {

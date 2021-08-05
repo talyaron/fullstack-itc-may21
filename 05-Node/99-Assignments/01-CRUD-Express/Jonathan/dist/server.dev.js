@@ -18,6 +18,13 @@ var readAllTasks = function readAllTasks() {
   return JSON.parse(allTasks);
 };
 
+function getOrderTask(allTasks) {
+  allTasks.sort(function (a, b) {
+    return a.datetime < b.datetime ? -1 : a.datetime > b.datetime ? 1 : 0;
+  });
+  return allTasks;
+}
+
 app.post("/addTask", function (req, res) {
   try {
     var _req$body = req.body,
@@ -67,8 +74,7 @@ app["delete"]("/deleteTask/:id", function (req, res) {
     allTasks = allTasks.filter(function (task) {
       return task.id !== id;
     });
-    fs.writeFileSync("./task.json", JSON.stringify(allTasks)); //allStudents.sort(function (a, b){return (a.id - b.id)})
-
+    fs.writeFileSync("./task.json", JSON.stringify(allTasks));
     res.send(allTasks);
   } catch (e) {
     res.status(500).send({
@@ -84,9 +90,8 @@ app.put("/doneTask/:id", function (req, res) {
       return task.id === id;
     });
     task.status = 'done';
-    fs.writeFileSync("./task.json", JSON.stringify(allTasks)); //allStudents.sort(function (a, b){return (a.id - b.id)})
-
-    res.send(allTasks);
+    fs.writeFileSync("./task.json", JSON.stringify(allTasks));
+    res.send(getOrderTask(allTasks));
   } catch (e) {
     res.status(500).send({
       error: "".concat(e)
@@ -118,8 +123,7 @@ app.put("/updateTask/:id", function (req, res) {
     task.status = status;
     task.date = date;
     task.min = min;
-    fs.writeFileSync("./task.json", JSON.stringify(allTasks)); //allStudents.sort(function (a, b){return (a.id - b.id)})
-
+    fs.writeFileSync("./task.json", JSON.stringify(allTasks));
     res.send(allTasks);
   } catch (e) {
     res.status(500).send({
@@ -143,17 +147,14 @@ app.get("/getPriority/:status", function (req, res) {
     task = allTasks.filter(function (task) {
       return task.status === status;
     });
-    res.send(task);
+    res.send(getOrderTask(task));
   } else {
     res.send(allTasks);
   }
 });
 app.get("/orderDate", function (req, res) {
   var allTasks = readAllTasks();
-  allTasks.sort(function (a, b) {
-    return a.datetime < b.datetime ? -1 : a.datetime > b.datetime ? 1 : 0;
-  });
-  res.send(allTasks);
+  res.send(getOrderTask(allTasks));
 });
 app.listen(port, function () {
   console.log("Example app listening at http://localhost:".concat(port));

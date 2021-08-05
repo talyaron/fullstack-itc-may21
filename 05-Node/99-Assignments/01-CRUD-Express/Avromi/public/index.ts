@@ -12,7 +12,16 @@
 //     ev.target.appendChild(document.getElementById(data));
 //   }
 
-const title = "title"
+
+class Title{
+    title:string 
+    constructor(title:string){
+    this.title = title;
+}}
+const title = new Title( 'notwe one ');
+
+
+
 
 //create form handle to submit title....
 

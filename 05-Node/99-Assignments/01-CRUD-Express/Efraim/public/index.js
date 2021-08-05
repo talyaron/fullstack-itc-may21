@@ -1,20 +1,26 @@
 
 // For YS, I orginally used axios and the code was way shorter and cleaner.. 
 // assignment said to use promises so I changed it all to fetch and resolve and reject and seems a lot bulkier now..
-
-window.addEventListener('load', () => {
+function getFullTaskList(){
     try {
         return new Promise((resolve, reject) => {
             fetch('/getList')
                 .then(r => r.json())
                 .then(data => {
                     resolve(data.list)
-                    renderArrayToDom(data.list)
                 })
                 .catch(e => {
                     reject(e)
                 });
         })
+    } catch (e) {
+        console.error(e)
+    }
+}
+window.addEventListener('load', async() => {
+    try {
+       const list = await getFullTaskList();
+       await renderArrayToDom(list)      
     } catch (e) {
         console.error(e)
     }
@@ -41,7 +47,6 @@ function handleTask(ev) {
                 .then(data => {
                     resolve(data.list)
                     renderArrayToDom(data.list)
-                    alert("Submitted Succesfuly!")
                 })
                 .catch(e => {
                     reject(e)
@@ -83,7 +88,7 @@ function deleteTask(taskID) {
 function updateTask(taskID) {
     try {
         const newTaskName = document.getElementById(`${taskID}update`).value;
-        return new Promise((resolve, reject) => {
+        return new Promise(async(resolve, reject) => {
             fetch('/updateTask', {
                     method: 'PUT',
                     headers: {
@@ -98,7 +103,6 @@ function updateTask(taskID) {
                 .then(data => {
                     resolve(data.list.list)
                     renderArrayToDom(data.list.list)
-                    alert("updated succefully!")
                 })
                 .catch(e => {
                     reject(e)
@@ -134,14 +138,29 @@ function updateStatus(ID) {
         console.error(e)
     }
 }
-
+async function editTaskKeepText(id){
+    try{
+        const edit = document.getElementById(`${id}update`);
+        const list = await getFullTaskList()
+        const arrayElement = await list.filter(find => find.itemID === id)
+        edit.placeholder = ""
+        edit.value = arrayElement[0].item
+} catch (e) {
+    console.error(e)
+}
+}
 function dateUrgency(date) {
+    try{
     if ((new Date(date) - new Date()) / 1000 < 86400) {
         return "red"
     } else if ((new Date(date) - new Date()) / 1000 < 259200) {
+        return "orange"
+    }else if((new Date(date) - new Date()) / 1000 < 604800) {
         return "rgb(220, 220, 2)"
     } else {
         return "blue"
+    }} catch (e) {
+        console.error(e)
     }
 }
 async function renderArrayToDom(listArray) {
@@ -163,7 +182,7 @@ async function renderArrayToDom(listArray) {
                     `<div class="holder__item" id='${listItem.itemID}'>
                 <div class="holder__item__header">Task:</div>
                 <div class="holder__item__taskDisplay">${listItem.item}</div>
-                <input class="holder__item__task" id="${listItem.itemID}update" placeholder="Edit Task, Click Update!"  value="">
+                <input class="holder__item__task" id="${listItem.itemID}update" placeholder="Edit Task, Click Update!"  value="" onclick='editTaskKeepText("${listItem.itemID}")'>
                 <div class='button button--update' onclick='updateTask("${listItem.itemID}")'>UPDATE</div>
                 <div class="holder__item__header">Due Date:</div>
                 <div class="holder__item__dueDate" style="color: ${urgencyColor}">${listItem.dueDate}</div>
