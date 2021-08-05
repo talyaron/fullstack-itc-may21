@@ -40,17 +40,18 @@ app["delete"]('/tasks/:id', function (req, res) {
 
 app.put('/tasks', function (req, res) {
   var _req$body = req.body,
-      task = _req$body.task,
-      date = _req$body.date,
-      status = _req$body.status,
+      taskEdit = _req$body.taskEdit,
+      dateEdit = _req$body.dateEdit,
+      statusEdit = _req$body.statusEdit,
       id = _req$body.id;
-  var taskUpdate = tasks.findIndex(function (task) {
+  var taskUpdate = tasks.find(function (task) {
     return task.id === id;
   });
-  if (task) tasks[taskUpdate].task = task;
-  if (date) tasks[taskUpdate].date = date;
-  if (status) tasks[taskUpdate].status = status;
-  tasks[taskUpdate].id = id;
+  taskUpdate.task = taskEdit;
+  taskUpdate.date = dateEdit;
+  taskUpdate.status = statusEdit;
+  taskUpdate.id = id;
+  console.log(taskUpdate);
   res.send(tasks);
 });
 app.listen(port, function () {
