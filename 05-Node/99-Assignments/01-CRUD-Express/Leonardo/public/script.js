@@ -22,25 +22,20 @@ async function handleSubmit(event) {
 
 //Function to render the data of the tasks in the DOM
 function renderTask(data) {
+    const htmltoDo = renderThrough(data, 'toDo');
+    document.getElementById('toDo').innerHTML = htmltoDo;
 
-    const htmlInProgress = data.map(task => {
-        if (task.status === 'inProgress') {
-            return `<div class='tasks inProgress' draggable="true">
-                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
-                    <h4> ${task.title} </h4>             
-                    <p> ${task.description} </p>
-                </button>
-                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
-                </div>`
-        }
-    }).join('');
-
+    const htmlInProgress = renderThrough(data, 'inProgress');
     document.getElementById('inProgress').innerHTML = htmlInProgress;
 
-    //////////////
-    const htmlDone = data.map(task => {
-        if (task.status === 'done') {
-            return `<div class='tasks done' draggable="true">
+    const htmlDone = renderThrough(data, 'done');
+    document.getElementById('done').innerHTML = htmlDone;
+};
+
+function renderThrough(data, status) {
+    const toShow = data.map(task => {
+        if (task.status === status) {
+            return `<div class='tasks ${status}' id='${task.id}' draggable="true" ondragstart="onDragStart(event)">
                 <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
                     <h4> ${task.title} </h4>             
                     <p> ${task.description} </p>
@@ -49,25 +44,7 @@ function renderTask(data) {
                 </div>`
         }
     }).join('');
-
-    document.getElementById('done').innerHTML = htmlDone
-
-    //////////////
-    const htmltoDo = data.map(task => {
-        if (task.status === 'toDo') {
-            return `<div class='tasks toDo' draggable="true">
-                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
-                    <h4> ${task.title} </h4>             
-                    <p> ${task.description} </p>
-                </button>
-                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
-                </div>`
-        }
-    }).join('');
-    const todoRoot = document.getElementById('toDo');
-    debugger;
-    console.dir(todoRoot);
-    todoRoot.innerHTML = htmltoDo
+    return toShow;
 };
 
 //Get the tasks information:
