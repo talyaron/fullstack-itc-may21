@@ -137,34 +137,37 @@ function handleSubmit(event) {
 
 //UPDATE
 
- function updateEmploye (id){
-	 
- }
 
+let currentId;
+function updateEmploye(id){
+ currentId = id;
+}
+async function handleEdit(event){
+    event.preventDefault();
+    try{
 
+    let id = currentId;
+    const nameEdit = document.querySelector('#name').value;
+    const emailEdit = document.querySelector('#email').value;
+    const addressEdit = document.querySelector('#address').value;
+	const phoneEdit = document.querySelector('#phone').value;
+    const updateEmploye = {nameEdit, emailEdit, addressEdit, phoneEdit, id} 
+	if(nameEdit==="" || emailEdit==="" || addressEdit==="" || phoneEdit==="") throw new Error ('data vacia')
+	
 
-// function updateEmploye(personId) {
-// 	const newName = document.getElementById(`${personId}name`).value;
-// 	axios.put('/updateEmploye', {
-// 			id: personId,
-// 			name: newName
-// 		})
-// 		.then(res => {
-// 			console.log(res.data.message)
-// 			render(res.array.allEmployes)
+	console.log(updateEmploye);
+
+	const employeData = await axios.put(`/updateEmployes`, updateEmploye );
+	event.target.reset()
+	render(employeData.data);
+	if($("#aditEmployeeModal")){
+		$("#editEmployeeModal").modal("hide") 
 		
-// 		})
-// }
-
-// function handleEdit(event){
-// 	event.preventDefault()
-
-
-
-
-
-// 	updateEmploye()
-
-
-// }
+	}
+	} catch (error) {
+			console.error(error);
+		}
+    
+    
+}
 

@@ -136,18 +136,67 @@ function deleteEmploye(id) {
 
 ; //UPDATE
 
-function updateEmploye(id) {} // function updateEmploye(personId) {
-// 	const newName = document.getElementById(`${personId}name`).value;
-// 	axios.put('/updateEmploye', {
-// 			id: personId,
-// 			name: newName
-// 		})
-// 		.then(res => {
-// 			console.log(res.data.message)
-// 			render(res.array.allEmployes)
-// 		})
-// }
-// function handleEdit(event){
-// 	event.preventDefault()
-// 	updateEmploye()
-// }
+var currentId;
+
+function updateEmploye(id) {
+  currentId = id;
+}
+
+function handleEdit(event) {
+  var id, nameEdit, emailEdit, addressEdit, phoneEdit, _updateEmploye, employeData;
+
+  return regeneratorRuntime.async(function handleEdit$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          event.preventDefault();
+          _context3.prev = 1;
+          id = currentId;
+          nameEdit = document.querySelector('#name').value;
+          emailEdit = document.querySelector('#email').value;
+          addressEdit = document.querySelector('#address').value;
+          phoneEdit = document.querySelector('#phone').value;
+          _updateEmploye = {
+            nameEdit: nameEdit,
+            emailEdit: emailEdit,
+            addressEdit: addressEdit,
+            phoneEdit: phoneEdit,
+            id: id
+          };
+
+          if (!(nameEdit === "" || emailEdit === "" || addressEdit === "" || phoneEdit === "")) {
+            _context3.next = 10;
+            break;
+          }
+
+          throw new Error('data vacia');
+
+        case 10:
+          console.log(_updateEmploye);
+          _context3.next = 13;
+          return regeneratorRuntime.awrap(axios.put("/updateEmployes", _updateEmploye));
+
+        case 13:
+          employeData = _context3.sent;
+          event.target.reset();
+          render(employeData.data);
+
+          if ($("#aditEmployeeModal")) {
+            $("#editEmployeeModal").modal("hide");
+          }
+
+          _context3.next = 22;
+          break;
+
+        case 19:
+          _context3.prev = 19;
+          _context3.t0 = _context3["catch"](1);
+          console.error(_context3.t0);
+
+        case 22:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, null, null, [[1, 19]]);
+}
