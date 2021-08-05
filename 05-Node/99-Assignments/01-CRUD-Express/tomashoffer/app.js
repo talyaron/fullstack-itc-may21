@@ -35,13 +35,13 @@ app.delete('/tasks/:id', (req, res)=>{
 })
 // UPDATE TASKS
 app.put('/tasks', (req, res)=>{ 
-const {task, date, status, id} =  req.body; 
-const taskUpdate = tasks.findIndex(task => task.id === id)
-if(task) tasks[taskUpdate].task = task;
-if(date) tasks[taskUpdate].date = date;
-if(status) tasks[taskUpdate].status = status;
-tasks[taskUpdate].id = id;
-
+const {taskEdit, dateEdit, statusEdit, id} =  req.body; 
+const taskUpdate = tasks.find(task => task.id === id)
+taskUpdate.task = taskEdit;
+taskUpdate.date = dateEdit;
+taskUpdate.status = statusEdit;
+taskUpdate.id = id;
+console.log(taskUpdate)
 res.send(tasks);
 })
 

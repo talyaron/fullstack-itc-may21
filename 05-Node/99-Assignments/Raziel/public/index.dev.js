@@ -1,5 +1,13 @@
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 /* www.youtube.com/CodeExplained */
 // SELECT ELEMENTS
 var balanceEl = document.querySelector(".balance .value");
@@ -51,60 +59,65 @@ allBtn.addEventListener("click", function () {
   active(allBtn);
   inactive([incomeBtn, expenseBtn]);
 });
-addExpense.addEventListener("click", function _callee() {
-  var expense, data, options;
-  return regeneratorRuntime.async(function _callee$(_context) {
+addExpense.addEventListener("click", addExpense1);
+
+function addExpense1() {
+  var expense, res, data;
+  return regeneratorRuntime.async(function addExpense1$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
-
-          if (!(!expenseTitle.value || !expenseAmount.value)) {
-            _context.next = 3;
-            break;
-          }
-
-          return _context.abrupt("return");
-
-        case 3:
-          // SAVE THE ENTRY TO ENTRY_LIST
           expense = {
             type: "expense",
             title: expenseTitle.value,
             amount: parseInt(expenseAmount.value)
           };
-          ENTRY_LIST.push(expense);
-          data = {
-            type: "expense",
-            tile: expenseTitle.value,
-            amount: parseInt(expenseAmount.value)
-          };
-          options = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data) // body data type must match "Content-Type" header
+          _context.next = 3;
+          return regeneratorRuntime.awrap(axios.post("/addExpense", expense));
 
-          };
-          fetch('/addExpense', options);
+        case 3:
+          res = _context.sent;
+          console.log(res.data);
+          data = res.data; // const data= await res.json();
+
+          ENTRY_LIST.push.apply(ENTRY_LIST, _toConsumableArray(data));
+          console.log(ENTRY_LIST);
           updateUI();
           clearInput([expenseTitle, expenseAmount]);
-          _context.next = 15;
-          break;
 
-        case 12:
-          _context.prev = 12;
-          _context.t0 = _context["catch"](0);
-          console.error(_context.t0);
-
-        case 15:
+        case 10:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 12]]);
-});
+  });
+} // IF ONE OF THE INPUTS IS EMPTY => EXIT
+//     try {
+//         if(!expenseTitle.value || !expenseAmount.value ) return;
+//         // SAVE THE ENTRY TO ENTRY_LIST
+//         let expense = {
+//             type : "expense",
+//             title : expenseTitle.value,
+//             amount : parseInt(expenseAmount.value)
+//         }
+//         ENTRY_LIST.push(expense);
+//        const data = {type : "expense",tile :expenseTitle.value,amount : parseInt(expenseAmount.value)}
+//        const options={
+//            method:'POST',
+//            headers: {
+//             'Content-Type': 'application/json'
+//           },
+//           body: JSON.stringify(data) // body data type must match "Content-Type" header
+//        }
+//        fetch('/addExpense',options);
+//         updateUI();
+//         clearInput( [expenseTitle, expenseAmount] )  
+//     } catch (error) {
+//         console.error(error)
+//     }
+// })
+
+
 addIncome.addEventListener("click", function () {
   // IF ONE OF THE INPUTS IS EMPTY => EXIT
   if (!incomeTitle.value || !incomeAmount.value) return; // SAVE THE ENTRY TO ENTRY_LIST

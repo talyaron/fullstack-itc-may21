@@ -1,11 +1,46 @@
 "use strict";
 
-// window.onload = function () {
-// }
-//render
+/*  Questions and doubts: 
+1)How can I solve the problem add a new employe when you don't write anything in each input, now you can add employes without information
+2)How can I solve comunications with the client user when he want to edit each employe, I used try catch throw new error to stop editing if you don't put info in each input, but I want to pass the info from the de dom into the modal edit so the client don't need to add again each inputs
+3)Also I need one or two session to recap the routes, controllers and promises
+
+*/
+//Get the employes information:
+function getAllEmployes() {
+  var employesData;
+  return regeneratorRuntime.async(function getAllEmployes$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return regeneratorRuntime.awrap(axios.get('/getEmployes'));
+
+        case 3:
+          employesData = _context.sent;
+          render(employesData.data);
+          _context.next = 10;
+          break;
+
+        case 7:
+          _context.prev = 7;
+          _context.t0 = _context["catch"](0);
+          console.log(_context.t0);
+
+        case 10:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[0, 7]]);
+}
+
+; //render
+
 function render(array) {
   if ($("#addEmployeeModal")) {
-    $("#addEmployeeModal").modal("hide"); //se agrega si esta vacio, modificarlo!!
+    $("#addEmployeeModal").modal("hide");
   }
 
   var root = document.querySelector(".root");
@@ -17,8 +52,9 @@ function render(array) {
       var name = elem.name,
           email = elem.email,
           address = elem.address,
-          phone = elem.phone;
-      html += "<tr>\n\t\t\t<td></td>\n\t\t\t<td>".concat(name, "</td>\n\t\t\t<td>").concat(email, "</td>\n\t\t\t<td>").concat(address, "</td>\n\t\t\t<td>").concat(phone, "</td>\n\t\t\t<td>\n\t\t\t\t<a href=\"#editEmployeeModal\" class=\"edit\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Edit\">&#xE254;</i></a>\n\t\t\t\t<a href=\"#deleteEmployeeModal\" class=\"delete\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Delete\">&#xE872;</i></a>\n\t\t\t</td>\n\t\t</tr>");
+          phone = elem.phone,
+          id = elem.id;
+      html += "<tr>\n\t\t\t<td></td>\n\t\t\t<td>".concat(name, "</td>\n\t\t\t<td>").concat(email, "</td>\n\t\t\t<td>").concat(address, "</td>\n\t\t\t<td>").concat(phone, "</td>\n\t\t\t<td>\n\t\t\t\t<a href=\"#editEmployeeModal\" class=\"edit\" data-toggle=\"modal\"><i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Edit\"  onclick='updateEmploye(\"").concat(id, "\")' >&#xE254;</i></a>\n\t\t\t\t<i class=\"material-icons\" data-toggle=\"tooltip\" title=\"Delete\"  onclick='deleteEmploye(\"").concat(id, "\")' style=\"cursor:pointer\">&#xE872;</i>\n\t\t\t</td>\n\t\t</tr>");
     });
     html += "</tbody></table>";
   } else {
@@ -64,70 +100,110 @@ function handleSubmit(event) {
   } else {
     alert('You need to complete at least one field');
   }
-} //DELETE
+}
 
+function deleteEmploye(id) {
+  var option, employeData;
+  return regeneratorRuntime.async(function deleteEmploye$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          option = confirm("Are you sure do you want to delete this employe?");
 
-function deleteRecord(personId) {
-  axios["delete"]('/deleteEmployes', {
-    id: personId
-  }).then(function (res) {
-    console.log(employes);
-    render(res.array.allEmployes);
-  });
-} //tengo que guardar el id del que estoy clickeando para borrar y mandarlo a deleteRecord para eliminarlo
+          if (!option) {
+            _context2.next = 7;
+            break;
+          }
 
+          _context2.next = 5;
+          return regeneratorRuntime.awrap(axios["delete"]("/deleteEmployes/".concat(id)));
 
-function handleDelete(event) {
-  event.preventDefault();
-  deleteRecord();
-  console.log('hio');
-} //UPDATE
+        case 5:
+          employeData = _context2.sent;
+          render(employeData.data.allEmployes);
 
+        case 7:
+          _context2.next = 12;
+          break;
 
-function updateEmploye(personId) {
-  var newName = document.getElementById("".concat(personId, "name")).value;
-  axios.put('/updateEmploye', {
-    id: personId,
-    name: newName
-  }).then(function (res) {
-    console.log(res.data.message);
-    render(res.array.allEmployes);
-  });
+        case 9:
+          _context2.prev = 9;
+          _context2.t0 = _context2["catch"](0);
+          console.error(_context2.t0);
+
+        case 12:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, null, null, [[0, 9]]);
+}
+
+; //UPDATE
+
+var currentId;
+
+function updateEmploye(id) {
+  currentId = id;
 }
 
 function handleEdit(event) {
-  event.preventDefault();
-  updateEmploye();
-} //Get the employes information:
+  var id, nameEdit, emailEdit, addressEdit, phoneEdit, _updateEmploye, employeData;
 
-
-function getAllEmployes() {
-  var employesData;
-  return regeneratorRuntime.async(function getAllEmployes$(_context) {
+  return regeneratorRuntime.async(function handleEdit$(_context3) {
     while (1) {
-      switch (_context.prev = _context.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
-          _context.prev = 0;
-          _context.next = 3;
-          return regeneratorRuntime.awrap(axios.get('/getEmployes'));
+          event.preventDefault();
+          _context3.prev = 1;
+          id = currentId;
+          nameEdit = document.querySelector('#name').value;
+          emailEdit = document.querySelector('#email').value;
+          addressEdit = document.querySelector('#address').value;
+          phoneEdit = document.querySelector('#phone').value;
+          _updateEmploye = {
+            nameEdit: nameEdit,
+            emailEdit: emailEdit,
+            addressEdit: addressEdit,
+            phoneEdit: phoneEdit,
+            id: id
+          };
 
-        case 3:
-          employesData = _context.sent;
-          render(employesData.data);
-          _context.next = 10;
-          break;
+          if (!(nameEdit === "" || emailEdit === "" || addressEdit === "" || phoneEdit === "")) {
+            _context3.next = 10;
+            break;
+          }
 
-        case 7:
-          _context.prev = 7;
-          _context.t0 = _context["catch"](0);
-          console.log(_context.t0);
+          throw new Error('Data not completed');
 
         case 10:
+          console.log(_updateEmploye);
+          _context3.next = 13;
+          return regeneratorRuntime.awrap(axios.put("/updateEmployes", _updateEmploye));
+
+        case 13:
+          employeData = _context3.sent;
+          event.target.reset();
+          render(employeData.data);
+
+          if ($("#aditEmployeeModal")) {
+            $("#editEmployeeModal").modal("hide");
+            alert('You editted all info correctly');
+          }
+
+          _context3.next = 22;
+          break;
+
+        case 19:
+          _context3.prev = 19;
+          _context3.t0 = _context3["catch"](1);
+          console.error(_context3.t0);
+
+        case 22:
         case "end":
-          return _context.stop();
+          return _context3.stop();
       }
     }
-  }, null, null, [[0, 7]]);
+  }, null, null, [[1, 19]]);
 }
-
-;

@@ -54,37 +54,60 @@ allBtn.addEventListener("click", function(){
     inactive( [incomeBtn, expenseBtn] );
 })
 
-addExpense.addEventListener("click",async  function(){
-    // IF ONE OF THE INPUTS IS EMPTY => EXIT
-    try {
-        if(!expenseTitle.value || !expenseAmount.value ) return;
+addExpense.addEventListener("click",addExpense1)
 
-        // SAVE THE ENTRY TO ENTRY_LIST
-        let expense = {
-            type : "expense",
-            title : expenseTitle.value,
-            amount : parseInt(expenseAmount.value)
-        }
-        ENTRY_LIST.push(expense);
-        
-       const data = {type : "expense",tile :expenseTitle.value,amount : parseInt(expenseAmount.value)}
-       const options={
-           method:'POST',
-           headers: {
-            'Content-Type': 'application/json'
-           
-          },
-          body: JSON.stringify(data) // body data type must match "Content-Type" header
 
-       }
-       fetch('/addExpense',options);
+async function addExpense1(){
+
+
+
+    let expense = {
+        type : "expense",
+        title : expenseTitle.value,
+        amount : parseInt(expenseAmount.value)
+    }
+const res= await axios.post("/addExpense",expense)
+console.log(res.data);
+const data=res.data;
+// const data= await res.json();
+ENTRY_LIST.push(...data)
+console.log(ENTRY_LIST);
         updateUI();
         clearInput( [expenseTitle, expenseAmount] )  
-    } catch (error) {
-        console.error(error)
-    }
+
+}
+
+
+    // IF ONE OF THE INPUTS IS EMPTY => EXIT
+//     try {
+//         if(!expenseTitle.value || !expenseAmount.value ) return;
+
+//         // SAVE THE ENTRY TO ENTRY_LIST
+//         let expense = {
+//             type : "expense",
+//             title : expenseTitle.value,
+//             amount : parseInt(expenseAmount.value)
+//         }
+//         ENTRY_LIST.push(expense);
+        
+//        const data = {type : "expense",tile :expenseTitle.value,amount : parseInt(expenseAmount.value)}
+//        const options={
+//            method:'POST',
+//            headers: {
+//             'Content-Type': 'application/json'
+           
+//           },
+//           body: JSON.stringify(data) // body data type must match "Content-Type" header
+
+//        }
+//        fetch('/addExpense',options);
+//         updateUI();
+//         clearInput( [expenseTitle, expenseAmount] )  
+//     } catch (error) {
+//         console.error(error)
+//     }
     
-})
+// })
 
 addIncome.addEventListener("click", function(){
     // IF ONE OF THE INPUTS IS EMPTY => EXIT
