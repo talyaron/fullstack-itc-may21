@@ -7,11 +7,11 @@ var port = process.env.PORT || 3000;
 app.use(express["static"]('public'));
 app.get('/cookie', function (req, res) {
   //read cookies 
-  // const cookie = req.cookies;
-  // console.log(cookies);
+  var cookie = req.cookies;
+  console.log(cookie);
   console.log('before cookie ');
   res.cookie('cookie', "Avromi Is...", {
-    maxAge: 3000,
+    maxAge: 30000000,
     httpOnly: true
   });
   res.send({
