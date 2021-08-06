@@ -176,12 +176,12 @@ function deleteOrEdit(event){
     }
 }
 
-function deleteEntry(entry){
-    ENTRY_LIST.splice( entry.id, 1);
+// function deleteEntry(entry){
+//     ENTRY_LIST.splice( entry.id, 1);
 
-    updateUI();
-}
- async function deleteEnt(id){
+//     updateUI();
+// }
+ async function  deleteEntryt(id){
 
     const res=await axios.delete(`/deleteEntry/${id}`);
     updateUI();

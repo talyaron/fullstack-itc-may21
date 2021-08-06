@@ -74,6 +74,15 @@ app.post('/addIncome', function (req, res) {
     res.status(500).send(error.message);
   }
 });
+app["delete"]('/deleteEntry/{id}', function (req, res) {
+  var id = req.params.id;
+  var allEntery = readAllEntery();
+  allEntery = allEntery.filter(function (entery) {
+    return entery.id !== id;
+  });
+  fs.writeFileSync("./EntryList.json", JSON.stringify(allEntery));
+  res.send(allEntery);
+});
 app.listen(port, function () {
   console.log('Server listen on port', port);
 });
