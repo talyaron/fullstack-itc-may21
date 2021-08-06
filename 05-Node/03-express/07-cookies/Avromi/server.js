@@ -9,10 +9,10 @@ app.use(express.static('public'))
 app.get('/cookie', (req, res) => {
 
 //read cookies 
-// const cookie = req.cookies;
-// console.log(cookies);
+const cookie = req.cookies;
+console.log(cookie);
 console.log('before cookie ');
-res.cookie('cookie', "Avromi Is...", {maxAge: 3000, httpOnly: true});
+res.cookie('cookie', "Avromi Is...", {maxAge: 30000000, httpOnly: true});
 res.send({ok: true})
 });
 
