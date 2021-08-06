@@ -183,3 +183,11 @@ footer p {
 .hide {
   display: none;
 }
+
+.done {
+  -webkit-text-decoration-line: line-through;
+  text-decoration-line: line-through;
+  text-decoration-color: white;
+  text-decoration-thickness: 3px;
+  color: rgba(245, 245, 245, 0.486);
+}

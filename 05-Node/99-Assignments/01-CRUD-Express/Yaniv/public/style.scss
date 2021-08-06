@@ -1,0 +1,183 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    width: 100vw;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+button {
+    width:fit-content;
+    margin: 10px auto;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 10px;
+    border: 0;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+
+    &:hover {
+        transition: 150ms;
+    }
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 175px;
+    background-image: linear-gradient(to bottom right, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff);
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.todos {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: space-evenly;
+    justify-content: space-around;
+
+    &__item {
+        margin: 10px 0;
+
+        &--upcoming {
+            margin-top: 0;
+        }
+    }
+
+    .headers {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        text-align: center;
+
+        &__item {
+            width: 25%;
+            margin-bottom: 0;
+
+            &--content {
+                width: 40%;
+            }
+
+            &--delete {
+                width: 10%;
+            }
+        }
+    }
+
+    .upcoming,.later {
+
+        &__item {
+            background-color: #f1f1f1;
+
+            &--upcoming {
+                border-left: 4px solid #bae1ff;
+            }
+    
+            &--later {
+                border-left: 4px solid #ffdfba	;
+            }
+
+            &--header {
+                background-color: unset;
+                text-align: left;
+                margin: 0;
+
+                &-upcoming {
+                    color: #bae1ff;
+                }
+
+                &-later {
+                    color: #ffdfba;
+                }
+            }
+        }
+        
+        .todo {
+            margin: 10px 0;
+            display: flex;
+            text-align: center;
+            justify-content: space-between;    
+            
+            &__item {
+                width:25%;
+                padding: 5px 0;
+
+                &--content {
+                    width:40%;
+                    word-wrap: break-word;
+                }
+
+                &--status {
+                    height: stretch;
+                    color: white;
+
+                    &-pending {
+                        background-color: #E96C3F;
+                    }
+        
+                    &-in-progress {
+                        background-color: #F0AD52;
+                    }
+        
+                    &-stuck {
+                        background-color: #D1505E;
+                    }
+        
+                    &-done {
+                        background-color: #5FC57E;
+                    }
+                }
+
+                &--due-date {
+
+                    &-soon {
+                        font-weight: bold;
+                    }
+        
+                    &-passed {
+                        font-weight: bold;
+                        color: #D1505E;
+                    }
+                }
+
+                &--delete {
+                    width:10%;
+                    color: #D1505E
+                }
+            }
+            
+            .edit-form {
+                width: 100%;
+
+                &__item {
+                    margin: 0;
+                    width:25%;
+                    padding: 5px 0;
+
+                    &--content {
+                        width:40%;
+                    }
+
+                    &--submit {
+                        width:10%;
+                    }
+                }
+            }
+        }
+    }
+}

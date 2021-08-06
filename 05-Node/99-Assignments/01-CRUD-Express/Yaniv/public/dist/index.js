@@ -34,120 +34,199 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 getData(null, null);
-var newToDoform = document.querySelector('#todos-form');
-var searchToDosform = document.querySelector('#search-todos-form');
+var addToDoForm = document.querySelector('#add-todo-form');
+var searchToDosForm = document.querySelector('#search-todos-form');
+var searchToDosContentInput = document.querySelector('#search-todos-content');
+var searchToDosStatusSelect = document.querySelector('#search-todos-status');
+var editToDosAncestor = document.querySelector('.todos');
+var editToDosform;
 var resetBtn = document.querySelector('#reset');
 // sorting should be on client side for quick response + not change the database order
-newToDoform.addEventListener('submit', function (ev) { return handleNewTodo(ev); });
-searchToDosform.addEventListener('keyup', function (ev) { return handleToDoSearch(ev); });
-resetBtn.addEventListener('click', function (ev) { return handleReset(ev); });
-function handleNewTodo(ev) {
-    return __awaiter(this, void 0, void 0, function () {
-        var formElements, content, dueDate, toDo, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    ev.preventDefault();
-                    formElements = ev.target.elements;
-                    content = formElements.toDoContent.value;
-                    dueDate = Date.parse(formElements.toDoDueDate.value);
-                    toDo = { content: content, status: 'Pending...', dueDate: dueDate };
-                    return [4 /*yield*/, postToDo(toDo)];
-                case 1:
-                    _a.sent();
-                    return [4 /*yield*/, getData(null, null)];
-                case 2:
-                    _a.sent();
-                    ev.target.reset();
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _a.sent();
-                    console.error(error_1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+// sort onclick on todo table header (status/due date. no need to sort be content)
+var addToDoTimeInput = document.querySelector("#add-todo-due-date");
+var ToDos = /** @class */ (function () {
+    function ToDos(toDoList) {
+        this.toDoList = toDoList;
+    }
+    ToDos.prototype.renderToDos = function () {
+        try {
+            var upcomingRoot = document.querySelector(".upcoming");
+            var laterRoot = document.querySelector(".later");
+            var dateInThirtyDays = new Date();
+            dateInThirtyDays.setDate(dateInThirtyDays.getDate() + 30);
+            var options_1 = { day: 'numeric', month: 'long' };
+            var upcomingLimit = dateInThirtyDays.toLocaleDateString('en-US', options_1);
+            for (var i = 0; i < searchToDosForm.children.length; i++) {
+                searchToDosForm.children[i].disabled = false;
             }
-        });
+            var upcomingHtml_1 = "<h2 class=\"upcoming__item upcoming__item--header upcoming__item--header-upcoming\">Up to " + upcomingLimit + "</h2>";
+            var laterHtml_1 = "<h2 class=\"later__item later__item--header later__item--header-later\">After " + upcomingLimit + "</h2>";
+            upcomingRoot.innerHTML = upcomingHtml_1;
+            laterRoot.innerHTML = laterHtml_1;
+            this.toDoList = this.toDoList.sort(function (a, b) { return Date.parse(a.dueDate) - Date.parse(b.dueDate); });
+            this.toDoList = this.toDoList.sort(function (a, b) {
+                var aId = a.status;
+                var bId = b.status;
+                if (aId > bId) {
+                    return -1;
+                }
+                if (aId < bId) {
+                    return 1;
+                }
+                return 0;
+            });
+            this.toDoList.forEach(function (toDo) {
+                var toDoDueDate = new Date(toDo.dueDate);
+                options_1 = { day: 'numeric', month: 'short', year: 'numeric' };
+                var toDoDueDateString = toDoDueDate.toLocaleDateString('en-US', options_1);
+                var statusClass = '';
+                switch (toDo.status) {
+                    case 'Pending...':
+                        statusClass = 'todo__item--status-pending';
+                        break;
+                    case 'Done':
+                        statusClass = 'todo__item--status-done';
+                        break;
+                    case 'In progress...':
+                        statusClass = 'todo__item--status-in-progress';
+                        break;
+                    case 'Stuck':
+                        statusClass = 'todo__item--status-stuck';
+                        break;
+                }
+                var now = Date.now();
+                var toDoDueDateNumber = toDoDueDate.getTime();
+                var toDays = (1000 * 60 * 60 * 24);
+                var inHowManyDays = (toDoDueDateNumber - now) / toDays;
+                if (inHowManyDays < 30) {
+                    var dueDateClass = '';
+                    if (inHowManyDays < 8) {
+                        dueDateClass = (inHowManyDays > 0) ? ' todo__item--due-date-soon' : ' todo__item--due-date-passed';
+                    }
+                    upcomingHtml_1 +=
+                        "<div class=\"upcoming__item upcoming__item--upcoming todo\" id=\"" + toDo.uuid + "\">\n            <div class=\"todo__item todo__item--content\">" + toDo.content + "</div>\n            <div class=\"todo__item todo__item--status " + statusClass + "\">" + toDo.status + "</div>\n            <div class=\"todo__item todo__item--due-date" + dueDateClass + "\">" + toDoDueDateString + "</div>\n            <div class=\"todo__item todo__item--delete\"><i class=\"fa fa-trash\"></i></div>\n          </div>";
+                }
+                else {
+                    laterHtml_1 +=
+                        "<div class=\"later__item later__item--later todo\" id=\"" + toDo.uuid + "\">\n            <div class=\"todo__item todo__item--content\">" + toDo.content + "</div>\n            <div class=\"todo__item todo__item--status " + statusClass + "\">" + toDo.status + "</div>\n            <div class=\"todo__item todo__item--due-date\">" + toDoDueDateString + "</div>\n            <div class=\"todo__item todo__item--delete\"><i class=\"fa fa-trash\"></i></div>\n          </div>";
+                }
+            });
+            upcomingRoot.innerHTML = upcomingHtml_1;
+            laterRoot.innerHTML = laterHtml_1;
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
+    return ToDos;
+}());
+addToDoForm.addEventListener('submit', function (ev) { return handleAddToDo(ev); });
+searchToDosContentInput.addEventListener('keyup', function (ev) { return handleSearchToDo(ev); });
+searchToDosStatusSelect.addEventListener('change', function (ev) { return handleSearchToDo(ev); });
+editToDosAncestor.addEventListener('click', function (ev) { return handleClickedToDo(ev); });
+resetBtn.addEventListener('click', function (ev) { return handleReset(ev); });
+addToDoTimeInput.addEventListener('click', function (ev) { return onlyFutureToDos(ev); });
+var handleAddToDo = function (ev) { return __awaiter(_this, void 0, Promise, function () {
+    var formElements, content, dueDate, toDo, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                ev.preventDefault();
+                formElements = ev.target.elements;
+                content = formElements.toDoContent.value;
+                dueDate = new Date(formElements.toDoDueDate.value);
+                toDo = { content: content, status: 'Pending...', dueDate: dueDate, uuid: null, createdDate: new Date(), editedDate: null };
+                return [4 /*yield*/, postToDo(toDo)];
+            case 1:
+                _a.sent();
+                return [4 /*yield*/, getData(null, null)];
+            case 2:
+                _a.sent();
+                ev.target.reset();
+                return [3 /*break*/, 4];
+            case 3:
+                error_1 = _a.sent();
+                console.error(error_1);
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
     });
-}
-function handleToDoSearch(ev) {
+}); };
+var handleSearchToDo = function (ev) {
     try {
-        ev.preventDefault();
-        var formElements = ev.target.elements;
+        var formElements = ev.target.parentElement.elements;
         var content = formElements.toDoContent.value;
         var status = formElements.toDoStatus.value;
         if ((content === '') && (status === ''))
             return;
         getData(content, status);
         resetBtn.style.display = 'unset';
-        ev.target.reset();
     }
     catch (error) {
         console.error(error);
     }
-}
-function getData(toDoContent, toDoStatus) {
-    return __awaiter(this, void 0, Promise, function () {
-        var dataToFetch, _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    if (!((!toDoContent) && (!toDoStatus))) return [3 /*break*/, 2];
-                    return [4 /*yield*/, getToDos()];
-                case 1:
-                    _a = _b.sent();
-                    return [3 /*break*/, 4];
-                case 2: return [4 /*yield*/, searchToDos(toDoContent, toDoStatus)];
-                case 3:
-                    _a = _b.sent();
-                    _b.label = 4;
-                case 4:
-                    dataToFetch = _a;
-                    renderData(dataToFetch);
-                    return [2 /*return*/];
-            }
-        });
-    });
-}
-function renderData(dataToRender) {
-    try {
-        var upcomingRoot = document.querySelector(".upcoming");
-        var laterRoot = document.querySelector(".later");
-        var upcomingHtml_1 = "";
-        var laterHtml_1 = "";
-        upcomingRoot.innerHTML = upcomingHtml_1;
-        laterRoot.innerHTML = laterHtml_1;
-        if (typeof dataToRender.data === "string") {
-            upcomingRoot.innerHTML = "<h3>" + dataToRender.data + "</h3>";
-            return;
+};
+var handleEditToDo = function (ev) { return __awaiter(_this, void 0, Promise, function () {
+    var formElements, uuid, content, status, dueDate, toDo, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                ev.preventDefault();
+                formElements = ev.target.elements;
+                uuid = ev.target.getAttribute("id").replace('-edit-form', '');
+                content = formElements.toDoContent.value;
+                status = formElements.toDoStatus.value;
+                dueDate = new Date(formElements.toDoDueDate.value);
+                toDo = { content: content, status: status, dueDate: dueDate, uuid: uuid, createdDate: null, editedDate: new Date() };
+                return [4 /*yield*/, putToDo(toDo)];
+            case 1:
+                _a.sent();
+                return [4 /*yield*/, getData(null, null)];
+            case 2:
+                _a.sent();
+                ev.target.reset();
+                return [3 /*break*/, 4];
+            case 3:
+                error_2 = _a.sent();
+                console.error(error_2);
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
-        var now_1 = Date.now();
-        dataToRender.data.forEach(function (toDo) {
-            if (((toDo.dueDate - now_1) * (1000 * 60 * 60 * 24)) < 30) {
-                upcomingHtml_1 +=
-                    "<div class=\"upcoming__item todo\" id=\"" + toDo.uuid + "\">\n          <div class=\"todo__item todo__item--content\">" + toDo.content + "</div>\n          <div class=\"todo__item todo__item--status\">" + toDo.status + "</div>\n          <div class=\"todo__item todo__item--due-date\">" + toDo.dueDate + "</div>\n          <button class=\"todo__item todo__item--edit\"><i class=\"fa fa-edit\"></i>div>\n          <button class=\"todo__item todo__item--delete\"><i class=\"fa fa-remove\"></i>div>\n        </div>";
-            }
-            else {
-                laterHtml_1 +=
-                    "<div class=\"later__item todo\" id=\"" + toDo.uuid + "\">\n          <div class=\"todo__item todo__item--content\">" + toDo.content + "</div>\n          <div class=\"todo__item todo__item--status\">" + toDo.status + "</div>\n          <div class=\"todo__item todo__item--due-date\">" + toDo.dueDate + "</div>\n          <button class=\"todo__item todo__item--edit\"><i class=\"fa fa-edit\"></i>div>\n          <button class=\"todo__item todo__item--delete\"><i class=\"fa fa-remove\"></i>div>\n        </div>";
-            }
-        });
-        upcomingRoot.innerHTML = upcomingHtml_1;
-        laterRoot.innerHTML = laterHtml_1;
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
-function handleReset(ev) {
+    });
+}); };
+var handleDeleteToDo = function (ev) { return __awaiter(_this, void 0, Promise, function () {
+    var toDoAnsestor, uuid, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                toDoAnsestor = (ev.target.className === 'fa fa-trash') ? ev.target.parentElement.parentElement : ev.target.parentElement;
+                uuid = toDoAnsestor.getAttribute("id");
+                return [4 /*yield*/, deleteToDo(uuid)];
+            case 1:
+                _a.sent();
+                return [4 /*yield*/, getData(null, null)];
+            case 2:
+                _a.sent();
+                return [3 /*break*/, 4];
+            case 3:
+                error_3 = _a.sent();
+                console.error(error_3);
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+var handleReset = function (ev) {
     try {
-        ev.preventDefault();
         getData(null, null);
         resetBtn.style.display = 'none';
-        ev.target.reset();
     }
     catch (error) {
         console.error(error);
     }
-}
+};

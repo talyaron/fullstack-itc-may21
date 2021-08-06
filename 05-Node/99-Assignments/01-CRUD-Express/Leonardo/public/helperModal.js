@@ -13,27 +13,43 @@ const closeEdit = document.getElementById("closeEdit");
 buttonUpload.addEventListener('click', openModal);
 
 function openModal() {
-    modalUpload.style.display = "block";
-    modalUpload.classList.add("showModal");
+    try {
+        modalUpload.style.display = "block";
+        modalUpload.classList.add("showModal");
+    } catch (error) {
+        console.error(error);
+    };
 };
 
 // When the user clicks on <span> (x), close the modal
 closeUpload.addEventListener('click', closeModal);
 
 function closeModal() {
-    modalUpload.style.display = "none";
+    try {
+        modalUpload.style.display = "none";
+    } catch (error) {
+        console.error(error);
+    };
 };
 
 closeEdit.addEventListener('click', closeModalEdit);
 
 function closeModalEdit() {
-    modalEdit.style.display = "none";
+    try {
+        modalEdit.style.display = "none";
+    } catch (error) {
+        console.error(error);
+    };
 };
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
-    if (event.target === modalUpload || event.target === modalEdit) {
-        modalUpload.style.display = "none";
-        modalEdit.style.display = "none";
-    }
+    try {
+        if (event.target === modalUpload || event.target === modalEdit) {
+            modalUpload.style.display = "none";
+            modalEdit.style.display = "none";
+        }
+    } catch (error) {
+        console.error(error);
+    };
 };

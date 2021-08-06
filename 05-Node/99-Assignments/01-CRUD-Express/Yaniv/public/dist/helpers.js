@@ -34,117 +34,138 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+function getData(toDoContent, toDoStatus) {
+    return __awaiter(this, void 0, Promise, function () {
+        var dataToFetch, _a, dataToRender, upcomingRoot, laterRoot, i;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    if (!((!toDoContent) && (!toDoStatus))) return [3 /*break*/, 2];
+                    return [4 /*yield*/, getToDos()];
+                case 1:
+                    _a = _b.sent();
+                    return [3 /*break*/, 4];
+                case 2: return [4 /*yield*/, searchToDos(toDoContent, toDoStatus)];
+                case 3:
+                    _a = _b.sent();
+                    _b.label = 4;
+                case 4:
+                    dataToFetch = _a;
+                    dataToRender = (typeof dataToFetch.data === "string") ? dataToFetch.data : new ToDos(dataToFetch.data);
+                    upcomingRoot = document.querySelector(".upcoming");
+                    laterRoot = document.querySelector(".later");
+                    if (typeof dataToRender === "string") {
+                        upcomingRoot.innerHTML = "<h3>" + dataToRender + "</h3>";
+                        laterRoot.innerHTML = '';
+                        if (dataToRender !== 'Your to-do list is empty. Go do something you love 🤩')
+                            return [2 /*return*/];
+                        for (i = 0; i < searchToDosForm.children.length; i++) {
+                            searchToDosForm.children[i].disabled = true;
+                        }
+                        return [2 /*return*/];
+                    }
+                    dataToRender.renderToDos();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
 function getToDos() {
     return __awaiter(this, void 0, void 0, function () {
-        var response, toDos, error_1;
+        var toDos, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
+                    _a.trys.push([0, 2, , 3]);
                     return [4 /*yield*/, axios.get("/todo-list")];
                 case 1:
-                    response = _a.sent();
-                    return [4 /*yield*/, response.json()];
-                case 2:
                     toDos = _a.sent();
                     return [2 /*return*/, toDos];
-                case 3:
+                case 2:
                     error_1 = _a.sent();
                     console.error(error_1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
 function postToDo(toDo) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, toDos, error_2;
+        var toDos, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
+                    _a.trys.push([0, 2, , 3]);
                     return [4 /*yield*/, axios.post("/post-todo", toDo)];
                 case 1:
-                    response = _a.sent();
-                    return [4 /*yield*/, response.json()];
-                case 2:
                     toDos = _a.sent();
                     return [2 /*return*/, toDos];
-                case 3:
+                case 2:
                     error_2 = _a.sent();
                     console.error(error_2);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
 function searchToDos(toDoContent, toDoStatus) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, searchedToDos, error_3;
+        var searchedToDos, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
+                    _a.trys.push([0, 2, , 3]);
                     return [4 /*yield*/, axios.get("/todo?content=" + toDoContent + "&status=" + toDoStatus)];
                 case 1:
-                    response = _a.sent();
-                    return [4 /*yield*/, response.json()];
-                case 2:
                     searchedToDos = _a.sent();
                     return [2 /*return*/, searchedToDos];
-                case 3:
+                case 2:
                     error_3 = _a.sent();
                     console.error(error_3);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
-function putToDo(toDoUuid) {
+function putToDo(toDo) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, toDos, error_4;
+        var toDos, error_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, axios.put("/todo/" + toDoUuid)];
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.put("/todo/" + toDo.uuid, toDo)];
                 case 1:
-                    response = _a.sent();
-                    return [4 /*yield*/, response.json()];
-                case 2:
                     toDos = _a.sent();
                     return [2 /*return*/, toDos];
-                case 3:
+                case 2:
                     error_4 = _a.sent();
                     console.error(error_4);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
 function deleteToDo(toDoUuid) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, toDos, error_5;
+        var toDos, error_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
+                    _a.trys.push([0, 2, , 3]);
                     return [4 /*yield*/, axios["delete"]("/todo/" + toDoUuid)];
                 case 1:
-                    response = _a.sent();
-                    return [4 /*yield*/, response.json()];
-                case 2:
                     toDos = _a.sent();
                     return [2 /*return*/, toDos];
-                case 3:
+                case 2:
                     error_5 = _a.sent();
                     console.error(error_5);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });

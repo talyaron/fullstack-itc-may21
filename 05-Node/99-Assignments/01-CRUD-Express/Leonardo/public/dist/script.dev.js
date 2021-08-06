@@ -55,29 +55,60 @@ function handleSubmit(event) {
 ; //Function to render the data of the tasks in the DOM
 
 function renderTask(data) {
-  var htmlInProgress = data.map(function (task) {
-    if (task.status === 'inProgress') {
-      return "<div class='tasks inProgress' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
-    }
-  }).join('');
-  document.getElementById('inProgress').innerHTML = htmlInProgress; //////////////
+  try {
+    var toDoElement = document.querySelector('#toDo');
+    if (!toDoElement) throw new Error('Can´t find the element "toDo"');
+    var htmltoDo = renderThrough(data, 'toDo');
+    toDoElement.innerHTML = htmltoDo;
+    var inProgressElement = document.querySelector('#inProgress');
+    if (!inProgressElement) throw new Error('Can´t find the element "inProgress"');
+    var htmlInProgress = renderThrough(data, 'inProgress');
+    inProgressElement.innerHTML = htmlInProgress;
+    var doneElement = document.querySelector('#done');
+    if (!doneElement) throw new Error('Can´t find the element "done"');
+    var htmlDone = renderThrough(data, 'done');
+    doneElement.innerHTML = htmlDone;
+  } catch (error) {
+    console.error(error);
+  }
 
-  var htmlDone = data.map(function (task) {
-    if (task.status === 'done') {
-      return "<div class='tasks done' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
-    }
-  }).join('');
-  document.getElementById('done').innerHTML = htmlDone; //////////////
+  ;
+}
 
-  var htmltoDo = data.map(function (task) {
-    if (task.status === 'toDo') {
-      return "<div class='tasks toDo' draggable=\"true\">\n                <button class=\"tasks__edit\" id='".concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                    <h4> ").concat(task.title, " </h4>             \n                    <p> ").concat(task.description, " </p>\n                </button>\n                <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                </div>");
-    }
-  }).join('');
-  var todoRoot = document.getElementById('toDo');
-  debugger;
-  console.dir(todoRoot);
-  todoRoot.innerHTML = htmltoDo;
+; //This function is a continuation of a function "renderTask(data)", because I split the tasks by status
+
+function renderThrough(data, status) {
+  try {
+    var toShow = data.map(function (task) {
+      if (task.status === status) {
+        var taskDateCreated = readableDate(task.dateCreated);
+        return "<div class='tasks ".concat(status, "' id='").concat(task.id, "' draggable=\"true\" ondragstart=\"onDragStart(event)\">\n                    <button class=\"tasks__edit\" id='").concat(task.id, "name' onclick=uploadTask(\"").concat(task.id, "\")>\n                        <h4> ").concat(task.title, " </h4>             \n                        <p> ").concat(task.description, " </p>\n                    </button>\n                    <div class=\"tasks__info\">\n                    <p><i class=\"fas fa-trash tasks__delete--button\" onclick='deleteTask(\"").concat(task.id, "\")' title=\"Remove\"></i></p>\n                    <span class=\"tasks__info--date\">").concat(taskDateCreated, "</span>\n                    </div>\n                    </div>");
+      }
+    }).join('');
+    return toShow;
+  } catch (error) {
+    console.error(error);
+  }
+
+  ;
+}
+
+; //This function is to edit the format for the Date that Im going to show in the DOM
+
+function readableDate(date) {
+  try {
+    var today = new Date(date);
+    var options = {
+      day: 'numeric',
+      month: 'numeric',
+      year: '2-digit'
+    };
+    return today.toLocaleDateString('en-GB', options);
+  } catch (error) {
+    console.error(error);
+  }
+
+  ;
 }
 
 ; //Get the tasks information:
@@ -191,7 +222,7 @@ function uploadTask(id) {
           tasksData = _context4.sent;
           html = tasksData.data.map(function (element) {
             if (element.id === id) {
-              return "<h1>EDIT TASK</h1>\n                    \n                    <div class=\"form__wrapper\">\n                    <label for=\"title\">Title:</label>\n                    <input type=\"text\" name=\"title\" id=\"title\" maxlength=\"40\" value=\"".concat(element.title, "\" required>\n                    </div>\n    \n                    <div class=\"form__wrapper\">\n                    <label for=\"description\">Description:</label>\n                    <textarea type=\"text\" name=\"description\" id=\"description\" cols=\"30\" rows=\"10\"\n                    maxlength=\"200\" required>").concat(element.description, "</textarea>\n                    </div>\n    \n                    <div>\n                        <label for=\"toDo2\">To Do</label>\n                        <input type=\"radio\" id=\"toDo2\" name=\"status\" value=\"toDo\" checked />\n    \n                        <label for=\"inProgress2\">In Progress</label>\n                        <input type=\"radio\" id=\"inProgress2\" name=\"status\" value=\"inProgress\" />\n    \n                        <label for=\"done2\">Done</label>\n                        <input type=\"radio\" id=\"done2\" name=\"status\" value=\"done\" />\n                    </div>\n                    <input class=\"form__input--submit\" type=\"submit\" value=\"Save changes\">");
+              return "<div id=\"checkRadioButton\" onmouseenter='radioButtonCheck(\"".concat(element.status, "\")'>\n                    <div class=\"form__wrapper\">\n                    <label for=\"title\">Title:</label>\n                    <input class=\"form__input\" type=\"text\" name=\"title\" id=\"title\" maxlength=\"40\" value=\"").concat(element.title, "\" required>\n                    </div>\n    \n                    <div class=\"form__wrapper\">\n                    <label for=\"description\">Description:</label>\n                    <textarea class=\"form__textarea\" type=\"text\" name=\"description\" id=\"description\" cols=\"30\" rows=\"10\"\n                    maxlength=\"200\" required>").concat(element.description, "</textarea>\n                    </div>\n    \n                    <div class=\"form__wrapper\">\n                    <label>Status:</label>\n                        <div class=\"form__radio\">\n                        <label for=\"toDo2\">To Do</label>\n                        <input type=\"radio\" id=\"toDo2\" name=\"status\" value=\"toDo\"/>\n    \n                        <label for=\"inProgress2\">In Progress</label>\n                        <input type=\"radio\" id=\"inProgress2\" name=\"status\" value=\"inProgress\"/>\n    \n                        <label for=\"done2\">Done</label>\n                        <input type=\"radio\" id=\"done2\" name=\"status\" value=\"done\"/>\n                        </div>\n                    </div>\n                    <input class=\"form__input--submit\" type=\"submit\" value=\"Save changes\">\n                    </div>");
             }
           }).join('');
           formEdit.innerHTML = html;
@@ -213,8 +244,45 @@ function uploadTask(id) {
       }
     }
   }, null, null, [[0, 16]]);
-} //Handle Edit
+} //In the "form Edit" I stablish the previous checked value that the element already has 
 
+
+function radioButtonCheck(status) {
+  try {
+    var elementWithTheEvent = document.querySelector('#checkRadioButton');
+    if (!elementWithTheEvent) throw new Error('The is a problem finding the element to check the radio button');
+    var radioToDo = document.querySelector('#toDo2');
+    if (!radioToDo) throw new Error('The is a problem finding the element "toDo" radio button');
+    var radioInProgress = document.querySelector('#inProgress2');
+    if (!radioInProgress) throw new Error('The is a problem finding the element "inProgress" radio button');
+    var radioDone = document.querySelector('#done2');
+    if (!radioDone) throw new Error('The is a problem finding the element "done" radio button');
+
+    switch (status) {
+      case 'toDo':
+        radioToDo.checked = true;
+        break;
+
+      case 'inProgress':
+        radioInProgress.checked = true;
+        break;
+
+      case 'done':
+        radioDone.checked = true;
+        break;
+    }
+
+    ; //With this the event is going to happen only once
+
+    elementWithTheEvent.onmouseenter = null;
+  } catch (error) {
+    console.error(error);
+  }
+
+  ;
+}
+
+; //Handle Edit
 
 function handleEdit(ev) {
   var _ev$target$elements, title, description, status, tasksData, tasks;

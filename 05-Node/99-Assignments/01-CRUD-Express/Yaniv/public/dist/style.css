@@ -1,0 +1,149 @@
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100vw;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+button {
+  width: fit-content;
+  margin: 10px auto;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 10px;
+  border: 0;
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+}
+button:hover {
+  transition: 150ms;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 175px;
+  background-image: linear-gradient(to bottom right, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff);
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.todos {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: space-evenly;
+  justify-content: space-around;
+}
+.todos__item {
+  margin: 10px 0;
+}
+.todos__item--upcoming {
+  margin-top: 0;
+}
+.todos .headers {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  text-align: center;
+}
+.todos .headers__item {
+  width: 25%;
+  margin-bottom: 0;
+}
+.todos .headers__item--content {
+  width: 40%;
+}
+.todos .headers__item--delete {
+  width: 10%;
+}
+.todos .upcoming__item, .todos .later__item {
+  background-color: #f1f1f1;
+}
+.todos .upcoming__item--upcoming, .todos .later__item--upcoming {
+  border-left: 4px solid #bae1ff;
+}
+.todos .upcoming__item--later, .todos .later__item--later {
+  border-left: 4px solid #ffdfba;
+}
+.todos .upcoming__item--header, .todos .later__item--header {
+  background-color: unset;
+  text-align: left;
+  margin: 0;
+}
+.todos .upcoming__item--header-upcoming, .todos .later__item--header-upcoming {
+  color: #bae1ff;
+}
+.todos .upcoming__item--header-later, .todos .later__item--header-later {
+  color: #ffdfba;
+}
+.todos .upcoming .todo, .todos .later .todo {
+  margin: 10px 0;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
+.todos .upcoming .todo__item, .todos .later .todo__item {
+  width: 25%;
+  padding: 5px 0;
+}
+.todos .upcoming .todo__item--content, .todos .later .todo__item--content {
+  width: 40%;
+  word-wrap: break-word;
+}
+.todos .upcoming .todo__item--status, .todos .later .todo__item--status {
+  height: stretch;
+  color: white;
+}
+.todos .upcoming .todo__item--status-pending, .todos .later .todo__item--status-pending {
+  background-color: #E96C3F;
+}
+.todos .upcoming .todo__item--status-in-progress, .todos .later .todo__item--status-in-progress {
+  background-color: #F0AD52;
+}
+.todos .upcoming .todo__item--status-stuck, .todos .later .todo__item--status-stuck {
+  background-color: #D1505E;
+}
+.todos .upcoming .todo__item--status-done, .todos .later .todo__item--status-done {
+  background-color: #5FC57E;
+}
+.todos .upcoming .todo__item--due-date-soon, .todos .later .todo__item--due-date-soon {
+  font-weight: bold;
+}
+.todos .upcoming .todo__item--due-date-passed, .todos .later .todo__item--due-date-passed {
+  font-weight: bold;
+  color: #D1505E;
+}
+.todos .upcoming .todo__item--delete, .todos .later .todo__item--delete {
+  width: 10%;
+  color: #D1505E;
+}
+.todos .upcoming .todo .edit-form, .todos .later .todo .edit-form {
+  width: 100%;
+}
+.todos .upcoming .todo .edit-form__item, .todos .later .todo .edit-form__item {
+  margin: 0;
+  width: 25%;
+  padding: 5px 0;
+}
+.todos .upcoming .todo .edit-form__item--content, .todos .later .todo .edit-form__item--content {
+  width: 40%;
+}
+.todos .upcoming .todo .edit-form__item--submit, .todos .later .todo .edit-form__item--submit {
+  width: 10%;
+}

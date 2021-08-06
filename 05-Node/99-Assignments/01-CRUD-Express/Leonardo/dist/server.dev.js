@@ -29,49 +29,63 @@ app.use(express.json());
 app.use(express["static"]('public')); //This function is to read the array (I create this so the information will be kept even if I turn off the server)
 
 function readJsonAllTasks() {
-  var tasksList = fs.readFileSync("./allTasks.json");
-  return JSON.parse(tasksList);
+  try {
+    var tasksList = fs.readFileSync("./allTasks.json");
+    return JSON.parse(tasksList);
+  } catch (error) {
+    console.error(error);
+  }
 } //Route to create a Task
 
 
 app.post('/createTask', function (req, res) {
-  var body = req.body;
-  var schema = Joi.object({
-    taskTitle: Joi.string().max(40).required(),
-    taskDescription: Joi.string().max(200).required()
-  });
-
-  var _schema$validate = schema.validate({
-    taskTitle: body.taskTitle,
-    taskDescription: body.taskDescription
-  }),
-      error = _schema$validate.error,
-      value = _schema$validate.value;
-
-  if (!error) {
-    var task = {
-      id: uuidv4(),
-      dateCreated: Date.now(),
-      title: value.taskTitle,
-      description: value.taskDescription,
-      status: 'toDo'
-    };
-    var allTasks = readJsonAllTasks();
-    allTasks.push(task);
-    fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
-    res.send({
-      message: 'A new Task was added',
-      tasks: allTasks
+  try {
+    var body = req.body;
+    var schema = Joi.object({
+      taskTitle: Joi.string().max(40).required(),
+      taskDescription: Joi.string().max(200).required()
     });
-  } else {
-    var msg = error.details[0].message;
-    res.status(400).send(msg);
+
+    var _schema$validate = schema.validate({
+      taskTitle: body.taskTitle,
+      taskDescription: body.taskDescription
+    }),
+        _error = _schema$validate.error,
+        value = _schema$validate.value;
+
+    if (!_error) {
+      var task = {
+        id: uuidv4(),
+        dateCreated: Date.now(),
+        title: value.taskTitle,
+        description: value.taskDescription,
+        status: 'toDo'
+      };
+      var allTasks = readJsonAllTasks();
+      allTasks.push(task);
+      fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
+      res.send({
+        message: 'A new Task was added',
+        tasks: allTasks
+      });
+    } else {
+      var msg = _error.details[0].message;
+      res.status(400).send(msg);
+    }
+  } catch (error) {
+    console.error(error);
   }
+
+  ;
 }); //Route to get all the Tasks
 
 app.get('/getAllTasks', function (req, res) {
-  var allTasks = readJsonAllTasks();
-  res.send(allTasks);
+  try {
+    var allTasks = readJsonAllTasks();
+    res.send(allTasks);
+  } catch (error) {
+    console.error(error);
+  }
 }); //Route to delete a Task
 
 app["delete"]('/deleteTask/:id', function (req, res) {
@@ -110,6 +124,34 @@ app.put('/editTask/:id', function (req, res) {
       fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
       res.send({
         message: 'A task was updated',
+        tasks: allTasks
+      });
+    } else {
+      res.send({
+        message: 'Couldnt find a task to update',
+        tasks: allTasks
+      });
+    }
+  } catch (e) {
+    res.status(400).send(error);
+  }
+}); //Route to update the status of a Task with the Drag and Drop tool
+
+app.put('/editStatusTask/:id/:status', function (req, res) {
+  try {
+    var _req$params = req.params,
+        id = _req$params.id,
+        status = _req$params.status;
+    var allTasks = readJsonAllTasks();
+    var taskIndex = allTasks.findIndex(function (task) {
+      return task.id === id;
+    });
+
+    if (taskIndex > -1) {
+      allTasks[taskIndex].status = status;
+      fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
+      res.send({
+        message: 'The status of the task was updated',
         tasks: allTasks
       });
     } else {

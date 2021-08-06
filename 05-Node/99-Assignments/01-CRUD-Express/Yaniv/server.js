@@ -21,6 +21,7 @@ const readJson = () => {
 }
 
 class ToDos {
+    
     constructor() {
         this.toDoList = readJson();
     }
@@ -36,11 +37,13 @@ class ToDos {
 
     addToDo(toDo) {
         try {
-            this.toDoList({
-                ...toDo,
-                uuid: uuidv4(),
-                dateCreated: new Date()
-            });
+            toDo.uuid = uuidv4();
+            toDo.createdDate = new Date();
+            toDo.editedDate = null;
+
+            this.toDoList.push(toDo);
+            
+            this.updateToDosJson();
 
         } catch (error) {
             console.error(error);
@@ -50,8 +53,18 @@ class ToDos {
     searchToDos(toDoContent,toDoStatus) {
         try {
             let searchedToDos = this.toDoList;
-            if (toDoContent !== '') this.toDoList.findIndex(toDo => toDo.content === toDoContent);
-            if (toDoStatus !== '') this.toDoList.findIndex(toDo => toDo.content === toDoStatus);
+            const toDoContentRegEx = new RegExp(toDoContent,'gmi');
+
+            if ((toDoContent === '') && (toDoStatus == '')) {
+                return searchedToDos;
+            }
+
+            if (toDoContent !== '') {
+                searchedToDos = this.toDoList.filter(toDo => toDoContentRegEx.test(toDo.content));
+            }
+            if (toDoStatus !== '') {
+                searchedToDos = this.toDoList.filter(toDo => toDo.status === toDoStatus);
+            }
 
             return searchedToDos;
 
@@ -66,10 +79,22 @@ class ToDos {
         
             if (toDoToUpdateIndex === -1) return [];
     
-            if (toDo.content !== '') this.toDoList.findIndex(toDoItem => toDoItem.content === toDo.content);
-            if (toDo.status !== '') this.toDoList.findIndex(toDoItem => toDoItem.content === toDo.status);
-            if (toDo.dueDate !== '') this.toDoList.findIndex(toDoItem => toDoItem.uuid === toDo.dueDate);
-    
+            let isEdited = false;
+
+            if ((toDo.content !== '') && (toDo.content !== this.toDoList[toDoToUpdateIndex].content)) {
+                this.toDoList[toDoToUpdateIndex].content = toDo.content;
+                isEdited = true;
+            }
+            if ((toDo.status !== '') && (toDo.status !== this.toDoList[toDoToUpdateIndex].status)) {
+                this.toDoList[toDoToUpdateIndex].status = toDo.status;
+                isEdited = true;
+            }
+            if ((toDo.dueDate !== '') && (toDo.dueDate !== this.toDoList[toDoToUpdateIndex].dueDate)) {
+                this.toDoList[toDoToUpdateIndex].dueDate = toDo.dueDate;
+                isEdited = true;
+            }
+            if (isEdited) this.toDoList[toDoToUpdateIndex].editedDate = new Date();
+
             this.updateToDosJson();
             return [this.toDoList[toDoToUpdateIndex]];
     
@@ -106,19 +131,17 @@ app.get('/todo-list', (req, res) => {
         res.send(resToSent);
 
     } catch (error) {
-        console.error(er);
+        console.error(error);
         res.status(400).send({error: er.message});
     }
 });
 
 app.post('/post-todo', (req, res) => {
     try {
-        const {
-            body
-        } = req;
+        const { body } = req;
         toDos.addToDo(body);
 
-        console.log(`${body.name} added to to-do list!`);
+        console.log(`${body.content} added to to-do list!`);
         res.send(toDos);
 
     } catch (er) {
@@ -127,7 +150,7 @@ app.post('/post-todo', (req, res) => {
     }
 });
 
-app.get('/todo?content=:content&status=:status', (req, res) => { // can search by content or status.
+app.get('/todo', (req, res) => {
     try {
         const {
             content,
@@ -136,7 +159,7 @@ app.get('/todo?content=:content&status=:status', (req, res) => { // can search b
 
         const searchedToDos = toDos.searchToDos(content,status);
 
-        const resToSent = (searchedToDos.length === 0) ? `No to-dos found` : searchedToDos; 
+        const resToSent = (searchedToDos.length === 0) ? `No to-dos found 👁‍🗨` : searchedToDos; 
         const terminalMsg = (searchedToDos.length === 0) ? `No to-dos found` : `${searchedToDos.length} to-dos found!`;
 
         console.log(terminalMsg);
