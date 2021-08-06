@@ -6,7 +6,7 @@ var app = require('express')();
 
 var cookieParser = require('cookie-parser');
 
-app.use(cookieParser);
+app.use(cookieParser());
 app.get('/getData', function (req, res) {
   console.log(req.cookies);
   var cookieName = req.cookies.cookieName;
