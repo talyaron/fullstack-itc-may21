@@ -51,16 +51,16 @@ app.delete("/deleteTask/:id", (req, res) => {
 
 //* PUT
 app.put("/updateTask/:id",(req,res) => {
-    let { id } = req.params;
+    const { id } = req.params;
     const { name,description } = req.body;
     const tasks = localJson();
 
     const updateTask = tasks.find((task)=> task.id === id)
-
+    fs.readFileSync("./task.json", JSON.stringify(updateTask));
     updateTask.name = name;
     updateTask.description = description;
 
-    res.send(updateTask)
+    res.send(tasks)
 })
 
 //Listen
