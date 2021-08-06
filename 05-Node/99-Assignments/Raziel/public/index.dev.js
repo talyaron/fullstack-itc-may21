@@ -67,15 +67,25 @@ function addExpense1() {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          _context.prev = 0;
+
+          if (!(!expenseTitle.value || !expenseAmount.value)) {
+            _context.next = 3;
+            break;
+          }
+
+          return _context.abrupt("return");
+
+        case 3:
           expense = {
             type: "expense",
             title: expenseTitle.value,
             amount: parseInt(expenseAmount.value)
           };
-          _context.next = 3;
+          _context.next = 6;
           return regeneratorRuntime.awrap(axios.post("/addExpense", expense));
 
-        case 3:
+        case 6:
           res = _context.sent;
           console.log(res.data);
           data = res.data; // const data= await res.json();
@@ -84,13 +94,20 @@ function addExpense1() {
           console.log(ENTRY_LIST);
           updateUI();
           clearInput([expenseTitle, expenseAmount]);
+          _context.next = 18;
+          break;
 
-        case 10:
+        case 15:
+          _context.prev = 15;
+          _context.t0 = _context["catch"](0);
+          console.error(_context.t0);
+
+        case 18:
         case "end":
           return _context.stop();
       }
     }
-  });
+  }, null, null, [[0, 15]]);
 } // IF ONE OF THE INPUTS IS EMPTY => EXIT
 //     try {
 //         if(!expenseTitle.value || !expenseAmount.value ) return;
@@ -118,33 +135,68 @@ function addExpense1() {
 // })
 
 
-addIncome.addEventListener("click", function () {
-  // IF ONE OF THE INPUTS IS EMPTY => EXIT
-  if (!incomeTitle.value || !incomeAmount.value) return; // SAVE THE ENTRY TO ENTRY_LIST
+addIncome.addEventListener("click", addIncome1()); //     // IF ONE OF THE INPUTS IS EMPTY => EXIT
+//     if(!incomeTitle.value || !incomeAmount.value ) return;
+//     // SAVE THE ENTRY TO ENTRY_LIST
+//     let income = {
+//         type : "income",
+//         title : incomeTitle.value,
+//         amount : parseInt(incomeAmount.value)
+//     }
+//     ENTRY_LIST.push(income);
+//     const data = {type : "income",tile :incomeTitle.value,amount : parseInt(incomeAmount.value)}
+//        const options={
+//            method:'POST',
+//            headers: {
+//             'Content-Type': 'application/json'
+//           },
+//           body: JSON.stringify(data) // body data type must match "Content-Type" header
+//        }
+//        fetch('/addIncome',options);
+//     updateUI();
+//     clearInput( [incomeTitle, incomeAmount] )
+// })
 
-  var income = {
-    type: "income",
-    title: incomeTitle.value,
-    amount: parseInt(incomeAmount.value)
-  };
-  ENTRY_LIST.push(income);
-  var data = {
-    type: "income",
-    tile: incomeTitle.value,
-    amount: parseInt(incomeAmount.value)
-  };
-  var options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data) // body data type must match "Content-Type" header
+function addIncome1() {
+  var _income, res, data;
 
-  };
-  fetch('/addIncome', options);
-  updateUI();
-  clearInput([incomeTitle, incomeAmount]);
-});
+  return regeneratorRuntime.async(function addIncome1$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          _income = {
+            type: "income",
+            title: incomeTitle.value,
+            amount: parseInt(incomeAmount.value)
+          };
+          _context2.next = 4;
+          return regeneratorRuntime.awrap(axios.post("/addIncome", _income));
+
+        case 4:
+          res = _context2.sent;
+          console.log(res.data);
+          data = res.data;
+          ENTRY_LIST.push.apply(ENTRY_LIST, _toConsumableArray(data));
+          console.log(ENTRY_LIST);
+          updateUI();
+          clearInput([incomeTitle, incomeAmount]);
+          _context2.next = 16;
+          break;
+
+        case 13:
+          _context2.prev = 13;
+          _context2.t0 = _context2["catch"](0);
+          console.error(_context2.t0);
+
+        case 16:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, null, null, [[0, 13]]);
+}
+
 incomeList.addEventListener("click", deleteOrEdit);
 expenseList.addEventListener("click", deleteOrEdit);
 allList.addEventListener("click", deleteOrEdit); // HELPERS
@@ -158,11 +210,31 @@ function deleteOrEdit(event) {
   } else if (targetBtn.id == EDIT) {
     editEntry(entry);
   }
-}
+} // function deleteEntry(entry){
+//     ENTRY_LIST.splice( entry.id, 1);
+//     updateUI();
+// }
 
-function deleteEntry(entry) {
-  ENTRY_LIST.splice(entry.id, 1);
-  updateUI();
+
+function deleteEntryt(id) {
+  var res;
+  return regeneratorRuntime.async(function deleteEntryt$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return regeneratorRuntime.awrap(axios["delete"]("/deleteEntry/".concat(id)));
+
+        case 2:
+          res = _context3.sent;
+          updateUI();
+
+        case 4:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  });
 }
 
 function editEntry(entry) {

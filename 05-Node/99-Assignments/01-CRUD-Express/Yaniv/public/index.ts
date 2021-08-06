@@ -1,7 +1,9 @@
 getData(null, null);
 
-const addToDoform: HTMLFormElement = document.querySelector('#add-todo-form');
-const searchToDosform: HTMLFormElement = document.querySelector('#search-todos-form');
+const addToDoForm: HTMLFormElement = document.querySelector('#add-todo-form');
+const searchToDosForm: HTMLFormElement = document.querySelector('#search-todos-form');
+const searchToDosContentInput: HTMLElement = document.querySelector('#search-todos-content');
+const searchToDosStatusSelect: HTMLElement = document.querySelector('#search-todos-status');
 const editToDosAncestor: HTMLElement = document.querySelector('.todos');
 let editToDosform: HTMLFormElement;
 const resetBtn: HTMLElement = document.querySelector('#reset');
@@ -35,12 +37,12 @@ class ToDos {
       let options: object = {day: 'numeric', month: 'long'  };
       const upcomingLimit: string = dateInThirtyDays.toLocaleDateString('en-US', options);
 
-      for (let i = 0; i < searchToDosform.children.length; i++) {
-        searchToDosform.children[i].disabled = false;
+      for (let i = 0; i < searchToDosForm.children.length; i++) {
+        searchToDosForm.children[i].disabled = false;
       }
 
-      let upcomingHtml: string = `<h2 class="upcoming__item upcoming__item--header">Before ${upcomingLimit}</h2>`;
-      let laterHtml: string = `<h2 class="later__item later__item--header">After ${upcomingLimit}</h2>`;
+      let upcomingHtml: string = `<h2 class="upcoming__item upcoming__item--header upcoming__item--header-upcoming">Up to ${upcomingLimit}</h2>`;
+      let laterHtml: string = `<h2 class="later__item later__item--header later__item--header-later">After ${upcomingLimit}</h2>`;
 
       upcomingRoot.innerHTML = upcomingHtml;
       laterRoot.innerHTML = laterHtml;
@@ -49,8 +51,8 @@ class ToDos {
       this.toDoList = this.toDoList.sort((a: ToDo, b: ToDo) => {
         const aId = a.status;
         const bId = b.status;
-        if (aId < bId) {return -1;}
-        if (aId > bId) {return 1;}
+        if (aId > bId) {return -1;}
+        if (aId < bId) {return 1;}
         return 0;
       });
 
@@ -63,16 +65,16 @@ class ToDos {
         let statusClass: string = '';
         switch (toDo.status) {
           case 'Pending...':
-            statusClass = 'pending'; // background-color for scss: #E96C3F
+            statusClass = 'todo__item--status-pending';
           break;
           case 'Done':
-            statusClass = 'done'; // background-color for scss: #5FC57E
+            statusClass = 'todo__item--status-done';
           break;
           case 'In progress...':
-            statusClass = 'in-progress'; // background-color for scss: #F0AD52
+            statusClass = 'todo__item--status-in-progress';
           break;
           case 'Stuck':
-            statusClass = 'stuck'; // background-color for scss: #D1505E
+            statusClass = 'todo__item--status-stuck';
           break;
         }
 
@@ -83,12 +85,12 @@ class ToDos {
 
         if ( inHowManyDays < 30) {
           let dueDateClass: string = '';
-          if (inHowManyDays < 7) {
-            dueDateClass = (inHowManyDays > 0) ? ' soon' : ' passed' // for scss: font-weigth: bold : font-weigth: bold; color #D1505E
+          if (inHowManyDays < 8) {
+            dueDateClass = (inHowManyDays > 0) ? ' todo__item--due-date-soon' : ' todo__item--due-date-passed';
           }
 
           upcomingHtml += 
-          `<div class="upcoming__item todo" id="${toDo.uuid}">
+          `<div class="upcoming__item upcoming__item--upcoming todo" id="${toDo.uuid}">
             <div class="todo__item todo__item--content">${toDo.content}</div>
             <div class="todo__item todo__item--status ${statusClass}">${toDo.status}</div>
             <div class="todo__item todo__item--due-date${dueDateClass}">${toDoDueDateString}</div>
@@ -97,7 +99,7 @@ class ToDos {
         }
         else {
           laterHtml += 
-          `<div class="later__item todo" id="${toDo.uuid}">
+          `<div class="later__item later__item--later todo" id="${toDo.uuid}">
             <div class="todo__item todo__item--content">${toDo.content}</div>
             <div class="todo__item todo__item--status ${statusClass}">${toDo.status}</div>
             <div class="todo__item todo__item--due-date">${toDoDueDateString}</div>
@@ -115,8 +117,9 @@ class ToDos {
   }
 }
 
-addToDoform.addEventListener('submit', ev => handleAddToDo(ev));
-searchToDosform.addEventListener('keyup', ev => handleSearchToDo(ev));
+addToDoForm.addEventListener('submit', ev => handleAddToDo(ev));
+searchToDosContentInput.addEventListener('keyup', ev => handleSearchToDo(ev));
+searchToDosStatusSelect.addEventListener('change', ev => handleSearchToDo(ev));
 editToDosAncestor.addEventListener('click', ev => handleClickedToDo(ev));
 resetBtn.addEventListener('click', ev => handleReset(ev));
 addToDoTimeInput.addEventListener('click', ev => onlyFutureToDos(ev));
@@ -143,8 +146,7 @@ const handleAddToDo = async (ev: any): Promise<void> => {
 
 const handleSearchToDo =  (ev: any): void => {
   try {
-    ev.preventDefault();
-    const formElements = ev.target.elements;
+    const formElements = ev.target.parentElement.elements;
 
     const content: string = formElements.toDoContent.value;
     const status: string = formElements.toDoStatus.value;
@@ -153,8 +155,6 @@ const handleSearchToDo =  (ev: any): void => {
 
     getData(content, status);
     resetBtn.style.display = 'unset';
-
-    ev.target.reset();
 
   } catch (error) {
     console.error(error);
@@ -198,12 +198,8 @@ const handleDeleteToDo = async (ev: any): Promise<void> => {
 
 const handleReset =  (ev: any): void => {
   try {
-    ev.preventDefault();
-
     getData(null, null);
     resetBtn.style.display = 'none';
-
-    ev.target.reset();
 
   } catch (error) {
     console.error(error);

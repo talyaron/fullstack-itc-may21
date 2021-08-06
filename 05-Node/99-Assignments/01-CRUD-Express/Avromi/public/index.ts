@@ -1,34 +1,70 @@
-// function allowDrop(ev) {
-//     ev.preventDefault();
-//   }
-  
-//   function drag(ev) {
-//     ev.dataTransfer.setData("text", ev.target.id);
-//   }
-  
-//   function drop(ev) {
-//     ev.preventDefault();
-//     const data = ev.dataTransfer.getData("text");
-//     ev.target.appendChild(document.getElementById(data));
-//   }
+async function getAllTask() {
+    try {
+        const res = await axios.get('/tasks/')
+        const allTasks = res.data
+        renderTasks(allTasks);
+    } catch (error) {
+        console.log(error);
+    }
+}
+getAllTask()
 
 
-class Title{
-    title:string 
-    constructor(title:string){
-    this.title = title;
-}}
-const title = new Title( 'notwe one ');
+async function addTask(title) {
+    try {
+        const res = await axios.post('/tasks/newTask', { title })
+        const allTasks = res.data
+        renderTasks(allTasks);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function deleteTask(id) {
+    try {
+        const res = await axios.delete(`/tasks/delete?id=${id}`)
+        const allTasks = res.data
+        renderTasks(allTasks);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//render allTasks to DOM with a click for edit and delete abd update task
 
 
 
+const form = document.querySelector(".main__form")
+form.addEventListener('submit', handleSubmit);
 
-//create form handle to submit title....
+function handleSubmit(ev: any): any {
+    ev.preventDefault();
+    const task = ev.target.elements.task.value;
+    addTask(task)
 
-axios.post('/newTask',{title})
-.then(res=>{
-    console.log(res.data)
-})
-.catch(e=>{
-    console.error(e)
-})
+    ev.target.reset();
+}
+
+function handleDelete(id): any {
+    deleteTask(id);
+}
+
+function handleEdit(id): any {
+    console.log(id);
+}
+
+
+function renderTasks(data) {
+    const tasksDiv = document.querySelector("#divcont")
+    let html = "";
+    data.forEach((task) => {
+        html += ` <div class='tasks'><h3>${task.title}</h3>
+        <button onclick="handleDelete('${task.id}')">Delete</button>
+        <button onclick="handleEdit('${task.id}')">Edit</button>
+        <input type="checkbox" name="done">
+        </div>`
+    })
+    tasksDiv.innerHTML = html
+
+}
+

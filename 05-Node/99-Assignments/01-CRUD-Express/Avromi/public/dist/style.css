@@ -1,18 +1,21 @@
-#div1 {
-  width: 350px;
-  height: 70px;
-  padding: 10px;
-  border: 1px solid #aaaaaa;
+#divcont {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.tasks {
+  border: solid black 2px;
+  margin: 5px;
+  padding: 3px;
 }
 
 .sidebar {
   height: 100%;
   width: 160px;
   position: fixed;
-  z-index: 1;
-  top: 0;
+  top: 90px;
   left: 0;
-  background-color: #111;
+  background-color: white;
   overflow-x: hidden;
   padding-top: 16px;
 }
@@ -31,9 +34,13 @@
 
 .nav {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
   background-color: #111;
-  padding: 30px;
+  padding: 20px;
   margin: 0;
+  z-index: 1;
+  top: 0;
 }
 
 .main {

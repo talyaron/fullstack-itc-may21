@@ -26,43 +26,55 @@ app.use(express.static('public'));
 
 //This function is to read the array (I create this so the information will be kept even if I turn off the server)
 function readJsonAllTasks() {
-    const tasksList = fs.readFileSync("./allTasks.json");
-    return JSON.parse(tasksList);
+    try {
+        const tasksList = fs.readFileSync("./allTasks.json");
+        return JSON.parse(tasksList);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 //Route to create a Task
 app.post('/createTask', (req, res) => {
-    const { body } = req;
-    const schema = Joi.object({
-        taskTitle: Joi.string().max(40).required(),
-        taskDescription: Joi.string().max(200).required(),
-    });
-    const { error, value } = schema.validate({
-        taskTitle: body.taskTitle,
-        taskDescription: body.taskDescription,
-    });
-    if (!error) {
-        const task = {
-            id: uuidv4(),
-            dateCreated: Date.now(),
-            title: value.taskTitle,
-            description: value.taskDescription,
-            status: 'toDo'
-        };
-        const allTasks = readJsonAllTasks();
-        allTasks.push(task);
-        fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
-        res.send({ message: 'A new Task was added', tasks: allTasks });
-    } else {
-        const msg = error.details[0].message;
-        res.status(400).send(msg);
-    }
+    try {
+        const { body } = req;
+        const schema = Joi.object({
+            taskTitle: Joi.string().max(40).required(),
+            taskDescription: Joi.string().max(200).required(),
+        });
+        const { error, value } = schema.validate({
+            taskTitle: body.taskTitle,
+            taskDescription: body.taskDescription,
+        });
+        if (!error) {
+            const task = {
+                id: uuidv4(),
+                dateCreated: Date.now(),
+                title: value.taskTitle,
+                description: value.taskDescription,
+                status: 'toDo'
+            };
+            const allTasks = readJsonAllTasks();
+            allTasks.push(task);
+            fs.writeFileSync("./allTasks.json", JSON.stringify(allTasks));
+            res.send({ message: 'A new Task was added', tasks: allTasks });
+        } else {
+            const msg = error.details[0].message;
+            res.status(400).send(msg);
+        }
+    } catch (error) {
+        console.error(error);
+    };
 });
 
 //Route to get all the Tasks
 app.get('/getAllTasks', (req, res) => {
-    const allTasks = readJsonAllTasks();
-    res.send(allTasks);
+    try {
+        const allTasks = readJsonAllTasks();
+        res.send(allTasks);
+    } catch (error) {
+        console.error(error);
+    }
 });
 
 //Route to delete a Task
