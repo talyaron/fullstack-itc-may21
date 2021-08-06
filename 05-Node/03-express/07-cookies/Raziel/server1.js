@@ -5,7 +5,7 @@ app.use(express.static('public'));
 app.use(cookieParser());
 app.get('/getData', function (req, res) {
     console.log(req.cookie);
-    //   const {cookieName}=req.cookie;
+    var cookieName = req.cookie.cookieName;
     var name = JSON.stringify({ name: "Cookie MOnster" });
     res.cookie('cookieName', name, { maxAge: 8000000, httpOnly: true });
     res.send({ ok: true });

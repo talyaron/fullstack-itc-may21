@@ -9,7 +9,8 @@ app.get('/getData', (req ,res)=>{
 
 
     console.log(req.cookie);
-    //   const {cookieName}=req.cookie;
+    const {cookieName}=req.cookie;
+    
       
 
     const name =JSON.stringify({name:"Cookie MOnster"});
