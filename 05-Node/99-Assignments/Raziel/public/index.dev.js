@@ -1,5 +1,13 @@
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 /* www.youtube.com/CodeExplained */
 // SELECT ELEMENTS
 var balanceEl = document.querySelector(".balance .value");
@@ -51,9 +59,11 @@ allBtn.addEventListener("click", function () {
   active(allBtn);
   inactive([incomeBtn, expenseBtn]);
 });
-addExpense.addEventListener("click", function _callee() {
-  var expense, data, options;
-  return regeneratorRuntime.async(function _callee$(_context) {
+addExpense.addEventListener("click", addExpense1);
+
+function addExpense1() {
+  var expense, res, data;
+  return regeneratorRuntime.async(function addExpense1$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -67,71 +77,126 @@ addExpense.addEventListener("click", function _callee() {
           return _context.abrupt("return");
 
         case 3:
-          // SAVE THE ENTRY TO ENTRY_LIST
           expense = {
             type: "expense",
             title: expenseTitle.value,
             amount: parseInt(expenseAmount.value)
           };
-          ENTRY_LIST.push(expense);
-          data = {
-            type: "expense",
-            tile: expenseTitle.value,
-            amount: parseInt(expenseAmount.value)
-          };
-          options = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data) // body data type must match "Content-Type" header
+          _context.next = 6;
+          return regeneratorRuntime.awrap(axios.post("/addExpense", expense));
 
-          };
-          fetch('/addExpense', options);
+        case 6:
+          res = _context.sent;
+          console.log(res.data);
+          data = res.data; // const data= await res.json();
+
+          ENTRY_LIST.push.apply(ENTRY_LIST, _toConsumableArray(data));
+          console.log(ENTRY_LIST);
           updateUI();
           clearInput([expenseTitle, expenseAmount]);
-          _context.next = 15;
+          _context.next = 18;
           break;
 
-        case 12:
-          _context.prev = 12;
+        case 15:
+          _context.prev = 15;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
 
-        case 15:
+        case 18:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 12]]);
-});
-addIncome.addEventListener("click", function () {
-  // IF ONE OF THE INPUTS IS EMPTY => EXIT
-  if (!incomeTitle.value || !incomeAmount.value) return; // SAVE THE ENTRY TO ENTRY_LIST
+  }, null, null, [[0, 15]]);
+} // IF ONE OF THE INPUTS IS EMPTY => EXIT
+//     try {
+//         if(!expenseTitle.value || !expenseAmount.value ) return;
+//         // SAVE THE ENTRY TO ENTRY_LIST
+//         let expense = {
+//             type : "expense",
+//             title : expenseTitle.value,
+//             amount : parseInt(expenseAmount.value)
+//         }
+//         ENTRY_LIST.push(expense);
+//        const data = {type : "expense",tile :expenseTitle.value,amount : parseInt(expenseAmount.value)}
+//        const options={
+//            method:'POST',
+//            headers: {
+//             'Content-Type': 'application/json'
+//           },
+//           body: JSON.stringify(data) // body data type must match "Content-Type" header
+//        }
+//        fetch('/addExpense',options);
+//         updateUI();
+//         clearInput( [expenseTitle, expenseAmount] )  
+//     } catch (error) {
+//         console.error(error)
+//     }
+// })
 
-  var income = {
-    type: "income",
-    title: incomeTitle.value,
-    amount: parseInt(incomeAmount.value)
-  };
-  ENTRY_LIST.push(income);
-  var data = {
-    type: "income",
-    tile: incomeTitle.value,
-    amount: parseInt(incomeAmount.value)
-  };
-  var options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data) // body data type must match "Content-Type" header
 
-  };
-  fetch('/addIncome', options);
-  updateUI();
-  clearInput([incomeTitle, incomeAmount]);
-});
+addIncome.addEventListener("click", addIncome1()); //     // IF ONE OF THE INPUTS IS EMPTY => EXIT
+//     if(!incomeTitle.value || !incomeAmount.value ) return;
+//     // SAVE THE ENTRY TO ENTRY_LIST
+//     let income = {
+//         type : "income",
+//         title : incomeTitle.value,
+//         amount : parseInt(incomeAmount.value)
+//     }
+//     ENTRY_LIST.push(income);
+//     const data = {type : "income",tile :incomeTitle.value,amount : parseInt(incomeAmount.value)}
+//        const options={
+//            method:'POST',
+//            headers: {
+//             'Content-Type': 'application/json'
+//           },
+//           body: JSON.stringify(data) // body data type must match "Content-Type" header
+//        }
+//        fetch('/addIncome',options);
+//     updateUI();
+//     clearInput( [incomeTitle, incomeAmount] )
+// })
+
+function addIncome1() {
+  var _income, res, data;
+
+  return regeneratorRuntime.async(function addIncome1$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          _income = {
+            type: "income",
+            title: incomeTitle.value,
+            amount: parseInt(incomeAmount.value)
+          };
+          _context2.next = 4;
+          return regeneratorRuntime.awrap(axios.post("/addIncome", _income));
+
+        case 4:
+          res = _context2.sent;
+          console.log(res.data);
+          data = res.data;
+          ENTRY_LIST.push.apply(ENTRY_LIST, _toConsumableArray(data));
+          console.log(ENTRY_LIST);
+          updateUI();
+          clearInput([incomeTitle, incomeAmount]);
+          _context2.next = 16;
+          break;
+
+        case 13:
+          _context2.prev = 13;
+          _context2.t0 = _context2["catch"](0);
+          console.error(_context2.t0);
+
+        case 16:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, null, null, [[0, 13]]);
+}
+
 incomeList.addEventListener("click", deleteOrEdit);
 expenseList.addEventListener("click", deleteOrEdit);
 allList.addEventListener("click", deleteOrEdit); // HELPERS
@@ -145,11 +210,31 @@ function deleteOrEdit(event) {
   } else if (targetBtn.id == EDIT) {
     editEntry(entry);
   }
-}
+} // function deleteEntry(entry){
+//     ENTRY_LIST.splice( entry.id, 1);
+//     updateUI();
+// }
 
-function deleteEntry(entry) {
-  ENTRY_LIST.splice(entry.id, 1);
-  updateUI();
+
+function deleteEntryt(id) {
+  var res;
+  return regeneratorRuntime.async(function deleteEntryt$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return regeneratorRuntime.awrap(axios["delete"]("/deleteEntry/".concat(id)));
+
+        case 2:
+          res = _context3.sent;
+          updateUI();
+
+        case 4:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  });
 }
 
 function editEntry(entry) {

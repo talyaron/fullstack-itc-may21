@@ -22,40 +22,60 @@ async function handleSubmit(event) {
 
 //Function to render the data of the tasks in the DOM
 function renderTask(data) {
-    const htmltoDo = renderThrough(data, 'toDo');
-    document.getElementById('toDo').innerHTML = htmltoDo;
+    try {
+        const toDoElement = document.querySelector('#toDo');
+        if (!toDoElement) throw new Error('Can´t find the element "toDo"');
+        const htmltoDo = renderThrough(data, 'toDo');
+        toDoElement.innerHTML = htmltoDo;
 
-    const htmlInProgress = renderThrough(data, 'inProgress');
-    document.getElementById('inProgress').innerHTML = htmlInProgress;
+        const inProgressElement = document.querySelector('#inProgress');
+        if (!inProgressElement) throw new Error('Can´t find the element "inProgress"');
+        const htmlInProgress = renderThrough(data, 'inProgress');
+        inProgressElement.innerHTML = htmlInProgress;
 
-    const htmlDone = renderThrough(data, 'done');
-    document.getElementById('done').innerHTML = htmlDone;
+        const doneElement = document.querySelector('#done');
+        if (!doneElement) throw new Error('Can´t find the element "done"');
+        const htmlDone = renderThrough(data, 'done');
+        doneElement.innerHTML = htmlDone;
+    } catch (error) {
+        console.error(error);
+    };
 };
 
+//This function is a continuation of a function "renderTask(data)", because I split the tasks by status
 function renderThrough(data, status) {
-    const toShow = data.map(task => {
-        if (task.status === status) {
-            let taskDateCreated = readableDate(task.dateCreated);
-            return `<div class='tasks ${status}' id='${task.id}' draggable="true" ondragstart="onDragStart(event)">
-                <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
-                    <h4> ${task.title} </h4>             
-                    <p> ${task.description} </p>
-                </button>
-                <div class="tasks__info">
-                <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
-                <span class="tasks__info--date">${taskDateCreated}</span>
-                </div>
-                </div>`
-        }
-    }).join('');
-    return toShow;
+    try {
+        const toShow = data.map(task => {
+            if (task.status === status) {
+                let taskDateCreated = readableDate(task.dateCreated);
+                return `<div class='tasks ${status}' id='${task.id}' draggable="true" ondragstart="onDragStart(event)">
+                    <button class="tasks__edit" id='${task.id}name' onclick=uploadTask("${task.id}")>
+                        <h4> ${task.title} </h4>             
+                        <p> ${task.description} </p>
+                    </button>
+                    <div class="tasks__info">
+                    <p><i class="fas fa-trash tasks__delete--button" onclick='deleteTask("${task.id}")' title="Remove"></i></p>
+                    <span class="tasks__info--date">${taskDateCreated}</span>
+                    </div>
+                    </div>`
+            }
+        }).join('');
+        return toShow;
+    } catch (error) {
+        console.error(error);
+    };
 };
 
+//This function is to edit the format for the Date that Im going to show in the DOM
 function readableDate(date) {
-    const today = new Date(date);
-    const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
-    return today.toLocaleDateString('en-GB', options);
-}
+    try {
+        const today = new Date(date);
+        const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
+        return today.toLocaleDateString('en-GB', options);
+    } catch (error) {
+        console.error(error);
+    };
+};
 
 //Get the tasks information:
 async function getAllTasks() {
@@ -95,7 +115,8 @@ async function uploadTask(id) {
         let html = tasksData.data.map(element => {
             if (element.id === id) {
                 return (
-                    `<div class="form__wrapper">
+                    `<div id="checkRadioButton" onmouseenter='radioButtonCheck("${element.status}")'>
+                    <div class="form__wrapper">
                     <label for="title">Title:</label>
                     <input class="form__input" type="text" name="title" id="title" maxlength="40" value="${element.title}" required>
                     </div>
@@ -110,16 +131,17 @@ async function uploadTask(id) {
                     <label>Status:</label>
                         <div class="form__radio">
                         <label for="toDo2">To Do</label>
-                        <input type="radio" id="toDo2" name="status" value="toDo" checked />
+                        <input type="radio" id="toDo2" name="status" value="toDo"/>
     
                         <label for="inProgress2">In Progress</label>
-                        <input type="radio" id="inProgress2" name="status" value="inProgress" />
+                        <input type="radio" id="inProgress2" name="status" value="inProgress"/>
     
                         <label for="done2">Done</label>
-                        <input type="radio" id="done2" name="status" value="done" />
+                        <input type="radio" id="done2" name="status" value="done"/>
                         </div>
                     </div>
-                    <input class="form__input--submit" type="submit" value="Save changes">`
+                    <input class="form__input--submit" type="submit" value="Save changes">
+                    </div>`
                 )
             }
         }).join('');
@@ -129,6 +151,42 @@ async function uploadTask(id) {
         console.error(error);
     };
 }
+
+//In the "form Edit" I stablish the previous checked value that the element already has 
+function radioButtonCheck(status) {
+    try {
+        const elementWithTheEvent = document.querySelector('#checkRadioButton');
+        if (!elementWithTheEvent) throw new Error('The is a problem finding the element to check the radio button');
+
+        const radioToDo = document.querySelector('#toDo2');
+        if (!radioToDo) throw new Error('The is a problem finding the element "toDo" radio button');
+
+        const radioInProgress = document.querySelector('#inProgress2');
+        if (!radioInProgress) throw new Error('The is a problem finding the element "inProgress" radio button');
+
+        const radioDone = document.querySelector('#done2');
+        if (!radioDone) throw new Error('The is a problem finding the element "done" radio button');
+
+        switch (status) {
+            case 'toDo':
+                radioToDo.checked = true;
+                break;
+
+            case 'inProgress':
+                radioInProgress.checked = true;
+                break;
+
+            case 'done':
+                radioDone.checked = true;
+                break;
+        };
+
+        //With this the event is going to happen only once
+        elementWithTheEvent.onmouseenter = null;
+    } catch (error) {
+        console.error(error);
+    };
+};
 
 //Handle Edit
 async function handleEdit(ev) {

@@ -1,4 +1,4 @@
-// Brightness modal:
+// Brightness-change modal:
 const settingsButton = document.querySelector('.fa-cog')
 const settingsModal = document.querySelector('.settings-modal')
 const changeModeButton = document.querySelector('.fa-adjust')
@@ -25,3 +25,9 @@ const addTaskModal = document.querySelector('.add-task-modal')
 plusButton.addEventListener('click', () => {
     addTaskModal.classList.remove('hide')
 })
+
+// Edit-task modal:
+const openEditModal = () => {
+    const editModal = document.querySelector('.edit-modal-wrapper')
+    editModal.classList.remove('hide')
+}

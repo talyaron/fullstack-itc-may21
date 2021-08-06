@@ -6,13 +6,13 @@ const onlyFutureToDos = (ev): void => {
   } catch (error) {
     console.error(error);
   }
-};
+}
 
 const handleClickedToDo = (ev: any): void => {
   try {
 
-    if  (((ev.target.className !== 'upcoming__item todo')  &&
-          (ev.target.className !== 'later__item todo') &&
+    if  (((ev.target.className !== 'upcoming__item upcoming__item--upcoming todo')  &&
+          (ev.target.className !== 'later__item later__item--later todo') &&
           (ev.target.className.indexOf('todo__item todo__item--') === -1) &&
           (ev.target.className !== 'fa fa-trash')) ||
          (document.querySelector('.edit-form'))) return;
@@ -45,9 +45,9 @@ const setToDoToEdit = (toDoDiv: HTMLElement): HTMLFormElement => {
     `<form class="edit-form" id="">
       <input class="edit-form__item edit-form__item--content" type="text" placeholder="Edit your to-do" minlength="2" maxlength="80" name="toDoContent" id="edit-todo-content" />
       <select class="edit-form__item edit-form__item--status" name="toDoStatus" id="edit-todo-status">
-        <option value="">choose status</option>
+        <option value="">Choose status</option>
         <option value="Pending...">Pending...</option>
-        <option value="In Progress...">In Progress...</option>
+        <option value="In progress...">In progress...</option>
         <option value="Stuck">Stuck</option>
         <option value="Done">Done</option>
       </select>

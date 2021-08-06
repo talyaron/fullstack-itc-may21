@@ -11,7 +11,9 @@ order tasks*/
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
-const { v4: uuidv4 } = require('uuid');
+const {
+    v4: uuidv4
+} = require('uuid');
 
 const fs = require('fs')
 
@@ -21,31 +23,39 @@ app.use(express.json());
 
 
 const readAllEmployes = () => {
-    const allEmployes = fs.readFileSync('./employes.json'); 
-    return JSON.parse(allEmployes); 
+    const allEmployes = fs.readFileSync('./employes.json');
+    return JSON.parse(allEmployes);
 }
 let allEmployes = readAllEmployes()
 
 
-app.get('/getEmployes', (req, res)=>{
+app.get('/getEmployes', (req, res) => {
     res.send(allEmployes)
 })
 
 
-app.post('/addEmployes', (req, res)=>{
+app.post('/addEmployes', (req, res) => {
 
-    const {name, email,  address, phone} = req.body
+    const {
+        name,
+        email,
+        address,
+        phone
+    } = req.body
     const newEmploye = {
-    
-        name : name,
-        email : email,
-        address : address,
-        phone : phone,
-        id : uuidv4()
+
+        name: name,
+        email: email,
+        address: address,
+        phone: phone,
+        id: uuidv4()
     }
     allEmployes.push(newEmploye)
     fs.writeFileSync('./employes.json', JSON.stringify(allEmployes))
-    res.send({ message: 'one person was added', allEmployes })
+    res.send({
+        message: 'one person was added',
+        allEmployes
+    })
 })
 
 // app.put('/updateEmployes/:id', (req, res)=>{
@@ -57,8 +67,14 @@ app.post('/addEmployes', (req, res)=>{
 //     res.send(employeUpdate)
 // })
 // UPDATE TASKS
-app.put('/updateEmployes', (req, res)=>{ 
-    const {nameEdit, emailEdit, addressEdit, phoneEdit, id} =  req.body; 
+app.put('/updateEmployes', (req, res) => {
+    const {
+        nameEdit,
+        emailEdit,
+        addressEdit,
+        phoneEdit,
+        id
+    } = req.body;
     const employeUpdate = allEmployes.find(employe => employe.id === id)
     employeUpdate.name = nameEdit;
     employeUpdate.email = emailEdit;
@@ -67,17 +83,22 @@ app.put('/updateEmployes', (req, res)=>{
     employeUpdate.id = id;
     console.log(allEmployes)
     res.send(allEmployes);
-    })
+})
 
 
 app.delete('/deleteEmployes/:id', (req, res) => {
-        let { id } = req.params
-    
-        allEmployes = allEmployes.filter((employe) => employe.id !== id);
-        fs.writeFileSync("./employes.json", JSON.stringify(allEmployes));
-        res.send({ message: 'one employe record was deleted', allEmployes })
-        console.log(allEmployes)
-    
+    let {
+        id
+    } = req.params
+
+    allEmployes = allEmployes.filter((employe) => employe.id !== id);
+    fs.writeFileSync("./employes.json", JSON.stringify(allEmployes));
+    res.send({
+        message: 'one employe record was deleted',
+        allEmployes
+    })
+    console.log(allEmployes)
+
 
 })
 
@@ -89,4 +110,3 @@ app.delete('/deleteEmployes/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)
 })
-

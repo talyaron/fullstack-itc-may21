@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./dist/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://kit.fontawesome.com/9e08100192.js" crossorigin="anonymous"></script>
@@ -26,7 +29,7 @@
             <div class="right-wrapper__search">
                 <i class="fas fa-search fa-lg"></i>
             </div>
-            <div class="right-wrapper__settings animate__pulse">
+            <div class="right-wrapper__settings">
                 <i class="fas fa-cog fa-lg"></i>
                 <div class="settings-modal hide">
                     <p>Change appearance</p>
@@ -41,6 +44,15 @@
         </div>
     </nav>
     <h2 class="welcome-message">Welcome to your dojo.</h2>
+<!-- Edit modal -->
+    <div class="edit-modal-wrapper hide">
+        <h4>Change your pledge?</h4>
+        <form id="edit-modal-form" onsubmit="handleUpdate(event)">
+            <label for="edit-text"></label>
+            <input type="text" name="edit-text" class="edit-modal-form__text">
+            <button type="submit" class="edit-modal-form__submit-btn">Pledge again</button>
+        </form>
+    </div>
 <!-- List starts here -->
     <main>
         <div class="list">
@@ -48,34 +60,7 @@
                 <h3 class="list__header__headline">Perform these tasks, Ninja!</h3>
             </div>
             <div class="list__body">
-                <div class="task">
-                    <div class="task__done-button">
-                        <img src="./images/sword.png" alt="">
-                    </div>
-                    <p class="task__text">Lorem ipsum dolor sit amet</p>
-                    <div class="task__buttons-wrapper">
-                        <div class="edit-button-wrapper">
-                            <i class="fas fa-pencil-alt fa-lg"></i>
-                        </div>
-                        <div class="delete-button-wrapper">
-                            <i class="fas fa-trash fa-lg"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="task">
-                    <div class="task__done-button">
-                        <img src="./images/sword.png" alt="">
-                    </div>
-                    <p class="task__text">Lorem ipsum dolor sit amet</p>
-                    <div class="task__buttons-wrapper">
-                        <div class="edit-button-wrapper">
-                            <i class="fas fa-pencil-alt fa-lg"></i>
-                        </div>
-                        <div class="delete-button-wrapper">
-                            <i class="fas fa-trash fa-lg"></i>
-                        </div>
-                    </div>
-                </div>
+                <!-- Tasks -->
             </div>
         </div>
     </main>
@@ -88,8 +73,7 @@
             <h4>Sensei demands a new task!</h4>
             <p>He does not take promises lightly.</p>
             <form id="add-task-form">
-                <span>•</span>
-                <input type="text" name="task-text" id="task-text" placeholder="Show him your skills">
+                <input type="text" name="task-text" id="task-text" required placeholder="Show him your skills">
                 <button type="submit">Pledge</button>
             </form>
         </div>
