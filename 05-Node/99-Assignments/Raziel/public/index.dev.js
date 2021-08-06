@@ -210,16 +210,15 @@ function deleteOrEdit(event) {
   } else if (targetBtn.id == EDIT) {
     editEntry(entry);
   }
-}
+} // function deleteEntry(entry){
+//     ENTRY_LIST.splice( entry.id, 1);
+//     updateUI();
+// }
 
-function deleteEntry(entry) {
-  ENTRY_LIST.splice(entry.id, 1);
-  updateUI();
-}
 
-function deleteEnt(id) {
+function deleteEntryt(id) {
   var res;
-  return regeneratorRuntime.async(function deleteEnt$(_context3) {
+  return regeneratorRuntime.async(function deleteEntryt$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:

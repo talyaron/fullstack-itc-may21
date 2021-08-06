@@ -62,5 +62,11 @@ app.post('/addIncome',(req,res) => {
     }
 })
  
-
+app.delete('/deleteEntry/{id}',(req,res) => {
+    const {id}= req.params;
+    let allEntery=readAllEntery();
+    allEntery=allEntery.filter(entery =>entery.id !== id);
+    fs.writeFileSync("./EntryList.json",JSON.stringify(allEntery));
+    res.send(allEntery);
+})
 app.listen(port, () => { console.log('Server listen on port', port) })
