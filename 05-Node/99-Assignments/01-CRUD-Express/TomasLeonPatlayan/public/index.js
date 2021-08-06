@@ -31,15 +31,26 @@ const deletePromise = async (id) => {
   renderTask(deletes);
 };
 
-const updatePromise = async (event) => {
+let updateId;
+function updateTask(id) {
+updateId = id;
+}
 
-  let { name, description } = event.target.elements;
-  name = name.value;
-  description = description.value;
+const updatePromise = async (event) => {
+event.preventDefault()
+let id = updateId 
+const title = document.querySelector('#modal-title').value;
+const description = document.querySelector('#modal-description').value;
+const updatess = {title,description,id}
+// const updateTask = await axios.put(`/updateTask/${id}`,updates)
+
+
+
+
   const updateTask = await fetch(`/updateTask/${id}`, {
-    method: "put",
-    data: { name, description },
-  });
+    method: "put"
+    
+  },updatess);
   const updates = await updateTask.json();
   renderTask(updates);
 };
@@ -58,10 +69,10 @@ function renderTask(data) {
     <input type="checkbox">
     </td>
     <td class="text-right">
-    <button type="button" class ="btn btn-primary mb-1"  data-toggle="modal" data-target="#exampleModal" >
+    <button onclick='updateTask("${task.id}")' type="button" class ="btn btn-primary mb-1"  data-toggle="modal" data-target="#exampleModal" >
     <i class="fa fa-pencil"></i>
     </button>
-    <button onclick="deletePromise('${task.id}')" class="btn btn-danger mb-1 ml-1">
+    <button onclick='deletePromise("${task.id}")' class="btn btn-danger mb-1 ml-1">
     <i class="fa fa-trash"></i>
     </button>
     </td>
