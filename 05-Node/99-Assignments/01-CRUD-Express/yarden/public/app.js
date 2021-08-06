@@ -8,10 +8,13 @@ class Task {
         this.id = Math.random().toString(16).slice(2)
         this.isDone = false
     }
+    update(newTask) {
+        this.text = newTask.text
+    }
 }
 
 // The tasks array
-const tasks = []
+let tasks = []
 
 
 /* Add */
@@ -25,10 +28,11 @@ function handleSubmit(ev) {
     const taskText = ev.target[0].value
     if (!taskText) throw new Error('Please enter description.')
     const newTask = new Task(taskText)
-    tasks.unshift(newTask)
-    console.log(tasks);
+    tasks.push(newTask)
+    console.log(tasks)
     renderTaskList()
     modal.classList.add('hide')
+    ev.target.reset()
 }
 
 
@@ -49,7 +53,7 @@ const renderTaskList = () => {
     <p class="task__text ${checkIsDone(task.isDone)}">${task.text}</p>
     <div class="task__buttons-wrapper">
         <div class="edit-button-wrapper">
-            <i onclick='handleUpdate("${task.id}")' class="fas fa-pencil-alt fa-lg"></i>
+            <i onclick='getIdForUpdate("${task.id}")' class="fas fa-pencil-alt fa-lg"></i>
         </div>
         <div class="delete-button-wrapper">
             <i onclick='handleDelete("${task.id}")' class="fas fa-trash fa-lg"></i>
@@ -61,27 +65,37 @@ const renderTaskList = () => {
     document.querySelector('.list__body').innerHTML = taskHtml
 }
 
+// async function getAllTasks() {
+//     try {
+//         const tasksData = await axios.get('/getAllTasks');
+//         renderTask(tasksData.data);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 /* Update */
+function getIdForUpdate(taskId) {
+    openEditModal()
+    const taskToUpdate = tasks.find(task => task.id === taskId)
+    return taskToUpdate.id
+}
 
 function handleUpdate(ev) {
-
+    ev.preventDefault()
+    
+    ev.target.reset()
 }
 
-const updateTask = (ev) => {
-
-}
 
 /* Delete */
 
-function handleDelete(ev) {
-    
+function handleDelete(taskId) {
+    const taskToDelete = tasks.find(task => task.id === taskId)
+    const filteredTasks = tasks.filter(task => task.id !== taskToDelete.id)
+    tasks = filteredTasks
+    renderTaskList()
 }
-
-const deleteTask = (ev) => {
-
-}
-
 
 /* Send info to server with axios */
 

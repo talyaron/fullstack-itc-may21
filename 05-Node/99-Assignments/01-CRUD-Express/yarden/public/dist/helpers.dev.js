@@ -1,6 +1,6 @@
 "use strict";
 
-// Brightness modal:
+// Brightness-change modal:
 var settingsButton = document.querySelector('.fa-cog');
 var settingsModal = document.querySelector('.settings-modal');
 var changeModeButton = document.querySelector('.fa-adjust');
@@ -22,4 +22,9 @@ var plusButton = document.querySelector('.button-wrapper');
 var addTaskModal = document.querySelector('.add-task-modal');
 plusButton.addEventListener('click', function () {
   addTaskModal.classList.remove('hide');
-});
+}); // Edit-task modal:
+
+var openEditModal = function openEditModal() {
+  var editModal = document.querySelector('.edit-modal-wrapper');
+  editModal.classList.remove('hide');
+};

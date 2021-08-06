@@ -79,8 +79,9 @@ async function handleEdit(e){
     
     }catch(e) {console.error(e)}
 }
-// FUNCION GET DATA
+// FUNCION GET DATA 
 async function getAllTasks(){
+    
     try{
     const response = await axios.get('/tasks');
     renderTasks(response.data)
