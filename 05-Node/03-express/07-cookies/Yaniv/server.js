@@ -6,7 +6,7 @@ const port = process.env.PORT || 5555;
 app.get('/getData', (req ,res)=>{
 
 
-    res.cookie('myFirstCookie',"Eat me!", { maxAge: 60000, httpOnly: true });
+    res.cookie('myFirstCookie',"Eat me!", { maxAge: 3000, httpOnly: true });
     res.send({success:true})
 })
 

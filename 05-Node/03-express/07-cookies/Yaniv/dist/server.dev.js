@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 var port = process.env.PORT || 5555;
 app.get('/getData', function (req, res) {
   res.cookie('myFirstCookie', "Eat me!", {
-    maxAge: 60000,
+    maxAge: 3000,
     httpOnly: true
   });
   res.send({
