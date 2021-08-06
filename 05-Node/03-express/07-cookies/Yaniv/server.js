@@ -10,6 +10,7 @@ app.get('/getData', (req ,res)=>{
     res.cookie(cookieName, JSON.stringify(cookieObject), { maxAge: 300000, httpOnly: true });
     res.send({success:true});
 
+    console.log(req.cookies);
     const { myFirstCookie } = req.cookies;
     const FetchedCookieObject = JSON.parse(myFirstCookie);
     console.log(FetchedCookieObject);

@@ -19,6 +19,7 @@ app.get('/getData', function (req, res) {
   res.send({
     success: true
   });
+  console.log(req.cookies);
   var myFirstCookie = req.cookies.myFirstCookie;
   var FetchedCookieObject = JSON.parse(myFirstCookie);
   console.log(FetchedCookieObject);
