@@ -16,6 +16,8 @@ const readAllEntery=() => {
 
 const allEntery = fs.readFileSync(filepath);
 console.log(allEntery);
+
+
 app.post('/addExpense',(req, res) => {
     try {
         const {type, title,amount} = req.body;
@@ -37,6 +39,27 @@ app.post('/addExpense',(req, res) => {
     }
     
 
+})
+
+app.post('/addIncome',(req,res) => {
+    try {
+        const {type, title,amount} = req.body;
+        
+    const newExpense={
+        type,
+        title,
+        amount,
+        id:uuidv4()
+    }
+    console.log(newExpense);
+    const allEntery=readAllEntery();
+    allEntery.push(newExpense);
+    console.log(allEntery);
+    fs.writeFileSync("./EntryList.json",JSON.stringify(allEntery));
+    res.send(allEntery)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 })
  
 

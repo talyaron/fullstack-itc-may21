@@ -49,6 +49,31 @@ app.post('/addExpense', function (req, res) {
     res.status(500).send(error.message);
   }
 });
+app.post('/addIncome', function (req, res) {
+  try {
+    var _req$body2 = req.body,
+        type = _req$body2.type,
+        title = _req$body2.title,
+        amount = _req$body2.amount;
+    var newExpense = {
+      type: type,
+      title: title,
+      amount: amount,
+      id: uuidv4()
+    };
+    console.log(newExpense);
+
+    var _allEntery2 = readAllEntery();
+
+    _allEntery2.push(newExpense);
+
+    console.log(_allEntery2);
+    fs.writeFileSync("./EntryList.json", JSON.stringify(_allEntery2));
+    res.send(_allEntery2);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
 app.listen(port, function () {
   console.log('Server listen on port', port);
 });

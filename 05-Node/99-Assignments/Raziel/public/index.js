@@ -58,9 +58,8 @@ addExpense.addEventListener("click",addExpense1)
 
 
 async function addExpense1(){
-
-
-
+ try {
+    if(!expenseTitle.value || !expenseAmount.value ) return;
     let expense = {
         type : "expense",
         title : expenseTitle.value,
@@ -74,6 +73,11 @@ ENTRY_LIST.push(...data)
 console.log(ENTRY_LIST);
         updateUI();
         clearInput( [expenseTitle, expenseAmount] )  
+
+ } catch (error) {
+     console.error(error);
+ }
+
 
 }
 
@@ -109,32 +113,51 @@ console.log(ENTRY_LIST);
     
 // })
 
-addIncome.addEventListener("click", function(){
-    // IF ONE OF THE INPUTS IS EMPTY => EXIT
-    if(!incomeTitle.value || !incomeAmount.value ) return;
+addIncome.addEventListener("click",addIncome1());
+//     // IF ONE OF THE INPUTS IS EMPTY => EXIT
+//     if(!incomeTitle.value || !incomeAmount.value ) return;
 
-    // SAVE THE ENTRY TO ENTRY_LIST
+//     // SAVE THE ENTRY TO ENTRY_LIST
+//     let income = {
+//         type : "income",
+//         title : incomeTitle.value,
+//         amount : parseInt(incomeAmount.value)
+//     }
+//     ENTRY_LIST.push(income);
+//     const data = {type : "income",tile :incomeTitle.value,amount : parseInt(incomeAmount.value)}
+//        const options={
+//            method:'POST',
+//            headers: {
+//             'Content-Type': 'application/json'
+           
+//           },
+//           body: JSON.stringify(data) // body data type must match "Content-Type" header
+
+//        }
+//        fetch('/addIncome',options);
+//     updateUI();
+//     clearInput( [incomeTitle, incomeAmount] )
+// })
+async function addIncome1(){
+
+try {
     let income = {
         type : "income",
         title : incomeTitle.value,
         amount : parseInt(incomeAmount.value)
     }
-    ENTRY_LIST.push(income);
-    const data = {type : "income",tile :incomeTitle.value,amount : parseInt(incomeAmount.value)}
-       const options={
-           method:'POST',
-           headers: {
-            'Content-Type': 'application/json'
-           
-          },
-          body: JSON.stringify(data) // body data type must match "Content-Type" header
-
-       }
-       fetch('/addIncome',options);
+    const res= await axios.post("/addIncome", income);
+    console.log(res.data);
+    const data=res.data;
+    ENTRY_LIST.push(...data)
+    console.log(ENTRY_LIST);
     updateUI();
     clearInput( [incomeTitle, incomeAmount] )
-})
+} catch (error) {
+    console.error(error);
+}
 
+}
 incomeList.addEventListener("click", deleteOrEdit);
 expenseList.addEventListener("click", deleteOrEdit);
 allList.addEventListener("click", deleteOrEdit);
@@ -158,7 +181,11 @@ function deleteEntry(entry){
 
     updateUI();
 }
+ async function deleteEnt(id){
 
+    const res=await axios.delete(`/deleteEntry/${id}`);
+    updateUI();
+ }
 function editEntry(entry){
     console.log(entry)
     let ENTRY = ENTRY_LIST[entry.id];
