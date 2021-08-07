@@ -74,7 +74,16 @@ app.post('/addIncome', function (req, res) {
     res.status(500).send(error.message);
   }
 });
-app["delete"]('/deleteEntry/{id}', function (req, res) {
+app.get('/getEntery', function (req, res) {
+  try {
+    var _allEntery3 = readAllEntery();
+
+    res.send(_allEntery3);
+  } catch (error) {
+    console.error(error);
+  }
+});
+app["delete"]('/deleteEntry/:id', function (req, res) {
   var id = req.params.id;
   var allEntery = readAllEntery();
   allEntery = allEntery.filter(function (entery) {

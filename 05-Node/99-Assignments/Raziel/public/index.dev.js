@@ -36,10 +36,7 @@ var balance = 0,
     income = 0,
     outcome = 0;
 var DELETE = "delete",
-    EDIT = "edit"; // // LOOK IF THERE IS SAVED DATA IN LOCALSTORAGE
-// ENTRY_LIST = JSON.parse(localStorage.getItem("entry_list")) || [];
-// updateUI();
-// EVENT LISTENERS
+    EDIT = "edit"; // EVENT LISTENERS
 
 expenseBtn.addEventListener("click", function () {
   show(expenseEl);
@@ -68,24 +65,16 @@ function addExpense1() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-
-          if (!(!expenseTitle.value || !expenseAmount.value)) {
-            _context.next = 3;
-            break;
-          }
-
-          return _context.abrupt("return");
-
-        case 3:
+          // if(!expenseTitle.value || !expenseAmount.value ) return;
           expense = {
             type: "expense",
             title: expenseTitle.value,
             amount: parseInt(expenseAmount.value)
           };
-          _context.next = 6;
+          _context.next = 4;
           return regeneratorRuntime.awrap(axios.post("/addExpense", expense));
 
-        case 6:
+        case 4:
           res = _context.sent;
           console.log(res.data);
           data = res.data; // const data= await res.json();
@@ -94,68 +83,23 @@ function addExpense1() {
           console.log(ENTRY_LIST);
           updateUI();
           clearInput([expenseTitle, expenseAmount]);
-          _context.next = 18;
+          _context.next = 16;
           break;
 
-        case 15:
-          _context.prev = 15;
+        case 13:
+          _context.prev = 13;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
 
-        case 18:
+        case 16:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 15]]);
-} // IF ONE OF THE INPUTS IS EMPTY => EXIT
-//     try {
-//         if(!expenseTitle.value || !expenseAmount.value ) return;
-//         // SAVE THE ENTRY TO ENTRY_LIST
-//         let expense = {
-//             type : "expense",
-//             title : expenseTitle.value,
-//             amount : parseInt(expenseAmount.value)
-//         }
-//         ENTRY_LIST.push(expense);
-//        const data = {type : "expense",tile :expenseTitle.value,amount : parseInt(expenseAmount.value)}
-//        const options={
-//            method:'POST',
-//            headers: {
-//             'Content-Type': 'application/json'
-//           },
-//           body: JSON.stringify(data) // body data type must match "Content-Type" header
-//        }
-//        fetch('/addExpense',options);
-//         updateUI();
-//         clearInput( [expenseTitle, expenseAmount] )  
-//     } catch (error) {
-//         console.error(error)
-//     }
-// })
+  }, null, null, [[0, 13]]);
+}
 
-
-addIncome.addEventListener("click", addIncome1()); //     // IF ONE OF THE INPUTS IS EMPTY => EXIT
-//     if(!incomeTitle.value || !incomeAmount.value ) return;
-//     // SAVE THE ENTRY TO ENTRY_LIST
-//     let income = {
-//         type : "income",
-//         title : incomeTitle.value,
-//         amount : parseInt(incomeAmount.value)
-//     }
-//     ENTRY_LIST.push(income);
-//     const data = {type : "income",tile :incomeTitle.value,amount : parseInt(incomeAmount.value)}
-//        const options={
-//            method:'POST',
-//            headers: {
-//             'Content-Type': 'application/json'
-//           },
-//           body: JSON.stringify(data) // body data type must match "Content-Type" header
-//        }
-//        fetch('/addIncome',options);
-//     updateUI();
-//     clearInput( [incomeTitle, incomeAmount] )
-// })
+addIncome.addEventListener("click", addIncome1());
 
 function addIncome1() {
   var _income, res, data;
@@ -216,26 +160,46 @@ function deleteOrEdit(event) {
 // }
 
 
-function deleteEntryt(id) {
-  var res;
-  return regeneratorRuntime.async(function deleteEntryt$(_context3) {
+function deleteEntery(id) {
+  var option, Entery;
+  return regeneratorRuntime.async(function deleteEntery$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          _context3.next = 2;
+          _context3.prev = 0;
+          option = confirm("Are you sure do you want to delete this task?");
+
+          if (!option) {
+            _context3.next = 8;
+            break;
+          }
+
+          _context3.next = 5;
           return regeneratorRuntime.awrap(axios["delete"]("/deleteEntry/".concat(id)));
 
-        case 2:
-          res = _context3.sent;
+        case 5:
+          Entery = _context3.sent;
+          ENTRY_LIST.push.apply(ENTRY_LIST, _toConsumableArray(Entery.data));
           updateUI();
 
-        case 4:
+        case 8:
+          _context3.next = 13;
+          break;
+
+        case 10:
+          _context3.prev = 10;
+          _context3.t0 = _context3["catch"](0);
+          console.error(_context3.t0);
+
+        case 13:
         case "end":
           return _context3.stop();
       }
     }
-  });
+  }, null, null, [[0, 10]]);
 }
+
+;
 
 function editEntry(entry) {
   console.log(entry);
@@ -248,8 +212,6 @@ function editEntry(entry) {
     expenseAmount.value = ENTRY.amount;
     expenseTitle.value = ENTRY.title;
   }
-
-  deleteEntry(entry);
 }
 
 function updateUI() {

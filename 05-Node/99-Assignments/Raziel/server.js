@@ -62,7 +62,20 @@ app.post('/addIncome',(req,res) => {
     }
 })
  
-app.delete('/deleteEntry/{id}',(req,res) => {
+
+app.get('/getEntery', (req, res) => {
+    try {
+        const allEntery = readAllEntery();
+        res.send(allEntery);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+
+
+
+app.delete('/deleteEntry/:id',(req,res) => {
     const {id}= req.params;
     let allEntery=readAllEntery();
     allEntery=allEntery.filter(entery =>entery.id !== id);
