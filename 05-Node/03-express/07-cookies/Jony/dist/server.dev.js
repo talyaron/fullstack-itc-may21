@@ -4,15 +4,15 @@ var express = require('express');
 
 var app = require('express')();
 
-var cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser'); //app.use(cookieParser())
 
-app.use(cookieParser());
+
 app.get('/getData', function (req, res) {
-  console.log(req.cookies);
-  var cookieName = req.cookies.cookieName;
-  var cookie = JSON.parse(cookieName);
-  var name = cookie.name;
-  console.log(name);
+  // console.log(req.cookies)
+  // const {cookieName} = req.cookies
+  // const cookie = JSON.parse(cookieName)
+  // const {name} = cookie
+  // console.log(name)
   var newName = {
     'name': 'Jonathan',
     'edad': 23

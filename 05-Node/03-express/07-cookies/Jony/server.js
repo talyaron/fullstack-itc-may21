@@ -4,15 +4,15 @@ var cookieParser = require('cookie-parser');
 
 
 
-app.use(cookieParser())
+//app.use(cookieParser())
 app.get('/getData', function (req, res) {
 
 
-    console.log(req.cookies)
-    const {cookieName} = req.cookies
-    const cookie = JSON.parse(cookieName)
-    const {name} = cookie
-    console.log(name)
+    // console.log(req.cookies)
+    // const {cookieName} = req.cookies
+    // const cookie = JSON.parse(cookieName)
+    // const {name} = cookie
+    // console.log(name)
 
     const newName = {
         'name': 'Jonathan',
