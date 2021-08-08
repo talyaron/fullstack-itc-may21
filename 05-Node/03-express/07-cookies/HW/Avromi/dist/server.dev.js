@@ -23,8 +23,9 @@ app.get('/cookie', function (req, res) {
 });
 app.get('/user', function (req, res) {
   var cookie = req.cookies['cookie'];
-  res.send(cookie);
-  console.log(cookie);
+  res.send({
+    cookie: cookie
+  });
 });
 app.listen(port, function () {
   console.log("App listening on port: ".concat(port));

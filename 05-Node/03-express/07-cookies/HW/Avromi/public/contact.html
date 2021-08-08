@@ -22,13 +22,10 @@
 
         fetch('/user')
             .then(r => r.json())
-            .then(data => render(data))
-      console.log(data);
-
+            .then(data => render(data.cookie))
 
 
         function render(data) {
-            console.log('render');
             const root = document.querySelector('.rootDiv');
             const html = `Hello, ${data}`
             root.innerHTML = html;

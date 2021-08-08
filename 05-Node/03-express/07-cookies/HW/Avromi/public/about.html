@@ -20,11 +20,11 @@
     <script>
         fetch('/user')
             .then(r => r.json())
-            .then(data => render(data))
+            .then(data => render(data.cookie))
 
         function render(data) {
             const root = document.querySelector('.rootDiv');
-            const html = `Hello, ${data}`
+            html = `Hello, ${data}`
             root.innerHTML = html;
 
         }

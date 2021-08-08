@@ -25,8 +25,8 @@ app.get('/cookie', (req, res) => {
 
 app.get('/user', (req, res) => {
     const cookie = req.cookies['cookie'];
-    res.send(cookie)
-console.log(cookie);
+    res.send({cookie})
+
 })
 
 
