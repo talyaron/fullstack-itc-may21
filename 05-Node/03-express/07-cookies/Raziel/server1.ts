@@ -8,15 +8,18 @@ app.use(cookieParser());
 app.get('/getData', (req ,res)=>{
 
 
-    console.log(req.cookie);
-    const {cookieName}=req.cookie;
-    
-      
+    console.log(req.cookies);
+    const { cookieName } = req.cookies
+    const cookie = JSON.parse(cookieName);
+    console.log(cookie)
+    const {name} = cookie;
+    console.log(name)
 
-    const name =JSON.stringify({name:"Cookie MOnster"});
-    res.cookie('cookieName',name, { maxAge: 8000000, httpOnly: true });
-    res.send({ok:true})
+    //write a cookie
 
+    const name1 = JSON.stringify({ name: 'Raziel' })
+    res.cookie('cookieName', name1, { maxAge: 300000000, httpOnly: true });
+    res.send({ ok: true })
 })
 
 
