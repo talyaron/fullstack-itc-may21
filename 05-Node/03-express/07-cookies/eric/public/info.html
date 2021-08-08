@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal info</title>
+    <link rel="stylesheet" href="dist/style.css">
+
+    <title>Show login</title>
 </head>
-<body onload="pepe(event)">
+<body onload=getLogin(event)>
      <div id="root"></div>
+     <div>
+         <button id="login">Login page</button>
+     </div>
 
 
 <script>
 
+      const loginPage = document.getElementById("login")
 
-     function pepe(ev){
+      loginPage.addEventListener("click", backPage)
+
+
+     function getLogin(ev){
        ev.preventDefault();
 
-        fetch('/user')
+        fetch('/user', )
             .then(r=>r.json())
             .then(data=>render(data))
     
@@ -26,16 +35,25 @@
     function render(data){
 
         let html = ''
-        const {name} = data;
+        const {name, password} = data;
         const root = document.getElementById('root')   
 
-        html += `<div>${name}</div>`
+        html += `<div>
+                 <div>Your userName is: ${name}.</div>
+                 <div>Your password is: ${password}</div>
+
+                </div>`
 
         root.innerHTML = html;
     }
 
+    
+    function  backPage(){
+        window.location.href = 'index.html';
+     }
 
-         
+
+
 
 </script>
 </body>
