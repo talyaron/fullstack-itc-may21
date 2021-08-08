@@ -45,13 +45,14 @@ async function postTask(task){
     try{
     const response = await axios.post('/tasks', task);
     renderTasks(response.data)
-    }catch(e){console.error(e)}
+    }catch(e){console.error(e)} //YS: You wont have an error since you are not sending an error from the BE, your BE will just crash. 
 }
     
 // FUNCION DELETE
 async function deleteTasks(id){
     try{
     if (!id) throw new error('We need an ID for the delete')
+    //YS: You should have an alert message here before deleting: Are you sure you want to delete?
     const response = await axios.delete(`/tasks/${id}`)
     let responseData = response.data;
     console.log(responseData);
@@ -66,15 +67,15 @@ function setCurrentId(id){
 async function handleEdit(e){
     e.preventDefault();
     try{
-    let id = currentId;
+    let id = currentId; //YS: Why dont you just use the currentId instead of changing it back to ID? You can call it taskToEditId?
     const taskEdit = document.querySelector('#taskName').value;
     const dateEdit = document.querySelector('#dateName').value;
     const statusEdit = document.querySelector('#statusName').value;
     const updateTask = {taskEdit, dateEdit, statusEdit, id} 
-    console.log(updateTask)
+    console.log(updateTask) //YS: ?
     const response = await axios.put(`/tasks`, updateTask);
     const responseData = response.data;
-    console.log(response.data)
+    console.log(response.data) //YS: ?
     renderTasks(responseData);
     
     }catch(e) {console.error(e)}

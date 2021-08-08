@@ -7,7 +7,7 @@ var port = process.env.port || 3000;
 
 var fs = require("fs");
 
-var _require = require('uuid'),
+var _require = require("uuid"),
     uuidv4 = _require.v4;
 
 app.use(express["static"]("public"));
@@ -19,6 +19,7 @@ var readAllTasks = function readAllTasks() {
 };
 
 function getOrderTask(allTasks) {
+  //YS: You should change the text of your button to Order Tasks by Date or something because the user doesnt know what they are ordering by. 
   allTasks.sort(function (a, b) {
     return a.datetime < b.datetime ? -1 : a.datetime > b.datetime ? 1 : 0;
   });
@@ -45,9 +46,28 @@ app.post("/addTask", function (req, res) {
       status: status,
       datetime: datetime
     };
+    /*  
+        2 things with this newTask object: 
+        1) Whenever your keys and values are the same, you dont have to write it twice: 
+        const newTask = {   
+            id: uuidv4(),
+            title,
+            description,
+            date,
+            min,
+            emoji,
+            status,
+            datetime,
+        };
+          2) Another thing you can do is spread your req.body object and add the ID: 
+        const newTask = { 
+            ...req.body,   
+            id: uuidv4(),  
+        };
+    */
 
     if (!title || !description || !date || !min || !emoji || !status) {
-      throw new Error("Don't have any of the element of the json object");
+      throw new Error("Don't have any of the element of the json object"); //YS: Good but the client doesnt really know what that means - only you do. 
     }
 
     var allTasks = readAllTasks();
@@ -60,10 +80,11 @@ app.post("/addTask", function (req, res) {
   } catch (e) {
     res.status(500).send({
       error: "".concat(e)
-    });
+    }); //YS: You should send back the e.message instead of the whole error object. 
   }
 });
 app.get("/getAllTask", function (req, res) {
+  //YS: Try/Catch? 
   var allTasks = readAllTasks();
   res.send(allTasks);
 });
@@ -88,17 +109,19 @@ app.put("/doneTask/:id", function (req, res) {
     var allTasks = readAllTasks();
     task = allTasks.find(function (task) {
       return task.id === id;
-    });
-    task.status = 'done';
+    }); //YS: WHERE DID YOU GET TASK FROM????????  CONST/LET???  Now your variable has the same name as your callback (not good)! 
+
+    task.status = "done";
     fs.writeFileSync("./task.json", JSON.stringify(allTasks));
     res.send(getOrderTask(allTasks));
   } catch (e) {
     res.status(500).send({
       error: "".concat(e)
-    });
+    }); //YS: e.message
   }
 });
 app.put("/updateTask/:id", function (req, res) {
+  //YS: Very good 
   try {
     var id = req.params.id;
     var _req$body2 = req.body,
@@ -116,7 +139,8 @@ app.put("/updateTask/:id", function (req, res) {
     var allTasks = readAllTasks();
     task = allTasks.find(function (task) {
       return task.id === id;
-    });
+    }); //YS: WHERE DID YOU GET TASK FROM????????  CONST/LET ???
+
     task.title = title;
     task.description = description;
     task.emoji = emoji;
@@ -136,14 +160,15 @@ app.get("/getTask/:id", function (req, res) {
   var allTasks = readAllTasks();
   task = allTasks.find(function (task) {
     return task.id === id;
-  });
+  }); //YS: WHERE DID YOU GET TASK FROM????????  CONST/LET ???
+
   res.send(task);
 });
 app.get("/getPriority/:status", function (req, res) {
   var status = req.params.status;
   var allTasks = readAllTasks();
 
-  if (status !== 'everything') {
+  if (status !== "everything") {
     task = allTasks.filter(function (task) {
       return task.status === status;
     });

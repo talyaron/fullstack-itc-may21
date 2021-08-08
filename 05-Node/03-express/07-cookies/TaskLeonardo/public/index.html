@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookieland</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="shortcut icon" href="img/faviconCountry.png" type="image/x-icon">
+    <link rel="stylesheet" href="dist/styles.min.css">
+</head>
+
+<body>
+    <nav class="top-menu">
+        <h1 class="top-menu__title">Ministry of Interior</h1>
+        <img class="top-menu__logo" src="./img/logoCookieland.jpg" alt="Cookieland" />
+    </nav>
+
+    <div class="form">
+        <form id="login">
+            <h1>WELCOME TO COOKIELAND</h1>
+
+            <div class="form__wrapper">
+                <label for="email">Email:</label>
+                <input type="email" name="email" placeholder="Enter your email">
+            </div>
+
+            <div class="form__wrapper">
+                <label for="password">Password:</label>
+                <input type="password" name="password" placeholder="Enter your password" maxlength="10"
+                    autocomplete="off">
+            </div>
+
+            <div id="errorMessage"></div>
+
+            <div class="form__wrapper--submit">
+                <input class="button--login" type="submit" value="Login">
+            </div>
+        </form>
+        <button class="form__submit--newuser button" id="buttonCreate">New user</button>
+    </div>
+    <!-- Modal to create a new user -->
+    <div id="modalCreate" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <form class="form" id="create">
+                <h3>Create a new user</h3>
+                <div class="form__wrapper">
+                    <label for="namePerson">Name:</label>
+                    <input type="text" name="namePerson" placeholder="Enter your name" maxlength="35" required>
+                </div>
+
+                <div class="form__wrapper">
+                    <label for="newEmail">Email:</label>
+                    <input type="email" name="newEmail" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form__wrapper">
+                    <label for="newPassword">Password:</label>
+                    <input type="password" name="newPassword" placeholder="Enter your password" autocomplete="off"
+                        required>
+                </div>
+
+                <input class="form__submit--newuser" type="submit" value="Create user">
+            </form>
+
+        </div>
+    </div>
+
+    <script src="dist/helperModal.dev.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -7,6 +7,7 @@ var app = express();
 var cookieParser = require('cookie-parser');
 
 var port = process.env.PORT || 5555;
+app.use(cookieParser());
 app.get('/getData', function (req, res) {
   var cookieObject = {
     content: "Eat me!"

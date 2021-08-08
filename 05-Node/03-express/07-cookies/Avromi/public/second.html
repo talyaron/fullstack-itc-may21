@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<h1>>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="index.html">Home Page</a>
+    <a href="third.html">Third Page</a>
+    <h1>Second</h1>
+    <div class="rootDiv"></div>
+    <script>
+        fetch('/user')
+        .then(r=>r.json())
+        .then(data=>render(data))
+        console.log(data);
+
+        // function render(data){
+        //     const root = document.quarySelector('.rootDiv')
+        //     let html = "";
+
+
+        // }
+    </script>
+</body>
+</html>

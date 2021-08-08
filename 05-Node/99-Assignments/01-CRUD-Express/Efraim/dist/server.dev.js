@@ -8,7 +8,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var express = require('express');
 
-app = express();
+app = express(); //YS: CONST app!!!!!!  
+
 var port = process.env.PORT || 5000;
 app.use(express.json());
 
@@ -17,7 +18,8 @@ var Ajv = require("ajv");
 var ajv = new Ajv();
 app.use(express["static"]('public'));
 
-var toDOItems = function toDOItems(item, dueDate) {
+var toDOItems = //YS: Class names are capitalized
+function toDOItems(item, dueDate) {
   _classCallCheck(this, toDOItems);
 
   this.item = item;
@@ -29,6 +31,7 @@ var toDOItems = function toDOItems(item, dueDate) {
 var toDoList =
 /*#__PURE__*/
 function () {
+  //YS: Class names are capitalized
   function toDoList() {
     _classCallCheck(this, toDoList);
 
@@ -66,7 +69,8 @@ app.post('/addListItem', function (req, res) {
       required: ["task", "dueDate"],
       additionalProperties: false
     };
-    var validate = ajv.compile(schema);
+    var validate = ajv.compile(schema); //YS: Nice
+
     var body = req.body;
     var valid = validate(body);
 
@@ -82,6 +86,7 @@ app.post('/addListItem', function (req, res) {
   } catch (e) {
     console.log(e);
     res.status(400).send({
+      //YS: Very good. 
       error: e.message
     });
   }
@@ -90,13 +95,15 @@ app["delete"]('/deleteTask/:ID', function (req, res) {
   var ID = req.params.ID;
   list.list = list.list.filter(function (list) {
     return list.itemID !== ID;
-  });
+  }); //YS: Would be better if this were a new variable instead of list.list: const deletedList = list.list.filter(list => list.item....)
+
   res.send(list);
 });
 app.put('/updateTask', function (req, res) {
   var _req$body = req.body,
       id = _req$body.id,
-      newTaskName = _req$body.newTaskName;
+      newTaskName = _req$body.newTaskName; //YS: Id should be sent through params and not body.  app.put('/updateTask/:taskId', (req, res) => {...
+
   var listIndex = list.list.findIndex(function (list) {
     return list.itemID === id;
   });
@@ -111,10 +118,11 @@ app.put('/updateTask', function (req, res) {
     res.send({
       message: 'couldnt find the task Item!',
       list: list
-    });
+    }); //YS: res.status(400)
   }
 });
 app.put('/updateStatus', function (req, res) {
+  //YS: Id should be sent through params and not body.  app.put('/updateStatus/:statusId', (req, res) => {...
   var id = req.body.id;
   var listIndex = list.list.findIndex(function (list) {
     return list.itemID === id;
