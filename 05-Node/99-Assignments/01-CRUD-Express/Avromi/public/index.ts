@@ -22,7 +22,7 @@ async function addTask(title) {
 
 async function editTask(id, newTitle) {
     try {
-        const res = await axios.put('/tasks/editTask', { id, newTitle })
+        const res = await axios.put('/tasks/editTask', { id, newTitle }) //YS: Id should be in params/query
         const allTasks = res.data
         renderTasks(allTasks);
     } catch (error) {
@@ -59,7 +59,7 @@ function handleDelete(id): any {
     deleteTask(id);
 }
 const edit = document.querySelector(".edit");
-function handleEdit(id, title): any {
+function handleEdit(id, title): any { //YS: Good
 
     let html = '';
 

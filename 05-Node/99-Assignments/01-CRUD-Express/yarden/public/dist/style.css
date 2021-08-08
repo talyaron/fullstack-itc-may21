@@ -328,3 +328,7 @@ footer .fa-plus:hover {
   text-decoration-thickness: 2px;
   color: rgba(245, 245, 245, 0.486);
 }
+
+.task.dragged {
+  opacity: 0.5;
+}
