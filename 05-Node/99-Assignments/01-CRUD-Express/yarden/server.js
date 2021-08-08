@@ -31,15 +31,6 @@ tasksOnServer.push(new Task ("Take out the trash"))
 // GET (CRUD:READ) all tasks
 app.get('/tasks', (req, res) => {
         res.send(tasksOnServer)
-<<<<<<< HEAD
-=======
-    } catch (er) {
-        console.error(er) //YS: Should be: res.status(400).send(er.message)
-    }
-})
-app.get('/tasks/:id', (req, res)=>{ //YS: Try/Catch? 
-    res.send(tasksOnServer)
->>>>>>> f85ee9ef3c0f1768ef326cb878700bf303ac00e5
 })
 
 // POST (CRUD:Create) tasks
