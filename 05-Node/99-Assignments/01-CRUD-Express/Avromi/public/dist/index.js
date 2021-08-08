@@ -56,7 +56,7 @@ function getAllTask() {
         });
     });
 }
-getAllTask();
+getAllTask(); //YS: Add an onload function. 
 function addTask(title) {
     return __awaiter(this, void 0, void 0, function () {
         var res, allTasks, error_2;
@@ -79,9 +79,32 @@ function addTask(title) {
         });
     });
 }
-function deleteTask(id) {
+function editTask(id, newTitle) {
     return __awaiter(this, void 0, void 0, function () {
         var res, allTasks, error_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.put('/tasks/editTask', { id: id, newTitle: newTitle })];
+                case 1:
+                    res = _a.sent() //YS: Nice
+                    ;
+                    allTasks = res.data;
+                    renderTasks(allTasks);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_3 = _a.sent();
+                    console.log(error_3);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function deleteTask(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var res, allTasks, error_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -93,8 +116,8 @@ function deleteTask(id) {
                     renderTasks(allTasks);
                     return [3 /*break*/, 3];
                 case 2:
-                    error_3 = _a.sent();
-                    console.log(error_3);
+                    error_4 = _a.sent();
+                    console.log(error_4);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
@@ -113,14 +136,28 @@ function handleSubmit(ev) {
 function handleDelete(id) {
     deleteTask(id);
 }
-function handleEdit(id) {
-    console.log(id);
+var edit = document.querySelector(".edit");
+function handleEdit(id, title) {
+    var html = '';
+    html += "<h3>edit<h3><br>\n    <form class=\"editForm\" id=\"" + id + "\" onsubmit=\"handleEditSubmit(event)\">\n    <input type=\"text\" value=\"" + title + "\" name=\"newTitle\">\n    <input onclick=\"closeEditWindow()\" type=\"button\" value=\"Cancel\" id=\"cancel\"> \n    <input type=\"submit\" value=\"Edit\"></form>";
+    edit.innerHTML = html;
+    edit.style.display = "block";
+}
+function handleEditSubmit(ev) {
+    ev.preventDefault();
+    var id = ev.target.id;
+    var newTitle = ev.target.elements.newTitle.value;
+    editTask(id, newTitle);
+    edit.style.display = "none";
+}
+function closeEditWindow(event) {
+    edit.style.display = "none";
 }
 function renderTasks(data) {
     var tasksDiv = document.querySelector("#divcont");
     var html = "";
     data.forEach(function (task) {
-        html += " <div class='tasks'><h3>" + task.title + "</h3>\n        <button onclick=\"handleDelete('" + task.id + "')\">Delete</button>\n        <button onclick=\"handleEdit('" + task.id + "')\">Edit</button>\n        <input type=\"checkbox\" name=\"done\">\n        </div>";
+        html += " <div class='tasks'><h3>" + task.title + "</h3>\n        <button onclick=\"handleDelete('" + task.id + "')\">Delete</button>\n        <button onclick=\"handleEdit('" + task.id + "','" + task.title + "')\">Edit</button>\n        <input type=\"checkbox\" name=\"done\">\n        </div>";
     });
     tasksDiv.innerHTML = html;
 }

@@ -14,7 +14,7 @@ class Task {
 }
 
 // The tasks array
-let tasks = []
+let tasks = [] //YS: This should come from the BE
 
 
 /* Add */
@@ -23,7 +23,7 @@ const form = document.querySelector('#add-task-form')
 const modal = document.querySelector('.add-task-modal')
 form.addEventListener('submit', handleSubmit)
 
-function handleSubmit(ev) {
+function handleSubmit(ev) { //YS: Where is your fetch/axios? 
     ev.preventDefault()
     const taskText = ev.target[0].value
     if (!taskText) throw new Error('Please enter description.')
@@ -75,7 +75,7 @@ const renderTaskList = () => {
 // }
 
 /* Update */
-function getIdForUpdate(taskId) {
+function getIdForUpdate(taskId) { //YS: Where is your fetch/axios? 
     openEditModal()
     const taskToUpdate = tasks.find(task => task.id === taskId)
     return taskToUpdate.id
@@ -90,7 +90,7 @@ function handleUpdate(ev) {
 
 /* Delete */
 
-function handleDelete(taskId) {
+function handleDelete(taskId) { //YS: Where is your fetch/axios? 
     const taskToDelete = tasks.find(task => task.id === taskId)
     const filteredTasks = tasks.filter(task => task.id !== taskToDelete.id)
     tasks = filteredTasks

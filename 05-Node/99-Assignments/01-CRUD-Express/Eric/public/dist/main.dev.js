@@ -5,6 +5,11 @@
 2)How can I solve comunications with the client user when he want to edit each employe, I used try catch throw new error to stop editing if you don't put info in each input, but I want to pass the info from the de dom into the modal edit so the client don't need to add again each inputs
 3)Also I need one or two session to recap the routes, controllers and promises
 
+
+YS: 
+1) With an if statement: if(name.length === 0 || email.length === 0 etc....) return 
+2) Im not sure what you mean
+3) Let me know
 */
 //Get the employes information:
 function getAllEmployes() {
@@ -15,7 +20,7 @@ function getAllEmployes() {
         case 0:
           _context.prev = 0;
           _context.next = 3;
-          return regeneratorRuntime.awrap(axios.get('/getEmployes'));
+          return regeneratorRuntime.awrap(axios.get("/getEmployes"));
 
         case 3:
           employesData = _context.sent;
@@ -34,12 +39,12 @@ function getAllEmployes() {
       }
     }
   }, null, null, [[0, 7]]);
-}
+} //render
 
-; //render
 
 function render(array) {
   if ($("#addEmployeeModal")) {
+    //YS: You should make this into a function since you are using it more than once. function hideModal/toggleModal or something
     $("#addEmployeeModal").modal("hide");
   }
 
@@ -58,7 +63,7 @@ function render(array) {
     });
     html += "</tbody></table>";
   } else {
-    var _html = "";
+    var _html = ""; //YS: Why are you defining html again?
   }
 
   root.innerHTML = html;
@@ -82,6 +87,7 @@ function handleSubmit(event) {
     axios({
       method: "post",
       url: "/addEmployes",
+      //YS: Should pass the ID in params!
       data: {
         name: name,
         email: email,
@@ -98,7 +104,7 @@ function handleSubmit(event) {
       return event.target.reset();
     });
   } else {
-    alert('You need to complete at least one field');
+    alert("You need to complete at least one field");
   }
 }
 
@@ -109,7 +115,7 @@ function deleteEmploye(id) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
-          option = confirm("Are you sure do you want to delete this employe?");
+          option = confirm("Are you sure do you want to delete this employe?"); //YS: NICE!!!!
 
           if (!option) {
             _context2.next = 7;
@@ -138,9 +144,8 @@ function deleteEmploye(id) {
       }
     }
   }, null, null, [[0, 9]]);
-}
+} //UPDATE
 
-; //UPDATE
 
 var currentId;
 
@@ -157,11 +162,12 @@ function handleEdit(event) {
         case 0:
           event.preventDefault();
           _context3.prev = 1;
-          id = currentId;
-          nameEdit = document.querySelector('#name').value;
-          emailEdit = document.querySelector('#email').value;
-          addressEdit = document.querySelector('#address').value;
-          phoneEdit = document.querySelector('#phone').value;
+          id = currentId; //YS: Why dont you just use the currentId?
+
+          nameEdit = document.querySelector("#name").value;
+          emailEdit = document.querySelector("#email").value;
+          addressEdit = document.querySelector("#address").value;
+          phoneEdit = document.querySelector("#phone").value;
           _updateEmploye = {
             nameEdit: nameEdit,
             emailEdit: emailEdit,
@@ -175,7 +181,7 @@ function handleEdit(event) {
             break;
           }
 
-          throw new Error('Data not completed');
+          throw new Error("Data not completed");
 
         case 10:
           console.log(_updateEmploye);
@@ -184,12 +190,13 @@ function handleEdit(event) {
 
         case 13:
           employeData = _context3.sent;
+          //YS: Id through params!
           event.target.reset();
           render(employeData.data);
 
           if ($("#aditEmployeeModal")) {
             $("#editEmployeeModal").modal("hide");
-            alert('You editted all info correctly');
+            alert("You editted all info correctly"); //YS: NICE!!!!
           }
 
           _context3.next = 22;

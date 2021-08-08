@@ -160,31 +160,36 @@ function handleEdit(e) {
       }
     }
   }, null, null, [[1, 16]]);
-} // FUNCION GET DATA WITH PROMISE
+} // FUNCION GET DATA 
 
 
 function getAllTasks() {
+  var response;
   return regeneratorRuntime.async(function getAllTasks$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          return _context4.abrupt("return", new Promise(function (resolve, reject) {
-            fetch('/tasks').then(function (response) {
-              return response.json();
-            }).then(function (response) {
-              resolve(response.data);
-              renderTasks(response.data);
-            })["catch"](function (e) {
-              reject(e);
-            });
-          }));
+          _context4.prev = 0;
+          _context4.next = 3;
+          return regeneratorRuntime.awrap(axios.get('/tasks'));
 
-        case 1:
+        case 3:
+          response = _context4.sent;
+          renderTasks(response.data);
+          _context4.next = 10;
+          break;
+
+        case 7:
+          _context4.prev = 7;
+          _context4.t0 = _context4["catch"](0);
+          console.error(_context4.t0);
+
+        case 10:
         case "end":
           return _context4.stop();
       }
     }
-  });
+  }, null, null, [[0, 7]]);
 }
 
 getAllTasks();

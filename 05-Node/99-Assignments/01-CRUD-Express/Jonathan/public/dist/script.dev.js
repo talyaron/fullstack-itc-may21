@@ -70,6 +70,7 @@ function searchPriorty(ev) {
           throw new Error("No task ".concat(_inputSearch, "  on the database"));
 
         case 8:
+          //YS: Good 
           renderTask(allTask);
           _context.next = 14;
           break;
@@ -298,6 +299,7 @@ function getTaskToUpdate(id) {
 
         case 9:
           getTask = _context7.sent;
+          //YS: Nice! 
           inputTitle = document.querySelector("#title");
           inputDescription = document.querySelector("#description");
           inputTitle.value = getTask.title;
@@ -332,6 +334,7 @@ function updateTaskOnDOM(ev) {
 
         case 4:
           updateTaskOnDom = _context8.sent;
+          //YS: Good! 
           bgModal.classList.remove('bg-active');
           renderTask(updateTaskOnDom);
 
@@ -352,6 +355,7 @@ function getDataFromDOM() {
   var date = inputDateTime.substring(0, inputDateTime.indexOf('T'));
   var min = inputDateTime.substring(inputDateTime.indexOf('T') + 1, inputDateTime.length);
   var Task = {
+    //YS: Why is this capitalized? 
     title: inputTitle,
     description: inputDescription,
     date: date,

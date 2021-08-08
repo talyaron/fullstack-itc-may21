@@ -17,14 +17,14 @@ app.use(express.json());
 
 //?GET
 
-app.get("/getTask", (req, res) => {
+app.get("/getTask", (req, res) => {  //YS: Error handling?? 
   const students = localJson();
   res.send(students);
 });
 
 //TODO: POST
-app.post("/addTask", (req, res) => {
-  const { name,description } = req.body;
+app.post("/addTask", (req, res) => { //YS: Error handling?? 
+  const { name,description } = req.body; //YS: What if the title or desription is empty? 
   const task = localJson();
   const addTask = {
     id: uuidv4(),
@@ -41,7 +41,7 @@ app.post("/addTask", (req, res) => {
 app.use(express.static("public"));
 
 //! DELETE
-app.delete("/deleteTask/:id", (req, res) => {
+app.delete("/deleteTask/:id", (req, res) => {  //YS: Error handling?? 
   let { id } = req.params;
   const tasks = localJson();
   const deleteTask = tasks.filter((task) => task.id !== id);
@@ -50,7 +50,7 @@ app.delete("/deleteTask/:id", (req, res) => {
 });
 
 //* PUT
-app.put("/updateTask/:id",(req,res) => {
+app.put("/updateTask/:id",(req,res) => {  //YS: Error handling??  You have a bug in this route, your server is crashing
     const { id } = req.params;
     const { name,description } = req.body;
     const tasks = localJson();
@@ -59,6 +59,7 @@ app.put("/updateTask/:id",(req,res) => {
     fs.readFileSync("./task.json", JSON.stringify(updateTask));
     updateTask.name = name;
     updateTask.description = description;
+    console.log(tasks)
 
     res.send(tasks)
 })

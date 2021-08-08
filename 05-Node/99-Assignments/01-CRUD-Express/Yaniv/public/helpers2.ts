@@ -11,7 +11,7 @@ const onlyFutureToDos = (ev): void => {
 const handleClickedToDo = (ev: any): void => {
   try {
 
-    if  (((ev.target.className !== 'upcoming__item upcoming__item--upcoming todo')  &&
+    if  (((ev.target.className !== 'upcoming__item upcoming__item--upcoming todo')  && //YS: You can use classList.contains instead. 
           (ev.target.className !== 'later__item later__item--later todo') &&
           (ev.target.className.indexOf('todo__item todo__item--') === -1) &&
           (ev.target.className !== 'fa fa-trash')) ||
