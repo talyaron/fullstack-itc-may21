@@ -22,7 +22,8 @@ class Survey {
         this.title = title;
         this.id = uuidv4();
         this.questions = [];
-        this.admin = {//email:adminEmail}
+        this.admin = {//email:adminEmail
+            }
     }
 }
 
