@@ -8,15 +8,17 @@
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="https://freesvg.org/img/Bank.png" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="dist/style.min.css">
+    <link rel="stylesheet" href="main.min.css">
     <title>Bank Jonathan</title>
 </head>
 
-<body onload="getCookies(event)">
+<body class="body" onload="getCookies(event)">
     <header>
         <h1 class="headerh1">Bank Jonathan</h1>
+        <i class="fas fa-sign-out-alt headerh1--i"></i>
     </header>
-    <div id="root"></div>
+    <div id="rootMessage" class="rootMessage"></div>
+    <div id="rootBalance" class="rootBalance"></div>
     <script src="main.js"></script>
 </body>
 
