@@ -80,7 +80,11 @@ function () {
 var Question = function Question(title) {
   _classCallCheck(this, Question);
 
-  this.title = title, this.questionID = Math.random().toString(16).slice(2); // this.voters = [{ voterID: , score: }]
+  this.title = title, this.questionID = Math.random().toString(16).slice(2);
+  this.voters = {
+    voterID: [],
+    score: []
+  };
 };
 
 var Questions =

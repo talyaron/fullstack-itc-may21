@@ -56,7 +56,7 @@ class Question {
     constructor(title){
         this.title = title,
         this.questionID = Math.random().toString(16).slice(2);
-        // this.voters = [{ voterID: , score: }]
+        this.voters = {voterID: [], score: []}
     }
 } 
 class Questions{
