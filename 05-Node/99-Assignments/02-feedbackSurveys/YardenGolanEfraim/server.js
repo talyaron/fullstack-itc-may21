@@ -72,6 +72,7 @@ class Questions{
 
 const users = new Users()
 let selectedAdmin = {}
+let selectedAdminIndex = 0
 
 app.post('/createUser', (req, res) => {
 
@@ -198,6 +199,7 @@ app.post('/addSurvey', (req, res) => {
         if(user.email === body.adminEmail) {
             users.users[index].createdSurvey.push(new Survey(body.surveyName, body.adminEmail));
             selectedAdmin = users.users[index]
+            selectedAdminIndex = index
         }
     });
         res.send(selectedAdmin);
@@ -225,6 +227,8 @@ app.post('/postQuestions', (req, res) => {
         selectedAdmin.createdSurvey.find(survey=>survey.surveyID === surveyID).questions.push(new Question(question))
     
     })
+    users.users[selectedAdminIndex] = selectedAdmin
+    console.log(users.users)
         res.send(selectedAdmin);
     } catch (e) {
         console.log(e)

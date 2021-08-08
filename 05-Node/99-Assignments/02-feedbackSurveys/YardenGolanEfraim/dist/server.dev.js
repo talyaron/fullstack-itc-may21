@@ -108,6 +108,7 @@ function () {
 
 var users = new Users();
 var selectedAdmin = {};
+var selectedAdminIndex = 0;
 app.post('/createUser', function (req, res) {
   try {
     var schema = {
@@ -217,6 +218,7 @@ app.post('/addSurvey', function (req, res) {
       if (user.email === body.adminEmail) {
         users.users[index].createdSurvey.push(new Survey(body.surveyName, body.adminEmail));
         selectedAdmin = users.users[index];
+        selectedAdminIndex = index;
       }
     });
     res.send(selectedAdmin);
@@ -237,6 +239,8 @@ app.post('/postQuestions', function (req, res) {
         return survey.surveyID === surveyID;
       }).questions.push(new Question(question));
     });
+    users.users[selectedAdminIndex] = selectedAdmin;
+    console.log(users.users);
     res.send(selectedAdmin);
   } catch (e) {
     console.log(e);
