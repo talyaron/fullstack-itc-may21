@@ -10,6 +10,7 @@ var _require = require('uuid'),
     uuidv4 = _require.v4;
 
 function getAllTasks() {
+  //YS: Try/Catch
   var allTasks = fs.readFileSync(filePath);
   console.log(allTasks);
   var parsed = JSON.parse(allTasks);
@@ -17,6 +18,7 @@ function getAllTasks() {
 }
 
 function addTask(title) {
+  //YS: Try/Catch
   var allTasks = getAllTasks();
   var task = {
     title: title,
@@ -28,6 +30,7 @@ function addTask(title) {
 }
 
 function deleteTask(id) {
+  //YS: Try/Catch
   var allTasks = getAllTasks();
   var filteredTasks = allTasks.filter(function (task) {
     return task.id !== id;
@@ -36,6 +39,19 @@ function deleteTask(id) {
   return filteredTasks;
 }
 
+function editTask(id, newTitle) {
+  console.log("inside model");
+  var allTasks = getAllTasks();
+  var taskToEdit = allTasks.filter(function (task) {
+    return task.id === id;
+  });
+  taskToEdit[0].title = newTitle;
+  console.log(taskToEdit);
+  fs.writeFileSync(filePath, JSON.stringify(allTasks));
+  return allTasks;
+}
+
 exports.getAllTasks = getAllTasks;
 exports.addTask = addTask;
 exports.deleteTask = deleteTask;
+exports.editTask = editTask;

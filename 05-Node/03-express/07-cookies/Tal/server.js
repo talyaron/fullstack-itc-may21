@@ -23,11 +23,42 @@ const cookieParser = require('cookie-parser');
 //   next(); // <-- important!
 // });
 
-app.get('/getData', (req ,res)=>{
+app.use(cookieParser());
 
 
-    res.cookie('cookieName',"Hi", { maxAge: 3000, httpOnly: true });
-    res.send({ok:true})
+app.get('/getData', (req, res) => {
+
+
+
+    //read cookies
+    console.log(req.cookies);
+    const { cookieName } = req.cookies
+    const cookie = JSON.parse(cookieName);
+    console.log(cookie)
+    const {name} = cookie;
+    console.log(name)
+
+    //write a cookie
+
+    const name1 = JSON.stringify({ name: 'Raziel' })
+    res.cookie('cookieName', name1, { maxAge: 300000000, httpOnly: true });
+    res.send({ ok: true })
+})
+
+app.get('/user', (req, res)=>{
+
+    //get name from the cookie
+
+    //read cookies
+    console.log(req.cookies);
+    const { cookieName } = req.cookies
+    const cookie = JSON.parse(cookieName);
+    console.log(cookie)
+    const {name} = cookie;
+    console.log(name)
+
+    res.send({name})
+
 })
 
 app.use(express.static('public'));

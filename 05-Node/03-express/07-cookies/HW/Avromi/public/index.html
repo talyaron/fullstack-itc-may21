@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="wrap">
+            <form><input type="text" name="name" placeholder="Username">
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </nav>
+    <h1>Home</h1>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', handleSubmit);
+
+        function handleSubmit(ev) {
+            ev.preventDefault()
+            const name = ev.target.elements.name.value;
+            console.log(name);
+            fetch(`/cookie?name=${name}` )
+                .then(r => r.json())
+                .then(data => console.log(data))
+
+
+            form.style.display = "none";
+
+
+        }
+        window.onload = () => {
+            form.style.display = 'block';
+        }
+    </script>
+    <style>
+        nav {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        form {
+            display: none;
+        }
+    </style>
+</body>
+
+</html>

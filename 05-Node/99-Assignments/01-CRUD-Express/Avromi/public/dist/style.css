@@ -49,6 +49,11 @@
   padding: 0px 10px;
 }
 
+.edit {
+  border: 3px solid green;
+  display: none;
+}
+
 /* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
 @media screen and (max-height: 450px) {
   .sidebar {

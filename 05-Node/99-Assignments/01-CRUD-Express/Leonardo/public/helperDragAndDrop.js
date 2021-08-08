@@ -1,4 +1,4 @@
-function onDragStart(event) {
+function onDragStart(event) { //YS: Very nice!!! 
     try {
         event.dataTransfer.setData('text/plain', event.target.id);
         event.currentTarget.style.backgroundColor = 'yellow';

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/style.min.css">
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="https://freesvg.org/img/Bank.png" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Bank Account</title>
+</head>
+
+<body class="body">
+    <div class="container">
+        <form class="container__form">
+            <h2>Welcome to Bank Jonathan</h2>
+            <div class="container__form__form">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" class="container__form__form--email">
+                <label for="password" class="container__form__form--labelpassword">Password</label>
+                <input type="password" name="password" id="password" class="container__form__form--password">
+                <div class="container__form__form--buttons">
+                    <input type="button" value="Sign Up" class="container__form__form--buttons--btn container__form__form--buttons--signup">
+                    <input type="button" value="Login" class="container__form__form--buttons--btn container__form__form--buttons--login">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-bg">
+        <div class="modal-bg__modal">
+            <form id="form" class="modal-bg__modal__form">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username">
+                <label for="email-login">E-mail</label>
+                <input type="email" name="emaillogin" id="email-login">
+                <label for="password-login">Password</label>
+                <input type="password" name="passwordlogin" id="password-login">
+                <button type="submit">Sign Up</button>
+            </form>
+            <span class="modal-close">✖️</span>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

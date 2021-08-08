@@ -59,10 +59,10 @@ class ToDos {
       this.toDoList.forEach((toDo: ToDo): void => {
         const toDoDueDate: Date = new Date(toDo.dueDate);
         options = {day: 'numeric', month: 'short', year: 'numeric'  };
-        const toDoDueDateString: string = toDoDueDate.toLocaleDateString('en-US', options);
+        const toDoDueDateString: string = toDoDueDate.toLocaleDateString('en-US', options); //YS: Nice, you can also use a library called moment which does this automatically. 
     
 
-        let statusClass: string = '';
+        let statusClass: string = ''; //YS: Good! 
         switch (toDo.status) {
           case 'Pending...':
             statusClass = 'todo__item--status-pending';
@@ -124,7 +124,7 @@ editToDosAncestor.addEventListener('click', ev => handleClickedToDo(ev));
 resetBtn.addEventListener('click', ev => handleReset(ev));
 addToDoTimeInput.addEventListener('click', ev => onlyFutureToDos(ev));
 
-const handleAddToDo = async (ev: any): Promise<void> => {
+const handleAddToDo = async (ev: any): Promise<void> => { //YS: You can add some message for the client saying "Todo added successfully or something"
   try {
     ev.preventDefault();
     const formElements = ev.target.elements;
@@ -134,8 +134,8 @@ const handleAddToDo = async (ev: any): Promise<void> => {
 
     const toDo: ToDo = { content, status: 'Pending...', dueDate, uuid: null, createdDate: new Date(), editedDate: null};
 
-    await postToDo(toDo);
-    await getData(null, null);
+    await postToDo(toDo); //YS: Very nice
+    await getData(null, null); 
 
     ev.target.reset();
 
@@ -166,7 +166,9 @@ const handleEditToDo = async (ev: any): Promise<void> => {
     ev.preventDefault();
     const formElements = ev.target.elements;
 
-    const uuid: string = ev.target.getAttribute("id").replace('-edit-form','');
+    const uuid: string = ev.target.getAttribute("id").replace('-edit-form',''); /* YS: Ok, that is one way to do it, but we usually dont keep the info in the HTML.
+                                                                                    You should add the eventListener when creating the HTML dynamically (renderToDos)
+                                                                                    and then you should pass the id as a parameter */
     const content: string = formElements.toDoContent.value;
     const status: any = formElements.toDoStatus.value;
     const dueDate: any = new Date(formElements.toDoDueDate.value);
@@ -186,7 +188,7 @@ const handleEditToDo = async (ev: any): Promise<void> => {
 const handleDeleteToDo = async (ev: any): Promise<void> => {
   try {
     const toDoAnsestor: HTMLElement = (ev.target.className === 'fa fa-trash') ? ev.target.parentElement.parentElement : ev.target.parentElement;
-    const uuid: string = toDoAnsestor.getAttribute("id");
+    const uuid: string = toDoAnsestor.getAttribute("id"); //YS: Same as in the edit, 
     
     await deleteToDo(uuid);
     await getData(null, null);

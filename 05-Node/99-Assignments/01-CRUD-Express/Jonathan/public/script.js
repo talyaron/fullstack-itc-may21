@@ -59,7 +59,7 @@ async function searchPriorty(ev) {
 
         const inputSearch = document.querySelector('#filterstatus').value
         const allTask = await searchPriortyPromise(inputSearch)
-        if (allTask.length === 0) throw new Error(`No task ${inputSearch}  on the database`)
+        if (allTask.length === 0) throw new Error(`No task ${inputSearch}  on the database`) //YS: Good 
         renderTask(allTask)
     } catch (e) {
         alert(e)
@@ -121,7 +121,7 @@ async function getAllTask(ev) {
     }
 }
 
-async function orderDate(ev) {
+async function orderDate(ev) { //YS: Good
 
     try {
         ev.preventDefault()
@@ -134,7 +134,7 @@ async function orderDate(ev) {
     }
 }
 
-async function deleteTask(id) {
+async function deleteTask(id) { //YS: Good
     if (confirm("Do you want to delete this task?")) {
         alert('Delete task')
         const response = await axios.delete(`/deleteTask/${id}`)
@@ -162,7 +162,7 @@ async function getTaskToUpdate(id) {
         addTask.style.backgroundColor = 'red';
         addTask.style.cursor = 'not-allowed';
         editTask.style.cursor = 'pointer';
-        const getTask = await getTaskPromise(id)
+        const getTask = await getTaskPromise(id) //YS: Nice! 
         const inputTitle = document.querySelector("#title")
         const inputDescription = document.querySelector("#description")
         inputTitle.value = getTask.title
@@ -181,7 +181,7 @@ async function updateTaskOnDOM(ev) {
 
     const updateTask = getDataFromDOM()
 
-    const updateTaskOnDom = await updateTaskPromise(idTask, updateTask)
+    const updateTaskOnDom = await updateTaskPromise(idTask, updateTask) //YS: Good! 
     bgModal.classList.remove('bg-active')
     renderTask(updateTaskOnDom)
 
@@ -199,7 +199,7 @@ function getDataFromDOM() {
         const date = inputDateTime.substring(0, inputDateTime.indexOf('T'))
         const min = inputDateTime.substring(inputDateTime.indexOf('T') + 1, inputDateTime.length)
 
-        const Task = {
+        const Task = { //YS: Why is this capitalized? 
             title: inputTitle,
             description: inputDescription,
             date: date,

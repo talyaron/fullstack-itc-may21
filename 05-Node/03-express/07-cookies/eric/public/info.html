@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show login</title>
+</head>
+<body onload=getLogin(event)>
+     <div id="root"></div>
+     <div>
+         <button id="login">Login page</button>
+     </div>
+
+
+<script>
+
+      const loginPage = document.getElementById("login")
+
+      loginPage.addEventListener("click", backPage)
+
+
+     function getLogin(ev){
+       ev.preventDefault();
+
+        fetch('/user', )
+            .then(r=>r.json())
+            .then(data=>render(data))
+    
+    
+    }
+
+    function render(data){
+
+        let html = ''
+        const {name, password} = data;
+        const root = document.getElementById('root')   
+
+        html += `<div>Your userName is: ${name} and your password is: ${password}</div>`
+
+        root.innerHTML = html;
+    }
+
+    
+    function  backPage(){
+        window.location.href = 'index.html';
+     }
+
+
+
+
+</script>
+</body>
+</html>
