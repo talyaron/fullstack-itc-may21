@@ -10,6 +10,8 @@
   "author": "yaniv",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^2.0.12"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "uuid": "^8.3.2"
   }
 }

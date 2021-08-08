@@ -1,4 +1,4 @@
-async function getAllTask() {
+async function getAllTask() { //YS: Nice
     try {
         const res = await axios.get('/tasks/')
         const allTasks = res.data
@@ -7,7 +7,7 @@ async function getAllTask() {
         console.log(error);
     }
 }
-getAllTask()
+getAllTask() //YS: Add an onload function. 
 
 
 async function addTask(title) {
@@ -32,7 +32,7 @@ async function editTask(id, newTitle) {
 
 async function deleteTask(id) {
     try {
-        const res = await axios.delete(`/tasks/delete?id=${id}`)
+        const res = await axios.delete(`/tasks/delete?id=${id}`) //YS: Nice
         const allTasks = res.data
         renderTasks(allTasks);
     } catch (error) {

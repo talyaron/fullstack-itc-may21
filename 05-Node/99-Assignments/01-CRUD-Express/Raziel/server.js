@@ -12,29 +12,29 @@ app.use(express.json());
 function readTransaction (){
     try {
         const transaction =fs.readFileSync(filepath)
-        console.log(transaction)
+        console.log(transaction)  //YS: console.log?
         return JSON.parse(transaction)
-    } catch (error) {
-        
+    } catch (error) { 
+        //YS: ???
     }
 }
 
-app.get('/allTransactions',(req,res)=>{
+app.get('/allTransactions',(req,res)=>{ //YS: Error handling?
     const transaction = readTransaction();
     res.send(transaction);
 })
-app.post('/addTransaction',(req,res)=>{
+app.post('/addTransaction',(req,res)=>{ //YS: Error handling?
 
     const {text,amount} = req.body;
     const transaction =readTransaction();
-    console.log(req.body)
+    console.log(req.body) //YS: console.log?
     const newTransaction ={
         text,
         amount,
         id:uuidv4()
     }
     
-    console.log(newTransaction)
+    console.log(newTransaction) //YS: console.log?
     
     transaction.push(newTransaction);
     // console.log(transaction);
@@ -43,7 +43,7 @@ app.post('/addTransaction',(req,res)=>{
 })
 
 
-app.delete('/deleteTransaction/:id',(req,res)=>{
+app.delete('/deleteTransaction/:id',(req,res)=>{ //YS: Error handling?
 const{id}=req.params;
 const transaction= readTransaction();
 const deletedTrans=transaction.filter(trans=>trans.id!==id);
@@ -52,21 +52,21 @@ res.send(deletedTrans)
 })
 
 
-app.put('/editTransaction/:id',(req,res)=>{
+app.put('/editTransaction/:id',(req,res)=>{ //YS: Error handling?
     const {id}=req.params;
     const{newText,newAmount}=req.body;
     const transaction= readTransaction();
-    const updateTransaction=transaction.find(trans=>trans.id==id);
+    const updateTransaction=transaction.find(trans=>trans.id==id); //YS: If you are using find, you can  just use the actual object, not the index. 
   
 if(updateTransaction>-1){
-    transaction[updateTransaction].text=newText;
-    transaction[updateTransaction].amount=newAmount;
+    transaction[updateTransaction].text=newText; //YS: Should be: updateTransaction.text 
+    transaction[updateTransaction].amount=newAmount; //YS: Should be: updateTransaction.amount 
     fs.writeFileSync("./transactions.json",JSON.stringify(transaction));
     res.send({ message: 'A task was updated',transaction })
 
 }
 else{
-    res.send({ message: 'Couldnt find a transaction to update'})
+    res.send({ message: 'Couldnt find a transaction to update'}) //YS: res.status(400)..send({ message: 'Couldnt find a transaction to update'})
  
 }
 

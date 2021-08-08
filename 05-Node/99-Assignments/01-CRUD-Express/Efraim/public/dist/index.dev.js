@@ -2,9 +2,11 @@
 
 // For YS, I orginally used axios and the code was way shorter and cleaner.. 
 // assignment said to use promises so I changed it all to fetch and resolve and reject and seems a lot bulkier now..
+// YS: Its good to use axios with async/await (or without async/await) - next time ask me, I would've said no problem. Although you did a great job using promises too. 
 function getFullTaskList() {
   try {
     return new Promise(function (resolve, reject) {
+      //YS: You can also use async/await with promises (instead of the .thens) - I think its much cleaner and DRY. 
       fetch('/getList').then(function (r) {
         return r.json();
       }).then(function (data) {
@@ -51,6 +53,7 @@ window.addEventListener('load', function _callee() {
 });
 
 function handleTask(ev) {
+  //YS: Good
   ev.preventDefault();
 
   try {
@@ -85,6 +88,7 @@ var form = document.querySelector("form");
 form.addEventListener("submit", handleTask);
 
 function deleteTask(taskID) {
+  //YS: Good
   try {
     return new Promise(function (resolve, reject) {
       fetch("/deleteTask/".concat(taskID), {
@@ -108,13 +112,15 @@ function deleteTask(taskID) {
 
 function updateTask(taskID) {
   try {
-    var newTaskName = document.getElementById("".concat(taskID, "update")).value;
+    var newTaskName = document.getElementById("".concat(taskID, "update")).value; //YS: Nice 
+
     return new Promise(function _callee2(resolve, reject) {
       return regeneratorRuntime.async(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               fetch('/updateTask', {
+                //YS: Id should go here. 
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json'
@@ -126,7 +132,8 @@ function updateTask(taskID) {
               }).then(function (r) {
                 return r.json();
               }).then(function (data) {
-                resolve(data.list.list);
+                resolve(data.list.list); //YS: Destrucutre this object
+
                 renderArrayToDom(data.list.list);
               })["catch"](function (e) {
                 reject(e);
@@ -148,6 +155,7 @@ function updateStatus(ID) {
   try {
     return new Promise(function (resolve, reject) {
       fetch('/updateStatus', {
+        //YS: /:id
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -208,6 +216,7 @@ function editTaskKeepText(id) {
 }
 
 function dateUrgency(date) {
+  //YS: Nice
   try {
     if ((new Date(date) - new Date()) / 1000 < 86400) {
       return "red";
@@ -234,7 +243,7 @@ function renderArrayToDom(listArray) {
           html = '';
           _context4.next = 5;
           return regeneratorRuntime.awrap(listArray.sort(function (a, b) {
-            return new Date(a.dueDate) - new Date(b.dueDate);
+            return new Date(a.dueDate) - new Date(b.dueDate); //YS: Good
           }));
 
         case 5:

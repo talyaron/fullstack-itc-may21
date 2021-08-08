@@ -21,7 +21,8 @@ var fs = require("fs"); //Uuidv4 is to generate a new ID
 var _require = require('uuid'),
     uuidv4 = _require.v4;
 
-uuidv4(); //Joi is to validate the data I enter:
+uuidv4(); //YS: Why are you calling it here? 
+//Joi is to validate the data I enter:
 
 var Joi = require("joi");
 
@@ -47,6 +48,7 @@ app.post('/createTask', function (req, res) {
     });
 
     var _schema$validate = schema.validate({
+      //YS: Very nice
       taskTitle: body.taskTitle,
       taskDescription: body.taskDescription
     }),
@@ -73,7 +75,7 @@ app.post('/createTask', function (req, res) {
       res.status(400).send(msg);
     }
   } catch (error) {
-    console.error(error);
+    console.error(error); //YS: Good! This should be res.status(500).send(error.message)
   }
 
   ;
@@ -84,7 +86,7 @@ app.get('/getAllTasks', function (req, res) {
     var allTasks = readJsonAllTasks();
     res.send(allTasks);
   } catch (error) {
-    console.error(error);
+    console.error(error); //YS: Not console log! res.status(400/500).send(error.message)
   }
 }); //Route to delete a Task
 
@@ -101,7 +103,7 @@ app["delete"]('/deleteTask/:id', function (req, res) {
       tasks: allTasks
     });
   } catch (e) {
-    res.status(400).send(error);
+    res.status(400).send(error); //YS: error.message
   }
 }); //Route to update a Task
 
@@ -115,7 +117,7 @@ app.put('/editTask/:id', function (req, res) {
     var allTasks = readJsonAllTasks();
     var taskIndex = allTasks.findIndex(function (task) {
       return task.id === id;
-    });
+    }); //YS: Why not use find?
 
     if (taskIndex > -1) {
       allTasks[taskIndex].title = taskTitle;
@@ -130,7 +132,7 @@ app.put('/editTask/:id', function (req, res) {
       res.send({
         message: 'Couldnt find a task to update',
         tasks: allTasks
-      });
+      }); //YS: res.status(400).send....
     }
   } catch (e) {
     res.status(400).send(error);
@@ -145,7 +147,7 @@ app.put('/editStatusTask/:id/:status', function (req, res) {
     var allTasks = readJsonAllTasks();
     var taskIndex = allTasks.findIndex(function (task) {
       return task.id === id;
-    });
+    }); //YS: Why not use find?
 
     if (taskIndex > -1) {
       allTasks[taskIndex].status = status;
@@ -161,7 +163,7 @@ app.put('/editStatusTask/:id/:status', function (req, res) {
       });
     }
   } catch (e) {
-    res.status(400).send(error);
+    res.status(400).send(error); //YS: error.message
   }
 }); //This function is to listen to the port
 

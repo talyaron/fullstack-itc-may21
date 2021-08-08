@@ -6,7 +6,7 @@ const {
 } = require('uuid');
 
 
-function getAllTasks() {
+function getAllTasks() { //YS: Try/Catch
     const allTasks = fs.readFileSync(filePath);
     console.log(allTasks);
     const parsed = JSON.parse(allTasks)
@@ -15,7 +15,7 @@ function getAllTasks() {
 
 
 
-function addTask(title) {
+function addTask(title) { //YS: Try/Catch
 
     const allTasks = getAllTasks();
     const task = {
@@ -29,7 +29,7 @@ function addTask(title) {
     return allTasks
 }
 
-function deleteTask(id) {
+function deleteTask(id) { //YS: Try/Catch
 
     const allTasks = getAllTasks();
 

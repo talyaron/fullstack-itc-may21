@@ -1,5 +1,6 @@
 "use strict";
 
+//YS: Very nice! 
 function addTaskPromise(newTask) {
   return new Promise(function (resolve, reject) {
     fetch('/addTask', {
@@ -18,7 +19,7 @@ function addTaskPromise(newTask) {
           alert(task.error);
         });
       }
-    });
+    }); //YS: .catch? 
   });
 }
 

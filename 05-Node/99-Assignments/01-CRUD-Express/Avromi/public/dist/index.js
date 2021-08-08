@@ -56,7 +56,7 @@ function getAllTask() {
         });
     });
 }
-getAllTask();
+getAllTask(); //YS: Add an onload function. 
 function addTask(title) {
     return __awaiter(this, void 0, void 0, function () {
         var res, allTasks, error_2;
@@ -88,7 +88,8 @@ function editTask(id, newTitle) {
                     _a.trys.push([0, 2, , 3]);
                     return [4 /*yield*/, axios.put('/tasks/editTask', { id: id, newTitle: newTitle })];
                 case 1:
-                    res = _a.sent();
+                    res = _a.sent() //YS: Nice
+                    ;
                     allTasks = res.data;
                     renderTasks(allTasks);
                     return [3 /*break*/, 3];

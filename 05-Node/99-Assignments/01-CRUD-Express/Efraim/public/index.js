@@ -1,9 +1,11 @@
 
 // For YS, I orginally used axios and the code was way shorter and cleaner.. 
 // assignment said to use promises so I changed it all to fetch and resolve and reject and seems a lot bulkier now..
+
+// YS: Its good to use axios with async/await (or without async/await) - next time ask me, I would've said no problem. Although you did a great job using promises too. 
 function getFullTaskList(){
     try {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => { //YS: You can also use async/await with promises (instead of the .thens) - I think its much cleaner and DRY. 
             fetch('/getList')
                 .then(r => r.json())
                 .then(data => {
@@ -27,7 +29,7 @@ window.addEventListener('load', async() => {
 })
 
 
-function handleTask(ev) {
+function handleTask(ev) {  //YS: Good
     ev.preventDefault();
     try {
         let task = ev.target.elements.task.value;
@@ -61,7 +63,7 @@ function handleTask(ev) {
 const form = document.querySelector("form")
 form.addEventListener("submit", handleTask)
 
-function deleteTask(taskID) {
+function deleteTask(taskID) {  //YS: Good
     try {
         return new Promise((resolve, reject) => {
             fetch(`/deleteTask/${taskID}`, {
@@ -87,9 +89,9 @@ function deleteTask(taskID) {
 
 function updateTask(taskID) {
     try {
-        const newTaskName = document.getElementById(`${taskID}update`).value;
+        const newTaskName = document.getElementById(`${taskID}update`).value; //YS: Nice 
         return new Promise(async(resolve, reject) => {
-            fetch('/updateTask', {
+            fetch('/updateTask', { //YS: Id should go here. 
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -101,8 +103,8 @@ function updateTask(taskID) {
                 })
                 .then(r => r.json())
                 .then(data => {
-                    resolve(data.list.list)
-                    renderArrayToDom(data.list.list)
+                    resolve(data.list.list) //YS: Destrucutre this object
+                    renderArrayToDom(data.list.list) 
                 })
                 .catch(e => {
                     reject(e)
@@ -116,7 +118,7 @@ function updateTask(taskID) {
 function updateStatus(ID) {
     try {
         return new Promise((resolve, reject) => {
-            fetch('/updateStatus', {
+            fetch('/updateStatus', { //YS: /:id
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -138,7 +140,7 @@ function updateStatus(ID) {
         console.error(e)
     }
 }
-async function editTaskKeepText(id){
+async function editTaskKeepText(id){  //YS: Nice
     try{
         const edit = document.getElementById(`${id}update`);
         const list = await getFullTaskList()
@@ -149,7 +151,7 @@ async function editTaskKeepText(id){
     console.error(e)
 }
 }
-function dateUrgency(date) {
+function dateUrgency(date) { //YS: Nice
     try{
     if ((new Date(date) - new Date()) / 1000 < 86400) {
         return "red"
@@ -169,7 +171,7 @@ async function renderArrayToDom(listArray) {
         let html = ''
 
         await listArray.sort(function (a, b) {
-            return new Date(a.dueDate) - new Date(b.dueDate);
+            return new Date(a.dueDate) - new Date(b.dueDate); //YS: Good
         });
 
 

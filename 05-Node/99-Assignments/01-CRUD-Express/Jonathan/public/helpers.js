@@ -1,3 +1,4 @@
+//YS: Very nice! 
 function addTaskPromise(newTask) {
     return new Promise((resolve, reject) => {
         fetch('/addTask', {
@@ -12,7 +13,7 @@ function addTaskPromise(newTask) {
                 } else {
                     return res.json().then(task => { alert(task.error) })
                 }
-            })
+            }) //YS: .catch? 
     })
 }
 
