@@ -9,7 +9,7 @@ app.use(express.static('public'));
 app.use(cookieParser())
 
 
-class Users {
+class User {
    
     constructor(name, email, password) {
         this.name = name;
@@ -18,9 +18,18 @@ class Users {
         this.createdSurvey = []
 
     }
-    newUser(user){
-        this.push(user)
+   
+}
+
+class Users{
+    constructor(){
+        this.users = [];
     }
+
+    newUser(user){
+        this.users.push(user)
+    }
+    
 }
 
 class Surveys {
