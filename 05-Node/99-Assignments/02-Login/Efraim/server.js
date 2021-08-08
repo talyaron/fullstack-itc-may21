@@ -58,16 +58,10 @@ app.post('/createUser', (req, res) => {
 
 app.get('/user', (req, res)=>{
 
-    //get name from the cookie
-
-    //read cookies
-    console.log(req.cookies);
+    
     const { cookieName } = req.cookies
     const cookie = JSON.parse(cookieName);
-    console.log(cookieName)
     const {user} = cookie;
-    console.log(user)
-
     res.send({user})
 
 })
