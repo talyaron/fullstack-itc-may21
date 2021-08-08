@@ -9,7 +9,6 @@ const cookieParser = require('cookie-parser')
 
 //Uuidv4 is to generate a new ID
 const { v4: uuidv4 } = require('uuid');
-uuidv4();
 
 //Joi is to validate the data I enter:
 const Joi = require("joi");
@@ -24,7 +23,7 @@ function readJsonAllUsers() {
         const usersList = fs.readFileSync("./allUsers.json");
         return JSON.parse(usersList);
     } catch (error) {
-        console.error(error);
+        res.status(500).send(error.message);
     };
 };
 
@@ -61,7 +60,7 @@ app.post('/createUser', (req, res) => {
             res.status(400).send(msg);
         }
     } catch (error) {
-        console.error(error);
+        res.status(500).send(error.message);
     };
 });
 
@@ -79,8 +78,8 @@ app.post('/login', (req, res) => {
         } else {
             res.send({ message: 'Username or password are wrong, try again!', userInfo: null })
         }
-    } catch (e) {
-        res.status(400).send(error);
+    } catch (error) {
+        res.status(500).send(error.message);
     }
 });
 
@@ -92,7 +91,7 @@ app.get('/userInfo', (req, res) => {
 
         res.send({ cookie })
     } catch (error) {
-        console.error(error);
+        res.status(500).send(error.message)
     }
 });
 
@@ -101,6 +100,6 @@ app.listen(port, () => {
     try {
         console.log(`The server is running at port: ${port}`)
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send(error.message)
     }
 });
