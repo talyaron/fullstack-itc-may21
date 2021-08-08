@@ -23,14 +23,11 @@ app.post('/signUpUser', function (req, res) {
 
         if (!isFound) {
 
-            const {username, email, password} = req.body
-
             const user = {
-                username: username,
-                email: email,
-                password: password,
-                balance: parseFloat((Math.random() < 0.5 ? -1 * Math.random() : 1 *  Math.random()) * 1000 + 200).toFixed(2) 
+                ...req.body,
+                balance: parseFloat((Math.random() < 0.5 ? -1 * Math.random() : 1 * Math.random()) * 1000 + 200).toFixed(2)
             }
+
 
             allLogin.push(user)
 
@@ -68,7 +65,7 @@ app.post('/loginUser', function (req, res) {
         }
 
     } catch (e) {
-        res.status(500).send({ error: `${e}` });
+        res.status(500).send({ error: `${e.message}` });
     }
 
 
@@ -77,12 +74,13 @@ app.post('/loginUser', function (req, res) {
 
 
 app.get('/getCookie', function (req, res) {
-
-    const { cookieName } = req.cookies
-    const cookie = JSON.parse(cookieName)
-    //const { username, balance } = cookie
-    res.send(cookie);
-
+    try {
+        const { cookieName } = req.cookies
+        const cookie = JSON.parse(cookieName)
+        res.send(cookie);
+    } catch (e) {
+        res.status(500).send({ error: `${e.message}` });
+    }
 });
 
 app.use(express.static('public'));
