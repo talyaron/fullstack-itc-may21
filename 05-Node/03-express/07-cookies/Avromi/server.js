@@ -19,6 +19,7 @@ res.send({ok: true})
 
 app.get('/user', (req, res) => {
     const cookie = req.cookies['cookie'];
+    res.send(cookie)
 console.log(cookie);
 })
 

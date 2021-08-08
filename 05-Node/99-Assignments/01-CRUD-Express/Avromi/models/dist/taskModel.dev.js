@@ -36,6 +36,19 @@ function deleteTask(id) {
   return filteredTasks;
 }
 
+function editTask(id, newTitle) {
+  console.log("inside model");
+  var allTasks = getAllTasks();
+  var taskToEdit = allTasks.filter(function (task) {
+    return task.id === id;
+  });
+  taskToEdit[0].title = newTitle;
+  console.log(taskToEdit);
+  fs.writeFileSync(filePath, JSON.stringify(allTasks));
+  return allTasks;
+}
+
 exports.getAllTasks = getAllTasks;
 exports.addTask = addTask;
 exports.deleteTask = deleteTask;
+exports.editTask = editTask;

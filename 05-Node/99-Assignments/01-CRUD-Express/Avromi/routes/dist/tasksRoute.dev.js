@@ -13,6 +13,9 @@ var _require2 = require('../models/taskModel.js'),
 var _require3 = require('../models/taskModel.js'),
     deleteTask = _require3.deleteTask;
 
+var _require4 = require('../models/taskModel.js'),
+    editTask = _require4.editTask;
+
 router.get('/', function (req, res) {
   try {
     var allTasks = getAllTasks();
@@ -39,7 +42,17 @@ router.post('/newTask', function (req, res) {
   } catch (error) {
     res.status(500).send(error.message);
   }
-}); //router.put('/')
-//router.delete
-
+});
+router.put('/editTask', function (req, res) {
+  try {
+    var newTitle = req.body.newTitle;
+    var id = req.body.id;
+    console.log(id);
+    var allTasks = editTask(id, newTitle);
+    console.log("afetr edit task ");
+    res.send(allTasks);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
 module.exports = router;

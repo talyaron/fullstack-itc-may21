@@ -23,6 +23,7 @@ app.get('/cookie', function (req, res) {
 });
 app.get('/user', function (req, res) {
   var cookie = req.cookies['cookie'];
+  res.send(cookie);
   console.log(cookie);
 });
 app.listen(port, function () {
