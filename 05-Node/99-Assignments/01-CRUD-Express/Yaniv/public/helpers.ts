@@ -42,7 +42,7 @@ async function postToDo(toDo) {
 
 async function searchToDos(toDoContent, toDoStatus) {
   try {
-    const searchedToDos = await axios.get(`/todo?content=${toDoContent}&status=${toDoStatus}`);
+    const searchedToDos = await axios.get(`/todo?content=${toDoContent}&status=${toDoStatus}`); //YS: Cool
     return searchedToDos;
 
   } catch (error) {

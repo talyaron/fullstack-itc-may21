@@ -3,6 +3,8 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 5555;
 
+app.use(cookieParser());
+
 app.get('/getData', (req ,res)=>{
 
     const cookieObject = {content:"Eat me!"};

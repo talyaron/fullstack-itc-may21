@@ -1,4 +1,4 @@
-async function getAllTask() {
+async function getAllTask() { //YS: Nice
     try {
         const res = await axios.get('/tasks/')
         const allTasks = res.data
@@ -7,7 +7,7 @@ async function getAllTask() {
         console.log(error);
     }
 }
-getAllTask()
+getAllTask() //YS: Add an onload function. 
 
 
 async function addTask(title) {
@@ -20,9 +20,19 @@ async function addTask(title) {
     }
 }
 
+async function editTask(id, newTitle) {
+    try {
+        const res = await axios.put('/tasks/editTask', { id, newTitle })
+        const allTasks = res.data
+        renderTasks(allTasks);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function deleteTask(id) {
     try {
-        const res = await axios.delete(`/tasks/delete?id=${id}`)
+        const res = await axios.delete(`/tasks/delete?id=${id}`) //YS: Nice
         const allTasks = res.data
         renderTasks(allTasks);
     } catch (error) {
@@ -48,9 +58,36 @@ function handleSubmit(ev: any): any {
 function handleDelete(id): any {
     deleteTask(id);
 }
+const edit = document.querySelector(".edit");
+function handleEdit(id, title): any {
 
-function handleEdit(id): any {
-    console.log(id);
+    let html = '';
+
+    html += `<h3>edit<h3><br>
+    <form class="editForm" id="${id}" onsubmit="handleEditSubmit(event)">
+    <input type="text" value="${title}" name="newTitle">
+    <input onclick="closeEditWindow()" type="button" value="Cancel" id="cancel"> 
+    <input type="submit" value="Edit"></form>`
+
+    edit.innerHTML = html;
+    edit.style.display = "block";
+}
+
+function handleEditSubmit(ev) {
+    ev.preventDefault();
+    const id = ev.target.id
+    const newTitle = ev.target.elements.newTitle.value;
+    editTask(id, newTitle)
+
+    edit.style.display = "none";
+}
+
+
+
+
+function closeEditWindow(event) {
+
+    edit.style.display = "none";
 }
 
 
@@ -60,7 +97,7 @@ function renderTasks(data) {
     data.forEach((task) => {
         html += ` <div class='tasks'><h3>${task.title}</h3>
         <button onclick="handleDelete('${task.id}')">Delete</button>
-        <button onclick="handleEdit('${task.id}')">Edit</button>
+        <button onclick="handleEdit('${task.id}','${task.title}')">Edit</button>
         <input type="checkbox" name="done">
         </div>`
     })

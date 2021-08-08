@@ -6,7 +6,7 @@ const {
 } = require('uuid');
 
 
-function getAllTasks() {
+function getAllTasks() { //YS: Try/Catch
     const allTasks = fs.readFileSync(filePath);
     console.log(allTasks);
     const parsed = JSON.parse(allTasks)
@@ -15,7 +15,7 @@ function getAllTasks() {
 
 
 
-function addTask(title) {
+function addTask(title) { //YS: Try/Catch
 
     const allTasks = getAllTasks();
     const task = {
@@ -29,7 +29,7 @@ function addTask(title) {
     return allTasks
 }
 
-function deleteTask(id) {
+function deleteTask(id) { //YS: Try/Catch
 
     const allTasks = getAllTasks();
 
@@ -39,8 +39,20 @@ function deleteTask(id) {
     return filteredTasks
 }
 
+function editTask(id, newTitle) {
+    console.log("inside model");
+    const allTasks = getAllTasks();
+    const taskToEdit = allTasks.filter(task => task.id === id);
+    taskToEdit[0].title = newTitle;
+    console.log(taskToEdit)
+    fs.writeFileSync(filePath, JSON.stringify(allTasks));
+    return allTasks
+}
+
+
 
 
 exports.getAllTasks = getAllTasks
 exports.addTask = addTask
 exports.deleteTask = deleteTask
+exports.editTask = editTask

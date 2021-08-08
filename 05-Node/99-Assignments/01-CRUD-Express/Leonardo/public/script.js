@@ -67,7 +67,7 @@ function renderThrough(data, status) {
 };
 
 //This function is to edit the format for the Date that Im going to show in the DOM
-function readableDate(date) {
+function readableDate(date) { //YS: Nice! There is a library called moment which does this for you. 
     try {
         const today = new Date(date);
         const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
@@ -102,9 +102,9 @@ async function deleteTask(id) {
 
 //Update a task:
 //This will contain the Task ID to Edit
-let taskIdEdit = '';
+let taskIdEdit = ''; //YS: You can just do: let taskIdEdit;
 
-async function uploadTask(id) {
+async function uploadTask(id) { //YS: Nice! Thought it should be called updateTask
     try {
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "block";
@@ -146,7 +146,7 @@ async function uploadTask(id) {
             }
         }).join('');
         formEdit.innerHTML = html;
-        taskIdEdit = id;
+        taskIdEdit = id; //YS: Nice
     } catch (error) {
         console.error(error);
     };

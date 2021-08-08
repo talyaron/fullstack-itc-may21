@@ -3,12 +3,13 @@ const postTask = (event) => {
 
   let { name, description } = event.target.elements;
   name = name.value;
-  description = description.value;
-  axios({
+  description = description.value;  
+  axios({   /* YS: You can just write: axios.post(`/addTask, {name, description})
+                                       .then().. */
     method: "post",
     url: `/addTask`,
     data: {
-      name,
+      name,   
       description,
     },
     headers: {
@@ -36,7 +37,7 @@ function updateTask(id) {
 updateId = id;
 }
 
-const updatePromise = async (event) => {
+const updatePromise = async (event) => { //YS: You have a bug here, this is not functional. 
 event.preventDefault()
 let id = updateId 
 const title = document.querySelector('#modal-title').value;
