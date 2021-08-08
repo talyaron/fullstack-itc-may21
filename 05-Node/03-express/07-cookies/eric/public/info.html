@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal info</title>
+</head>
+<body onload="pepe(event)">
+     <div id="root"></div>
+
+
+<script>
+
+
+     function pepe(ev){
+       ev.preventDefault();
+
+        fetch('/user')
+            .then(r=>r.json())
+            .then(data=>render(data))
+    
+    
+    }
+
+    function render(data){
+
+        let html = ''
+        const {name} = data;
+        const root = document.getElementById('root')   
+
+        html += `<div>${name}</div>`
+
+        root.innerHTML = html;
+    }
+
+
+         
+
+</script>
+</body>
+</html>

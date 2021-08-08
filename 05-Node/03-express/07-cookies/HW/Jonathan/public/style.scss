@@ -1,0 +1,189 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.body {
+    background-image: url(https://cdn.hovia.com/app/uploads/wall-street-plain-820x532.jpg);
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+
+
+    &__form {
+        box-shadow: 0 1px 3px rgba(202, 211, 224, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        background-color: whitesmoke;
+        padding: 3.3em;
+        border-radius: 15px;
+
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+
+        &__form {
+            margin-bottom: 1em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            &--labelpassword {
+                margin-top: 1em;
+            }
+
+            &--email,
+            &--password {
+                text-indent: 0.3em;
+                border: none;
+                border-bottom: 1px solid gray;
+                margin-top: 0.3em;
+                background-color: rgb(201, 201, 201);
+            }
+
+            input:focus {
+                outline: none
+            }
+
+            ;
+
+            &--buttons {
+                display: flex;
+                justify-content: center;
+                margin-top: 2em;
+
+                &--signup {
+                    margin-right: 1em;
+                    background: linear-gradient(90deg, #1056c0, #3131d4 67%, #1e61de 84%, #195fe0);
+                    box-shadow: 0 3px 9px 0 rgb(239 34 34 / 29%);
+                    color: whitesmoke;
+                }
+
+                &--signup:hover {
+                    opacity: 0.7;
+                }
+
+                &--login {
+                    box-shadow: 0 3px 9px 0 rgb(239 34 34 / 29%);
+                    background: linear-gradient(90deg, #c01039, #dc1223 67%, #de1e1e 84%, #e02a19);
+                    color: whitesmoke;
+                    font-weight: bold;
+                }
+
+                &--login:hover {
+                    opacity: 0.7;
+                }
+
+                &--btn {
+                    padding: 1em;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    border: none;
+                }
+
+                &--btn:focus {
+                    outline: 0
+                }
+            }
+        }
+
+
+    }
+}
+
+
+
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+
+    &__modal {
+        position: relative;
+        background: linear-gradient(90deg, #153836, #12dc9f 67%, #1edebe 84%, #19e0d6);
+        color: white;
+        width: 25%;
+        height: 45%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 10px;
+
+
+        &__form {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            label {
+                margin: 0.5em 0;
+                font-size: 1.1rem;
+            }
+
+            input {
+                margin: 0 auto;
+            }
+
+            input:focus {
+                outline: none;
+            }
+
+            button{
+                margin-top:2em;
+                padding: 0.5em;
+                cursor: pointer;
+                border-radius: 5px;
+                border: none;
+                background:rgba(0, 0, 0, 0.24);
+                color:lightgrey;
+            }
+
+            button:hover{
+                opacity: 0.7;
+            };
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.bg-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+header{
+    padding:1em;
+}
+.headerh1{
+   text-align: center;
+}
+
