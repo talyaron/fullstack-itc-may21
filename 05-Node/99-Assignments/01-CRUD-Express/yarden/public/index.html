@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./dist/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://kit.fontawesome.com/9e08100192.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="shortcut icon" href="./images/list-ninja-favicon.ico" type="image/x-icon">
     <title>List Ninja</title>
 </head>
@@ -50,6 +51,7 @@
         <form id="edit-modal-form" onsubmit="handleUpdate(event)">
             <label for="edit-text"></label>
             <input type="text" name="edit-text" class="edit-modal-form__text">
+            <input type="hidden" name="task-id" id="task-id">
             <button type="submit" class="edit-modal-form__submit-btn">Pledge again</button>
         </form>
     </div>
@@ -79,7 +81,8 @@
         </div>
         <p>App by Yarden Tal for ITC Fullstack course</p>
     </footer>
-    
+
+    <script src="./api.js"></script>
     <script src="./app.js"></script>
     <script src="./helpers.js"></script>
 </body>
