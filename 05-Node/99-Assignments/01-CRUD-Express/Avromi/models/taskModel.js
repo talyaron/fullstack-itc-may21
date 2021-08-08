@@ -39,8 +39,20 @@ function deleteTask(id) { //YS: Try/Catch
     return filteredTasks
 }
 
+function editTask(id, newTitle) {
+    console.log("inside model");
+    const allTasks = getAllTasks();
+    const taskToEdit = allTasks.filter(task => task.id === id);
+    taskToEdit[0].title = newTitle;
+    console.log(taskToEdit)
+    fs.writeFileSync(filePath, JSON.stringify(allTasks));
+    return allTasks
+}
+
+
 
 
 exports.getAllTasks = getAllTasks
 exports.addTask = addTask
 exports.deleteTask = deleteTask
+exports.editTask = editTask

@@ -8,8 +8,11 @@ const {
     getAllTasks
 } = require('../models/taskModel.js')
 const {
-    deleteTask 
-} = require('../models/taskModel.js')   //YS: You can import all of them in one line:   const { addTask, getAllTasks, deleteTask } = require('../models/taskModel.js')
+    deleteTask
+} = require('../models/taskModel.js')
+const {
+    editTask
+} = require('../models/taskModel.js')
 
 router.get('/', (req, res) => {
     try {
@@ -49,7 +52,20 @@ router.post('/newTask', (req, res) => { //YS: Good
     }
 })
 
-//router.put('/')
-//router.delete
+router.put('/editTask', (req, res) => {
+    try {
+   
+        const newTitle = req.body.newTitle;
+        const id = req.body.id;
+        console.log(id);
+        const allTasks =  editTask(id, newTitle)
+        console.log("afetr edit task ");
+        res.send(
+            allTasks
+        )
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+})
 
 module.exports = router
