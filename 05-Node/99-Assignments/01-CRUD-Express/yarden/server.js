@@ -15,10 +15,10 @@ app.get('/getAllTasks', (req, res) => {
     try {
         res.send(tasksOnServer)
     } catch (er) {
-        console.error(er)
+        console.error(er) //YS: Should be: res.status(400).send(er.message)
     }
 })
-app.get('/tasks/:id', (req, res)=>{
+app.get('/tasks/:id', (req, res)=>{ //YS: Try/Catch? 
     res.send(tasksOnServer)
 })
 

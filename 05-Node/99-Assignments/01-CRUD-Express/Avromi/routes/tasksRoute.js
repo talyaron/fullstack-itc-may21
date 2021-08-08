@@ -8,8 +8,8 @@ const {
     getAllTasks
 } = require('../models/taskModel.js')
 const {
-    deleteTask
-} = require('../models/taskModel.js')
+    deleteTask 
+} = require('../models/taskModel.js')   //YS: You can import all of them in one line:   const { addTask, getAllTasks, deleteTask } = require('../models/taskModel.js')
 
 router.get('/', (req, res) => {
     try {
@@ -18,11 +18,11 @@ router.get('/', (req, res) => {
             allTasks
         )
     } catch (error) {
-        res.status(500).send(error.message)
+        res.status(500).send(error.message) //YS: Good
     }
 })
 
-router.delete('/delete', (req, res) => {
+router.delete('/delete', (req, res) => { //YS: Nice
     try {
         console.log("before id");
         const id = req.query.id;
@@ -37,7 +37,7 @@ router.delete('/delete', (req, res) => {
     }
 })
 
-router.post('/newTask', (req, res) => {
+router.post('/newTask', (req, res) => { //YS: Good
     try {
         const title = req.body.title;
         const allTask = addTask(title)

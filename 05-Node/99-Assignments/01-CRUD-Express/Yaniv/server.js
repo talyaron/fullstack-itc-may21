@@ -38,7 +38,7 @@ class ToDos {
     addToDo(toDo) {
         try {
             toDo.uuid = uuidv4();
-            toDo.createdDate = new Date();
+            toDo.createdDate = new Date(); //YS: Nice
             toDo.editedDate = null;
 
             this.toDoList.push(toDo);
@@ -50,7 +50,7 @@ class ToDos {
         }
     }
 
-    searchToDos(toDoContent,toDoStatus) {
+    searchToDos(toDoContent,toDoStatus) { //YS: Very nice
         try {
             let searchedToDos = this.toDoList;
             const toDoContentRegEx = new RegExp(toDoContent,'gmi');
@@ -73,9 +73,9 @@ class ToDos {
         }
     }
 
-    updateToDo(toDoUuid, toDo) {
+    updateToDo(toDoUuid, toDo) { //YS: Nice! 
         try {
-            const toDoToUpdateIndex = this.toDoList.findIndex(toDoItem => toDoItem.uuid === toDoUuid);
+            const toDoToUpdateIndex = this.toDoList.findIndex(toDoItem => toDoItem.uuid === toDoUuid); 
         
             if (toDoToUpdateIndex === -1) return [];
     
@@ -93,7 +93,7 @@ class ToDos {
                 this.toDoList[toDoToUpdateIndex].dueDate = toDo.dueDate;
                 isEdited = true;
             }
-            if (isEdited) this.toDoList[toDoToUpdateIndex].editedDate = new Date();
+            if (isEdited) this.toDoList[toDoToUpdateIndex].editedDate = new Date(); //YS: Very nice! You can also use Date.now()
 
             this.updateToDosJson();
             return [this.toDoList[toDoToUpdateIndex]];
@@ -105,7 +105,7 @@ class ToDos {
 
     deleteToDo(toDoUuid) {
         try {
-            const toDoToUpdateIndex = this.toDoList.findIndex(toDo => toDo.uuid === toDoUuid);
+            const toDoToUpdateIndex = this.toDoList.findIndex(toDo => toDo.uuid === toDoUuid); //YS: You and your findIndex... 
 
             if (toDoToUpdateIndex === -1) return [];
             
@@ -132,7 +132,7 @@ app.get('/todo-list', (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(400).send({error: er.message});
+        res.status(400).send({error: er.message}); //YS: Very nice
     }
 });
 
@@ -142,7 +142,7 @@ app.post('/post-todo', (req, res) => {
         toDos.addToDo(body);
 
         console.log(`${body.content} added to to-do list!`);
-        res.send(toDos);
+        res.send(toDos); //YS: You are sending the whole class back? 
 
     } catch (er) {
         console.error(er);
@@ -150,7 +150,7 @@ app.post('/post-todo', (req, res) => {
     }
 });
 
-app.get('/todo', (req, res) => {
+app.get('/todo', (req, res) => { //YS: Nice
     try {
         const {
             content,

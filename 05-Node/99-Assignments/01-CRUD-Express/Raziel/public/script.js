@@ -112,7 +112,7 @@ async function removeTransaction(id) {
 
 //Update transaction by id
 
-async function updateTransaction(id) {
+async function updateTransaction(id) { //YS: This needs a little improvement
   const newText = text;
   const newAmount = amount;
   const updateTransaction = {

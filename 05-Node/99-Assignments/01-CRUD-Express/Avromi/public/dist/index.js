@@ -56,7 +56,7 @@ function getAllTask() {
         });
     });
 }
-getAllTask();
+getAllTask(); //YS: Add an onload function. 
 function addTask(title) {
     return __awaiter(this, void 0, void 0, function () {
         var res, allTasks, error_2;
@@ -86,9 +86,10 @@ function deleteTask(id) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, axios["delete"]("/tasks/delete?id=" + id)];
+                    return [4 /*yield*/, axios["delete"]("/tasks/delete?id=" + id)]; //YS: Nice
                 case 1:
-                    res = _a.sent();
+                    res = _a.sent() //YS: Nice
+                    ;
                     allTasks = res.data;
                     renderTasks(allTasks);
                     return [3 /*break*/, 3];

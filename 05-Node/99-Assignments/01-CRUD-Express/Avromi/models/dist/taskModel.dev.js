@@ -10,6 +10,7 @@ var _require = require('uuid'),
     uuidv4 = _require.v4;
 
 function getAllTasks() {
+  //YS: Try/Catch
   var allTasks = fs.readFileSync(filePath);
   console.log(allTasks);
   var parsed = JSON.parse(allTasks);
@@ -17,6 +18,7 @@ function getAllTasks() {
 }
 
 function addTask(title) {
+  //YS: Try/Catch
   var allTasks = getAllTasks();
   var task = {
     title: title,
@@ -28,6 +30,7 @@ function addTask(title) {
 }
 
 function deleteTask(id) {
+  //YS: Try/Catch
   var allTasks = getAllTasks();
   var filteredTasks = allTasks.filter(function (task) {
     return task.id !== id;

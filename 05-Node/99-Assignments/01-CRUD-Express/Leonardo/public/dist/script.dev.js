@@ -96,6 +96,7 @@ function renderThrough(data, status) {
 ; //This function is to edit the format for the Date that Im going to show in the DOM
 
 function readableDate(date) {
+  //YS: Nice! There is a library called moment which does this for you. 
   try {
     var today = new Date(date);
     var options = {
@@ -185,7 +186,7 @@ function deleteTask(id) {
 ; //Update a task:
 //This will contain the Task ID to Edit
 
-var taskIdEdit = '';
+var taskIdEdit = ''; //YS: You can just do: let taskIdEdit;
 
 function uploadTask(id) {
   var formEdit, tasksData, html;
@@ -226,7 +227,8 @@ function uploadTask(id) {
             }
           }).join('');
           formEdit.innerHTML = html;
-          taskIdEdit = id;
+          taskIdEdit = id; //YS: Nice
+
           _context4.next = 19;
           break;
 
