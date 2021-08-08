@@ -121,7 +121,7 @@
         position: relative;
         background: linear-gradient(90deg, #153836, #12dc9f 67%, #1edebe 84%, #19e0d6);
         color: white;
-        width: 60%;
+        width: 25%;
         height: 45%;
         display: flex;
         justify-content: space-evenly;
@@ -180,4 +180,10 @@
 }
 
 
+header{
+    padding:1em;
+}
+.headerh1{
+   text-align: center;
+}
 

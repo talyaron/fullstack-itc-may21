@@ -59,7 +59,7 @@ function closeModal() {
 }
 
 function handleSumbit(ev) {
-  var username, email, password, validEmail, emailReg, newUser, response, ok;
+  var username, email, password, newUser, response, ok;
   return regeneratorRuntime.async(function handleSumbit$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -69,45 +69,34 @@ function handleSumbit(ev) {
           username = ev.target.elements.username.value;
           email = ev.target.elements.emaillogin.value;
           password = ev.target.elements.passwordlogin.value;
-          validEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
-          emailReg = new RegExp(validEmail, 'gmi');
-
-          if (emailReg.test(email)) {
-            _context2.next = 9;
-            break;
-          }
-
-          throw new Error('Your email is not in the correct form');
-
-        case 9:
           newUser = {
             username: username,
             email: email,
             password: password
           };
-          _context2.next = 12;
+          _context2.next = 8;
           return regeneratorRuntime.awrap(addSignUpPromise(newUser));
 
-        case 12:
+        case 8:
           response = _context2.sent;
           ok = response.ok;
           alert(ok);
           bgModal.classList.remove('bg-active');
           ev.target.elements.reset();
-          _context2.next = 22;
+          _context2.next = 18;
           break;
 
-        case 19:
-          _context2.prev = 19;
+        case 15:
+          _context2.prev = 15;
           _context2.t0 = _context2["catch"](0);
           console.log(_context2.t0);
 
-        case 22:
+        case 18:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 19]]);
+  }, null, null, [[0, 15]]);
 } //PROMISE
 
 

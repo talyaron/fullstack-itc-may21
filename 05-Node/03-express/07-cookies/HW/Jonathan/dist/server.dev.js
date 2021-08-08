@@ -24,17 +24,7 @@ app.post('/signUpUser', function (req, res) {
     });
 
     if (!isFound) {
-      var _req$body = req.body,
-          username = _req$body.username,
-          email = _req$body.email,
-          password = _req$body.password;
-      var user = {
-        username: username,
-        email: email,
-        password: password,
-        balance: parseFloat((Math.random() < 0.5 ? -1 * Math.random() : 1 * Math.random()) * 1000 + 200).toFixed(2)
-      };
-      allLogin.push(user);
+      allLogin.push(req.body);
       fs.writeFileSync("./login.json", JSON.stringify(allLogin));
       res.send({
         ok: "Has creado una cuenta",
@@ -51,9 +41,9 @@ app.post('/signUpUser', function (req, res) {
 });
 app.post('/loginUser', function (req, res) {
   try {
-    var _req$body2 = req.body,
-        email = _req$body2.email,
-        password = _req$body2.password;
+    var _req$body = req.body,
+        email = _req$body.email,
+        password = _req$body.password;
     var allLogin = readAllLogin();
     var isUserPassOK = allLogin.some(function (elem) {
       return elem.email === email && elem.password === password;
@@ -64,7 +54,7 @@ app.post('/loginUser', function (req, res) {
         return elem.email === email && elem.password === password;
       });
       res.cookie('cookieName', JSON.stringify(userLogin), {
-        maxAge: 3000,
+        maxAge: 30000000,
         httpOnly: true
       });
       res.send({
@@ -81,9 +71,9 @@ app.post('/loginUser', function (req, res) {
 });
 app.get('/getCookie', function (req, res) {
   var cookieName = req.cookies.cookieName;
-  var cookie = JSON.parse(cookieName); //const { username, balance } = cookie
-
-  res.send(cookie);
+  var cookie = JSON.parse(cookieName);
+  var username = cookie.username;
+  res.send(username);
 });
 app.use(express["static"]('public'));
 app.listen(3000, function () {
