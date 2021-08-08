@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <h1>About</h1>
+    <div class="rootDiv"></div>
+    <script>
+        fetch('/user')
+            .then(r => r.json())
+            .then(data => render(data))
+
+        function render(data) {
+            const root = document.querySelector('.rootDiv');
+            const html = `Hello, ${data}`
+            root.innerHTML = html;
+
+        }
+    </script>
+</body>
+
+</html>
