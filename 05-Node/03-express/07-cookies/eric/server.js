@@ -10,7 +10,7 @@ app.use(cookieParser());
 
 app.post('/getData', (req, res) => {
 
-
+    try{
 
   
     const {userName, password} = req.body
@@ -22,6 +22,10 @@ app.post('/getData', (req, res) => {
      res.cookie('cookieName', loginData, { maxAge: 3000, httpOnly: true });
 
      res.send({ ok: 'Press accept to see your login data'})
+
+    } catch (e) {
+        res.status(500).send({ error: `${e}` });
+    }
 })
 
 app.get('/user', (req, res)=>{
@@ -29,6 +33,7 @@ app.get('/user', (req, res)=>{
     //get name from the cookie
 
     //read cookies
+
     console.log(req.cookies);
     const { cookieName } = req.cookies
     const cookie = JSON.parse(cookieName);
