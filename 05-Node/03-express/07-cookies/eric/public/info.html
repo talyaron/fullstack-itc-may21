@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/style.css">
+
     <title>Show login</title>
 </head>
 <body onload=getLogin(event)>
@@ -36,7 +38,11 @@
         const {name, password} = data;
         const root = document.getElementById('root')   
 
-        html += `<div>Your userName is: ${name} and your password is: ${password}</div>`
+        html += `<div>
+                 <div>Your userName is: ${name}.</div>
+                 <div>Your password is: ${password}</div>
+
+                </div>`
 
         root.innerHTML = html;
     }
