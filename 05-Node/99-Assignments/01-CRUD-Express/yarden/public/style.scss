@@ -1,3 +1,5 @@
+// List Ninja styling file
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -273,4 +275,8 @@ footer {
     text-decoration-color: white;
     text-decoration-thickness: 2px;
     color: rgba(245, 245, 245, 0.486);
+}
+
+.task.dragged {
+    opacity: .5;
 }
