@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const {
+const {                                    ///YS: const { addTask, getAllTasks, deleteTask, editTask } = require('../models/taskModel.js')
     addTask
 } = require('../models/taskModel.js')
 const {
@@ -56,7 +56,7 @@ router.put('/editTask', (req, res) => {
     try {
    
         const newTitle = req.body.newTitle;
-        const id = req.body.id;
+        const id = req.body.id; //YS: Should pass the id through params/query
         console.log(id);
         const allTasks =  editTask(id, newTitle)
         console.log("afetr edit task ");
