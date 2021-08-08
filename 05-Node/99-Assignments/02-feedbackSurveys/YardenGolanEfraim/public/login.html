@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <form onsubmit="handleLogin(event)">
+        <input type="email" name="email" placeholder="email" required>
+        <input type="password" name="password" placeholder="password" required>
+        <button id="submit" type="submit">Login</button>
+    </form>
+</body>
+
+<script>
+    async function handleLogin(event){
+        event.preventDefault()
+        const password = event.target.elements.password.value;
+        const email = event.target.elements.email.value
+        const result = await axios.post('/login', {
+                        password: password,
+                        email: email
+                    })
+                await console.log(result)
+                event.target.reset();
+    } 
+   
+    document.getElementById("submit").addEventListener("click", ()=>{
+        window.location.href="/surveylist.html";
+    });
+       
+</script>
+</html>
