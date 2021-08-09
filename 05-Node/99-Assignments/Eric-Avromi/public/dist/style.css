@@ -72,3 +72,10 @@ body.my-login-page {
     padding: 15px;
   }
 }
+.inputName {
+  margin: 200px;
+}
+
+#dangerSurvey {
+  margin-left: 300px;
+}
