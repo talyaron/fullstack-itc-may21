@@ -14,19 +14,13 @@ function handleRegister(event) {
             name: name,
             password: password
           };
-          axios({
-            method: "post",
-            url: "/signUp",
-            data: {
-              name: name,
-              password: password
-            },
-            headers: {
-              "Content-Type": "application/json"
-            }
+          axios.post("/signUp", {
+            newUser: newUser
+          }, {
+            "Content-Type": "application/json"
           }).then(function (_ref) {
             var data = _ref.data;
-            return renderTask(data);
+            return console.log(data);
           })["catch"](function (err) {
             console.log(err);
           });

@@ -10,18 +10,8 @@ async function handleRegister(event) {
     name: name,
     password: password,
   };
-  axios({
-    method: "post",
-    url: `/signUp`,
-    data: {
-      name,
-      password,
-    },
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then(({ data }) => renderTask(data))
+  axios.post( `/signUp`,{newUser},{"Content-Type": "application/json",})
+    .then(({ data }) => console.log(data))
     .catch((err) => {
       console.log(err);
     });
