@@ -6,13 +6,11 @@ var app = express();
 
 var fs = require('fs');
 
-var port = process.env["const"] || 3000;
+var port = process.env["const"] || 3000; // const cookieParser = require("cookie-parser");
+// app.use(cookieParser());
+// app.use(express.json());
 
-var cookieParser = require('cookie-parser');
-
-app.use(express["static"]('public'));
-app.use(cookieParser());
-app.use(express.json()); // function readUserData(){
+app.use(express["static"]('public')); // function readUserData(){
 //     const userData = fs.readFileSync("./userData.json");
 //     return JSON.parse(userData);
 // }
@@ -28,7 +26,6 @@ app.use(express.json()); // function readUserData(){
 //     res.send(users);
 //   });
 
-app.use(express["static"]('public'));
 app.listen(port, function () {
   console.log('Server listen on port', port);
 });

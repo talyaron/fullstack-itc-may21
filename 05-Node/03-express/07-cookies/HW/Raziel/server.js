@@ -2,15 +2,14 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const port= process.env.const || 3000;
+// const cookieParser = require("cookie-parser");
 
-const cookieParser = require('cookie-parser');
+
+
+// app.use(cookieParser());
+
+// app.use(express.json());
 app.use(express.static('public'));
-
-
-app.use(cookieParser())
-
-app.use(express.json());
-
 
 
 // function readUserData(){
@@ -33,5 +32,4 @@ app.use(express.json());
 //   });
   
 
-  app.use(express.static('public'));
 app.listen(port, () => { console.log('Server listen on port', port) })
