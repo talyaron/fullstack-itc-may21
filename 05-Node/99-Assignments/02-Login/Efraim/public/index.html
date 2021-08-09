@@ -18,7 +18,7 @@
         <label for="lastName">Enter Last Name:</label>
         <input type="text" name="lastName" placeholder=" last name" required>
         <button class="button" type="submit">Submit!</button>
-        <a href="second.html">Go to next page!</a>
+       
     </form>
     <script>
         async function handleUser(event) {
@@ -38,6 +38,9 @@
                 console.error(e)
             }
         }
+        document.querySelector(".button").addEventListener("click", ()=>{
+        window.location.href="/second.html";
+    });
     </script>
 </body>
 

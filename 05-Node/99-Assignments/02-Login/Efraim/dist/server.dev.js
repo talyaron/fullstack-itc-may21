@@ -59,14 +59,9 @@ app.post('/createUser', function (req, res) {
   }
 });
 app.get('/user', function (req, res) {
-  //get name from the cookie
-  //read cookies
-  console.log(req.cookies);
   var cookieName = req.cookies.cookieName;
   var cookie = JSON.parse(cookieName);
-  console.log(cookieName);
   var user = cookie.user;
-  console.log(user);
   res.send({
     user: user
   });

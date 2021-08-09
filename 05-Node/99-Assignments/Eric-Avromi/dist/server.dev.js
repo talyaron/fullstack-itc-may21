@@ -28,7 +28,8 @@ var Survey = function Survey(title) {
   this.title = title;
   this.id = uuidv4();
   this.questions = [];
-  this.admin = {};
+  this.admin = {//email:adminEmail
+  };
 };
 
 app.use(express["static"]("public"));
