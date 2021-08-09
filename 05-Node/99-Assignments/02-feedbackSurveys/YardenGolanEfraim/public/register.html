@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <form onsubmit="handleRegister(event)">
+        <input type="username" name="username" placeholder="username">
+        <input type="email" name="email" placeholder="email">
+        <input type="password" name="password" placeholder="password">
+        <button type="submit">Register</button>
+    </form>
+    <a href="/login.html">Go to Login</a>
+
+</body>
+<script>
+
+
+    async function handleRegister(ev) {
+        ev.preventDefault()
+        const username = ev.target.elements.username.value;
+        const password = ev.target.elements.password.value;
+        const email = ev.target.elements.email.value
+        const result = await axios.post('/createUser', {
+                        username: username,
+                        password: password,
+                        email: email
+                    })
+                await console.log(result)
+                await alert("Register Succesful!")
+                ev.target.reset();
+    }
+</script>
+
+</html>
