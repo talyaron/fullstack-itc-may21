@@ -59,7 +59,7 @@ app.post('/loginUser', function (req, res) {
         if (isUserPassOK) {
             const userLogin = allLogin.find(elem => (elem.email === email) && (elem.password === password))
             res.cookie('cookieName', JSON.stringify(userLogin), { maxAge: 3000, httpOnly: true });
-            res.send({ ok: 'Bienvendio a Bank Jonathan' });
+            res.send({ ok: 'Welcome to Bank Jonathan' });
         } else {
             throw new Error("Is incorrect your email or password. Try Again")
         }
@@ -77,9 +77,10 @@ app.get('/getCookie', function (req, res) {
     try {
         const { cookieName } = req.cookies
         const cookie = JSON.parse(cookieName)
+        console.log(cookie)
         res.send(cookie);
     } catch (e) {
-        res.status(500).send({ error: `${e.message}` });
+        res.status(500).send({ error: `${e}` });
     }
 });
 

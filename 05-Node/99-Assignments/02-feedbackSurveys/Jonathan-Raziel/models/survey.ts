@@ -23,14 +23,14 @@ class Survey {
 
 }
 
-class SurveysList {
-    SurveryArray: Array<Survey> = [];
+// class SurveysList {
+//     SurveryArray: Array<Survey> = [];
 
-    addSurvey(survey: Survey) {
-        try {
-            this.SurveryArray.push(survey);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
+//     addSurvey(survey: Survey) {
+//         try {
+//             this.SurveryArray.push(survey);
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }

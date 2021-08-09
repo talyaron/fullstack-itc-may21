@@ -8,17 +8,13 @@ var Survey = /** @class */ (function () {
     }
     return Survey;
 }());
-var SurveysList = /** @class */ (function () {
-    function SurveysList() {
-        this.SurveryArray = [];
-    }
-    SurveysList.prototype.addSurvey = function (survey) {
-        try {
-            this.SurveryArray.push(survey);
-        }
-        catch (error) {
-            console.log(error);
-        }
-    };
-    return SurveysList;
-}());
+// class SurveysList {
+//     SurveryArray: Array<Survey> = [];
+//     addSurvey(survey: Survey) {
+//         try {
+//             this.SurveryArray.push(survey);
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }

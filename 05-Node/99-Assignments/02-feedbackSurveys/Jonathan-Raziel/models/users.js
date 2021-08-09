@@ -9,22 +9,19 @@ var User = /** @class */ (function () {
     }
     return User;
 }());
-var UserList = /** @class */ (function () {
-    function UserList() {
-        this.UsersArray = [];
-    }
-    UserList.prototype.add = function (users) {
-        try {
-            this.UsersArray.push(users);
-        }
-        catch (error) {
-            console.log(error);
-        }
-    };
-    return UserList;
-}());
+// class UserList {
+//     UsersArray: Array<User> = [];
+//     add(users: User) {
+//         try {
+//             this.UsersArray.push(users);
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }
 //here you supposed to have our app.post for passing to the model
-module.exports = {
-    User: User,
-    UserList: UserList
-};
+// module.exports = {
+//     User: User,
+//     UserList: UserList,
+// };
+module.exports = User;
