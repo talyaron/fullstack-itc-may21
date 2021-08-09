@@ -33,14 +33,14 @@ app.post('/signUpUser', function (req, res) {
 
             fs.writeFileSync("./login.json", JSON.stringify(allLogin));
 
-            res.send({ ok: "Has creado una cuenta", user: allLogin });
+            res.send({ ok: "User Created", user: allLogin });
         } else {
-            throw new Error("this is user is foundes")
+            throw new Error("this is user alredady exist")
 
         }
 
     } catch (e) {
-        res.status(500).send({ error: `${e}` });
+        res.status(500).send({ error: `${e.message}` });
     }
 
 })
@@ -59,7 +59,7 @@ app.post('/loginUser', function (req, res) {
         if (isUserPassOK) {
             const userLogin = allLogin.find(elem => (elem.email === email) && (elem.password === password))
             res.cookie('cookieName', JSON.stringify(userLogin), { maxAge: 3000, httpOnly: true });
-            res.send({ ok: 'Bienvendio a Bank Jonathan' });
+            res.send({ ok: 'Welcome to Bank Jonathan' });
         } else {
             throw new Error("Is incorrect your email or password. Try Again")
         }
@@ -76,7 +76,9 @@ app.post('/loginUser', function (req, res) {
 app.get('/getCookie', function (req, res) {
     try {
         const { cookieName } = req.cookies
+        if(!cookieName) throw new Error("Nothing is on the cookie")
         const cookie = JSON.parse(cookieName)
+        console.log(cookie)
         res.send(cookie);
     } catch (e) {
         res.status(500).send({ error: `${e.message}` });

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Register</title>
+</head>
+
+<body class="register">
+    <header>
+        <button class="register--return">Return Page</button>
+    </header>
+    <div class="container">
+        <form id="form-register" class="container__form">
+            <label for="username">UserName</label>
+            <input type="text" name="username" id="username">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+            <button type="submit" >Register</button>
+        </form>
+    </div>
+    <script>
+
+        //btn
+        const btnReturn = document.querySelector('.register--return');
+
+        //form
+        const form = document.querySelector('.container__form');
+
+        //addEventListener
+        btnReturn.addEventListener('click', toHomePage)
+        form.addEventListener('submit', handleRegister)
+
+        //function
+
+        function toHomePage() {
+            window.location.href = 'home.html'
+        }
+
+
+
+        async function handleRegister(ev) {
+            try {
+                ev.preventDefault()
+
+                const username = ev.target.elements.username.value
+                const email = ev.target.elements.email.value
+                const password = ev.target.elements.password.value
+
+                const newUser = {
+                    username: username,
+                    email: email,
+                    password: password,
+                }
+                console.log(newUser)
+
+                const response = await addRegisterPromise(newUser)
+                const { ok } = response
+                alert(ok)
+
+                ev.target.reset()
+
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
+        //PROMISE
+        function addRegisterPromise(newUser) {
+            return new Promise((resolve, reject) => {
+                fetch('/usersRegister', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+                }).then(function (res) {
+                    if (res.status === 200 && res.ok) {
+                        return res.json().then(user => { resolve(user) });
+                    } else {
+                        return res.json().then(user => { alert(user.error) })
+                    }
+                })
+            })
+        }
+    </script>
+</body>
+
+</html>

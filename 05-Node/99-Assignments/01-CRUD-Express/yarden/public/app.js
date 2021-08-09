@@ -11,23 +11,14 @@ Functions:
 */
 
 // The tasks array
-<<<<<<< HEAD
 const tasks = []
-=======
-let tasks = [] //YS: This should come from the BE
-
->>>>>>> f85ee9ef3c0f1768ef326cb878700bf303ac00e5
 
 /* Add */
 const form = document.querySelector('#add-task-form')
 const modal = document.querySelector('.add-task-modal')
 form.addEventListener('submit', handleSubmit)
 
-<<<<<<< HEAD
 async function handleSubmit(ev) {
-=======
-function handleSubmit(ev) { //YS: Where is your fetch/axios? 
->>>>>>> f85ee9ef3c0f1768ef326cb878700bf303ac00e5
     ev.preventDefault()
     const taskText = ev.target[0].value
     if (!taskText) throw new Error('Please enter description.')
@@ -70,13 +61,9 @@ const renderTaskList = () => {
 }
 
 /* Update */
-<<<<<<< HEAD
 function getIdForUpdate(taskId) {
     const id = document.querySelector('#task-id')
     id.value = taskId
-=======
-function getIdForUpdate(taskId) { //YS: Where is your fetch/axios? 
->>>>>>> f85ee9ef3c0f1768ef326cb878700bf303ac00e5
     openEditModal()
     const taskToUpdate = tasks.find(task => task.id === taskId)
     return taskToUpdate.id
@@ -97,12 +84,7 @@ async function handleUpdate(ev) {
 }
 
 /* Delete */
-<<<<<<< HEAD
 async function handleDelete(taskId) {
-=======
-
-function handleDelete(taskId) { //YS: Where is your fetch/axios? 
->>>>>>> f85ee9ef3c0f1768ef326cb878700bf303ac00e5
     const taskToDelete = tasks.find(task => task.id === taskId)
     console.dir(taskToDelete);
     const tasksAfterDelete = await deleteTask(taskToDelete.id)

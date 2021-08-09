@@ -24,11 +24,10 @@ app.post("/signUp", (req, res) => {
   const { name, email, password } = req.body;
   const users = localJson();
   const addUser = {
-     id: uuidv4(),
+    id: uuidv4(),
     name: name,
     email: email,
     password: password,
-   
   };
   users.push(addUser);
   fs.writeFileSync("./users.json", JSON.stringify(users));
@@ -53,7 +52,7 @@ app.post("/login", (req, res) => {
           elements.password === password
       );
       res.cookie("cookieName", JSON.stringify(doLogin), {
-        maxAge: 3000000,
+        maxAge: 30000,
         httpOnly: true,
       });
       res.send({ ok: "Hello, thanks for coming back" });
@@ -61,7 +60,7 @@ app.post("/login", (req, res) => {
       throw new Error("No hay PEPE");
     }
   } catch (error) {
-    res.status(500).send({ error: `${e}` });
+    res.status(500).send({ error: `${error}` });
   }
 });
 app.use(express.static("public"));
