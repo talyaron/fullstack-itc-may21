@@ -66,7 +66,6 @@ const handleLogin = async (ev: any): Promise<void> => {
       errorP.innerHTML = dataToHandle;
 
     } else {
-      await postLogin(loginUser);
       ev.target.reset();
       window.location.href = 'user.html';
       }

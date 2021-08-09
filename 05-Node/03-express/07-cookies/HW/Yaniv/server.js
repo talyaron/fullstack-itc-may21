@@ -93,7 +93,6 @@ app.post('/login', (req ,res) => {
         const resToSent = (loginUser.length === 0) ? `Username and password combination doesn't exist. Please register or check again` : loginUser[0];
         
         if (typeof resToSent !== 'string') {
-            console.log('resToSent',resToSent);
             const { username } = resToSent;
             const cookieName = 'loggedInUser';
     
@@ -101,7 +100,7 @@ app.post('/login', (req ,res) => {
             console.log(`${username} is saved in your ${cookieName} cookie`);
             }
 
-        console.log(resToSent);
+        console.log('from json to cookie:',resToSent);
         res.send(resToSent);
     
     } catch (error) {
@@ -116,7 +115,7 @@ app.get('/user', (req ,res) => {
         const { loggedInUser } = req.cookies;
         const Fetcheduser = JSON.parse(loggedInUser);
         
-        console.log(Fetcheduser);
+        console.log('from cookie to DOM:',Fetcheduser);
         res.send(Fetcheduser);
 
     } catch (error) {

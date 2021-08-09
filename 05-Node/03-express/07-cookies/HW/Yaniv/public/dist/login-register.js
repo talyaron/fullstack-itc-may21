@@ -109,7 +109,7 @@ var handleLogin = function (ev) { return __awaiter(_this, void 0, Promise, funct
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 5, , 6]);
+                _a.trys.push([0, 2, , 3]);
                 ev.preventDefault();
                 formElements = ev.target.elements;
                 loginUsername = formElements.loginUsername.value;
@@ -119,24 +119,21 @@ var handleLogin = function (ev) { return __awaiter(_this, void 0, Promise, funct
             case 1:
                 fetchedData = _a.sent();
                 dataToHandle = fetchedData.data;
-                if (!(typeof dataToHandle === "string")) return [3 /*break*/, 2];
-                errorP = document.querySelector('#error');
-                errorP.innerHTML = dataToHandle;
-                return [3 /*break*/, 4];
-            case 2: return [4 /*yield*/, postLogin(loginUser)];
-            case 3:
-                _a.sent();
+                if (typeof dataToHandle === "string") {
+                    errorP = document.querySelector('#error');
+                    errorP.innerHTML = dataToHandle;
+                }
+                else {
+                    ev.target.reset();
+                    window.location.href = 'user.html';
+                }
                 ev.target.reset();
-                window.location.href = 'user.html';
-                _a.label = 4;
-            case 4:
-                ev.target.reset();
-                return [3 /*break*/, 6];
-            case 5:
+                return [3 /*break*/, 3];
+            case 2:
                 error_4 = _a.sent();
                 console.error(error_4);
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
