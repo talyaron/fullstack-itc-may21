@@ -37,15 +37,15 @@ app.post('/signUpUser', function (req, res) {
       allLogin.push(user);
       fs.writeFileSync("./login.json", JSON.stringify(allLogin));
       res.send({
-        ok: "Has creado una cuenta",
+        ok: "User Created",
         user: allLogin
       });
     } else {
-      throw new Error("this is user is foundes");
+      throw new Error("this is user alredady exist");
     }
   } catch (e) {
     res.status(500).send({
-      error: "".concat(e)
+      error: "".concat(e.message)
     });
   }
 });
@@ -82,12 +82,13 @@ app.post('/loginUser', function (req, res) {
 app.get('/getCookie', function (req, res) {
   try {
     var cookieName = req.cookies.cookieName;
+    if (!cookieName) throw new Error("Nothing is on the cookie");
     var cookie = JSON.parse(cookieName);
     console.log(cookie);
     res.send(cookie);
   } catch (e) {
     res.status(500).send({
-      error: "".concat(e)
+      error: "".concat(e.message)
     });
   }
 });

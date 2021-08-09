@@ -43,21 +43,3 @@ async function getCookies(ev) {
     const root = document.querySelector('#root')
 
 }
-
-
-
-// async function getCookies(ev) {
-
-//     ev.preventDefault()
-
-//     const response = await axios.get('/getCookie')
-//     const data = response.data
-//     console.log(data)
-
-//     const root = document.querySelector('#root')
-//     root.innerHTML = `<div>
-//                         <p>Hello ${data.username}, welcome to our bank. Have a nice day</p>
-//                         <span>Balance ${data.balance}</span>
-//                         </div>`
-
-// }
