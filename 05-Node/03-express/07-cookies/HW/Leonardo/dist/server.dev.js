@@ -13,9 +13,8 @@ var cookieParser = require('cookie-parser'); //Uuidv4 is to generate a new ID
 
 
 var _require = require('uuid'),
-    uuidv4 = _require.v4;
+    uuidv4 = _require.v4; //Joi is to validate the data I enter:
 
-uuidv4(); //Joi is to validate the data I enter:
 
 var Joi = require("joi");
 
@@ -28,7 +27,7 @@ function readJsonAllUsers() {
     var usersList = fs.readFileSync("./allUsers.json");
     return JSON.parse(usersList);
   } catch (error) {
-    console.error(error);
+    res.status(500).send(error.message);
   }
 
   ;
@@ -41,13 +40,8 @@ app.post('/createUser', function (req, res) {
     var body = req.body;
     var schema = Joi.object({
       nameUser: Joi.string().max(30).required(),
-      email: Joi.string().email({
-        minDomainSegments: 2,
-        tlds: {
-          allow: ['com', 'net']
-        }
-      }).required(),
-      password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required()
+      email: Joi.string().required(),
+      password: Joi.string().required()
     });
 
     var _schema$validate = schema.validate({
@@ -55,10 +49,10 @@ app.post('/createUser', function (req, res) {
       email: body.email,
       password: body.password
     }),
-        _error = _schema$validate.error,
+        error = _schema$validate.error,
         value = _schema$validate.value;
 
-    if (!_error) {
+    if (!error) {
       var user = {
         id: uuidv4(),
         dateCreated: Date.now(),
@@ -74,11 +68,11 @@ app.post('/createUser', function (req, res) {
         users: allUsers
       });
     } else {
-      var msg = _error.details[0].message;
+      var msg = error.details[0].message;
       res.status(400).send(msg);
     }
   } catch (error) {
-    console.error(error);
+    res.status(500).send(error.message);
   }
 
   ;
@@ -113,8 +107,8 @@ app.post('/login', function (req, res) {
         userInfo: null
       });
     }
-  } catch (e) {
-    res.status(400).send(error);
+  } catch (error) {
+    res.status(500).send(error.message);
   }
 });
 app.get('/userInfo', function (req, res) {
@@ -126,7 +120,7 @@ app.get('/userInfo', function (req, res) {
       cookie: cookie
     });
   } catch (error) {
-    console.error(error);
+    res.status(500).send(error.message);
   }
 }); //This function is to listen to the port
 
@@ -134,6 +128,6 @@ app.listen(port, function () {
   try {
     console.log("The server is running at port: ".concat(port));
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send(error.message);
   }
 });
