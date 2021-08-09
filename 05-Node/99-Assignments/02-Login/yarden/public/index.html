@@ -12,12 +12,12 @@
 </head>
 <body>
     <h1>Login page</h1>
-    <form class="login-form">
+    <form class="login-form" onsubmit="handleSubmit(event)">
         <label for="name"></label>
         <input type="text" name="name" id="name">
         <label for="email"></label>
         <input type="email" name="email" id="email">
-        <button type="submit">Login</button>
+        <button type="submit" id="submit-btn" onclick="goToSite(event)">Login</button>
     </form>
 
     <script src="./dist/app.js"></script>

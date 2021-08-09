@@ -3,7 +3,6 @@ This is the back-end file
 */
 
 const express = require('express')
-const Ajv = require("ajv")
 const cookieParser = require('cookie-parser')
 
 const port = process.env.PORT || 3000
@@ -12,9 +11,10 @@ const app = express()
 app.use(express.json())
 app.use(express.static('public'));
 app.use(cookieParser())
-const ajv = new Ajv()
 
-
+app.post('/api/uddUser', (res, req) => {
+    
+})
 
 
 // Listen on port:
