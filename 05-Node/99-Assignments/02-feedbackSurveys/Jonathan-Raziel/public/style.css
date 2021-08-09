@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.home {
+  background-color: lightgrey;
+}
+.home .container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.home .container__btn {
+  padding: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: black;
+  color: whitesmoke;
+}
+.home .container__btn:hover {
+  opacity: 0.7;
+}
+.home .container__login {
+  margin-right: 2em;
+}
+
+.login {
+  background-color: lightgrey;
+}
+.login .container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.login .container__form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.login .container__form label, .login .container__form input {
+  margin-top: 1em;
+}
+.login .container__form--loginbtn {
+  background-color: black;
+  color: white;
+  padding: 1em;
+  cursor: pointer;
+}
+
+.register {
+  background-color: lightgrey;
+}
+.register .container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.register .container__form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.register .container__form label, .register .container__form input {
+  margin-top: 1em;
+}
+.register .container__form--registerbtn {
+  background-color: black;
+  color: white;
+  padding: 1em;
+  cursor: pointer;
+}
