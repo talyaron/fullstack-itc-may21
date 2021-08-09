@@ -108,7 +108,6 @@ app.post('/login', function (req, res) {
     var resToSent = loginUser.length === 0 ? "Username and password combination doesn't exist. Please register or check again" : loginUser[0];
 
     if (typeof resToSent !== 'string') {
-      console.log('resToSent', resToSent);
       var username = resToSent.username;
       var cookieName = 'loggedInUser';
       res.cookie(cookieName, JSON.stringify(resToSent), {
@@ -118,7 +117,7 @@ app.post('/login', function (req, res) {
       console.log("".concat(username, " is saved in your ").concat(cookieName, " cookie"));
     }
 
-    console.log(resToSent);
+    console.log('from json to cookie:', resToSent);
     res.send(resToSent);
   } catch (error) {
     console.error(error);
@@ -131,7 +130,7 @@ app.get('/user', function (req, res) {
   try {
     var loggedInUser = req.cookies.loggedInUser;
     var Fetcheduser = JSON.parse(loggedInUser);
-    console.log(Fetcheduser);
+    console.log('from cookie to DOM:', Fetcheduser);
     res.send(Fetcheduser);
   } catch (error) {
     console.error(error);
