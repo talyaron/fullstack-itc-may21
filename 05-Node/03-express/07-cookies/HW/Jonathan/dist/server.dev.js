@@ -1,5 +1,11 @@
 "use strict";
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var express = require("express");
 
 var app = express();
@@ -24,7 +30,11 @@ app.post('/signUpUser', function (req, res) {
     });
 
     if (!isFound) {
-      allLogin.push(req.body);
+      var user = _objectSpread({}, req.body, {
+        balance: parseFloat((Math.random() < 0.5 ? -1 * Math.random() : 1 * Math.random()) * 1000 + 200).toFixed(2)
+      });
+
+      allLogin.push(user);
       fs.writeFileSync("./login.json", JSON.stringify(allLogin));
       res.send({
         ok: "Has creado una cuenta",
@@ -54,26 +64,32 @@ app.post('/loginUser', function (req, res) {
         return elem.email === email && elem.password === password;
       });
       res.cookie('cookieName', JSON.stringify(userLogin), {
-        maxAge: 30000000,
+        maxAge: 3000,
         httpOnly: true
       });
       res.send({
-        ok: 'Bienvendio a Bank Jonathan'
+        ok: 'Welcome to Bank Jonathan'
       });
     } else {
       throw new Error("Is incorrect your email or password. Try Again");
     }
   } catch (e) {
     res.status(500).send({
-      error: "".concat(e)
+      error: "".concat(e.message)
     });
   }
 });
 app.get('/getCookie', function (req, res) {
-  var cookieName = req.cookies.cookieName;
-  var cookie = JSON.parse(cookieName);
-  var username = cookie.username;
-  res.send(username);
+  try {
+    var cookieName = req.cookies.cookieName;
+    var cookie = JSON.parse(cookieName);
+    console.log(cookie);
+    res.send(cookie);
+  } catch (e) {
+    res.status(500).send({
+      error: "".concat(e)
+    });
+  }
 });
 app.use(express["static"]('public'));
 app.listen(3000, function () {

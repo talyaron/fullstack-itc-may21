@@ -12,22 +12,32 @@ app.use(express.static('public'));
 
 const model = require("./models/users");
 
-const readUser = () => {
-    const allLogin = fs.readFileSync("./user.json");
-    return JSON.parse(readUser);
+ const readAllUsers = () => {
+     const allUsers = fs.readFileSync("./user.json");
+     return JSON.parse(allUsers);
 }
 
+//const userList = new model.UserList();
+
 app.post('/usersRegister', (req, res) => {
-
+    try {
     //const user1 = new model.User("pepe", 'a@a.com','a1a23',[]);
-    const user = new model.User(req.body.username, req.body.email, req.body.password, [])
-    const userList = new model.UserList()
-    userList.add(user);
-    //fs.writeFileSync("./user.json", JSON.stringify(userList));
-    console.log(userList);
-    res.send({ok:"true"});
-})
+    const allUsers = readAllUsers();
+    const isFound = allUsers.some(elem => (elem.email === req.body.email) || elem.username === req.body.username)
+    if (!isFound) {
+        const user = new model(req.body.username, req.body.email, req.body.password, [])
+        allUsers.push(user)
+        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+        res.send({ok:"User Created", allUsers: allUsers});
+    } else {
+        throw new Error("this is user is on the list")
 
+    }
+    
+    }catch(e) {
+        res.status(500).send({ error: `${e}` });
+    }
+})
 
 
 
