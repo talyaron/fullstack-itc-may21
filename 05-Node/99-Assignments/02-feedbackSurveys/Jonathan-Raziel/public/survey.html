@@ -34,26 +34,27 @@
         //addEventListener
         btnAddQuestion.addEventListener('click', addQuestion)
 
-        //Raziel, for this maybe we can create route to create an uuuid for each question or here because if we need to edit or delete, we need an id
 
         function addQuestion(ev) {
             ev.preventDefault()
+           
             const rootQuestion = document.querySelector('.main')
             let html = ''
             html += `
                     <div class="boxquestion">
                             <div class="boxquestion__question1">
                                 <label for="question1">
-                                    <input type="text" name="quesiton" class="boxquestion__question1--title" size="53" >
+                                    <input type="text" name="quesiton" class="boxquestion__question1--title" size="53" onclick='deleteQuestion("${Math.random().toString(16).slice(2)}")' >
                                 </label>
                             </div>
                             <i class="fas fa-user-edit boxquestion--edit"></i>
                             <i class="fas fa-trash boxquestion--trash"></i> 
                     </div>`
 
-
+            
             rootQuestion.insertAdjacentHTML("afterend", html)
-          
+        
+
             const btnCreate = document.querySelector('.btncreate');
             btnCreate.disabled = false;
             btnCreate.style.cursor = 'pointer';

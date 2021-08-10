@@ -1,16 +1,16 @@
 export { };
 
-interface Question {
+export interface Question {
     title: string;
     questionId: string;
     voters: Array<Voter>;
 }
-interface Voter {
+export interface Voter {
     voterID: string;
     score: number;
 }
 
-class Survey {
+export class Survey {
     title: string;
     admin: string;
     question: Array<Question>;
