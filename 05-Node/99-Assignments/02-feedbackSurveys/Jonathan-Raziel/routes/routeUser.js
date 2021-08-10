@@ -1,6 +1,11 @@
+"use strict";
+exports.__esModule = true;
 var express = require('express');
 var router = express.Router();
-router.get('/', function (req, res) {
-    //
-});
+var controllersUsers_1 = require("../controllers/controllersUsers");
+var controllersUsers_2 = require("../controllers/controllersUsers");
+var controllersUsers_3 = require("../controllers/controllersUsers");
+router.post('/usersRegister', controllersUsers_1.usersRegister);
+router.post('/userLogin', controllersUsers_2.loginUser);
+router.get('/getCookie', controllersUsers_3.getCookie);
 module.exports = router;

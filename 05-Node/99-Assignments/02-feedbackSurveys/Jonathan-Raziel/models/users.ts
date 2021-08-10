@@ -1,6 +1,6 @@
 export { };
 
-class User {
+export class User {
     username: string;
     email: string;
     password: string;
@@ -36,4 +36,4 @@ class User {
 //     UserList: UserList,
 // };
 
-module.exports = User;
+//module.exports = User;
