@@ -3,10 +3,11 @@ export {}
 // const express = require("express");
 // const app = express();
 const fs = require("fs");
+const { uuid } = require('uuidv4')
 //const cookieParser = require('cookie-parser');
 
 import {User} from '../models/users'
-
+import {Question} from '../models/survey'
 
 
 const readAllUsers = () => {
@@ -62,11 +63,9 @@ export function usersRegister(req, res) {
         const { cookieName } = req.cookies
         if(!cookieName) throw new Error("Nothing is on the cookie")
         const cookie = JSON.parse(cookieName)
-        console.log(cookie)
         res.send(cookie);
     } catch (e) {
         res.status(500).send({ error: `${e.message}` });
     }
 };
 
- 

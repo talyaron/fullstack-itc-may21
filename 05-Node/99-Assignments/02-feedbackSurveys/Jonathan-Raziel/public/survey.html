@@ -18,22 +18,14 @@
     <div class="container__title">
         <label>Title</label>
         <textarea name="title" id="title" rows="2" cols="50" class="container__title--title"></textarea>
-        <label>Description</label>
-        <textarea name="description" id="description" rows="1" cols="50"></textarea>
+
     </div>
     <main class="main">
-        <div class="boxquestion">
-            <i class="fas fa-plus-circle boxquestion--circle"></i>
-            <div class="boxquestion__question1">
-                <label for="question1">
-                    <input type="text" name="quesiton1" id="question1" class="boxquestion__question1--title" size="53">
-                </label>
-            </div>
-
-            <i class="fas fa-user-edit boxquestion--edit"></i>
-            <i class="fas fa-trash boxquestion--trash"></i>
-        </div>
+        <i class="fas fa-plus-circle boxquestion--circle"></i>
     </main>
+    <div class="creater">
+        <button type="button" class="btncreate" disabled>CREATE</button>
+    </div>
     <script>
 
         //btn
@@ -42,24 +34,35 @@
         //addEventListener
         btnAddQuestion.addEventListener('click', addQuestion)
 
+
         function addQuestion(ev) {
             ev.preventDefault()
-            let count = 0
+           
+            //for now ill leave the code.  (9:20 lol)
+            //I think this way is better to have an unique id but if you wanna create a unique id and send for the server to the client and get it with axios or fetch, its ok
+            //the important is the exercise works
+
             const rootQuestion = document.querySelector('.main')
             let html = ''
             html += `
                     <div class="boxquestion">
-                        <i class="fas fa-plus-circle boxquestion--circle"></i>
                             <div class="boxquestion__question1">
                                 <label for="question1">
-                                    <input type="text" name="quesiton1" id="question1" class="boxquestion__question1--title" size="53">
+                                    <input type="text" name="quesiton" class="boxquestion__question1--title" size="53"  >
                                 </label>
                             </div>
-                            <i class="fas fa-user-edit boxquestion--edit"></i>
-                            <i class="fas fa-trash boxquestion--trash"></i> 
+                            <i class="fas fa-user-edit boxquestion--edit" onclick='deleteQuestion("${Math.random().toString(16).slice(2)}")'></i>
+                            <i class="fas fa-trash boxquestion--trash" onclick='deleteQuestion("${Math.random().toString(16).slice(2)}")'></i> 
                     </div>`
-      
-          rootQuestion.insertAdjacentHTML("afterbegin",html)
+
+            
+            rootQuestion.insertAdjacentHTML("afterend", html)
+        
+
+            const btnCreate = document.querySelector('.btncreate');
+            btnCreate.disabled = false;
+            btnCreate.style.cursor = 'pointer';
+            
         }
 
         async function getCookies(ev) {
