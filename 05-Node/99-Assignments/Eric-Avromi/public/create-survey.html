@@ -61,11 +61,11 @@
             </form>
           </div>
           <div class="card-footer text-end">
-            <button type="submit" class="btn btn-primary">Add new question</button>
+            <button type="submit" class="btn btn-success">Add new question</button>
             <button type="submit" class="btn btn-danger">Delete question</button>
             <button type="submit" class="btn btn-primary">Edit question</button>
-            <button type="submit" class="btn btn-danger">Back survey admin</button>
-            <button type="submit" class="btn btn-primary">Finish and share</button>
+            <button type="submit" class="btn btn-warning">Back survey admin</button>
+            <button type="submit" class="btn btn-link">Share</button>
 
             <!--when we press add new question, we need to render this form below of the previous question-->
             <!--when we press edit question, we need to can change the question but not the rating, only question sentence-->
@@ -82,8 +82,24 @@
 
       <script>
         const btnAddQuestion = document.querySelector('btn btn-primary')
+        
+        const btnDeleteQuestion = document.querySelector('.btn btn-danger')
+
+        const btneditQuestion = document.querySelector('.btn btn-primary')
+
+        const btnBackToSurveyAdmin = document.querySelector('.btn btn-warning')
+
+        const link = document.querySelector('.btn btn-link')
+
 
         btnAddQuestion.addEventListener('click', renderNewQuestion)
+        btnDeleteQuestion.addEventListener('click', deleteQuestion)
+        btneditQuestion.addEventListener('click', editQuestion)
+        btnBackToSurveyAdmin.addEventListener('click', backToSurveyAdmin)
+        link.addEventListener('click', sendSurvey)
+
+
+
 
         function renderNewQuestion(questions){
           const root = document.querySelector('.root')
@@ -137,13 +153,11 @@
         }
 
 
-        const btnDeleteQuestion = document.querySelector('.btn btn-danger')
-
-        const editQuestion = document.querySelector('.btn btn-primary')
+     
 
 
-        btnDeleteQuestion.addEventListener('click', deleteQuestion)
-        editQuestion.addEventListener('click', editQuestion)
+
+        
 
         
         function deleteQuestion(){
@@ -156,8 +170,14 @@
             console.log('hi');
         }
 
+        function sendSurvey(){
+          
+          console.log('hi');
+        }
 
-
+        function backToSurveyAdmin(){
+          console.log('hi');
+        }
 
 
 
