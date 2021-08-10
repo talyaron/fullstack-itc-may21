@@ -130,40 +130,57 @@
         justify-content: space-around;
     }
 
-    .container__title{
+    .container__title {
         margin-top: 1em;
         display: flex;
         align-items: center;
         flex-direction: column;
-        justify-content:center;
+        justify-content: center;
 
-        &--title{
+        &--title {
             margin-bottom: 1em;
         }
     }
 
-    .boxquestion{
+    .boxquestion {
         margin-top: 2.5em;
         display: flex;
         align-items: center;
-        justify-content:center;
+        justify-content: center;
 
-        &--circle{
+        &--circle {
             margin-right: 1em;
             display: flex;
-            justify-content:center;
+            justify-content: center;
             align-items: center;
-            font-size:1.5em;
+            font-size: 1.5em;
+            cursor: pointer;
         }
 
-        &--edit{
+        &--edit {
             margin-left: 0.5em;
         }
 
-        &--trash{
+        &--trash {
             margin-left: 0.5em;
         }
 
     }
-}
 
+    .creater {
+        display: flex;
+        justify-content: center;
+        margin-top: 1em;
+        position: relative;
+        left:-1%;
+        .btncreate {
+            background-color: black;
+            color: white;
+            padding: 0.7em;
+            cursor: not-allowed;
+        }
+        .btncreate:hover {
+            opacity: 0.7;
+        }
+    }
+}
