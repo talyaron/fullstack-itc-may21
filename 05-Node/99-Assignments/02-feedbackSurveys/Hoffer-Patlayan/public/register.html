@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <form class="container form">
+    <form onsubmit="handleSubmit(event)" class="container form">
         <fieldset>
           <legend>SignUp</legend>
           <label>User Name</label>
           <div class="form__user">
-            <input type="text"name="user"  placeholder="Put your User Name"/>
+            <input type="text"name="name"  placeholder="Put your User Name"/>
             
           </div>
           <label>E-Mail</label>
@@ -36,5 +36,11 @@
        
        
       </form>
+
+
+    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+   
+      <script src="./app.js"></script>
 </body>
 </html>
