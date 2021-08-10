@@ -1,11 +1,23 @@
-export { };
+const userModel = require('../models/users');
+const fs = require("fs");
 
-import { users } from '../models/users';
+const readJson = () => {
+    try {
+        const users = fs.readFileSync('./users.json');
+        return JSON.parse(users);
 
-export function allUsers (req, res) {
-    res.send(users);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+function newUser(req, res) {
+    console.log(req);
+    const user = new userModel(req.body.username, req.body.email, req.body.password)
+    const allUsers = readJson();
+    allUsers.push(user)
+    fs.writeFileSync("./users.json", JSON.stringify(allUsers));
+    res.send({ message: 'A new User was added', users: allUsers });
 }
 
-/* export function firstBeach (req, res) {
-    res.send(beaches[0]);
-}; */
+exports.newUser = newUser

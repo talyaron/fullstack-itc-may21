@@ -1,21 +1,13 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.users = void 0;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var fs = require('fs');
+var User = function User(username, email, password) {
+  _classCallCheck(this, User);
 
-var readJson = function readJson() {
-  try {
-    var _users = fs.readFileSync('../users.json');
-
-    return JSON.parse(_users);
-  } catch (error) {
-    console.error(error);
-  }
+  this.username = username;
+  this.email = email;
+  this.password = password;
 };
 
-var users = readJson();
-exports.users = users;
+module.exports = User;

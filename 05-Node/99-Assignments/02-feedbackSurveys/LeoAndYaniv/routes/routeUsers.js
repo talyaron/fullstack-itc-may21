@@ -1,9 +1,8 @@
-export {};
 const express = require('express')
 const router = express.Router();
 
-import { allUsers } from '../controlers/controlerUsers';
+const controllers = require('../controlers/controlerUsers');
 
-router.get('/all',allUsers)
+router.post('/user', controllers.newUser)
 
-module.exports = router
+module.exports = router;

@@ -1,7 +1,7 @@
 "use strict";
 
 //Handle the form to create a new user:
-var handleFormCreate = document.querySelector("#form");
+var handleFormCreate = document.querySelector("#createForm");
 handleFormCreate.addEventListener('submit', doingSubmitCreate);
 
 function doingSubmitCreate(ev) {
@@ -26,15 +26,15 @@ function doingSubmitCreate(ev) {
           throw new Error("Please complete all the fields");
 
         case 8:
-          ev.target.reset();
-          _context.next = 11;
-          return regeneratorRuntime.awrap(axios.post('/register', {
+          _context.next = 10;
+          return regeneratorRuntime.awrap(axios.post('/register/user', {
             username: username,
             email: email,
             password: password
           }));
 
-        case 11:
+        case 10:
+          ev.target.reset();
           _context.next = 16;
           break;
 

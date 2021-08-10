@@ -1,14 +1,9 @@
-export {};
-const fs = require('fs');
-
-const readJson = () => {
-    try {
-        const users = fs.readFileSync('../users.json');
-        return JSON.parse(users);
-
-    } catch (error) {
-        console.error(error);
+class User {
+    constructor(username, email, password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 }
 
-export const users = readJson();
+module.exports = User;
