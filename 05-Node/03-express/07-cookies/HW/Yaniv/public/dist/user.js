@@ -1,4 +1,3 @@
-// This is the client side main TS file
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,27 +34,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-// Send input to server:
-function handleSubmit(ev) {
+function getUser() {
     return __awaiter(this, void 0, void 0, function () {
-        var name, email, user;
+        var loggedInUser, username, h1Element, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    ev.preventDefault();
-                    name = ev.target.elements.name.value;
-                    email = ev.target.elements.email.value;
-                    return [4 /*yield*/, axios.post('/uddUser', {
-                            name: name,
-                            email: email
-                        })];
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.get("/user")];
                 case 1:
-                    user = _a.sent();
-                    console.log(user);
-                    ev.target.reset();
-                    window.location.href = '/page2.html';
-                    return [2 /*return*/];
+                    loggedInUser = _a.sent();
+                    username = loggedInUser.data.username;
+                    h1Element = document.querySelector('#hello');
+                    h1Element.insertAdjacentHTML('beforeend', username);
+                    return [2 /*return*/, username];
+                case 2:
+                    error_1 = _a.sent();
+                    console.error(error_1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
+getUser();
