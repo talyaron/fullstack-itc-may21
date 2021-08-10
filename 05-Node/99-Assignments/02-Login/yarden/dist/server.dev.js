@@ -1,14 +1,11 @@
 "use strict";
 
-function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
-
 /* 
     This is a simple login 2 + page site exercise
             This is the back-end file.
 */
+// Require expressions and constants for this project:
 var express = require('express');
-
-var Ajv = require('ajv');
 
 var cookieParser = require('cookie-parser');
 
@@ -17,32 +14,37 @@ var app = express();
 app.use(express.json());
 app.use(express["static"]('public'));
 app.use(cookieParser());
-var ajv = new Ajv();
-var user = ''; // Create user on server:
+var users = []; // POST to create user on server:
 
-app.post('/uddUser', function (res, req) {
-  // Validation with ajv:
-  var schema = {
-    type: "object",
-    properties: {
-      name: {
-        type: "string"
-      },
-      email: {
-        type: "string"
-      }
-    },
-    required: ["name", "email"],
-    additionalProperties: false
+app.post('/addUser', function (req, res) {
+  var user = {
+    name: req.body.name,
+    email: req.body.email
   };
-  var validate = ajv.compile(schema);
-  console.log(schema);
-  console.log(req.body);
-  var body = req.body;
-  console.log(body);
-  var valid = validate(body);
-  if (!valid) console.log(validate.errors);
-  user = (_readOnlyError("user"), JSON.stringify("Name: ".concat(body.name, ", Email: ").concat(body.email)));
+  users.push(user);
+  var user1 = JSON.stringify({
+    user: user
+  });
+  res.cookie('userDetails', {
+    user1: user1
+  }, {
+    maxAge: 3000000,
+    httpOnly: true
+  });
+  res.status(201).send({
+    ok: true
+  });
+});
+app.get('/user', function (req, res) {
+  var user1 = req.cookies.userDetails.user1;
+  var cookie = JSON.parse(user1);
+  var _cookie$user = cookie.user,
+      name = _cookie$user.name,
+      email = _cookie$user.email;
+  res.send({
+    name: name,
+    email: email
+  });
 }); // Listen on port:
 
 app.listen(port, function () {

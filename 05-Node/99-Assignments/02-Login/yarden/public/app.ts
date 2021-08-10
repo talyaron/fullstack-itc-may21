@@ -1,4 +1,4 @@
-// This is the client side main TS file
+// This is the client side file.
 
 // Send input to server:
 async function handleSubmit(ev) {
@@ -6,7 +6,7 @@ async function handleSubmit(ev) {
         const name = ev.target.elements.name.value
         const email = ev.target.elements.email.value   
         
-        const user = await axios.post('/uddUser', {
+        const user = await axios.post('/addUser', {
             name: name,
             email: email
         })
@@ -16,3 +16,10 @@ async function handleSubmit(ev) {
         window.location.href = '/page2.html'
 }
 
+// Display user details on site pages:
+async function getUser() {
+    const userDetails = await axios.get('/user')
+    const name = userDetails.data.name
+    const email = userDetails.data.email
+    alert(`Hi, ${name}. Email registered: "${email}". Thanks for registering!`)
+}
