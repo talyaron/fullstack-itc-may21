@@ -1,15 +1,28 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.allUsers = allUsers;
+var userModel = require('../models/users');
 
-var _users = require("../models/users");
+var fs = require("fs");
 
-function allUsers(req, res) {
-  res.send(_users.users);
+var readJson = function readJson() {
+  try {
+    var users = fs.readFileSync('./users.json');
+    return JSON.parse(users);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+function newUser(req, res) {
+  console.log(req);
+  var user = new userModel(req.body.username, req.body.email, req.body.password);
+  var allUsers = readJson();
+  allUsers.push(user);
+  fs.writeFileSync("./users.json", JSON.stringify(allUsers));
+  res.send({
+    message: 'A new User was added',
+    users: allUsers
+  });
 }
-/* export function firstBeach (req, res) {
-    res.send(beaches[0]);
-}; */
+
+exports.newUser = newUser;

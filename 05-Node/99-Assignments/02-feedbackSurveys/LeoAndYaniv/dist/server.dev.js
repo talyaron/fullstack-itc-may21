@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-app = express();
+var app = express();
 var port = process.env.PORT || 3000;
 
 var cookieParser = require('cookie-parser');
@@ -13,7 +13,7 @@ app.use(cookieParser()); //Route
 
 var registerRoute = require('./routes/routeUsers');
 
-app.use('/routeUsers', registerRoute);
+app.use('/register', registerRoute);
 app.listen(port, function () {
   console.log("Listening on port: ".concat(port));
 });

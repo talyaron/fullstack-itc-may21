@@ -4,7 +4,7 @@ var express = require('express');
 
 var router = express.Router();
 
-var controllers = require('../controlers/controlerUsers');
+var _require = require('./models/userModels.js'),
+    addUsers = _require.addUsers;
 
-router.post('/user', controllers.newUser);
 module.exports = router;
