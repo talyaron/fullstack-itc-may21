@@ -18,8 +18,7 @@
     <div class="container__title">
         <label>Title</label>
         <textarea name="title" id="title" rows="2" cols="50" class="container__title--title"></textarea>
-        <label>Description</label>
-        <textarea name="description" id="description" rows="1" cols="50"></textarea>
+       
     </div>
     <main class="main">
         <div class="boxquestion">
@@ -34,6 +33,7 @@
             <i class="fas fa-trash boxquestion--trash"></i>
         </div>
     </main>
+    <button type="button">Sumbit</button>
     <script>
 
         //btn
@@ -44,8 +44,8 @@
 
         function addQuestion(ev) {
             ev.preventDefault()
-            let count = 0
             const rootQuestion = document.querySelector('.main')
+           // console.log(rootQuestion.children[-1])
             let html = ''
             html += `
                     <div class="boxquestion">
@@ -58,7 +58,8 @@
                             <i class="fas fa-user-edit boxquestion--edit"></i>
                             <i class="fas fa-trash boxquestion--trash"></i> 
                     </div>`
-      
+         
+        
           rootQuestion.insertAdjacentHTML("afterbegin",html)
         }
 

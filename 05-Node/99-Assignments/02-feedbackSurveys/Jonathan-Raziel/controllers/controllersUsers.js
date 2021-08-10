@@ -56,7 +56,6 @@ function getCookie(req, res) {
         if (!cookieName)
             throw new Error("Nothing is on the cookie");
         var cookie = JSON.parse(cookieName);
-        console.log(cookie);
         res.send(cookie);
     }
     catch (e) {

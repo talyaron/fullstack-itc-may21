@@ -62,7 +62,6 @@ export function usersRegister(req, res) {
         const { cookieName } = req.cookies
         if(!cookieName) throw new Error("Nothing is on the cookie")
         const cookie = JSON.parse(cookieName)
-        console.log(cookie)
         res.send(cookie);
     } catch (e) {
         res.status(500).send({ error: `${e.message}` });
