@@ -2,7 +2,7 @@ export { };
 const express = require('express');
 const router = express.Router();
 
-import {getUsers} from '../controllers/dist/userControllers'
+import {getUsers} from '../controllers/userControllers';
 
 router.get('/getUsers', getUsers)
 
