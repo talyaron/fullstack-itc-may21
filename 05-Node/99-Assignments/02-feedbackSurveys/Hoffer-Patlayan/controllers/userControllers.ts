@@ -6,7 +6,7 @@ const localJson = () => {
     return JSON.parse(fileJson);
   };
 
-export function getUsers(req, res) {
+export function getUsers(req: any, res: any) {
     const { cookieName } = req.cookies;
     const cookie = JSON.parse(cookieName);
     const { name } = cookie;

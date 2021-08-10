@@ -19,4 +19,4 @@ app.use('/signUp', signUpRoute);
 app.use('/logIn', logInRoute);
 
 
-app.listen(3500, ()=>{console.log('listen on 1200')})
+app.listen(3500, ()=>{console.log('listen on 3500')})
