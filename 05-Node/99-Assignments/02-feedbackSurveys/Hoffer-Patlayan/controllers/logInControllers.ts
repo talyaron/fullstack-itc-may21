@@ -6,19 +6,19 @@ const localJson = () => {
     return JSON.parse(fileJson);
   };
 
-export function logInUser(req, res) {
+export function logInUser(req: any, res: any) {
     try {
         const { name, email, password } = req.body;
         const users = localJson();
         const correctUser = users.some(
-          (elements) =>
+          (elements: any) =>
             elements.name === name &&
             elements.email === email &&
             elements.password === password
         );
         if (correctUser) {
           const doLogin = users.find(
-            (elements) =>
+            (elements: any) =>
               elements.name === name &&
               elements.email === email &&
               elements.password === password
