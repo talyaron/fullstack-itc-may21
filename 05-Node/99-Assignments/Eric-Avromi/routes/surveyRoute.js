@@ -26,8 +26,6 @@ const router = express.Router()
 
 
 
-
-
 router.get('/', (req, res) => {
     try {
         const allSurveys = getAllSurveys()
