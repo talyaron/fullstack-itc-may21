@@ -64,6 +64,8 @@
             <button type="submit" class="btn btn-primary">Add new question</button>
             <button type="submit" class="btn btn-danger">Delete question</button>
             <button type="submit" class="btn btn-primary">Edit question</button>
+            <button type="submit" class="btn btn-danger">Back survey admin</button>
+            <button type="submit" class="btn btn-primary">Finish and share</button>
 
             <!--when we press add new question, we need to render this form below of the previous question-->
             <!--when we press edit question, we need to can change the question but not the rating, only question sentence-->
@@ -128,20 +130,31 @@
             
           });
           root.innerHTML = html
+          //when you are like a admin, is not important to see the options becuase never change,  so we can delete and render only question title
+          //how we can render editable question? with a modal to edit and then render?
+
 
         }
 
 
         const btnDeleteQuestion = document.querySelector('.btn btn-danger')
 
+        const editQuestion = document.querySelector('.btn btn-primary')
+
+
         btnDeleteQuestion.addEventListener('click', deleteQuestion)
+        editQuestion.addEventListener('click', editQuestion)
+
         
         function deleteQuestion(){
             
             console.log('hi');
         }
 
-
+        function editQuestion(){
+            
+            console.log('hi');
+        }
 
 
 
