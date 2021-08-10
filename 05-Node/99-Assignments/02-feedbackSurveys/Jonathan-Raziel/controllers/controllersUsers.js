@@ -1,10 +1,10 @@
 "use strict";
 exports.__esModule = true;
 exports.getCookie = exports.loginUser = exports.usersRegister = void 0;
-var express = require("express");
-var app = express();
+// const express = require("express");
+// const app = express();
 var fs = require("fs");
-var cookieParser = require('cookie-parser');
+//const cookieParser = require('cookie-parser');
 var users_1 = require("../models/users");
 var readAllUsers = function () {
     var allUsers = fs.readFileSync("./user.json");
