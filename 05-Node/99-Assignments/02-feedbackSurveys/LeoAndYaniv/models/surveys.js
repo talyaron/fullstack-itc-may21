@@ -12,6 +12,7 @@ var Rating = /** @class */ (function () {
 exports.Rating = Rating;
 var Question = /** @class */ (function () {
     function Question(content) {
+        this.uuid = uuidv4();
         this.content = content;
         this.ratings = []; //when user raiting update
     }
@@ -19,7 +20,7 @@ var Question = /** @class */ (function () {
 }());
 exports.Question = Question;
 var Survey = /** @class */ (function () {
-    function Survey(admin, questions) {
+    function Survey(admin) {
         this.uuid = uuidv4();
         this.admin = admin;
         this.questions = []; //when the user push add here

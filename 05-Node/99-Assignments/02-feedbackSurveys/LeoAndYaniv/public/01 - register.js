@@ -15,9 +15,8 @@ async function doingSubmitCreate(ev) {
         ev.target.reset();
         const userInfo = { username, email, password }
         const userCreated = await axios.post('/register/create', userInfo);
-
         if (userCreated.data.user != null) {
-            location.href = "03- surveys.html";
+            location.href = `03- surveys.html?email=${userCreated.data.user.email}`;
         } else {
             errorMessage.innerHTML = userCreated.data.message;
         }
