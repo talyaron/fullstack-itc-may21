@@ -1,4 +1,4 @@
-// This is the client side main TS file
+// This is the client side file.
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -45,7 +45,7 @@ function handleSubmit(ev) {
                     ev.preventDefault();
                     name = ev.target.elements.name.value;
                     email = ev.target.elements.email.value;
-                    return [4 /*yield*/, axios.post('/uddUser', {
+                    return [4 /*yield*/, axios.post('/addUser', {
                             name: name,
                             email: email
                         })];
@@ -54,6 +54,23 @@ function handleSubmit(ev) {
                     console.log(user);
                     ev.target.reset();
                     window.location.href = '/page2.html';
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+// Display user details on site pages:
+function getUser() {
+    return __awaiter(this, void 0, void 0, function () {
+        var userDetails, name, email;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, axios.get('/user')];
+                case 1:
+                    userDetails = _a.sent();
+                    name = userDetails.data.name;
+                    email = userDetails.data.email;
+                    alert("Hi, " + name + ". Email registered: \"" + email + "\". Thanks for registering!");
                     return [2 /*return*/];
             }
         });
