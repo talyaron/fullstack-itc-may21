@@ -1,23 +1,43 @@
-const userModel = require('../models/users');
-const fs = require("fs");
-
-const readJson = () => {
+"use strict";
+exports.__esModule = true;
+exports.login = exports.newUser = exports.readJson = void 0;
+var users_1 = require("../models/users");
+var fs = require("fs");
+//Function to read the JSON of created users
+exports.readJson = function () {
     try {
-        const users = fs.readFileSync('./users.json');
+        var users = fs.readFileSync("./users.json");
         return JSON.parse(users);
-
-    } catch (error) {
+    }
+    catch (error) {
         console.error(error);
     }
 };
-
+//Function to add a new user into the JSON
 function newUser(req, res) {
-    console.log(req);
-    const user = new userModel(req.body.username, req.body.email, req.body.password)
-    const allUsers = readJson();
-    allUsers.push(user)
+    var user = new users_1.User(req.body.username, req.body.email, req.body.password);
+    var allUsers = exports.readJson();
+    allUsers.push(user);
     fs.writeFileSync("./users.json", JSON.stringify(allUsers));
-    res.send({ message: 'A new User was added', users: allUsers });
+    res.send({ message: "A new User was added", user: user });
 }
-
-exports.newUser = newUser
+exports.newUser = newUser;
+//Function to login the user
+function login(req, res) {
+    var _a = req.body, email = _a.email, password = _a.password;
+    var allUsers = exports.readJson();
+    var userExist = allUsers.find(function (user) { return user.email === email && user.password === password; });
+    if (userExist) {
+        var username = userExist.username;
+        var userCookie = JSON.stringify({ username: username, email: email });
+        res.cookie("cookieName", userCookie, { maxAge: 300000000, httpOnly: true });
+        res.send({ userInfo: username });
+    }
+    else {
+        res.send({
+            message: "Username or password are wrong, try again!",
+            userInfo: null
+        });
+    }
+}
+exports.login = login;

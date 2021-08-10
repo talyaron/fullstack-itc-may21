@@ -1,8 +1,8 @@
-const express = require('express')
-const router = express.Router();
-
-const controllers = require('../controlers/controlerUsers');
-
-router.post('/user', controllers.newUser)
-
+"use strict";
+exports.__esModule = true;
+var express = require('express');
+var router = express.Router();
+var controlerUsers_1 = require("../controlers/controlerUsers");
+router.post('/create', controlerUsers_1.newUser);
+router.post('/login', controlerUsers_1.login);
 module.exports = router;

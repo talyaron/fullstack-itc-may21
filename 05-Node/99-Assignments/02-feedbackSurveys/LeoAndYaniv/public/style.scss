@@ -116,3 +116,10 @@ body {
       justify-content: center;
     }
   }
+
+  #errorMessage {
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+  }
