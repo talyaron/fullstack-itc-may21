@@ -38,17 +38,21 @@
         function addQuestion(ev) {
             ev.preventDefault()
            
+            //for now ill leave the code.  (9:20 lol)
+            //I think this way is better to have an unique id but if you wanna create a unique id and send for the server to the client and get it with axios or fetch, its ok
+            //the important is the exercise works
+
             const rootQuestion = document.querySelector('.main')
             let html = ''
             html += `
                     <div class="boxquestion">
                             <div class="boxquestion__question1">
                                 <label for="question1">
-                                    <input type="text" name="quesiton" class="boxquestion__question1--title" size="53" onclick='deleteQuestion("${Math.random().toString(16).slice(2)}")' >
+                                    <input type="text" name="quesiton" class="boxquestion__question1--title" size="53"  >
                                 </label>
                             </div>
-                            <i class="fas fa-user-edit boxquestion--edit"></i>
-                            <i class="fas fa-trash boxquestion--trash"></i> 
+                            <i class="fas fa-user-edit boxquestion--edit" onclick='deleteQuestion("${Math.random().toString(16).slice(2)}")'></i>
+                            <i class="fas fa-trash boxquestion--trash" onclick='deleteQuestion("${Math.random().toString(16).slice(2)}")'></i> 
                     </div>`
 
             
