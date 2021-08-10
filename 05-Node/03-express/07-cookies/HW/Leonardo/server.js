@@ -33,8 +33,8 @@ app.post('/createUser', (req, res) => {
         const { body } = req;
         const schema = Joi.object({
             nameUser: Joi.string().max(30).required(),
-            email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-            password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
+            email: Joi.string().required(),
+            password: Joi.string().required(),
         });
 
         const { error, value } = schema.validate({
