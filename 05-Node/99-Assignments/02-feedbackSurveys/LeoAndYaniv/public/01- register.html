@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="dist/style.min.css">
 </head>
+
 <body>
-    
+    <nav class="top-menu">
+        <h1 class="top-menu__title">REGISTRATION</h1>
+        <a class="top-menu__button" href="/index.html">Go back</a>
+    </nav>
+
+    <form class="form">
+        <h3>Register a new user</h3>
+        <div class="form__wrapper">
+            <label for="username">Name:</label>
+            <input type="text" name="username" placeholder="Enter your name" maxlength="35" required>
+        </div>
+
+        <div class="form__wrapper">
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form__wrapper">
+            <label for="password">Password:</label>
+            <input type="password" name="password" placeholder="Enter your password" autocomplete="off" required>
+        </div>
+
+        <input class="form__submit--newuser" type="submit" value="Create user">
+    </form>
+
+    <script src="register.js"></script>
 </body>
+
 </html>

@@ -1,4 +1,9 @@
-const express = require('express');
+export {};
+const express = require('express')
 const router = express.Router();
 
-import {/* functions from controlers function1, function2, etc */} from '../controlers'
+import { allUsers } from '../controlers/controlerUsers';
+
+router.get('/all',allUsers)
+
+module.exports = router
