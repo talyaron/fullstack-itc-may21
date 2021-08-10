@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <h1></h1>
+    <h1></h1> <!-- Is this supposed to stay empty? (: -->
     <h2>Add A Survey!</h2>
     <form onsubmit="handleSurvey(event)">
         <input type="text" name="survey" placeholder="surveyname" required>
@@ -57,7 +57,7 @@
                                 <span class="close">&times;</span>
                                  <form onsubmit="handleQuestions(event)">
                                      <div id="question-holder">
-                                        <input type="text" name="${ID}" id="${ID}" placeholder="question" required>
+                                        <input type="text" name="${ID}" id="${ID}" placeholder="Question" required>
                                     </div>
                                     <button id="addQuestion" onclick="addAnotherQuestion()">Add Question</button>
                                     <button id="submit" type="submit">Submit Questions!</button>
