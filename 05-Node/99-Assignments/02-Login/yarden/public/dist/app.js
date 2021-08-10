@@ -35,12 +35,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-// Handle submit that transfers user to page 2 and shows their name and email
+// Send input to server:
 function handleSubmit(ev) {
     return __awaiter(this, void 0, void 0, function () {
-        function goToSite(event) {
-            window.location.href = '/page2.html';
-        }
         var name, email, user;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -48,12 +45,15 @@ function handleSubmit(ev) {
                     ev.preventDefault();
                     name = ev.target.elements.name.value;
                     email = ev.target.elements.email.value;
-                    return [4 /*yield*/, axios.post('/api/uddUser', {
+                    return [4 /*yield*/, axios.post('/uddUser', {
                             name: name,
                             email: email
                         })];
                 case 1:
                     user = _a.sent();
+                    console.log(user);
+                    ev.target.reset();
+                    window.location.href = '/page2.html';
                     return [2 /*return*/];
             }
         });
