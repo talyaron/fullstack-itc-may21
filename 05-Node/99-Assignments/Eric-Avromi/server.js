@@ -7,6 +7,12 @@ const {
 
 const fs = require("fs");
 
+const surveyRouter = require('./routes/surveyRoute.js')
+const {
+    v4: uuidv4 
+} = require('uuid'); 
+
+
 class User {
     constructor(name, email, password) {
         this.name = name;
@@ -29,6 +35,8 @@ class Survey {
 
 app.use(express.static("public"));
 app.use(express.json());
+
+app.use('/survey', surveyRouter)
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);

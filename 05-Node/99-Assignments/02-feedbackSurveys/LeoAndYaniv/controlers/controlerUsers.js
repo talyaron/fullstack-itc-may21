@@ -1,3 +1,11 @@
+export { };
+
 import { users } from '../models/users';
 
-// add functions to handle data
+export function allUsers (req, res) {
+    res.send(users);
+}
+
+/* export function firstBeach (req, res) {
+    res.send(beaches[0]);
+}; */
