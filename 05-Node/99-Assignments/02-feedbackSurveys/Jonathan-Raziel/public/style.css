@@ -99,3 +99,40 @@
 .historial .survey--btn:hover {
   opacity: 0.7;
 }
+
+.surveys {
+  background-color: lightgrey;
+}
+.surveys header {
+  display: flex;
+  justify-content: space-around;
+}
+.surveys .container__title {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.surveys .container__title--title {
+  margin-bottom: 1em;
+}
+.surveys .boxquestion {
+  margin-top: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.surveys .boxquestion--circle {
+  margin-right: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+}
+.surveys .boxquestion--edit {
+  margin-left: 0.5em;
+}
+.surveys .boxquestion--trash {
+  margin-left: 0.5em;
+}
