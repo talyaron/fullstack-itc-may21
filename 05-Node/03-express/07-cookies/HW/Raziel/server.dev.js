@@ -10,7 +10,8 @@ var port = process.env["const"] || 3000;
 
 var cookieParser = require("cookie-parser");
 
-var e = require("express");
+var _require = require('uuid'),
+    uuidv4 = _require.v4;
 
 app.use(cookieParser());
 app.use(express.json());
@@ -28,65 +29,58 @@ app.post("/signUp", function (req, res) {
         password = _req$body.password;
     var userData = readUserData();
     var addUser = {
+      id: uuidv4(),
       name: name,
       password: password
     };
     userData.push(addUser);
-    fs.writeFileSync("./userData.json", JSON.stringify(users));
-    res.send(users);
+    fs.writeFileSync("./userData.json", JSON.stringify(userData));
+    res.send(userData);
   } catch (error) {
-    console.error(error);
+    res.status(400).send(error.message);
   }
 });
-app.post("/loginUser", function (req, res) {
+app.post('/loginUser', function (req, res) {
   try {
     var _req$body2 = req.body,
-        email = _req$body2.email,
+        name = _req$body2.name,
         password = _req$body2.password;
     var userData = readUserData();
-    var isUserPassOK = userData.some(function (elem) {
-      return elem.email === email && elem.password === password;
+    var userExist = userData.find(function (user) {
+      return user.name === name && user.password === password;
     });
 
-    if (isUserPassOK) {
-      var userLogin = userData.find(function (elem) {
-        return elem.email === email && elem.password === password;
+    if (userExist) {
+      var nameUser = userExist.nameUser;
+      var userCookie = JSON.stringify({
+        nameUser: name
       });
-      res.cookie("cookieName", JSON.stringify(userLogin), {
-        maxAge: 3000,
+      res.cookie('cookieName', userCookie, {
+        maxAge: 300000001,
         httpOnly: true
       });
       res.send({
-        ok: "Hello Raziel"
+        userInfo: userExist
       });
     } else {
-      throw new Error("wrong email or password");
+      res.send({
+        message: 'Username or password are wrong, try again!'
+      });
     }
-
-    app.get("/getCookie", function (req, res) {
-      try {
-        var cookieName = req.cookies.cookieName;
-        var cookie = JSON.parse(cookieName);
-        res.send(cookie);
-      } catch (e) {
-        res.status(500).send({
-          error: "".concat(e.message)
-        });
-      }
-    });
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    res.status(500).send(error.message);
   }
 });
-app.get("/getCookie", function (req, res) {
+app.get('/userInfo', function (req, res) {
   try {
+    //Read cookies
     var cookieName = req.cookies.cookieName;
     var cookie = JSON.parse(cookieName);
-    res.send(cookie);
-  } catch (e) {
-    res.status(500).send({
-      error: "".concat(e.message)
+    res.send({
+      cookie: cookie
     });
+  } catch (error) {
+    res.status(500).send(error.message);
   }
 });
 app.listen(port, function () {

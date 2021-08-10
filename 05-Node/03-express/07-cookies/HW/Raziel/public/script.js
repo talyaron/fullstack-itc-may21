@@ -1,6 +1,6 @@
 //log information
 
-async function handleRegister(event) {
+  async function handleRegister(event) {
   event.preventDefault();
 
   const name = event.target.elements.name.value;
@@ -10,12 +10,13 @@ async function handleRegister(event) {
     name: name,
     password: password,
   };
+console.log(newUser);
+  const response = await registerPromise(newUser)
 
-  const response = await registerPromise(newUser);
-  const { ok } = response;
-  alert(ok);
   event.target.reset();
 }
+
+
 
 async function handelLogIn(event) {
   event.preventDefault();
@@ -28,62 +29,44 @@ async function handelLogIn(event) {
     email: inputName,
     password: inputPassword,
   };
-
-  const response = await signInPromise(user);
-  const { ok } = response;
-  alert(ok);
+  console.log(user);
+   const response = await signInPromise(user);
+  alert( response.data);
   window.location.href = "page2.html";
 }
 
-function registerPromise(newUser) {
-  return new Promise((resolve, reject) => {
-    fetch("/signUp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    }).then(function (res) {
-      if (res.status === 200 && res.ok) {
-        return res.json().then((newUser) => {
-          resolve(newUser);
-        });
-      } else {
-        return res.json().then((newUser) => {
-          alert(newUser.error);
-        });
-      }
-    });
-  });
+
+
+
+async function registerPromise(newUser) {
+
+const response = await axios.post('/signUp',newUser);
+console.log(response.data);
+return response.data;
+
+ }
+
+
+ async function signInPromise(user) {
+
+  const response = await axios.post('/loginUser',user);
+  return response.data;
+   }
+  
+   async function getCookies(ev) {
+
+    ev.preventDefault()
+
+    const response = await axios.get('//userInfo')
+    const { name } = response.data;
+
+
+    const rootMessage = document.querySelector('#root')
+    rootMessage.innerHTML = `<p>Hello ${name} </p>`
+
+    
 }
 
-function signInPromise(user) {
-  return new Promise((resolve, reject) => {
-    fetch("/loginUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    }).then(function (res) {
-      if (res.status === 200 && res.ok) {
-        return res.json().then((user) => {
-          resolve(user);
-        });
-      } else {
-        return res.json().then((user) => {
-          alert(user.error);
-        });
-      }
-    });
-  });
-}
 
-async function getCookies(ev) {
-  ev.preventDefault();
 
-  const response = await axios.get("/getCookie");
-  const data = response.data;
-  const root = document.querySelector("#root");
-  root.innerHTML = `<p>Hello ${data}, welcome`;
-}
+   

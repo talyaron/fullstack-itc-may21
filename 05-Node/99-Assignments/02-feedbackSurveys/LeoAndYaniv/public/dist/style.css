@@ -1,0 +1,105 @@
+html,
+body {
+  margin: 0;
+  background: cadetblue;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+.top-menu {
+  background-color: limegreen;
+  display: flex;
+  justify-content: space-evenly;
+  font-style: oblique;
+  align-items: center;
+}
+.top-menu__title {
+  color: #333333;
+  display: flex;
+  align-items: center;
+}
+.top-menu__logo {
+  width: 100px;
+}
+.top-menu__button {
+  text-decoration: none;
+  background: black;
+  color: white;
+  padding: 5px;
+  border-radius: 50px;
+  width: 55px;
+  display: flex;
+  justify-content: center;
+}
+.top-menu__button:hover {
+  background-color: white;
+  color: black;
+}
+
+.options {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 75px;
+}
+.options a {
+  text-decoration: none;
+  background: black;
+  color: white;
+  padding: 20px;
+  border-radius: 50px;
+  width: 75px;
+  display: flex;
+  justify-content: center;
+}
+.options a:hover {
+  background-color: white;
+  color: black;
+}
+
+.form {
+  padding: 10px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 50px;
+  margin: 25px auto;
+  background: peru;
+  justify-content: center;
+  align-items: center;
+}
+.form__submit--newuser {
+  background-color: black;
+  color: white;
+  border-radius: 100px;
+}
+.form__submit--newuser:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+.form__input--image {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border-radius: 50px;
+}
+
+.form__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.form__wrapper input {
+  margin: 15px;
+  width: 70%;
+}
+.form__wrapper label {
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+}
+.form__wrapper--submit {
+  display: flex;
+  justify-content: center;
+}

@@ -19,15 +19,56 @@
             <input type="email" name="email" id="email">
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
-            <input type="button" value="Login" class="container__form--loginbtn">
+            <button type="submit" class="container__form--loginbtn">Login</button>
         </form>
     </div>
     <script>
         //btn
         const btnReturn = document.querySelector('.login--return');
+        const form = document.querySelector('#form-login');
+
 
         //addEventListener
         btnReturn.addEventListener('click', toHomePage)
+        form.addEventListener('submit', loginUser)
+
+        async function loginUser(ev) {
+
+            ev.preventDefault()
+
+            const email = ev.target.elements.email.value
+            const password = ev.target.elements.password.value
+
+            const user = {
+                email: email,
+                password: password,
+            }
+
+            const response = await enterLoginPromise(user)
+
+            alert(response.ok)
+            window.location.href = 'historial.html'
+
+        }
+
+        function enterLoginPromise(userLogin) {
+    return new Promise((resolve, reject) => {
+        fetch('/login/userLogin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userLogin)
+        }).then(function (res) {
+            if (res.status === 200 && res.ok) {
+                return res.json().then(user => { resolve(user) });
+            } else {
+                return res.json().then(user => { alert(user.error) })
+            }
+        })
+    })
+}
+
 
         //function
         function toHomePage() {

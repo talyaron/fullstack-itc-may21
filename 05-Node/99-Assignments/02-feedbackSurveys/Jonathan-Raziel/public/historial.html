@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Historial</title>
+</head>
+
+<body class="historial" onload="getCookies(event)">
+    <!--Cookie-->
+    <header>
+        <div id="nameCookie"></div>
+    </header>
+    <div class="survey">
+        <button type="button" class="survey--btn">Create Survey</button>
+    </div>
+    <div id="rootSurveys"></div>
+    <script>
+
+        async function getCookies(ev) {
+
+            ev.preventDefault()
+
+            const response = await axios.get('/cookie/getCookie')
+            const { username, balance } = response.data
+
+
+            const rootMessage = document.querySelector('#nameCookie')
+            rootMessage.innerHTML = `<span>Hi ✋ ${username.charAt(0).toUpperCase() + username.slice(1)}</span>`
+
+            const root = document.querySelector('#rootSurveys')
+
+        }
+
+    </script>
+</body>
+
+</html>
