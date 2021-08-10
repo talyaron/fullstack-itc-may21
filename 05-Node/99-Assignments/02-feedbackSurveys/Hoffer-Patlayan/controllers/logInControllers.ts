@@ -1,11 +1,10 @@
 export { };
-
-import { localJson } from "../server";
+const fs = require("fs");
 // LEER JSON Users
-// const localJson = () => {
-//     const fileJson = fs.readFileSync("./users.json");
-//     return JSON.parse(fileJson);
-//   };
+const localJson = () => {
+    const fileJson = fs.readFileSync("./db/users.json");
+    return JSON.parse(fileJson);
+  };
 
 export function logInUser(req: any, res: any) {
     try {

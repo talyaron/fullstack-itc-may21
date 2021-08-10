@@ -1,22 +1,24 @@
 export { };
-import { localJson } from "../server";
-import fs from 'fs'
-// // LEER JSON Users
-// const localJson = () => {
-//     const fileJson = fs.readFileSync("./users.json");
-//     return JSON.parse(fileJson);
-//   };
+const fs = require("fs");
+// LEER JSON Users
+const localJson = () => {
+    const fileJson = fs.readFileSync("./db/users.json");
+    return JSON.parse(fileJson);
+  };
 
 
   export function registerUser(req: any, res: any) {
     const { name, email, password } = req.body;
     const users = localJson();
     const addUser = {
+   
       name: name,
       email: email,
       password: password,  
     };
     users.push(addUser);
-    fs.writeFileSync("./users.json", JSON.stringify(users));
+    fs.writeFileSync("./db/users.json", JSON.stringify(users));
+    console.log(users);
+    
     res.send(users);
   }   
