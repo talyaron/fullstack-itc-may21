@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+exports.User = void 0;
 var User = /** @class */ (function () {
     function User(username, email, password, surveys) {
         this.username = username;
@@ -9,6 +10,7 @@ var User = /** @class */ (function () {
     }
     return User;
 }());
+exports.User = User;
 // class UserList {
 //     UsersArray: Array<User> = [];
 //     add(users: User) {
@@ -24,4 +26,4 @@ var User = /** @class */ (function () {
 //     User: User,
 //     UserList: UserList,
 // };
-module.exports = User;
+//module.exports = User;
