@@ -1,6 +1,6 @@
 //log information
 
-async function handleRegister(event) {
+  async function handleRegister(event) {
   event.preventDefault();
 
   const name = event.target.elements.name.value;
@@ -10,12 +10,14 @@ async function handleRegister(event) {
     name: name,
     password: password,
   };
-
-  const response = await registerPromise(newUser);
-  const { ok } = response;
-  alert(ok);
+console.log(newUser);
+  const response = await registerPromise(newUser)
+  alert( response.data);
+console.log(response);
   event.target.reset();
 }
+
+
 
 async function handelLogIn(event) {
   event.preventDefault();
@@ -30,54 +32,31 @@ async function handelLogIn(event) {
   };
 
   const response = await signInPromise(user);
-  const { ok } = response;
-  alert(ok);
+  alert( response.data);
   window.location.href = "page2.html";
 }
 
-function registerPromise(newUser) {
-  return new Promise((resolve, reject) => {
-    fetch("/signUp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    }).then(function (res) {
-      if (res.status === 200 && res.ok) {
-        return res.json().then((newUser) => {
-          resolve(newUser);
-        });
-      } else {
-        return res.json().then((newUser) => {
-          alert(newUser.error);
-        });
-      }
-    });
-  });
-}
 
-function signInPromise(user) {
-  return new Promise((resolve, reject) => {
-    fetch("/loginUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    }).then(function (res) {
-      if (res.status === 200 && res.ok) {
-        return res.json().then((user) => {
-          resolve(user);
-        });
-      } else {
-        return res.json().then((user) => {
-          alert(user.error);
-        });
-      }
-    });
-  });
-}
+
+
+async function registerPromise(newUser) {
+
+const response = await axios.post('/signUp',newUser);
+console.log(response.data);
+return response.data;
+
+ }
+
+
+ async function signInPromise(user) {
+
+  const response = await axios.post('/loginUser',user);
+  return response.data;
+   }
+  
+
+
+
 
 async function getCookies(ev) {
   ev.preventDefault();

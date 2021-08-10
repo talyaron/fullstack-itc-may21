@@ -32,10 +32,10 @@ app.post("/signUp", function (req, res) {
       password: password
     };
     userData.push(addUser);
-    fs.writeFileSync("./userData.json", JSON.stringify(users));
-    res.send(users);
+    fs.writeFileSync("./userData.json", JSON.stringify(userData));
+    res.send(userData);
   } catch (error) {
-    console.error(error);
+    res.status(400).send(error.message);
   }
 });
 app.post("/loginUser", function (req, res) {

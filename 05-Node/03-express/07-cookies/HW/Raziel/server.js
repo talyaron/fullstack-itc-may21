@@ -19,13 +19,13 @@ app.post("/signUp", (req, res) => {
     const userData = readUserData();
     const addUser = {
       name: name,
-      password: password,
+      password: password
     };
     userData.push(addUser);
-    fs.writeFileSync("./userData.json", JSON.stringify(users));
-    res.send(users);
+    fs.writeFileSync("./userData.json", JSON.stringify(userData));
+    res.send(userData);
   } catch (error) {
-    console.error(error);
+  res.status(400).send(error.message);
   }
 });
 
