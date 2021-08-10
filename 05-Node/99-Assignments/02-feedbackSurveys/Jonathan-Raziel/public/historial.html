@@ -21,20 +21,27 @@
     <div id="rootSurveys"></div>
     <script>
 
+        //btn
+        const btnCreateSurveys = document.querySelector('.survey--btn')
+
+        btnCreateSurveys.addEventListener('click',createSurveys)
+
+        function createSurveys(ev) {
+            ev.preventDefault()
+            window.location.href = 'survey.html'
+        }
+
         async function getCookies(ev) {
 
             ev.preventDefault()
-
             const response = await axios.get('/cookie/getCookie')
-            const { username, balance } = response.data
-
+            const {username} = response.data
 
             const rootMessage = document.querySelector('#nameCookie')
             rootMessage.innerHTML = `<span>Hi ✋ ${username.charAt(0).toUpperCase() + username.slice(1)}</span>`
-
-            const root = document.querySelector('#rootSurveys')
-
         }
+
+
 
     </script>
 </body>

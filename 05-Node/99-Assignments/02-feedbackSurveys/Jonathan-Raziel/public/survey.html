@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Survey</title>
+</head>
+
+<body class="surveys" onload="getCookies(event)">
+    <header>
+        <div id="nameCookie"></div>
+    </header>
+    <div class="container__title">
+        <label>Title</label>
+        <textarea name="title" id="title" rows="2" cols="50" class="container__title--title"></textarea>
+        <label>Description</label>
+        <textarea name="description" id="description" rows="1" cols="50"></textarea>
+    </div>
+    <main class="main">
+        <div class="boxquestion">
+            <i class="fas fa-plus-circle boxquestion--circle"></i>
+            <div class="boxquestion__question1">
+                <label for="question1">
+                    <input type="text" name="quesiton1" id="question1" class="boxquestion__question1--title" size="53">
+                </label>
+            </div>
+
+            <i class="fas fa-user-edit boxquestion--edit"></i>
+            <i class="fas fa-trash boxquestion--trash"></i>
+        </div>
+    </main>
+    <script>
+
+        //btn
+        const btnAddQuestion = document.querySelector('.boxquestion--circle')
+
+        //addEventListener
+        btnAddQuestion.addEventListener('click', addQuestion)
+
+        function addQuestion(ev) {
+            ev.preventDefault()
+            let count = 0
+            const rootQuestion = document.querySelector('.main')
+            let html = ''
+            html += `
+                    <div class="boxquestion">
+                        <i class="fas fa-plus-circle boxquestion--circle"></i>
+                            <div class="boxquestion__question1">
+                                <label for="question1">
+                                    <input type="text" name="quesiton1" id="question1" class="boxquestion__question1--title" size="53">
+                                </label>
+                            </div>
+                            <i class="fas fa-user-edit boxquestion--edit"></i>
+                            <i class="fas fa-trash boxquestion--trash"></i> 
+                    </div>`
+      
+          rootQuestion.insertAdjacentHTML("afterbegin",html)
+        }
+
+        async function getCookies(ev) {
+
+            ev.preventDefault()
+            const response = await axios.get('/cookie/getCookie')
+            const { username } = response.data
+
+            const rootMessage = document.querySelector('#nameCookie')
+            rootMessage.innerHTML = `<span>Hi ✋ ${username.charAt(0).toUpperCase() + username.slice(1)}</span>`
+        }
+
+
+
+    </script>
+</body>
+
+</html>
