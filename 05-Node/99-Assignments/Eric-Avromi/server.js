@@ -3,13 +3,17 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 const fs = require("fs"); //do  the same to questions .json?
+app.use(express.static("public"));
+app.use(express.json());
+
+
+// const addUserRouter = require('./routes/tasksRoute.js')
+// app.use('/users', userRouter)
 
 const {
     addUsers
     } = require('./models/userModels.js')
 
-app.use(express.static("public"));
-app.use(express.json());
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
