@@ -12,8 +12,7 @@
   };
 console.log(newUser);
   const response = await registerPromise(newUser)
-  alert( response.data);
-console.log(response);
+
   event.target.reset();
 }
 
@@ -30,8 +29,8 @@ async function handelLogIn(event) {
     email: inputName,
     password: inputPassword,
   };
-
-  const response = await signInPromise(user);
+  console.log(user);
+   const response = await signInPromise(user);
   alert( response.data);
   window.location.href = "page2.html";
 }
@@ -54,15 +53,20 @@ return response.data;
   return response.data;
    }
   
+   async function getCookies(ev) {
+
+    ev.preventDefault()
+
+    const response = await axios.get('//userInfo')
+    const { name } = response.data;
 
 
+    const rootMessage = document.querySelector('#root')
+    rootMessage.innerHTML = `<p>Hello ${name} </p>`
 
-
-async function getCookies(ev) {
-  ev.preventDefault();
-
-  const response = await axios.get("/getCookie");
-  const data = response.data;
-  const root = document.querySelector("#root");
-  root.innerHTML = `<p>Hello ${data}, welcome`;
+    
 }
+
+
+
+   

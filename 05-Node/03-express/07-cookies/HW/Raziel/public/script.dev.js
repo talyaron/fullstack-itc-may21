@@ -20,11 +20,9 @@ function handleRegister(event) {
 
         case 7:
           response = _context.sent;
-          alert(response.data);
-          console.log(response);
           event.target.reset();
 
-        case 11:
+        case 9:
         case "end":
           return _context.stop();
       }
@@ -46,15 +44,16 @@ function handelLogIn(event) {
             email: inputName,
             password: inputPassword
           };
-          _context2.next = 6;
+          console.log(user);
+          _context2.next = 7;
           return regeneratorRuntime.awrap(signInPromise(user));
 
-        case 6:
+        case 7:
           response = _context2.sent;
           alert(response.data);
           window.location.href = "page2.html";
 
-        case 9:
+        case 10:
         case "end":
           return _context2.stop();
       }
@@ -106,20 +105,20 @@ function signInPromise(user) {
 }
 
 function getCookies(ev) {
-  var response, data, root;
+  var response, name, rootMessage;
   return regeneratorRuntime.async(function getCookies$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           ev.preventDefault();
           _context5.next = 3;
-          return regeneratorRuntime.awrap(axios.get("/getCookie"));
+          return regeneratorRuntime.awrap(axios.get('//userInfo'));
 
         case 3:
           response = _context5.sent;
-          data = response.data;
-          root = document.querySelector("#root");
-          root.innerHTML = "<p>Hello ".concat(data, ", welcome");
+          name = response.data.name;
+          rootMessage = document.querySelector('#root');
+          rootMessage.innerHTML = "<p>Hello ".concat(name, " </p>");
 
         case 7:
         case "end":
