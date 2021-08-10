@@ -18,22 +18,14 @@
     <div class="container__title">
         <label>Title</label>
         <textarea name="title" id="title" rows="2" cols="50" class="container__title--title"></textarea>
-       
+
     </div>
     <main class="main">
-        <div class="boxquestion">
-            <i class="fas fa-plus-circle boxquestion--circle"></i>
-            <div class="boxquestion__question1">
-                <label for="question1">
-                    <input type="text" name="quesiton1" id="question1" class="boxquestion__question1--title" size="53">
-                </label>
-            </div>
-
-            <i class="fas fa-user-edit boxquestion--edit"></i>
-            <i class="fas fa-trash boxquestion--trash"></i>
-        </div>
+        <i class="fas fa-plus-circle boxquestion--circle"></i>
     </main>
-    <button type="button">Sumbit</button>
+    <div class="creater">
+        <button type="button" class="btncreate" disabled>CREATE</button>
+    </div>
     <script>
 
         //btn
@@ -42,25 +34,30 @@
         //addEventListener
         btnAddQuestion.addEventListener('click', addQuestion)
 
+        //Raziel, for this maybe we can create route to create an uuuid for each question or here because if we need to edit or delete, we need an id
+
         function addQuestion(ev) {
             ev.preventDefault()
             const rootQuestion = document.querySelector('.main')
-           // console.log(rootQuestion.children[-1])
             let html = ''
             html += `
                     <div class="boxquestion">
-                        <i class="fas fa-plus-circle boxquestion--circle"></i>
                             <div class="boxquestion__question1">
                                 <label for="question1">
-                                    <input type="text" name="quesiton1" id="question1" class="boxquestion__question1--title" size="53">
+                                    <input type="text" name="quesiton" class="boxquestion__question1--title" size="53" >
                                 </label>
                             </div>
                             <i class="fas fa-user-edit boxquestion--edit"></i>
                             <i class="fas fa-trash boxquestion--trash"></i> 
                     </div>`
-         
-        
-          rootQuestion.insertAdjacentHTML("afterbegin",html)
+
+
+            rootQuestion.insertAdjacentHTML("afterend", html)
+          
+            const btnCreate = document.querySelector('.btncreate');
+            btnCreate.disabled = false;
+            btnCreate.style.cursor = 'pointer';
+            
         }
 
         async function getCookies(ev) {
