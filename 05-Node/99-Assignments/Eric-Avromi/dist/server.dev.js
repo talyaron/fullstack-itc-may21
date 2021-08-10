@@ -10,11 +10,12 @@ var port = process.env.PORT || 8080;
 var fs = require("fs"); //do  the same to questions .json?
 
 
+app.use(express["static"]("public"));
+app.use(express.json()); // const addUserRouter = require('./routes/tasksRoute.js')
+// app.use('/users', userRouter)
+
 var _require = require('./models/userModels.js'),
     addUsers = _require.addUsers;
-
-app.use(express["static"]("public"));
-app.use(express.json());
 
 var cookieParser = require('cookie-parser');
 
