@@ -8,6 +8,7 @@ const localJson = () => {
   };
 
 export function logInUser(req: any, res: any) {
+  
     try {
         const {email, password } = req.body;
         const users = localJson();

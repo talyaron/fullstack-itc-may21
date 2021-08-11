@@ -1,4 +1,5 @@
 const express = require('express');
+const { User, Users, Survey, Surveys, Question, Questions } = require('./models.js')
 const app = express();
 const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 3000;
@@ -9,71 +10,12 @@ app.use(express.static('public'));
 app.use(cookieParser())
 
 
-class User {
-   
-    constructor(name, email, password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.createdSurvey = []
-
-    }
-}
-
-class Users{
-    constructor(){
-        this.users = [];
-    }
-
-    newUser(user){
-        this.users.push(user)
-    }
-    
-}
-
-class Survey {
- 
-    constructor(title, admin) {  
-        this.surveyID = Math.random().toString(16).slice(2);
-        this.title = title;
-        this.admin = admin;
-        this.questions = []
-    }
-}
-class Surveys{
-    constructor(){
-        this.surveys = [];
-    }
-
-    newSurvey(survey){
-        this.surveys.push(survey)
-    }
-    
-}
-
-class Question {
-
-    constructor(title){
-        this.title = title,
-        this.questionID = Math.random().toString(16).slice(2);
-        this.voters = {voterID: [], score: []}
-    }
-} 
-class Questions{
-    constructor(){
-        this.questions = [];
-    }
-
-    newQuestion(question){
-        this.questions.push(question)
-    }
-    
-}
-
 const users = new Users()
-let selectedAdmin = {}
-let selectedAdminIndex = 0
+const selectedAdmin = {}
+const selectedAdminIndex = 0
 
+
+// Route to create user
 app.post('/createUser', (req, res) => {
 
     try {
@@ -116,8 +58,9 @@ app.post('/createUser', (req, res) => {
             error: e.message
         });
     }
-
 })
+
+// Login route
 app.post('/login', (req, res) => {
 
     try {
@@ -163,6 +106,7 @@ app.post('/login', (req, res) => {
 
 })
 
+// Route to add a survey
 app.post('/addSurvey', (req, res) => {
 
     try {
@@ -212,6 +156,7 @@ app.post('/addSurvey', (req, res) => {
 
 })
 
+// Route to post a question
 app.post('/postQuestions', (req, res) => {
 
     try {
@@ -239,10 +184,13 @@ app.post('/postQuestions', (req, res) => {
 
 })
 
+// Route to send selected Admin
 app.get('/selectedAdminUser', (req, res) => {
     res.send(selectedAdmin)
 })
 
+
+// Listen on port
 app.listen(port, () => {
     console.log('Server listen on port', port)
 })

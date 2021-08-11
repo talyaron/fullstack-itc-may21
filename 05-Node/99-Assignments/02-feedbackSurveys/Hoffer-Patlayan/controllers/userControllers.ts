@@ -1,3 +1,4 @@
+
 export function getUsers(req: any, res: any) {
     // console.log(req)
 
