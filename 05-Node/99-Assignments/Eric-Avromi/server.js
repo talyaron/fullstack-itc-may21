@@ -10,9 +10,7 @@ app.use(express.json());
 // const addUserRouter = require('./routes/tasksRoute.js')
 // app.use('/users', userRouter)
 
-const {
-    addUsers
-    } = require('./models/userModels.js')
+const addUserr = require('./models/userModels')
 
 
 const cookieParser = require('cookie-parser');
@@ -26,12 +24,11 @@ app.post('/register', (req, res) => {
     addUsers(newUser);
     
     
-  
-    
-    res.cookie('cookie',  {
-        maxAge: 30000000,
+    res.cookie('cookie', JSON.stringify(newUser), {
+        maxAge: 30000000, 
         httpOnly: true
-    }).send({
+    })
+    res.send({
         ok: true
     });
 });
@@ -69,30 +66,8 @@ const {
     v4: uuidv4 
 } = require('uuid');  // do  the same to questions?
 
-
-class User {
-    constructor(name, email, password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.id = uuidv4();
-        this.createdSurvey = [];  //this will get survey Id..
-    }
-}
-
-
-
-
-// class Survey {
-//     constructor(title){
-//         this.title = title;
-//         this.id = uuidv4();
-//         this.questions = [];
-//         this.admin = {//email:adminEmail
-//             }
-//     }
-// }
-
+app.use('/pepe',surveyRouter)
+a
 
 
 app.use('/survey', surveyRouter) //do the same for questionRouter?

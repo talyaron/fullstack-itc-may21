@@ -12,8 +12,7 @@ app.use(express["static"]("public"));
 app.use(express.json()); // const addUserRouter = require('./routes/tasksRoute.js')
 // app.use('/users', userRouter)
 
-var _require = require('./models/userModels.js'),
-    addUsers = _require.addUsers;
+var addUserr = require('./models/userModels');
 
 var cookieParser = require('cookie-parser');
 
@@ -55,10 +54,12 @@ app.post('/login', function (req, res) {
 
 var surveyRouter = require('./routes/surveyRoute.js');
 
-var _require2 = require('uuid'),
-    uuidv4 = _require2.v4; // do  the same to questions?
+var _require = require('uuid'),
+    uuidv4 = _require.v4; // do  the same to questions?
 
 
+app.use('/pepe', surveyRouter);
+a;
 app.use('/survey', surveyRouter); //do the same for questionRouter?
 
 app.listen(port, function () {

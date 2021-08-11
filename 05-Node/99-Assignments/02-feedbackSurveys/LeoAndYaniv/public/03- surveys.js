@@ -32,13 +32,17 @@ async function createSurvey() {
 //Function to render all the surveys from the user that is login
 async function bringSurveysToShow(emailLogin) {
     const bringSurveys = await axios.get(`/surveys/getSurveys/${emailLogin}`);
-    console.log(bringSurveys);
     const root = document.querySelector('#root');
     let html = "";
-    bringSurveys.data.surveys.forEach(question => {
+    bringSurveys.data.surveys.forEach(survey => {
         html += ` <div class="showSurvey">
-                    <h3 class="showSurvey__title">${question.title}</h3>
+                    <button class="showSurvey__title" onclick=showSurveyInfo("${survey.uuid}")>${survey.title}</button>
                 </div>`
     })
     root.innerHTML = html;
 };
+
+//Function when you click on a Survey you will redirect to other page to see all the information of it
+function showSurveyInfo(surveyId){
+    window.location.href = `./05- view-survey.html?uuid=${surveyId}`;
+}

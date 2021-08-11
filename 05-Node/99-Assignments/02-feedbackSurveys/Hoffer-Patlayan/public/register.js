@@ -21,7 +21,7 @@ axios({
 .catch((err) => {
   console.log(err);
 });
-
+window.location.href = 'index.html'
 
 //   axios.post("/signUp/registerUser", {
 //     name,

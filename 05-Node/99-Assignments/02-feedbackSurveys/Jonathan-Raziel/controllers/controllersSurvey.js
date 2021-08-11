@@ -13,21 +13,24 @@ var __assign = (this && this.__assign) || function () {
 exports.__esModule = true;
 exports.addSurveys = void 0;
 var fs = require("fs");
-var uuid = require("uuidv4").uuid;
+var uuidv4 = require("uuid").v4;
 var survey_1 = require("../models/survey");
 var readAllSurveys = function () {
-    var allSurveys = fs.readFileSync("./surveys.json");
+    var allSurveys = fs.readFileSync("./survey.json");
     return JSON.parse(allSurveys);
 };
 function addSurveys(req, res) {
     try {
         var allSurveys = readAllSurveys();
-        console.log(req.body);
-        var newSurvey = __assign({ "id": uuid.v4() }, req.body);
-        var question = new survey_1.Survey(newSurvey.title, newSurvey.title, newSurvey.email, newSurvey.question);
-        allSurveys.push(question);
+        var newSurvey_1 = __assign({ id: uuidv4() }, req.body);
+        var survey = new survey_1.Survey(newSurvey_1.id, newSurvey_1.title, newSurvey_1.email, newSurvey_1.questions);
+        allSurveys.push(survey);
         fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
-        res.send({ ok: "Surveys Created", allSurveys: allSurveys });
+        var allUsers = JSON.parse(fs.readFileSync("./user.json"));
+        var surveyUser = allUsers.find(function (user) { return user.email === newSurvey_1.email; });
+        surveyUser.surveys.push(newSurvey_1);
+        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+        res.send({ ok: "Surveys Created" });
     }
     catch (e) {
         res.status(500).send({ error: "" + e });
