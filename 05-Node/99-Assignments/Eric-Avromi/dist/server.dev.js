@@ -7,7 +7,7 @@ var express = require("express");
 var app = express();
 var port = process.env.PORT || 8080;
 
-var fs = require("fs"); //do  the same to questions .json?
+var fs = require("fs"); //do  the same to answers and surveys .json?
 
 
 app.use(express["static"]("public"));
@@ -35,12 +35,24 @@ app.post('/register', function (req, res) {
     ok: true
   });
 });
-app.get('/useAdmin', function (req, res) {
-  var cookie = req.cookies['cookie'];
-  res.send({
-    cookie: cookie
+app.post('/login', function (req, res) {
+  //class info from the form, create a new user like an instance
+  var _req$body2 = req.body,
+      name = _req$body2.name,
+      email = _req$body2.email,
+      password = _req$body2.password;
+  var user = new User(name, email, password);
+  addUsers(user);
+  res.cookie('cookie', {
+    maxAge: 30000000,
+    httpOnly: true
+  }).send({
+    ok: true
   });
-});
+}); // app.get('/useAdmin', (req, res) => {
+//     const cookie = req.cookies['cookie'];
+//     res.send({cookie})
+// })
 
 var surveyRouter = require('./routes/surveyRoute.js');
 

@@ -1,5 +1,4 @@
 export {};
-/* import { readJson } from "../controlers/controlerUsers"; */
 
 export class User {
   username: string;
@@ -16,10 +15,3 @@ export class User {
     this.answeredSurveys = [];
   }
 }
-
-/* export class Users {
-    users: Array<User>
-    constructor(){
-    this.users = readJson();
-}
-} */

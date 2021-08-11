@@ -3,7 +3,8 @@
 var root = document.querySelector('#nameUser');
 
 function getUserInfoFromCookie() {
-  var userInfo, username;
+  var userInfo, _userInfo$data$cookie, username, email;
+
   return regeneratorRuntime.async(function getUserInfoFromCookie$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -13,10 +14,11 @@ function getUserInfoFromCookie() {
 
         case 2:
           userInfo = _context.sent;
-          username = userInfo.data.cookie.username;
+          _userInfo$data$cookie = userInfo.data.cookie, username = _userInfo$data$cookie.username, email = _userInfo$data$cookie.email;
           renderuserInfo(username);
+          bringSurveysToShow(email);
 
-        case 5:
+        case 6:
         case "end":
           return _context.stop();
       }
@@ -76,4 +78,36 @@ function createSurvey() {
   }, null, null, [[0, 12]]);
 }
 
-;
+; //Function to render all the surveys from the user that is login
+
+function bringSurveysToShow(emailLogin) {
+  var bringSurveys, root, html;
+  return regeneratorRuntime.async(function bringSurveysToShow$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return regeneratorRuntime.awrap(axios.get("/surveys/getSurveys/".concat(emailLogin)));
+
+        case 2:
+          bringSurveys = _context3.sent;
+          root = document.querySelector('#root');
+          html = "";
+          bringSurveys.data.surveys.forEach(function (survey) {
+            html += " <div class=\"showSurvey\">\n                    <button class=\"showSurvey__title\" onclick=showSurveyInfo(\"".concat(survey.uuid, "\")>").concat(survey.title, "</button>\n                </div>");
+          });
+          root.innerHTML = html;
+
+        case 7:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  });
+}
+
+; //Function when you click on a Survey you will redirect to other page to see all the information of it
+
+function showSurveyInfo(surveyId) {
+  window.location.href = "./05- view-survey.html?uuid=".concat(surveyId);
+}

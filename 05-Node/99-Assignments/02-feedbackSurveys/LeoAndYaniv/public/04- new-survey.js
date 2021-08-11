@@ -39,7 +39,7 @@ async function addNewQuestion(ev) {
 
 //Function to render the data of the questions in the DOM
 function renderQuestions(questions) {
-   const root = document.querySelector("#root")
+    const root = document.querySelector("#root")
     let html = "";
     questions.forEach(question => {
         html += ` <div><h3>${question.content}</h3>
@@ -64,12 +64,35 @@ async function deleteQuestion(id) {
     }
 };
 
-/* //Get all the questions to show from this survey:
-async function getAllQuestions() {
+//When the user click on the button "Cancel and go back" is going to cancel all the survey
+const cancelSurvey = document.querySelector("#buttonCancel");
+cancelSurvey.addEventListener('click', cancelTheSurvey);
+
+async function cancelTheSurvey() {
     try {
-        const questionsFromSurvey = await axios.get(`/surveys/getQuestions/${uuid}`);
-        renderQuestions(questionsFromSurvey.data.survey.questions);
+        const option = confirm(`Are you sure do you want to cancel all the survey, you will lose all the data created here?`);
+        if (option) {
+            //UUID is the id from the survey
+            const userInfo = await axios.delete(`/surveys/deleteSurvey/${uuid}`);
+            location.href = `03- surveys.html?email=${userInfo.data.userInfo}`;
+        }
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
-}; */
+};
+
+//When the user click on the button "Upload the survey" is going to create the survay and save it in the "survey.json"
+const uploadSurvey = document.querySelector("#buttonUpload");
+uploadSurvey.addEventListener('click', uploadTheSurvey);
+
+async function uploadTheSurvey() {
+    try {
+        const inputSurvey = document.querySelector('#surveyTitle');
+        const surveyTitle = inputSurvey.value;
+        //UUID is the id from the survey
+        const userInfo = await axios.post(`/register/uploadUserWithSurvey/${uuid}`, { surveyTitle });
+        location.href = `03- surveys.html?email=${userInfo.data.userInfo}`;
+    } catch (error) {
+        console.error(error);
+    }
+};
