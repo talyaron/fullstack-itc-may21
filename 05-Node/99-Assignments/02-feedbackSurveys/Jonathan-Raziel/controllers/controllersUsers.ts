@@ -7,7 +7,7 @@ const { uuid } = require('uuidv4')
 //const cookieParser = require('cookie-parser');
 
 import {User} from '../models/users'
-import {Question} from '../models/survey'
+
 
 
 const readAllUsers = () => {

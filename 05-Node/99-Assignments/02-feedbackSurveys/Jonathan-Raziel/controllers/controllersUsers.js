@@ -4,6 +4,7 @@ exports.getCookie = exports.loginUser = exports.usersRegister = void 0;
 // const express = require("express");
 // const app = express();
 var fs = require("fs");
+var uuid = require('uuidv4').uuid;
 //const cookieParser = require('cookie-parser');
 var users_1 = require("../models/users");
 var readAllUsers = function () {
