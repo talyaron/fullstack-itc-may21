@@ -1,37 +1,38 @@
-const express = require('express')
-const router = express.Router();
-const {
-    v4: uuidv4 
-} = require('uuid');
+"use strict";
 
-class Survey {
-    constructor(admin) {
-        console.log('sdgdfgdfhdfh')
-        this.title = '';
-        this.id = uuidv4();
-        this.questions = [];
-        this.admin = admin;
-    }
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-router.post('/newSurvey', (req, res) => {
-    try {
-        console.log('insdie new survey route ');
-        const admin = req.cookies.cookie.email;
-        console.log(admin)
-        const newSurvey = new Survey(admin)
-      console.log(newSurvey);
-        res.send({ok:true})
+var express = require('express');
 
+var router = express.Router();
 
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
-})
+var _require = require('uuid'),
+    uuidv4 = _require.v4;
 
+var Survey = function Survey(admin) {
+  _classCallCheck(this, Survey);
 
+  console.log('sdgdfgdfhdfh');
+  this.title = '';
+  this.id = uuidv4();
+  this.questions = [];
+  this.admin = admin;
+};
 
-// router.get('/', (req, res) => {
+router.post('/newSurvey', function (req, res) {
+  try {
+    console.log('insdie new survey route ');
+    var admin = req.cookies.cookie.email;
+    console.log(admin);
+    var newSurvey = new Survey(admin);
+    console.log(newSurvey);
+    res.send({
+      ok: true
+    });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}); // router.get('/', (req, res) => {
 //     try {
 //         const allSurveys = getAllSurveys()
 //         res.send(
@@ -41,13 +42,10 @@ router.post('/newSurvey', (req, res) => {
 //         res.status(500).send(error.message) 
 //     }
 // })
-
 // router.delete('/deleteSurvey', (req, res) => { 
 //     try {
 //         console.log("before id");
 //         const id = req.query.id;
-
-
 //         const allSurveys = deleteSurvey(id)
 //         res.send(
 //             allSurveys
@@ -56,13 +54,10 @@ router.post('/newSurvey', (req, res) => {
 //         res.status(500).send(error.message)
 //     }
 // })
-
 // router.delete('/deleteQuestion', (req, res) => { 
 //     try {
 //         console.log("before id");
 //         const id = req.query.id;
-
-
 //         const allQuestions = deleteQuestion(id)
 //         res.send(
 //             allQuestions
@@ -71,9 +66,6 @@ router.post('/newSurvey', (req, res) => {
 //         res.status(500).send(error.message)
 //     }
 // })
-
-
-
 // router.post('/newQuestion', (req, res) => { 
 //     try {
 //         const title = req.body.title;
@@ -85,11 +77,8 @@ router.post('/newSurvey', (req, res) => {
 //         res.status(500).send(error.message)
 //     }
 // })
-
-
 // router.put('/editSurvey', (req, res) => {
 //     try {
-
 //         const newTitle = req.body.newTitle;
 //         const id = req.body.id; 
 //         console.log(id);
@@ -102,10 +91,8 @@ router.post('/newSurvey', (req, res) => {
 //         res.status(500).send(error.message)
 //     }
 // })
-
 // router.put('/editQuestion', (req, res) => {
 //     try {
-
 //         const newTitle = req.body.newTitle;
 //         const id = req.body.id; 
 //         console.log(id);
@@ -119,5 +106,4 @@ router.post('/newSurvey', (req, res) => {
 //     }
 // })
 
-
-module.exports = router
+module.exports = router;

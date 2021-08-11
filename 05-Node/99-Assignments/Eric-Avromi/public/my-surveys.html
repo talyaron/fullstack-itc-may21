@@ -64,12 +64,13 @@
 
 
 
-       async function createNewSurvey() {
-            const data = await axios.post('/survey/newSurvey')//survey INfo
-
+        async function createNewSurvey() {
+            console.log('dfh')
+            const data = await axios.post('/survey/newSurvey', {})//survey INfo
+            console.log(data);
             window.location.href = "create-survey.html"
-           
-          
+
+
         }
 
         function deleteSurvey() {
