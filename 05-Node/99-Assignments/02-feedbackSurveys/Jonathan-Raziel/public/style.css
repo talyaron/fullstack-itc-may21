@@ -99,6 +99,24 @@
 .historial .survey--btn:hover {
   opacity: 0.7;
 }
+.historial .surveys {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+}
+.historial .surveys__box {
+  border: 1px solid red;
+  width: 500px;
+  height: 75px;
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.historial .surveys__box span {
+  position: absolute;
+  left: 10%;
+}
 
 .surveys {
   background-color: lightgrey;

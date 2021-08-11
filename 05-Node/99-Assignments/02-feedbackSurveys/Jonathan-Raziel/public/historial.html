@@ -18,13 +18,13 @@
     <div class="survey">
         <button type="button" class="survey--btn">Create Survey</button>
     </div>
-    <div id="rootSurveys"></div>
+    <div id="rootSurveys" class="surveys"></div>
     <script>
 
         //btn
         const btnCreateSurveys = document.querySelector('.survey--btn')
 
-        btnCreateSurveys.addEventListener('click',createSurveys)
+        btnCreateSurveys.addEventListener('click', createSurveys)
 
         function createSurveys(ev) {
             ev.preventDefault()
@@ -35,7 +35,7 @@
 
             ev.preventDefault()
             const response = await axios.get('/cookie/getCookie')
-            const {username, email} = response.data
+            const { username, email } = response.data
 
             const rootMessage = document.querySelector('#nameCookie')
             rootMessage.innerHTML = `<span>Hi ✋ ${username.charAt(0).toUpperCase() + username.slice(1)}</span>`
@@ -45,16 +45,24 @@
             const data = responseSurveys.data
 
             let html = '';
-            
+
+            const createSurveys = document.querySelector('#rootSurveys')
+
             data.forEach(element => {
-                html+= `<p>${element.title}</p>`
+                html += `<div class="surveys__box" onclick='moveToSurvey("${element.id}")'>
+                             <span>Title: ${element.title}</span>
+                        </div>`
             });
 
-            document.querySelector('#rootSurveys').insertAdjacentHTML('afterend', html)
+            createSurveys.innerHTML = html
 
         }
 
-        
+        function moveToSurvey(id){
+            // render to All the things 
+        }
+
+
 
 
     </script>
