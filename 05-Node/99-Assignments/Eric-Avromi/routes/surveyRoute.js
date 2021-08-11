@@ -1,21 +1,31 @@
 const express = require('express')
-const router = express.Router()
+const router = express.Router();
+const {
+    v4: uuidv4 
+} = require('uuid');
+const {
+    addSurvey
+} = require('../models/surveyModel.js')
 
 class Survey {
-    constructor(title, admin) {
-        this.title = title;
+    constructor(admin) {
+        console.log('sdgdfgdfhdfh')
+        this.title = '';
         this.id = uuidv4();
         this.questions = [];
-        this.admin = admin
+        this.admin = admin;
     }
 }
 
 router.post('/newSurvey', (req, res) => {
     try {
         console.log('insdie new survey route ');
-        console.log(req.cookies); //who created this survey
-        res.send(req.cookies);
-        const newSurvey = new Survey()
+        const admin = req.cookies.cookie.email;
+        console.log(admin)
+        const newSurvey = new Survey(admin)
+       addSurvey(newSurvey);//will give back all Surveys 
+        res.send({ok:true})
+
 
     } catch (error) {
         res.status(500).send(error.message)

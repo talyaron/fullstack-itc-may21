@@ -7,84 +7,69 @@ var filePath = path.resolve(__dirname, 'survey.json');
 var fs = require('fs');
 
 var _require = require('uuid'),
-    uuidv4 = _require.v4; //splice routes and models for each .json (one for surveys and other for questions)
+    uuidv4 = _require.v4;
 
+function addSurvey(newSurvey) {
+  var allSurveys = getAllSurveys(); // const task = {
+  //     title,
+  //     id: uuidv4()
+  // }
+
+  allSurveys.push(newSurvey);
+  fs.writeFileSync(filePath, JSON.stringify(allSurveys));
+  return allSurveys;
+}
 
 function getAllSurveys() {
-  var allTasks = fs.readFileSync(filePath);
-  console.log(allTasks);
-  var parsed = JSON.parse(allTasks);
+  var allSurveys = fs.readFileSync(filePath);
+  var parsed = JSON.parse(allSurveys);
   return parsed;
 }
 
-function addSurvey(title) {
-  var allTasks = getAllTasks();
-  var task = {
-    title: title,
-    id: uuidv4()
-  };
-  allTasks.push(task);
-  fs.writeFileSync(filePath, JSON.stringify(allTasks));
-  return allTasks;
-}
-
-function addQuestion(title) {
-  var allTasks = getAllTasks();
-  var task = {
-    title: title,
-    id: uuidv4()
-  };
-  allTasks.push(task);
-  fs.writeFileSync(filePath, JSON.stringify(allTasks));
-  return allTasks;
-}
-
-function deleteSurvey(id) {
-  var allTasks = getAllTasks();
-  var filteredTasks = allTasks.filter(function (task) {
-    return task.id !== id;
-  });
-  fs.writeFileSync(filePath, JSON.stringify(filteredTasks));
-  return filteredTasks;
-}
-
-function deleteQuestion(id) {
-  var allTasks = getAllTasks();
-  var filteredTasks = allTasks.filter(function (task) {
-    return task.id !== id;
-  });
-  fs.writeFileSync(filePath, JSON.stringify(filteredTasks));
-  return filteredTasks;
-}
-
-function editQuestion(id, newTitle) {
-  console.log("inside model");
-  var allTasks = getAllTasks();
-  var taskToEdit = allTasks.filter(function (task) {
-    return task.id === id;
-  });
-  taskToEdit[0].title = newTitle;
-  console.log(taskToEdit);
-  fs.writeFileSync(filePath, JSON.stringify(allTasks));
-  return allTasks;
-}
-
-function editSurvey(id, newTitle) {
-  console.log("inside model");
-  var allTasks = getAllTasks();
-  var taskToEdit = allTasks.filter(function (task) {
-    return task.id === id;
-  });
-  taskToEdit[0].title = newTitle;
-  console.log(taskToEdit);
-  fs.writeFileSync(filePath, JSON.stringify(allTasks));
-  return allTasks;
-}
-
-exports.getAllSurveys = getAllSurveys;
-exports.addSurvey = addSurvey;
-exports.deleteSurvey = deleteSurvey;
-exports.editSurvey = editSurvey;
-exports.addQuestion = addQuestion;
-exports.editQuestion = editQuestion;
-exports.deleteQuestion = deleteQuestion;
+exports.addSurvey = addSurvey; //splice routes and models for each .json (one for surveys and other for questions)
+// function addQuestion(title) { 
+//     const allTasks = getAllTasks();
+//     const task = {
+//         title,
+//         id: uuidv4()
+//     }
+//     allTasks.push(task);
+//     fs.writeFileSync(filePath, JSON.stringify(allTasks));
+//     return allTasks
+// }
+// function deleteSurvey(id) { 
+//     const allTasks = getAllTasks();
+//     const filteredTasks = allTasks.filter(task => task.id !== id)
+//     fs.writeFileSync(filePath, JSON.stringify(filteredTasks));
+//     return filteredTasks
+// }
+// function deleteQuestion(id) { 
+//     const allTasks = getAllTasks();
+//     const filteredTasks = allTasks.filter(task => task.id !== id)
+//     fs.writeFileSync(filePath, JSON.stringify(filteredTasks));
+//     return filteredTasks
+// }
+// function editQuestion(id, newTitle) { 
+//     console.log("inside model");
+//     const allTasks = getAllTasks();
+//     const taskToEdit = allTasks.filter(task => task.id === id); 
+//     taskToEdit[0].title = newTitle;
+//     console.log(taskToEdit)
+//     fs.writeFileSync(filePath, JSON.stringify(allTasks));
+//     return allTasks
+// }
+// function editSurvey(id, newTitle) { 
+//     console.log("inside model");
+//     const allTasks = getAllTasks();
+//     const taskToEdit = allTasks.filter(task => task.id === id); 
+//     taskToEdit[0].title = newTitle;
+//     console.log(taskToEdit)
+//     fs.writeFileSync(filePath, JSON.stringify(allTasks));
+//     return allTasks
+// }
+// exports.getAllSurveys = getAllSurveys
+// exports.deleteSurvey = deleteSurvey
+// exports.editSurvey = editSurvey 
+// exports.addQuestion = addQuestion
+// exports.editQuestion = editQuestion
+// exports.deleteQuestion = deleteQuestion
