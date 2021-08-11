@@ -27,10 +27,11 @@ router.post('/register', (req, res) => {
     const newUser = new User (name, email, password)
     addUsers(newUser);
 
-    // const {name, email} = newUser;
+    
+
   
     
-    res.cookie('cookie', newUser,  {
+    res.cookie('cookie', {name , email},  {
         maxAge: 30000000,
         httpOnly: true
     }).send({

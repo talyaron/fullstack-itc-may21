@@ -21,17 +21,11 @@ app.use('/users', userRouter)
 
 
 
-
-
 // app.get('/useAdmin', (req, res) => {
 //     const cookie = req.cookies['cookie'];
 //     res.send({cookie})
 
 // })
-
-
-
-
 
 
 
@@ -47,8 +41,6 @@ app.use('/users', userRouter)
 //             }
 //     }
 // }
-
-
 
 
 
