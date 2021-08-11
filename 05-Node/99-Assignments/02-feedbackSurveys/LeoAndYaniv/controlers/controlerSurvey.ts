@@ -43,7 +43,7 @@ export function getQuestionsSurvey(req, res) {
   const { uuid } = req.params;
   let allSurveys = readJsonSurveys();
   const surveyExist = allSurveys.find((survey) => survey.uuid === uuid);
-  
+
   res.send({ survey: surveyExist });
 }
 
@@ -52,8 +52,11 @@ export function deleteQuestion(req, res) {
   const { id, uuid } = req.params;
   let allSurveys = readJsonSurveys();
   const surveyExist = allSurveys.find((survey) => survey.uuid === uuid);
-  allSurveys = surveyExist.questions.filter((survey) => survey.uuid !== id);
+  //Inside the questions of a specific Survey I will filter the question that I dont want
+  surveyExist.questions = surveyExist.questions.filter(
+    (survey) => survey.uuid !== id
+  );
 
   fs.writeFileSync("./surveys.json", JSON.stringify(allSurveys));
-  res.send({ message: "A question was deleted", surveys: allSurveys });
-};
+  res.send({ message: "A question was deleted", surveys: surveyExist });
+}

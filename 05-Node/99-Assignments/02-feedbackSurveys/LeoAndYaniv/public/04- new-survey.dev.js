@@ -19,10 +19,9 @@ function getUserInfoFromCookie() {
         case 2:
           userInfo = _context.sent;
           _userInfo$data$cookie = userInfo.data.cookie, email = _userInfo$data$cookie.email, username = _userInfo$data$cookie.username;
-          console.log(email, username);
           renderuserInfo(username);
 
-        case 6:
+        case 5:
         case "end":
           return _context.stop();
       }
@@ -109,7 +108,7 @@ function deleteQuestion(id) {
           option = confirm("Are you sure do you want to delete this question?");
 
           if (!option) {
-            _context3.next = 8;
+            _context3.next = 7;
             break;
           }
 
@@ -118,24 +117,23 @@ function deleteQuestion(id) {
 
         case 5:
           questions = _context3.sent;
-          console.log(questions);
-          renderQuestions(questions.data.surveys);
+          renderQuestions(questions.data.surveys.questions);
 
-        case 8:
-          _context3.next = 13;
+        case 7:
+          _context3.next = 12;
           break;
 
-        case 10:
-          _context3.prev = 10;
+        case 9:
+          _context3.prev = 9;
           _context3.t0 = _context3["catch"](0);
           console.error(_context3.t0);
 
-        case 13:
+        case 12:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 10]]);
+  }, null, null, [[0, 9]]);
 }
 
 ;
