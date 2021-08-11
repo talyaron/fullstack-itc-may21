@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="dist/style.css">
     <title>Surveys admin</title>
 </head>
-<body>
+<body onload="getAllSurveys()">
 
     <div class="card-footer text-end">
             <button class="btn btn-primary">Create a new survey</button>
@@ -30,12 +30,11 @@
     <script>
 
         const btnNewSurvey = document.querySelector('.btn-primary')
-        const btnDeleteSurvey = document.querySelector('.btn btn-danger')
+        const btnDeleteSurvey = document.querySelector('.btn-danger')
 
         
         btnNewSurvey.addEventListener('click', createNewSurvey)
         btnDeleteSurvey.addEventListener('click', deleteSurvey)
-        console.log(btnNewSurvey);
         
         fetch('/userAdmin')
             .then(r => r.json())
@@ -55,6 +54,16 @@
         }
 
 
+        async function getAllSurveys() { 
+    try {
+        const res = await axios.get('/surveys/')
+        const allTasks = res.data
+        renderSurveys(allSurveys);
+    } catch (error) {
+        console.log(error);
+    }
+}
+getAllSurveys()
  
         
         </script>
