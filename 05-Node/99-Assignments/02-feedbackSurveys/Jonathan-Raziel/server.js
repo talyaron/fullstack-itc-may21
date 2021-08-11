@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var fs = require("fs");
 var cookieParser = require('cookie-parser');
+var uuid = require('uuidv4').uuid;
 //const routeUser = require('./routes/routeUser');
 //app.use('/users', routeUser)
 app.use(cookieParser());
@@ -11,9 +12,11 @@ app.use(express.static('public'));
 var userModel = require("./routes/routeUser");
 var userLogin = require("./routes/routeUser");
 var getCookie = require("./routes/routeUser");
+var addSurveys = require("./routes/routesSurveys");
 app.use('/register', userModel);
 app.use('/login', userLogin);
 app.use('/cookie', getCookie);
+app.use('/surveys', addSurveys);
 //  const readAllUsers = () => {
 //      const allUsers = fs.readFileSync("./user.json");
 //      return JSON.parse(allUsers);
