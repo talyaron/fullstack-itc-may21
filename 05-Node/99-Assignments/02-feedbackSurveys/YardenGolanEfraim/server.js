@@ -11,8 +11,8 @@ app.use(cookieParser())
 
 
 const users = new Users()
-const selectedAdmin = {}
-const selectedAdminIndex = 0
+let selectedAdmin = {}
+let selectedAdminIndex = 0
 
 
 // Route to create user

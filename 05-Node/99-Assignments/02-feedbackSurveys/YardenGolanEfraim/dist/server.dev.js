@@ -1,7 +1,5 @@
 "use strict";
 
-function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
-
 var express = require('express');
 
 var _require = require('./models.js'),
@@ -95,9 +93,9 @@ app.post('/login', function (req, res) {
 
     console.log(users);
     console.log(users.users);
-    selectedAdmin = (_readOnlyError("selectedAdmin"), users.users.find(function (r) {
+    selectedAdmin = users.users.find(function (r) {
       return r.email === body.email && r.password === body.password;
-    }));
+    });
     console.log(selectedAdmin);
     res.send(selectedAdmin);
   } catch (e) {
@@ -138,8 +136,8 @@ app.post('/addSurvey', function (req, res) {
     users.users.map(function (user, index) {
       if (user.email === body.adminEmail) {
         users.users[index].createdSurvey.push(new Survey(body.surveyName, body.adminEmail));
-        selectedAdmin = (_readOnlyError("selectedAdmin"), users.users[index]);
-        selectedAdminIndex = (_readOnlyError("selectedAdminIndex"), index);
+        selectedAdmin = users.users[index];
+        selectedAdminIndex = index;
       }
     });
     res.send(selectedAdmin);
