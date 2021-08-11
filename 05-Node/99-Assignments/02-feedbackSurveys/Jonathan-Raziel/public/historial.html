@@ -10,7 +10,7 @@
     <title>Historial</title>
 </head>
 
-<body class="historial" onload="getCookies(event)">
+<body class="historial" onload="getCookiesAndSurveys(event)">
     <!--Cookie-->
     <header>
         <div id="nameCookie"></div>
@@ -31,16 +31,30 @@
             window.location.href = 'survey.html'
         }
 
-        async function getCookies(ev) {
+        async function getCookiesAndSurveys(ev) {
 
             ev.preventDefault()
             const response = await axios.get('/cookie/getCookie')
-            const {username} = response.data
+            const {username, email} = response.data
 
             const rootMessage = document.querySelector('#nameCookie')
             rootMessage.innerHTML = `<span>Hi ✋ ${username.charAt(0).toUpperCase() + username.slice(1)}</span>`
+
+
+            const responseSurveys = await axios.get(`/surveys/show/${email}`)
+            const data = responseSurveys.data
+
+            let html = '';
+            
+            data.forEach(element => {
+                html+= `<p>${element.title}</p>`
+            });
+
+            document.querySelector('#rootSurveys').insertAdjacentHTML('afterend', html)
+
         }
 
+        
 
 
     </script>

@@ -99,7 +99,6 @@
             const rootQuestion = document.querySelector('.main')
             const length = rootQuestion.children.length
             let arrayQuestion = []
-            console.log(typeof length)
 
             for (let i = 1; i < length; i++) {
                 arrayQuestion.push(rootQuestion.children[i].children[0].children[0].children[0].value)
@@ -110,16 +109,15 @@
             const responseCookie = await axios.get('/cookie/getCookie')
             const { email } = responseCookie.data
 
-
             const newSurvey = {
                 title: inputTitle,
                 email: email,
                 questions: arrayQuestion,
             }
 
-            console.log(newSurvey)
             const responseAwait = await addSurveysPromise(newSurvey)
-            console.log(responseAwait)
+            const {ok} = responseAwait
+            alert(ok)
 
         }
 
@@ -133,9 +131,9 @@
                     body: JSON.stringify(newSurvey)
                 }).then(function (res) {
                     if (res.status === 200 && res.ok) {
-                        return res.json().then(user => { resolve(user) });
+                        return res.json().then(pepe => { resolve(pepe) });
                     } else {
-                        return res.json().then(user => { alert(user.error) })
+                        return res.json().then(pepe => { alert(pepe.error) })
                     }
                 })
             })

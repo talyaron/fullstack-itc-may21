@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.getCookie = exports.loginUser = exports.usersRegister = void 0;
+exports.getSurveys = exports.getCookie = exports.loginUser = exports.usersRegister = void 0;
 // const express = require("express");
 // const app = express();
 var fs = require("fs");
@@ -65,3 +65,16 @@ function getCookie(req, res) {
 }
 exports.getCookie = getCookie;
 ;
+function getSurveys(req, res) {
+    try {
+        var email = req.params.email;
+        var allUsers = readAllUsers();
+        if (allUsers.length !== 0) {
+            res.send(allUsers[0].surveys);
+        }
+    }
+    catch (e) {
+        res.status(500).send({ error: "" + e });
+    }
+}
+exports.getSurveys = getSurveys;
