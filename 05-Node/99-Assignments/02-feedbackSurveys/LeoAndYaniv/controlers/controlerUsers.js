@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.login = exports.newUser = exports.readJson = void 0;
+exports.getInfo = exports.login = exports.newUser = exports.readJson = void 0;
 var users_1 = require("../models/users");
 var fs = require("fs");
 //Function to read the JSON of created users
@@ -19,6 +19,9 @@ function newUser(req, res) {
     var allUsers = exports.readJson();
     allUsers.push(user);
     fs.writeFileSync("./users.json", JSON.stringify(allUsers));
+    var username = user.username, email = user.email;
+    var userCookie = JSON.stringify({ username: username, email: email });
+    res.cookie("cookieName", userCookie, { maxAge: 300000000, httpOnly: true });
     res.send({ message: "A new User was added", user: user });
 }
 exports.newUser = newUser;
@@ -41,3 +44,16 @@ function login(req, res) {
     }
 }
 exports.login = login;
+//Function to get the information from the cookie
+function getInfo(req, res) {
+    try {
+        //Read cookies
+        var cookieName = req.cookies.cookieName;
+        var cookie = JSON.parse(cookieName);
+        res.send({ cookie: cookie });
+    }
+    catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+exports.getInfo = getInfo;

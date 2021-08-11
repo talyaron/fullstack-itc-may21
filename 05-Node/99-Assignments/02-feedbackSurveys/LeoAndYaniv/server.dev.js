@@ -14,7 +14,10 @@ app.use(cookieParser()); //Route
 
 var registerRoute = require('./routes/routeUsers');
 
+var surveysRoute = require('./routes/routeSurveys');
+
 app.use('/register', registerRoute);
+app.use('/surveys', surveysRoute);
 app.listen(port, function () {
   console.log("Listening on port: ".concat(port));
 });

@@ -19,6 +19,9 @@ export function newUser(req, res) {
   const allUsers = readJson();
   allUsers.push(user);
   fs.writeFileSync("./users.json", JSON.stringify(allUsers));
+  const { username, email} = user;
+  const userCookie = JSON.stringify({ username: username, email: email });
+  res.cookie("cookieName", userCookie, { maxAge: 300000000, httpOnly: true });
   res.send({ message: "A new User was added", user: user });
 }
 
@@ -26,10 +29,12 @@ export function newUser(req, res) {
 export function login(req, res) {
   const { email, password } = req.body;
   const allUsers = readJson();
-  const userExist = allUsers.find((user) => user.email === email && user.password === password);
+  const userExist = allUsers.find(
+    (user) => user.email === email && user.password === password
+  );
   if (userExist) {
     const { username } = userExist;
-    const userCookie = JSON.stringify({ username: username, email: email});
+    const userCookie = JSON.stringify({ username: username, email: email });
     res.cookie("cookieName", userCookie, { maxAge: 300000000, httpOnly: true });
     res.send({ userInfo: username });
   } else {
@@ -37,5 +42,18 @@ export function login(req, res) {
       message: "Username or password are wrong, try again!",
       userInfo: null,
     });
+  }
+}
+
+//Function to get the information from the cookie
+export function getInfo(req, res) {
+  try {
+    //Read cookies
+    const { cookieName } = req.cookies;
+    const cookie = JSON.parse(cookieName);
+
+    res.send({ cookie });
+  } catch (error) {
+    res.status(500).send(error.message);
   }
 }
