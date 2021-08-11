@@ -1,14 +1,10 @@
-export { };
-const fs = require("fs");
-// LEER JSON Users
-const localJson = () => {
-    const fileJson = fs.readFileSync("./db/users.json");
-    return JSON.parse(fileJson);
-  };
-
 export function getUsers(req: any, res: any) {
+    console.log(req)
+
     const { cookieName } = req.cookies;
+    console.log(JSON.stringify(req.cookies));
+    
     const cookie = JSON.parse(cookieName);
-    const { name } = cookie;
-    res.send(name);
+
+    res.send(cookie);
 };  
