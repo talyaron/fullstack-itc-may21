@@ -57,7 +57,7 @@ async function deleteQuestion(id) {
         if (option) {
             //id: Is the ID from the question and UUID is the id from the survey
             const questions = await axios.delete(`/surveys/deleteQuestion/${id}/${uuid}`);
-            renderQuestions(questions.data.surveys.questions);
+            renderQuestions(questions.data.survey.questions);
         }
     } catch (error) {
         console.error(error);
