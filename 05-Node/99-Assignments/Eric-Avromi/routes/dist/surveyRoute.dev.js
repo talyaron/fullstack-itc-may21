@@ -6,10 +6,10 @@ var express = require('express');
 
 var router = express.Router();
 
-var Survey = function Survey(title, admin) {
+var Survey = function Survey(admin) {
   _classCallCheck(this, Survey);
 
-  this.title = title;
+  this.title = '';
   this.id = uuidv4();
   this.questions = [];
   this.admin = admin;
@@ -18,10 +18,11 @@ var Survey = function Survey(title, admin) {
 router.post('/newSurvey', function (req, res) {
   try {
     console.log('insdie new survey route ');
-    console.log(req.cookies); //who created this survey
-
-    res.send(req.cookies);
-    var newSurvey = new Survey();
+    var admin = req.cookies.cookie.email;
+    var newSurvey = new Survey(admin);
+    res.send({
+      ok: true
+    });
   } catch (error) {
     res.status(500).send(error.message);
   }

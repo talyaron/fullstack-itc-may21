@@ -65,10 +65,10 @@
 
 
        async function createNewSurvey() {
-            const data = await axios.post('/survey/newSurvey', {})//survey INfo
-            console.log(data);
+            const data = await axios.post('/survey/newSurvey')//survey INfo
+
             window.location.href = "create-survey.html"
-            console.log('survey created');
+           
           
         }
 

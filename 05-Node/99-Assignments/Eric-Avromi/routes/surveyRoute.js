@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 class Survey {
-    constructor(title, admin) {
-        this.title = title;
+    constructor( admin) {
+        this.title = '';
         this.id = uuidv4();
         this.questions = [];
         this.admin = admin
@@ -13,9 +13,11 @@ class Survey {
 router.post('/newSurvey', (req, res) => {
     try {
         console.log('insdie new survey route ');
-        console.log(req.cookies); //who created this survey
-        res.send(req.cookies);
-        const newSurvey = new Survey()
+        const admin = req.cookies.cookie.email;
+        const newSurvey = new Survey(admin)
+      
+        res.send({ok:true})
+
 
     } catch (error) {
         res.status(500).send(error.message)
