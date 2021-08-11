@@ -107,6 +107,19 @@
 
 		}
 
+
+		
+		const btnRegister = document.querySelector('.btn-block')
+
+
+		btnRegister.addEventListener('click', redirectMySurveys)
+
+		function redirectMySurveys(){
+			//if email, password, name and agree terms and conditions !== "" then run this function
+			window.location.href = "my-surveys.html"
+
+		}
+
 	</script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
