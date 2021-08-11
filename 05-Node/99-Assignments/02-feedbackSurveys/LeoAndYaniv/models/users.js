@@ -1,7 +1,6 @@
 "use strict";
 exports.__esModule = true;
 exports.User = void 0;
-/* import { readJson } from "../controlers/controlerUsers"; */
 var User = /** @class */ (function () {
     function User(username, email, password) {
         this.username = username;
@@ -13,9 +12,3 @@ var User = /** @class */ (function () {
     return User;
 }());
 exports.User = User;
-/* export class Users {
-    users: Array<User>
-    constructor(){
-    this.users = readJson();
-}
-} */

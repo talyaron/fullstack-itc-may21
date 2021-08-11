@@ -91,15 +91,14 @@ function bringSurveysToShow(emailLogin) {
 
         case 2:
           bringSurveys = _context3.sent;
-          console.log(bringSurveys);
           root = document.querySelector('#root');
           html = "";
-          bringSurveys.data.surveys.forEach(function (question) {
-            html += " <div class=\"showSurvey\">\n                    <h3 class=\"showSurvey__title\">".concat(question.title, "</h3>\n                </div>");
+          bringSurveys.data.surveys.forEach(function (survey) {
+            html += " <div class=\"showSurvey\">\n                    <button class=\"showSurvey__title\" onclick=showSurveyInfo(\"".concat(survey.uuid, "\")>").concat(survey.title, "</button>\n                </div>");
           });
           root.innerHTML = html;
 
-        case 8:
+        case 7:
         case "end":
           return _context3.stop();
       }
@@ -107,4 +106,8 @@ function bringSurveysToShow(emailLogin) {
   });
 }
 
-;
+; //Function when you click on a Survey you will redirect to other page to see all the information of it
+
+function showSurveyInfo(surveyId) {
+  window.location.href = "./05- view-survey.html?uuid=".concat(surveyId);
+}
