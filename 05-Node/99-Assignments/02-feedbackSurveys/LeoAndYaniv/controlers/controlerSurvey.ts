@@ -57,14 +57,14 @@ export function addQuestion(req, res) {
 }
 
 // //Function to get a question from a specific survey
-// export function getQuestionsSurvey(req, res) {
-//   //User email sended by params in the URL
-//   const { uuid } = req.params;
-//   let allSurveys = new Surveys;
-//   const surveyToUpdate = allSurveys.findSurvey(uuid);
+export function getQuestionsSurvey(req, res) {
+  //User email sended by params in the URL
+  const { uuid } = req.params;
+  let allSurveys = new Surveys;
+  const surveyToUpdate = allSurveys.findSurvey(uuid);
 
-//   res.send({ survey: surveyToUpdate }); 
-// }
+  res.send({ survey: surveyToUpdate }); 
+}
 
 //Function to delete a question
 export function deleteQuestion(req, res) {

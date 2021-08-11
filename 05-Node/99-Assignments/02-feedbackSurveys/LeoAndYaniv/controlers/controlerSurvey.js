@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.deleteQuestion = exports.addQuestion = exports.deleteSurvey = exports.newSurvey = exports.getSurveys = void 0;
+exports.deleteQuestion = exports.getQuestionsSurvey = exports.addQuestion = exports.deleteSurvey = exports.newSurvey = exports.getSurveys = void 0;
 var surveys_1 = require("../models/surveys");
 //Function to get all the surveys from a specific user
 function getSurveys(req, res) {
@@ -51,13 +51,14 @@ function addQuestion(req, res) {
 }
 exports.addQuestion = addQuestion;
 // //Function to get a question from a specific survey
-// export function getQuestionsSurvey(req, res) {
-//   //User email sended by params in the URL
-//   const { uuid } = req.params;
-//   let allSurveys = new Surveys;
-//   const surveyToUpdate = allSurveys.findSurvey(uuid);
-//   res.send({ survey: surveyToUpdate }); 
-// }
+function getQuestionsSurvey(req, res) {
+    //User email sended by params in the URL
+    var uuid = req.params.uuid;
+    var allSurveys = new surveys_1.Surveys;
+    var surveyToUpdate = allSurveys.findSurvey(uuid);
+    res.send({ survey: surveyToUpdate });
+}
+exports.getQuestionsSurvey = getQuestionsSurvey;
 //Function to delete a question
 function deleteQuestion(req, res) {
     var _a = req.params, id = _a.id, uuid = _a.uuid; // id: question uuid; uuid: survey uuid
