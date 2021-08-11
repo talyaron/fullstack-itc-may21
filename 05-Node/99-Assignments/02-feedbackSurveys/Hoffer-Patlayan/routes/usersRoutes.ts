@@ -4,7 +4,7 @@ const router = express.Router();
 
 import { getUsers } from '../controllers/userControllers';
 
-router.get('/getUsers', getUsers)
+router.get('/getUsers', getUsers);
 
 
 module.exports = router
