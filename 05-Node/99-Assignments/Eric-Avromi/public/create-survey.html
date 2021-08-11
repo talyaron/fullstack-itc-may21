@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>  
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="dist/style.css">
     <title>Create Survey</title>
@@ -12,69 +14,158 @@
     <div class="mx-0 mx-sm-auto">
         <div class="card">
           <div class="card-header bg-primary">
- 
-            <h5 class="card-title text-white mt-2" id="exampleModalLabel">Set a survey</h5>
-            <input class="form-check-inputName" type="text" name="exampleForm" id="radioExample1"  placeholder="Survey name"/>
+            
 
-        </div>
-    
+            <h5 class="card-title text-white mt-2" id="exampleModalLabel">Set a survey</h5>
+            <input class="form-check-inputName1" type="text" name="exampleForm1" id="radioExample1"  placeholder="Survey name"/>
+            <button type="submit" class="btn btn-light">Share</button>  
+          </div>
+
           <div class="modal-body">
             <div class="text-center">
               <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
-              <p>
-                <strong>Your opinion matters</strong>
-              </p>
-            </div>
-      <!--Add edit button and delete for eache question divs-->
-            <hr />
            
+            </div>
+        
+           <!--average and score need to have numbers 1-5-->
             <form class="px-4" action="">
-                <input class="form-check-inputName" type="text" name="exampleForm" id="radioExample1"  placeholder="Write a question"/>
-              <div class="form-check mb-2">
+                <input class="form-check-inputName2" type="text" name="exampleForm2" id="radioExample2"  placeholder="Write a question"/>
+              <!-- <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="exampleForm" id="radioExample1" />
                 <label class="form-check-label" for="radioExample1">
-                  Very good
+                  5
                 </label>
               </div>
               <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="exampleForm" id="radioExample2" />
                 <label class="form-check-label" for="radioExample2">
-                  Good
+                  4
                 </label>
               </div>
               <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="exampleForm" id="radioExample3" />
                 <label class="form-check-label" for="radioExample3">
-                  Medicore
+                  3
                 </label>
               </div>
               <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="exampleForm" id="radioExample4" />
                 <label class="form-check-label" for="radioExample4">
-                  Bad
+                  2
                 </label>
               </div>
               <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="exampleForm" id="radioExample5" />
                 <label class="form-check-label" for="radioExample5">
-                  Very bad
+                  1
                 </label>
-              </div>           
+              </div>            -->
             </form>
           </div>
           <div class="card-footer text-end">
-            <button type="submit" class="btn btn-primary">Add new question</button>
+            <button type="submit" class="btn btn-success">Add new question</button>
             <button type="submit" class="btn btn-danger">Delete question</button>
             <button type="submit" class="btn btn-primary">Edit question</button>
+            <button type="submit" class="btn btn-warning">Back survey admin</button>
 
-            <!--when we press add new question, we need to render this form below of the previous question-->
-            <!--when we press edit question, we need to can change the question but not the rating, only question sentence-->
+            <!--when we press edit question, we need to change the question but not the rating, only question sentence-->
             <!--when we press delete question, we need should have delete all the div form question-->
             <!--in each div question we need to render average score and quantity of voters-->
             <!--add a share buttom at the end of the survey to redirect to user login only with email-->
+            <!--add button to exit page, send link to complete survey and return previous page-->
 
           </div>
         </div>
+        <div class="root"></div>
       </div>
+
+
+      <script>
+        const btnAddQuestion = document.querySelector('.btn-success')
+        
+        const btnDeleteQuestion = document.querySelector('.btn-danger')
+
+        const btneditQuestion = document.querySelector('.btn-primary')
+
+        const btnBackToSurveyAdmin = document.querySelector('.btn-warning')
+
+        const link = document.querySelector('.btn-light')
+
+
+        btnAddQuestion.addEventListener('click', renderNewQuestion)
+        btnDeleteQuestion.addEventListener('click', deleteQuestion)
+        btneditQuestion.addEventListener('click', editQuestion)
+        btnBackToSurveyAdmin.addEventListener('click', backToSurveyAdmin)
+        link.addEventListener('click', sendSurvey)
+
+
+
+
+        function renderNewQuestion(data){
+      
+      console.log('hi');
+      
+          const root = document.querySelector('.root')
+          html =''
+          data.forEach((question) => {
+            html += `<form class="px-4" action="">
+                       <input class="form-check-inputName" type="text" name="exampleForm" id="radioExample1"  placeholder="Write a question" />
+             
+                          <div class="card-footer text-end">
+                          <button type="submit" class="btn btn-primary">Add new question</button>
+                          <button type="submit" class="btn btn-danger">Delete question</button>
+                          <button type="submit" class="btn btn-primary">Edit question</button>
+                          <button type="submit" class="btn btn-warning">Back survey admin</button>
+
+                          </div>
+                          
+                      </form>`
+            
+          });
+          root.innerHTML = html
+          //when you are an admin, is not important to see the options becuase never change,  so we can delete and render only question title
+          //how we can render editable question? with a modal to edit and then render?
+
+
+        }
+
+
+          
+        function deleteQuestion(){
+            
+            console.log('hi');
+        }
+
+        function editQuestion(){
+            
+            console.log('hi');
+        }
+
+        function sendSurvey(){
+          
+          console.log('hi');
+        }
+
+        function backToSurveyAdmin(){
+          window.location.href = "my-surveys.html"
+        }
+
+
+
+//         async function getAllQuestions() { 
+//           try {
+//         const res = await axios.get('/questions/')
+//         const allQuestions = res.data
+//         renderNewQuestion(allQuestions);
+//           } catch (error) {
+//               console.log(error);
+//           }
+//         }
+// getAllQuestions()
+
+
+      </script>
+
+
 </body>
 </html>

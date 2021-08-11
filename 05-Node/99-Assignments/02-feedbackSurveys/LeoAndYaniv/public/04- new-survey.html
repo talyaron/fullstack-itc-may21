@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Survey</title>
+    <link rel="stylesheet" href="dist/style.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body onload="getUserInfoFromCookie()">
+    <nav class="top-menu">
+        <h1 class="top-menu__title">NEW SURVEY</h1>
+        <div id="nameUser"></div>
+        <a class="top-menu__button" href="/03- surveys.html">Go back</a>
+    </nav>
+
+    <div>
+        <input type="text" id="surveyTitle" placeholder="Enter the title of your survey">
+        <button class="form__submit--newuser button" id="buttonCreate">New question</button>
+    </div>
+
+    <div id="root"></div>
+
+    <div>
+        <button class="form__submit--newuser button" id="buttonUpload">Upload the survey</button>
+        <button class="form__submit--newuser button" id="buttonCancel">Cancel and go back</button>
+    </div>
+
+
+    <!-- Modal to create a new user -->
+    <div id="modalCreate" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <form class="form" id="create">
+                <h3>Create a new question</h3>
+
+                <div class="form__wrapper">
+                    <input type="text" name="question" placeholder="Enter a question" required>
+                </div>
+
+                <input class="form__submit--newuser" type="submit" value="Add question">
+            </form>
+
+        </div>
+    </div>
+
+    <script src="helperModal.js"></script>
+    <script src="04- new-survey.js"></script>
+</body>
+
+</html>

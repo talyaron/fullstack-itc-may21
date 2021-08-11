@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Historial</title>
+</head>
+
+<body class="historial" onload="getCookiesAndSurveys(event)">
+    <!--Cookie-->
+    <header>
+        <div id="nameCookie"></div>
+    </header>
+    <div class="survey">
+        <button type="button" class="survey--btn">Create Survey</button>
+    </div>
+    <div id="rootSurveys" class="surveys"></div>
+    <script>
+
+        //btn
+        const btnCreateSurveys = document.querySelector('.survey--btn')
+
+        btnCreateSurveys.addEventListener('click', createSurveys)
+
+        function createSurveys(ev) {
+            ev.preventDefault()
+            window.location.href = 'survey.html'
+        }
+
+        async function getCookiesAndSurveys(ev) {
+
+            ev.preventDefault()
+            const response = await axios.get('/cookie/getCookie')
+            const { username, email } = response.data
+
+            const rootMessage = document.querySelector('#nameCookie')
+            rootMessage.innerHTML = `<span>Hi ✋ ${username.charAt(0).toUpperCase() + username.slice(1)}</span>`
+
+
+            const responseSurveys = await axios.get(`/surveys/show/${email}`)
+            const data = responseSurveys.data
+
+            let html = '';
+
+            const createSurveys = document.querySelector('#rootSurveys')
+
+            data.forEach(element => {
+                html += `<div class="surveys__box" onclick='moveToSurvey("${element.id}")'>
+                             <span>Title: ${element.title}</span>
+                        </div>`
+            });
+
+            createSurveys.innerHTML = html
+
+        }
+
+        function moveToSurvey(id){
+            // render to All the things 
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 
 //log information
 function handleRegister(event) {
-  var name, password, newUser, response, ok;
+  var name, password, newUser, response;
   return regeneratorRuntime.async(function handleRegister$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -14,16 +14,15 @@ function handleRegister(event) {
             name: name,
             password: password
           };
-          _context.next = 6;
+          console.log(newUser);
+          _context.next = 7;
           return regeneratorRuntime.awrap(registerPromise(newUser));
 
-        case 6:
+        case 7:
           response = _context.sent;
-          ok = response.ok;
-          alert(ok);
           event.target.reset();
 
-        case 10:
+        case 9:
         case "end":
           return _context.stop();
       }
@@ -32,7 +31,7 @@ function handleRegister(event) {
 }
 
 function handelLogIn(event) {
-  var inputName, inputPassword, user, response, ok;
+  var inputName, inputPassword, user, response;
   return regeneratorRuntime.async(function handelLogIn$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -45,13 +44,13 @@ function handelLogIn(event) {
             email: inputName,
             password: inputPassword
           };
-          _context2.next = 6;
+          console.log(user);
+          _context2.next = 7;
           return regeneratorRuntime.awrap(signInPromise(user));
 
-        case 6:
+        case 7:
           response = _context2.sent;
-          ok = response.ok;
-          alert(ok);
+          alert(response.data);
           window.location.href = "page2.html";
 
         case 10:
@@ -63,68 +62,67 @@ function handelLogIn(event) {
 }
 
 function registerPromise(newUser) {
-  return new Promise(function (resolve, reject) {
-    fetch("/signUp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newUser)
-    }).then(function (res) {
-      if (res.status === 200 && res.ok) {
-        return res.json().then(function (newUser) {
-          resolve(newUser);
-        });
-      } else {
-        return res.json().then(function (newUser) {
-          alert(newUser.error);
-        });
+  var response;
+  return regeneratorRuntime.async(function registerPromise$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return regeneratorRuntime.awrap(axios.post('/signUp', newUser));
+
+        case 2:
+          response = _context3.sent;
+          console.log(response.data);
+          return _context3.abrupt("return", response.data);
+
+        case 5:
+        case "end":
+          return _context3.stop();
       }
-    });
+    }
   });
 }
 
 function signInPromise(user) {
-  return new Promise(function (resolve, reject) {
-    fetch("/loginUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(user)
-    }).then(function (res) {
-      if (res.status === 200 && res.ok) {
-        return res.json().then(function (user) {
-          resolve(user);
-        });
-      } else {
-        return res.json().then(function (user) {
-          alert(user.error);
-        });
+  var response;
+  return regeneratorRuntime.async(function signInPromise$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return regeneratorRuntime.awrap(axios.post('/loginUser', user));
+
+        case 2:
+          response = _context4.sent;
+          return _context4.abrupt("return", response.data);
+
+        case 4:
+        case "end":
+          return _context4.stop();
       }
-    });
+    }
   });
 }
 
 function getCookies(ev) {
-  var response, data, root;
-  return regeneratorRuntime.async(function getCookies$(_context3) {
+  var response, name, rootMessage;
+  return regeneratorRuntime.async(function getCookies$(_context5) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context5.prev = _context5.next) {
         case 0:
           ev.preventDefault();
-          _context3.next = 3;
-          return regeneratorRuntime.awrap(axios.get("/getCookie"));
+          _context5.next = 3;
+          return regeneratorRuntime.awrap(axios.get('//userInfo'));
 
         case 3:
-          response = _context3.sent;
-          data = response.data;
-          root = document.querySelector("#root");
-          root.innerHTML = "<p>Hello ".concat(data, ", welcome");
+          response = _context5.sent;
+          name = response.data.name;
+          rootMessage = document.querySelector('#root');
+          rootMessage.innerHTML = "<p>Hello ".concat(name, " </p>");
 
         case 7:
         case "end":
-          return _context3.stop();
+          return _context5.stop();
       }
     }
   });

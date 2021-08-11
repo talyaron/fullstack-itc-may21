@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Login or Register</title>
+</head>
+
+<body>
+    <h1>Login or Register</h1>
+    
+    <h2>Register</h2>
+    <form id="register_form">
+        <label for="registerUsername">Username:</label>
+        <input type="text" name="registerUsername" id="register-username" required />
+        <label for="registerPassword">Password:</label>
+        <input type="password" name="registerPassword" id="register-password" required />
+        <input type="submit" id="register-submit" value="Register" />
+    </form>
+
+    <h2>Login</h2>
+    <form id="login_form">
+        <label for="loginUsername">Username:</label>
+        <input type="text" name="loginUsername" id="login-username" required />
+        <label for="loginPassword">Password:</label>
+        <input type="password" name="loginPassword" id="login-password" required />
+        <input type="submit" id="login-submit" value="Login" />
+    </form>
+
+    <p id="error"></p>
+
+    <script src="dist/login-register.js"></script>
+</body>
+
+</html>

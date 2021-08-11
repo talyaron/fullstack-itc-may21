@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Survey</title>
+</head>
+
+<body class="surveys" onload="getCookies(event)">
+    <header>
+        <div id="nameCookie"></div>
+    </header>
+    <div class="container__title">
+        <label>Title</label>
+        <input type="text"name="title" id="title" class="container__title--title"/>
+
+    </div>
+    <main class="main">
+        <i class="fas fa-plus-circle boxquestion--circle"></i>
+    </main>
+    <div class="creater">
+        <button type="button" class="btncreate" disabled>CREATE</button>
+    </div>
+    <script>
+
+        //btn
+        const btnAddQuestion = document.querySelector('.boxquestion--circle')
+        const btnCreateSurveys = document.querySelector('.btncreate')
+
+        //init
+        let count = 0;
+
+        //addEventListener
+        btnAddQuestion.addEventListener('click', addQuestion)
+        btnCreateSurveys.addEventListener('click', createSurvey)
+
+
+        function addQuestion(ev) {
+            ev.preventDefault()
+
+            //for now ill leave the code.  (9:20 lol)
+            //I think this way is better to have an unique id but if you wanna create a unique id and send for the server to the client and get it with axios or fetch, its ok
+            //the important is the exercise works
+
+            const rootQuestion = document.querySelector('.main')
+
+            let html = ''
+            html += `
+                    <div class="boxquestion" id="boxquestion${count}" >
+                            <div class="boxquestion__question">
+                                <label for="question">
+                                    <input type="text" name="question${count}" class="boxquestion__question--title" size="53" id="${count}" onchange='blockQuestion("${count}")'>
+                                </label>
+                            </div>
+                            <i class="fas fa-user-edit boxquestion--edit" onclick='editQuestion("${count}")'></i>
+                            <i class="fas fa-trash boxquestion--trash" onclick='deleteQuestion("${count}")'></i> 
+                    </div>`
+
+
+            rootQuestion.insertAdjacentHTML("beforeend", html)
+            count++;
+            const btnCreate = document.querySelector('.btncreate');
+            btnCreate.disabled = false;
+            btnCreate.style.cursor = 'pointer';
+
+        }
+
+        function blockQuestion(id) {
+            document.getElementById(id).disabled = true;
+        }
+
+
+        function editQuestion(id) {
+            document.getElementById(id).disabled = false;
+        }
+
+        function deleteQuestion(id) {
+            document.getElementById(`boxquestion${id}`).remove()
+
+        }
+
+        async function getCookies(ev) {
+
+            ev.preventDefault()
+            const response = await axios.get('/cookie/getCookie')
+            const { username } = response.data
+
+            const rootMessage = document.querySelector('#nameCookie')
+            rootMessage.innerHTML = `<span>Hi ✋ ${username.charAt(0).toUpperCase() + username.slice(1)}</span>`
+        }
+
+        async function createSurvey(ev) {
+            ev.preventDefault()
+            const rootQuestion = document.querySelector('.main')
+            const length = rootQuestion.children.length
+            let arrayQuestion = []
+
+            for (let i = 1; i < length; i++) {
+                arrayQuestion.push(rootQuestion.children[i].children[0].children[0].children[0].value)
+            }
+
+            const inputTitle = document.querySelector('.container__title--title').value
+
+            const responseCookie = await axios.get('/cookie/getCookie')
+            const { email } = responseCookie.data
+
+            const newSurvey = {
+                title: inputTitle,
+                email: email,
+                questions: arrayQuestion,
+            }
+
+            const responseAwait = await addSurveysPromise(newSurvey)
+            const {ok} = responseAwait
+            alert(ok)
+
+        }
+
+        function addSurveysPromise(newSurvey) {
+            return new Promise((resolve, reject) => {
+                fetch('/surveys/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newSurvey)
+                }).then(function (res) {
+                    if (res.status === 200 && res.ok) {
+                        return res.json().then(pepe => { resolve(pepe) });
+                    } else {
+                        return res.json().then(pepe => { alert(pepe.error) })
+                    }
+                })
+            })
+        }
+
+
+
+    </script>
+</body>
+
+</html>

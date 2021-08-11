@@ -1,0 +1,55 @@
+.container {
+  width: 100%;
+  max-width: 30rem;
+  margin: auto auto;
+}
+
+.form p {
+  font-size: 1.4rem;
+  color: #333333;
+  margin: 2rem 0 0 0;
+}
+
+.form legend {
+  font-size: 2rem;
+  color: #333333;
+}
+
+.form label {
+  font-weight: 700;
+  text-transform: uppercase;
+  display: block;
+}
+
+.form input {
+  padding: 1rem;
+  display: block;
+  width: 90%;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+.form .form__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 2rem;
+}
+
+.form .form__buttons .form__login-button button {
+  background-color: #71B100;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 1rem 3rem;
+  display: inline-block;
+  border: none;
+}
+/*# sourceMappingURL=styles.css.map */

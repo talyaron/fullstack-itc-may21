@@ -41,7 +41,8 @@
   justify-content: center;
   flex-direction: column;
 }
-.login .container__form label, .login .container__form input {
+.login .container__form label,
+.login .container__form input {
   margin-top: 1em;
 }
 .login .container__form--loginbtn {
@@ -65,7 +66,8 @@
   justify-content: center;
   flex-direction: column;
 }
-.register .container__form label, .register .container__form input {
+.register .container__form label,
+.register .container__form input {
   margin-top: 1em;
 }
 .register .container__form--registerbtn {
@@ -73,4 +75,99 @@
   color: white;
   padding: 1em;
   cursor: pointer;
+}
+
+.historial {
+  background-color: lightgrey;
+}
+.historial header {
+  display: flex;
+  justify-content: space-around;
+}
+.historial .survey {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  transform: translate(-50%, -50%);
+}
+.historial .survey--btn {
+  background-color: black;
+  color: white;
+  padding: 0.7em;
+  cursor: pointer;
+}
+.historial .survey--btn:hover {
+  opacity: 0.7;
+}
+.historial .surveys {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+}
+.historial .surveys__box {
+  border: 1px solid red;
+  width: 500px;
+  height: 75px;
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.historial .surveys__box span {
+  position: absolute;
+  left: 10%;
+}
+
+.surveys {
+  background-color: lightgrey;
+}
+.surveys header {
+  display: flex;
+  justify-content: space-around;
+}
+.surveys .container__title {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.surveys .container__title--title {
+  margin-bottom: 1em;
+}
+.surveys .boxquestion {
+  margin-top: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.surveys .boxquestion--circle {
+  margin-right: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.surveys .boxquestion--edit {
+  margin-left: 0.5em;
+}
+.surveys .boxquestion--trash {
+  margin-left: 0.5em;
+}
+.surveys .creater {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  position: relative;
+  left: -1%;
+}
+.surveys .creater .btncreate {
+  background-color: black;
+  color: white;
+  padding: 0.7em;
+  cursor: not-allowed;
+}
+.surveys .creater .btncreate:hover {
+  opacity: 0.7;
 }
