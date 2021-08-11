@@ -114,8 +114,12 @@
   align-items: center;
 }
 .historial .surveys__box span {
-  position: absolute;
+  position: relative;
   left: 10%;
+}
+.historial .surveys__box i {
+  position: relative;
+  right: 10%;
 }
 
 .surveys {
