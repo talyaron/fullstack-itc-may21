@@ -6,9 +6,16 @@ var express = require('express');
 
 var router = express.Router();
 
+var _require = require('uuid'),
+    uuidv4 = _require.v4;
+
+var _require2 = require('../models/surveyModel.js'),
+    addSurvey = _require2.addSurvey;
+
 var Survey = function Survey(admin) {
   _classCallCheck(this, Survey);
 
+  console.log('sdgdfgdfhdfh');
   this.title = '';
   this.id = uuidv4();
   this.questions = [];
@@ -19,7 +26,10 @@ router.post('/newSurvey', function (req, res) {
   try {
     console.log('insdie new survey route ');
     var admin = req.cookies.cookie.email;
+    console.log(admin);
     var newSurvey = new Survey(admin);
+    addSurvey(newSurvey); //will give back all Surveys 
+
     res.send({
       ok: true
     });
