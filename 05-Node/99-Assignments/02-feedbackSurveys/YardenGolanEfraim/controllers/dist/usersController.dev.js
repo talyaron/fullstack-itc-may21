@@ -4,11 +4,14 @@ var models = require('../models');
 
 var Ajv = require("ajv");
 
-exports.login = function (req, res) {
+exports.addUser = function (req, res) {
   try {
     var schema = {
       type: "object",
       properties: {
+        username: {
+          type: "string"
+        },
         password: {
           type: "string"
         },
@@ -16,7 +19,7 @@ exports.login = function (req, res) {
           type: "string"
         }
       },
-      required: ["password", "email"],
+      required: ["username", "password", "email"],
       additionalProperties: false
     };
     var validate = ajv.compile(schema);
@@ -30,13 +33,8 @@ exports.login = function (req, res) {
       throw new Error("Invalid data was transferd");
     }
 
-    console.log(users);
-    console.log(users.users);
-    selectedAdmin = users.users.find(function (r) {
-      return r.email === body.email && r.password === body.password;
-    });
-    console.log(selectedAdmin);
-    res.send(selectedAdmin);
+    users.newUser(new User(body.username, body.email, body.password));
+    res.send(users);
   } catch (e) {
     console.log(e);
     res.status(400).send({
