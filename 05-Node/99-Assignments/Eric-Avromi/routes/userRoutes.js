@@ -28,16 +28,20 @@ router.post('/register', (req, res) => {
     addUsers(newUser);
 
     
-
-  
     
-    res.cookie('cookie', {name , email},  {
+    res.cookie('cookie', {name ,email},  {
         maxAge: 30000000,
         httpOnly: true
-    }).send({
+    }).send({ 
         ok: true
     });
 });
+
+router.get('/userAdmin', (req, res) => {
+    const cookie = req.cookies['cookie'];
+    res.send({cookie})
+
+})
 
 // router.post('/login', (req, res) => {
 
