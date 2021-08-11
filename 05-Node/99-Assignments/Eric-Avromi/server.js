@@ -21,29 +21,6 @@ app.use('/users', userRouter)
 
 
 
-// app.get('/useAdmin', (req, res) => {
-//     const cookie = req.cookies['cookie'];
-//     res.send({cookie})
-
-// })
-
-
-
-
-
-
-// class Survey {
-//     constructor(title){
-//         this.title = title;
-//         this.id = uuidv4();
-//         this.questions = [];
-//         this.admin = {//email:adminEmail
-//             }
-//     }
-// }
-
-
-
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });

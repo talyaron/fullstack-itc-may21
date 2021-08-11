@@ -40,6 +40,12 @@ router.post('/register', function (req, res) {
   }).send({
     ok: true
   });
+});
+router.get('/userAdmin', function (req, res) {
+  var cookie = req.cookies['cookie'];
+  res.send({
+    cookie: cookie
+  });
 }); // router.post('/login', (req, res) => {
 //     //class info from the form, create a new user like an instance
 //     const {
