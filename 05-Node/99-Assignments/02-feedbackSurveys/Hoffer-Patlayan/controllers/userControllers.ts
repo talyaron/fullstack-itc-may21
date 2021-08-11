@@ -1,7 +1,7 @@
 
 export function getUsers(req: any, res: any) {
     try {
-        console.log(req)
+        
 
         const { cookieName } = req.cookies;
         console.log(cookieName)

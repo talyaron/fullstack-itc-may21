@@ -52,4 +52,16 @@
   display: inline-block;
   border: none;
 }
+
+button {
+  background: #71B100;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 1rem 3rem;
+  text-align: center;
+  display: inline-block;
+  border: none;
+}
 /*# sourceMappingURL=styles.css.map */
