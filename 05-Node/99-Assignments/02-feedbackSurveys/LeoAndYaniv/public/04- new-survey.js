@@ -8,7 +8,6 @@ const root = document.querySelector('#nameUser');
 async function getUserInfoFromCookie() {
     const userInfo = await axios.get('/register/info');
     const { email, username } = userInfo.data.cookie;
-    console.log(email, username);
     renderuserInfo(username);
 };
 
@@ -58,8 +57,7 @@ async function deleteQuestion(id) {
         if (option) {
             //id: Is the ID from the question and UUID is the id from the survey
             const questions = await axios.delete(`/surveys/deleteQuestion/${id}/${uuid}`);
-           console.log(questions);
-            renderQuestions(questions.data.surveys);
+            renderQuestions(questions.data.surveys.questions);
         }
     } catch (error) {
         console.error(error);
