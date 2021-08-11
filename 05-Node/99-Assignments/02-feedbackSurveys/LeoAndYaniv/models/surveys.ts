@@ -136,8 +136,10 @@ export class Surveys {
     try {
       const survey = this.findSurvey(surveyToUpdate.uuid);
       survey.questions = surveyToUpdate.questions;
-
+      
       this.updateSurveysJson();
+      
+      return survey;
 
     } catch (error) {
       console.error(error);
