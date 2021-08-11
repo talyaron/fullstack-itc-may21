@@ -8,7 +8,7 @@ function addUsers(user){
     console.log(allUsers);
     const allUsersPars = JSON.parse(allUsers)
     const updateUsers = allUsersPars.push(user);
-    const writeUser =  fs.writeFileSync(updateUsers, "./users.json");
+  fs.writeFileSync("./users.json", JSON.stringify(allUsersPars));
     return console.log('user added ');
 
 }
