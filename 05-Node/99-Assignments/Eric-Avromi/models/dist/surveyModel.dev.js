@@ -1,8 +1,7 @@
 "use strict";
 
-var path = require('path');
+var path = require('path'); // const filePath = path.resolve(__dirname, './survey.json')
 
-var filePath = path.resolve(__dirname, 'survey.json');
 
 var fs = require('fs');
 
@@ -10,18 +9,22 @@ var _require = require('uuid'),
     uuidv4 = _require.v4;
 
 function addSurvey(newSurvey) {
-  var allSurveys = getAllSurveys(); // const task = {
+  console.log("hello surbey ");
+  var allSurveys = getAllSurveys();
+  console.log("hello surbey 3 "); // const task = {
   //     title,
   //     id: uuidv4()
   // }
 
   allSurveys.push(newSurvey);
-  fs.writeFileSync(filePath, JSON.stringify(allSurveys));
+  fs.writeFileSync("../survey.json", JSON.stringify(allSurveys));
   return allSurveys;
 }
 
 function getAllSurveys() {
-  var allSurveys = fs.readFileSync(filePath);
+  console.log('indie get all survey ');
+  var allSurveys = fs.readFileSync("../survey.json");
+  console.log('indie get after read y ');
   var parsed = JSON.parse(allSurveys);
   return parsed;
 }

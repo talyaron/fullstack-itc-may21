@@ -1,6 +1,6 @@
 
 const path = require('path')
-const filePath = path.resolve(__dirname, 'survey.json')
+// const filePath = path.resolve(__dirname, './survey.json')
 const fs = require('fs');
 const {
     v4: uuidv4
@@ -9,22 +9,25 @@ const {
 
 
 function addSurvey(newSurvey) { 
-    
+
+    console.log("hello surbey ");
     const allSurveys = getAllSurveys();
+    console.log("hello surbey 3 ");
     // const task = {
     //     title,
     //     id: uuidv4()
     // }
-    
+   
     allSurveys.push(newSurvey);
     
-    fs.writeFileSync(filePath, JSON.stringify(allSurveys));
+    fs.writeFileSync("../survey.json", JSON.stringify(allSurveys));
     return allSurveys
 }
 
 function getAllSurveys() { 
-    const allSurveys = fs.readFileSync(filePath);
-  
+    console.log('indie get all survey ');
+    const allSurveys = fs.readFileSync("../survey.json");
+    console.log('indie get after read y ');
     const parsed = JSON.parse(allSurveys)
     return parsed
 }

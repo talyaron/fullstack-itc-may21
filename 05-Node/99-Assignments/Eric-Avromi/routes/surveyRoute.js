@@ -23,7 +23,7 @@ router.post('/newSurvey', (req, res) => {
         const admin = req.cookies.cookie.email;
         console.log(admin)
         const newSurvey = new Survey(admin)
-       addSurvey(newSurvey);//will give back all Surveys 
+        addSurvey(newSurvey);//will give back all Surveys 
         res.send({ok:true})
 
 
