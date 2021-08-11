@@ -33,11 +33,12 @@ var Question = /** @class */ (function () {
 }());
 exports.Question = Question;
 var Survey = /** @class */ (function () {
-    function Survey(admin) {
-        this.uuid = uuidv4();
-        this.title = "";
+    function Survey(_a) {
+        var uuid = _a.uuid, title = _a.title, admin = _a.admin, questions = _a.questions;
+        this.uuid = (uuid === null) ? uuidv4() : uuid;
+        this.title = (uuid === null) ? "" : title;
         this.admin = admin;
-        this.questions = []; //when the user push add here
+        this.questions = (questions === null) ? [] : questions; //when the user push add here
     }
     Survey.prototype.addQuestion = function (newQuestion) {
         try {
@@ -115,6 +116,7 @@ var Surveys = /** @class */ (function () {
     };
     Surveys.prototype.updateSurvey = function (surveyToUpdate) {
         try {
+            console.log('updateSurvey called');
             var survey = this.findSurvey(surveyToUpdate.uuid);
             survey.questions = surveyToUpdate.questions;
             this.updateSurveysJson();
