@@ -41,3 +41,13 @@ export function addSurveys(req, res) {
     }
 }
 
+export function sendSurvey(req, res) {
+    try {
+        const allSurveys = readAllSurveys();
+        console.log(allSurveys);
+  
+
+    } catch (e) {
+        res.status(500).send({ error: `${e}` });
+    }
+}

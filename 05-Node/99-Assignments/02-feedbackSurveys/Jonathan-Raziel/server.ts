@@ -13,6 +13,7 @@ const getCookie = require("./routes/routeUser")
 const getSurveys = require("./routes/routeUser")
 
 const addSurveys = require("./routes/routesSurveys")
+const sendService = require("./routes/routesSurveys")
 
 app.use('/register', userModel);
 app.use('/login', userLogin);
@@ -20,6 +21,7 @@ app.use('/cookie', getCookie);
 app.use('/surveys', getSurveys);
 
 app.use('/surveys',addSurveys)
+app.use('/sendUserSurvey',sendService)
 
 
 app.listen(8000, function () { console.log('Listen on 8000'); });
