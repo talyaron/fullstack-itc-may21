@@ -20,13 +20,13 @@ function addSurvey(newSurvey) {
    
     allSurveys.push(newSurvey);
     
-    fs.writeFileSync("../survey.json", JSON.stringify(allSurveys));
+    fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
     return allSurveys
 }
 
 function getAllSurveys() { 
     console.log('indie get all survey ');
-    const allSurveys = fs.readFileSync("../survey.json");
+    const allSurveys = fs.readFileSync("./survey.json");
     console.log('indie get after read y ');
     const parsed = JSON.parse(allSurveys)
     return parsed
