@@ -45,29 +45,28 @@ function doingSubmitLogin(ev) {
 
         case 14:
           userLogin = _context.sent;
-          console.log(userLogin);
 
           if (userLogin.data.userInfo != null) {
-            location.href = "03- surveys.html";
+            location.href = "03- surveys.html?email=".concat(userInfo.email);
           } else {
             _errorMessage.innerHTML = userLogin.data.message;
           }
 
-          _context.next = 23;
+          _context.next = 22;
           break;
 
-        case 19:
-          _context.prev = 19;
+        case 18:
+          _context.prev = 18;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
           errorMessage.innerHTML = _context.t0;
 
-        case 23:
+        case 22:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 19]]);
+  }, null, null, [[0, 18]]);
 }
 
 ;

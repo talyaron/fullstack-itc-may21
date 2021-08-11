@@ -1,4 +1,5 @@
 export { };
+import {User} from '../models/users';
 const fs = require("fs");
 // LEER JSON Users
 const localJson = () => {
@@ -10,13 +11,8 @@ const localJson = () => {
   export function registerUser(req: any, res: any) {
     const { name, email, password } = req.body;
     const users = localJson();
-    const addUser = {
-   
-      name: name,
-      email: email,
-      password: password,  
-    };
-    users.push(addUser);
+    const user = new User(name , email, password)
+    users.push(user);
     fs.writeFileSync("./db/users.json", JSON.stringify(users));
     console.log(users);
     

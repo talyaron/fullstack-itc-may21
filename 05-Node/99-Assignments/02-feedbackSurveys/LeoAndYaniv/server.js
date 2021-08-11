@@ -11,7 +11,9 @@ app.use(cookieParser());
 
 //Route
 const registerRoute = require('./routes/routeUsers');
+const surveysRoute = require('./routes/routeSurveys');
 
 app.use('/register', registerRoute);
+app.use('/surveys', surveysRoute);
 
 app.listen(port, () => { console.log(`Listening on port: ${port}`) });

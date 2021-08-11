@@ -49,7 +49,7 @@ function doingSubmitCreate(ev) {
           userCreated = _context.sent;
 
           if (userCreated.data.user != null) {
-            location.href = "03- surveys.html";
+            location.href = "03- surveys.html?email=".concat(userCreated.data.user.email);
           } else {
             _errorMessage.innerHTML = userCreated.data.message;
           }

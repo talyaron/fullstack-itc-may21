@@ -14,10 +14,9 @@ async function doingSubmitLogin(ev) {
         ev.target.reset();
         const userInfo = { email, password }
         const userLogin = await axios.post('/register/login', userInfo);
-        console.log(userLogin);
 
         if (userLogin.data.userInfo != null) {
-            location.href = "03- surveys.html";
+            location.href = `03- surveys.html?email=${userInfo.email}`;
         } else {
             errorMessage.innerHTML = userLogin.data.message;
         }

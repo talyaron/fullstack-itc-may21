@@ -11,9 +11,11 @@ export class Rating {
 }
 
 export class Question {
+  uuid: string;
   content: string;
   ratings: Array<Rating>; //(number of fillers & average rating)
   constructor(content) {
+    this.uuid = uuidv4();
     this.content = content;
     this.ratings = []; //when user raiting update
   }
@@ -21,10 +23,12 @@ export class Question {
 
 export class Survey {
   uuid: string;
+  title: string;
   admin: string; //(email)
   questions: Array<Question>;
-  constructor(admin, questions) {
+  constructor(admin) {
     this.uuid = uuidv4();
+    this.title = '';
     this.admin = admin;
     this.questions = []; //when the user push add here
     /* createSurvey()
