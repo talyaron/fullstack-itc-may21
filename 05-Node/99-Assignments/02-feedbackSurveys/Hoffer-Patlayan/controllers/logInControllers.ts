@@ -23,11 +23,12 @@ export function logInUser(req: any, res: any) {
               elements.email === email &&
               elements.password === password
           );
+        
           res.cookie("cookieName", JSON.stringify(doLogin), {
-            maxAge: 3000000,
+            maxAge: 300000,
             httpOnly: true,
           });
-          res.send({ ok: "Hello, thanks for coming back" });
+          res.send({userInfo: doLogin });
         } else {
           throw new Error("No hay PEPE");
         }
