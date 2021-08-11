@@ -1,7 +1,5 @@
 "use strict";
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 var express = require("express");
 
 var app = express();
@@ -31,16 +29,7 @@ app.use('/users', userRouter); // const addUserRouter = require('./routes/tasksR
 //     const cookie = req.cookies['cookie'];
 //     res.send({cookie})
 // })
-
-var User = function User(name, email, password) {
-  _classCallCheck(this, User);
-
-  this.name = name;
-  this.email = email;
-  this.password = password;
-  this.id = uuidv4();
-  this.createdSurvey = []; //this will get survey Id..
-}; // class Survey {
+// class Survey {
 //     constructor(title){
 //         this.title = title;
 //         this.id = uuidv4();
@@ -49,7 +38,6 @@ var User = function User(name, email, password) {
 //             }
 //     }
 // }
-
 
 app.listen(port, function () {
   console.log("Server listening at http://localhost:".concat(port));
