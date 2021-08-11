@@ -23,10 +23,12 @@ export class Question {
 
 export class Survey {
   uuid: string;
+  title: string;
   admin: string; //(email)
   questions: Array<Question>;
   constructor(admin) {
     this.uuid = uuidv4();
+    this.title = '';
     this.admin = admin;
     this.questions = []; //when the user push add here
     /* createSurvey()

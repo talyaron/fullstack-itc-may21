@@ -1,4 +1,5 @@
 export { };
+// import {User} from '../models/users';
 const fs = require("fs");
 // LEER JSON Users
 const localJson = () => {
@@ -8,18 +9,17 @@ const localJson = () => {
 
 export function logInUser(req: any, res: any) {
     try {
-        const { name, email, password } = req.body;
+        const {email, password } = req.body;
         const users = localJson();
         const correctUser = users.some(
           (elements: any) =>
-            elements.name === name &&
+    
             elements.email === email &&
             elements.password === password
         );
         if (correctUser) {
           const doLogin = users.find(
             (elements: any) =>
-              elements.name === name &&
               elements.email === email &&
               elements.password === password
           );

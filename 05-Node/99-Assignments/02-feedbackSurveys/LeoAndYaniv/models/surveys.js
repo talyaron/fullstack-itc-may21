@@ -22,6 +22,7 @@ exports.Question = Question;
 var Survey = /** @class */ (function () {
     function Survey(admin) {
         this.uuid = uuidv4();
+        this.title = '';
         this.admin = admin;
         this.questions = []; //when the user push add here
         /* createSurvey()
