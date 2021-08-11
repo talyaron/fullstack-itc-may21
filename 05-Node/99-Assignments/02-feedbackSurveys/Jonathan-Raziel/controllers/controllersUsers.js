@@ -67,10 +67,11 @@ exports.getCookie = getCookie;
 ;
 function getSurveys(req, res) {
     try {
-        var email = req.params.email;
+        var email_2 = req.params.email;
         var allUsers = readAllUsers();
         if (allUsers.length !== 0) {
-            res.send(allUsers[0].surveys);
+            var find = allUsers.find(function (user) { return user.email === email_2; });
+            res.send(find.surveys);
         }
     }
     catch (e) {
