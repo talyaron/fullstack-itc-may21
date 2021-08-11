@@ -7,7 +7,6 @@ const localJson = () => {
     return JSON.parse(fileJson);
   };
 
-
   export function registerUser(req: any, res: any) {
     const { name, email, password } = req.body;
     const users = localJson();

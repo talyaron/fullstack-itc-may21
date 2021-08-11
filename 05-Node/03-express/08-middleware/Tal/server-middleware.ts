@@ -20,7 +20,7 @@ app.get('/getData', (req, res) => {
 
     //write a cookie
 
-    const name1 = JSON.stringify({ name: 'Raziel' })
+    const name1:string = JSON.stringify({ name: 'Raziel' })
     res.cookie('cookieName', name1, { maxAge: 300000000, httpOnly: true });
     res.send({ ok: true })
 })
@@ -33,7 +33,7 @@ app.get('/user', (req, res)=>{
     console.log(req.cookies);
     const { cookieName } = req.cookies
     const cookie = JSON.parse(cookieName);
-    console.log(cookie)
+    console.log(cookie);
     const {name} = cookie;
     console.log(name)
 

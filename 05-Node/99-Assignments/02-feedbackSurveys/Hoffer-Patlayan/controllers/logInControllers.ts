@@ -8,6 +8,7 @@ const localJson = () => {
   };
 
 export function logInUser(req: any, res: any) {
+  
     try {
         const {email, password } = req.body;
         const users = localJson();
@@ -25,7 +26,7 @@ export function logInUser(req: any, res: any) {
           );
         
           res.cookie("cookieName", JSON.stringify(doLogin), {
-            maxAge: 300000,
+            maxAge: 3000000,
             httpOnly: true,
           });
           res.send({userInfo: doLogin });
