@@ -37,3 +37,18 @@ function addSurveys(req, res) {
     }
 }
 exports.addSurveys = addSurveys;
+// export function deleteSurveys(req,res){
+//     try {
+//         const {id,email} = req.params
+//         let allSurveys = readAllSurveys();
+//          if(allSurveys.length !== 0){
+//             //  console.log(allSurveys)
+//             //  allSurveys = allSurveys.filter(user => (user.id !== id))
+//             // // const findSurveyToDelete = userFind.surveys.filter(survey => survey.id !== id)
+//             // fs.writeFileSync("./user.json", JSON.stringify(allSurveys));
+//             // res.send(allSurveys)
+//          } 
+//     } catch (e) {
+//         res.status(500).send({ error: `${e}` });
+//     }
+// }

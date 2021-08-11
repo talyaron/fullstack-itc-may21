@@ -1,114 +1,38 @@
 "use strict";
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 var express = require('express');
-
-var app = express();
 
 var cookieParser = require('cookie-parser');
 
-var port = process.env.PORT || 3000;
-app.use(express.json());
-
 var Ajv = require("ajv");
 
+var _require = require('./models.js'),
+    User = _require.User,
+    Users = _require.Users,
+    Survey = _require.Survey,
+    Surveys = _require.Surveys,
+    Question = _require.Question,
+    Questions = _require.Questions; // Routes
+
+
+var loginRoute = require('./routes/loginRoute');
+
+var questionsRoute = require('./routes/questionsRoute');
+
+var surveysRoute = require('./routes/surveysRoute');
+
+var usersRoute = require('./routes/usersRoute');
+
+var app = express();
 var ajv = new Ajv();
+var port = process.env.PORT || 3000;
+app.use(express.json());
 app.use(express["static"]('public'));
 app.use(cookieParser());
-
-var User = function User(name, email, password) {
-  _classCallCheck(this, User);
-
-  this.name = name;
-  this.email = email;
-  this.password = password;
-  this.createdSurvey = [];
-};
-
-var Users =
-/*#__PURE__*/
-function () {
-  function Users() {
-    _classCallCheck(this, Users);
-
-    this.users = [];
-  }
-
-  _createClass(Users, [{
-    key: "newUser",
-    value: function newUser(user) {
-      this.users.push(user);
-    }
-  }]);
-
-  return Users;
-}();
-
-var Survey = function Survey(title, admin) {
-  _classCallCheck(this, Survey);
-
-  this.surveyID = Math.random().toString(16).slice(2);
-  this.title = title;
-  this.admin = admin;
-  this.questions = [];
-};
-
-var Surveys =
-/*#__PURE__*/
-function () {
-  function Surveys() {
-    _classCallCheck(this, Surveys);
-
-    this.surveys = [];
-  }
-
-  _createClass(Surveys, [{
-    key: "newSurvey",
-    value: function newSurvey(survey) {
-      this.surveys.push(survey);
-    }
-  }]);
-
-  return Surveys;
-}();
-
-var Question = function Question(title) {
-  _classCallCheck(this, Question);
-
-  this.title = title, this.questionID = Math.random().toString(16).slice(2);
-  this.voters = {
-    voterID: [],
-    score: []
-  };
-};
-
-var Questions =
-/*#__PURE__*/
-function () {
-  function Questions() {
-    _classCallCheck(this, Questions);
-
-    this.questions = [];
-  }
-
-  _createClass(Questions, [{
-    key: "newQuestion",
-    value: function newQuestion(question) {
-      this.questions.push(question);
-    }
-  }]);
-
-  return Questions;
-}();
-
 var users = new Users();
 var selectedAdmin = {};
-var selectedAdminIndex = 0;
+var selectedAdminIndex = 0; // Route to create user
+
 app.post('/createUser', function (req, res) {
   try {
     var schema = {
@@ -146,47 +70,10 @@ app.post('/createUser', function (req, res) {
       error: e.message
     });
   }
-});
-app.post('/login', function (req, res) {
-  try {
-    var schema = {
-      type: "object",
-      properties: {
-        password: {
-          type: "string"
-        },
-        email: {
-          type: "string"
-        }
-      },
-      required: ["password", "email"],
-      additionalProperties: false
-    };
-    var validate = ajv.compile(schema);
-    var body = req.body;
-    var valid = validate(body);
+}); // Login route
 
-    if (!valid) {
-      validate.errors.forEach(function (err) {
-        return console.log(err.message);
-      });
-      throw new Error("Invalid data was transferd");
-    }
+app.use('/login', loginRoute); // Route to add a survey
 
-    console.log(users);
-    console.log(users.users);
-    selectedAdmin = users.users.find(function (r) {
-      return r.email === body.email && r.password === body.password;
-    });
-    console.log(selectedAdmin);
-    res.send(selectedAdmin);
-  } catch (e) {
-    console.log(e);
-    res.status(400).send({
-      error: e.message
-    });
-  }
-});
 app.post('/addSurvey', function (req, res) {
   try {
     var schema = {
@@ -228,7 +115,8 @@ app.post('/addSurvey', function (req, res) {
       error: e.message
     });
   }
-});
+}); // Route to post a question
+
 app.post('/postQuestions', function (req, res) {
   try {
     var body = req.body;
@@ -248,10 +136,13 @@ app.post('/postQuestions', function (req, res) {
       error: e.message
     });
   }
-});
+}); // Route to send selected Admin
+
 app.get('/selectedAdminUser', function (req, res) {
   res.send(selectedAdmin);
-});
+}); // Listen on port
+
 app.listen(port, function () {
   console.log('Server listen on port', port);
 });
+console.log(users);

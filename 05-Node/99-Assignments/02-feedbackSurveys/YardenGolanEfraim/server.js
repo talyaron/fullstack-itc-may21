@@ -1,79 +1,29 @@
 const express = require('express');
-const app = express();
 const cookieParser = require('cookie-parser');
-const port = process.env.PORT || 3000;
-app.use(express.json());
 const Ajv = require("ajv");
+const { User, Users, Survey, Surveys, Question, Questions } = require('./models.js')
+
+// Routes
+const loginRoute = require('./routes/loginRoute')
+const questionsRoute = require('./routes/questionsRoute')
+const surveysRoute = require('./routes/surveysRoute')
+const usersRoute = require('./routes/usersRoute')
+
+const app = express();
 const ajv = new Ajv()
+const port = process.env.PORT || 3000;
+
+app.use(express.json());
 app.use(express.static('public'));
 app.use(cookieParser())
 
-
-class User {
-   
-    constructor(name, email, password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.createdSurvey = []
-
-    }
-}
-
-class Users{
-    constructor(){
-        this.users = [];
-    }
-
-    newUser(user){
-        this.users.push(user)
-    }
-    
-}
-
-class Survey {
- 
-    constructor(title, admin) {  
-        this.surveyID = Math.random().toString(16).slice(2);
-        this.title = title;
-        this.admin = admin;
-        this.questions = []
-    }
-}
-class Surveys{
-    constructor(){
-        this.surveys = [];
-    }
-
-    newSurvey(survey){
-        this.surveys.push(survey)
-    }
-    
-}
-
-class Question {
-
-    constructor(title){
-        this.title = title,
-        this.questionID = Math.random().toString(16).slice(2);
-        this.voters = {voterID: [], score: []}
-    }
-} 
-class Questions{
-    constructor(){
-        this.questions = [];
-    }
-
-    newQuestion(question){
-        this.questions.push(question)
-    }
-    
-}
 
 const users = new Users()
 let selectedAdmin = {}
 let selectedAdminIndex = 0
 
+
+// Route to create user
 app.post('/createUser', (req, res) => {
 
     try {
@@ -116,53 +66,12 @@ app.post('/createUser', (req, res) => {
             error: e.message
         });
     }
-
-})
-app.post('/login', (req, res) => {
-
-    try {
-
-        const schema = {
-            type: "object",
-            properties: {
-                password: {
-                    type:"string"
-                },
-                email: {
-                    type:"string"
-                }
-            },
-            required: ["password", "email"],
-            additionalProperties: false
-        }
-        const validate = ajv.compile(schema)
-
-
-        const {
-            body
-        } = req;
-
-        const valid = validate(body) 
-        if (!valid) {
-            validate.errors.forEach(err =>
-                console.log(err.message)
-            )
-            throw new Error("Invalid data was transferd")
-        }
-        console.log(users)
-        console.log(users.users)
-        selectedAdmin = users.users.find(r=> r.email === body.email && r.password === body.password)
-        console.log(selectedAdmin)
-        res.send(selectedAdmin);
-    } catch (e) {
-        console.log(e)
-        res.status(400).send({ 
-            error: e.message
-        });
-    }
-
 })
 
+// Login route
+app.use('/login', loginRoute)
+
+// Route to add a survey
 app.post('/addSurvey', (req, res) => {
 
     try {
@@ -212,6 +121,7 @@ app.post('/addSurvey', (req, res) => {
 
 })
 
+// Route to post a question
 app.post('/postQuestions', (req, res) => {
 
     try {
@@ -239,10 +149,13 @@ app.post('/postQuestions', (req, res) => {
 
 })
 
+// Route to send selected Admin
 app.get('/selectedAdminUser', (req, res) => {
     res.send(selectedAdmin)
 })
 
+
+// Listen on port
 app.listen(port, () => {
     console.log('Server listen on port', port)
 })

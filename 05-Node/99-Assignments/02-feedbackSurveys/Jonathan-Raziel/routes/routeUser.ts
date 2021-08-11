@@ -12,5 +12,4 @@ router.post('/userLogin', loginUser)
 router.get('/getCookie', getCookie)
 router.get('/show/:email',getSurveys)
 
-
 module.exports = router

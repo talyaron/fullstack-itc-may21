@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pollster survey list</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dist/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -30,7 +30,7 @@
     async function getAdminUser() {
         const nameDisplay = document.querySelector("h1")
         adminUser = await axios.get('/selectedAdminUser')
-        await console.log(adminUser.data[0])
+        console.log(adminUser)
         nameDisplay.innerText = await adminUser.data.name
         await renderArrayToDom(adminUser.data.createdSurvey)
 
