@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+	font-family:'Roboto', sans-serif;
+    
+}
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -40,6 +45,11 @@
   }
 
 
+#login-headline {
+    padding: 2rem;
+    text-align: center;
+    margin: 0 auto;
+}
 /* Styling for the user page */
 /* ----------------------------- */
 #user-welcome-healdine, #user-headline {
@@ -61,12 +71,15 @@
   margin: .3em;
   width: 100%;
   text-align: center;
-}
-.question__title{
-  font-size: 1.3rem;
+
+  &__title{
+    font-size: 1.3rem;
+  }
 }
 
+
 .input-wrapper{
+    text-align: center;
   margin: 0 auto;
   width: 100%;
 }
@@ -74,14 +87,28 @@
 .button-wrapper {
   margin: 0 auto;
 }
-#submit-btn {
-  font-size: 1rem;
-  margin: 2em auto;
-  padding: 1em 1.5em;
-  cursor: pointer;
-  color: whitesmoke;
-  background: #197540;
-  font-weight: bold;
+#submit-btn, #link {
+//   font-size: 1rem;
+//   margin: 2em auto;
+//   padding: 1em 1.5em;
+//   cursor: pointer;
+//   color: whitesmoke;
+//   background: #197540;
+//   font-weight: bold;
+margin:0;
+background-color:#197540;
+border:solid 1px #23583a;
+font-size:16px;
+color:white;
+font-weight:normal;
+padding-top:10px;
+padding-bottom:10px;
+padding-right:30px;
+padding-left:30px;
+-moz-border-radius:0px;
+-webkit-border-radius:0px;
+border-radius:0px;
+text-decoration: none;
 }
 
 /* Input:range - Slider styling */
@@ -192,3 +219,54 @@
   input[type=range]:focus::-ms-fill-upper {
     background: #367ebd;
   }
+
+  //*register page - form css*
+
+.form-field {
+    margin:0;
+    padding:5px 0 0 0;
+
+    &__label {
+        font-size:15px;
+        color:#757575;
+        font-weight:normal;
+        padding-top:5px;
+        padding-bottom:5px;
+        float:none;
+        text-align:left;
+        width:auto;
+        display:block;
+    }
+
+    &__input {
+        background-color:white;
+	border:solid 1px darkgrey;
+	font-size:15px;
+	color:#757575;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	padding-top:5px;
+	padding-bottom:5px;
+	padding-left:10px;
+	padding-right:10px;
+	width:100%;
+	box-sizing:border-box;
+    }
+
+    &__submit {
+        margin:0;
+	background-color:#197540;
+	border:solid 1px #23583a;
+	font-size:16px;
+	color:white;
+	font-weight:normal;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-right:30px;
+	padding-left:30px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+    }
+}
