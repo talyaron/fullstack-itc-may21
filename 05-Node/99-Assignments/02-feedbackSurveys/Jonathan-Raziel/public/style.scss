@@ -136,8 +136,13 @@
             align-items: center;
 
             span{
-                position: absolute;
+                position: relative;
                 left:10%;
+            }
+
+            i{
+                position: relative;
+                right:10%;
             }
         }
     }
