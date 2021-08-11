@@ -1,5 +1,6 @@
 export { };
 import {User} from '../models/users'
+
 const fs = require("fs");
 // LEER JSON Users
 const localJson = () => {
