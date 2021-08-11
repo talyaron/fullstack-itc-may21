@@ -36,9 +36,9 @@
         btnNewSurvey.addEventListener('click', createNewSurvey)
         btnDeleteSurvey.addEventListener('click', deleteSurvey)
         
-        fetch('/userAdmin')
-            .then(r => r.json())
-            .then(data => console.log(data.cookie))
+        // fetch('/userAdmin')
+        //     .then(r => r.json())
+        //     .then(data => console.log(data.cookie))
 
 
 
@@ -54,16 +54,16 @@
         }
 
 
-        async function getAllSurveys() { 
-    try {
-        const res = await axios.get('/surveys/')
-        const allTasks = res.data
-        renderSurveys(allSurveys);
-    } catch (error) {
-        console.log(error);
-    }
-}
-getAllSurveys()
+//         async function getAllSurveys() { 
+//     try {
+//         const res = await axios.get('/surveys/')
+//         const allTasks = res.data
+//         renderSurveys(allSurveys);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+// getAllSurveys()
  
         
         </script>

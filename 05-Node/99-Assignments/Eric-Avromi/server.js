@@ -36,11 +36,29 @@ app.post('/register', (req, res) => {
     });
 });
 
-app.get('/useAdmin', (req, res) => {
-    const cookie = req.cookies['cookie'];
-    res.send({cookie})
+app.post('/login', (req, res) => {
 
-})
+    //class info from the form, create a new user like an instance
+    const {name, email, password} = req.body
+    const user = new User (name, email, password)
+    addUsers(user);
+    
+    
+  
+    
+    res.cookie('cookie',  {
+        maxAge: 30000000,
+        httpOnly: true
+    }).send({
+        ok: true
+    });
+});
+
+// app.get('/useAdmin', (req, res) => {
+//     const cookie = req.cookies['cookie'];
+//     res.send({cookie})
+
+// })
 
 
 
