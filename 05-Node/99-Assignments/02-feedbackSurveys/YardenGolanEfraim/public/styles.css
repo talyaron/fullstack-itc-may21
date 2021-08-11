@@ -47,6 +47,10 @@
   margin: 0 auto;
 }
 
+.question__explanation {
+  font-style: italic;
+}
+
 .questions-wrapper {
   margin: 0 auto;
 }

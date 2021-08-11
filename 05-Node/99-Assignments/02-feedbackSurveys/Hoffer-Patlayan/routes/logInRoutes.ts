@@ -7,4 +7,4 @@ import {logInUser} from '../controllers/logInControllers'
 router.post('/postLogIn', logInUser)
 
 
-module.exports = router
+module.exports = router;
