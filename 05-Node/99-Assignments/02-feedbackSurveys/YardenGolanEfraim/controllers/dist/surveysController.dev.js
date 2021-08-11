@@ -4,19 +4,19 @@ var models = require('../models');
 
 var Ajv = require("ajv");
 
-exports.login = function (req, res) {
+exports.addSurvey = function (req, res) {
   try {
     var schema = {
       type: "object",
       properties: {
-        password: {
+        adminEmail: {
           type: "string"
         },
-        email: {
+        surveyName: {
           type: "string"
         }
       },
-      required: ["password", "email"],
+      required: ["surveyName", "adminEmail"],
       additionalProperties: false
     };
     var validate = ajv.compile(schema);
@@ -28,14 +28,16 @@ exports.login = function (req, res) {
         return console.log(err.message);
       });
       throw new Error("Invalid data was transferd");
-    }
+    } // users.users.find(find => find.email === body.email )
 
-    console.log(users);
-    console.log(users.users);
-    selectedAdmin = users.users.find(function (r) {
-      return r.email === body.email && r.password === body.password;
+
+    users.users.map(function (user, index) {
+      if (user.email === body.adminEmail) {
+        users.users[index].createdSurvey.push(new Survey(body.surveyName, body.adminEmail));
+        selectedAdmin = users.users[index];
+        selectedAdminIndex = index;
+      }
     });
-    console.log(selectedAdmin);
     res.send(selectedAdmin);
   } catch (e) {
     console.log(e);

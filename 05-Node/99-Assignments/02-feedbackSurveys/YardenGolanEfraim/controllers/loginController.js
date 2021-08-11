@@ -1,5 +1,4 @@
 const models = require('../models')
-const server = require('../server')
 const Ajv = require("ajv");
 
 exports.login = (req, res) => {
