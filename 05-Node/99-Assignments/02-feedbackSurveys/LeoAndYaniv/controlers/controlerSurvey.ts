@@ -37,7 +37,7 @@ export function newSurvey(req, res) {
   res.send({ message: "A new Survey was added", survey: survey });
 }
 
-//Function to create an empty survey
+//Function to get a question from a specific survey
 export function getQuestionsSurvey(req, res) {
   //User email sended by params in the URL
   const { uuid } = req.params;
@@ -59,4 +59,35 @@ export function deleteQuestion(req, res) {
 
   fs.writeFileSync("./surveys.json", JSON.stringify(allSurveys));
   res.send({ message: "A question was deleted", surveys: surveyExist });
+}
+
+//Function to delete the completly survey
+export function deleteSurvey(req, res) {
+  const { uuid } = req.params;
+  let allSurveys = readJsonSurveys();
+  allSurveys = allSurveys.filter((survey) => survey.uuid !== uuid);
+
+  //Read cookies to send the data from the user login
+  const { cookieName } = req.cookies;
+  const cookie = JSON.parse(cookieName);
+
+  fs.writeFileSync("./surveys.json", JSON.stringify(allSurveys));
+  res.send({ message: "A question was deleted", userInfo: cookie.email });
+}
+
+//Function to get all the surveys from a specific user
+export function getSurveys(req, res) {
+  try {
+    const { emailLogIn } = req.params;
+    let allSurveys = readJsonSurveys();
+    const surveysFromUser = allSurveys.filter(
+      (survey) => survey.admin === emailLogIn
+    );
+    res.send({
+      message: "You get all the surveys from the user login",
+      surveys: surveysFromUser,
+    });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 }

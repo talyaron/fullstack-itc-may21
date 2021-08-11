@@ -136,13 +136,86 @@ function deleteQuestion(id) {
   }, null, null, [[0, 9]]);
 }
 
-;
-/* //Get all the questions to show from this survey:
-async function getAllQuestions() {
-    try {
-        const questionsFromSurvey = await axios.get(`/surveys/getQuestions/${uuid}`);
-        renderQuestions(questionsFromSurvey.data.survey.questions);
-    } catch (error) {
-        console.log(error);
+; //When the user click on the button "Cancel and go back" is going to cancel all the survey
+
+var cancelSurvey = document.querySelector("#buttonCancel");
+cancelSurvey.addEventListener('click', cancelTheSurvey);
+
+function cancelTheSurvey() {
+  var option, userInfo;
+  return regeneratorRuntime.async(function cancelTheSurvey$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.prev = 0;
+          option = confirm("Are you sure do you want to cancel all the survey, you will lose all the data created here?");
+
+          if (!option) {
+            _context4.next = 7;
+            break;
+          }
+
+          _context4.next = 5;
+          return regeneratorRuntime.awrap(axios["delete"]("/surveys/deleteSurvey/".concat(uuid)));
+
+        case 5:
+          userInfo = _context4.sent;
+          location.href = "03- surveys.html?email=".concat(userInfo.data.userInfo);
+
+        case 7:
+          _context4.next = 12;
+          break;
+
+        case 9:
+          _context4.prev = 9;
+          _context4.t0 = _context4["catch"](0);
+          console.error(_context4.t0);
+
+        case 12:
+        case "end":
+          return _context4.stop();
+      }
     }
-}; */
+  }, null, null, [[0, 9]]);
+}
+
+; //When the user click on the button "Upload the survey" is going to create the survay and save it in the "survey.json"
+
+var uploadSurvey = document.querySelector("#buttonUpload");
+uploadSurvey.addEventListener('click', uploadTheSurvey);
+
+function uploadTheSurvey() {
+  var inputSurvey, surveyTitle, userInfo;
+  return regeneratorRuntime.async(function uploadTheSurvey$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+          inputSurvey = document.querySelector('#surveyTitle');
+          surveyTitle = inputSurvey.value; //UUID is the id from the survey
+
+          _context5.next = 5;
+          return regeneratorRuntime.awrap(axios.post("/register/uploadUserWithSurvey/".concat(uuid), {
+            surveyTitle: surveyTitle
+          }));
+
+        case 5:
+          userInfo = _context5.sent;
+          location.href = "03- surveys.html?email=".concat(userInfo.data.userInfo);
+          _context5.next = 12;
+          break;
+
+        case 9:
+          _context5.prev = 9;
+          _context5.t0 = _context5["catch"](0);
+          console.error(_context5.t0);
+
+        case 12:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, [[0, 9]]);
+}
+
+;
