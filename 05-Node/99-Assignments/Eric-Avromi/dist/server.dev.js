@@ -7,7 +7,7 @@ var express = require("express");
 var app = express();
 var port = process.env.PORT || 8080;
 
-var fs = require("fs"); //do  the same to questions .json?
+var fs = require("fs"); //do  the same to answers and surveys .json?
 
 
 app.use(express["static"]("public"));

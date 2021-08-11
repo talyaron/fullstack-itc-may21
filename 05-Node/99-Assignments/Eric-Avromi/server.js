@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
 
-const fs = require("fs"); //do  the same to questions .json?
+const fs = require("fs"); //do  the same to answers and surveys .json?
 app.use(express.static("public"));
 app.use(express.json());
 
