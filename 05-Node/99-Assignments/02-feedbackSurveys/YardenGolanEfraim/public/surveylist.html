@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SurveyList</title>
+    <title>Pollster survey list</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <h1></h1>
+    <h1></h1> <!-- Is this for the Admin name? (: -->
     <h2>Add A Survey!</h2>
     <form onsubmit="handleSurvey(event)">
         <input type="text" name="survey" placeholder="surveyname" required>
@@ -57,7 +57,7 @@
                                 <span class="close">&times;</span>
                                  <form onsubmit="handleQuestions(event)">
                                      <div id="question-holder">
-                                        <input type="text" name="${ID}" id="${ID}" placeholder="question" required>
+                                        <input type="text" name="${ID}" id="${ID}" placeholder="Question" required>
                                     </div>
                                     <button id="addQuestion" onclick="addAnotherQuestion()">Add Question</button>
                                     <button id="submit" type="submit">Submit Questions!</button>
