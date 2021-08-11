@@ -1,58 +1,27 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
-
+const cookieParser = require('cookie-parser');
 const fs = require("fs"); //do  the same to answers and surveys .json?
+const surveyRouter = require('./routes/surveyRoute.js')
+const userRouter = require('./routes/userRoutes.js')
+const {
+    v4: uuidv4 
+} = require('uuid');  // do  the same to questions?
 app.use(express.static("public"));
+app.use(cookieParser());
 app.use(express.json());
+app.use('/survey', surveyRouter) //do the same for questionRouter?
+
+app.use('/users', userRouter)
 
 
 // const addUserRouter = require('./routes/tasksRoute.js')
 // app.use('/users', userRouter)
 
-const {
-    addUsers
-    } = require('./models/userModels.js')
 
 
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
 
-app.post('/register', (req, res) => {
-
-    //class info from the form, create a new user like an instance
-    const {name, email, password} = req.body
-    const newUser = new User (name, email, password)
-    addUsers(newUser);
-    
-    
-  
-    
-    res.cookie('cookie',  {
-        maxAge: 30000000,
-        httpOnly: true
-    }).send({
-        ok: true
-    });
-});
-
-app.post('/login', (req, res) => {
-
-    //class info from the form, create a new user like an instance
-    const {name, email, password} = req.body
-    const user = new User (name, email, password)
-    addUsers(user);
-    
-    
-  
-    
-    res.cookie('cookie',  {
-        maxAge: 30000000,
-        httpOnly: true
-    }).send({
-        ok: true
-    });
-});
 
 // app.get('/useAdmin', (req, res) => {
 //     const cookie = req.cookies['cookie'];
@@ -63,11 +32,6 @@ app.post('/login', (req, res) => {
 
 
 
-
-const surveyRouter = require('./routes/surveyRoute.js')
-const {
-    v4: uuidv4 
-} = require('uuid');  // do  the same to questions?
 
 
 class User {
@@ -95,7 +59,7 @@ class User {
 
 
 
-app.use('/survey', surveyRouter) //do the same for questionRouter?
+
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
