@@ -75,7 +75,8 @@ export function getSurveys(req, res) {
         const {email} = req.params
         const allUsers = readAllUsers();
         if(allUsers.length !== 0){
-            res.send(allUsers[0].surveys);
+            const find = allUsers.find(user => user.email === email)
+            res.send(find.surveys);
         } 
     } catch (e) {
         res.status(500).send({ error: `${e}` });
