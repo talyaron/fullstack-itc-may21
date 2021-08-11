@@ -1,11 +1,22 @@
+
 export function getUsers(req: any, res: any) {
-    console.log(req)
+    try {
+        console.log(req)
 
-    const { cookieName } = req.cookies;
-    
-    console.log(JSON.stringify(req.cookies));
-    
-    const cookie = JSON.parse(cookieName);
+        const { cookieName } = req.cookies;
+        console.log(cookieName)
+        if(!cookieName) throw new Error('No cookie was found')
 
-    res.send(cookie);
-};  
+
+
+        const cookie = JSON.parse(cookieName);
+        console.log(cookie);
+        const { name } = cookie;
+
+        console.log(name)
+        res.send(cookie);
+    } catch (e) {
+        console.log(e)
+        res.status(400).send({error:"No cookie was found"})
+    }
+};

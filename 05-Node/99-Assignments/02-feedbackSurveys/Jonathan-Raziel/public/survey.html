@@ -17,7 +17,7 @@
     </header>
     <div class="container__title">
         <label>Title</label>
-        <input type="text"name="title" id="title" class="container__title--title"/>
+        <input type="text" name="title" id="title" class="container__title--title" />
 
     </div>
     <main class="main">
@@ -26,18 +26,30 @@
     <div class="creater">
         <button type="button" class="btncreate" disabled>CREATE</button>
     </div>
+    <i class="fas fa-paper-plane sendLink"></i>
     <script>
-
         //btn
         const btnAddQuestion = document.querySelector('.boxquestion--circle')
         const btnCreateSurveys = document.querySelector('.btncreate')
-
+        const sendLink = document.querySelector('.sendLink');
         //init
         let count = 0;
 
         //addEventListener
         btnAddQuestion.addEventListener('click', addQuestion)
         btnCreateSurveys.addEventListener('click', createSurvey)
+        sendLink.addEventListener('click', sendLinkToUser)
+
+        async function sendLinkToUser(ev) {
+
+            ev.preventDefault();
+            const responseSurveyId = await axios.get('/sendUserSurvey/sendSurvey');
+            console.log(responseSurveyId);
+
+        }
+
+
+
 
 
         function addQuestion(ev) {
@@ -88,7 +100,9 @@
 
             ev.preventDefault()
             const response = await axios.get('/cookie/getCookie')
-            const { username } = response.data
+            const {
+                username
+            } = response.data
 
             const rootMessage = document.querySelector('#nameCookie')
             rootMessage.innerHTML = `<span>Hi ✋ ${username.charAt(0).toUpperCase() + username.slice(1)}</span>`
@@ -107,7 +121,9 @@
             const inputTitle = document.querySelector('.container__title--title').value
 
             const responseCookie = await axios.get('/cookie/getCookie')
-            const { email } = responseCookie.data
+            const {
+                email
+            } = responseCookie.data
 
             const newSurvey = {
                 title: inputTitle,
@@ -116,7 +132,9 @@
             }
 
             const responseAwait = await addSurveysPromise(newSurvey)
-            const {ok} = responseAwait
+            const {
+                ok
+            } = responseAwait
             alert(ok)
 
         }
@@ -131,16 +149,17 @@
                     body: JSON.stringify(newSurvey)
                 }).then(function (res) {
                     if (res.status === 200 && res.ok) {
-                        return res.json().then(pepe => { resolve(pepe) });
+                        return res.json().then(pepe => {
+                            resolve(pepe)
+                        });
                     } else {
-                        return res.json().then(pepe => { alert(pepe.error) })
+                        return res.json().then(pepe => {
+                            alert(pepe.error)
+                        })
                     }
                 })
             })
         }
-
-
-
     </script>
 </body>
 
