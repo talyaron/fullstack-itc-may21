@@ -53,7 +53,8 @@ div {
 
 /* Styling for the user page */
 /* ----------------------------- */
-#user-welcome-healdine, #user-headline {
+#user-welcome-healdine,
+#user-headline {
   text-align: center;
   margin: 0 auto;
 }
@@ -299,7 +300,8 @@ div {
 
 /* Styling for the user page */
 /* ----------------------------- */
-#user-welcome-healdine, #user-headline {
+#user-welcome-healdine,
+#user-headline {
   text-align: center;
   margin: 0 auto;
 }
@@ -333,7 +335,8 @@ div {
   margin: 0 auto;
 }
 
-#submit-btn, #link {
+#submit-btn,
+#link {
   margin: 0;
   background-color: #197540;
   border: solid 1px #23583a;
@@ -523,4 +526,20 @@ input[type=range]:focus::-ms-fill-upper {
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
   border-radius: 0px;
+}
+
+.holder__survey {
+  background-color: white;
+  border: solid 1px darkgrey;
+  font-size: 15px;
+  color: #757575;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
