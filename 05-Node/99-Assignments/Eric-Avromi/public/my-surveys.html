@@ -18,7 +18,9 @@
     <div class="hello"></div>
 
     <div class="card-footer text-end">
-        <button class="btn btn-primary">Create a new survey</button>
+        <button class="btn btn-primary"     >Logout</button>
+
+        <button class="btn btn-primary" id="create">New survey</button>
     </div>
 
 
@@ -50,7 +52,7 @@
             hello.innerHTML = html;
         }
 
-        const btnNewSurvey = document.querySelector('.btn-primary')
+        const btnNewSurvey = document.getElementById('create')
         const btnDeleteSurvey = document.querySelector('.btn-danger')
 
 
