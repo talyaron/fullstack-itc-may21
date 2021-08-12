@@ -1,41 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="dist/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="dist/style.css">
     <title>Surveys admin</title>
 </head>
-<body onload="getAllSurveys()">
+
+<body>
+
+    <div class="hello"></div>
 
     <div class="card-footer text-end">
-            <button class="btn btn-primary">Create a new survey</button>
-</div>
+        <button class="btn btn-dark"  id="return"   >Logout</button>
 
-    
-<div class="card-footer text-end">
-    <h4>List of Surveys</h4>
-    <button type="submit" class="btn btn-danger" id="dangerSurvey">Delete survey</button>
-    <p>title of surveys</p>
-    <!--here we need to bring name of survey wich came from create a survey in "survey name input-->
+        <button class="btn btn-primary" id="create">New survey</button>
+    </div>
 
-    <!--put hover for each div survey and cursor pointer to show you can click on that and go to the inside of each survey-->
-</div>
+
+    <div class="card-footer text-end">
+        <h4>List of Surveys</h4>
+        <button type="submit" class="btn btn-danger" id="dangerSurvey">Delete survey</button>
+        <p>title of surveys</p>
+        <!--here we need to bring name of survey wich came from create a survey in "survey name input-->
+
+        <!--put hover for each div survey and cursor pointer to show you can click on that and go to the inside of each survey-->
+    </div>
     <!--in this page we need to see all surveys you already created before, and you should have delete each survey (div below each div) and also you should have create a new one from this page-->
 
     <script>
 
-        const btnNewSurvey = document.querySelector('.btn-primary')
+    const returnPage = document.querySelector('#return')
+    returnPage.addEventListener('click', loginOut)
+    function loginOut(){
+            window.location.href = 'index.html'
+        } 
+
+        axios.get("/users/userAdmin")
+            .then((res) => {
+                console.log(res.data);
+                const { name } = res.data.cookie;
+                render(name)
+            })
+        // .then(console.log(cookie))
+
+        function render(data) {
+            const hello = document.querySelector('.hello')
+            let html = '';
+            html += `<p>Hello, ${data}</p>`
+            hello.innerHTML = html;
+        }
+
+        const btnNewSurvey = document.getElementById('create')
         const btnDeleteSurvey = document.querySelector('.btn-danger')
 
-        
+
         btnNewSurvey.addEventListener('click', createNewSurvey)
         btnDeleteSurvey.addEventListener('click', deleteSurvey)
-        
+
         // fetch('/userAdmin')
         //     .then(r => r.json())
         //     .then(data => console.log(data.cookie))
@@ -43,13 +71,19 @@
 
 
 
-        function createNewSurvey(){
-            window.location.href = "create-survey.html"
-            console.log('hi');
+        async function createNewSurvey(ev) {
+            ev.preventDefault()
+            console.log('dfh')
+            const data = await axios.post('/survey/newSurvey')   // ('/survey/newSurvey', {})survey INfo
+            const {id} = data.data //it doesn't work 
+            console.log(data.data);
+            window.location.href = `./create-survey.html?id=${id}` //how we can get the id params of this user survey
+
+
         }
-        
-        function deleteSurvey(){
-            
+
+        function deleteSurvey() {
+
             console.log('hi');
         }
 
@@ -64,10 +98,10 @@
 //     }
 // }
 // getAllSurveys()
- 
-        
-        </script>
-        
+
+
+    </script>
+
 
 </body>
 

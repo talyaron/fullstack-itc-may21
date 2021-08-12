@@ -8,9 +8,9 @@ const localJson = () => {
   };
 
   export function registerUser(req: any, res: any) {
-    const { name, email, password } = req.body;
+    const { name, email, password, array } = req.body;
     const users = localJson();
-    const user = new User(name , email, password)
+    const user = new User(name , email, password, [])
     users.push(user);
     fs.writeFileSync("./db/users.json", JSON.stringify(users));
     console.log(users);

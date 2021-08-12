@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/style.css">
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    rel="stylesheet"
+  />
     <title>Pollster register</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
@@ -12,36 +17,30 @@
 </head>
 
 <body>
-    <h1>Welcome! Register here</h1>
-    <form onsubmit="handleRegister(event)">
-        <label for="username">User name</label>
-        <input type="username" name="username" placeholder="Username" required>
-        <label for="email">Email</label>
-        <input type="email" name="email" placeholder="Email" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Register</button>
-    </form>
-    <a href="/login.html">Go to Login</a>
+    <div class="question">
+        <h1>Welcome! Register here</h1>
+        <div class="input-wrapper">
+            <form class="form-field" onsubmit="handleRegister(event)">
+                <div>
+                <label class="form-field__label"  for="username">User name</label>
+           
+                <input class="form-field__input" type="username" name="username" placeholder="Username" required>
+            </div>
+            <div>
+                <label class="form-field__label" for="email">Email</label>
+                <input class="form-field__input" type="email" name="email" placeholder="Email" required>
+            </div>
+            <div>
+                <label class="form-field__label" for="password">Password</label>
+                <input class="form-field__input" type="password" name="password" placeholder="Password" required>
+            </div>
+                <button class="form-field__submit" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+    <a id="link" href="/login.html">Go to Login</a>
 
 </body>
-<script>
-
-
-    async function handleRegister(ev) {
-        ev.preventDefault()
-        const username = ev.target.elements.username.value;
-        const password = ev.target.elements.password.value;
-        const email = ev.target.elements.email.value
-        const result = await axios.post('/createUser', {
-                        username: username,
-                        password: password,
-                        email: email
-                    })
-                await console.log(result)
-                await alert(`Register succesful, ${username}!`)
-                ev.target.reset();
-    }
-</script>
+<script src="scripts/register.js"></script>
 
 </html>

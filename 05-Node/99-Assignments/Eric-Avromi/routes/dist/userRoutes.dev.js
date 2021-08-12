@@ -32,10 +32,19 @@ router.post('/register', function (req, res) {
   var newUser = new User(name, email, password);
   addUsers(newUser);
   res.cookie('cookie', {
+    name: name,
+    email: email
+  }, {
     maxAge: 30000000,
     httpOnly: true
   }).send({
     ok: true
+  });
+});
+router.get('/userAdmin', function (req, res) {
+  var cookie = req.cookies['cookie'];
+  res.send({
+    cookie: cookie
   });
 }); // router.post('/login', (req, res) => {
 //     //class info from the form, create a new user like an instance

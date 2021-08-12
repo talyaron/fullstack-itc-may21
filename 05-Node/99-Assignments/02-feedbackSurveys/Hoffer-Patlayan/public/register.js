@@ -5,7 +5,6 @@ const handleSubmit = async (event) => {
   const password = event.target.elements.password.value;
 
 axios({
-
     method: "post",
     url: `/signUp/registerUser`,
     data: {
@@ -13,9 +12,6 @@ axios({
       email,
       password
     },
-
-
-
 })
 .then(({ data }) => console.log(data))
 .catch((err) => {
@@ -23,13 +19,4 @@ axios({
 });
 window.location.href = 'index.html'
 
-//   axios.post("/signUp/registerUser", {
-//     name,
-//     email,
-//     password,
-//   })
-//   .then(({data})= console.log(data))
-//   .catch((err) => {
-//     console.log(err);
-//   });
 };
