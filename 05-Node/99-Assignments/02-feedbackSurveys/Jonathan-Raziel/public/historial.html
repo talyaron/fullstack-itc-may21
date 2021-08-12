@@ -12,8 +12,10 @@
 </head>
 
 <body class="historial" onload="getCookiesAndSurveys(event)">
-    <!--Cookie-->
+   
     <header>
+        
+        <button type="button" class="return">Log Out</button>
         <div id="nameCookie"></div>
     </header>
     <div class="survey">
@@ -24,12 +26,25 @@
 
         //btn
         const btnCreateSurveys = document.querySelector('.survey--btn')
+        const returnPage = document.querySelector('.return')
 
+
+        //addEventListener
         btnCreateSurveys.addEventListener('click', createSurveys)
+        returnPage.addEventListener('click', loginOut)
+        
 
-        function createSurveys(ev) {
+
+        function loginOut(){
+            window.location.href = 'login.html'
+        } 
+
+        async function createSurveys(ev) {
             ev.preventDefault()
-            window.location.href = 'survey.html'
+
+            const response = await axios.get('/id/surveys')
+             const {id} = response.data
+             window.location.href = `./survey.html?id=${id}`;
         }
 
         async function getCookiesAndSurveys(ev) {
@@ -76,7 +91,7 @@
         }
 
         function moveToSurvey(id) {
-            // render to All the things 
+            window.location.href = `./survey.html?id=${id}`; 
         }
 
 

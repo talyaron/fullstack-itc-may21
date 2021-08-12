@@ -384,15 +384,15 @@ form.sign-in-form {
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="#" class="sign-in-form">
+          <form onsubmit="handelLogInUser(ev)" class="sign-in-form">
             <h2 class="title">Sign in</h2>
             <div class="input-field">
                 <i class="fas fa-envelope"></i>
-              <input type="text" placeholder="Email" />
+              <input type="email" placeholder="Email" name="userEmail" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" placeholder="Password" name="userPassword" />
             </div>
             <input type="submit" value="Login" class="btn solid" />
           </form>
@@ -410,7 +410,24 @@ form.sign-in-form {
     </div>
 
   <script>
+   async function handelLogInUser(ev){
+  ev.preventDefault();
+   const email=ev.target.elements.userEmail.value;
+   const password = ev.target.elements.userPassword.value;
+    const newUser={
+      email: email,
+      password: password
+    }
+     const response=await enterLogin(user);
+//  window.location.href =
+//    }
 
+//    // http://mydoomain.com/survey-login.html?surevyId=3423534545   for enduser
+//    //redirect after login to this page:
+
+//    // http://mydoomain.com/survey.html?surveyId=3423534545
+
+  }
   </script>
   </body>
 </html>

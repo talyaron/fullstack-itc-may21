@@ -118,6 +118,7 @@ var Surveys = /** @class */ (function () {
             var survey = this.findSurvey(surveyToUpdate.uuid);
             survey.questions = surveyToUpdate.questions;
             this.updateSurveysJson();
+            return survey;
         }
         catch (error) {
             console.error(error);
