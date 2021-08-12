@@ -45,7 +45,7 @@
         axios.get("/users/userAdmin")
             .then((res) => {
                 console.log(res.data);
-                const { name } = res.data.cookie;
+                const { email } = res.data.cookie;
                 render(name)
             })
         // .then(console.log(cookie))
