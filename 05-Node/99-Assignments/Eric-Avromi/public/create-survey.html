@@ -21,7 +21,7 @@
         <input class="form-check-inputName1" type="text" name="exampleForm1" id="radioExample1"
           placeholder="Survey name" />
         <button type="submit" class="btn btn-light">Share</button>
-        <button class="btn btn-dark">Logout</button>
+        <button class="btn btn-dark" id="return" >Logout</button>
       </div>
       <div class="modal-body">
         <div class="text-center">
@@ -44,6 +44,12 @@
   </div>
 
   <script>
+
+const returnPage = document.querySelector('#return')
+    returnPage.addEventListener('click', loginOut)
+    function loginOut(){
+            window.location.href = 'index.html'
+        } 
 
     async function saveSurvey() {
       console.log('hello');

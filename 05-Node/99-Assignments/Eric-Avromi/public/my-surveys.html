@@ -18,7 +18,7 @@
     <div class="hello"></div>
 
     <div class="card-footer text-end">
-        <button class="btn btn-primary"     >Logout</button>
+        <button class="btn btn-dark"  id="return"   >Logout</button>
 
         <button class="btn btn-primary" id="create">New survey</button>
     </div>
@@ -36,6 +36,11 @@
 
     <script>
 
+    const returnPage = document.querySelector('#return')
+    returnPage.addEventListener('click', loginOut)
+    function loginOut(){
+            window.location.href = 'index.html'
+        } 
 
         axios.get("/users/userAdmin")
             .then((res) => {
@@ -66,11 +71,13 @@
 
 
 
-        async function createNewSurvey() {
+        async function createNewSurvey(ev) {
+            ev.preventDefault()
             console.log('dfh')
-            const data = await axios.post('/survey/newSurvey', {})//survey INfo
-            console.log(data);
-            window.location.href = "create-survey.html"
+            const data = await axios.post('/survey/newSurvey')   // ('/survey/newSurvey', {})survey INfo
+            const {id} = data.data //it doesn't work 
+            console.log(data.data);
+            window.location.href = `./create-survey.html?id=${id}` //how we can get the id params of this user survey
 
 
         }
