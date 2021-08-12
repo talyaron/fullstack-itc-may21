@@ -19,7 +19,7 @@ axios({
 .catch((err) => {
   console.log(err);
 });
-window.location.href = 'survey.html'
+window.location.href = 'survay.html'
 
 event.target.reset();
 }
