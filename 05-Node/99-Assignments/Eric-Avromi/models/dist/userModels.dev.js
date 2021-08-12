@@ -4,12 +4,16 @@ var fs = require('fs');
 
 function addUsers(user) {
   console.log('in add user ');
-  var allUsers = fs.readFileSync("./users.json");
-  console.log(allUsers);
-  var allUsersPars = JSON.parse(allUsers);
-  var updateUsers = allUsersPars.push(user);
-  fs.writeFileSync("./users.json", JSON.stringify(allUsersPars));
+  var allUsers = getAllUsers();
+  var updateUsers = allUsers.push(user);
+  fs.writeFileSync("./users.json", JSON.stringify(allUsers));
   return console.log('user added ');
+}
+
+function getAllUsers() {
+  var allUsers = fs.readFileSync("./users.json");
+  var parsed = JSON.parse(allUsers);
+  return parsed;
 }
 
 exports.addUsers = addUsers;
