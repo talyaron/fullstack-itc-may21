@@ -45,8 +45,13 @@
         axios.get("/users/userAdmin")
             .then((res) => {
                 console.log(res.data);
+<<<<<<< HEAD
+                const { name } = res.data.cookie;
+                render(name)
+=======
                 const { email } = res.data.cookie;
                 render(email)
+>>>>>>> 7febc77d3d642fdd09283a45254046332cc6d365
             })
         // .then(console.log(cookie))
 
@@ -75,8 +80,8 @@
             ev.preventDefault()
             console.log('dfh')
             const data = await axios.post('/survey/newSurvey')   // ('/survey/newSurvey', {})survey INfo
-            const {id} = data.data //it doesn't work 
-            console.log(data.data);
+            const {id} = data.data.newSurvey//it doesn't work 
+            console.log(data.data.newSurvey);
             window.location.href = `./create-survey.html?id=${id}` //how we can get the id params of this user survey
 
 

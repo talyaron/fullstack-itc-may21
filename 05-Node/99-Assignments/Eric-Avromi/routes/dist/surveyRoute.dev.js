@@ -31,7 +31,8 @@ router.post('/newSurvey', function (req, res) {
     addSurvey(newSurvey); //will give back all Surveys 
 
     res.send({
-      ok: true
+      ok: true,
+      newSurvey: newSurvey
     });
   } catch (error) {
     res.status(500).send(error.message);
