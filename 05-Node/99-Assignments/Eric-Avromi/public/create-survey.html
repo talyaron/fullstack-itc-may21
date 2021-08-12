@@ -17,26 +17,19 @@
   <div class="mx-0 mx-sm-auto">
     <div class="card">
       <div class="card-header bg-primary">
-
-
         <h5 class="card-title text-white mt-2" id="exampleModalLabel">Set a survey</h5>
         <input class="form-check-inputName1" type="text" name="exampleForm1" id="radioExample1"
           placeholder="Survey name" />
         <button type="submit" class="btn btn-light">Share</button>
       </div>
-
       <div class="modal-body">
         <div class="text-center">
           <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
-
         </div>
-
-        <!--average and score need to have numbers 1-5-->
         <form class="px-4" action="">
           <input class="form-check-inputName2" type="text" name="exampleForm2" id="radioExample2"
             placeholder="Write a question" />
-        
-        </form>
+              </form>
       </div>
       <div class="card-footer text-end">
         <button type="submit" class="btn btn-success">Add</button>
@@ -44,20 +37,12 @@
         <button type="submit" class="btn btn-primary">Edit</button>
         <button type="submit" class="btn btn-warning">Back</button>
         <button type="submit" onclick="saveSurvey()" class="btn btn-success">Save</button>
-        <!--when we press edit question, we need to change the question but not the rating, only question sentence-->
-        <!--when we press delete question, we need should have delete all the div form question-->
-        <!--in each div question we need to render average score and quantity of voters-->
-        <!--add a share buttom at the end of the survey to redirect to user login only with email-->
-        <!--add button to exit page, send link to complete survey and return previous page-->
-
       </div>
     </div>
     <div class="root"></div>
   </div>
 
-
   <script>
-
 
     async function saveSurvey() {
       console.log('hello');
@@ -105,8 +90,7 @@
 
       });
       root.innerHTML = html
-      //when you are an admin, is not important to see the options becuase never change,  so we can delete and render only question title
-      //how we can render editable question? with a modal to edit and then render?
+
 
 
     }
