@@ -26,7 +26,7 @@ router.post('/newSurvey', (req, res) => {
         console.log(admin)
         const newSurvey = new Survey(admin)
         addSurvey(newSurvey);//will give back all Surveys 
-        res.send({ok:true})
+        res.send({ok:true, newSurvey: newSurvey},)
 
 
     } catch (error) {
