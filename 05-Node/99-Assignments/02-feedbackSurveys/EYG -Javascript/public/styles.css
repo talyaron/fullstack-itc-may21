@@ -192,3 +192,12 @@
   input[type=range]:focus::-ms-fill-upper {
     background: #367ebd;
   }
+
+
+  .thanks {
+    display: none
+  }
+  .questioninfo-holder{
+    display: flex;
+    flex-flow: row;
+  }
