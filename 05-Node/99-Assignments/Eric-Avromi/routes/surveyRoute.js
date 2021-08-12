@@ -6,6 +6,9 @@ const {
 const {
     addSurvey
 } = require('../models/surveyModel.js')
+const {
+    getAllUsers
+} = require(`../models/userModels.js`)
 
 
 
@@ -24,9 +27,10 @@ router.post('/newSurvey', (req, res) => {
         const admin = req.cookies.cookie.email;
         console.log(admin)
         const newSurvey = new Survey(admin)
-        addSurvey(newSurvey);//will give back all Surveys 
+        addSurvey(newSurvey);
+     
         res.send({ok:true, newSurvey:newSurvey},)
-        console.log('insdie new survey route ');
+       
 
 
     } catch (error) {

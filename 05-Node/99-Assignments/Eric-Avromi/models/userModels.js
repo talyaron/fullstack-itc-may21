@@ -22,3 +22,5 @@ function getAllUsers() {
 
 
 exports.addUsers = addUsers;
+
+exports.getAllUsers = getAllUsers;
