@@ -3,12 +3,15 @@ const addQuest = document.getElementById('addQuest');
 const rootQuestions = document.getElementById('rootQuestions');
 const subBtn = document.getElementById('subBtn');
 
+
+    
+const arrayChildrens = []
+
 function addSurvey(){
     
     const questionForm = document.getElementById('questionForm');
     const container = document.querySelector('.container_form');
-    
-    const arrayChildrens = []
+
     const arrQuestions = [];
     const length = questionForm.children.length;
     
@@ -24,16 +27,11 @@ function addSurvey(){
     }
     arrayChildrens.push(jsonSub);   
     console.log(arrayChildrens)
-
-    axios({
-        method: "post",
-        url: `/signUp/registerUser`,
-        data: arrayChildrens,
-    })
-    .then(({ data }) => console.log(data))
-    .catch((err) => {
-      console.log(err);
-    });
+    sendSurvey()
+}
+async function sendSurvey(){
+    const response = await axios.post('/survey/addSurvey', arrayChildrens);
+    console.log(response)
 }
 
 
