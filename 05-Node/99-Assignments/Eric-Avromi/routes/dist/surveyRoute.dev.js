@@ -24,7 +24,6 @@ var Survey = function Survey(admin) {
 
 router.post('/newSurvey', function (req, res) {
   try {
-    console.log('insdie new survey route ');
     var admin = req.cookies.cookie.email;
     console.log(admin);
     var newSurvey = new Survey(admin);
@@ -34,6 +33,7 @@ router.post('/newSurvey', function (req, res) {
       ok: true,
       newSurvey: newSurvey
     });
+    console.log('insdie new survey route ');
   } catch (error) {
     res.status(500).send(error.message);
   }
