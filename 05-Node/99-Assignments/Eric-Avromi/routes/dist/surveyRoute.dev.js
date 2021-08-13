@@ -12,6 +12,9 @@ var _require = require('uuid'),
 var _require2 = require('../models/surveyModel.js'),
     addSurvey = _require2.addSurvey;
 
+var _require3 = require("../models/userModels.js"),
+    getAllUsers = _require3.getAllUsers;
+
 var Survey = function Survey(admin) {
   _classCallCheck(this, Survey);
 
@@ -24,14 +27,13 @@ var Survey = function Survey(admin) {
 
 router.post('/newSurvey', function (req, res) {
   try {
-    console.log('insdie new survey route ');
     var admin = req.cookies.cookie.email;
     console.log(admin);
     var newSurvey = new Survey(admin);
-    addSurvey(newSurvey); //will give back all Surveys 
-
+    addSurvey(newSurvey);
     res.send({
-      ok: true
+      ok: true,
+      newSurvey: newSurvey
     });
   } catch (error) {
     res.status(500).send(error.message);

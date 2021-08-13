@@ -22,7 +22,8 @@ export function getSurveys(req, res) {
 export function newSurvey(req, res) {
   //User email sended by params in the URL
   const { id } = req.params; // admin email
-  const survey = new Survey(id);
+  const newSurvey = {uuid: null, title: null, admin: id, questions: null};
+  const survey = new Survey(newSurvey);
   const allSurveys = new Surveys;
   allSurveys.createSurvey(survey);
   res.send({ message: "A new Survey was added", survey });
@@ -45,8 +46,7 @@ export function deleteSurvey(req, res) {
 export function addQuestion(req, res) {
   const { uuid } = req.params;
   let allSurveys = new Surveys;
-  const surveyToUpdate = new Survey(allSurveys.findSurvey(uuid).admin);
-  console.log(surveyToUpdate);
+  const surveyToUpdate = new Survey(allSurveys.findSurvey(uuid));
 
   const newQuestion = new Question(req.body.question);
 
@@ -71,7 +71,7 @@ export function getQuestionsSurvey(req, res) {
 export function deleteQuestion(req, res) {
   const { id, uuid } = req.params; // id: question uuid; uuid: survey uuid
   let allSurveys = new Surveys();
-  const surveyToUpdate = new Survey(allSurveys.findSurvey(uuid).admin);
+  const surveyToUpdate = new Survey(allSurveys.findSurvey(uuid));
   //Inside the questions of a specific Survey I will filter the question that I dont want
   surveyToUpdate.deleteQuestion(id)
   allSurveys.updateSurvey(surveyToUpdate);

@@ -9,6 +9,9 @@ var router = express.Router();
 var _require = require('uuid'),
     uuidv4 = _require.v4;
 
+var _require2 = require('../models/surveyModel.js'),
+    addSurvey = _require2.addSurvey;
+
 var Survey = function Survey(admin) {
   _classCallCheck(this, Survey);
 
@@ -25,7 +28,8 @@ router.post('/newSurvey', function (req, res) {
     var admin = req.cookies.cookie.email;
     console.log(admin);
     var newSurvey = new Survey(admin);
-    console.log(newSurvey);
+    addSurvey(newSurvey); //will give back all Surveys 
+
     res.send({
       ok: true
     });

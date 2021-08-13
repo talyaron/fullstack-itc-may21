@@ -27,8 +27,8 @@ function addSurvey(newSurvey) {
 function getAllSurveys() { 
     console.log('indie get all survey ');
     const allSurveys = fs.readFileSync("./survey.json");
+    const parsed = JSON.parse(allSurveys);
     console.log('indie get after read y ');
-    const parsed = JSON.parse(allSurveys)
     return parsed
 }
 
