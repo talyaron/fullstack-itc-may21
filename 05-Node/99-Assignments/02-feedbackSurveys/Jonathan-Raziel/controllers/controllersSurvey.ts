@@ -51,19 +51,31 @@ export function addSurveys(req, res) {
 }
 
 
-// export function deleteSurveys(req,res){
-//     try {
-//         const {id,email} = req.params
-//         let allSurveys = readAllSurveys();
-//          if(allSurveys.length !== 0){
-//             //  console.log(allSurveys)
-//             //  allSurveys = allSurveys.filter(user => (user.id !== id))
-//             // // const findSurveyToDelete = userFind.surveys.filter(survey => survey.id !== id)
-//             // fs.writeFileSync("./user.json", JSON.stringify(allSurveys));
-//             // res.send(allSurveys)
+export function deleteSurveys(req,res){
+    try {
+        const {id,email} = req.params
+        let allSurveys = readAllSurveys();
+        let allUsers = JSON.parse(fs.readFileSync("./user.json"));
+        //console.log(id)
+        //console.log(email)
 
-//          } 
-//     } catch (e) {
-//         res.status(500).send({ error: `${e}` });
-//     }
-// }
+        const user = allUsers.filter(user=>user.email === email)
+        user[0].surveys = user[0].surveys.filter(survey => survey.id !== id)
+        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+
+        
+        //eliminar de json surveys
+        allSurveys = allSurveys.filter(survey => survey.id !== id)
+        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+
+        let allUsersUser = JSON.parse(fs.readFileSync("./user.json"));
+        const find = allUsersUser.find(user => user.email === email)
+        console.log(find.surveys)
+        res.send(find.surveys);
+    
+
+          
+    } catch (e) {
+        res.status(500).send({ error: `${e}` });
+    }
+}
