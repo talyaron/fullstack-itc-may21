@@ -39,11 +39,11 @@ export class Survey {
   title: string;
   admin: string; //(email)
   questions: Array<Question>;
-  constructor(admin) {
-    this.uuid = uuidv4();
-    this.title = "";
+  constructor({uuid, title, admin, questions}) {
+    this.uuid = (uuid === null) ? uuidv4() : uuid;
+    this.title = (uuid === null) ? "" : title;
     this.admin = admin;
-    this.questions = []; //when the user push add here
+    this.questions = (questions === null) ? [] : questions; //when the user push add here
   }
 
   addQuestion(newQuestion) {
@@ -57,7 +57,7 @@ export class Survey {
 
   deleteQuestion(questionId) {
     try {
-      this.questions.filter(question => question.uuid !== questionId);
+      this.questions = this.questions.filter(question => question.uuid !== questionId);
 
     } catch (error) {
       console.error(error);
@@ -112,7 +112,7 @@ export class Surveys {
  
   deleteSurvey(surveyUuid) {
     try {
-      this.surveys.filter(survey => survey.uuid !== surveyUuid);
+      this.surveys = this.surveys.filter(survey => survey.uuid !== surveyUuid);
 
       this.updateSurveysJson();
 
@@ -124,7 +124,7 @@ export class Surveys {
   findSurvey(surveyUuid) {
     try {
       const survey = this.surveys.find(surveyItem => (surveyItem.uuid === surveyUuid));
-      
+
       return survey;
 
     } catch (error) {

@@ -22,7 +22,8 @@ exports.getSurveys = getSurveys;
 function newSurvey(req, res) {
     //User email sended by params in the URL
     var id = req.params.id; // admin email
-    var survey = new surveys_1.Survey(id);
+    var newSurvey = { uuid: null, title: null, admin: id, questions: null };
+    var survey = new surveys_1.Survey(newSurvey);
     var allSurveys = new surveys_1.Surveys;
     allSurveys.createSurvey(survey);
     res.send({ message: "A new Survey was added", survey: survey });
@@ -33,18 +34,14 @@ function deleteSurvey(req, res) {
     var uuid = req.params.uuid;
     var allSurveys = new surveys_1.Surveys;
     allSurveys.deleteSurvey(uuid);
-    //Read cookies to send the data from the user login
-    var userDetails = req.cookies.userDetails;
-    var cookie = JSON.parse(userDetails);
-    res.send({ message: "The survey was deleted", userInfo: cookie.email });
+    res.send({ message: "The survey was deleted", userInfo: req.email });
 }
 exports.deleteSurvey = deleteSurvey;
 //Function to add a new question into the survey
 function addQuestion(req, res) {
     var uuid = req.params.uuid;
     var allSurveys = new surveys_1.Surveys;
-    var surveyToUpdate = new surveys_1.Survey(allSurveys.findSurvey(uuid).admin);
-    console.log(surveyToUpdate);
+    var surveyToUpdate = new surveys_1.Survey(allSurveys.findSurvey(uuid));
     var newQuestion = new surveys_1.Question(req.body.question);
     surveyToUpdate.addQuestion(newQuestion);
     allSurveys.updateSurvey(surveyToUpdate);
@@ -64,7 +61,7 @@ exports.getQuestionsSurvey = getQuestionsSurvey;
 function deleteQuestion(req, res) {
     var _a = req.params, id = _a.id, uuid = _a.uuid; // id: question uuid; uuid: survey uuid
     var allSurveys = new surveys_1.Surveys();
-    var surveyToUpdate = new surveys_1.Survey(allSurveys.findSurvey(uuid).admin);
+    var surveyToUpdate = new surveys_1.Survey(allSurveys.findSurvey(uuid));
     //Inside the questions of a specific Survey I will filter the question that I dont want
     surveyToUpdate.deleteQuestion(id);
     allSurveys.updateSurvey(surveyToUpdate);

@@ -3,9 +3,12 @@ const router = express.Router();
 const {
     v4: uuidv4 
 } = require('uuid');
-const {
-    addSurvey
-} = require('../models/surveyModel.js')
+const { addSurvey} = require('../models/surveyModel.js');
+const {getAllSurveys} = require('../controllers/surveyControllers')
+const { getAllUsers} = require(`../models/userModels.js`)
+
+const {getUser} = require('../middlewares/user')
+
 
 class Survey {
     constructor(admin) {
@@ -19,18 +22,21 @@ class Survey {
 
 router.post('/newSurvey', (req, res) => {
     try {
-        console.log('insdie new survey route ');
         const admin = req.cookies.cookie.email;
         console.log(admin)
         const newSurvey = new Survey(admin)
-        addSurvey(newSurvey);//will give back all Surveys 
-        res.send({ok:true})
+        addSurvey(newSurvey);
+     
+        res.send({ok:true, newSurvey:newSurvey},)
+       
 
 
     } catch (error) {
         res.status(500).send(error.message)
     }
 })
+
+router.get('/allSurveys',getUser, getAllSurveys);
 
 
 

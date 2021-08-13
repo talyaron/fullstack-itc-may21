@@ -21,6 +21,7 @@
         <input class="form-check-inputName1" type="text" name="exampleForm1" id="radioExample1"
           placeholder="Survey name" />
         <button type="submit" class="btn btn-light">Share</button>
+        <button class="btn btn-dark" id="return" >Logout</button>
       </div>
       <div class="modal-body">
         <div class="text-center">
@@ -43,6 +44,12 @@
   </div>
 
   <script>
+
+const returnPage = document.querySelector('#return')
+    returnPage.addEventListener('click', loginOut)
+    function loginOut(){
+            window.location.href = 'index.html'
+        } 
 
     async function saveSurvey() {
       console.log('hello');
@@ -114,6 +121,22 @@
 
     function backToSurveyAdmin() {
       window.location.href = "my-surveys.html"
+      //render surveys by id and show title or add a button in admin page to see each surveys
+
+      // axios.get("/survey/userAdmin")
+        //     .then((res) => {
+        //         console.log(res.data);
+        //         const { title } = res.data.cookie;
+        //         renderSurveys(title)
+        //     })
+
+        function renderSurveys(data) {
+            const survey = document.querySelector('.survey')
+            let html = '';
+            html += `${data.title}`
+            survey.innerHTML = html;
+        }
+
     }
 
 
