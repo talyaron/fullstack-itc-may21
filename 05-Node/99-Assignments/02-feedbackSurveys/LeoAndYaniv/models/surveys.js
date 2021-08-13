@@ -50,7 +50,7 @@ var Survey = /** @class */ (function () {
     };
     Survey.prototype.deleteQuestion = function (questionId) {
         try {
-            this.questions.filter(function (question) { return question.uuid !== questionId; });
+            this.questions = this.questions.filter(function (question) { return question.uuid !== questionId; });
         }
         catch (error) {
             console.error(error);
@@ -98,7 +98,7 @@ var Surveys = /** @class */ (function () {
     };
     Surveys.prototype.deleteSurvey = function (surveyUuid) {
         try {
-            this.surveys.filter(function (survey) { return survey.uuid !== surveyUuid; });
+            this.surveys = this.surveys.filter(function (survey) { return survey.uuid !== surveyUuid; });
             this.updateSurveysJson();
         }
         catch (error) {
@@ -116,7 +116,6 @@ var Surveys = /** @class */ (function () {
     };
     Surveys.prototype.updateSurvey = function (surveyToUpdate) {
         try {
-            console.log('updateSurvey called');
             var survey = this.findSurvey(surveyToUpdate.uuid);
             survey.questions = surveyToUpdate.questions;
             this.updateSurveysJson();

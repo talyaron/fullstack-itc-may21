@@ -57,7 +57,7 @@ export class Survey {
 
   deleteQuestion(questionId) {
     try {
-      this.questions.filter(question => question.uuid !== questionId);
+      this.questions = this.questions.filter(question => question.uuid !== questionId);
 
     } catch (error) {
       console.error(error);
@@ -112,7 +112,7 @@ export class Surveys {
  
   deleteSurvey(surveyUuid) {
     try {
-      this.surveys.filter(survey => survey.uuid !== surveyUuid);
+      this.surveys = this.surveys.filter(survey => survey.uuid !== surveyUuid);
 
       this.updateSurveysJson();
 
@@ -134,7 +134,6 @@ export class Surveys {
 
   updateSurvey(surveyToUpdate) {
     try {
-      console.log('updateSurvey called');
       const survey = this.findSurvey(surveyToUpdate.uuid);
       survey.questions = surveyToUpdate.questions;
       
