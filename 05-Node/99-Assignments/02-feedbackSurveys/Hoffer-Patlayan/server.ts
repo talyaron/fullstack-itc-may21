@@ -2,13 +2,14 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const cookieParser = require("cookie-parser");
+// 
 // const { v4: uuidv4 } = require("uuid");
+
 
 export const localJson = () => {
     const fileJson = fs.readFileSync("./db/users.json");
     return JSON.parse(fileJson);
   };
-
 
 app.use(cookieParser());
 app.use(express.json());

@@ -1,7 +1,6 @@
 const getUser = async () => {
   const getUser = await axios.get("/users/getUsers");
   const { name } = getUser.data;
-  // const getIt = await getUser.json();
   render(name);
 };
 const render = (name) => {
