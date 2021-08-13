@@ -7,12 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
     <title>Historial</title>
 </head>
 
 <body class="historial" onload="getCookiesAndSurveys(event)">
-    <!--Cookie-->
+   
     <header>
+        
+        <button type="button" class="return">Log Out</button>
         <div id="nameCookie"></div>
     </header>
     <div class="survey">
@@ -23,12 +26,25 @@
 
         //btn
         const btnCreateSurveys = document.querySelector('.survey--btn')
+        const returnPage = document.querySelector('.return')
 
+
+        //addEventListener
         btnCreateSurveys.addEventListener('click', createSurveys)
+        returnPage.addEventListener('click', loginOut)
+        
 
-        function createSurveys(ev) {
+
+        function loginOut(){
+            window.location.href = 'login.html'
+        } 
+
+        async function createSurveys(ev) {
             ev.preventDefault()
-            window.location.href = 'survey.html'
+
+            const response = await axios.get('/id/surveys')
+             const {id} = response.data
+             window.location.href = `./survey.html?id=${id}`;
         }
 
         async function getCookiesAndSurveys(ev) {
@@ -44,22 +60,38 @@
             const responseSurveys = await axios.get(`/surveys/show/${email}`)
             const data = responseSurveys.data
 
+            renderAllSurveys(data)
+
+        }
+
+        async function deleteSurveys(id,email) {
+            if (confirm("Do you want to delete this surveys?")) {
+                alert('Delete surveys')
+                const response = await axios.delete(`/delete/user/${id}/${email}`)
+                const surveys = response.data
+                renderAllSurveys([surveys])
+            } else {
+                alert('Delete Cancelled!')
+            }
+        }
+
+        function renderAllSurveys(arrayToRender) {
             let html = '';
 
             const createSurveys = document.querySelector('#rootSurveys')
 
-            data.forEach(element => {
+            arrayToRender.forEach(element => {
                 html += `<div class="surveys__box" onclick='moveToSurvey("${element.id}")'>
-                             <span>Title: ${element.title}</span>
-                        </div>`
+                                <span>Title: ${element.title}</span>
+                                <i class="fas fa-trash boxquestion--trash" onclick='deleteSurveys("${element.id}","${element.email}")'></i> 
+            </div>`
             });
 
             createSurveys.innerHTML = html
-
         }
 
-        function moveToSurvey(id){
-            // render to All the things 
+        function moveToSurvey(id) {
+            window.location.href = `./survey.html?id=${id}`; 
         }
 
 

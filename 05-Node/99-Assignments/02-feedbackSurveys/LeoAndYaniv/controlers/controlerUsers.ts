@@ -1,93 +1,81 @@
 export {};
 
-import { User } from "../models/users";
-import { Survey } from "../models/surveys";
-const fs = require("fs");
+import { User, Users } from "../models/users";
 
-//Function to read the JSON of created users
-export const readJsonUsers = () => {
+const fs = require("fs");
+const path = require('path');
+const surveysJsonPath = path.resolve(__dirname, '../models/surveys.json');
+
+//Function to add a new user into the JSON
+export function newUser(req, res) {
   try {
-    const users = fs.readFileSync("./users.json");
-    return JSON.parse(users);
+    const { username, email, password } = req.body;
+    const user = new User(username, email, password);
+    const allUsers = new Users;
+    const userCreated: boolean = allUsers.createUser(user);
+    if (!userCreated) {
+      res.send({ message: "A new User was added", user });  
+    } else {
+      res.send({ message: "Email already registered, please try a different email address!" });
+    }
+
   } catch (error) {
     console.error(error);
+    res.status(500).send(error.message);
   }
-};
+}
+
+//Function to login the user
+export function login(req, res) {
+  try {
+    const { email, password } = req.body;
+    const allUsers = new Users;
+    const username = allUsers.loginUser(email, password);
+    if (username) {
+      res.send({ message: "Logged in successfully", username });
+    } else {
+      res.send({ message: "Username or password are wrong, please try again!" });
+    }
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.message);
+  }
+}
+
+export function sendCookie(req, res) {
+  try {
+    res.send({ email: req.email, username: req.username });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.message);
+  }
+}
 
 //Function to read the JSON of created surveys
-export const readJsonSurveys = () => {
+const readJsonSurveys = () => {
   try {
-    const surveys = fs.readFileSync("./surveys.json");
+    const surveys = fs.readFileSync(surveysJsonPath);
     return JSON.parse(surveys);
   } catch (error) {
     console.error(error);
   }
 };
 
-//Function to add a new user into the JSON
-export function newUser(req, res) {
-  const user = new User(req.body.username, req.body.email, req.body.password);
-  const allUsers = readJsonUsers();
-  allUsers.push(user);
-  fs.writeFileSync("./users.json", JSON.stringify(allUsers));
-  const { username, email } = user;
-  const userCookie = JSON.stringify({ username: username, email: email });
-  res.cookie("cookieName", userCookie, { maxAge: 300000000, httpOnly: true });
-  res.send({ message: "A new User was added", user: user });
-}
-
-//Function to login the user
-export function login(req, res) {
-  const { email, password } = req.body;
-  const allUsers = readJsonUsers();
-  const userExist = allUsers.find(
-    (user) => user.email === email && user.password === password
-  );
-  if (userExist) {
-    const { username } = userExist;
-    const userCookie = JSON.stringify({ username: username, email: email });
-    res.cookie("cookieName", userCookie, { maxAge: 300000000, httpOnly: true });
-    res.send({ userInfo: username });
-  } else {
-    res.send({
-      message: "Username or password are wrong, try again!",
-      userInfo: null,
-    });
-  }
-}
-
-//Function to get the information from the cookie
-export function getInfo(req, res) {
-  try {
-    //Read cookies
-    const { cookieName } = req.cookies;
-    const cookie = JSON.parse(cookieName);
-
-    res.send({ cookie });
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-}
-
-//Function to get the information from the cookie
+//Function to add new survey uuid to user
 export function uploadSurvey(req, res) {
   try {
-    const { uuid } = req.params;
+    const { uuid } = req.params; // survey uuid
     let allSurveys = readJsonSurveys();
-    const surveyExist = allSurveys.find((survey) => survey.uuid === uuid);
-    surveyExist.title = req.body.surveyTitle;
+    const newSurvey = allSurveys.find((survey) => survey.uuid === uuid);
+    newSurvey.title = req.body.surveyTitle;
 
-    //Read cookies to find the user
-    const { cookieName } = req.cookies;
-    const cookie = JSON.parse(cookieName);
-    let allUsers = readJsonUsers();
-    const userExist = allUsers.find((user) => user.email === cookie.email);
-    //I pushed the UUID of the surevey that I just finished to the user that is login
-    userExist.createdSurveys.push(surveyExist.uuid);
-    fs.writeFileSync("./users.json", JSON.stringify(allUsers));
-    fs.writeFileSync("./surveys.json", JSON.stringify(allSurveys));
-    res.send({ message: "Amazing! You created a survey propertly", userInfo: cookie.email });
+    let allUsers = new Users;
+    allUsers.addCreatedSurvey(req.email, newSurvey.uuid);
+    res.send({ message: "Amazing! You created a survey properly", userInfo: req.email });
   } catch (error) {
+    console.error(error);
     res.status(500).send(error.message);
   }
 }

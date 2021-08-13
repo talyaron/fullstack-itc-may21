@@ -13,7 +13,10 @@ const getCookie = require("./routes/routeUser")
 const getSurveys = require("./routes/routeUser")
 
 const addSurveys = require("./routes/routesSurveys")
-const sendService = require("./routes/routesSurveys")
+//const deleteSurveys = require("./routes/routesSurveys")
+const getUniqueId = require("./routes/routesSurveys")
+const getPrevios = require("./routes/routesSurveys")
+
 
 app.use('/register', userModel);
 app.use('/login', userLogin);
@@ -21,7 +24,10 @@ app.use('/cookie', getCookie);
 app.use('/surveys', getSurveys);
 
 app.use('/surveys',addSurveys)
-app.use('/sendUserSurvey',sendService)
+app.use('/id',getUniqueId)
+app.use('/r',getPrevios)
+
+//app.use('/delete',deleteSurveys)
 
 
 app.listen(8000, function () { console.log('Listen on 8000'); });

@@ -49,19 +49,6 @@
 										Password is required
 									</div>
 								</div>
-
-								<div class="form-group">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" name="agree" id="agree" class="custom-control-input"
-											required="">
-										<label for="agree" class="custom-control-label">I agree to the <a href="#">Terms
-												and Conditions</a></label>
-										<div class="invalid-feedback">
-											You must agree with our Terms and Conditions
-										</div>
-									</div>
-								</div>
-
 								<div class="form-group m-0">
 									<button type="submit" class="btn btn-primary btn-block">
 										Register
@@ -73,9 +60,7 @@
 							</form>
 						</div>
 					</div>
-					<div class="footer">
-						Copyright &copy; 2021 &mdash; Avromi & Eric Company
-					</div>
+				
 				</div>
 			</div>
 		</div>
@@ -102,7 +87,7 @@
 					console.log(res.data);
 				})
 
-
+				window.location.href = "my-surveys.html"
 			//fetch or axios to catch the inputs and the  send routes
 
 		}
@@ -112,13 +97,7 @@
 		const btnRegister = document.querySelector('.btn-block')
 
 
-		// btnRegister.addEventListener('click', redirectMySurveys)
-
-		// function redirectMySurveys(){
-		// //if email, password, name and agree terms and conditions !== "" then run this function
-		// 	window.location.href = "my-surveys.html"
-
-		// }
+	
 
 	</script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

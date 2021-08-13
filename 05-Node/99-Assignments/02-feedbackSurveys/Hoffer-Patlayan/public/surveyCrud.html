@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="./SASS/styles.css" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+      <h1>Create your own survay</h1>
+        <div class="container_form">
+            <input type="text" name="title id="suvName" placeholder="Suvery Name">
+            <button class="btn btn-primary" id="addQuest">Create a Question!</button>
+            <div id="questionForm" >
+            </div>
+            <button class="btn btn-primary"  id="subBtn" type="submit">Add to survay</button>
+  </div>
+    </div>
+    
+<!-- <script src="../"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+  // QUERYSELECTORS
+    const addQuest = document.getElementById('addQuest');
+    const rootQuestions = document.getElementById('rootQuestions');
+    const subBtn = document.getElementById('subBtn');
+  
+    const arrayChildrens = []
+    
+    function addSurvey(){
+        
+        const questionForm = document.getElementById('questionForm');
+        const container = document.querySelector('.container_form');
+    
+        const arrQuestions = [];
+        const length = questionForm.children.length;
+        
+        for (let i = 0; i < length; i++) {
+            const questions = questionForm.children[i].children[0].value;
+            arrQuestions.push(questions);
+            
+        }    
+        const title = container.children[0].value;
+        const jsonSub = {
+            "title": title,
+            "questions": {...arrQuestions}
+        }
+        arrayChildrens.push(jsonSub);   
+        console.log(arrayChildrens)
+        sendSurvey(jsonSub)
+    }
+    async function sendSurvey(json){
+        const response = await axios.post('/survey/addSurvey', json);
+        console.log(response)
+    }
+    
+    
+    
+    let cont = 0;
+    function dispayFormQuestions(){   
+        const questionForm = document.getElementById('questionForm');
+        let html = "";
+        
+        html = `<div> 
+        <input type="text" name="question" id="question${cont}" placeholder="Make your question...">
+        </div`
+        
+        questionForm.insertAdjacentHTML("beforeend",html);
+        cont++;
+    }
+    // EVENT LISTENERS
+    subBtn.addEventListener('click', addSurvey);
+    addQuest.addEventListener('click', dispayFormQuestions);
+    
+    
+    
+    
+    </script>
+</body>
+</html>

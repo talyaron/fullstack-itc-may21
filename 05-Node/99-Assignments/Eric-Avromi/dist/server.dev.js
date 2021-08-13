@@ -25,19 +25,6 @@ app.use('/survey', surveyRouter); //do the same for questionRouter?
 
 app.use('/users', userRouter); // const addUserRouter = require('./routes/tasksRoute.js')
 // app.use('/users', userRouter)
-// app.get('/useAdmin', (req, res) => {
-//     const cookie = req.cookies['cookie'];
-//     res.send({cookie})
-// })
-// class Survey {
-//     constructor(title){
-//         this.title = title;
-//         this.id = uuidv4();
-//         this.questions = [];
-//         this.admin = {//email:adminEmail
-//             }
-//     }
-// }
 
 app.listen(port, function () {
   console.log("Server listening at http://localhost:".concat(port));

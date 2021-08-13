@@ -1,113 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>  
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="dist/style.css">
-    <title>Create Survey</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="dist/style.css">
+  <title>Create Survey</title>
 </head>
+
 <body>
-    <div class="mx-0 mx-sm-auto">
-        <div class="card">
-          <div class="card-header bg-primary">
-            
-
-            <h5 class="card-title text-white mt-2" id="exampleModalLabel">Set a survey</h5>
-            <input class="form-check-inputName1" type="text" name="exampleForm1" id="radioExample1"  placeholder="Survey name"/>
-            <button type="submit" class="btn btn-light">Share</button>  
-          </div>
-
-          <div class="modal-body">
-            <div class="text-center">
-              <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
-           
-            </div>
-        
-           <!--average and score need to have numbers 1-5-->
-            <form class="px-4" action="">
-                <input class="form-check-inputName2" type="text" name="exampleForm2" id="radioExample2"  placeholder="Write a question"/>
-              <!-- <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="exampleForm" id="radioExample1" />
-                <label class="form-check-label" for="radioExample1">
-                  5
-                </label>
-              </div>
-              <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="exampleForm" id="radioExample2" />
-                <label class="form-check-label" for="radioExample2">
-                  4
-                </label>
-              </div>
-              <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="exampleForm" id="radioExample3" />
-                <label class="form-check-label" for="radioExample3">
-                  3
-                </label>
-              </div>
-              <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="exampleForm" id="radioExample4" />
-                <label class="form-check-label" for="radioExample4">
-                  2
-                </label>
-              </div>
-              <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="exampleForm" id="radioExample5" />
-                <label class="form-check-label" for="radioExample5">
-                  1
-                </label>
-              </div>            -->
-            </form>
-          </div>
-          <div class="card-footer text-end">
-            <button type="submit" class="btn btn-success">Add new question</button>
-            <button type="submit" class="btn btn-danger">Delete question</button>
-            <button type="submit" class="btn btn-primary">Edit question</button>
-            <button type="submit" class="btn btn-warning">Back survey admin</button>
-
-            <!--when we press edit question, we need to change the question but not the rating, only question sentence-->
-            <!--when we press delete question, we need should have delete all the div form question-->
-            <!--in each div question we need to render average score and quantity of voters-->
-            <!--add a share buttom at the end of the survey to redirect to user login only with email-->
-            <!--add button to exit page, send link to complete survey and return previous page-->
-
-          </div>
-        </div>
-        <div class="root"></div>
+  <div class="mx-0 mx-sm-auto">
+    <div class="card">
+      <div class="card-header bg-primary">
+        <h5 class="card-title text-white mt-2" id="exampleModalLabel">Set a survey</h5>
+        <input class="form-check-inputName1" type="text" name="exampleForm1" id="radioExample1"
+          placeholder="Survey name" />
+        <button type="submit" class="btn btn-light">Share</button>
+        <button class="btn btn-dark" id="return" >Logout</button>
       </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
+        </div>
+        <form class="px-4" action="">
+          <input class="form-check-inputName2" type="text" name="exampleForm2" id="radioExample2"
+            placeholder="Write a question" />
+              </form>
+      </div>
+      <div class="card-footer text-end">
+        <button type="submit" class="btn btn-success">Add</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
+        <button type="submit" class="btn btn-warning">Back</button>
+        <button type="submit" onclick="saveSurvey()" class="btn btn-success">Save</button>
+      </div>
+    </div>
+    <div class="root"></div>
+  </div>
 
+  <script>
 
-      <script>
-        const btnAddQuestion = document.querySelector('.btn-success')
-        
-        const btnDeleteQuestion = document.querySelector('.btn-danger')
+const returnPage = document.querySelector('#return')
+    returnPage.addEventListener('click', loginOut)
+    function loginOut(){
+            window.location.href = 'index.html'
+        } 
 
-        const btneditQuestion = document.querySelector('.btn-primary')
-
-        const btnBackToSurveyAdmin = document.querySelector('.btn-warning')
-
-        const link = document.querySelector('.btn-light')
-
-
-        btnAddQuestion.addEventListener('click', renderNewQuestion)
-        btnDeleteQuestion.addEventListener('click', deleteQuestion)
-        btneditQuestion.addEventListener('click', editQuestion)
-        btnBackToSurveyAdmin.addEventListener('click', backToSurveyAdmin)
-        link.addEventListener('click', sendSurvey)
-
-
-
-
-        function renderNewQuestion(data){
-    
+    async function saveSurvey() {
+      console.log('hello');
       
-          const root = document.querySelector('.root')
-          html =''
-          data.forEach((question) => {
-            html += `<form class="px-4" action="">
+
+    }
+    const btnAddQuestion = document.querySelector('.btn-success')
+
+    const btnDeleteQuestion = document.querySelector('.btn-danger')
+
+    const btneditQuestion = document.querySelector('.btn-primary')
+
+    const btnBackToSurveyAdmin = document.querySelector('.btn-warning')
+
+    const link = document.querySelector('.btn-light')
+
+
+    btnAddQuestion.addEventListener('click', renderNewQuestion)
+    btnDeleteQuestion.addEventListener('click', deleteQuestion)
+    btneditQuestion.addEventListener('click', editQuestion)
+    btnBackToSurveyAdmin.addEventListener('click', backToSurveyAdmin)
+    link.addEventListener('click', sendSurvey)
+
+
+
+
+    function renderNewQuestion(data) {
+
+
+      const root = document.querySelector('.root')
+      html = ''
+      data.forEach((question) => {
+        html += `<form class="px-4" action="">
                        <input class="form-check-inputName" type="text" name="exampleForm" id="radioExample1"  placeholder="Write a question" />
              
                           <div class="card-footer text-end">
@@ -119,35 +94,50 @@
                           </div>
                           
                       </form>`
-            
-          });
-          root.innerHTML = html
-          //when you are an admin, is not important to see the options becuase never change,  so we can delete and render only question title
-          //how we can render editable question? with a modal to edit and then render?
+
+      });
+      root.innerHTML = html
 
 
+
+    }
+
+
+
+    function deleteQuestion() {
+
+      console.log('hi');
+    }
+
+    function editQuestion() {
+
+      console.log('hi');
+    }
+
+    function sendSurvey() {
+
+      console.log('hi');
+    }
+
+    function backToSurveyAdmin() {
+      window.location.href = "my-surveys.html"
+      //render surveys by id and show title or add a button in admin page to see each surveys
+
+      // axios.get("/survey/userAdmin")
+        //     .then((res) => {
+        //         console.log(res.data);
+        //         const { title } = res.data.cookie;
+        //         renderSurveys(title)
+        //     })
+
+        function renderSurveys(data) {
+            const survey = document.querySelector('.survey')
+            let html = '';
+            html += `${data.title}`
+            survey.innerHTML = html;
         }
 
-
-          
-        function deleteQuestion(){
-            
-            console.log('hi');
-        }
-
-        function editQuestion(){
-            
-            console.log('hi');
-        }
-
-        function sendSurvey(){
-          
-          console.log('hi');
-        }
-
-        function backToSurveyAdmin(){
-          window.location.href = "my-surveys.html"
-        }
+    }
 
 
 
@@ -163,8 +153,9 @@
 // getAllQuestions()
 
 
-      </script>
+  </script>
 
 
 </body>
+
 </html>

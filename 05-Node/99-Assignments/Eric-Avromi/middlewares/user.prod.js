@@ -1,0 +1,1 @@
+"use strict";function getUser(e,o,s){var r=e.cookies.cookie;console.log(r),console.log("middleware"),r&&(e.user=r,console.log(e.user)),s()}exports.getUser=getUser;
