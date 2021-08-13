@@ -30,12 +30,14 @@
     <i class="fas fa-paper-plane sendlink"></i>
 
     <script>
-       
-       //btn
+
+        //btn
         const btnAddQuestion = document.querySelector('.boxquestion--circle')
         const btnCreateSurveys = document.querySelector('.btncreate')
         const sendLink = document.querySelector('.sendlink');
         const returnPage = document.querySelector('.return')
+     
+
         //init
         let count = 0;
 
@@ -43,12 +45,13 @@
         btnAddQuestion.addEventListener('click', addQuestion)
         btnCreateSurveys.addEventListener('click', createSurvey)
         sendLink.addEventListener('click', sendLinkToUser)
-        returnPage.addEventListener('click',returnPageToHistorial)
+        returnPage.addEventListener('click', returnPageToHistorial)
+ 
 
-        
-        function returnPageToHistorial(){
+
+        function returnPageToHistorial() {
             window.location.href = 'historial.html'
-        } 
+        }
 
         function sendLinkToUser() {
 
@@ -60,6 +63,7 @@
         }
 
         function addQuestion(ev) {
+
             ev.preventDefault()
 
             //for now ill leave the code.  (9:20 lol)
@@ -120,46 +124,50 @@
             const idSurvey = params.get('id');
 
 
+            const isCreated = JSON.parse(localStorage.getItem("isCreated"))
 
-            const responseSurvey = await axios.get(`/r/s/${idSurvey}`)
+            if (isCreated === 1) {
+                const responseSurvey = await axios.get(`/r/s/${idSurvey}`)
 
-            let html = '';
-            if (responseSurvey.data) {
-                const inputTitle = document.querySelector('.container__title--title')
+                let html = '';
+                if (responseSurvey.data) {
+                    const inputTitle = document.querySelector('.container__title--title')
 
-                const { title, question } = responseSurvey.data;
+                    const { title, question } = responseSurvey.data;
 
-                inputTitle.value = title;
+                    inputTitle.value = title;
 
-                const rootQuestion = document.querySelector('.main')
-                let html = ''
+                    const rootQuestion = document.querySelector('.main')
+                    let html = ''
 
-                for (let i = 0; i < question.length; i++) {
+                    for (let i = 0; i < question.length; i++) {
 
-                    html += `
+                        html += `
                     <div class="boxquestion" id="boxquestion${i}" >
                             <div class="boxquestion__question">
                                 <label for="question">
                                     <input type="text" name="question${i}" class="boxquestion__question--title" value="${question[i]}" size="53" id="${i}" onchange='blockQuestion("${i}")' disabled>
                                 </label>
                             </div>
-                            <i class="fas fa-user-edit boxquestion--edit" onclick='editQuestion("${i}")'></i>
-                            <i class="fas fa-trash boxquestion--trash" onclick='deleteQuestion("${i}")'></i> 
                     </div>`
+
+                    }
+
+                    rootQuestion.insertAdjacentHTML("beforeend", html)
+                    count++;
+                    btnCreateSurveys.hidden = true;
+                    btnAddQuestion.style.display = "none"
 
                 }
 
-                rootQuestion.insertAdjacentHTML("beforeend", html)
-                count++;
-                const btnCreate = document.querySelector('.btncreate');
-                btnCreate.disabled = false;
-                btnCreate.style.cursor = 'pointer';
-
+            } else {
+                btnCreateSurveys.hidden = false;
+                btnAddQuestion.style.display = "visible"
             }
-
-
-
         }
+
+
+
 
         async function createSurvey(ev) {
             ev.preventDefault()
@@ -195,8 +203,6 @@
             alert(ok)
 
 
-
-
         }
 
         function addSurveysPromise(newSurvey) {
@@ -220,6 +226,7 @@
                 })
             })
         }
+
     </script>
 </body>
 

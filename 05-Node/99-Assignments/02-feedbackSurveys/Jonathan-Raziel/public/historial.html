@@ -45,6 +45,7 @@
             const response = await axios.get('/id/surveys')
              const {id} = response.data
              window.location.href = `./survey.html?id=${id}`;
+             localStorage.setItem('isCreated', JSON.stringify(0)) 
         }
 
         async function getCookiesAndSurveys(ev) {
@@ -78,8 +79,6 @@
 
         function renderAllSurveys(arrayToRender) {
 
-            console.log(arrayToRender)
-            
             let html = '';
 
         
@@ -97,7 +96,8 @@
         }
 
         function moveToSurvey(id) {
-            window.location.href = `./survey.html?id=${id}`; 
+            window.location.href = `./survey.html?id=${id}`;
+            localStorage.setItem('isCreated', JSON.stringify(1)) 
         }
 
 

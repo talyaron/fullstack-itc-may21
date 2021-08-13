@@ -42,8 +42,6 @@ function deleteSurveys(req, res) {
         var _a = req.params, id_1 = _a.id, email_1 = _a.email;
         var allSurveys = readAllSurveys();
         var allUsers = JSON.parse(fs.readFileSync("./user.json"));
-        //console.log(id)
-        //console.log(email)
         var user = allUsers.filter(function (user) { return user.email === email_1; });
         user[0].surveys = user[0].surveys.filter(function (survey) { return survey.id !== id_1; });
         fs.writeFileSync("./user.json", JSON.stringify(allUsers));
@@ -52,7 +50,6 @@ function deleteSurveys(req, res) {
         fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
         var allUsersUser = JSON.parse(fs.readFileSync("./user.json"));
         var find = allUsersUser.find(function (user) { return user.email === email_1; });
-        console.log(find.surveys);
         res.send(find.surveys);
     }
     catch (e) {

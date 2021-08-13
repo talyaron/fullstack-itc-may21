@@ -1,12 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-import {addSurveys} from '../controllers/controllersSurvey'
-import {deleteSurveys} from '../controllers/controllersSurvey'
-
-import {getUniqueId} from '../controllers/controllersSurvey'
-
-import {getPreviousSurvey} from '../controllers/controllersSurvey'
+import {addSurveys,deleteSurveys,getUniqueId,getPreviousSurvey,editSurveys} from '../controllers/controllersSurvey'
+// import {deleteSurveys} from '../controllers/controllersSurvey'
+// import {getUniqueId} from '../controllers/controllersSurvey'
+// import {getPreviousSurvey} from '../controllers/controllersSurvey'
 
 
 router.post('/add', addSurveys)
