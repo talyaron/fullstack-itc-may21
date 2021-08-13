@@ -2,22 +2,32 @@
 
 var express = require('express');
 
+var cookieParser = require('cookie-parser');
+
+var Ajv = require("ajv");
+
 var _require = require('./models.js'),
     User = _require.User,
     Users = _require.Users,
     Survey = _require.Survey,
     Surveys = _require.Surveys,
     Question = _require.Question,
-    Questions = _require.Questions;
+    Questions = _require.Questions; // Import routes
+
+
+var loginRoute = require('./routes/loginRoute');
+
+var questionsRoute = require('./routes/questionsRoute');
+
+var surveysRoute = require('./routes/surveysRoute');
+
+var usersRoute = require('./routes/usersRoute');
+
+var adminRoute = require('./routes/adminRoute');
 
 var app = express();
-
-var cookieParser = require('cookie-parser');
-
 var port = process.env.PORT || 3000;
 app.use(express.json());
-
-var Ajv = require("ajv");
 
 var _require2 = require('ajv/dist/vocabularies/applicator/dependencies'),
     error = _require2.error;
@@ -56,7 +66,9 @@ app.post('/createUser', function (req, res) {
       throw new Error("Invalid data was transferd");
     }
 
-    if (body.password === '') {
+    if (users.users.find(function (info) {
+      return info.email === body.email;
+    }) === undefined && body.password === '') {
       users.newUser(new User(body.username, body.email, body.password));
       var guestUser = users.users[users.users.length - 1];
       var guestCookie = JSON.stringify({
@@ -70,8 +82,6 @@ app.post('/createUser', function (req, res) {
     } else if (users.users.find(function (info) {
       return info.email === body.email && info.password === '';
     }) != undefined) {
-      console.log("poo");
-      console.log(users.users);
       users.users.find(function (info) {
         return info.email === body.email;
       }).password = body.password;
@@ -80,6 +90,26 @@ app.post('/createUser', function (req, res) {
       }).name = body.username;
       console.log(users);
       res.send(users);
+    } else if (users.users.find(function (info) {
+      return info.email === body.email && info.password != '' && body.password === '';
+    }) != undefined) {
+      var _guestUser = users.users.find(function (info) {
+        return info.email === body.email;
+      });
+
+      var _guestCookie = JSON.stringify({
+        guestUser: _guestUser
+      });
+
+      res.cookie('guest', _guestCookie, {
+        maxAge: 300000000,
+        httpOnly: true
+      });
+      res.send(_guestUser);
+    } else if (users.users.find(function (info) {
+      return info.email === body.email;
+    }) != undefined) {
+      res.send("Email already taken!");
     } else {
       users.newUser(new User(body.username, body.email, body.password));
       res.send(users);
@@ -239,7 +269,17 @@ app.get('/selectedAdminUser', function (req, res) {
   var cookie = JSON.parse(admin);
   var selectedAdmin = cookie.selectedAdmin;
   res.send(selectedAdmin);
-});
+}); // Route to create user
+
+app.use('/createUser', usersRoute); // Login route
+
+app.use('/login', loginRoute); // Route to add a survey
+
+app.use('/addSurvey', surveysRoute); // Route to post a question
+
+app.use('/postQuestions', questionsRoute); // Route to send selected Admin
+
+app.use('/selectedAdminUser', adminRoute);
 app.get('/sendSurvey', function (req, res) {
   try {
     var id = req.query.id;

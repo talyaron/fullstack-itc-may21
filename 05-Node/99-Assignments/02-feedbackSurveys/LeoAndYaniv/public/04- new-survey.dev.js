@@ -14,7 +14,7 @@ function getUserInfoFromCookie() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return regeneratorRuntime.awrap(axios.get('/register/info'));
+          return regeneratorRuntime.awrap(axios.get('/user/info'));
 
         case 2:
           userInfo = _context.sent;
@@ -117,7 +117,7 @@ function deleteQuestion(id) {
 
         case 5:
           questions = _context3.sent;
-          renderQuestions(questions.data.surveys.questions);
+          renderQuestions(questions.data.survey.questions);
 
         case 7:
           _context3.next = 12;
@@ -195,7 +195,7 @@ function uploadTheSurvey() {
           surveyTitle = inputSurvey.value; //UUID is the id from the survey
 
           _context5.next = 5;
-          return regeneratorRuntime.awrap(axios.post("/register/uploadUserWithSurvey/".concat(uuid), {
+          return regeneratorRuntime.awrap(axios.post("/user/uploadUserWithSurvey/".concat(uuid), {
             surveyTitle: surveyTitle
           }));
 

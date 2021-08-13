@@ -1,13 +1,14 @@
 export { };
 const express = require('express');
 const router = express.Router();
+import { userCookieRead, userCookieWrite } from '../middlewares/UserCookie';
 
-import {newUser, login, getInfo, uploadSurvey} from '../controlers/controlerUsers'
+import { newUser, login, sendCookie, uploadSurvey } from '../controlers/controlerUsers'
 
-router.post('/create', newUser);
-router.post('/login', login);
-router.get('/info', getInfo);
+router.post('/register', newUser, userCookieWrite);
+router.post('/login', login, userCookieWrite);
+router.get('/info', userCookieRead, sendCookie);
 //When the user click to finish the new survey I call this method
-router.post('/uploadUserWithSurvey/:uuid', uploadSurvey);
+router.post('/uploadUserWithSurvey/:uuid', userCookieRead, uploadSurvey);
 
-module.exports = router
+module.exports = router;

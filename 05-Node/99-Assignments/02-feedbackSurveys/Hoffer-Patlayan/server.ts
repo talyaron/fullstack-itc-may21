@@ -6,11 +6,11 @@ const bodyParser = require('body-parser')
 
 // const { v4: uuidv4 } = require("uuid");
 
+
 export const localJson = () => {
     const fileJson = fs.readFileSync("./db/users.json");
     return JSON.parse(fileJson);
   };
-
 
 app.use(cookieParser());
 app.use(bodyParser());

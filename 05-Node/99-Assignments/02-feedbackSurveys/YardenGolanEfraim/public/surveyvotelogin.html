@@ -33,9 +33,14 @@
                         password: '',
                         email: email
                     })
-                    await alert ("login success!")
-                await console.log(result)
-                window.location.href=`/surveyvote.html?surveyId=${surveyID}`;
+                    console.log(result.data)
+                    if(result.data.password =! ""){
+            alert(`Welcome Back ${username}`)
+            window.location.href=`/surveyvote.html?surveyId=${surveyID}`;
+        }else{
+        
+        alert(`Register succesful, ${username}!`)
+                window.location.href=`/surveyvote.html?surveyId=${surveyID}`;}
     }
 </script>
 </html>

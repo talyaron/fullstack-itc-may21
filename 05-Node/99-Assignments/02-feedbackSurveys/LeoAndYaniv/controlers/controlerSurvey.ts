@@ -35,11 +35,7 @@ export function deleteSurvey(req, res) {
   let allSurveys = new Surveys;
   allSurveys.deleteSurvey(uuid);
 
-  //Read cookies to send the data from the user login
-  const { userDetails } = req.cookies;
-  const cookie = JSON.parse(userDetails);
-
-  res.send({ message: "The survey was deleted", userInfo: cookie.email });
+  res.send({ message: "The survey was deleted", userInfo: req.email });
 }
 
 //Function to add a new question into the survey

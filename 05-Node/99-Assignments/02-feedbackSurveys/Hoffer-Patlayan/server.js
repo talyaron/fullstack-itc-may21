@@ -5,6 +5,7 @@ var express = require("express");
 var app = express();
 var fs = require("fs");
 var cookieParser = require("cookie-parser");
+// 
 // const { v4: uuidv4 } = require("uuid");
 var localJson = function () {
     var fileJson = fs.readFileSync("./db/users.json");
@@ -19,10 +20,12 @@ app.set("port", 3500 || process.env.PORT);
 var usersRoute = require('./routes/usersRoutes');
 var signUpRoute = require('./routes/signUpRoutes');
 var logInRoute = require('./routes/logInRoutes');
+var addSurveys = require('./routes/surveyRoutes');
 // ROUTES
 app.use('/users', usersRoute);
 app.use('/signUp', signUpRoute);
 app.use('/logIn', logInRoute);
+app.use('/survey', addSurveys);
 app.listen(app.get("port"), function () {
     console.log("app listening at http://localhost:" + app.get("port"));
 });

@@ -19,17 +19,17 @@ function handleRegister(ev) {
 
         case 6:
           result = _context.sent;
-          _context.next = 9;
-          return regeneratorRuntime.awrap(console.log(result));
 
-        case 9:
-          _context.next = 11;
-          return regeneratorRuntime.awrap(alert("Register succesful, ".concat(username, "!")));
+          if (result.data === "Email already taken!") {
+            alert("".concat(result.data));
+          } else {
+            alert("Register succesful, ".concat(username, "!"));
+          }
 
-        case 11:
+          console.log(result);
           ev.target.reset();
 
-        case 12:
+        case 10:
         case "end":
           return _context.stop();
       }

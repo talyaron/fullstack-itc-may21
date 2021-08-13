@@ -29,14 +29,6 @@ export class User {
     this.answeredSurveys = [];
   }
 
-  userJsonForCookie() {
-    try {
-      return JSON.stringify({ username:this.username, email:this.email });
-  
-    } catch (error) {
-      console.error(error);
-    }
-  }
 }
 
 export class Users {

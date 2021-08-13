@@ -43,7 +43,7 @@ function doingSubmitCreate(ev) {
             password: password
           };
           _context.next = 15;
-          return regeneratorRuntime.awrap(axios.post('/register/create', userInfo));
+          return regeneratorRuntime.awrap(axios.post('/user/register', userInfo));
 
         case 15:
           userCreated = _context.sent;
