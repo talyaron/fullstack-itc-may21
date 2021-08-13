@@ -66,7 +66,9 @@ app.post('/createUser', function (req, res) {
       throw new Error("Invalid data was transferd");
     }
 
-    if (body.password === '') {
+    if (users.users.find(function (info) {
+      return info.email === body.email;
+    }) === undefined && body.password === '') {
       users.newUser(new User(body.username, body.email, body.password));
       var guestUser = users.users[users.users.length - 1];
       var guestCookie = JSON.stringify({
