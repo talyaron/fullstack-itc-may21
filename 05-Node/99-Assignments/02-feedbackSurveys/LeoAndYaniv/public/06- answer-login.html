@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Answer Survey</title>
+    <link rel="stylesheet" href="dist/style.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
+
 <body>
-    
+    <nav class="top-menu">
+        <h1 class="top-menu__title">LOGIN TO ANSWER A SURVEY</h1>
+    </nav>
+
+    <form class="form" id="existingForm">
+        <h3>Enter your login data</h3>
+
+        <div class="form__wrapper">
+            <label for="username">Username:</label>
+            <input type="text" name="username" placeholder="Enter your username" required>
+        </div>
+
+        <div class="form__wrapper">
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div id="errorMessage"></div>
+        
+        <input class="form__submit--newuser" type="submit" value="Enter">
+    </form>
+
+    <script src="06- answer-login.js"></script>
 </body>
+
 </html>

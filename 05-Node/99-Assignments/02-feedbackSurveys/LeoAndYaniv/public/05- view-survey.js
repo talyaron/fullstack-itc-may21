@@ -18,12 +18,14 @@ function renderuserInfo(username) {
 
 //Function to render the data of a survey in the DOM
 async function renderSurveyInfo() {
+    const title = document.querySelector("#title");
+    title.innerHTML = `<h2>Link: <span>http://localhost:3000/06-%20answer-login.html?${uuid}</span></h2>`;
+
     const root = document.querySelector("#root");
     const questionsCreated = await axios.get(`/surveys/getQuestions/${uuid}`);
-   let html = "";
+    let html = "";
     questionsCreated.data.survey.questions.forEach(question => {
-        html += `<div><h3>${question.content}</h3>
-                    </div>`
+        html += `<div><h3>${question.content}</h3></div>`
     })
     root.innerHTML = html;
 };

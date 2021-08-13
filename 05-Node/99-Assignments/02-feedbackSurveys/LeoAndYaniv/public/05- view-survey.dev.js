@@ -39,24 +39,26 @@ function renderuserInfo(username) {
 ; //Function to render the data of a survey in the DOM
 
 function renderSurveyInfo() {
-  var root, questionsCreated, html;
+  var title, root, questionsCreated, html;
   return regeneratorRuntime.async(function renderSurveyInfo$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
+          title = document.querySelector("#title");
+          title.innerHTML = "<h2>Link: <span>http://localhost:3000/06-%20answer-login.html?".concat(uuid, "</span></h2>");
           root = document.querySelector("#root");
-          _context2.next = 3;
+          _context2.next = 5;
           return regeneratorRuntime.awrap(axios.get("/surveys/getQuestions/".concat(uuid)));
 
-        case 3:
+        case 5:
           questionsCreated = _context2.sent;
           html = "";
           questionsCreated.data.survey.questions.forEach(function (question) {
-            html += "<div><h3>".concat(question.content, "</h3>\n                    </div>");
+            html += "<div><h3>".concat(question.content, "</h3></div>");
           });
           root.innerHTML = html;
 
-        case 7:
+        case 9:
         case "end":
           return _context2.stop();
       }

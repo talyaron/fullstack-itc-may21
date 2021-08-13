@@ -1,7 +1,7 @@
 export {};
 
 import { User, Users } from "../models/users";
-import { Survey, Surveys } from "../models/surveys";
+import { Surveys } from "../models/surveys";
 
 const fs = require("fs");
 const path = require("path");
