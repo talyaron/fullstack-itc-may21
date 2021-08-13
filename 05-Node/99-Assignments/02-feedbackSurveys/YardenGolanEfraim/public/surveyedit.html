@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div class="survey"></div>
+
+    <button onclick="copyURLtoClipboard()" id="copyURL">Copy URL To Clipboard</button>
+
+
+</body>
+<script>
+    function renderSurveyInfo() {
+        axios.get('/getSurvey')
+            .then((res) => renderSurveyEdit(res.data[0]));
+    }
+    window.addEventListener("load", renderSurveyInfo())
+ 
+
+    function renderSurveyEdit(survey) {
+        const surveyInfo = document.querySelector(".survey")
+        let questionCount = survey.questions.length
+        let questionHtml = ''
+        for (i = 0; i < questionCount; i++) {
+            let questionNumber = i + 1
+            let sum = 0;
+
+        for (let p = 0; p < survey.questions[i].voters.score.length; p++) {
+            sum += survey.questions[i].voters.score[p];
+            }
+            questionHtml +=
+                `  <div>Question ${questionNumber}</div>
+                        <div class="questioninfo-holder">
+                        <div id= "${survey.questions[i].questionID}"class= "question${i}">${survey.questions[i].title}</div>
+                        <div class="averagevotes">Average Score:${sum/survey.questions[i].voters.score.length}</div>
+                        <div class="numberofvotes">Number of Voters: ${survey.questions[i].voters.score.length}</div>
+                        </div> `
+        }
+        console.log(questionHtml)
+        let html = `<div class="survey__ID"  id='${survey.surveyID}'>
+                        <div class="survey__ID__Title">${survey.title}</div>
+                        ${questionHtml}
+                        <form onsubmit="handleQuestions(event)">
+                                     <div id="question-holder">
+                                        <input type="text" name="${survey.surveyID}" id="${survey.surveyID}" placeholder="Question" required>
+                                    </div>
+                                    <button id="submit" type="submit">Submit Questions!</button>
+                                </form>
+                      
+                            </div>
+                    </div>`
+        surveyInfo.innerHTML = html
+
+    }
+
+    function addQuestions(ID) {
+        const modal = document.querySelector(`.myModal`);
+        modal.innerHTML = `<div id="myModal" class="modal">
+                            <div class="modal-content">
+                                
+                            </div>
+                        </div> `
+        const modalDisplay = document.getElementById("myModal")
+
+        modalDisplay.style.display = "block";
+
+        // // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modalDisplay) {
+                modalDisplay.style.display = "none";
+            }
+        }
+    }
+
+
+
+    async function handleQuestions(event) {
+        event.preventDefault()
+        console.log(event.target.elements[0].id)
+
+        let questions = []
+
+        questions.push(event.target.elements[0].value)
+
+        const surveyID = event.target.elements[0].id
+        console.log(questions)
+        const result = await axios.post('/postQuestions', {
+            questions: questions,
+            surveyID: surveyID
+        })
+        await console.log(result)
+
+        event.target.reset();
+        renderSurveyInfo()
+
+    }
+
+    function copyURLtoClipboard() {
+           console.log("poo")
+            axios.get('/getSurvey')
+            .then(function(res){ 
+            const surveyID = res.data[0].surveyID
+            const text = `http://localhost:3000/surveyvotelogin.html?surveyId=${surveyID}`
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        })
+    }
+</script>
+
+</html>

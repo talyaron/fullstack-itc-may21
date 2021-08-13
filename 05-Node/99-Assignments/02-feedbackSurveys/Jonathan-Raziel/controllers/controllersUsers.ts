@@ -30,6 +30,7 @@ export function usersRegister(req, res) {
             throw new Error("this is user is on the list")
         }
     } catch (e) {
+        
         res.status(500).send({ error: `${e}` });
     }
 }

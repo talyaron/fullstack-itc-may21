@@ -13,6 +13,7 @@
 
 <body class="surveys" onload="getCookies(event)">
     <header>
+        <button type="button" class="return">Return</button>
         <div id="nameCookie"></div>
     </header>
     <div class="container__title">
@@ -26,12 +27,15 @@
     <div class="creater">
         <button type="button" class="btncreate" disabled>CREATE</button>
     </div>
-    <i class="fas fa-paper-plane sendLink"></i>
+    <i class="fas fa-paper-plane sendlink"></i>
+
     <script>
-        //btn
+       
+       //btn
         const btnAddQuestion = document.querySelector('.boxquestion--circle')
         const btnCreateSurveys = document.querySelector('.btncreate')
-        const sendLink = document.querySelector('.sendLink');
+        const sendLink = document.querySelector('.sendlink');
+        const returnPage = document.querySelector('.return')
         //init
         let count = 0;
 
@@ -39,18 +43,21 @@
         btnAddQuestion.addEventListener('click', addQuestion)
         btnCreateSurveys.addEventListener('click', createSurvey)
         sendLink.addEventListener('click', sendLinkToUser)
+        returnPage.addEventListener('click',returnPageToHistorial)
 
-        async function sendLinkToUser(ev) {
+        
+        function returnPageToHistorial(){
+            window.location.href = 'historial.html'
+        } 
 
-            ev.preventDefault();
-            const responseSurveyId = await axios.get('/sendUserSurvey/sendSurvey');
-            console.log(responseSurveyId);
+        function sendLinkToUser() {
+
+            const params = new URLSearchParams(window.location.search);
+            const idSurvey = params.get('id');
+
+            alert(`http://localhost:8000/${idSurvey}`) //windows.location or something
 
         }
-
-
-
-
 
         function addQuestion(ev) {
             ev.preventDefault()
@@ -106,6 +113,52 @@
 
             const rootMessage = document.querySelector('#nameCookie')
             rootMessage.innerHTML = `<span>Hi ✋ ${username.charAt(0).toUpperCase() + username.slice(1)}</span>`
+
+
+
+            const params = new URLSearchParams(window.location.search);
+            const idSurvey = params.get('id');
+
+
+
+            const responseSurvey = await axios.get(`/r/s/${idSurvey}`)
+
+            let html = '';
+            if (responseSurvey.data) {
+                const inputTitle = document.querySelector('.container__title--title')
+
+                const { title, question } = responseSurvey.data;
+
+                inputTitle.value = title;
+
+                const rootQuestion = document.querySelector('.main')
+                let html = ''
+
+                for (let i = 0; i < question.length; i++) {
+
+                    html += `
+                    <div class="boxquestion" id="boxquestion${i}" >
+                            <div class="boxquestion__question">
+                                <label for="question">
+                                    <input type="text" name="question${i}" class="boxquestion__question--title" value="${question[i]}" size="53" id="${i}" onchange='blockQuestion("${i}")' disabled>
+                                </label>
+                            </div>
+                            <i class="fas fa-user-edit boxquestion--edit" onclick='editQuestion("${i}")'></i>
+                            <i class="fas fa-trash boxquestion--trash" onclick='deleteQuestion("${i}")'></i> 
+                    </div>`
+
+                }
+
+                rootQuestion.insertAdjacentHTML("beforeend", html)
+                count++;
+                const btnCreate = document.querySelector('.btncreate');
+                btnCreate.disabled = false;
+                btnCreate.style.cursor = 'pointer';
+
+            }
+
+
+
         }
 
         async function createSurvey(ev) {
@@ -121,21 +174,28 @@
             const inputTitle = document.querySelector('.container__title--title').value
 
             const responseCookie = await axios.get('/cookie/getCookie')
+
             const {
                 email
             } = responseCookie.data
 
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
             const newSurvey = {
+                id: id,
                 title: inputTitle,
                 email: email,
                 questions: arrayQuestion,
             }
 
             const responseAwait = await addSurveysPromise(newSurvey)
-            const {
-                ok
-            } = responseAwait
+
+            const { ok } = responseAwait
             alert(ok)
+
+
+
 
         }
 
