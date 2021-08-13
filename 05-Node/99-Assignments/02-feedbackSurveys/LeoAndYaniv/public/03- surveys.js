@@ -1,7 +1,7 @@
 const root = document.querySelector('#nameUser');
 
 async function getUserInfoFromCookie() {
-    const userInfo = await axios.get('/register/info');
+    const userInfo = await axios.get('/user/info');
     const { username, email } = userInfo.data.cookie;
     renderuserInfo(username);
     bringSurveysToShow(email);

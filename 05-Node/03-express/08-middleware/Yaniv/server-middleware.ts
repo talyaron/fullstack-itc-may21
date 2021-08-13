@@ -60,8 +60,6 @@ function getName(req, res, next) {
         req.name = undefined;
     }
 
-
-
     next();
 }
 

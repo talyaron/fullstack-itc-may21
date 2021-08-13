@@ -13,7 +13,7 @@ async function doingSubmitLogin(ev) {
         if (!email || !password) throw new Error("Please complete all the fields");
         ev.target.reset();
         const userInfo = { email, password }
-        const userLogin = await axios.post('/register/login', userInfo);
+        const userLogin = await axios.post('/user/login', userInfo);
 
         if (userLogin.data.userInfo != null) {
             location.href = `03- surveys.html?email=${userInfo.email}`;

@@ -41,7 +41,7 @@ function doingSubmitLogin(ev) {
             password: password
           };
           _context.next = 14;
-          return regeneratorRuntime.awrap(axios.post('/register/login', userInfo));
+          return regeneratorRuntime.awrap(axios.post('/user/login', userInfo));
 
         case 14:
           userLogin = _context.sent;

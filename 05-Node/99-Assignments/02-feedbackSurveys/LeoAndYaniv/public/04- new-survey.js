@@ -6,7 +6,7 @@ const uuid = url.searchParams.get("uuid");
 const root = document.querySelector('#nameUser');
 
 async function getUserInfoFromCookie() {
-    const userInfo = await axios.get('/register/info');
+    const userInfo = await axios.get('/user/info');
     const { email, username } = userInfo.data.cookie;
     renderuserInfo(username);
 };
@@ -90,7 +90,7 @@ async function uploadTheSurvey() {
         const inputSurvey = document.querySelector('#surveyTitle');
         const surveyTitle = inputSurvey.value;
         //UUID is the id from the survey
-        const userInfo = await axios.post(`/register/uploadUserWithSurvey/${uuid}`, { surveyTitle });
+        const userInfo = await axios.post(`/user/uploadUserWithSurvey/${uuid}`, { surveyTitle });
         location.href = `03- surveys.html?email=${userInfo.data.userInfo}`;
     } catch (error) {
         console.error(error);

@@ -10,7 +10,7 @@ function getUserInfoFromCookie() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return regeneratorRuntime.awrap(axios.get('/register/info'));
+          return regeneratorRuntime.awrap(axios.get('/user/info'));
 
         case 2:
           userInfo = _context.sent;

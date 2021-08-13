@@ -2,18 +2,21 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const cookieParser = require('cookie-parser');
+const {readUserCookie} = require('./middlewares/readUserCookie');
+// const isAdmin = require('./middlewares/isAdmin');
 
 app.use(express.json());
 app.use(express.static('public'));
+// app.use(isAdmin());
 
 //I use this to read the cookie (I can create it with out this)
 app.use(cookieParser());
 
 //Route
-const registerRoute = require('./routes/routeUsers');
+const userRoute = require('./routes/routeUsers');
 const surveysRoute = require('./routes/routeSurveys');
 
-app.use('/register', registerRoute);
+app.use('/user', readUserCookie, userRoute);
 app.use('/surveys', surveysRoute);
 
 app.listen(port, () => { console.log(`Listening on port: ${port}`) });

@@ -13,8 +13,6 @@ function newUser(req, res) {
         var allUsers = new users_1.Users;
         var userCreated = allUsers.createUser(user);
         if (!userCreated) {
-            var userCookie = user.userJsonForCookie();
-            res.cookie("userDetails", userCookie, { maxAge: 300000000, httpOnly: true });
             res.send({ message: "A new User was added", user: user });
         }
         else {
@@ -34,9 +32,6 @@ function login(req, res) {
         var allUsers = new users_1.Users;
         var username = allUsers.loginUser(email, password);
         if (username) {
-            var user = new users_1.User(username, email, password);
-            var userCookie = user.userJsonForCookie();
-            res.cookie("userDetails", userCookie, { maxAge: 300000000, httpOnly: true });
             res.send({ message: "Logged in successfully", username: username });
         }
         else {

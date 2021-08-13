@@ -1,7 +1,6 @@
 export {};
 
 import { User, Users } from "../models/users";
-import { Survey } from "../models/surveys";
 
 const fs = require("fs");
 const path = require('path');
@@ -15,8 +14,6 @@ export function newUser(req, res) {
     const allUsers = new Users;
     const userCreated: boolean = allUsers.createUser(user);
     if (!userCreated) {
-      const userCookie = user.userJsonForCookie();
-      res.cookie("userDetails", userCookie, { maxAge: 300000000, httpOnly: true });
       res.send({ message: "A new User was added", user });  
     } else {
       res.send({ message: "Email already registered, please try a different email address!" });
@@ -35,9 +32,6 @@ export function login(req, res) {
     const allUsers = new Users;
     const username = allUsers.loginUser(email, password);
     if (username) {
-      const user = new User(username, email, password);
-      const userCookie = user.userJsonForCookie();
-      res.cookie("userDetails", userCookie, { maxAge: 300000000, httpOnly: true });
       res.send({ message: "Logged in successfully", username });
     } else {
       res.send({ message: "Username or password are wrong, please try again!" });
