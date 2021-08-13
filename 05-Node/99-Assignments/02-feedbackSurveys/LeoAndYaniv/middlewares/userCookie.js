@@ -21,6 +21,7 @@ exports.userCookieRead = userCookieRead;
 function userCookieWrite(req, res, next) {
     try {
         var _a = req.body, username = _a.username, email = _a.email;
+        console.log(req.body);
         if ((!username) || (!email))
             throw new Error("User details processing issues");
         var cookieToWrite = JSON.stringify({ username: username, email: email });

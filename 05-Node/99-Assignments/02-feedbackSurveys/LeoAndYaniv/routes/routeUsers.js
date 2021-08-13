@@ -9,4 +9,5 @@ router.post('/login', controlerUsers_1.login);
 router.get('/info', UserCookie_1.userCookieRead, controlerUsers_1.sendCookie);
 //When the user click to finish the new survey I call this method
 router.post('/uploadUserWithSurvey/:uuid', UserCookie_1.userCookieRead, controlerUsers_1.uploadSurvey);
+router.post('/answerLogin', UserCookie_1.userCookieWrite, controlerUsers_1.sendCookie);
 module.exports = router;
