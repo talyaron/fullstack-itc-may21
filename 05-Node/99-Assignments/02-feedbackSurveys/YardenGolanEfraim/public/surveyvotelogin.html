@@ -33,9 +33,12 @@
                         password: '',
                         email: email
                     })
-                    await alert ("login success!")
-                await console.log(result)
-                window.location.href=`/surveyvote.html?surveyId=${surveyID}`;
+                    if(result.data === "Email already taken!"){
+            alert(`${result.data}`)
+        }else{
+        
+        alert(`Register succesful, ${username}!`)
+                window.location.href=`/surveyvote.html?surveyId=${surveyID}`;}
     }
 </script>
 </html>

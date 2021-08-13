@@ -10,7 +10,11 @@
             password: password,
             email: email
         })
-        await console.log(result)
-        await alert(`Register succesful, ${username}!`)
+        if(result.data === "Email already taken!"){
+            alert(`${result.data}`)
+        }else{
+        
+        alert(`Register succesful, ${username}!`)}
+        console.log(result)
         ev.target.reset();
     }
