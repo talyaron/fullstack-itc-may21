@@ -66,8 +66,7 @@ export class Users {
     try {
       const userExists = this.users.find(user => (user.email === email) && (user.password === password));
       if (userExists) {
-        const { username } = userExists;
-        return username;
+        return userExists;
       }
 
       return undefined;
@@ -78,8 +77,8 @@ export class Users {
   }
 
   addCreatedSurvey(cookieEmail, newSurveyUuid) {
-    const LoggedInUser = this.users.find((user) => user.email === cookieEmail);
-    LoggedInUser.createdSurveys.push(newSurveyUuid);
+    const loggedInUser = this.users.find((user) => user.email === cookieEmail);
+    loggedInUser.createdSurveys.push(newSurveyUuid);
 
     this.updateUsersJson();
 

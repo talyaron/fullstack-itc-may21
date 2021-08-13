@@ -13,5 +13,4 @@ router.delete('/deleteQuestion/:id/:uuid', userCookieRead, deleteQuestion);
 router.delete('/deleteSurvey/:uuid', deleteSurvey);
 router.get('/getSurveys/:emailLogIn', userCookieRead, getSurveys);
 
-
 module.exports = router
