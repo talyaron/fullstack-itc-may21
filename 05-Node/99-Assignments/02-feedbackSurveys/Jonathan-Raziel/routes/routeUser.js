@@ -8,6 +8,7 @@ var controllersUsers_1 = require("../controllers/controllersUsers");
 // import {getSurveys} from '../controllers/controllersUsers'
 router.post('/usersRegister', controllersUsers_1.usersRegister);
 router.post('/userLogin', controllersUsers_1.loginUser);
+router.post('/endUserLogin', controllersUsers_1.endUserLogin);
 router.get('/getCookie', controllersUsers_1.getCookie);
 router.get('/show/:email', controllersUsers_1.getSurveys);
 module.exports = router;

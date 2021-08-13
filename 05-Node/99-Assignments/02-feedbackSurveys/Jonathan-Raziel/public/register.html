@@ -132,15 +132,15 @@ body{
           <form id="form-register"   class="form-box px-3 container__form">
             <div class="form-input">
               <span><i class="fa fa-user"></i></span>
-              <input type="text" name="username" placeholder="User Name" id="username" required>
+              <input type="text" name="username" placeholder="User Name" id="username" >
             </div>
             <div class="form-input">
               <span><i class="fa fa-envelope-o"></i></span>
-              <input type="email" name="email" placeholder="Email Address" id="email" required>
+              <input type="email" name="email" placeholder="Email Address" id="email" >
             </div>
             <div class="form-input">
               <span><i class="fa fa-key"></i></span>
-              <input type="password" name="password" placeholder="Password" id="password" required>
+              <input type="password" name="password" placeholder="Password" id="password" >
             </div>
             <div class="mb-3">
               <button type="submit" class="btn btn-block text-uppercase">
@@ -215,7 +215,7 @@ body{
                     password: password,
                 }
 
-
+               console.log(newUser);
                 const response = await addRegisterPromise(newUser)
                 const { ok } = response
                 alert(ok)
