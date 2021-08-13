@@ -2,23 +2,23 @@
 
 var root = document.querySelector('#nameUser');
 
-function getUserInfoFromCookie() {
-  var userInfo, _userInfo$data$cookie, username, email;
-
-  return regeneratorRuntime.async(function getUserInfoFromCookie$(_context) {
+function getUserDetailsFromCookie() {
+  var userDetails, username, email;
+  return regeneratorRuntime.async(function getUserDetailsFromCookie$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return regeneratorRuntime.awrap(axios.get('/register/info'));
+          return regeneratorRuntime.awrap(axios.get('/user/info'));
 
         case 2:
-          userInfo = _context.sent;
-          _userInfo$data$cookie = userInfo.data.cookie, username = _userInfo$data$cookie.username, email = _userInfo$data$cookie.email;
-          renderuserInfo(username);
+          userDetails = _context.sent;
+          username = userDetails.data.username;
+          email = userDetails.data.email;
+          renderuserDetails(username);
           bringSurveysToShow(email);
 
-        case 6:
+        case 7:
         case "end":
           return _context.stop();
       }
@@ -28,7 +28,7 @@ function getUserInfoFromCookie() {
 
 ;
 
-function renderuserInfo(username) {
+function renderuserDetails(username) {
   var toRender = "<h1>Welcome <span class=\"nameUser__title\">".concat(username, "</span></h1>");
   root.innerHTML = toRender;
 }

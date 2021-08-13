@@ -11,7 +11,9 @@ const {
 app.use(express.static("public"));
 app.use(cookieParser());
 app.use(express.json());
-app.use('/survey', surveyRouter) 
+app.use('/survey', surveyRouter)
+
+
 
 app.use('/users', userRouter)
 

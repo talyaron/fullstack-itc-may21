@@ -22,14 +22,6 @@ var User = /** @class */ (function () {
         this.createdSurveys = [];
         this.answeredSurveys = [];
     }
-    User.prototype.userJsonForCookie = function () {
-        try {
-            return JSON.stringify({ username: this.username, email: this.email });
-        }
-        catch (error) {
-            console.error(error);
-        }
-    };
     return User;
 }());
 exports.User = User;
