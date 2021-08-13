@@ -2,22 +2,32 @@
 
 var express = require('express');
 
+var cookieParser = require('cookie-parser');
+
+var Ajv = require("ajv");
+
 var _require = require('./models.js'),
     User = _require.User,
     Users = _require.Users,
     Survey = _require.Survey,
     Surveys = _require.Surveys,
     Question = _require.Question,
-    Questions = _require.Questions;
+    Questions = _require.Questions; // Import routes
+
+
+var loginRoute = require('./routes/loginRoute');
+
+var questionsRoute = require('./routes/questionsRoute');
+
+var surveysRoute = require('./routes/surveysRoute');
+
+var usersRoute = require('./routes/usersRoute');
+
+var adminRoute = require('./routes/adminRoute');
 
 var app = express();
-
-var cookieParser = require('cookie-parser');
-
 var port = process.env.PORT || 3000;
 app.use(express.json());
-
-var Ajv = require("ajv");
 
 var _require2 = require('ajv/dist/vocabularies/applicator/dependencies'),
     error = _require2.error;
@@ -80,6 +90,10 @@ app.post('/createUser', function (req, res) {
       }).name = body.username;
       console.log(users);
       res.send(users);
+    } else if (users.users.find(function (info) {
+      return info.email === body.email;
+    }) != undefined) {
+      res.send("Email already taken!");
     } else {
       users.newUser(new User(body.username, body.email, body.password));
       res.send(users);
@@ -123,18 +137,20 @@ app.post('/login', function (req, res) {
 
     console.log(users);
     console.log(users.users);
-    var selectedAdmin = users.users.find(function (r) {
+
+    var _selectedAdmin = users.users.find(function (r) {
       return r.email === body.email && r.password === body.password;
     });
+
     var adminCookie = JSON.stringify({
-      selectedAdmin: selectedAdmin
+      selectedAdmin: _selectedAdmin
     });
     res.cookie('admin', adminCookie, {
       maxAge: 300000000,
       httpOnly: true
     });
-    console.log(selectedAdmin);
-    res.send(selectedAdmin);
+    console.log(_selectedAdmin);
+    res.send(_selectedAdmin);
   } catch (e) {
     console.log(e);
     res.status(400).send({
@@ -173,13 +189,13 @@ app.post('/addSurvey', function (req, res) {
     users.users.map(function (user, index) {
       if (user.email === body.adminEmail) {
         users.users[index].createdSurvey.push(new Survey(body.surveyName, body.adminEmail));
-        var selectedAdmin = users.users[index];
-        var selectedAdminIndex = index;
+        var _selectedAdmin2 = users.users[index];
+        var _selectedAdminIndex = index;
         var adminCookie = JSON.stringify({
-          selectedAdmin: selectedAdmin
+          selectedAdmin: _selectedAdmin2
         });
         var adminCookieIndex = JSON.stringify({
-          selectedAdminIndex: selectedAdminIndex
+          selectedAdminIndex: _selectedAdminIndex
         });
         res.cookie('admin', adminCookie, {
           maxAge: 300000000,
@@ -189,7 +205,7 @@ app.post('/addSurvey', function (req, res) {
           maxAge: 300000000,
           httpOnly: true
         });
-        res.send(selectedAdmin);
+        res.send(_selectedAdmin2);
       }
     });
   } catch (e) {
@@ -205,27 +221,27 @@ app.post('/postQuestions', function (req, res) {
     var body = req.body;
     var admin = req.cookies.admin;
     var cookie = JSON.parse(admin);
-    var selectedAdmin = cookie.selectedAdmin;
+    var _selectedAdmin3 = cookie.selectedAdmin;
     var adminIndex = req.cookies.adminIndex;
     var cookieIndex = JSON.parse(adminIndex);
-    var selectedAdminIndex = cookieIndex.selectedAdminIndex;
+    var _selectedAdminIndex2 = cookieIndex.selectedAdminIndex;
     var questions = body.questions;
     var surveyID = body.surveyID;
     questions.forEach(function (question) {
-      selectedAdmin.createdSurvey.find(function (survey) {
+      _selectedAdmin3.createdSurvey.find(function (survey) {
         return survey.surveyID === surveyID;
       }).questions.push(new Question(question));
     });
-    users.users[selectedAdminIndex] = selectedAdmin;
+    users.users[_selectedAdminIndex2] = _selectedAdmin3;
     var adminCookie = JSON.stringify({
-      selectedAdmin: selectedAdmin
+      selectedAdmin: _selectedAdmin3
     });
     res.cookie('admin', adminCookie, {
       maxAge: 300000000,
       httpOnly: true
     });
     console.log(users.users);
-    res.send(selectedAdmin);
+    res.send(_selectedAdmin3);
   } catch (e) {
     console.log(e);
     res.status(400).send({
@@ -240,6 +256,18 @@ app.get('/selectedAdminUser', function (req, res) {
   var selectedAdmin = cookie.selectedAdmin;
   res.send(selectedAdmin);
 });
+var selectedAdmin = {};
+var selectedAdminIndex = 0; // Route to create user
+
+app.use('/createUser', usersRoute); // Login route
+
+app.use('/login', loginRoute); // Route to add a survey
+
+app.use('/addSurvey', surveysRoute); // Route to post a question
+
+app.use('/postQuestions', questionsRoute); // Route to send selected Admin
+
+app.use('/selectedAdminUser', adminRoute);
 app.get('/sendSurvey', function (req, res) {
   try {
     var id = req.query.id;
@@ -261,11 +289,13 @@ app.get('/getSurvey', function (req, res) {
     var editID = cookieEditID;
     var admin = req.cookies.admin;
     var cookie = JSON.parse(admin);
-    var selectedAdmin = cookie.selectedAdmin;
-    console.log(selectedAdmin, editID);
-    var surveyInfo = selectedAdmin.createdSurvey.filter(function (survey) {
+    var _selectedAdmin4 = cookie.selectedAdmin;
+    console.log(_selectedAdmin4, editID);
+
+    var surveyInfo = _selectedAdmin4.createdSurvey.filter(function (survey) {
       return survey.surveyID === editID;
     });
+
     res.send(surveyInfo);
   } catch (e) {
     console.error(e);

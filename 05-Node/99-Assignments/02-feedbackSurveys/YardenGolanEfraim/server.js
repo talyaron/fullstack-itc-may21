@@ -11,11 +11,11 @@ const usersRoute = require('./routes/usersRoute')
 const adminRoute = require('./routes/adminRoute')
 
 const app = express();
-const ajv = new Ajv()
+
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-const Ajv = require("ajv");
+
 const { error } = require('ajv/dist/vocabularies/applicator/dependencies');
 const ajv = new Ajv()
 app.use(express.static('public'));
@@ -61,7 +61,7 @@ app.post('/createUser', (req, res) => {
             )
             throw new Error("Invalid data was transferd")
         }
-       
+    
         if(body.password === ''){
             users.newUser(new User(body.username, body.email, body.password))
             const guestUser = users.users[users.users.length -1]
@@ -76,6 +76,8 @@ app.post('/createUser', (req, res) => {
         users.users.find(info=> info.email === body.email ).name = body.username 
         console.log(users)
         res.send(users)
+        }else if (users.users.find(info=>info.email === body.email)!= undefined){
+        res.send("Email already taken!")
         }else{
         users.newUser(new User(body.username, body.email, body.password))
         res.send(users)}
