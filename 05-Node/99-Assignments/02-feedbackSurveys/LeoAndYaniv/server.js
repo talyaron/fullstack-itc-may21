@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const cookieParser = require('cookie-parser');
-const {readUserCookie} = require('./middlewares/readUserCookie');
 // const isAdmin = require('./middlewares/isAdmin');
 
 app.use(express.json());
@@ -16,7 +15,7 @@ app.use(cookieParser());
 const userRoute = require('./routes/routeUsers');
 const surveysRoute = require('./routes/routeSurveys');
 
-app.use('/user', readUserCookie, userRoute);
+app.use('/user', userRoute);
 app.use('/surveys', surveysRoute);
 
 app.listen(port, () => { console.log(`Listening on port: ${port}`) });

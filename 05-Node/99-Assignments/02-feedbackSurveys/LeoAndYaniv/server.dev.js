@@ -5,10 +5,7 @@ var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
 
-var cookieParser = require('cookie-parser');
-
-var _require = require('./middlewares/readUserCookie'),
-    readUserCookie = _require.readUserCookie; // const isAdmin = require('./middlewares/isAdmin');
+var cookieParser = require('cookie-parser'); // const isAdmin = require('./middlewares/isAdmin');
 
 
 app.use(express.json());
@@ -21,7 +18,7 @@ var userRoute = require('./routes/routeUsers');
 
 var surveysRoute = require('./routes/routeSurveys');
 
-app.use('/user', readUserCookie, userRoute);
+app.use('/user', userRoute);
 app.use('/surveys', surveysRoute);
 app.listen(port, function () {
   console.log("Listening on port: ".concat(port));

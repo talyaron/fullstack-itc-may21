@@ -41,21 +41,6 @@ export function login(req, res) {
     console.error(error);
     res.status(500).send(error.message);
   }
-
-}
-
-//Function to get the information from the cookie
-export function getInfo(req, res) {
-  try {
-    //Read cookies
-    const { userDetails } = req.cookies;
-    const cookie = JSON.parse(userDetails);
-
-    res.send({ cookie });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(error.message);
-  }
 }
 
 //Function to read the JSON of created surveys
@@ -76,13 +61,9 @@ export function uploadSurvey(req, res) {
     const newSurvey = allSurveys.find((survey) => survey.uuid === uuid);
     newSurvey.title = req.body.surveyTitle;
 
-    //Read cookies to find the user
-    const { userDetails } = req.cookies;
-    const cookie = JSON.parse(userDetails);
     let allUsers = new Users;
-    allUsers.addCreatedSurvey(cookie.email, newSurvey.uuid);
-    fs.writeFileSync(surveysJsonPath, JSON.stringify(allSurveys));
-    res.send({ message: "Amazing! You created a survey properly", userInfo: cookie.email });
+    allUsers.addCreatedSurvey(req.email, newSurvey.uuid);
+    res.send({ message: "Amazing! You created a survey properly", userInfo: req.email });
   } catch (error) {
     console.error(error);
     res.status(500).send(error.message);

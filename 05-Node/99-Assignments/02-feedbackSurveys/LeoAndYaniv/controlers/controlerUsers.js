@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.uploadSurvey = exports.getInfo = exports.login = exports.newUser = void 0;
+exports.uploadSurvey = exports.login = exports.newUser = void 0;
 var users_1 = require("../models/users");
 var fs = require("fs");
 var path = require('path');
@@ -44,20 +44,6 @@ function login(req, res) {
     }
 }
 exports.login = login;
-//Function to get the information from the cookie
-function getInfo(req, res) {
-    try {
-        //Read cookies
-        var userDetails = req.cookies.userDetails;
-        var cookie = JSON.parse(userDetails);
-        res.send({ cookie: cookie });
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).send(error.message);
-    }
-}
-exports.getInfo = getInfo;
 //Function to read the JSON of created surveys
 var readJsonSurveys = function () {
     try {
@@ -75,13 +61,9 @@ function uploadSurvey(req, res) {
         var allSurveys = readJsonSurveys();
         var newSurvey = allSurveys.find(function (survey) { return survey.uuid === uuid_1; });
         newSurvey.title = req.body.surveyTitle;
-        //Read cookies to find the user
-        var userDetails = req.cookies.userDetails;
-        var cookie = JSON.parse(userDetails);
         var allUsers = new users_1.Users;
-        allUsers.addCreatedSurvey(cookie.email, newSurvey.uuid);
-        fs.writeFileSync(surveysJsonPath, JSON.stringify(allSurveys));
-        res.send({ message: "Amazing! You created a survey properly", userInfo: cookie.email });
+        allUsers.addCreatedSurvey(req.email, newSurvey.uuid);
+        res.send({ message: "Amazing! You created a survey properly", userInfo: req.email });
     }
     catch (error) {
         console.error(error);

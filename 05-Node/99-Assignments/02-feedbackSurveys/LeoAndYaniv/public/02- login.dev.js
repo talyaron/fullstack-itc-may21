@@ -46,8 +46,8 @@ function doingSubmitLogin(ev) {
         case 14:
           userLogin = _context.sent;
 
-          if (userLogin.data.userInfo != null) {
-            location.href = "03- surveys.html?email=".concat(userInfo.email);
+          if (userLogin.data.username) {
+            location.href = "03- surveys.html?email=".concat(email);
           } else {
             _errorMessage.innerHTML = userLogin.data.message;
           }

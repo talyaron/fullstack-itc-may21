@@ -14,7 +14,7 @@ async function doingSubmitCreate(ev) {
         if (!username || !email || !password) throw new Error("Please complete all the fields");
         ev.target.reset();
         const userInfo = { username, email, password };
-        const userCreated = await axios.post('/user/create', userInfo);
+        const userCreated = await axios.post('/user/register', userInfo);
         if (userCreated.data.user != null) {
             location.href = `03- surveys.html?email=${userCreated.data.user.email}`;
         } else {
