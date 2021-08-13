@@ -27,7 +27,7 @@
     <div class="creater">
         <button type="button" class="btncreate" disabled>CREATE</button>
     </div>
-    <i class="fas fa-paper-plane sendlink"></i>
+    <a href="#" class="whatsapp"><i class="fas fa-paper-plane sendlink"></i></a>
 
     <script>
 
@@ -58,8 +58,14 @@
             const params = new URLSearchParams(window.location.search);
             const idSurvey = params.get('id');
 
-            alert(`http://localhost:8000/${idSurvey}`) //windows.location or something
+            const whatsapp = document.querySelector('.whatsapp')
 
+            const sendLink = 'whatsapp://send?text=' + window.location.origin + '/userSurvey.html/' + idSurvey
+
+            whatsapp.setAttribute('href', sendLink)
+
+
+            
         }
 
         function addQuestion(ev) {
