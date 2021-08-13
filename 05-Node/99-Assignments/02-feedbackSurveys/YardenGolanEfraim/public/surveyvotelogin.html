@@ -33,8 +33,10 @@
                         password: '',
                         email: email
                     })
-                    if(result.data === "Email already taken!"){
-            alert(`${result.data}`)
+                    console.log(result.data)
+                    if(result.data.password =! ""){
+            alert(`Welcome Back ${username}`)
+            window.location.href=`/surveyvote.html?surveyId=${surveyID}`;
         }else{
         
         alert(`Register succesful, ${username}!`)

@@ -82,8 +82,6 @@ app.post('/createUser', function (req, res) {
     } else if (users.users.find(function (info) {
       return info.email === body.email && info.password === '';
     }) != undefined) {
-      console.log("poo");
-      console.log(users.users);
       users.users.find(function (info) {
         return info.email === body.email;
       }).password = body.password;
@@ -92,6 +90,22 @@ app.post('/createUser', function (req, res) {
       }).name = body.username;
       console.log(users);
       res.send(users);
+    } else if (users.users.find(function (info) {
+      return info.email === body.email && info.password != '' && body.password === '';
+    }) != undefined) {
+      var _guestUser = users.users.find(function (info) {
+        return info.email === body.email;
+      });
+
+      var _guestCookie = JSON.stringify({
+        guestUser: _guestUser
+      });
+
+      res.cookie('guest', _guestCookie, {
+        maxAge: 300000000,
+        httpOnly: true
+      });
+      res.send(_guestUser);
     } else if (users.users.find(function (info) {
       return info.email === body.email;
     }) != undefined) {

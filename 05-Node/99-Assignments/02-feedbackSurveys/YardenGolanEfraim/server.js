@@ -69,14 +69,16 @@ app.post('/createUser', (req, res) => {
             res.cookie('guest', guestCookie, { maxAge: 300000000, httpOnly: true });
             res.send(guestUser)
         } else if(users.users.find(info=>info.email === body.email && info.password === '') != undefined){
-           
-            console.log("poo")
-            console.log(users.users)
         users.users.find(info=> info.email === body.email ).password = body.password 
         users.users.find(info=> info.email === body.email ).name = body.username 
         console.log(users)
         res.send(users)
-        }else if (users.users.find(info=>info.email === body.email)!= undefined){
+        }else if(users.users.find(info=>info.email === body.email && info.password != '' && body.password === '') != undefined){
+            const guestUser = users.users.find(info => info.email === body.email)
+            const guestCookie = JSON.stringify({ guestUser })
+            res.cookie('guest', guestCookie, { maxAge: 300000000, httpOnly: true });
+            res.send(guestUser)
+            }else if (users.users.find(info=>info.email === body.email)!= undefined){
         res.send("Email already taken!")
         }else{
         users.newUser(new User(body.username, body.email, body.password))
