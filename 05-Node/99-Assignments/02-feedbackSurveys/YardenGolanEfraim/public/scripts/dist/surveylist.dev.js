@@ -12,19 +12,15 @@ function getAdminUser() {
 
         case 3:
           adminUser = _context.sent;
-          _context.next = 6;
-          return regeneratorRuntime.awrap(console.log(adminUser.data[0]));
-
-        case 6:
-          _context.next = 8;
+          console.log(adminUser);
+          _context.next = 7;
           return regeneratorRuntime.awrap(adminUser.data.name);
 
-        case 8:
+        case 7:
           nameDisplay.innerText = _context.sent;
-          _context.next = 11;
-          return regeneratorRuntime.awrap(renderArrayToDom(adminUser.data.createdSurvey));
+          renderArrayToDom(adminUser.data.createdSurvey);
 
-        case 11:
+        case 9:
         case "end":
           return _context.stop();
       }
@@ -78,7 +74,7 @@ function renderArrayToDom(surveyArray) {
     var list = document.querySelector(".holder");
     var html = '';
     surveyArray.forEach(function (survey) {
-      html += "<div class=\"holder__survey\" onclick='moveToSurveyEdit(\"".concat(survey.surveyID, "\")' id='").concat(survey.surveyID, "'>\n                    <div class=\"holder__survey__header\">Survey:</div>\n                    <div class=\"holder__survey__taskDisplay\">").concat(survey.title, "</div>\n                </div>");
+      html += "<div class=\"holder__survey\" onclick='moveToSurveyEdit(\"".concat(survey.surveyID, "\")' id='").concat(survey.surveyID, "'>\n                        <div class=\"holder__survey__header\">Survey:</div>\n                        <div class=\"holder__survey__taskDisplay\">").concat(survey.title, "</div>\n                    </div>");
     });
     list.innerHTML = html;
   } catch (e) {
