@@ -1,21 +1,19 @@
 {
-  "name": "hoffer-patlayan",
+  "name": "tomashoffer",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.ts"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
-    "uuid": "^8.3.2"
+    "typescript": "^4.3.5"
   },
   "devDependencies": {
-    "@types/node": "^16.4.13",
-    "typescript": "^4.3.5"
+    "@types/node": "^16.6.1"
   }
 }

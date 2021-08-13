@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const cookieParser = require("cookie-parser");
+const bodyParser = require('body-parser')
+
 // const { v4: uuidv4 } = require("uuid");
 
 export const localJson = () => {
@@ -11,6 +13,7 @@ export const localJson = () => {
 
 
 app.use(cookieParser());
+app.use(bodyParser());
 app.use(express.json());
 app.use(express.static("public"));
 app.set("port", 3500 || process.env.PORT);
