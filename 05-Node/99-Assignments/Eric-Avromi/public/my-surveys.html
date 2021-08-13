@@ -28,6 +28,8 @@
         <h4>List of Surveys</h4>
         <button type="submit" class="btn btn-danger" id="dangerSurvey">Delete survey</button>
         <p>title of surveys</p>
+        <div class="surveys"></div>
+
 
     </div>
 
@@ -45,14 +47,18 @@
                 const { email } = res.data.cookie;
                 render(email)
             })
-        // .then(console.log(cookie))
 
-        function render(data) {
+
+            function render(data) {
             const hello = document.querySelector('.hello')
             let html = '';
             html += `<p>Hello, ${data}</p>`
             hello.innerHTML = html;
         }
+
+        // .then(console.log(cookie))
+
+        
 
         const btnNewSurvey = document.getElementById('create')
         const btnDeleteSurvey = document.querySelector('.btn-danger')
@@ -88,7 +94,7 @@
 //         async function getAllSurveys() { 
 //     try {
 //         const res = await axios.get('/surveys/')
-//         const allTasks = res.data
+//         const allSurveys = res.data
 //         renderSurveys(allSurveys);
 //     } catch (error) {
 //         console.log(error);

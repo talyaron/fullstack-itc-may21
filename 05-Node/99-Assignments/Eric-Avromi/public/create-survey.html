@@ -121,6 +121,22 @@ const returnPage = document.querySelector('#return')
 
     function backToSurveyAdmin() {
       window.location.href = "my-surveys.html"
+      //render surveys by id and show title or add a button in admin page to see each surveys
+
+      // axios.get("/survey/userAdmin")
+        //     .then((res) => {
+        //         console.log(res.data);
+        //         const { title } = res.data.cookie;
+        //         renderSurveys(title)
+        //     })
+
+        function renderSurveys(data) {
+            const survey = document.querySelector('.survey')
+            let html = '';
+            html += `${data.title}`
+            survey.innerHTML = html;
+        }
+
     }
 
 
