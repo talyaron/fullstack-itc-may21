@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form onsumbit='handleSumbit(event)'>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name">
+        <label for=' id'>ID</label>
+        <input type="number" name="id" id="id">
+        <button type="submit">SEND</button>
+    </form>
+
+    <script>
+
+        function handleSumbit(event) {
+
+            event.preventDefault()
+
+            const name = event.target.elements.name.value
+            const id = event.target.elements.id.value
+
+           console.log(name)
+        }
+
+    </script>
+
+</body>
+
+</html>
