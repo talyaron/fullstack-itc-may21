@@ -80,7 +80,7 @@
             const data = await axios.post('/survey/newSurvey')   // ('/survey/newSurvey', {})survey INfo
             const {id} = data.data.newSurvey
             console.log(data.data.newSurvey);
-            window.location.href = `./create-survey.html?id=${id}` //how we can get the id params of this user survey
+            window.location.href = `./create-survey.html?id=${id}` 
 
 
         }
