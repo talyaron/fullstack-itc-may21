@@ -3,13 +3,11 @@ const router = express.Router();
 const {
     v4: uuidv4 
 } = require('uuid');
-const {
-    addSurvey
-} = require('../models/surveyModel.js')
-const {
-    getAllUsers
-} = require(`../models/userModels.js`)
+const { addSurvey} = require('../models/surveyModel.js');
+const {getAllSurveys} = require('../controllers/surveyControllers')
+const { getAllUsers} = require(`../models/userModels.js`)
 
+const {getUser} = require('../middlewares/user')
 
 
 class Survey {
@@ -37,6 +35,8 @@ router.post('/newSurvey', (req, res) => {
         res.status(500).send(error.message)
     }
 })
+
+router.get('/allSurveys',getUser, getAllSurveys);
 
 
 

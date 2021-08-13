@@ -12,6 +12,15 @@ var _require = require('uuid'),
 var _require2 = require('../models/surveyModel.js'),
     addSurvey = _require2.addSurvey;
 
+var _require3 = require('../controllers/surveyControllers'),
+    getAllSurveys = _require3.getAllSurveys;
+
+var _require4 = require("../models/userModels.js"),
+    getAllUsers = _require4.getAllUsers;
+
+var _require5 = require('../middlewares/user'),
+    getUser = _require5.getUser;
+
 var Survey = function Survey(admin) {
   _classCallCheck(this, Survey);
 
@@ -24,19 +33,19 @@ var Survey = function Survey(admin) {
 
 router.post('/newSurvey', function (req, res) {
   try {
-    console.log('insdie new survey route ');
     var admin = req.cookies.cookie.email;
     console.log(admin);
     var newSurvey = new Survey(admin);
-    addSurvey(newSurvey); //will give back all Surveys 
-
+    addSurvey(newSurvey);
     res.send({
-      ok: true
+      ok: true,
+      newSurvey: newSurvey
     });
   } catch (error) {
     res.status(500).send(error.message);
   }
-}); // router.get('/', (req, res) => {
+});
+router.get('/allSurveys', getUser, getAllSurveys); // router.get('/', (req, res) => {
 //     try {
 //         const allSurveys = getAllSurveys()
 //         res.send(
