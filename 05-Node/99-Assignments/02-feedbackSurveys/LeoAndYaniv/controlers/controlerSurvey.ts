@@ -8,7 +8,6 @@ export function getSurveys(req, res) {
     const { emailLogIn } = req.params;
     let allSurveys = new Surveys;
     const surveysFromUser = allSurveys.findUserSurveys(emailLogIn);
-    
     res.send({
       message: "You get all the surveys from the user login",
       surveys: surveysFromUser,

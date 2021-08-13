@@ -4,11 +4,9 @@
 var url_string = window.location.href;
 var url = new URL(url_string);
 var uuid = url.searchParams.get("uuid");
-var root = document.querySelector('#nameUser');
 
 function getUserInfoFromCookie() {
-  var userInfo, _userInfo$data$cookie, email, username;
-
+  var userInfo, username;
   return regeneratorRuntime.async(function getUserInfoFromCookie$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -18,10 +16,11 @@ function getUserInfoFromCookie() {
 
         case 2:
           userInfo = _context.sent;
-          _userInfo$data$cookie = userInfo.data.cookie, email = _userInfo$data$cookie.email, username = _userInfo$data$cookie.username;
+          console.log(userInfo);
+          username = userInfo.data.username;
           renderuserInfo(username);
 
-        case 5:
+        case 6:
         case "end":
           return _context.stop();
       }
@@ -32,8 +31,9 @@ function getUserInfoFromCookie() {
 ;
 
 function renderuserInfo(username) {
+  var loggedUser = document.querySelector('#nameUser');
   var toRender = "<h1><span class=\"nameUser__title\">".concat(username, "</span> lets create an amazing survey!</h1>");
-  root.innerHTML = toRender;
+  loggedUser.innerHTML = toRender;
 }
 
 ;

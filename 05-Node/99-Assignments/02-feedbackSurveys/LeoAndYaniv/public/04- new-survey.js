@@ -3,20 +3,18 @@ const url_string = window.location.href;
 const url = new URL(url_string);
 const uuid = url.searchParams.get("uuid");
 
-const root = document.querySelector('#nameUser');
-
 async function getUserInfoFromCookie() {
     const userInfo = await axios.get('/user/info');
-    const { email, username } = userInfo.data.cookie;
+    console.log(userInfo);
+    const { username } = userInfo.data;
     renderuserInfo(username);
 };
 
 function renderuserInfo(username) {
+    const loggedUser = document.querySelector('#nameUser');
     const toRender = `<h1><span class="nameUser__title">${username}</span> lets create an amazing survey!</h1>`
-    root.innerHTML = toRender;
+    loggedUser.innerHTML = toRender;
 };
-
-
 
 const createQuestion = document.querySelector('#create');
 createQuestion.addEventListener('submit', addNewQuestion);

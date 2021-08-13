@@ -77,6 +77,7 @@ export function getSurveys(req, res) {
         const allUsers = readAllUsers();
         if(allUsers.length !== 0){
             const find = allUsers.find(user => user.email === email)
+
             res.send(find.surveys);
         } 
     } catch (e) {
