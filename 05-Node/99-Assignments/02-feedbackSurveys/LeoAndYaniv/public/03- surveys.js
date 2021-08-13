@@ -1,13 +1,14 @@
 const root = document.querySelector('#nameUser');
 
-async function getUserInfoFromCookie() {
-    const userInfo = await axios.get('/user/info');
-    const { username, email } = userInfo.data.cookie;
-    renderuserInfo(username);
+async function getUserDetailsFromCookie() {
+    const userDetails = await axios.get('/user/info');
+    const username = userDetails.data.username;
+    const email = userDetails.data.email;
+    renderuserDetails(username);
     bringSurveysToShow(email);
 };
 
-function renderuserInfo(username) {
+function renderuserDetails(username) {
     const toRender = `<h1>Welcome <span class="nameUser__title">${username}</span></h1>`
     root.innerHTML = toRender;
 };

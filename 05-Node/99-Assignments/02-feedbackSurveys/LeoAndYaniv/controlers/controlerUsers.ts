@@ -43,6 +43,16 @@ export function login(req, res) {
   }
 }
 
+export function sendCookie(req, res) {
+  try {
+    res.send({ email: req.email, username: req.username });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.message);
+  }
+}
+
 //Function to read the JSON of created surveys
 const readJsonSurveys = () => {
   try {

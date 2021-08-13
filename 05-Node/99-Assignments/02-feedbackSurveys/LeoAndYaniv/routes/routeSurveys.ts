@@ -11,7 +11,7 @@ router.post('/create/:uuid', addQuestion);
 router.get('/getQuestions/:uuid', getQuestionsSurvey);
 router.delete('/deleteQuestion/:id/:uuid', userCookieRead, deleteQuestion);
 router.delete('/deleteSurvey/:uuid', deleteSurvey);
-router.get('/getSurveys/:emailLogIn', getSurveys);
+router.get('/getSurveys/:emailLogIn', userCookieRead, getSurveys);
 
 
 module.exports = router

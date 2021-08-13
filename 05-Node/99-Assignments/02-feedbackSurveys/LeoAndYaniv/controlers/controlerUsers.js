@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.uploadSurvey = exports.login = exports.newUser = void 0;
+exports.uploadSurvey = exports.sendCookie = exports.login = exports.newUser = void 0;
 var users_1 = require("../models/users");
 var fs = require("fs");
 var path = require('path');
@@ -44,6 +44,16 @@ function login(req, res) {
     }
 }
 exports.login = login;
+function sendCookie(req, res) {
+    try {
+        res.send({ email: req.email, username: req.username });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).send(error.message);
+    }
+}
+exports.sendCookie = sendCookie;
 //Function to read the JSON of created surveys
 var readJsonSurveys = function () {
     try {

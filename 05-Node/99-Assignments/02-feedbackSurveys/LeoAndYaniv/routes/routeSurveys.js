@@ -10,5 +10,5 @@ router.post('/create/:uuid', controlerSurvey_1.addQuestion);
 router.get('/getQuestions/:uuid', controlerSurvey_1.getQuestionsSurvey);
 router["delete"]('/deleteQuestion/:id/:uuid', UserCookie_1.userCookieRead, controlerSurvey_1.deleteQuestion);
 router["delete"]('/deleteSurvey/:uuid', controlerSurvey_1.deleteSurvey);
-router.get('/getSurveys/:emailLogIn', controlerSurvey_1.getSurveys);
+router.get('/getSurveys/:emailLogIn', UserCookie_1.userCookieRead, controlerSurvey_1.getSurveys);
 module.exports = router;
