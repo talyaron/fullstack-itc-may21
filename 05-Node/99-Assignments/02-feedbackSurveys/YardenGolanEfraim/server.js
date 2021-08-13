@@ -239,8 +239,7 @@ app.get('/selectedAdminUser', (req, res) => {
         const {selectedAdmin} = cookie;
     res.send(selectedAdmin)
 })
-let selectedAdmin = {}
-let selectedAdminIndex = 0
+
 
 // Route to create user
 app.use('/createUser', usersRoute)

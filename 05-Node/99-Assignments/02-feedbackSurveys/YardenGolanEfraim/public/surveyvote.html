@@ -44,7 +44,7 @@
         axios.get('/guestVoter')
         .then((res)=> userName.innerText = (`Hi, ${res.data.name}`))
     }
-    window.onload(surveyToAnswer())
+    window.addEventListener("load", surveyToAnswer())
 
     function renderSurveyToBeVoted(survey){
        const questionHolder = document.querySelector(".questions-wrapper")
