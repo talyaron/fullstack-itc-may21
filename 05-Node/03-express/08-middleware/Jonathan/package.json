@@ -1,11 +1,10 @@
 {
-  "name": "03-express",
+  "name": "Jonathan",
   "version": "1.0.0",
   "description": "",
-  "main": "server-middleware.js",
+  "main": "servermid.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server-middleware.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +14,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "@types/node": "^16.6.1"
+    "@types/node": "^16.6.1",
+    "typescript": "^4.3.5"
   }
 }
