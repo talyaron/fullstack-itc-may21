@@ -41,6 +41,21 @@ router.post('/register', function (req, res) {
     ok: true
   });
 });
+router.post('/login', function (req, res) {
+  var _req$body2 = req.body,
+      email = _req$body2.email,
+      password = _req$body2.password;
+  var newUser = new User(email, password);
+  addUsers(newUser);
+  res.cookie('cookie', {
+    email: email
+  }, {
+    maxAge: 30000000,
+    httpOnly: true
+  }).send({
+    ok: true
+  });
+});
 router.get('/userAdmin', function (req, res) {
   var cookie = req.cookies['cookie'];
   res.send({

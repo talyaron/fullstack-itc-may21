@@ -33,11 +33,12 @@ var Question = /** @class */ (function () {
 }());
 exports.Question = Question;
 var Survey = /** @class */ (function () {
-    function Survey(admin) {
-        this.uuid = uuidv4();
-        this.title = "";
+    function Survey(_a) {
+        var uuid = _a.uuid, title = _a.title, admin = _a.admin, questions = _a.questions;
+        this.uuid = (uuid === null) ? uuidv4() : uuid;
+        this.title = (uuid === null) ? "" : title;
         this.admin = admin;
-        this.questions = []; //when the user push add here
+        this.questions = (questions === null) ? [] : questions; //when the user push add here
     }
     Survey.prototype.addQuestion = function (newQuestion) {
         try {
@@ -49,7 +50,7 @@ var Survey = /** @class */ (function () {
     };
     Survey.prototype.deleteQuestion = function (questionId) {
         try {
-            this.questions.filter(function (question) { return question.uuid !== questionId; });
+            this.questions = this.questions.filter(function (question) { return question.uuid !== questionId; });
         }
         catch (error) {
             console.error(error);
@@ -97,7 +98,7 @@ var Surveys = /** @class */ (function () {
     };
     Surveys.prototype.deleteSurvey = function (surveyUuid) {
         try {
-            this.surveys.filter(function (survey) { return survey.uuid !== surveyUuid; });
+            this.surveys = this.surveys.filter(function (survey) { return survey.uuid !== surveyUuid; });
             this.updateSurveysJson();
         }
         catch (error) {
