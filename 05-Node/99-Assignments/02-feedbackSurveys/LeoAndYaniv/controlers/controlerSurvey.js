@@ -77,7 +77,7 @@ function editQuestion(req, res) {
     //Inside the questions of a specific Survey I will filter the question that I dont want
     surveyToUpdate.editQuestion(qUuid, editedQuestion.content);
     allSurveys.updateSurvey(surveyToUpdate);
-    res.send({ message: "A question was edited", survey: surveyToUpdate });
+    res.send({ message: "The question was edited", survey: surveyToUpdate });
 }
 exports.editQuestion = editQuestion;
 //Function to update questions of a survey
