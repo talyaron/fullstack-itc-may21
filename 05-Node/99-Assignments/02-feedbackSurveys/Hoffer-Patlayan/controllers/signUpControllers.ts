@@ -12,11 +12,12 @@ export function registerUser(req: any, res: any) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(req.body);
-    const valores = req.body;
-    const validaciones = errors.array();
-    res.render("register", { validaciones: validaciones, valores: valores });
-   
+    // const valores = req.body;
+    // const validaciones = errors.array();
+    // res.render("register", { validaciones: validaciones, valores: valores });
     console.log(errors);
+    return res.status(400).json({ errors: errors.array() });
+    // 
     
     
   } else {

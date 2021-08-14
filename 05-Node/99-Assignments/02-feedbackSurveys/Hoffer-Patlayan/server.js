@@ -5,7 +5,7 @@ var express = require("express");
 var app = express();
 var fs = require("fs");
 var cookieParser = require("cookie-parser");
-// 
+var bodyParser = require('body-parser');
 // const { v4: uuidv4 } = require("uuid");
 var localJson = function () {
     var fileJson = fs.readFileSync("./db/users.json");
@@ -13,6 +13,7 @@ var localJson = function () {
 };
 exports.localJson = localJson;
 app.use(cookieParser());
+app.use(bodyParser());
 app.use(express.json());
 app.use(express.static("public"));
 app.set("port", 3500 || process.env.PORT);
