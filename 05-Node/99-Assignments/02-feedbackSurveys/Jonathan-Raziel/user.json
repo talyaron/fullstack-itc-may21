@@ -29,5 +29,20 @@
                 ]
             }
         ]
+    },
+    {
+        "username": "raziel",
+        "email": "raziel@gmail.com",
+        "password": "a123",
+        "surveys": [
+            {
+                "id": "9c4573c1-0fa6-4890-a36d-418da7ac06cb",
+                "title": "asd",
+                "email": "raziel@gmail.com",
+                "questions": [
+                    "asd"
+                ]
+            }
+        ]
     }
 ]
