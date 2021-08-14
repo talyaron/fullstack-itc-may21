@@ -55,15 +55,18 @@ const handleForm = document.querySelector("#root");
 handleForm.addEventListener('submit', answerSubmit);
 
 function answerSubmit(ev) {
-    let answeredQuestions = {};
+    let answeredQuestions = [];
     ev.preventDefault();
     for (let index = 0; index < ev.target.elements.length; index++) {
         const element = ev.target.elements[index];
         if (element.checked === true) {
             element.id = element.id.substring(0, element.id.length - 1);
             //console.log(element.id, "pepe" ,element.value);
-            answeredQuestions = {'questionId' : element.value, 'raiting': element.value};
-            console.log(answeredQuestions);
+            const answeredQuestion = {'questionId' : element.id, 'raiting': element.value};
+            answeredQuestions.push(answeredQuestion)
+            
         }
     }
+    console.log(answeredQuestions);
+    //aca tengo que registrar al usuario y tambien registrar las respuestas a las preguntas de los otros usuarios
 }
