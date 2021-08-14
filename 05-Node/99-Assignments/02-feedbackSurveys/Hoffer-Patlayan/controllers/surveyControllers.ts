@@ -42,6 +42,17 @@ export const getAllSurveys = () => {
     const getUsers = getAllUsers();
     const getCookie  = JSON.parse(req.cookies.cookieName);
     const findLogInUser = getUsers.find((user:any) => user.email === getCookie.email);
-    console.log(findLogInUser);
     res.send(findLogInUser);
   }
+
+  export function deleteSurvey(req: any, res: any) {
+    const { id } = req.params;
+    let getUsers = getAllUsers();
+    const getCookie  = JSON.parse(req.cookies.cookieName);
+    const findLogInUser = getUsers.findIndex((user:any) => user.email === getCookie.email);
+    const find = getUsers.find((user:any) => user.email === getCookie.email);
+    getUsers[findLogInUser].createSurvey = find.createSurvey.filter((surv:any) =>surv.id !== id);
+    fs.writeFileSync("./db/users.json", JSON.stringify(getUsers));
+ 
+  }
+
