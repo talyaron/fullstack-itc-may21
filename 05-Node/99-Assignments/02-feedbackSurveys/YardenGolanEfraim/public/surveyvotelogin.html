@@ -30,16 +30,16 @@
         const email = event.target.elements.email.value
         const result = await axios.post('/createUser', {
                         username: username,
-                        password: '',
+                        password: "",
                         email: email
                     })
-                    console.log(result.data)
-                    if(result.data.password =! ""){
-            alert(`Welcome Back ${username}`)
-            window.location.href=`/surveyvote.html?surveyId=${surveyID}`;
+                    console.log(result.data.password)
+                    if(result.data.password !== ""){
+            alert(`Welcome Back ${username}!`)
+           window.location.href=`/surveyvote.html?surveyId=${surveyID}`;
         }else{
         
-        alert(`Register succesful, ${username}!`)
+        alert(`Login succesful, ${username}!`)
                 window.location.href=`/surveyvote.html?surveyId=${surveyID}`;}
     }
 </script>

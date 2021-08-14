@@ -68,9 +68,12 @@ app.post('/createUser', function (req, res) {
 
     if (users.users.find(function (info) {
       return info.email === body.email;
-    }) === undefined && body.password === '') {
-      users.newUser(new User(body.username, body.email, body.password));
+    }) === undefined && body.password === "") {
+      users.newUser(new User(body.username, body.email, ""));
+      console.log('');
+      console.log(users);
       var guestUser = users.users[users.users.length - 1];
+      console.log(guestUser);
       var guestCookie = JSON.stringify({
         guestUser: guestUser
       });
@@ -91,11 +94,13 @@ app.post('/createUser', function (req, res) {
       console.log(users);
       res.send(users);
     } else if (users.users.find(function (info) {
-      return info.email === body.email && info.password != '' && body.password === '';
+      return info.email === body.email && info.password != '' && body.password === "";
     }) != undefined) {
       var _guestUser = users.users.find(function (info) {
         return info.email === body.email;
       });
+
+      console.log(_guestUser);
 
       var _guestCookie = JSON.stringify({
         guestUser: _guestUser
