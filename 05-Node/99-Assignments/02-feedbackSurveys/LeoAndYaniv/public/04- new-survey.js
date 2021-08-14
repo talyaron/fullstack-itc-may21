@@ -16,36 +16,20 @@ function renderUserDetails(username) {
 };
 
 const createQuestion = document.querySelector('#question-form');
-createQuestion.addEventListener('submit', handleQuestion);
+createQuestion.addEventListener('submit', addNewQuestion);
 
-function handleQuestion(ev) {
-    ev.preventDefault();
-    let { question } = ev.target.elements;
-    question = question.value;
-    if (!question)
-        throw new Error("Please type a question");
-        modalUpload.style.display = "none";
-    ev.target.reset();
-
-    const qUuid = ev.target.parentElement.id;
-    if (qUuid) {editQuestion(question, qUuid);}
-    else {addNewQuestion(question);}
-}
-
-async function addNewQuestion(question) {
+async function addNewQuestion(ev) {
     try {
+        ev.preventDefault();
+        let { question } = ev.target.elements;
+        question = question.value;
+        if (!question)
+            throw new Error("Please type a question");
+        modalUpload.style.display = "none";
+        ev.target.reset();
+
         const questionsCreated = await axios.post(`/surveys/createQuestion/${uuid}`, { question });
         renderQuestions(questionsCreated.data.survey.questions);
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-async function editQuestion(question, qUuid) {
-    try {
-
-        const questionsEdited = await axios.put(`/surveys/editQuestion/${qUuid}/${uuid}`, { question });
-        renderQuestions(questionsEdited.data.survey.questions);
     } catch (error) {
         console.error(error);
     }
@@ -58,11 +42,55 @@ function renderQuestions(questions) {
     questions.forEach(question => {
         html += ` <div><h3>${question.content}</h3>
         <button onclick="deleteQuestion('${question.uuid}')">Delete</button>
-        <button class="buttonEdit" onclick="openModal('${question.uuid}','${question.content}')">Edit</button>
+        <button class="buttonEdit" onclick="editQuestion('${question.uuid}','${question.content}')">Edit</button>
         </div>`
     });
 
     root.innerHTML = html;
+};
+
+function editQuestion(qUuid , question ) {
+    try {
+        if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
+        modalEdit.style.display = "block";
+        modalEdit.classList.add("showModal");
+        
+        const formEdit = document.querySelector("#formEdit");
+        if (!formEdit) throw new Error('There is a problem finding form from HTML');
+        let html = `
+        <div id="modalToEdit">
+        <h3>Edit question</h3>
+
+        <div class="form__wrapper">
+            <input type="text" id="questionContent" value="${question}" required>
+            <button class="form__submit--newuser" id="updateQuestion" onclick="handleEdit('${qUuid}')">Update question</button>
+        </div>
+        <div>`
+        formEdit.innerHTML = html;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+
+//Handle Edit
+async function handleEdit(qUuid) {
+    try {
+        let questionContent = document.querySelector('#questionContent');
+        questionContent = questionContent.value;
+        
+        if (!questionContent)
+            throw new Error("You need to complete all the fields");
+
+        if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
+        modalEdit.style.display = "none";
+    
+        const questionsEdited = await axios.put(`/surveys/editQuestion/${qUuid}/${uuid}`, { questionContent });
+        renderQuestions(questionsEdited.data.survey.questions);
+    } catch (error) {
+        console.error(error);
+    };
 };
 
 //Delete a question:
@@ -118,7 +146,7 @@ async function uploadTheSurvey(ev) {
 };
 
 const backToSurveysBtn = document.querySelector('#to-surveys');
-backToSurveysBtn.addEventListener('click',backToSurveys);
+backToSurveysBtn.addEventListener('click', backToSurveys);
 
 async function backToSurveys() {
     try {
