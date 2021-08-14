@@ -65,4 +65,6 @@ async function answerSubmit(ev) {
     userDetails = { username, email, uuid };
     await axios.post('/user/answerLoginAfter', userDetails);
     await axios.put(`/surveys/updateQuestions/${uuid}`, answeredQuestions);
+    alert('Survey completed successfully');
+    location.href = `index.html`;
 }
