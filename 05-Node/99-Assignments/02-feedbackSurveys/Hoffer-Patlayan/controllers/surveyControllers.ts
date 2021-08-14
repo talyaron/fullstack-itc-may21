@@ -88,11 +88,10 @@ export const getAllSurveys = () => {
     const getUsers = getAllUsers();
     const getCookie  = JSON.parse(req.cookies.cookieName);
     const findUser = getUsers.findIndex((user:any) => user.email === getCookie.email);
-    getUsers[findUser].createSurvey.title = title;
-    getUsers[findUser].createSurvey.question = question;
+    const findSuveryUser = getUsers[findUser].createSurvey.find((survey:any) => survey.id === idCookie);
+    findSuveryUser.title = title;
+    findSuveryUser.question = question;
     fs.writeFileSync("./db/users.json", JSON.stringify(getUsers));
-    
-    
     
     res.send({ok:"succes"})
   }
