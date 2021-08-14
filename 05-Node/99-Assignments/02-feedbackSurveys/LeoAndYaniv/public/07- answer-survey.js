@@ -56,16 +56,13 @@ async function answerSubmit(ev) {
         const element = ev.target.elements[index];
         if (element.checked) {
             element.id = element.id.substring(0, element.id.length - 1);
-            //console.log(element.id, "pepe" ,element.value);
-            const answeredQuestion = {questionId: element.id, raiting: Number(element.value)};
+            const answeredQuestion = {questionId: element.id, rating: Number(element.value)};
             answeredQuestions.push(answeredQuestion);
         }
     }
-    console.log(answeredQuestions);
     let userDetails = await axios.get('/user/info');
     const { username, email } = userDetails.data;
     userDetails = { username, email, uuid };
     await axios.post('/user/answerLoginAfter', userDetails);
     await axios.put(`/surveys/updateQuestions/${uuid}`, answeredQuestions);
-    //aca tengo que registrar al usuario y tambien registrar las respuestas a las preguntas de los otros usuarios
 }
