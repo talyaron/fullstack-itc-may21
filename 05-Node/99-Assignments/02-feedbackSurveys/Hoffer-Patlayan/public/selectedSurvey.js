@@ -1,4 +1,4 @@
-let idSelected = [];
+
 // GET SURVAYS
 async function getSurv(){
     const getSurv = await axios(`/survey/getSurvey`);
