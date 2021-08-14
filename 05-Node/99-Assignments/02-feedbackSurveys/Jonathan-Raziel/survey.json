@@ -1,90 +1,36 @@
-<<<<<<< HEAD
-[{"id":"f07b575f-83b6-432e-977e-c07c0fedef7b","title":"pepe","admin":"jnisen@gmail.com","question":["asd","estas"]},{"id":"ac88db67-f8c1-40fd-841d-f0c68285d01e","title":"asdasd","admin":"eric@gmail.com","question":["asdasd"]},{"id":"9c4573c1-0fa6-4890-a36d-418da7ac06cb","title":"asd","admin":"raziel@gmail.com","question":["asd"]},{"id":null,"title":"a","admin":"a@gmail.com","question":["3333"]}]
-=======
 [
     {
-        "id": "5a84a4f2-d86c-4a45-9d57-466081c123ec",
-        "title": "pp",
-        "admin": "jnisen@gmail.com",
-        "question": [
-            "ppe"
-        ]
-    },
-    {
-        "id": "5a84a4f2-d86c-4a45-9d57-466081c123ec",
-        "title": "asd",
-        "admin": "jnisen@gmail.com",
-        "question": [
-            "asdasd"
-        ]
-    },
-    {
-        "id": "5a84a4f2-d86c-4a45-9d57-466081c123ec",
-        "title": "asd",
-        "admin": "jnisen@gmail.com",
-        "question": [
-            "asd"
-        ]
-    },
-    {
-        "id": "5a84a4f2-d86c-4a45-9d57-466081c123ec",
-        "title": "asd",
-        "admin": "jnisen@gmail.com",
-        "question": [
-            {
-                "title": "asd",
-                "id": "c1177a42-822c-495e-a054-890ecb065afc"
-            }
-        ]
-    },
-    {
-        "id": "5a84a4f2-d86c-4a45-9d57-466081c123ec",
-        "title": "asd",
-        "admin": "jnisen@gmail.com",
-        "question": [
-            {
-                "title": "asd",
-                "id": "d2a1f317-bea1-42f4-9c6e-0fddfce31e74"
-            }
-        ]
-    },
-    {
-        "id": "5a84a4f2-d86c-4a45-9d57-466081c123ec",
-        "title": "asd",
-        "admin": "jnisen@gmail.com",
-        "question": [
-            {
-                "title": "asd",
-                "id": "cc2dbafc-95e7-4a92-b002-179ed7d3520f"
-            }
-        ]
-    },
-    {
-        "id": "a3d12700-a21f-4f21-9679-f4f2239f7b77",
+        "id": "f2af8011-43d4-4a62-9876-7bd0339d7b62",
         "title": "asd",
         "admin": "jnisen@gmail.com",
         "question": [
             {
                 "title": "asdasd",
-                "id": "14159769-f3b0-4a08-a447-b9cdbeaa4e71"
+                "id": "9f93e8c9-da96-4fa2-9793-7daf9b316fdb",
+                "voters": []
             }
         ]
     },
     {
-        "id": "a3d12700-a21f-4f21-9679-f4f2239f7b77",
-        "title": "asd",
-        "admin": "jnisen@gmail.com"
-    },
-    {
-        "id": "a3d12700-a21f-4f21-9679-f4f2239f7b77",
-        "title": "asd",
+        "id": "e5bd9901-3cbd-4358-bea1-9da7c664c9bb",
+        "title": "hi",
         "admin": "jnisen@gmail.com",
         "question": [
             {
-                "title": "asdas",
-                "id": "8e39e186-5799-4014-9b14-f53e9b8d7174"
+                "title": "how",
+                "id": "437826e8-c035-498e-af8f-b142f46cd059",
+                "voters": []
+            },
+            {
+                "title": "are",
+                "id": "6f53b85b-b3a1-4cd6-92fe-7241ac74e13c",
+                "voters": []
+            },
+            {
+                "title": "you",
+                "id": "f6de2911-f9c1-494b-9d51-35ded0cbaee4",
+                "voters": []
             }
         ]
     }
 ]
->>>>>>> b9e550453ffeebc30daa56f8acf8d083baa5941c

@@ -67,10 +67,11 @@ export function endUserLogin(req, res) {
         const { email, password } = (req.body)
         const allUsers = readAllUsers();
         const isUserPassOK = allUsers.some(elem => (elem.email === email) && (elem.password === password))
-        if ( isUserPassOK) {
+        console.log(allUsers)
+        if ( isUserPassOK && allUsers.surveys) {
             res.send({ ok: 'Welcome back admin' });
         } else {
-            const user = new User(req.body.username, req.body.email, req.body.password, [])
+            const user = new User(null,req.body.email, req.body.password,null)
             console.log(user);
             allUsers.push(user)
             fs.writeFileSync("./user.json", JSON.stringify(allUsers));
@@ -79,9 +80,6 @@ export function endUserLogin(req, res) {
     } catch (error) {
         res.status(500).send({ error: `error` }); }
 }
-
-
-
 
 
 

@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Document</title>
+
     <script>
 
         const isRedirect = JSON.parse(localStorage.getItem("isRedirect"))
@@ -13,6 +15,11 @@
         if (isRedirect !== 0) {
             localStorage.setItem('isRedirect', JSON.stringify(1))
             function redirectpage() {
+
+                const params = new URLSearchParams(window.location.search);
+                const idSurvey = params.get('surveyId');
+                //console.log(idSurvey);
+                localStorage.setItem('id', JSON.stringify(idSurvey))
                 window.location.replace("http://localhost:8000/surveyLogIn.html")
             }
             setTimeout('redirectpage()', 4000)
@@ -20,12 +27,57 @@
     </script>
 </head>
 
-<body>
-    <div class="root"></div>
+<body onload="getIdSurvey()">
+
+
+    <form class="sumbit">
+        <div id="root"></div>
+
+        <button type="submit">Send</button>
+    </form>
     <script>
 
+        async function getIdSurvey() {
+
+            const params = new URLSearchParams(window.location.search);
+            const idSurvey = params.get('surveyId');
+
+            const response = await axios.get(`/r/s/${idSurvey}`)
+            const data = response.data
 
 
+            renderSurvey(data) //inputs, ratios and sumbit
+        }
+
+        function renderSurvey(data) {
+            const root = document.querySelector('#root');
+            let html = ''
+
+
+            html += `<p>${data.title}</p>` //title of survey
+
+            
+
+            root.innerHTML = html;
+
+
+        }
+        const form = document.querySelector('.sumbit');
+        form.addEventListener('submit   ', sendSurvey)
+
+        function sendSurvey(ev) {
+            ev.preventDefault();
+
+            console.log('A')
+            //const length = ev.target.elements.length
+
+            //const scoreQuestion = []
+
+            const params = new URLSearchParams(window.location.search);
+            const idSurvey = params.get('surveyId');
+
+
+        }
         //find the id that match the link with the survey.json and render with title and question + ratio buttons
     </script>
 </body>

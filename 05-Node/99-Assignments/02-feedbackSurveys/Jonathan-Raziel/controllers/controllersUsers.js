@@ -57,11 +57,12 @@ function endUserLogin(req, res) {
         var _a = (req.body), email_2 = _a.email, password_2 = _a.password;
         var allUsers = readAllUsers();
         var isUserPassOK = allUsers.some(function (elem) { return (elem.email === email_2) && (elem.password === password_2); });
-        if (isUserPassOK) {
+        console.log(allUsers);
+        if (isUserPassOK && allUsers.surveys) {
             res.send({ ok: 'Welcome back admin' });
         }
         else {
-            var user = new users_1.User(req.body.username, req.body.email, req.body.password, []);
+            var user = new users_1.User(null, req.body.email, req.body.password, null);
             console.log(user);
             allUsers.push(user);
             fs.writeFileSync("./user.json", JSON.stringify(allUsers));
