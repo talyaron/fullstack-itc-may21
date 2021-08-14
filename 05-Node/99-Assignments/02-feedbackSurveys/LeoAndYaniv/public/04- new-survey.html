@@ -24,29 +24,38 @@
         <input type="submit" class="form__submit--newuser button" id="buttonUpload" value="Upload the survey">
     </form>
     <button class="form__submit--newuser button" id="buttonCancel">Cancel and go back</button>
-    
+
     <div style="display:flex;">
         <h2 style="margin:0;">Survey's Questions</h2>
         <button class="form__submit--newuser button" title="Add a question" id="buttonCreate">+</button>
     </div>
-    
+
     <div id="root"></div>
 
-    <!-- Modal to create a new user -->
+    <!-- Modal to create a new question -->
     <div id="modalQuestion" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
             <span id="closeModal" class="close">&times;</span>
             <form class="form" id="question-form">
-                <h3 id="create-or-edit"></h3>
+                <h3>Create a new question</h3>
 
                 <div class="form__wrapper">
-                    <input id="question-content" type="text" name="question" placeholder="Enter a question" required>
+                    <input type="text" name="question" placeholder="Enter a question" required>
                 </div>
 
-                <input id="submit-question" class="form__submit--newuser" type="submit" value="Add question">
+                <input class="form__submit--newuser" type="submit" value="Add question">
             </form>
+        </div>
+    </div>
 
+    <!-- Modal to edit a question -->
+    <div id="modalEdit" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeEdit" class="close">&times;</span>
+            <div class="form" id="formEdit">
+            </div>
         </div>
     </div>
 

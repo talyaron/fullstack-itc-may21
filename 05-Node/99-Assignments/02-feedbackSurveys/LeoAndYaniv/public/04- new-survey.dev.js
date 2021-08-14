@@ -37,86 +37,51 @@ function renderUserDetails(username) {
 
 ;
 var createQuestion = document.querySelector('#question-form');
-createQuestion.addEventListener('submit', handleQuestion);
+createQuestion.addEventListener('submit', addNewQuestion);
 
-function handleQuestion(ev) {
-  ev.preventDefault();
-  var question = ev.target.elements.question;
-  question = question.value;
-  if (!question) throw new Error("Please type a question");
-  modalUpload.style.display = "none";
-  ev.target.reset();
-  var qUuid = ev.target.parentElement.id;
-
-  if (qUuid) {
-    editQuestion(question, qUuid);
-  } else {
-    addNewQuestion(question);
-  }
-}
-
-function addNewQuestion(question) {
-  var questionsCreated;
+function addNewQuestion(ev) {
+  var question, questionsCreated;
   return regeneratorRuntime.async(function addNewQuestion$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
-          _context2.next = 3;
+          ev.preventDefault();
+          question = ev.target.elements.question;
+          question = question.value;
+
+          if (question) {
+            _context2.next = 6;
+            break;
+          }
+
+          throw new Error("Please type a question");
+
+        case 6:
+          modalUpload.style.display = "none";
+          ev.target.reset();
+          _context2.next = 10;
           return regeneratorRuntime.awrap(axios.post("/surveys/createQuestion/".concat(uuid), {
             question: question
           }));
 
-        case 3:
+        case 10:
           questionsCreated = _context2.sent;
           renderQuestions(questionsCreated.data.survey.questions);
-          _context2.next = 10;
+          _context2.next = 17;
           break;
 
-        case 7:
-          _context2.prev = 7;
+        case 14:
+          _context2.prev = 14;
           _context2.t0 = _context2["catch"](0);
           console.error(_context2.t0);
 
-        case 10:
+        case 17:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 7]]);
-}
-
-;
-
-function editQuestion(question, qUuid) {
-  var questionsEdited;
-  return regeneratorRuntime.async(function editQuestion$(_context3) {
-    while (1) {
-      switch (_context3.prev = _context3.next) {
-        case 0:
-          _context3.prev = 0;
-          _context3.next = 3;
-          return regeneratorRuntime.awrap(axios.put("/surveys/editQuestion/".concat(qUuid, "/").concat(uuid), {
-            question: question
-          }));
-
-        case 3:
-          questionsEdited = _context3.sent;
-          renderQuestions(questionsEdited.data.survey.questions);
-          _context3.next = 10;
-          break;
-
-        case 7:
-          _context3.prev = 7;
-          _context3.t0 = _context3["catch"](0);
-          console.error(_context3.t0);
-
-        case 10:
-        case "end":
-          return _context3.stop();
-      }
-    }
-  }, null, null, [[0, 7]]);
+  }, null, null, [[0, 14]]);
 }
 
 ; //Function to render the data of the questions in the DOM
@@ -125,9 +90,81 @@ function renderQuestions(questions) {
   var root = document.querySelector("#root");
   var html = "";
   questions.forEach(function (question) {
-    html += " <div><h3>".concat(question.content, "</h3>\n        <button onclick=\"deleteQuestion('").concat(question.uuid, "')\">Delete</button>\n        <button class=\"buttonEdit\" onclick=\"openModal('").concat(question.uuid, "','").concat(question.content, "')\">Edit</button>\n        </div>");
+    html += " <div><h3>".concat(question.content, "</h3>\n        <button onclick=\"deleteQuestion('").concat(question.uuid, "')\">Delete</button>\n        <button class=\"buttonEdit\" onclick=\"editQuestion('").concat(question.uuid, "','").concat(question.content, "')\">Edit</button>\n        </div>");
   });
   root.innerHTML = html;
+}
+
+;
+
+function editQuestion(qUuid, question) {
+  try {
+    if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
+    modalEdit.style.display = "block";
+    modalEdit.classList.add("showModal");
+    var formEdit = document.querySelector("#formEdit");
+    if (!formEdit) throw new Error('There is a problem finding form from HTML');
+    var html = "\n        <div id=\"modalToEdit\">\n        <h3>Edit question</h3>\n\n        <div class=\"form__wrapper\">\n            <input type=\"text\" id=\"questionContent\" value=\"".concat(question, "\" required>\n            <button class=\"form__submit--newuser\" id=\"updateQuestion\" onclick=\"handleEdit('").concat(qUuid, "')\">Update question</button>\n        </div>\n        <div>");
+    formEdit.innerHTML = html;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+; //Handle Edit
+
+function handleEdit(qUuid) {
+  var questionContent, questionsEdited;
+  return regeneratorRuntime.async(function handleEdit$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          questionContent = document.querySelector('#questionContent');
+          questionContent = questionContent.value;
+
+          if (questionContent) {
+            _context3.next = 5;
+            break;
+          }
+
+          throw new Error("You need to complete all the fields");
+
+        case 5:
+          if (modalEdit) {
+            _context3.next = 7;
+            break;
+          }
+
+          throw new Error('There is a problem finding modalEdit from HTML');
+
+        case 7:
+          modalEdit.style.display = "none";
+          _context3.next = 10;
+          return regeneratorRuntime.awrap(axios.put("/surveys/editQuestion/".concat(qUuid, "/").concat(uuid), {
+            questionContent: questionContent
+          }));
+
+        case 10:
+          questionsEdited = _context3.sent;
+          renderQuestions(questionsEdited.data.survey.questions);
+          _context3.next = 17;
+          break;
+
+        case 14:
+          _context3.prev = 14;
+          _context3.t0 = _context3["catch"](0);
+          console.error(_context3.t0);
+
+        case 17:
+          ;
+
+        case 18:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, null, null, [[0, 14]]);
 }
 
 ; //Delete a question:

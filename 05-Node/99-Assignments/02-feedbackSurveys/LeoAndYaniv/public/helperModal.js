@@ -1,33 +1,19 @@
 // Get the modal
 const modalUpload = document.getElementById("modalQuestion");
+const modalEdit = document.getElementById("modalEdit");
 
 // Get the button that opens the modal
 const buttonCreate = document.getElementById("buttonCreate");
 
 // Get the <span> element that closes the modal
 const closeUpload = document.getElementById("closeModal");
+const closeEdit = document.getElementById("closeEdit");
 
 // When the user clicks the button, open the modal
-buttonCreate.addEventListener('click', openModal(null));
+buttonCreate.addEventListener('click', openModal);
 
-function openModal(qUuid,qContent) {
+function openModal() {
     try {
-        const instructionElement = document.querySelector('#create-or-edit');
-        const submitBtn = document.querySelector('#submit-question');
-        
-        if (qUuid) {
-            const modalContent = document.querySelector('.modal-content');
-            modalContent.id = qUuid;
-            const questionContent = document.querySelector('#question-content');
-            questionContent.value = qContent;
-
-            instructionElement.innerText = 'Edit the question';
-            submitBtn.value = 'Edit question';
-        } else {
-            instructionElement.innerText = 'Create a new question';
-            submitBtn.value = 'Add question';
-        }
-
         modalUpload.style.display = "block";
         modalUpload.classList.add("showModal");
     } catch (error) {
@@ -46,11 +32,22 @@ function closeModal() {
     };
 };
 
+closeEdit.addEventListener('click', closeModalEdit);
+
+function closeModalEdit() {
+    try {
+        modalEdit.style.display = "none";
+    } catch (error) {
+        console.error(error);
+    };
+};
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     try {
-        if (event.target === modalUpload) {
+        if (event.target === modalUpload || event.target === modalEdit) {
             modalUpload.style.display = "none";
+            modalEdit.style.display = "none";
         }
     } catch (error) {
         console.error(error);
