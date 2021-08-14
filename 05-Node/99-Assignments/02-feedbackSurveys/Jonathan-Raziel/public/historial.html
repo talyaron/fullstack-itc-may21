@@ -44,7 +44,7 @@
 
             const response = await axios.get('/id/surveys')
              const {id} = response.data
-             window.location.href = `./survey.html?id=${id}`;
+             window.location.href = `./survey.html?surveyId=${id}`;
              localStorage.setItem('isCreated', JSON.stringify(0)) 
         }
 
@@ -96,7 +96,7 @@
         }
 
         function moveToSurvey(id) {
-            window.location.href = `./survey.html?id=${id}`;
+            window.location.href = `./survey.html?surveyId=${id}`;
             localStorage.setItem('isCreated', JSON.stringify(1)) 
         }
 
