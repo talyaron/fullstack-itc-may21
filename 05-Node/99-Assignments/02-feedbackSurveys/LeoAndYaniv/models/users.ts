@@ -77,8 +77,8 @@ export class Users {
   }
 
   addCreatedSurvey(cookieEmail, newSurveyUuid) {
-    const loggedInUser = this.users.find((user) => user.email === cookieEmail);
-    loggedInUser.createdSurveys.push(newSurveyUuid);
+    const loggedInUserIndex = this.users.findIndex((user) => user.email === cookieEmail);
+    this.users[loggedInUserIndex].createdSurveys.push(newSurveyUuid);
 
     this.updateUsersJson();
 

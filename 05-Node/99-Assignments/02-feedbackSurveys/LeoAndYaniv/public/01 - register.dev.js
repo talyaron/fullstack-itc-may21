@@ -5,7 +5,7 @@ var handleFormCreate = document.querySelector("#createForm");
 handleFormCreate.addEventListener('submit', doingSubmitCreate);
 
 function doingSubmitCreate(ev) {
-  var _errorMessage, _ev$target$elements, username, email, password, userInfo, userCreated;
+  var _errorMessage, _ev$target$elements, username, email, password, userDetails, userCreated;
 
   return regeneratorRuntime.async(function doingSubmitCreate$(_context) {
     while (1) {
@@ -37,13 +37,13 @@ function doingSubmitCreate(ev) {
 
         case 11:
           ev.target.reset();
-          userInfo = {
+          userDetails = {
             username: username,
             email: email,
             password: password
           };
           _context.next = 15;
-          return regeneratorRuntime.awrap(axios.post('/user/register', userInfo));
+          return regeneratorRuntime.awrap(axios.post('/user/register', userDetails));
 
         case 15:
           userCreated = _context.sent;
