@@ -103,12 +103,13 @@
 
             var data = new FormData(form)
 
-            for (const entry of data) {
-                scoreList.push({
-                    id: id,
-                    score: +entry[1]
-                })
-            };
+             for (const entry of data) {
+                 scoreList.push({
+                     id: id,
+                     score: +entry[1]
+                 })
+             };
+             
 
             const params = new URLSearchParams(window.location.search);
             const idSurvey = params.get('surveyId');
@@ -122,7 +123,7 @@
 
         }
 
-        function addScorePromise(scoreList,idSurvey) {
+         function addScorePromise(scoreList,idSurvey) {
             return new Promise((resolve, reject) => {
                 fetch(`/score/add/${idSurvey}`, {
                     method: 'POST',
@@ -140,7 +141,7 @@
                             alert(pepe.error)
                         })
                     }
-                })
+                }).catch(error => console.error('Error: ', error));
             })
         }
 
