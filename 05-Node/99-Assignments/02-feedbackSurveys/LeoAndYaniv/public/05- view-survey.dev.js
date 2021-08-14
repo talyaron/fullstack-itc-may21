@@ -5,9 +5,9 @@ var url_string = window.location.href;
 var url = new URL(url_string);
 var uuid = url.searchParams.get("uuid");
 
-function getUserInfoFromCookie() {
-  var userInfo, username;
-  return regeneratorRuntime.async(function getUserInfoFromCookie$(_context) {
+function getUserDetailsFromCookie() {
+  var userDetails, username;
+  return regeneratorRuntime.async(function getUserDetailsFromCookie$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -15,9 +15,9 @@ function getUserInfoFromCookie() {
           return regeneratorRuntime.awrap(axios.get('/user/info'));
 
         case 2:
-          userInfo = _context.sent;
-          username = userInfo.data.username;
-          renderuserInfo(username);
+          userDetails = _context.sent;
+          username = userDetails.data.username;
+          renderuserDetails(username);
 
         case 5:
         case "end":
@@ -29,7 +29,7 @@ function getUserInfoFromCookie() {
 
 ;
 
-function renderuserInfo(username) {
+function renderuserDetails(username) {
   var loggedUser = document.querySelector('#nameUser');
   var toRender = "<h1>Awsome survey <span class=\"nameUser__title\">".concat(username, "</span>!</h1>");
   loggedUser.innerHTML = toRender;

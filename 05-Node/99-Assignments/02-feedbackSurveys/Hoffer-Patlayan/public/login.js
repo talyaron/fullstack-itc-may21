@@ -25,7 +25,7 @@ axios({
   //   // alert(error)
   // }
 
-window.location.href = 'survay.html'
+window.location.href = 'survey.html'
 
 event.target.reset();
 }

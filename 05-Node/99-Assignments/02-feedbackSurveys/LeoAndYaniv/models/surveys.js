@@ -38,7 +38,7 @@ var Survey = /** @class */ (function () {
         this.uuid = uuid === null ? uuidv4() : uuid;
         this.title = uuid === null ? "" : title;
         this.admin = admin;
-        this.questions = questions === null ? [] : questions; //when the user push add here
+        this.questions = (questions === null) ? [] : questions; //when the user push add here
     }
     Survey.prototype.addQuestion = function (newQuestion) {
         try {
@@ -113,10 +113,10 @@ var Surveys = /** @class */ (function () {
             console.error(error);
         }
     };
-    Surveys.prototype.findSurvey = function (surveyUuid) {
+    Surveys.prototype.findSurveyIndex = function (surveyUuid) {
         try {
-            var survey = this.surveys.find(function (surveyItem) { return surveyItem.uuid === surveyUuid; });
-            return survey;
+            var surveyIndex = this.surveys.findIndex(function (surveyItem) { return surveyItem.uuid === surveyUuid; });
+            return surveyIndex;
         }
         catch (error) {
             console.error(error);
@@ -124,10 +124,8 @@ var Surveys = /** @class */ (function () {
     };
     Surveys.prototype.updateSurvey = function (surveyToUpdate) {
         try {
-            var survey = this.findSurvey(surveyToUpdate.uuid);
-            survey.questions = surveyToUpdate.questions;
+            this.surveys[this.findSurveyIndex(surveyToUpdate.uuid)] = surveyToUpdate;
             this.updateSurveysJson();
-            return survey;
         }
         catch (error) {
             console.error(error);

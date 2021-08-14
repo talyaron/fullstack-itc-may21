@@ -43,7 +43,7 @@ export class Survey {
     this.uuid = uuid === null ? uuidv4() : uuid;
     this.title = uuid === null ? "" : title;
     this.admin = admin;
-    this.questions = questions === null ? [] : questions; //when the user push add here
+    this.questions = (questions === null) ? [] : questions; //when the user push add here
   }
 
   addQuestion(newQuestion) {
@@ -112,6 +112,7 @@ export class Surveys {
       this.surveys.push(newSurvey);
 
       this.updateSurveysJson();
+      
     } catch (error) {
       console.error(error);
     }
@@ -127,12 +128,12 @@ export class Surveys {
     }
   }
 
-  findSurvey(surveyUuid) {
+  findSurveyIndex(surveyUuid) {
     try {
-      const survey = this.surveys.find(
+      const surveyIndex = this.surveys.findIndex(
         (surveyItem) => surveyItem.uuid === surveyUuid
       );
-      return survey;
+      return surveyIndex;
     } catch (error) {
       console.error(error);
     }
@@ -140,12 +141,10 @@ export class Surveys {
 
   updateSurvey(surveyToUpdate) {
     try {
-      const survey = this.findSurvey(surveyToUpdate.uuid);
-      survey.questions = surveyToUpdate.questions;
+      this.surveys[this.findSurveyIndex(surveyToUpdate.uuid)] = surveyToUpdate;
 
       this.updateSurveysJson();
 
-      return survey;
     } catch (error) {
       console.error(error);
     }

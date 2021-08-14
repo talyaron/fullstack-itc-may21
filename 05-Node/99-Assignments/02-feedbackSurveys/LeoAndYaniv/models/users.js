@@ -63,8 +63,8 @@ var Users = /** @class */ (function () {
         }
     };
     Users.prototype.addCreatedSurvey = function (cookieEmail, newSurveyUuid) {
-        var loggedInUser = this.users.find(function (user) { return user.email === cookieEmail; });
-        loggedInUser.createdSurveys.push(newSurveyUuid);
+        var loggedInUserIndex = this.users.findIndex(function (user) { return user.email === cookieEmail; });
+        this.users[loggedInUserIndex].createdSurveys.push(newSurveyUuid);
         this.updateUsersJson();
     };
     return Users;
