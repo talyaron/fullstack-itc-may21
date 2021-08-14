@@ -4,7 +4,7 @@ const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 
 
-import { Survey } from '../models/survey'
+import { Survey, Question, Voter } from '../models/survey'
 
 
 const readAllSurveys = () => {
@@ -13,6 +13,10 @@ const readAllSurveys = () => {
 }
 
 export function getUniqueId(req, res) {
+    const id = uuidv4()
+    res.send({ id: id })
+}
+export function getUniqueIdQuestions(req, res) {
     const id = uuidv4()
     res.send({ id: id })
 }
@@ -29,7 +33,6 @@ export function getPreviousSurvey(req, res) {
 export function addSurveys(req, res) {
     try {
         const allSurveys = readAllSurveys();
-
 
         const survey = new Survey(req.body.id, req.body.title, req.body.email, req.body.questions)
         allSurveys.push(survey)
