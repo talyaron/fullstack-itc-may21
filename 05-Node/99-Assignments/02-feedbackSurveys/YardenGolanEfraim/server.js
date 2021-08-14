@@ -62,9 +62,12 @@ app.post('/createUser', (req, res) => {
             throw new Error("Invalid data was transferd")
         }
     
-        if(users.users.find(info=>info.email === body.email) === undefined && body.password === ''){
-            users.newUser(new User(body.username, body.email, body.password))
+        if(users.users.find(info=>info.email === body.email) === undefined && body.password === ""){
+            users.newUser(new User(body.username, body.email, ""))
+            console.log('')
+            console.log(users)
             const guestUser = users.users[users.users.length -1]
+            console.log(guestUser)
             const guestCookie = JSON.stringify({ guestUser })
             res.cookie('guest', guestCookie, { maxAge: 300000000, httpOnly: true });
             res.send(guestUser)
@@ -73,8 +76,9 @@ app.post('/createUser', (req, res) => {
         users.users.find(info=> info.email === body.email ).name = body.username 
         console.log(users)
         res.send(users)
-        }else if(users.users.find(info=>info.email === body.email && info.password != '' && body.password === '') != undefined){
+        }else if(users.users.find(info=>info.email === body.email && info.password != '' && body.password === "") != undefined){
             const guestUser = users.users.find(info => info.email === body.email)
+            console.log(guestUser)
             const guestCookie = JSON.stringify({ guestUser })
             res.cookie('guest', guestCookie, { maxAge: 300000000, httpOnly: true });
             res.send(guestUser)

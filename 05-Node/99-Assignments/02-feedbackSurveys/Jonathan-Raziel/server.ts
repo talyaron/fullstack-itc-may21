@@ -8,32 +8,23 @@ app.use(express.json());
 app.use(express.static('public'));
 
 const userModel = require("./routes/routeUser")
-const userLogin = require("./routes/routeUser")
-const getCookie = require("./routes/routeUser")
-const getSurveys = require("./routes/routeUser")
-const endUserLogin= require("./routes/routeUser")
-const addSurveys = require("./routes/routesSurveys")
-const deleteSurveys = require("./routes/routesSurveys")
-const getUniqueId = require("./routes/routesSurveys")
-const getUniqueIdQuestions = require("./routes/routesSurveys")
-const getPrevios = require("./routes/routesSurveys")
-
-const editSurveys = require("./routes/routesSurveys")
-
 
 app.use('/register', userModel);
-app.use('/login', userLogin);
-app.use('/login', endUserLogin);
-app.use('/cookie', getCookie);
-app.use('/surveys', getSurveys);
+app.use('/login', userModel);
+app.use('/login', userModel);
+app.use('/cookie', userModel);
+app.use('/surveys', userModel);
+app.use('/score',userModel)
 
-app.use('/surveys',addSurveys)
-app.use('/id',getUniqueId)
-app.use('/id',getUniqueIdQuestions)
-app.use('/r',getPrevios)
-app.use('/c', editSurveys)
+const surveyModel = require("./routes/routesSurveys")
 
-app.use('/delete',deleteSurveys)
+app.use('/surveys',surveyModel)
+app.use('/id',surveyModel)
+app.use('/id',surveyModel)
+app.use('/r',surveyModel)
+app.use('/c', surveyModel)
+app.use('/delete',surveyModel)
+
 
 
 

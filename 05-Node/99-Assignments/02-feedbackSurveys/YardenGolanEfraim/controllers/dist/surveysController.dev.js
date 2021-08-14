@@ -28,8 +28,7 @@ exports.addSurvey = function (req, res) {
         return console.log(err.message);
       });
       throw new Error("Invalid data was transferd");
-    } // users.users.find(find => find.email === body.email )
-
+    }
 
     users.users.map(function (user, index) {
       if (user.email === body.adminEmail) {

@@ -39,7 +39,7 @@
 
 
         //init
-        //let count = 0;
+        let count = 0;
 
         //addEventListener
         btnAddQuestion.addEventListener('click', addQuestion)
@@ -75,25 +75,25 @@
             const response = await axios.get('/id/questions')
             const { id } = response.data
 
-            console.log(id)
+           
 
             const rootQuestion = document.querySelector('.main')
 
             let html = ''
             html += `
-                    <div class="boxquestion" id="boxquestion${id}" >
+                    <div class="boxquestion" id="boxquestion${count}" >
                             <div class="boxquestion__question">
                                 <label for="question">
-                                    <input type="text" name="question${id}" class="boxquestion__question--title" size="53" id="${id}" onchange='blockQuestion("${id}")'>
+                                    <input type="text" name="question${count}" class="boxquestion__question--title" size="53" id="${count}" onchange='blockQuestion("${count}")'>
                                 </label>
                             </div>
-                            <i class="fas fa-user-edit boxquestion--edit" onclick='editQuestion("${id}")'></i>
-                            <i class="fas fa-trash boxquestion--trash" onclick='deleteQuestion("${id}")'></i> 
+                            <i class="fas fa-user-edit boxquestion--edit" onclick='editQuestion("${count}")'></i>
+                            <i class="fas fa-trash boxquestion--trash" onclick='deleteQuestion("${count}")'></i> 
                     </div>`
 
 
             rootQuestion.insertAdjacentHTML("beforeend", html)
-
+            count++;
             const btnCreate = document.querySelector('.btncreate');
             btnCreate.disabled = false;
             btnCreate.style.cursor = 'pointer';
@@ -142,19 +142,42 @@
 
                     const { title, question } = responseSurvey.data;
 
+
+
                     inputTitle.value = title;
 
                     const rootQuestion = document.querySelector('.main')
+
+                    let avg = []
+
+                    const cantidad = question[0].voters.length
+
+
+                    for (let i = 0; i < question.length; i++) {
+                       
+                  
+                            avg.push(parseFloat((question[i].voters.reduce((sum, value) => (typeof value.score == "number" ? sum + value.score : sum), 0)) / cantidad).toFixed(2));    
+                        
+                        
+                    }
+
+
+
                     let html = ''
 
                     for (let i = 0; i < question.length; i++) {
+
+
 
                         html += `
                     <div class="boxquestion" id="boxquestion${i}" >
                             <div class="boxquestion__question">
                                 <label for="question">
-                                    <input type="text" name="question${i}" class="boxquestion__question--title" value="${question[i]}" size="53" id="${i}" onchange='blockQuestion("${i}")' disabled>
+                                    <input type="text" name="question${i}" class="boxquestion__question--title" value="${question[i].title}" size="53" id="${i}" onchange='blockQuestion("${i}")' disabled>
+                                    
                                 </label>
+                                <span>Avg: ${avg[i]}</span>
+                                <span>#: ${cantidad}</span>
                             </div>
                     </div>`
 
@@ -185,8 +208,8 @@
             for (let i = 1; i < length; i++) {
                 arrayQuestion.push({
                     title: rootQuestion.children[i].children[0].children[0].children[0].value,
-                    id: rootQuestion.children[i].children[0].children[0].children[0].getAttribute('id'),
-                    voters:[],
+                    id: i - 1,
+                    voters: [],
                 })
 
             }
@@ -202,8 +225,7 @@
             const params = new URLSearchParams(window.location.search);
             const id = params.get('surveyId');
 
-            console.log(id)
-
+           
             const newSurvey = {
                 id: id,
                 title: inputTitle,
@@ -211,6 +233,7 @@
                 questions: arrayQuestion,
             }
 
+         
             const responseAwait = await addSurveysPromise(newSurvey)
 
             const { ok } = responseAwait

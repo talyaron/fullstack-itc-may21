@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.getSurveys = exports.getCookie = exports.endUserLogin = exports.loginUser = exports.usersRegister = void 0;
+exports.scoreAdd = exports.getSurveys = exports.getCookie = exports.endUserLogin = exports.loginUser = exports.usersRegister = void 0;
 // const express = require("express");
 // const app = express();
 var fs = require("fs");
@@ -102,3 +102,24 @@ function getSurveys(req, res) {
     }
 }
 exports.getSurveys = getSurveys;
+function scoreAdd(req, res) {
+    try {
+        var id_1 = req.params.id;
+        var allUsers = readAllUsers();
+        var allSurveys = JSON.parse(fs.readFileSync("./survey.json"));
+        var admin_1 = allSurveys.find(function (survey) { return survey.id === id_1; }).admin;
+        var findAdmin = allUsers.find(function (user) { return user.email === admin_1; });
+        var findSurveyQuestions = findAdmin.surveys.find(function (survey) { return survey.id === id_1; }).questions;
+        var findSurveyinSurveyJSON = allSurveys.find(function (survey) { return survey.id === id_1; }).question;
+        for (var i = 0; i < findSurveyQuestions.length; i++) {
+            findSurveyQuestions[i].voters.push(req.body[i]);
+            findSurveyinSurveyJSON[i].voters.push(req.body[i]); // check this way double
+        }
+        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+    }
+    catch (e) {
+        res.status(500).send({ error: "" + e });
+    }
+}
+exports.scoreAdd = scoreAdd;

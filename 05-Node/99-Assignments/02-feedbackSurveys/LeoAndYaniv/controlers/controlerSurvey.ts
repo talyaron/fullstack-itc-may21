@@ -80,12 +80,26 @@ export function editQuestion(req, res) {
   const { qUuid, uuid } = req.params; // qUuid: question uuid; uuid: survey uuid
   const allSurveys = new Surveys();
   const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
-  
-  const editedQuestion = new Question(req.body.question);
 
+  const editedQuestion = new Question(req.body.questionContent);
+  
   //Inside the questions of a specific Survey I will filter the question that I dont want
   surveyToUpdate.editQuestion(qUuid, editedQuestion.content)
   allSurveys.updateSurvey(surveyToUpdate);
 
-  res.send({ message: "A question was deleted", survey: surveyToUpdate });
+  res.send({ message: "The question was edited", survey: surveyToUpdate });
+}
+
+//Function to update questions of a survey
+export function updateQuestionsSurvey(req, res) {
+  const { uuid } = req.params;
+  const allSurveys = new Surveys;
+  const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
+  
+  const answeredQuestions = req.body; 
+  answeredQuestions.forEach(question => surveyToUpdate.updateQuestionRating(question.questionId, question.rating));
+  
+  allSurveys.updateSurvey(surveyToUpdate);
+
+  res.send({ message: "A new Question was added", survey: surveyToUpdate });
 }

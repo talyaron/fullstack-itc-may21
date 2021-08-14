@@ -11,4 +11,5 @@ router.post('/userLogin', controllersUsers_1.loginUser);
 router.post('/endUserLogin', controllersUsers_1.endUserLogin);
 router.get('/getCookie', controllersUsers_1.getCookie);
 router.get('/show/:email', controllersUsers_1.getSurveys);
+router.post('/add/:id', controllersUsers_1.scoreAdd);
 module.exports = router;

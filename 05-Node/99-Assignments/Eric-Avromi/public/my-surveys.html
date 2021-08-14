@@ -13,7 +13,7 @@
     <title>Surveys admin</title>
 </head>
 
-<body>
+<body onload=getAllSurveys()>
 
     <div class="hello"></div>
 
@@ -92,14 +92,16 @@
 
 
 
-
+        function renderSurveys(){
+            console.log('hi');
+        }
 
         async function getAllSurveys() {
             try {
                 const res = await axios.get('/survey/allSurveys')
                 const {surveys} = res.data
                 console.log(surveys)
-                // renderSurveys(allSurveys);
+                 renderSurveys(allSurveys);
             } catch (error) {
                 console.log(error);
             }

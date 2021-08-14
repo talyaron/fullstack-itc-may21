@@ -18,7 +18,7 @@
 
                 const params = new URLSearchParams(window.location.search);
                 const idSurvey = params.get('surveyId');
-                //console.log(idSurvey);
+               
                 localStorage.setItem('id', JSON.stringify(idSurvey))
                 window.location.replace("http://localhost:8000/surveyLogIn.html")
             }
@@ -56,29 +56,95 @@
 
             html += `<p>${data.title}</p>` //title of survey
 
-            
+            data.question.forEach((question, index) => {
+                html += `
+        
+                <p>${question.title}</p> 
+                <div>
+  <input type="radio" id="one" name="${index}" value="1"
+         checked>
+  <label for="score${index}">1</label>
+</div>
+
+<div>
+  <input type="radio" id="two" name="${index}" value="2">
+  <label for="score${index}">2</label>
+</div>
+
+<div>
+  <input type="radio" id="three" name="${index}" value="3">
+  <label for="score${index}">3</label>
+</div>
+<div>
+  <input type="radio" id="four" name="${index}" value="4">
+  <label for="score${index}">4</label>
+</div>
+<div>
+  <input type="radio" id="five" name="${index}" value="5">
+  <label for="score${index}">5</label>
+</div>
+`
+            });
 
             root.innerHTML = html;
 
 
         }
         const form = document.querySelector('.sumbit');
-        form.addEventListener('submit   ', sendSurvey)
+        form.addEventListener('submit', sendSurvey)
 
-        function sendSurvey(ev) {
+        async function sendSurvey(ev) {
             ev.preventDefault();
 
-            console.log('A')
-            //const length = ev.target.elements.length
+            const scoreList = []
 
-            //const scoreQuestion = []
+            const response = await axios.get('/id/surveys')
+            const { id } = response.data
+
+            var data = new FormData(form)
+
+             for (const entry of data) {
+                 scoreList.push({
+                     id: id,
+                     score: +entry[1]
+                 })
+             };
+             
 
             const params = new URLSearchParams(window.location.search);
             const idSurvey = params.get('surveyId');
 
+            const responseAwait = await addScorePromise(scoreList,idSurvey)
+
+            const { ok } = responseAwait
+            alert(ok)
+
+
 
         }
-        //find the id that match the link with the survey.json and render with title and question + ratio buttons
+
+         function addScorePromise(scoreList,idSurvey) {
+            return new Promise((resolve, reject) => {
+                fetch(`/score/add/${idSurvey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(scoreList)
+                }).then(function (res) {
+                    if (res.status === 200 && res.ok) {
+                        return res.json().then(pepe => {
+                            resolve(pepe)
+                        });
+                    } else {
+                        return res.json().then(pepe => {
+                            alert(pepe.error)
+                        })
+                    }
+                }).catch(error => console.error('Error: ', error));
+            })
+        }
+
     </script>
 </body>
 
