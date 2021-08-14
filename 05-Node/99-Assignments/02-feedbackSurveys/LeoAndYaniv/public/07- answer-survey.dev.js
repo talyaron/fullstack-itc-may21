@@ -5,9 +5,9 @@ var url_string = window.location.href;
 var url = new URL(url_string);
 var uuid = url.searchParams.get("uuid");
 
-function getUserInfoFromCookie() {
-  var userInfo, username;
-  return regeneratorRuntime.async(function getUserInfoFromCookie$(_context) {
+function getUserDetailsFromCookie() {
+  var userDetails, username;
+  return regeneratorRuntime.async(function getUserDetailsFromCookie$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -15,9 +15,9 @@ function getUserInfoFromCookie() {
           return regeneratorRuntime.awrap(axios.get('/user/info'));
 
         case 2:
-          userInfo = _context.sent;
-          username = userInfo.data.username;
-          renderuserInfo(username);
+          userDetails = _context.sent;
+          username = userDetails.data.username;
+          renderUserDetails(username);
 
         case 5:
         case "end":
@@ -29,7 +29,7 @@ function getUserInfoFromCookie() {
 
 ;
 
-function renderuserInfo(username) {
+function renderUserDetails(username) {
   var loggedUser = document.querySelector('#nameUser');
   var toRender = "<h1>Ready to answer the survey, <span class=\"nameUser__title\">".concat(username, "</span>?</h1>");
   loggedUser.innerHTML = toRender;
@@ -39,7 +39,7 @@ function renderuserInfo(username) {
 ; //Function to render the data of a survey in the DOM
 
 function renderSurveyInfo() {
-  var root, questionsCreated, html, button;
+  var root, questionsCreated, html;
   return regeneratorRuntime.async(function renderSurveyInfo$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -54,14 +54,9 @@ function renderSurveyInfo() {
           questionsCreated.data.survey.questions.forEach(function (question) {
             html += "<div id=\"".concat(question.uuid, "\">\n        <h3>").concat(question.content, "</h3>\n            <p class=\"raitings\">\n                <input id=\"").concat(question.uuid, "1\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"5\">\n                <label for=\"").concat(question.uuid, "1\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "2\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"4\">\n                <label for=\"").concat(question.uuid, "2\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "3\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"3\">\n                <label for=\"").concat(question.uuid, "3\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "4\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"2\">\n                <label for=\"").concat(question.uuid, "4\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "5\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"1\">\n                <label for=\"").concat(question.uuid, "5\">\u2605</label>\n            </p>\n        </div>");
           });
-          root.innerHTML = html;
-          button = document.createElement('button');
-          button.type = 'submit';
-          button.className = 'top-menu__button';
-          button.innerText = 'Submit answer';
-          root.appendChild(button);
+          root.insertAdjacentHTML("afterbegin", html);
 
-        case 12:
+        case 7:
         case "end":
           return _context2.stop();
       }
@@ -75,22 +70,52 @@ var handleForm = document.querySelector("#root");
 handleForm.addEventListener('submit', answerSubmit);
 
 function answerSubmit(ev) {
-  var answeredQuestions = [];
-  ev.preventDefault();
+  var answeredQuestions, index, element, answeredQuestion, userDetails, _userDetails$data, username, email;
 
-  for (var index = 0; index < ev.target.elements.length; index++) {
-    var element = ev.target.elements[index];
+  return regeneratorRuntime.async(function answerSubmit$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          answeredQuestions = [];
+          ev.preventDefault();
 
-    if (element.checked === true) {
-      element.id = element.id.substring(0, element.id.length - 1); //console.log(element.id, "pepe" ,element.value);
+          for (index = 0; index < ev.target.elements.length; index++) {
+            element = ev.target.elements[index];
 
-      var answeredQuestion = {
-        'questionId': element.id,
-        'raiting': element.value
-      };
-      answeredQuestions.push(answeredQuestion);
+            if (element.checked) {
+              element.id = element.id.substring(0, element.id.length - 1); //console.log(element.id, "pepe" ,element.value);
+
+              answeredQuestion = {
+                questionId: element.id,
+                raiting: Number(element.value)
+              };
+              answeredQuestions.push(answeredQuestion);
+            }
+          }
+
+          console.log(answeredQuestions);
+          _context3.next = 6;
+          return regeneratorRuntime.awrap(axios.get('/user/info'));
+
+        case 6:
+          userDetails = _context3.sent;
+          _userDetails$data = userDetails.data, username = _userDetails$data.username, email = _userDetails$data.email;
+          userDetails = {
+            username: username,
+            email: email,
+            uuid: uuid
+          };
+          _context3.next = 11;
+          return regeneratorRuntime.awrap(axios.post('/user/answerLoginAfter', userDetails));
+
+        case 11:
+          _context3.next = 13;
+          return regeneratorRuntime.awrap(axios.put("/surveys/updateQuestions/".concat(uuid), answeredQuestions));
+
+        case 13:
+        case "end":
+          return _context3.stop();
+      }
     }
-  }
-
-  console.log(answeredQuestions); //aca tengo que registrar al usuario y tambien registrar las respuestas a las preguntas de los otros usuarios
+  });
 }
