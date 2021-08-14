@@ -34,14 +34,14 @@ export function addSurveys(req, res) {
     try {
         const allSurveys = readAllSurveys();
 
-        let QuestionList: Array<Question> = []
+        // let QuestionList: Array<Question> = []
 
-        console.log(req.body.questions)
-        req.body.questions.forEach(element => {
-            QuestionList.push(element)
-        });
+        // console.log(req.body.questions)
+        // req.body.questions.forEach(element => {
+        //     QuestionList.push(element)
+        // });
 
-        const survey = new Survey(req.body.id, req.body.title, req.body.email, QuestionList)
+        const survey = new Survey(req.body.id, req.body.title, req.body.email, req.body.questions)
         allSurveys.push(survey)
         fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
 
