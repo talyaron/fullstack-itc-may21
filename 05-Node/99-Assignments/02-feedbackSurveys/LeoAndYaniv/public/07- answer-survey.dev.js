@@ -83,21 +83,19 @@ function answerSubmit(ev) {
             element = ev.target.elements[index];
 
             if (element.checked) {
-              element.id = element.id.substring(0, element.id.length - 1); //console.log(element.id, "pepe" ,element.value);
-
+              element.id = element.id.substring(0, element.id.length - 1);
               answeredQuestion = {
                 questionId: element.id,
-                raiting: Number(element.value)
+                rating: Number(element.value)
               };
               answeredQuestions.push(answeredQuestion);
             }
           }
 
-          console.log(answeredQuestions);
-          _context3.next = 6;
+          _context3.next = 5;
           return regeneratorRuntime.awrap(axios.get('/user/info'));
 
-        case 6:
+        case 5:
           userDetails = _context3.sent;
           _userDetails$data = userDetails.data, username = _userDetails$data.username, email = _userDetails$data.email;
           userDetails = {
@@ -105,14 +103,14 @@ function answerSubmit(ev) {
             email: email,
             uuid: uuid
           };
-          _context3.next = 11;
+          _context3.next = 10;
           return regeneratorRuntime.awrap(axios.post('/user/answerLoginAfter', userDetails));
 
-        case 11:
-          _context3.next = 13;
+        case 10:
+          _context3.next = 12;
           return regeneratorRuntime.awrap(axios.put("/surveys/updateQuestions/".concat(uuid), answeredQuestions));
 
-        case 13:
+        case 12:
         case "end":
           return _context3.stop();
       }

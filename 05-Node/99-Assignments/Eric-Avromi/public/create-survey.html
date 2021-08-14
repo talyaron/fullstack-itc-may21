@@ -96,9 +96,11 @@ const returnPage = document.querySelector('#return')
     link.addEventListener('click', sendSurvey)
 
 
+    let count = 0;
 
-
-    function renderNewQuestion(data) {
+    async function renderNewQuestion(data) {
+      const response = await axios.get('/id/questions')
+            const { id } = response.data
 
 
       const root = document.querySelector('.root')
@@ -108,25 +110,26 @@ const returnPage = document.querySelector('#return')
       <div>          
         <input class="form-check-inputName" type="text" name="exampleForm" id="radioExample1"  placeholder="Write a question" />
              
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <button type="submit" class="btn btn-danger" id="boxquestion" onclick="deleteQuestion("${count}")">Delete</button>
         <button type="submit" class="btn btn-primary">Edit</button>
 
                           </div>
                           
                       `
 
-//modificar style divs
-      root.insertAdjacentHTML('beforeend',html)
 
+      root.insertAdjacentHTML('beforeend',html);
+      count++;
 
 
     }
 
 
 
-    function deleteQuestion() {
-
+    function deleteQuestion(id) {
+      document.getElementById(`boxquestion${id}`).remove()
       console.log('hi');
+
     }
 
     function editQuestion() {
@@ -161,16 +164,7 @@ const returnPage = document.querySelector('#return')
 
 
 
-//         async function getAllQuestions() { 
-//           try {
-//         const res = await axios.get('/questions/')
-//         const allQuestions = res.data
-//         renderNewQuestion(allQuestions);
-//           } catch (error) {
-//               console.log(error);
-//           }
-//         }
-// getAllQuestions()
+
 
 
   </script>
