@@ -3,13 +3,13 @@ const url_string = window.location.href;
 const url = new URL(url_string);
 const uuid = url.searchParams.get("uuid");
 
-async function getUserInfoFromCookie() {
-    const userInfo = await axios.get('/user/info');
-    const { username } = userInfo.data;
-    renderuserInfo(username);
+async function getUserDetailsFromCookie() {
+    const userDetails = await axios.get('/user/info');
+    const { username } = userDetails.data;
+    renderuserDetails(username);
 };
 
-function renderuserInfo(username) {
+function renderuserDetails(username) {
     const loggedUser = document.querySelector('#nameUser');
     const toRender = `<h1>Awsome survey <span class="nameUser__title">${username}</span>!</h1>`
     loggedUser.innerHTML = toRender;

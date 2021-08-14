@@ -1,7 +1,7 @@
 export {};
 
 import { User, Users } from "../models/users";
-import { Surveys } from "../models/surveys";
+import { Survey, Surveys } from "../models/surveys";
 
 const fs = require("fs");
 const path = require("path");
@@ -61,31 +61,31 @@ export function sendCookie(req, res) {
 }
 
 //Function to read the JSON of created surveys
-const readJsonSurveys = () => {
-  try {
-    const surveys = fs.readFileSync(surveysJsonPath);
-    return JSON.parse(surveys);
-  } catch (error) {
-    console.error(error);
-  }
-};
+// const readJsonSurveys = () => {
+//   try {
+//     const surveys = fs.readFileSync(surveysJsonPath);
+//     return JSON.parse(surveys);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 //Function to add new survey uuid to user
 export function uploadSurvey(req, res) {
   try {
     const { uuid } = req.params; // survey uuid
-    let surveys = readJsonSurveys();
-    const newSurvey = surveys.find((survey) => survey.uuid === uuid);
+    
+    const allSurveys = new Surveys();
+    const newSurvey = new Survey(allSurveys[allSurveys.findSurveyIndex(uuid)]);
     newSurvey.title = req.body.surveyTitle;
+    allSurveys.updateSurvey(newSurvey);
 
     let allUsers = new Users();
-    let allSurveys = new Surveys();
+    allUsers.addCreatedSurvey(req.email, uuid);
 
-    allUsers.addCreatedSurvey(req.email, newSurvey.uuid);
-    allSurveys.updateTitleSurveysJson(surveys)
     res.send({
       message: "Amazing! You created a survey properly",
-      userInfo: req.email,
+      userDetails: req.email,
     });
   } catch (error) {
     console.error(error);

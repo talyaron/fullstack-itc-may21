@@ -5,9 +5,9 @@ var url_string = window.location.href;
 var url = new URL(url_string);
 var uuid = url.searchParams.get("uuid");
 
-function getUserInfoFromCookie() {
-  var userInfo, username;
-  return regeneratorRuntime.async(function getUserInfoFromCookie$(_context) {
+function getUserDetailsFromCookie() {
+  var userDetails, username;
+  return regeneratorRuntime.async(function getUserDetailsFromCookie$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -15,10 +15,10 @@ function getUserInfoFromCookie() {
           return regeneratorRuntime.awrap(axios.get('/user/info'));
 
         case 2:
-          userInfo = _context.sent;
-          console.log(userInfo);
-          username = userInfo.data.username;
-          renderuserInfo(username);
+          userDetails = _context.sent;
+          console.log(userDetails);
+          username = userDetails.data.username;
+          renderUserDetails(username);
 
         case 6:
         case "end":
@@ -30,7 +30,7 @@ function getUserInfoFromCookie() {
 
 ;
 
-function renderuserInfo(username) {
+function renderUserDetails(username) {
   var loggedUser = document.querySelector('#nameUser');
   var toRender = "<h1><span class=\"nameUser__title\">".concat(username, "</span> lets create an amazing survey!</h1>");
   loggedUser.innerHTML = toRender;
@@ -142,7 +142,7 @@ var cancelSurvey = document.querySelector("#buttonCancel");
 cancelSurvey.addEventListener('click', cancelTheSurvey);
 
 function cancelTheSurvey() {
-  var option, userInfo;
+  var option, userDetails;
   return regeneratorRuntime.async(function cancelTheSurvey$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
@@ -151,7 +151,7 @@ function cancelTheSurvey() {
           option = confirm("Are you sure do you want to cancel all the survey, you will lose all the data created here?");
 
           if (!option) {
-            _context4.next = 7;
+            _context4.next = 8;
             break;
           }
 
@@ -159,63 +159,108 @@ function cancelTheSurvey() {
           return regeneratorRuntime.awrap(axios["delete"]("/surveys/deleteSurvey/".concat(uuid)));
 
         case 5:
-          userInfo = _context4.sent;
-          location.href = "03- surveys.html?email=".concat(userInfo.data.userInfo);
+          userDetails = _context4.sent;
+          console.log(userDetails);
+          location.href = "03- surveys.html?email=".concat(userDetails.data.userDetails);
 
-        case 7:
-          _context4.next = 12;
+        case 8:
+          _context4.next = 13;
           break;
 
-        case 9:
-          _context4.prev = 9;
+        case 10:
+          _context4.prev = 10;
           _context4.t0 = _context4["catch"](0);
           console.error(_context4.t0);
 
-        case 12:
+        case 13:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 9]]);
+  }, null, null, [[0, 10]]);
 }
 
 ; //When the user click on the button "Upload the survey" is going to create the survay and save it in the "survey.json"
 
-var uploadSurvey = document.querySelector("#buttonUpload");
-uploadSurvey.addEventListener('click', uploadTheSurvey);
+var uploadSurvey = document.querySelector("#new-survey");
+uploadSurvey.addEventListener('submit', uploadTheSurvey);
 
-function uploadTheSurvey() {
-  var inputSurvey, surveyTitle, userInfo;
+function uploadTheSurvey(ev) {
+  var surveyTitle, userDetails;
   return regeneratorRuntime.async(function uploadTheSurvey$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
-          inputSurvey = document.querySelector('#surveyTitle');
-          surveyTitle = inputSurvey.value; //UUID is the id from the survey
+          ev.preventDefault();
+          surveyTitle = ev.target.elements.surveyTitle;
+          surveyTitle = surveyTitle.value;
 
-          _context5.next = 5;
+          if (surveyTitle) {
+            _context5.next = 6;
+            break;
+          }
+
+          throw new Error("Please type a title for the survey");
+
+        case 6:
+          ev.target.reset(); //UUID is the id from the survey
+
+          _context5.next = 9;
           return regeneratorRuntime.awrap(axios.post("/user/uploadUserWithSurvey/".concat(uuid), {
             surveyTitle: surveyTitle
           }));
 
-        case 5:
-          userInfo = _context5.sent;
-          location.href = "03- surveys.html?email=".concat(userInfo.data.userInfo);
-          _context5.next = 12;
+        case 9:
+          userDetails = _context5.sent;
+          location.href = "03- surveys.html?email=".concat(userDetails.data.userDetails);
+          _context5.next = 16;
           break;
 
-        case 9:
-          _context5.prev = 9;
+        case 13:
+          _context5.prev = 13;
           _context5.t0 = _context5["catch"](0);
           console.error(_context5.t0);
 
-        case 12:
+        case 16:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 9]]);
+  }, null, null, [[0, 13]]);
+}
+
+;
+var backToSurveysBtn = document.querySelector('#to-surveys');
+backToSurveysBtn.addEventListener('click', backToSurveys);
+
+function backToSurveys() {
+  var userDetails;
+  return regeneratorRuntime.async(function backToSurveys$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.prev = 0;
+          _context6.next = 3;
+          return regeneratorRuntime.awrap(axios.get("/user/info"));
+
+        case 3:
+          userDetails = _context6.sent;
+          location.href = "03- surveys.html?email=".concat(userDetails.data.email);
+          _context6.next = 10;
+          break;
+
+        case 7:
+          _context6.prev = 7;
+          _context6.t0 = _context6["catch"](0);
+          console.error(_context6.t0);
+
+        case 10:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  }, null, null, [[0, 7]]);
 }
 
 ;

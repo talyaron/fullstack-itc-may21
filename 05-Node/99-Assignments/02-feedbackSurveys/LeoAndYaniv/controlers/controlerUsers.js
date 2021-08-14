@@ -64,29 +64,27 @@ function sendCookie(req, res) {
 }
 exports.sendCookie = sendCookie;
 //Function to read the JSON of created surveys
-var readJsonSurveys = function () {
-    try {
-        var surveys = fs.readFileSync(surveysJsonPath);
-        return JSON.parse(surveys);
-    }
-    catch (error) {
-        console.error(error);
-    }
-};
+// const readJsonSurveys = () => {
+//   try {
+//     const surveys = fs.readFileSync(surveysJsonPath);
+//     return JSON.parse(surveys);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 //Function to add new survey uuid to user
 function uploadSurvey(req, res) {
     try {
-        var uuid_1 = req.params.uuid; // survey uuid
-        var surveys = readJsonSurveys();
-        var newSurvey = surveys.find(function (survey) { return survey.uuid === uuid_1; });
-        newSurvey.title = req.body.surveyTitle;
-        var allUsers = new users_1.Users();
+        var uuid = req.params.uuid; // survey uuid
         var allSurveys = new surveys_1.Surveys();
-        allUsers.addCreatedSurvey(req.email, newSurvey.uuid);
-        allSurveys.updateTitleSurveysJson(surveys);
+        var newSurvey = new surveys_1.Survey(allSurveys[allSurveys.findSurveyIndex(uuid)]);
+        newSurvey.title = req.body.surveyTitle;
+        allSurveys.updateSurvey(newSurvey);
+        var allUsers = new users_1.Users();
+        allUsers.addCreatedSurvey(req.email, uuid);
         res.send({
             message: "Amazing! You created a survey properly",
-            userInfo: req.email
+            userDetails: req.email
         });
     }
     catch (error) {
