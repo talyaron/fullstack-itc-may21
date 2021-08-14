@@ -431,7 +431,9 @@
       const response = await enterEndUserLogIn(newUser);
       alert(response.ok);
 
-      window.location.replace("userSurvey.html")
+      const idSurvey = JSON.parse(localStorage.getItem('id'))
+
+      window.location.href = `./userSurvey.html?surveyId=${idSurvey}`;
       localStorage.setItem('isRedirect', JSON.stringify(0))
 
       

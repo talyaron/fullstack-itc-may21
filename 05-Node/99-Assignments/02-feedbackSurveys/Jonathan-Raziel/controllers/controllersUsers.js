@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.getSurveys = exports.getCookie = exports.endUserLogin = exports.loginUser = exports.usersRegister = void 0;
+exports.scoreAdd = exports.getSurveys = exports.getCookie = exports.endUserLogin = exports.loginUser = exports.usersRegister = void 0;
 // const express = require("express");
 // const app = express();
 var fs = require("fs");
@@ -57,11 +57,12 @@ function endUserLogin(req, res) {
         var _a = (req.body), email_2 = _a.email, password_2 = _a.password;
         var allUsers = readAllUsers();
         var isUserPassOK = allUsers.some(function (elem) { return (elem.email === email_2) && (elem.password === password_2); });
-        if (isUserPassOK) {
+        console.log(allUsers);
+        if (isUserPassOK && allUsers.surveys) {
             res.send({ ok: 'Welcome back admin' });
         }
         else {
-            var user = new users_1.User(req.body.username, req.body.email, req.body.password, []);
+            var user = new users_1.User(null, req.body.email, req.body.password, null);
             console.log(user);
             allUsers.push(user);
             fs.writeFileSync("./user.json", JSON.stringify(allUsers));
@@ -101,3 +102,24 @@ function getSurveys(req, res) {
     }
 }
 exports.getSurveys = getSurveys;
+function scoreAdd(req, res) {
+    try {
+        var id_1 = req.params.id;
+        var allUsers = readAllUsers();
+        var allSurveys = JSON.parse(fs.readFileSync("./survey.json"));
+        var admin_1 = allSurveys.find(function (survey) { return survey.id === id_1; }).admin;
+        var findAdmin = allUsers.find(function (user) { return user.email === admin_1; });
+        var findSurveyQuestions = findAdmin.surveys.find(function (survey) { return survey.id === id_1; }).questions;
+        var findSurveyinSurveyJSON = allSurveys.find(function (survey) { return survey.id === id_1; }).question;
+        for (var i = 0; i < findSurveyQuestions.length; i++) {
+            findSurveyQuestions[i].voters.push(req.body[i]);
+            findSurveyinSurveyJSON[i].voters.push(req.body[i]); // check this way double
+        }
+        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+    }
+    catch (e) {
+        res.status(500).send({ error: "" + e });
+    }
+}
+exports.scoreAdd = scoreAdd;

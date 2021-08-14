@@ -85,11 +85,15 @@
             const createSurveys = document.querySelector('#rootSurveys')
 
 
+          
+
             arrayToRender.forEach(element => {
                 html += `<div class="surveys__box" onclick='moveToSurvey("${element.id}")'>
                                 <span>Title: ${element.title}</span>
+                                <span>Asnwers: ${element.questions[0].voters.length}</span>
                           </div>
                           <i class="fas fa-trash boxquestion--trash" onclick='deleteSurveys("${element.id}","${element.email}")'></i>`
+                          
             });
 
             createSurveys.innerHTML = html

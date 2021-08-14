@@ -1,5 +1,3 @@
-
-
 export {};
 // import {User} from '../models/users';
 import { validationResult } from "express-validator";
