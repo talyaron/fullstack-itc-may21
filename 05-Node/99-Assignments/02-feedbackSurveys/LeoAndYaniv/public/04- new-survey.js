@@ -5,7 +5,6 @@ const uuid = url.searchParams.get("uuid");
 
 async function getUserDetailsFromCookie() {
     const userDetails = await axios.get('/user/info');
-    console.log(userDetails);
     const { username } = userDetails.data;
     renderUserDetails(username);
 };
@@ -16,20 +15,37 @@ function renderUserDetails(username) {
     loggedUser.innerHTML = toRender;
 };
 
-const createQuestion = document.querySelector('#create');
-createQuestion.addEventListener('submit', addNewQuestion);
+const createQuestion = document.querySelector('#question-form');
+createQuestion.addEventListener('submit', handleQuestion);
 
-async function addNewQuestion(ev) {
+function handleQuestion(ev) {
+    ev.preventDefault();
+    let { question } = ev.target.elements;
+    question = question.value;
+    if (!question)
+        throw new Error("Please type a question");
+        modalUpload.style.display = "none";
+    ev.target.reset();
+
+    const qUuid = ev.target.parentElement.id;
+    if (qUuid) {editQuestion(question, qUuid);}
+    else {addNewQuestion(question);}
+}
+
+async function addNewQuestion(question) {
     try {
-        ev.preventDefault();
-        let { question } = ev.target.elements;
-        question = question.value;
-        if (!question)
-            throw new Error("Please type a question");
-        modalCreate.style.display = "none";
-        ev.target.reset();
-        const questionsCreated = await axios.post(`/surveys/create/${uuid}`, { question });
+        const questionsCreated = await axios.post(`/surveys/createQuestion/${uuid}`, { question });
         renderQuestions(questionsCreated.data.survey.questions);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+async function editQuestion(question, qUuid) {
+    try {
+
+        const questionsEdited = await axios.put(`/surveys/editQuestion/${qUuid}/${uuid}`, { question });
+        renderQuestions(questionsEdited.data.survey.questions);
     } catch (error) {
         console.error(error);
     }
@@ -42,19 +58,20 @@ function renderQuestions(questions) {
     questions.forEach(question => {
         html += ` <div><h3>${question.content}</h3>
         <button onclick="deleteQuestion('${question.uuid}')">Delete</button>
-        <button onclick="handleEdit('${question.uuid}')">Edit</button>
+        <button class="buttonEdit" onclick="openModal('${question.uuid}','${question.content}')">Edit</button>
         </div>`
-    })
+    });
+
     root.innerHTML = html;
 };
 
 //Delete a question:
-async function deleteQuestion(id) {
+async function deleteQuestion(qUuid) {
     try {
         const option = confirm(`Are you sure do you want to delete this question?`);
         if (option) {
-            //id: Is the ID from the question and UUID is the id from the survey
-            const questions = await axios.delete(`/surveys/deleteQuestion/${id}/${uuid}`);
+            //qUuid: Is the ID from the question and uuid is the ID from the survey
+            const questions = await axios.delete(`/surveys/deleteQuestion/${qUuid}/${uuid}`);
             renderQuestions(questions.data.survey.questions);
         }
     } catch (error) {

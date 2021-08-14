@@ -50,14 +50,16 @@ var Survey = /** @class */ (function () {
     };
     Survey.prototype.deleteQuestion = function (questionId) {
         try {
-            this.questions = this.questions.filter(function (question) { return question.uuid !== questionId; });
+            this.questions = this.questions.filter(function (question) { return (question.uuid !== questionId); });
         }
         catch (error) {
             console.error(error);
         }
     };
-    Survey.prototype.editQuestion = function () {
+    Survey.prototype.editQuestion = function (questionId, editedQuestion) {
         try {
+            var questionToEditIndex = this.questions.findIndex(function (question) { return (question.uuid === questionId); });
+            this.questions[questionToEditIndex].content = editedQuestion;
         }
         catch (error) {
             console.error(error);
