@@ -56,16 +56,17 @@ export class Survey {
 
   deleteQuestion(questionId) {
     try {
-      this.questions = this.questions.filter(
-        (question) => question.uuid !== questionId
-      );
+      this.questions = this.questions.filter(question => (question.uuid !== questionId));
     } catch (error) {
       console.error(error);
     }
   }
 
-  editQuestion() {
+  editQuestion(questionId, editedQuestion) {
     try {
+      const questionToEditIndex = this.questions.findIndex(question => (question.uuid === questionId));
+      this.questions[questionToEditIndex].content = editedQuestion;
+
     } catch (error) {
       console.error(error);
     }

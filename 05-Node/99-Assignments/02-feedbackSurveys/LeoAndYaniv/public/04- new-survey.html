@@ -33,18 +33,18 @@
     <div id="root"></div>
 
     <!-- Modal to create a new user -->
-    <div id="modalCreate" class="modal">
+    <div id="modalQuestion" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
             <span id="closeModal" class="close">&times;</span>
-            <form class="form" id="create">
-                <h3>Create a new question</h3>
+            <form class="form" id="question-form">
+                <h3 id="create-or-edit"></h3>
 
                 <div class="form__wrapper">
-                    <input type="text" name="question" placeholder="Enter a question" required>
+                    <input id="question-content" type="text" name="question" placeholder="Enter a question" required>
                 </div>
 
-                <input class="form__submit--newuser" type="submit" value="Add question">
+                <input id="submit-question" class="form__submit--newuser" type="submit" value="Add question">
             </form>
 
         </div>

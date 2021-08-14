@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.deleteQuestion = exports.getQuestionsSurvey = exports.addQuestion = exports.deleteSurvey = exports.newSurvey = exports.getSurveys = void 0;
+exports.editQuestion = exports.deleteQuestion = exports.getQuestionsSurvey = exports.addQuestion = exports.deleteSurvey = exports.newSurvey = exports.getSurveys = void 0;
 var surveys_1 = require("../models/surveys");
 //Function to get all the surveys from a specific user
 function getSurveys(req, res) {
@@ -69,3 +69,14 @@ function deleteQuestion(req, res) {
     res.send({ message: "A question was deleted", survey: surveyToUpdate });
 }
 exports.deleteQuestion = deleteQuestion;
+function editQuestion(req, res) {
+    var _a = req.params, qUuid = _a.qUuid, uuid = _a.uuid; // qUuid: question uuid; uuid: survey uuid
+    var allSurveys = new surveys_1.Surveys();
+    var surveyToUpdate = new surveys_1.Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
+    var editedQuestion = new surveys_1.Question(req.body.question);
+    //Inside the questions of a specific Survey I will filter the question that I dont want
+    surveyToUpdate.editQuestion(qUuid, editedQuestion.content);
+    allSurveys.updateSurvey(surveyToUpdate);
+    res.send({ message: "A question was deleted", survey: surveyToUpdate });
+}
+exports.editQuestion = editQuestion;
