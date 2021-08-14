@@ -37,12 +37,28 @@ var Users = /** @class */ (function () {
             console.error(error);
         }
     };
-    Users.prototype.createUser = function (user) {
+    Users.prototype.createUser = function (user, surveyUuid) {
         try {
-            var emailExists = this.users.find(function (userItem) { return userItem.email === user.email; });
-            if (emailExists)
-                return true;
-            this.users.push(user);
+            var emailIndex = this.users.findIndex(function (userItem) { return userItem.email === user.email; });
+            if (surveyUuid === null) { // registration attempt
+                if (emailIndex !== -1) { // email exists
+                    if (this.users[emailIndex].password !== null)
+                        return true; // have password
+                    else { // don't have password
+                        this.users[emailIndex].password = user.password;
+                    }
+                }
+                else { // email doesn't exist
+                    this.users.push(user);
+                }
+            }
+            else if (emailIndex !== -1) { // survey answers submit + email exists
+                this.users[emailIndex].answeredSurveys.push(surveyUuid);
+            }
+            else { // survey answers submit + email doens't exist
+                user.answeredSurveys.push(surveyUuid);
+                this.users.push(user);
+            }
             this.updateUsersJson();
             return false;
         }

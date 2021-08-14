@@ -65,6 +65,15 @@ var Survey = /** @class */ (function () {
             console.error(error);
         }
     };
+    Survey.prototype.updateQuestionRating = function (questionId, questionRating) {
+        try {
+            var questionToEditIndex = this.questions.findIndex(function (question) { return (question.uuid === questionId); });
+            this.questions[questionToEditIndex].ratings.push(questionRating);
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
     return Survey;
 }());
 exports.Survey = Survey;

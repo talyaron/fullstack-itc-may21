@@ -17,10 +17,10 @@ async function doingSubmitLogin(ev) {
         email = email.value;
         if (!username || !email) throw new Error("Please complete all the fields");
         ev.target.reset();
-        const userInfo = { username, email }
+        const userDetails = { username, email }
 
-        if (userInfo) {
-            await axios.post('/user/answerLogin', userInfo);
+        if (userDetails) {
+            await axios.post('/user/answerLoginBefore', userDetails);
             location.href = `07- answer-survey.html?uuid=${uuid}`;
         } else {
             throw new Error('Some of the fields are wrong, please try again!')
