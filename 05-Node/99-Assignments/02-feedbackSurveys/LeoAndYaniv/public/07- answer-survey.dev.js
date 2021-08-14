@@ -111,6 +111,10 @@ function answerSubmit(ev) {
           return regeneratorRuntime.awrap(axios.put("/surveys/updateQuestions/".concat(uuid), answeredQuestions));
 
         case 12:
+          alert('Survey completed successfully');
+          location.href = "index.html";
+
+        case 14:
         case "end":
           return _context3.stop();
       }

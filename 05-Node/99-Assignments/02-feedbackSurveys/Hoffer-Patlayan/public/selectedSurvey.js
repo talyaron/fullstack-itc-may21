@@ -1,12 +1,9 @@
-
 // GET SURVAYS
 async function getSurv(){
     const getSurv = await axios(`/survey/getSurvey`);
     const selected = getSurv.data
-    // const idSurv = selected.id;
     renderSurvey(selected);
     renderForm(selected)
-    // idSelected.push(idSurv)
 }
 getSurv()
 
@@ -60,7 +57,7 @@ function getModal(){
           arrQuestions.push(questions);
       }    
       const editSurv = {
-        // "id": idSelected,
+
         "title": title,
         "question": {...arrQuestions}
     }

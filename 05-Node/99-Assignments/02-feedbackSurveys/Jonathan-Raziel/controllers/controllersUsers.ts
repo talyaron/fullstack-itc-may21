@@ -18,12 +18,11 @@ const readAllUsers = () => {
 
 export function usersRegister(req, res) {
     try {
-        //const user1 = new model.User("pepe", 'a@a.com','a1a23',[]);
+        
         const allUsers = readAllUsers();
         const isFound = allUsers.some(elem => (elem.email === req.body.email) || elem.username === req.body.username)
         if (!isFound) {
             const user = new User(req.body.username, req.body.email, req.body.password, [])
-            console.log(user);
             allUsers.push(user)
             fs.writeFileSync("./user.json", JSON.stringify(allUsers));
             res.send({ ok: "User Created", allUsers: allUsers });
@@ -113,6 +112,8 @@ export function getSurveys(req, res) {
 export function scoreAdd(req, res) {
     try {
         const { id } = req.params
+
+        console.log(id)
         const allUsers = readAllUsers();
         const allSurveys = JSON.parse(fs.readFileSync("./survey.json"));
         const admin = allSurveys.find(survey => survey.id === id).admin
@@ -126,11 +127,11 @@ export function scoreAdd(req, res) {
         for (let i = 0; i < findSurveyQuestions.length; i++) {
             findSurveyQuestions[i].voters.push(req.body[i])
             findSurveyinSurveyJSON[i].voters.push(req.body[i]) // check this way double
-
         }
 
-        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
-        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+ 
+    fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+     fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
 
     } catch (e) {
         res.status(500).send({ error: `${e}` });
