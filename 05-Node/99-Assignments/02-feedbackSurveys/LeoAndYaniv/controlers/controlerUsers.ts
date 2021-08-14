@@ -13,7 +13,7 @@ export function newUser(req, res) {
     const { username, email, password } = req.body;
     const user = new User(username, email, password);
     const allUsers = new Users();
-    const emailExistsWithPass: boolean = allUsers.createUser(user);
+    const emailExistsWithPass: boolean = allUsers.createUser(user, null);
     if (!emailExistsWithPass) {
       res.send({ message: "A new User was added", user });
     } else {
@@ -57,7 +57,7 @@ export function answerLogin(req, res) {
     const { username, email, uuid } = req.body;
     const user = new User(username, email, null);
     const allUsers = new Users();
-    const emailExists: boolean = allUsers.createUser(user);
+    const emailExists: boolean = allUsers.createUser(user, uuid);
     if (!emailExists) {
       res.send({ message: "A new User was added", email, username });
     } else {

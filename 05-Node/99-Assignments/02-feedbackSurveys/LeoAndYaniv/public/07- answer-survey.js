@@ -57,7 +57,7 @@ async function answerSubmit(ev) {
         if (element.checked) {
             element.id = element.id.substring(0, element.id.length - 1);
             //console.log(element.id, "pepe" ,element.value);
-            const answeredQuestion = {questionId: element.id, raiting: element.value};
+            const answeredQuestion = {questionId: element.id, raiting: Number(element.value)};
             answeredQuestions.push(answeredQuestion);
         }
     }

@@ -85,7 +85,7 @@ function updateQuestionsSurvey(req, res) {
     var uuid = req.params.uuid;
     var allSurveys = new surveys_1.Surveys;
     var surveyToUpdate = new surveys_1.Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
-    var answeredQuestions = req.body.answeredQuestions;
+    var answeredQuestions = req.body;
     answeredQuestions.forEach(function (question) { return surveyToUpdate.updateQuestionRating(question.questionId, question.rating); });
     allSurveys.updateSurvey(surveyToUpdate);
     res.send({ message: "A new Question was added", survey: surveyToUpdate });

@@ -12,7 +12,7 @@ function newUser(req, res) {
         var _a = req.body, username = _a.username, email = _a.email, password = _a.password;
         var user = new users_1.User(username, email, password);
         var allUsers = new users_1.Users();
-        var emailExistsWithPass = allUsers.createUser(user);
+        var emailExistsWithPass = allUsers.createUser(user, null);
         if (!emailExistsWithPass) {
             res.send({ message: "A new User was added", user: user });
         }
@@ -59,7 +59,7 @@ function answerLogin(req, res) {
         var _a = req.body, username = _a.username, email = _a.email, uuid = _a.uuid;
         var user = new users_1.User(username, email, null);
         var allUsers = new users_1.Users();
-        var emailExists = allUsers.createUser(user);
+        var emailExists = allUsers.createUser(user, uuid);
         if (!emailExists) {
             res.send({ message: "A new User was added", email: email, username: username });
         }

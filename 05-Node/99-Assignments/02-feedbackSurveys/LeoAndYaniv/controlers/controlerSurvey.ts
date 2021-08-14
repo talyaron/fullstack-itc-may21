@@ -95,8 +95,7 @@ export function updateQuestionsSurvey(req, res) {
   const { uuid } = req.params;
   const allSurveys = new Surveys;
   const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
-
-  const { answeredQuestions } = req.body;
+  const answeredQuestions = req.body;
   answeredQuestions.forEach(question => surveyToUpdate.updateQuestionRating(question.questionId, question.rating));
   
   allSurveys.updateSurvey(surveyToUpdate);

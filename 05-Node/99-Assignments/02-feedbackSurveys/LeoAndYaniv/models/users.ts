@@ -47,11 +47,11 @@ export class Users {
     }
   }
 
-  createUser(user) {
+  createUser(user, surveyUuid) {
     try {
       const emailIndex = this.users.findIndex(userItem => userItem.email === user.email);
 
-      if (user.password !== null) { // registration attempt
+      if (surveyUuid === null) { // registration attempt
         if (emailIndex !== -1) { // email exists
           if (this.users[emailIndex].password !== null) return true; // have password
           else { // don't have password
@@ -61,9 +61,10 @@ export class Users {
           this.users.push(user);
         }
       } else if (emailIndex !== -1) { // survey answers submit + email exists
-        this.users[emailIndex].answeredSurveys.push(user.uuid);
+        this.users[emailIndex].answeredSurveys.push(surveyUuid);
       } else { // survey answers submit + email doens't exist
-        this.users.push(new User(user.username, user.email, null));
+        user.answeredSurveys.push(surveyUuid);
+        this.users.push(user);
       }
                     
       this.updateUsersJson();
