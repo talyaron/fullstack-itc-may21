@@ -2,21 +2,24 @@
 exports.__esModule = true;
 exports.uploadSurvey = exports.sendCookie = exports.login = exports.newUser = void 0;
 var users_1 = require("../models/users");
+var surveys_1 = require("../models/surveys");
 var fs = require("fs");
-var path = require('path');
-var surveysJsonPath = path.resolve(__dirname, '../models/surveys.json');
+var path = require("path");
+var surveysJsonPath = path.resolve(__dirname, "../models/surveys.json");
 //Function to add a new user into the JSON
 function newUser(req, res) {
     try {
         var _a = req.body, username = _a.username, email = _a.email, password = _a.password;
         var user = new users_1.User(username, email, password);
-        var allUsers = new users_1.Users;
+        var allUsers = new users_1.Users();
         var userCreated = allUsers.createUser(user);
         if (!userCreated) {
             res.send({ message: "A new User was added", user: user });
         }
         else {
-            res.send({ message: "Email already registered, please try a different email address!" });
+            res.send({
+                message: "Email already registered, please try a different email address!"
+            });
         }
     }
     catch (error) {
@@ -29,13 +32,19 @@ exports.newUser = newUser;
 function login(req, res) {
     try {
         var _a = req.body, email = _a.email, password = _a.password;
-        var allUsers = new users_1.Users;
-        var username = allUsers.loginUser(email, password);
-        if (username) {
+        var allUsers = new users_1.Users();
+        var userExist = allUsers.loginUser(email, password);
+        var username = userExist.username;
+        //Set the cookie
+        var cookieToWrite = JSON.stringify({ username: username, email: email });
+        res.cookie("userDetails", cookieToWrite, { maxAge: 300000000, httpOnly: true });
+        if (userExist) {
             res.send({ message: "Logged in successfully", username: username });
         }
         else {
-            res.send({ message: "Username or password are wrong, please try again!" });
+            res.send({
+                message: "Username or password are wrong, please try again!"
+            });
         }
     }
     catch (error) {
@@ -68,12 +77,17 @@ var readJsonSurveys = function () {
 function uploadSurvey(req, res) {
     try {
         var uuid_1 = req.params.uuid; // survey uuid
-        var allSurveys = readJsonSurveys();
-        var newSurvey = allSurveys.find(function (survey) { return survey.uuid === uuid_1; });
+        var surveys = readJsonSurveys();
+        var newSurvey = surveys.find(function (survey) { return survey.uuid === uuid_1; });
         newSurvey.title = req.body.surveyTitle;
-        var allUsers = new users_1.Users;
+        var allUsers = new users_1.Users();
+        var allSurveys = new surveys_1.Surveys();
         allUsers.addCreatedSurvey(req.email, newSurvey.uuid);
-        res.send({ message: "Amazing! You created a survey properly", userInfo: req.email });
+        allSurveys.updateTitleSurveysJson(surveys);
+        res.send({
+            message: "Amazing! You created a survey properly",
+            userInfo: req.email
+        });
     }
     catch (error) {
         console.error(error);

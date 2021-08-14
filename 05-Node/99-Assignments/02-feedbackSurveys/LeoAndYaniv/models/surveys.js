@@ -3,8 +3,8 @@ exports.__esModule = true;
 exports.Surveys = exports.Survey = exports.Question = exports.Rating = exports.readJsonSurveys = void 0;
 var uuidv4 = require("uuid").v4;
 var fs = require("fs");
-var path = require('path');
-var surveysJsonPath = path.resolve(__dirname, './surveys.json');
+var path = require("path");
+var surveysJsonPath = path.resolve(__dirname, "./surveys.json");
 //Function to read the JSON of created surveys
 exports.readJsonSurveys = function () {
     try {
@@ -35,10 +35,10 @@ exports.Question = Question;
 var Survey = /** @class */ (function () {
     function Survey(_a) {
         var uuid = _a.uuid, title = _a.title, admin = _a.admin, questions = _a.questions;
-        this.uuid = (uuid === null) ? uuidv4() : uuid;
-        this.title = (uuid === null) ? "" : title;
+        this.uuid = uuid === null ? uuidv4() : uuid;
+        this.title = uuid === null ? "" : title;
         this.admin = admin;
-        this.questions = (questions === null) ? [] : questions; //when the user push add here
+        this.questions = questions === null ? [] : questions; //when the user push add here
     }
     Survey.prototype.addQuestion = function (newQuestion) {
         try {
@@ -78,6 +78,14 @@ var Surveys = /** @class */ (function () {
             console.error(error);
         }
     };
+    Surveys.prototype.updateTitleSurveysJson = function (updatedSurveys) {
+        try {
+            fs.writeFileSync(surveysJsonPath, JSON.stringify(updatedSurveys));
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
     Surveys.prototype.findUserSurveys = function (adminEmail) {
         try {
             var adminSurveys = this.surveys.filter(function (survey) { return survey.admin === adminEmail; });
@@ -107,7 +115,7 @@ var Surveys = /** @class */ (function () {
     };
     Surveys.prototype.findSurvey = function (surveyUuid) {
         try {
-            var survey = this.surveys.find(function (surveyItem) { return (surveyItem.uuid === surveyUuid); });
+            var survey = this.surveys.find(function (surveyItem) { return surveyItem.uuid === surveyUuid; });
             return survey;
         }
         catch (error) {

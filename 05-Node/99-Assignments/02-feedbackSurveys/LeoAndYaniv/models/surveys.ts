@@ -1,8 +1,8 @@
 export {};
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
-const path = require('path');
-const surveysJsonPath = path.resolve(__dirname, './surveys.json');
+const path = require("path");
+const surveysJsonPath = path.resolve(__dirname, "./surveys.json");
 
 //Function to read the JSON of created surveys
 export const readJsonSurveys = () => {
@@ -39,17 +39,16 @@ export class Survey {
   title: string;
   admin: string; //(email)
   questions: Array<Question>;
-  constructor({uuid, title, admin, questions}) {
-    this.uuid = (uuid === null) ? uuidv4() : uuid;
-    this.title = (uuid === null) ? "" : title;
+  constructor({ uuid, title, admin, questions }) {
+    this.uuid = uuid === null ? uuidv4() : uuid;
+    this.title = uuid === null ? "" : title;
     this.admin = admin;
-    this.questions = (questions === null) ? [] : questions; //when the user push add here
+    this.questions = questions === null ? [] : questions; //when the user push add here
   }
 
   addQuestion(newQuestion) {
     try {
       this.questions.push(newQuestion);
-
     } catch (error) {
       console.error(error);
     }
@@ -57,8 +56,9 @@ export class Survey {
 
   deleteQuestion(questionId) {
     try {
-      this.questions = this.questions.filter(question => question.uuid !== questionId);
-
+      this.questions = this.questions.filter(
+        (question) => question.uuid !== questionId
+      );
     } catch (error) {
       console.error(error);
     }
@@ -81,19 +81,27 @@ export class Surveys {
 
   updateSurveysJson() {
     try {
-        fs.writeFileSync(surveysJsonPath,JSON.stringify(this.surveys));
-
+      fs.writeFileSync(surveysJsonPath, JSON.stringify(this.surveys));
     } catch (error) {
-        console.error(error);
+      console.error(error);
+    }
+  }
+
+  updateTitleSurveysJson(updatedSurveys) {
+    try {
+      fs.writeFileSync(surveysJsonPath, JSON.stringify(updatedSurveys));
+    } catch (error) {
+      console.error(error);
     }
   }
 
   findUserSurveys(adminEmail) {
     try {
-      const adminSurveys = this.surveys.filter(survey => survey.admin === adminEmail);
+      const adminSurveys = this.surveys.filter(
+        (survey) => survey.admin === adminEmail
+      );
 
       return adminSurveys;
-
     } catch (error) {
       console.error(error);
     }
@@ -104,18 +112,16 @@ export class Surveys {
       this.surveys.push(newSurvey);
 
       this.updateSurveysJson();
-
     } catch (error) {
       console.error(error);
     }
   }
- 
+
   deleteSurvey(surveyUuid) {
     try {
       this.surveys = this.surveys.filter(survey => survey.uuid !== surveyUuid);
 
       this.updateSurveysJson();
-
     } catch (error) {
       console.error(error);
     }
@@ -123,10 +129,10 @@ export class Surveys {
 
   findSurvey(surveyUuid) {
     try {
-      const survey = this.surveys.find(surveyItem => (surveyItem.uuid === surveyUuid));
-
+      const survey = this.surveys.find(
+        (surveyItem) => surveyItem.uuid === surveyUuid
+      );
       return survey;
-
     } catch (error) {
       console.error(error);
     }
@@ -136,11 +142,10 @@ export class Surveys {
     try {
       const survey = this.findSurvey(surveyToUpdate.uuid);
       survey.questions = surveyToUpdate.questions;
-      
-      this.updateSurveysJson();
-      
-      return survey;
 
+      this.updateSurveysJson();
+
+      return survey;
     } catch (error) {
       console.error(error);
     }
