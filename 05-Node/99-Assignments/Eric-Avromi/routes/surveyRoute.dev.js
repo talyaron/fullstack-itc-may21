@@ -9,6 +9,8 @@ var router = express.Router();
 var _require = require('uuid'),
     uuidv4 = _require.v4;
 
+var fs = require('fs');
+
 var _require2 = require('../models/surveyModel.js'),
     addSurvey = _require2.addSurvey;
 
@@ -24,7 +26,6 @@ var _require5 = require('../middlewares/user'),
 var Survey = function Survey(admin) {
   _classCallCheck(this, Survey);
 
-  console.log('sdgdfgdfhdfh');
   this.title = '';
   this.id = uuidv4();
   this.questions = [];
@@ -79,18 +80,20 @@ router.get('/allSurveys', getUser, getAllSurveys); // router.get('/', (req, res)
 //         res.status(500).send(error.message)
 //     }
 // })
-// router.post('/newQuestion', (req, res) => { 
-//     try {
-//         const title = req.body.title;
-//         const allQuestions = addQuestion(title)
-//         res.send(
-//             allQuestions
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
-// router.put('/editSurvey', (req, res) => {
+
+router.post('/pepe', function (req, res) {
+  try {
+    var admin = req.cookies.cookie.email;
+    var allUsers = JSON.parse(fs.readFileSync("./users.json"));
+    var findUser = allUsers.find(function (user) {
+      return user.email === admin;
+    });
+    findUser.createdSurvey.push(req.body);
+    fs.writeFileSync("./users.json", JSON.stringify(allUsers));
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}); // router.put('/editSurvey', (req, res) => {
 //     try {
 //         const newTitle = req.body.newTitle;
 //         const id = req.body.id; 
