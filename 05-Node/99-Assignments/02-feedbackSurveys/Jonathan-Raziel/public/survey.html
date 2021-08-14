@@ -36,17 +36,17 @@
         const btnCreateSurveys = document.querySelector('.btncreate')
         const sendLink = document.querySelector('.sendlink');
         const returnPage = document.querySelector('.return')
-     
+
 
         //init
-        let count = 0;
+        //let count = 0;
 
         //addEventListener
         btnAddQuestion.addEventListener('click', addQuestion)
         btnCreateSurveys.addEventListener('click', createSurvey)
         sendLink.addEventListener('click', sendLinkToUser)
         returnPage.addEventListener('click', returnPageToHistorial)
- 
+
 
 
         function returnPageToHistorial() {
@@ -56,7 +56,7 @@
         function sendLinkToUser() {
 
             const params = new URLSearchParams(window.location.search);
-            const idSurvey = params.get('id');
+            const idSurvey = params.get('surveyId');
 
             const whatsapp = document.querySelector('.whatsapp')
 
@@ -65,34 +65,35 @@
             whatsapp.setAttribute('href', sendLink)
 
 
-            
+
         }
 
-        function addQuestion(ev) {
+        async function addQuestion(ev) {
 
             ev.preventDefault()
 
-            //for now ill leave the code.  (9:20 lol)
-            //I think this way is better to have an unique id but if you wanna create a unique id and send for the server to the client and get it with axios or fetch, its ok
-            //the important is the exercise works
+            const response = await axios.get('/id/questions')
+            const { id } = response.data
+
+            console.log(id)
 
             const rootQuestion = document.querySelector('.main')
 
             let html = ''
             html += `
-                    <div class="boxquestion" id="boxquestion${count}" >
+                    <div class="boxquestion" id="boxquestion${id}" >
                             <div class="boxquestion__question">
                                 <label for="question">
-                                    <input type="text" name="question${count}" class="boxquestion__question--title" size="53" id="${count}" onchange='blockQuestion("${count}")'>
+                                    <input type="text" name="question${id}" class="boxquestion__question--title" size="53" id="${id}" onchange='blockQuestion("${id}")'>
                                 </label>
                             </div>
-                            <i class="fas fa-user-edit boxquestion--edit" onclick='editQuestion("${count}")'></i>
-                            <i class="fas fa-trash boxquestion--trash" onclick='deleteQuestion("${count}")'></i> 
+                            <i class="fas fa-user-edit boxquestion--edit" onclick='editQuestion("${id}")'></i>
+                            <i class="fas fa-trash boxquestion--trash" onclick='deleteQuestion("${id}")'></i> 
                     </div>`
 
 
             rootQuestion.insertAdjacentHTML("beforeend", html)
-            count++;
+
             const btnCreate = document.querySelector('.btncreate');
             btnCreate.disabled = false;
             btnCreate.style.cursor = 'pointer';
@@ -127,7 +128,7 @@
 
 
             const params = new URLSearchParams(window.location.search);
-            const idSurvey = params.get('id');
+            const idSurvey = params.get('surveyId');
 
 
             const isCreated = JSON.parse(localStorage.getItem("isCreated"))
@@ -182,7 +183,12 @@
             let arrayQuestion = []
 
             for (let i = 1; i < length; i++) {
-                arrayQuestion.push(rootQuestion.children[i].children[0].children[0].children[0].value)
+                arrayQuestion.push({
+                    title: rootQuestion.children[i].children[0].children[0].children[0].value,
+                    id: rootQuestion.children[i].children[0].children[0].children[0].getAttribute('id'),
+                    
+                })
+
             }
 
             const inputTitle = document.querySelector('.container__title--title').value
@@ -194,7 +200,9 @@
             } = responseCookie.data
 
             const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
+            const id = params.get('surveyId');
+
+            console.log(id)
 
             const newSurvey = {
                 id: id,

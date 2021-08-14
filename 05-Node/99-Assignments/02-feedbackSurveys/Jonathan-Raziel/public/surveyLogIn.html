@@ -431,6 +431,9 @@
       const response = await enterEndUserLogIn(newUser);
       alert(response.ok);
 
+      window.location.replace("userSurvey.html")
+      localStorage.setItem('isRedirect', JSON.stringify(0))
+
       
 
       //window.location.replace('http://localhost:8000/userSurvey.html?surveyId=9c4573c1-0fa6-4890-a36d-418da7ac06cb')

@@ -15,6 +15,7 @@ const endUserLogin= require("./routes/routeUser")
 const addSurveys = require("./routes/routesSurveys")
 const deleteSurveys = require("./routes/routesSurveys")
 const getUniqueId = require("./routes/routesSurveys")
+const getUniqueIdQuestions = require("./routes/routesSurveys")
 const getPrevios = require("./routes/routesSurveys")
 
 const editSurveys = require("./routes/routesSurveys")
@@ -28,6 +29,7 @@ app.use('/surveys', getSurveys);
 
 app.use('/surveys',addSurveys)
 app.use('/id',getUniqueId)
+app.use('/id',getUniqueIdQuestions)
 app.use('/r',getPrevios)
 app.use('/c', editSurveys)
 

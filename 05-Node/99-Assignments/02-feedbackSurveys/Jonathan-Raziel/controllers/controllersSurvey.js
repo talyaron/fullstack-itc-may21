@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.deleteSurveys = exports.addSurveys = exports.getPreviousSurvey = exports.getUniqueId = void 0;
+exports.deleteSurveys = exports.addSurveys = exports.getPreviousSurvey = exports.getUniqueIdQuestions = exports.getUniqueId = void 0;
 var fs = require("fs");
 var uuidv4 = require("uuid").v4;
 var survey_1 = require("../models/survey");
@@ -13,6 +13,11 @@ function getUniqueId(req, res) {
     res.send({ id: id });
 }
 exports.getUniqueId = getUniqueId;
+function getUniqueIdQuestions(req, res) {
+    var id = uuidv4();
+    res.send({ id: id });
+}
+exports.getUniqueIdQuestions = getUniqueIdQuestions;
 function getPreviousSurvey(req, res) {
     var id = req.params.id;
     var allSurveys = readAllSurveys();
@@ -23,7 +28,12 @@ exports.getPreviousSurvey = getPreviousSurvey;
 function addSurveys(req, res) {
     try {
         var allSurveys = readAllSurveys();
-        var survey = new survey_1.Survey(req.body.id, req.body.title, req.body.email, req.body.questions);
+        var QuestionList_1 = [];
+        console.log(req.body.questions);
+        req.body.questions.forEach(function (element) {
+            QuestionList_1.push(element);
+        });
+        var survey = new survey_1.Survey(req.body.id, req.body.title, req.body.email, QuestionList_1);
         allSurveys.push(survey);
         fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
         var allUsers = JSON.parse(fs.readFileSync("./user.json"));

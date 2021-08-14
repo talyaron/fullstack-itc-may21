@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Document</title>
     <script>
-        function redirectpage(){
-            window.location.href = "http://localhost:8000/surveyLogIn.html"
+
+        const isRedirect = JSON.parse(localStorage.getItem("isRedirect"))
+
+        if (isRedirect !== 0) {
+            localStorage.setItem('isRedirect', JSON.stringify(1))
+            function redirectpage() {
+                window.location.replace("http://localhost:8000/surveyLogIn.html")
+            }
+            setTimeout('redirectpage()', 4000)
         }
-        setTimeout('redirectpage()',4000)
     </script>
 </head>
+
 <body>
     <div class="root"></div>
     <script>
-        
+
 
 
         //find the id that match the link with the survey.json and render with title and question + ratio buttons
-    </script>   
+    </script>
 </body>
+
 </html>
