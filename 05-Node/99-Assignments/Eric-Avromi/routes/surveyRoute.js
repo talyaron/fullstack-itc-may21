@@ -3,6 +3,7 @@ const router = express.Router();
 const {
     v4: uuidv4 
 } = require('uuid');
+const fs = require('fs')
 const { addSurvey} = require('../models/surveyModel.js');
 const {getAllSurveys} = require('../controllers/surveyControllers')
 const { getAllUsers} = require(`../models/userModels.js`)
@@ -12,7 +13,7 @@ const {getUser} = require('../middlewares/user')
 
 class Survey {
     constructor(admin) {
-        console.log('sdgdfgdfhdfh')
+        
         this.title = '';
         this.id = uuidv4();
         this.questions = [];
@@ -83,17 +84,21 @@ router.get('/allSurveys',getUser, getAllSurveys);
 
 
 
-// router.post('/newQuestion', (req, res) => { 
-//     try {
-//         const title = req.body.title;
-//         const allQuestions = addQuestion(title)
-//         res.send(
-//             allQuestions
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
+router.post('/pepe', (req, res) => { 
+    try {
+        const admin = req.cookies.cookie.email;
+        const allUsers = JSON.parse(fs.readFileSync("./users.json"));
+        const findUser = allUsers.find(user=>user.email === admin)
+        findUser.createdSurvey.push(req.body)
+        fs.writeFileSync("./users.json", JSON.stringify(allUsers))
+  
+    
+
+
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+})
 
 
 // router.put('/editSurvey', (req, res) => {

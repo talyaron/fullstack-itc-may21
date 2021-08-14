@@ -28,14 +28,14 @@
           <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
         </div>
         <form class="px-4" action="">
-          <input class="form-check-inputName2" type="text" name="exampleForm2" id="radioExample2"
-            placeholder="Write a question" />
+          <!-- <input class="form-check-inputName2" type="text" name="exampleForm2" id="radioExample2" -->
+            <!-- placeholder="Write a question" /> -->
               </form>
       </div>
       <div class="card-footer text-end">
         <button type="submit" class="btn btn-success">Add</button>
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <button type="submit" class="btn btn-primary">Edit</button>
+        <!-- <button type="submit" class="btn btn-danger">Delete</button>
+        <button type="submit" class="btn btn-primary">Edit</button> -->
         <button type="submit" class="btn btn-warning">Back</button>
         <button type="submit" onclick="saveSurvey()" class="btn btn-success">Save</button>
       </div>
@@ -53,9 +53,31 @@ const returnPage = document.querySelector('#return')
 
     async function saveSurvey() {
       console.log('hello');
+      const root = document.querySelector('.root')
+      const quantity = root.children.length
+      console.log(quantity);
+      let arr = [];
+      for (let i = 0; i < quantity; i++){
+        arr.push(root.children[i].children[0].value)
+
+      }
       
+      let array = {title: "", question:""}
+
+      axios.post("/question/pepe", {arr})
+				.then((res) => {
+					console.log(res.data);
+				})
 
     }
+
+    
+    
+
+
+
+
+
     const btnAddQuestion = document.querySelector('.btn-success')
 
     const btnDeleteQuestion = document.querySelector('.btn-danger')
@@ -81,22 +103,20 @@ const returnPage = document.querySelector('#return')
 
       const root = document.querySelector('.root')
       html = ''
-      data.forEach((question) => {
-        html += `<form class="px-4" action="">
-                       <input class="form-check-inputName" type="text" name="exampleForm" id="radioExample1"  placeholder="Write a question" />
+      
+        html += `
+      <div>          
+        <input class="form-check-inputName" type="text" name="exampleForm" id="radioExample1"  placeholder="Write a question" />
              
-                          <div class="card-footer text-end">
-                          <button type="submit" class="btn btn-primary">Add new question</button>
-                          <button type="submit" class="btn btn-danger">Delete question</button>
-                          <button type="submit" class="btn btn-primary">Edit question</button>
-                          <button type="submit" class="btn btn-warning">Back survey admin</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
 
                           </div>
                           
-                      </form>`
+                      `
 
-      });
-      root.innerHTML = html
+//modificar style divs
+      root.insertAdjacentHTML('beforeend',html)
 
 
 

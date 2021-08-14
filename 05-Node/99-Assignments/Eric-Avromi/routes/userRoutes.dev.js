@@ -29,6 +29,7 @@ router.post('/register', function (req, res) {
       name = _req$body.name,
       email = _req$body.email,
       password = _req$body.password;
+  console.log(req.body);
   var newUser = new User(name, email, password);
   addUsers(newUser);
   res.cookie('cookie', {
@@ -45,10 +46,13 @@ router.post('/login', function (req, res) {
   var _req$body2 = req.body,
       email = _req$body2.email,
       password = _req$body2.password;
+  console.log(req.body);
   var newUser = new User(email, password);
-  addUsers(newUser);
+  console.log(newUser); // addUsers(newUser);
+
   res.cookie('cookie', {
-    email: email
+    email: email,
+    password: password
   }, {
     maxAge: 30000000,
     httpOnly: true
