@@ -71,7 +71,30 @@ export const getAllSurveys = () => {
     const getCookie  = req.cookies.idSelected;
     const getSuverys = getAllSurveys();
     const selectedSurv = getSuverys.find((survey:any) => survey.id === getCookie);
-    console.log(selectedSurv);
     res.send(selectedSurv)
   }
+
+  export function editSelectedSurvey(req: any, res: any) {
+    const idCookie  = req.cookies.idSelected;
+    const getSuverys = getAllSurveys();
+    const indexSelectedSurv = getSuverys.findIndex((survey:any) => survey.id === idCookie);
+    const title = req.body.title;
+    const question = req.body.question;
+    getSuverys[indexSelectedSurv].title = title;
+    getSuverys[indexSelectedSurv].question = question;
+    fs.writeFileSync("./db/survey.json", JSON.stringify(getSuverys));
+
+
+    const getUsers = getAllUsers();
+    const getCookie  = JSON.parse(req.cookies.cookieName);
+    const findUser = getUsers.findIndex((user:any) => user.email === getCookie.email);
+    const findSuveryUser = getUsers[findUser].createSurvey.find((survey:any) => survey.id === idCookie);
+    findSuveryUser.title = title;
+    findSuveryUser.question = question;
+    fs.writeFileSync("./db/users.json", JSON.stringify(getUsers));
+    
+    res.send({ok:"succes"})
+  }
+
+
 

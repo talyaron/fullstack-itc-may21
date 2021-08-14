@@ -31,7 +31,6 @@ exports.addSurvey = (req, res) => {
             throw new Error("Invalid data was transferd")
         }
         
-       // users.users.find(find => find.email === body.email )
        users.users.map((user, index) => {
         if(user.email === body.adminEmail) {
             users.users[index].createdSurvey.push(new Survey(body.surveyName, body.adminEmail));
