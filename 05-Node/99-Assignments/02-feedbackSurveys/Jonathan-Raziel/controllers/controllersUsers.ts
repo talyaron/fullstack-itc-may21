@@ -31,7 +31,7 @@ export function usersRegister(req, res) {
             throw new Error("this is user is on the list")
         }
     } catch (e) {
-        
+
         res.status(500).send({ error: `${e}` });
     }
 }
@@ -68,17 +68,18 @@ export function endUserLogin(req, res) {
         const allUsers = readAllUsers();
         const isUserPassOK = allUsers.some(elem => (elem.email === email) && (elem.password === password))
         console.log(allUsers)
-        if ( isUserPassOK && allUsers.surveys) {
+        if (isUserPassOK && allUsers.surveys) {
             res.send({ ok: 'Welcome back admin' });
         } else {
-            const user = new User(null,req.body.email, req.body.password,null)
+            const user = new User(null, req.body.email, req.body.password, null)
             console.log(user);
             allUsers.push(user)
             fs.writeFileSync("./user.json", JSON.stringify(allUsers));
             res.send({ ok: "User Created", allUsers: allUsers });
         }
     } catch (error) {
-        res.status(500).send({ error: `error` }); }
+        res.status(500).send({ error: `error` });
+    }
 }
 
 
@@ -97,13 +98,40 @@ export function getCookie(req, res) {
 
 export function getSurveys(req, res) {
     try {
-        const {email} = req.params
+        const { email } = req.params
         const allUsers = readAllUsers();
-        if(allUsers.length !== 0){
+        if (allUsers.length !== 0) {
             const find = allUsers.find(user => user.email === email)
 
             res.send(find.surveys);
-        } 
+        }
+    } catch (e) {
+        res.status(500).send({ error: `${e}` });
+    }
+}
+
+export function scoreAdd(req, res) {
+    try {
+        const { id } = req.params
+        const allUsers = readAllUsers();
+        const allSurveys = JSON.parse(fs.readFileSync("./survey.json"));
+        const admin = allSurveys.find(survey => survey.id === id).admin
+
+        const findAdmin = allUsers.find(user => user.email === admin)
+        const findSurveyQuestions = findAdmin.surveys.find(survey => survey.id === id).questions
+
+        const findSurveyinSurveyJSON = allSurveys.find(survey => survey.id === id).question
+
+
+        for (let i = 0; i < findSurveyQuestions.length; i++) {
+            findSurveyQuestions[i].voters.push(req.body[i])
+            findSurveyinSurveyJSON[i].voters.push(req.body[i]) // check this way double
+
+        }
+
+        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+
     } catch (e) {
         res.status(500).send({ error: `${e}` });
     }
