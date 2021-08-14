@@ -39,7 +39,7 @@ function renderuserInfo(username) {
 ; //Function to render the data of a survey in the DOM
 
 function renderSurveyInfo() {
-  var root, questionsCreated, html;
+  var root, questionsCreated, html, button;
   return regeneratorRuntime.async(function renderSurveyInfo$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -52,11 +52,16 @@ function renderSurveyInfo() {
           questionsCreated = _context2.sent;
           html = "";
           questionsCreated.data.survey.questions.forEach(function (question) {
-            html += "<div>\n        <h3>".concat(question.content, "</h3>\n        <form class=\"votation\">\n            <p class=\"raitings\">\n                <input id=\"").concat(question.uuid, "\" type=\"radio\" name=\"raiting\" value=\"5\">\n                <label for=\"").concat(question.uuid, "\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "\" type=\"radio\" name=\"raiting\" value=\"4\">\n                <label for=\"").concat(question.uuid, "\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "\" type=\"radio\" name=\"raiting\" value=\"3\">\n                <label for=\"").concat(question.uuid, "\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "\" type=\"radio\" name=\"raiting\" value=\"2\">\n                <label for=\"").concat(question.uuid, "\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "\" type=\"radio\" name=\"raiting\" value=\"1\">\n                <label for=\"").concat(question.uuid, "\">\u2605</label>\n            </p>\n        </form>\n        </div>");
+            html += "<div id=\"".concat(question.uuid, "\">\n        <h3>").concat(question.content, "</h3>\n            <p class=\"raitings\">\n                <input id=\"").concat(question.uuid, "1\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"5\">\n                <label for=\"").concat(question.uuid, "1\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "2\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"4\">\n                <label for=\"").concat(question.uuid, "2\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "3\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"3\">\n                <label for=\"").concat(question.uuid, "3\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "4\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"2\">\n                <label for=\"").concat(question.uuid, "4\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "5\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"1\">\n                <label for=\"").concat(question.uuid, "5\">\u2605</label>\n            </p>\n        </div>");
           });
           root.innerHTML = html;
+          button = document.createElement('button');
+          button.type = 'submit';
+          button.className = 'top-menu__button';
+          button.innerText = 'Submit answer';
+          root.appendChild(button);
 
-        case 7:
+        case 12:
         case "end":
           return _context2.stop();
       }
@@ -64,12 +69,26 @@ function renderSurveyInfo() {
   });
 }
 
-;
-var submitAnswer = document.querySelector('#submitAnswer');
-submitAnswer.addEventListener('click', answerSubmit);
+; //Handle the form to create a new user:
 
-function answerSubmit() {
-  var votation = document.getElementsByTagName('raiting');
-  var pepe = document.getElementsByName('raiting');
-  console.log(pepe);
+var handleForm = document.querySelector("#root");
+handleForm.addEventListener('submit', answerSubmit);
+
+function answerSubmit(ev) {
+  var answeredQuestions = {};
+  ev.preventDefault();
+
+  for (var index = 0; index < ev.target.elements.length; index++) {
+    var element = ev.target.elements[index];
+
+    if (element.checked === true) {
+      element.id = element.id.substring(0, element.id.length - 1); //console.log(element.id, "pepe" ,element.value);
+
+      answeredQuestions = {
+        'questionId': element.value,
+        'raiting': element.value
+      };
+      console.log(answeredQuestions);
+    }
+  }
 }

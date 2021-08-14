@@ -76,7 +76,7 @@ export function uploadSurvey(req, res) {
     const { uuid } = req.params; // survey uuid
     
     const allSurveys = new Surveys();
-    const newSurvey = new Survey(allSurveys[allSurveys.findSurveyIndex(uuid)]);
+    const newSurvey = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
     newSurvey.title = req.body.surveyTitle;
     allSurveys.updateSurvey(newSurvey);
 

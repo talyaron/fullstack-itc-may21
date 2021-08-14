@@ -77,7 +77,7 @@ function uploadSurvey(req, res) {
     try {
         var uuid = req.params.uuid; // survey uuid
         var allSurveys = new surveys_1.Surveys();
-        var newSurvey = new surveys_1.Survey(allSurveys[allSurveys.findSurveyIndex(uuid)]);
+        var newSurvey = new surveys_1.Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
         newSurvey.title = req.body.surveyTitle;
         allSurveys.updateSurvey(newSurvey);
         var allUsers = new users_1.Users();
