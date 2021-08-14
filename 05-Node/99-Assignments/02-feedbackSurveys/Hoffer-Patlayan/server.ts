@@ -23,6 +23,7 @@ const usersRoute = require('./routes/usersRoutes');
 const signUpRoute = require('./routes/signUpRoutes');
 const logInRoute = require('./routes/logInRoutes');
 const addSurveys = require('./routes/surveyRoutes');
+const votersRoute = require('./routes/votersRoutes');
 
 
 // ROUTES
@@ -30,6 +31,7 @@ app.use('/users', usersRoute);
 app.use('/signUp', signUpRoute);
 app.use('/logIn', logInRoute);
 app.use('/survey', addSurveys);
+app.use('/voter',votersRoute);
 
 
 app.listen(app.get("port"), () => {
