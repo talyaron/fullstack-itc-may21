@@ -53,6 +53,25 @@ export const getAllSurveys = () => {
     const find = getUsers.find((user:any) => user.email === getCookie.email);
     getUsers[findLogInUser].createSurvey = find.createSurvey.filter((surv:any) =>surv.id !== id);
     fs.writeFileSync("./db/users.json", JSON.stringify(getUsers));
- 
+    
+    let getSurvey = getAllSurveys();
+    getSurvey = getSurvey.filter((survey:any) => survey.id !== id);
+    console.log(getSurvey);
+    fs.writeFileSync("./db/survey.json", JSON.stringify(getSurvey));
+    res.send({ok:"succes"})
+  }
+
+  export function saveSelectedSurvey(req: any, res: any) {
+    const { id } = req.params;
+    res.cookie('idSelected', id, { maxAge: 300000000, httpOnly: true });
+    res.send({ok:"succes"})
+  }
+
+  export function getSelectedSurvey(req: any, res: any) {
+    const getCookie  = req.cookies.idSelected;
+    const getSuverys = getAllSurveys();
+    const selectedSurv = getSuverys.find((survey:any) => survey.id === getCookie);
+    console.log(selectedSurv);
+    res.send(selectedSurv)
   }
 
