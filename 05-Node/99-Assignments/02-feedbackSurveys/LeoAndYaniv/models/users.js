@@ -54,8 +54,7 @@ var Users = /** @class */ (function () {
         try {
             var userExists = this.users.find(function (user) { return (user.email === email) && (user.password === password); });
             if (userExists) {
-                var username = userExists.username;
-                return username;
+                return userExists;
             }
             return undefined;
         }
@@ -64,8 +63,8 @@ var Users = /** @class */ (function () {
         }
     };
     Users.prototype.addCreatedSurvey = function (cookieEmail, newSurveyUuid) {
-        var LoggedInUser = this.users.find(function (user) { return user.email === cookieEmail; });
-        LoggedInUser.createdSurveys.push(newSurveyUuid);
+        var loggedInUserIndex = this.users.findIndex(function (user) { return user.email === cookieEmail; });
+        this.users[loggedInUserIndex].createdSurveys.push(newSurveyUuid);
         this.updateUsersJson();
     };
     return Users;

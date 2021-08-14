@@ -12,39 +12,39 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
-<body onload="getUserInfoFromCookie()">
+<body onload="getUserDetailsFromCookie()">
     <nav class="top-menu">
         <h1 class="top-menu__title">NEW SURVEY</h1>
         <div id="nameUser"></div>
-        <a class="top-menu__button" href="/03- surveys.html">Go back</a>
+        <a id="to-surveys" class="top-menu__button" href="/03- surveys.html">Go back</a>
     </nav>
 
-    <div>
-        <input type="text" id="surveyTitle" placeholder="Enter the title of your survey">
-        <button class="form__submit--newuser button" id="buttonCreate">New question</button>
+    <form id="new-survey">
+        <input type="text" id="surveyTitle" name="surveyTitle" placeholder="Enter the title of your survey" required>
+        <input type="submit" class="form__submit--newuser button" id="buttonUpload" value="Upload the survey">
+    </form>
+    <button class="form__submit--newuser button" id="buttonCancel">Cancel and go back</button>
+    
+    <div style="display:flex;">
+        <h2 style="margin:0;">Survey's Questions</h2>
+        <button class="form__submit--newuser button" title="Add a question" id="buttonCreate">+</button>
     </div>
-
+    
     <div id="root"></div>
 
-    <div>
-        <button class="form__submit--newuser button" id="buttonUpload">Upload the survey</button>
-        <button class="form__submit--newuser button" id="buttonCancel">Cancel and go back</button>
-    </div>
-
-
     <!-- Modal to create a new user -->
-    <div id="modalCreate" class="modal">
+    <div id="modalQuestion" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
             <span id="closeModal" class="close">&times;</span>
-            <form class="form" id="create">
-                <h3>Create a new question</h3>
+            <form class="form" id="question-form">
+                <h3 id="create-or-edit"></h3>
 
                 <div class="form__wrapper">
-                    <input type="text" name="question" placeholder="Enter a question" required>
+                    <input id="question-content" type="text" name="question" placeholder="Enter a question" required>
                 </div>
 
-                <input class="form__submit--newuser" type="submit" value="Add question">
+                <input id="submit-question" class="form__submit--newuser" type="submit" value="Add question">
             </form>
 
         </div>

@@ -44,7 +44,8 @@
 
             const response = await axios.get('/id/surveys')
              const {id} = response.data
-             window.location.href = `./survey.html?id=${id}`;
+             window.location.href = `./survey.html?surveyId=${id}`;
+             localStorage.setItem('isCreated', JSON.stringify(0)) 
         }
 
         async function getCookiesAndSurveys(ev) {
@@ -69,29 +70,34 @@
                 alert('Delete surveys')
                 const response = await axios.delete(`/delete/user/${id}/${email}`)
                 const surveys = response.data
-                renderAllSurveys([surveys])
+                renderAllSurveys(surveys)
+                
             } else {
                 alert('Delete Cancelled!')
             }
         }
 
         function renderAllSurveys(arrayToRender) {
+
             let html = '';
 
+        
             const createSurveys = document.querySelector('#rootSurveys')
+
 
             arrayToRender.forEach(element => {
                 html += `<div class="surveys__box" onclick='moveToSurvey("${element.id}")'>
                                 <span>Title: ${element.title}</span>
-                                <i class="fas fa-trash boxquestion--trash" onclick='deleteSurveys("${element.id}","${element.email}")'></i> 
-            </div>`
+                          </div>
+                          <i class="fas fa-trash boxquestion--trash" onclick='deleteSurveys("${element.id}","${element.email}")'></i>`
             });
 
             createSurveys.innerHTML = html
         }
 
         function moveToSurvey(id) {
-            window.location.href = `./survey.html?id=${id}`; 
+            window.location.href = `./survey.html?surveyId=${id}`;
+            localStorage.setItem('isCreated', JSON.stringify(1)) 
         }
 
 

@@ -3,8 +3,8 @@ exports.__esModule = true;
 exports.Surveys = exports.Survey = exports.Question = exports.Rating = exports.readJsonSurveys = void 0;
 var uuidv4 = require("uuid").v4;
 var fs = require("fs");
-var path = require('path');
-var surveysJsonPath = path.resolve(__dirname, './surveys.json');
+var path = require("path");
+var surveysJsonPath = path.resolve(__dirname, "./surveys.json");
 //Function to read the JSON of created surveys
 exports.readJsonSurveys = function () {
     try {
@@ -35,8 +35,8 @@ exports.Question = Question;
 var Survey = /** @class */ (function () {
     function Survey(_a) {
         var uuid = _a.uuid, title = _a.title, admin = _a.admin, questions = _a.questions;
-        this.uuid = (uuid === null) ? uuidv4() : uuid;
-        this.title = (uuid === null) ? "" : title;
+        this.uuid = uuid === null ? uuidv4() : uuid;
+        this.title = uuid === null ? "" : title;
         this.admin = admin;
         this.questions = (questions === null) ? [] : questions; //when the user push add here
     }
@@ -50,14 +50,16 @@ var Survey = /** @class */ (function () {
     };
     Survey.prototype.deleteQuestion = function (questionId) {
         try {
-            this.questions = this.questions.filter(function (question) { return question.uuid !== questionId; });
+            this.questions = this.questions.filter(function (question) { return (question.uuid !== questionId); });
         }
         catch (error) {
             console.error(error);
         }
     };
-    Survey.prototype.editQuestion = function () {
+    Survey.prototype.editQuestion = function (questionId, editedQuestion) {
         try {
+            var questionToEditIndex = this.questions.findIndex(function (question) { return (question.uuid === questionId); });
+            this.questions[questionToEditIndex].content = editedQuestion;
         }
         catch (error) {
             console.error(error);
@@ -73,6 +75,14 @@ var Surveys = /** @class */ (function () {
     Surveys.prototype.updateSurveysJson = function () {
         try {
             fs.writeFileSync(surveysJsonPath, JSON.stringify(this.surveys));
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
+    Surveys.prototype.updateTitleSurveysJson = function (updatedSurveys) {
+        try {
+            fs.writeFileSync(surveysJsonPath, JSON.stringify(updatedSurveys));
         }
         catch (error) {
             console.error(error);
@@ -105,10 +115,10 @@ var Surveys = /** @class */ (function () {
             console.error(error);
         }
     };
-    Surveys.prototype.findSurvey = function (surveyUuid) {
+    Surveys.prototype.findSurveyIndex = function (surveyUuid) {
         try {
-            var survey = this.surveys.find(function (surveyItem) { return (surveyItem.uuid === surveyUuid); });
-            return survey;
+            var surveyIndex = this.surveys.findIndex(function (surveyItem) { return surveyItem.uuid === surveyUuid; });
+            return surveyIndex;
         }
         catch (error) {
             console.error(error);
@@ -116,10 +126,8 @@ var Surveys = /** @class */ (function () {
     };
     Surveys.prototype.updateSurvey = function (surveyToUpdate) {
         try {
-            var survey = this.findSurvey(surveyToUpdate.uuid);
-            survey.questions = surveyToUpdate.questions;
+            this.surveys[this.findSurveyIndex(surveyToUpdate.uuid)] = surveyToUpdate;
             this.updateSurveysJson();
-            return survey;
         }
         catch (error) {
             console.error(error);

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hola</h1>
+    <form action="" onsubmit="handleSubmit(event)"> 
+    <input type="text" name="name" placeholder="name">
+    <input type="number" name="id" placeholder="id">
+    <input type="submit" value="SEND">
+    </form>
+<script>
+    function handleSubmit(event){
+        try{
+        event.preventDefault()
+        let {name, id} =  event.target.elements
+        name = name.value;
+        id = id.valueAsNumber
+        console.log(name, id)
+        if(!name || !id) throw new Error ('no id or no name in field')
+        axios.post('/addStudent', {name, id})
+        .then((({data})=>{
+            console.log(data)
+        })  
+    }catch(e){
+        console.error()
+    }
+    }
+</script>
+    
+</body>
+</html>

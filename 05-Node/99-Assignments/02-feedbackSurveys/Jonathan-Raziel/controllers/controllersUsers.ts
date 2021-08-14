@@ -23,6 +23,7 @@ export function usersRegister(req, res) {
         const isFound = allUsers.some(elem => (elem.email === req.body.email) || elem.username === req.body.username)
         if (!isFound) {
             const user = new User(req.body.username, req.body.email, req.body.password, [])
+            console.log(user);
             allUsers.push(user)
             fs.writeFileSync("./user.json", JSON.stringify(allUsers));
             res.send({ ok: "User Created", allUsers: allUsers });
@@ -59,6 +60,31 @@ export function loginUser(req, res) {
 
 };
 
+
+
+export function endUserLogin(req, res) {
+    try {
+        const { email, password } = (req.body)
+        const allUsers = readAllUsers();
+        const isUserPassOK = allUsers.some(elem => (elem.email === email) && (elem.password === password))
+        if ( isUserPassOK) {
+            res.send({ ok: 'Welcome back admin' });
+        } else {
+            const user = new User(req.body.username, req.body.email, req.body.password, [])
+            console.log(user);
+            allUsers.push(user)
+            fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+            res.send({ ok: "User Created", allUsers: allUsers });
+        }
+    } catch (error) {
+        res.status(500).send({ error: `error` }); }
+}
+
+
+
+
+
+
 export function getCookie(req, res) {
     try {
         const { cookieName } = req.cookies
@@ -77,11 +103,11 @@ export function getSurveys(req, res) {
         const allUsers = readAllUsers();
         if(allUsers.length !== 0){
             const find = allUsers.find(user => user.email === email)
+
             res.send(find.surveys);
         } 
     } catch (e) {
         res.status(500).send({ error: `${e}` });
     }
 }
-
 

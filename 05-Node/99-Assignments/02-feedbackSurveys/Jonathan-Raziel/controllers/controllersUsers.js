@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.getSurveys = exports.getCookie = exports.loginUser = exports.usersRegister = void 0;
+exports.getSurveys = exports.getCookie = exports.endUserLogin = exports.loginUser = exports.usersRegister = void 0;
 // const express = require("express");
 // const app = express();
 var fs = require("fs");
@@ -18,6 +18,7 @@ function usersRegister(req, res) {
         var isFound = allUsers.some(function (elem) { return (elem.email === req.body.email) || elem.username === req.body.username; });
         if (!isFound) {
             var user = new users_1.User(req.body.username, req.body.email, req.body.password, []);
+            console.log(user);
             allUsers.push(user);
             fs.writeFileSync("./user.json", JSON.stringify(allUsers));
             res.send({ ok: "User Created", allUsers: allUsers });
@@ -51,6 +52,27 @@ function loginUser(req, res) {
 }
 exports.loginUser = loginUser;
 ;
+function endUserLogin(req, res) {
+    try {
+        var _a = (req.body), email_2 = _a.email, password_2 = _a.password;
+        var allUsers = readAllUsers();
+        var isUserPassOK = allUsers.some(function (elem) { return (elem.email === email_2) && (elem.password === password_2); });
+        if (isUserPassOK) {
+            res.send({ ok: 'Welcome back admin' });
+        }
+        else {
+            var user = new users_1.User(req.body.username, req.body.email, req.body.password, []);
+            console.log(user);
+            allUsers.push(user);
+            fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+            res.send({ ok: "User Created", allUsers: allUsers });
+        }
+    }
+    catch (error) {
+        res.status(500).send({ error: "error" });
+    }
+}
+exports.endUserLogin = endUserLogin;
 function getCookie(req, res) {
     try {
         var cookieName = req.cookies.cookieName;
@@ -67,10 +89,10 @@ exports.getCookie = getCookie;
 ;
 function getSurveys(req, res) {
     try {
-        var email_2 = req.params.email;
+        var email_3 = req.params.email;
         var allUsers = readAllUsers();
         if (allUsers.length !== 0) {
-            var find = allUsers.find(function (user) { return user.email === email_2; });
+            var find = allUsers.find(function (user) { return user.email === email_3; });
             res.send(find.surveys);
         }
     }
