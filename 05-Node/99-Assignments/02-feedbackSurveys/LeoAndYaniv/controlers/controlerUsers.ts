@@ -13,8 +13,8 @@ export function newUser(req, res) {
     const { username, email, password } = req.body;
     const user = new User(username, email, password);
     const allUsers = new Users();
-    const userCreated: boolean = allUsers.createUser(user);
-    if (!userCreated) {
+    const emailExistsWithPass: boolean = allUsers.createUser(user);
+    if (!emailExistsWithPass) {
       res.send({ message: "A new User was added", user });
     } else {
       res.send({
@@ -44,6 +44,24 @@ export function login(req, res) {
       res.send({
         message: "Username or password are wrong, please try again!",
       });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.message);
+  }
+}
+
+//Function for answer Login JSON
+export function answerLogin(req, res) {
+  try {
+    const { username, email, uuid } = req.body;
+    const user = new User(username, email, null);
+    const allUsers = new Users();
+    const emailExists: boolean = allUsers.createUser(user);
+    if (!emailExists) {
+      res.send({ message: "A new User was added", email, username });
+    } else {
+      res.send({ message: "A new User was added", email, username });
     }
   } catch (error) {
     console.error(error);

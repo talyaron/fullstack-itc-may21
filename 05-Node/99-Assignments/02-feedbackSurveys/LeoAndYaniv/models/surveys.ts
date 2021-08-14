@@ -71,6 +71,16 @@ export class Survey {
       console.error(error);
     }
   }
+
+  updateQuestionRating(questionId, questionRating) {
+    try {
+      const questionToEditIndex = this.questions.findIndex(question => (question.uuid === questionId));
+      this.questions[questionToEditIndex].ratings.push(questionRating);
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
 export class Surveys {

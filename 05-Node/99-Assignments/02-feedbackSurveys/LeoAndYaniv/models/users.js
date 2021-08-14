@@ -39,10 +39,25 @@ var Users = /** @class */ (function () {
     };
     Users.prototype.createUser = function (user) {
         try {
-            var emailExists = this.users.find(function (userItem) { return userItem.email === user.email; });
-            if (emailExists)
-                return true;
-            this.users.push(user);
+            var emailIndex = this.users.findIndex(function (userItem) { return userItem.email === user.email; });
+            if (user.password !== null) { // registration attempt
+                if (emailIndex !== -1) { // email exists
+                    if (this.users[emailIndex].password !== null)
+                        return true; // have password
+                    else { // don't have password
+                        this.users[emailIndex].password = user.password;
+                    }
+                }
+                else { // email doesn't exist
+                    this.users.push(user);
+                }
+            }
+            else if (emailIndex !== -1) { // survey answers submit + email exists
+                this.users[emailIndex].answeredSurveys.push(user.uuid);
+            }
+            else { // survey answers submit + email doens't exist
+                this.users.push(new User(user.username, user.email, null));
+            }
             this.updateUsersJson();
             return false;
         }

@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.uploadSurvey = exports.sendCookie = exports.login = exports.newUser = void 0;
+exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.newUser = void 0;
 var users_1 = require("../models/users");
 var surveys_1 = require("../models/surveys");
 var fs = require("fs");
@@ -12,8 +12,8 @@ function newUser(req, res) {
         var _a = req.body, username = _a.username, email = _a.email, password = _a.password;
         var user = new users_1.User(username, email, password);
         var allUsers = new users_1.Users();
-        var userCreated = allUsers.createUser(user);
-        if (!userCreated) {
+        var emailExistsWithPass = allUsers.createUser(user);
+        if (!emailExistsWithPass) {
             res.send({ message: "A new User was added", user: user });
         }
         else {
@@ -53,6 +53,26 @@ function login(req, res) {
     }
 }
 exports.login = login;
+//Function for answer Login JSON
+function answerLogin(req, res) {
+    try {
+        var _a = req.body, username = _a.username, email = _a.email, uuid = _a.uuid;
+        var user = new users_1.User(username, email, null);
+        var allUsers = new users_1.Users();
+        var emailExists = allUsers.createUser(user);
+        if (!emailExists) {
+            res.send({ message: "A new User was added", email: email, username: username });
+        }
+        else {
+            res.send({ message: "A new User was added", email: email, username: username });
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).send(error.message);
+    }
+}
+exports.answerLogin = answerLogin;
 function sendCookie(req, res) {
     try {
         res.send({ email: req.email, username: req.username });

@@ -89,3 +89,17 @@ export function editQuestion(req, res) {
 
   res.send({ message: "A question was deleted", survey: surveyToUpdate });
 }
+
+//Function to update questions of a survey
+export function updateQuestionsSurvey(req, res) {
+  const { uuid } = req.params;
+  const allSurveys = new Surveys;
+  const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
+
+  const { answeredQuestions } = req.body;
+  answeredQuestions.forEach(question => surveyToUpdate.updateQuestionRating(question.questionId, question.rating));
+  
+  allSurveys.updateSurvey(surveyToUpdate);
+
+  res.send({ message: "A new Question was added", survey: surveyToUpdate });
+}

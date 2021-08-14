@@ -3,13 +3,13 @@ const url_string = window.location.href;
 const url = new URL(url_string);
 const uuid = url.searchParams.get("uuid");
 
-async function getUserInfoFromCookie() {
-    const userInfo = await axios.get('/user/info');
-    const { username } = userInfo.data;
-    renderuserInfo(username);
+async function getUserDetailsFromCookie() {
+    const userDetails = await axios.get('/user/info');
+    const { username } = userDetails.data;
+    renderUserDetails(username);
 };
 
-function renderuserInfo(username) {
+function renderUserDetails(username) {
     const loggedUser = document.querySelector('#nameUser');
     const toRender = `<h1>Ready to answer the survey, <span class="nameUser__title">${username}</span>?</h1>`
     loggedUser.innerHTML = toRender;
@@ -42,31 +42,30 @@ async function renderSurveyInfo() {
             </p>
         </div>`
     })
-    root.innerHTML = html;
-    const button = document.createElement('button');
-    button.type = 'submit';
-    button.className = 'top-menu__button'
-    button.innerText = 'Submit answer';
-    root.appendChild(button)
+    root.insertAdjacentHTML("afterbegin",html);
 };
 
 //Handle the form to create a new user:
 const handleForm = document.querySelector("#root");
 handleForm.addEventListener('submit', answerSubmit);
 
-function answerSubmit(ev) {
+async function answerSubmit(ev) {
     let answeredQuestions = [];
     ev.preventDefault();
     for (let index = 0; index < ev.target.elements.length; index++) {
         const element = ev.target.elements[index];
-        if (element.checked === true) {
+        if (element.checked) {
             element.id = element.id.substring(0, element.id.length - 1);
             //console.log(element.id, "pepe" ,element.value);
-            const answeredQuestion = {'questionId' : element.id, 'raiting': element.value};
-            answeredQuestions.push(answeredQuestion)
-            
+            const answeredQuestion = {questionId: element.id, raiting: element.value};
+            answeredQuestions.push(answeredQuestion);
         }
     }
     console.log(answeredQuestions);
+    let userDetails = await axios.get('/user/info');
+    const { username, email } = userDetails.data;
+    userDetails = { username, email, uuid };
+    await axios.post('/user/answerLoginAfter', userDetails);
+    await axios.put(`/surveys/updateQuestions/${uuid}`, answeredQuestions);
     //aca tengo que registrar al usuario y tambien registrar las respuestas a las preguntas de los otros usuarios
 }

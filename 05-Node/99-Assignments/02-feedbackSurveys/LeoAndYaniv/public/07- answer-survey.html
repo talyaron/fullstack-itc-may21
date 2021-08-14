@@ -12,13 +12,16 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
-<body onload="getUserInfoFromCookie()">
+<body onload="getUserDetailsFromCookie()">
     <nav class="top-menu">
         <h1 class="top-menu__title">ANSWER SURVEY</h1>
         <div id="nameUser"></div>
     </nav>
 
-    <form id="root" class="votation"></form>
+    <form id="root" class="votation">
+
+        <input type="submit" id="submit-answers" class="top-menu__button" value="Submit answer" />
+    </form>
 
     <script src="07- answer-survey.js"></script>
 </body>

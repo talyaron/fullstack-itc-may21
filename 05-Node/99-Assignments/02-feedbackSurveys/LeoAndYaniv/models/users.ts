@@ -49,12 +49,25 @@ export class Users {
 
   createUser(user) {
     try {
-      const emailExists = this.users.find(userItem => userItem.email === user.email);
-      if (emailExists) return true;
-      this.users.push(user);
-            
-      this.updateUsersJson();
+      const emailIndex = this.users.findIndex(userItem => userItem.email === user.email);
 
+      if (user.password !== null) { // registration attempt
+        if (emailIndex !== -1) { // email exists
+          if (this.users[emailIndex].password !== null) return true; // have password
+          else { // don't have password
+            this.users[emailIndex].password = user.password;
+          }
+        } else { // email doesn't exist
+          this.users.push(user);
+        }
+      } else if (emailIndex !== -1) { // survey answers submit + email exists
+        this.users[emailIndex].answeredSurveys.push(user.uuid);
+      } else { // survey answers submit + email doens't exist
+        this.users.push(new User(user.username, user.email, null));
+      }
+                    
+      this.updateUsersJson();
+      
       return false;
 
     } catch (error) {

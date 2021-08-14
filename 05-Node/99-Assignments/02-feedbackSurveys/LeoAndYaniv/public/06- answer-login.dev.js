@@ -9,7 +9,7 @@ var handleFormCreate = document.querySelector("#existingForm");
 handleFormCreate.addEventListener('submit', doingSubmitLogin);
 
 function doingSubmitLogin(ev) {
-  var _errorMessage, _ev$target$elements, username, email, userInfo;
+  var _errorMessage, _ev$target$elements, username, email, userDetails;
 
   return regeneratorRuntime.async(function doingSubmitLogin$(_context) {
     while (1) {
@@ -40,18 +40,18 @@ function doingSubmitLogin(ev) {
 
         case 10:
           ev.target.reset();
-          userInfo = {
+          userDetails = {
             username: username,
             email: email
           };
 
-          if (!userInfo) {
+          if (!userDetails) {
             _context.next = 18;
             break;
           }
 
           _context.next = 15;
-          return regeneratorRuntime.awrap(axios.post('/user/answerLogin', userInfo));
+          return regeneratorRuntime.awrap(axios.post('/user/answerLoginBefore', userDetails));
 
         case 15:
           location.href = "07- answer-survey.html?uuid=".concat(uuid);
