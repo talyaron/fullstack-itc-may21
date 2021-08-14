@@ -61,7 +61,8 @@ const returnPage = document.querySelector('#return')
         arr.push(root.children[i].children[0].value)
 
       }
-      console.log(arr);
+      
+      let array = {title: "", question:""}
 
       axios.post("/question/pepe", {arr})
 				.then((res) => {

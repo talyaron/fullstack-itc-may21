@@ -91,10 +91,8 @@ router.post('/pepe', (req, res) => {
         const findUser = allUsers.find(user=>user.email === admin)
         findUser.createdSurvey.push(req.body)
         fs.writeFileSync("./users.json", JSON.stringify(allUsers))
-        
-
-
-
+  
+    
 
 
     } catch (error) {
