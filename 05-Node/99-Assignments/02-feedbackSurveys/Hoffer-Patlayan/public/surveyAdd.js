@@ -17,15 +17,15 @@
           
       }    
       const title = container.children[0].value;
-      const jsonSub = {
+      const newSurv = {
           "title": title,
           "questions": {...arrQuestions}
       }
 
-      sendSurvey(jsonSub)
+      sendSurvey(newSurv)
   }
-  async function sendSurvey(json){
-      const response = await axios.post('/survey/addSurvey', json);
+  async function sendSurvey(newSurv){
+      const response = await axios.post('/survey/addSurvey', newSurv);
   }
   
   

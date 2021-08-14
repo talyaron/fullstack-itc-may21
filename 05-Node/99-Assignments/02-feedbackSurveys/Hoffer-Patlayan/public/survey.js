@@ -33,9 +33,10 @@ function renderSurvay(surveyData){
   let html = "";
   surveyData.forEach((survey) => {
     html += `<a onclick='selectedSurv("${survey.id}")' href="selectedSurvey.html"><div class="survey_info">
-                <h3 style="cursor: pointer">${survey.title}</h3>
-                <a style="cursor: pointer"><i onclick='deleteSurvey("${survey.id}")' class="icon_delete fas fa-trash"></i></a>
-              </div></a>`;
+    <h3 style="cursor: pointer">${survey.title}</h3>
+    <a style="cursor: pointer"><i onclick='deleteSurvey("${survey.id}")' class="icon_delete fas fa-trash"></i></a>
+    <a onclick='selectedSurv("${survey.id}")' href=""><i class="fas fa-share-alt-square"></i></a>
+  </div></a>`;
   });root.innerHTML = html;
 }  
 
