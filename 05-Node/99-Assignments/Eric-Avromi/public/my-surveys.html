@@ -12,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="dist/style.css">
     <title>Surveys admin</title>
 </head>
-<body onload=getAllSurveys()>
+
+<body>
     <div class="hello"></div>
     <div class="card-footer text-end">
         <button class="btn btn-dark" id="return">Logout</button>
@@ -24,15 +25,11 @@
     </div>
 
     <script>
-
-        
         axios.get("/users/userAdmin")
             .then((res) => {
-                console.log(res.data);
                 const { email } = res.data.cookie;
                 render(email)
             })
-
 
         function render(data) {
             const root = document.querySelector('.hello')
@@ -43,31 +40,35 @@
 
         async function getAllSurveys() {
             try {
-                const res = await axios.get('/survey')
-                const {surveys} = res.data.title
-                //  renderSurveys(allSurveys);
-                console.log(surveys);
+                const res = await axios.get('/survey/getAllSurveys')
+                const surveys = res.data
+                renderSurveys(surveys);
             } catch (error) {
                 console.log(error);
             }
         }
 
-        getAllSurveys()
+        window.onload = getAllSurveys()
 
-        function renderSurveys(){
-        const root = document.querySelector('.surveys')
-      html = ''
-      html +=
-        `<div>          
-            
-            <button type="submit" class="btn btn-danger" id="dangerSurvey" onclick='deleteSurvey()'>Delete</button>
-            
-            </div>`
-      root.insertAdjacentHTML('beforeend', html);
+        function renderSurveys(surveys) {
+            const root = document.querySelector('.surveys')
+            let html = ''
+            surveys.forEach(survey => {
+                html +=
+                    `<div>
+                        <h3>${survey.title}</h3>
+                        <button type="submit" class="btn btn-danger" id="dangerSurvey" onclick='deleteSurvey("${survey.id}")'>Delete</button>
+                    </div>`
+
+            });
+            root.innerHTML= html;
         }
 
-        function deleteSurvey() {
-        console.log('hi');
+        async function deleteSurvey(id) {
+            const r = await axios.delete(`/survey/deleteSurvey/${id}`)
+            const deletedSurveys = r.data
+            renderSurveys(deletedSurveys)
+            console.log(deletedSurveys);
         }
 
         const btnNewSurvey = document.getElementById('create').addEventListener('click', createNewSurvey)
@@ -76,12 +77,11 @@
             ev.preventDefault()
             const data = await axios.post('/survey/newSurvey')
             const { id } = data.data.newSurvey
-            console.log(data.data.newSurvey);
             window.location.href = `./create-survey.html?id=${id}`
         }
 
         const returnPage = document.querySelector('#return').addEventListener('click', loginOut)
-        
+
         function loginOut() {
             window.location.href = 'index.html'
         }
@@ -89,4 +89,5 @@
 
     </script>
 </body>
+
 </html>

@@ -22,7 +22,6 @@ class User {
 router.post('/register', (req, res) => {
 
     const {name, email, password} = req.body
-    console.log(req.body);
     const newUser = new User (name, email, password)
     addUsers(newUser);
     
@@ -37,11 +36,9 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
 
     const {email, password} = req.body
-    console.log(req.body);
 
     const newUser = new User ( email, password)
-    console.log(newUser);
-    // addUsers(newUser);
+    addUsers(newUser);
     
     res.cookie('cookie', {email, password},  {
         maxAge: 30000000,

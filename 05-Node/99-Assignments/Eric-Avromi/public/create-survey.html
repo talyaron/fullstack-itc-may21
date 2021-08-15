@@ -48,20 +48,13 @@
     async function saveSurvey() {
       const inputTitle = document.querySelector('#surveyTitle')
       saveData.title = inputTitle.value
-
       let arr = [];
       const allQuestions = document.querySelectorAll('.questions');
       allQuestions.forEach(question => {
-        const q = {
-          number: question.id,
-          question: question.value
-        }
+        const q = {[question.id]: question.value}
         arr.push(q)
       })
       saveData.questions = arr;
-      console.log(saveData);
-
-
       axios.post("/question/pepe", saveData)
         .then((res) => {
           console.log(res.data);
