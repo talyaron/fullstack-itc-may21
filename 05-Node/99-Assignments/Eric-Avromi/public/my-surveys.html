@@ -25,12 +25,7 @@
 
     <script>
 
-        const returnPage = document.querySelector('#return')
-        returnPage.addEventListener('click', loginOut)
-        function loginOut() {
-            window.location.href = 'index.html'
-        }
-
+        
         axios.get("/users/userAdmin")
             .then((res) => {
                 console.log(res.data);
@@ -46,18 +41,6 @@
             root.innerHTML = html;
         }
 
-        const btnNewSurvey = document.getElementById('create').addEventListener('click', createNewSurvey)
-
-        async function createNewSurvey(ev) {
-            ev.preventDefault()
-            const data = await axios.post('/survey/newSurvey')
-            const { id } = data.data.newSurvey
-            console.log(data.data.newSurvey);
-            window.location.href = `./create-survey.html?id=${id}`
-        }
-
-
-
         async function getAllSurveys() {
             try {
                 const res = await axios.get('/survey')
@@ -71,8 +54,6 @@
 
         getAllSurveys()
 
-      
-
         function renderSurveys(){
         const root = document.querySelector('.surveys')
       html = ''
@@ -82,14 +63,27 @@
             <button type="submit" class="btn btn-danger" id="dangerSurvey" onclick='deleteSurvey()'>Delete</button>
             
             </div>`
-
       root.insertAdjacentHTML('beforeend', html);
-
         }
-
 
         function deleteSurvey() {
         console.log('hi');
+        }
+
+        const btnNewSurvey = document.getElementById('create').addEventListener('click', createNewSurvey)
+
+        async function createNewSurvey(ev) {
+            ev.preventDefault()
+            const data = await axios.post('/survey/newSurvey')
+            const { id } = data.data.newSurvey
+            console.log(data.data.newSurvey);
+            window.location.href = `./create-survey.html?id=${id}`
+        }
+
+        const returnPage = document.querySelector('#return').addEventListener('click', loginOut)
+        
+        function loginOut() {
+            window.location.href = 'index.html'
         }
 
 
