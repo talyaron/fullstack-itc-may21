@@ -2,7 +2,8 @@
 
 var _require = require('../models.js'),
     User = _require.User,
-    users = _require.users;
+    users = _require.users,
+    createGuestCookie = _require.createGuestCookie;
 
 var Ajv = require("ajv");
 
@@ -42,13 +43,7 @@ exports.add_user = function (req, res) {
     }) === undefined && body.password === "") {
       users.newUser(new User(body.username, body.email, ""));
       var guestUser = users.users[users.users.length - 1];
-      var guestCookie = JSON.stringify({
-        guestUser: guestUser
-      });
-      res.cookie('guest', guestCookie, {
-        maxAge: 300000000,
-        httpOnly: true
-      });
+      createGuestCookie(guestUser, res);
       res.send(guestUser);
     } else if (users.users.find(function (info) {
       return info.email === body.email && info.password === '';
@@ -67,14 +62,7 @@ exports.add_user = function (req, res) {
         return info.email === body.email;
       });
 
-      var _guestCookie = JSON.stringify({
-        guestUser: _guestUser
-      });
-
-      res.cookie('guest', _guestCookie, {
-        maxAge: 300000000,
-        httpOnly: true
-      });
+      createGuestCookie(_guestUser, res);
       res.send(_guestUser);
     } else if (users.users.find(function (info) {
       return info.email === body.email;

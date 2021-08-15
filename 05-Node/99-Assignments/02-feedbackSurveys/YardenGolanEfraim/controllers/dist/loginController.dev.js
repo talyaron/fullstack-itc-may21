@@ -1,7 +1,8 @@
 "use strict";
 
 var _require = require('../models.js'),
-    users = _require.users;
+    users = _require.users,
+    createAdminCookie = _require.createAdminCookie;
 
 var Ajv = require("ajv");
 
@@ -36,13 +37,7 @@ exports.login = function (req, res) {
     var selectedAdmin = users.users.find(function (r) {
       return r.email === body.email && r.password === body.password;
     });
-    var adminCookie = JSON.stringify({
-      selectedAdmin: selectedAdmin
-    });
-    res.cookie('admin', adminCookie, {
-      maxAge: 300000000,
-      httpOnly: true
-    });
+    createAdminCookie(selectedAdmin, res);
     res.send(selectedAdmin);
   } catch (e) {
     console.log(e);

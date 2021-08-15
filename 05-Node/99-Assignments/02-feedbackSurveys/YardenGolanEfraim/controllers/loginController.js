@@ -1,4 +1,4 @@
-const { users } = require('../models.js')
+const { users, createAdminCookie } = require('../models.js')
 const Ajv = require("ajv");
 const ajv = new Ajv()
 
@@ -35,8 +35,7 @@ exports.login = (req, res) => {
         }
      
         const selectedAdmin = users.users.find(r=> r.email === body.email && r.password === body.password)
-        const adminCookie = JSON.stringify({ selectedAdmin })
-        res.cookie('admin', adminCookie, { maxAge: 300000000, httpOnly: true });
+        createAdminCookie(selectedAdmin, res)
         res.send(selectedAdmin);
         
     } catch (e) {

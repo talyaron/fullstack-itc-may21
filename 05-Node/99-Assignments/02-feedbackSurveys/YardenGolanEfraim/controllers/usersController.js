@@ -1,4 +1,8 @@
-const { User, users } = require('../models.js')
+const {
+    User,
+    users,
+    createGuestCookie
+} = require('../models.js')
 const Ajv = require("ajv");
 const ajv = new Ajv()
 
@@ -13,10 +17,10 @@ exports.add_user = (req, res) => {
                     type: "string"
                 },
                 password: {
-                    type:"string"
+                    type: "string"
                 },
                 email: {
-                    type:"string"
+                    type: "string"
                 }
             },
             required: ["username", "password", "email"],
@@ -29,42 +33,41 @@ exports.add_user = (req, res) => {
             body
         } = req;
 
-        const valid = validate(body) 
+        const valid = validate(body)
         if (!valid) {
             validate.errors.forEach(err =>
                 console.log(err.message)
             )
             throw new Error("Invalid data was transferd")
         }
-    
-        if(users.users.find(info=>info.email === body.email) === undefined && body.password === ""){
+
+        if (users.users.find(info => info.email === body.email) === undefined && body.password === "") {
             users.newUser(new User(body.username, body.email, ""))
-            const guestUser = users.users[users.users.length -1]
-            const guestCookie = JSON.stringify({ guestUser })
-            res.cookie('guest', guestCookie, { maxAge: 300000000, httpOnly: true });
+            const guestUser = users.users[users.users.length - 1]
+            createGuestCookie(guestUser, res)
             res.send(guestUser)
-        } else if(users.users.find(info=>info.email === body.email && info.password === '') != undefined){
-        users.users.find(info=> info.email === body.email ).password = body.password 
-        users.users.find(info=> info.email === body.email ).name = body.username 
-        res.send(users)
-        }else if(users.users.find(info=>info.email === body.email && info.password != '' && body.password === "") != undefined){
+        } else if (users.users.find(info => info.email === body.email && info.password === '') != undefined) {
+            users.users.find(info => info.email === body.email).password = body.password
+            users.users.find(info => info.email === body.email).name = body.username
+            res.send(users)
+        } else if (users.users.find(info => info.email === body.email && info.password != '' && body.password === "") != undefined) {
             const guestUser = users.users.find(info => info.email === body.email)
-            const guestCookie = JSON.stringify({ guestUser })
-            res.cookie('guest', guestCookie, { maxAge: 300000000, httpOnly: true });
+            createGuestCookie(guestUser, res)
             res.send(guestUser)
-            }else if (users.users.find(info=>info.email === body.email)!= undefined){
-        res.send("Email already taken!")
-        }else{
-        users.newUser(new User(body.username, body.email, body.password))
-        res.send("success!")}
+        } else if (users.users.find(info => info.email === body.email) != undefined) {
+            res.send("Email already taken!")
+        } else {
+            users.newUser(new User(body.username, body.email, body.password))
+            res.send("success!")
+        }
     } catch (e) {
         console.log(e)
-        res.status(400).send({ 
+        res.status(400).send({
             error: e.message
         });
     }
 }
 
-exports.get_all_users = (req, res)=>{
+exports.get_all_users = (req, res) => {
     res.send(users)
 }

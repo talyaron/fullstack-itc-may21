@@ -2,7 +2,10 @@
 
 var _require = require('../models.js'),
     Survey = _require.Survey,
-    users = _require.users;
+    users = _require.users,
+    getAdminCookie = _require.getAdminCookie,
+    createAdminCookie = _require.createAdminCookie,
+    getAdminCookieIndex = _require.getAdminCookieIndex;
 
 var Ajv = require("ajv");
 
@@ -11,23 +14,13 @@ var ajv = new Ajv();
 exports.delete_survey = function (req, res) {
   try {
     var ID = req.params.ID;
-    var admin = req.cookies.admin;
-    var cookie = JSON.parse(admin);
-    var selectedAdmin = cookie.selectedAdmin;
+    var selectedAdmin = getAdminCookie(req);
     selectedAdmin.createdSurvey = selectedAdmin.createdSurvey.filter(function (survey) {
       return survey.surveyID != ID;
     });
-    var adminIndex = req.cookies.adminIndex;
-    var cookieIndex = JSON.parse(adminIndex);
-    var selectedAdminIndex = cookieIndex.selectedAdminIndex;
+    var selectedAdminIndex = getAdminCookieIndex(req);
     users.users[selectedAdminIndex] = selectedAdmin;
-    var adminCookie = JSON.stringify({
-      selectedAdmin: selectedAdmin
-    });
-    res.cookie('admin', adminCookie, {
-      maxAge: 300000000,
-      httpOnly: true
-    });
+    createAdminCookie(selectedAdmin, res);
     res.send(selectedAdmin);
   } catch (e) {
     console.error(e);
@@ -79,15 +72,9 @@ exports.add_survey = function (req, res) {
         users.users[index].createdSurvey.push(new Survey(body.surveyName, body.adminEmail));
         var selectedAdmin = users.users[index];
         var selectedAdminIndex = index;
-        var adminCookie = JSON.stringify({
-          selectedAdmin: selectedAdmin
-        });
+        createAdminCookie(selectedAdmin, res);
         var adminCookieIndex = JSON.stringify({
           selectedAdminIndex: selectedAdminIndex
-        });
-        res.cookie('admin', adminCookie, {
-          maxAge: 300000000,
-          httpOnly: true
         });
         res.cookie('adminIndex', adminCookieIndex, {
           maxAge: 300000000,
@@ -109,9 +96,7 @@ exports.get_survey = function (req, res) {
     var surveyEditID = req.cookies.surveyEditID;
     var cookieEditID = JSON.parse(surveyEditID);
     var editID = cookieEditID;
-    var admin = req.cookies.admin;
-    var cookie = JSON.parse(admin);
-    var selectedAdmin = cookie.selectedAdmin;
+    var selectedAdmin = getAdminCookie(req);
     var surveyInfo = selectedAdmin.createdSurvey.filter(function (survey) {
       return survey.surveyID === editID;
     });
@@ -122,9 +107,7 @@ exports.get_survey = function (req, res) {
 };
 
 exports.survey_to_answer = function (req, res) {
-  var admin = req.cookies.admin;
-  var cookie = JSON.parse(admin);
-  var selectedAdmin = cookie.selectedAdmin;
+  var selectedAdmin = getAdminCookie(req);
   var id = req.query.id;
   var surveyRequired = selectedAdmin.createdSurvey.filter(function (survey) {
     return survey.surveyID === id;
