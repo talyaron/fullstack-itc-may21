@@ -200,7 +200,7 @@ body{
 
         function enterLoginPromise(userLogin) {
     return new Promise((resolve, reject) => {
-        fetch('/login/userLogin', {
+        fetch('/loginUser/userLogin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
