@@ -1,4 +1,4 @@
-function handleGuestLogin(event){
+async function handleGuestLogin(event){
     event.preventDefault()
     try{
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -6,7 +6,7 @@ function handleGuestLogin(event){
     const surveyID = params.surveyId
     const username = event.target.elements.username.value;
     const email = event.target.elements.email.value
-    const result = axios.post('/users', {
+    const result = await axios.post('/users', {
                     username: username,
                     password: "",
                     email: email
