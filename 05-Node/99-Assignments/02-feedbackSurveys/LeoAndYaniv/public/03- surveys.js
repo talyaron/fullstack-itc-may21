@@ -38,6 +38,7 @@ async function bringSurveysToShow(emailLogin) {
     bringSurveys.data.surveys.forEach(survey => {
         html += ` <div class="showSurvey">
                     <button class="showSurvey__title" onclick=showSurveyInfo("${survey.uuid}")>${survey.title}</button>
+                    <i class="fas fa-share-alt-square button__survey" id="Element${survey.uuid}" onclick='copyTextFromElement("${survey.uuid}")'></i>
                 </div>`
     })
     root.innerHTML = html;
@@ -46,4 +47,19 @@ async function bringSurveysToShow(emailLogin) {
 //Function when you click on a Survey you will redirect to other page to see all the information of it
 function showSurveyInfo(surveyId){
     window.location.href = `./05- view-survey.html?uuid=${surveyId}`;
+}
+
+//Function to copy the path
+function copyTextFromElement(surveyUuid) {
+  try {
+    const textWantToCopy = `http://localhost:3000/06-%20answer-login.html?${surveyUuid}`;
+    //Copy the text to the clipboard
+    const successful = navigator.clipboard.writeText(textWantToCopy);
+
+    const buttonCopy = document.querySelector(`#Element${surveyUuid}`);
+    if (successful) buttonCopy.innerHTML = "Link copied to clipboard!";
+    else buttonCopy.innerHTML = "Unable to copy!";
+  } catch (error) {
+    console.error(error);
+  }
 }

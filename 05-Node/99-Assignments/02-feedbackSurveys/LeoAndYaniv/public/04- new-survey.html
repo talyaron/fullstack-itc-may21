@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Survey</title>
+    <link rel="shortcut icon" href="./img/favicon.png" />
     <link rel="stylesheet" href="dist/style.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -16,45 +19,52 @@
     <nav class="top-menu">
         <h1 class="top-menu__title">NEW SURVEY</h1>
         <div id="nameUser"></div>
-        <a id="to-surveys" class="top-menu__button" href="/03- surveys.html">Go back</a>
+        <a id="to-surveys" class="top-menu__button" onclick="cancelTheSurvey()">Go back</a>
     </nav>
 
-    <form id="new-survey">
-        <input type="text" id="surveyTitle" name="surveyTitle" placeholder="Enter the title of your survey" required>
-        <input type="submit" class="form__submit--newuser button" id="buttonUpload" value="Upload the survey">
-    </form>
-    <button class="form__submit--newuser button" id="buttonCancel">Cancel and go back</button>
-
-    <div style="display:flex;">
-        <h2 style="margin:0;">Survey's Questions</h2>
-        <button class="form__submit--newuser button" title="Add a question" id="buttonCreate">+</button>
-    </div>
-
-    <div id="root"></div>
-
-    <!-- Modal to create a new question -->
-    <div id="modalQuestion" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span>
-            <form class="form" id="question-form">
-                <h3>Create a new question</h3>
-
-                <div class="form__wrapper">
-                    <input type="text" name="question" placeholder="Enter a question" required>
-                </div>
-
-                <input class="form__submit--newuser" type="submit" value="Add question">
+    <div class="information">
+        <div class="information__survey--menu">
+            <form id="new-survey">
+                <input class="information__survey--title" type="text" id="surveyTitle" name="surveyTitle"
+                    placeholder="Enter the title of your survey" autocomplete="off" required>
+                <input class="information__survey--button form__submit--newuser button" type="submit" id="buttonUpload"
+                    value="Upload survey">
             </form>
+            <button class="information__survey--button form__submit--newuser button" id="buttonCancel">Cancel and go
+                back</button>
         </div>
-    </div>
 
-    <!-- Modal to edit a question -->
-    <div id="modalEdit" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span id="closeEdit" class="close">&times;</span>
-            <div class="form" id="formEdit">
+        <div class="information__survey__questions">
+            <h2 style="margin:0;">Survey's Questions</h2>
+            <button class="form__submit--newuser button" title="Add a question" id="buttonCreate">+</button>
+        </div>
+
+        <div class="allinformation" id="root"></div>
+
+        <!-- Modal to create a new question -->
+        <div id="modalQuestion" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <form class="form" id="question-form">
+                    <h3>Create a new question</h3>
+
+                    <div class="form__wrapper">
+                        <input type="text" name="question" placeholder="Enter a question" required>
+                    </div>
+
+                    <input class="form__submit--newuser" type="submit" value="Add question">
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal to edit a question -->
+        <div id="modalEdit" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="closeEdit" class="close">&times;</span>
+                <div class="form" id="formEdit">
+                </div>
             </div>
         </div>
     </div>

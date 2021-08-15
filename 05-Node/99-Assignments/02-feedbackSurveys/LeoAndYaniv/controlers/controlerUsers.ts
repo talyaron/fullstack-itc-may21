@@ -34,11 +34,11 @@ export function login(req, res) {
     const { email, password } = req.body;
     const allUsers = new Users();
     const userExist = allUsers.loginUser(email, password);
+    if (userExist) {
     const { username } = userExist;
     //Set the cookie
     const cookieToWrite: string = JSON.stringify({ username, email });
       res.cookie("userDetails", cookieToWrite, { maxAge: 300000000, httpOnly: true });
-    if (userExist) {
       res.send({ message: "Logged in successfully", username });
     } else {
       res.send({

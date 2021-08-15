@@ -90,7 +90,7 @@ function renderQuestions(questions) {
   var root = document.querySelector("#root");
   var html = "";
   questions.forEach(function (question) {
-    html += " <div><h3>".concat(question.content, "</h3>\n        <button onclick=\"deleteQuestion('").concat(question.uuid, "')\">Delete</button>\n        <button class=\"buttonEdit\" onclick=\"editQuestion('").concat(question.uuid, "','").concat(question.content, "')\">Edit</button>\n        </div>");
+    html += " <div class=\"information__question\">\n            <div class=\"information__question--title\">\n            <h3>".concat(question.content, "</h3>\n            </div>\n            <div class=\"information__question--buttons\">\n            <i class=\"fas fa-trash-alt button--pointer\" onclick=\"deleteQuestion('").concat(question.uuid, "')\"></i>\n            <i class=\"fas fa-edit button--pointer\" onclick=\"editQuestion('").concat(question.uuid, "','").concat(question.content, "')\"></i>\n            </div>\n            </div>");
   });
   root.innerHTML = html;
 }
@@ -104,7 +104,7 @@ function editQuestion(qUuid, question) {
     modalEdit.classList.add("showModal");
     var formEdit = document.querySelector("#formEdit");
     if (!formEdit) throw new Error('There is a problem finding form from HTML');
-    var html = "\n        <div id=\"modalToEdit\">\n        <h3>Edit question</h3>\n\n        <div class=\"form__wrapper\">\n            <input type=\"text\" id=\"questionContent\" value=\"".concat(question, "\" required>\n            <button class=\"form__submit--newuser\" id=\"updateQuestion\" onclick=\"handleEdit('").concat(qUuid, "')\">Update question</button>\n        </div>\n        <div>");
+    var html = "\n        <div class=\"modalEdit\" id=\"modalToEdit\">\n        <h3>Edit question</h3>\n\n        <div class=\"form__wrapper--edit\">\n            <input class=\"form__wrapper--edit--question\" type=\"text\" id=\"questionContent\" value=\"".concat(question, "\" required>\n            <button class=\"form__submit--newuser form__wrapper--edit--button\" id=\"updateQuestion\" onclick=\"handleEdit('").concat(qUuid, "')\">Update question</button>\n        </div>\n        <div>");
     formEdit.innerHTML = html;
   } catch (error) {
     console.error(error);
@@ -219,7 +219,7 @@ function cancelTheSurvey() {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
-          option = confirm("Are you sure do you want to cancel all the survey, you will lose all the data created here?");
+          option = confirm("Are you sure do you want to cancel the survey, you will lose all the data created here?");
 
           if (!option) {
             _context5.next = 8;

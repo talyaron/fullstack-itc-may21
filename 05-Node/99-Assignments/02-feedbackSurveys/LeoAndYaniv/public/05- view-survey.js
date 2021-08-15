@@ -18,14 +18,30 @@ function renderuserDetails(username) {
 
 //Function to render the data of a survey in the DOM
 async function renderSurveyInfo() {
-    const title = document.querySelector("#title");
-    title.innerHTML = `<h2>Link: <span>http://localhost:3000/06-%20answer-login.html?${uuid}</span></h2>`;
-
     const root = document.querySelector("#root");
     const questionsCreated = await axios.get(`/surveys/getQuestions/${uuid}`);
+
+    const title = document.querySelector("#title");
+    title.innerHTML = `<h2 class="survey__title">${questionsCreated.data.survey.title}</h2>
+    <div class="button__share"><i class="fas fa-share-alt-square" id="Element${uuid}" onclick='copyTextFromElement()'></i></div>`;
+
     let html = "";
     questionsCreated.data.survey.questions.forEach(question => {
-        html += `<div><h3>${question.content}</h3></div>`
+        html += `<div class="survey__questions">${question.content}</div>`
     })
     root.innerHTML = html;
 };
+
+//Function to copy the path
+function copyTextFromElement() {
+    try {
+        const textWantToCopy = `http://localhost:3000/06-%20answer-login.html?${uuid}`;
+        //Copy the text to the clipboard
+        const successful = navigator.clipboard.writeText(textWantToCopy);
+
+        if (successful) alert('Link copied to clipboard!');
+        else buttonCopy.innerHTML = "Unable to copy!";
+    } catch (error) {
+        console.error(error);
+    }
+}

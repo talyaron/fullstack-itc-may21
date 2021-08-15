@@ -38,6 +38,60 @@ body {
   color: black;
 }
 
+.allinformation {
+  height: max-content;
+  background-color: peru;
+  padding-bottom: 10px;
+}
+
+.information {
+  background: peru;
+  width: 90%;
+  margin: auto;
+  height: 100%;
+  padding-top: 20px;
+}
+.information__survey--title {
+  width: 90%;
+  font-size: 25px;
+  font-weight: 700;
+  display: block;
+  text-align: center;
+  margin: auto;
+}
+.information__survey--button {
+  display: block;
+  margin: auto;
+  margin-top: 15px;
+  width: 175px;
+}
+.information__survey__questions {
+  display: flex;
+  width: 50%;
+  justify-content: space-evenly;
+  margin: auto;
+  margin-top: 15px;
+}
+.information__question {
+  display: flex;
+  justify-content: center;
+  background: cadetblue;
+  width: 90%;
+  margin: auto;
+  border-radius: 50px;
+  margin-top: 25px;
+}
+.information__question--title {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+}
+.information__question--buttons {
+  display: flex;
+  align-items: center;
+  padding-right: 12px;
+}
+
 .options {
   display: flex;
   justify-content: space-evenly;
@@ -85,7 +139,7 @@ body {
   flex-direction: column;
   border-radius: 50px;
   margin: 25px auto;
-  background: peru;
+  background: #5f9ea0;
   justify-content: center;
   align-items: center;
 }
@@ -106,10 +160,24 @@ body {
   border-radius: 50px;
 }
 
+.register {
+  background-color: peru;
+}
+
 .form__wrapper {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+}
+.form__wrapper--edit {
+  display: block;
+  text-align: center;
+}
+.form__wrapper--edit--question {
+  width: 100%;
+}
+.form__wrapper--edit--button {
+  margin-top: 10px;
 }
 .form__wrapper input {
   margin: 15px;
@@ -123,6 +191,10 @@ body {
 .form__wrapper--submit {
   display: flex;
   justify-content: center;
+}
+
+.wrapper__register {
+  justify-content: space-between;
 }
 
 #errorMessage {
@@ -141,12 +213,100 @@ body {
   justify-content: center;
 }
 .showSurvey__title {
-  background: grey;
+  background: peru;
   display: flex;
   width: 50%;
   justify-content: center;
   border-radius: 50px;
   margin: 10px;
+  cursor: pointer;
+  height: 50px;
+  align-items: center;
+  font-weight: bold;
+}
+.showSurvey__title:hover {
+  color: white;
+  background-color: brown;
+}
+
+.button--pointer {
+  cursor: pointer;
+  margin-left: 10px;
+}
+.button--pointer:hover {
+  color: white;
+}
+
+.button__survey {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.button__survey:hover {
+  color: brown;
+}
+
+.button__share {
+  display: flex;
+  padding-right: 25px;
+  font-size: 50px;
+  color: brown;
+  cursor: pointer;
+  width: fit-content;
+  align-items: center;
+}
+.button__share:hover {
+  color: black;
+}
+
+.survey__title {
+  display: flex;
+  justify-content: center;
+  background: brown;
+  width: 70%;
+  margin: auto;
+  margin-top: 20px;
+  height: 50px;
+  align-items: center;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.survey__information--title {
+  display: flex;
+}
+
+.allinformation--questions {
+  height: 100vh;
+  background-color: peru;
+  padding: 10px 0;
+}
+
+.survey__questions {
+  background: burlywood;
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  margin: 10px;
+  height: 50px;
+  align-items: center;
+  border: 2px solid black;
+}
+
+.submit {
+  justify-content: space-between;
+}
+.submit__button {
+  background-color: black;
+  margin: auto;
+  color: white;
+  border-radius: 100px;
+  padding: 15px;
+  display: flex;
+}
+.submit__button:hover {
+  background-color: white;
+  color: black;
   cursor: pointer;
 }
 
@@ -185,6 +345,10 @@ body {
   left: 50px;
 }
 
+.modalEdit h3 {
+  text-align: center;
+}
+
 .votation input[type=radio] {
   display: none;
 }
@@ -194,6 +358,7 @@ body {
 .votation .raitings {
   direction: rtl;
   unicode-bidi: bidi-override;
+  margin-right: 15px;
 }
 .votation label:hover,
 .votation label:hover ~ label {

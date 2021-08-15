@@ -34,11 +34,11 @@ function login(req, res) {
         var _a = req.body, email = _a.email, password = _a.password;
         var allUsers = new users_1.Users();
         var userExist = allUsers.loginUser(email, password);
-        var username = userExist.username;
-        //Set the cookie
-        var cookieToWrite = JSON.stringify({ username: username, email: email });
-        res.cookie("userDetails", cookieToWrite, { maxAge: 300000000, httpOnly: true });
         if (userExist) {
+            var username = userExist.username;
+            //Set the cookie
+            var cookieToWrite = JSON.stringify({ username: username, email: email });
+            res.cookie("userDetails", cookieToWrite, { maxAge: 300000000, httpOnly: true });
             res.send({ message: "Logged in successfully", username: username });
         }
         else {

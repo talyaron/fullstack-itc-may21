@@ -39,7 +39,7 @@ function renderUserDetails(username) {
 ; //Function to render the data of a survey in the DOM
 
 function renderSurveyInfo() {
-  var root, questionsCreated, html;
+  var root, questionsCreated, title, html;
   return regeneratorRuntime.async(function renderSurveyInfo$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -50,13 +50,15 @@ function renderSurveyInfo() {
 
         case 3:
           questionsCreated = _context2.sent;
+          title = document.querySelector("#title");
+          title.innerHTML = "<h2 class=\"survey__title\">".concat(questionsCreated.data.survey.title, "</h2>\n    <div class=\"button__share\"><i class=\"fas fa-share-alt-square\" id=\"Element").concat(uuid, "\" onclick='copyTextFromElement()'></i></div>");
           html = "";
           questionsCreated.data.survey.questions.forEach(function (question) {
-            html += "<div id=\"".concat(question.uuid, "\">\n        <h3>").concat(question.content, "</h3>\n            <p class=\"raitings\">\n                <input id=\"").concat(question.uuid, "1\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"5\">\n                <label for=\"").concat(question.uuid, "1\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "2\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"4\">\n                <label for=\"").concat(question.uuid, "2\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "3\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"3\">\n                <label for=\"").concat(question.uuid, "3\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "4\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"2\">\n                <label for=\"").concat(question.uuid, "4\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "5\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"1\">\n                <label for=\"").concat(question.uuid, "5\">\u2605</label>\n            </p>\n        </div>");
+            html += "<div class=\"survey__questions submit\" id=\"".concat(question.uuid, "\">\n        <h3>").concat(question.content, "</h3>\n            <p class=\"raitings\">\n                <input id=\"").concat(question.uuid, "1\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"5\">\n                <label for=\"").concat(question.uuid, "1\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "2\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"4\">\n                <label for=\"").concat(question.uuid, "2\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "3\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"3\">\n                <label for=\"").concat(question.uuid, "3\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "4\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"2\">\n                <label for=\"").concat(question.uuid, "4\">\u2605</label>\n                \n                <input id=\"").concat(question.uuid, "5\" type=\"radio\" name=\"raiting").concat(question.uuid, "\" value=\"1\">\n                <label for=\"").concat(question.uuid, "5\">\u2605</label>\n            </p>\n        </div>");
           });
           root.insertAdjacentHTML("afterbegin", html);
 
-        case 7:
+        case 9:
         case "end":
           return _context2.stop();
       }

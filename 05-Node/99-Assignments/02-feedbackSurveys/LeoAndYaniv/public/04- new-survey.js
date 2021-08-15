@@ -40,30 +40,36 @@ function renderQuestions(questions) {
     const root = document.querySelector("#root")
     let html = "";
     questions.forEach(question => {
-        html += ` <div><h3>${question.content}</h3>
-        <button onclick="deleteQuestion('${question.uuid}')">Delete</button>
-        <button class="buttonEdit" onclick="editQuestion('${question.uuid}','${question.content}')">Edit</button>
-        </div>`
+        html +=
+            ` <div class="information__question">
+            <div class="information__question--title">
+            <h3>${question.content}</h3>
+            </div>
+            <div class="information__question--buttons">
+            <i class="fas fa-trash-alt button--pointer" onclick="deleteQuestion('${question.uuid}')"></i>
+            <i class="fas fa-edit button--pointer" onclick="editQuestion('${question.uuid}','${question.content}')"></i>
+            </div>
+            </div>`
     });
 
     root.innerHTML = html;
 };
 
-function editQuestion(qUuid , question ) {
+function editQuestion(qUuid, question) {
     try {
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "block";
         modalEdit.classList.add("showModal");
-        
+
         const formEdit = document.querySelector("#formEdit");
         if (!formEdit) throw new Error('There is a problem finding form from HTML');
         let html = `
-        <div id="modalToEdit">
+        <div class="modalEdit" id="modalToEdit">
         <h3>Edit question</h3>
 
-        <div class="form__wrapper">
-            <input type="text" id="questionContent" value="${question}" required>
-            <button class="form__submit--newuser" id="updateQuestion" onclick="handleEdit('${qUuid}')">Update question</button>
+        <div class="form__wrapper--edit">
+            <input class="form__wrapper--edit--question" type="text" id="questionContent" value="${question}" required>
+            <button class="form__submit--newuser form__wrapper--edit--button" id="updateQuestion" onclick="handleEdit('${qUuid}')">Update question</button>
         </div>
         <div>`
         formEdit.innerHTML = html;
@@ -79,13 +85,13 @@ async function handleEdit(qUuid) {
     try {
         let questionContent = document.querySelector('#questionContent');
         questionContent = questionContent.value;
-        
+
         if (!questionContent)
             throw new Error("You need to complete all the fields");
 
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "none";
-    
+
         const questionsEdited = await axios.put(`/surveys/editQuestion/${qUuid}/${uuid}`, { questionContent });
         renderQuestions(questionsEdited.data.survey.questions);
     } catch (error) {
@@ -113,7 +119,7 @@ cancelSurvey.addEventListener('click', cancelTheSurvey);
 
 async function cancelTheSurvey() {
     try {
-        const option = confirm(`Are you sure do you want to cancel all the survey, you will lose all the data created here?`);
+        const option = confirm(`Are you sure do you want to cancel the survey, you will lose all the data created here?`);
         if (option) {
             //UUID is the id from the survey
             const userDetails = await axios.delete(`/surveys/deleteSurvey/${uuid}`);
