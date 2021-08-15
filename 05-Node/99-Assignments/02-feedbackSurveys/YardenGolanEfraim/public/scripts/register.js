@@ -2,6 +2,7 @@
 
     async function handleRegister(ev) {
         ev.preventDefault()
+        try{
         const username = ev.target.elements.username.value;
         const password = ev.target.elements.password.value;
         const email = ev.target.elements.email.value
@@ -15,6 +16,8 @@
         }else{
         
         alert(`Register succesful, ${username}!`)}
-        console.log(result)
         ev.target.reset();
-    }
+    }catch (e) {
+        console.error(e)
+    }}
+    document.querySelector(".form-field").addEventListener("submit", handleRegister)

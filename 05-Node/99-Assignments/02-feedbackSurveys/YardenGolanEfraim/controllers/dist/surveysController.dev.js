@@ -8,10 +8,35 @@ var Ajv = require("ajv");
 
 var ajv = new Ajv();
 
+exports.delete_survey = function (req, res) {
+  try {
+    var ID = req.params.ID;
+    var admin = req.cookies.admin;
+    var cookie = JSON.parse(admin);
+    var selectedAdmin = cookie.selectedAdmin;
+    selectedAdmin.createdSurvey = selectedAdmin.createdSurvey.filter(function (survey) {
+      return survey.surveyID != ID;
+    });
+    var adminIndex = req.cookies.adminIndex;
+    var cookieIndex = JSON.parse(adminIndex);
+    var selectedAdminIndex = cookieIndex.selectedAdminIndex;
+    users.users[selectedAdminIndex] = selectedAdmin;
+    var adminCookie = JSON.stringify({
+      selectedAdmin: selectedAdmin
+    });
+    res.cookie('admin', adminCookie, {
+      maxAge: 300000000,
+      httpOnly: true
+    });
+    res.send(selectedAdmin);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 exports.send_survey = function (req, res) {
   try {
     var id = req.query.id;
-    console.log(id);
     var idString = JSON.stringify(id);
     res.cookie('surveyEditID', idString, {
       maxAge: 300000000,
@@ -47,8 +72,7 @@ exports.add_survey = function (req, res) {
         return console.log(err.message);
       });
       throw new Error("Invalid data was transferd");
-    } // users.users.find(find => find.email === body.email )
-
+    }
 
     users.users.map(function (user, index) {
       if (user.email === body.adminEmail) {
@@ -70,7 +94,6 @@ exports.add_survey = function (req, res) {
           httpOnly: true
         });
         res.send(selectedAdmin);
-        console.log(selectedAdmin);
       }
     });
   } catch (e) {
@@ -89,7 +112,6 @@ exports.get_survey = function (req, res) {
     var admin = req.cookies.admin;
     var cookie = JSON.parse(admin);
     var selectedAdmin = cookie.selectedAdmin;
-    console.log(selectedAdmin, editID);
     var surveyInfo = selectedAdmin.createdSurvey.filter(function (survey) {
       return survey.surveyID === editID;
     });

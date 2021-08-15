@@ -28,7 +28,6 @@ exports.post_questions = function (req, res) {
       maxAge: 300000000,
       httpOnly: true
     });
-    console.log(users.users);
     res.send(selectedAdmin);
   } catch (e) {
     console.log(e);
