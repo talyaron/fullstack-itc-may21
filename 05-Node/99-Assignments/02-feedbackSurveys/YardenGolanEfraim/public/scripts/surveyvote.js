@@ -2,17 +2,17 @@ const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 
 
-function surveyToAnswer() {
+async function surveyToAnswer() {
     try {
         const title = document.getElementById("survey-title")
         const userName = document.getElementById("user-welcome-healdine")
 
-        axios.get(`/surveys/surveyToAnswer?id=${params.surveyId}`)
+        await axios.get(`/surveys/surveyToAnswer?id=${params.surveyId}`)
             .then((res) => {
                 title.innerHTML = res.data[0].title
                 renderSurveyToBeVoted(res.data[0])
             })
-        axios.get('/votes')
+        await axios.get('/votes')
             .then((res) => userName.innerText = (`Hi, ${res.data.name}`))
     } catch (e) {
         console.error(e)
