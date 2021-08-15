@@ -1,7 +1,5 @@
 const fs = require('fs');
 
-
-
 function addUsers(user){
     console.log('in add user ');
     const allUsers = getAllUsers()
@@ -19,8 +17,5 @@ function getAllUsers() {
 }
 
 
-
-
 exports.addUsers = addUsers;
-
 exports.getAllUsers = getAllUsers;

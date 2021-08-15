@@ -15,11 +15,8 @@ var fs = require('fs'); // const {addSurvey} = require('../models/surveyModel.js
 var _require2 = require('../controllers/surveyControllers'),
     getAllSurveys = _require2.getAllSurveys;
 
-var _require3 = require("../models/userModels.js"),
-    getAllUsers = _require3.getAllUsers;
-
-var _require4 = require('../middlewares/user'),
-    getUser = _require4.getUser;
+var _require3 = require('../middlewares/user'),
+    getUser = _require3.getUser;
 
 var Survey = function Survey() {
   _classCallCheck(this, Survey);
