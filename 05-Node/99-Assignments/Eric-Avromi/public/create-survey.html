@@ -77,7 +77,7 @@
         `<div>          
         <input class="form-check-inputName questions" type="text" name="exampleForm" id='question-${count}' placeholder="Write a question" />    
         <button type="submit" class="btn btn-danger" id="boxquestion" onclick="deleteQuestion()">Delete</button>
-        <button type="submit" class="btn btn-primary" onclick="editQuestion()">Edit</button>
+        
       </div>`
       root.insertAdjacentHTML('beforeend', html);
       count++;
@@ -89,26 +89,15 @@
 
     }
 
-    function editQuestion() {
-
-      console.log('hi');
-    }
+    
 
     function sendSurvey() {
-
+      //first save question
       console.log('hi');
     }
 
     function backToSurveyAdmin() {
       window.location.href = "my-surveys.html"
-
-      // function renderSurveys(data) {
-      //     const survey = document.querySelector('.survey')
-      //     let html = '';
-      //     html += `${data.title}`
-      //     survey.innerHTML = html;
-      // }
-
     }
 
 
