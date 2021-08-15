@@ -1,6 +1,5 @@
 
 const path = require('path')
-// const filePath = path.resolve(__dirname, './survey.json')
 const fs = require('fs');
 const {
     v4: uuidv4
@@ -30,5 +29,6 @@ function getAllSurveys() {
 }
 
 exports.addSurvey = addSurvey
+exports.getAllSurveys = getAllSurveys   
 
 

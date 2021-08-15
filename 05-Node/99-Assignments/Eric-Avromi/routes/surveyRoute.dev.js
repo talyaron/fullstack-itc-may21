@@ -23,21 +23,22 @@ var _require4 = require("../models/userModels.js"),
 var _require5 = require('../middlewares/user'),
     getUser = _require5.getUser;
 
-var Survey = function Survey(admin) {
+var Survey = function Survey() {
   _classCallCheck(this, Survey);
 
   this.title = '';
-  this.id = uuidv4();
   this.questions = [];
-  this.admin = admin;
+  this.admin = "";
+  this.id = "";
 };
 
+var newSurvey = new Survey();
 router.post('/newSurvey', function (req, res) {
   try {
     var admin = req.cookies.cookie.email;
-    console.log(admin);
-    var newSurvey = new Survey(admin);
-    addSurvey(newSurvey);
+    newSurvey.id = uuidv4();
+    console.log(admin); // addSurvey(newSurvey);
+
     res.send({
       ok: true,
       newSurvey: newSurvey
@@ -46,7 +47,35 @@ router.post('/newSurvey', function (req, res) {
     res.status(500).send(error.message);
   }
 });
-router.get('/allSurveys', getUser, getAllSurveys); // router.get('/', (req, res) => {
+router.get('/allSurveys', getUser, getAllSurveys);
+router.post('/pepe', function (req, res) {
+  console.log(req.body);
+
+  try {
+    var admin = req.cookies.cookie.email;
+    var allUsers = JSON.parse(fs.readFileSync("./users.json"));
+    var findUser = allUsers.find(function (user) {
+      return user.email === admin;
+    });
+    findUser.createdSurvey.push(req.body);
+    fs.writeFileSync("./users.json", JSON.stringify(allUsers));
+    newSurvey.title = req.body.title;
+    newSurvey.questions = req.body.questions;
+    newSurvey.admin = req.cookies.cookie.email;
+    console.log(newSurvey);
+    var allSurveys = fs.readFileSync("./survey.json");
+    var allPars = JSON.parse(allSurveys);
+    allPars.push(newSurvey);
+    fs.writeFileSync("./survey.json", JSON.stringify(allPars));
+    console.log(req.cookies);
+    res.send({
+      ok: true
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
+}); // router.get('/', (req, res) => {
 //     try {
 //         const allSurveys = getAllSurveys()
 //         res.send(
@@ -80,20 +109,7 @@ router.get('/allSurveys', getUser, getAllSurveys); // router.get('/', (req, res)
 //         res.status(500).send(error.message)
 //     }
 // })
-
-router.post('/pepe', function (req, res) {
-  try {
-    var admin = req.cookies.cookie.email;
-    var allUsers = JSON.parse(fs.readFileSync("./users.json"));
-    var findUser = allUsers.find(function (user) {
-      return user.email === admin;
-    });
-    findUser.createdSurvey.push(req.body);
-    fs.writeFileSync("./users.json", JSON.stringify(allUsers));
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-}); // router.put('/editSurvey', (req, res) => {
+// router.put('/editSurvey', (req, res) => {
 //     try {
 //         const newTitle = req.body.newTitle;
 //         const id = req.body.id; 
