@@ -127,6 +127,9 @@ async function deleteQuestion(qUuid) {
             if (disableAddQuestionBtn) {
                 AddQuestionBtn.disabled = true;
                 AddQuestionBtn.classList.add('button--disabled');
+            } else {
+                AddQuestionBtn.disabled = false;
+                AddQuestionBtn.classList.remove('button--disabled');
             }
             
             const SubmitSurvey = document.querySelector('#buttonUpload');
