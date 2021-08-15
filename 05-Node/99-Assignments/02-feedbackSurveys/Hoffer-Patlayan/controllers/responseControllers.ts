@@ -19,24 +19,61 @@ export const getAllUsers = () => {
   const fileJson = fs.readFileSync("./db/users.json");
   return JSON.parse(fileJson);
 };
+// READ RESPONSE JSON`
+export const getAllResponse = () => {
+  const fileJson = fs.readFileSync("./db/response.json");
+  return JSON.parse(fileJson);
+};
+
+
+export const getAllResponds= ()=> {
+  const fileJson = fs.readFileSync("./db/response.json");
+  return JSON.parse(fileJson);
+}
 
 
 export function getSuveryShare(req: any, res: any) {
   const idQuery  = req.query;
-  console.log(idQuery.id)
   const getSuvery = getAllSurveys();
   const findSurv = getSuvery.find((user:any) => user.id === idQuery.id);
   res.cookie('shareSurv', findSurv, { maxAge: 300000000, httpOnly: true });
-  console.log(findSurv)
   res.send(findSurv);
 }
 
-// export function getSuveryShareCookie(req: any, res: any) {
-//   const shareCookie  = req.cookies.shareSurv;
-//   console.log(shareCookie)
-//   res.send(shareCookie);
-// }
+export function sendRespon(req:any,res:any){
+
+  const {id,arr } = req.body;
+  // let id = uuidv4();
+  const responds = getAllResponds();
+
+  const survey = getAllSurveys();
+
+
+  const a = survey.find((user:any)=>user.id === id)
+
+  const aa = [{
+    title: a.title,
+    question : a.question,
+    respondes : arr 
+  }]
+
+  responds.push(aa)
+
+
+  fs.writeFileSync("./db/response.json", JSON.stringify(responds));
 
 
 
+  // const respond = new Response(id,arr);
+  // responds.push(respond);
+  // fs.writeFileSync("./db/response.json", JSON.stringify(responds));
 
+  res.send(responds);
+
+}
+
+export function getResp(req:any,res:any){
+  const getRes =  getAllResponse();
+  console.log(getRes);
+  res.send(getRes)
+}

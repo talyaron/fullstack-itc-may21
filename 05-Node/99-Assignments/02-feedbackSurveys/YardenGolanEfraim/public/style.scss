@@ -68,11 +68,14 @@ div {
 }
 
 .question {
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.877);
   padding: 1em;
   margin: .3em;
   width: 100%;
   text-align: center;
+  &:hover {
+    background-color: wheat;
+  }
 }
 
 .question__title {
@@ -97,6 +100,13 @@ div {
   background: #197540;
   font-weight: bold;
   text-decoration: none;
+}
+
+.thanks {
+  color: green;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 0 auto;
 }
 
 /* Input:range - Slider styling */
@@ -326,7 +336,7 @@ div {
   margin: .3em;
   width: 100%;
   text-align: center;
-
+  background:#19753f49;
   &__title {
     font-size: 1.3rem;
   }
@@ -650,5 +660,6 @@ input[type=range]:focus::-ms-fill-upper {
 //for surveyvote.html
 
 #survey-title {
-  
+  text-align: center;
+  color: rgba(255, 0, 0, 0.795);
 }

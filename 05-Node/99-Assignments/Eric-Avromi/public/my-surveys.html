@@ -56,10 +56,9 @@
             surveys.forEach(survey => {
                 html +=
                     `<div>
-                        <h3>${survey.title}</h3>
+                        <h3 onclick='showAnswers()' style='cursor:pointer'>${survey.title}</h3>
                         <button type="submit" class="btn btn-danger" id="dangerSurvey" onclick='deleteSurvey("${survey.id}")'>Delete</button>
                     </div>`
-
             });
             root.innerHTML= html;
         }
@@ -70,6 +69,14 @@
             renderSurveys(deletedSurveys)
             console.log(deletedSurveys);
         }
+
+
+        async function showAnswers(){
+            window.location.href = 'showAnswers.html'
+
+        
+        }
+
 
         const btnNewSurvey = document.getElementById('create').addEventListener('click', createNewSurvey)
 
