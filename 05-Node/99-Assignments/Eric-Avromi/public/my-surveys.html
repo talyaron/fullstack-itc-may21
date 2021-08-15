@@ -41,10 +41,10 @@
 
 
         function render(data) {
-            const hello = document.querySelector('.hello')
+            const root = document.querySelector('.hello')
             let html = '';
             html += `<p>Hello, ${data}</p>`
-            hello.innerHTML = html;
+            root.innerHTML = html;
         }
 
         const btnNewSurvey = document.getElementById('create').addEventListener('click', createNewSurvey)

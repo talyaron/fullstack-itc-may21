@@ -45,12 +45,14 @@ router.post('/pepe', (req, res) => {
         fs.writeFileSync("./users.json", JSON.stringify(allUsers))
 
         newSurvey.title = req.body.title
+        console.log(newSurvey.title);
         newSurvey.questions = req.body.questions
         newSurvey.admin = req.cookies.cookie.email
-        console.log(newSurvey);
+        
         const allSurveys = fs.readFileSync("./survey.json");
         const allPars = JSON.parse(allSurveys);
         allPars.push(newSurvey)
+        
         fs.writeFileSync("./survey.json", JSON.stringify(allPars))
         console.log(req.cookies);
         

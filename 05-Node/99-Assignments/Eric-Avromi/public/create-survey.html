@@ -46,7 +46,6 @@
     let saveData = {}
 
     async function saveSurvey() {
-      console.log('hello');
       const inputTitle = document.querySelector('#surveyTitle')
       saveData.title = inputTitle.value
 
@@ -69,15 +68,11 @@
         })
     }
 
-    const btnAddQuestion = document.querySelector('.btn-success')
+    const btnAddQuestion = document.querySelector('.btn-success').addEventListener('click', renderNewQuestion)
 
-    const btnBackToSurveyAdmin = document.querySelector('.btn-warning')
+    const btnBackToSurveyAdmin = document.querySelector('.btn-warning').addEventListener('click', backToSurveyAdmin)
 
-    const link = document.querySelector('.btn-light')
-
-    btnAddQuestion.addEventListener('click', renderNewQuestion)
-    btnBackToSurveyAdmin.addEventListener('click', backToSurveyAdmin)
-    link.addEventListener('click', sendSurvey)
+    const link = document.querySelector('.btn-light').addEventListener('click', sendSurvey)
 
     let count = 0;
 
