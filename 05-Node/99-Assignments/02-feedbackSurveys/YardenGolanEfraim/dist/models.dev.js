@@ -92,11 +92,13 @@ function () {
   return Questions;
 }();
 
+var users = new Users();
 module.exports = {
   User: User,
   Users: Users,
   Survey: Survey,
   Surveys: Surveys,
   Question: Question,
-  Questions: Questions
+  Questions: Questions,
+  users: users
 };

@@ -1,6 +1,6 @@
  async function getAdminUser() {
         const nameDisplay = document.querySelector("h1")
-        const adminUser = await axios.get('/selectedAdminUser')
+        const adminUser = await axios.get('/admin')
         console.log(adminUser)
         nameDisplay.innerText = await adminUser.data.name
         renderArrayToDom(adminUser.data.createdSurvey)
@@ -11,8 +11,8 @@
     async function handleSurvey(event) {
         event.preventDefault()
         const surveyName = event.target.elements.survey.value;
-        const adminUser = await axios.get('/selectedAdminUser')
-        const result = await axios.post('/addSurvey', {
+        const adminUser = await axios.get('/admin')
+        const result = await axios.post('/surveys/addSurvey', {
             surveyName: surveyName,
             adminEmail: adminUser.data.email
         })
@@ -47,6 +47,6 @@
         }
     }
     function moveToSurveyEdit(surveyID){
-        axios.get(`/sendSurvey?id=${surveyID}`)
+        axios.get(`/surveys/sendSurvey?id=${surveyID}`)
         window.location.href="/surveyedit.html";
     }

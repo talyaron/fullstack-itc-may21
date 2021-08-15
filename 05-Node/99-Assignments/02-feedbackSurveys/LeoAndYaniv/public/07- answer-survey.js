@@ -71,5 +71,5 @@ async function answerSubmit(ev) {
     }
 
     alert(submitAnswers.data.message);
-    location.href = `http://localhost:3000/06-%20answer-login.html?survey=${uuid}`;
+    location.href = `http://localhost:3000/06-%20answer-login.html?${uuid}`;
 }

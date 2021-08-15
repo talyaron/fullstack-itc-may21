@@ -1,9 +1,11 @@
-const express = require("express");
-const router = express.Router();
-const surveysController = require("../controllers/surveysController");
+const express = require("express")
+const router = express.Router()
+const surveysController = require("../controllers/surveysController")
 
-router
-  .route("/")
-  .post(surveysController.addSurvey)
+router.get('/sendSurvey', surveysController.send_survey)
+router.post('/addSurvey', surveysController.add_survey)
+router.get('/getSurvey', surveysController.get_survey)
+router.get('/surveyToAnswer', surveysController.survey_to_answer)
 
-module.exports = router;
+
+module.exports = router

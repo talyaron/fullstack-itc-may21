@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dist/style.css">
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
@@ -20,7 +21,7 @@
 </body>
 <script>
     function renderSurveyInfo() {
-        axios.get('/getSurvey')
+        axios.get('/surveys/getSurvey')
             .then((res) => renderSurveyEdit(res.data[0]));
     }
     window.addEventListener("load", renderSurveyInfo())
@@ -93,7 +94,7 @@
 
         const surveyID = event.target.elements[0].id
         console.log(questions)
-        const result = await axios.post('/postQuestions', {
+        const result = await axios.post('/questions', {
             questions: questions,
             surveyID: surveyID
         })
@@ -106,7 +107,7 @@
 
     function copyURLtoClipboard() {
            console.log("poo")
-            axios.get('/getSurvey')
+            axios.get('surveys/getSurvey')
             .then(function(res){ 
             const surveyID = res.data[0].surveyID
             const text = `http://localhost:3000/surveyvotelogin.html?surveyId=${surveyID}`

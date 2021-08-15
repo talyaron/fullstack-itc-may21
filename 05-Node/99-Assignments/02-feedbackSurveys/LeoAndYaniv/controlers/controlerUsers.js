@@ -3,9 +3,6 @@ exports.__esModule = true;
 exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.newUser = void 0;
 var users_1 = require("../models/users");
 var surveys_1 = require("../models/surveys");
-var fs = require("fs");
-var path = require("path");
-var surveysJsonPath = path.resolve(__dirname, "../models/surveys.json");
 //Function to add a new user into the JSON
 function newUser(req, res) {
     try {
@@ -84,15 +81,6 @@ function sendCookie(req, res) {
     }
 }
 exports.sendCookie = sendCookie;
-//Function to read the JSON of created surveys
-// const readJsonSurveys = () => {
-//   try {
-//     const surveys = fs.readFileSync(surveysJsonPath);
-//     return JSON.parse(surveys);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 //Function to add new survey uuid to user
 function uploadSurvey(req, res) {
     try {

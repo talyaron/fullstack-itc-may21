@@ -36,12 +36,12 @@
         const title = document.getElementById("survey-title")
         const userName = document.getElementById("user-welcome-healdine")
         
-        axios.get(`/surveyToAnswer?id=${params.surveyId}`)
+        axios.get(`/surveys/surveyToAnswer?id=${params.surveyId}`)
         .then((res) => {
             title.innerHTML = res.data[0].title
             renderSurveyToBeVoted(res.data[0])
         })
-        axios.get('/guestVoter')
+        axios.get('/votes')
         .then((res)=> userName.innerText = (`Hi, ${res.data.name}`))
     }
     window.addEventListener("load", surveyToAnswer())
@@ -65,12 +65,12 @@
         event.preventDefault()
         let numberOfQuestion = 0
         let votersID = ''
-        await axios.get(`/surveyToAnswer?id=${params.surveyId}`)
+        await axios.get(`/surveys/surveyToAnswer?id=${params.surveyId}`)
         .then((res) => {
             numberOfQuestion = res.data[0].questions.length
             console.log(numberOfQuestion)
         })
-        await axios.get('/guestVoter')
+        await axios.get('/votes')
         .then((res)=> votersID = (res.data.email))
         let votes = []
         for(i=0; i< numberOfQuestion; i++){
@@ -78,7 +78,7 @@
         }
         
         console.log(votes)
-        const result = await axios.post('/postVotes', {
+        const result = await axios.post('/votes', {
                         ID: params.surveyId,
                         votes: votes,
                         votersID: votersID

@@ -18,7 +18,6 @@ var _require3 = require("../models/userModels.js"),
 var Survey = function Survey(admin) {
   _classCallCheck(this, Survey);
 
-  console.log('sdgdfgdfhdfh');
   this.title = '';
   this.id = uuidv4();
   this.questions = [];
@@ -28,7 +27,6 @@ var Survey = function Survey(admin) {
 router.post('/newSurvey', function (req, res) {
   try {
     var admin = req.cookies.cookie.email;
-    console.log(admin);
     var newSurvey = new Survey(admin);
     addSurvey(newSurvey);
     res.send({

@@ -3,10 +3,6 @@ export {};
 import { User, Users } from "../models/users";
 import { Survey, Surveys } from "../models/surveys";
 
-const fs = require("fs");
-const path = require("path");
-const surveysJsonPath = path.resolve(__dirname, "../models/surveys.json");
-
 //Function to add a new user into the JSON
 export function newUser(req, res) {
   try {
@@ -78,16 +74,6 @@ export function sendCookie(req, res) {
     res.status(500).send(error.message);
   }
 }
-
-//Function to read the JSON of created surveys
-// const readJsonSurveys = () => {
-//   try {
-//     const surveys = fs.readFileSync(surveysJsonPath);
-//     return JSON.parse(surveys);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 
 //Function to add new survey uuid to user
 export function uploadSurvey(req, res) {

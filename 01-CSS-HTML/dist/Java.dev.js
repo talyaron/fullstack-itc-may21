@@ -1,7 +1,6 @@
 "use strict";
 
 var container = document.querySelector(".container");
-console.log(container);
 
 var boxes = function boxes() {
   try {
