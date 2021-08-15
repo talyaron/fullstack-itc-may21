@@ -237,11 +237,6 @@ body {
   color: white;
 }
 
-.button--disabled {
-  background: gray;
-  cursor: not-allowed;
-}
-
 .button__survey {
   display: flex;
   align-items: center;
@@ -313,6 +308,11 @@ body {
   background-color: white;
   color: black;
   cursor: pointer;
+}
+
+.button--disabled {
+  background: gray !important;
+  cursor: not-allowed !important;
 }
 
 .modal {

@@ -20,11 +20,10 @@ var User = function User(name, email, password) {
   this.email = email;
   this.password = password;
   this.id = uuidv4();
-  this.createdSurvey = []; //this will get survey Id..
+  this.createdSurvey = [];
 };
 
 router.post('/register', function (req, res) {
-  //class info from the form, create a new user like an instance
   var _req$body = req.body,
       name = _req$body.name,
       email = _req$body.email,

@@ -55,7 +55,6 @@ router.post('/pepe', function (req, res) {
     findUser.createdSurvey.push(req.body);
     fs.writeFileSync("./users.json", JSON.stringify(allUsers));
     newSurvey.title = req.body.title;
-    console.log(newSurvey.title);
     newSurvey.questions = req.body.questions;
     newSurvey.admin = req.cookies.cookie.email;
     var allSurveys = fs.readFileSync("./survey.json");
