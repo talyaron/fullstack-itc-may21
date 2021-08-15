@@ -237,6 +237,11 @@ body {
   color: white;
 }
 
+.button--disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
 .button__survey {
   display: flex;
   align-items: center;

@@ -1,6 +1,6 @@
 // export {};
 
-// import {  } from "";
+// import { Users } from "../models/users";
 
 // export function isAdmin(req, res, next) {
 //   try {

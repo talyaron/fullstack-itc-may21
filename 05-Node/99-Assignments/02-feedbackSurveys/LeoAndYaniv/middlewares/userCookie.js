@@ -24,7 +24,7 @@ function userCookieWrite(req, res, next) {
         if ((!username) || (!email))
             throw new Error("User details processing issues");
         var cookieToWrite = JSON.stringify({ username: username, email: email });
-        res.cookie("userDetails", cookieToWrite, { maxAge: 300000000, httpOnly: true });
+        res.cookie("userDetails", cookieToWrite, { maxAge: 900000, httpOnly: true });
         req.username = username;
         req.email = email;
         next();
