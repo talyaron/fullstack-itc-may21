@@ -1,96 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pollster</title>
     <link rel="stylesheet" href="dist/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+    <title>Survey vote</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
+
 <body>
     <h1 id="user-headline">Welcome to Pollster</h1>
     <h2 id="user-welcome-healdine"></h2>
-    <h3 id="survey-title"><h3>
-   <form onsubmit="handleSubmit(event)">
-    <div class="questions-wrapper">
-<!-- Questions go in here -->
-       
-        </div>
-        <div class="button-wrapper">
-            <button type="submit" id="submit-btn" >SEND</button>
-        </div>
-   </form>
-   <div class="thanks">Thanks for your vote!
-    </div>
-    
+    <h3 id="survey-title">
+        <h3>
+            <form onsubmit="handleSubmit(event)">
+                <div class="questions-wrapper">
+                    <!-- Questions go in here -->
+
+                </div>
+                <div class="button-wrapper">
+                    <button type="submit" id="submit-btn">Send</button>
+                </div>
+            </form>
+            <div class="thanks">
+                <h1 id="user-headline">Thanks for your vote!</h1>
+                
+            </div>
+
 </body>
 <script>
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     console.log(params.surveyId)
-    
+
     function surveyToAnswer() {
         const title = document.getElementById("survey-title")
         const userName = document.getElementById("user-welcome-healdine")
-        
+
         axios.get(`/surveys/surveyToAnswer?id=${params.surveyId}`)
-        .then((res) => {
-            title.innerHTML = res.data[0].title
-            renderSurveyToBeVoted(res.data[0])
-        })
+            .then((res) => {
+                title.innerHTML = res.data[0].title
+                renderSurveyToBeVoted(res.data[0])
+            })
         axios.get('/votes')
-        .then((res)=> userName.innerText = (`Hi, ${res.data.name}`))
+            .then((res) => userName.innerText = (`Hi, ${res.data.name}!`))
     }
     window.addEventListener("load", surveyToAnswer())
 
-    function renderSurveyToBeVoted(survey){
-       const questionHolder = document.querySelector(".questions-wrapper")
-       let html = ''
-            survey.questions.map((question, index) =>{
-       html +=
-        `<div class="question">
+    function renderSurveyToBeVoted(survey) {
+        const questionHolder = document.querySelector(".questions-wrapper")
+        let html = ''
+        survey.questions.map((question, index) => {
+            html +=
+                `<div class="question">
             <p class="question__title">${question.title}</p>
             <div class="input-wrapper">
                 <label class="question__explanation" for="range">1 - Not at all; 5 - Absolutely</label> <br>
                 <input type="range" name="range${index}" id="range" min="1" max="5">
             </div>
         </div>`
-    })
-      questionHolder.innerHTML= html
+        })
+        questionHolder.innerHTML = html
     }
     async function handleSubmit(event) {
         event.preventDefault()
         let numberOfQuestion = 0
         let votersID = ''
         await axios.get(`/surveys/surveyToAnswer?id=${params.surveyId}`)
-        .then((res) => {
-            numberOfQuestion = res.data[0].questions.length
-            console.log(numberOfQuestion)
-        })
+            .then((res) => {
+                numberOfQuestion = res.data[0].questions.length
+                console.log(numberOfQuestion)
+            })
         await axios.get('/votes')
-        .then((res)=> votersID = (res.data.email))
+            .then((res) => votersID = (res.data.email))
         let votes = []
-        for(i=0; i< numberOfQuestion; i++){
+        for (i = 0; i < numberOfQuestion; i++) {
             await votes.push(parseInt(event.target.elements[i].value))
         }
-        
+
         console.log(votes)
         const result = await axios.post('/votes', {
-                        ID: params.surveyId,
-                        votes: votes,
-                        votersID: votersID
-                    })
-                await console.log(result)
-                await alert(`voted succesfully!`)
-               event.target.reset();
-        const form= document.querySelector("form")
+            ID: params.surveyId,
+            votes: votes,
+            votersID: votersID
+        })
+        await console.log(result)
+        await alert(`voted succesfully!`)
+        event.target.reset();
+        const form = document.querySelector("form")
         form.style.display = "none"
         const thanks = document.querySelector(".thanks")
         thanks.style.display = "block"
     }
-    
+
 </script>
+
 </html>

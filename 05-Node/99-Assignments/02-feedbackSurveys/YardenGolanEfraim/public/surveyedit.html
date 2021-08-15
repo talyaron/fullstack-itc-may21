@@ -5,22 +5,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./dist/style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="dist/style.css">
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    rel="stylesheet"
+  />
+    <title>Edit your survey</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
+    <div class="test">
+        <h1>Submit questions to your survey here!</h1>   
+    </div>
     <div class="survey"></div>
 
-    <button onclick="copyURLtoClipboard()" id="copyURL">Copy URL To Clipboard</button>
+    <button class="form-field__submit" onclick="copyURLtoClipboard()" id="copyURL"><i class="fas fa-share-alt-square"></i> Copy URL To Clipboard
+        
+    </button>
 
 
 </body>
 <script>
-    function renderSurveyInfo() {
+      function renderSurveyInfo() {
         axios.get('/surveys/getSurvey')
             .then((res) => renderSurveyEdit(res.data[0]));
     }
@@ -39,22 +48,21 @@
             sum += survey.questions[i].voters.score[p];
             }
             questionHtml +=
-                `  <div>Question ${questionNumber}</div>
+                `  <div>Question ${questionNumber}:</div>
                         <div class="questioninfo-holder">
-                        <div id= "${survey.questions[i].questionID}"class= "question${i}">${survey.questions[i].title}</div>
-                        <div class="averagevotes">Average Score:${sum/survey.questions[i].voters.score.length}</div>
-                        <div class="numberofvotes">Number of Voters: ${survey.questions[i].voters.score.length}</div>
+                        <div id= "${survey.questions[i].questionID}"class= "questioninfo-holder__question"><h2>${survey.questions[i].title}</h2></div>
+                        <div class="questioninfo-holder__averagevotes"> Avg. Score:${sum/survey.questions[i].voters.score.length}</div>
+                        <div class="questioninfo-holder__numberofvotes">Number of Voters: ${survey.questions[i].voters.score.length}</div>
                         </div> `
         }
-        console.log(questionHtml)
         let html = `<div class="survey__ID"  id='${survey.surveyID}'>
                         <div class="survey__ID__Title">${survey.title}</div>
                         ${questionHtml}
-                        <form onsubmit="handleQuestions(event)">
+                        <form class="form-field" onsubmit="handleQuestions(event)">
                                      <div id="question-holder">
                                         <input type="text" name="${survey.surveyID}" id="${survey.surveyID}" placeholder="Question" required>
                                     </div>
-                                    <button id="submit" type="submit">Submit Questions!</button>
+                                    <button id="submit-btn" type="submit"><i class="fas fa-plus-square"></i> Submit Questions!</button>
                                 </form>
                       
                             </div>
@@ -106,9 +114,9 @@
     }
 
     function copyURLtoClipboard() {
-           console.log("poo")
-            axios.get('surveys/getSurvey')
-            .then(function(res){ 
+        axios.get('surveys/getSurvey')
+        .then(function(res){ 
+            console.log("poo")
             const surveyID = res.data[0].surveyID
             const text = `http://localhost:3000/surveyvotelogin.html?surveyId=${surveyID}`
             const el = document.createElement('textarea');
