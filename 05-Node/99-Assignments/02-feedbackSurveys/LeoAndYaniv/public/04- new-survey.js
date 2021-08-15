@@ -16,9 +16,9 @@ function renderUserDetails(username) {
 };
 
 const createQuestion = document.querySelector('#question-form');
-createQuestion.addEventListener('submit', addNewQuestion);
+createQuestion.addEventListener('submit', addQuestion);
 
-async function addNewQuestion(ev) {
+async function addQuestion(ev) {
     try {
         ev.preventDefault();
         let { question } = ev.target.elements;
@@ -28,8 +28,22 @@ async function addNewQuestion(ev) {
         modalUpload.style.display = "none";
         ev.target.reset();
 
-        const questionsCreated = await axios.post(`/surveys/createQuestion/${uuid}`, { question });
-        renderQuestions(questionsCreated.data.survey.questions);
+        const surveyQuestions = await axios.post(`/surveys/question/${uuid}/new`, { question });
+        const { survey, disableAddQuestionBtn, disableSubmitSurvey } = surveyQuestions.data;
+        renderQuestions(survey.questions);
+
+        const AddQuestionBtn = document.querySelector('#buttonCreate');
+        if (disableAddQuestionBtn) {
+            AddQuestionBtn.disabled = true;
+            AddQuestionBtn.classList.add('button--disabled');
+        }
+        
+        const SubmitSurvey = document.querySelector('#buttonUpload');
+        if (!disableSubmitSurvey) {
+            SubmitSurvey.disabled = false;
+            SubmitSurvey.classList.remove('button--disabled');
+        }
+        
     } catch (error) {
         console.error(error);
     }
@@ -40,30 +54,36 @@ function renderQuestions(questions) {
     const root = document.querySelector("#root")
     let html = "";
     questions.forEach(question => {
-        html += ` <div><h3>${question.content}</h3>
-        <button onclick="deleteQuestion('${question.uuid}')">Delete</button>
-        <button class="buttonEdit" onclick="editQuestion('${question.uuid}','${question.content}')">Edit</button>
-        </div>`
+        html +=
+            ` <div class="information__question">
+            <div class="information__question--title">
+            <h3>${question.content}</h3>
+            </div>
+            <div class="information__question--buttons">
+            <i class="fas fa-trash-alt button--pointer" onclick="deleteQuestion('${question.uuid}')"></i>
+            <i class="fas fa-edit button--pointer" onclick="editQuestion('${question.uuid}','${question.content}')"></i>
+            </div>
+            </div>`
     });
 
     root.innerHTML = html;
 };
 
-function editQuestion(qUuid , question ) {
+function editQuestion(qUuid, question) {
     try {
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "block";
         modalEdit.classList.add("showModal");
-        
+
         const formEdit = document.querySelector("#formEdit");
         if (!formEdit) throw new Error('There is a problem finding form from HTML');
         let html = `
-        <div id="modalToEdit">
+        <div class="modalEdit" id="modalToEdit">
         <h3>Edit question</h3>
 
-        <div class="form__wrapper">
-            <input type="text" id="questionContent" value="${question}" required>
-            <button class="form__submit--newuser" id="updateQuestion" onclick="handleEdit('${qUuid}')">Update question</button>
+        <div class="form__wrapper--edit">
+            <input class="form__wrapper--edit--question" type="text" id="questionContent" value="${question}" required>
+            <button class="form__submit--newuser form__wrapper--edit--button" id="updateQuestion" onclick="handleEdit('${qUuid}')">Update question</button>
         </div>
         <div>`
         formEdit.innerHTML = html;
@@ -79,14 +99,14 @@ async function handleEdit(qUuid) {
     try {
         let questionContent = document.querySelector('#questionContent');
         questionContent = questionContent.value;
-        
+
         if (!questionContent)
             throw new Error("You need to complete all the fields");
 
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "none";
-    
-        const questionsEdited = await axios.put(`/surveys/editQuestion/${qUuid}/${uuid}`, { questionContent });
+
+        const questionsEdited = await axios.put(`/surveys/question/${uuid}/${qUuid}`, { questionContent });
         renderQuestions(questionsEdited.data.survey.questions);
     } catch (error) {
         console.error(error);
@@ -99,9 +119,27 @@ async function deleteQuestion(qUuid) {
         const option = confirm(`Are you sure do you want to delete this question?`);
         if (option) {
             //qUuid: Is the ID from the question and uuid is the ID from the survey
-            const questions = await axios.delete(`/surveys/deleteQuestion/${qUuid}/${uuid}`);
-            renderQuestions(questions.data.survey.questions);
+            const surveyQuestions = await axios.delete(`/surveys/question/${uuid}/${qUuid}`);
+            const { survey, disableAddQuestionBtn, disableSubmitSurvey } = surveyQuestions.data;
+            renderQuestions(survey.questions);
+
+            const AddQuestionBtn = document.querySelector('#buttonCreate');
+            if (disableAddQuestionBtn) {
+                AddQuestionBtn.disabled = true;
+                AddQuestionBtn.classList.add('button--disabled');
+            } else {
+                AddQuestionBtn.disabled = false;
+                AddQuestionBtn.classList.remove('button--disabled');
+            }
+            
+            const SubmitSurvey = document.querySelector('#buttonUpload');
+            if (disableSubmitSurvey) {
+                SubmitSurvey.disabled = true;
+                SubmitSurvey.classList.add('button--disabled');
+            }
+    
         }
+        
     } catch (error) {
         console.error(error);
     }
@@ -113,11 +151,10 @@ cancelSurvey.addEventListener('click', cancelTheSurvey);
 
 async function cancelTheSurvey() {
     try {
-        const option = confirm(`Are you sure do you want to cancel all the survey, you will lose all the data created here?`);
+        const option = confirm(`Are you sure do you want to cancel the survey, you will lose all the data created here?`);
         if (option) {
             //UUID is the id from the survey
-            const userDetails = await axios.delete(`/surveys/deleteSurvey/${uuid}`);
-            console.log(userDetails);
+            const userDetails = await axios.delete(`/surveys/survey/${uuid}`);
             location.href = `03- surveys.html?email=${userDetails.data.userDetails}`;
         }
     } catch (error) {

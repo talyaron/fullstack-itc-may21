@@ -3,10 +3,6 @@ export {};
 import { User, Users } from "../models/users";
 import { Survey, Surveys } from "../models/surveys";
 
-const fs = require("fs");
-const path = require("path");
-const surveysJsonPath = path.resolve(__dirname, "../models/surveys.json");
-
 //Function to add a new user into the JSON
 export function newUser(req, res) {
   try {
@@ -33,12 +29,12 @@ export function login(req, res) {
   try {
     const { email, password } = req.body;
     const allUsers = new Users();
-    const userExist = allUsers.loginUser(email, password);
-    const { username } = userExist;
+    const userExists = allUsers.loginUser(email, password);
+    if (userExists) {
+    const { username } = userExists;
     //Set the cookie
     const cookieToWrite: string = JSON.stringify({ username, email });
-      res.cookie("userDetails", cookieToWrite, { maxAge: 300000000, httpOnly: true });
-    if (userExist) {
+      res.cookie("userDetails", cookieToWrite, { maxAge: 900000, httpOnly: true });
       res.send({ message: "Logged in successfully", username });
     } else {
       res.send({
@@ -54,14 +50,15 @@ export function login(req, res) {
 //Function for answer Login JSON
 export function answerLogin(req, res) {
   try {
-    const { username, email, uuid } = req.body;
+    const { username, email } = req;
+    const { uuid } = req.params;
     const user = new User(username, email, null);
     const allUsers = new Users();
-    const emailExists: boolean = allUsers.createUser(user, uuid);
-    if (!emailExists) {
-      res.send({ message: "A new User was added", email, username });
+    const filledAlready: boolean = allUsers.createUser(user, uuid);
+    if (!filledAlready) {
+      res.send({ message: "User answers received", filledAlready });
     } else {
-      res.send({ message: "A new User was added", email, username });
+      res.send({ message: "User already filled", filledAlready });
     }
   } catch (error) {
     console.error(error);
@@ -77,16 +74,6 @@ export function sendCookie(req, res) {
     res.status(500).send(error.message);
   }
 }
-
-//Function to read the JSON of created surveys
-// const readJsonSurveys = () => {
-//   try {
-//     const surveys = fs.readFileSync(surveysJsonPath);
-//     return JSON.parse(surveys);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 
 //Function to add new survey uuid to user
 export function uploadSurvey(req, res) {

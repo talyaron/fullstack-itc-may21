@@ -37,11 +37,12 @@ function renderUserDetails(username) {
 
 ;
 var createQuestion = document.querySelector('#question-form');
-createQuestion.addEventListener('submit', addNewQuestion);
+createQuestion.addEventListener('submit', addQuestion);
 
-function addNewQuestion(ev) {
-  var question, questionsCreated;
-  return regeneratorRuntime.async(function addNewQuestion$(_context2) {
+function addQuestion(ev) {
+  var question, surveyQuestions, _surveyQuestions$data, survey, disableAddQuestionBtn, disableSubmitSurvey, AddQuestionBtn, SubmitSurvey;
+
+  return regeneratorRuntime.async(function addQuestion$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
@@ -61,27 +62,42 @@ function addNewQuestion(ev) {
           modalUpload.style.display = "none";
           ev.target.reset();
           _context2.next = 10;
-          return regeneratorRuntime.awrap(axios.post("/surveys/createQuestion/".concat(uuid), {
+          return regeneratorRuntime.awrap(axios.post("/surveys/question/".concat(uuid, "/new"), {
             question: question
           }));
 
         case 10:
-          questionsCreated = _context2.sent;
-          renderQuestions(questionsCreated.data.survey.questions);
-          _context2.next = 17;
+          surveyQuestions = _context2.sent;
+          _surveyQuestions$data = surveyQuestions.data, survey = _surveyQuestions$data.survey, disableAddQuestionBtn = _surveyQuestions$data.disableAddQuestionBtn, disableSubmitSurvey = _surveyQuestions$data.disableSubmitSurvey;
+          renderQuestions(survey.questions);
+          AddQuestionBtn = document.querySelector('#buttonCreate');
+
+          if (disableAddQuestionBtn) {
+            AddQuestionBtn.disabled = true;
+            AddQuestionBtn.classList.add('button--disabled');
+          }
+
+          SubmitSurvey = document.querySelector('#buttonUpload');
+
+          if (!disableSubmitSurvey) {
+            SubmitSurvey.disabled = false;
+            SubmitSurvey.classList.remove('button--disabled');
+          }
+
+          _context2.next = 22;
           break;
 
-        case 14:
-          _context2.prev = 14;
+        case 19:
+          _context2.prev = 19;
           _context2.t0 = _context2["catch"](0);
           console.error(_context2.t0);
 
-        case 17:
+        case 22:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 14]]);
+  }, null, null, [[0, 19]]);
 }
 
 ; //Function to render the data of the questions in the DOM
@@ -90,7 +106,7 @@ function renderQuestions(questions) {
   var root = document.querySelector("#root");
   var html = "";
   questions.forEach(function (question) {
-    html += " <div><h3>".concat(question.content, "</h3>\n        <button onclick=\"deleteQuestion('").concat(question.uuid, "')\">Delete</button>\n        <button class=\"buttonEdit\" onclick=\"editQuestion('").concat(question.uuid, "','").concat(question.content, "')\">Edit</button>\n        </div>");
+    html += " <div class=\"information__question\">\n            <div class=\"information__question--title\">\n            <h3>".concat(question.content, "</h3>\n            </div>\n            <div class=\"information__question--buttons\">\n            <i class=\"fas fa-trash-alt button--pointer\" onclick=\"deleteQuestion('").concat(question.uuid, "')\"></i>\n            <i class=\"fas fa-edit button--pointer\" onclick=\"editQuestion('").concat(question.uuid, "','").concat(question.content, "')\"></i>\n            </div>\n            </div>");
   });
   root.innerHTML = html;
 }
@@ -104,7 +120,7 @@ function editQuestion(qUuid, question) {
     modalEdit.classList.add("showModal");
     var formEdit = document.querySelector("#formEdit");
     if (!formEdit) throw new Error('There is a problem finding form from HTML');
-    var html = "\n        <div id=\"modalToEdit\">\n        <h3>Edit question</h3>\n\n        <div class=\"form__wrapper\">\n            <input type=\"text\" id=\"questionContent\" value=\"".concat(question, "\" required>\n            <button class=\"form__submit--newuser\" id=\"updateQuestion\" onclick=\"handleEdit('").concat(qUuid, "')\">Update question</button>\n        </div>\n        <div>");
+    var html = "\n        <div class=\"modalEdit\" id=\"modalToEdit\">\n        <h3>Edit question</h3>\n\n        <div class=\"form__wrapper--edit\">\n            <input class=\"form__wrapper--edit--question\" type=\"text\" id=\"questionContent\" value=\"".concat(question, "\" required>\n            <button class=\"form__submit--newuser form__wrapper--edit--button\" id=\"updateQuestion\" onclick=\"handleEdit('").concat(qUuid, "')\">Update question</button>\n        </div>\n        <div>");
     formEdit.innerHTML = html;
   } catch (error) {
     console.error(error);
@@ -141,7 +157,7 @@ function handleEdit(qUuid) {
         case 7:
           modalEdit.style.display = "none";
           _context3.next = 10;
-          return regeneratorRuntime.awrap(axios.put("/surveys/editQuestion/".concat(qUuid, "/").concat(uuid), {
+          return regeneratorRuntime.awrap(axios.put("/surveys/question/".concat(uuid, "/").concat(qUuid), {
             questionContent: questionContent
           }));
 
@@ -170,7 +186,8 @@ function handleEdit(qUuid) {
 ; //Delete a question:
 
 function deleteQuestion(qUuid) {
-  var option, questions;
+  var option, surveyQuestions, _surveyQuestions$data2, survey, disableAddQuestionBtn, disableSubmitSurvey, AddQuestionBtn, SubmitSurvey;
+
   return regeneratorRuntime.async(function deleteQuestion$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
@@ -179,32 +196,49 @@ function deleteQuestion(qUuid) {
           option = confirm("Are you sure do you want to delete this question?");
 
           if (!option) {
-            _context4.next = 7;
+            _context4.next = 12;
             break;
           }
 
           _context4.next = 5;
-          return regeneratorRuntime.awrap(axios["delete"]("/surveys/deleteQuestion/".concat(qUuid, "/").concat(uuid)));
+          return regeneratorRuntime.awrap(axios["delete"]("/surveys/question/".concat(uuid, "/").concat(qUuid)));
 
         case 5:
-          questions = _context4.sent;
-          renderQuestions(questions.data.survey.questions);
+          surveyQuestions = _context4.sent;
+          _surveyQuestions$data2 = surveyQuestions.data, survey = _surveyQuestions$data2.survey, disableAddQuestionBtn = _surveyQuestions$data2.disableAddQuestionBtn, disableSubmitSurvey = _surveyQuestions$data2.disableSubmitSurvey;
+          renderQuestions(survey.questions);
+          AddQuestionBtn = document.querySelector('#buttonCreate');
 
-        case 7:
-          _context4.next = 12;
+          if (disableAddQuestionBtn) {
+            AddQuestionBtn.disabled = true;
+            AddQuestionBtn.classList.add('button--disabled');
+          } else {
+            AddQuestionBtn.disabled = false;
+            AddQuestionBtn.classList.remove('button--disabled');
+          }
+
+          SubmitSurvey = document.querySelector('#buttonUpload');
+
+          if (disableSubmitSurvey) {
+            SubmitSurvey.disabled = true;
+            SubmitSurvey.classList.add('button--disabled');
+          }
+
+        case 12:
+          _context4.next = 17;
           break;
 
-        case 9:
-          _context4.prev = 9;
+        case 14:
+          _context4.prev = 14;
           _context4.t0 = _context4["catch"](0);
           console.error(_context4.t0);
 
-        case 12:
+        case 17:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 9]]);
+  }, null, null, [[0, 14]]);
 }
 
 ; //When the user click on the button "Cancel and go back" is going to cancel all the survey
@@ -219,36 +253,35 @@ function cancelTheSurvey() {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
-          option = confirm("Are you sure do you want to cancel all the survey, you will lose all the data created here?");
+          option = confirm("Are you sure do you want to cancel the survey, you will lose all the data created here?");
 
           if (!option) {
-            _context5.next = 8;
+            _context5.next = 7;
             break;
           }
 
           _context5.next = 5;
-          return regeneratorRuntime.awrap(axios["delete"]("/surveys/deleteSurvey/".concat(uuid)));
+          return regeneratorRuntime.awrap(axios["delete"]("/surveys/survey/".concat(uuid)));
 
         case 5:
           userDetails = _context5.sent;
-          console.log(userDetails);
           location.href = "03- surveys.html?email=".concat(userDetails.data.userDetails);
 
-        case 8:
-          _context5.next = 13;
+        case 7:
+          _context5.next = 12;
           break;
 
-        case 10:
-          _context5.prev = 10;
+        case 9:
+          _context5.prev = 9;
           _context5.t0 = _context5["catch"](0);
           console.error(_context5.t0);
 
-        case 13:
+        case 12:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 10]]);
+  }, null, null, [[0, 9]]);
 }
 
 ; //When the user click on the button "Upload the survey" is going to create the survay and save it in the "survey.json"

@@ -13,7 +13,7 @@ function renderSurvey(survey){
     const rootQuestions = document.querySelector(".questions");
     let html = "";
       html +=       `<h3>${survey.title}</h3>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="icon_edit far fa-edit" ></i></a>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="icon_edit far fa-edit fa-2x"></i></a>
                     <h4>Questions:</h4>`;
    root.innerHTML = html;
 

@@ -5,12 +5,13 @@ import { Surveys, Survey, Question } from "../models/surveys";
 //Function to get all the surveys from a specific user
 export function getSurveys(req, res) {
   try {
-    const { admin } = req.params;
+    const admin = req.email;
     const allSurveys = new Surveys;
-    const surveysFromUser = allSurveys.findUserSurveys(admin);
+    const surveys = allSurveys.findUserSurveys(admin);
     res.send({
       message: "You get all the surveys from the user login",
-      surveys: surveysFromUser,
+      surveys,
+      admin
     });
   } catch (error) {
     res.status(500).send(error.message);
@@ -20,7 +21,7 @@ export function getSurveys(req, res) {
 //Function to create an empty survey
 export function newSurvey(req, res) {
   //User email sended by params in the URL
-  const { admin } = req.params; // admin email
+  const admin = req.email;
   
   const newSurvey = {uuid: null, title: null, admin, questions: null};
   const survey = new Survey(newSurvey);
@@ -33,7 +34,6 @@ export function newSurvey(req, res) {
 //Function to delete the completly survey
 export function deleteSurvey(req, res) {
   const { uuid } = req.params;
-  console.log(req.email);
   const allSurveys = new Surveys;
   allSurveys.deleteSurvey(uuid);
 
@@ -48,10 +48,15 @@ export function addQuestion(req, res) {
 
   const newQuestion = new Question(req.body.question);
 
-  surveyToUpdate.addQuestion(newQuestion);
+  const howManyQuestions: number = surveyToUpdate.addQuestion(newQuestion);
+  let disableAddQuestionBtn: boolean = false;
+  let disableSubmitSurvey: boolean = false;
+  if (howManyQuestions > 9) disableAddQuestionBtn = true;
+  if (howManyQuestions === 0) disableSubmitSurvey = true;
+
   allSurveys.updateSurvey(surveyToUpdate);
 
-  res.send({ message: "A new Question was added", survey: surveyToUpdate });
+  res.send({ message: "A new Question was added", survey: surveyToUpdate, disableAddQuestionBtn, disableSubmitSurvey });
 }
 
 // //Function to get a question from a specific survey
@@ -60,7 +65,6 @@ export function getQuestionsSurvey(req, res) {
   const { uuid } = req.params;
   const allSurveys = new Surveys;
   const surveyToUpdate = allSurveys.surveys[allSurveys.findSurveyIndex(uuid)];
-
   res.send({ survey: surveyToUpdate });
 }
 
@@ -70,10 +74,16 @@ export function deleteQuestion(req, res) {
   const allSurveys = new Surveys();
   const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
   //Inside the questions of a specific Survey I will filter the question that I dont want
-  surveyToUpdate.deleteQuestion(qUuid)
+
+  const howManyQuestions: number = surveyToUpdate.deleteQuestion(qUuid);;
+  let disableAddQuestionBtn: boolean = false;
+  let disableSubmitSurvey: boolean = false;
+  if (howManyQuestions > 9) disableAddQuestionBtn = true;
+  if (howManyQuestions === 0) disableSubmitSurvey = true;
+
   allSurveys.updateSurvey(surveyToUpdate);
 
-  res.send({ message: "A question was deleted", survey: surveyToUpdate });
+  res.send({ message: "A question was deleted", survey: surveyToUpdate, disableAddQuestionBtn, disableSubmitSurvey });
 }
 
 export function editQuestion(req, res) {

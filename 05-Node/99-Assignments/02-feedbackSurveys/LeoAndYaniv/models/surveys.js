@@ -1,4 +1,11 @@
 "use strict";
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 exports.__esModule = true;
 exports.Surveys = exports.Survey = exports.Question = exports.Rating = exports.readJsonSurveys = void 0;
 var uuidv4 = require("uuid").v4;
@@ -9,7 +16,14 @@ var surveysJsonPath = path.resolve(__dirname, "./surveys.json");
 exports.readJsonSurveys = function () {
     try {
         var surveys = fs.readFileSync(surveysJsonPath);
-        return JSON.parse(surveys);
+        var surveysInCreation = JSON.parse(surveys);
+        var surveysWithTitles = JSON.parse(surveys);
+        surveysWithTitles = surveysWithTitles.filter(function (survey) { return survey.title !== ''; });
+        // keep surveys created in last 15 mins, even WO title
+        surveysInCreation = surveysInCreation.filter(function (survey) { return (Date.now() - survey.createdDate < 900000); });
+        surveysInCreation = surveysInCreation.filter(function (survey) { return survey.title === ''; });
+        var surveysToKeep = __spreadArrays(surveysWithTitles, surveysInCreation);
+        return surveysToKeep;
     }
     catch (error) {
         console.error(error);
@@ -39,10 +53,12 @@ var Survey = /** @class */ (function () {
         this.title = uuid === null ? "" : title;
         this.admin = admin;
         this.questions = (questions === null) ? [] : questions; //when the user push add here
+        this.createdDate = Date.now();
     }
     Survey.prototype.addQuestion = function (newQuestion) {
         try {
             this.questions.push(newQuestion);
+            return this.questions.length;
         }
         catch (error) {
             console.error(error);
@@ -51,6 +67,7 @@ var Survey = /** @class */ (function () {
     Survey.prototype.deleteQuestion = function (questionId) {
         try {
             this.questions = this.questions.filter(function (question) { return (question.uuid !== questionId); });
+            return this.questions.length;
         }
         catch (error) {
             console.error(error);

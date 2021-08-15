@@ -41,6 +41,65 @@ body {
   }
 }
 
+.allinformation {
+  height: max-content;
+  background-color: peru;
+  padding-bottom: 10px;
+}
+.information {
+  background: peru;
+  width: 90%;
+  margin: auto;
+  height: 100%;
+  padding-top: 20px;
+
+  &__survey {
+    &--title {
+      width: 90%;
+      font-size: 25px;
+      font-weight: 700;
+      display: block;
+      text-align: center;
+      margin: auto;
+    }
+    &--button {
+      display: block;
+      margin: auto;
+      margin-top: 15px;
+      width: 175px;
+    }
+
+    &__questions {
+      display: flex;
+      width: 50%;
+      justify-content: space-evenly;
+      margin: auto;
+      margin-top: 15px;
+    }
+  }
+  &__question {
+    display: flex;
+    justify-content: center;
+    background: cadetblue;
+    width: 90%;
+    margin: auto;
+    border-radius: 50px;
+    margin-top: 25px;
+
+    &--title {
+      width: 90%;
+      display: flex;
+      justify-content: center;
+    }
+
+    &--buttons {
+      display: flex;
+      align-items: center;
+      padding-right: 12px;
+    }
+  }
+}
+
 .options {
   display: flex;
   justify-content: space-evenly;
@@ -92,7 +151,7 @@ body {
   flex-direction: column;
   border-radius: 50px;
   margin: 25px auto;
-  background: peru;
+  background: #5f9ea0;
   justify-content: center;
   align-items: center;
 
@@ -118,10 +177,27 @@ body {
   }
 }
 
+.register {
+  background-color: peru;
+}
+
 .form__wrapper {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+
+  &--edit {
+    display: block;
+    text-align: center;
+
+    &--question {
+      width: 100%;
+    }
+
+    &--button {
+      margin-top: 10px;
+    }
+  }
 
   & input {
     margin: 15px;
@@ -140,6 +216,10 @@ body {
   }
 }
 
+.wrapper__register {
+  justify-content: space-between;
+}
+
 #errorMessage {
   color: white;
   display: flex;
@@ -156,14 +236,117 @@ body {
   justify-content: center;
 
   &__title {
-    background: grey;
+    background: peru;
     display: flex;
     width: 50%;
     justify-content: center;
     border-radius: 50px;
     margin: 10px;
     cursor: pointer;
+    height: 50px;
+    align-items: center;
+    font-weight: bold;
+
+    &:hover {
+      color: white;
+      background-color: brown;
+    }
   }
+}
+
+.button--pointer {
+  cursor: pointer;
+  margin-left: 10px;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.button__survey {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    color: brown;
+  }
+}
+
+.button__share {
+  display: flex;
+  padding-right: 25px;
+  font-size: 50px;
+  color: brown;
+  cursor: pointer;
+  width: fit-content;
+  align-items: center;
+
+  &:hover {
+    color: black;
+  }
+}
+
+.survey__title {
+  display: flex;
+  justify-content: center;
+  background: brown;
+  width: 70%;
+  margin: auto;
+  margin-top: 20px;
+  height: 50px;
+  align-items: center;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.survey__information--title {
+  display: flex;
+}
+
+.allinformation--questions {
+  height: 100vh;
+  background-color: peru;
+  padding: 10px 0;
+}
+
+.survey__questions {
+  background: burlywood;
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  margin: 10px;
+  height: 50px;
+  align-items: center;
+  border: 2px solid black;
+}
+
+.submit {
+  justify-content: space-between;
+
+  &__button {
+    background-color: black;
+    margin: auto;
+    color: white;
+    border-radius: 100px;
+    padding: 15px;
+    display: flex;
+
+    &:hover {
+      background-color: white;
+      color: black;
+      cursor: pointer;
+    }
+  }
+}
+
+.button--disabled {
+  background: gray !important;
+  cursor: not-allowed !important;
+}
+
+.title--modify {
+  justify-content: space-around;
 }
 
 //////////////////////////MODAL////////////////////////
@@ -203,6 +386,12 @@ body {
   left: 50px;
 }
 
+.modalEdit {
+  h3 {
+    text-align: center;
+  }
+}
+
 //////////STARS TO VOTE////////////
 .votation {
   input[type="radio"] {
@@ -216,6 +405,7 @@ body {
   .raitings {
     direction: rtl;
     unicode-bidi: bidi-override;
+    margin-right: 15px;
   }
 
   label:hover,

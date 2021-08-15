@@ -1,12 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-const {
-    v4: uuidv4 
-} = require('uuid');  // do  the same to questions?
-const {
-    addUsers
-} = require('../models/userModels.js')
+const {v4: uuidv4} = require('uuid'); 
+const {addUsers} = require('../models/userModels.js')
+// const {getAllUsers} = require(`../models/userModels.js`)
+
 
 
 class User {
@@ -15,20 +13,18 @@ class User {
         this.email = email;
         this.password = password;
         this.id = uuidv4();
-        this.createdSurvey = [];  //this will get survey Id..
+        this.createdSurvey = [];  
     }
 }
 
 
+
 router.post('/register', (req, res) => {
 
-    //class info from the form, create a new user like an instance
     const {name, email, password} = req.body
     console.log(req.body);
     const newUser = new User (name, email, password)
     addUsers(newUser);
-
-    
     
     res.cookie('cookie', {name ,email},  {
         maxAge: 30000000,
@@ -46,8 +42,6 @@ router.post('/login', (req, res) => {
     const newUser = new User ( email, password)
     console.log(newUser);
     // addUsers(newUser);
-
-    
     
     res.cookie('cookie', {email, password},  {
         maxAge: 30000000,
@@ -63,26 +57,6 @@ router.get('/userAdmin', (req, res) => {
     res.send({cookie})
 
 })
-
-// router.post('/login', (req, res) => {
-
-//     //class info from the form, create a new user like an instance
-//     const {
-//         name,
-//         email,
-//         password
-//     } = req.body
-//     const user = new User(name, email, password)
-//     addUsers(user);
-
-//     res.cookie('cookie', {
-//         maxAge: 30000000,
-//         httpOnly: true
-//     }).send({
-//         ok: true
-//     });
-// });
-
 
 
 module.exports = router

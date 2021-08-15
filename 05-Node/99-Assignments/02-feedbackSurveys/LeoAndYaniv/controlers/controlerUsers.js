@@ -3,9 +3,6 @@ exports.__esModule = true;
 exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.newUser = void 0;
 var users_1 = require("../models/users");
 var surveys_1 = require("../models/surveys");
-var fs = require("fs");
-var path = require("path");
-var surveysJsonPath = path.resolve(__dirname, "../models/surveys.json");
 //Function to add a new user into the JSON
 function newUser(req, res) {
     try {
@@ -33,12 +30,12 @@ function login(req, res) {
     try {
         var _a = req.body, email = _a.email, password = _a.password;
         var allUsers = new users_1.Users();
-        var userExist = allUsers.loginUser(email, password);
-        var username = userExist.username;
-        //Set the cookie
-        var cookieToWrite = JSON.stringify({ username: username, email: email });
-        res.cookie("userDetails", cookieToWrite, { maxAge: 300000000, httpOnly: true });
-        if (userExist) {
+        var userExists = allUsers.loginUser(email, password);
+        if (userExists) {
+            var username = userExists.username;
+            //Set the cookie
+            var cookieToWrite = JSON.stringify({ username: username, email: email });
+            res.cookie("userDetails", cookieToWrite, { maxAge: 900000, httpOnly: true });
             res.send({ message: "Logged in successfully", username: username });
         }
         else {
@@ -56,15 +53,16 @@ exports.login = login;
 //Function for answer Login JSON
 function answerLogin(req, res) {
     try {
-        var _a = req.body, username = _a.username, email = _a.email, uuid = _a.uuid;
+        var username = req.username, email = req.email;
+        var uuid = req.params.uuid;
         var user = new users_1.User(username, email, null);
         var allUsers = new users_1.Users();
-        var emailExists = allUsers.createUser(user, uuid);
-        if (!emailExists) {
-            res.send({ message: "A new User was added", email: email, username: username });
+        var filledAlready = allUsers.createUser(user, uuid);
+        if (!filledAlready) {
+            res.send({ message: "User answers received", filledAlready: filledAlready });
         }
         else {
-            res.send({ message: "A new User was added", email: email, username: username });
+            res.send({ message: "User already filled", filledAlready: filledAlready });
         }
     }
     catch (error) {
@@ -83,15 +81,6 @@ function sendCookie(req, res) {
     }
 }
 exports.sendCookie = sendCookie;
-//Function to read the JSON of created surveys
-// const readJsonSurveys = () => {
-//   try {
-//     const surveys = fs.readFileSync(surveysJsonPath);
-//     return JSON.parse(surveys);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 //Function to add new survey uuid to user
 function uploadSurvey(req, res) {
     try {

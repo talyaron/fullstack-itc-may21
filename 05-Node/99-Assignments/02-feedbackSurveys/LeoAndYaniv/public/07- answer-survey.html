@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Answer Survey</title>
+    <link rel="shortcut icon" href="./img/favicon.png" />
     <link rel="stylesheet" href="dist/style.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
@@ -14,13 +15,14 @@
 
 <body onload="getUserDetailsFromCookie()">
     <nav class="top-menu">
-        <h1 class="top-menu__title">ANSWER SURVEY</h1>
         <div id="nameUser"></div>
     </nav>
 
-    <form id="root" class="votation">
+    <div class="survey__information--title" id="title"></div>
 
-        <input type="submit" id="submit-answers" class="top-menu__button" value="Submit answer" />
+    <form id="root" class="allinformation--questions votation">
+
+        <input class="submit__button" type="submit" id="submit-answers" class="top-menu__button" value="Submit answer" />
     </form>
 
     <script src="07- answer-survey.js"></script>

@@ -121,10 +121,19 @@
         }
     }
 
+ 
+
     .surveys {
         position: absolute;
         top: 20%;
         left: 30%;
+
+        .boxes{
+            display: flex;
+            align-items: center;
+        }
+
+   
 
         &__box {
             border: 1px solid red;
@@ -135,15 +144,18 @@
             justify-content: space-between;
             align-items: center;
 
-            span{
+            .title{
                 position: relative;
                 left:10%;
             }
 
-            i{
+            .answers{
                 position: relative;
                 right:10%;
             }
+
+
+           
         }
     }
 
