@@ -1,1 +1,1 @@
-[]
+[{"username":"pepe","email":"pepe@pepe.com","password":"123","createdSurveys":["2f363ae7-3402-4aed-907c-a80c7a92c129","5fd5296f-310a-4233-960f-518281a10fcb"],"answeredSurveys":[]},{"username":"koko","email":"koko@koko.com","password":"123","createdSurveys":[],"answeredSurveys":["2f363ae7-3402-4aed-907c-a80c7a92c129","0f8dd8ed-fb23-484b-9e07-2d7762da5e61"]},{"username":"yaniv","email":"yaniv@yaniv.com","password":"123","createdSurveys":["0f8dd8ed-fb23-484b-9e07-2d7762da5e61"],"answeredSurveys":[]}]
