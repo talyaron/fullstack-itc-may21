@@ -34,8 +34,6 @@
       </div>
       <div class="card-footer text-end">
         <button type="submit" class="btn btn-success">Add</button>
-        <!-- <button type="submit" class="btn btn-danger">Delete</button>
-        <button type="submit" class="btn btn-primary">Edit</button> -->
         <button type="submit" class="btn btn-warning">Back</button>
         <button type="submit" onclick="saveSurvey()" class="btn btn-success">Save</button>
       </div>
@@ -80,9 +78,8 @@ const returnPage = document.querySelector('#return')
 
     const btnAddQuestion = document.querySelector('.btn-success')
 
-    const btnDeleteQuestion = document.querySelector('.btn-danger')
+    
 
-    const btneditQuestion = document.querySelector('.btn-primary')
 
     const btnBackToSurveyAdmin = document.querySelector('.btn-warning')
 
@@ -90,44 +87,40 @@ const returnPage = document.querySelector('#return')
 
 
     btnAddQuestion.addEventListener('click', renderNewQuestion)
-    btnDeleteQuestion.addEventListener('click', deleteQuestion)
-    btneditQuestion.addEventListener('click', editQuestion)
     btnBackToSurveyAdmin.addEventListener('click', backToSurveyAdmin)
     link.addEventListener('click', sendSurvey)
 
-
-    let count = 0;
+    // let count = 0;
 
     async function renderNewQuestion(data) {
-      const response = await axios.get('/id/questions')
-            const { id } = response.data
+      // const response = await axios.get('/id/questions')
+      //       const { id } = response.data
 
 
       const root = document.querySelector('.root')
       html = ''
       
-        html += `
-      <div>          
+        html += 
+      
+      `<div>          
         <input class="form-check-inputName" type="text" name="exampleForm" id="radioExample1"  placeholder="Write a question" />
              
-        <button type="submit" class="btn btn-danger" id="boxquestion" onclick="deleteQuestion("${count}")">Delete</button>
-        <button type="submit" class="btn btn-primary">Edit</button>
+        <button type="submit" class="btn btn-danger" id="boxquestion" onclick="deleteQuestion()">Delete</button>
+        <button type="submit" class="btn btn-primary" onclick="editQuestion()">Edit</button>
 
-                          </div>
-                          
-                      `
+      </div>`
 
 
       root.insertAdjacentHTML('beforeend',html);
-      count++;
+      // count++;
 
 
     }
 
 
 
-    function deleteQuestion(id) {
-      document.getElementById(`boxquestion${id}`).remove()
+    function deleteQuestion() {
+      // document.getElementById(`boxquestion${id}`).remove()
       console.log('hi');
 
     }
@@ -144,6 +137,7 @@ const returnPage = document.querySelector('#return')
 
     function backToSurveyAdmin() {
       window.location.href = "my-surveys.html"
+      console.log('hola');
       //render surveys by id and show title or add a button in admin page to see each surveys
 
       // axios.get("/survey/userAdmin")
