@@ -1,7 +1,6 @@
 "use strict";
 
-var path = require('path'); // const filePath = path.resolve(__dirname, './survey.json')
-
+var path = require('path');
 
 var fs = require('fs');
 
@@ -26,3 +25,4 @@ function getAllSurveys() {
 }
 
 exports.addSurvey = addSurvey;
+exports.getAllSurveys = getAllSurveys;

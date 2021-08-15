@@ -18,7 +18,7 @@
     <div class="card">
       <div class="card-header bg-primary">
         <h5 class="card-title text-white mt-2" id="exampleModalLabel">Set a survey</h5>
-        <input class="form-check-inputName1" type="text" name="exampleForm1" id="radioExample1"
+        <input class="form-check-inputName1" type="text" name="title" id="surveyTitle"
           placeholder="Survey name" />
         <button type="submit" class="btn btn-light">Share</button>
         <button class="btn btn-dark" id="return" >Logout</button>
@@ -28,8 +28,7 @@
           <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
         </div>
         <form class="px-4" action="">
-          <!-- <input class="form-check-inputName2" type="text" name="exampleForm2" id="radioExample2" -->
-            <!-- placeholder="Write a question" /> -->
+       
               </form>
       </div>
       <div class="card-footer text-end">
@@ -43,34 +42,38 @@
 
   <script>
 
-const returnPage = document.querySelector('#return')
-    returnPage.addEventListener('click', loginOut)
+const returnPage = document.querySelector('#return').addEventListener('click', loginOut)
+
     function loginOut(){
             window.location.href = 'index.html'
         } 
 
+
+    let saveData = {}
+
     async function saveSurvey() {
       console.log('hello');
-      const root = document.querySelector('.root')
-      const quantity = root.children.length
-      console.log(quantity);
+      const inputTitle = document.querySelector('#surveyTitle')
+      saveData.title = inputTitle.value
+     
       let arr = [];
-      for (let i = 0; i < quantity; i++){
-        arr.push(root.children[i].children[0].value)
+      const allQuestions = document.querySelectorAll('.questions');
+      allQuestions.forEach(question => {
+        const q = {
+          number: question.id,
+          question: question.value
+        }
+        arr.push(q)
+      })
+      saveData.questions = arr;
+      console.log(saveData);
 
-      }
-      
-      let array = {title: "", question:""}
-
-      axios.post("/question/pepe", {arr})
+    
+      axios.post("/question/pepe", saveData)
 				.then((res) => {
 					console.log(res.data);
 				})
-
     }
-
-    
-    
 
 
 
@@ -90,31 +93,22 @@ const returnPage = document.querySelector('#return')
     btnBackToSurveyAdmin.addEventListener('click', backToSurveyAdmin)
     link.addEventListener('click', sendSurvey)
 
-    // let count = 0;
+    let count = 0;
 
     async function renderNewQuestion(data) {
       // const response = await axios.get('/id/questions')
       //       const { id } = response.data
-
-
       const root = document.querySelector('.root')
       html = ''
-      
-        html += 
-      
+      html += 
       `<div>          
-        <input class="form-check-inputName" type="text" name="exampleForm" id="radioExample1"  placeholder="Write a question" />
+        <input class="form-check-inputName questions" type="text" name="exampleForm" id='question-${count}' placeholder="Write a question" />
              
         <button type="submit" class="btn btn-danger" id="boxquestion" onclick="deleteQuestion()">Delete</button>
         <button type="submit" class="btn btn-primary" onclick="editQuestion()">Edit</button>
-
       </div>`
-
-
       root.insertAdjacentHTML('beforeend',html);
-      // count++;
-
-
+      count++;
     }
 
 

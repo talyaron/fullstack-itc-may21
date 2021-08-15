@@ -77,7 +77,7 @@
         async function createNewSurvey(ev) {
             ev.preventDefault()
             console.log('dfh')
-            const data = await axios.post('/survey/newSurvey')   // ('/survey/newSurvey', {})survey INfo
+            const data = await axios.post('/survey/newSurvey') 
             const { id } = data.data.newSurvey
             console.log(data.data.newSurvey);
             window.location.href = `./create-survey.html?id=${id}`
