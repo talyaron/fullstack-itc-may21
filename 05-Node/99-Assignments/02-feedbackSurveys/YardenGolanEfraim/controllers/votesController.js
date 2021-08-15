@@ -51,6 +51,7 @@ exports.post_votes = (req, res) => {
         const { admin } = req.cookies
         const cookie = JSON.parse(admin);
         const {selectedAdmin} = cookie;
+        if(selectedAdmin.createdSurvey.find(survey => survey.surveyID === body.ID).questions[0].voters.voterID.find(id=> id === body.votersID) ===undefined){
         for(i=0; i< body.votes.length; i++){
         selectedAdmin.createdSurvey.find(survey => survey.surveyID === body.ID).questions[i].voters.score.push(body.votes[i])
         selectedAdmin.createdSurvey.find(survey => survey.surveyID === body.ID).questions[i].voters.voterID.push(body.votersID)
@@ -59,7 +60,10 @@ exports.post_votes = (req, res) => {
 
         const adminCookie = JSON.stringify({ selectedAdmin })
         res.cookie('admin', adminCookie, { maxAge: 300000000, httpOnly: true });
-        res.send(selectedAdmin);
+        res.send("vote success!");}
+        else{
+            res.send("already voted!")
+        }
     } catch (e) {
         console.log(e)
         res.status(400).send({ 
