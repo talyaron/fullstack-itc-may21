@@ -23,7 +23,10 @@ async function renderSurveyInfo() {
 
     let html = "";
     questionsCreated.data.survey.questions.forEach(question => {
-        const average = getTheAverageScorePerQuestion(question);
+        let average = getTheAverageScorePerQuestion(question);
+        if (Number.isNaN(average)) {
+            average = 0
+        };
         html += `<div class="survey__questions title--modify">${question.content} <span class="nameUser__title">Average score: ${average.toFixed(2)} </span></div>`
     })
     root.innerHTML = html;
@@ -32,11 +35,11 @@ async function renderSurveyInfo() {
 function getTheAverageScorePerQuestion(questionInASurvey) {
     let count = 0;
     let total = 0;
-    questionInASurvey.ratings.forEach(rating =>{
+    questionInASurvey.ratings.forEach(rating => {
         total += rating;
-        count ++;
+        count++;
     });
-    return total/count;
+    return total / count;
 }
 
 //Function to copy the path
