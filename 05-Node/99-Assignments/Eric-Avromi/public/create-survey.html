@@ -48,20 +48,13 @@
     async function saveSurvey() {
       const inputTitle = document.querySelector('#surveyTitle')
       saveData.title = inputTitle.value
-
       let arr = [];
       const allQuestions = document.querySelectorAll('.questions');
       allQuestions.forEach(question => {
-        const q = {
-          number: question.id,
-          question: question.value
-        }
+        const q = {[question.id]: question.value}
         arr.push(q)
       })
       saveData.questions = arr;
-      console.log(saveData);
-
-
       axios.post("/question/pepe", saveData)
         .then((res) => {
           console.log(res.data);
@@ -84,7 +77,7 @@
         `<div>          
         <input class="form-check-inputName questions" type="text" name="exampleForm" id='question-${count}' placeholder="Write a question" />    
         <button type="submit" class="btn btn-danger" id="boxquestion" onclick="deleteQuestion()">Delete</button>
-        <button type="submit" class="btn btn-primary" onclick="editQuestion()">Edit</button>
+        
       </div>`
       root.insertAdjacentHTML('beforeend', html);
       count++;

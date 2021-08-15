@@ -88,7 +88,7 @@ div {
   margin: 0 auto;
 }
 
-#submit-btn {
+#submit-btn, #submit-btn:visited {
   font-size: 1rem;
   margin: 2em auto;
   padding: 1em 1.5em;
@@ -96,6 +96,7 @@ div {
   color: whitesmoke;
   background: #197540;
   font-weight: bold;
+  text-decoration: none;
 }
 
 /* Input:range - Slider styling */
@@ -353,6 +354,24 @@ div {
   text-decoration: none;
 }
 
+#submit-btn:hover,
+#link:hover {
+  margin: 0;
+  background-color: #59a378;
+  border: solid 1px #23583a;
+  font-size: 16px;
+  color: white;
+  font-weight: normal;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  text-decoration: none;
+}
+
 /* Input:range - Slider styling */
 input[type=range] {
   -webkit-appearance: none;
@@ -527,12 +546,26 @@ input[type=range]:focus::-ms-fill-upper {
   -webkit-border-radius: 0px;
   border-radius: 0px;
 }
+.form-field__submit:hover {
+  background-color: #59a378;
+  border: solid 1px #23583a;
+  font-size: 16px;
+  color: white;
+  font-weight: normal;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
 
 .holder__survey {
   background-color: white;
   border: solid 1px darkgrey;
   font-size: 15px;
-  color: #757575;
+  color: #000000;
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
   border-radius: 0px;
@@ -542,4 +575,37 @@ input[type=range]:focus::-ms-fill-upper {
   padding-right: 10px;
   width: 100%;
   box-sizing: border-box;
+}
+.holder__survey:hover {
+  background-color: #d3d3d3;
+  border: solid 1px #000000;
+  font-size: 15px;
+  color: #23583a;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.questioninfo-holder {
+  background-color: #d3d3d3;
+  border: solid 1px #000000;
+  border-radius: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.questioninfo-holder__question {
+  text-emphasis-style: bold;
+}
+.questioninfo-holder__averagevotes {
+  text-size-adjust: 2px;
 }
