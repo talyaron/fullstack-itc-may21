@@ -33,8 +33,6 @@ exports.login = function (req, res) {
       throw new Error("Invalid data was transferd");
     }
 
-    console.log(users);
-    console.log(users.users);
     var selectedAdmin = users.users.find(function (r) {
       return r.email === body.email && r.password === body.password;
     });
@@ -45,7 +43,6 @@ exports.login = function (req, res) {
       maxAge: 300000000,
       httpOnly: true
     });
-    console.log(selectedAdmin);
     res.send(selectedAdmin);
   } catch (e) {
     console.log(e);

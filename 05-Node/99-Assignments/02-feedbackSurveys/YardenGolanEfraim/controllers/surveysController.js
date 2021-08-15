@@ -22,8 +22,7 @@ exports.delete_survey  = (req, res) => {
 
 exports.send_survey = (req, res) => {
     try {
-        const {id} = req.query;
-        console.log(id) 
+        const {id} = req.query; 
         const idString = JSON.stringify(id)
         res.cookie('surveyEditID', idString, { maxAge: 300000000, httpOnly: true });
        
@@ -65,7 +64,7 @@ exports.add_survey = (req, res) => {
             throw new Error("Invalid data was transferd")
         }
         
-       // users.users.find(find => find.email === body.email )
+    
        users.users.map((user, index) => {
         if(user.email === body.adminEmail) {
             users.users[index].createdSurvey.push(new Survey(body.surveyName, body.adminEmail));

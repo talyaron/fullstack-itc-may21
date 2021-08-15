@@ -39,21 +39,16 @@ exports.add_user = (req, res) => {
     
         if(users.users.find(info=>info.email === body.email) === undefined && body.password === ""){
             users.newUser(new User(body.username, body.email, ""))
-            console.log('')
-            console.log(users)
             const guestUser = users.users[users.users.length -1]
-            console.log(guestUser)
             const guestCookie = JSON.stringify({ guestUser })
             res.cookie('guest', guestCookie, { maxAge: 300000000, httpOnly: true });
             res.send(guestUser)
         } else if(users.users.find(info=>info.email === body.email && info.password === '') != undefined){
         users.users.find(info=> info.email === body.email ).password = body.password 
         users.users.find(info=> info.email === body.email ).name = body.username 
-        console.log(users)
         res.send(users)
         }else if(users.users.find(info=>info.email === body.email && info.password != '' && body.password === "") != undefined){
             const guestUser = users.users.find(info => info.email === body.email)
-            console.log(guestUser)
             const guestCookie = JSON.stringify({ guestUser })
             res.cookie('guest', guestCookie, { maxAge: 300000000, httpOnly: true });
             res.send(guestUser)
@@ -61,7 +56,7 @@ exports.add_user = (req, res) => {
         res.send("Email already taken!")
         }else{
         users.newUser(new User(body.username, body.email, body.password))
-        res.send(users)}
+        res.send("success!")}
     } catch (e) {
         console.log(e)
         res.status(400).send({ 

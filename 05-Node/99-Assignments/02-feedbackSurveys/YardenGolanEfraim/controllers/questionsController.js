@@ -24,7 +24,6 @@ exports.post_questions = (req, res) => {
     users.users[selectedAdminIndex] = selectedAdmin
     const adminCookie = JSON.stringify({ selectedAdmin })
     res.cookie('admin', adminCookie, { maxAge: 300000000, httpOnly: true });
-    console.log(users.users)
         res.send(selectedAdmin);
     } catch (e) {
         console.log(e)
