@@ -11,7 +11,7 @@ function handleRegister(ev) {
           password = ev.target.elements.password.value;
           email = ev.target.elements.email.value;
           _context.next = 6;
-          return regeneratorRuntime.awrap(axios.post('/createUser', {
+          return regeneratorRuntime.awrap(axios.post('/users', {
             username: username,
             password: password,
             email: email
