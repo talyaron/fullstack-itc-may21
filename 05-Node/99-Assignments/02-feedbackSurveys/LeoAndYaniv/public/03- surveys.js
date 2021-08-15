@@ -44,7 +44,7 @@ function showSurvey(surveyId){
 //Function to copy the path
 function copyTextFromElement(surveyUuid) {
   try {
-    const sharableSurveyLink = `http://localhost:3000/06-%20answer-login.html?${surveyUuid}`;
+    const sharableSurveyLink = `http://localhost:3000/06-%20answer-login.html?survey=${surveyUuid}`;
     //Copy the text to the clipboard
     const successful = navigator.clipboard.writeText(sharableSurveyLink);
 

@@ -31,7 +31,7 @@ async function renderSurveyInfo() {
 //Function to copy the path
 function copyTextFromElement() {
     try {
-        const textWantToCopy = `http://localhost:3000/06-%20answer-login.html?${uuid}`;
+        const textWantToCopy = `http://localhost:3000/06-%20answer-login.html?survey=${uuid}`;
         //Copy the text to the clipboard
         const successful = navigator.clipboard.writeText(textWantToCopy);
 

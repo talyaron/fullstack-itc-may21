@@ -61,7 +61,11 @@ export class Users {
           this.users.push(user);
         }
       } else if (emailIndex !== -1) { // survey answers submit + email exists
-        this.users[emailIndex].answeredSurveys.push(surveyUuid);
+        const userFilled = this.users[emailIndex].answeredSurveys.find(surveyUuidItem => surveyUuidItem === surveyUuid)
+        if (userFilled) return true; // already answered survey
+        else {
+          this.users[emailIndex].answeredSurveys.push(surveyUuid);
+        }
       } else { // survey answers submit + email doens't exist
         user.answeredSurveys.push(surveyUuid);
         this.users.push(user);
