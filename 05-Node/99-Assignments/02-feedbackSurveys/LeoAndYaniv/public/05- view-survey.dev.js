@@ -45,10 +45,11 @@ function renderSurveyInfo() {
         case 3:
           questionsCreated = _context2.sent;
           title = document.querySelector("#title");
-          title.innerHTML = "<h2 class=\"survey__title\">".concat(questionsCreated.data.survey.title, "</h2>\n    <div class=\"button__share\"><i class=\"fas fa-share-alt-square\" id=\"Element").concat(uuid, "\" onclick='copyTextFromElement()'></i></div>");
+          title.innerHTML = "<h2 class=\"survey__title title--modify\">".concat(questionsCreated.data.survey.title, " <span class=\"nameUser__title\">Answers: ").concat(questionsCreated.data.survey.questions[0].ratings.length, " </span></h2>\n    <div class=\"button__share\"><i class=\"fas fa-share-alt-square\" id=\"Element").concat(uuid, "\" onclick='copyTextFromElement()'></i></div>");
           html = "";
           questionsCreated.data.survey.questions.forEach(function (question) {
-            html += "<div class=\"survey__questions\">".concat(question.content, "</div>");
+            var average = getTheAverageScorePerQuestion(question);
+            html += "<div class=\"survey__questions title--modify\">".concat(question.content, " <span class=\"nameUser__title\">Average score: ").concat(average.toFixed(2), " </span></div>");
           });
           root.innerHTML = html;
 
@@ -60,7 +61,18 @@ function renderSurveyInfo() {
   });
 }
 
-; //Function to copy the path
+;
+
+function getTheAverageScorePerQuestion(questionInASurvey) {
+  var count = 0;
+  var total = 0;
+  questionInASurvey.ratings.forEach(function (rating) {
+    total += rating;
+    count++;
+  });
+  return total / count;
+} //Function to copy the path
+
 
 function copyTextFromElement() {
   try {

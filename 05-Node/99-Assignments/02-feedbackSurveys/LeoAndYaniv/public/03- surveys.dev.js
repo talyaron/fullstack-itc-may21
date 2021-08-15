@@ -2,9 +2,9 @@
 
 var root = document.querySelector('#nameUser');
 
-function getUserDetailsFromCookie() {
-  var userDetails, username, email;
-  return regeneratorRuntime.async(function getUserDetailsFromCookie$(_context) {
+function renderUserDetails() {
+  var userDetails, username, toRender;
+  return regeneratorRuntime.async(function renderUserDetails$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -14,11 +14,10 @@ function getUserDetailsFromCookie() {
         case 2:
           userDetails = _context.sent;
           username = userDetails.data.username;
-          email = userDetails.data.email;
-          renderuserDetails(username);
-          bringSurveysToShow(email);
+          toRender = "<h1>Welcome <span class=\"nameUser__title\">".concat(username, "</span></h1>");
+          root.innerHTML = toRender;
 
-        case 7:
+        case 6:
         case "end":
           return _context.stop();
       }
@@ -27,78 +26,69 @@ function getUserDetailsFromCookie() {
 }
 
 ;
-
-function renderuserDetails(username) {
-  var toRender = "<h1>Welcome <span class=\"nameUser__title\">".concat(username, "</span></h1>");
-  root.innerHTML = toRender;
-}
-
-;
 var redirectButton = document.querySelector('#redirect');
 redirectButton.addEventListener('click', createSurvey);
 
 function createSurvey() {
-  var url_string, url, email, idSurveyCreated;
+  var idSurveyCreated;
   return regeneratorRuntime.async(function createSurvey$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
-          url_string = window.location.href;
-          url = new URL(url_string);
-          email = url.searchParams.get("email");
-          _context2.next = 6;
-          return regeneratorRuntime.awrap(axios.post("/surveys/createSurvey/".concat(email)));
+          _context2.next = 3;
+          return regeneratorRuntime.awrap(axios.post("/surveys/survey/new"));
 
-        case 6:
+        case 3:
           idSurveyCreated = _context2.sent;
           window.location.href = "./04- new-survey.html?uuid=".concat(idSurveyCreated.data.survey.uuid);
 
           if (window.location.href) {
-            _context2.next = 10;
+            _context2.next = 7;
             break;
           }
 
           throw new Error('The page where you want to redirect it doesn´t exist!');
 
-        case 10:
-          _context2.next = 15;
+        case 7:
+          _context2.next = 12;
           break;
 
-        case 12:
-          _context2.prev = 12;
+        case 9:
+          _context2.prev = 9;
           _context2.t0 = _context2["catch"](0);
           console.error(_context2.t0);
 
-        case 15:
+        case 12:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 12]]);
+  }, null, null, [[0, 9]]);
 }
 
 ; //Function to render all the surveys from the user that is login
 
-function bringSurveysToShow(emailLogin) {
-  var bringSurveys, root, html;
-  return regeneratorRuntime.async(function bringSurveysToShow$(_context3) {
+function getSurveysToShow() {
+  var surveysToShow, root, html, surveys;
+  return regeneratorRuntime.async(function getSurveysToShow$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return regeneratorRuntime.awrap(axios.get("/surveys/getSurveys/".concat(emailLogin)));
+          return regeneratorRuntime.awrap(axios.get("/surveys/survey/all"));
 
         case 2:
-          bringSurveys = _context3.sent;
+          surveysToShow = _context3.sent;
           root = document.querySelector('#root');
           html = "";
-          bringSurveys.data.surveys.forEach(function (survey) {
-            html += " <div class=\"showSurvey\">\n                    <button class=\"showSurvey__title\" onclick=showSurveyInfo(\"".concat(survey.uuid, "\")>").concat(survey.title, "</button>\n                    <i class=\"fas fa-share-alt-square button__survey\" id=\"Element").concat(survey.uuid, "\" onclick='copyTextFromElement(\"").concat(survey.uuid, "\")'></i>\n                </div>");
+          surveys = surveysToShow.data.surveys;
+          surveys.forEach(function (survey) {
+            html += " <div class=\"showSurvey\">\n    <button class=\"showSurvey__title title--modify\" onclick=showSurvey(\"".concat(survey.uuid, "\")>").concat(survey.title, " <span class=\"nameUser__title\">Answers: ").concat(survey.questions[0].ratings.length, " </span></button> \n                    <i class=\"fas fa-share-alt-square button__survey\" id=\"Element").concat(survey.uuid, "\" onclick='copyTextFromElement(\"").concat(survey.uuid, "\")'></i>\n                </div>");
           });
           root.innerHTML = html;
 
-        case 7:
+        case 8:
         case "end":
           return _context3.stop();
       }
@@ -108,16 +98,16 @@ function bringSurveysToShow(emailLogin) {
 
 ; //Function when you click on a Survey you will redirect to other page to see all the information of it
 
-function showSurveyInfo(surveyId) {
+function showSurvey(surveyId) {
   window.location.href = "./05- view-survey.html?uuid=".concat(surveyId);
 } //Function to copy the path
 
 
 function copyTextFromElement(surveyUuid) {
   try {
-    var textWantToCopy = "http://localhost:3000/06-%20answer-login.html?".concat(surveyUuid); //Copy the text to the clipboard
+    var sharableSurveyLink = "http://localhost:3000/06-%20answer-login.html?".concat(surveyUuid); //Copy the text to the clipboard
 
-    var successful = navigator.clipboard.writeText(textWantToCopy);
+    var successful = navigator.clipboard.writeText(sharableSurveyLink);
     var buttonCopy = document.querySelector("#Element".concat(surveyUuid));
     if (successful) buttonCopy.innerHTML = "Link copied to clipboard!";else buttonCopy.innerHTML = "Unable to copy!";
   } catch (error) {

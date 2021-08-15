@@ -29,7 +29,7 @@ async function getSurveysToShow() {
     const { surveys } = surveysToShow.data;
     surveys.forEach(survey => {
         html += ` <div class="showSurvey">
-                    <button class="showSurvey__title" onclick=showSurvey("${survey.uuid}")>${survey.title}</button>
+    <button class="showSurvey__title title--modify" onclick=showSurvey("${survey.uuid}")>${survey.title} <span class="nameUser__title">Answers: ${survey.questions[0].ratings.length} </span></button> 
                     <i class="fas fa-share-alt-square button__survey" id="Element${survey.uuid}" onclick='copyTextFromElement("${survey.uuid}")'></i>
                 </div>`
     })

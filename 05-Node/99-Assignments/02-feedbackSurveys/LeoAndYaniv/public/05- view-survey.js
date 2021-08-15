@@ -18,15 +18,26 @@ async function renderSurveyInfo() {
     const questionsCreated = await axios.get(`/surveys/questions/${uuid}`);
 
     const title = document.querySelector("#title");
-    title.innerHTML = `<h2 class="survey__title">${questionsCreated.data.survey.title}</h2>
+    title.innerHTML = `<h2 class="survey__title title--modify">${questionsCreated.data.survey.title} <span class="nameUser__title">Answers: ${questionsCreated.data.survey.questions[0].ratings.length} </span></h2>
     <div class="button__share"><i class="fas fa-share-alt-square" id="Element${uuid}" onclick='copyTextFromElement()'></i></div>`;
 
     let html = "";
     questionsCreated.data.survey.questions.forEach(question => {
-        html += `<div class="survey__questions">${question.content}</div>`
+        const average = getTheAverageScorePerQuestion(question);
+        html += `<div class="survey__questions title--modify">${question.content} <span class="nameUser__title">Average score: ${average.toFixed(2)} </span></div>`
     })
     root.innerHTML = html;
 };
+
+function getTheAverageScorePerQuestion(questionInASurvey) {
+    let count = 0;
+    let total = 0;
+    questionInASurvey.ratings.forEach(rating =>{
+        total += rating;
+        count ++;
+    });
+    return total/count;
+}
 
 //Function to copy the path
 function copyTextFromElement() {
