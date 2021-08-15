@@ -104,6 +104,10 @@
   top: 20%;
   left: 30%;
 }
+.historial .surveys .boxes {
+  display: flex;
+  align-items: center;
+}
 .historial .surveys__box {
   border: 1px solid red;
   width: 500px;
@@ -113,11 +117,11 @@
   justify-content: space-between;
   align-items: center;
 }
-.historial .surveys__box span {
+.historial .surveys__box .title {
   position: relative;
   left: 10%;
 }
-.historial .surveys__box i {
+.historial .surveys__box .answers {
   position: relative;
   right: 10%;
 }

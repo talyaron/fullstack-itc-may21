@@ -12,35 +12,20 @@
     <link rel="stylesheet" type="text/css" href="dist/style.css">
     <title>Surveys admin</title>
 </head>
-
 <body onload=getAllSurveys()>
-
     <div class="hello"></div>
-
     <div class="card-footer text-end">
         <button class="btn btn-dark" id="return">Logout</button>
-
         <button class="btn btn-primary" id="create">New survey</button>
     </div>
-
-
     <div class="card-footer text-end">
         <h4>List of Surveys</h4>
-        <button type="submit" class="btn btn-danger" id="dangerSurvey">Delete survey</button>
-        <p>title of surveys</p>
         <div class="surveys"></div>
-
-
     </div>
 
     <script>
 
-        const returnPage = document.querySelector('#return')
-        returnPage.addEventListener('click', loginOut)
-        function loginOut() {
-            window.location.href = 'index.html'
-        }
-
+        
         axios.get("/users/userAdmin")
             .then((res) => {
                 console.log(res.data);
@@ -50,69 +35,58 @@
 
 
         function render(data) {
-            const hello = document.querySelector('.hello')
+            const root = document.querySelector('.hello')
             let html = '';
             html += `<p>Hello, ${data}</p>`
-            hello.innerHTML = html;
-        }
-
-        // .then(console.log(cookie))
-
-
-
-        const btnNewSurvey = document.getElementById('create')
-        const btnDeleteSurvey = document.querySelector('.btn-danger')
-
-
-        btnNewSurvey.addEventListener('click', createNewSurvey)
-        btnDeleteSurvey.addEventListener('click', deleteSurvey)
-
-        // fetch('/userAdmin')
-        //     .then(r => r.json())
-        //     .then(data => console.log(data.cookie))
-
-
-
-
-        async function createNewSurvey(ev) {
-            ev.preventDefault()
-            console.log('dfh')
-            const data = await axios.post('/survey/newSurvey')   // ('/survey/newSurvey', {})survey INfo
-            const { id } = data.data.newSurvey
-            console.log(data.data.newSurvey);
-            window.location.href = `./create-survey.html?id=${id}`
-
-
-        }
-
-        function deleteSurvey() {
-
-            console.log('hi');
-        }
-
-
-
-        function renderSurveys(){
-            console.log('hi');
+            root.innerHTML = html;
         }
 
         async function getAllSurveys() {
             try {
-                const res = await axios.get('/survey/allSurveys')
-                const {surveys} = res.data
-                console.log(surveys)
-                 renderSurveys(allSurveys);
+                const res = await axios.get('/survey')
+                const {surveys} = res.data.title
+                //  renderSurveys(allSurveys);
+                console.log(surveys);
             } catch (error) {
                 console.log(error);
             }
         }
+
         getAllSurveys()
+
+        function renderSurveys(){
+        const root = document.querySelector('.surveys')
+      html = ''
+      html +=
+        `<div>          
+            
+            <button type="submit" class="btn btn-danger" id="dangerSurvey" onclick='deleteSurvey()'>Delete</button>
+            
+            </div>`
+      root.insertAdjacentHTML('beforeend', html);
+        }
+
+        function deleteSurvey() {
+        console.log('hi');
+        }
+
+        const btnNewSurvey = document.getElementById('create').addEventListener('click', createNewSurvey)
+
+        async function createNewSurvey(ev) {
+            ev.preventDefault()
+            const data = await axios.post('/survey/newSurvey')
+            const { id } = data.data.newSurvey
+            console.log(data.data.newSurvey);
+            window.location.href = `./create-survey.html?id=${id}`
+        }
+
+        const returnPage = document.querySelector('#return').addEventListener('click', loginOut)
+        
+        function loginOut() {
+            window.location.href = 'index.html'
+        }
 
 
     </script>
-
-
 </body>
-
-
 </html>

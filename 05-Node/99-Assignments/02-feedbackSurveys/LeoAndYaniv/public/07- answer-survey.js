@@ -19,10 +19,15 @@ function renderUserDetails(username) {
 //Function to render the data of a survey in the DOM
 async function renderSurveyInfo() {
     const root = document.querySelector("#root");
-    const questionsCreated = await axios.get(`/surveys/getQuestions/${uuid}`);
+    const questionsCreated = await axios.get(`/surveys/questions/${uuid}`);
+    
+    const title = document.querySelector("#title");
+    title.innerHTML = `<h2 class="survey__title">${questionsCreated.data.survey.title}</h2>
+    <div class="button__share"><i class="fas fa-share-alt-square" id="Element${uuid}" onclick='copyTextFromElement()'></i></div>`;
+
     let html = "";
     questionsCreated.data.survey.questions.forEach(question => {
-        html += `<div id="${question.uuid}">
+        html += `<div class="survey__questions submit" id="${question.uuid}">
         <h3>${question.content}</h3>
             <p class="raitings">
                 <input id="${question.uuid}1" type="radio" name="raiting${question.uuid}" value="5">
@@ -64,7 +69,7 @@ async function answerSubmit(ev) {
     const { username, email } = userDetails.data;
     userDetails = { username, email, uuid };
     await axios.post('/user/answerLoginAfter', userDetails);
-    await axios.put(`/surveys/updateQuestions/${uuid}`, answeredQuestions);
+    await axios.put(`/surveys/questions/${uuid}`, answeredQuestions);
     alert('Survey completed successfully');
     location.href = `index.html`;
 }

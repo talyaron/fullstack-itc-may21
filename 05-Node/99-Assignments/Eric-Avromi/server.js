@@ -11,22 +11,13 @@ app.use(express.static("public"));
 app.use(cookieParser());
 app.use(express.json());
 
-
 app.use('/survey', surveyRouter)
 app.use('/question', surveyRouter)
-
-
-
-
 app.use('/users', userRouter)
 
 
-// const addUserRouter = require('./routes/tasksRoute.js')
-// app.use('/users', userRouter)
-
-
-
-
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+app.listen(port, () => {console.log(`Server listening at http://localhost:${port}`);
 });
+
+
+
