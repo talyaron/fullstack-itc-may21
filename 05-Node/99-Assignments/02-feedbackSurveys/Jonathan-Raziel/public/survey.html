@@ -27,8 +27,9 @@
     <div class="creater">
         <button type="button" class="btncreate" disabled>CREATE</button>
     </div>
-    <a href="#" class="whatsapp"><i class="fas fa-paper-plane sendlink"></i></a>
-
+    <div style="display:flex;justify-content:center; margin-top:2em">
+        <a href="#" class="whatsapp"><button class="sendlink">Whatsapp <i class="fab fa-whatsapp-square"></i></button></a>
+    </div>
     <script>
 
         //btn
@@ -158,9 +159,9 @@
 
 
                         avg.push(parseFloat((question[i].voters.reduce((sum, value) => (typeof value.score == "number" ? sum + value.score : sum), 0)) / cantidad).toFixed(2));
-                       
+
                     }
-                    
+
 
                     let html = ''
 
@@ -176,14 +177,14 @@
                                     
                                 </label>`
 
-                               if(avg[0] === 'NaN'){
-                                html += `<span>Avg: 0;</span>`
-                               }else{
-                                html += `<span>Avg: ${avg[i]};</span>`
-                               } 
+                        if (avg[0] === 'NaN') {
+                            html += `<span>Avg: 0;</span>`
+                        } else {
+                            html += `<span>Avg: ${avg[i]};</span>`
+                        }
 
-                               
-                               html +=`<span>People who answered ${cantidad}</span>
+
+                        html += `<span>People who answered ${cantidad}</span>
                             </div>
                     </div>`
 
