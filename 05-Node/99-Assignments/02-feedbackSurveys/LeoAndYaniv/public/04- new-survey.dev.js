@@ -5,9 +5,9 @@ var url_string = window.location.href;
 var url = new URL(url_string);
 var uuid = url.searchParams.get("uuid");
 
-function getUserDetailsFromCookie() {
-  var userDetails, username;
-  return regeneratorRuntime.async(function getUserDetailsFromCookie$(_context) {
+function renderUserDetails() {
+  var userDetails, username, loggedUser, toRender;
+  return regeneratorRuntime.async(function renderUserDetails$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -17,9 +17,11 @@ function getUserDetailsFromCookie() {
         case 2:
           userDetails = _context.sent;
           username = userDetails.data.username;
-          renderUserDetails(username);
+          loggedUser = document.querySelector('#nameUser');
+          toRender = "<h1><span class=\"nameUser__title\">".concat(username, "</span> lets create an amazing survey!</h1>");
+          loggedUser.innerHTML = toRender;
 
-        case 5:
+        case 7:
         case "end":
           return _context.stop();
       }
@@ -28,19 +30,11 @@ function getUserDetailsFromCookie() {
 }
 
 ;
-
-function renderUserDetails(username) {
-  var loggedUser = document.querySelector('#nameUser');
-  var toRender = "<h1><span class=\"nameUser__title\">".concat(username, "</span> lets create an amazing survey!</h1>");
-  loggedUser.innerHTML = toRender;
-}
-
-;
 var createQuestion = document.querySelector('#question-form');
 createQuestion.addEventListener('submit', addQuestion);
 
 function addQuestion(ev) {
-  var question, surveyQuestions, _surveyQuestions$data, survey, disableAddQuestionBtn, disableSubmitSurvey, AddQuestionBtn, SubmitSurvey;
+  var question, surveyQuestions, _surveyQuestions$data, disableAddQuestionBtn, disableSubmitSurvey, AddQuestionBtn, SubmitSurvey;
 
   return regeneratorRuntime.async(function addQuestion$(_context2) {
     while (1) {
@@ -68,8 +62,8 @@ function addQuestion(ev) {
 
         case 10:
           surveyQuestions = _context2.sent;
-          _surveyQuestions$data = surveyQuestions.data, survey = _surveyQuestions$data.survey, disableAddQuestionBtn = _surveyQuestions$data.disableAddQuestionBtn, disableSubmitSurvey = _surveyQuestions$data.disableSubmitSurvey;
-          renderQuestions(survey.questions);
+          _surveyQuestions$data = surveyQuestions.data, disableAddQuestionBtn = _surveyQuestions$data.disableAddQuestionBtn, disableSubmitSurvey = _surveyQuestions$data.disableSubmitSurvey;
+          renderQuestions();
           AddQuestionBtn = document.querySelector('#buttonCreate');
 
           if (disableAddQuestionBtn) {
@@ -100,17 +94,6 @@ function addQuestion(ev) {
   }, null, null, [[0, 19]]);
 }
 
-; //Function to render the data of the questions in the DOM
-
-function renderQuestions(questions) {
-  var root = document.querySelector("#root");
-  var html = "";
-  questions.forEach(function (question) {
-    html += " <div class=\"information__question\">\n            <div class=\"information__question--title\">\n            <h3>".concat(question.content, "</h3>\n            </div>\n            <div class=\"information__question--buttons\">\n            <i class=\"fas fa-trash-alt button--pointer\" onclick=\"deleteQuestion('").concat(question.uuid, "')\"></i>\n            <i class=\"fas fa-edit button--pointer\" onclick=\"editQuestion('").concat(question.uuid, "','").concat(question.content, "')\"></i>\n            </div>\n            </div>");
-  });
-  root.innerHTML = html;
-}
-
 ;
 
 function editQuestion(qUuid, question) {
@@ -130,7 +113,7 @@ function editQuestion(qUuid, question) {
 ; //Handle Edit
 
 function handleEdit(qUuid) {
-  var questionContent, questionsEdited;
+  var questionContent;
   return regeneratorRuntime.async(function handleEdit$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -162,31 +145,30 @@ function handleEdit(qUuid) {
           }));
 
         case 10:
-          questionsEdited = _context3.sent;
-          renderQuestions(questionsEdited.data.survey.questions);
-          _context3.next = 17;
+          renderQuestions();
+          _context3.next = 16;
           break;
 
-        case 14:
-          _context3.prev = 14;
+        case 13:
+          _context3.prev = 13;
           _context3.t0 = _context3["catch"](0);
           console.error(_context3.t0);
 
-        case 17:
+        case 16:
           ;
 
-        case 18:
+        case 17:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 14]]);
+  }, null, null, [[0, 13]]);
 }
 
 ; //Delete a question:
 
 function deleteQuestion(qUuid) {
-  var option, surveyQuestions, _surveyQuestions$data2, survey, disableAddQuestionBtn, disableSubmitSurvey, AddQuestionBtn, SubmitSurvey;
+  var option, surveyQuestions, _surveyQuestions$data2, disableAddQuestionBtn, disableSubmitSurvey, AddQuestionBtn, SubmitSurvey;
 
   return regeneratorRuntime.async(function deleteQuestion$(_context4) {
     while (1) {
@@ -205,8 +187,8 @@ function deleteQuestion(qUuid) {
 
         case 5:
           surveyQuestions = _context4.sent;
-          _surveyQuestions$data2 = surveyQuestions.data, survey = _surveyQuestions$data2.survey, disableAddQuestionBtn = _surveyQuestions$data2.disableAddQuestionBtn, disableSubmitSurvey = _surveyQuestions$data2.disableSubmitSurvey;
-          renderQuestions(survey.questions);
+          _surveyQuestions$data2 = surveyQuestions.data, disableAddQuestionBtn = _surveyQuestions$data2.disableAddQuestionBtn, disableSubmitSurvey = _surveyQuestions$data2.disableSubmitSurvey;
+          renderQuestions();
           AddQuestionBtn = document.querySelector('#buttonCreate');
 
           if (disableAddQuestionBtn) {
@@ -241,6 +223,44 @@ function deleteQuestion(qUuid) {
   }, null, null, [[0, 14]]);
 }
 
+; //Function to render the data of the questions in the DOM
+
+function renderQuestions() {
+  var surveyQuestions, questions, SubmitSurvey, questionCounterElement, root, html;
+  return regeneratorRuntime.async(function renderQuestions$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
+          return regeneratorRuntime.awrap(axios.get("/surveys/questions/".concat(uuid)));
+
+        case 2:
+          surveyQuestions = _context5.sent;
+          questions = surveyQuestions.data.survey.questions;
+          SubmitSurvey = document.querySelector('#buttonUpload');
+
+          if (questions.length > 0) {
+            SubmitSurvey.disabled = false;
+            SubmitSurvey.classList.remove('button--disabled');
+          }
+
+          questionCounterElement = document.querySelector('#question-counter');
+          questionCounterElement.innerText = questions.length;
+          root = document.querySelector("#root");
+          html = "";
+          questions.forEach(function (question) {
+            html += " <div class=\"information__question\">\n            <div class=\"information__question--title\">\n            <h3>".concat(question.content, "</h3>\n            </div>\n            <div class=\"information__question--buttons\">\n            <i class=\"fas fa-trash-alt button--pointer\" onclick=\"deleteQuestion('").concat(question.uuid, "')\"></i>\n            <i class=\"fas fa-edit button--pointer\" onclick=\"editQuestion('").concat(question.uuid, "','").concat(question.content, "')\"></i>\n            </div>\n            </div>");
+          });
+          root.innerHTML = html;
+
+        case 12:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  });
+}
+
 ; //When the user click on the button "Cancel and go back" is going to cancel all the survey
 
 var cancelSurvey = document.querySelector("#buttonCancel");
@@ -248,37 +268,37 @@ cancelSurvey.addEventListener('click', cancelTheSurvey);
 
 function cancelTheSurvey() {
   var option, userDetails;
-  return regeneratorRuntime.async(function cancelTheSurvey$(_context5) {
+  return regeneratorRuntime.async(function cancelTheSurvey$(_context6) {
     while (1) {
-      switch (_context5.prev = _context5.next) {
+      switch (_context6.prev = _context6.next) {
         case 0:
-          _context5.prev = 0;
+          _context6.prev = 0;
           option = confirm("Are you sure do you want to cancel the survey, you will lose all the data created here?");
 
           if (!option) {
-            _context5.next = 7;
+            _context6.next = 7;
             break;
           }
 
-          _context5.next = 5;
+          _context6.next = 5;
           return regeneratorRuntime.awrap(axios["delete"]("/surveys/survey/".concat(uuid)));
 
         case 5:
-          userDetails = _context5.sent;
+          userDetails = _context6.sent;
           location.href = "03- surveys.html?email=".concat(userDetails.data.userDetails);
 
         case 7:
-          _context5.next = 12;
+          _context6.next = 12;
           break;
 
         case 9:
-          _context5.prev = 9;
-          _context5.t0 = _context5["catch"](0);
-          console.error(_context5.t0);
+          _context6.prev = 9;
+          _context6.t0 = _context6["catch"](0);
+          console.error(_context6.t0);
 
         case 12:
         case "end":
-          return _context5.stop();
+          return _context6.stop();
       }
     }
   }, null, null, [[0, 9]]);
@@ -291,17 +311,17 @@ uploadSurvey.addEventListener('submit', uploadTheSurvey);
 
 function uploadTheSurvey(ev) {
   var surveyTitle, userDetails;
-  return regeneratorRuntime.async(function uploadTheSurvey$(_context6) {
+  return regeneratorRuntime.async(function uploadTheSurvey$(_context7) {
     while (1) {
-      switch (_context6.prev = _context6.next) {
+      switch (_context7.prev = _context7.next) {
         case 0:
-          _context6.prev = 0;
+          _context7.prev = 0;
           ev.preventDefault();
           surveyTitle = ev.target.elements.surveyTitle;
           surveyTitle = surveyTitle.value;
 
           if (surveyTitle) {
-            _context6.next = 6;
+            _context7.next = 6;
             break;
           }
 
@@ -310,25 +330,25 @@ function uploadTheSurvey(ev) {
         case 6:
           ev.target.reset(); //UUID is the id from the survey
 
-          _context6.next = 9;
+          _context7.next = 9;
           return regeneratorRuntime.awrap(axios.post("/user/uploadUserWithSurvey/".concat(uuid), {
             surveyTitle: surveyTitle
           }));
 
         case 9:
-          userDetails = _context6.sent;
+          userDetails = _context7.sent;
           location.href = "03- surveys.html?email=".concat(userDetails.data.userDetails);
-          _context6.next = 16;
+          _context7.next = 16;
           break;
 
         case 13:
-          _context6.prev = 13;
-          _context6.t0 = _context6["catch"](0);
-          console.error(_context6.t0);
+          _context7.prev = 13;
+          _context7.t0 = _context7["catch"](0);
+          console.error(_context7.t0);
 
         case 16:
         case "end":
-          return _context6.stop();
+          return _context7.stop();
       }
     }
   }, null, null, [[0, 13]]);
@@ -340,28 +360,28 @@ backToSurveysBtn.addEventListener('click', backToSurveys);
 
 function backToSurveys() {
   var userDetails;
-  return regeneratorRuntime.async(function backToSurveys$(_context7) {
+  return regeneratorRuntime.async(function backToSurveys$(_context8) {
     while (1) {
-      switch (_context7.prev = _context7.next) {
+      switch (_context8.prev = _context8.next) {
         case 0:
-          _context7.prev = 0;
-          _context7.next = 3;
+          _context8.prev = 0;
+          _context8.next = 3;
           return regeneratorRuntime.awrap(axios.get("/user/info"));
 
         case 3:
-          userDetails = _context7.sent;
+          userDetails = _context8.sent;
           location.href = "03- surveys.html?email=".concat(userDetails.data.email);
-          _context7.next = 10;
+          _context8.next = 10;
           break;
 
         case 7:
-          _context7.prev = 7;
-          _context7.t0 = _context7["catch"](0);
-          console.error(_context7.t0);
+          _context8.prev = 7;
+          _context8.t0 = _context8["catch"](0);
+          console.error(_context8.t0);
 
         case 10:
         case "end":
-          return _context7.stop();
+          return _context8.stop();
       }
     }
   }, null, null, [[0, 7]]);

@@ -3,13 +3,10 @@ const url_string = window.location.href;
 const url = new URL(url_string);
 const uuid = url.searchParams.get("uuid");
 
-async function getUserDetailsFromCookie() {
+
+async function renderUserDetails() {
     const userDetails = await axios.get('/user/info');
     const { username } = userDetails.data;
-    renderUserDetails(username);
-};
-
-function renderUserDetails(username) {
     const loggedUser = document.querySelector('#nameUser');
     const toRender = `<h1><span class="nameUser__title">${username}</span> lets create an amazing survey!</h1>`
     loggedUser.innerHTML = toRender;
@@ -29,8 +26,8 @@ async function addQuestion(ev) {
         ev.target.reset();
 
         const surveyQuestions = await axios.post(`/surveys/question/${uuid}/new`, { question });
-        const { survey, disableAddQuestionBtn, disableSubmitSurvey } = surveyQuestions.data;
-        renderQuestions(survey.questions);
+        const { disableAddQuestionBtn, disableSubmitSurvey } = surveyQuestions.data;
+        renderQuestions();
 
         const AddQuestionBtn = document.querySelector('#buttonCreate');
         if (disableAddQuestionBtn) {
@@ -47,26 +44,6 @@ async function addQuestion(ev) {
     } catch (error) {
         console.error(error);
     }
-};
-
-//Function to render the data of the questions in the DOM
-function renderQuestions(questions) {
-    const root = document.querySelector("#root")
-    let html = "";
-    questions.forEach(question => {
-        html +=
-            ` <div class="information__question">
-            <div class="information__question--title">
-            <h3>${question.content}</h3>
-            </div>
-            <div class="information__question--buttons">
-            <i class="fas fa-trash-alt button--pointer" onclick="deleteQuestion('${question.uuid}')"></i>
-            <i class="fas fa-edit button--pointer" onclick="editQuestion('${question.uuid}','${question.content}')"></i>
-            </div>
-            </div>`
-    });
-
-    root.innerHTML = html;
 };
 
 function editQuestion(qUuid, question) {
@@ -92,8 +69,6 @@ function editQuestion(qUuid, question) {
     }
 };
 
-
-
 //Handle Edit
 async function handleEdit(qUuid) {
     try {
@@ -106,8 +81,8 @@ async function handleEdit(qUuid) {
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "none";
 
-        const questionsEdited = await axios.put(`/surveys/question/${uuid}/${qUuid}`, { questionContent });
-        renderQuestions(questionsEdited.data.survey.questions);
+        await axios.put(`/surveys/question/${uuid}/${qUuid}`, { questionContent });
+        renderQuestions();
     } catch (error) {
         console.error(error);
     };
@@ -120,8 +95,8 @@ async function deleteQuestion(qUuid) {
         if (option) {
             //qUuid: Is the ID from the question and uuid is the ID from the survey
             const surveyQuestions = await axios.delete(`/surveys/question/${uuid}/${qUuid}`);
-            const { survey, disableAddQuestionBtn, disableSubmitSurvey } = surveyQuestions.data;
-            renderQuestions(survey.questions);
+            const {disableAddQuestionBtn, disableSubmitSurvey } = surveyQuestions.data;
+            renderQuestions();
 
             const AddQuestionBtn = document.querySelector('#buttonCreate');
             if (disableAddQuestionBtn) {
@@ -143,6 +118,37 @@ async function deleteQuestion(qUuid) {
     } catch (error) {
         console.error(error);
     }
+};
+
+//Function to render the data of the questions in the DOM
+async function renderQuestions() {
+    const surveyQuestions = await axios.get(`/surveys/questions/${uuid}`);
+    const { questions } = surveyQuestions.data.survey;
+
+    const SubmitSurvey = document.querySelector('#buttonUpload');
+    if (questions.length > 0) {
+        SubmitSurvey.disabled = false;
+        SubmitSurvey.classList.remove('button--disabled');
+    }
+
+    const questionCounterElement = document.querySelector('#question-counter');
+    questionCounterElement.innerText = questions.length;
+    const root = document.querySelector("#root")
+    let html = "";
+    questions.forEach(question => {
+        html +=
+            ` <div class="information__question">
+            <div class="information__question--title">
+            <h3>${question.content}</h3>
+            </div>
+            <div class="information__question--buttons">
+            <i class="fas fa-trash-alt button--pointer" onclick="deleteQuestion('${question.uuid}')"></i>
+            <i class="fas fa-edit button--pointer" onclick="editQuestion('${question.uuid}','${question.content}')"></i>
+            </div>
+            </div>`
+    });
+
+    root.innerHTML = html;
 };
 
 //When the user click on the button "Cancel and go back" is going to cancel all the survey
