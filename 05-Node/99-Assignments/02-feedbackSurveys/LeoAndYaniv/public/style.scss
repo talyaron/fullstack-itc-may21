@@ -263,11 +263,6 @@ body {
   }
 }
 
-.button--disabled {
-  background: gray !important;
-  cursor: not-allowed !important;
-}
-
 .button__survey {
   display: flex;
   align-items: center;
@@ -343,6 +338,11 @@ body {
       cursor: pointer;
     }
   }
+}
+
+.button--disabled {
+  background: gray !important;
+  cursor: not-allowed !important;
 }
 
 //////////////////////////MODAL////////////////////////
