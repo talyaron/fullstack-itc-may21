@@ -46,7 +46,7 @@ function renderSurveyInfo() {
         case 0:
           root = document.querySelector("#root");
           _context2.next = 3;
-          return regeneratorRuntime.awrap(axios.get("/surveys/getQuestions/".concat(uuid)));
+          return regeneratorRuntime.awrap(axios.get("/surveys/questions/".concat(uuid)));
 
         case 3:
           questionsCreated = _context2.sent;
@@ -110,7 +110,7 @@ function answerSubmit(ev) {
 
         case 10:
           _context3.next = 12;
-          return regeneratorRuntime.awrap(axios.put("/surveys/updateQuestions/".concat(uuid), answeredQuestions));
+          return regeneratorRuntime.awrap(axios.put("/surveys/questions/".concat(uuid), answeredQuestions));
 
         case 12:
           alert('Survey completed successfully');

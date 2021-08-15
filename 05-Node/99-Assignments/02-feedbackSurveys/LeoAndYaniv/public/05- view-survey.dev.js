@@ -5,9 +5,9 @@ var url_string = window.location.href;
 var url = new URL(url_string);
 var uuid = url.searchParams.get("uuid");
 
-function getUserDetailsFromCookie() {
-  var userDetails, username;
-  return regeneratorRuntime.async(function getUserDetailsFromCookie$(_context) {
+function renderUserDetails() {
+  var userDetails, username, loggedUser, toRender;
+  return regeneratorRuntime.async(function renderUserDetails$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -17,23 +17,17 @@ function getUserDetailsFromCookie() {
         case 2:
           userDetails = _context.sent;
           username = userDetails.data.username;
-          renderuserDetails(username);
+          loggedUser = document.querySelector('#nameUser');
+          toRender = "<h1>Awsome survey <span class=\"nameUser__title\">".concat(username, "</span>!</h1>");
+          loggedUser.innerHTML = toRender;
+          renderSurveyInfo();
 
-        case 5:
+        case 8:
         case "end":
           return _context.stop();
       }
     }
   });
-}
-
-;
-
-function renderuserDetails(username) {
-  var loggedUser = document.querySelector('#nameUser');
-  var toRender = "<h1>Awsome survey <span class=\"nameUser__title\">".concat(username, "</span>!</h1>");
-  loggedUser.innerHTML = toRender;
-  renderSurveyInfo();
 }
 
 ; //Function to render the data of a survey in the DOM
@@ -46,7 +40,7 @@ function renderSurveyInfo() {
         case 0:
           root = document.querySelector("#root");
           _context2.next = 3;
-          return regeneratorRuntime.awrap(axios.get("/surveys/getQuestions/".concat(uuid)));
+          return regeneratorRuntime.awrap(axios.get("/surveys/questions/".concat(uuid)));
 
         case 3:
           questionsCreated = _context2.sent;

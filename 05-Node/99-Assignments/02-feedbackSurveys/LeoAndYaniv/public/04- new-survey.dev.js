@@ -37,11 +37,12 @@ function renderUserDetails(username) {
 
 ;
 var createQuestion = document.querySelector('#question-form');
-createQuestion.addEventListener('submit', addNewQuestion);
+createQuestion.addEventListener('submit', addQuestion);
 
-function addNewQuestion(ev) {
-  var question, questionsCreated;
-  return regeneratorRuntime.async(function addNewQuestion$(_context2) {
+function addQuestion(ev) {
+  var question, surveyQuestions, _surveyQuestions$data, survey, disableAddQuestionBtn, disableSubmitSurvey, AddQuestionBtn, SubmitSurvey;
+
+  return regeneratorRuntime.async(function addQuestion$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
@@ -61,27 +62,42 @@ function addNewQuestion(ev) {
           modalUpload.style.display = "none";
           ev.target.reset();
           _context2.next = 10;
-          return regeneratorRuntime.awrap(axios.post("/surveys/createQuestion/".concat(uuid), {
+          return regeneratorRuntime.awrap(axios.post("/surveys/question/".concat(uuid, "/new"), {
             question: question
           }));
 
         case 10:
-          questionsCreated = _context2.sent;
-          renderQuestions(questionsCreated.data.survey.questions);
-          _context2.next = 17;
+          surveyQuestions = _context2.sent;
+          _surveyQuestions$data = surveyQuestions.data, survey = _surveyQuestions$data.survey, disableAddQuestionBtn = _surveyQuestions$data.disableAddQuestionBtn, disableSubmitSurvey = _surveyQuestions$data.disableSubmitSurvey;
+          renderQuestions(survey.questions);
+          AddQuestionBtn = document.querySelector('#buttonCreate');
+
+          if (disableAddQuestionBtn) {
+            AddQuestionBtn.disabled = true;
+            AddQuestionBtn.classList.add('button--disabled');
+          }
+
+          SubmitSurvey = document.querySelector('#buttonUpload');
+
+          if (!disableSubmitSurvey) {
+            SubmitSurvey.disabled = false;
+            SubmitSurvey.classList.remove('button--disabled');
+          }
+
+          _context2.next = 22;
           break;
 
-        case 14:
-          _context2.prev = 14;
+        case 19:
+          _context2.prev = 19;
           _context2.t0 = _context2["catch"](0);
           console.error(_context2.t0);
 
-        case 17:
+        case 22:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 14]]);
+  }, null, null, [[0, 19]]);
 }
 
 ; //Function to render the data of the questions in the DOM
@@ -141,7 +157,7 @@ function handleEdit(qUuid) {
         case 7:
           modalEdit.style.display = "none";
           _context3.next = 10;
-          return regeneratorRuntime.awrap(axios.put("/surveys/editQuestion/".concat(qUuid, "/").concat(uuid), {
+          return regeneratorRuntime.awrap(axios.put("/surveys/question/".concat(uuid, "/").concat(qUuid), {
             questionContent: questionContent
           }));
 
@@ -170,7 +186,8 @@ function handleEdit(qUuid) {
 ; //Delete a question:
 
 function deleteQuestion(qUuid) {
-  var option, questions;
+  var option, surveyQuestions, _surveyQuestions$data2, survey, disableAddQuestionBtn, disableSubmitSurvey, AddQuestionBtn, SubmitSurvey;
+
   return regeneratorRuntime.async(function deleteQuestion$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
@@ -179,32 +196,46 @@ function deleteQuestion(qUuid) {
           option = confirm("Are you sure do you want to delete this question?");
 
           if (!option) {
-            _context4.next = 7;
+            _context4.next = 12;
             break;
           }
 
           _context4.next = 5;
-          return regeneratorRuntime.awrap(axios["delete"]("/surveys/deleteQuestion/".concat(qUuid, "/").concat(uuid)));
+          return regeneratorRuntime.awrap(axios["delete"]("/surveys/question/".concat(uuid, "/").concat(qUuid)));
 
         case 5:
-          questions = _context4.sent;
-          renderQuestions(questions.data.survey.questions);
+          surveyQuestions = _context4.sent;
+          _surveyQuestions$data2 = surveyQuestions.data, survey = _surveyQuestions$data2.survey, disableAddQuestionBtn = _surveyQuestions$data2.disableAddQuestionBtn, disableSubmitSurvey = _surveyQuestions$data2.disableSubmitSurvey;
+          renderQuestions(survey.questions);
+          AddQuestionBtn = document.querySelector('#buttonCreate');
 
-        case 7:
-          _context4.next = 12;
+          if (disableAddQuestionBtn) {
+            AddQuestionBtn.disabled = true;
+            AddQuestionBtn.classList.add('button--disabled');
+          }
+
+          SubmitSurvey = document.querySelector('#buttonUpload');
+
+          if (disableSubmitSurvey) {
+            SubmitSurvey.disabled = true;
+            SubmitSurvey.classList.add('button--disabled');
+          }
+
+        case 12:
+          _context4.next = 17;
           break;
 
-        case 9:
-          _context4.prev = 9;
+        case 14:
+          _context4.prev = 14;
           _context4.t0 = _context4["catch"](0);
           console.error(_context4.t0);
 
-        case 12:
+        case 17:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 9]]);
+  }, null, null, [[0, 14]]);
 }
 
 ; //When the user click on the button "Cancel and go back" is going to cancel all the survey
@@ -227,7 +258,7 @@ function cancelTheSurvey() {
           }
 
           _context5.next = 5;
-          return regeneratorRuntime.awrap(axios["delete"]("/surveys/deleteSurvey/".concat(uuid)));
+          return regeneratorRuntime.awrap(axios["delete"]("/surveys/survey/".concat(uuid)));
 
         case 5:
           userDetails = _context5.sent;

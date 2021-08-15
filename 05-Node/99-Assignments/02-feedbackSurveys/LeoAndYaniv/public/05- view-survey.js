@@ -3,13 +3,9 @@ const url_string = window.location.href;
 const url = new URL(url_string);
 const uuid = url.searchParams.get("uuid");
 
-async function getUserDetailsFromCookie() {
+async function renderUserDetails() {
     const userDetails = await axios.get('/user/info');
     const { username } = userDetails.data;
-    renderuserDetails(username);
-};
-
-function renderuserDetails(username) {
     const loggedUser = document.querySelector('#nameUser');
     const toRender = `<h1>Awsome survey <span class="nameUser__title">${username}</span>!</h1>`
     loggedUser.innerHTML = toRender;
@@ -19,7 +15,7 @@ function renderuserDetails(username) {
 //Function to render the data of a survey in the DOM
 async function renderSurveyInfo() {
     const root = document.querySelector("#root");
-    const questionsCreated = await axios.get(`/surveys/getQuestions/${uuid}`);
+    const questionsCreated = await axios.get(`/surveys/questions/${uuid}`);
 
     const title = document.querySelector("#title");
     title.innerHTML = `<h2 class="survey__title">${questionsCreated.data.survey.title}</h2>
