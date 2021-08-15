@@ -8,14 +8,14 @@ import {newSurvey, getSurveys, deleteSurvey, addQuestion, editQuestion, deleteQu
 
 //When the user click to start a new survey I call this method
 router.route('/survey/:uuid')
-    .post(userCookieRead,/* isAdmin,*/ newSurvey)
-    .get(userCookieRead,/* isAdmin,*/ getSurveys)
-    .delete(userCookieRead,/* isAdmin,*/ deleteSurvey);
+    .post(userCookieRead, isAdmin, newSurvey)
+    .get(userCookieRead, isAdmin, getSurveys)
+    .delete(userCookieRead, isAdmin, deleteSurvey);
 
 router.route('/question/:uuid/:qUuid')
-    .post(userCookieRead,/* isAdmin,*/ addQuestion)
-    .put(userCookieRead,/* isAdmin,*/ editQuestion)
-    .delete(userCookieRead,/* isAdmin,*/ deleteQuestion);
+    .post(userCookieRead, isAdmin, addQuestion)
+    .put(userCookieRead, isAdmin, editQuestion)
+    .delete(userCookieRead, isAdmin, deleteQuestion);
 
 router.route('/questions/:uuid')
     .get(getQuestionsSurvey)
