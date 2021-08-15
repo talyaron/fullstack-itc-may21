@@ -1,12 +1,12 @@
 
 
-    async function handleRegister(ev) {
+    function handleRegister(ev) {
         ev.preventDefault()
         try{
         const username = ev.target.elements.username.value;
         const password = ev.target.elements.password.value;
         const email = ev.target.elements.email.value
-        const result = await axios.post('/users', {
+        const result = axios.post('/users', {
             username: username,
             password: password,
             email: email

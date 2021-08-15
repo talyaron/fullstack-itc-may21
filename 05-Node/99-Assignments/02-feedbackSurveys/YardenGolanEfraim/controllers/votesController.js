@@ -1,4 +1,4 @@
-const { users } = require('../models.js')
+const { users, getAdminCookie, createAdminCookie, getAdminCookieIndex } = require('../models.js')
 const Ajv = require("ajv");
 const ajv = new Ajv()
 
@@ -45,21 +45,19 @@ exports.post_votes = (req, res) => {
             )
             throw new Error("Invalid data was transferd")
         }
-        const { adminIndex } = req.cookies
-        const cookieIndex = JSON.parse(adminIndex);
-        const {selectedAdminIndex} = cookieIndex;
-        const { admin } = req.cookies
-        const cookie = JSON.parse(admin);
-        const {selectedAdmin} = cookie;
+        const selectedAdminIndex = getAdminCookieIndex(req)
+        const selectedAdmin = getAdminCookie(req)
+        if(selectedAdmin.createdSurvey.find(survey => survey.surveyID === body.ID).questions[0].voters.voterID.find(id=> id === body.votersID) ===undefined){
         for(i=0; i< body.votes.length; i++){
         selectedAdmin.createdSurvey.find(survey => survey.surveyID === body.ID).questions[i].voters.score.push(body.votes[i])
         selectedAdmin.createdSurvey.find(survey => survey.surveyID === body.ID).questions[i].voters.voterID.push(body.votersID)
     }
         users.users[selectedAdminIndex] = selectedAdmin
-
-        const adminCookie = JSON.stringify({ selectedAdmin })
-        res.cookie('admin', adminCookie, { maxAge: 300000000, httpOnly: true });
-        res.send(selectedAdmin);
+        createAdminCookie(selectedAdmin, res)
+        res.send("vote success!");}
+        else{
+            res.send("already voted!")
+        }
     } catch (e) {
         console.log(e)
         res.status(400).send({ 
