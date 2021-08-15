@@ -3,7 +3,6 @@
 var fs = require('fs');
 
 function addUsers(user) {
-  console.log('in add user ');
   var allUsers = getAllUsers();
   var updateUsers = allUsers.push(user);
   fs.writeFileSync("./users.json", JSON.stringify(allUsers));
