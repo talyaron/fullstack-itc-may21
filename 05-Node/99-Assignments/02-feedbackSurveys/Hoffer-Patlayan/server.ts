@@ -2,9 +2,6 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const cookieParser = require("cookie-parser");
-const bodyParser = require('body-parser')
-
-// const { v4: uuidv4 } = require("uuid");
 
 
 export const localJson = () => {
@@ -13,7 +10,6 @@ export const localJson = () => {
   };
 
 app.use(cookieParser());
-app.use(bodyParser());
 app.use(express.json());
 app.use(express.static("public"));
 app.set("port", 3500 || process.env.PORT);
@@ -24,6 +20,7 @@ const signUpRoute = require('./routes/signUpRoutes');
 const logInRoute = require('./routes/logInRoutes');
 const addSurveys = require('./routes/surveyRoutes');
 const votersRoute = require('./routes/votersRoutes');
+const responseRoute = require('./routes/responseRoutes');
 
 
 // ROUTES
@@ -31,7 +28,8 @@ app.use('/users', usersRoute);
 app.use('/signUp', signUpRoute);
 app.use('/logIn', logInRoute);
 app.use('/survey', addSurveys);
-app.use('/voter',votersRoute);
+app.use('/voter', votersRoute);
+app.use('/response', responseRoute);
 
 
 app.listen(app.get("port"), () => {

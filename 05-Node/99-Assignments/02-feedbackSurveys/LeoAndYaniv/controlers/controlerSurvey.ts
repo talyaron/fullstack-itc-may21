@@ -34,7 +34,6 @@ export function newSurvey(req, res) {
 //Function to delete the completly survey
 export function deleteSurvey(req, res) {
   const { uuid } = req.params;
-  console.log(req.email);
   const allSurveys = new Surveys;
   allSurveys.deleteSurvey(uuid);
 
@@ -43,7 +42,6 @@ export function deleteSurvey(req, res) {
 
 //Function to add a new question into the survey
 export function addQuestion(req, res) {
-  console.log(req.params);
   const { uuid } = req.params;
   const allSurveys = new Surveys;
   const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
@@ -67,7 +65,6 @@ export function getQuestionsSurvey(req, res) {
   const { uuid } = req.params;
   const allSurveys = new Surveys;
   const surveyToUpdate = allSurveys.surveys[allSurveys.findSurveyIndex(uuid)];
-
   res.send({ survey: surveyToUpdate });
 }
 

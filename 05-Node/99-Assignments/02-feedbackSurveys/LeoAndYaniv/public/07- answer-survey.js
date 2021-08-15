@@ -65,11 +65,11 @@ async function answerSubmit(ev) {
             answeredQuestions.push(answeredQuestion);
         }
     }
-    let userDetails = await axios.get('/user/info');
-    const { username, email } = userDetails.data;
-    userDetails = { username, email, uuid };
-    await axios.post('/user/answerLoginAfter', userDetails);
-    await axios.put(`/surveys/questions/${uuid}`, answeredQuestions);
-    alert('Survey completed successfully');
-    location.href = `index.html`;
+    const submitAnswers = await axios.post(`/user/answerLoginAfter/${uuid}`);
+    if (!submitAnswers.data.filledAlready) {
+        await axios.put(`/surveys/questions/${uuid}`, answeredQuestions);
+    }
+
+    alert(submitAnswers.data.message);
+    location.href = `http://localhost:3000/06-%20answer-login.html?${uuid}`;
 }

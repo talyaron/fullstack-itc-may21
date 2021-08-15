@@ -1,3 +1,7 @@
+* {
+  font-family: "Cairo", sans-serif;
+}
+
 html,
 body {
   margin: 0;
@@ -313,6 +317,10 @@ body {
 .button--disabled {
   background: gray !important;
   cursor: not-allowed !important;
+}
+
+.title--modify {
+  justify-content: space-around;
 }
 
 .modal {

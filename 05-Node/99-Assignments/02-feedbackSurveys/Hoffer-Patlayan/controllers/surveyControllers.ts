@@ -3,12 +3,11 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
-const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 import { Survey } from '../models/survey'
 
 
-app.use(bodyParser());
+app.use(express.json());
 app.use(cookieParser());
 // READ SURVEY JSON
 export const getAllSurveys = () => {
@@ -56,7 +55,6 @@ export const getAllSurveys = () => {
     
     let getSurvey = getAllSurveys();
     getSurvey = getSurvey.filter((survey:any) => survey.id !== id);
-    console.log(getSurvey);
     fs.writeFileSync("./db/survey.json", JSON.stringify(getSurvey));
     res.send({ok:"succes"})
   }

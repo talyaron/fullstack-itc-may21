@@ -1,6 +1,6 @@
-const models = require('../models')
-const Ajv = require("ajv")
-
-exports.getAdmin = (req, res) => {
+exports.get_admin = (req, res) => {
+    const { admin } = req.cookies
+        const cookie = JSON.parse(admin);
+        const {selectedAdmin} = cookie;
     res.send(selectedAdmin)
 }
