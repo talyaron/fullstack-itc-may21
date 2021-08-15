@@ -75,7 +75,6 @@ exports.add_survey = (req, res) => {
             res.cookie('admin', adminCookie, { maxAge: 300000000, httpOnly: true });
             res.cookie('adminIndex', adminCookieIndex, { maxAge: 300000000, httpOnly: true });
             res.send(selectedAdmin);
-            console.log(selectedAdmin);
         }
     });
         
@@ -96,7 +95,6 @@ exports.get_survey = (req, res) => {
         const { admin } = req.cookies
         const cookie = JSON.parse(admin);
         const {selectedAdmin} = cookie;
-        console.log(selectedAdmin, editID)
         const surveyInfo = selectedAdmin.createdSurvey.filter(survey=>survey.surveyID === editID)
         res.send(surveyInfo)
     } catch (e) {

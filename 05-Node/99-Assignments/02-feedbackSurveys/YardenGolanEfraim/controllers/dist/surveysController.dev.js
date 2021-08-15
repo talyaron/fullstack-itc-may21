@@ -94,7 +94,6 @@ exports.add_survey = function (req, res) {
           httpOnly: true
         });
         res.send(selectedAdmin);
-        console.log(selectedAdmin);
       }
     });
   } catch (e) {
@@ -113,7 +112,6 @@ exports.get_survey = function (req, res) {
     var admin = req.cookies.admin;
     var cookie = JSON.parse(admin);
     var selectedAdmin = cookie.selectedAdmin;
-    console.log(selectedAdmin, editID);
     var surveyInfo = selectedAdmin.createdSurvey.filter(function (survey) {
       return survey.surveyID === editID;
     });
