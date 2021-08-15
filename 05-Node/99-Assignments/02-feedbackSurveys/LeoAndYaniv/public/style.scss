@@ -264,8 +264,8 @@ body {
 }
 
 .button--disabled {
-  background: gray;
-  cursor: not-allowed;
+  background: gray !important;
+  cursor: not-allowed !important;
 }
 
 .button__survey {

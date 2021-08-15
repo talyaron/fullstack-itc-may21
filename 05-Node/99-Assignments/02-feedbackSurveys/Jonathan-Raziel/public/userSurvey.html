@@ -33,7 +33,7 @@
     <form class="sumbit">
         <div id="root"></div>
 
-        <button type="submit">Send</button>
+        <button type="submit" style="margin-top:2em">Send</button>
     </form>
     <script>
 
@@ -42,48 +42,52 @@
             const params = new URLSearchParams(window.location.search);
             const idSurvey = params.get('surveyId');
 
-            const response = await axios.get(`/r/s/${idSurvey}`)
+            const response = await axios.get(`/previous/getSurvey/${idSurvey}`)
             const data = response.data
 
 
-            renderSurvey(data) //inputs, ratios and sumbit
+            renderSurvey(data) 
         }
 
         function renderSurvey(data) {
             const root = document.querySelector('#root');
             let html = ''
 
+            let count = 1;
 
-            html += `<p>${data.title}</p>` //title of survey
+            html += `<p>Survey Title: ${data.title}</p>` 
 
             data.question.forEach((question, index) => {
                 html += `
         
-                <p>${question.title}</p> 
+                <p>Question ${count}: ${question.title}</p> 
+                <div style="display:flex">
+                    
                 <div>
-  <input type="radio" id="one" name="${index}" value="1"
-         checked>
-  <label for="score${index}">1</label>
-</div>
+                    <input type="radio" id="one" name="${index}" value="1" checked>
+                    <label for="score${index}">1</label>
+                </div>
 
-<div>
-  <input type="radio" id="two" name="${index}" value="2">
-  <label for="score${index}">2</label>
-</div>
+                <div>
+                    <input type="radio" id="two" name="${index}" value="2">
+                    <label for="score${index}">2</label>
+                </div>
 
-<div>
-  <input type="radio" id="three" name="${index}" value="3">
-  <label for="score${index}">3</label>
-</div>
-<div>
-  <input type="radio" id="four" name="${index}" value="4">
-  <label for="score${index}">4</label>
-</div>
-<div>
-  <input type="radio" id="five" name="${index}" value="5">
-  <label for="score${index}">5</label>
-</div>
+                <div>
+                    <input type="radio" id="three" name="${index}" value="3">
+                     <label for="score${index}">3</label>
+                </div>
+                <div>
+                    <input type="radio" id="four" name="${index}" value="4">
+                    <label for="score${index}">4</label>
+                </div>
+                <div>
+                    <input type="radio" id="five" name="${index}" value="5">
+                    <label for="score${index}">5</label>
+                </div>
+            </div>
 `
+count++;
             });
 
             root.innerHTML = html;
@@ -133,12 +137,12 @@
                     body: JSON.stringify(scoreList)
                 }).then(function (res) {
                     if (res.status === 200 && res.ok) {
-                        return res.json().then(pepe => {
-                            resolve(pepe)
+                        return res.json().then(survey => {
+                            resolve(survey);
                         });
                     } else {
-                        return res.json().then(pepe => {
-                            alert(pepe.error)
+                        return res.json().then(survey => {
+                            alert(survey.survey)
                         })
                     }
                 }).catch(error => console.error('Error: ', error));
