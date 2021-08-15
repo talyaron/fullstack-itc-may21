@@ -152,7 +152,6 @@ async function cancelTheSurvey() {
         if (option) {
             //UUID is the id from the survey
             const userDetails = await axios.delete(`/surveys/survey/${uuid}`);
-            console.log(userDetails);
             location.href = `03- surveys.html?email=${userDetails.data.userDetails}`;
         }
     } catch (error) {

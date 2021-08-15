@@ -45,7 +45,7 @@ function getTheAverageScorePerQuestion(questionInASurvey) {
 //Function to copy the path
 function copyTextFromElement() {
     try {
-        const textWantToCopy = `http://localhost:3000/06-%20answer-login.html?survey=${uuid}`;
+        const textWantToCopy = `http://localhost:3000/06-%20answer-login.html?${uuid}`;
         //Copy the text to the clipboard
         const successful = navigator.clipboard.writeText(textWantToCopy);
 
