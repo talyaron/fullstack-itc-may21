@@ -54,14 +54,15 @@ export function login(req, res) {
 //Function for answer Login JSON
 export function answerLogin(req, res) {
   try {
-    const { username, email, uuid } = req.body;
+    const { username, email } = req;
+    const { uuid } = req.params;
     const user = new User(username, email, null);
     const allUsers = new Users();
-    const emailExists: boolean = allUsers.createUser(user, uuid);
-    if (!emailExists) {
-      res.send({ message: "A new User was added", email, username });
+    const filledAlready: boolean = allUsers.createUser(user, uuid);
+    if (!filledAlready) {
+      res.send({ message: "User answers received", filledAlready });
     } else {
-      res.send({ message: "A new User was added", email, username });
+      res.send({ message: "User already filled", filledAlready });
     }
   } catch (error) {
     console.error(error);
