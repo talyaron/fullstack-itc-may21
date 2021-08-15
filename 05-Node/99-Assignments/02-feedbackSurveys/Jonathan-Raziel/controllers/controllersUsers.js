@@ -13,12 +13,10 @@ var readAllUsers = function () {
 };
 function usersRegister(req, res) {
     try {
-        //const user1 = new model.User("pepe", 'a@a.com','a1a23',[]);
         var allUsers = readAllUsers();
         var isFound = allUsers.some(function (elem) { return (elem.email === req.body.email) || elem.username === req.body.username; });
         if (!isFound) {
             var user = new users_1.User(req.body.username, req.body.email, req.body.password, []);
-            console.log(user);
             allUsers.push(user);
             fs.writeFileSync("./user.json", JSON.stringify(allUsers));
             res.send({ ok: "User Created", allUsers: allUsers });
@@ -113,12 +111,14 @@ function scoreAdd(req, res) {
         var findSurveyinSurveyJSON = allSurveys.find(function (survey) { return survey.id === id_1; }).question;
         for (var i = 0; i < findSurveyQuestions.length; i++) {
             findSurveyQuestions[i].voters.push(req.body[i]);
-            findSurveyinSurveyJSON[i].voters.push(req.body[i]); // check this way double
+            findSurveyinSurveyJSON[i].voters.push(req.body[i]);
         }
         fs.writeFileSync("./user.json", JSON.stringify(allUsers));
         fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+        res.send({ ok: "Answer Sended" });
     }
     catch (e) {
+        console.log(e);
         res.status(500).send({ error: "" + e });
     }
 }

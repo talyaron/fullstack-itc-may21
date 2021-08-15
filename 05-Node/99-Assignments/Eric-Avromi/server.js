@@ -13,7 +13,6 @@ app.use(express.json());
 
 app.use('/survey', surveyRouter)
 app.use('/question', surveyRouter)
-
 app.use('/users', userRouter)
 
 
@@ -22,4 +21,3 @@ app.listen(port, () => {console.log(`Server listening at http://localhost:${port
 
 
 
-//alert user slready exist

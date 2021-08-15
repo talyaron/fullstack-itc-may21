@@ -4,7 +4,6 @@ const {v4: uuidv4} = require('uuid');
 const fs = require('fs')
 // const {addSurvey} = require('../models/surveyModel.js');
 const {getAllSurveys} = require('../controllers/surveyControllers')
-const {getAllUsers} = require(`../models/userModels.js`)
 const {getUser} = require('../middlewares/user')
 
 class Survey {

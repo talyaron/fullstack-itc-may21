@@ -18,7 +18,7 @@ const readAllUsers = () => {
 
 export function usersRegister(req, res) {
     try {
-        
+
         const allUsers = readAllUsers();
         const isFound = allUsers.some(elem => (elem.email === req.body.email) || elem.username === req.body.username)
         if (!isFound) {
@@ -113,7 +113,6 @@ export function scoreAdd(req, res) {
     try {
         const { id } = req.params
 
-        console.log(id)
         const allUsers = readAllUsers();
         const allSurveys = JSON.parse(fs.readFileSync("./survey.json"));
         const admin = allSurveys.find(survey => survey.id === id).admin
@@ -126,14 +125,19 @@ export function scoreAdd(req, res) {
 
         for (let i = 0; i < findSurveyQuestions.length; i++) {
             findSurveyQuestions[i].voters.push(req.body[i])
-            findSurveyinSurveyJSON[i].voters.push(req.body[i]) // check this way double
+            findSurveyinSurveyJSON[i].voters.push(req.body[i])
         }
 
- 
-    fs.writeFileSync("./user.json", JSON.stringify(allUsers));
-     fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+
+
+        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+
+        res.send({ ok: "Answer Sended" });
+
 
     } catch (e) {
+        console.log(e)
         res.status(500).send({ error: `${e}` });
     }
 }

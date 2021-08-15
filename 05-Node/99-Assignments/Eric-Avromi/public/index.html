@@ -63,14 +63,10 @@
 
     <script>
 
-
-        //same to verufy password and email to enter password
+        //alert user slready exist
+        //same to verify password and email to enter password
         
-        const form = document.querySelector('.my-login-validation')
-
-        form.addEventListener('submit', hundleSubmit)
-
-
+        const form = document.querySelector('.my-login-validation').addEventListener('submit', hundleSubmit)
         
 		function hundleSubmit(ev) {
 			ev.preventDefault()
@@ -89,31 +85,8 @@
 		}
 
 
-        // btnLogin.addEventListener('click', redirectMySurveys)
-
-		// function redirectMySurveys(){
-		// //if email  and password !== "" then run this function
-
-		// 	window.location.href = "my-surveys.html"
-
-		// }
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+     
     </script>
-
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

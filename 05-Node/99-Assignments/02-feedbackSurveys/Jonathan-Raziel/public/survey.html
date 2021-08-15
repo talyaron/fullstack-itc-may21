@@ -75,7 +75,7 @@
             const response = await axios.get('/id/questions')
             const { id } = response.data
 
-           
+
 
             const rootQuestion = document.querySelector('.main')
 
@@ -134,7 +134,7 @@
             const isCreated = JSON.parse(localStorage.getItem("isCreated"))
 
             if (isCreated === 1) {
-                const responseSurvey = await axios.get(`/r/s/${idSurvey}`)
+                const responseSurvey = await axios.get(`/previous/getSurvey/${idSurvey}`)
 
                 let html = '';
                 if (responseSurvey.data) {
@@ -153,15 +153,14 @@
                     const cantidad = question[0].voters.length
 
 
+
                     for (let i = 0; i < question.length; i++) {
+
+
+                        avg.push(parseFloat((question[i].voters.reduce((sum, value) => (typeof value.score == "number" ? sum + value.score : sum), 0)) / cantidad).toFixed(2));
                        
-                  
-                            avg.push(parseFloat((question[i].voters.reduce((sum, value) => (typeof value.score == "number" ? sum + value.score : sum), 0)) / cantidad).toFixed(2));    
-                        
-                        
                     }
-
-
+                    
 
                     let html = ''
 
@@ -175,9 +174,16 @@
                                 <label for="question">
                                     <input type="text" name="question${i}" class="boxquestion__question--title" value="${question[i].title}" size="53" id="${i}" onchange='blockQuestion("${i}")' disabled>
                                     
-                                </label>
-                                <span>Avg: ${avg[i]}</span>
-                                <span>#: ${cantidad}</span>
+                                </label>`
+
+                               if(avg[0] === 'NaN'){
+                                html += `<span>Avg: 0;</span>`
+                               }else{
+                                html += `<span>Avg: ${avg[i]};</span>`
+                               } 
+
+                               
+                               html +=`<span>People who answered ${cantidad}</span>
                             </div>
                     </div>`
 
@@ -225,7 +231,7 @@
             const params = new URLSearchParams(window.location.search);
             const id = params.get('surveyId');
 
-           
+
             const newSurvey = {
                 id: id,
                 title: inputTitle,
@@ -233,7 +239,7 @@
                 questions: arrayQuestion,
             }
 
-         
+
             const responseAwait = await addSurveysPromise(newSurvey)
 
             const { ok } = responseAwait
@@ -252,12 +258,12 @@
                     body: JSON.stringify(newSurvey)
                 }).then(function (res) {
                     if (res.status === 200 && res.ok) {
-                        return res.json().then(pepe => {
-                            resolve(pepe)
+                        return res.json().then(survey => {
+                            resolve(survey)
                         });
                     } else {
-                        return res.json().then(pepe => {
-                            alert(pepe.error)
+                        return res.json().then(survey => {
+                            alert(survey.error)
                         })
                     }
                 })
