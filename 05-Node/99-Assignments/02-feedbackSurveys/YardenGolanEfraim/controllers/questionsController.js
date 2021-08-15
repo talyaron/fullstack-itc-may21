@@ -1,6 +1,4 @@
-const { User, Users, Survey, Surveys, Question, Questions, users } = require('../models.js')
-const Ajv = require("ajv");
-const ajv = new Ajv()
+const { Question, users } = require('../models.js')
 
 exports.post_questions = (req, res) => {
 

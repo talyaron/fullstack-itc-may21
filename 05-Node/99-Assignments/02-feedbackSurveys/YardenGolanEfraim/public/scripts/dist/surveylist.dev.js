@@ -83,6 +83,6 @@ function renderArrayToDom(surveyArray) {
 }
 
 function moveToSurveyEdit(surveyID) {
-  axios.get("/sendSurvey?id=".concat(surveyID));
+  axios.get("/surveys/sendSurvey?id=".concat(surveyID));
   window.location.href = "/surveyedit.html";
 }
