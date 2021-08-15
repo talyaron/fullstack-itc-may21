@@ -6,6 +6,8 @@ router.get('/sendSurvey', surveysController.send_survey)
 router.post('/addSurvey', surveysController.add_survey)
 router.get('/getSurvey', surveysController.get_survey)
 router.get('/surveyToAnswer', surveysController.survey_to_answer)
+router.delete('/deleteSurvey/:ID', surveysController.delete_survey)
+
 
 
 module.exports = router

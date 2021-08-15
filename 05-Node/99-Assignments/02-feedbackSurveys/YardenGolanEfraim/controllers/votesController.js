@@ -3,6 +3,7 @@ const Ajv = require("ajv");
 const ajv = new Ajv()
 
 exports.guest_voter = (req, res) => {
+    try{
     const { guest } = req.cookies
     console.log(guest)
     const guestCookie = JSON.parse(guest);
@@ -10,7 +11,9 @@ exports.guest_voter = (req, res) => {
     const {guestUser} = guestCookie;
     console.log(guestUser)
     res.send(guestUser)
-}
+}catch (e) {
+    console.error(e)
+}}
 
 exports.post_votes = (req, res) => {
 
