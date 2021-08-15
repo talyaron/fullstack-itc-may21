@@ -11,12 +11,12 @@ function isAdmin(req, res, next) {
             var userPass = allUsers.users[userIndex].password;
             if (userPass) { // have password => admin
                 isUserAdmin = true;
-                next();
             }
         }
-        else {
+        if (isUserAdmin)
+            next();
+        else
             res.status(401).send({ error: 'You are not authorized to open this page' });
-        }
     }
     catch (error) {
         res.status(500).send(error.message);
