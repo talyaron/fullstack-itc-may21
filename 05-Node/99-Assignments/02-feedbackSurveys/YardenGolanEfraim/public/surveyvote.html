@@ -36,7 +36,7 @@
         const title = document.getElementById("survey-title")
         const userName = document.getElementById("user-welcome-healdine")
         
-        axios.get(`/surveyToAnswer?id=${params.surveyId}`)
+        axios.get(`/surveys/surveyToAnswer?id=${params.surveyId}`)
         .then((res) => {
             title.innerHTML = res.data[0].title
             renderSurveyToBeVoted(res.data[0])
@@ -65,7 +65,7 @@
         event.preventDefault()
         let numberOfQuestion = 0
         let votersID = ''
-        await axios.get(`/surveyToAnswer?id=${params.surveyId}`)
+        await axios.get(`/surveys/surveyToAnswer?id=${params.surveyId}`)
         .then((res) => {
             numberOfQuestion = res.data[0].questions.length
             console.log(numberOfQuestion)

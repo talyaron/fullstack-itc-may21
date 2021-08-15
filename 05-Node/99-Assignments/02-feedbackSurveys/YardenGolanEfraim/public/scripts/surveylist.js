@@ -47,6 +47,6 @@
         }
     }
     function moveToSurveyEdit(surveyID){
-        axios.get(`/sendSurvey?id=${surveyID}`)
+        axios.get(`/surveys/sendSurvey?id=${surveyID}`)
         window.location.href="/surveyedit.html";
     }

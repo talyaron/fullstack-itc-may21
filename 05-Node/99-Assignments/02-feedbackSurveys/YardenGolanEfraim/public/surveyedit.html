@@ -107,7 +107,7 @@
 
     function copyURLtoClipboard() {
            console.log("poo")
-            axios.get('/getSurvey')
+            axios.get('surveys/getSurvey')
             .then(function(res){ 
             const surveyID = res.data[0].surveyID
             const text = `http://localhost:3000/surveyvotelogin.html?surveyId=${surveyID}`

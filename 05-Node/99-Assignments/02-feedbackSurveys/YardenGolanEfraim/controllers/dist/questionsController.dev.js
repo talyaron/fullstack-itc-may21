@@ -1,17 +1,8 @@
 "use strict";
 
 var _require = require('../models.js'),
-    User = _require.User,
-    Users = _require.Users,
-    Survey = _require.Survey,
-    Surveys = _require.Surveys,
     Question = _require.Question,
-    Questions = _require.Questions,
     users = _require.users;
-
-var Ajv = require("ajv");
-
-var ajv = new Ajv();
 
 exports.post_questions = function (req, res) {
   try {
