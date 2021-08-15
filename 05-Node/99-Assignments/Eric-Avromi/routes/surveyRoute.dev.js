@@ -9,19 +9,17 @@ var router = express.Router();
 var _require = require('uuid'),
     uuidv4 = _require.v4;
 
-var fs = require('fs');
+var fs = require('fs'); // const {addSurvey} = require('../models/surveyModel.js');
 
-var _require2 = require('../models/surveyModel.js'),
-    addSurvey = _require2.addSurvey;
 
-var _require3 = require('../controllers/surveyControllers'),
-    getAllSurveys = _require3.getAllSurveys;
+var _require2 = require('../controllers/surveyControllers'),
+    getAllSurveys = _require2.getAllSurveys;
 
-var _require4 = require("../models/userModels.js"),
-    getAllUsers = _require4.getAllUsers;
+var _require3 = require("../models/userModels.js"),
+    getAllUsers = _require3.getAllUsers;
 
-var _require5 = require('../middlewares/user'),
-    getUser = _require5.getUser;
+var _require4 = require('../middlewares/user'),
+    getUser = _require4.getUser;
 
 var Survey = function Survey() {
   _classCallCheck(this, Survey);
@@ -75,67 +73,5 @@ router.post('/pepe', function (req, res) {
     console.log(error);
     res.status(500).send(error.message);
   }
-}); // router.get('/', (req, res) => {
-//     try {
-//         const allSurveys = getAllSurveys()
-//         res.send(
-//             allSurveys
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message) 
-//     }
-// })
-// router.delete('/deleteSurvey', (req, res) => { 
-//     try {
-//         console.log("before id");
-//         const id = req.query.id;
-//         const allSurveys = deleteSurvey(id)
-//         res.send(
-//             allSurveys
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
-// router.delete('/deleteQuestion', (req, res) => { 
-//     try {
-//         console.log("before id");
-//         const id = req.query.id;
-//         const allQuestions = deleteQuestion(id)
-//         res.send(
-//             allQuestions
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
-// router.put('/editSurvey', (req, res) => {
-//     try {
-//         const newTitle = req.body.newTitle;
-//         const id = req.body.id; 
-//         console.log(id);
-//         const allSurveys =  editSurvey(id, newTitle)
-//         console.log("afetr edit task ");
-//         res.send(
-//             allSurveys
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
-// router.put('/editQuestion', (req, res) => {
-//     try {
-//         const newTitle = req.body.newTitle;
-//         const id = req.body.id; 
-//         console.log(id);
-//         const allQuestions =  editQuestion(id, newTitle)
-//         console.log("afetr edit task ");
-//         res.send(
-//             allQuestions
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
-
+});
 module.exports = router;
