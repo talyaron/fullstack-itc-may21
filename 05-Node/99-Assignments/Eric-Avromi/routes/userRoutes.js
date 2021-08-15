@@ -13,14 +13,14 @@ class User {
         this.email = email;
         this.password = password;
         this.id = uuidv4();
-        this.createdSurvey = [];  //this will get survey Id..
+        this.createdSurvey = [];  
     }
 }
 
 
+
 router.post('/register', (req, res) => {
 
-    //class info from the form, create a new user like an instance
     const {name, email, password} = req.body
     console.log(req.body);
     const newUser = new User (name, email, password)
