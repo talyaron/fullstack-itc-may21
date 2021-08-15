@@ -5,7 +5,7 @@
         const username = ev.target.elements.username.value;
         const password = ev.target.elements.password.value;
         const email = ev.target.elements.email.value
-        const result = await axios.post('/createUser', {
+        const result = await axios.post('/users', {
             username: username,
             password: password,
             email: email

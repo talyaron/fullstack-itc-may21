@@ -8,7 +8,7 @@ function getAdminUser() {
         case 0:
           nameDisplay = document.querySelector("h1");
           _context.next = 3;
-          return regeneratorRuntime.awrap(axios.get('/selectedAdminUser'));
+          return regeneratorRuntime.awrap(axios.get('/admin'));
 
         case 3:
           adminUser = _context.sent;
@@ -39,12 +39,12 @@ function handleSurvey(event) {
           event.preventDefault();
           surveyName = event.target.elements.survey.value;
           _context2.next = 4;
-          return regeneratorRuntime.awrap(axios.get('/selectedAdminUser'));
+          return regeneratorRuntime.awrap(axios.get('/admin'));
 
         case 4:
           adminUser = _context2.sent;
           _context2.next = 7;
-          return regeneratorRuntime.awrap(axios.post('/addSurvey', {
+          return regeneratorRuntime.awrap(axios.post('/surveys/addSurvey', {
             surveyName: surveyName,
             adminEmail: adminUser.data.email
           }));

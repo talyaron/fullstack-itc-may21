@@ -28,7 +28,7 @@
         const surveyID = params.surveyId
         const username = event.target.elements.username.value;
         const email = event.target.elements.email.value
-        const result = await axios.post('/createUser', {
+        const result = await axios.post('/users', {
                         username: username,
                         password: "",
                         email: email

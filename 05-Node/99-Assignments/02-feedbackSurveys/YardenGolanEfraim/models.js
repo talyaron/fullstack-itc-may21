@@ -52,4 +52,6 @@ class Questions{
     }    
 }
 
-module.exports = { User, Users, Survey, Surveys, Question, Questions }
+const users = new Users()
+
+module.exports = { User, Users, Survey, Surveys, Question, Questions, users }

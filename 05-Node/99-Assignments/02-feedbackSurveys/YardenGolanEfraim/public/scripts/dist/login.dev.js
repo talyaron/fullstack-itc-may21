@@ -11,7 +11,7 @@ function handleLogin(event) {
           password = event.target.elements.password.value;
           email = event.target.elements.email.value;
           _context.next = 5;
-          return regeneratorRuntime.awrap(axios.get('/getAllUsers'));
+          return regeneratorRuntime.awrap(axios.get('/users'));
 
         case 5:
           allUsers = _context.sent;
@@ -35,7 +35,7 @@ function handleLogin(event) {
         case 10:
           result = _context.sent;
           event.target.reset();
-          alert("login success!!");
+          alert("login success!");
           window.location.href = "/surveylist.html";
           _context.next = 18;
           break;

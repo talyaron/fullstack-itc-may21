@@ -1,8 +1,17 @@
 "use strict";
 
-var models = require('../models');
+var _require = require('../models.js'),
+    User = _require.User,
+    Users = _require.Users,
+    Survey = _require.Survey,
+    Surveys = _require.Surveys,
+    Question = _require.Question,
+    Questions = _require.Questions,
+    users = _require.users;
 
 var Ajv = require("ajv");
+
+var ajv = new Ajv();
 
 exports.login = function (req, res) {
   try {
@@ -32,8 +41,15 @@ exports.login = function (req, res) {
 
     console.log(users);
     console.log(users.users);
-    selectedAdmin = users.users.find(function (r) {
+    var selectedAdmin = users.users.find(function (r) {
       return r.email === body.email && r.password === body.password;
+    });
+    var adminCookie = JSON.stringify({
+      selectedAdmin: selectedAdmin
+    });
+    res.cookie('admin', adminCookie, {
+      maxAge: 300000000,
+      httpOnly: true
     });
     console.log(selectedAdmin);
     res.send(selectedAdmin);
