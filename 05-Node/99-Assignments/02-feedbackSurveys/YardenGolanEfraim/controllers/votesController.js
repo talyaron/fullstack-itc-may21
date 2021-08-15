@@ -5,11 +5,8 @@ const ajv = new Ajv()
 exports.guest_voter = (req, res) => {
     try{
     const { guest } = req.cookies
-    console.log(guest)
     const guestCookie = JSON.parse(guest);
-    console.log(guestCookie)
     const {guestUser} = guestCookie;
-    console.log(guestUser)
     res.send(guestUser)
 }catch (e) {
     console.error(e)
@@ -48,7 +45,6 @@ exports.post_votes = (req, res) => {
             )
             throw new Error("Invalid data was transferd")
         }
-        console.log(body.ID, body.votes)
         const { adminIndex } = req.cookies
         const cookieIndex = JSON.parse(adminIndex);
         const {selectedAdminIndex} = cookieIndex;

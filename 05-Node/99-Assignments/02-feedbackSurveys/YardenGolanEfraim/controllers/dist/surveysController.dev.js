@@ -37,7 +37,6 @@ exports.delete_survey = function (req, res) {
 exports.send_survey = function (req, res) {
   try {
     var id = req.query.id;
-    console.log(id);
     var idString = JSON.stringify(id);
     res.cookie('surveyEditID', idString, {
       maxAge: 300000000,
@@ -73,8 +72,7 @@ exports.add_survey = function (req, res) {
         return console.log(err.message);
       });
       throw new Error("Invalid data was transferd");
-    } // users.users.find(find => find.email === body.email )
-
+    }
 
     users.users.map(function (user, index) {
       if (user.email === body.adminEmail) {
