@@ -2,6 +2,24 @@ const { Survey, users } = require('../models.js')
 const Ajv = require("ajv");
 const ajv = new Ajv()
 
+exports.delete_survey  = (req, res) => {
+    try{
+    const { ID } = req.params
+    const { admin } = req.cookies
+    const cookie = JSON.parse(admin);
+    const {selectedAdmin} = cookie;
+    selectedAdmin.createdSurvey = selectedAdmin.createdSurvey.filter(survey => survey.surveyID != ID) 
+    const { adminIndex } = req.cookies
+    const cookieIndex = JSON.parse(adminIndex);
+    const {selectedAdminIndex} = cookieIndex;
+    users.users[selectedAdminIndex] = selectedAdmin 
+    const adminCookie = JSON.stringify({ selectedAdmin })
+    res.cookie('admin', adminCookie, { maxAge: 300000000, httpOnly: true });
+    res.send(selectedAdmin)
+}catch (e) {
+    console.error(e)
+}}
+
 exports.send_survey = (req, res) => {
     try {
         const {id} = req.query;

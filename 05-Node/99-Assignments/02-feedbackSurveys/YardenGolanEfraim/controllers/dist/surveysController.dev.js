@@ -8,6 +8,32 @@ var Ajv = require("ajv");
 
 var ajv = new Ajv();
 
+exports.delete_survey = function (req, res) {
+  try {
+    var ID = req.params.ID;
+    var admin = req.cookies.admin;
+    var cookie = JSON.parse(admin);
+    var selectedAdmin = cookie.selectedAdmin;
+    selectedAdmin.createdSurvey = selectedAdmin.createdSurvey.filter(function (survey) {
+      return survey.surveyID != ID;
+    });
+    var adminIndex = req.cookies.adminIndex;
+    var cookieIndex = JSON.parse(adminIndex);
+    var selectedAdminIndex = cookieIndex.selectedAdminIndex;
+    users.users[selectedAdminIndex] = selectedAdmin;
+    var adminCookie = JSON.stringify({
+      selectedAdmin: selectedAdmin
+    });
+    res.cookie('admin', adminCookie, {
+      maxAge: 300000000,
+      httpOnly: true
+    });
+    res.send(selectedAdmin);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 exports.send_survey = function (req, res) {
   try {
     var id = req.query.id;

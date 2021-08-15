@@ -1,6 +1,5 @@
 "use strict";
 
-// Send password and email to server
 function handleLogin(event) {
   var password, email, allUsers, result;
   return regeneratorRuntime.async(function handleLogin$(_context) {
@@ -8,16 +7,14 @@ function handleLogin(event) {
       switch (_context.prev = _context.next) {
         case 0:
           event.preventDefault();
+          _context.prev = 1;
           password = event.target.elements.password.value;
           email = event.target.elements.email.value;
-          _context.next = 5;
+          _context.next = 6;
           return regeneratorRuntime.awrap(axios.get('/users'));
 
-        case 5:
+        case 6:
           allUsers = _context.sent;
-          console.log(allUsers.data.users.find(function (info) {
-            return info.email === email;
-          }));
 
           if (!(allUsers.data.users.find(function (info) {
             return info.email === email && info.password === password;
@@ -35,7 +32,7 @@ function handleLogin(event) {
         case 10:
           result = _context.sent;
           event.target.reset();
-          alert("login success!");
+          alert("login success!!");
           window.location.href = "/surveylist.html";
           _context.next = 18;
           break;
@@ -45,9 +42,20 @@ function handleLogin(event) {
           throw new Error("incorrect email or password");
 
         case 18:
+          _context.next = 23;
+          break;
+
+        case 20:
+          _context.prev = 20;
+          _context.t0 = _context["catch"](1);
+          console.error(_context.t0);
+
+        case 23:
         case "end":
           return _context.stop();
       }
     }
-  });
+  }, null, null, [[1, 20]]);
 }
+
+document.querySelector('.form-field').addEventListener("submit", handleLogin);
