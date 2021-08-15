@@ -315,6 +315,10 @@ body {
   cursor: not-allowed !important;
 }
 
+.title--modify {
+  justify-content: space-around;
+}
+
 .modal {
   display: none;
   position: fixed;
