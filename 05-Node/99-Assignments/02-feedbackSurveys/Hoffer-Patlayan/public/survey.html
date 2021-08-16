@@ -12,9 +12,21 @@
   </head>
   <body>
       <div class="container">
-        <div class="root"></div>
-        <a href="surveyAdd.html"><button>Click on it to Create a Survey</button></a>
-        <h2>Here are your Surveys:</h2>
+        <nav class="navbar navbar-light bg-light">
+          <div class="container-fluid">
+            <img src="img/logo.png" alt="">
+            <a href="survey.html" class="navbar-brand">My Surveys</a>
+            <a href="surveyAdd.html" class="navbar-brand">Create Survey</a>
+            <div class="root" style="margin-top:5px"></div>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <button type="button" class="logOutBtn btn btn-danger">LogOut</button>
+          </div>
+        </nav>
+      
+        <h2 class="page-header">Here are your Surveys:</h2>
         <div class="render_survey">
  
         </div>
@@ -25,7 +37,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Share Survey</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -44,3 +56,5 @@
     <script src="./survey.js"></script>
   </body>
 </html>
+
+

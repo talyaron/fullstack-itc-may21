@@ -9,7 +9,7 @@ const getUser = async () => {
 const render = (name) => {
   const root = document.querySelector(".root");
 
-  const renderIt = `<h2>Hello ${name} and Welcome!</h2>`;
+  const renderIt = `<h5>Welcome ${name}!</h5>`;
   root.innerHTML = renderIt;
 };
 getUser();
@@ -31,13 +31,13 @@ function renderSurvay(surveyData){
   const root = document.querySelector(".render_survey");
   let html = "";
   surveyData.forEach((survey) => {
-    html += `<a onclick='selectedSurv("${survey.id}")' href="selectedSurvey.html">
-                <div class="survey_info">
-                  <h3 style="cursor: pointer">${survey.title}</h3>
-                  <a style="cursor: pointer"><i onclick='deleteSurvey("${survey.id}")' class="icon_delete fas fa-trash fa-2x"></i></a>
-                  <a style="cursor: pointer"  data-bs-toggle="modal" data-bs-target="#exampleModal"><i onclick='shareId("${survey.id}")' class="fas fa-share-alt-square fa-2x"></i></a>
-                </div>
-              </a>`;
+    html += `   <div class="survey_info">
+    <a class="title_survey" onclick='selectedSurv("${survey.id}")' href="selectedSurvey.html"><h3 class="title_surveys">${survey.title}</h3></a>
+    <div class="survey_icons">
+      <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i onclick='shareId("${survey.id}")' class="icon_share fas fa-share-alt-square fa-lg"></i></a>
+      <a style="cursor: pointer"><i onclick='deleteSurvey("${survey.id}")' class="icon_delete fas fa-trash fa-lg"></i></a>
+    </div>
+  </div>`;
   });root.innerHTML = html;
 }  
 
@@ -61,9 +61,12 @@ async function shareId(id){
 function modalRender(id){
   const root = document.querySelector(".modal-body");
   let html = "";
-  html += `<h5>Share this link: http://localhost:3500/response.html?id=${id}</h5>
-  <a href="https://api.whatsapp.com/send?text=http://localhost:3500/response.html?id=${id}" data-action="share/whatsapp/share"><i class="fab fa-whatsapp-square"></i></a>`;
+  html += `<h5>Share this link:</h5>
+  <a href="http://localhost:3500/response.html?id=${id}">http://localhost:3500/response.html?id=${id}</a><br><br>
+    <a class="icon_wpp" href="https://api.whatsapp.com/send?text=http://localhost:3500/response.html?id=${id}" data-action="share/whatsapp/share">Share by Whatssapp</a>`;
   root.innerHTML = html;
 }
 
-
+async function resultsId(id){
+  const gerServ = await axios.get(`/survey/results`, id);
+}

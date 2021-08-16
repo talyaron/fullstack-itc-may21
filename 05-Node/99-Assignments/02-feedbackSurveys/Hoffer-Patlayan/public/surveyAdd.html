@@ -21,27 +21,32 @@
   </head>
   <body>
     <div class="container">
-      <h1>Create your own Survey</h1>
-      <button><a href="survey.html">Back to your Surveys</a></button>
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <img src="img/logo.png" alt="">
+          <a href="survey.html" class="navbar-brand">My Surveys</a>
+          <a href="surveyAdd.html" class="navbar-brand">Create Survey</a>
+          <div class="root"></div>
+          <button type="button" class="logOutBtn btn btn-danger">LogOut</button>
+        </div>
+      </nav>
+      <h1 class="page-header">Create your own Survey</h1>
       <div class="container_form">
+        <button class="btn btn-primary" id="addQuest">New Question</button>
+        <button class="btn btn-primary" id="subBtn" type="submit">Add to Survay</button>
         <input
           type="text"
           name="title"
           id="suvName"
+          class="form-control title_input"
           placeholder="Suvery Name"
         />
-        <button class="btn btn-primary" id="addQuest">
-          Create a Question!
-        </button>
         <div id="questionForm"></div>
-        <button class="btn btn-primary" id="subBtn" type="submit">
-          Add to survay
-        </button>
       </div>
     </div>
-
-    <!-- <script src="../"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="surveyAdd.js"></script>
   </body>
 </html>
+
+
