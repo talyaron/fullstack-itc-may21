@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.deleteSurveys = exports.addSurveys = exports.getPreviousSurvey = exports.getUniqueIdQuestions = exports.getUniqueId = void 0;
+exports.getAnswer = exports.deleteSurveys = exports.addSurveys = exports.getPreviousSurvey = exports.getUniqueIdQuestions = exports.getUniqueId = void 0;
 var fs = require("fs");
 var uuidv4 = require("uuid").v4;
 var survey_1 = require("../models/survey");
@@ -62,3 +62,11 @@ function deleteSurveys(req, res) {
     }
 }
 exports.deleteSurveys = deleteSurveys;
+function getAnswer(req, res) {
+    var _a = req.params, id = _a.id, email = _a.email;
+    var allSurveys = readAllSurveys();
+    var findSurvey = allSurveys.find(function (survey) { return survey.id === id; });
+    var isAdminCreateSurvey = findSurvey.question[0].voters.some(function (voter) { return voter.email === email; });
+    res.send(isAdminCreateSurvey);
+}
+exports.getAnswer = getAnswer;

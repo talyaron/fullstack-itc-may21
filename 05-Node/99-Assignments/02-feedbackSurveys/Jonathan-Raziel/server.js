@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var fs = require("fs");
 var cookieParser = require('cookie-parser');
+var port = process.env.PORT || 8000;
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.static('public'));
@@ -17,6 +18,6 @@ app.use('/surveys', surveyModel);
 app.use('/id', surveyModel);
 app.use('/id', surveyModel);
 app.use('/previous', surveyModel);
-// app.use('/c', surveyModel)
 app.use('/delete', surveyModel);
-app.listen(8000, function () { console.log('Listen on 8000'); });
+app.use('/answer', surveyModel);
+app.listen(port, function () { console.log('Listen on 8000'); });
