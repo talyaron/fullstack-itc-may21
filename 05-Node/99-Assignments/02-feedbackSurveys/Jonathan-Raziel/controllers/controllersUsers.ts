@@ -176,6 +176,7 @@ export function scoreAdd(req, res) {
         });
 
 
+        
         const newResponse = {
             'id': id,
             'title': findSurvey.title,
