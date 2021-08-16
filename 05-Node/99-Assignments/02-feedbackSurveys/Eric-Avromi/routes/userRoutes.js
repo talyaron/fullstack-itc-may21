@@ -1,0 +1,59 @@
+const express = require('express')
+const router = express.Router()
+
+const {v4: uuidv4} = require('uuid'); 
+const {addUsers} = require('../models/userModels.js')
+// const {getAllUsers} = require(`../models/userModels.js`)
+
+
+
+class User {
+    constructor(name, email, password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.id = uuidv4();
+        this.createdSurvey = [];  
+    }
+}
+
+
+
+router.post('/register', (req, res) => {
+
+    const {name, email, password} = req.body
+    const newUser = new User (name, email, password)
+    addUsers(newUser);
+    
+    res.cookie('cookie', {name ,email},  { //YS: You should not send private info in a cookie (its a security breach)
+        maxAge: 30000000,
+        httpOnly: true
+    }).send({ 
+        ok: true
+    });
+});
+
+router.post('/login', (req, res) => {
+
+    const {email, password} = req.body
+
+    const newUser = new User ( email, password)
+    addUsers(newUser);
+    
+    res.cookie('cookie', {email, password},  {
+        maxAge: 30000000,
+        httpOnly: true
+    }).send({ 
+        ok: true
+    });
+});
+
+
+router.get('/userAdmin', (req, res) => { //YS: What is this for? 
+    const cookie = req.cookies['cookie'];
+    res.send({cookie})
+
+})
+
+
+module.exports = router

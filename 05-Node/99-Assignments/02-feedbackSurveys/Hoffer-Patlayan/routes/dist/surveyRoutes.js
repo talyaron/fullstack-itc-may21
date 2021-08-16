@@ -1,0 +1,12 @@
+"use strict";
+exports.__esModule = true;
+var express = require('express');
+var router = express.Router();
+var surveyControllers_1 = require("../controllers/surveyControllers");
+router.post('/addSurvey', surveyControllers_1.addSurveys);
+router.get('/logUser', surveyControllers_1.getLogInUser);
+router.post('/deleteSurvey/:id', surveyControllers_1.deleteSurvey);
+router.get('/saveSurvey/:id', surveyControllers_1.saveSelectedSurvey);
+router.get('/getSurvey', surveyControllers_1.getSelectedSurvey);
+router.post('/editSurvey', surveyControllers_1.editSelectedSurvey);
+module.exports = router;
