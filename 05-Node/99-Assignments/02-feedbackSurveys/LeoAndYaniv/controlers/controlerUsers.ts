@@ -8,12 +8,12 @@ export function newUser(req, res) {
   try {
     const { username, email, password } = req.body;
     const user = new User(username, email, password);
-    const allUsers = new Users();
+    const allUsers = new Users();  //YS: Would be better to create one global instance of the class so that everytime you use it it is the same instance. 
     const emailExistsWithPass: boolean = allUsers.createUser(user, null);
     if (!emailExistsWithPass) {
       res.send({ message: "A new User was added", user });
     } else {
-      res.send({
+      res.send({  //YS: Status 400
         message:
           "Email already registered, please try a different email address!",
       });
@@ -33,7 +33,7 @@ export function login(req, res) {
     if (userExists) {
     const { username } = userExists;
     //Set the cookie
-    const cookieToWrite: string = JSON.stringify({ username, email });
+    const cookieToWrite: string = JSON.stringify({ username, email }); //YS: No private info on cookies (you can use ID)
       res.cookie("userDetails", cookieToWrite, { maxAge: 900000, httpOnly: true });
       res.send({ message: "Logged in successfully", username });
     } else {
@@ -55,7 +55,7 @@ export function answerLogin(req, res) {
     const user = new User(username, email, null);
     const allUsers = new Users();
     const filledAlready: boolean = allUsers.createUser(user, uuid);
-    if (!filledAlready) {
+    if (!filledAlready) { //YS: Status 400
       res.send({ message: "User answers received", filledAlready });
     } else {
       res.send({ message: "User already filled", filledAlready });
@@ -68,7 +68,7 @@ export function answerLogin(req, res) {
 
 export function sendCookie(req, res) {
   try {
-    res.send({ email: req.email, username: req.username });
+    res.send({ email: req.email, username: req.username }); //YS: Private info
   } catch (error) {
     console.error(error);
     res.status(500).send(error.message);
@@ -81,7 +81,7 @@ export function uploadSurvey(req, res) {
     const { uuid } = req.params; // survey uuid
     
     const allSurveys = new Surveys();
-    const newSurvey = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
+    const newSurvey = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]); //YS: Messy parameter - should make it into a variable
     newSurvey.title = req.body.surveyTitle;
     allSurveys.updateSurvey(newSurvey);
 

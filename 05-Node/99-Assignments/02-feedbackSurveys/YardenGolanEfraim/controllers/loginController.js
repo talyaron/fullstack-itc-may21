@@ -2,11 +2,11 @@ const { users, createAdminCookie } = require('../models.js')
 const Ajv = require("ajv");
 const ajv = new Ajv()
 
-exports.login = (req, res) => {
+exports.login = (req, res) => { 
 
     try {
 
-        const schema = {
+        const schema = {  //YS: Nice
             type: "object",
             properties: {
                 password: {
@@ -34,7 +34,7 @@ exports.login = (req, res) => {
             throw new Error("Invalid data was transferd")
         }
      
-        const selectedAdmin = users.users.find(r=> r.email === body.email && r.password === body.password)
+        const selectedAdmin = users.users.find(r=> r.email === body.email && r.password === body.password) //YS: What if it doesnt find it? 
         createAdminCookie(selectedAdmin, res)
         res.send(selectedAdmin);
         

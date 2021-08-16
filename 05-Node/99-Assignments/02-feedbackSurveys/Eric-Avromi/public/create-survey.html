@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="dist/style.css" />
+    <title>Create Survey</title>
+  </head>
+  <body>
+    <div class="mx-0 mx-sm-auto">
+      <div class="card">
+        <div class="card-header bg-primary">
+          <h5 class="card-title text-white mt-2" id="exampleModalLabel">Set a survey</h5>
+          <input
+            class="form-check-inputName1"
+            type="text"
+            name="title"
+            id="surveyTitle"
+            placeholder="Survey name"
+          />
+          <button type="submit" class="btn btn-light">Share</button>
+          <button class="btn btn-dark" id="return">Logout</button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
+          </div>
+        </div>
+        <div class="card-footer text-end">
+          <button type="submit" class="btn btn-success">Add</button>
+          <button type="submit" class="btn btn-warning">Back</button>
+          <button type="submit" onclick="saveSurvey()" class="btn btn-success">Save</button>
+        </div>
+      </div>
+      <div class="root"></div>
+    </div>
+
+    <script>
+      const returnPage = document.querySelector('#return').addEventListener('click', loginOut);
+
+      function loginOut() {
+        window.location.href = 'index.html';
+      }
+
+      let saveData = {};
+
+      async function saveSurvey() {
+        const inputTitle = document.querySelector('#surveyTitle');
+        saveData.title = inputTitle.value;
+        let arr = [];
+        const allQuestions = document.querySelectorAll('.questions');
+        allQuestions.forEach((question) => {
+          const q = { [question.id]: question.value };
+          arr.push(q);
+        });
+        saveData.questions = arr;
+        axios.post('/question/pepe', saveData).then((res) => {
+          console.log(res.data);
+        });
+      }
+
+      const btnAddQuestion = document
+        .querySelector('.btn-success')
+        .addEventListener('click', renderNewQuestion);
+
+      const btnBackToSurveyAdmin = document
+        .querySelector('.btn-warning')
+        .addEventListener('click', backToSurveyAdmin);
+
+      const link = document.querySelector('.btn-light').addEventListener('click', sendSurvey);
+
+      let count = 0;
+
+      async function renderNewQuestion(data) {
+        const root = document.querySelector('.root');
+        html = '';
+        html += `<div>          
+        <input class="form-check-inputName questions" type="text" name="exampleForm" id='question-${count}' placeholder="Write a question" />    
+        <button type="submit" class="btn btn-danger" id="boxquestion" onclick="deleteQuestion()">Delete</button>
+        
+      </div>`;
+        root.insertAdjacentHTML('beforeend', html);
+        count++;
+      }
+
+      function deleteQuestion() {
+        // document.getElementById(`boxquestion${id}`).remove()
+        console.log('hi');
+      }
+
+      function sendSurvey() {
+        //first save question
+        console.log('hi');
+      }
+
+      function backToSurveyAdmin() {
+        window.location.href = 'my-surveys.html';
+      }
+    </script>
+  </body>
+</html>

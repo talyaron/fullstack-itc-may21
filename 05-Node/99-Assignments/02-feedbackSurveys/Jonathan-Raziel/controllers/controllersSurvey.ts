@@ -36,15 +36,15 @@ export function addSurveys(req, res) {
 
         const survey = new Survey(req.body.id, req.body.title, req.body.email, req.body.questions)
         allSurveys.push(survey)
-        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys)); //YS: This should be in a function and go in your models
 
-        const allUsers = JSON.parse(fs.readFileSync("./user.json"));
+        const allUsers = JSON.parse(fs.readFileSync("./user.json")); //YS: This should be in a function and go in your models
 
-        const surveyUser = allUsers.find(user => user.email === req.body.email)
+        const surveyUser = allUsers.find(user => user.email === req.body.email) //YS: This should be in a function and go in your models
 
-        surveyUser.surveys.push(req.body)
+        surveyUser.surveys.push(req.body) //YS: This should be in a function and go in your models
 
-        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+        fs.writeFileSync("./user.json", JSON.stringify(allUsers)); //YS: This should be in a function and go in your models
 
         res.send({ ok: "Surveys Created" });
 
@@ -57,20 +57,20 @@ export function addSurveys(req, res) {
 export function deleteSurveys(req, res) {
     try {
         const { id, email } = req.params
-        let allSurveys = readAllSurveys();
-        let allUsers = JSON.parse(fs.readFileSync("./user.json"));
+        let allSurveys = readAllSurveys();  
+        let allUsers = JSON.parse(fs.readFileSync("./user.json")); //YS: This should be in a function and go in your models
 
-        const user = allUsers.filter(user => user.email === email)
-        user[0].surveys = user[0].surveys.filter(survey => survey.id !== id)
-        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+        const user = allUsers.filter(user => user.email === email) //YS: This should be in a function and go in your models
+        user[0].surveys = user[0].surveys.filter(survey => survey.id !== id) //YS: This should be in a function and go in your models
+        fs.writeFileSync("./user.json", JSON.stringify(allUsers)); //YS: This should be in a function and go in your models
 
 
         //eliminar de json surveys
-        allSurveys = allSurveys.filter(survey => survey.id !== id)
-        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+        allSurveys = allSurveys.filter(survey => survey.id !== id) //YS: This should be in a function and go in your models
+        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys)); //YS: This should be in a function and go in your models
 
-        let allUsersUser = JSON.parse(fs.readFileSync("./user.json"));
-        const find = allUsersUser.find(user => user.email === email)
+        let allUsersUser = JSON.parse(fs.readFileSync("./user.json")); //YS: This should be in a function and go in your models
+        const find = allUsersUser.find(user => user.email === email) //YS: This should be in a function and go in your models
         res.send(find.surveys);
 
 

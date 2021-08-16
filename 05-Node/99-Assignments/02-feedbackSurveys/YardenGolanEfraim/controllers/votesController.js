@@ -45,7 +45,7 @@ exports.post_votes = (req, res) => {
             )
             throw new Error("Invalid data was transferd")
         }
-        const selectedAdminIndex = getAdminCookieIndex(req)
+        const selectedAdminIndex = getAdminCookieIndex(req)  //YS: Again, there are too many objects and indexes, make more variables or destructure the objects
         const selectedAdmin = getAdminCookie(req)
         if(selectedAdmin.createdSurvey.find(survey => survey.surveyID === body.ID).questions[0].voters.voterID.find(id=> id === body.votersID) ===undefined){
         for(i=0; i< body.votes.length; i++){

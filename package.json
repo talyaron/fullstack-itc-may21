@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "@types/node": "^16.4.13"
-  },
-  "dependencies": {
-    "express": "^4.17.1"
-  }
-}

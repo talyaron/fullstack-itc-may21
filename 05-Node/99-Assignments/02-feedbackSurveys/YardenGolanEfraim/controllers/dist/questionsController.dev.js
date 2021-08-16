@@ -12,12 +12,13 @@ exports.post_questions = function (req, res) {
     var body = req.body;
     var selectedAdmin = getAdminCookie(req);
     var selectedAdminIndex = getAdminCookieIndex(req);
-    var questions = body.questions;
+    var questions = body.questions; //YS: You can destructure both of them: const { questions, surveyId } = body
+
     var surveyID = body.surveyID;
     questions.forEach(function (question) {
       selectedAdmin.createdSurvey.find(function (survey) {
         return survey.surveyID === surveyID;
-      }).questions.push(new Question(question));
+      }).questions.push(new Question(question)); //YS: Find method returns a object, where is the object? It should be made into a varbiable. 
     });
     users.users[selectedAdminIndex] = selectedAdmin;
     createAdminCookie(selectedAdmin, res);

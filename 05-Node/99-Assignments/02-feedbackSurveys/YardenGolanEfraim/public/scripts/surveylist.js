@@ -2,7 +2,7 @@
      try {
         const nameDisplay = document.querySelector("h1")
         const adminUser = await axios.get('/admin')
-        nameDisplay.innerText = await adminUser.data.name
+        nameDisplay.innerText = await adminUser.data.name //YS: YOu dont need an await for this. 
         renderArrayToDom(adminUser.data.createdSurvey)
 
     }catch (e) {
@@ -19,7 +19,7 @@
             surveyName: surveyName,
             adminEmail: adminUser.data.email
         })
-        await renderArrayToDom(result.data.createdSurvey)
+        await renderArrayToDom(result.data.createdSurvey) //YS: This shouldnt be await since the renderArrayToDom is not async
         event.target.reset();
 
     }catch (e) {
