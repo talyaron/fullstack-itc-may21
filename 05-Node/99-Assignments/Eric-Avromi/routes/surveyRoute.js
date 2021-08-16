@@ -15,15 +15,6 @@ const {
     get
 } = require('./userRoutes');
 
-class Survey {
-    constructor() {
-
-        this.title = '';
-        this.questions = [];
-        this.admin = "";
-        this.id = ""
-    }
-}
 
 const newSurvey = new Survey()
 
