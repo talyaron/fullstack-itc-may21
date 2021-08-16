@@ -23,7 +23,7 @@ export function addSurveys(req, res) {
 
         const surveyUser = allUsers.find(user => user.email === req.body.email)
 
-        surveyUser.createdSurvey.push(req.body)
+        surveyUser.surveys.push(req.body)
 
         fs.writeFileSync("./users.json", JSON.stringify(allUsers));
 

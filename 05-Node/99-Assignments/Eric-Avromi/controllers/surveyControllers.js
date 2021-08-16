@@ -15,7 +15,7 @@ function addSurveys(req, res) {
     fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
     var allUsers = JSON.parse(fs.readFileSync("./users.json"));
     var surveyUser = allUsers.find(function (user) { return user.email === req.body.email; });
-    surveyUser.createdSurvey.push(req.body);
+    surveyUser.surveys.push(req.body);
     fs.writeFileSync("./users.json", JSON.stringify(allUsers));
     res.send({ ok: "Surveys Created" });
 }
