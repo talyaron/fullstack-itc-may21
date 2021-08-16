@@ -5,7 +5,7 @@ import { Users } from "../models/users";
 export function isAdmin(req, res, next) {
     try {
         let isUserAdmin: boolean = false;
-        const allUsers = new Users();
+        const allUsers = new Users(); //YS: Here you are creating a new instance of Users (different from the one you are using)
         const userIndex = allUsers.users.findIndex(user => user.email === req.email);
 
         if ((userIndex !== -1)) { // user exists

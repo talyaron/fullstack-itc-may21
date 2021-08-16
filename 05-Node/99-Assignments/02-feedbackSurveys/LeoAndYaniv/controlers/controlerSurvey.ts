@@ -19,20 +19,20 @@ export function getSurveys(req, res) {
 }
 
 //Function to create an empty survey
-export function newSurvey(req, res) {
+export function newSurvey(req, res) {    //YS: Try/Catch
   //User email sended by params in the URL
   const admin = req.email;
   
   const newSurvey = {uuid: null, title: null, admin, questions: null};
-  const survey = new Survey(newSurvey);
+  const survey = new Survey(newSurvey);  
   
-  const allSurveys = new Surveys;
+  const allSurveys = new Surveys; //YS: Same as with users class, would be better to have just one instance of this class
   allSurveys.createSurvey(survey);
   res.send({ message: "A new Survey was added", survey });
 }
 
 //Function to delete the completly survey
-export function deleteSurvey(req, res) {
+export function deleteSurvey(req, res) { //YS: Try/Catch?
   const { uuid } = req.params;
   const allSurveys = new Surveys;
   allSurveys.deleteSurvey(uuid);
@@ -41,10 +41,10 @@ export function deleteSurvey(req, res) {
 }
 
 //Function to add a new question into the survey
-export function addQuestion(req, res) {
+export function addQuestion(req, res) { //YS: Try/Catch?
   const { uuid } = req.params;
   const allSurveys = new Surveys;
-  const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
+  const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]); //YS: Same as before
 
   const newQuestion = new Question(req.body.question);
 
@@ -60,16 +60,16 @@ export function addQuestion(req, res) {
 }
 
 // //Function to get a question from a specific survey
-export function getQuestionsSurvey(req, res) {
+export function getQuestionsSurvey(req, res) { //YS: Try/Catch?
   //User email sended by params in the URL
   const { uuid } = req.params;
-  const allSurveys = new Surveys;
+  const allSurveys = new Surveys; 
   const surveyToUpdate = allSurveys.surveys[allSurveys.findSurveyIndex(uuid)];
   res.send({ survey: surveyToUpdate });
 }
 
 //Function to delete a question
-export function deleteQuestion(req, res) {
+export function deleteQuestion(req, res) { //YS: Try/Catch?
   const { qUuid, uuid } = req.params; // qUuid: question uuid; uuid: survey uuid
   const allSurveys = new Surveys();
   const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
@@ -86,7 +86,7 @@ export function deleteQuestion(req, res) {
   res.send({ message: "A question was deleted", survey: surveyToUpdate, disableAddQuestionBtn, disableSubmitSurvey });
 }
 
-export function editQuestion(req, res) {
+export function editQuestion(req, res) { //YS: Try/Catch?
   const { qUuid, uuid } = req.params; // qUuid: question uuid; uuid: survey uuid
   const allSurveys = new Surveys();
   const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
@@ -101,7 +101,7 @@ export function editQuestion(req, res) {
 }
 
 //Function to update questions of a survey
-export function updateQuestionsSurvey(req, res) {
+export function updateQuestionsSurvey(req, res) { //YS: Try/Catch?
   const { uuid } = req.params;
   const allSurveys = new Surveys;
   const surveyToUpdate = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);

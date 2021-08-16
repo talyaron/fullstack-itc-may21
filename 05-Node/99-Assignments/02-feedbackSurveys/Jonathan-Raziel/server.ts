@@ -7,16 +7,17 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.static('public'));
 
-const userModel = require("./routes/routeUser")
+const userModel = require("./routes/routeUser") //YS: Should be called userRoute
 
-app.use('/register', userModel);
+//YS: This is not how we use routes - you should only have 1 route with 1 file. You are using many different routes for the same file.  
+app.use('/register', userModel);  
 app.use('/loginUser', userModel);
 app.use('/login', userModel);
 app.use('/cookie', userModel);
 app.use('/surveys', userModel);
 app.use('/score',userModel)
 
-const surveyModel = require("./routes/routesSurveys")
+const surveyModel = require("./routes/routesSurveys") //YS: Should be called surveyRoute
 
 app.use('/surveys',surveyModel)
 app.use('/id',surveyModel)

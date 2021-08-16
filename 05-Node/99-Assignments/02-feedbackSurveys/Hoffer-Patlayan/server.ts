@@ -15,7 +15,7 @@ app.use(express.static("public"));
 app.set("port", 3500 || process.env.PORT);
 
 // ROUTES FILES IMPORTS
-const usersRoute = require('./routes/usersRoutes');
+const usersRoute = require('./routes/dist/usersRoutes');
 const signUpRoute = require('./routes/signUpRoutes');
 const logInRoute = require('./routes/logInRoutes');
 const addSurveys = require('./routes/surveyRoutes');

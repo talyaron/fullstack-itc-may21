@@ -4,6 +4,8 @@ const fs = require("fs");
 const path = require("path");
 const surveysJsonPath = path.resolve(__dirname, "./surveys.json");
 
+//YS: Good job! Very organized.
+
 //Function to read the JSON of created surveys
 export const readJsonSurveys = () => {
   try {
@@ -12,7 +14,7 @@ export const readJsonSurveys = () => {
     let surveysWithTitles = JSON.parse(surveys);
     surveysWithTitles = surveysWithTitles.filter(survey => survey.title !== '');
     // keep surveys created in last 15 mins, even WO title
-    surveysInCreation = surveysInCreation.filter(survey => (Date.now() - survey.createdDate < 900000));
+    surveysInCreation = surveysInCreation.filter(survey => (Date.now() - survey.createdDate < 900000)); //YS: Nice!
     surveysInCreation = surveysInCreation.filter(survey => survey.title === '');
     const surveysToKeep = [ ...surveysWithTitles, ...surveysInCreation ]
     return surveysToKeep;

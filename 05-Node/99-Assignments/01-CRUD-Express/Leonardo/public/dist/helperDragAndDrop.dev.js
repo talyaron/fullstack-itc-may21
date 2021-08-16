@@ -1,7 +1,7 @@
 "use strict";
 
 function onDragStart(event) {
-  //YS: Very nice!!! 
+  //YS: Doesn't seem to be used
   try {
     event.dataTransfer.setData('text/plain', event.target.id);
     event.currentTarget.style.backgroundColor = 'yellow';

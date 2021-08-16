@@ -41,6 +41,7 @@ exports.add_user = function (req, res) {
     if (users.users.find(function (info) {
       return info.email === body.email;
     }) === undefined && body.password === "") {
+      //Ok, could be more DRY and separate things into different variables/destructure
       users.newUser(new User(body.username, body.email, ""));
       var guestUser = users.users[users.users.length - 1];
       createGuestCookie(guestUser, res);
