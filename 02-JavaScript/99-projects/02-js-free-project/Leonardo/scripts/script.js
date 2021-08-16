@@ -23,11 +23,14 @@ var Pet = /** @class */ (function () {
     return Pet;
 }());
 //I initialice a new array that will contains all the pets:
-var pets = [];
+var pets = JSON.parse(localStorage.getItem('pet'));
 //Function to add a pet to the array
 function addPet(name, age, gender, city, image, description, contactNumber) {
     try {
         var newPet = new Pet(name, age, gender, city, image, description, contactNumber);
+        if (pets === null) {
+            pets = [];
+        }
         pets.push(newPet);
         if (!this.pets)
             throw new Error('The array where you want to push the pets it doesn´t exist!');
@@ -50,22 +53,13 @@ var doingSubmit = function (ev) {
         var image = document.querySelector('#previewImage').getAttribute("src");
         addPet(name, age, gender, city, image, description, contactNumber);
         ev.target.reset();
-        //YS: Add an alert here or some message that a pet has been added. 
+        alert('Pet added propertly!');
+        location.href = 'listOfPets.html';
     }
     catch (error) {
         console.error(error);
     }
 };
-function redirect() {
-    try {
-        window.location.href = '../Chat/listOfPets.html';
-        if (!window.location.href)
-            throw new Error('The page where you want to redirect it doesn´t exist!');
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
 //Function to show the previous image in the form:
 function readURL(input) {
     if (input.files && input.files[0]) {

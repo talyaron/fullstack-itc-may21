@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vamosargentina</title>
+    <title>MatchPet</title>
     <link rel="stylesheet" href="dist/style.min.css">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
@@ -37,15 +37,13 @@
             required>
 
         <input type="file" id="image" name="image" onchange="readURL(this);">
-        <img class="form__input--image" id="previewImage">
+        <img class="form__input--image" id="previewImage" src="img/dogProfile.png">
 
         <input class="form__input--submit" type="submit" value="Post my lovely pet!">
-
-        <!-- 
-        Will see that the next button is not the niciest, that is because my idea is to have a database and when a user upload his pet, that redirect to see all the pets in the page. However, because we dont have a database I choose to upload as many pets as you want and then you see all the pets that you upload in local mode -->
-        <button class="form__input--submit" onclick="redirect()">See the tinder </button>
     </form>
-    <script src="scripts/dist/script.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 
 </html>
+
+
