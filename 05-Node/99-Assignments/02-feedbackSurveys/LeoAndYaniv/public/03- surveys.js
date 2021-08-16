@@ -1,5 +1,5 @@
 const root = document.querySelector('#nameUser');
-//YS: Good
+
 async function renderUserDetails() {
     const userDetails = await axios.get('/user/info');
     const { username } = userDetails.data;

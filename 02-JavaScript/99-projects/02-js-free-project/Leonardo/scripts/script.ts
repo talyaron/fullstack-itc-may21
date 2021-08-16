@@ -33,22 +33,19 @@ class Pet {
 }
 
 //I initialice a new array that will contains all the pets:
-let pets: Array<Pet> = JSON.parse(localStorage.getItem('pet'));
+const pets: Array<Pet> = [];
 
 //Function to add a pet to the array
 function addPet(name: string, age: number, gender: string, city: string, image: string, description: string, contactNumber: number): void {
     try {
         let newPet: Pet = new Pet(name, age, gender, city, image, description, contactNumber)
-        if (pets === null){
-            pets = [];
-        }
         pets.push(newPet);
         if (!this.pets) throw new Error('The array where you want to push the pets it doesn´t exist!')
         localStorage.setItem('pet', JSON.stringify(pets));
     } catch (error) {
         console.error(error);
     }
-}   
+}
 
 //With this function I handle the form:
 const doingSubmit = (ev: any): void => {   
@@ -63,12 +60,20 @@ const doingSubmit = (ev: any): void => {
         const image: string = document.querySelector('#previewImage').getAttribute("src");  
         addPet(name, age, gender, city, image, description, contactNumber);
         ev.target.reset();
-        alert('Pet added propertly!')
-        location.href = 'listOfPets.html';
+        //YS: Add an alert here or some message that a pet has been added. 
     } catch (error) {
         console.error(error);
     }
 };
+
+function redirect(): void {
+    try {
+        window.location.href = '../Chat/listOfPets.html';
+        if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!')
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 //Function to show the previous image in the form:
 function readURL(input): void {

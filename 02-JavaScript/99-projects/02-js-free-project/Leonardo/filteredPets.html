@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="dist/style.min.css">
 </head>
 
-<body class="body__filter" onload="renderPetsFilter()">
+<body class="body__filter">
     <header class="filter">
-        <a class="filter__button filter--back" href="listOfPets.html">Delete filter</a>
+        <button class="filter__button" onclick="goBack()">Delete filter</button>
     </header>
     <div id="root"></div>
     <div class="pet"></div>
-    <script src="scripts/scriptFilterPets.js"></script>
+    <script src="scripts/dist/scriptFilterPets.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 
 
-    function handleRegister(ev) { //YS: Good! 
+    function handleRegister(ev) {
         ev.preventDefault()
         try{
         const username = ev.target.elements.username.value;

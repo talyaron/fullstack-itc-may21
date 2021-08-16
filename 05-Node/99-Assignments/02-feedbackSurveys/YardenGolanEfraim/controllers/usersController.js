@@ -41,8 +41,8 @@ exports.add_user = (req, res) => {
             throw new Error("Invalid data was transferd")
         }
 
-        if (users.users.find(info => info.email === body.email) === undefined && body.password === "") { //Ok, could be more DRY and separate things into different variables/destructure
-            users.newUser(new User(body.username, body.email, "")) 
+        if (users.users.find(info => info.email === body.email) === undefined && body.password === "") {
+            users.newUser(new User(body.username, body.email, ""))
             const guestUser = users.users[users.users.length - 1]
             createGuestCookie(guestUser, res)
             res.send(guestUser)

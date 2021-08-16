@@ -24,7 +24,7 @@ async function renderSurveyInfo() {
     let html = "";
     questionsCreated.data.survey.questions.forEach(question => {
         let average = getTheAverageScorePerQuestion(question);
-        if (Number.isNaN(average)) { //YS: Nice!
+        if (Number.isNaN(average)) {
             average = 0
         };
         html += `<div class="survey__questions title--modify">${question.content} <span class="nameUser__title">Average score: ${average.toFixed(2)} </span></div>`

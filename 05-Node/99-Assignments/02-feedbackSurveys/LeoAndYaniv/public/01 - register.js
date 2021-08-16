@@ -2,7 +2,7 @@
 const handleFormCreate = document.querySelector("#createForm");
 handleFormCreate.addEventListener('submit', doingSubmitCreate);
 
-async function doingSubmitCreate(ev) { //YS: Nice
+async function doingSubmitCreate(ev) {
     try {
         const errorMessage = document.querySelector('#errorMessage');
         if (!errorMessage) throw new Error('There is a problem findind the container for the error message')

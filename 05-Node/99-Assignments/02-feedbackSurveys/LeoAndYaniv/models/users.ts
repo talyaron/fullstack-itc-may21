@@ -2,10 +2,7 @@ export {};
 
 const fs = require("fs");
 const path = require('path');
-const usersJsonPath = path.resolve(__dirname, './users.json'); //YS: Nice!
-
-//YS: Good job! Very organized.
-
+const usersJsonPath = path.resolve(__dirname, './users.json');
 
 //Function to read the JSON of created users
 const readJsonUsers = () => {
@@ -50,7 +47,7 @@ export class Users {
     }
   }
 
-  createUser(user, surveyUuid) { //YS: Im sure there could've been a less confusing solution, but well done. 
+  createUser(user, surveyUuid) {
     try {
       const emailIndex = this.users.findIndex(userItem => userItem.email === user.email);
 

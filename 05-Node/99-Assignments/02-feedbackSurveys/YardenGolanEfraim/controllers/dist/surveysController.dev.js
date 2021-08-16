@@ -19,8 +19,7 @@ exports.delete_survey = function (req, res) {
       return survey.surveyID != ID;
     });
     var selectedAdminIndex = getAdminCookieIndex(req);
-    users.users[selectedAdminIndex] = selectedAdmin; //YS: This is unclear, make different variables. 
-
+    users.users[selectedAdminIndex] = selectedAdmin;
     createAdminCookie(selectedAdmin, res);
     res.send(selectedAdmin);
   } catch (e) {
@@ -31,8 +30,7 @@ exports.delete_survey = function (req, res) {
 exports.send_survey = function (req, res) {
   try {
     var id = req.query.id;
-    var idString = JSON.stringify(id); //YS: This is not necessary 
-
+    var idString = JSON.stringify(id);
     res.cookie('surveyEditID', idString, {
       maxAge: 300000000,
       httpOnly: true
@@ -71,8 +69,7 @@ exports.add_survey = function (req, res) {
 
     users.users.map(function (user, index) {
       if (user.email === body.adminEmail) {
-        users.users[index].createdSurvey.push(new Survey(body.surveyName, body.adminEmail)); //YS: Separate into variables
-
+        users.users[index].createdSurvey.push(new Survey(body.surveyName, body.adminEmail));
         var selectedAdmin = users.users[index];
         var selectedAdminIndex = index;
         createAdminCookie(selectedAdmin, res);
@@ -98,8 +95,7 @@ exports.get_survey = function (req, res) {
   try {
     var surveyEditID = req.cookies.surveyEditID;
     var cookieEditID = JSON.parse(surveyEditID);
-    var editID = cookieEditID; //YS: Why not just use cookieEditID
-
+    var editID = cookieEditID;
     var selectedAdmin = getAdminCookie(req);
     var surveyInfo = selectedAdmin.createdSurvey.filter(function (survey) {
       return survey.surveyID === editID;

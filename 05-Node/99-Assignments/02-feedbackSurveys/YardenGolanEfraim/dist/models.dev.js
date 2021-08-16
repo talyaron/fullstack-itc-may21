@@ -92,7 +92,7 @@ function () {
   return Questions;
 }();
 
-var users = new Users(); //////////////////////////////////  YS: All of these cookie functions below should be middleware - not models. 
+var users = new Users();
 
 function createAdminCookie(selectedAdmin, res) {
   try {

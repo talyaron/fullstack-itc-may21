@@ -2,7 +2,7 @@
 const url_string = window.location.href;
 const url = new URL(url_string);
 const uuid = url.searchParams.get("uuid");
-//YS: Good
+
 async function getUserDetailsFromCookie() {
     const userDetails = await axios.get('/user/info');
     const { username } = userDetails.data;

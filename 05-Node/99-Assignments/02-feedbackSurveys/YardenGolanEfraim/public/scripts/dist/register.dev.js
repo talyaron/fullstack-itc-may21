@@ -1,7 +1,6 @@
 "use strict";
 
 function handleRegister(ev) {
-  //YS: Good! 
   ev.preventDefault();
 
   try {

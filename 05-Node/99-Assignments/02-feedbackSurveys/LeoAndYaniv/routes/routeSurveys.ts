@@ -8,7 +8,7 @@ import {newSurvey, getSurveys, deleteSurvey, addQuestion, editQuestion, deleteQu
 
 //When the user click to start a new survey I call this method
 router.route('/survey/:uuid')
-    .post(userCookieRead, isAdmin, newSurvey)  //YS: Very nice use of middleware!
+    .post(userCookieRead, isAdmin, newSurvey)
     .get(userCookieRead, isAdmin, getSurveys)
     .delete(userCookieRead, isAdmin, deleteSurvey);
 

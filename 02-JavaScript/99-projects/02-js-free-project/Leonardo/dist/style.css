@@ -161,12 +161,6 @@ body {
   background-color: black;
   color: white;
 }
-.filter--back {
-  text-decoration: none;
-  color: black;
-  background-color: #EFEFEF;
-  border: 2px solid black;
-}
 
 select {
   border: 3px solid coral;
@@ -177,8 +171,4 @@ select {
 }
 select:hover {
   border: 3px solid lightseagreen;
-}
-
-#previewImage {
-  border-radius: 50px;
 }

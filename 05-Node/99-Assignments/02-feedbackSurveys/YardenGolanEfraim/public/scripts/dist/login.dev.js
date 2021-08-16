@@ -32,8 +32,7 @@ function handleLogin(event) {
         case 10:
           result = _context.sent;
           event.target.reset();
-          alert("login success!!"); //YS: How do you know it was successful?: if (result)
-
+          alert("login success!!");
           window.location.href = "/surveylist.html";
           _context.next = 18;
           break;

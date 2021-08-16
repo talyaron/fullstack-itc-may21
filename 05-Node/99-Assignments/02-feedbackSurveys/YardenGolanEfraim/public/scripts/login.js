@@ -5,14 +5,14 @@ async function handleLogin(event){
     const password = event.target.elements.password.value;
     const email = event.target.elements.email.value
     const allUsers = await axios.get('/users')
-    if(allUsers.data.users.find(info => info.email === email && info.password === password) != undefined){ //YS: Long and confusing if statement, separate to variables. 
+    if(allUsers.data.users.find(info => info.email === email && info.password === password) != undefined){
     const result = await axios.post('/login', {
                     password: password,
                     email: email
                 })
            
             event.target.reset();
-           alert("login success!!") //YS: How do you know it was successful?: if (result)
+           alert("login success!!")
             window.location.href="/surveylist.html";}
             else{
                 alert("incorrect email or password!")

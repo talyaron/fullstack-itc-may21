@@ -4,23 +4,23 @@ const root: HTMLElement = document.querySelector('#root')
 //I render all the pets
 function renderPets(): void {
     try {
-        let html: string = allPets.map(element => {
+        let html: string = this.allPets.map(element => {
             return (
-                `<div id='${element.name}' class="pet__item__wrapper">
-                <div><img class="pet__item__image" src="${element.image}" alt=""></div>
-                <div class="pet__item__information__wrapper">
-                <div>Name: <b>${element.name.toUpperCase()}</b></div>
-                <div>Age: <b>${element.age}</b></div>
-                 </div>
-                <div class="pet__item__information__description">${element.description}</div>
-                <div class="pet__item__information__wrapper">
-                <div><b>${element.city.toUpperCase()}</b></div>
-                <div>Contact:<b>${element.contactNumber}</b></div>
-                 </div>
-                <div class="pet__item__information__description">${element.gender.toUpperCase()}</div>
-                 </div>`
+                `<div id='${element.name}' class="pet__item__wrapper">` +
+                `<div><img class="pet__item__image" src="${element.image}" alt=""></div>` +
+                `<div class="pet__item__information__wrapper">` +
+                `<div>Name: <b>${element.name.toUpperCase()}</b></div>` +
+                `<div>Age: <b>${element.age}</b></div>` +
+                ` </div>` +
+                `<div class="pet__item__information__description">${element.description}</div>` +
+                `<div class="pet__item__information__wrapper">` +
+                `<div><b>${element.city.toUpperCase()}</b></div>` +
+                `<div>Contact:<b>${element.contactNumber}</b></div>` +
+                ` </div>` +
+                `<div class="pet__item__information__description">${element.gender.toUpperCase()}</div>` +
+                ` </div>`
             )
-        }).join(''); 
+        }).join('');  //YS: Please use template literals (string interpolation)  instead of concatenating with + and joining. 
         if (!html) throw new Error('An error happens when you want to render the pets!')
         root.innerHTML = html;
     } catch (error) {
@@ -93,6 +93,16 @@ function handleFilter(): void {
         const petsFiltered = allPets.filter(element => (element.age === age.value) && (element.city.toUpperCase() === city.value) && (element.gender.toUpperCase() === gender.value)); //YS: What if all of them are false? Let the user know.
         localStorage.setItem('petFiltered', JSON.stringify(petsFiltered));
         window.location.href = 'filteredPets.html';
+        if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!');
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+//Call this function to go back to the main page
+function goBack(): void {
+    try {
+        window.location.href = 'index.html';       //YS: Would have liked to see navbar
         if (!window.location.href) throw new Error('The page where you want to redirect it doesn´t exist!');
     } catch (error) {
         console.error(error);

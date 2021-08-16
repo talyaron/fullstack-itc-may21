@@ -1,7 +1,7 @@
 //Get the UUID from the URL
 const url_string = window.location.href;
 const url = new URL(url_string);
-const uuid = url.searchParams.get("uuid"); //YS: Good!
+const uuid = url.searchParams.get("uuid");
 
 
 async function renderUserDetails() {
@@ -29,13 +29,13 @@ async function addQuestion(ev) {
         const { disableAddQuestionBtn, disableSubmitSurvey } = surveyQuestions.data;
         renderQuestions();
 
-        const AddQuestionBtn = document.querySelector('#buttonCreate'); //YS: Shouldnt be capitalized
+        const AddQuestionBtn = document.querySelector('#buttonCreate');
         if (disableAddQuestionBtn) {
             AddQuestionBtn.disabled = true;
             AddQuestionBtn.classList.add('button--disabled');
         }
         
-        const SubmitSurvey = document.querySelector('#buttonUpload'); //YS: Shouldnt be capitalized
+        const SubmitSurvey = document.querySelector('#buttonUpload');
         if (!disableSubmitSurvey) {
             SubmitSurvey.disabled = false;
             SubmitSurvey.classList.remove('button--disabled');
@@ -155,7 +155,7 @@ async function renderQuestions() {
 const cancelSurvey = document.querySelector("#buttonCancel");
 cancelSurvey.addEventListener('click', cancelTheSurvey);
 
-async function cancelTheSurvey() { //YS: Good! 
+async function cancelTheSurvey() {
     try {
         const option = confirm(`Are you sure do you want to cancel the survey, you will lose all the data created here?`);
         if (option) {

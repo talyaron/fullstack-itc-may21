@@ -53,7 +53,6 @@ class Questions{
 }
 
 const users = new Users()
-//////////////////////////////////  YS: All of these cookie functions below should be middleware - not models. 
 function createAdminCookie(selectedAdmin, res){
     try{
     const adminCookie = JSON.stringify({ selectedAdmin })

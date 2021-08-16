@@ -23,11 +23,10 @@ function renderSurveyEdit(survey) {
         questionHtml +=
             `  <div>Question ${questionNumber}</div>
                     <div class="questioninfo-holder">
-                    <div id= "${survey.questions[i].questionID}"class= "question${i}">${survey.questions[i].title}</div> 
-                    <div class="averagevotes">Average Score:${sum/survey.questions[i].voters.score.length}</div>  
+                    <div id= "${survey.questions[i].questionID}"class= "question${i}">${survey.questions[i].title}</div>
+                    <div class="averagevotes">Average Score:${sum/survey.questions[i].voters.score.length}</div>
                     <div class="numberofvotes">Number of Voters: ${survey.questions[i].voters.score.length}</div>
-                    </div> ` 
-                    //YS: You could make average score into a terneray operator: ${sum/survey.questions[i].voters.score.length} !== NaN ? ${sum/survey.questions[i].voters.score.length} : 'No Average Score Yet'
+                    </div> `
     }
     let html = `<div class="survey__ID"  id='${survey.surveyID}'>
                     <div class="survey__ID__Title">${survey.title}</div>

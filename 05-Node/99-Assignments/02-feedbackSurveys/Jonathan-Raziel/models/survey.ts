@@ -1,5 +1,5 @@
 export { };
-//YS: Your data manupulation should go here
+
 export interface Question {
     title: string;
     questionId: string;

@@ -11,7 +11,6 @@ var ajv = new Ajv();
 exports.login = function (req, res) {
   try {
     var schema = {
-      //YS: Nice
       type: "object",
       properties: {
         password: {
@@ -37,8 +36,7 @@ exports.login = function (req, res) {
 
     var selectedAdmin = users.users.find(function (r) {
       return r.email === body.email && r.password === body.password;
-    }); //YS: What if it doesnt find it? 
-
+    });
     createAdminCookie(selectedAdmin, res);
     res.send(selectedAdmin);
   } catch (e) {

@@ -3,7 +3,7 @@ const router = express.Router();
 const usersController = require("../controllers/usersController")
 
 router
-  .route("/") //YS: Good
+  .route("/")
   .post(usersController.add_user)
   .get(usersController.get_all_users)
 module.exports = router;

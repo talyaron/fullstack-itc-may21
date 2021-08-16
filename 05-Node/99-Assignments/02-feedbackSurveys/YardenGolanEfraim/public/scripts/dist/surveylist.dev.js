@@ -18,7 +18,6 @@ function getAdminUser() {
 
         case 7:
           nameDisplay.innerText = _context.sent;
-          //YS: YOu dont need an await for this. 
           renderArrayToDom(adminUser.data.createdSurvey);
           _context.next = 14;
           break;
@@ -64,7 +63,6 @@ function handleSurvey(event) {
           return regeneratorRuntime.awrap(renderArrayToDom(result.data.createdSurvey));
 
         case 11:
-          //YS: This shouldnt be await since the renderArrayToDom is not async
           event.target.reset();
           _context2.next = 17;
           break;

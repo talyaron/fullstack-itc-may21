@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 
 app.use(express.json());
 app.use(express.static('public'));
-// app.use(isAdmin());  
+// app.use(isAdmin());
 
 //I use this to read the cookie (I can create it with out this)
 app.use(cookieParser());
@@ -19,6 +19,3 @@ app.use('/user', userRoute);
 app.use('/surveys', surveysRoute);
 
 app.listen(port, () => { console.log(`Listening on port: ${port}`) });
-
-
-//YS: Good!
