@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+
+    <script>
+
+        const isRedirect = JSON.parse(localStorage.getItem("isRedirect"))
+
+        if (isRedirect !== 0) {
+            localStorage.setItem('isRedirect', JSON.stringify(1))
+            function redirectpage() {
+
+                const params = new URLSearchParams(window.location.search);
+                const idSurvey = params.get('surveyId');
+               
+                localStorage.setItem('id', JSON.stringify(idSurvey))
+                window.location.replace("http://localhost:8080/user-login.html")
+            }
+            setTimeout('redirectpage()', 4000)
+        }
+    </script>
+</head>
+
+<body onload="getIdSurvey()">
+
+
+    <form class="sumbit">
+        <div id="root"></div>
+
+        <button type="submit">Send</button>
+    </form>
+    <script>
+
+        async function getIdSurvey() {
+
+            const params = new URLSearchParams(window.location.search);
+            const idSurvey = params.get('surveyId');
+
+            const response = await axios.get(`/previous/getSurvey/${idSurvey}`)
+            const data = response.data
+
+
+            renderSurvey(data) 
+        }
+
+        function renderSurvey(data) {
+            const root = document.querySelector('#root');
+            let html = ''
+
+            let count = 1;
+
+            html += `<p>Survey Title: ${data.title}</p>` 
+
+            data.question.forEach((question, index) => {
+                html += `
+        
+                <p>Question ${count}: ${question.title}</p> 
+                <div style="display:flex">
+                    
+                <div>
+                    <input type="radio" id="one" name="${index}" value="1" checked>
+                    <label for="score${index}">1</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="two" name="${index}" value="2">
+                    <label for="score${index}">2</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="three" name="${index}" value="3">
+                     <label for="score${index}">3</label>
+                </div>
+                <div>
+                    <input type="radio" id="four" name="${index}" value="4">
+                    <label for="score${index}">4</label>
+                </div>
+                <div>
+                    <input type="radio" id="five" name="${index}" value="5">
+                    <label for="score${index}">5</label>
+                </div>
+            </div>
+`
+count++;
+            });
+
+            root.innerHTML = html;
+
+
+        }
+        const form = document.querySelector('.sumbit');
+        form.addEventListener('submit', sendSurvey)
+
+        async function sendSurvey(ev) {
+            ev.preventDefault();
+
+            const scoreList = []
+
+            const response = await axios.get('/id/surveys')
+            const { id } = response.data
+
+            var data = new FormData(form)
+
+             for (const entry of data) {
+                 scoreList.push({
+                     id: id,
+                     score: +entry[1]
+                 })
+             };
+             
+
+            const params = new URLSearchParams(window.location.search);
+            const idSurvey = params.get('surveyId');
+
+            const responseAwait = await addScorePromise(scoreList,idSurvey)
+
+            const { ok } = responseAwait
+            alert(ok)
+
+
+
+        }
+
+         function addScorePromise(scoreList,idSurvey) {
+            return new Promise((resolve, reject) => {
+                fetch(`/score/add/${idSurvey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(scoreList)
+                }).then(function (res) {
+                    if (res.status === 200 && res.ok) {
+                        return res.json().then(survey => {
+                            resolve(survey);
+                        });
+                    } else {
+                        return res.json().then(survey => {
+                            alert(survey.survey)
+                        })
+                    }
+                }).catch(error => console.error('Error: ', error));
+            })
+        }
+
+    </script>
+</body>
+
+</html>

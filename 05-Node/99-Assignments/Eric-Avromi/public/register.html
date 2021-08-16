@@ -64,18 +64,44 @@
 
 		const form = document.querySelector('.my-login-validation').addEventListener('submit', hundleSubmit)
 
-		function hundleSubmit(ev) {
+	async	function hundleSubmit(ev) {
 			ev.preventDefault()
 			const name = ev.target.elements.name.value;
 			const email = ev.target.elements.email.value;
 			const password = ev.target.elements.password.value;
 
-			axios.post("/users/register", { name, email, password })
-				.then((res) => {
-					console.log(res.data);
-				})
-				window.location.href = "my-surveys.html"
+
+			const newUser = {
+                    name: name,
+                    email: email,
+                    password: password,
+                }
+
+            
+                const response = await addRegister(newUser)
+
+
+		
+				window.location.href = "index.html"
 		}
+
+		function addRegister(newUser) {
+            return new Promise((resolve, reject) => {
+                fetch('/register/user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+                }).then(function (res) {
+                    if (res.status === 200 && res.ok) {
+                        return res.json().then(user => { resolve(user) });
+                    } else {
+                        return res.json().then(user => { alert(user.error) })
+                    }
+                })
+            })
+        }
 
 		
 
