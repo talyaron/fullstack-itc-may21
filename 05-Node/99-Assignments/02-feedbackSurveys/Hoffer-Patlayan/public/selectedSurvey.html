@@ -11,25 +11,31 @@
 </head>
 <body>
     <div class="container">
-        <h1>See your Survey</h1>
-        <button><a href='survey.html'>Back to your Surveys</a></button>
-        <div class="renderTitle">
-           
-        </div>
-        <div class="questions">
-                    
-        </div>       
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+              <img src="img/logo.png" alt="">
+              <a href="survey.html" class="navbar-brand">My Surveys</a>
+              <a href="surveyAdd.html" class="navbar-brand">Create Survey</a>
+              <div class="root"></div>
+              <button type="button" class="logOutBtn btn btn-danger">LogOut</button>
+            </div>
+          </nav>
+        <h1 class="page-header">This is your Survey</h1>
+        <div class="render_surv">
+            <div class="renderTitle"></div>
+            <div class="questions"></div>     
+        </div>  
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Surey</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Edit Survey</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" onsubmit="submitForm(event)">
+                <form class="form_modal" onsubmit="submitForm(event)">
                     <div class="form_title">
                        
                     </div>
@@ -51,4 +57,5 @@
     <script src="selectedSurvey.js"></script>
 </body>
 </html>
+
 

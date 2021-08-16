@@ -3,6 +3,21 @@
   const rootQuestions = document.getElementById('rootQuestions');
   const subBtn = document.getElementById('subBtn');
   
+  // GET USER FOR WELCOME
+const getUser = async () => {
+    const getUser = await axios.get("/users/getUsers");
+    const { name } = getUser.data;
+    render(name);
+  };
+  const render = (name) => {
+    const root = document.querySelector(".root");
+  
+    const renderIt = `<h5>Welcome ${name}!</h5>`;
+    root.innerHTML = renderIt;
+  };
+  getUser();
+
+
   function addSurvey(){
       
       const questionForm = document.getElementById('questionForm');
@@ -16,7 +31,7 @@
           arrQuestions.push(questions);
           
       }    
-      const title = container.children[0].value;
+      const title = container.children[2].value;
       const newSurv = {
           "title": title,
           "questions": {...arrQuestions}
@@ -35,7 +50,7 @@
       let html = "";
       
       html = `<div> 
-      <input type="text" name="question" id="question${cont}" placeholder="Make your question...">
+      <input type="text" name="question" class="form-control question_input" id="question${cont}" placeholder="Make your question...">
       </div`
       
       questionForm.insertAdjacentHTML("beforeend",html);
