@@ -1,5 +1,7 @@
-const { users, getAdminCookie, createAdminCookie, getAdminCookieIndex } = require('../models.js')
-const Ajv = require("ajv");
+const { users } = require('../models/usersModel')
+const { getAdminCookie, createAdminCookie, getAdminCookieIndex } = require('../models/adminModel')
+
+const Ajv = require("ajv")
 const ajv = new Ajv()
 
 exports.guest_voter = (req, res) => {
