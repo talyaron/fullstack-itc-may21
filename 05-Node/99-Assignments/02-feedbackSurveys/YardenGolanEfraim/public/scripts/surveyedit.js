@@ -27,7 +27,7 @@ function renderSurveyEdit(survey) {
   <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
 </svg> Question ${questionNumber}</div>
                     <div class="questioninfo-holder">
-                        <div id= "${survey.questions[i].questionID}"class= "center-me question${i}">Question: <br><em>${survey.questions[i].title}</em></div><br>
+                        <div id= "${survey.questions[i].questionID}"class= "center-me question${i}"><br><em>${survey.questions[i].title}</em></div><br>
                         <div class="averagevotes center-me">Average Score: <br> <strong>${sum/survey.questions[i].voters.score.length}</strong></div><br>
                         <div class="numberofvotes center-me">Number of Voters: <br> <strong>${survey.questions[i].voters.score.length}</strong></div>
                     </div> `
