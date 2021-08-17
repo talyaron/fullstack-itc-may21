@@ -64,17 +64,21 @@ button {
   border: none;
 }
 
-.container img {
+body {
+  background-color: #b3b3b3;
+}
+
+body .container-fluid img {
   width: 6rem;
   height: 6rem;
 }
 
-.container .page-header {
+body .container-fluid .page-header {
   text-align: center;
   margin-top: 2rem;
 }
 
-.container .render_survey {
+body .container-fluid .render_survey {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -83,63 +87,64 @@ button {
       -ms-flex-direction: column;
           flex-direction: column;
   margin: 0 auto;
-  width: 30rem;
+  width: 37rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-.container .render_survey .survey_info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+body .container-fluid .render_survey .survey_info {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
   border: 1px solid black;
-  gap: 2rem;
+  gap: 8rem;
   margin-left: 2rem;
   padding: 2rem;
 }
 
-.container .render_survey .survey_info .title_survey {
+body .container-fluid .render_survey .survey_info .title_survey {
   text-decoration: none;
 }
 
-.container .render_survey .survey_info .title_survey .title_surveys {
+body .container-fluid .render_survey .survey_info .title_survey .title_surveys {
   color: black;
   cursor: pointer;
 }
 
-.container .render_survey .survey_info .survey_icons {
-  margin-left: 8rem;
+body .container-fluid .render_survey .survey_info .survey_icons {
+  margin-left: 4rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   gap: 1rem;
 }
 
-.modal .icon_wpp {
+body .modal .icon_wpp {
   text-decoration: none;
 }
 
-.container .container_form {
+.container-fluid .container_form {
   text-align: center;
   margin: 0 auto;
   margin-top: 2rem;
   width: 60%;
 }
 
-.container .container_form .title_input {
+.container-fluid .container_form .title_input {
   margin-top: 1rem;
 }
 
-.container .container_form .question_input {
+.container-fluid .container_form .question_input {
   margin-top: 1rem;
 }
 
-.container .page-header {
+.container-fluid .page-header {
   text-align: center;
   margin-top: 2rem;
 }
 
-.container .render_surv {
+.container-fluid .render_surv {
   margin: 0 auto;
   margin-top: 3rem;
   text-align: center;
@@ -147,12 +152,12 @@ button {
   width: 60%;
 }
 
-.container .render_surv .icon_edit {
+.container-fluid .render_surv .icon_edit {
   margin-left: 2rem;
   margin-top: 3px;
 }
 
-.container .render_surv .render_surv_title {
+.container-fluid .render_surv .render_surv_title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -164,7 +169,7 @@ button {
   text-align: center;
 }
 
-.container .render_surv .render_surv_title .title_surv {
+.container-fluid .render_surv .render_surv_title .title_surv {
   text-align: center;
 }
 
@@ -198,5 +203,31 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.formulario_surv {
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 2rem;
+  width: 60%;
+}
+
+.formulario_surv .form-select {
+  text-align: center;
+  margin: 0 auto;
+  width: 20%;
+}
+
+.formulario_surv .questions_title {
+  margin: 1rem;
+}
+
+.formulario_surv .btnSubmit {
+  margin-top: 2rem;
+}
+
+.container_logIn {
+  width: 60%;
+  margin-top: 5rem;
 }
 /*# sourceMappingURL=styles.css.map */
