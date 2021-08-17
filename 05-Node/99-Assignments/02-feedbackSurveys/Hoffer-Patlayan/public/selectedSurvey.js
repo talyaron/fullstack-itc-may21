@@ -90,3 +90,10 @@ async function editSurvey(editSurv){
 }
 const subBtn = document.querySelector('#subBtn');
 subBtn.addEventListener('click', getModal);
+
+// lOGOUT
+async function logOut(){
+  const logOut = await axios(`/logIn/logOut`);
+ window.location.href = "http://localhost:3500/";
+}
+

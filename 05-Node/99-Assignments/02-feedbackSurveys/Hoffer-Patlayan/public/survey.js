@@ -78,10 +78,10 @@ async function resultsId(id){
   const gerServ = await axios.get(`/survey/results`, id);
 }
 
-// ALERT DELETE
-// const deleteBtn = document.querySelector('.icon_delete');
-// deleteBtn.addEventListener('click', alertSubmit)
 
-function alertSubmit(){
- 
+// LOGOUT
+async function logOut(){
+   const logOut = await axios(`/logIn/logOut`);
+  window.location.href = "http://localhost:3500/";
 }
+

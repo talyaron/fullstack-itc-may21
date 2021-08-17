@@ -1,7 +1,12 @@
 export {};
-// import {User} from '../models/users';
-import { validationResult } from "express-validator";
+const express = require("express");
+const app = express();
+const cookieParser = require("cookie-parser");
 const fs = require("fs");
+
+import { validationResult } from "express-validator";
+app.use(cookieParser());
+
 // LEER JSON Users
 const localJson = () => {
   const fileJson = fs.readFileSync("./db/users.json");
@@ -42,5 +47,6 @@ export function logInUser(req: any, res: any) {
 }
 
 export function logOutUser(req: any, res: any) {
-  
+     res.clearCookie('cookieName');
+     res.send({clear:true});
 }

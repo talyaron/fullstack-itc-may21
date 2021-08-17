@@ -56,6 +56,14 @@ const getUser = async () => {
       questionForm.insertAdjacentHTML("beforeend",html);
       cont++;
   }
+
+  // LOGOUT
+async function logOut(){
+    const logOut = await axios(`/logIn/logOut`);
+   window.location.href = "http://localhost:3500/";
+ } 
+
   // EVENT LISTENERS
   subBtn.addEventListener('click', addSurvey);
   addQuest.addEventListener('click', dispayFormQuestions);
+
