@@ -7,7 +7,7 @@ import { userCookieRead, userCookieWrite } from '../middlewares/UserCookie';
 import { isAdmin } from '../middlewares/isAdmin';
 
 //I import the function of the Controlers that Im going to use here
-import { newUser, login, sendCookie, uploadSurvey, answerLogin } from '../controlers/controlerUsers'
+import { newUser, login, sendCookie, uploadSurvey, answerLogin, deleteSurveyUser } from '../controlers/controlerUsers'
 
 router.post('/register', userCookieWrite ,newUser);
 router.post('/login', login);
@@ -16,5 +16,6 @@ router.get('/info', userCookieRead, sendCookie);
 router.post('/uploadUserWithSurvey/:uuid', userCookieRead, isAdmin, uploadSurvey);
 router.post('/answerLoginBefore', userCookieWrite, sendCookie);
 router.post('/answerLoginAfter/:uuid', userCookieRead, answerLogin);
+router.delete('/deleteSurvey/:uuid', userCookieRead, deleteSurveyUser);
 
 module.exports = router;

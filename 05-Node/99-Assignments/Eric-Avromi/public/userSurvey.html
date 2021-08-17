@@ -22,7 +22,7 @@
                 localStorage.setItem('id', JSON.stringify(idSurvey))
                 window.location.replace("http://localhost:8080/user-login.html")
             }
-            setTimeout('redirectpage()', 4000)
+            setTimeout('redirectpage()', 500)
         }
     </script>
 </head>
@@ -41,10 +41,9 @@
 
             const params = new URLSearchParams(window.location.search);
             const idSurvey = params.get('surveyId');
-
+            console.log(idSurvey);
             const response = await axios.get(`/previous/getSurvey/${idSurvey}`)
             const data = response.data
-
 
             renderSurvey(data) 
         }
@@ -123,8 +122,12 @@ count++;
             const { ok } = responseAwait
             alert(ok)
 
+            localStorage.setItem('isRedirect', JSON.stringify(0))
+            setTimeout('redirectpage()', 500)
 
-
+        }
+        function redirectpage(){
+            window.location.replace("http://localhost:8080/user-login.html")
         }
 
          function addScorePromise(scoreList,idSurvey) {

@@ -77,7 +77,7 @@ var handleContact = function (ev) {
 var searchContact = function (searchBar) {
     try {
         var regExp = "^" + searchBar;
-        var searchTermReg_1 = new RegExp(regExp, 'i'); 
+        var searchTermReg_1 = new RegExp(regExp, 'i'); //YS:  This should be gmi(global, multiline, case-insensitve) instaed of just i. 
         allContacts = allContactsForSearch.filter(function (elem) { return searchTermReg_1.test(elem.name); });
         localStorage.setItem("contactos", JSON.stringify(allContacts));
         render(allContacts);

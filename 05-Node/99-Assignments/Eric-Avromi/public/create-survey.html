@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="card-footer text-end">
-        <button type="submit" class="btn btn-success">Add</button>
+        <button type="submit" class="btn btn-primary">Add</button>
         <button type="submit" class="btn btn-warning">Return</button>
 
         <button type="submit"  class="btn btn-success" id="btncreate">Create</button>
@@ -41,10 +41,11 @@
   <script>
 
         //btn
-        const btnAddQuestion = document.querySelector('.btn-success')
+        const btnAddQuestion = document.querySelector('.btn-primary')
         const btnCreateSurveys = document.querySelector('#btncreate')
         const sendLink = document.querySelector('.btn-light');
         const returnPage = document.querySelector('.btn-warning')
+        const logOutPage = document.querySelector('.btn-dark')
 
         let count = 0;
 
@@ -53,11 +54,16 @@
         btnCreateSurveys.addEventListener('click', createSurvey)
         sendLink.addEventListener('click', sendLinkToUser)
         returnPage.addEventListener('click', returnPageToMySurveys)
+        logOutPage.addEventListener('click', logOut)
 
 
 
         function returnPageToMySurveys() {
             window.location.href = 'my-surveys.html'
+        }
+
+        function logOut() {
+            window.location.href = 'index.html'
         }
 
         function sendLinkToUser() {
@@ -67,7 +73,7 @@
 
             const whatsapp = document.querySelector('.whatsapp')
 
-            const sendLink = 'whatsapp://send?text=' + window.location.origin + '/user-login.html?surveyId=' + idSurvey
+            const sendLink = 'whatsapp://send?text=' + window.location.origin + '/userSurvey.html?surveyId=' + idSurvey
 
             whatsapp.setAttribute('href', sendLink)
 
@@ -126,11 +132,11 @@
             ev.preventDefault()
             const response = await axios.get('/cookie/getCookie')
             const {
-                name
+                userName
             } = response.data
 
             const rootHello = document.querySelector('.nameCookie')
-            rootHello.innerHTML = `<span>Hello  ${name}</span>`
+            rootHello.innerHTML = `<span>Hello  ${userName}</span>`
 
 
 
@@ -211,18 +217,21 @@
 
         async function createSurvey(ev) {
             ev.preventDefault()
-            const rootQuestion = document.querySelector('.root')
-            const length = rootQuestion.children.length
+            const root = document.querySelector('.root')
+            const length = root.children.length
             let arrayQuestion = []
 
-            for (let i = 1; i < length; i++) {
+
+            for (let i = 0; i < length; i++) {
                 arrayQuestion.push({
-                    title: rootQuestion.children[i].children[0].children[0].children[0].value,
-                    id: i - 1,
+                    title: root.children[i].children[0].children[0].children[0].value,
+                    id: i ,
                     voters: [],
                 })
 
             }
+            
+            
 
             const inputTitle = document.querySelector('#surveyTitle').value
 
@@ -249,7 +258,7 @@
             const { ok } = responseAwait
             alert(ok)
 
-
+            localStorage.setItem('isRedirect', JSON.stringify(1))
         }
 
         function addSurveys(newSurvey) {

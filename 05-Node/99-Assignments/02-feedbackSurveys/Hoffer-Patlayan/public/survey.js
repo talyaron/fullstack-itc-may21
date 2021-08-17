@@ -14,18 +14,18 @@ const render = (name) => {
 };
 getUser();
 
-let arrSurvey = [];
-
+let arrSurv = [];
 // GET SURVAYS
 const getLogInUser = async () => {
   const getUser = await axios.get("/survey/logUser");
   const dataUser = getUser.data;
   const surveyData = dataUser.createSurvey;
-  arrSurvey.push(surveyData);
+  const surveyDataTitle = dataUser.createSurvey[1].title;
   renderSurvay(surveyData)
-  
+  arrSurv.push(surveyData);
+  console.log(surveyDataTitle);
 };
-getLogInUser()
+window.onload = getLogInUser();
 
 function renderSurvay(surveyData){
   const root = document.querySelector(".render_survey");
@@ -85,3 +85,38 @@ async function logOut(){
   window.location.href = "http://localhost:3500/";
 }
 
+// SEARCH BAR 
+
+async function regExSurvey(searchBar){
+  try {
+    const getUser = await axios.get("/survey/logUser");
+    const dataUser = getUser.data;
+    const surveyData = dataUser.createSurvey;
+    let newArray = [];
+    for(let i = 0; i < surveyData.length; i++){
+      const regExp = `^${searchBar}`;
+      const searchTermReg= new RegExp(regExp, 'g');  
+      newArray = surveyData.filter(elem => searchTermReg.test(elem.title));
+
+    }
+    renderSurvay(newArray)
+  } catch (e) {
+      console.error(e)
+  }
+}
+
+const searchSurvey = (ev) => {
+    try {
+        ev.preventDefault();
+        const searchBar = ev.target.parentElement.elements.searchBar.value;
+        regExSurvey(searchBar);
+        console.log(searchBar);
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+
+// EVENTLISTENERS
+const searchBar = document.getElementById('searchBar');
+searchBar.addEventListener('keyup', searchSurvey);
