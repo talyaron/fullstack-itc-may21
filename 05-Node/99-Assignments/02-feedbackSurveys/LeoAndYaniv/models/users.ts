@@ -122,7 +122,6 @@ export class Users {
       this.users.forEach((user) => {
         user.answeredSurveys = user.answeredSurveys.filter(answeredSurveys => (answeredSurveys !== surveyId));
       });
-      console.log(this.users);
 
       this.updateUsersJson();
     } catch (error) {

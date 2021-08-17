@@ -104,7 +104,6 @@ var Users = /** @class */ (function () {
             this.users.forEach(function (user) {
                 user.answeredSurveys = user.answeredSurveys.filter(function (answeredSurveys) { return (answeredSurveys !== surveyId); });
             });
-            console.log(this.users);
             this.updateUsersJson();
         }
         catch (error) {
