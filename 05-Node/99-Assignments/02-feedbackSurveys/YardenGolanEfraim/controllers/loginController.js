@@ -1,4 +1,6 @@
-const { users, createAdminCookie } = require('../models.js')
+const { createAdminCookie } = require('../models/adminModel')
+const { users } = require('../models/usersModel')
+
 const Ajv = require("ajv");
 const ajv = new Ajv()
 

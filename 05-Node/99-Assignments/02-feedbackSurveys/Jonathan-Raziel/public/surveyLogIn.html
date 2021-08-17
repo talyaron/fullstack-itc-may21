@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./scss/style.min.css">
   <title>Sign in</title>
 </head>
 <style>
@@ -411,53 +411,8 @@
       </div>
     </div>
   </div>
-
-  <script>
-
-    const form = document.querySelector('.sign-in-form');
-
-    form.addEventListener('submit', handelLogInUser)
-
-    async function handelLogInUser(ev) {
-      ev.preventDefault();
-
-      const email = ev.target.elements.userEmail.value;
-      const password = ev.target.elements.userPassword.value;
-      const newUser = {
-        email: email,
-        password: password
-      }
-
-      const response = await enterEndUserLogIn(newUser);
-      alert(response.ok);
-
-      const idSurvey = JSON.parse(localStorage.getItem('id'))
-
-      window.location.href = `./userSurvey.html?surveyId=${idSurvey}`;
-      localStorage.setItem('isRedirect', JSON.stringify(0))
-
-    }
-
-
-    function enterEndUserLogIn(newUser) {
-      return new Promise((resolve, reject) => {
-        fetch('/login/endUserLogin', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(newUser)
-        }).then(function (res) {
-          if (res.status === 200 && res.ok) {
-            return res.json().then(user => { resolve(user) });
-          } else {
-            return res.json().then(user => { alert(user.error) })
-          }
-        })
-      })
-    }
-
-  </script>
+  <script src="scripts/helpers/promises.js"></script>
+  <script src="scripts/surveyLogin.js"></script>
 </body>
 
 </html>

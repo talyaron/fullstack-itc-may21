@@ -1,3 +1,17 @@
+// GET USER FOR WELCOME
+const getUser = async () => {
+    const getUser = await axios.get("/users/getUsers");
+    const { name } = getUser.data;
+    render(name);
+  };
+  const render = (name) => {
+    const root = document.querySelector(".root");
+  
+    const renderIt = `<h5 style="color: white;">Welcome ${name}!</h5>`;
+    root.innerHTML = renderIt;
+  };
+  getUser();
+  
 // GET SURVAYS
 async function getSurv(){
     const getSurv = await axios(`/survey/getSurvey`);
@@ -12,16 +26,18 @@ function renderSurvey(survey){
     const root = document.querySelector(".renderTitle");
     const rootQuestions = document.querySelector(".questions");
     let html = "";
-      html +=       `<h3>${survey.title}</h3>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="icon_edit far fa-edit fa-2x"></i></a>
-                    <h4>Questions:</h4>`;
+      html +=           `<div class="render_surv_title"><h3 class="title_surv">Title: ${survey.title}</h3>
+                        <a class="icon_edit" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="far fa-edit fa-lg"></i></a></div>
+                        <h5>Questions:</h5>`;
    root.innerHTML = html;
 
     const preguntas = survey.question;
     const arrPregs = Object.values(preguntas);
     let htmlQuestions = "";
     arrPregs.forEach((preg) => {
-        htmlQuestions += `<p>${preg}</p>`
+        htmlQuestions += `
+                            <h5>- ${preg}</h5>
+                         `
        })
     rootQuestions.innerHTML = htmlQuestions;
   }  
@@ -30,14 +46,16 @@ function renderForm(survey){
     const root = document.querySelector(".form_title");
     const rootQuestions = document.querySelector(".form_questions");
     let html = "";
-    html += `<input type="text" class="titleInput" placeholder="${survey.title}">`;
+    html += `<label for="">Title:</label>
+            <input type="text" class="titleInput" placeholder="${survey.title}">
+            <label for="">Questions:</label>`;
     root.innerHTML = html;
 
     const preguntas = survey.question;
     const arrPregs = Object.values(preguntas);
     let htmlQuestions = "";
     arrPregs.forEach((preg) => {
-        htmlQuestions += `<input type="text" placeholder="${preg}">`
+        htmlQuestions += `<input type="text" placeholder="${preg}"> `
        })
     rootQuestions.insertAdjacentHTML("afterbegin",htmlQuestions);
 }
@@ -72,3 +90,10 @@ async function editSurvey(editSurv){
 }
 const subBtn = document.querySelector('#subBtn');
 subBtn.addEventListener('click', getModal);
+
+// lOGOUT
+async function logOut(){
+  const logOut = await axios(`/logIn/logOut`);
+ window.location.href = "http://localhost:3500/";
+}
+
