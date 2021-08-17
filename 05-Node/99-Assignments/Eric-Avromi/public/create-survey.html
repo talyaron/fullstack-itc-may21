@@ -12,13 +12,14 @@
   <link rel="stylesheet" type="text/css" href="dist/style.css">
   <title>Create Survey</title>
 </head>
-<body>
+<body onload="getCookies(event)">
   <div class="mx-0 mx-sm-auto">
     <div class="card">
       <div class="card-header bg-primary">
+        <div class="nameCookie"></div>
         <h5 class="card-title text-white mt-2" id="exampleModalLabel">Set a survey</h5>
-        <input class="form-check-inputName1" type="text" name="title" id="surveyTitle" placeholder="Survey name" />
-        <button type="submit" class="btn btn-light">Share</button>
+        <input class="form-check-inputName" type="text" name="title" id="surveyTitle" placeholder="Survey name" />
+        <a href="#" class="whatsapp"> <button type="submit" class="btn btn-light">Share by Whatsapp</button></a>
         <button class="btn btn-dark" id="return">Logout</button>
       </div>
       <div class="modal-body">
@@ -28,8 +29,10 @@
       </div>
       <div class="card-footer text-end">
         <button type="submit" class="btn btn-success">Add</button>
-        <button type="submit" class="btn btn-warning">Back</button>
-        <button type="submit" onclick="saveSurvey()" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-warning">Return</button>
+
+        <button type="submit"  class="btn btn-success" id="btncreate">Create</button>
+
       </div>
     </div>
     <div class="root"></div>
@@ -37,68 +40,239 @@
 
   <script>
 
-    const returnPage = document.querySelector('#return').addEventListener('click', loginOut)
+        //btn
+        const btnAddQuestion = document.querySelector('.btn-success')
+        const btnCreateSurveys = document.querySelector('#btncreate')
+        const sendLink = document.querySelector('.btn-light');
+        const returnPage = document.querySelector('.btn-warning')
 
-    function loginOut() {
-      window.location.href = 'index.html'
-    }
+        let count = 0;
 
-    let saveData = {}
+        //addEventListener
+        btnAddQuestion.addEventListener('click', addQuestion)
+        btnCreateSurveys.addEventListener('click', createSurvey)
+        sendLink.addEventListener('click', sendLinkToUser)
+        returnPage.addEventListener('click', returnPageToMySurveys)
 
-    async function saveSurvey() {
-      const inputTitle = document.querySelector('#surveyTitle')
-      saveData.title = inputTitle.value
-      let arr = [];
-      const allQuestions = document.querySelectorAll('.questions');
-      allQuestions.forEach(question => {
-        const q = {[question.id]: question.value}
-        arr.push(q)
-      })
-      saveData.questions = arr;
-      axios.post("/question/pepe", saveData)
-        .then((res) => {
-          console.log(res.data);
-        })
-    }
 
-    const btnAddQuestion = document.querySelector('.btn-success').addEventListener('click', renderNewQuestion)
 
-    const btnBackToSurveyAdmin = document.querySelector('.btn-warning').addEventListener('click', backToSurveyAdmin)
+        function returnPageToMySurveys() {
+            window.location.href = 'my-surveys.html'
+        }
 
-    const link = document.querySelector('.btn-light').addEventListener('click', sendSurvey)
+        function sendLinkToUser() {
 
-    let count = 0;
+            const params = new URLSearchParams(window.location.search);
+            const idSurvey = params.get('surveyId');
 
-    async function renderNewQuestion(data) {
+            const whatsapp = document.querySelector('.whatsapp')
 
-      const root = document.querySelector('.root')
-      html = ''
-      html +=
-        `<div>          
-        <input class="form-check-inputName questions" type="text" name="exampleForm" id='question-${count}' placeholder="Write a question" />    
-        <button type="submit" class="btn btn-danger" id="boxquestion" onclick="deleteQuestion()">Delete</button>
-        
-      </div>`
-      root.insertAdjacentHTML('beforeend', html);
-      count++;
-    }
+            const sendLink = 'whatsapp://send?text=' + window.location.origin + '/user-login.html?surveyId=' + idSurvey
 
-    function deleteQuestion() {
-      // document.getElementById(`boxquestion${id}`).remove()
-      console.log('hi');
+            whatsapp.setAttribute('href', sendLink)
 
-    }
 
-    
 
-    function sendSurvey() {
-      //first save question
-      console.log('hi');
-    }
+        }
 
-    function backToSurveyAdmin() {
-      window.location.href = "my-surveys.html"
-    }
+        async function addQuestion(ev) {
+
+            ev.preventDefault()
+
+            const response = await axios.get('/id/questions')
+            const { id } = response.data
+
+
+
+            const root = document.querySelector('.root')
+
+            let html = ''
+            html += `
+                    <div class="boxquestion" id="boxquestion${count}" >
+                            <div class="boxquestion__question">
+                                <label for="question">
+                                    <input type="text" name="question${count}" class="boxquestion__question--title" id="${count}" onchange='blockQuestion("${count}")'>
+                                </label>
+                            </div>
+                            <button type="submit"  class="btn btn-success" id="boxquestion--edit" onclick='editQuestion("${count}")'>Edit</button>
+                            <button type="submit"  class="btn btn-danger" id="boxquestion--trash" onclick='deleteQuestion("${count}")'>Delete</button>
+                    </div>`
+
+
+            root.insertAdjacentHTML("beforeend", html)
+            count++;
+            const btnCreate = document.querySelector('#btncreate');
+            btnCreate.disabled = false;
+            btnCreate.style.cursor = 'pointer';
+
+        }
+
+        function blockQuestion(id) {
+            document.getElementById(id).disabled = true;
+        }
+
+
+        function editQuestion(id) {
+            document.getElementById(id).disabled = false;
+        }
+
+        function deleteQuestion(id) {
+            document.getElementById(`boxquestion${id}`).remove()
+
+        }
+
+        async function getCookies(ev) {
+
+            ev.preventDefault()
+            const response = await axios.get('/cookie/getCookie')
+            const {
+                name
+            } = response.data
+
+            const rootHello = document.querySelector('.nameCookie')
+            rootHello.innerHTML = `<span>Hello  ${name}</span>`
+
+
+
+            const params = new URLSearchParams(window.location.search);
+            const idSurvey = params.get('surveyId');
+
+
+            const isCreated = JSON.parse(localStorage.getItem("isCreated"))
+
+            if (isCreated === 1) {
+                const responseSurvey = await axios.get(`/previous/getSurvey/${idSurvey}`)
+
+                let html = '';
+                if (responseSurvey.data) {
+                    const inputTitle = document.querySelector('#surveyTitle')
+
+                    const { title, question } = responseSurvey.data;
+
+                    inputTitle.value = title;
+
+                    const rootQuestion = document.querySelector('.root')
+
+                    let avg = []
+
+                    const cantidad = question[0].voters.length
+
+
+
+                    for (let i = 0; i < question.length; i++) {
+
+
+                        avg.push(parseFloat((question[i].voters.reduce((sum, value) => (typeof value.score == "number" ? sum + value.score : sum), 0)) / cantidad).toFixed(2));
+
+                    }
+
+
+                    let html = ''
+
+                    for (let i = 0; i < question.length; i++) {
+
+
+
+                        html += `
+                    <div class="boxquestion" id="boxquestion${i}" >
+                            <div class="boxquestion__question">
+                                <label for="question">
+                                    <input type="text" name="question${i}" class="boxquestion__question--title" value="${question[i].title}"  id="${i}" onchange='blockQuestion("${i}")' disabled>
+                                </label>`
+
+                        if (avg[0] === 'NaN') {
+                            html += `<span>Avg: 0;</span>`
+                        } else {
+                            html += `<span>Avg: ${avg[i]};</span>`
+                        }
+
+
+                        html += `<span>People who answered ${cantidad}</span>
+                            </div>
+                    </div>`
+
+                    }
+
+                    rootQuestion.insertAdjacentHTML("beforeend", html)
+                    count++;
+                    btnCreateSurveys.hidden = true;
+                    btnAddQuestion.style.display = "none"
+
+                }
+
+            } else {
+                btnCreateSurveys.hidden = false;
+                btnAddQuestion.style.display = "visible"
+            }
+        }
+
+
+
+
+        async function createSurvey(ev) {
+            ev.preventDefault()
+            const rootQuestion = document.querySelector('.root')
+            const length = rootQuestion.children.length
+            let arrayQuestion = []
+
+            for (let i = 1; i < length; i++) {
+                arrayQuestion.push({
+                    title: rootQuestion.children[i].children[0].children[0].children[0].value,
+                    id: i - 1,
+                    voters: [],
+                })
+
+            }
+
+            const inputTitle = document.querySelector('#surveyTitle').value
+
+            const responseCookie = await axios.get('/cookie/getCookie')
+
+            const {
+                email
+            } = responseCookie.data
+
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('surveyId');
+
+
+            const newSurvey = {
+                id: id,
+                title: inputTitle,
+                email: email,
+                questions: arrayQuestion,
+            }
+
+
+            const responseAwait = await addSurveys(newSurvey)
+
+            const { ok } = responseAwait
+            alert(ok)
+
+
+        }
+
+        function addSurveys(newSurvey) {
+            return new Promise((resolve, reject) => {
+                fetch('/surveys/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newSurvey)
+                }).then(function (res) {
+                    if (res.status === 200 && res.ok) {
+                        return res.json().then(survey => {
+                            resolve(survey)
+                        });
+                    } else {
+                        return res.json().then(survey => {
+                            alert(survey.error)
+                        })
+                    }
+                })
+            })
+        }
 
 
   </script>

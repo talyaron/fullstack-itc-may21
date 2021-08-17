@@ -3,6 +3,8 @@ const app = express();
 const fs = require("fs");
 const cookieParser = require('cookie-parser');
 
+const port = process.env.PORT || 8000
+
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.static('public'));
@@ -22,11 +24,11 @@ app.use('/surveys',surveyModel)
 app.use('/id',surveyModel)
 app.use('/id',surveyModel)
 app.use('/previous',surveyModel)
-// app.use('/c', surveyModel)
 app.use('/delete',surveyModel)
+app.use('/answer', surveyModel)
 
 
 
 
-app.listen(8000, function () { console.log('Listen on 8000'); });
+app.listen(port, function () { console.log('Listen on 8000'); });
 

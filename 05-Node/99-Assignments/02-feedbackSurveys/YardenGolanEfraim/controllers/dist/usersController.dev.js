@@ -2,7 +2,8 @@
 
 var _require = require('../models.js'),
     User = _require.User,
-    users = _require.users;
+    users = _require.users,
+    createGuestCookie = _require.createGuestCookie;
 
 var Ajv = require("ajv");
 
@@ -41,17 +42,8 @@ exports.add_user = function (req, res) {
       return info.email === body.email;
     }) === undefined && body.password === "") {
       users.newUser(new User(body.username, body.email, ""));
-      console.log('');
-      console.log(users);
       var guestUser = users.users[users.users.length - 1];
-      console.log(guestUser);
-      var guestCookie = JSON.stringify({
-        guestUser: guestUser
-      });
-      res.cookie('guest', guestCookie, {
-        maxAge: 300000000,
-        httpOnly: true
-      });
+      createGuestCookie(guestUser, res);
       res.send(guestUser);
     } else if (users.users.find(function (info) {
       return info.email === body.email && info.password === '';
@@ -62,7 +54,6 @@ exports.add_user = function (req, res) {
       users.users.find(function (info) {
         return info.email === body.email;
       }).name = body.username;
-      console.log(users);
       res.send(users);
     } else if (users.users.find(function (info) {
       return info.email === body.email && info.password != '' && body.password === "";
@@ -71,16 +62,7 @@ exports.add_user = function (req, res) {
         return info.email === body.email;
       });
 
-      console.log(_guestUser);
-
-      var _guestCookie = JSON.stringify({
-        guestUser: _guestUser
-      });
-
-      res.cookie('guest', _guestCookie, {
-        maxAge: 300000000,
-        httpOnly: true
-      });
+      createGuestCookie(_guestUser, res);
       res.send(_guestUser);
     } else if (users.users.find(function (info) {
       return info.email === body.email;
@@ -88,7 +70,7 @@ exports.add_user = function (req, res) {
       res.send("Email already taken!");
     } else {
       users.newUser(new User(body.username, body.email, body.password));
-      res.send(users);
+      res.send("success!");
     }
   } catch (e) {
     console.log(e);

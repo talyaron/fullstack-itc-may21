@@ -8,4 +8,5 @@ router.get('/surveys', controllersSurvey_1.getUniqueId);
 router.get('/questions', controllersSurvey_1.getUniqueIdQuestions);
 router.get('/getSurvey/:id', controllersSurvey_1.getPreviousSurvey);
 router["delete"]('/user/:id/:email', controllersSurvey_1.deleteSurveys);
+router.get('/getAsnwer/:id/:email', controllersSurvey_1.getAnswer);
 module.exports = router;

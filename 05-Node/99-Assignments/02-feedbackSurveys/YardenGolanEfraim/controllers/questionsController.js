@@ -1,4 +1,4 @@
-const { Question, users } = require('../models.js')
+const { Question, users, getAdminCookie, createAdminCookie, getAdminCookieIndex } = require('../models.js')
 
 exports.post_questions = (req, res) => {
 
@@ -6,12 +6,8 @@ exports.post_questions = (req, res) => {
         const {
             body
         } = req;
-        const { admin } = req.cookies
-        const cookie = JSON.parse(admin);
-        const {selectedAdmin} = cookie;
-        const { adminIndex } = req.cookies
-        const cookieIndex = JSON.parse(adminIndex);
-        const {selectedAdminIndex} = cookieIndex;
+        const selectedAdmin = getAdminCookie(req)
+        const selectedAdminIndex = getAdminCookieIndex(req)
        
     const {questions} = body
     const {surveyID} = body
@@ -22,9 +18,7 @@ exports.post_questions = (req, res) => {
     
     })
     users.users[selectedAdminIndex] = selectedAdmin
-    const adminCookie = JSON.stringify({ selectedAdmin })
-    res.cookie('admin', adminCookie, { maxAge: 300000000, httpOnly: true });
-    console.log(users.users)
+    createAdminCookie(selectedAdmin, res)
         res.send(selectedAdmin);
     } catch (e) {
         console.log(e)

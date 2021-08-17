@@ -4,7 +4,7 @@ const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 
 
-import { Survey, Question, Voter } from '../models/survey'
+import { Survey} from '../models/survey'
 
 
 const readAllSurveys = () => {
@@ -80,3 +80,11 @@ export function deleteSurveys(req, res) {
     }
 }
 
+export function getAnswer(req, res) {
+
+    const { id, email } = req.params
+    const allSurveys = readAllSurveys();
+    const findSurvey = allSurveys.find(survey => survey.id === id)
+    const isAdminCreateSurvey = findSurvey.question[0].voters.some(voter=>voter.email === email)
+    res.send(isAdminCreateSurvey)
+}

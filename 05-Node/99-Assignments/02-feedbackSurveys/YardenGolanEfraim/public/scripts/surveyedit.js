@@ -35,7 +35,7 @@ function renderSurveyEdit(survey) {
                                  <div id="question-holder">
                                     <input type="text" name="${survey.surveyID}" id="${survey.surveyID}" placeholder="Question" required>
                                 </div>
-                                <button id="submit" type="submit">Submit Questions!</button>
+                                <button  id="submit-btn" type="submit"><i class="fas fa-plus-square"></i>>Submit Questions!</button>
                             </form>
                   
                         </div>

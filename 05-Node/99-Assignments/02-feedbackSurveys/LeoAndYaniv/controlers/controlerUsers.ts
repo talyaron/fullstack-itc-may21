@@ -1,13 +1,17 @@
 export {};
 
+//I import the classes (with Methods) of the Models that Im going to use here
 import { User, Users } from "../models/users";
 import { Survey, Surveys } from "../models/surveys";
 
 //Function to add a new user into the JSON
 export function newUser(req, res) {
   try {
+    //Get the information from the body
     const { username, email, password } = req.body;
+    //Initialice a new instance of the User
     const user = new User(username, email, password);
+    //Initialice a new instance of Users (the initialization will read the JSON of Users)
     const allUsers = new Users();
     const emailExistsWithPass: boolean = allUsers.createUser(user, null);
     if (!emailExistsWithPass) {
@@ -31,10 +35,13 @@ export function login(req, res) {
     const allUsers = new Users();
     const userExists = allUsers.loginUser(email, password);
     if (userExists) {
-    const { username } = userExists;
-    //Set the cookie
-    const cookieToWrite: string = JSON.stringify({ username, email });
-      res.cookie("userDetails", cookieToWrite, { maxAge: 900000, httpOnly: true });
+      const { username } = userExists;
+      //Set the cookie
+      const cookieToWrite: string = JSON.stringify({ username, email });
+      res.cookie("userDetails", cookieToWrite, {
+        maxAge: 900000,
+        httpOnly: true,
+      });
       res.send({ message: "Logged in successfully", username });
     } else {
       res.send({
@@ -79,9 +86,11 @@ export function sendCookie(req, res) {
 export function uploadSurvey(req, res) {
   try {
     const { uuid } = req.params; // survey uuid
-    
+
     const allSurveys = new Surveys();
-    const newSurvey = new Survey(allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]);
+    const newSurvey = new Survey(
+      allSurveys.surveys[allSurveys.findSurveyIndex(uuid)]
+    );
     newSurvey.title = req.body.surveyTitle;
     allSurveys.updateSurvey(newSurvey);
 

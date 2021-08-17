@@ -1,8 +1,7 @@
+const { getAdminCookie } = require('../models.js')
 exports.get_admin = (req, res) => {
     try{
-    const { admin } = req.cookies
-        const cookie = JSON.parse(admin);
-        const {selectedAdmin} = cookie;
+    const selectedAdmin = getAdminCookie(req)
     res.send(selectedAdmin)
 }catch (e) {
     console.error(e)

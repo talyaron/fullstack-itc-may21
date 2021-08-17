@@ -153,7 +153,7 @@
 
                     const cantidad = question[0].voters.length
 
-
+                    html += `<span style="display:flex;justify-content:center; font-weight:bold;">VOTERS: ${cantidad}</span>`
 
                     for (let i = 0; i < question.length; i++) {
 
@@ -163,11 +163,11 @@
                     }
 
 
-                    let html = ''
+                    
 
                     for (let i = 0; i < question.length; i++) {
 
-
+                        
 
                         html += `
                     <div class="boxquestion" id="boxquestion${i}" >
@@ -180,11 +180,11 @@
                         if (avg[0] === 'NaN') {
                             html += `<span>Avg: 0;</span>`
                         } else {
-                            html += `<span>Avg: ${avg[i]};</span>`
+                            html += `<span>Avg: ${avg[i]}</span>`
                         }
 
 
-                        html += `<span>People who answered ${cantidad}</span>
+                        html += `
                             </div>
                     </div>`
 

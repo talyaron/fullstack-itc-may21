@@ -75,5 +75,6 @@ export function sendRespon(req:any,res:any){
 export function getResp(req:any,res:any){
   const getRes =  getAllResponse();
   console.log(getRes);
+  // const findByTitle 
   res.send(getRes)
 }
