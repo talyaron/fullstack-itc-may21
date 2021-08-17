@@ -7,7 +7,7 @@ const getUser = async () => {
   const render = (name) => {
     const root = document.querySelector(".root");
   
-    const renderIt = `<h5>Welcome ${name}!</h5>`;
+    const renderIt = `<h5 style="color: white;">Welcome ${name}!</h5>`;
     root.innerHTML = renderIt;
   };
   getUser();
@@ -90,3 +90,10 @@ async function editSurvey(editSurv){
 }
 const subBtn = document.querySelector('#subBtn');
 subBtn.addEventListener('click', getModal);
+
+// lOGOUT
+async function logOut(){
+  const logOut = await axios(`/logIn/logOut`);
+ window.location.href = "http://localhost:3500/";
+}
+

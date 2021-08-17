@@ -66,7 +66,7 @@ export class Users {
         else {
           this.users[emailIndex].answeredSurveys.push(surveyUuid);
         }
-      } else { // survey answers submit + email doens't exist
+      } else { // survey answers submit + email doesn't exist
         user.answeredSurveys.push(surveyUuid);
         this.users.push(user);
       }

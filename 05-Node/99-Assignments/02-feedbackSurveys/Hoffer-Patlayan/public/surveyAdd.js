@@ -12,7 +12,7 @@ const getUser = async () => {
   const render = (name) => {
     const root = document.querySelector(".root");
   
-    const renderIt = `<h5>Welcome ${name}!</h5>`;
+    const renderIt = `<h5 style="color: white;">Welcome ${name}!</h5>`;
     root.innerHTML = renderIt;
   };
   getUser();
@@ -56,6 +56,14 @@ const getUser = async () => {
       questionForm.insertAdjacentHTML("beforeend",html);
       cont++;
   }
+
+  // LOGOUT
+async function logOut(){
+    const logOut = await axios(`/logIn/logOut`);
+   window.location.href = "http://localhost:3500/";
+ } 
+
   // EVENT LISTENERS
   subBtn.addEventListener('click', addSurvey);
   addQuest.addEventListener('click', dispayFormQuestions);
+
