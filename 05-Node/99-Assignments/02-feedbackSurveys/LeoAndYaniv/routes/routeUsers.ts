@@ -1,9 +1,12 @@
 export { };
 const express = require('express');
 const router = express.Router();
+
+//I import the function of the Middlewares that I going to use here
 import { userCookieRead, userCookieWrite } from '../middlewares/UserCookie';
 import { isAdmin } from '../middlewares/isAdmin';
 
+//I import the function of the Controlers that Im going to use here
 import { newUser, login, sendCookie, uploadSurvey, answerLogin } from '../controlers/controlerUsers'
 
 router.post('/register', userCookieWrite ,newUser);
@@ -15,5 +18,3 @@ router.post('/answerLoginBefore', userCookieWrite, sendCookie);
 router.post('/answerLoginAfter/:uuid', userCookieRead, answerLogin);
 
 module.exports = router;
-
-//We comment the middleware "idAdmin" because it was causing problems and we didnt have enought time to figure out
