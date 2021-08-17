@@ -7,7 +7,7 @@ const getUser = async () => {
   const render = (name) => {
     const root = document.querySelector(".root");
   
-    const renderIt = `<h5>Welcome ${name}!</h5>`;
+    const renderIt = `<h5 style="color: white;">Welcome ${name}!</h5>`;
     root.innerHTML = renderIt;
   };
   getUser();

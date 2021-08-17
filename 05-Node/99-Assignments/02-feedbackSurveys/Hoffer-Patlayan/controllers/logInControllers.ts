@@ -9,9 +9,6 @@ const localJson = () => {
 };
 
 export function logInUser(req: any, res: any) {
-  
- 
- 
     const { email, password } = req.body;
     const users = localJson();
 
@@ -20,8 +17,6 @@ export function logInUser(req: any, res: any) {
 
     console.log(errors);
     return res.status(400).json({ errors: errors.array() });
-    
-    
   } 
   try {
     const correctUser = users.some(
@@ -33,7 +28,6 @@ export function logInUser(req: any, res: any) {
         (elements: any) =>
           elements.email === email && elements.password === password
       );
-
       res.cookie("cookieName", JSON.stringify(doLogin), {
         maxAge: 3000000,
         httpOnly: true,
@@ -45,7 +39,8 @@ export function logInUser(req: any, res: any) {
   } catch (error) {
     res.status(500).send({ error: `${error}` });
   }
-   
-    
+}
+
+export function logOutUser(req: any, res: any) {
   
 }
