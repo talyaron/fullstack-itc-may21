@@ -1,20 +1,16 @@
-export{}
-
+export { };
 
 export class User {
-    name:string;
-    email:string;
-    password:string;
-    createdSurvey: Array<string>
+    userName: string;
+    email: string;
+    password: string;
+    surveys: Array<string>;
 
-
-
-
-    constructor(name, email, password, createdSurvey) {
-        this.name = name;
+    constructor(userName, email, password, surveys) {
+        this.userName = userName;
         this.email = email;
         this.password = password;
-        this.createdSurvey = createdSurvey;  
+        this.surveys = surveys;
     }
-}
 
+}

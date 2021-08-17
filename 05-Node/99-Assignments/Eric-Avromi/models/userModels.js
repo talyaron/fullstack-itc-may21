@@ -2,11 +2,11 @@
 exports.__esModule = true;
 exports.User = void 0;
 var User = /** @class */ (function () {
-    function User(name, email, password, createdSurvey) {
-        this.name = name;
+    function User(userName, email, password, surveys) {
+        this.userName = userName;
         this.email = email;
         this.password = password;
-        this.createdSurvey = createdSurvey;
+        this.surveys = surveys;
     }
     return User;
 }());
