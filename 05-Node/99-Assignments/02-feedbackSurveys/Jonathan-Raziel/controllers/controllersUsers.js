@@ -11,35 +11,30 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 exports.__esModule = true;
-exports.scoreAdd = exports.getSurveys = exports.getCookie = exports.endUserLogin = exports.loginUser = exports.usersRegister = void 0;
-// const express = require("express");
-// const app = express();
+exports.scoreAdd = exports.getSurveys = exports.getCookie = exports.endUserLogin = exports.loginUser = exports.usersRegister = exports.readAllUsers = void 0;
 var fs = require("fs");
-var uuid = require('uuidv4').uuid;
-//const cookieParser = require('cookie-parser');
 var users_1 = require("../models/users");
-var readAllUsers = function () {
-    var allUsers = fs.readFileSync("./user.json");
+exports.readAllUsers = function () {
+    var allUsers = fs.readFileSync("./models/data/user.json");
     return JSON.parse(allUsers);
 };
 function usersRegister(req, res) {
     try {
-        var allUsers = readAllUsers();
+        var allUsers = exports.readAllUsers();
         var isFound = allUsers.some(function (elem) { return (elem.email === req.body.email) || elem.username === req.body.username; });
         if (!isFound) {
             var user = new users_1.User(req.body.username, req.body.email, req.body.password, [], []);
             allUsers.push(user);
-            fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+            fs.writeFileSync("./models/data/user.json", JSON.stringify(allUsers));
             res.send({ ok: "Hi " + req.body.username + ", now you can create surveys after login", allUsers: allUsers });
         }
         else {
             var hasUsername = allUsers.some(function (elem) { return (elem.username === req.body.username); });
             if (!hasUsername) {
                 var foundUser = allUsers.find(function (elem) { return (elem.email === req.body.email); });
-                console.log(foundUser);
                 foundUser.username = req.body.username;
                 foundUser.surveys = [];
-                fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+                fs.writeFileSync("./models/data/user.json", JSON.stringify(allUsers));
                 res.send({ ok: "Hi " + req.body.username + ", now you can create surveys after login", allUsers: allUsers });
             }
             else {
@@ -55,7 +50,7 @@ exports.usersRegister = usersRegister;
 function loginUser(req, res) {
     try {
         var _a = (req.body), email_1 = _a.email, password_1 = _a.password;
-        var allUsers = readAllUsers();
+        var allUsers = exports.readAllUsers();
         var isUserExist = allUsers.some(function (elem) { return (elem.email === email_1); });
         var isPasswordOk = allUsers.some(function (elem) { return (elem.password === password_1); });
         if (isUserExist && isPasswordOk) {
@@ -65,7 +60,7 @@ function loginUser(req, res) {
                 res.send({ ok: "Welcome " + userLogin.username });
             }
             else {
-                throw new Error("You're on the database but not without username, please go to register");
+                throw new Error("You're on the database but without username, please go to register");
             }
         }
         else if (isUserExist) {
@@ -85,12 +80,12 @@ function endUserLogin(req, res) {
     try {
         var _a = (req.body), email_2 = _a.email, password_2 = _a.password;
         var id_1 = req.params.id;
-        var allUsers = readAllUsers();
-        var allSurveys = JSON.parse(fs.readFileSync("./survey.json"));
-        var isUserExist = allUsers.some(function (elem) { return (elem.email === email_2); });
-        var isPassworExist = allUsers.some(function (elem) { return (elem.password === password_2); });
+        var allUsers = exports.readAllUsers();
+        var allSurveys = JSON.parse(fs.readFileSync("./models/data/survey.json"));
+        var isUserOk = allUsers.some(function (elem) { return (elem.email === email_2) && (elem.password === password_2); });
+        var isEmailOrPasswordWrong = allUsers.some(function (elem) { return (elem.email === email_2) || (elem.password === password_2); });
         res.cookie('cookieName', JSON.stringify(email_2), { maxAge: 30000000, httpOnly: true });
-        if (isUserExist && isPassworExist) {
+        if (isUserOk) {
             var isAdminSurvey = allSurveys.find(function (survey) { return (survey.id === id_1) && (email_2 === survey.admin); });
             if (isAdminSurvey) {
                 throw new Error("You cannot vote your own survey");
@@ -99,13 +94,13 @@ function endUserLogin(req, res) {
                 res.send({ ok: "Welcome back " + email_2 + ", thank you for voting" });
             }
         }
-        else if (isUserExist || isPassworExist) {
+        else if (isEmailOrPasswordWrong) {
             throw new Error("Something is wrong, your email or password");
         }
         else {
             var user = new users_1.User(null, req.body.email, req.body.password, null, []);
             allUsers.push(user);
-            fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+            fs.writeFileSync("./models/data/user.json", JSON.stringify(allUsers));
             res.send({ ok: "Hello " + email_2 + ", thank you for voting", allUsers: allUsers });
         }
     }
@@ -131,7 +126,7 @@ exports.getCookie = getCookie;
 function getSurveys(req, res) {
     try {
         var email_3 = req.params.email;
-        var allUsers = readAllUsers();
+        var allUsers = exports.readAllUsers();
         if (allUsers.length !== 0) {
             var find = allUsers.find(function (user) { return user.email === email_3; });
             res.send(find.surveys);
@@ -147,8 +142,8 @@ function scoreAdd(req, res) {
         var id_2 = req.params.id;
         var cookieName = req.cookies.cookieName;
         var email_4 = JSON.parse(cookieName);
-        var allUsers = readAllUsers();
-        var allSurveys = JSON.parse(fs.readFileSync("./survey.json"));
+        var allUsers = exports.readAllUsers();
+        var allSurveys = JSON.parse(fs.readFileSync("./models/data/survey.json"));
         //admin
         var admin_1 = allSurveys.find(function (survey) { return survey.id === id_2; }).admin;
         var findAdmin = allUsers.find(function (user) { return user.email === admin_1; });
@@ -173,8 +168,8 @@ function scoreAdd(req, res) {
         };
         console.log(email_4);
         findVoter.answersSurveys.push(newResponse);
-        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
-        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+        fs.writeFileSync("./models/data/user.json", JSON.stringify(allUsers));
+        fs.writeFileSync("./models/data/survey.json", JSON.stringify(allSurveys));
         res.send({ ok: "Answer Sended" });
     }
     catch (e) {

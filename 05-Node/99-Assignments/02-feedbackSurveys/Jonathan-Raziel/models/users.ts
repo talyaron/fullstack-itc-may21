@@ -1,5 +1,7 @@
 export { };
 
+const fs = require("fs");
+
 export class User {
     username: string;
     email: string;
@@ -17,12 +19,24 @@ export class User {
 
 }
 
-// class UserList {
-//     UsersArray: Array<User> = [];
+
+// const readAllUsers = () => {
+//     const allUsers = fs.readFileSync("./models/data/user.json");
+//     return JSON.parse(allUsers);
+// }
+
+
+// export class UserList {
+//     usersArray: Array<User> = [];
+
+//     constructor(){
+//         this.usersArray = readAllUsers()
+//     }
+    
 
 //     add(users: User) {
 //         try {
-//             this.UsersArray.push(users);
+//             this.usersArray.push(users);
 //         } catch (error) {
 //             console.log(error);
 //         }
@@ -30,12 +44,9 @@ export class User {
 
 // }
 
-//here you supposed to have our app.post for passing to the model
-
 
 // module.exports = {
 //     User: User,
 //     UserList: UserList,
 // };
 
-//module.exports = User;

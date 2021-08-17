@@ -1,0 +1,20 @@
+[
+    {
+        "id": "c5a0b6bb-78fb-4041-bcd1-5cf02db2bcab",
+        "title": "helado",
+        "admin": "jnisen@gmail.com",
+        "question": [
+            {
+                "title": "manzana",
+                "id": 0,
+                "voters": [
+                    {
+                        "id": "eaae11f4-3b33-456b-910e-77ef74b811f4",
+                        "score": 3,
+                        "email": "eric@gmail.com"
+                    }
+                ]
+            }
+        ]
+    }
+]

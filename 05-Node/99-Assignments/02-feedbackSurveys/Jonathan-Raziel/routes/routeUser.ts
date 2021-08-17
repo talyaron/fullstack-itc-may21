@@ -3,11 +3,13 @@ const router = express.Router()
 
 import {usersRegister,loginUser,getCookie,getSurveys,endUserLogin,scoreAdd} from '../controllers/controllersUsers'
 
+
+
 router.post('/user', usersRegister)
-router.post('/userLogin', loginUser)
-router.post('/endUserLogin/:id', endUserLogin);
-router.get('/getCookie', getCookie)
-router.get('/show/:email',getSurveys)
-router.post('/add/:id',scoreAdd)
+      .post('/userLogin', loginUser)
+      .post('/endUserLogin/:id', endUserLogin)
+      .get('/getCookie', getCookie)
+      .get('/show/:email',getSurveys)
+      .post('/add/:id',scoreAdd)
 
 module.exports = router

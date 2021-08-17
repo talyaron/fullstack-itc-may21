@@ -9,24 +9,13 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.static('public'));
 
-const userModel = require("./routes/routeUser")
+const userRoute = require("./routes/routeUser")
 
-app.use('/register', userModel);
-app.use('/loginUser', userModel);
-app.use('/login', userModel);
-app.use('/cookie', userModel);
-app.use('/surveys', userModel);
-app.use('/score',userModel)
+app.use('/user', userRoute);
 
-const surveyModel = require("./routes/routesSurveys")
+const surveyRoute = require("./routes/routesSurveys")
 
-app.use('/surveys',surveyModel)
-app.use('/id',surveyModel)
-app.use('/id',surveyModel)
-app.use('/previous',surveyModel)
-app.use('/delete',surveyModel)
-app.use('/answer', surveyModel)
-
+app.use('/survey',surveyRoute)
 
 
 
