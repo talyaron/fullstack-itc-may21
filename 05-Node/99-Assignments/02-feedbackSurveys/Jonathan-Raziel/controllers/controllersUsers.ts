@@ -1,17 +1,12 @@
 export { }
 
-// const express = require("express");
-// const app = express();
 const fs = require("fs");
-const { uuid } = require('uuidv4')
-//const cookieParser = require('cookie-parser');
 
-import { User } from '../models/users'
+import { User} from '../models/users'
 
 
-
-const readAllUsers = () => {
-    const allUsers = fs.readFileSync("./user.json");
+export const readAllUsers = () => {
+    const allUsers = fs.readFileSync("./models/data/user.json");
     return JSON.parse(allUsers);
 }
 
@@ -24,17 +19,16 @@ export function usersRegister(req, res) {
         if (!isFound) {
             const user = new User(req.body.username, req.body.email, req.body.password, [], [])
             allUsers.push(user)
-            fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+            fs.writeFileSync("./models/data/user.json", JSON.stringify(allUsers));
             res.send({ ok: `Hi ${req.body.username}, now you can create surveys after login`, allUsers: allUsers });
         } else {
             const hasUsername = allUsers.some(elem => (elem.username === req.body.username))
 
             if (!hasUsername) {
                 const foundUser = allUsers.find(elem => (elem.email === req.body.email))
-                console.log(foundUser)
                 foundUser.username = req.body.username;
                 foundUser.surveys = [];
-                fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+                fs.writeFileSync("./models/data/user.json", JSON.stringify(allUsers));
                 res.send({ ok: `Hi ${req.body.username}, now you can create surveys after login`, allUsers: allUsers });
             } else {
                 throw new Error("this is user is on database")
@@ -57,7 +51,7 @@ export function loginUser(req, res) {
 
         const isUserExist = allUsers.some(elem => (elem.email === email))
         const isPasswordOk = allUsers.some(elem => (elem.password === password))
-
+        
         if (isUserExist && isPasswordOk) {
 
             const userLogin = allUsers.find(elem => (elem.email === email) && (elem.password === password))
@@ -66,7 +60,7 @@ export function loginUser(req, res) {
                 res.cookie('cookieName', JSON.stringify(userLogin), { maxAge: 30000000, httpOnly: true });
                 res.send({ ok: `Welcome ${userLogin.username}`});
             }else{
-                throw new Error("You're on the database but not without username, please go to register")
+                throw new Error("You're on the database but without username, please go to register")
             }
         } else if (isUserExist){
             throw new Error("Is incorrect your email or password Try Again")
@@ -88,28 +82,28 @@ export function endUserLogin(req, res) {
         const { id } = req.params
 
         const allUsers = readAllUsers();
-        const allSurveys = JSON.parse(fs.readFileSync("./survey.json"));
+        const allSurveys = JSON.parse(fs.readFileSync("./models/data/survey.json"));
 
-        const isUserExist = allUsers.some(elem => (elem.email === email))
-        const isPassworExist = allUsers.some(elem => (elem.password === password))
+        const isUserOk = allUsers.some(elem => (elem.email === email) && (elem.password === password))
+        const isEmailOrPasswordWrong = allUsers.some(elem => (elem.email === email) || (elem.password === password))
 
         res.cookie('cookieName', JSON.stringify(email), { maxAge: 30000000, httpOnly: true });
 
-        if (isUserExist && isPassworExist) {
+        if (isUserOk) {
             const isAdminSurvey = allSurveys.find(survey => (survey.id === id) && (email === survey.admin))
             if (isAdminSurvey) {
                 throw new Error("You cannot vote your own survey")
             } else {
                 res.send({ ok: `Welcome back ${email}, thank you for voting` });
             }
-        } else if (isUserExist || isPassworExist) {
+        } else if (isEmailOrPasswordWrong) {
             throw new Error("Something is wrong, your email or password")
 
         } else {
 
             const user = new User(null, req.body.email, req.body.password, null, [])
             allUsers.push(user)
-            fs.writeFileSync("./user.json", JSON.stringify(allUsers));
+            fs.writeFileSync("./models/data/user.json", JSON.stringify(allUsers));
             res.send({ ok: `Hello ${email}, thank you for voting`, allUsers: allUsers });
         }
     } catch (e) {
@@ -152,7 +146,7 @@ export function scoreAdd(req, res) {
         const email = JSON.parse(cookieName)
 
         const allUsers = readAllUsers();
-        const allSurveys = JSON.parse(fs.readFileSync("./survey.json"));
+        const allSurveys = JSON.parse(fs.readFileSync("./models/data/survey.json"));
 
         //admin
 
@@ -187,8 +181,8 @@ export function scoreAdd(req, res) {
         console.log(email);
         findVoter.answersSurveys.push(newResponse)
 
-        fs.writeFileSync("./user.json", JSON.stringify(allUsers));
-        fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
+        fs.writeFileSync("./models/data/user.json", JSON.stringify(allUsers));
+        fs.writeFileSync("./models/data/survey.json", JSON.stringify(allSurveys));
 
         res.send({ ok: "Answer Sended" });
 
