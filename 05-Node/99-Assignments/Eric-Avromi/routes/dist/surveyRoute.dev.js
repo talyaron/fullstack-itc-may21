@@ -9,26 +9,33 @@ var router = express.Router();
 var _require = require('uuid'),
     uuidv4 = _require.v4;
 
-var _require2 = require('../models/surveyModel.js'),
-    addSurvey = _require2.addSurvey;
+var fs = require('fs'); // const {addSurvey} = require('../models/surveyModel.js');
 
-var _require3 = require("../models/userModels.js"),
-    getAllUsers = _require3.getAllUsers;
 
-var Survey = function Survey(admin) {
+var _require2 = require('../models/surveyModel'),
+    getAllSurveys = _require2.getAllSurveys;
+
+var _require3 = require('../middlewares/user'),
+    getUser = _require3.getUser;
+
+var _require4 = require('./userRoutes'),
+    get = _require4.get;
+
+var Survey = function Survey() {
   _classCallCheck(this, Survey);
 
   this.title = '';
-  this.id = uuidv4();
   this.questions = [];
-  this.admin = admin;
+  this.admin = "";
+  this.id = "";
 };
 
+var newSurvey = new Survey();
 router.post('/newSurvey', function (req, res) {
   try {
     var admin = req.cookies.cookie.email;
-    var newSurvey = new Survey(admin);
-    addSurvey(newSurvey);
+    newSurvey.id = uuidv4(); // addSurvey(newSurvey);
+
     res.send({
       ok: true,
       newSurvey: newSurvey
@@ -36,78 +43,45 @@ router.post('/newSurvey', function (req, res) {
   } catch (error) {
     res.status(500).send(error.message);
   }
-}); // router.get('/', (req, res) => {
-//     try {
-//         const allSurveys = getAllSurveys()
-//         res.send(
-//             allSurveys
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message) 
-//     }
-// })
-// router.delete('/deleteSurvey', (req, res) => { 
-//     try {
-//         console.log("before id");
-//         const id = req.query.id;
-//         const allSurveys = deleteSurvey(id)
-//         res.send(
-//             allSurveys
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
-// router.delete('/deleteQuestion', (req, res) => { 
-//     try {
-//         console.log("before id");
-//         const id = req.query.id;
-//         const allQuestions = deleteQuestion(id)
-//         res.send(
-//             allQuestions
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
-// router.post('/newQuestion', (req, res) => { 
-//     try {
-//         const title = req.body.title;
-//         const allQuestions = addQuestion(title)
-//         res.send(
-//             allQuestions
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
-// router.put('/editSurvey', (req, res) => {
-//     try {
-//         const newTitle = req.body.newTitle;
-//         const id = req.body.id; 
-//         console.log(id);
-//         const allSurveys =  editSurvey(id, newTitle)
-//         console.log("afetr edit task ");
-//         res.send(
-//             allSurveys
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
-// router.put('/editQuestion', (req, res) => {
-//     try {
-//         const newTitle = req.body.newTitle;
-//         const id = req.body.id; 
-//         console.log(id);
-//         const allQuestions =  editQuestion(id, newTitle)
-//         console.log("afetr edit task ");
-//         res.send(
-//             allQuestions
-//         )
-//     } catch (error) {
-//         res.status(500).send(error.message)
-//     }
-// })
+});
+router.get('/getAllSurveys', function (req, res) {
+  var surveys = getAllSurveys();
+  res.send(surveys);
+});
+router["delete"]('/deleteSurvey/:id', function (req, res) {
+  var id = req.params.id;
+  var surveys = getAllSurveys();
+  var newSurveys = surveys.filter(function (survey) {
+    survey.id !== id;
+  });
+  console.log(newSurveys);
+  fs.writeFileSync('./survey.json', JSON.stringify(newSurveys));
+  res.send(newSurveys);
+});
+router.post('/pepe', function (req, res) {
+  try {
+    var admin = req.cookies.cookie.email;
+    var allUsers = JSON.parse(fs.readFileSync("./users.json"));
+    var findUser = allUsers.find(function (user) {
+      return user.email === admin;
+    });
 
+    if (findUser) {
+      findUser.createdSurvey.push(req.body);
+      fs.writeFileSync("./users.json", JSON.stringify(allUsers));
+      newSurvey.title = req.body.title;
+      newSurvey.questions = req.body.questions;
+      newSurvey.admin = req.cookies.cookie.email;
+      var allSurveys = fs.readFileSync("./survey.json");
+      var allPars = JSON.parse(allSurveys);
+      allPars.push(newSurvey);
+      fs.writeFileSync("./survey.json", JSON.stringify(allPars));
+      res.send({
+        ok: true
+      });
+    }
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
 module.exports = router;

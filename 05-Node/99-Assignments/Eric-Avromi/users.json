@@ -1,1 +1,17 @@
+<<<<<<< HEAD
+[{
+    "name": "Avraham Russell",
+    "email": "avromirussell@gmail.com",
+    "password": "1234",
+    "id": "0c231461-41cf-49bb-907f-6487989cba9f",
+    "createdSurvey": []
+}, {
+    "name": "Bottoms Up vending",
+    "email": "sales@vendingmachines.io",
+    "password": "11111",
+    "id": "96e19fd6-7849-49cd-91f0-55af5fb5c847",
+    "createdSurvey": []
+}]
+=======
 [{"userName":"eric","email":"kobrinskye@gmail.com","password":"1","surveys":[{"id":"e71c03ae-d50e-4038-a267-8bc07c50d9f7","title":"express","email":"kobrinskye@gmail.com","questions":[{"title":"question1","id":0,"voters":[{"id":"443918e5-187b-4561-8e29-afbc1bd8b094","score":1}]}]}]},{"userName":null,"email":"hola@gmail.com","password":"1","surveys":null}]
+>>>>>>> f72f12eb410987e1f1a1bc187aeb80ba3cd517a9
