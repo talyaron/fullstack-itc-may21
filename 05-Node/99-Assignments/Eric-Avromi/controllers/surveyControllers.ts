@@ -16,16 +16,18 @@ export function getUniqueId(req, res) {
     const id = uuidv4()
     res.send({ id: id })
 }
-export function getUniqueIdQuestions(req, res) {
-    const id = uuidv4()
-    res.send({ id: id })
-}
+// export function getUniqueIdQuestions(req, res) {
+//     const id = uuidv4()
+//     res.send({ id: id })
+// }
 
 export function getPreviousSurvey(req, res) {
 
     const { id } = req.params
     const allSurveys = readAllSurveys();
     const survey = allSurveys.find(survey => survey.id === id)
+    console.log(id);
+    
     res.send(survey)
 }
 

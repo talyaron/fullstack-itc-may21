@@ -41,9 +41,9 @@
 
             const params = new URLSearchParams(window.location.search);
             const idSurvey = params.get('surveyId');
-            console.log(idSurvey);
             const response = await axios.get(`/previous/getSurvey/${idSurvey}`)
             const data = response.data
+            console.log(idSurvey);
 
             renderSurvey(data) 
         }

@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.deleteSurveys = exports.addSurveys = exports.getPreviousSurvey = exports.getUniqueIdQuestions = exports.getUniqueId = void 0;
+exports.deleteSurveys = exports.addSurveys = exports.getPreviousSurvey = exports.getUniqueId = void 0;
 var fs = require("fs");
 var uuidv4 = require("uuid").v4;
 var surveyModels_1 = require("../models/surveyModels");
@@ -13,15 +13,15 @@ function getUniqueId(req, res) {
     res.send({ id: id });
 }
 exports.getUniqueId = getUniqueId;
-function getUniqueIdQuestions(req, res) {
-    var id = uuidv4();
-    res.send({ id: id });
-}
-exports.getUniqueIdQuestions = getUniqueIdQuestions;
+// export function getUniqueIdQuestions(req, res) {
+//     const id = uuidv4()
+//     res.send({ id: id })
+// }
 function getPreviousSurvey(req, res) {
     var id = req.params.id;
     var allSurveys = readAllSurveys();
     var survey = allSurveys.find(function (survey) { return survey.id === id; });
+    console.log(id);
     res.send(survey);
 }
 exports.getPreviousSurvey = getPreviousSurvey;
