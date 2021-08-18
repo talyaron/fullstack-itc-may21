@@ -7,7 +7,8 @@ localStorage.setItem('id', JSON.stringify(idSurvey));
 
 if (isRedirect !== 0) {
   var redirectpage = function redirectpage() {
-    window.location.replace("http://localhost:8000/surveyLogIn.html");
+    var location = window.location.origin;
+    window.location.replace("".concat(location, "/surveyLogIn.html"));
   };
 
   localStorage.setItem('isRedirect', JSON.stringify(1));

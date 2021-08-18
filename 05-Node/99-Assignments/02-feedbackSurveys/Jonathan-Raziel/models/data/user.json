@@ -1,1 +1,52 @@
-[{"username":"jnisen","email":"jnisen@gmail.com","password":"a1234","surveys":[{"id":"c5a0b6bb-78fb-4041-bcd1-5cf02db2bcab","title":"helado","email":"jnisen@gmail.com","questions":[{"title":"manzana","id":0,"voters":[{"id":"eaae11f4-3b33-456b-910e-77ef74b811f4","score":3,"email":"eric@gmail.com"}]}]}],"answersSurveys":[]},{"username":"eric","email":"eric@gmail.com","password":"a123","surveys":[],"answersSurveys":[{"id":"c5a0b6bb-78fb-4041-bcd1-5cf02db2bcab","title":"helado","admin":"jnisen@gmail.com","questions":[{"title":"manzana","id":"eaae11f4-3b33-456b-910e-77ef74b811f4","score":3}]}]}]
+[
+    {
+        "username": "jnisen",
+        "email": "jnisen@gmail.com",
+        "password": "a1234",
+        "surveys": [
+            {
+                "id": "8f425eb5-fd30-4c03-aee7-c6491bb4f34e",
+                "title": "como te caen estas personas?",
+                "email": "jnisen@gmail.com",
+                "questions": [
+                    {
+                        "title": "leo szejpiacki",
+                        "id": 0,
+                        "voters": []
+                    },
+                    {
+                        "title": "tomi hoffer",
+                        "id": 1,
+                        "voters": []
+                    },
+                    {
+                        "title": "tomi patlayan",
+                        "id": 2,
+                        "voters": []
+                    },
+                    {
+                        "title": "sr kobrinsky",
+                        "id": 3,
+                        "voters": []
+                    },
+                    {
+                        "title": "cuba",
+                        "id": 4,
+                        "voters": []
+                    },
+                    {
+                        "title": "kevin szuchet",
+                        "id": 5,
+                        "voters": []
+                    },
+                    {
+                        "title": "jonshon nisen",
+                        "id": 6,
+                        "voters": []
+                    }
+                ]
+            }
+        ],
+        "answersSurveys": []
+    }
+]
