@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const fs = require("fs");
+var path = require('path');
+app.use(express.static(path.join(__dirname, 'public')))
 const cookieParser = require('cookie-parser');
 
 app.use(cookieParser())
 app.use(express.json());
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 const userRoutes = require("./routes/userRoutes")
 

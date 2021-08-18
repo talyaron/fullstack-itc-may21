@@ -1,1 +1,1 @@
-[]
+[{"userName":"eric","email":"kobrinskye@gmail.com","password":"1","surveys":[{"id":"e71c03ae-d50e-4038-a267-8bc07c50d9f7","title":"express","email":"kobrinskye@gmail.com","questions":[{"title":"question1","id":0,"voters":[{"id":"443918e5-187b-4561-8e29-afbc1bd8b094","score":1}]}]}]},{"userName":null,"email":"hola@gmail.com","password":"1","surveys":null}]
