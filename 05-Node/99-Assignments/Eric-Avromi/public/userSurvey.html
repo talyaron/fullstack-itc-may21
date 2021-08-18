@@ -129,7 +129,9 @@ count++;
 
         }
         function redirectpage(){
-            window.location.replace("http://localhost:8080/user-login.html")
+            const location = window.location.origin
+            window.location.replace(`${location}/user-login.html`)
+            // window.location.replace("http://localhost:8080/user-login.html")
         }
 
          function addScorePromise(scoreList,idSurvey) {
