@@ -66,49 +66,31 @@ function renderSurvey(arrayToRender, idSurvey) {
           html = '';
           count = 1;
           html += "<p>Survey Title: ".concat(arrayToRender.title, "</p>");
-          arrayToRender.question.forEach(function (question, index) {
-            html += "\n        \n                <p>Question ".concat(count, ": ").concat(question.title, "</p> \n                <div style=\"display:flex\">\n                    \n                <div>\n                    <input type=\"radio\" id=\"one").concat(count, "\" name=\"").concat(index, "\" value=\"1\" checked>\n                    <label for=\"score").concat(index, "\">1</label>\n                </div>\n\n                <div>\n                    <input type=\"radio\" id=\"two").concat(count, "\" name=\"").concat(index, "\" value=\"2\" >\n                    <label for=\"score").concat(index, "\">2</label>\n                </div>\n\n                <div>\n                    <input type=\"radio\" id=\"three").concat(count, "\" name=\"").concat(index, "\" value=\"3\">\n                     <label for=\"score").concat(index, "\">3</label>\n                </div>\n                <div>\n                    <input type=\"radio\" id=\"four").concat(count, "\" name=\"").concat(index, "\" value=\"4\">\n                    <label for=\"score").concat(index, "\">4</label>\n                </div>\n                <div>\n                    <input type=\"radio\" id=\"five").concat(count, "\" name=\"").concat(index, "\" value=\"5\">\n                    <label for=\"score").concat(index, "\">5</label>\n                </div>\n            </div>  \n            ");
-            count++;
-          });
-          root.innerHTML = html;
 
-          if (isCreatedbyAdmin) {
-            arrayToRender.question.forEach(function (element) {
+          if (!isCreatedbyAdmin) {
+            arrayToRender.question.forEach(function (question, index) {
+              html += "\n        \n                <p>Question ".concat(count, ": ").concat(question.title, "</p> \n                <div style=\"display:flex\">\n                    \n                <div>\n                    <input type=\"radio\" id=\"one").concat(count, "\" name=\"").concat(index, "\" value=\"1\" checked>\n                    <label for=\"score").concat(index, "\">1</label>\n                </div>\n\n                <div>\n                    <input type=\"radio\" id=\"two").concat(count, "\" name=\"").concat(index, "\" value=\"2\" >\n                    <label for=\"score").concat(index, "\">2</label>\n                </div>\n\n                <div>\n                    <input type=\"radio\" id=\"three").concat(count, "\" name=\"").concat(index, "\" value=\"3\">\n                     <label for=\"score").concat(index, "\">3</label>\n                </div>\n                <div>\n                    <input type=\"radio\" id=\"four").concat(count, "\" name=\"").concat(index, "\" value=\"4\">\n                    <label for=\"score").concat(index, "\">4</label>\n                </div>\n                <div>\n                    <input type=\"radio\" id=\"five").concat(count, "\" name=\"").concat(index, "\" value=\"5\">\n                    <label for=\"score").concat(index, "\">5</label>\n                </div>\n            </div>  \n            ");
+              count++;
+            });
+            sendButton.disabled = false;
+          } else {
+            arrayToRender.question.forEach(function (element, index) {
+              console.log(element);
+              html += "<p style=\"font-weight:bold\">Question ".concat(index + 1, ": <span>").concat(element.title, "</span></p>");
               var voter = element.voters.filter(function (voter) {
                 return voter.email === email;
               });
               voter.forEach(function (element, index) {
-                switch (element.score) {
-                  case 1:
-                    document.getElementById("one".concat(index + 1)).checked = true;
-                    break;
-
-                  case 2:
-                    console.log("two".concat(index + 1));
-                    document.getElementById("two".concat(index + 1)).checked = true;
-                    break;
-
-                  case 3:
-                    document.getElementById("three".concat(index + 1)).checked = true;
-                    break;
-
-                  case 4:
-                    document.getElementById("four".concat(index + 1)).checked = true;
-                    break;
-
-                  case 5:
-                    document.getElementById("five".concat(index + 1)).checked = true;
-                    break;
-                }
+                html += "<span>Score ".concat(element.score, "</span>");
               });
             });
             sendButton.disabled = true;
             alert('Thanks for coming back, this was your answer');
-          } else {
-            sendButton.disabled = false;
           }
 
-        case 15:
+          root.innerHTML = html;
+
+        case 14:
         case "end":
           return _context2.stop();
       }
@@ -207,5 +189,6 @@ function sendSurvey(ev) {
 }
 
 function redirectpage() {
-  window.location.replace("http://localhost:8000/surveyLogIn.html");
+  var location = window.location.origin;
+  window.location.replace("".concat(location, "/surveyLogIn.html"));
 }

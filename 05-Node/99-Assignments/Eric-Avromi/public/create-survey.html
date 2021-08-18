@@ -231,7 +231,6 @@
 
             }
             
-            
 
             const inputTitle = document.querySelector('#surveyTitle').value
 
@@ -251,7 +250,7 @@
                 email: email,
                 questions: arrayQuestion,
             }
-
+            console.log(newSurvey);
 
             const responseAwait = await addSurveys(newSurvey)
 

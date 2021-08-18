@@ -44,12 +44,18 @@
       const response = await enterEndUserLogIn(newUser);
       alert(response.ok);
 
-      const idSurvey = JSON.parse(localStorage.getItem('id'))
+      const params = new URLSearchParams(window.location.search);
+      const idSurvey = params.get('surveyId');
 
+
+      localStorage.setItem('id', JSON.stringify(idSurvey))
+      console.log(idSurvey);
       window.location.href = `./userSurvey.html?surveyId=${idSurvey}`;
-      localStorage.setItem('isRedirect', JSON.stringify(0))
+      // localStorage.setItem('isRedirect', JSON.stringify(0))
 
     }
+
+
 
 
     function enterEndUserLogIn(newUser) {

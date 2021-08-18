@@ -10,20 +10,22 @@
 
     <script>
 
-        const isRedirect = JSON.parse(localStorage.getItem("isRedirect"))
+        // // const isRedirect = JSON.parse(localStorage.getItem("isRedirect"))
 
-        if (isRedirect !== 0) {
-            localStorage.setItem('isRedirect', JSON.stringify(1))
-            function redirectpage() {
+        // if (isRedirect !== 0) {
+        //     localStorage.setItem('isRedirect', JSON.stringify(1))
+        //     function redirectpage() {
 
-                const params = new URLSearchParams(window.location.search);
-                const idSurvey = params.get('surveyId');
+        //         const params = new URLSearchParams(window.location.search);
+        //         const idSurvey = params.get('surveyId');
+
+        //         console.log(idSurvey)
                
-                localStorage.setItem('id', JSON.stringify(idSurvey))
-                window.location.replace("http://localhost:8080/user-login.html")
-            }
-            setTimeout('redirectpage()', 500)
-        }
+        //         localStorage.setItem('id', JSON.stringify(idSurvey))
+        //         window.location.replace("http://localhost:8080/user-login.html")
+        //     }
+        //     // setTimeout('redirectpage()', 500)
+        // }
     </script>
 </head>
 
@@ -43,9 +45,7 @@
             const idSurvey = params.get('surveyId');
             const response = await axios.get(`/previous/getSurvey/${idSurvey}`)
             const data = response.data
-            console.log(idSurvey);
-
-            renderSurvey(data) 
+            renderSurvey([data]) 
         }
 
         function renderSurvey(data) {
@@ -54,9 +54,11 @@
 
             let count = 1;
 
+            
+
             html += `<p>Survey Title: ${data.title}</p>` 
 
-            data.question.forEach((question, index) => {
+            data[0].question.forEach((question, index) => {
                 html += `
         
                 <p>Question ${count}: ${question.title}</p> 
@@ -123,11 +125,13 @@ count++;
             alert(ok)
 
             localStorage.setItem('isRedirect', JSON.stringify(0))
-            setTimeout('redirectpage()', 500)
+            // setTimeout('redirectpage()', 500)
 
         }
         function redirectpage(){
-            window.location.replace("http://localhost:8080/user-login.html")
+            const location = window.location.origin
+            window.location.replace(`${location}/user-login.html`)
+            // window.location.replace("http://localhost:8080/user-login.html")
         }
 
          function addScorePromise(scoreList,idSurvey) {
