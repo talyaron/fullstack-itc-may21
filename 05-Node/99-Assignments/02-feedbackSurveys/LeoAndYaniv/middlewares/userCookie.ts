@@ -1,11 +1,14 @@
 export {};
+import { secret } from './secret';
+const jwt = require('jwt-simple');
 
 export function userCookieRead(req, res, next) {
     try {
       const { userDetails } = req.cookies;
 
       if (userDetails) { 
-        const cookie = JSON.parse(userDetails);
+        const decoded = jwt.decode(userDetails, secret);
+        const cookie = JSON.parse(decoded);
         const { username, email } = cookie;
         req.cookieExist = true;
         req.username = username;
@@ -32,7 +35,8 @@ export function userCookieRead(req, res, next) {
 
       //Here I set the cookie
       const cookieToWrite: string = JSON.stringify({ username, email });
-      res.cookie("userDetails", cookieToWrite, { maxAge: 900000, httpOnly: true });
+      const token = jwt.encode(cookieToWrite, secret);
+      res.cookie("userDetails", token, { maxAge: 900000, httpOnly: true });
 
       req.username = username;
       req.email = email;

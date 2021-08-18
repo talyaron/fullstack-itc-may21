@@ -1,6 +1,8 @@
 "use strict";
 exports.__esModule = true;
 exports.deleteSurveyUser = exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.newUser = void 0;
+var secret_1 = require("../middlewares/secret");
+var jwt = require('jwt-simple');
 //I import the classes (with Methods) of the Models that Im going to use here
 var users_1 = require("../models/users");
 var surveys_1 = require("../models/surveys");
@@ -39,7 +41,8 @@ function login(req, res) {
             var username = userExists.username;
             //Set the cookie
             var cookieToWrite = JSON.stringify({ username: username, email: email });
-            res.cookie("userDetails", cookieToWrite, {
+            var token = jwt.encode(cookieToWrite, secret_1.secret);
+            res.cookie("userDetails", token, {
                 maxAge: 900000,
                 httpOnly: true
             });

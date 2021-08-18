@@ -1,4 +1,6 @@
 export {};
+import { secret } from '../middlewares/secret';
+const jwt = require('jwt-simple');
 
 //I import the classes (with Methods) of the Models that Im going to use here
 import { User, Users } from "../models/users";
@@ -38,7 +40,8 @@ export function login(req, res) {
       const { username } = userExists;
       //Set the cookie
       const cookieToWrite: string = JSON.stringify({ username, email });
-      res.cookie("userDetails", cookieToWrite, {
+      const token = jwt.encode(cookieToWrite, secret);
+      res.cookie("userDetails", token, {
         maxAge: 900000,
         httpOnly: true,
       });
