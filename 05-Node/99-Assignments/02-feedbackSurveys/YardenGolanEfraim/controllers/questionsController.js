@@ -1,4 +1,6 @@
-const { Question, users, getAdminCookie, createAdminCookie, getAdminCookieIndex } = require('../models.js')
+const { Question } = require('../models/questionsModel')
+const { users } = require('../models/usersModel')
+const { getAdminCookie, createAdminCookie, getAdminCookieIndex } = require('../models/adminModel')
 
 exports.post_questions = (req, res) => {
 

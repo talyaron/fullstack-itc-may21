@@ -1,3 +1,17 @@
+// GET USER FOR WELCOME
+const getUser = async () => {
+    const getUser = await axios.get("/users/getUsers");
+    const { name } = getUser.data;
+    render(name);
+  };
+  const render = (name) => {
+    const root = document.querySelector(".root");
+  
+    const renderIt = `<h5 style="color: white;">Welcome ${name}!</h5>`;
+    root.innerHTML = renderIt;
+  };
+  getUser();
+  
 // GET SURVAYS
 async function getSurv() {
   const getSurv = await axios(`/survey/getSurvey`);
@@ -89,5 +103,12 @@ async function editSurvey(editSurv) {
   window.location.reload();
   getSurv();
 }
-const subBtn = document.querySelector("#subBtn");
-subBtn.addEventListener("click", getModal);
+const subBtn = document.querySelector('#subBtn');
+subBtn.addEventListener('click', getModal);
+
+// lOGOUT
+async function logOut(){
+  const logOut = await axios(`/logIn/logOut`);
+ window.location.href = "http://localhost:3500/";
+}
+

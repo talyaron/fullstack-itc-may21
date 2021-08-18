@@ -87,7 +87,7 @@ function renderArrayToDom(surveyArray) {
     var list = document.querySelector(".holder");
     var html = '';
     surveyArray.forEach(function (survey) {
-      html += "<div class=\"holder__survey\" onclick='moveToSurveyEdit(\"".concat(survey.surveyID, "\")' id='").concat(survey.surveyID, "'>\n                        <div class=\"holder__survey__header\">Survey:</div>\n                        <div class=\"holder__survey__taskDisplay\">").concat(survey.title, "</div>\n                    </div>\n                    <div class=\"holder__delete\" onclick='deleteSurvey(\"").concat(survey.surveyID, "\")'>Delete</div>");
+      html += "<div class=\"holder__survey\" onclick='moveToSurveyEdit(\"".concat(survey.surveyID, "\")' id='").concat(survey.surveyID, "'>\n                        <div class=\"holder__survey__header center-me\">Survey:</div>\n                        <br>\n                        <div class=\"holder__survey__taskDisplay\">").concat(survey.title, "</div>\n                    </div>\n                    <div class=\"holder__delete\" onclick='deleteSurvey(\"").concat(survey.surveyID, "\")'>Delete</div>");
     });
     list.innerHTML = html;
   } catch (e) {

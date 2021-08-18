@@ -13,7 +13,7 @@ async function surveyToAnswer() {
                 renderSurveyToBeVoted(res.data[0])
             })
         await axios.get('/votes')
-            .then((res) => userName.innerText = (`Hi, ${res.data.name}`))
+            .then((res) => userName.innerText = (`Hi, ${res.data.name}.`))
     } catch (e) {
         console.error(e)
     }

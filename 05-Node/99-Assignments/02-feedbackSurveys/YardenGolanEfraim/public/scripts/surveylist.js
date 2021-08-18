@@ -39,7 +39,8 @@
 
                 html += (
                     `<div class="holder__survey" onclick='moveToSurveyEdit("${survey.surveyID}")' id='${survey.surveyID}'>
-                        <div class="holder__survey__header">Survey:</div>
+                        <div class="holder__survey__header center-me">Survey:</div>
+                        <br>
                         <div class="holder__survey__taskDisplay">${survey.title}</div>
                     </div>
                     <div class="holder__delete" onclick='deleteSurvey("${survey.surveyID}")'>Delete</div>`

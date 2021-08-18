@@ -7,6 +7,7 @@ export interface Question {
 }
 export interface Voter {
     voterID: string;
+    email:string;
     score: number;
 }
 

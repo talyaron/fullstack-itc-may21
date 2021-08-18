@@ -1,8 +1,6 @@
-const {
-    User,
-    users,
-    createGuestCookie
-} = require('../models.js')
+const { User, users } = require('../models/usersModel')
+const { createGuestCookie  } = require('../models/adminModel')
+
 const Ajv = require("ajv");
 const ajv = new Ajv()
 

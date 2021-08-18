@@ -3,7 +3,7 @@ import { body } from "express-validator";
 const express = require("express");
 const router = express.Router();
 
-import { logInUser } from "../controllers/logInControllers";
+import { logInUser, logOutUser } from "../controllers/logInControllers";
 
 router.post(
   "/postLogIn",
@@ -15,5 +15,6 @@ router.post(
     .isLength({ min: 4 }),
   logInUser
 );
+router.get('/logOut', logOutUser);
 
 module.exports = router;

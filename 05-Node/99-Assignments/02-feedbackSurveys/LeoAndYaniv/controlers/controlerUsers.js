@@ -1,13 +1,17 @@
 "use strict";
 exports.__esModule = true;
-exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.newUser = void 0;
+exports.deleteSurveyUser = exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.newUser = void 0;
+//I import the classes (with Methods) of the Models that Im going to use here
 var users_1 = require("../models/users");
 var surveys_1 = require("../models/surveys");
 //Function to add a new user into the JSON
 function newUser(req, res) {
     try {
+        //Get the information from the body
         var _a = req.body, username = _a.username, email = _a.email, password = _a.password;
+        //Initialice a new instance of the User
         var user = new users_1.User(username, email, password);
+        //Initialice a new instance of Users (the initialization will read the JSON of Users)
         var allUsers = new users_1.Users();
         var emailExistsWithPass = allUsers.createUser(user, null);
         if (!emailExistsWithPass) {
@@ -35,7 +39,10 @@ function login(req, res) {
             var username = userExists.username;
             //Set the cookie
             var cookieToWrite = JSON.stringify({ username: username, email: email });
-            res.cookie("userDetails", cookieToWrite, { maxAge: 900000, httpOnly: true });
+            res.cookie("userDetails", cookieToWrite, {
+                maxAge: 900000,
+                httpOnly: true
+            });
             res.send({ message: "Logged in successfully", username: username });
         }
         else {
@@ -73,7 +80,9 @@ function answerLogin(req, res) {
 exports.answerLogin = answerLogin;
 function sendCookie(req, res) {
     try {
-        res.send({ email: req.email, username: req.username });
+        var status = (req.cookieExist) ? 200 : 404;
+        var message = (req.cookieExist) ? 'Cookie sent' : 'The session has expired. Please login again.';
+        res.status(status).send({ cookieExist: req.cookieExist, email: req.email, username: req.username, message: message });
     }
     catch (error) {
         console.error(error);
@@ -102,3 +111,17 @@ function uploadSurvey(req, res) {
     }
 }
 exports.uploadSurvey = uploadSurvey;
+//Function to delete the completly survey from the users (created and answers)
+function deleteSurveyUser(req, res) {
+    try {
+        var uuid = req.params.uuid;
+        var allUsers = new users_1.Users();
+        allUsers.deleteSurveyForUser(uuid);
+        res.send({ message: "The survey was deleted" });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).send(error.message);
+    }
+}
+exports.deleteSurveyUser = deleteSurveyUser;

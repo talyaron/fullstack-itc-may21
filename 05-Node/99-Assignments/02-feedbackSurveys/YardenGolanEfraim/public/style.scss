@@ -1,3 +1,19 @@
+body {
+  background-color: #85FFBD;
+  background-image: linear-gradient(296deg, #85FFBD 0%, #bcffee 100%);
+  width: 60vw;
+  margin: 0 auto;
+}
+
+.logo-wrapper {
+  margin: 1em auto;
+}
+
+.center-me {
+  margin: 0 auto;
+  text-align: center;
+}
+
 .modal {
   display: none;
   /* Hidden by default */
@@ -65,17 +81,6 @@ div {
 
 .questions-wrapper {
   margin: 0 auto;
-}
-
-.question {
-  border: 1px solid rgba(0, 0, 0, 0.877);
-  padding: 1em;
-  margin: .3em;
-  width: 100%;
-  text-align: center;
-  &:hover {
-    background-color: wheat;
-  }
 }
 
 .question__title {
@@ -243,11 +248,6 @@ input[type=range]:focus::-ms-fill-upper {
   display: none
 }
 
-.questioninfo-holder {
-  display: flex;
-  flex-flow: row;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
@@ -336,7 +336,11 @@ div {
   margin: .3em;
   width: 100%;
   text-align: center;
-  background:#19753f49;
+  color: rgba(245, 245, 245, 0.856);
+  background:#0094e98c;
+  &:hover {
+    background:#0094e9b7;
+  }
   &__title {
     font-size: 1.3rem;
   }
@@ -363,8 +367,8 @@ div {
   //   background: #197540;
   //   font-weight: bold;
   margin: 0;
-  background-color: #197540;
   border: solid 1px #23583a;
+  background-color: #197540;
   font-size: 16px;
   color: white;
   font-weight: normal;
@@ -380,8 +384,8 @@ div {
 
 #submit-btn:hover,
 #link:hover {
+  background-color: #156938;
   margin: 0;
-  background-color: #59a378;
   border: solid 1px #23583a;
   font-size: 16px;
   color: white;
@@ -528,11 +532,14 @@ input[type=range]:focus::-ms-fill-upper {
 
 .form-field {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 5px 0 0 0;
 
   &__label {
     font-size: 15px;
-    color: #757575;
+    color: #000000;
     font-weight: normal;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -556,10 +563,27 @@ input[type=range]:focus::-ms-fill-upper {
     padding-right: 10px;
     width: 100%;
     box-sizing: border-box;
+    margin: .5em;
   }
 
   &__submit {
-    margin: 0;
+    margin: 1em auto;
+    background-color: #19753fde;
+    border: solid 1px #23583a;
+    font-size: 16px;
+    color: white;
+    font-weight: normal;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    cursor: pointer;
+  }
+
+  &__submit:hover {
     background-color: #197540;
     border: solid 1px #23583a;
     font-size: 16px;
@@ -573,23 +597,7 @@ input[type=range]:focus::-ms-fill-upper {
     -webkit-border-radius: 0px;
     border-radius: 0px;
   }
-
-  &__submit:hover {
-    background-color: #59a378;
-    border: solid 1px #23583a;
-    font-size: 16px;
-    color: white;
-    font-weight: normal;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 30px;
-    padding-left: 30px;
-    -moz-border-radius: 0px;
-    -webkit-border-radius: 0px;
-    border-radius: 0px;
-  }
 }
-
 
 //css for dynamic stuff:
 //holder survey belongs to surveylist.html
@@ -608,10 +616,32 @@ input[type=range]:focus::-ms-fill-upper {
   padding-right: 10px;
   width: 100%;
   box-sizing: border-box;
-  &__header {}
+}
 
+.holder__survey__header {
+  color: #0093E9;
+  font-weight: bold;
+}
 
-  &__taskdisplay {}
+.holder__survey__taskDisplay {
+  font-style: italic;
+}
+
+.holder {
+
+    margin: 2em auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__delete {
+      margin: .7em;
+      color: rgba(255, 0, 0, 0.568);
+      cursor: pointer;
+      &:hover {
+        color: red;
+        background-color: #d3d3d3;
+      }
+    }
 }
 
 .holder__survey:hover {
@@ -628,6 +658,7 @@ input[type=range]:focus::-ms-fill-upper {
   padding-right: 10px;
   width: 100%;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 //for surveyedit.html
@@ -635,6 +666,7 @@ input[type=range]:focus::-ms-fill-upper {
 .questioninfo-holder {
   background-color: #d3d3d3;
   border: solid 1px #000000;
+  gap: 1.5em;
   border-radius: 0px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -642,24 +674,111 @@ input[type=range]:focus::-ms-fill-upper {
   padding-right: 10px;
   display: flex;
   flex-direction: column;
-
+  margin: .5em;
   &__question {
     text-emphasis-style: bold;
   }
-  
-  &__averagevotes {
-    text-size-adjust: 2px;
-
-  }
-
-  &__numberofvotes {
-
-  }
 }
+
+.averagevotes {
+  color: #0093E9;
+  }
+
+.numberofvotes {
+  color: #800cc3da;
+  }
 
 //for surveyvote.html
 
 #survey-title {
   text-align: center;
   color: rgba(255, 0, 0, 0.795);
+  font-size: 1.5rem;
+}
+
+#log-out {
+  position: absolute;
+  top: 1vh;
+  background-color: rgba(255, 0, 0, 0.609);
+  padding: .5em 1em;
+  &:hover {
+    background-color: rgba(255, 0, 0, 0.781);
+  }
+}
+
+.yellow-bck {
+  background-color: rgba(255, 255, 0, 0.705);
+  color:rgb(0, 0, 0);
+  
+  &:hover {
+    background-color: yellow;
+    color:rgb(0, 0, 0);
+
+  }
+}
+
+.guest-login {
+  margin: 5em;
+  &>label {
+    margin: 1em;
+  }
+  &>button {
+    background-color: rgba(255, 0, 0, 0.698);
+    color: white;
+    padding: 0.5em;
+    margin: 0.5em;
+      cursor: pointer;
+      &:hover {
+        background-color: red;
+      }
+    }
+}
+
+.questioninfo-holder {
+  display: flex;
+  flex-flow: row;
+  width: 80%;
+  background-color: whitesmoke;
+  &:hover {
+  background-color: rgb(235, 235, 235);
+  }
+}
+
+.survey__ID {
+  border-bottom: 1px solid grey;
+}
+
+.survey__ID__Title {
+  margin: .4em auto;
+  font-size: 1.4rem;
+}
+
+.my-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5em 0;
+  & input {
+    padding: 0.8em;
+  }
+}
+
+.s-login-h2 {
+  color: gray;
+  font-size: 1.3rem
+}
+
+.grey {
+  color: gray;
+  margin: .3em;
+}
+
+.orange-bck {
+  background-color: rgba(255, 166, 0, 0.76) !important;
+  padding: 0.7em !important ;
+
+  &:hover {
+    background-color: orange !important;
+  }
 }
