@@ -135,6 +135,21 @@ body {
   color: black;
   cursor: pointer;
 }
+.options--button {
+  background: antiquewhite;
+  width: 35%;
+  border-radius: 50px;
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  left: 35%;
+}
+.options--button a {
+  text-decoration: none;
+}
+.options--button a:hover {
+  color: green;
+}
 
 .form {
   padding: 10px;

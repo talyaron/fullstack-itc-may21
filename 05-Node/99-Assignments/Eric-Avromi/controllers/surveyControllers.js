@@ -28,6 +28,7 @@ exports.getPreviousSurvey = getPreviousSurvey;
 function addSurveys(req, res) {
     try {
         var allSurveys = readAllSurveys();
+        console.log(req.body);
         var survey = new surveyModels_1.Survey(req.body.id, req.body.title, req.body.email, req.body.questions);
         allSurveys.push(survey);
         fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));

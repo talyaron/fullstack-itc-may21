@@ -146,6 +146,22 @@ body {
       }
     }
   }
+  &--button {
+    background: antiquewhite;
+    width: 35%;
+    border-radius: 50px;
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    left: 35%;
+    a{
+      text-decoration: none;
+
+      &:hover {
+        color: green;
+      }
+    }
+  }
 }
 
 .form {

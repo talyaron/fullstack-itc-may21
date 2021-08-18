@@ -26,6 +26,7 @@ export function getPreviousSurvey(req, res) {
     const { id } = req.params
     const allSurveys = readAllSurveys();
     const survey = allSurveys.find(survey => survey.id === id)
+    
     res.send(survey)
 }
 
@@ -33,7 +34,8 @@ export function getPreviousSurvey(req, res) {
 export function addSurveys(req, res) {
     try {
         const allSurveys = readAllSurveys();
-
+        console.log(req.body);
+        
         const survey = new Survey(req.body.id, req.body.title, req.body.email, req.body.questions)
         allSurveys.push(survey)
         fs.writeFileSync("./survey.json", JSON.stringify(allSurveys));
