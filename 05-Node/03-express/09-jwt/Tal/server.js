@@ -1,6 +1,8 @@
 var express = require('express'); //get library
 var app = express(); //get express
 var port = process.env.PORT || 3000; //port
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.json()); //use express to get parse json
 //route

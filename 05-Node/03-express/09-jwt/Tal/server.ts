@@ -1,9 +1,10 @@
 const express = require('express'); //get library
 const app = express(); //get express
 const port = process.env.PORT || 3000; //port
+const cookieParser = require('cookie-parser');
 
 
-
+app.use(cookieParser());
 
 app.use(express.static('public'));
 
