@@ -4,14 +4,19 @@ export function userCookieRead(req, res, next) {
     try {
       const { userDetails } = req.cookies;
 
-      if (!userDetails) throw new Error("Cookie was not found");
-
-      const cookie = JSON.parse(userDetails);
-      const { username, email } = cookie;
-      req.username = username;
-      req.email = email;
-
-      next();
+      if (userDetails) { 
+        const cookie = JSON.parse(userDetails);
+        const { username, email } = cookie;
+        req.cookieExist = true;
+        req.username = username;
+        req.email = email;
+        
+        next();
+        
+      } else {
+        req.cookieExist = false;
+        res.status(404).send({cookieExist: req.cookieExist, message:'The session has expired. Please login again.'});
+      }
 
     } catch (error) {
       console.error(error);

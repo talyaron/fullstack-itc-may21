@@ -4,16 +4,37 @@ const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 
 
-import { Survey } from '../models/surveyModels'
+import { Survey, Question, Voter } from '../models/surveyModels'
 
-const getAllSurveys = () => {
+
+const readAllSurveys = () => {
     const allSurveys = fs.readFileSync("./survey.json");
     return JSON.parse(allSurveys);
 }
 
-export function addSurveys(req, res) {
+export function getUniqueId(req, res) {
+    const id = uuidv4()
+    res.send({ id: id })
+}
+// export function getUniqueIdQuestions(req, res) {
+//     const id = uuidv4()
+//     res.send({ id: id })
+// }
+
+export function getPreviousSurvey(req, res) {
+
+    const { id } = req.params
+    const allSurveys = readAllSurveys();
+    const survey = allSurveys.find(survey => survey.id === id)
+    console.log(id);
     
-        const allSurveys = getAllSurveys();
+    res.send(survey)
+}
+
+
+export function addSurveys(req, res) {
+    try {
+        const allSurveys = readAllSurveys();
 
         const survey = new Survey(req.body.id, req.body.title, req.body.email, req.body.questions)
         allSurveys.push(survey)
@@ -29,17 +50,20 @@ export function addSurveys(req, res) {
 
         res.send({ ok: "Surveys Created" });
 
-  
+    } catch (e) {
+        res.status(500).send({ error: `${e}` });
+    }
 }
 
+
 export function deleteSurveys(req, res) {
-    
+    try {
         const { id, email } = req.params
-        let allSurveys = getAllSurveys();
+        let allSurveys = readAllSurveys();
         let allUsers = JSON.parse(fs.readFileSync("./users.json"));
 
         const user = allUsers.filter(user => user.email === email)
-        user[0].createdSurvey = user[0].createdSurvey.filter(survey => survey.id !== id)
+        user[0].surveys = user[0].surveys.filter(survey => survey.id !== id)
         fs.writeFileSync("./users.json", JSON.stringify(allUsers));
 
 
@@ -49,23 +73,11 @@ export function deleteSurveys(req, res) {
 
         let allUsersUser = JSON.parse(fs.readFileSync("./users.json"));
         const find = allUsersUser.find(user => user.email === email)
-        res.send(find.createdSurvey);
+        res.send(find.surveys);
 
-}
 
-export function getId(req, res) {
-    const id = uuidv4()
-    res.send({ id: id })
-}
-export function getIdQuestions(req, res) {
-    const id = uuidv4()
-    res.send({ id: id })
-}
 
-export function previousSurvey(req, res) {
-
-    const { id } = req.params
-    const allSurveys = getAllSurveys();
-    const survey = allSurveys.find(survey => survey.id === id)
-    res.send(survey)
+    } catch (e) {
+        res.status(500).send({ error: `${e}` });
+    }
 }

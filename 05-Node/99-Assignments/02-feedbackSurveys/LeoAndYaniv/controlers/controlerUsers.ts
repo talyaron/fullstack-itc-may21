@@ -75,7 +75,10 @@ export function answerLogin(req, res) {
 
 export function sendCookie(req, res) {
   try {
-    res.send({ email: req.email, username: req.username });
+    const status = (req.cookieExist) ? 200 : 404;
+    const message = (req.cookieExist) ? 'Cookie sent' : 'The session has expired. Please login again.';
+    res.status(status).send({cookieExist: req.cookieExist, email: req.email, username: req.username, message });
+    
   } catch (error) {
     console.error(error);
     res.status(500).send(error.message);
@@ -105,4 +108,18 @@ export function uploadSurvey(req, res) {
     console.error(error);
     res.status(500).send(error.message);
   }
+}
+
+//Function to delete the completly survey from the users (created and answers)
+export function deleteSurveyUser(req, res) {
+   try {
+    const { uuid } = req.params;
+    const allUsers = new Users();
+    allUsers.deleteSurveyForUser(uuid);
+
+    res.send({ message: "The survey was deleted" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.message);
+  } 
 }
