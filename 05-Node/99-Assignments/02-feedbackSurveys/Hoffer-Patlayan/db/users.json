@@ -1,1 +1,1 @@
-[ ]
+[{"name":"Tomas","email":"tomipatlayan@gmail.com","password":"pepe","createSurvey":[{"id":"5d8c896f-8ebf-48e5-a415-20fc3db12a9f","title":"Tomas","admin":"tomipatlayan@gmail.com","question":{"0":"dsadsa"}},{"id":"e3adb155-0a08-4a8c-be9a-12cf567c726f","title":"Helado","admin":"tomipatlayan@gmail.com","question":{}},{"id":"2f155eec-ef8e-44de-a5d5-285bd955eaae","title":"Helado","admin":"tomipatlayan@gmail.com","question":{"0":"Chocolate"}}]},{"name":"pepe","email":"tomi@gmail.com","password":"pepe","createSurvey":[]}]
