@@ -1,17 +1,33 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jwt-simple');
 
-import {passwordsControl} from '../controlers/passwordsControls';
+const { secret } = require('../secrets/secrets');
 
-function userRole (req, res, next){
-    const {user} = req.cookies;
-    const {role} = user;
-    console.log(role)
-    req.role = role;
-    next();
+
+import { passwordsControl } from '../controlers/passwordsControls';
+
+function userRole(req, res, next) {
+    try {
+        const { user } = req.cookies;
+
+        if (user === undefined) throw new Error('no user in cookie');
+
+        const userDecoded = jwt.decode(user, secret);
+        console.log(userDecoded)
+        const { role } = userDecoded;
+        if (role === undefined) throw new Error('No role in cookie')
+
+        req.role = role;
+        console.log(role)
+        next();
+    } catch (e) {
+        console.error(e)
+        res.status(500).send({ error: e.message })
+    }
 }
 
-router.get('/getAllPasswords',userRole,passwordsControl);
+router.get('/getAllPasswords', userRole, passwordsControl);
 
 
 module.exports = router;

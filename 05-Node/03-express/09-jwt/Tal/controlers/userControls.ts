@@ -1,3 +1,7 @@
+const jwt = require('jwt-simple');
+
+const{secret} = require('../secrets/secrets');
+
 interface Admin{
      username: string; 
      password:string; 
@@ -10,13 +14,23 @@ export const loginControl = (req, res) => {
     console.log(username, password);
 
     const admin:Admin = admins.find(admin=>admin.username === username);
+
+    const role = {role:null}
     if(admin !== undefined && admin.password === password){
         console.log('is admin');
-        res.cookie('user',{role:'admin'}, { maxAge: 900000, httpOnly: true });
+        role.role = 'admin';
+       
     } else {
-        res.cookie('user',{role:'public'}, { maxAge: 900000, httpOnly: true });
+
+        role.role = 'public';
+        var roleJWT = jwt.encode(role, secret);
+        res.cookie('user',roleJWT, { maxAge: 900000, httpOnly: true });
     }
    
+    var roleJWT = jwt.encode(role, secret);
+
+    res.cookie('user',roleJWT, { maxAge: 900000, httpOnly: true });
+
     res.send({ login: true })
 }
 
