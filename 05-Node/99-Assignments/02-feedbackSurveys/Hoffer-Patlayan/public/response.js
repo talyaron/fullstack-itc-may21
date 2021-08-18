@@ -62,6 +62,8 @@ const handleSubmit =  (event) => {
   responds.forEach(element => {
     arr.push(+(element.value))
   });
+
+ 
   
   axios({
     method: "post",
@@ -73,18 +75,8 @@ const handleSubmit =  (event) => {
       console.log(err);
     });
 };
-async function sendRes(newRes){
-  const response = await axios.post(`/response/postResponds`, newRes);
-}
-const btn = document.querySelector('.btnSubmit');
-btn.addEventListener('click', alertSubmit)
+// async function sendRes(newRes){
+//   const response = await axios.post(`/response/postResponds`, newRes);
+//   console.log(response); 
+// }
 
-function alertSubmit(){
-  const root = document.querySelector('.alert');
-  let html = '<div class="alert alert-info" role="alert">Thank you, your survey was sent!</div>';
-  root.innerHTML = html;
-  setTimeout(() =>{
-    html = '';
-    root.innerHTML = html;
-  }, 3000)
-}

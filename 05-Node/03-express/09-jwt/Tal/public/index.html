@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <form onsubmit="handleLogin(event)">
+        <input type='text' name='username' placeholder="username">
+        <input type='text' name='password' placeholder="password">
+        <button type="submit">Login</button>
+    </form>
+
+    <form onsubmit="handleRegister(event)">
+        <input type='text' name='username' placeholder="username">
+        <input type='password' name='password' placeholder="password">
+        <button type="submit">Register</button>
+    </form>
+    <button onclick="getPasswords()">Get Passwords</button>
+    <script src="index.js"></script>
+</body>
+</html>

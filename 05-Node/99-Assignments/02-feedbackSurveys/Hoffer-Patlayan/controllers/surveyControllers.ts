@@ -1,98 +1,142 @@
-export { }
+export {};
 const express = require("express");
 const app = express();
 const fs = require("fs");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 const cookieParser = require("cookie-parser");
-import { Survey } from '../models/survey'
-
+import { Survey } from "../models/survey";
 
 app.use(express.json());
 app.use(cookieParser());
 // READ SURVEY JSON
 export const getAllSurveys = () => {
-    const fileJson = fs.readFileSync("./db/survey.json");
-    return JSON.parse(fileJson);
-  };
+  const fileJson = fs.readFileSync("./db/survey.json");
+  return JSON.parse(fileJson);
+};
 // READ USERS JSON`
-  export const getAllUsers = () => {
-    const fileJson = fs.readFileSync("./db/users.json");
-    return JSON.parse(fileJson);
-  };
+export const getAllUsers = () => {
+  const fileJson = fs.readFileSync("./db/users.json");
+  return JSON.parse(fileJson);
+};
+export const getAllRes = () => {
+  const fileJson = fs.readFileSync("./db/response.json");
+  return JSON.parse(fileJson);
+};
+export function addSurveys(req: any, res: any) {
+  // add survay from class to survay.json
 
-  export function addSurveys(req: any, res: any) {
-      // add survay from class to survay.json
-      const getSuverys = getAllSurveys();
-      const getCookie  = JSON.parse(req.cookies.cookieName);
-      let id = uuidv4();
-      const newSurvey = new Survey(id, req.body.title, getCookie.email, req.body.questions);
-      getSuverys.push(newSurvey);
-      fs.writeFileSync("./db/survey.json", JSON.stringify(getSuverys))
+  const getSuverys = getAllSurveys();
+  const getCookie = JSON.parse(req.cookies.cookieName);
+  let id = uuidv4();
+  const newSurvey = new Survey(
+    id,
+    req.body.title,
+    getCookie.email,
+    req.body.questions
+  );
+  getSuverys.push(newSurvey);
+  fs.writeFileSync("./db/survey.json", JSON.stringify(getSuverys));
 
-      const getUsers = getAllUsers();
-      const survUser = getUsers.find((user:any) => user.email === getCookie.email);
-      survUser.createSurvey.push(newSurvey);
-      fs.writeFileSync("./db/users.json", JSON.stringify(getUsers));
-      
-      res.send({ok: "success"});
-  }
+  const getUsers = getAllUsers();
+  const survUser = getUsers.find((user: any) => user.email === getCookie.email);
+  survUser.createSurvey.push(newSurvey);
+  fs.writeFileSync("./db/users.json", JSON.stringify(getUsers));
 
-  export function getLogInUser(req: any, res: any) {
-    const getUsers = getAllUsers();
-    const getCookie  = JSON.parse(req.cookies.cookieName);
-    const findLogInUser = getUsers.find((user:any) => user.email === getCookie.email);
-    res.send(findLogInUser);
-  }
+  res.send({ ok: "success" });
+}
 
-  export function deleteSurvey(req: any, res: any) {
-    const { id } = req.params;
-    let getUsers = getAllUsers();
-    const getCookie  = JSON.parse(req.cookies.cookieName);
-    const findLogInUser = getUsers.findIndex((user:any) => user.email === getCookie.email);
-    const find = getUsers.find((user:any) => user.email === getCookie.email);
-    getUsers[findLogInUser].createSurvey = find.createSurvey.filter((surv:any) =>surv.id !== id);
-    fs.writeFileSync("./db/users.json", JSON.stringify(getUsers));
-    
-    let getSurvey = getAllSurveys();
-    getSurvey = getSurvey.filter((survey:any) => survey.id !== id);
-    fs.writeFileSync("./db/survey.json", JSON.stringify(getSurvey));
-    res.send({ok:"succes"})
-  }
+export function getLogInUser(req: any, res: any) {
+  const getUsers = getAllUsers();
+  const getCookie = JSON.parse(req.cookies.cookieName);
+  const findLogInUser = getUsers.find(
+    (user: any) => user.email === getCookie.email
+  );
+  res.send(findLogInUser);
+}
 
-  export function saveSelectedSurvey(req: any, res: any) {
-    const { id } = req.params;
-    res.cookie('idSelected', id, { maxAge: 300000000, httpOnly: true });
-    res.send({ok:"succes"})
-  }
+export function deleteSurvey(req: any, res: any) {
+  const { id } = req.params;
+  let getUsers = getAllUsers();
+  const getCookie = JSON.parse(req.cookies.cookieName);
+  const findLogInUser = getUsers.findIndex(
+    (user: any) => user.email === getCookie.email
+  );
+  const find = getUsers.find((user: any) => user.email === getCookie.email);
+  getUsers[findLogInUser].createSurvey = find.createSurvey.filter(
+    (surv: any) => surv.id !== id
+  );
+  fs.writeFileSync("./db/users.json", JSON.stringify(getUsers));
 
-  export function getSelectedSurvey(req: any, res: any) {
-    const getCookie  = req.cookies.idSelected;
-    const getSuverys = getAllSurveys();
-    const selectedSurv = getSuverys.find((survey:any) => survey.id === getCookie);
-    res.send(selectedSurv)
-  }
+  let getSurvey = getAllSurveys();
+  getSurvey = getSurvey.filter((survey: any) => survey.id !== id);
+  fs.writeFileSync("./db/survey.json", JSON.stringify(getSurvey));
+  res.send({ ok: "succes" });
+}
 
-  export function editSelectedSurvey(req: any, res: any) {
-    const idCookie  = req.cookies.idSelected;
-    const getSuverys = getAllSurveys();
-    const indexSelectedSurv = getSuverys.findIndex((survey:any) => survey.id === idCookie);
-    const title = req.body.title;
-    const question = req.body.question;
-    getSuverys[indexSelectedSurv].title = title;
-    getSuverys[indexSelectedSurv].question = question;
-    fs.writeFileSync("./db/survey.json", JSON.stringify(getSuverys));
+export function saveSelectedSurvey(req: any, res: any) {
+  const { id } = req.params;
+  res.cookie("idSelected", id, { maxAge: 300000000, httpOnly: true });
+  res.send({ ok: "succes" });
+}
 
+export function getSelectedSurvey(req: any, res: any) {
+  const getCookie = req.cookies.idSelected;
+  const { id } = req.params;
+  const getSuverys = getAllSurveys();
+  const allRes = getAllRes();
+  const selectedSurv = getSuverys.find(
+    (survey: any) => survey.id === getCookie
+  );
+  const selectedRes = allRes.filter((res: any) => res.id === id);
+  // selectedRes.forEach((element:any) => {
+  //   console.log(element.respondes);
 
-    const getUsers = getAllUsers();
-    const getCookie  = JSON.parse(req.cookies.cookieName);
-    const findUser = getUsers.findIndex((user:any) => user.email === getCookie.email);
-    const findSuveryUser = getUsers[findUser].createSurvey.find((survey:any) => survey.id === idCookie);
-    findSuveryUser.title = title;
-    findSuveryUser.question = question;
-    fs.writeFileSync("./db/users.json", JSON.stringify(getUsers));
-    
-    res.send({ok:"succes"})
-  }
+  // });
+  // console.log(selectedSurv);
+  console.log(selectedRes);
 
+  res.send(selectedSurv);
+}
 
+export function editSelectedSurvey(req: any, res: any) {
+  const idCookie = req.cookies.idSelected;
+  const getSuverys = getAllSurveys();
+  const indexSelectedSurv = getSuverys.findIndex(
+    (survey: any) => survey.id === idCookie
+  );
+  const title = req.body.title;
+  const question = req.body.question;
+  getSuverys[indexSelectedSurv].title = title;
+  getSuverys[indexSelectedSurv].question = question;
+  fs.writeFileSync("./db/survey.json", JSON.stringify(getSuverys));
 
+  const getUsers = getAllUsers();
+  const getCookie = JSON.parse(req.cookies.cookieName);
+  const findUser = getUsers.findIndex(
+    (user: any) => user.email === getCookie.email
+  );
+  const findSuveryUser = getUsers[findUser].createSurvey.find(
+    (survey: any) => survey.id === idCookie
+  );
+  findSuveryUser.title = title;
+  findSuveryUser.question = question;
+  fs.writeFileSync("./db/users.json", JSON.stringify(getUsers));
+
+  res.send({ ok: "succes" });
+}
+
+// export const addResResult = (req: any, res: any) => {
+//   const { id } = req.body;
+//   const getSuvery = getAllSurveys();
+//   const allRes = getAllRes();
+
+//   const putInSurvey = allRes.find((resp:any)=> resp.id ===id);
+
+//   const arrResp = [ {
+//     id: putInSurvey.id,
+//     respondes:putInSurvey.respondes,
+//   }]
+// getSuvery.push(arrResp);
+
+// fs.writeFileSync("./db/survey.json", JSON.stringify(getSuvery));
+// };
