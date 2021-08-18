@@ -93,6 +93,53 @@ function () {
 }();
 
 var users = new Users();
+
+function createAdminCookie(selectedAdmin, res) {
+  try {
+    var adminCookie = JSON.stringify({
+      selectedAdmin: selectedAdmin
+    });
+    res.cookie('admin', adminCookie, {
+      maxAge: 300000000,
+      httpOnly: true
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function getAdminCookie(req) {
+  try {
+    var admin = req.cookies.admin;
+    var cookie = JSON.parse(admin);
+    var selectedAdmin = cookie.selectedAdmin;
+    return selectedAdmin;
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function createGuestCookie(guestUser, res) {
+  try {
+    var guestCookie = JSON.stringify({
+      guestUser: guestUser
+    });
+    res.cookie('guest', guestCookie, {
+      maxAge: 300000000,
+      httpOnly: true
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function getAdminCookieIndex(req) {
+  var adminIndex = req.cookies.adminIndex;
+  var cookieIndex = JSON.parse(adminIndex);
+  var selectedAdminIndex = cookieIndex.selectedAdminIndex;
+  return selectedAdminIndex;
+}
+
 module.exports = {
   User: User,
   Users: Users,
@@ -100,5 +147,9 @@ module.exports = {
   Surveys: Surveys,
   Question: Question,
   Questions: Questions,
-  users: users
+  users: users,
+  createAdminCookie: createAdminCookie,
+  getAdminCookie: getAdminCookie,
+  createGuestCookie: createGuestCookie,
+  getAdminCookieIndex: getAdminCookieIndex
 };

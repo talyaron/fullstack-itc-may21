@@ -9,8 +9,7 @@ export class Survey {
         this.id = id;
         this.title = title;
         this.admin = admin;
-        this.question = question;
-        
+        this.question = question;        
     }
 }
 

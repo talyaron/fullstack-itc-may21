@@ -1,4 +1,6 @@
-const { users } = require('../models.js')
+const { createAdminCookie } = require('../models/adminModel')
+const { users } = require('../models/usersModel')
+
 const Ajv = require("ajv");
 const ajv = new Ajv()
 
@@ -33,13 +35,9 @@ exports.login = (req, res) => {
             )
             throw new Error("Invalid data was transferd")
         }
-        console.log(users)
-        console.log(users.users)
-        
+     
         const selectedAdmin = users.users.find(r=> r.email === body.email && r.password === body.password)
-        const adminCookie = JSON.stringify({ selectedAdmin })
-        res.cookie('admin', adminCookie, { maxAge: 300000000, httpOnly: true });
-        console.log(selectedAdmin)
+        createAdminCookie(selectedAdmin, res)
         res.send(selectedAdmin);
         
     } catch (e) {

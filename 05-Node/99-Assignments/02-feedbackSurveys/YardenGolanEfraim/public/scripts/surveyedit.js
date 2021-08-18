@@ -21,21 +21,26 @@ function renderSurveyEdit(survey) {
         sum += survey.questions[i].voters.score[p];
         }
         questionHtml +=
-            `  <div>Question ${questionNumber}</div>
+            `  <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="blue" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg> Question ${questionNumber}</div>
                     <div class="questioninfo-holder">
-                    <div id= "${survey.questions[i].questionID}"class= "question${i}">${survey.questions[i].title}</div>
-                    <div class="averagevotes">Average Score:${sum/survey.questions[i].voters.score.length}</div>
-                    <div class="numberofvotes">Number of Voters: ${survey.questions[i].voters.score.length}</div>
+                        <div id= "${survey.questions[i].questionID}"class= "center-me question${i}"><br><em>${survey.questions[i].title}</em></div><br>
+                        <div class="averagevotes center-me">Average Score: <br> <strong>${sum/survey.questions[i].voters.score.length}</strong></div><br>
+                        <div class="numberofvotes center-me">Number of Voters: <br> <strong>${survey.questions[i].voters.score.length}</strong></div>
                     </div> `
     }
     let html = `<div class="survey__ID"  id='${survey.surveyID}'>
                     <div class="survey__ID__Title">${survey.title}</div>
                     ${questionHtml}
-                    <form onsubmit="handleQuestions(event)">
+                    <form onsubmit="handleQuestions(event)" class="my-form">
                                  <div id="question-holder">
                                     <input type="text" name="${survey.surveyID}" id="${survey.surveyID}" placeholder="Question" required>
                                 </div>
-                                <button id="submit" type="submit">Submit Questions!</button>
+                                <br>
+                                <button  id="submit-btn" type="submit"><i class="fas fa-plus-square"></i>Submit Question</button>
                             </form>
                   
                         </div>
@@ -74,6 +79,7 @@ function copyURLtoClipboard() {
         el.select();
         document.execCommand('copy');
         document.body.removeChild(el);
+        alert('Survey link copied!')
     })
 }catch (e) {
     console.error(e)

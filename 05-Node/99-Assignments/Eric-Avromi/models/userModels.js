@@ -1,21 +1,13 @@
-const fs = require('fs');
-
-function addUsers(user){
-    console.log('in add user ');
-    const allUsers = getAllUsers()
-    const updateUsers = allUsers.push(user);
-  fs.writeFileSync("./users.json", JSON.stringify(allUsers));
-    return console.log('user added ');
-
-}
-
-function getAllUsers() { 
-
-  const allUsers = fs.readFileSync("./users.json");
-  const parsed = JSON.parse(allUsers);
-  return parsed
-}
-
-
-exports.addUsers = addUsers;
-exports.getAllUsers = getAllUsers;
+"use strict";
+exports.__esModule = true;
+exports.User = void 0;
+var User = /** @class */ (function () {
+    function User(userName, email, password, surveys) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.surveys = surveys;
+    }
+    return User;
+}());
+exports.User = User;
