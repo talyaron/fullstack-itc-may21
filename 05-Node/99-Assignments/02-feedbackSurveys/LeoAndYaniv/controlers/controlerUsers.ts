@@ -30,6 +30,20 @@ export function newUser(req, res) {
   }
 }
 
+export function findUsername(req, res) {
+  try {
+    const { email } = req.params;
+    const allUsers = new Users();
+
+    const username = allUsers.findUsername(email);
+    res.send({ message: "username was found", username });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.message);
+  }
+}
+
 //Function to login the user
 export function login(req, res) {
   try {
@@ -39,12 +53,12 @@ export function login(req, res) {
     if (userExists) {
       const { username } = userExists;
       //Set the cookie
-      const cookieToWrite: string = JSON.stringify({ username, email });
-      const token = jwt.encode(cookieToWrite, secret);
-      res.cookie("userDetails", token, {
-        maxAge: 900000,
-        httpOnly: true,
-      });
+      // const cookieToWrite: string = JSON.stringify({ username, email });
+      // const token = jwt.encode(cookieToWrite, secret);
+      // res.cookie("userDetails", token, {
+      //   maxAge: 900000,
+      //   httpOnly: true,
+      // });
       res.send({ message: "Logged in successfully", username });
     } else {
       res.send({

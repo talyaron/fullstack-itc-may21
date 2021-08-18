@@ -30,6 +30,7 @@ export function userCookieRead(req, res, next) {
   export function userCookieWrite(req, res, next) {
     try {
       //Get the information from the body
+      console.log(req.body);
       const { username, email } = req.body;
       if ((!username) || (!email)) throw new Error("User details processing issues");
 

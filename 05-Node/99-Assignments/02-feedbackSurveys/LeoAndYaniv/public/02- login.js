@@ -12,7 +12,9 @@ async function doingSubmitLogin(ev) {
         password = password.value;
         if (!email || !password) throw new Error("Please complete all the fields");
         ev.target.reset();
-        const userDetails = { email, password }
+        const userLoginUsername = await axios.get(`/user/username/${email}`);
+        const { username } = userLoginUsername.data;
+        const userDetails = { email, password, username }
         const userLogin = await axios.post('/user/login', userDetails);
 
         if (userLogin.data.username) {

@@ -7,10 +7,11 @@ import { userCookieRead, userCookieWrite } from '../middlewares/UserCookie';
 import { isAdmin } from '../middlewares/isAdmin';
 
 //I import the function of the Controlers that Im going to use here
-import { newUser, login, sendCookie, uploadSurvey, answerLogin, deleteSurveyUser } from '../controlers/controlerUsers'
+import { newUser, login, sendCookie, uploadSurvey, answerLogin, deleteSurveyUser, findUsername } from '../controlers/controlerUsers'
 
 router.post('/register', userCookieWrite ,newUser);
-router.post('/login', login);
+router.get('/username/:email', findUsername);
+router.post('/login', userCookieWrite, login);
 router.get('/info', userCookieRead, sendCookie);
 //When the user click to finish the new survey I call this method
 router.post('/uploadUserWithSurvey/:uuid', userCookieRead, isAdmin, uploadSurvey);
