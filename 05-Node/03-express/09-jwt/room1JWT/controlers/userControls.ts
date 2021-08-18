@@ -12,11 +12,13 @@ export const loginControl = (req, res) => {
 
     const { username, password } = req.body;
     console.log(username, password);
+    
 
     const admin:Admin = admins.find(admin=>admin.username === username);
     // const cookieAdmin = {role: 'admin'}
     // const cookiePublic = {role: 'public'}
     const tokenAdmin=jwt.encode(admin,secret);
+    console.log(tokenAdmin)
     // const tokenPublic=jwt.encode(cookiePublic,secret);
     if(admin !== undefined && admin.password === password){
         console.log('is admin');
