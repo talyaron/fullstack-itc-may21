@@ -51,9 +51,7 @@ router.get('/getAllSurveys', (req, res) => {
 router.delete('/deleteSurvey/:id', (req, res) => {
     const id = req.params.id
     const surveys = getAllSurveys()
-    const newSurveys = surveys.filter(survey => {
-       return survey.id !== id              
-        
+    const newSurveys = surveys.filter(survey => {survey.id !== id              
     
     })
     console.log(newSurveys);
