@@ -75,7 +75,10 @@ export function answerLogin(req, res) {
 
 export function sendCookie(req, res) {
   try {
-    res.send({ email: req.email, username: req.username });
+    const status = (req.cookieExist) ? 200 : 404;
+    const message = (req.cookieExist) ? 'Cookie sent' : 'The session has expired. Please login again.';
+    res.status(status).send({cookieExist: req.cookieExist, email: req.email, username: req.username, message });
+    
   } catch (error) {
     console.error(error);
     res.status(500).send(error.message);
