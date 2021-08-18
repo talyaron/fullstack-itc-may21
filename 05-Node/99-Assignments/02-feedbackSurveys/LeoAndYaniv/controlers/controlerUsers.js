@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
-exports.deleteSurveyUser = exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.newUser = void 0;
+exports.deleteSurveyUser = exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.findUsername = exports.newUser = void 0;
+var jwt = require('jwt-simple');
 //I import the classes (with Methods) of the Models that Im going to use here
 var users_1 = require("../models/users");
 var surveys_1 = require("../models/surveys");
@@ -29,6 +30,19 @@ function newUser(req, res) {
     }
 }
 exports.newUser = newUser;
+function findUsername(req, res) {
+    try {
+        var email = req.params.email;
+        var allUsers = new users_1.Users();
+        var username = allUsers.findUsername(email);
+        res.send({ message: "username was found", username: username });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).send(error.message);
+    }
+}
+exports.findUsername = findUsername;
 //Function to login the user
 function login(req, res) {
     try {
@@ -38,11 +52,12 @@ function login(req, res) {
         if (userExists) {
             var username = userExists.username;
             //Set the cookie
-            var cookieToWrite = JSON.stringify({ username: username, email: email });
-            res.cookie("userDetails", cookieToWrite, {
-                maxAge: 900000,
-                httpOnly: true
-            });
+            // const cookieToWrite: string = JSON.stringify({ username, email });
+            // const token = jwt.encode(cookieToWrite, secret);
+            // res.cookie("userDetails", token, {
+            //   maxAge: 900000,
+            //   httpOnly: true,
+            // });
             res.send({ message: "Logged in successfully", username: username });
         }
         else {

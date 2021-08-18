@@ -91,11 +91,22 @@ export class Users {
 
   loginUser(email, password) {
     try {
-      const userExists = this.users.find(
-        (user) => user.email === email && user.password === password
-      );
+      const userExists = this.users.find(user => user.email === email && user.password === password);
       if (userExists) {
         return userExists;
+      }
+
+      return undefined;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  findUsername (email) {
+    try {
+      const userExists = this.users.find(user => user.email === email);
+      if (userExists) {
+        return userExists.username;
       }
 
       return undefined;

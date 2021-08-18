@@ -24,5 +24,5 @@ async function getPasswords(ev):Promise<void>{
 
  
     const {data} = await axios.get('/secrets/getAllPasswords');
-    console.log(data)
+    console.log(data);
 }

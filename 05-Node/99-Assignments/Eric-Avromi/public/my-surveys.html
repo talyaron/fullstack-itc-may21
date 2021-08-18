@@ -49,10 +49,10 @@
             ev.preventDefault()
             const response = await axios.get('/cookie/getCookie')
             const { userName, email } = response.data
-
+            console.log(userName);
             const root = document.querySelector('.hello')
             root.innerHTML = `<span>Hello ${userName}</span>`
-
+            
             const responseSurveys = await axios.get(`/surveys/show/${email}`)
             const data = responseSurveys.data
 

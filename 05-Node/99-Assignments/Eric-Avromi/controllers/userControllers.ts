@@ -1,4 +1,7 @@
 export { }
+const jwt = require('jwt-simple');
+
+import {secret} from '../secret/secret'
 
 const fs = require("fs");
 const { uuid } = require('uuidv4')
@@ -42,7 +45,10 @@ export function loginUser(req, res) {
 
         if (isUserPassOK) {
             const userLogin = allUsers.find(elem => (elem.email === email) && (elem.password === password))
-            res.cookie('cookieName', JSON.stringify(userLogin), { maxAge: 30000000, httpOnly: true });
+            const token = jwt.encode(userLogin, secret);
+            console.log(token);
+            
+            res.cookie('cookieName', token, { maxAge: 30000000, httpOnly: true });
             res.send({ ok: 'Welcom admin' });
         } else {
             throw new Error("Is incorrect your email or password. Try Again")
@@ -80,11 +86,23 @@ export function endUserLogin(req, res) {
 
 export function getCookie(req, res) {
     try {
-        const { cookieName } = req.cookies
+        console.log('decoding');
+        const {cookieName}  = req.cookies
+        console.log(cookieName);
+    
+        const decoded = jwt.decode(cookieName, secret);
+        
+        console.log('decoding',decoded);
+        
         if (!cookieName) throw new Error("Nothing is on the cookie")
-        const cookie = JSON.parse(cookieName)
+        const cookie = decoded
+        
         res.send(cookie);
+
+        
     } catch (e) {
+        console.log(e.message);
+        
         res.status(500).send({ error: `${e.message}` });
     }
 };

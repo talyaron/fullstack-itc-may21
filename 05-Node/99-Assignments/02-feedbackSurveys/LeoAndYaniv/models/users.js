@@ -91,6 +91,18 @@ var Users = /** @class */ (function () {
             console.error(error);
         }
     };
+    Users.prototype.findUsername = function (email) {
+        try {
+            var userExists = this.users.find(function (user) { return user.email === email; });
+            if (userExists) {
+                return userExists.username;
+            }
+            return undefined;
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
     Users.prototype.addCreatedSurvey = function (cookieEmail, newSurveyUuid) {
         var loggedInUserIndex = this.users.findIndex(function (user) { return user.email === cookieEmail; });
         this.users[loggedInUserIndex].createdSurveys.push(newSurveyUuid);
