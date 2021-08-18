@@ -15,8 +15,6 @@ exports.loginControl = function (req, res) {
     }
     else {
         role.role = 'public';
-        var roleJWT = jwt.encode(role, secret);
-        res.cookie('user', roleJWT, { maxAge: 900000, httpOnly: true });
     }
     var roleJWT = jwt.encode(role, secret);
     res.cookie('user', roleJWT, { maxAge: 900000, httpOnly: true });

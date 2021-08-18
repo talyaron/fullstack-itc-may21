@@ -22,8 +22,12 @@ function userRole(req, res, next) {
         console.log(role)
         next();
     } catch (e) {
-        console.error(e)
-        res.status(500).send({ error: e.message })
+        console.error(e.message)
+        if (e.message === 'Signature verification failed') {
+            res.send(401).send({ error: e.message })
+        } else {
+            res.status(500).send({ error: e.message })
+        }
     }
 }
 
