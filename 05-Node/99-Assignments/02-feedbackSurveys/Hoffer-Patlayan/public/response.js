@@ -65,7 +65,7 @@ const handleSubmit =  (event) => {
     arr.push(+(element.value))
   });
 
-  console.log(arr,id)
+  console.log([arr],id)
   
    //const select = document.getElementById("respondses");
    //const options=document.getElementsByTagName("option");
@@ -90,7 +90,8 @@ const handleSubmit =  (event) => {
       console.log(err);
     });
 };
-async function sendRes(newRes){
-  const response = await axios.post(`/response/postResponds`, newRes);
-  console.log(response); 
-}
+// async function sendRes(newRes){
+//   const response = await axios.post(`/response/postResponds`, newRes);
+//   console.log(response); 
+// }
+
