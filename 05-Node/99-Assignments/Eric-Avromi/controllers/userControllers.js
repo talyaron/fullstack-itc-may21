@@ -1,6 +1,8 @@
 "use strict";
 exports.__esModule = true;
 exports.scoreAdd = exports.getSurveys = exports.getCookie = exports.endUserLogin = exports.loginUser = exports.usersRegister = void 0;
+var jwt = require('jwt-simple');
+var secret_1 = require("../secret/secret");
 var fs = require("fs");
 var uuid = require('uuidv4').uuid;
 var userModels_1 = require("../models/userModels");
@@ -34,7 +36,9 @@ function loginUser(req, res) {
         var isUserPassOK = allUsers.some(function (elem) { return (elem.email === email_1) && (elem.password === password_1); });
         if (isUserPassOK) {
             var userLogin = allUsers.find(function (elem) { return (elem.email === email_1) && (elem.password === password_1); });
-            res.cookie('cookieName', JSON.stringify(userLogin), { maxAge: 30000000, httpOnly: true });
+            var token = jwt.encode(userLogin, secret_1.secret);
+            console.log(token);
+            res.cookie('cookieName', token, { maxAge: 30000000, httpOnly: true });
             res.send({ ok: 'Welcom admin' });
         }
         else {
@@ -71,13 +75,18 @@ function endUserLogin(req, res) {
 exports.endUserLogin = endUserLogin;
 function getCookie(req, res) {
     try {
+        console.log('decoding');
         var cookieName = req.cookies.cookieName;
+        console.log(cookieName);
+        var decoded = jwt.decode(cookieName, secret_1.secret);
+        console.log('decoding', decoded);
         if (!cookieName)
             throw new Error("Nothing is on the cookie");
-        var cookie = JSON.parse(cookieName);
+        var cookie = decoded;
         res.send(cookie);
     }
     catch (e) {
+        console.log(e.message);
         res.status(500).send({ error: "" + e.message });
     }
 }
