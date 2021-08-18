@@ -207,5 +207,6 @@ function sendSurvey(ev) {
 }
 
 function redirectpage() {
-  window.location.replace("http://localhost:8000/surveyLogIn.html");
+  var location = window.location.origin;
+  window.location.replace("".concat(location, "/surveyLogIn.html"));
 }
