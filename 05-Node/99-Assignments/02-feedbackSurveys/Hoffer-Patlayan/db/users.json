@@ -1,1 +1,8 @@
-[ ]
+[
+    {
+        "name": "tomas",
+        "email": "tomas@sivarsoft.com",
+        "password": "river",
+        "createSurvey": []
+    }
+]
