@@ -80,7 +80,9 @@ function answerLogin(req, res) {
 exports.answerLogin = answerLogin;
 function sendCookie(req, res) {
     try {
-        res.send({ email: req.email, username: req.username });
+        var status = (req.cookieExist) ? 200 : 404;
+        var message = (req.cookieExist) ? 'Cookie sent' : 'The session has expired. Please login again.';
+        res.status(status).send({ cookieExist: req.cookieExist, email: req.email, username: req.username, message: message });
     }
     catch (error) {
         console.error(error);
