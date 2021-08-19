@@ -43,37 +43,38 @@ function doingSubmitLogin(ev) {
           userLoginUsername = _context.sent;
           username = userLoginUsername.data.username;
           userDetails = {
+            username: username,
             email: email,
-            password: password,
-            username: username
+            password: password
           };
           _context.next = 18;
           return regeneratorRuntime.awrap(axios.post('/user/login', userDetails));
 
         case 18:
           userLogin = _context.sent;
+          console.log(userLogin.data);
 
-          if (userLogin.data.username) {
+          if (userLogin.data.userExists) {
             location.href = "03- surveys.html?email=".concat(email);
           } else {
             _errorMessage.innerHTML = userLogin.data.message;
           }
 
-          _context.next = 26;
+          _context.next = 27;
           break;
 
-        case 22:
-          _context.prev = 22;
+        case 23:
+          _context.prev = 23;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
           errorMessage.innerHTML = _context.t0;
 
-        case 26:
+        case 27:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 22]]);
+  }, null, null, [[0, 23]]);
 }
 
 ;

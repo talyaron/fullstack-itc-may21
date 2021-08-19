@@ -10,15 +10,15 @@ export function userCookieRead(req, res, next) {
         const decoded = jwt.decode(userDetails, secret);
         const cookie = JSON.parse(decoded);
         const { username, email } = cookie;
-        req.cookieExist = true;
+        req.cookieExists = true;
         req.username = username;
         req.email = email;
         
         next();
         
       } else {
-        req.cookieExist = false;
-        res.status(404).send({cookieExist: req.cookieExist, message:'The session has expired. Please login again.'});
+        req.cookieExists = false;
+        res.status(401).send({cookieExist: req.cookieExists, message:'The session has expired. Please log in again.'});
       }
 
     } catch (error) {
@@ -30,7 +30,6 @@ export function userCookieRead(req, res, next) {
   export function userCookieWrite(req, res, next) {
     try {
       //Get the information from the body
-      console.log(req.body);
       const { username, email } = req.body;
       if ((!username) || (!email)) throw new Error("User details processing issues");
 
@@ -39,6 +38,7 @@ export function userCookieRead(req, res, next) {
       const token = jwt.encode(cookieToWrite, secret);
       res.cookie("userDetails", token, { maxAge: 900000, httpOnly: true });
 
+      req.cookieExists = true;
       req.username = username;
       req.email = email;
 

@@ -1,7 +1,6 @@
 "use strict";
 exports.__esModule = true;
 exports.deleteSurveyUser = exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.findUsername = exports.newUser = void 0;
-var jwt = require('jwt-simple');
 //I import the classes (with Methods) of the Models that Im going to use here
 var users_1 = require("../models/users");
 var surveys_1 = require("../models/surveys");
@@ -50,20 +49,10 @@ function login(req, res) {
         var allUsers = new users_1.Users();
         var userExists = allUsers.loginUser(email, password);
         if (userExists) {
-            var username = userExists.username;
-            //Set the cookie
-            // const cookieToWrite: string = JSON.stringify({ username, email });
-            // const token = jwt.encode(cookieToWrite, secret);
-            // res.cookie("userDetails", token, {
-            //   maxAge: 900000,
-            //   httpOnly: true,
-            // });
-            res.send({ message: "Logged in successfully", username: username });
+            res.send({ message: "Logged in successfully", userExists: true });
         }
         else {
-            res.send({
-                message: "Username or password are wrong, please try again!"
-            });
+            res.send({ message: "Username or password are wrong, please try again!", userExists: false });
         }
     }
     catch (error) {
@@ -95,9 +84,9 @@ function answerLogin(req, res) {
 exports.answerLogin = answerLogin;
 function sendCookie(req, res) {
     try {
-        var status = (req.cookieExist) ? 200 : 404;
-        var message = (req.cookieExist) ? 'Cookie sent' : 'The session has expired. Please login again.';
-        res.status(status).send({ cookieExist: req.cookieExist, email: req.email, username: req.username, message: message });
+        var status = (req.cookieExists) ? 200 : 401;
+        var message = (req.cookieExists) ? 'Cookie sent' : 'The session has expired. Please login again.';
+        res.status(status).send({ cookieExists: req.cookieExists, email: req.email, username: req.username, message: message });
     }
     catch (error) {
         console.error(error);
