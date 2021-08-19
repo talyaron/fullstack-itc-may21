@@ -10,14 +10,14 @@ async function doingSubmitLogin(ev) {
         let { email, password } = ev.target.elements
         email = email.value;
         password = password.value;
-        if (!email || !password) throw new Error("Please complete all the fields");
+        if ((!email) || (!password)) throw new Error("Please complete all the fields");
         ev.target.reset();
         const userLoginUsername = await axios.get(`/user/username/${email}`);
         const { username } = userLoginUsername.data;
-        const userDetails = { email, password, username }
+        const userDetails = { username, email, password }
         const userLogin = await axios.post('/user/login', userDetails);
-
-        if (userLogin.data.username) {
+        console.log(userLogin.data);
+        if (userLogin.data.userExists) {
             location.href = `03- surveys.html?email=${email}`;
         } else {
             errorMessage.innerHTML = userLogin.data.message;

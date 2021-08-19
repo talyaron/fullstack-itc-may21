@@ -1,6 +1,4 @@
 export {};
-import { secret } from '../middlewares/secret';
-const jwt = require('jwt-simple');
 
 //I import the classes (with Methods) of the Models that Im going to use here
 import { User, Users } from "../models/users";
@@ -51,19 +49,9 @@ export function login(req, res) {
     const allUsers = new Users();
     const userExists = allUsers.loginUser(email, password);
     if (userExists) {
-      const { username } = userExists;
-      //Set the cookie
-      // const cookieToWrite: string = JSON.stringify({ username, email });
-      // const token = jwt.encode(cookieToWrite, secret);
-      // res.cookie("userDetails", token, {
-      //   maxAge: 900000,
-      //   httpOnly: true,
-      // });
-      res.send({ message: "Logged in successfully", username });
+      res.send({ message: "Logged in successfully", userExists: true });
     } else {
-      res.send({
-        message: "Username or password are wrong, please try again!",
-      });
+      res.send({ message: "Username or password are wrong, please try again!", userExists: false });
     }
   } catch (error) {
     console.error(error);
@@ -92,9 +80,9 @@ export function answerLogin(req, res) {
 
 export function sendCookie(req, res) {
   try {
-    const status = (req.cookieExist) ? 200 : 404;
-    const message = (req.cookieExist) ? 'Cookie sent' : 'The session has expired. Please login again.';
-    res.status(status).send({cookieExist: req.cookieExist, email: req.email, username: req.username, message });
+    const status = (req.cookieExists) ? 200 : 401;
+    const message = (req.cookieExists) ? 'Cookie sent' : 'The session has expired. Please login again.';
+    res.status(status).send({cookieExists: req.cookieExists, email: req.email, username: req.username, message });
     
   } catch (error) {
     console.error(error);
