@@ -10,7 +10,7 @@ const getUser = async () => {
     const renderIt = `<h5 style="color: white;">Welcome ${name}!</h5>`;
     root.innerHTML = renderIt;
   };
-  getUser();
+  getUser(); //YS: Onload
   
 // GET SURVAYS
 async function getSurv() {
@@ -21,7 +21,7 @@ async function getSurv() {
   renderSurvey(selected,resSeleceted);
   renderForm(selected);
 }
-getSurv();
+getSurv(); //YS: Onload
 
 // RENDER
 async function renderSurvey(survey,respo) {

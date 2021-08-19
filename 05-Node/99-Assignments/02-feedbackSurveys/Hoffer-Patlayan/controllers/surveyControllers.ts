@@ -9,16 +9,16 @@ import { Survey } from "../models/survey";
 app.use(express.json());
 app.use(cookieParser());
 // READ SURVEY JSON
-export const getAllSurveys = () => {
+export const getAllSurveys = () => { //YS: DRY - You already have these functions
   const fileJson = fs.readFileSync("./db/survey.json");
   return JSON.parse(fileJson);
 };
 // READ USERS JSON`
-export const getAllUsers = () => {
+export const getAllUsers = () => {  //YS: DRY - You already have these functions
   const fileJson = fs.readFileSync("./db/users.json");
   return JSON.parse(fileJson);
 };
-export const getAllRes = () => {
+export const getAllRes = () => {  //YS: DRY - You already have these functions
   const fileJson = fs.readFileSync("./db/response.json");
   return JSON.parse(fileJson);
 };
@@ -75,7 +75,7 @@ export function deleteSurvey(req: any, res: any) {
 
 export function saveSelectedSurvey(req: any, res: any) {
   const { id } = req.params;
-  res.cookie("idSelected", id, { maxAge: 300000000, httpOnly: true });
+  res.cookie("idSelected", id, { maxAge: 300000000, httpOnly: true }); //YS: This should be done in middleware
   res.send({ ok: "succes" });
 }
 
