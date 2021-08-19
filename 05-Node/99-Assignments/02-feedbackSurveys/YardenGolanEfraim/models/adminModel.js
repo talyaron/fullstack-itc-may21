@@ -1,7 +1,12 @@
+const jwt = require('jwt-simple');
+let payload = '';
+const secret = 'jdgfjkdgfjdjkbvzjkhdvlj';
+
 function createAdminCookie(selectedAdmin, res){
     try{
-    const adminCookie = JSON.stringify({ selectedAdmin })
-    res.cookie('admin', adminCookie, { maxAge: 300000000, httpOnly: true });
+    payload = JSON.stringify({ selectedAdmin })
+    const token = jwt.encode(payload, secret);
+    res.cookie('admin', token, { maxAge: 300000000, httpOnly: true });
   
 }catch (e) {
     console.error(e)
@@ -9,8 +14,12 @@ function createAdminCookie(selectedAdmin, res){
 
 function getAdminCookie(req){
     try{
-        const { admin } = req.cookies
-        const cookie = JSON.parse(admin);
+        const {admin} = req.cookies
+        console.log(admin)
+        const decoded = jwt.decode(admin, secret);
+        console.log(decoded)
+        const cookie = JSON.parse(decoded);
+        console.log(cookie)
         const {selectedAdmin} = cookie;
         return selectedAdmin
 }catch (e) {
