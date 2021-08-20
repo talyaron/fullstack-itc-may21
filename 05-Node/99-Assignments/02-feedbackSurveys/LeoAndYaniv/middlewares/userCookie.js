@@ -1,20 +1,23 @@
 "use strict";
 exports.__esModule = true;
 exports.userCookieWrite = exports.userCookieRead = void 0;
+var secret_1 = require("./secret");
+var jwt = require('jwt-simple');
 function userCookieRead(req, res, next) {
     try {
         var userDetails = req.cookies.userDetails;
         if (userDetails) {
-            var cookie = JSON.parse(userDetails);
+            var decoded = jwt.decode(userDetails, secret_1.secret);
+            var cookie = JSON.parse(decoded);
             var username = cookie.username, email = cookie.email;
-            req.cookieExist = true;
+            req.cookieExists = true;
             req.username = username;
             req.email = email;
             next();
         }
         else {
-            req.cookieExist = false;
-            res.status(404).send({ cookieExist: req.cookieExist, message: 'The session has expired. Please login again.' });
+            req.cookieExists = false;
+            res.status(401).send({ cookieExist: req.cookieExists, message: 'The session has expired. Please log in again.' });
         }
     }
     catch (error) {
@@ -31,7 +34,9 @@ function userCookieWrite(req, res, next) {
             throw new Error("User details processing issues");
         //Here I set the cookie
         var cookieToWrite = JSON.stringify({ username: username, email: email });
-        res.cookie("userDetails", cookieToWrite, { maxAge: 900000, httpOnly: true });
+        var token = jwt.encode(cookieToWrite, secret_1.secret);
+        res.cookie("userDetails", token, { maxAge: 900000, httpOnly: true });
+        req.cookieExists = true;
         req.username = username;
         req.email = email;
         //"Next" means that I will continue with the Route

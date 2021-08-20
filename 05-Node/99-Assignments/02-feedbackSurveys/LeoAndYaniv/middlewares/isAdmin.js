@@ -16,7 +16,7 @@ function isAdmin(req, res, next) {
         if (req.isAuthorized)
             next();
         else
-            res.status(401).send({ isAuthorized: req.isAuthorized, message: 'You are not authorized to open this page' });
+            res.status(401).send({ isAuthorized: req.isAuthorized, message: 'You are not authorized to open this page.' });
     }
     catch (error) {
         res.status(500).send(error.message);

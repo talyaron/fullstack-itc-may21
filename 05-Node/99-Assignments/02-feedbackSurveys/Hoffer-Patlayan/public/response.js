@@ -22,7 +22,7 @@ async function getSurvey(id) {
   render(getServ.data);
   renderWelcome(getServ.data.admin);
 }
-async function getResp() {
+async function getResp() { //YS: ?
   const gerServ = await axios.get(`/response/getResp`);
 }
 getResp();
@@ -70,7 +70,7 @@ const handleSubmit =  (event) => {
     url: `/response/postResponds`,
     data: {id, arr},
   }).then(({ data }) => {
-      return data;
+      return data; //YS: You dont have to return
     }).catch((err) => {
       console.log(err);
     });

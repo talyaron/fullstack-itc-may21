@@ -24,7 +24,7 @@ const responseRoute = require('./routes/responseRoutes');
 
 
 // ROUTES
-app.use('/users', usersRoute);
+app.use('/users', usersRoute);   //YS: I think you have too many routes here, would be better to have a users route and survey route
 app.use('/signUp', signUpRoute);
 app.use('/logIn', logInRoute);
 app.use('/survey', addSurveys);

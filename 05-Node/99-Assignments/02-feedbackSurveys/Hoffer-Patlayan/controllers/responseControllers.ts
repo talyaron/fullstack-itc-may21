@@ -4,28 +4,28 @@ const app = express();
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const cookieParser = require("cookie-parser");
-import { Response } from "../models/response";
+import { Response } from "../models/response";   //YS: There are some imports you are not using
 
 app.use(express.json());
 app.use(cookieParser());
 
 // READ SURVEY JSON
-export const getAllSurveys = () => {
+export const getAllSurveys = () => { //YS: Models
   const fileJson = fs.readFileSync("./db/survey.json");
   return JSON.parse(fileJson);
 };
 // READ USERS JSON`
-export const getAllUsers = () => {
+export const getAllUsers = () => { //YS: Models
   const fileJson = fs.readFileSync("./db/users.json");
   return JSON.parse(fileJson);
 };
 // READ RESPONSE JSON`
-export const getAllResponse = () => {
+export const getAllResponse = () => { //YS: Models DRY
   const fileJson = fs.readFileSync("./db/response.json");
   return JSON.parse(fileJson);
 };
 
-export const getAllResponds = () => {
+export const getAllResponds = () => { //YS: Models DRY
   const fileJson = fs.readFileSync("./db/response.json");
   return JSON.parse(fileJson);
 };
@@ -38,7 +38,7 @@ export function getSuveryShare(req: any, res: any) {
   res.send(findSurv);
 }
 
-export function sendRespon(req: any, res: any) {
+export function sendRespon(req: any, res: any) { 
   const { id, arr} = req.body;
 try {
   

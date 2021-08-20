@@ -8,7 +8,8 @@ var isAdmin_1 = require("../middlewares/isAdmin");
 //I import the function of the Controlers that Im going to use here
 var controlerUsers_1 = require("../controlers/controlerUsers");
 router.post('/register', UserCookie_1.userCookieWrite, controlerUsers_1.newUser);
-router.post('/login', controlerUsers_1.login);
+router.get('/username/:email', controlerUsers_1.findUsername);
+router.post('/login', UserCookie_1.userCookieWrite, controlerUsers_1.login);
 router.get('/info', UserCookie_1.userCookieRead, controlerUsers_1.sendCookie);
 //When the user click to finish the new survey I call this method
 router.post('/uploadUserWithSurvey/:uuid', UserCookie_1.userCookieRead, isAdmin_1.isAdmin, controlerUsers_1.uploadSurvey);

@@ -8,7 +8,7 @@ const localJson = () => {
   return JSON.parse(fileJson);
 };
 
-export function registerUser(req: any, res: any) {
+export function registerUser(req: any, res: any) { 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(req.body);

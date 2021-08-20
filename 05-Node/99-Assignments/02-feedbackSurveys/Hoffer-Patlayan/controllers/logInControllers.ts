@@ -8,7 +8,7 @@ import { validationResult } from "express-validator";
 app.use(cookieParser());
 
 // LEER JSON Users
-const localJson = () => {
+const localJson = () => {  //YS: This should be in your models. 
   const fileJson = fs.readFileSync("./db/users.json");
   return JSON.parse(fileJson);
 };
@@ -21,7 +21,7 @@ export function logInUser(req: any, res: any) {
      if (!errors.isEmpty()) {
 
     console.log(errors);
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ errors: errors.array() }); //YS: You shouldn't return res.json()  (send it without return)
   } 
   try {
     const correctUser = users.some(
@@ -39,10 +39,10 @@ export function logInUser(req: any, res: any) {
       });
       res.send({ userInfo: doLogin });
     } else{
-      throw new Error('User no Found')
+      throw new Error('User no Found') //YS: Good
     }
   } catch (error) {
-    res.status(500).send({ error: `${error}` });
+    res.status(500).send({ error: `${error}` }); //YS: Good
   }
 }
 

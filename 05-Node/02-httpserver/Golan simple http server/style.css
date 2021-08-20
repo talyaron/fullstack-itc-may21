@@ -1,0 +1,39 @@
+* {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+
+}
+
+head {
+    margin: 2rem 2rem 2rem 2rem;
+  }
+body {
+    background-image: linear-gradient(to bottom right, #F3F2EF, #FFFFFF);
+}
+.wrapper__profile {
+    border-radius: 0.5rem;
+}
+
+.wrapper__profile--img {
+    border-radius: 0.5rem;
+    /* background-image: url(); */
+    background-size: 50%;
+    size: 50%;
+}
+h1 {
+    color: darkcyan;
+}
+
+img {
+    height: 20%;
+    width: 20%;
+    border-radius: 0.5rem;
+}
+
+a, a:hover, a:visited {
+    text-decoration: none;
+}
+.contact__type {
+display: flex;
+flex-direction: column  ;
+}

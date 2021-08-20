@@ -1,8 +1,3 @@
-//Get the UUID from the URL
-const url_string = window.location.href;
-const url = new URL(url_string);
-const uuid = url.searchParams.get("uuid");
-
 async function getUserDetailsFromCookie() {
     const userDetails = await axios.get('/user/info');
     const { username } = userDetails.data;

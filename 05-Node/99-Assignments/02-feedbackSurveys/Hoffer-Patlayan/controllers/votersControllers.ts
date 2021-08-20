@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 export {};
 const fs = require("fs");
-const userJson = () => {
+const userJson = () => { //YS: This should be in models
   const fileJson = fs.readFileSync("./db/voters.json");
   return JSON.parse(fileJson);
 };
