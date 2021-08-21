@@ -1,0 +1,157 @@
+[
+    {
+        "id": "2ec7acab-c82c-412d-a898-323e5180c0e0",
+        "title": "helado",
+        "admin": "jnisen@gmail.com",
+        "question": [
+            {
+                "title": "manzana",
+                "id": 0,
+                "voters": [
+                    {
+                        "id": "24265d2b-6458-4f7d-8a87-e4740ee9ac09",
+                        "score": 3,
+                        "email": "eric@gmail.com"
+                    },
+                    {
+                        "id": "087e0805-a23a-457c-b4ed-bfce538cfdfb",
+                        "score": 5,
+                        "email": "pepe@gmail.com"
+                    },
+                    {
+                        "id": "6ba7171b-2517-413c-8037-0bb8d56e04f6",
+                        "score": 4,
+                        "email": "leo@gmail.com"
+                    },
+                    {
+                        "id": "bd0bcabc-ab63-4c2b-ad00-b7f10cf8a346",
+                        "score": 5,
+                        "email": "a@a.com"
+                    }
+                ]
+            },
+            {
+                "title": "pera",
+                "id": 1,
+                "voters": [
+                    {
+                        "id": "24265d2b-6458-4f7d-8a87-e4740ee9ac09",
+                        "score": 5,
+                        "email": "eric@gmail.com"
+                    },
+                    {
+                        "id": "087e0805-a23a-457c-b4ed-bfce538cfdfb",
+                        "score": 5,
+                        "email": "pepe@gmail.com"
+                    },
+                    {
+                        "id": "6ba7171b-2517-413c-8037-0bb8d56e04f6",
+                        "score": 3,
+                        "email": "leo@gmail.com"
+                    },
+                    {
+                        "id": "bd0bcabc-ab63-4c2b-ad00-b7f10cf8a346",
+                        "score": 4,
+                        "email": "a@a.com"
+                    }
+                ]
+            },
+            {
+                "title": "melon",
+                "id": 2,
+                "voters": [
+                    {
+                        "id": "24265d2b-6458-4f7d-8a87-e4740ee9ac09",
+                        "score": 2,
+                        "email": "eric@gmail.com"
+                    },
+                    {
+                        "id": "087e0805-a23a-457c-b4ed-bfce538cfdfb",
+                        "score": 5,
+                        "email": "pepe@gmail.com"
+                    },
+                    {
+                        "id": "6ba7171b-2517-413c-8037-0bb8d56e04f6",
+                        "score": 2,
+                        "email": "leo@gmail.com"
+                    },
+                    {
+                        "id": "bd0bcabc-ab63-4c2b-ad00-b7f10cf8a346",
+                        "score": 4,
+                        "email": "a@a.com"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "5ad536e2-b297-483b-aabc-cf2d720b5358",
+        "title": "perras",
+        "admin": "a@a.com",
+        "question": [
+            {
+                "title": "1",
+                "id": 0,
+                "voters": [
+                    {
+                        "id": "50e2c152-f360-4c50-856c-52b1e5fefe17",
+                        "score": 4,
+                        "email": "jnisen@gmail.com"
+                    },
+                    {
+                        "id": "0cde6293-ec57-4fa3-bbfc-12acbb5ccad0",
+                        "score": 4,
+                        "email": "pepe@gmail.com"
+                    },
+                    {
+                        "id": "3d7a5394-6ef3-4d84-8d18-df0d03214560",
+                        "score": 2,
+                        "email": "leo@gmail.com"
+                    }
+                ]
+            },
+            {
+                "title": "2",
+                "id": 1,
+                "voters": [
+                    {
+                        "id": "50e2c152-f360-4c50-856c-52b1e5fefe17",
+                        "score": 3,
+                        "email": "jnisen@gmail.com"
+                    },
+                    {
+                        "id": "0cde6293-ec57-4fa3-bbfc-12acbb5ccad0",
+                        "score": 3,
+                        "email": "pepe@gmail.com"
+                    },
+                    {
+                        "id": "3d7a5394-6ef3-4d84-8d18-df0d03214560",
+                        "score": 5,
+                        "email": "leo@gmail.com"
+                    }
+                ]
+            },
+            {
+                "title": "3",
+                "id": 2,
+                "voters": [
+                    {
+                        "id": "50e2c152-f360-4c50-856c-52b1e5fefe17",
+                        "score": 2,
+                        "email": "jnisen@gmail.com"
+                    },
+                    {
+                        "id": "0cde6293-ec57-4fa3-bbfc-12acbb5ccad0",
+                        "score": 2,
+                        "email": "pepe@gmail.com"
+                    },
+                    {
+                        "id": "3d7a5394-6ef3-4d84-8d18-df0d03214560",
+                        "score": 3,
+                        "email": "leo@gmail.com"
+                    }
+                ]
+            }
+        ]
+    }
+]
