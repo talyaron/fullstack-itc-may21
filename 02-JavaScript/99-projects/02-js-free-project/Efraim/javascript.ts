@@ -16,11 +16,11 @@ class Product {
   }
 
 }
-class Cart {
-  cart: Array<Product> = [];
+cla
 
   addToCart(product: Product) {
-    try {
+    trss Cart {
+  cart: Array<Product> = [];y {
       this.cart.push(product);
     } catch (e) {
       console.error(e)
