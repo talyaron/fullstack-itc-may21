@@ -21,7 +21,7 @@ function usersRegister(req, res) {
             res.send({ ok: "User Created", allUsers: allUsers });
         }
         else {
-            throw new Error("this is user is on the list");
+            throw new Error("this user is on the list");
         }
     }
     catch (e) {
