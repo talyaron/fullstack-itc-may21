@@ -1,0 +1,41 @@
+#form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#submit {
+  margin-top: 15px;
+}
+
+.pageTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.question {
+  display: flex;
+  border: 1px solid #000;
+  margin: 6px;
+}
+
+.homeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loginBtn {
+  margin: 4px;
+}
+
+.signUpBtn {
+  margin: 4px;
+}
+
+#todosContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
