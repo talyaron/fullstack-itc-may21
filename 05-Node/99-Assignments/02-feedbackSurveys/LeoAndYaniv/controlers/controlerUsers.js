@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.deleteSurveyUser = exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.newUser = void 0;
+exports.deleteSurveyUser = exports.uploadSurvey = exports.sendCookie = exports.answerLogin = exports.login = exports.findUsername = exports.newUser = void 0;
 //I import the classes (with Methods) of the Models that Im going to use here
 var users_1 = require("../models/users");
 var surveys_1 = require("../models/surveys");
@@ -29,6 +29,19 @@ function newUser(req, res) {
     }
 }
 exports.newUser = newUser;
+function findUsername(req, res) {
+    try {
+        var email = req.params.email;
+        var allUsers = new users_1.Users();
+        var username = allUsers.findUsername(email);
+        res.send({ message: "username was found", username: username });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).send(error.message);
+    }
+}
+exports.findUsername = findUsername;
 //Function to login the user
 function login(req, res) {
     try {
@@ -36,19 +49,10 @@ function login(req, res) {
         var allUsers = new users_1.Users();
         var userExists = allUsers.loginUser(email, password);
         if (userExists) {
-            var username = userExists.username;
-            //Set the cookie
-            var cookieToWrite = JSON.stringify({ username: username, email: email });
-            res.cookie("userDetails", cookieToWrite, {
-                maxAge: 900000,
-                httpOnly: true
-            });
-            res.send({ message: "Logged in successfully", username: username });
+            res.send({ message: "Logged in successfully", userExists: true });
         }
         else {
-            res.send({
-                message: "Username or password are wrong, please try again!"
-            });
+            res.send({ message: "Username or password are wrong, please try again!", userExists: false });
         }
     }
     catch (error) {
@@ -80,7 +84,9 @@ function answerLogin(req, res) {
 exports.answerLogin = answerLogin;
 function sendCookie(req, res) {
     try {
-        res.send({ email: req.email, username: req.username });
+        var status = (req.cookieExists) ? 200 : 401;
+        var message = (req.cookieExists) ? 'Cookie sent' : 'The session has expired. Please login again.';
+        res.status(status).send({ cookieExists: req.cookieExists, email: req.email, username: req.username, message: message });
     }
     catch (error) {
         console.error(error);

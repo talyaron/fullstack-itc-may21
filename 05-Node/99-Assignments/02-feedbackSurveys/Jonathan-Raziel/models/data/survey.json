@@ -1,20 +1,5 @@
-[
-    {
-        "id": "c5a0b6bb-78fb-4041-bcd1-5cf02db2bcab",
-        "title": "helado",
-        "admin": "jnisen@gmail.com",
-        "question": [
-            {
-                "title": "manzana",
-                "id": 0,
-                "voters": [
-                    {
-                        "id": "eaae11f4-3b33-456b-910e-77ef74b811f4",
-                        "score": 3,
-                        "email": "eric@gmail.com"
-                    }
-                ]
-            }
-        ]
-    }
-]
+<<<<<<< HEAD
+[{"id":"c5a0b6bb-78fb-4041-bcd1-5cf02db2bcab","title":"helado","admin":"jnisen@gmail.com","question":[{"title":"manzana","id":0,"voters":[{"id":"eaae11f4-3b33-456b-910e-77ef74b811f4","score":3,"email":"eric@gmail.com"}]}]},{"id":"dbfada89-a80d-4a8b-a73b-0101c05d480c","title":"rwerwe","admin":"raz@gmail.com","question":[{"title":"rwerwe","id":0,"voters":[]}]},{"id":"451b79d1-93f2-4a24-93de-64368ab89486","title":"dsds","admin":"raz@gmail.com","question":[{"title":"434","id":0,"voters":[]}]},{"id":"fab80e96-e5e8-42ed-8974-43b91a3f83d5","title":"32423423423","admin":"raz@gmail.com","question":[{"title":"fsdfsdfsdfsdfsdfsd","id":0,"voters":[]}]},{"id":"849ac098-fa43-4860-8b9d-a6042c31e878","title":"65756756","admin":"baz@gmail.com","question":[{"title":"765765","id":0,"voters":[]}]}]
+=======
+[{"id":"8f425eb5-fd30-4c03-aee7-c6491bb4f34e","title":"como te caen estas personas?","admin":"jnisen@gmail.com","question":[{"title":"leo szejpiacki","id":0,"voters":[]},{"title":"tomi hoffer","id":1,"voters":[]},{"title":"tomi patlayan","id":2,"voters":[]},{"title":"sr kobrinsky","id":3,"voters":[]},{"title":"cuba","id":4,"voters":[]},{"title":"kevin szuchet","id":5,"voters":[]},{"title":"jonshon nisen","id":6,"voters":[]}]},{"id":"8b5ee1e1-314e-4390-8421-983ee7636e72","title":"a","admin":"eric@gmail.com","question":[{"title":"b","id":0,"voters":[{"id":"43d1324d-e01f-42d2-b982-ba49e3e8ef10","score":3,"email":"pepe@gmail.com"},{"id":"bfa9bc5b-521f-49e6-987a-e47ec2ea7c64","score":1,"email":"pepe2@gmail.com"}]},{"title":"c","id":1,"voters":[{"id":"43d1324d-e01f-42d2-b982-ba49e3e8ef10","score":3,"email":"pepe@gmail.com"},{"id":"bfa9bc5b-521f-49e6-987a-e47ec2ea7c64","score":4,"email":"pepe2@gmail.com"}]}]}]
+>>>>>>> e298a432ccb88c087c2b6afc9221530a477fe99e

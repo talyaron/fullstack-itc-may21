@@ -4,7 +4,7 @@ const router = express.Router();
 import { body } from 'express-validator';
 import {registerUser} from '../controllers/signUpControllers'
 
-router.post('/registerUser',
+router.post('/registerUser',  //YS: Try to stick to AJV for validations + This can be part of your users route
     body('email','Ingrese email')
     .exists()
     .isEmail(),

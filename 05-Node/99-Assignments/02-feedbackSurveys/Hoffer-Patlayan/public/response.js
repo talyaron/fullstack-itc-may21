@@ -22,7 +22,7 @@ async function getSurvey(id) {
   render(getServ.data);
   renderWelcome(getServ.data.admin);
 }
-async function getResp() {
+async function getResp() { //YS: ?
   const gerServ = await axios.get(`/response/getResp`);
 }
 getResp();
@@ -62,29 +62,21 @@ const handleSubmit =  (event) => {
   responds.forEach(element => {
     arr.push(+(element.value))
   });
+
+ 
   
   axios({
     method: "post",
     url: `/response/postResponds`,
     data: {id, arr},
   }).then(({ data }) => {
-      return data;
+      return data; //YS: You dont have to return
     }).catch((err) => {
       console.log(err);
     });
 };
-async function sendRes(newRes){
-  const response = await axios.post(`/response/postResponds`, newRes);
-}
-const btn = document.querySelector('.btnSubmit');
-btn.addEventListener('click', alertSubmit)
+// async function sendRes(newRes){
+//   const response = await axios.post(`/response/postResponds`, newRes);
+//   console.log(response); 
+// }
 
-function alertSubmit(){
-  const root = document.querySelector('.alert');
-  let html = '<div class="alert alert-info" role="alert">Thank you, your survey was sent!</div>';
-  root.innerHTML = html;
-  setTimeout(() =>{
-    html = '';
-    root.innerHTML = html;
-  }, 3000)
-}

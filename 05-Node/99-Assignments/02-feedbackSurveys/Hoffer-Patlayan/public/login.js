@@ -17,7 +17,7 @@ const handleLogin = (event) => {
   })
     .then(({ data }) => {
       window.location.href = "survey.html";
-      return data;
+      return data; //YS: What is this for? 
     })
 
     .catch((err) => {

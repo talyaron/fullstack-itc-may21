@@ -22,7 +22,7 @@ const handleSubmit = async (event) => {
  
   .then(({ data }) =>{
     window.location.href ='index.html';
-    return data
+    return data  //YS: Are you using this?
 
   } )
 

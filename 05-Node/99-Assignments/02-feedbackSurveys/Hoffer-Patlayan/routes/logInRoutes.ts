@@ -5,7 +5,7 @@ const router = express.Router();
 
 import { logInUser, logOutUser } from "../controllers/logInControllers";
 
-router.post(
+router.post(  //YS: Try to stick to AJV for validations + this can be part of your users route
   "/postLogIn",
   body("email", "Ingrese email")
   .exists()

@@ -42,7 +42,7 @@ function renderSurvay(surveyData){
 }  
 
 function deleteSurvey(id){
-  const getUser = axios.post(`/survey/deleteSurvey/${id}`);
+  const getUser = axios.post(`/survey/deleteSurvey/${id}`); //YS: You are not using the variable, why make one? 
   getLogInUser()
   const root = document.querySelector('.alert_delete');
   let html = '<div style="width: 30%; text-align: center; margin-top: 2rem;" class="container alert alert-danger" role="alert">Survey deleted!</div>';
@@ -75,13 +75,13 @@ function modalRender(id){
 }
 
 async function resultsId(id){
-  const gerServ = await axios.get(`/survey/results`, id);
+  const gerServ = await axios.get(`/survey/results`, id); //YS: Not used
 }
 
 
 // LOGOUT
 async function logOut(){
-   const logOut = await axios(`/logIn/logOut`);
+   const logOut = await axios(`/logIn/logOut`); //YS: Not used
   window.location.href = "http://localhost:3500/";
 }
 

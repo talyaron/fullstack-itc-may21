@@ -5,21 +5,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./scss/style.min.css">
+    <!-- <link rel="stylesheet" href="./scss/style.min.css"> -->
+    <link rel="stylesheet" href="./scss/styleHistorical.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
     <title>Historial</title>
 </head>
 
 <body class="historial" onload="getCookiesAndSurveys(event)">
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <form action="#" class="sign-in-form">
+
+                    <input type="button" value="Create Survey" class="btn solid survey--btn" />
+
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panels-container">
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>
+                    <div id="nameCookie"></div>
+                </h3>
+                <p>
+                    Create you own survey and help us improve
+                </p>
+                <button class="btn transparent return survey--btn" id="sign-up-btn">
+                    Log out
+                </button>
+                <div id="rootSurveys" class="surveys"></div>
+            </div>
+            <img src="./pics/log.svg" class="image" alt="" />
+        </div>
+
+    </div>
+    </div>
+
+
+    <!-- <body class="historial" onload="getCookiesAndSurveys(event)">
     <header>
         <button type="button" class="return">Log Out</button>
         <div id="nameCookie"></div>
     </header>
     <div class="survey">
         <button type="button" class="survey--btn">Create Survey</button>
-    </div>
-    <div id="rootSurveys" class="surveys"></div>
+    </div> -->
+    <!-- <div id="rootSurveys" class="surveys"></div> -->
     <script src="scripts/historial.js"></script>
 </body>
 
