@@ -68,18 +68,37 @@ function getAllProducts() {
 }
 window.addEventListener("load", getAllProducts);
 function renderProductList(productArray) {
-    try {
-        var html_1 = '';
-        productArray.map(function (product) {
-            html_1 +=
-                "<div id='" + product.id + "'  class=\"shopping-list__item-wrapper\">\n      <img class=\"shopping-list__item-wrapper__item-image\" src=" + product.imgSrc + " alt=\"\" onclick=\"viewProduct('" + product.id + "')\">\n      <h2  class=\"shopping-list__item-wrapper__item-name\">" + product.description + "</h2>\n      <h3  class=\"shopping-list__item-wrapper__item-price\">$" + product.price + "</h3>\n      <button  id='" + product.id + "Button' class=\"shopping-list__item-wrapper__add\" onclick=\"moveToCart('" + product.id + "'); colorChangeButton('" + product.id + "')\">Add to Cart</button>\n      </div>";
+    return __awaiter(this, void 0, void 0, function () {
+        var html_1, cart_1, shoppingList, e_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    html_1 = '';
+                    return [4 /*yield*/, axios.get("/cart/getUserCart", { headers: headers })];
+                case 1:
+                    cart_1 = _a.sent();
+                    productArray.map(function (product) {
+                        if (cart_1.data.find(function (prd) { return prd.product.id === product.id; }) != undefined) {
+                            html_1 +=
+                                "<div id='" + product.id + "'  class=\"shopping-list__item-wrapper\">\n      <img class=\"shopping-list__item-wrapper__item-image\" src=" + product.imgSrc + " alt=\"\" onclick=\"viewProduct('" + product.id + "')\">\n      <h2  class=\"shopping-list__item-wrapper__item-name\">" + product.description + "</h2>\n      <h3  class=\"shopping-list__item-wrapper__item-price\">$" + product.price + "</h3>\n      <button  id='" + product.id + "Button' class=\"shopping-list__item-wrapper__add\" style=\"background-color:red; color:white;\">selected</button>\n      </div>";
+                        }
+                        else {
+                            html_1 +=
+                                "<div id='" + product.id + "'  class=\"shopping-list__item-wrapper\">\n      <img class=\"shopping-list__item-wrapper__item-image\" src=" + product.imgSrc + " alt=\"\" onclick=\"viewProduct('" + product.id + "')\">\n      <h2  class=\"shopping-list__item-wrapper__item-name\">" + product.description + "</h2>\n      <h3  class=\"shopping-list__item-wrapper__item-price\">$" + product.price + "</h3>\n      <button  id='" + product.id + "Button' class=\"shopping-list__item-wrapper__add\" onclick=\"moveToCart('" + product.id + "'); colorChangeButton('" + product.id + "')\">Add to Cart</button>\n      </div>";
+                        }
+                    });
+                    shoppingList = document.querySelector(".shopping-list");
+                    shoppingList.innerHTML = html_1;
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_2 = _a.sent();
+                    console.error(e_2);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
         });
-        var shoppingList = document.querySelector(".shopping-list");
-        shoppingList.innerHTML = html_1;
-    }
-    catch (e) {
-        console.error(e);
-    }
+    });
 }
 function moveToCart(productID) {
     try {
@@ -110,7 +129,7 @@ function colorChangeButton(id) {
 }
 function findProductbySearchTerm(searchTerm) {
     return __awaiter(this, void 0, void 0, function () {
-        var userRegEx_1, allProducts, searchResults, e_2;
+        var userRegEx_1, allProducts, searchResults, e_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -122,8 +141,8 @@ function findProductbySearchTerm(searchTerm) {
                     searchResults = allProducts.data.products.filter(function (productItem) { return userRegEx_1.test(productItem.description); });
                     return [2 /*return*/, searchResults];
                 case 2:
-                    e_2 = _a.sent();
-                    console.error(e_2);
+                    e_3 = _a.sent();
+                    console.error(e_3);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }

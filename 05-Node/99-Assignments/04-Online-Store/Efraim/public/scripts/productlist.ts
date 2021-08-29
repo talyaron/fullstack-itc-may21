@@ -16,10 +16,20 @@ async function getAllProducts() {
 
 window.addEventListener("load", getAllProducts)
 
-function renderProductList(productArray: Array<any>) {
+async function renderProductList(productArray: Array<any>) {
   try {
     let html: string = ''
+    const cart = await axios.get("/cart/getUserCart", { headers: headers })
     productArray.map(product => {
+      if(cart.data.find(prd=> prd.product.id === product.id)!= undefined){
+        html +=
+        `<div id='${product.id}'  class="shopping-list__item-wrapper">
+      <img class="shopping-list__item-wrapper__item-image" src=${product.imgSrc} alt="" onclick="viewProduct('${product.id}')">
+      <h2  class="shopping-list__item-wrapper__item-name">${product.description}</h2>
+      <h3  class="shopping-list__item-wrapper__item-price">$${product.price}</h3>
+      <button  id='${product.id}Button' class="shopping-list__item-wrapper__add" style="background-color:red; color:white;">selected</button>
+      </div>`
+      }else{
       html +=
         `<div id='${product.id}'  class="shopping-list__item-wrapper">
       <img class="shopping-list__item-wrapper__item-image" src=${product.imgSrc} alt="" onclick="viewProduct('${product.id}')">
@@ -27,7 +37,7 @@ function renderProductList(productArray: Array<any>) {
       <h3  class="shopping-list__item-wrapper__item-price">$${product.price}</h3>
       <button  id='${product.id}Button' class="shopping-list__item-wrapper__add" onclick="moveToCart('${product.id}'); colorChangeButton('${product.id}')">Add to Cart</button>
       </div>`
-    })
+    }})
     const shoppingList = document.querySelector(".shopping-list")
     shoppingList.innerHTML = html;
 

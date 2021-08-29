@@ -149,6 +149,7 @@ function handleSubmit(ev) {
                     return [4 /*yield*/, renderProductsAdmin()];
                 case 2:
                     _a.sent();
+                    alert("Product added succefully!");
                     return [3 /*break*/, 4];
                 case 3:
                     e_4 = _a.sent();

@@ -70,6 +70,7 @@ async function handleSubmit(ev) {
         const result = await axios.post('/adminUsers/addProduct', fd, {headers: headersForFile})
         ev.target.reset();
         await renderProductsAdmin()
+        alert("Product added succefully!")
     } catch (e) {
         console.error(e)
     }
