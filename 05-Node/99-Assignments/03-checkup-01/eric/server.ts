@@ -5,13 +5,10 @@ const port = process.env.PORT || 3000;
 app.use(express.static('public'));
 
 //route
-const beachesRoute = require('./routes/routeBeaches');
-const drinksRoute = require('./routes/routeDrinks');
 
-app.use('/beaches', beachesRoute);
-app.use('/drinks', drinksRoute);
+const studentsRoute = require('./routes/studentsRoute');
+app.use('/students', studentsRoute);
 
-//route
 
 
 app.listen(port, () => console.log('Server listen on port', port))
