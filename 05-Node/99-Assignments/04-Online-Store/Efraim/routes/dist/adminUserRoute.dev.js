@@ -27,5 +27,5 @@ router["delete"]('/deleteProduct/:productID', authorization, checkAdminForAllReq
 // validateBody was breaking the code.. ideally I wanted upload.single last so the image isn't saved if 
 // one of the other middlewares ended the post
 
-router.post('/addProduct', upload.single('image'), validateBody(Schemas.addProductSchemaAJV), authorization, checkAdminForAllReq, adminUserController.addProduct);
+router.post('/addProduct', authorization, checkAdminForAllReq, upload.single('image'), validateBody(Schemas.addProductSchemaAJV), adminUserController.addProduct);
 module.exports = router;

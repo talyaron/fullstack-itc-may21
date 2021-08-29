@@ -35,10 +35,10 @@ router.delete(
 
 router.post(
     '/addProduct',
-    upload.single('image'),
-    validateBody(Schemas.addProductSchemaAJV),
     authorization,
     checkAdminForAllReq, 
+    upload.single('image'),
+    validateBody(Schemas.addProductSchemaAJV),
     adminUserController.addProduct
 )
 
