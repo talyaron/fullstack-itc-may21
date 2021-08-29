@@ -10,14 +10,27 @@ export class Student {
 }
 
 export class Students {
-    students:Array<Student>;
+    students:Array<Student> = []
 
+    
     addStudent(student:Student):void {
         this.students.push(student);
     }
 
-    getRandomStudent(number:number){
+    getRandomStudent(number:number):Array<Student> {
         console.log('getRandomStudent');
+        const students = JSON.parse(JSON.stringify(this.students))
+        const randomStudent = []
+        
+        for(let i = 0 ; i <number && students.length>0; i++){
+            const index = Math.floor(Math.random()*students.length)
+            const student = students[index]
+            randomStudent.push(student);
+            students.splice(index, 1)
+
+
+        }
+        return randomStudent
         
     }
 

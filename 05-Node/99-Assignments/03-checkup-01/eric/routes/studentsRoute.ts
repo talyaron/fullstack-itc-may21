@@ -2,8 +2,10 @@ export { };
 const express = require('express')
 const router = express.Router();
 
-const {getStudents} = require('../controlers/controllerStudents')
+const {getStudents, addStudent} = require('../controlers/controllerStudents')
 
-router.get('/all_Students', getStudents)
+router
+        .get('/all_Students', getStudents)
+        .post('/add_students', addStudent)
 
 module.exports = router

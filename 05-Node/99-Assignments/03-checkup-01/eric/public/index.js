@@ -36,17 +36,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function getAllStudents() {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, data, error, e_1;
+        var _a, data, error, students, e_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
                     _b.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, axios('/student/all_students')];
+                    return [4 /*yield*/, axios('/students/all_students')];
                 case 1:
                     _a = _b.sent(), data = _a.data, error = _a.error;
                     console.log(data);
                     if (error)
                         throw error;
+                    students = data.students;
+                    console.log(students);
+                    renderStudents(students);
                     return [3 /*break*/, 3];
                 case 2:
                     e_1 = _b.sent();
@@ -56,4 +59,52 @@ function getAllStudents() {
         });
     });
 }
+function addStudent(ev) {
+    return __awaiter(this, void 0, void 0, function () {
+        var name, _a, data, error, students, e_2;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _b.trys.push([0, 2, , 3]);
+                    ev.preventDefault();
+                    name = ev.target.elements.name.value;
+                    console.log(name);
+                    if (!name)
+                        throw new Error('no name was given');
+                    return [4 /*yield*/, axios.post('/students/add_students', { name: name })];
+                case 1:
+                    _a = _b.sent(), data = _a.data, error = _a.error;
+                    if (error)
+                        throw error;
+                    console.log(data);
+                    students = data.students;
+                    renderStudents(students);
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_2 = _b.sent();
+                    console.error(e_2.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+// function renderStudents(students:Array<any>){   
+//     try{
+//         const root = document.querySelector('.root')
+//         let html = ''
+//         html += ``
+//     }
+// }
 getAllStudents();
+function getRandomStudent() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            try {
+            }
+            catch (error) {
+            }
+            return [2 /*return*/];
+        });
+    });
+}

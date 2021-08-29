@@ -12,12 +12,22 @@ var Student = /** @class */ (function () {
 exports.Student = Student;
 var Students = /** @class */ (function () {
     function Students() {
+        this.students = [];
     }
     Students.prototype.addStudent = function (student) {
         this.students.push(student);
     };
     Students.prototype.getRandomStudent = function (number) {
         console.log('getRandomStudent');
+        var students = JSON.parse(JSON.stringify(this.students));
+        var randomStudent = [];
+        for (var i = 0; i < number && students.length > 0; i++) {
+            var index = Math.floor(Math.random() * students.length);
+            var student = students[index];
+            randomStudent.push(student);
+            students.splice(index, 1);
+        }
+        return randomStudent;
     };
     Students.prototype.removeStudent = function (studentId) {
         console.log('removeStudent');
