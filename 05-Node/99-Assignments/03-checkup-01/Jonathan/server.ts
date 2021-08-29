@@ -13,6 +13,10 @@ app.use('/drinks', drinksRoute);
 
 //route
 
+const studentRoute = require('./routes/routeStudent')
+app.use('/student', studentRoute);
+
+
 
 app.listen(port, () => console.log('Server listen on port', port))
 
