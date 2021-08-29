@@ -9,18 +9,18 @@ var cookieParser = require('cookie-parser');
 
 var path = require('path');
 
-var usersJsonPath = path.resolve(__dirname, './models/users.json');
-console.log(usersJsonPath);
+var pathToPublicFolder = path.resolve(__dirname, "./public");
 app.use(express.json());
-app.use(express["static"]('public')); //I use this to read the cookie (I can create it with out this)
+app.use(express["static"](pathToPublicFolder)); //I use this to read a cookie (I can create it with out this)
 
-app.use(cookieParser()); //Route
+app.use(cookieParser()); //Route (I import the routes of users and surveys)
 
-var registerRoute = require('./routes/routeUsers');
+var userRoute = require('./routes/routeUsers');
 
-var surveysRoute = require('./routes/routeSurveys');
+var surveysRoute = require('./routes/routeSurveys'); //Use of that Routes that I imported
 
-app.use('/register', registerRoute);
+
+app.use('/user', userRoute);
 app.use('/surveys', surveysRoute);
 app.listen(port, function () {
   console.log("Listening on port: ".concat(port));

@@ -1,0 +1,123 @@
+body {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #f9fd02 0%, #f7e817 50%, #000000 50%, #1b1a1a 100%);
+  }
+h1 {
+    text-align: center;
+    margin-top: 4rem;
+    font-family: cursive;
+    color: red;
+    font-size: 4rem;
+}
+a {
+    margin: 1rem;
+    text-decoration: none;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: auto;
+    
+}
+
+form{
+    margin: auto;
+    background-color: red;
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 20px;
+}
+input {
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+button {
+    background: black;
+  border: none;
+  font-weight: bold;
+  font-size: smaller;
+  border-radius: 5px;
+  color: yellow;
+  margin: 1rem;
+}
+button:hover {
+    cursor: pointer;
+}
+label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+.button2{
+    background: yellow;
+    border: none;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 5px;
+    color: black;
+    margin: 1rem;
+    margin-left: 4rem;
+    font-size: smaller;
+
+}
+.button6{
+    background: yellow;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    color: black;
+    margin: 1rem;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    width: 120px;
+}
+.button3{
+    background: black;
+    border: none;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 5px;
+    color: yellow;
+    margin: 1rem;
+    margin-left: 4rem;
+    font-size: smaller;
+  
+}
+.button5{
+    background: black;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    color: yellow;
+    margin: 1rem;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+}
+.--margin{
+    margin: 0;
+    font-size: smaller;
+}
+.button4{
+    background: linear-gradient(to right, #1b1a1a 0%, #000000 50%, #f7e817 50%, #f9fd02 100%);
+    border: none;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 5px;
+    color: red;
+    margin: 1rem;
+    margin-top: 3rem;
+    
+    font-size: smaller;
+    
+}
+img{
+    width:800px;
+    height:400px;
+    margin: auto;
+    margin-top: 2rem;
+    border-radius: 20px;
+}
