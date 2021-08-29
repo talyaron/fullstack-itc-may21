@@ -63,10 +63,9 @@ async function handleSubmit(ev) {
         const file: any = imageFile.files[0];
         fd.append('image', file, `${file.name}`);
         const description: string = ev.target.children.description.value;
-        const price = JSON.stringify(ev.target.children.price.value);
+        const price:string = JSON.stringify(ev.target.children.price.value);
         fd.append('description', description);
         fd.append('price', price)
-        console.log(fd)
         const result = await axios.post('/adminUsers/addProduct', fd, {headers: headersForFile})
         ev.target.reset();
         await renderProductsAdmin()

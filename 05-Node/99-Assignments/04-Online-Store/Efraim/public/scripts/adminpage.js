@@ -141,7 +141,6 @@ function handleSubmit(ev) {
                     price = JSON.stringify(ev.target.children.price.value);
                     fd.append('description', description);
                     fd.append('price', price);
-                    console.log(fd);
                     return [4 /*yield*/, axios.post('/adminUsers/addProduct', fd, { headers: headersForFile })];
                 case 1:
                     result = _a.sent();
