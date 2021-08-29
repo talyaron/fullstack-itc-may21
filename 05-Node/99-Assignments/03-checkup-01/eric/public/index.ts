@@ -1,17 +1,12 @@
-function getImages(route) {
+async function getAllStudents() {
     try {
-        return new Promise((resolve, reject) => {
-            fetch(route)
-                .then(r => r.json())
-                .then(data => { resolve(data); })
-                .catch(err => { reject(err); })
-        })
-    } catch (err) { console.log(err); }
+        const { data, error } = await axios('/student/all_students')
+        console.log(data)
+        if(error) throw error
+
+    } catch (e) {
+
+    }
 }
 
-
-
-(async () => {
-    console.log(await getImages('/beaches/all'));
-    console.log(await getImages('/drinks/first'));
-})();
+getAllStudents()

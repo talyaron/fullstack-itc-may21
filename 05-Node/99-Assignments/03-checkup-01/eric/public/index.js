@@ -34,33 +34,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
-function getImages(route) {
-    try {
-        return new Promise(function (resolve, reject) {
-            fetch(route)
-                .then(function (r) { return r.json(); })
-                .then(function (data) { resolve(data); })["catch"](function (err) { reject(err); });
+function getAllStudents() {
+    return __awaiter(this, void 0, void 0, function () {
+        var _a, data, error, e_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios('/student/all_students')];
+                case 1:
+                    _a = _b.sent(), data = _a.data, error = _a.error;
+                    console.log(data);
+                    if (error)
+                        throw error;
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_1 = _b.sent();
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
         });
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-(function () { return __awaiter(_this, void 0, void 0, function () {
-    var _a, _b, _c, _d;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
-            case 0:
-                _b = (_a = console).log;
-                return [4 /*yield*/, getImages('/beaches/all')];
-            case 1:
-                _b.apply(_a, [_e.sent()]);
-                _d = (_c = console).log;
-                return [4 /*yield*/, getImages('/drinks/first')];
-            case 2:
-                _d.apply(_c, [_e.sent()]);
-                return [2 /*return*/];
-        }
     });
-}); })();
+}
+getAllStudents();
