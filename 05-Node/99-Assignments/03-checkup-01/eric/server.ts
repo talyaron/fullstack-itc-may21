@@ -2,16 +2,14 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.json())
 app.use(express.static('public'));
+app.use(express.json());
 
 //route
 
-const studnetsRoute = require('./routes/studentsRoute');
-app.use('/students', studnetsRoute);
+const studentsRoute = require('./routes/studentsRoute');
+app.use('/students', studentsRoute);
 
-
-//route
 
 
 app.listen(port, () => console.log('Server listen on port', port))
