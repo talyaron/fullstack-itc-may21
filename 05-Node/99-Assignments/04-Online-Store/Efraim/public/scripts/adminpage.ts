@@ -58,7 +58,7 @@ async function handleSubmit(ev) {
         const headersForFile = {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'};
-        const fd = new FormData();
+        const fd:FormData = new FormData();
         const imageFile = document.getElementById("file");
         const file: any = imageFile.files[0];
         fd.append('image', file, `${file.name}`);
