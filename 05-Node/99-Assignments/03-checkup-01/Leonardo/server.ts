@@ -5,10 +5,11 @@ const port = process.env.PORT || 3000;
 app.use(express.static('public'));
 
 //route
+const beachesRoute = require('./routes/routeBeaches');
+const drinksRoute = require('./routes/routeDrinks');
 
-const studnetsRoute = require('./routes/studentdRoute');
-app.use('/students', studnetsRoute);
-
+app.use('/beaches', beachesRoute);
+app.use('/drinks', drinksRoute);
 
 //route
 
