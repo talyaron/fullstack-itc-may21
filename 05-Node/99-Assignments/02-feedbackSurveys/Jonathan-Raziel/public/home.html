@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.min.css">
+    <title>Home Page</title>
+</head>
+
+<body class="home">
+    <div class="container">
+        <input type="button" value="Login" class="container__btn container__login">
+        <input type="button" value="Register" class="container__btn container__register">
+    </div>
+    <script>
+        //home page
+
+        //btn
+        const btnLogin = document.querySelector('.container__login');
+        const btnRegister = document.querySelector('.container__register');
+
+
+        //addEventListener
+        btnRegister.addEventListener('click', toRegisterPage)
+        btnLogin.addEventListener('click', toLoginPage)
+
+
+
+        //function
+        function toRegisterPage() {
+            window.location.href = 'register.html'
+        }
+
+        function toLoginPage() {
+            window.location.href = 'login.html'
+        }
+    </script>
+</body>
+
+</html>

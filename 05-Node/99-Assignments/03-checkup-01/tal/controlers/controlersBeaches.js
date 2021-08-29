@@ -6,7 +6,6 @@ function allBeaches(req, res) {
     res.send(images_1.beaches);
 }
 exports.allBeaches = allBeaches;
-;
 function firstBeach(req, res) {
     res.send(images_1.beaches[0]);
 }

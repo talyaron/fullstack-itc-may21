@@ -10,6 +10,6 @@ router.get('/all', (req, res) => {
 
 router.get('/first', (req, res) => {
     res.send(drinks[0]);
-});
+})
 
 module.exports = router
