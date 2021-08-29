@@ -8,6 +8,4 @@ var drinksRoute = require('./routes/routeDrinks');
 app.use('/beaches', beachesRoute);
 app.use('/drinks', drinksRoute);
 //route
-var studentRoute = require('./routes/routeStudent');
-app.use('/student', studentRoute);
 app.listen(port, function () { return console.log('Server listen on port', port); });

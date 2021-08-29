@@ -1,7 +1,6 @@
 {
-  "name": "Tal",
+  "name": "tal",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,11 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "fs": "0.0.1-security"
+    "express": "^4.17.1"
   },
   "devDependencies": {
-    "@types/node": "^16.4.11",
-    "typescript": "^4.4.2"
-  }
+    "@types/node": "^16.4.11"
+  },
+  "description": ""
 }
