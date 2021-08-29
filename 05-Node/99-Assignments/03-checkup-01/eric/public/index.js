@@ -99,8 +99,11 @@ function addStudent(ev) {
 getAllStudents();
 function getRandomStudent() {
     return __awaiter(this, void 0, void 0, function () {
+        var numberOfNames;
         return __generator(this, function (_a) {
             try {
+                numberOfNames = document.getElementById('numberOfNames').valueAsNumber;
+                console.dir(numberOfNames);
             }
             catch (error) {
             }

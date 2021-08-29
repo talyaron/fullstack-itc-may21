@@ -54,7 +54,8 @@ getAllStudents()
 
 async function getRandomStudent(){
     try{
-
+        const numberOfNames= document.getElementById('numberOfNames').valueAsNumber
+        console.dir(numberOfNames);
         
 
     }catch(error{
