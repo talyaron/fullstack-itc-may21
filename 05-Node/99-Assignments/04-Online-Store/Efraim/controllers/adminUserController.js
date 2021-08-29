@@ -1,8 +1,5 @@
 var _a = require('../models/classes'), Product = _a.Product, products = _a.products;
 var updateProductsModel = require('../models/adminmodels').updateProductsModel;
-var multer = require('multer');
-var Ajv = require("ajv");
-var ajv = new Ajv();
 exports.updateProducts = function (req, res) {
     try {
         var body = req.body;

@@ -1,8 +1,5 @@
 const { Product, products } = require('../models/classes')
 const { updateProductsModel } = require('../models/adminmodels')
-const multer = require('multer');
-const Ajv = require("ajv");
-const ajv = new Ajv()
 
 
 
