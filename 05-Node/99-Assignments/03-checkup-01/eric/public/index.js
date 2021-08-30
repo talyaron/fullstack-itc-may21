@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function getAllStudents() {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, data, error, students, error_1;
+        var _a, data, error, students, e_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -44,6 +44,7 @@ function getAllStudents() {
                     return [4 /*yield*/, axios('/students/all_students')];
                 case 1:
                     _a = _b.sent(), data = _a.data, error = _a.error;
+                    console.log(data);
                     if (error)
                         throw error;
                     students = data.students;
@@ -51,32 +52,7 @@ function getAllStudents() {
                     renderStudents(students);
                     return [3 /*break*/, 3];
                 case 2:
-                    error_1 = _b.sent();
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
-    });
-}
-function getRandomStudents() {
-    return __awaiter(this, void 0, void 0, function () {
-        var numberOfNames, _a, data, error, students, error_2;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    _b.trys.push([0, 2, , 3]);
-                    numberOfNames = document.getElementById('numberOfNames').valueAsNumber;
-                    console.log(numberOfNames);
-                    console.log('ffdg');
-                    return [4 /*yield*/, axios.post('/students/random_students', { number: numberOfNames })];
-                case 1:
-                    _a = _b.sent(), data = _a.data, error = _a.error;
-                    students = data.students;
-                    console.log(students);
-                    renderStudents(students);
-                    return [3 /*break*/, 3];
-                case 2:
-                    error_2 = _b.sent();
+                    e_1 = _b.sent();
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
@@ -85,17 +61,17 @@ function getRandomStudents() {
 }
 function addStudent(ev) {
     return __awaiter(this, void 0, void 0, function () {
-        var name, _a, data, error, students, e_1;
+        var name, _a, data, error, students, e_2;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
                     _b.trys.push([0, 2, , 3]);
                     ev.preventDefault();
                     name = ev.target.elements.name.value;
+                    console.log(name);
                     if (!name)
                         throw new Error('no name was given');
-                    console.log(name);
-                    return [4 /*yield*/, axios.post('/students/add_student', { name: name })];
+                    return [4 /*yield*/, axios.post('/students/add_students', { name: name })];
                 case 1:
                     _a = _b.sent(), data = _a.data, error = _a.error;
                     if (error)
@@ -103,27 +79,35 @@ function addStudent(ev) {
                     console.log(data);
                     students = data.students;
                     renderStudents(students);
-                    ev.target.reset();
                     return [3 /*break*/, 3];
                 case 2:
-                    e_1 = _b.sent();
-                    console.error(e_1.message);
+                    e_2 = _b.sent();
+                    console.error(e_2.message);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
         });
     });
 }
-function renderStudents(students) {
-    try {
-        var root = document.getElementById('root');
-        var html_1 = '';
-        students.forEach(function (student) {
-            html_1 += "<p>" + student.name + " <span onclick=\"deleteStudent('" + student.id + "')\">DELETE</span></p>";
-        });
-        root.innerHTML = html_1;
-    }
-    catch (error) {
-    }
-}
+// function renderStudents(students:Array<any>){   
+//     try{
+//         const root = document.querySelector('.root')
+//         let html = ''
+//         html += ``
+//     }
+// }
 getAllStudents();
+function getRandomStudent() {
+    return __awaiter(this, void 0, void 0, function () {
+        var numberOfNames;
+        return __generator(this, function (_a) {
+            try {
+                numberOfNames = document.getElementById('numberOfNames').valueAsNumber;
+                console.dir(numberOfNames);
+            }
+            catch (error) {
+            }
+            return [2 /*return*/];
+        });
+    });
+}
