@@ -1,0 +1,393 @@
+:root {
+    --main-color: #7cd1f9;
+    --main-bg-color: #dbf4ff;
+    --hover-bg-color: #7cd1f9;
+    --hover-color: darkorange;
+    --links-color: #518da8;
+  }
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+
+}
+
+html,body {
+    margin: 0;
+}
+
+body {
+    background-image: url('../images/cart-wp.png'), linear-gradient(var(--main-bg-color), var(--main-bg-color));;
+    background-blend-mode: normal;
+    background-repeat: repeat;
+    background-size: 80px;
+}
+
+a {
+    color: var(--links-color);
+
+    &:hover {
+        color: var(--hover-color);
+    }
+}
+
+.button {
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 5px;
+    margin: 2px;
+    color: white;
+    padding: 1vw;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: clamp(10px, 4vw, 16px);
+
+    &:hover {
+        background-color: var(--hover-bg-color);
+        color: white;
+    }
+
+    &:active {
+        -moz-box-shadow: 0 0 10px var(--main-color);
+        -webkit-box-shadow: 0 0 10px var(--main-color);
+        box-shadow: 0 0 10px var(--main-color);
+    }
+  }
+
+  .hide {
+      display: none;
+  }
+
+  .form-inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    max-width: 20vw;
+    min-width: 120px;
+
+    input {
+        margin-bottom: 10px;
+    }
+}
+
+.header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1.5fr 0.75fr 0.75fr 0.75fr 1.25fr 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "h1 item1 item2 item3 . h4 topright"
+        "h1 item1 item2 item3 . call botright";
+
+    position: sticky;
+    height: fit-content;
+    min-height: 90px;
+    height: 10vh;
+    max-height:100px;
+    background-image: url('../images/cart-wp.png'), linear-gradient(#2c2c2c, #2c2c2c);;
+    background-blend-mode: normal; 
+    background-repeat: repeat;
+    background-size: 200px;
+    top: 0;
+    color: white;
+    padding: 2.5vw;
+    -moz-box-shadow: inset 0 -10px 10px -10px var(--main-bg-color);
+    -webkit-box-shadow: inset 0 -10px 10px -10px var(--main-bg-color);
+    box-shadow: inset 0 -10px 10px -10px var(--main-bg-color);
+    z-index: 10;
+
+
+    &__item {
+        margin: 0;
+
+        &--h1 {
+            grid-area: h1;
+            font-size: clamp(26px, 3vw, 40px);;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+
+            &:hover {
+                color: var(--hover-bg-color);
+            }
+        }
+
+        &--add-product {
+            grid-area: item1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: clamp(8px, 4vw, 16px);
+            height: clamp(20px, 4vw, 40px);
+            width: clamp(20px, 4vw, 40px);
+            border-radius: 200px;
+            background-color: green;
+            cursor: pointer;
+        }
+
+        &--cart {
+            grid-area: item1;
+            position: relative;
+            width: clamp(20px, 4vw, 40px);
+            height: clamp(20px, 4vw, 40px);
+
+            img {
+                background-color: white;
+                padding: 5px;
+                border-radius: 50px;
+                width: 100%;
+
+                &:hover {
+                    background-color: var(--hover-bg-color);
+                }
+            }
+
+            div {
+                background-color: orange;
+                border: 1px solid white;
+                border-radius: 2px;
+                color: white;
+                font-size: clamp(10px, 2vw, 15px);;
+                font-weight: bold;
+                text-align: center;
+                height: 40%;
+                width: fit-content;
+                min-width: 50%;
+                position: absolute;
+                right: -50%;
+                top: -5px;
+            }
+        }
+
+        &--history {
+            grid-area: item2;
+            width: clamp(20px, 4vw, 40px);
+            height: clamp(20px, 4vw, 40px);
+
+            img {
+                background-color: white;
+                padding: 5px;
+                border-radius: 50px;
+                width: 100%;
+
+                &:hover {
+                    background-color: var(--hover-bg-color);
+                }
+            }
+        }
+
+        &--mall {
+            grid-area: item3;
+            width: clamp(20px, 4vw, 40px);
+            height: clamp(20px, 4vw, 40px);
+
+            img {
+                background-color: white;
+                padding: 5px;
+                border-radius: 50px;
+                width: 100%;
+
+                &:hover {
+                    background-color: var(--hover-bg-color);
+                }
+            }
+        }
+
+        &--h4 {
+            grid-area: h4;
+            font-size: clamp(8px, 4vw, 16px);
+        }
+        
+        &--admin-login-form {
+            grid-area: topright;
+            display: flex;
+            
+            .form-inputs {
+                width: 20vw;
+
+                &__item {
+                    font-size: clamp(6px, 4vw, 14px);
+                    margin: 0;
+                }
+            }
+        }
+
+        &--username {
+            grid-area: topright;
+            font-size: clamp(8px, 4vw, 16px);
+        }
+
+        &--call-to-register {
+            grid-area: call;
+            font-size: clamp(8px, 3vw, 12px);
+            color: white;
+        }
+
+        &--logout {
+            grid-area: botright;
+            border: 0;
+            margin: 0 auto;
+            padding: 5px;
+            color: white;
+            font-weight: bold;
+            width: fit-content;
+            border-radius: 20px;
+            background-color: darkred;
+            cursor: pointer;
+
+            &:hover {
+                background-color: red;
+            }
+        }
+
+        &--register {
+            grid-area: botright;
+        }
+    }
+}
+
+.main {
+    &__item {
+
+        &--store-name {
+            margin: 0;
+            background-image: url('../images/cart-wp.png'), linear-gradient(#2c2c2c, #2c2c2c);;
+            background-blend-mode: normal; 
+            background-repeat: repeat;
+            background-size: 200px;
+            color: white;
+            padding: 2.5vw;
+            -moz-box-shadow: inset 0 -10px 10px -10px var(--main-bg-color),
+            inset 0 10px 10px -10px var(--main-bg-color);
+            -webkit-box-shadow: inset 0 -10px 10px -10px var(--main-bg-color), 
+            inset 0 10px 10px -10px var(--main-bg-color);
+            box-shadow: inset 0 -10px 10px -10px var(--main-bg-color),
+            inset 0 10px 10px -10px var(--main-bg-color);
+        }
+    }
+}
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+    &__item {
+
+    }
+
+    .product {
+        margin: 10px;
+        padding: 15px 0;
+        border-radius: 10px;
+        height: 20vw;
+        width: 20vw;
+        min-height: 250px;
+        min-width: 250px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        &__item {
+            margin: 0;
+
+            &--name {
+
+            }
+
+            &--img {
+                max-height: 50%;
+
+                img {
+                    max-height: 100%;
+                }
+            }
+
+            &--description {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                width: 70%;
+                -webkit-box-orient: vertical;
+            }
+
+            &--price {
+
+            }
+
+            &--stock {
+
+            }
+        }
+        
+        .product-buttons {
+            width: 70%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &__item {
+                border: 0;
+                padding: 0;
+
+                &--edit {
+                    cursor: pointer;
+                }
+    
+                &--delete {
+                    color: darkred;
+                    cursor: pointer;
+                }
+    
+                &--cart-add {
+                    color: white;
+                    font-weight: bold;
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 20px;
+                    background-color: green;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: lightgreen;
+                    }
+                }
+    
+                &--cart-reduce {
+                    color: white;
+                    font-weight: bold;
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 20px;
+                    background-color: darkred;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: red;
+                    }
+
+                }
+
+                &--cart-quantity {
+                    color: white;
+                    font-weight: bold;
+                    height: 25px;
+                    width: 25px;
+                    border-radius: 2px;
+                    background-color: orange;
+                }
+
+                &:disabled {
+                    background-color: gray;
+                    color: white;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}
