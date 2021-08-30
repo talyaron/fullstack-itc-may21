@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./dist/style.min.css">
+    <title>Shop Shop Shop</title>
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="header__item header__item--h1">Shop Shop Shop</h1>
+
+        <h4 class="header__item header__item--h4">Store Managers Login</h4>
+                
+        <form class="header__item header__item--admin-login-form" id="admin-login-form">
+            <div class="form-inputs">
+                <input class="form-inputs__item" type="email" name="email" placeholder="Email address" required />
+                <input class="form-inputs__item" type="password" name="password" placeholder="Password" required />
+            </div>
+            <input class="button" type="submit" value="Login" />
+        </form>
+        
+        <p class="header__item header__item--call-to-register">Want to join our managers community?</p>
+        
+        <a class="header__item header__item--register button" href="./register.html">Help us manage our 1st beta store!</a>
+    </header>
+
+    <main class="main">
+        <h1>Login and Unleash The Shopper Within You!</h1>
+    
+        <form id="shopper-login-form">
+            <div class="form-inputs">
+                <label for="email">Email address</label>
+                <input type="text" name="email" placeholder="Email address" required />
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Password" required />
+            </div>
+            <input class="button" type="submit" value="Start Shopping" />
+        </form>
+
+        <p>Not a member yet? <a href="./shopper-register.html">Click here</a> to fix that!</p>
+    </main>
+
+    <script src="./dist/helper-errors.min.js"></script>
+    <script src="./dist/index.min.js"></script>
+</body>
+
+</html>

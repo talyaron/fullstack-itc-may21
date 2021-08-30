@@ -3,21 +3,40 @@ export class Student{
     name:string;
 
     constructor( name:string){
-        this.id = Math.random().toString(16);
+        this.id = "id_"+ Math.random().toString(16);
         console.log(this.id);
         this.name = name;
     }
 }
 
 export class Students{
-    students:Array<Student>;
+    studentsArray:Array<Student>;
+
+    constructor(){
+        this.studentsArray = [];
+    }
     
-    addStudent(student:Student):void{
-        this.students.push(student)
+    addStudent(student:Student){
+        console.log('add student')
+        this.studentsArray.push(student);
+        console.log('add student 2')
     }
 
-    getRandomStudents(number:number){
-        console.log('getRandomStudents')
+    getRandomStudents(number:number):Array<Student>{
+        console.log('getRandomStudents');
+
+        const students = JSON.parse(JSON.stringify(this.studentsArray));
+        const randomStudents =[];
+
+        for(let i = 0; i<number && students.length > 0; i++){
+            const index = Math.floor(Math.random()*students.length);
+            const student = students[index];
+            randomStudents.push(student);
+            students.splice(index, 1);
+            console.log(students)
+            
+        }
+        return randomStudents;
     }
 
     removeStudent(studentId:string){

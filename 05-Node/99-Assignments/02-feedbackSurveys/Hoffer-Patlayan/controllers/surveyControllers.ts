@@ -88,11 +88,6 @@ export function getSelectedSurvey(req: any, res: any) {
     (survey: any) => survey.id === getCookie
   );
   const selectedRes = allRes.filter((res: any) => res.id === id);
-  // selectedRes.forEach((element:any) => {
-  //   console.log(element.respondes);
-
-  // });
-  // console.log(selectedSurv);
   console.log(selectedRes);
 
   res.send(selectedSurv);
@@ -125,18 +120,3 @@ export function editSelectedSurvey(req: any, res: any) {
   res.send({ ok: "succes" });
 }
 
-// export const addResResult = (req: any, res: any) => {
-//   const { id } = req.body;
-//   const getSuvery = getAllSurveys();
-//   const allRes = getAllRes();
-
-//   const putInSurvey = allRes.find((resp:any)=> resp.id ===id);
-
-//   const arrResp = [ {
-//     id: putInSurvey.id,
-//     respondes:putInSurvey.respondes,
-//   }]
-// getSuvery.push(arrResp);
-
-// fs.writeFileSync("./db/survey.json", JSON.stringify(getSuvery));
-// };
