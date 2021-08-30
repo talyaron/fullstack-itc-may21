@@ -34,33 +34,68 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
-function getImages(route) {
-    try {
-        return new Promise(function (resolve, reject) {
-            fetch(route)
-                .then(function (r) { return r.json(); })
-                .then(function (data) { resolve(data); })["catch"](function (err) { reject(err); });
+var form = document.querySelector('#form');
+form.addEventListener('submit', addStudent);
+function getAllStudents() {
+    return __awaiter(this, void 0, void 0, function () {
+        var _a, data, error, e_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios('/student/all_students')];
+                case 1:
+                    _a = _b.sent(), data = _a.data, error = _a.error;
+                    console.log(data);
+                    if (error)
+                        throw error;
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_1 = _b.sent();
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
         });
+    });
+}
+function addStudent(ev) {
+    return __awaiter(this, void 0, void 0, function () {
+        var name, _a, data, error, e_2;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    ev.preventDefault();
+                    _b.label = 1;
+                case 1:
+                    _b.trys.push([1, 3, , 4]);
+                    name = ev.target.elements.name.value;
+                    if (!name)
+                        throw new Error('no name was given');
+                    return [4 /*yield*/, axios.post('/student/add_student', { name: name })];
+                case 2:
+                    _a = _b.sent(), data = _a.data, error = _a.error;
+                    renderStudents(data);
+                    if (error)
+                        throw error;
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_2 = _b.sent();
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+function renderStudents(students) {
+    try {
+        var html_1 = '';
+        var root = document.querySelector('#root');
+        students.students.forEach(function (element) {
+            html_1 += element.name + ", " + element.id;
+        });
+        root.insertAdjacentHTML('afterbegin', html_1);
     }
-    catch (err) {
-        console.log(err);
+    catch (e) {
     }
 }
-(function () { return __awaiter(_this, void 0, void 0, function () {
-    var _a, _b, _c, _d;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
-            case 0:
-                _b = (_a = console).log;
-                return [4 /*yield*/, getImages('/beaches/all')];
-            case 1:
-                _b.apply(_a, [_e.sent()]);
-                _d = (_c = console).log;
-                return [4 /*yield*/, getImages('/drinks/first')];
-            case 2:
-                _d.apply(_c, [_e.sent()]);
-                return [2 /*return*/];
-        }
-    });
-}); })();
+getAllStudents();
