@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../scss/register/register.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="shortcut icon" href="https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png" />
+    <title>Register</title>
+</head>
+
+<body>
+    <div class="container">
+        <form id="form-register" class="main__register">
+            <p class="heading">Please, Register</p>
+            <div class="box">
+                <label for="username">Username: </label>
+                <div>
+                    <input type="text" name="username" id="username">
+                </div>
+            </div>
+            <div class="box">
+                <label for="email">Email: </label>
+                <div>
+                    <input type="email" name="email" id="email">
+                </div>
+            </div>
+            <div class="box">
+                <label for="password">Password: </label>
+                <div>
+                    <input type="password" name="password" id="password">
+                </div>
+            </div>
+            <div class="box">
+                <label for="repassword">Password (again): </label>
+                <div>
+                    <input type="password" name="repassword" id="repassword">
+                </div>
+            </div>
+            <input type="submit" value="Register" class="registerBtn">
+            <p class='text'><a href="#" id="a-return">Home Page</a></p>
+        </form>
+    </div>
+    <script src="scripts/register/helpers/addPromiseRegister.js"></script>
+    <script src="scripts/register/register.js"></script>
+</body>
+
+</html>
