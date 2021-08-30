@@ -9,7 +9,7 @@ export class Student {
 
 
 export class Students{
-    students:Array<Student>;
+    students:Array<Student> = []
 
     addStudent(student:Student):void{
         this.students.push(student);

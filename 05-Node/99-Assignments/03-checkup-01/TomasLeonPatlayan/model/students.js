@@ -11,6 +11,7 @@ var Student = /** @class */ (function () {
 exports.Student = Student;
 var Students = /** @class */ (function () {
     function Students() {
+        this.students = [];
     }
     Students.prototype.addStudent = function (student) {
         this.students.push(student);
