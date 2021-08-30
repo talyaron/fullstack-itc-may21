@@ -71,7 +71,7 @@ async function addProductAdmin(ev) {
             swal("Good job!", productInfo.data.message, "success");
             ev.target.reset();
             document.querySelector('#previewImage').setAttribute('src', 'img/logoLosArgento.png');
-            renderProducts(null);
+            renderProducts(productInfo.data.allProducts.products);
         }
     } catch (error) {
         swal("Ohhh no!", error.response.data, "warning");
