@@ -35,32 +35,49 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-function getImages(route) {
-    try {
-        return new Promise(function (resolve, reject) {
-            fetch(route)
-                .then(function (r) { return r.json(); })
-                .then(function (data) { resolve(data); })["catch"](function (err) { reject(err); });
-        });
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-(function () { return __awaiter(_this, void 0, void 0, function () {
-    var _a, _b, _c, _d;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
+var getAllStudent = function () { return __awaiter(_this, void 0, void 0, function () {
+    var _a, data, error, error_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _b = (_a = console).log;
-                return [4 /*yield*/, getImages('/beaches/all')];
+                _b.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, axios('/student/all_student')];
             case 1:
-                _b.apply(_a, [_e.sent()]);
-                _d = (_c = console).log;
-                return [4 /*yield*/, getImages('/drinks/first')];
+                _a = _b.sent(), data = _a.data, error = _a.error;
+                if (error)
+                    throw error;
+                console.log(data);
+                return [3 /*break*/, 3];
             case 2:
-                _d.apply(_c, [_e.sent()]);
-                return [2 /*return*/];
+                error_1 = _b.sent();
+                console.log(error_1);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
-}); })();
+}); };
+var addStudent = function (ev) { return __awaiter(_this, void 0, void 0, function () {
+    var name, _a, data, error, error_2;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                name = ev.target.elements.name.value;
+                if (!name)
+                    throw new Error('no name was given');
+                return [4 /*yield*/, axios.post('/students/add_student', { name: name })];
+            case 1:
+                _a = _b.sent(), data = _a.data, error = _a.error;
+                if (error)
+                    throw error;
+                console.log(data);
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _b.sent();
+                console.error(error_2.message);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+getAllStudent();

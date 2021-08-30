@@ -1,17 +1,31 @@
-function getImages(route) {
-    try {
-        return new Promise((resolve, reject) => {
-            fetch(route)
-                .then(r => r.json())
-                .then(data => { resolve(data); })
-                .catch(err => { reject(err); })
-        })
-    } catch (err) { console.log(err); }
+ const getAllStudent = async()=> {
+try {
+    const {data,error}= await axios('/student/all_student')
+    if(error)throw error;
+    console.log(data);
+    
+} catch (error) {
+    console.log(error);
+    
 }
+ }
 
 
+ const addStudent= async (ev) => {
+     try {
+        const name= ev.target.elements.name.value;
+        if(!name)throw new Error('no name was given');
 
-(async () => {
-    console.log(await getImages('/beaches/all'));
-    console.log(await getImages('/drinks/first'));
-})();
+        const {data,error} = await axios.post('/students/add_student',{name})
+
+        if(error)throw error;
+        console.log(data);
+        
+     } catch (error) {
+         console.error(error.message);
+         
+     }
+
+ }
+
+ getAllStudent()
