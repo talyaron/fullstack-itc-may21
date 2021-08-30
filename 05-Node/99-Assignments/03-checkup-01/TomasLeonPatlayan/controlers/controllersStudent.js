@@ -11,7 +11,8 @@ exports.addStudents = function (req, res) {
         var name = req.body.name;
         if (!name)
             throw new Error('no Stundet was trasfered');
-        var newStudent = new students_1.Student(student);
+        var student_1 = new students_1.Student(name);
+        student_1.addStudent(student_1);
     }
     catch (error) {
     }

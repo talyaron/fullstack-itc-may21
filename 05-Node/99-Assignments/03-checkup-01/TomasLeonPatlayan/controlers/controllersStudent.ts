@@ -13,7 +13,9 @@ export const addStudents =(req,res)=> {
     const {name} = req.body
     if(!name) throw new Error('no Stundet was trasfered')  
 
-    const newStudent =   new Student(student);
+    const student =   new Student(name);
+
+    student.addStudent(student)
 
    } catch (error) {
        
