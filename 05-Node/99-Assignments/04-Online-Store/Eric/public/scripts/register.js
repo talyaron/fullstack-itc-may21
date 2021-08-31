@@ -16,7 +16,7 @@ const form = document.querySelector('.my-login-validation').addEventListener('su
 				ev.target.reset()
 		}
 
-		function addRegister(newUser) {
+		function addRegister(newUser) { //YS: Why not use async/await here too?
             return new Promise((resolve, reject) => {
                 fetch('/user/register', {
                     method: 'POST',

@@ -32,12 +32,13 @@ export function loginUser(req, res) {
     const allUsers = usersClass.userList;
 
     const isUserPassOK = allUsers.some(
-      (elem) => elem.email === email && elem.password === password);
+      (elem) => elem.email === email && elem.password === password); //YS: It doesnt let me log in since the password is encrypted so the passwords will never be equal
 
     if (isUserPassOK) {
       const userLogin = allUsers.find(
-        (elem) => elem.email === email && elem.password === password
-      );
+        (elem) => elem.email === email && elem.password === password);
+        
+      //if (userLogin) {
       res.cookie('cookieName', {isAdmin: userLogin.isAdmin, id:userLogin.id}, { maxAge: 30000000, httpOnly: false });  
 
       res.send({ userLogin });

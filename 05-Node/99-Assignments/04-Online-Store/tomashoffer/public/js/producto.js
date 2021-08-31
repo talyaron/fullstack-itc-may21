@@ -47,7 +47,7 @@ function alertCart(){
 
 // lOGOUT
 async function logOut(){
-    const logOut = await axios(`/user/logOut`);
+    const logOut = await axios(`/user/logOut`); //YS: if(logout)
    window.location.href = "http://localhost:3000/";
   }
   

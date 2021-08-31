@@ -69,7 +69,7 @@ export function deleteProductOnCart(req, res) {
     res.send({ ok: "Delete Product", cart: cart })
 }
 
-export function buyCart(req, res) {
+export function buyCart(req, res) { //YS: Nice, organized
     const allUsers = new Users();
     const user = allUsers.findUserById(req.id)
 

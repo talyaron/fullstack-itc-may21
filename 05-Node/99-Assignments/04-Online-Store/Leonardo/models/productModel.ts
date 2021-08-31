@@ -68,7 +68,7 @@ export class Products {
 
     detailsProduct(id) {
         try {
-            const productInfo = this.products.find(product => product.uuid === id);
+            const productInfo = this.products.find(product => product.uuid === id); //YS: What if it doesnt find the product?
             return productInfo;
         } catch (error) {
             console.error(error);

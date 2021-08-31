@@ -1,9 +1,10 @@
 export {};
 import { Cart, CartMethods, readAllUsers, readAllProducts } from "../modal/cart";
-const { v4: uuidv4 } = require("uuid");
-const cookieParser = require("cookie-parser");
+const { v4: uuidv4 } = require("uuid"); //YS: This is not being used
+const cookieParser = require("cookie-parser"); //YS: This is not being used
 const cartMethod = new  CartMethods()
 
+//YS: Try/Catch
 
 export function getOrder(req: any, res: any) { 
         const { idProdSelected } = req.cookies

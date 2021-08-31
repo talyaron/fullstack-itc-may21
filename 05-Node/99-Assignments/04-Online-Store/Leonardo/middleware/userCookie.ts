@@ -21,7 +21,7 @@ export function userCookieWrite(req, res, next) {
         const cookieToWrite: string = JSON.stringify({ id: user.uuid });
         const token = jwt.encode(cookieToWrite, process.env.SECRET_KEY);
         //The cookie is going to expire in 30 minutes
-        res.cookie("userInfo", token, { maxAge: 1800000, httpOnly: true });
+        res.cookie("userInfo", token, { maxAge: 1800000, httpOnly: true }); //YS: Nice!
 
         req.email = email;
         req.username = user.username;

@@ -11,12 +11,14 @@ window.onload = setTimeout(function getAllProductos() {
 
         case 2:
           getproductos = _context.sent;
+          //YS: Make this into a separate function and put it in a folder called api 
           productos = getproductos.data;
           _context.next = 6;
           return regeneratorRuntime.awrap(axios('/user/logIn'));
 
         case 6:
           getLogIn = _context.sent;
+          //YS: Make this into a separate function and put it in a folder called api 
           role = getLogIn.data.role;
           renderProducts(productos, role);
 
@@ -108,7 +110,7 @@ function postProd(newProd) {
 
         case 2:
           response = _context4.sent;
-          console.log(response);
+          console.log(response); //YS: You should do something else. Let the user know
 
         case 4:
         case "end":
@@ -147,7 +149,8 @@ function editProductData(newProdData) {
 
         case 2:
           editId = _context5.sent;
-          refresh();
+          //YS: Make this into a separate function and put it in a folder called api 
+          refresh(); //YS: Shouldnt have to do that
 
         case 4:
         case "end":
@@ -186,6 +189,7 @@ function deleteProdId(id) {
           return regeneratorRuntime.awrap(axios.post("/product/delete/".concat(id)));
 
         case 2:
+          //YS: Make this into a separate function and put it in a folder called api 
           refresh();
 
         case 3:
@@ -256,12 +260,14 @@ function regExSurvey(searchBar) {
 
         case 3:
           getproductos = _context11.sent;
+          //YS: Make this into a separate function and put it in a folder called api 
           productos = getproductos.data;
           _context11.next = 7;
           return regeneratorRuntime.awrap(axios('/user/logIn'));
 
         case 7:
           getLogIn = _context11.sent;
+          //YS: Make this into a separate function and put it in a folder called api 
           role = getLogIn.data.role;
           newArray = [];
 

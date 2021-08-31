@@ -14,7 +14,7 @@ import { sendCookieUser, logOutUser } from '../middleware/sendCookie';
 import { registerUser, logInUser, getAllUsers} from "../controllers/userControllers";
 
 router.post('/register', validateUser(schemaUsers), doesUserExist, encryptPwd, registerUser);
-router.post('/logIn', validateUser(schemaLogIn), compareLogin, sendCookieUser, logInUser)
+router.post('/logIn', validateUser(schemaLogIn), compareLogin, sendCookieUser, logInUser) //YS: Why do you have a POST and GET login? You just need the post. 
 router.get('/logIn', logInUser)
 router.get('/logOut', logOutUser)
 router.get('/allUsers', getAllUsers)

@@ -1,14 +1,14 @@
 export {};
 import { Product, ProductMethods, readAllProducts } from "../modal/product";
 const { v4: uuidv4 } = require("uuid");
-const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser"); //YS: This is not being used
 const methodProd = new ProductMethods()
 const allProds = readAllProducts();
 
-
+//YS: Missing try/catch
 
 export function addProducts(req: any, res: any) { 
-    const id = uuidv4();
+    const id = uuidv4(); //YS: You can add this into your product class instead of here: this.id = uuidv4()
     const product = new Product(req.body.productName, req.body.productDescription, req.body.productImage, req.body.productPrice, req.body.stock, id);
     methodProd.addProduct(product);
     res.send({ok:'product added successfully'});

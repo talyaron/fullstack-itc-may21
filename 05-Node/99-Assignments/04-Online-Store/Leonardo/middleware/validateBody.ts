@@ -11,7 +11,7 @@ export function validateBody(schema) {
         return (req, res, next) => {
             //I convert the price and the stock to numbers because when I bring the information using multer everything is a String
             if (req.body.price && req.body.stock) {
-                req.body.price = parseInt(req.body.price);
+                req.body.price = parseInt(req.body.price);  //YS: Destructure req.body
                 req.body.stock = parseInt(req.body.stock);
             }
             const valid = ajv.validate(schema, req.body);

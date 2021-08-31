@@ -3,8 +3,9 @@ const path = require('path');
 const pathToUsersJson = path.resolve(__dirname, '../db/users.json');
 const pathToSellsJson = path.resolve(__dirname, '../db/sells.json');
 const pathToProductsJson = path.resolve(__dirname, '../db/product.json');
-const { v4: uuidv4 } = require("uuid");
+const { v4: uuidv4 } = require("uuid"); //YS: This is not being used
 
+//Try/Catch
 export function readAllUsers(){
   const allUsers = fs.readFileSync(pathToUsersJson);
   return JSON.parse(allUsers);

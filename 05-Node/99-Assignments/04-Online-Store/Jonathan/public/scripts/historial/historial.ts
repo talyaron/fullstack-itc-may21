@@ -4,6 +4,7 @@ const btnGraph = document.querySelector('.btn-graph');
 btnReturn.addEventListener('click', returnMainPage)
 btnGraph.addEventListener('click', sendGraph)
 
+//YS: Very nice!
 
 async function getHistorial(ev) {
     ev.preventDefault();
