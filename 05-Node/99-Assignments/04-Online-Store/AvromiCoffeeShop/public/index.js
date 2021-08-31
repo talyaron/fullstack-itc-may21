@@ -44,14 +44,11 @@ function addUser(fname, lname, company, email, password, repassword) {
                     return [4 /*yield*/, axios.post('/users/register', { fname: fname, lname: lname, company: company, email: email, password: password, repassword: repassword })];
                 case 1:
                     res = _a.sent();
-                    if (res.status === 400) {
-                        console.log(res.data);
-                    }
                     swal("Hello " + fname + ", you're registration is complete!");
                     return [3 /*break*/, 3];
                 case 2:
                     error_1 = _a.sent();
-                    console.log(error_1);
+                    swal(error_1.response.data);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }

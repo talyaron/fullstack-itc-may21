@@ -2,12 +2,10 @@ async function addUser(fname, lname, company, email, password, repassword) {
     try {
         const res = await axios.post('/users/register', { fname, lname, company, email, password, repassword })
         
-        if(res.status === 400){
-           console.log(res.data);
-        }
+      
         swal(`Hello ${fname}, you're registration is complete!`)
     } catch (error) {
-        console.log(error);
+       swal(error.response.data);
     }
 }
 
