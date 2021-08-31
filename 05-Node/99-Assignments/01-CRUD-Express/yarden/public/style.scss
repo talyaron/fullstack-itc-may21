@@ -184,8 +184,9 @@ footer {
     z-index: 1;
     filter: drop-shadow(-9px 12px 10px rgba(0, 0, 0, 0.308));
     position:absolute;
-    right:40vw;
-    top: 20em;
+    left:50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 290px;
     height: 250px;
     
@@ -228,8 +229,9 @@ footer {
     position: absolute;
     border: 3px solid black;
     padding: 3em;
-    right:40vw;
-    top: 20em;
+    left:50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1;
     background-color: whitesmoke;
     width: 260px;

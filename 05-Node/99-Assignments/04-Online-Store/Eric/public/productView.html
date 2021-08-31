@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="getProdSelected()">
+ 
+
+    <nav class="navegacion">
+        <a class="navegacion__enlace navegacion__enlace--activo" href="store.html">Store</a>
+    </nav>
+
+ 
+<div class="render"></div>
+    <footer class="footer">
+        <p class="footer__texto">ITC Store.</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+
+<script>
+
+
+
+
+function renderProduct(product){
+    console.log(product);
+const render = document.querySelector('.render')
+   let html = ''
+    
+    html  += `   <main class="contenedor">
+       
+        <div class="camisa">
+            <img class="camisa__imagen" src="${product.image}" alt="Imagen del Producto">
+
+            <div class="camisa__contenido">
+                <p>${product.description}</p>
+
+                <form class="formulario">
+                    <select class="formulario__campo">
+                        <option disabled selected>-- Select Size --</option>
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                    </select>
+                    <input class="formulario__campo" type="number" placeholder="Quantity" min="1">
+                    <input class="formulario__submit" type="submit" value="Add to cart">
+                </form>
+            </div>
+        </div>
+    </main>`
+
+    render.innerHTML = html
+
+}
+
+
+async function getProdSelected(){
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    const response = await axios.get(`/product/getProductById/${productId}`);
+    const product = response.data
+    renderProduct(product)
+
+}
+
+
+
+
+</script>
+</body>
+</html>
