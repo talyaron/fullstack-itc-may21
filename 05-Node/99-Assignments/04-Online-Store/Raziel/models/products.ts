@@ -19,16 +19,14 @@ const readProductsJson = () => {
     uuid: string;
     picture: string;
     name: string;
-    description: string;
     price: number;
-    stock: number;
-    constructor(picture, name, description, price, stock) {
+    quantity: number;
+    constructor(picture, name, price, quantity) {
         this.uuid = uuidv4();
         this.picture = picture;
         this.name = name;
-        this.description = description;
         this.price = price;
-        this.stock = stock;
+        this.quantity = quantity;
     }
 }
 //Methods
@@ -69,14 +67,6 @@ const readProductsJson = () => {
     }
 
 
-    detailsProduct(id) {
-        try {
-            const productInfo = this.products.find(product => product.uuid === id);
-            return productInfo;
-        } catch (error) {
-            console.error(error);
-        }
-    }
 }
 
 

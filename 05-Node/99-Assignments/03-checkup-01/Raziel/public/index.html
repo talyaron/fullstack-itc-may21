@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Students</title>
+</head>
+
+<body>
+    <h1>Hi, lets add students!</h1>
+    <form onsubmit="addStudent(event)">
+        <input type="text" name="name" placeholder="Enter the name of the student">
+        <input type="submit" value="Add Student">
+    </form>
+
+    <div id="root"></div>
+
+    <button onclick="getRandomStudent()">CLICK TO GET RANDOM STUDENTS</button>
+    
+    <h1>THE RANDOM USERS ARE GOING TO BE:</h1>
+    
+    <div id="root1"></div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

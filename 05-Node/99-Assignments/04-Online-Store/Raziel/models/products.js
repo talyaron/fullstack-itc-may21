@@ -15,13 +15,12 @@ var readProductsJson = function () {
     }
 };
 var Product = /** @class */ (function () {
-    function Product(picture, name, description, price, stock) {
+    function Product(picture, name, price, quantity) {
         this.uuid = uuidv4();
         this.picture = picture;
         this.name = name;
-        this.description = description;
         this.price = price;
-        this.stock = stock;
+        this.quantity = quantity;
     }
     return Product;
 }());
@@ -52,15 +51,6 @@ var Products = /** @class */ (function () {
         try {
             this.products = this.products.filter(function (product) { return product.uuid !== id; });
             this.updateProductsJson();
-        }
-        catch (error) {
-            console.error(error);
-        }
-    };
-    Products.prototype.detailsProduct = function (id) {
-        try {
-            var productInfo = this.products.find(function (product) { return product.uuid === id; });
-            return productInfo;
         }
         catch (error) {
             console.error(error);
