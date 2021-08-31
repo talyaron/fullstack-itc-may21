@@ -59,7 +59,7 @@ function deleteProduct(id: string) {
     })
         .then(async (isConfirm) => {
             if (isConfirm) {
-                const response = await axios.delete(`product/deleteProduct/${id}`)
+                const response = await axios.delete(`product/deleteProduct/${id}`) //YS: You are using an async inside a .then, try not to mix
                 const { data } = response
                 swal(`${data.ok}`, "", "success")
                 getAllProducts()
@@ -140,13 +140,13 @@ async function searchProduct(ev) {
 
     const searchProduct = inputSearch.value
 
-    const responseUser = await axios.get('/user/readCookie')
+    const responseUser = await axios.get('/user/readCookie') //YS: You should have these requests in a separate function/separate file called api
     let role = responseUser.data.user.role
 
     if (role === 'admin') {
 
         if (searchProduct.length > 0) {
-            const response = await axios.get(`product/searchProduct/${store}/${searchProduct}`)
+            const response = await axios.get(`product/searchProduct/${store}/${searchProduct}`) //YS: You should have these requests in a separate function/separate file called api
             if (response.data.length === 1) renderAllProductsAdmin([response.data.allProducts])
             else renderAllProductsAdmin(response.data.allProducts)
         } else {
@@ -156,9 +156,9 @@ async function searchProduct(ev) {
     } else{
 
         if (searchProduct.length > 0) {
-            const response = await axios.get(`product/searchProduct/${store}/${searchProduct}`)
+            const response = await axios.get(`product/searchProduct/${store}/${searchProduct}`) //YS: You should have these requests in a separate function/separate file called api
             if (response.data.length === 1) renderAllProductsUser([response.data.allProducts],responseUser)
-            else renderAllProductsUser(response.data.allProducts,responseUser)
+            else renderAllProductsUser(response.data.allProducts,responseUser) 
         } else {
             getAllProducts()
         }

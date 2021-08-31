@@ -10,7 +10,6 @@ export class Cart {
 }
 
 
-
 export const readAllCarts = () => {
   try {
     const allCarts = fs.readFileSync(allCartsJSON);
@@ -20,6 +19,7 @@ export const readAllCarts = () => {
   }
 };
 
+//YS: Missing try catch
 
 export function addCart(newCart) {
   const allCarts = readAllCarts()

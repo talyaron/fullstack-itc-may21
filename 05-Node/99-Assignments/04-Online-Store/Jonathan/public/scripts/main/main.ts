@@ -24,11 +24,11 @@ async function getAllProducts() {
         const capitalizeStore = store.charAt(0).toUpperCase() + store.slice(1)
         h1.innerText = `Welcome to the ${capitalizeStore} Store`
         title[0].innerHTML = `${capitalizeStore} Store`
-
-        const responseAllProducts = await axios.get(`/store/getStore/${store}`)
+ 
+        const responseAllProducts = await axios.get(`/store/getStore/${store}`) //YS: You should have these requests in a separate function/separate file called api
         const { data } = responseAllProducts
 
-        const responseUser = await axios.get(`/user/readCookie`)
+        const responseUser = await axios.get(`/user/readCookie`) //YS: You should have these requests in a separate function/separate file called api
         let role = responseUser.data.user.role
 
         const rootProducts = document.querySelector('#rootProducts')

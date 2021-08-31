@@ -16,7 +16,7 @@ router.post('/changeQuantity', userCookieRead, checkStockProduct, changeQuantity
 router.post('/purchase', userCookieRead, checkStockCart, finalPurchase);
 router.get('/infoCart/:cartId', userCookieRead, infoCart);
 router.get('/allPurchase', userCookieRead, isAdmin, allCartsPurchased);
-router.delete('/deleteProduct/:productId/:cartId', userCookieRead, deleteProduct);
+router.delete('/deleteProduct/:productId/:cartId', userCookieRead, deleteProduct); //YS: Nice
 router.put('/changeStatus', userCookieRead, isAdmin, changeStatus);
 
 module.exports = router;

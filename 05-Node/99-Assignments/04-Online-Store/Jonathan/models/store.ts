@@ -14,6 +14,9 @@ interface Store {
 
 }
 
+//YS: Missing try catch
+
+
 export const readAllStores = () => {
   try {
     const stores = fs.readFileSync(allStoresJSON);
@@ -28,12 +31,12 @@ export const readAllStores = () => {
 export function addProductToStore(body) {
   const allStores: any = readAllStores()
   const findStore = allStores.find(store => store.store === body.store);
-  const { store, ...rest } = body;
+  const { store, ...rest } = body; //YS: Nice! 
   if (findStore === undefined) {
     const newStore = {
       id: uuidv4(),
       store: body.store,
-      allProducts: [rest]
+      allProducts: [rest] 
     }
     allStores.push(newStore)
   } else {
@@ -55,7 +58,7 @@ export function editProductToStore(id: string, store: string, body: Product) {
   let allStores: any = readAllStores()
   const findStore = allStores.find(allstores => allstores.store === store)
   const findProduct = findStore.allProducts.find(product => product.id === id)
-  findProduct.name = body.name;
+  findProduct.name = body.name; //YS: What if there is no name/desc/image/quantity in the body? 
   findProduct.description = body.description;
   findProduct.image = `../images/${store}/${body.image.split('\\')[2]}`
   findProduct.quantity = body.quantity;

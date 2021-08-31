@@ -74,11 +74,11 @@ async function payment(currentTotal){
 
 async function descreaseStock(){
     // DECREASE STOCK
-    const getCurrentUser = await axios.get('/user/logIn');
+    const getCurrentUser = await axios.get('/user/logIn'); //YS: Make this into a separate function and put it in a folder called api 
     const data = getCurrentUser.data.cart;
     data.forEach(async (prod)=>{
         prod.stock = prod.stock - prod.quantity;
-        const decreaseStock =  await axios.post('/product/updateStock', prod)
+        const decreaseStock =  await axios.post('/product/updateStock', prod) //YS: Make this into a separate function and put it in a folder called api 
     })
 }
 

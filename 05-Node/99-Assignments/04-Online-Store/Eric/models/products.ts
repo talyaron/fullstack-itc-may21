@@ -18,7 +18,7 @@ export class Product {
 
     constructor(id: string, name: string, image: string, price: number, quantity: number, description: string) {
         console.log(id, name, image, price, quantity, description)
-        this.id = id || uuidv4();
+        this.id = id || uuidv4(); //YS: Why or? Should be just uuid
         this.name = name;
         this.image = image;
         this.price = price;

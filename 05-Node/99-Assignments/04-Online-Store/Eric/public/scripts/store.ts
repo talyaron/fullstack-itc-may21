@@ -142,7 +142,7 @@ async function editProdId(productId) {
     const description = document.querySelector('.description') as HTMLInputElement
     const image = document.querySelector('.image') as HTMLInputElement
 
-    name.value = editId.data.product.name;
+    name.value = editId.data.product.name; //YS: You could de-structure the object here :  let {name, price, quantity, description, image} = editId.data.product
     price.value = editId.data.product.price
     quantity.value = editId.data.product.quantity
     description.value = editId.data.product.description

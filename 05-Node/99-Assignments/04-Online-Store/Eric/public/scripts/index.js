@@ -11,7 +11,7 @@
         }
 
 
-        function enterLogin(userLogin) {
+        function enterLogin(userLogin) { //YS: Why not use async/await here too? 
             return new Promise((resolve, reject) => {
                 fetch('/user/userLogin', {
                     method: 'POST',

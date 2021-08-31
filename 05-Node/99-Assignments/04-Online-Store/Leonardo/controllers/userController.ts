@@ -12,7 +12,7 @@ export function registerUser(req, res) {
         const allUsers = new Users();
         allUsers.createUser(user);
 
-        const products = null;
+        const products = null; //YS: Would be better to initialize it to an empty array than null. 
         const unpurchaseCart = new Cart(req.email, products)
         const allCarts = new Carts();
         allCarts.addProductsToCart(unpurchaseCart); 

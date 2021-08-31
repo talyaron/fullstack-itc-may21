@@ -4,7 +4,7 @@ const btnReturn = <HTMLElement>document.querySelector("#btn-return")
 
 btnReturn.addEventListener("click", returHistorial)
 
-
+//YS: Very nice!
 async function getGraph(ev) {
     ev.preventDefault();
 
@@ -35,7 +35,7 @@ function renderGraph(data) {
             arrayTotal.push(element.total)
         });
 
-        const ctx = document.getElementById('myChart').getContext('2d') 
+        const ctx = document.getElementById('myChart').getContext('2d')  //YS: Very nice!
         const chart = new Chart(ctx, {
             type: 'bar',
             data: {

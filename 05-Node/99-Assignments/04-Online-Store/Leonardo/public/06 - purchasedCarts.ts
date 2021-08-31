@@ -2,7 +2,7 @@
 try {
     const userTitle = document.querySelector('#nameUser');
 
-    async function renderUserDetails() {
+    async function renderUserDetails() { //YS: Why is the try outside of your function? 
         const userDetails = await axios.get('/user/info');
         const { username } = userDetails.data.userInfo;
         const toRender = `<h1>See your sells <span class="nameUser__title">${username}!</span></h1>`
@@ -63,7 +63,7 @@ function convertPicksToIcons(pickedStatus) {
 }
 
 //Get the information of the purchased carts
-async function getInformationToRender() {
+async function getInformationToRender() { //YS: Try catch? 
     const infoPurchaseCarts = await axios.get(`/cart/allPurchase/`);
     return infoPurchaseCarts.data.purchasedCarts;
 }

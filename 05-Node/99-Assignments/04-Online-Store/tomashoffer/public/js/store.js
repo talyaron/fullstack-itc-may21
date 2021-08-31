@@ -1,8 +1,8 @@
 window.onload = setTimeout(async function getAllProductos(){
 
-  const getproductos = await axios('/product/getProducts');
+  const getproductos = await axios('/product/getProducts'); //YS: Make this into a separate function and put it in a folder called api 
   const productos = getproductos.data;
-  const getLogIn = await axios('/user/logIn');
+  const getLogIn = await axios('/user/logIn'); //YS: Make this into a separate function and put it in a folder called api 
   const role = getLogIn.data.role;
  renderProducts(productos, role);
 }, 670)
@@ -65,7 +65,7 @@ async function renderProducts(productos, role){
 
 async function postProd(newProd){
     const response = await axios.post('/product/addProducts', newProd);
-    console.log(response);
+    console.log(response); //YS: You should do something else. Let the user know
 }
 
 // MODAL EDIT
@@ -81,16 +81,16 @@ function handleEditModal(e){
 }
 
 async function editProductData(newProdData){
-  const editId = await axios.post(`/product/edit`, newProdData);
-  refresh()
+  const editId = await axios.post(`/product/edit`, newProdData); //YS: Make this into a separate function and put it in a folder called api 
+  refresh() //YS: Shouldnt have to do that
 }
 
 
 async function editProdId(id){
-    const editId = await axios.post(`/product/edit/${id}`);
+    const editId = await axios.post(`/product/edit/${id}`); //YS: Make this into a separate function and put it in a folder called api 
 }
 async function deleteProdId(id){
-    await axios.post(`/product/delete/${id}`)
+    await axios.post(`/product/delete/${id}`) //YS: Make this into a separate function and put it in a folder called api 
     refresh()
     }
 
@@ -109,9 +109,9 @@ async function refresh() {
 // SEARCH BAR
   async function regExSurvey(searchBar){
     try {
-      const getproductos = await axios('/product/getProducts');
-      const productos = getproductos.data;
-      const getLogIn = await axios('/user/logIn');
+      const getproductos = await axios('/product/getProducts'); //YS: Make this into a separate function and put it in a folder called api 
+      const productos = getproductos.data; 
+      const getLogIn = await axios('/user/logIn'); //YS: Make this into a separate function and put it in a folder called api 
       const role = getLogIn.data.role;
 
       let newArray = [];

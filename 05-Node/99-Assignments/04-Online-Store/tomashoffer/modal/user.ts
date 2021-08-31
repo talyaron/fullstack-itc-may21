@@ -24,7 +24,7 @@ export class User {
       (this.email = email), 
       (this.password = password),
       (this.role = role),
-      (this.id = id),
+      (this.id = id), //YS: Here you can do this.id = uuidv4() also, why do they have parenthesis? 
       (this.cart = cart);
     }
 }

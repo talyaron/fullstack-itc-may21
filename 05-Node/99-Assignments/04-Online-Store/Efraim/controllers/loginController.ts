@@ -3,7 +3,7 @@ const { users } = require('../models/classes')
 exports.login = (req, res) => {
     try {
         const token = req.token
-        const URL = "/productlist.html"
+        const URL = "/productlist.html" //YS: This should be done in the FE, not BE. (once you recieve the token, you change the URL)
         res.send({URL, token});
 
     } catch (e) {

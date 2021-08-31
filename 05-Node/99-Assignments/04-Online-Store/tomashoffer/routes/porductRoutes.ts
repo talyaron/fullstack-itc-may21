@@ -9,6 +9,8 @@ import { getProducts, addProducts, getProdSelected, editProducts, deleteProd, up
 import { selectedProd, editProdCookie } from '../middleware/sendCookie';
 // import { isAdmin } from '../middleware/isAdmin';
 
+
+//YS: Nice routes, although they should be protected to be accessed only by admin or logged in users 
 router.get('/', getProdSelected)
 router.post('/:id', selectedProd)
 router.get('/getProducts', getProducts);

@@ -1,5 +1,5 @@
 const { readAllUsers } = require('../modal/user');
-
+//YS: Try catch, and why not create a token instead of sending just the ID? 
 export function sendCookieUser(req, res, next) {
       const { email } = req.body;
       const allUsers = readAllUsers();

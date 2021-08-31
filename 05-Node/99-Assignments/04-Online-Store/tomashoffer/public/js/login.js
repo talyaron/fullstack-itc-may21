@@ -17,7 +17,7 @@ btnSub.addEventListener('click', handleLogin);
 
 async function logIn(userLogIn){
     try{
-        const response = await axios.post('/user/logIn', userLogIn);
+        const response = await axios.post('/user/logIn', userLogIn); //YS: if(response)
        window.location.href = "/store.html";
     }catch(error){
         console.log(error.response);

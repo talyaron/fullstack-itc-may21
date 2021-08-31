@@ -76,7 +76,7 @@ export class Carts {
 
     searchUnpurchaseCart(userEmail) {
         try {
-            const unpurchaseCart = this.carts.find(cart => (cart.userEmail === userEmail) && (cart.purchasedDate === null));
+            const unpurchaseCart = this.carts.find(cart => (cart.userEmail === userEmail) && (cart.purchasedDate === null)); //YS: What if it doesnt find the cart?
             return unpurchaseCart;
         } catch (error) {
             console.error(error);
@@ -85,7 +85,7 @@ export class Carts {
 
     searchUserCart(cartId) {
         try {
-            const userCart = this.carts.find(cart => cart.uuid === cartId);
+            const userCart = this.carts.find(cart => cart.uuid === cartId); //YS: What if it doesnt find the cart?
             return userCart;
         } catch (error) {
             console.error(error);
@@ -103,8 +103,8 @@ export class Carts {
 
     searchProductInCart(productId, userCart) {
         try {
-            const productExist = userCart.products.find(product => product.productId === productId);
-            return productExist;
+            const productExist = userCart.products.find(product => product.productId === productId); //YS: What if it doesnt find the product?
+            return productExist; 
         } catch (error) {
             console.error(error);
         }

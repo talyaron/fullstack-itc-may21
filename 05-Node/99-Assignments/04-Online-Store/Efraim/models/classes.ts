@@ -30,7 +30,7 @@ class Users {
             console.error(e)
         }
     };
-    findIndexofUser(userID: string): number {
+    findIndexofUser(userID: string): number { //YS: I dont understand why you have a findIndex and a findUser, you can do the same with both. You only need one. 
         const index = this.users.findIndex(usr => usr.userID === userID)
         return index;
     }
@@ -83,11 +83,11 @@ class Products {
         }
     };
 
-    findIndexOfProduct(productId: string) {
+    findIndexOfProduct(productId: string) { //YS: Same comment as with user. 
         const index = this.products.findIndex(prd => prd.id === productId)
         return index;
     }
-    findProduct(productId: string): Product {
+    findProduct(productId: string): Product { //YS: Same comment as with user.
         try {
             const product: Product = this.products.find(prd => prd.id === productId);
             if (product) {
@@ -101,7 +101,7 @@ class Products {
 }
 const products: Products = new Products();
 
-products.addProduct(new Product("images/coffee.png", 'Stainless Steel Travel Mug', 20))
+products.addProduct(new Product("images/coffee.png", 'Stainless Steel Travel Mug', 20))   //YS: Would be better to create an array of product objects and then loop trough it instead of hardcoding. 
 products.addProduct(new Product("/images/beanie.png", 'Boundary Rib Beanie', 20))
 products.addProduct(new Product("/images/3.png", 'PUMA 2021 Clash Guernsey', 30))
 products.addProduct(new Product("/images/4.png", 'PUMA 2021 Home Guernsey', 25))
