@@ -11,5 +11,5 @@ var userCookie_1 = require("../middlewear/userCookie");
 //import form controlers----------------->
 var controlerUsers_1 = require("../controlers/controlerUsers");
 router.post('/register', validateBody_1.validateBody(Schemas.registerSchema), userExsistsValid_1.doRegUserExists, encryptPassword_1.encryptPassword, userCookie_1.userCookieWrite, controlerUsers_1.registerUser);
-router.post('/login', userExsistsValid_1.doLogInUserExists, userCookie_1.userCookieWrite, encryptPassword_1.decryptPassword, controlerUsers_1.login);
+router.post('/login', userCookie_1.userCookieWrite, encryptPassword_1.decryptPassword, controlerUsers_1.login);
 module.exports = router;
