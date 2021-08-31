@@ -14,7 +14,6 @@ const adminsArray = ['jnisen@gmail.com', 'leo@gmail.com', 'salmon@gmail.com']
 
 export function addNewUser(req, res) {
     const user = new User(req.body.username, req.body.email, req.body.password)
-    console.log(adminsArray)
     const role = adminsArray.includes(req.body.email) ? user.role = 'admin' : user.role = 'public'
     if (role === 'public') user.cart = []
     const allUsers = new Users();

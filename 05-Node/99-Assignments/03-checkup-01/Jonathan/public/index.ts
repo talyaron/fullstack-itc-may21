@@ -1,48 +1,111 @@
+const form = document.querySelector('#form') as HTMLFormElement;
+const body = document.querySelector('#body') as HTMLBodyElement;
+const btnEdit = document.querySelector('.btn-edit') as HTMLButtonElement;
 
-const form = document.querySelector('#form')
-form.addEventListener('submit', addStudent)
+form.onsubmit = addStudent
+body.onload = getStudents
+btnEdit.onclick = editStudent
 
-async function getAllStudents() {
+let idStudent;
+
+async function getStudents() {
     try {
-        const { data, error } = await axios('/student/all_students')
-        console.log(data)
-        if (error) throw error
+        const getStudents = await getStudentsAxios()
+        const { data, error } = getStudents
+
+        renderStudents(data.students)
+
 
     } catch (e) {
-
+        console.error(e)
     }
 }
+
 
 
 async function addStudent(ev) {
     ev.preventDefault();
     try {
-        const name = ev.target.elements.name.value;
-        if (!name) throw new Error('no name was given');
+        let { firstname, lastname, age } = ev.target.elements
+        firstname = firstname.value;
+        lastname = lastname.value;
+        age = age.value;
 
-        const { data, error } = await axios.post('/student/add_student', { name })
+        const newStudent = {
+            firstname: firstname,
+            lastname: lastname,
+            age: age,
+        }
 
-        renderStudents(data)
+        const student = await addStudentAxios(newStudent)
 
-        if (error) throw error;
+        renderStudents(student.students)
+
 
     } catch (e) {
-
+        console.error(e)
     }
-
 }
 
 function renderStudents(students) {
     try {
-        let html: string = '';
-        
-        const root = document.querySelector('#root') as HTMLElement;
-        
-        students.students.forEach(element => {
-            html+=`${element.name}, ${element.id}`
+
+        let html: string = ''
+        const root = document.querySelector('#root')
+
+        students.students.forEach(student => {
+
+            const { id, firstname, lastname, age } = student
+
+            html += `<div>
+                      <span>Firstname: ${firstname}</span>
+                      <span>Lastname: ${lastname}</span>
+                      <span>Age: ${age}</span>
+                      <button class="btn-delete" onclick="deleteStudent('${id}')">DELETE</button>
+                      <button class="btn-bring" onclick="bringStudent('${id}')">Bring</button>
+                    </div>`
         });
-        
-        root.insertAdjacentHTML('afterbegin', html)
+
+        root.innerHTML = html
+
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+async function bringStudent(id: string) {
+
+    let firstname = document.querySelector('#firstname') as HTMLInputElement;
+    let lastname = document.querySelector('#lastname') as HTMLInputElement;
+    let age = document.querySelector('#age') as HTMLInputElement;
+
+    const bringData = await bringStudentAxios(id)
+
+    firstname.value = bringData.student.firstname
+    lastname.value = bringData.student.lastname
+    age.value = bringData.student.age
+
+    idStudent = id
+}
+
+async function editStudent(ev) {
+    ev.preventDefault()
+
+    try {
+
+        const firstname = document.querySelector('#firstname') as HTMLInputElement;
+        const lastname = document.querySelector('#lastname') as HTMLInputElement;
+        const age = document.querySelector('#age') as HTMLInputElement;
+
+        const editData = {
+            firstname: firstname.value,
+            lastname: lastname.value,
+            age: age.value,
+        }
+
+        const editStudent = await editStudentAxios(editData, idStudent)
+        renderStudents(editStudent)
+
 
     } catch (e) {
 
@@ -50,4 +113,3 @@ function renderStudents(students) {
 }
 
 
-getAllStudents()

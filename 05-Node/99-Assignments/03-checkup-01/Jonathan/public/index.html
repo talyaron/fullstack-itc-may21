@@ -6,17 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Document</title>
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <title>Formulario</title>
 </head>
 
-<body>
-    <h1>Hi</h1>
+<body id="body">
     <form id="form">
-        <input type="text" name="name" id="name" placeholder="add name">
-        <button type="submit">ADD</button>
+        <input type="text" name="firstname" id="firstname" placeholder="nombre">
+        <input type="text" name="lastname" id="lastname" placeholder="apellido">
+        <input type="number" name="age" id="age" placeholder="edad">
+        <input type="submit" value="ADD STUDENT">
     </form>
+    <button class = "btn-edit">EDIT</button>
     <div id="root"></div>
-    <script src="index.js"></script>
+    <script src="./npm/students.js"></script>
+    <script src="./index.js"></script>
 </body>
 
 </html>

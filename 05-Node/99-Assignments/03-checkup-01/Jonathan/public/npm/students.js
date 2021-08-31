@@ -1,20 +1,3 @@
-// function addProductPromise(newProduct, store) {
-//     return new Promise((resolve, reject) => {
-//         fetch(`/product/addNewProduct/${store}`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(newProduct)
-//         }).then(function (res) {
-//             if (res.status === 200 && res.ok) {
-//                 return res.json().then(product => { resolve(product) });
-//             } else {
-//                 return res.json().then(product => { swal('Oops!', `${product.error}`, `error`) })
-//             }
-//         })
-//     })
-// }
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -51,53 +34,86 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function editProductPromise(editProduct, store) {
-    return new Promise(function (resolve, reject) {
-        fetch("product/editProduct/" + idProduct + "/" + store, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(editProduct)
-        }).then(function (res) {
-            if (res.status === 200 && res.ok) {
-                return res.json().then(function (product) { resolve(product); });
-            }
-            else {
-                return res.json().then(function (product) { swal('Oops!', "" + product.error, "error"); });
-            }
-        });
-    });
-}
-// async function addProduct(addNewProduct, store) {
-//     try {
-//         const response = await axios.post(`/product/addNewProduct/${store}`, addNewProduct)
-//         return response.data
-//     } catch (e) {
-//         console.log(e.response.data.error)
-//     }
-// }
-function addProduct(addNewProduct, store) {
+function addStudentAxios(newStudent) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, data, e_1;
+        var response, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, fetch("/product/addNewProduct/" + store, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(addNewProduct)
-                        })];
+                    return [4 /*yield*/, axios.post('/student/addStudent', newStudent)];
                 case 1:
                     response = _a.sent();
-                    data = response.json();
-                    return [2 /*return*/, data]; //ver que me trae
+                    return [2 /*return*/, response.data];
                 case 2:
                     e_1 = _a.sent();
-                    console.log(e_1.response.data.error);
+                    alert(e_1.response.data.error);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function getStudentsAxios() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, axios.get('/student/getStudents')];
+                case 1:
+                    response = _a.sent();
+                    return [2 /*return*/, response];
+            }
+        });
+    });
+}
+function deleteStudent(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, axios["delete"]("/student/deleteStudent/" + id)];
+                case 1:
+                    _a.sent();
+                    getStudents();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function bringStudentAxios(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, e_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.get("/student/bringStudent/" + id)];
+                case 1:
+                    response = _a.sent();
+                    return [2 /*return*/, response.data];
+                case 2:
+                    e_2 = _a.sent();
+                    alert(e_2.response.data.error);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function editStudentAxios(newInfo, id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, e_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.put("/student/editStudent/" + id, newInfo)];
+                case 1:
+                    response = _a.sent();
+                    return [2 /*return*/, response.data];
+                case 2:
+                    e_3 = _a.sent();
+                    alert(e_3.response.data.error);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
