@@ -58,10 +58,43 @@ function addUser(fname, lname, company, email, password, repassword) {
 var loginForm = document.querySelector("#loginForm");
 loginForm.addEventListener("submit", loginFormSubmit);
 function loginFormSubmit(ev) {
-    ev.preventDefault();
-    var email = ev.target.elements.email.value;
-    var password = ev.target.elements.password.value;
-    //validate??? 
+    return __awaiter(this, void 0, void 0, function () {
+        var email, password;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    ev.preventDefault();
+                    email = ev.target.elements.email.value;
+                    password = ev.target.elements.password.value;
+                    return [4 /*yield*/, loginUser(email, password)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function loginUser(email, password) {
+    return __awaiter(this, void 0, void 0, function () {
+        var res, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.post('/users/login', { email: email, password: password })];
+                case 1:
+                    res = _a.sent();
+                    console.log(res.data);
+                    window.localStorage.setItem('currentUser', JSON.stringify(res.data));
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_2 = _a.sent();
+                    console.log(error_2.response);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
 }
 var registerForm = document.querySelector("#registerForm");
 registerForm.addEventListener("submit", handleRegisterSubmit);

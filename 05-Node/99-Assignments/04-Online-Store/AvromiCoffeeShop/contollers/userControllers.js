@@ -9,11 +9,28 @@ exports.register = function (req, res) {
         res.status(500).send(error.message);
     }
 };
-// exports.login = (req, res) => {
-//     try {
-//         const {email, password} = req.body;
-//         // b- crypt
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+exports.login = function (req, res) {
+    try {
+        var _a = req.body, email_1 = _a.email, password = _a.password;
+        // b- crypt
+        var allUsers = getAllUsers();
+        var user = allUsers.find(function (user) { return user.email === email_1; });
+        if (user) {
+            if (user.password === password) {
+                console.log(user);
+                res.send({ name: user.fname, role: user.role });
+                return;
+            }
+            //     else {
+            //         throw new Error("password does not match")
+            //     }
+            // }
+            // else {
+            //     throw new Error("User Not Found")
+        }
+    }
+    catch (error) {
+        console.log(error);
+        res.send("hi");
+    }
+};

@@ -9,7 +9,7 @@ router.post('/register',
 doesUserExist, UsersController.register);
 // doPasswordsMatch, 
 // sendCookie,
-//  router.post('/login', UsersController.login)
+router.post('/login', UsersController.login);
 // router.get('/', (req, res) => {
 //     try {
 //         const allUsers= getAllUsers()

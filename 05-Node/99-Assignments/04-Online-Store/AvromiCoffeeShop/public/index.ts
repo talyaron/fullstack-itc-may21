@@ -13,11 +13,24 @@ async function addUser(fname, lname, company, email, password, repassword) {
 const loginForm = document.querySelector("#loginForm");
 loginForm.addEventListener("submit", loginFormSubmit);
 
-function loginFormSubmit(ev){
+async function loginFormSubmit(ev){
     ev.preventDefault();
     const email = ev.target.elements.email.value;
     const password = ev.target.elements.password.value;
+  await loginUser(email, password);
     //validate??? 
+}
+
+async function loginUser(email, password){
+    try {
+        
+  
+    const res = await axios.post('/users/login',{email, password});
+    console.log(res.data)
+    window.localStorage.setItem('currentUser', JSON.stringify(res.data))
+} catch (error) {
+        console.log(error.response);
+}
 }
 
 const registerForm = document.querySelector("#registerForm");

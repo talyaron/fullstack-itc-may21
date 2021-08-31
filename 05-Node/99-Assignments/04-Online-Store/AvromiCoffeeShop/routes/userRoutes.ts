@@ -10,12 +10,12 @@ const UsersController = require('../contollers/userControllers')
 
 router.post('/register',
     // validateBody(schema.registerSchema),
-    doesUserExist, UsersController.register)
+    doesUserExist, UsersController.register);
 // doPasswordsMatch, 
 // sendCookie,
 
 
-//  router.post('/login', UsersController.login)
+ router.post('/login', UsersController.login)
 
 // router.get('/', (req, res) => {
 //     try {
