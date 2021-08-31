@@ -36,13 +36,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function addStudentAxios(newStudent) {
     return __awaiter(this, void 0, void 0, function () {
-        var response;
+        var response, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios.post('/student/addStudent', newStudent)];
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.post('/student/addStudent', newStudent)];
                 case 1:
                     response = _a.sent();
-                    return [2 /*return*/, response];
+                    return [2 /*return*/, response.data];
+                case 2:
+                    error_1 = _a.sent();
+                    alert(error_1.response.data.error);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
@@ -56,6 +63,59 @@ function getStudentsAxios() {
                 case 1:
                     response = _a.sent();
                     return [2 /*return*/, response];
+            }
+        });
+    });
+}
+function deleteStudent(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, axios["delete"]("/student/deleteStudent/" + id)];
+                case 1:
+                    _a.sent();
+                    getStudents();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function bringStudentAxios(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.get("/student/bringStudent/" + id)];
+                case 1:
+                    response = _a.sent();
+                    return [2 /*return*/, response.data];
+                case 2:
+                    error_2 = _a.sent();
+                    alert(error_2.response.data.error);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function editStudentsAxios(newInfo, id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, error_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.put("/student/editStudent/" + id, newInfo)];
+                case 1:
+                    response = _a.sent();
+                    return [2 /*return*/, response.data];
+                case 2:
+                    error_3 = _a.sent();
+                    alert(error_3.response.data.error);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });

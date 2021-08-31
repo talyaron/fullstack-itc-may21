@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.getStudents = exports.addStudent = void 0;
+exports.editStudent = exports.bringStudent = exports.deleteStudent = exports.getStudents = exports.addStudent = void 0;
 var student_1 = require("../models/student");
 //ponerlo siempre afuera, sino no agrega al array y sobre escribe al renderizar
 var students = new student_1.Students();
@@ -15,3 +15,21 @@ function getStudents(req, res) {
     res.send({ students: students });
 }
 exports.getStudents = getStudents;
+function deleteStudent(req, res) {
+    var id = req.params.id;
+    students.deleteStudent(id);
+    res.send({ message: "student deleted" });
+}
+exports.deleteStudent = deleteStudent;
+function bringStudent(req, res) {
+    var id = req.params.id;
+    var student = students.findStudentById(id);
+    res.send({ student: student });
+}
+exports.bringStudent = bringStudent;
+function editStudent(req, res) {
+    var id = req.params.id;
+    var allStudents = students.editStudent(req.body, id);
+    res.send({ students: allStudents });
+}
+exports.editStudent = editStudent;
