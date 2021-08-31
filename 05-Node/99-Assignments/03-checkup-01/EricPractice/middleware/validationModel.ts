@@ -1,21 +1,20 @@
-// import {Students} from '../models/student';
+import {Students} from '../models/student';
 
+const students = new Students ()
 
-// export function isFirstNameExist(req, res, next) {
-//     try {
-//         const {firstname} = req.body
-//         const students = new Students ()
-//         const isSameName = students.findStudentByName(firstname)
-//         console.log(isSameName);
+export function isFirstNameExist(req, res, next) {
+    try {
+        const {firstname} = req.body
+        const isSameName = students.findStudentByName(firstname)
+        if(isSameName) res.status(404).send({error: "firstname already exist"})
+  
+    else
+        next()
+    
         
-//         if(isSameName) res.status(404).send("Firstname already exist")
-//         else{
-//             next()
-//         }
 
 
-//     } catch (error) {
+    } catch (error) {
         
-//     }
-
-
+    }
+}

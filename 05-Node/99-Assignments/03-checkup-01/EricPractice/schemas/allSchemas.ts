@@ -1,0 +1,11 @@
+export const schemaStudent = {
+    type: "object",
+    required: ["firstname", "lastname", "age"],
+    properties: {
+        username: { type: 'string', minLength: 1, errorMessage: "" },
+        email: { type: 'string', minLength: 1, errorMessage: "" },
+        password: { type: 'number', minLength: 1, errorMessage: "" },
+    },
+    additionalProperties: true,
+
+}
