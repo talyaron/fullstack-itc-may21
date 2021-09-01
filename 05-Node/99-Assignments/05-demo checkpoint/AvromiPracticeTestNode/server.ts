@@ -23,10 +23,8 @@ class User {
 app.post('/addUser', (req, res) => {
 const {name, imgSrc, prefColor} = req.body;
 const user = new User(name, imgSrc, prefColor);
-console.log(user);
-dataBase.push(name);
-console.log(dataBase);
-res.send(name)
+dataBase.push(user);
+res.send(dataBase)
 });
 
 app.listen(PORT,()=>console.log('Server listen on port', PORT));

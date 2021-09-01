@@ -16,9 +16,7 @@ var User = /** @class */ (function () {
 app.post('/addUser', function (req, res) {
     var _a = req.body, name = _a.name, imgSrc = _a.imgSrc, prefColor = _a.prefColor;
     var user = new User(name, imgSrc, prefColor);
-    console.log(user);
-    dataBase.push(name);
-    console.log(dataBase);
-    res.send(name);
+    dataBase.push(user);
+    res.send(dataBase);
 });
 app.listen(PORT, function () { return console.log('Server listen on port', PORT); });
