@@ -29,6 +29,7 @@ async function loginUser(email, password) {
         const res = await axios.post('/users/login', { email, password });
         console.log(res.data)
         localStorage.setItem('currentUser', JSON.stringify(res.data))
+        window.location.href = "store.html"
     } catch (error) {
         console.log(error.response);
     }
