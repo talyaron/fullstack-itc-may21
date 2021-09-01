@@ -34,89 +34,84 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function addStudentAxios(newStudent) {
+function addUser(fname, lname, company, email, password, repassword) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, error_1;
+        var res, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, axios.post('/student/addStudent', newStudent)];
+                    return [4 /*yield*/, axios.post('/users/register', { fname: fname, lname: lname, company: company, email: email, password: password, repassword: repassword })];
                 case 1:
-                    response = _a.sent();
-                    return [2 /*return*/, response.data];
+                    res = _a.sent();
+                    swal("Hello " + fname + ", you're registration is complete!");
+                    return [3 /*break*/, 3];
                 case 2:
                     error_1 = _a.sent();
-                    alert(error_1.response.data.error);
+                    swal(error_1.response.data);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
         });
     });
 }
-function getStudentsAxios() {
+var loginForm = document.querySelector("#loginForm");
+loginForm.addEventListener("submit", loginFormSubmit);
+function loginFormSubmit(ev) {
     return __awaiter(this, void 0, void 0, function () {
-        var response;
+        var email, password;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios.get('/student/getStudents')];
-                case 1:
-                    response = _a.sent();
-                    return [2 /*return*/, response];
-            }
-        });
-    });
-}
-function deleteStudent(id) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, axios["delete"]("/student/deleteStudent/" + id)];
+                case 0:
+                    ev.preventDefault();
+                    email = ev.target.elements.email.value;
+                    password = ev.target.elements.password.value;
+                    return [4 /*yield*/, loginUser(email, password)];
                 case 1:
                     _a.sent();
-                    getStudents();
                     return [2 /*return*/];
             }
         });
     });
 }
-function bringStudentAxios(id) {
+function loginUser(email, password) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, error_2;
+        var res, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, axios.get("/student/bringStudent/" + id)];
+                    return [4 /*yield*/, axios.post('/users/login', { email: email, password: password })];
                 case 1:
-                    response = _a.sent();
-                    return [2 /*return*/, response.data];
+                    res = _a.sent();
+                    console.log(res.data);
+                    localStorage.setItem('currentUser', JSON.stringify(res.data));
+                    window.location.href = "store.html";
+                    return [3 /*break*/, 3];
                 case 2:
                     error_2 = _a.sent();
-                    alert(error_2.response.data.error);
+                    console.log(error_2.response);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
         });
     });
 }
-function editStudentsAxios(newInfo, id) {
-    return __awaiter(this, void 0, void 0, function () {
-        var response, error_3;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, axios.put("/student/editStudent/" + id, newInfo)];
-                case 1:
-                    response = _a.sent();
-                    return [2 /*return*/, response.data];
-                case 2:
-                    error_3 = _a.sent();
-                    alert(error_3.response.data.error);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
-    });
+var registerForm = document.querySelector("#registerForm");
+registerForm.addEventListener("submit", handleRegisterSubmit);
+function handleRegisterSubmit(ev) {
+    ev.preventDefault();
+    var fname = event.target.elements.fname.value;
+    var lname = event.target.elements.lname.value;
+    var company = event.target.elements.company.value;
+    var email = event.target.elements.email.value;
+    var password = event.target.elements.password.value;
+    var repassword = event.target.elements.repassword.value;
+    addUser(fname, lname, company, email, password, repassword);
+    ev.target.reset();
+}
+var login = document.querySelector("#login");
+login.style.display = "none";
+function dispLogin() {
+    login.style.display = "block";
 }

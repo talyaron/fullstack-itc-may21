@@ -15,3 +15,24 @@ export function addStudent(req, res){
 export function getStudents(req, res){
     res.send({students:students})
 }
+
+export function deleteStudent(req, res){
+    const {id} = req.params
+    students.deleteStudent(id)
+
+    res.send({message: "student deleted"})
+}
+
+export function bringStudent(req, res){
+    const {id} = req.params
+    const student = students.findStudentById(id)
+    res.send({student:student})
+
+}
+
+
+export function editStudent(req, res){
+    const {id} = req.params
+    const allStudents = students.editStudent(req.body, id)
+    res.send({students: allStudents})
+}

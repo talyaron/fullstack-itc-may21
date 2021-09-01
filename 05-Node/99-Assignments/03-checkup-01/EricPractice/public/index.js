@@ -36,36 +36,36 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var form = document.querySelector('#form');
 var body = document.querySelector('#body');
+var btnEdit = document.querySelector('.btn-edit');
+form.addEventListener('submit', addStudents);
 body.onload = getStudents;
-function getStudents(ev) {
+function getStudents() {
     return __awaiter(this, void 0, void 0, function () {
         var getStudent, data, error, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    ev.preventDefault();
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
+                    _a.trys.push([0, 2, , 3]);
                     return [4 /*yield*/, getStudentsAxios()];
-                case 2:
+                case 1:
                     getStudent = _a.sent();
                     data = getStudent.data, error = getStudent.error;
                     renderStudents(data.students);
-                    return [3 /*break*/, 4];
-                case 3:
+                    return [3 /*break*/, 3];
+                case 2:
                     error_1 = _a.sent();
                     console.error(error_1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
-form.addEventListener('submit', addStudents);
+btnEdit.onclick = editStudents;
+var idStudent;
 function addStudents(ev) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, firstname, lastname, age, newStudent, student, data, error, error_2;
+        var _a, firstname, lastname, age, newStudent, student, error_2;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -81,8 +81,7 @@ function addStudents(ev) {
                     return [4 /*yield*/, addStudentAxios(newStudent)];
                 case 2:
                     student = _b.sent();
-                    data = student.data, error = student.error;
-                    renderStudents(data.students);
+                    renderStudents(student.students);
                     return [3 /*break*/, 4];
                 case 3:
                     error_2 = _b.sent();
@@ -97,12 +96,62 @@ function renderStudents(students) {
         var html_1 = '';
         var root = document.querySelector('#root');
         students.students.forEach(function (student) {
-            var firstname = student.firstname, lastname = student.lastname, age = student.age;
-            html_1 += "<div>\n                        <span>Firstname: " + firstname + "</span>\n                        <span>Lastname: " + lastname + "</span>\n                        <span>Age: " + age + "</span>\n                    </div>";
+            var id = student.id, firstname = student.firstname, lastname = student.lastname, age = student.age;
+            html_1 += "<div>\n                        <span>Firstname: " + firstname + "</span>\n                        <span>Lastname: " + lastname + "</span>\n                        <span>Age: " + age + "</span>\n                        <button class=\"btn-delete\" onclick=\"deleteStudent('" + id + "')\">Delete</button>\n                        <button class=\"btn-bring\" onclick=\"bringStudent('" + id + "')\">Bring</button>\n\n                    </div>";
         });
         root.innerHTML = html_1;
     }
     catch (e) {
         console.error(e);
     }
+}
+function bringStudent(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var firstname, lastname, age, brindData;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    firstname = document.querySelector('#firstname');
+                    lastname = document.querySelector('#lastname');
+                    age = document.querySelector('#age');
+                    return [4 /*yield*/, bringStudentAxios(id)];
+                case 1:
+                    brindData = _a.sent();
+                    console.log(brindData);
+                    firstname.value = brindData.student.firstname;
+                    lastname.value = brindData.student.lastname;
+                    age.value = brindData.student.age;
+                    idStudent = id;
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function editStudents(ev) {
+    return __awaiter(this, void 0, void 0, function () {
+        var firstname, lastname, age, editData, editStudent, error_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    ev.preventDefault();
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    firstname = document.querySelector('#firstname');
+                    lastname = document.querySelector('#lastname');
+                    age = document.querySelector('#age');
+                    editData = { firstname: firstname.value, lastname: lastname.value, age: age.value };
+                    return [4 /*yield*/, editStudentsAxios(editData, idStudent)];
+                case 2:
+                    editStudent = _a.sent();
+                    console.log(editData);
+                    renderStudents(editStudent);
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_3 = _a.sent();
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
 }
