@@ -43,7 +43,8 @@ async function register(ev) {
       username,
       password,
       imageUrl,
-      favColor
+      favColor,
+      registerOrLogin: 'register'
     });
     const { title, text } = registerUser.data;
 

@@ -79,7 +79,7 @@ function login(ev) {
                     email = email.value;
                     password = password.value;
                     ev.target.reset();
-                    return [4 /*yield*/, axios.post('/user/login', { email: email, password: password })];
+                    return [4 /*yield*/, axios.post('/user/login', { email: email, password: password, registerOrLogin: 'login' })];
                 case 1:
                     loginUser = _c.sent();
                     _b = loginUser.data, title = _b.title, text = _b.text;

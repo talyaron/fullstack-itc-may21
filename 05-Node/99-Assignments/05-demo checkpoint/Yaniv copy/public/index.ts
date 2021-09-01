@@ -33,7 +33,7 @@ async function login(ev) {
 
         ev.target.reset();
         
-        const loginUser = await axios.post('/user/login', { email, password });
+        const loginUser = await axios.post('/user/login', { email, password, registerOrLogin: 'login' });
         const { title, text } = loginUser.data;
         
         swal({

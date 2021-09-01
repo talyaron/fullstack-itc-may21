@@ -77,7 +77,8 @@ function register(ev) {
                             username: username,
                             password: password,
                             imageUrl: imageUrl,
-                            favColor: favColor
+                            favColor: favColor,
+                            registerOrLogin: 'register'
                         })];
                 case 1:
                     registerUser = _c.sent();

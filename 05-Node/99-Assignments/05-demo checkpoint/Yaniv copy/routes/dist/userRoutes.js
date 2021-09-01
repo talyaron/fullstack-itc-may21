@@ -6,7 +6,7 @@ var _a = require('../../controllers/dist/userControllers'), welcome = _a.welcome
 var _b = require('../../middlewares/dist/userMiddlewares'), isLoggedInAndAuthenticated = _b.isLoggedInAndAuthenticated, doesUserExist = _b.doesUserExist, encryptPassword = _b.encryptPassword, validatePassword = _b.validatePassword;
 router
     .get('/welcome', isLoggedInAndAuthenticated, doesUserExist, welcome)
-    .post('/register', doesUserExist, validatePassword, encryptPassword, register)
+    .post('/register', doesUserExist, encryptPassword, register)
     .post('/login', doesUserExist, validatePassword, login)
     .get('/logout', isLoggedInAndAuthenticated, doesUserExist, logout)
     .get('/details', isLoggedInAndAuthenticated, doesUserExist, details)

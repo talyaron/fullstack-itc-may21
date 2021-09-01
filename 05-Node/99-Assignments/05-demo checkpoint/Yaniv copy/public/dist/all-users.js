@@ -41,13 +41,13 @@ function renderUsers() {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, axios.get('/users/all')];
+                    return [4 /*yield*/, axios.get('/user/all')];
                 case 1:
                     getUsersDetails = _a.sent();
                     users = getUsersDetails.data.users;
                     usersElement = document.querySelector('.users');
                     html = users.map(function (user) {
-                        return "\n        <div class=\"users__item user\" id=\"" + user.userUuid + "\" style=\"background-color: " + user.favColor + "\">\n            <img src=\"" + user.imageUrl + "\"\n            <h2 class=\"user__item user__item--name\">" + user.name + "</h2>\n        </div>";
+                        return "\n        <div class=\"users__item user\" id=\"" + user.userUuid + "\" style=\"background-color: " + user.favColor + "\">\n            <img class=\"user__item user__item--img\" src=\"" + user.imageUrl + "\" />\n            <h2 class=\"user__item user__item--name\">" + user.username + "</h2>\n        </div>";
                     }).join('');
                     usersElement.innerHTML = html;
                     return [3 /*break*/, 3];

@@ -41,15 +41,20 @@ export function doesUserExist(req, res, next) {
                 next();
             } else res.status(404).send({ message: `User wasn't found, mister hacker...` });
         } else {
-            const { email } = req.body;
+            const { email, registerOrLogin } = req.body;
             
             const userIndex: number = users.findUserIndex(null, email);
 
-            if (userIndex === -1) res.status(404).send({ message: `User doesn't exist. Please register to the system.` });
-            else {
+            if (registerOrLogin === 'login') {
+                if (userIndex === -1) res.status(404).send({ message: `User doesn't exist. Please register to the system.` });
+                else {
                     req.userIndex = userIndex;
                     next();
                 }
+            } else {
+                if (userIndex !== -1) res.status(409).send({ message: `Email already registered. Please use a different one.` });
+                else next();
+            }
             return;
         }
 
@@ -83,12 +88,8 @@ export function encryptPassword(req, res, next) {
 
 export function validatePassword(req, res, next) {
     try {
-        const { role } = req; // registration attempt of new shopper or admin that wasn't already a shopper
-        if (role) {
-            next();
-            return;
-        }
 
+        
         const { password } = req.body;
         const users = new Users();
         const { userIndex } = req;

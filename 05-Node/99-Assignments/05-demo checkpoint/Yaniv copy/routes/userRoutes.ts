@@ -7,7 +7,7 @@ const { isLoggedInAndAuthenticated, doesUserExist, encryptPassword, validatePass
 
 router
     .get('/welcome', isLoggedInAndAuthenticated, doesUserExist, welcome)
-    .post('/register', doesUserExist, validatePassword, encryptPassword, register)
+    .post('/register', doesUserExist, encryptPassword, register)
     .post('/login', doesUserExist, validatePassword, login)
     .get('/logout', isLoggedInAndAuthenticated, doesUserExist, logout)
     .get('/details', isLoggedInAndAuthenticated, doesUserExist, details)

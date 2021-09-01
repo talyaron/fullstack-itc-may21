@@ -77,7 +77,7 @@ exports.details = function (req, res) {
 exports.allUsers = function (req, res) {
     try {
         var users = new Users();
-        res.send({ users: users });
+        res.send({ users: users.users });
     }
     catch (error) {
         console.error(error);

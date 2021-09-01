@@ -90,7 +90,7 @@ export const allUsers = (req, res)=> {
     
     const users = new Users();
     
-    res.send({ users });
+    res.send({ users: users.users });
 
 
   } catch (error) {

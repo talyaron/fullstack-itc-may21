@@ -43,13 +43,21 @@ function doesUserExist(req, res, next) {
                 res.status(404).send({ message: "User wasn't found, mister hacker..." });
         }
         else {
-            var email = req.body.email;
+            var _a = req.body, email = _a.email, registerOrLogin = _a.registerOrLogin;
             var userIndex = users.findUserIndex(null, email);
-            if (userIndex === -1)
-                res.status(404).send({ message: "User doesn't exist. Please register to the system." });
+            if (registerOrLogin === 'login') {
+                if (userIndex === -1)
+                    res.status(404).send({ message: "User doesn't exist. Please register to the system." });
+                else {
+                    req.userIndex = userIndex;
+                    next();
+                }
+            }
             else {
-                req.userIndex = userIndex;
-                next();
+                if (userIndex !== -1)
+                    res.status(409).send({ message: "Email already registered. Please use a different one." });
+                else
+                    next();
             }
             return;
         }
@@ -85,11 +93,6 @@ function encryptPassword(req, res, next) {
 exports.encryptPassword = encryptPassword;
 function validatePassword(req, res, next) {
     try {
-        var role = req.role; // registration attempt of new shopper or admin that wasn't already a shopper
-        if (role) {
-            next();
-            return;
-        }
         var password = req.body.password;
         var users = new Users();
         var userIndex = req.userIndex;
