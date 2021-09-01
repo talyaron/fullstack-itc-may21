@@ -1,10 +1,10 @@
 export const userSchemaAJV = {
     type: 'object',
     properties: {
-        name: { type: 'string', format: 'email' },
-        imgUrl: { type: 'string', format: 'url' },
+        name: { type: 'string' },
+        imgUrl: { type: 'string' },
         color: { type: 'string' }
     },
-    required: ['name'],
+    required: ['name', 'imgUrl', 'color'],
     additionalProperties: false,
 };

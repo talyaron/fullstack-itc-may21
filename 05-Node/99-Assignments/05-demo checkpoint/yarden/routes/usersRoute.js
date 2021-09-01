@@ -1,9 +1,12 @@
+"use strict";
+exports.__esModule = true;
 var express = require('express');
 var router = express.Router();
-var _a = require('../controllers/usersController'), get_users = _a.get_users, add_user = _a.add_user;
-// const { userSchemaAJV } = require('../schemas/userSchema')
-// const { validateBodyUser } = require('../middleware/validateBodyUser')
+var usersController_1 = require("../controllers/usersController");
+var userSchema_1 = require("../schemas/userSchema");
+var validateBodyUser_1 = require("../middleware/validateBodyUser");
+// const { sendCookie } = require('../middleware/cookie');
 router
-    .get('/allUsers', get_users)
-    .post('/addUser', add_user);
+    .get('/allUsers', usersController_1.get_users)
+    .post('/addUser', validateBodyUser_1.validateBodyUser(userSchema_1.userSchemaAJV), usersController_1.add_user);
 module.exports = router;

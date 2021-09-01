@@ -74,6 +74,7 @@ var addUser = function (event) { return __awaiter(_this, void 0, void 0, functio
                 users = data.users;
                 event.target.reset();
                 renderUsers(users);
+                console.log(users);
                 return [3 /*break*/, 3];
             case 2:
                 error_2 = _b.sent();
