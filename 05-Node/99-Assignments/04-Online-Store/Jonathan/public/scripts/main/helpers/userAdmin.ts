@@ -33,21 +33,23 @@ async function addProductOnDom(ev) {
         store: store,
     }
 
-    const response: any = await addProductPromise(addNewProduct, store)
-    const { ok, allProducts } = response
-    swal(`${ok}`, "", "success")
+    const product: any = await addProduct(addNewProduct, store)
     
-    bgModal.classList.remove('bg-active')
     
-    renderAllProductsAdmin(allProducts,store)
+    console.log('a', product)
+    
+    // const { ok, allProducts } = product
+    // swal(`${ok}`, "", "success")
+    
+    // bgModal.classList.remove('bg-active')
+    
+    // renderAllProductsAdmin(allProducts,store)
 
    
 }
 
-
-function deleteProduct(id: string) {
-
-    swal({
+async function deleteLabel(){
+  const isConfirm =  await swal({
         title: "Do you want to delete this product?",
         text: "Once deleted, you will not be able to recover this imaginary file!",
         icon: "warning",
@@ -57,16 +59,24 @@ function deleteProduct(id: string) {
         },
         dangerMode: true,
     })
-        .then(async (isConfirm) => {
-            if (isConfirm) {
-                const response = await axios.delete(`product/deleteProduct/${id}`) //YS: You are using an async inside a .then, try not to mix
+    return isConfirm
+}
+
+
+
+async function deleteProduct(id: string) {
+
+        const isConfirm = await deleteLabel()
+
+         if (isConfirm) {
+                const response = await axios.delete(`product/deleteProduct/${id}`)
                 const { data } = response
                 swal(`${data.ok}`, "", "success")
                 getAllProducts()
             } else {
                 swal("Delete Cancelled!", "", "success");
             }
-        });
+        
 
 }
 
@@ -140,13 +150,13 @@ async function searchProduct(ev) {
 
     const searchProduct = inputSearch.value
 
-    const responseUser = await axios.get('/user/readCookie') //YS: You should have these requests in a separate function/separate file called api
+    const responseUser = await axios.get('/user/readCookie')
     let role = responseUser.data.user.role
 
     if (role === 'admin') {
 
         if (searchProduct.length > 0) {
-            const response = await axios.get(`product/searchProduct/${store}/${searchProduct}`) //YS: You should have these requests in a separate function/separate file called api
+            const response = await axios.get(`product/searchProduct/${store}/${searchProduct}`)
             if (response.data.length === 1) renderAllProductsAdmin([response.data.allProducts])
             else renderAllProductsAdmin(response.data.allProducts)
         } else {
@@ -156,9 +166,9 @@ async function searchProduct(ev) {
     } else{
 
         if (searchProduct.length > 0) {
-            const response = await axios.get(`product/searchProduct/${store}/${searchProduct}`) //YS: You should have these requests in a separate function/separate file called api
+            const response = await axios.get(`product/searchProduct/${store}/${searchProduct}`)
             if (response.data.length === 1) renderAllProductsUser([response.data.allProducts],responseUser)
-            else renderAllProductsUser(response.data.allProducts,responseUser) 
+            else renderAllProductsUser(response.data.allProducts,responseUser)
         } else {
             getAllProducts()
         }

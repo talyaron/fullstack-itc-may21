@@ -11,7 +11,6 @@ var jwt = require('jwt-simple');
 var adminsArray = ['jnisen@gmail.com', 'leo@gmail.com', 'salmon@gmail.com'];
 function addNewUser(req, res) {
     var user = new user_1.User(req.body.username, req.body.email, req.body.password);
-    console.log(adminsArray);
     var role = adminsArray.includes(req.body.email) ? user.role = 'admin' : user.role = 'public';
     if (role === 'public')
         user.cart = [];

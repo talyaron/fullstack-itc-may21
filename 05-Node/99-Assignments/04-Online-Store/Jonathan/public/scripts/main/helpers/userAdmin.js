@@ -46,7 +46,7 @@ inputSearch.addEventListener('keyup', searchProduct);
 var idProduct;
 function addProductOnDom(ev) {
     return __awaiter(this, void 0, void 0, function () {
-        var store, _a, name, description, image, quantity, price, addNewProduct, response, ok, allProducts;
+        var store, _a, name, description, image, quantity, price, addNewProduct, product;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -66,50 +66,60 @@ function addProductOnDom(ev) {
                         price: price,
                         store: store
                     };
-                    return [4 /*yield*/, addProductPromise(addNewProduct, store)];
+                    return [4 /*yield*/, addProduct(addNewProduct, store)];
                 case 1:
-                    response = _b.sent();
-                    ok = response.ok, allProducts = response.allProducts;
-                    swal("" + ok, "", "success");
-                    bgModal.classList.remove('bg-active');
-                    renderAllProductsAdmin(allProducts, store);
+                    product = _b.sent();
+                    console.log('a', product);
                     return [2 /*return*/];
             }
         });
     });
 }
-function deleteProduct(id) {
-    var _this = this;
-    swal({
-        title: "Do you want to delete this product?",
-        text: "Once deleted, you will not be able to recover this imaginary file!",
-        icon: "warning",
-        buttons: {
-            cancel: true,
-            confirm: "Confirm"
-        },
-        dangerMode: true
-    })
-        .then(function (isConfirm) { return __awaiter(_this, void 0, void 0, function () {
-        var response, data;
+function deleteLabel() {
+    return __awaiter(this, void 0, void 0, function () {
+        var isConfirm;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    if (!isConfirm) return [3 /*break*/, 2];
-                    return [4 /*yield*/, axios["delete"]("product/deleteProduct/" + id)];
+                case 0: return [4 /*yield*/, swal({
+                        title: "Do you want to delete this product?",
+                        text: "Once deleted, you will not be able to recover this imaginary file!",
+                        icon: "warning",
+                        buttons: {
+                            cancel: true,
+                            confirm: "Confirm"
+                        },
+                        dangerMode: true
+                    })];
                 case 1:
+                    isConfirm = _a.sent();
+                    return [2 /*return*/, isConfirm];
+            }
+        });
+    });
+}
+function deleteProduct(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var isConfirm, response, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, deleteLabel()];
+                case 1:
+                    isConfirm = _a.sent();
+                    if (!isConfirm) return [3 /*break*/, 3];
+                    return [4 /*yield*/, axios["delete"]("product/deleteProduct/" + id)];
+                case 2:
                     response = _a.sent();
                     data = response.data;
                     swal("" + data.ok, "", "success");
                     getAllProducts();
-                    return [3 /*break*/, 3];
-                case 2:
+                    return [3 /*break*/, 4];
+                case 3:
                     swal("Delete Cancelled!", "", "success");
-                    _a.label = 3;
-                case 3: return [2 /*return*/];
+                    _a.label = 4;
+                case 4: return [2 /*return*/];
             }
         });
-    }); });
+    });
 }
 function findProduct(id) {
     return __awaiter(this, void 0, void 0, function () {
