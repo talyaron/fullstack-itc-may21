@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="styles.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <title>Users with colors</title>
+    <link rel="shortcut icon" href="./img/colors.png" />
+</head>
+
+<body onload="renderUsers()">
+
+    <div>
+        <form class="form" id="formNewUser">
+            <h3>Register a new user</h3>
+            <div class="form__wrapper wrapper__register">
+                <label for="username">Username:</label>
+                <input type="text" name="username" placeholder="Enter your username" maxlength="35" required>
+            </div>
+
+            <div class="form__wrapper wrapper__register">
+                <label for="picture">Image:</label>
+                <input type="text" name="picture" placeholder="Enter your image URL" required>
+            </div>
+
+            <div class="form__wrapper wrapper__register" id="passwordInput">
+                <label for="color">Favourite color:</label>
+                <input type="color" name="color" placeholder="Enter your favourite color">
+            </div>
+            <input class="form__submit--newuser" type="submit" value="Create user">
+        </form>
+    </div>
+
+    <div class="title">
+        <h1>If you click on the picture of the user you will save that user ID in the cookies</h1>
+    </div>
+
+    <section class="section">
+        <form onkeyup="handleSearch()">
+            <input class="form__search" type="text" name="search" id="search" placeholder="Search by product name" />
+        </form>
+    </section>
+
+    <div id="root"></div>
+
+    <!-- Modal to edit a task -->
+    <div id="modalUser" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <form class="formEdit" id="formEdit" onsubmit="handleEdit(event)"></form>
+        </div>
+    </div>
+
+    <script src="helperModals.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
