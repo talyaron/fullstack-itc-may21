@@ -1,0 +1,14 @@
+"use strict";
+exports.__esModule = true;
+var express = require('express');
+var router = express.Router();
+var Schemas = require('../schemas/schemas');
+var userCookie_1 = require("../middlewear/userCookie");
+var validateBody_1 = require("../middlewear/validateBody");
+var isAdmin_1 = require("../middlewear/isAdmin");
+var controlerProduct_1 = require("../controlers/controlerProduct");
+router.post('/newProduct', userCookie_1.userCookieRead, isAdmin_1.isAdmin, validateBody_1.validateBody(Schemas.productSchemaFJS), controlerProduct_1.newProduct);
+router.get('/allProducts', userCookie_1.userCookieRead, controlerProduct_1.getAllProducts);
+router["delete"]('/deleteProduct/:id', userCookie_1.userCookieRead, isAdmin_1.isAdmin, controlerProduct_1.removeProduct);
+router.put('/updateProduct/:id', userCookie_1.userCookieRead, isAdmin_1.isAdmin, validateBody_1.validateBody(Schemas.productSchemaFJS), controlerProduct_1.editProduct);
+module.exports = router;

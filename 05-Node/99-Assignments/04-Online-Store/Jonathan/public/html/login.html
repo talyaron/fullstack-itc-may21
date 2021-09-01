@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../scss/login/login.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="shortcut icon" href="https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png" />
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container">
+        <p class="heading">Welcome Back</p>
+        <form id="form-login" class="main__login">
+            <div class="box">
+                <label for="email">Email: </label>
+                <div>
+                    <input type="email" name="email" id="email">
+                </div>
+            </div>
+            <div class="box">
+                <label for="password">Password: </label>
+                <div>
+                    <input type="password" name="password" id="password">
+                </div>
+            </div>
+            <div class="box">
+                <label for="repassword">Password (again): </label>
+                <div>
+                    <input type="password" name="repassword" id="repassword">
+                </div>
+            </div>
+            <input type="submit" value="Login" class="loginBtn">
+            <p class='text'>Don't have an account? <a href="#" id="a-return">Register</a></p>
+        </form>
+    </div>
+    <script src="../scripts/login/helpers/enterPromiseLogin.js"></script>
+    <script src="../scripts/login/login.js"></script>
+</body>
+
+</html>

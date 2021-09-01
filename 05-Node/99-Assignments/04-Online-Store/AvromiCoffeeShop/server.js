@@ -1,0 +1,10 @@
+var express = require("express");
+var app = express();
+var port = process.env.PORT || 3000;
+app.use(express.static('public'));
+app.use(express.json());
+var productRouter = require('./routes/productRoutes.js');
+var userRouter = require('./routes/userRoutes.js');
+app.use('/products', productRouter);
+app.use('/users', userRouter);
+app.listen(port, function () { return console.log('Server listen on port', port); });

@@ -34,33 +34,163 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
-function getImages(route) {
-    try {
-        return new Promise(function (resolve, reject) {
-            fetch(route)
-                .then(function (r) { return r.json(); })
-                .then(function (data) { resolve(data); })["catch"](function (err) { reject(err); });
+var form = document.querySelector('#form');
+var body = document.querySelector('#body');
+var btnEdit = document.querySelector('.btn-edit');
+var inputSearch = document.querySelector('#search');
+form.onsubmit = addStudent;
+body.onload = getStudents;
+btnEdit.onclick = editStudent;
+inputSearch.onkeyup = searchByLastName;
+var idStudent;
+function getStudents() {
+    return __awaiter(this, void 0, void 0, function () {
+        var getStudents_1, data, error, e_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, getStudentsAxios()];
+                case 1:
+                    getStudents_1 = _a.sent();
+                    data = getStudents_1.data, error = getStudents_1.error;
+                    renderStudents(data.students);
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_1 = _a.sent();
+                    console.error(e_1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
         });
+    });
+}
+function addStudent(ev) {
+    return __awaiter(this, void 0, void 0, function () {
+        var _a, firstname, lastname, age, newStudent, student, e_2;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    ev.preventDefault();
+                    _b.label = 1;
+                case 1:
+                    _b.trys.push([1, 3, , 4]);
+                    _a = ev.target.elements, firstname = _a.firstname, lastname = _a.lastname, age = _a.age;
+                    firstname = firstname.value;
+                    lastname = lastname.value;
+                    age = age.valueAsNumber;
+                    newStudent = {
+                        firstname: firstname,
+                        lastname: lastname,
+                        age: age,
+                        actions: 0
+                    };
+                    return [4 /*yield*/, addStudentAxios(newStudent)];
+                case 2:
+                    student = _b.sent();
+                    if (typeof student === 'string')
+                        throw new Error("" + student);
+                    renderStudents(student.students);
+                    ev.target.reset();
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_2 = _b.sent();
+                    alert(e_2);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+function renderStudents(students) {
+    try {
+        var html_1 = '';
+        var root = document.querySelector('#root');
+        students.students.forEach(function (student) {
+            var id = student.id, firstname = student.firstname, lastname = student.lastname, age = student.age;
+            html_1 += "<div>\n                      <span>Firstname: " + firstname + "</span>\n                      <span>Lastname: " + lastname + "</span>\n                      <span>Age: " + age + "</span>\n                      <button class=\"btn-delete\" onclick=\"deleteStudent('" + id + "')\">DELETE</button>\n                      <button class=\"btn-bring\" onclick=\"bringStudent('" + id + "')\">Bring</button>\n                    </div>";
+        });
+        root.innerHTML = html_1;
     }
-    catch (err) {
-        console.log(err);
+    catch (e) {
+        console.error(e);
     }
 }
-(function () { return __awaiter(_this, void 0, void 0, function () {
-    var _a, _b, _c, _d;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
-            case 0:
-                _b = (_a = console).log;
-                return [4 /*yield*/, getImages('/beaches/all')];
-            case 1:
-                _b.apply(_a, [_e.sent()]);
-                _d = (_c = console).log;
-                return [4 /*yield*/, getImages('/drinks/first')];
-            case 2:
-                _d.apply(_c, [_e.sent()]);
-                return [2 /*return*/];
-        }
+function bringStudent(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var firstname, lastname, age, bringData;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    firstname = document.querySelector('#firstname');
+                    lastname = document.querySelector('#lastname');
+                    age = document.querySelector('#age');
+                    return [4 /*yield*/, bringStudentAxios(id)];
+                case 1:
+                    bringData = _a.sent();
+                    firstname.value = bringData.student.firstname;
+                    lastname.value = bringData.student.lastname;
+                    age.value = bringData.student.age;
+                    idStudent = id;
+                    return [2 /*return*/];
+            }
+        });
     });
-}); })();
+}
+function editStudent(ev) {
+    return __awaiter(this, void 0, void 0, function () {
+        var firstname, lastname, age, editData, editStudent_1, e_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    ev.preventDefault();
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    firstname = document.querySelector('#firstname');
+                    lastname = document.querySelector('#lastname');
+                    age = document.querySelector('#age');
+                    editData = {
+                        firstname: firstname.value,
+                        lastname: lastname.value,
+                        age: age.valueAsNumber,
+                        actions: 1
+                    };
+                    return [4 /*yield*/, editStudentAxios(editData, idStudent)];
+                case 2:
+                    editStudent_1 = _a.sent();
+                    renderStudents(editStudent_1);
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_3 = _a.sent();
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+function searchByLastName() {
+    return __awaiter(this, void 0, void 0, function () {
+        var searchLastName, getSearchByLastName, data, e_4;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    searchLastName = {
+                        searchLastName: inputSearch.value
+                    };
+                    return [4 /*yield*/, getSearchByLastNameAxios(searchLastName)];
+                case 1:
+                    getSearchByLastName = _a.sent();
+                    data = getSearchByLastName.data;
+                    renderStudents(data);
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_4 = _a.sent();
+                    console.log(e_4);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
