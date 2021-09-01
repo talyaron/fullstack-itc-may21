@@ -27,4 +27,8 @@ dataBase.push(user);
 res.send(dataBase)
 });
 
+app.get('/getUsers', (req, res) => {
+    res.send(dataBase)
+})
+
 app.listen(PORT,()=>console.log('Server listen on port', PORT));

@@ -19,4 +19,7 @@ app.post('/addUser', function (req, res) {
     dataBase.push(user);
     res.send(dataBase);
 });
+app.get('/getUsers', function (req, res) {
+    res.send(dataBase);
+});
 app.listen(PORT, function () { return console.log('Server listen on port', PORT); });
