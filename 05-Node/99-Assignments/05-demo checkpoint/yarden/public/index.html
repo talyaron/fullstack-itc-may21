@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Demo exam</title>
+</head>
+
+<body>
+    <h1>Demo exam</h1>
+    <form onsubmit="addUser(event)">
+        <input type="text" name="name" id="name" placeholder="name" required>
+        <input type="text" name="img-url" id="img-url" placeholder="img-url" required>
+        <input type="color" name="color" id="color" required>
+        <button type="submit">Add</button>
+
+        <div class="usersWrapper">
+            <!-- Users go here -->
+        </div>
+    </form>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
