@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://kit.fontawesome.com/0415b59e2e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>form</title>
+</head>
+<body id="body">
+    <!-- <input type="search" name="search" id="search" placeholder="Search student..."> -->
+    <form id="form" class="form">
+        <input type="text" name="firstname" id="firstname" placeholder="name">
+        <input type="url" name="image" id="image" placeholder="image url">
+        <input type="color" name="color" id="color" >
+        <input type="submit" value="Sign-in">
+    </form>
+    <div id="root"></div>
+
+    <script src="./npm/users.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
+
+
+
+<!--
+    70 points:
+Create an app for sign-in users and displaying all of the users
+
+
+Create an input form with name, image (URL), and preferred color (with color picker)
+The route should respond with the data of all the users.
+Render all the users, with their images, in cards that have the user's preferred color
+
+5 points: validation
+5 point: put the validation in middleware
+5 points: save specific user info in JWT cookie/bearer
+5: design patterns: (model, routes, controllers)
+5 points: use classes
+5 point: use typescript
+ -->

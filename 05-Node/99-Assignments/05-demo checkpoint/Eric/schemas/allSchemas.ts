@@ -1,0 +1,11 @@
+export const schemaUser = {
+    type: "object",
+    required: ["firstname", "image", "color"],
+    properties: {
+        firstname: { type: 'string', minLength: 1, errorMessage: "Length should be more than 1 character" },
+        image: { type: 'string', errorMessage: "URL wrong" },
+        color: { type: 'string', minLength: 1, errorMessage: ""},
+    },
+    additionalProperties: true,
+
+};
