@@ -8,9 +8,10 @@ exports.schemaUsers = {
         name: { type: 'string' },
         email: { type: 'string', format: 'email' },
         password: { type: 'string', minLength: 3 },
-        color: { type: 'string' }
+        color: { type: 'string' },
+        image: { type: 'string' }
     },
-    required: ['name', 'email', 'password', 'color'],
+    required: ['name', 'email', 'password', 'color', 'image'],
     additionalProperties: false
 };
 exports.schemaLogIn = {

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dist/popUp.css">
+    <link rel="stylesheet" href="./dist/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Welcome Page</title>
+</head>
+<body>
+    <div class="mainBox">
+         <h1>Welcome</h1>
+         <div class="login"><button  onclick="openLoginForm()"  type = "button" class = "btn">Log In</button></div>
+        
+         <div class="register"> <button  onclick="openRegisterForm()" type = "button" class = "btn">Register</button>
+         </div>
+    </div>
+
+    <!-- start of Log -IN -->
+<div class="popup-overlay"></div>
+<div class="popup">
+  <div class="popup-close" onclick="closeLoginForm()">×</div>
+  <div class="form">
+ 
+    <div class="header">
+     Log In
+    </div>
+    <form id="loginForm">
+    <div class="element">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email">
+    </div>
+    <div class="element">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div class="element">
+      <input type="submit" value="Log In">
+    </div>
+  </form>
+  </div>
+</div>
+<!-- end of log in -->
+<!-- start of Register -->
+<div class="popup-overlay2"></div>
+<div class="popup2">
+  <div class="popup-close2" onclick="closeRegisterForm()">×</div>
+  <div class="form2">
+ 
+    <div class="header2">
+     Register
+    </div>
+    <form  id="registerForm">
+    <div class="element2">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name">
+    </div>
+    <div class="element2">
+      <label for="email">Email</label>
+      <input type="Email" id="email" name="email">
+    </div>
+    <div class="element2">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password">
+    </div>
+    <div class="element2">
+        <label for="color">Pick Color</label>
+        <input type="color" id="color" name="color">
+      </div>
+      <div class="element2">
+        <label for="img">Enter Image Url</label>
+        <input type="url" id="img" name="img">
+      </div>
+    <div class="element2">
+     <input type="submit" value="Register">
+    </div>
+  </form>
+  </div>
+</div>
+<!-- end of register -->
+
+    
+
+   <script src="./popUpscript.js"></script>
+   <script src="./register.js"></script>
+   <script src="./logIn.js"></script>
+</body>
+</html>
