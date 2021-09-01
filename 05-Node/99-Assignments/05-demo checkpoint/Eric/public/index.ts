@@ -51,15 +51,15 @@ function renderUsers(users){
         const root = document.querySelector('#root')
         users.users.forEach(user => {
             const {firstname, image, color} = user
-
-            html += `
-                    <div>
-                        
-                        <span>Firstname: ${firstname}</span>
-                        <div>${image}</div>
-                        <div>${color}</div>
-                        
+            console.log(firstname, image, color);
+            
+            html += `<div class="card"  style="background:${color}">
+                        <img src="${image}" style="width:50%">
+                            <div class="container">
+                                <h4><b>Username: ${firstname}</b></h4>
+                            </div>
                     </div>`
+          
             
         });
         root.innerHTML = html

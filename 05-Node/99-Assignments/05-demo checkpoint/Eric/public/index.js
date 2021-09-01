@@ -97,7 +97,8 @@ function renderUsers(users) {
         var root = document.querySelector('#root');
         users.users.forEach(function (user) {
             var firstname = user.firstname, image = user.image, color = user.color;
-            html_1 += "\n                    <div>\n                        \n                        <span>Firstname: " + firstname + "</span>\n                        <div>" + image + "</div>\n                        <div>" + color + "</div>\n                        \n                    </div>";
+            console.log(firstname, image, color);
+            html_1 += "<div class=\"card\"  style=\"background:" + color + "\">\n                        <img src=\"" + image + "\" style=\"width:50%\">\n                            <div class=\"container\">\n                                <h4><b>Username: " + firstname + "</b></h4>\n                            </div>\n                    </div>";
         });
         root.innerHTML = html_1;
     }
