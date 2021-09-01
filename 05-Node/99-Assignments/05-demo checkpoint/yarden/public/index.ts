@@ -12,7 +12,6 @@ const addUser = async (event) => {
         const name = event.target.elements[0].value
         const imgUrl = event.target.elements[1].value
         const color = event.target.elements[2].value
-        console.log(name, imgUrl, color);
         if (!name || !imgUrl || !color) throw new Error('Missing input')
         const { data, error } = await axios.post('/users/addUser', { name, imgUrl, color })
         if (error) throw error;

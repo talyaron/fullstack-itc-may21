@@ -4,14 +4,16 @@ function handleRegister(){
     const emailDiv = document.querySelector('.form__email');
     const passDiv = document.querySelector('.form__password');
     const colorDiv = document.querySelector('.form__color');
+    const imageDiv = document.querySelector('.form__image');
 
 
     const name = nameDiv.children[0].value;
     const email = emailDiv.children[0].value;
     const password = passDiv.children[0].value;;
     const color = colorDiv.children[0].value;;
-    console.log(name, email, password, color);
-    const newUser = {name, email, password, color};
+    const image = imageDiv.children[0].value;;
+    console.log(name, email, password, color, image);
+    const newUser = {name, email, password, color, image};
     
     register(newUser)
     }catch(e) {
@@ -31,10 +33,10 @@ async function register(newUser){
        if(error) throw error;
 
         console.log(data)
-        // if (response.data) {
-        //     // window.location.href = "http://localhost:3000/index.html";
-        //     console.log('registrado')
-        // }  
+        if (response.data) {
+            window.location.href = "http://localhost:3000/index.html";
+            console.log('registrado')
+        }  
     }catch(error){
         console.error(error);
     }
