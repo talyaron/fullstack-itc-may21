@@ -1,0 +1,1 @@
+"use strict";var _require=require("../models/models"),User=_require.User,users=_require.users;exports.registerUser=function(e,r){try{var s=e.body,o=s.name,t=s.imageURL,u=s.color,c=new User(o,t,u);users.addUser(c),r.send(users)}catch(e){console.log(e)}},exports.getAllUsers=function(e,r){try{r.send(users)}catch(e){console.log(e)}};
