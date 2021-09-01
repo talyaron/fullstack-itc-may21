@@ -30,6 +30,7 @@ export class Student {
     }
 }
 
+
 export class Students {
     students: Array<Student>;
 
@@ -66,10 +67,28 @@ export class Students {
         return isFound
     }
 
+    randomStudents(randomNumber: number){
+        const randomArray = []
+        const students = JSON.parse(JSON.stringify(this.students))
+        for (let i = 0; i < randomNumber && students.length > 0; i++){
+            const index = Math.floor(Math.random() * students.length)
+            const studentRandom = students[index]
+            randomArray.push(studentRandom)
+            students.splice(index, 1)
+        }
+        return randomArray
+    }
+
+    searchStudentsByLastName(lastname: string) {
+        const regrExp: string = `^${lastname}`
+        const searchTermReg: RegExp = new RegExp(regrExp, 'i');
+        const studentsFoundByLastName = this.students.filter(student => searchTermReg.test(student.lastname))
+        return studentsFoundByLastName
+    }
+
     writeAllStudents() {
         fs.writeFileSync(allStudentsJSON, JSON.stringify(this.students));
 
     }
 }
-
 

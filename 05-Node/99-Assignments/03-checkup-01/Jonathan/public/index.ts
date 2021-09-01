@@ -1,10 +1,12 @@
 const form = document.querySelector('#form') as HTMLFormElement;
 const body = document.querySelector('#body') as HTMLBodyElement;
 const btnEdit = document.querySelector('.btn-edit') as HTMLButtonElement;
+const inputSearch = document.querySelector('#search') as HTMLInputElement;
 
 form.onsubmit = addStudent
 body.onload = getStudents
 btnEdit.onclick = editStudent
+inputSearch.onkeyup = searchByLastName
 
 let idStudent;
 
@@ -29,21 +31,25 @@ async function addStudent(ev) {
         let { firstname, lastname, age } = ev.target.elements
         firstname = firstname.value;
         lastname = lastname.value;
-        age = age.value;
+        age = age.valueAsNumber;
 
         const newStudent = {
             firstname: firstname,
             lastname: lastname,
             age: age,
+            actions: 0,
         }
 
         const student = await addStudentAxios(newStudent)
 
+        if(typeof student === 'string') throw new Error (`${student}`)
+
+
         renderStudents(student.students)
 
-
+        ev.target.reset();
     } catch (e) {
-        console.error(e)
+        alert(e)
     }
 }
 
@@ -93,6 +99,7 @@ async function editStudent(ev) {
 
     try {
 
+
         const firstname = document.querySelector('#firstname') as HTMLInputElement;
         const lastname = document.querySelector('#lastname') as HTMLInputElement;
         const age = document.querySelector('#age') as HTMLInputElement;
@@ -100,7 +107,8 @@ async function editStudent(ev) {
         const editData = {
             firstname: firstname.value,
             lastname: lastname.value,
-            age: age.value,
+            age: age.valueAsNumber,
+            actions:1,
         }
 
         const editStudent = await editStudentAxios(editData, idStudent)
@@ -111,5 +119,28 @@ async function editStudent(ev) {
 
     }
 }
+
+
+async function searchByLastName() {
+    try {
+
+        const searchLastName = {
+            searchLastName: inputSearch.value
+        }
+
+        const getSearchByLastName = await getSearchByLastNameAxios(searchLastName)
+        const { data } = getSearchByLastName
+
+        renderStudents(data)
+
+
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+
+
+
 
 

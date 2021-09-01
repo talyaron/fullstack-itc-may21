@@ -1,11 +1,12 @@
 "use strict";
 exports.__esModule = true;
-exports.editStudent = exports.bringStudent = exports.deleteStudent = exports.getStudents = exports.addStudent = void 0;
+exports.randomStudents = exports.searchByLastName = exports.editStudent = exports.bringStudent = exports.deleteStudent = exports.getStudents = exports.addStudent = void 0;
 var student_1 = require("../models/student");
 var students = new student_1.Students();
 function addStudent(req, res) {
-    var _a = req.body, firstname = _a.firstname, lastname = _a.lastname, age = _a.age;
-    var student = new student_1.Student(firstname, lastname, age);
+    // const {firstname,lastname, age} = req.body
+    // const student = new Student(firstname,lastname,age)
+    var student = req.students;
     students.addStudent(student);
     res.send({ students: students });
 }
@@ -32,3 +33,15 @@ function editStudent(req, res) {
     res.send({ students: allStudents });
 }
 exports.editStudent = editStudent;
+function searchByLastName(req, res) {
+    var searchLastName = req.body.searchLastName;
+    var findStudents = students.searchStudentsByLastName(searchLastName);
+    res.send({ students: findStudents });
+}
+exports.searchByLastName = searchByLastName;
+function randomStudents(req, res) {
+    var random = req.body.random;
+    var studentsRandom = students.randomStudents(random);
+    res.send({ students: studentsRandom });
+}
+exports.randomStudents = randomStudents;

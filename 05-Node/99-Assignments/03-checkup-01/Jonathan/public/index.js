@@ -37,9 +37,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var form = document.querySelector('#form');
 var body = document.querySelector('#body');
 var btnEdit = document.querySelector('.btn-edit');
+var inputSearch = document.querySelector('#search');
 form.onsubmit = addStudent;
 body.onload = getStudents;
 btnEdit.onclick = editStudent;
+inputSearch.onkeyup = searchByLastName;
 var idStudent;
 function getStudents() {
     return __awaiter(this, void 0, void 0, function () {
@@ -76,20 +78,24 @@ function addStudent(ev) {
                     _a = ev.target.elements, firstname = _a.firstname, lastname = _a.lastname, age = _a.age;
                     firstname = firstname.value;
                     lastname = lastname.value;
-                    age = age.value;
+                    age = age.valueAsNumber;
                     newStudent = {
                         firstname: firstname,
                         lastname: lastname,
-                        age: age
+                        age: age,
+                        actions: 0
                     };
                     return [4 /*yield*/, addStudentAxios(newStudent)];
                 case 2:
                     student = _b.sent();
+                    if (typeof student === 'string')
+                        throw new Error("" + student);
                     renderStudents(student.students);
+                    ev.target.reset();
                     return [3 /*break*/, 4];
                 case 3:
                     e_2 = _b.sent();
-                    console.error(e_2);
+                    alert(e_2);
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
             }
@@ -147,7 +153,8 @@ function editStudent(ev) {
                     editData = {
                         firstname: firstname.value,
                         lastname: lastname.value,
-                        age: age.value
+                        age: age.valueAsNumber,
+                        actions: 1
                     };
                     return [4 /*yield*/, editStudentAxios(editData, idStudent)];
                 case 2:
@@ -158,6 +165,31 @@ function editStudent(ev) {
                     e_3 = _a.sent();
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+function searchByLastName() {
+    return __awaiter(this, void 0, void 0, function () {
+        var searchLastName, getSearchByLastName, data, e_4;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    searchLastName = {
+                        searchLastName: inputSearch.value
+                    };
+                    return [4 /*yield*/, getSearchByLastNameAxios(searchLastName)];
+                case 1:
+                    getSearchByLastName = _a.sent();
+                    data = getSearchByLastName.data;
+                    renderStudents(data);
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_4 = _a.sent();
+                    console.log(e_4);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });

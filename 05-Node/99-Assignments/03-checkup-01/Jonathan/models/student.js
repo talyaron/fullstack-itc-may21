@@ -52,6 +52,23 @@ var Students = /** @class */ (function () {
         var isFound = this.students.find(function (student) { return student.firstname === firstname; });
         return isFound;
     };
+    Students.prototype.randomStudents = function (randomNumber) {
+        var randomArray = [];
+        var students = JSON.parse(JSON.stringify(this.students));
+        for (var i = 0; i < randomNumber && students.length > 0; i++) {
+            var index = Math.floor(Math.random() * students.length);
+            var studentRandom = students[index];
+            randomArray.push(studentRandom);
+            students.splice(index, 1);
+        }
+        return randomArray;
+    };
+    Students.prototype.searchStudentsByLastName = function (lastname) {
+        var regrExp = "^" + lastname;
+        var searchTermReg = new RegExp(regrExp, 'i');
+        var studentsFoundByLastName = this.students.filter(function (student) { return searchTermReg.test(student.lastname); });
+        return studentsFoundByLastName;
+    };
     Students.prototype.writeAllStudents = function () {
         fs.writeFileSync(allStudentsJSON, JSON.stringify(this.students));
     };
