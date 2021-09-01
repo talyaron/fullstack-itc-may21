@@ -12,7 +12,7 @@ exports.getAllUsers = (req, res) => {
 exports.addUser = (req, res) => {
     try {
         const {body} = req;
-        users.addUser(new User(body.email, body.password, body.role))
+        users.addUser(new User(body.email, body.password, body.role)) //YS: Make the instance of the class into a varbiable: const newUser = new User(body.email, body.password, body.role)
         res.send("Register Succesful!")
     } catch (e) {
         console.log(e)

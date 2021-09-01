@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./dist/style.min.css">
+    <title>Shopper Registerations</title>
+</head>
+
+<body>
+    <nav class="header">
+        <a class="header__item header__item--h1" href="./index.html">Shop Shop Shop</a>
+    </nav>
+    
+    <main class="main">
+        <h1>Gain Access to a World Full of Quality Products</h1>
+    
+        <form id="register-form">
+            <div class="form-inputs">
+                <label for="email">Email address</label>
+                <input type="email" name="email" placeholder="Email address" required />
+                <label for="username">Username</label>
+                <input type="text" name="username" placeholder="Username" minlength="2" maxlength="20" required />
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Password" title="Your password must contain 6-8 characters, at least one uppercase letter, one lowercase letter, one number and one special character. Please try again" required />
+                <label for="passwordVerify">Password Verification</label>
+                <input type="password" name="passwordVerify" placeholder="Password" title="Your password must contain 6-8 characters, at least one uppercase letter, one lowercase letter, one number and one special character. Please try again" required />            </div>
+            <input class="button" type="submit" value="Register" />
+        </form>
+    </main>
+
+    <script src="./dist/helper-errors.min.js"></script>
+    <script src="./dist/register.min.js"></script>
+</body>
+
+</html>

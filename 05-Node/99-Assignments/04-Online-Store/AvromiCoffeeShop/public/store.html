@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<style>
+    .products {
+        display: flex;
+        flex-flow: wrap;
+    }
+
+    .product-card {
+        padding: 2%;
+        flex-grow: 1;
+        flex-basis: 16%;
+
+        display: flex;
+
+    }
+
+    .product-image img {
+        
+        height: 200px;
+        width: 200px;
+        margin-right: 40px;
+    }
+
+
+
+    input[type=text],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+ 
+
+    input[type=submit],
+    [type=button] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    .formDiv {
+        border-radius: 5px;
+        background-color: #faf2f2;
+        margin: 40px;
+        padding: 20px;
+        position: fixed;
+    }
+    .addProductsDiv{
+        border-radius: 5px;
+        background-color: #faf2f2;
+        margin: 40px;
+        padding: 20px;
+        position: fixed;
+    }
+    .flexBox{
+        display: flex;
+        justify-content:space-around;
+        align-items:center;
+        background-color: #FFFFFF;
+        position: fixed;
+        top:0%;
+        width: 100%;
+    }
+    #divcont{
+    margin-top: 8%;
+    }
+    .admin{
+        display: none;
+    }
+  
+   
+</style>
+
+<body>
+<div class="flexBox">
+    <h2>Coffee Shop</h2>
+
+    <div class="addProducts admin"><button id="addButton">Add Products</button></div>
+
+</div>
+   
+    <div class="formDiv"></div>
+    <div class="addProductsDiv"></div>
+
+    <div id="divcont"></div>
+
+
+
+    <script src="store.js"></script>
+</body>
+
+</html>

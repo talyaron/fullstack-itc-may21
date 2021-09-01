@@ -2,14 +2,14 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.json())
 app.use(express.static('public'));
 
 //route
-const beachesRoute = require('./routes/routeBeaches');
-const drinksRoute = require('./routes/routeDrinks');
 
-app.use('/beaches', beachesRoute);
-app.use('/drinks', drinksRoute);
+const studnetsRoute = require('./routes/studentsRoute');
+app.use('/students', studnetsRoute);
+
 
 //route
 

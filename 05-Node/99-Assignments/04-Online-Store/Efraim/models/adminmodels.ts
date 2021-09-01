@@ -13,7 +13,7 @@ function updateProductsModel(id, description, price) {
         console.error(e)
     }
 }
-const storage = multer.diskStorage({
+const storage = multer.diskStorage({ //YS: Nice
     destination: "./public/images",
     filename: (req, file, cb) => {
         cb(

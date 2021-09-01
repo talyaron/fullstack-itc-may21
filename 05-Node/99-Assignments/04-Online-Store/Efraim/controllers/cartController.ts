@@ -3,7 +3,7 @@ const { addCart, deleteCart, updateCartItemValue} = require('../models/cartmodel
 
 exports.addToCart = (req, res) => {
     try {
-        const {body} = req;
+        const {body} = req; //YS: It is a bit strange to destructure just one level. For readability I think its better to use dot notation in this case. 
         const {userID} = req.decoded
         addCart(body.productID, userID)
         res.send(users)
