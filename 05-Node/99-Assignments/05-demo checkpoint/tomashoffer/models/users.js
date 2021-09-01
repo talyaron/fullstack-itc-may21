@@ -26,9 +26,11 @@ var UserMethods = /** @class */ (function () {
         this.users = readAllUsers();
     }
     UserMethods.prototype.updateJsonUsers = function () {
+        console.log('updateJsonUsers');
         fs.writeFileSync(pathToUsersJson, JSON.stringify(this.users));
     };
     UserMethods.prototype.addUser = function (user) {
+        console.log('user:', user);
         this.users.push(user);
         this.updateJsonUsers();
     };

@@ -27,13 +27,15 @@ btnSub.addEventListener('click', handleRegister);
 
 async function register(newUser){
     try{
-       await axios.post('/user/register', newUser);
-        console.log(response)
-        if (response.data) {
-            // window.location.href = "http://localhost:3000/index.html";
-            console.log('registrado')
-        }  
+       const {data ,error} = await axios.post('/user/register', newUser);
+       if(error) throw error;
+
+        console.log(data)
+        // if (response.data) {
+        //     // window.location.href = "http://localhost:3000/index.html";
+        //     console.log('registrado')
+        // }  
     }catch(error){
-        console.log(error.response);
+        console.error(error);
     }
 }
