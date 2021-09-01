@@ -31,10 +31,6 @@ var Users = /** @class */ (function () {
     Users.prototype.writeAllUsers = function () {
         fs.writeFileSync(allUsersJSON, JSON.stringify(this.users));
     };
-    Users.prototype.findUserByName = function (firstname) {
-        var isFound = this.users.find(function (user) { return user.firstname === firstname; });
-        return isFound;
-    };
     return Users;
 }());
 exports.Users = Users;

@@ -44,10 +44,7 @@ export class Users{
     }
  
 
-    findUserByName(firstname:string):User{
-        const isFound = this.users.find(user =>user.firstname === firstname)
-        return isFound
-    }
+  
 }
 
 
