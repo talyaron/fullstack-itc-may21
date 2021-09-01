@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>App's homepage</title>
+</head>
+
+<body>
+    <nav>
+        <div>Home</div>
+        <a href="second.html">Second Page</a>
+    </nav>
+
+    <main>
+        <h1>Home</h1>
+
+        <form id="add-item-form">
+            <label for="itemDetail1">item detail 1</label>
+            <input type="text" name="itemDetail1" id="item-detail-1" placeholder="itemDetail1" required />
+            <label for="itemDetail2">item detail 2</label>
+            <input type="text" name="itemDetail2" id="item-detail-2" placeholder="itemDetail2" required />
+            <input type="submit" value="ADD" style="background-color: darkgreen; color: white; display: inline-block;"/>
+        </form>
+
+        <div class="items">
+
+        </div>
+    </main>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

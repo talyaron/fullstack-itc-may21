@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="getAllProducts(event)">
+  
+
+    <nav class="navegacion">
+        <a class="navegacion__enlace navegacion__enlace--activo btnLogout" href="index.html">logout</a>
+
+        <button type="button" class="btn btn-info btn-lg btnAdd" data-toggle="modal" data-target="#myModal" style="display:none">Add
+            Product</button>
+        <!-- Modal -->
+        <form class="form">
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Add product</h3>
+
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add product</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Name" name="name" id="name">
+                            <input type="text" placeholder="Description" name="description">
+                            <input type="number" placeholder="Price" name="price" name="price">
+                            <input type="number" placeholder="Quantity" name="quantity">
+                            <input type="text" placeholder="Image" name="image" id="image">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-default" value="Add">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        </div>
+    </nav>
+    <main class="contenedor">
+        <h1>products</h1>
+        <div class="productoContenedor"></div>
+     
+    </main>
+    <footer class="footer">
+        <p class="footer__texto">ITC Store.</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="scripts/store.js"></script>
+</body>
+
+</html>

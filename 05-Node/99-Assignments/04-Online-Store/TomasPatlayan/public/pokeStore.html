@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./dist/app.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app" class="container">
+      <h1>PokeStore</h1>
+
+      <form id="formCreate">
+        <input type="text" name="name" />
+        <textarea
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+        ></textarea>
+        <input type="text" name="pokeType" />
+        <input type="number" name="price" />
+        <input type="url" name="image" />
+
+        <button type="submit">Send</button>
+      </form>
+      <div class="cart"><a href="./cart.html"><i class="fas fa-shopping-cart"></i></a></div>
+      <div id="root"></div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+ 
+    <script src="https://kit.fontawesome.com/3d37771d36.js" crossorigin="anonymous"></script>
+    <script src="./pokeStoreV2.js"></script>
+    
+   
+  </body>
+</html>
