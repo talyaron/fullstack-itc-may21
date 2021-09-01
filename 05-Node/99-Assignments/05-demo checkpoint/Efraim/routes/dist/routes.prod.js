@@ -1,0 +1,1 @@
+"use strict";var express=require("express"),router=express.Router(),controller=require("../controllers/controller");module.exports=router;

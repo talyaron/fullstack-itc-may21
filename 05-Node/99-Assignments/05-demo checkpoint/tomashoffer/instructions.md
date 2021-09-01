@@ -8,7 +8,7 @@ Render all the users, with their images, in cards that have the user's preferred
 
 5 points: validation
 5 point: put the validation in middleware
-5 points: save specific user info in JWT cookie
+5 points: save specific user info in JWT cookie/bearer
 5: design patterns: (model, routes, controllers)
 5 points: use classes
 5 point: use typescript

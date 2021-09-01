@@ -1,0 +1,30 @@
+.my-form {
+  margin-bottom: 3rem;
+}
+
+.holder {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.holder__user-card {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  align-items: center;
+}
+.holder__user-card__image {
+  margin-top: 2rem;
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+}
+.holder__user-card__name {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
