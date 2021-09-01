@@ -6,9 +6,10 @@ const students = new Students()
 
 export function addStudent(req, res){
 
-    const {firstname, lastname, age} = req.body
-    const student = new Student(firstname, lastname, age)
-    students.addStudent(student)
+    // const {firstname, lastname, age} = req.body
+    // const student = new Student(firstname, lastname, age)
+    const students = req.students
+    students.addStudent(students)
     res.send({students:students})
 }
 
@@ -35,4 +36,20 @@ export function editStudent(req, res){
     const {id} = req.params
     const allStudents = students.editStudent(req.body, id)
     res.send({students: allStudents})
+}
+
+
+export function searchByLastname(req, res){
+    
+    const {searchLastname} = req.body
+    const findStudents = students.searchStudentsByLastname(searchLastname)
+    res.send({students: findStudents})    
+}
+
+export function randomStudents(req, res){
+    const {random} = req.body
+    console.log(random);
+    
+    const studentsRandom = students.randomStudent(random)
+    res.send({students: studentsRandom})    
 }

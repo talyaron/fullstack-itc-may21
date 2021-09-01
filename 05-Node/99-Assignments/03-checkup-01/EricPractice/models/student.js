@@ -50,6 +50,23 @@ var Students = /** @class */ (function () {
         this.writeAllStudents();
         return this.students;
     };
+    Students.prototype.searchStudentsByLastname = function (lastname) {
+        var regrExp = "^" + lastname;
+        var searchTermReg = new RegExp(regrExp, "i");
+        var studentsFoundByLastname = this.students.filter(function (student) { return searchTermReg.test(student.lastname); });
+        return studentsFoundByLastname;
+    };
+    Students.prototype.randomStudent = function (randomNumber) {
+        var randomArray = [];
+        var students = JSON.parse(JSON.stringify(this.students));
+        for (var i = 0; i < randomNumber && students.length > 0; i++) {
+            var index = Math.floor(Math.random() * students.length);
+            var studentRandom = students[index];
+            randomArray.push(studentRandom);
+            students.splice(index, 1);
+        }
+        return randomArray;
+    };
     return Students;
 }());
 exports.Students = Students;

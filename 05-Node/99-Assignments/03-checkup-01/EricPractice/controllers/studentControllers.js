@@ -1,13 +1,14 @@
 "use strict";
 exports.__esModule = true;
-exports.editStudent = exports.bringStudent = exports.deleteStudent = exports.getStudents = exports.addStudent = void 0;
+exports.randomStudents = exports.searchByLastname = exports.editStudent = exports.bringStudent = exports.deleteStudent = exports.getStudents = exports.addStudent = void 0;
 var student_1 = require("../models/student");
 //ponerlo siempre afuera, sino no agrega al array y sobre escribe al renderizar
 var students = new student_1.Students();
 function addStudent(req, res) {
-    var _a = req.body, firstname = _a.firstname, lastname = _a.lastname, age = _a.age;
-    var student = new student_1.Student(firstname, lastname, age);
-    students.addStudent(student);
+    // const {firstname, lastname, age} = req.body
+    // const student = new Student(firstname, lastname, age)
+    var students = req.students;
+    students.addStudent(students);
     res.send({ students: students });
 }
 exports.addStudent = addStudent;
@@ -33,3 +34,16 @@ function editStudent(req, res) {
     res.send({ students: allStudents });
 }
 exports.editStudent = editStudent;
+function searchByLastname(req, res) {
+    var searchLastname = req.body.searchLastname;
+    var findStudents = students.searchStudentsByLastname(searchLastname);
+    res.send({ students: findStudents });
+}
+exports.searchByLastname = searchByLastname;
+function randomStudents(req, res) {
+    var random = req.body.random;
+    console.log(random);
+    var studentsRandom = students.randomStudent(random);
+    res.send({ students: studentsRandom });
+}
+exports.randomStudents = randomStudents;

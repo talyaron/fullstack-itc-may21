@@ -37,6 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var form = document.querySelector('#form');
 var body = document.querySelector('#body');
 var btnEdit = document.querySelector('.btn-edit');
+var inputSearch = document.querySelector('#search');
+inputSearch.onkeyup = searchByLastname;
 form.addEventListener('submit', addStudents);
 body.onload = getStudents;
 function getStudents() {
@@ -76,15 +78,19 @@ function addStudents(ev) {
                     _a = ev.target.elements, firstname = _a.firstname, lastname = _a.lastname, age = _a.age;
                     firstname = firstname.value;
                     lastname = lastname.value;
-                    age = age.value;
-                    newStudent = { firstname: firstname, lastname: lastname, age: age };
+                    age = age.valueAsNumber;
+                    newStudent = { firstname: firstname, lastname: lastname, age: age, actions: 0 };
                     return [4 /*yield*/, addStudentAxios(newStudent)];
                 case 2:
                     student = _b.sent();
+                    if (typeof student === 'string')
+                        throw new Error("" + student);
                     renderStudents(student.students);
+                    ev.target.reset();
                     return [3 /*break*/, 4];
                 case 3:
                     error_2 = _b.sent();
+                    alert(error_2);
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
             }
@@ -140,7 +146,7 @@ function editStudents(ev) {
                     firstname = document.querySelector('#firstname');
                     lastname = document.querySelector('#lastname');
                     age = document.querySelector('#age');
-                    editData = { firstname: firstname.value, lastname: lastname.value, age: age.value };
+                    editData = { firstname: firstname.value, lastname: lastname.value, age: age.valueAsNumber, actions: 1 };
                     return [4 /*yield*/, editStudentsAxios(editData, idStudent)];
                 case 2:
                     editStudent = _a.sent();
@@ -151,6 +157,31 @@ function editStudents(ev) {
                     error_3 = _a.sent();
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+function searchByLastname() {
+    return __awaiter(this, void 0, void 0, function () {
+        var searchLastname, getSearchByLastname, data, error, error_4;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    searchLastname = {
+                        searchLastname: inputSearch.value
+                    };
+                    return [4 /*yield*/, searchByLastnameAxios(searchLastname)];
+                case 1:
+                    getSearchByLastname = _a.sent();
+                    data = getSearchByLastname.data, error = getSearchByLastname.error;
+                    console.log(data);
+                    renderStudents(data);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_4 = _a.sent();
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });

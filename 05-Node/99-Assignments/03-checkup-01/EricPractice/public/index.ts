@@ -3,6 +3,9 @@
 const form = document.querySelector('#form')  as HTMLFormElement
 const body = document.querySelector('#body')  as HTMLBodyElement
 const btnEdit = document.querySelector('.btn-edit') as HTMLButtonElement
+const inputSearch = document.querySelector('#search') as HTMLInputElement
+
+inputSearch.onkeyup = searchByLastname
 
 form.addEventListener('submit',addStudents )
 
@@ -23,28 +26,26 @@ btnEdit.onclick = editStudents
 
 let idStudent;
 
-
-
-
-
-
 async function addStudents (ev){
     ev.preventDefault()
     try {
         let{firstname, lastname, age} = ev.target.elements;
-        firstname = firstname.value
-        lastname = lastname.value
-        age = age.value
+        firstname = firstname.value;
+        lastname = lastname.value;
+        age = age.valueAsNumber;
         
-        const newStudent = {firstname:firstname, lastname:lastname, age:age}
+        const newStudent = {firstname:firstname, lastname:lastname, age:age, actions:0}
         const student = await addStudentAxios(newStudent)
         
+        if(typeof student === 'string') throw new Error (`${student}`)
+
         renderStudents(student.students)
-        
+
+        ev.target.reset()
         
 
     } catch (error) {
-        
+        alert(error)
     }
 }
 
@@ -75,7 +76,6 @@ function renderStudents(students){
 
 }
 
-
 async function bringStudent(id: string){
     let firstname = document.querySelector('#firstname') as HTMLInputElement    
     let lastname = document.querySelector('#lastname') as HTMLInputElement    
@@ -98,7 +98,7 @@ async function editStudents(ev){
         const lastname = document.querySelector('#lastname') as HTMLInputElement    
         const age = document.querySelector('#age') as HTMLInputElement  
 
-        const editData ={firstname: firstname.value, lastname: lastname.value, age: age.value}
+        const editData ={firstname: firstname.value, lastname: lastname.value, age: age.valueAsNumber, actions:1}
         const editStudent = await editStudentsAxios(editData, idStudent)
         console.log(editData);
         renderStudents(editStudent)
@@ -106,4 +106,24 @@ async function editStudents(ev){
     } catch (error) {
         
     }
+}
+
+
+async function searchByLastname(){
+    try {
+        const searchLastname = {
+            searchLastname: inputSearch.value
+        }
+
+        const getSearchByLastname = await searchByLastnameAxios(searchLastname)
+        
+        const {data, error} = getSearchByLastname
+        
+        console.log(data);
+        
+        renderStudents(data)
+    } catch (error) {
+        
+    }
+
 }
