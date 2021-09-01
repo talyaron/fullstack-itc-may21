@@ -12,12 +12,14 @@ var app = express();
 var port = process.env.PORT || 555;
 app.use(express.json());
 app.use(express["static"](pathToFile));
-app.use(cookieParser()); // const userRoutes = require('./routes/userRoutes');
+app.use(cookieParser());
 
-var itemsRoute = require('./routes/itemsRoutes'); // app.use('/user', userRoutes);
+var userRoutes = require('./routes/dist/userRoutes');
 
+var storeRoutes = require('./routes/dist/storeRoutes');
 
-app.use('/items', itemsRoute);
+app.use('/user', userRoutes);
+app.use('/store', storeRoutes);
 app.listen(port, function () {
-  return console.log("App listening on port ".concat(port));
+  console.log("Listening on port: ".concat(port));
 });
