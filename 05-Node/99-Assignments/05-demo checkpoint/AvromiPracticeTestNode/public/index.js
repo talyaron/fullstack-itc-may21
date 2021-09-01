@@ -50,40 +50,59 @@ function handleSubmit(ev) {
 }
 function getAllUsers() {
     return __awaiter(this, void 0, void 0, function () {
-        var res, allUsers;
+        var res, allUsers, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios('/getUsers')];
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios('/getUsers')];
                 case 1:
                     res = _a.sent();
                     allUsers = res.data;
                     render(allUsers);
-                    return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    console.log(error_1.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
 function addUser(name, imgSrc, prefColor) {
     return __awaiter(this, void 0, void 0, function () {
-        var res, allUsers;
+        var res, allUsers, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios.post("/addUser", { name: name, imgSrc: imgSrc, prefColor: prefColor })];
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.post("/addUser", { name: name, imgSrc: imgSrc, prefColor: prefColor })];
                 case 1:
                     res = _a.sent();
                     allUsers = res.data;
                     console.log(allUsers);
                     render(allUsers);
-                    return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_2 = _a.sent();
+                    console.log(error_2.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
 function render(data) {
-    var root = document.querySelector(".root");
-    var html = "";
-    data.forEach(function (user) {
-        html += "<div class=\"card\">\n<img src=\"" + user.imgSrc + "\" alt=\"" + user.name + "\" style=\"width:100%\">\n<h1>" + user.name + "</h1>\n\n<div class=\"color\" style=\"background-color:" + user.prefColor + ";\"></div>\n\n</div>";
-    });
-    root.innerHTML = html;
+    try {
+        var root = document.querySelector(".root");
+        var html_1 = "";
+        data.forEach(function (user) {
+            html_1 += "<div class=\"card\">\n<img src=\"" + user.imgSrc + "\" alt=\"" + user.name + "\" style=\"width:100%\">\n<h1>" + user.name + "</h1>\n\n<div class=\"color\" style=\"background-color:" + user.prefColor + ";\"></div>\n\n</div>";
+        });
+        root.innerHTML = html_1;
+    }
+    catch (error) {
+        console.log(error.message);
+    }
 }
