@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+<body>
+    <style>
+
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: auto;
+            padding:1rem;
+            max-width: 50%;
+            background-color: rgb(182, 169, 169);
+        }
+    </style>
+    <form>
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="imgSrc" placeholder="Image URL (http://image.com/image)">
+        <input type="color" name="prefColor">
+        <input type="submit" value="Submit">
+    </form>
+
+
+    <script>
+        const form = document.querySelector('form')
+        form.addEventListener('submit', handleSubmit);
+
+        function handleSubmit(ev){
+            ev.preventDefault();
+            const name = ev.target.elements.name.value;
+            const imgSrc = ev.target.elements.imgSrc.value;
+            const prefColor = ev.target.elements.prefColor.value;
+            console.log(name, imgSrc, prefColor)
+            addUser(name, imgSrc, prefColor)
+
+            ev.target.reset();
+        }
+
+        async function addUser(name, imgSrc, prefColor){
+            const res = await axios.post("/addUser", {name, imgSrc, prefColor});
+            const allUsers = res.data
+        }
+
+
+    </script>
+    
+</body>
+</html>
