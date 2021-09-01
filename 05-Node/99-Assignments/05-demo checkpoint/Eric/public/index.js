@@ -49,6 +49,7 @@ function getUsers() {
                 case 1:
                     getUser = _a.sent();
                     data = getUser.data, error = getUser.error;
+                    console.log(data);
                     renderUsers(data.users);
                     return [3 /*break*/, 3];
                 case 2:
