@@ -24,6 +24,10 @@ img {
   flex-direction: column;
 }
 
+input {
+  margin: 5px;
+}
+
 #root {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
