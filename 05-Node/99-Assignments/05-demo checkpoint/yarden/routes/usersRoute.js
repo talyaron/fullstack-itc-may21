@@ -5,7 +5,6 @@ var router = express.Router();
 var usersController_1 = require("../controllers/usersController");
 var userSchema_1 = require("../schemas/userSchema");
 var validateBodyUser_1 = require("../middleware/validateBodyUser");
-// const { sendCookie } = require('../middleware/cookie');
 router
     .get('/allUsers', usersController_1.get_users)
     .post('/addUser', validateBodyUser_1.validateBodyUser(userSchema_1.userSchemaAJV), usersController_1.add_user);
