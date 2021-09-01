@@ -6,10 +6,9 @@ const students = new Students()
 
 export function addStudent(req, res){
 
-    // const {firstname, lastname, age} = req.body
-    // const student = new Student(firstname, lastname, age)
-    const students = req.students
-    students.addStudent(students)
+    const {firstname, lastname, age} = req.body
+    const student = new Student(firstname, lastname, age)
+    students.addStudent(student)
     res.send({students:students})
 }
 
