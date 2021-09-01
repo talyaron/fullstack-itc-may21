@@ -12,12 +12,14 @@ export class User {
   email: string;
   password: string;
   color: string;
+  image: string;
   id: string
-  constructor(name: string, email: string, password: string, color: string, id: string) {
+  constructor(name: string, email: string, password: string, color: string, image: string, id: string) {
     (this.name = name),
       (this.email = email),
       (this.password = password),
       (this.color = color),
+      (this.image = image),
       (this.id = id)
   }
 }
@@ -28,11 +30,10 @@ export class UserMethods {
     this.users = readAllUsers()
   }
   updateJsonUsers() {
-    console.log('updateJsonUsers')
+
     fs.writeFileSync(pathToUsersJson, JSON.stringify(this.users));
   }
   addUser(user) {
-    console.log('user:', user)
     this.users.push(user);
     this.updateJsonUsers();
   };
