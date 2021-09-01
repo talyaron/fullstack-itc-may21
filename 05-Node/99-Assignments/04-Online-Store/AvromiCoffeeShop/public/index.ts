@@ -1,36 +1,37 @@
 async function addUser(fname, lname, company, email, password, repassword) {
     try {
         const res = await axios.post('/users/register', { fname, lname, company, email, password, repassword })
-        
-      
+
+
         swal(`Hello ${fname}, you're registration is complete!`)
     } catch (error) {
-       swal(error.response.data);
+        swal(error.response.data);
     }
 }
 
 
 const loginForm = document.querySelector("#loginForm");
+
 loginForm.addEventListener("submit", loginFormSubmit);
 
-async function loginFormSubmit(ev){
+async function loginFormSubmit(ev) {
     ev.preventDefault();
     const email = ev.target.elements.email.value;
     const password = ev.target.elements.password.value;
-  await loginUser(email, password);
+    await loginUser(email, password);
     //validate??? 
 }
 
-async function loginUser(email, password){
+async function loginUser(email, password) {
     try {
-        
-  
-    const res = await axios.post('/users/login',{email, password});
-    console.log(res.data)
-    window.localStorage.setItem('currentUser', JSON.stringify(res.data))
-} catch (error) {
+
+
+        const res = await axios.post('/users/login', { email, password });
+        console.log(res.data)
+        localStorage.setItem('currentUser', JSON.stringify(res.data))
+    } catch (error) {
         console.log(error.response);
-}
+    }
 }
 
 const registerForm = document.querySelector("#registerForm");
@@ -59,3 +60,5 @@ function dispLogin() {
     login.style.display = "block";
 
 }
+
+

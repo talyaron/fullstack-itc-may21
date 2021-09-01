@@ -85,7 +85,7 @@ function loginUser(email, password) {
                 case 1:
                     res = _a.sent();
                     console.log(res.data);
-                    window.localStorage.setItem('currentUser', JSON.stringify(res.data));
+                    localStorage.setItem('currentUser', JSON.stringify(res.data));
                     return [3 /*break*/, 3];
                 case 2:
                     error_2 = _a.sent();

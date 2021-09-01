@@ -1,3 +1,22 @@
+
+
+
+function getStorage() {
+    const user = JSON.parse(localStorage.getItem("currentUser"))
+    return (user);
+
+}
+
+function displayAdmin() {
+    const role = getStorage().role;
+    const admin = document.querySelector(".admin");
+    if (role === "admin") {
+        admin.style.display = "block"
+    }
+
+}
+
+
 async function getAllProducts() { //YS: Nice
     try {
         const res = await axios.get('/products/')
@@ -7,7 +26,13 @@ async function getAllProducts() { //YS: Nice
         console.log(error);
     }
 }
-getAllProducts()
+window.onload = () => {
+    getAllProducts()
+    getStorage()
+    displayAdmin()
+
+}
+
 
 
 async function addProduct(name, description, price, imgSrc) {
@@ -42,10 +67,15 @@ async function deleteProduct(id) {
 
 
 function renderProducts(data) {
-    const productsDiv = document.querySelector("#divcont")
-    let html = "";
-    data.forEach((product) => {
-        html += ` <div class='products'>  <div class="product-card">
+    try {
+
+
+        const productsDiv = document.querySelector("#divcont")
+        let html = "";
+        const role = getStorage().role;
+        if (role === 'admin') {
+            data.forEach((product) => {
+                html += ` <div class='products'>  <div class="product-card">
         <div class="product-image">
           <img src="${product.imgSrc}">
         </div>
@@ -53,16 +83,34 @@ function renderProducts(data) {
           <h5>${product.name}</h5>
         <p>${product.description}</p>
         <p>${product.price}</p>
-       
-    
         <button onclick="handleDelete('${product.id}')">Delete</button>
         <button onclick="handleEdit('${product.id}','${product.name}','${product.description}','${product.price}','${product.imgSrc}')">Edit</button>
         </div>
         </div>`
-    })
-    productsDiv.innerHTML = html
-
+            })
+            productsDiv.innerHTML = html
+        } if ( role === 'public') {
+            data.forEach((product) => {
+                html += ` <div class='products'>  <div class="product-card">
+        <div class="product-image">
+          <img src="${product.imgSrc}">
+        </div>
+        <div class="product-info">
+          <h5>${product.name}</h5>
+        <p>${product.description}</p>
+        <p>${product.price}</p>
+        <button onclick="handleAddToCart('${product.id}','${product.name}','${product.description}','${product.price}','${product.imgSrc}')">Add To Cart</button>
+        </div>
+        </div>`
+            })
+            productsDiv.innerHTML = html
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
 }
+
+
 
 
 const edit = document.querySelector(".formDiv");
@@ -155,7 +203,7 @@ addButton.addEventListener('click', () => {
 
 </form>`
 
-   add.innerHTML = html;
+    add.innerHTML = html;
 
     add.style.display = "block"
 })

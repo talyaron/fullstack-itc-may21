@@ -21,12 +21,12 @@ exports.login = function (req, res) {
                 res.send({ name: user.fname, role: user.role });
                 return;
             }
-            //     else {
-            //         throw new Error("password does not match")
-            //     }
-            // }
-            // else {
-            //     throw new Error("User Not Found")
+            else {
+                throw new Error("password does not match");
+            }
+        }
+        else {
+            throw new Error("User Not Found");
         }
     }
     catch (error) {

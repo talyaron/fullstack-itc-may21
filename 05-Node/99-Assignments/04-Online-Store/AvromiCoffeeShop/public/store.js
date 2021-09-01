@@ -34,6 +34,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+function getStorage() {
+    var user = JSON.parse(localStorage.getItem("currentUser"));
+    return (user);
+}
+function displayAdmin() {
+    var role = getStorage().role;
+    var admin = document.querySelector(".admin");
+    if (role === "admin") {
+        admin.style.display = "block";
+    }
+}
 function getAllProducts() {
     return __awaiter(this, void 0, void 0, function () {
         var res, allProducts, error_1;
@@ -56,7 +67,11 @@ function getAllProducts() {
         });
     });
 }
-getAllProducts();
+window.onload = function () {
+    getAllProducts();
+    getStorage();
+    displayAdmin();
+};
 function addProduct(name, description, price, imgSrc) {
     return __awaiter(this, void 0, void 0, function () {
         var res, allProducts, error_2;
@@ -124,12 +139,26 @@ function deleteProduct(id) {
     });
 }
 function renderProducts(data) {
-    var productsDiv = document.querySelector("#divcont");
-    var html = "";
-    data.forEach(function (product) {
-        html += " <div class='products'>  <div class=\"product-card\">\n        <div class=\"product-image\">\n          <img src=\"" + product.imgSrc + "\">\n        </div>\n        <div class=\"product-info\">\n          <h5>" + product.name + "</h5>\n        <p>" + product.description + "</p>\n        <p>" + product.price + "</p>\n       \n    \n        <button onclick=\"handleDelete('" + product.id + "')\">Delete</button>\n        <button onclick=\"handleEdit('" + product.id + "','" + product.name + "','" + product.description + "','" + product.price + "','" + product.imgSrc + "')\">Edit</button>\n        </div>\n        </div>";
-    });
-    productsDiv.innerHTML = html;
+    try {
+        var productsDiv = document.querySelector("#divcont");
+        var html_1 = "";
+        var role = getStorage().role;
+        if (role === 'admin') {
+            data.forEach(function (product) {
+                html_1 += " <div class='products'>  <div class=\"product-card\">\n        <div class=\"product-image\">\n          <img src=\"" + product.imgSrc + "\">\n        </div>\n        <div class=\"product-info\">\n          <h5>" + product.name + "</h5>\n        <p>" + product.description + "</p>\n        <p>" + product.price + "</p>\n        <button onclick=\"handleDelete('" + product.id + "')\">Delete</button>\n        <button onclick=\"handleEdit('" + product.id + "','" + product.name + "','" + product.description + "','" + product.price + "','" + product.imgSrc + "')\">Edit</button>\n        </div>\n        </div>";
+            });
+            productsDiv.innerHTML = html_1;
+        }
+        if (role === 'public') {
+            data.forEach(function (product) {
+                html_1 += " <div class='products'>  <div class=\"product-card\">\n        <div class=\"product-image\">\n          <img src=\"" + product.imgSrc + "\">\n        </div>\n        <div class=\"product-info\">\n          <h5>" + product.name + "</h5>\n        <p>" + product.description + "</p>\n        <p>" + product.price + "</p>\n        <button onclick=\"handleAddToCart('" + product.id + "','" + product.name + "','" + product.description + "','" + product.price + "','" + product.imgSrc + "')\">Add To Cart</button>\n        </div>\n        </div>";
+            });
+            productsDiv.innerHTML = html_1;
+        }
+    }
+    catch (error) {
+        console.log(error.message);
+    }
 }
 var edit = document.querySelector(".formDiv");
 edit.style.display = "none";
