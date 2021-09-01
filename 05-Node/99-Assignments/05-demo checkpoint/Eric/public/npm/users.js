@@ -58,7 +58,7 @@ function getUsersAxios() {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios.get('/user/getUser')];
+                case 0: return [4 /*yield*/, axios.get('/user/getUsers')];
                 case 1:
                     response = _a.sent();
                     return [2 /*return*/, response];

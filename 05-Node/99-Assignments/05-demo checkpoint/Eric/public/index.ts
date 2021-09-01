@@ -11,6 +11,8 @@ async function getUsers(){
     try {
         const getUser = await getUsersAxios()
         const {data, error} = getUser
+        console.log(data);
+        
         renderUsers(data.users)
 
     } catch (error) {

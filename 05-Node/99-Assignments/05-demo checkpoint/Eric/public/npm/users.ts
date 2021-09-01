@@ -9,7 +9,7 @@ async function addUserAxios(newUser) {
 }
 
 async function getUsersAxios() {
-    const response = await axios.get('/user/getUser')
+    const response = await axios.get('/user/getUsers')
     return response
 }
 
