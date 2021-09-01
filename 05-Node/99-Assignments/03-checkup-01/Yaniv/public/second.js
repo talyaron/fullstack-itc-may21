@@ -34,32 +34,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var updateProductAncestor = document.querySelector('.products');
-updateProductAncestor.addEventListener('click', function (ev) { return updateProduct(ev); });
-function updateProduct(ev) {
+var doSomething1Form = document.querySelector('#do-something-1-form');
+doSomething1Form.addEventListener('submit', doSomething1);
+function doSomething1(ev) {
     return __awaiter(this, void 0, void 0, function () {
-        var productDiv, productUuid, productNameElement, productName, mathSign, putProductQuantity, productQuantity, productQuantityElement, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var clientInput1, _a, data, error, clientOutput, error_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    if ((ev.target.className !== 'product-buttons__item product-buttons__item--edit fas fa-edit'))
-                        return [2 /*return*/];
-                    productDiv = ev.target.parentElement.parentElement;
-                    productUuid = productDiv.getAttribute('id');
-                    productNameElement = productDiv.querySelector('.product__item--name');
-                    productName = productNameElement.innerText;
-                    mathSign = ev.target.innerText;
-                    return [4 /*yield*/, axios.put('/user/cart', { productUuid: productUuid, productName: productName, mathSign: mathSign })];
+                    _b.trys.push([0, 2, , 3]);
+                    ev.preventDefault();
+                    clientInput1 = ev.target.elements.clientInput1.value;
+                    return [4 /*yield*/, axios.post('/items/doSomething1', { Input1ModelName: clientInput1 })];
                 case 1:
-                    putProductQuantity = _a.sent();
-                    productQuantity = putProductQuantity.data.productQuantity;
-                    productQuantityElement = productDiv.querySelector(('.product-buttons__item--cart-quantity'));
-                    productQuantityElement.innerText = productQuantity;
-                    renderStore(false);
+                    _a = _b.sent(), data = _a.data, error = _a.error;
+                    clientOutput = data.clientOutput;
+                    renderItems(clientOutput); // if clientOutput are items to render
+                    // console.log(clientOutput);
+                    ev.target.reset();
                     return [3 /*break*/, 3];
                 case 2:
-                    error_1 = _a.sent();
+                    error_1 = _b.sent();
                     console.error(error_1.message);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
@@ -67,13 +62,3 @@ function updateProduct(ev) {
         });
     });
 }
-var readURL = function (input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            document.querySelector('#productImg').setAttribute("src", "" + e.target.result);
-            return e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-};

@@ -34,33 +34,140 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
-function getImages(route) {
-    try {
-        return new Promise(function (resolve, reject) {
-            fetch(route)
-                .then(function (r) { return r.json(); })
-                .then(function (data) { resolve(data); })["catch"](function (err) { reject(err); });
+function getAllItems() {
+    return __awaiter(this, void 0, void 0, function () {
+        var _a, data, error, items, error_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.get('/items/all')];
+                case 1:
+                    _a = _b.sent(), data = _a.data, error = _a.error;
+                    if (error)
+                        throw error;
+                    items = data.items;
+                    renderItems(items);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _b.sent();
+                    console.error(error_1.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
         });
+    });
+}
+var addItemForm = document.querySelector('#add-item-form');
+addItemForm.addEventListener('submit', addItem);
+function addItem(ev) {
+    return __awaiter(this, void 0, Promise, function () {
+        var itemDetail1, itemDetail2, _a, data, error, items, error_2;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _b.trys.push([0, 2, , 3]);
+                    ev.preventDefault();
+                    itemDetail1 = ev.target.elements.itemDetail1.value;
+                    itemDetail2 = ev.target.elements.itemDetail2.value;
+                    if (!itemDetail1 || !itemDetail2)
+                        throw new Error('missing details');
+                    return [4 /*yield*/, axios.post('/items/', { itemDetail1: itemDetail1, itemDetail2: itemDetail2 })];
+                case 1:
+                    _a = _b.sent(), data = _a.data, error = _a.error;
+                    if (error)
+                        throw error;
+                    items = data.items;
+                    renderItems(items);
+                    ev.target.reset();
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_2 = _b.sent();
+                    console.error(error_2.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function renderItems(items) {
+    try {
+        var itemsElement = document.querySelector('.items');
+        var itemsHtml = items.map(function (item) {
+            return "\n            <div class=\"items__item item\" id=\"" + item.itemUuid + "\" style=\"border: 1px solid black; border-radius: 10px;\">\n                <h2 class=\"item__item item__item--detail-1\">" + item.itemDetail1 + "</h2>\n                <p class=\"item__item item__item--detail-2\">" + item.itemDetail2 + "</p>\n                <button style=\"background-color: darkred; color: white; display: inline-block;\" class=\"item__item item__item--delete\" onclick=\"removeItem('" + item.itemUuid + "')\">DELETE</button>\n                <button style=\"background-color: blue; color: white; display: inline-block;\" class=\"item__item item__item--update\" onclick=\"renderUpdateItemForm('" + item.itemUuid + "')\">UPDATE</button>\n            </div>";
+        }).join('');
+        itemsElement.innerHTML = itemsHtml;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        console.error(error.message);
     }
 }
-(function () { return __awaiter(_this, void 0, void 0, function () {
-    var _a, _b, _c, _d;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
-            case 0:
-                _b = (_a = console).log;
-                return [4 /*yield*/, getImages('/beaches/all')];
-            case 1:
-                _b.apply(_a, [_e.sent()]);
-                _d = (_c = console).log;
-                return [4 /*yield*/, getImages('/drinks/first')];
-            case 2:
-                _d.apply(_c, [_e.sent()]);
-                return [2 /*return*/];
-        }
+function removeItem(itemUuid) {
+    return __awaiter(this, void 0, void 0, function () {
+        var _a, data, error, items, error_3;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios["delete"]("/items/" + itemUuid)];
+                case 1:
+                    _a = _b.sent(), data = _a.data, error = _a.error;
+                    if (error)
+                        throw error;
+                    items = data.items;
+                    renderItems(items);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_3 = _b.sent();
+                    console.error(error_3.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
     });
-}); })();
+}
+function renderUpdateItemForm(itemUuid) {
+    try {
+        var itemElement = document.querySelector("#" + itemUuid);
+        var itemDetail1 = itemElement.querySelector('.item__item--detail-1').innerText;
+        var itemDetail2 = itemElement.querySelector('.item__item--detail-2').innerText;
+        var updateItemFormHtml = "\n            <form class=\"items__item items__item--update-form item\" id=\"" + itemUuid + "\" onsubmit=\"updateItem(event)\">\n                <input class=\"item__item item__item--detail-1\" name=\"updatedItemDetail1\" value=" + itemDetail1 + " />\n                <input class=\"item__item item__item--detail-2\" name=\"updatedItemDetail2\" value=" + itemDetail2 + " />\n                <input type=\"submit\" class=\"item__item item__item--update\" style=\"background-color: blue; color: white; display: inline-block;\" value=\"UPDATE\" />\n            </form>";
+        itemElement.innerHTML = updateItemFormHtml;
+    }
+    catch (error) {
+        console.error(error.message);
+    }
+}
+function updateItem(ev) {
+    return __awaiter(this, void 0, void 0, function () {
+        var itemElement, itemUuid, updatedItemDetail1, updatedItemDetail2, _a, data, error, item, updateItemDivHtml, error_4;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _b.trys.push([0, 2, , 3]);
+                    ev.preventDefault();
+                    itemElement = ev.target.parentElement;
+                    itemUuid = itemElement.getAttribute('id');
+                    updatedItemDetail1 = ev.target.elements.updatedItemDetail1.value;
+                    updatedItemDetail2 = ev.target.elements.updatedItemDetail2.value;
+                    ev.target.reset();
+                    return [4 /*yield*/, axios.put('/items/', { itemUuid: itemUuid, updatedItemDetail1: updatedItemDetail1, updatedItemDetail2: updatedItemDetail2 })];
+                case 1:
+                    _a = _b.sent(), data = _a.data, error = _a.error;
+                    if (error)
+                        throw error;
+                    item = data.item;
+                    updateItemDivHtml = "\n        <div class=\"items__item item\" id=\"" + item.itemUuid + "\">\n        <h2 class=\"item__item item__item--detail-1\">" + item.itemDetail1 + "</h2>\n        <p class=\"item__item item__item--detail-2\">" + item.itemDetail2 + "</p>\n        <button style=\"background-color: darkred; color: white; display: inline-block;\" class=\"item__item item__item--delete\" onclick=\"removeItem('" + item.itemUuid + "')\">DELETE</button>\n        <button style=\"background-color: blue; color: white; display: inline-block;\" class=\"item__item item__item--update\" onclick=\"renderUpdateItemForm('" + item.itemUuid + "')\">UPDATE</button>\n        </div>";
+                    ev.target.reset();
+                    itemElement.innerHTML = updateItemDivHtml;
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_4 = _b.sent();
+                    console.error(error_4.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+getAllItems();
