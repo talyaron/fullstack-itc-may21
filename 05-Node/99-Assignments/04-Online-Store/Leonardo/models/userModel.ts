@@ -69,7 +69,7 @@ export class Users {
             if (userInfo) {
                 return userInfo;
             } else {
-                return undefined
+                return undefined //YS: throw new Error("User not found")
             }
         } catch (error) {
             console.error(error);
@@ -82,7 +82,7 @@ export class Users {
             if (userInfo) {
                 return userInfo;
             } else {
-                return undefined
+                return undefined //YS: throw new Error("User not found")
             }
         } catch (error) {
             console.error(error);

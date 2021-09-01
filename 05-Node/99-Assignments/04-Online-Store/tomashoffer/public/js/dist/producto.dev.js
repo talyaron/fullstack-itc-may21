@@ -77,6 +77,7 @@ function logOut() {
 
         case 2:
           logOut = _context3.sent;
+          //YS: if(logout)
           window.location.href = "http://localhost:3000/";
 
         case 4:

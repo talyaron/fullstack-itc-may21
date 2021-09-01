@@ -3,7 +3,7 @@ export { }
 //Require the package
 const nodemailer = require('nodemailer');
 
-export function sendEmail(req, res, next) {
+export function sendEmail(req, res, next) { //YS: Very nice! 
     if (req.role === 'admin') {
         const { username, email } = req.body;
 

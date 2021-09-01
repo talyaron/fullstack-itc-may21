@@ -1,0 +1,12 @@
+"use strict";
+exports.__esModule = true;
+var express = require('express');
+var router = express.Router();
+var userControllers_1 = require("../controllers/userControllers");
+var userExist_1 = require("../middleware/userExist");
+var allSchemas_1 = require("../schema/allSchemas");
+var validations_1 = require("../middleware/validations");
+var encryptPwd_1 = require("../middleware/encryptPwd");
+router.post('/register', validations_1.validateBody(allSchemas_1.registerSchema), encryptPwd_1.encryptPwd, userExist_1.userExist, userControllers_1.userRegister);
+router.post('/userLogin', userControllers_1.loginUser);
+module.exports = router;

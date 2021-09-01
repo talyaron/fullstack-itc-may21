@@ -29,6 +29,7 @@ function logIn(userLogIn) {
 
         case 3:
           response = _context.sent;
+          //YS: if(response)
           window.location.href = "/store.html";
           _context.next = 10;
           break;

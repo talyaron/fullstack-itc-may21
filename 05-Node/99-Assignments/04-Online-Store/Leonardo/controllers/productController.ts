@@ -63,8 +63,8 @@ export function editProduct(req, res) {
     try {
         const { id } = req.params;
         const allProducts = new Products();
-        const productToUpdate = allProducts.detailsProduct(id);
-        productToUpdate.name = req.body.product;
+        const productToUpdate = allProducts.detailsProduct(id); //YS: What if it doesnt find the product to update? 
+        productToUpdate.name = req.body.product; //YS: Would be better to de-structrue the req.body, DRY
         productToUpdate.description = req.body.description;
         productToUpdate.picture = req.file.filename;
         productToUpdate.price = req.body.price;

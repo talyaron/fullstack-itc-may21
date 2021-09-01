@@ -71,7 +71,7 @@ async function addProductAdmin(ev) {
             swal("Good job!", productInfo.data.message, "success");
             ev.target.reset();
             document.querySelector('#previewImage').setAttribute('src', 'img/logoLosArgento.png');
-            renderProducts(null);
+            renderProducts(productInfo.data.allProducts.products);
         }
     } catch (error) {
         swal("Ohhh no!", error.response.data, "warning");
@@ -223,7 +223,7 @@ function redirectCheckout() {
 };
 
 //Function to do a filter in the search input
-async function handleSearch() {
+async function handleSearch() { //YS: Very nice
     try {
         const searchProduct: any = document.querySelector('#search');
         const regEx: string = searchProduct.value;

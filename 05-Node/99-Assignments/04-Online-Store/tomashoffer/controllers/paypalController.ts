@@ -1,6 +1,7 @@
 export {};
 const paypal = require('paypal-rest-sdk');
 
+//YS: Very nice work! 
 paypal.configure({
     'mode': 'sandbox', //sandbox or live
     'client_id': 'AZCmPT28z6IUeZHoXnDkxbdIHB2tEM_5rh3Ke32YLYlZe90Xl7Fz9tX5A-hqyT_XUobxi5zVOhqhW1OT',

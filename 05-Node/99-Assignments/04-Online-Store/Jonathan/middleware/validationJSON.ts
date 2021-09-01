@@ -88,7 +88,7 @@ export function isProductExistAdd(req, res, next) {
         const imagePath = (image.includes(store)) ? image : `../images/${store}/${image.split('\\')[2]}`
         const allProducts: any = readAllProducts()
         const oldImage = allProducts.find(product => product.image === imagePath)
-        if (oldImage === undefined) {
+        if (oldImage === undefined) { 
             next()
         } else {
             if (imagePath === oldImage.image) throw new Error('Product already exists')

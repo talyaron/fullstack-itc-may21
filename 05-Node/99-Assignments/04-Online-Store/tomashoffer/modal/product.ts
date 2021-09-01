@@ -42,10 +42,11 @@ export class ProductMethods{
     fs.writeFileSync(pathToProductJson, JSON.stringify(allProducts));
     return allProducts;
   }
-  deleteProducto(id){
+  deleteProducto(id){ 
     const allProducts = readAllProducts();
     const deleteProd = allProducts.filter(prod => prod.id !== id);
     fs.writeFileSync(pathToProductJson, JSON.stringify(deleteProd));
+    //YS: You should return the allproducts array here
   }
   decreseStock(updateStock){
     const allProducts = readAllProducts();

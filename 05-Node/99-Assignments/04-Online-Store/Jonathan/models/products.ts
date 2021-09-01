@@ -5,6 +5,9 @@ const path = require("path");
 const allProductsJSON = path.resolve(__dirname, "./data/products.json");
 const { v4: uuidv4 } = require("uuid");
 
+
+//YS: Missing try catch
+
 export const readAllProducts = () => {
   try {
     const products = fs.readFileSync(allProductsJSON);

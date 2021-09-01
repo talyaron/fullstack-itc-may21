@@ -12,7 +12,7 @@ function handleAdminLogin(){
 async function logInAdministrador(newUser){
     try{
         const response = await axios.post('/user/adminLogIn', newUser);
-        console.log(response)
+        console.log(response) //YS: You should do something else here, like redirect
     }catch(error){
         console.log(error.response);
     }

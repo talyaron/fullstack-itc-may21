@@ -136,7 +136,7 @@ export function changeQuantity(req, res) {
         const userCart = allCarts.searchUserCart(cartId);
 
         //Search the product in the cart
-        const productExist = allCarts.searchProductInCart(productId, userCart);
+        const productExist = allCarts.searchProductInCart(productId, userCart); //YS: What if product doesnt exist? 
 
         //Have to parse because they are Strings
         productExist.quantity = quantity;

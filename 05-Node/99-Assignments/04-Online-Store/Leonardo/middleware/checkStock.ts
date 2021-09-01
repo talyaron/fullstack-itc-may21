@@ -3,7 +3,7 @@ export { };
 import { Products } from '../models/productModel';
 import { Carts } from '../models/cartModel';
 
-export function checkStockProduct(req, res, next) {
+export function checkStockProduct(req, res, next) { //YS: Very nice
     try {
         const { productId, quantity } = req.body;
         const product = new Products();
@@ -21,7 +21,7 @@ export function checkStockProduct(req, res, next) {
     }
 }
 
-export function checkStockCart(req, res, next) {
+export function checkStockCart(req, res, next) { //YS: Very nice
     try {
         const { cartId } = req.body;
 

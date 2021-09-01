@@ -13,7 +13,7 @@ export function validateRegister(schema) {
         if (!valid) {
             let propError = ajv.errors[0].instancePath.replace('/', '')
             propError = propError.charAt(0).toUpperCase() + propError.slice(1)
-            res.status(404).send({ error: `${propError}: ${ajv.errors[0]['message']}` })
+            res.status(404).send({ error: `${propError}: ${ajv.errors[0]['message']}` }) //YS: Nice 
         }
         else
             next()

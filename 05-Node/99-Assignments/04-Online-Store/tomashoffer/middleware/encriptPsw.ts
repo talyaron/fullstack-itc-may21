@@ -18,11 +18,11 @@ export async function compareLogin(req, res, next){
       const { email } = req.body;
       const allUsers = readAllUsers();
       const user = allUsers.find((user) => user.email === email);
-    if(user == null){
+    if(user == null){ //YS: if(!user)
       return res.status(400).send('Cannot find user');
     }
     try{
-       if(await bcrypt.compare(req.body.password, user.password)){
+       if(await bcrypt.compare(req.body.password, user.password)){ //YS: Don't put an await function inside an if, should be made into a varbiable. 
          next()
        }else{
         return res.status(400).send('Incorrect password');

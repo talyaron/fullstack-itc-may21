@@ -118,6 +118,7 @@ function descreaseStock() {
 
         case 2:
           getCurrentUser = _context5.sent;
+          //YS: Make this into a separate function and put it in a folder called api 
           data = getCurrentUser.data.cart;
           data.forEach(function _callee(prod) {
             var decreaseStock;

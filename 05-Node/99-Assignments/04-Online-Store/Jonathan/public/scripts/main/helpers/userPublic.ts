@@ -28,13 +28,13 @@ async function addProductCart(id, name, description, image, price, store) {
             store: store,
         }
 
-        const seeCart = await axios.get(`/user/seeCartStore/${store}`)
+        const seeCart = await axios.get(`/user/seeCartStore/${store}`) //YS: You should have these requests in a separate function/separate file called api
         const { data } = seeCart
 
         let count = data.cart.length
 
 
-        const response: any = await addCartPromise(addCartForNow)
+        const response: any = await addCartPromise(addCartForNow) //YS: You should have these requests in a separate function/separate file called api
         const { ok } = response
 
         if (ok) {

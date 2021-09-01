@@ -1,17 +1,21 @@
+const cookieParser = require('cookie-parser');
+
+const path = require('path');
+const pathToFile = path.resolve(__dirname, './public');
+
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.use(express.static('public'));
+const port = process.env.PORT || 555;
 
-//route
-const beachesRoute = require('./routes/routeBeaches');
-const drinksRoute = require('./routes/routeDrinks');
+app.use(express.json());
+app.use(express.static(pathToFile));
+app.use(cookieParser());
 
-app.use('/beaches', beachesRoute);
-app.use('/drinks', drinksRoute);
+// const userRoutes = require('./routes/userRoutes');
+const itemsRoute = require('./routes/itemsRoutes');
 
-//route
+// app.use('/user', userRoutes);
+app.use('/items', itemsRoute);
 
-
-app.listen(port, () => console.log('Server listen on port', port))
+app.listen(port, () => console.log(`App listening on port ${port}`));

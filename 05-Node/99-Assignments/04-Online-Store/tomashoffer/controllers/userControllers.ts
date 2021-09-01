@@ -1,9 +1,10 @@
 export {};
 import { User, UserMethods, readAllUsers } from "../modal/user";
 const { v4: uuidv4 } = require("uuid");
-const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser"); //YS: This is not being used
 const methodUser = new UserMethods()
 
+//YS: try/catch
 
 export function registerUser(req: any, res: any) { 
         const id = uuidv4();
