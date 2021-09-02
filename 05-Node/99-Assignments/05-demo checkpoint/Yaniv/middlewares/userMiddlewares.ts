@@ -1,5 +1,10 @@
 export {};
 
+const Ajv = require("ajv");
+const ajv = new Ajv();
+const addFormats = require("ajv-formats");
+addFormats(ajv);
+
 const { secret } = require('../../secret/dist/secret');
 const { User, Users } = require("../../models/dist/usersModel");
 const jwt = require('jsonwebtoken');
@@ -23,6 +28,27 @@ export function isLoggedInAndAuthenticated(req, res, next) {
     } catch (error) {
         console.error(error.message);
         res.status(500).send(error.message);    
+    }
+}
+
+export function validateBody(schema) {
+    try {
+        return (req, res, next) => {
+            try {
+                const valid = ajv.validate(schema, req.body);
+                if (!valid) {
+                    res.status(400).send(ajv.errors[0]["message"]);
+                    return;
+                }
+                next();
+
+            } catch (error) {
+                console.error(error.message);
+                res.status(500).send(error.message);
+            }
+        }
+    } catch (error) {
+        console.error(error.message);
     }
 }
 

@@ -3,11 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 const { welcome, register, login, logout, details, allUsers } = require('../../controllers/dist/userControllers');
-const { isLoggedInAndAuthenticated, doesUserExist, encryptPassword, validatePassword } = require('../../middlewares/dist/userMiddlewares');
+const { isLoggedInAndAuthenticated, validateBody, doesUserExist, encryptPassword, validatePassword } = require('../../middlewares/dist/userMiddlewares');
+const { userSchema } = require('../../schemas/dist/userSchema')
 
 router
     .get('/welcome', isLoggedInAndAuthenticated, doesUserExist, welcome)
-    .post('/register', doesUserExist, encryptPassword, register)
+    .post('/register', validateBody(userSchema), doesUserExist, encryptPassword, register)
     .post('/login', doesUserExist, validatePassword, login)
     .get('/logout', isLoggedInAndAuthenticated, doesUserExist, logout)
     .get('/details', isLoggedInAndAuthenticated, doesUserExist, details)

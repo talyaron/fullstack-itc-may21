@@ -34,7 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function renderUsers() {
+function renderUsers(results) {
     return __awaiter(this, void 0, void 0, function () {
         var getUsersDetails, users, usersElement, html, error_1;
         return __generator(this, function (_a) {
@@ -45,6 +45,9 @@ function renderUsers() {
                 case 1:
                     getUsersDetails = _a.sent();
                     users = getUsersDetails.data.users;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    if (results)
+                        users = results;
                     usersElement = document.querySelector('.users');
                     html = users.map(function (user) {
                         return "\n        <div class=\"users__item user\" id=\"" + user.userUuid + "\" style=\"background-color: " + user.favColor + "\">\n            <img class=\"user__item user__item--img\" src=\"" + user.imageUrl + "\" />\n            <h2 class=\"user__item user__item--name\">" + user.username + "</h2>\n        </div>";
@@ -60,4 +63,37 @@ function renderUsers() {
         });
     });
 }
-renderUsers();
+renderUsers(undefined); // all users
+var findUsersBySearchTerm = function (serachTerm) {
+    var userRegEx = new RegExp(serachTerm, 'gmi');
+    var users = JSON.parse(localStorage.getItem('users'));
+    var searchResults = users.filter(function (user) { return userRegEx.test(user.username); });
+    return searchResults;
+};
+var usersSearchForm = document.querySelector('#search-users-form');
+usersSearchForm.addEventListener('submit', handleSubmit);
+function handleSubmit(ev) {
+    try {
+        ev.preventDefault();
+        var searchTerm = ev.target.elements.searchByName.value;
+        var results = findUsersBySearchTerm(searchTerm);
+        renderUsers(results);
+        ev.target.reset();
+    }
+    catch (er) {
+        console.error(er);
+    }
+}
+var searchByNameInput = document.querySelector('#search-by-name');
+searchByNameInput.addEventListener('keyup', handleKeyUp);
+function handleKeyUp(ev) {
+    try {
+        ev.preventDefault();
+        var searchTerm = ev.target.value;
+        var results = findUsersBySearchTerm(searchTerm);
+        renderUsers(results);
+    }
+    catch (er) {
+        console.error(er);
+    }
+}

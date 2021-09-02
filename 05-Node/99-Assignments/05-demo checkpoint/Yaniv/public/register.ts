@@ -13,8 +13,7 @@ async function register(ev) {
     imageUrl = imageUrl.value;
     favColor = favColor.value;
 
-    const passRegExRule =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passRegExRule =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const passRegEx = new RegExp(passRegExRule, "gm");
     if (!passRegEx.test(password)) {
         swal({
