@@ -19,18 +19,32 @@ img {
 }
 
 .form {
+  max-width: 400px;
+  height: 40vh;
+  background: #A8C7D6;
+  margin: 60px auto;
   display: flex;
-  flex-flow: row wrap;
-  align-items: center;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 input {
   margin: 5px;
+  text-align: center;
 }
 
 #root {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.logout {
+  justify-content: center;
+  display: flex;
 }

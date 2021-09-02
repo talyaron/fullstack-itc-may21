@@ -9,15 +9,20 @@
     <link rel="stylesheet" href="style.css">
     <title>form</title>
 </head>
-<body id="body">
+<!-- <body id="body"> -->
+    <body>
+        
     <!-- <input type="search" name="search" id="search" placeholder="Search student..."> -->
     <form id="form" class="form">
-        <input type="text" name="firstname" id="firstname" placeholder="name">
+        <label>Enter your username</label>
+        <input type="text" name="firstname" id="firstname" placeholder="username">
+        <label>Enter an image</label>
         <input type="url" name="image" id="image" placeholder="image url">
+        <label>Pick your preferred color</label>
         <input type="color" name="color" id="color" >
         <input type="submit" value="Sign-in">
     </form>
-    <div id="root"></div>
+    <!-- <div id="root"></div> -->
 
     <script src="./npm/users.js"></script>
     <script src="index.js"></script>
@@ -39,6 +44,6 @@ Render all the users, with their images, in cards that have the user's preferred
 5 point: put the validation in middleware
 5 points: save specific user info in JWT cookie/bearer
 5: design patterns: (model, routes, controllers)
-5 points: use classes
+5 points: use classesd
 5 point: use typescript
  -->
