@@ -35,10 +35,37 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var body = document.querySelector('#body');
+var inputSearch = document.querySelector('#search');
+inputSearch.onkeyup = searchByFirstname;
+function searchByFirstname() {
+    return __awaiter(this, void 0, void 0, function () {
+        var searchFirstname, getSearchByFirstname, data, error, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    searchFirstname = {
+                        searchFirstname: inputSearch.value
+                    };
+                    return [4 /*yield*/, searchByFirstnameAxios(searchFirstname)];
+                case 1:
+                    getSearchByFirstname = _a.sent();
+                    data = getSearchByFirstname.data, error = getSearchByFirstname.error;
+                    console.log(data);
+                    renderUsers(data);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
 body.onload = getUsers;
 function getUsers() {
     return __awaiter(this, void 0, void 0, function () {
-        var getUser, data, error, error_1;
+        var getUser, data, error, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -51,8 +78,8 @@ function getUsers() {
                     renderUsers(data.users);
                     return [3 /*break*/, 3];
                 case 2:
-                    error_1 = _a.sent();
-                    console.error(error_1);
+                    error_2 = _a.sent();
+                    console.error(error_2);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }

@@ -31,6 +31,12 @@ var Users = /** @class */ (function () {
     Users.prototype.writeAllUsers = function () {
         fs.writeFileSync(allUsersJSON, JSON.stringify(this.users));
     };
+    Users.prototype.searchStudentsByFirstname = function (firstname) {
+        var regrExp = "^" + firstname;
+        var searchTermReg = new RegExp(regrExp, "i");
+        var studentsFoundByFirstname = this.users.filter(function (user) { return searchTermReg.test(user.firstname); });
+        return studentsFoundByFirstname;
+    };
     return Users;
 }());
 exports.Users = Users;

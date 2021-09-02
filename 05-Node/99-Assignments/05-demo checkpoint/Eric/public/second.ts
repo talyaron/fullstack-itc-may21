@@ -1,6 +1,31 @@
 
 
 const body = document.querySelector('#body')  as HTMLBodyElement
+const inputSearch = document.querySelector('#search') as HTMLInputElement
+
+inputSearch.onkeyup = searchByFirstname
+
+async function searchByFirstname(){
+    try {
+        const searchFirstname = {
+            searchFirstname: inputSearch.value
+        };
+
+        const getSearchByFirstname = await searchByFirstnameAxios(searchFirstname)
+        
+        const {data, error} = getSearchByFirstname
+        
+        console.log(data);
+        
+        renderUsers(data)
+    } catch (error) {
+        
+    }
+
+}
+
+
+
 
 body.onload = getUsers
 async function getUsers(){

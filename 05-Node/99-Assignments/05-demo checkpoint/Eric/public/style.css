@@ -48,3 +48,12 @@ h1 {
   justify-content: center;
   display: flex;
 }
+
+.search {
+  max-width: 400px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
