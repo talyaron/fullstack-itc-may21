@@ -13,11 +13,11 @@ window.onload = setTimeout( async function getBooks(){
     const getBooks = await axios('/book/getbook')
     const books = getBooks.data;
     renderBooks(books)
-}, 300)
+}, 500)
 
 
 async function renderBooks(books){
-    try{
+
     const root = document.querySelector("#tablaRender");
     let html = "";
         books.forEach((book) => {
@@ -28,18 +28,11 @@ async function renderBooks(books){
                  </tr>`;
       });
       root.innerHTML = html;
-    }catch (e) {
-        console.error(e)
     }
-}
   
 async function deleteBook(id){
-    try{
     await axios.post(`/book/delete/${id}`)
     window.location.reload()
-    }catch(e){
-        console.error(e)
-    }
 }
 
 async function searchBook(ev){

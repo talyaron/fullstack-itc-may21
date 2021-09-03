@@ -51,7 +51,7 @@ window.onload = setTimeout(function getBooks() {
       }
     }
   });
-}, 300);
+}, 500);
 
 function renderBooks(books) {
   var root, html;
@@ -59,18 +59,14 @@ function renderBooks(books) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          try {
-            root = document.querySelector("#tablaRender");
-            html = "";
-            books.forEach(function (book) {
-              html += "<tr>\n                    <th scope=\"row\">".concat(book.title, "</th>\n                     <td>").concat(book.author, "</td>\n                     <td><i onclick='deleteBook(\"").concat(book.id, "\")' class=\"fas fa-trash\"></i></td>\n                 </tr>");
-            });
-            root.innerHTML = html;
-          } catch (e) {
-            console.error(e);
-          }
+          root = document.querySelector("#tablaRender");
+          html = "";
+          books.forEach(function (book) {
+            html += "<tr>\n                    <th scope=\"row\">".concat(book.title, "</th>\n                     <td>").concat(book.author, "</td>\n                     <td><i onclick='deleteBook(\"").concat(book.id, "\")' class=\"fas fa-trash\"></i></td>\n                 </tr>");
+          });
+          root.innerHTML = html;
 
-        case 1:
+        case 4:
         case "end":
           return _context3.stop();
       }
@@ -83,26 +79,18 @@ function deleteBook(id) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          _context4.prev = 0;
-          _context4.next = 3;
+          _context4.next = 2;
           return regeneratorRuntime.awrap(axios.post("/book/delete/".concat(id)));
 
-        case 3:
+        case 2:
           window.location.reload();
-          _context4.next = 9;
-          break;
 
-        case 6:
-          _context4.prev = 6;
-          _context4.t0 = _context4["catch"](0);
-          console.error(_context4.t0);
-
-        case 9:
+        case 3:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 6]]);
+  });
 }
 
 function searchBook(ev) {
