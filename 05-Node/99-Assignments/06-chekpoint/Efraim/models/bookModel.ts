@@ -1,9 +1,9 @@
-const { books } = require('../models/models')
+const { Book, books } = require('../models/models')
 
 function searchWithRegExpTitle(searchTerm) {
     try{
         const userRegEx: RegExp = new RegExp(searchTerm, 'i');
-        const searchResults: Array<any> = books.books.filter(books => userRegEx.test(books.name));
+        const searchResults: Array<Book> = books.books.filter(books => userRegEx.test(books.name));
         return searchResults
     }catch (e) {
         console.error(e)
@@ -13,7 +13,7 @@ function searchWithRegExpTitle(searchTerm) {
 function searchWithRegExpAuthor(searchTerm) {
     try{
         const userRegEx: RegExp = new RegExp(searchTerm, 'i');
-        const searchResults: Array<any> = books.books.filter(books => userRegEx.test(books.author));
+        const searchResults: Array<Book> = books.books.filter(books => userRegEx.test(books.author));
         return searchResults
     }catch (e) {
         console.error(e)
@@ -22,7 +22,7 @@ function searchWithRegExpAuthor(searchTerm) {
 
 function updateBooks(bookID, name, author) {
     try{
-        const bookToUpdate = books.findBook(bookID)
+        const bookToUpdate: Book = books.findBook(bookID)
         bookToUpdate.name = name
         bookToUpdate.author = author
     }catch (e) {

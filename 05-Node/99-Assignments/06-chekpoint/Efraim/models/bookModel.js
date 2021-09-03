@@ -1,4 +1,4 @@
-var books = require('../models/models').books;
+var _a = require('../models/models'), Book = _a.Book, books = _a.books;
 function searchWithRegExpTitle(searchTerm) {
     try {
         var userRegEx_1 = new RegExp(searchTerm, 'i');
