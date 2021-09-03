@@ -29,8 +29,10 @@ app.post('/searchBooks', function (req, res) {
         var searchTerm = req.body.searchTerm;
         var searching_1 = new RegExp(searchTerm, 'i');
         var filteredBooks = dataBase.filter(function (book) { return searching_1.test(book.title); });
+        var filterAuthor = dataBase.filter(function (book) { return searching_1.test(book.author); });
+        var finalSearchArrayResults = filteredBooks.concat(filterAuthor);
         console.log(searchTerm);
-        res.send(filteredBooks);
+        res.send(finalSearchArrayResults);
     }
     catch (error) {
         console.log(error.message);

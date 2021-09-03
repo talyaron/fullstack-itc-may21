@@ -14,6 +14,7 @@ class Book {
     constructor(title: string, author: string) {
         this.title = title;
         this.author = author;
+
         this.id = Math.random().toString(16).slice(2);
     }
 }
@@ -35,8 +36,10 @@ app.post('/searchBooks', (req, res) => {
         const { searchTerm } = req.body;
         const searching: RegExp = new RegExp(searchTerm, 'i');
         let filteredBooks = dataBase.filter(book => searching.test(book.title))
+        let filterAuthor = dataBase.filter(book => searching.test(book.author))
+        let finalSearchArrayResults= filteredBooks.concat(filterAuthor)
         console.log(searchTerm);
-        res.send(filteredBooks)
+        res.send(finalSearchArrayResults)
     } catch (error) {
         console.log(error.message);
     }
