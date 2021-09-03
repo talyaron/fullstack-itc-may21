@@ -45,6 +45,14 @@ var Books = /** @class */ (function () {
             console.error(error);
         }
     };
+    Books.prototype.searchBooks = function (name) {
+        var regrExp = "^" + name;
+        var searchTermReg = new RegExp(regrExp, "i");
+        var booksFound = this.books.filter(function (book) {
+            return searchTermReg.test(book.bookName);
+        });
+        return booksFound;
+    };
     return Books;
 }());
 exports.Books = Books;

@@ -1,8 +1,9 @@
 export { };
 const jwt = require('jwt-simple');
-require('dotenv').config();
 
 import { Book, Books } from "../model/bookModel";
+
+
 export function addNewBook(req, res) {
     try {
         const { bookName,bookAuth } = req.body;
@@ -27,18 +28,11 @@ export function getAllBooks(req, res) {
 }
 
 
-// export function searchBooks(req, res) {
 
+export function searchBook(req, res){
+    const books = new Books();
 
-//     try {
-//         const allBooks = new Books();
-//         const regEx: string = searchUser.value;
-//         const searching: RegExp = new RegExp(regEx, 'gmi');
-
-
-//         const usersFiltered = allBooks.filter(book=> searching.test(book.));
-
-//     } catch (error) {
-        
-//     }
-// }
+    const {searchName} = req.body
+    const bookFound = books.searchBooks(searchName)
+    res.send({books:bookFound})    
+}
