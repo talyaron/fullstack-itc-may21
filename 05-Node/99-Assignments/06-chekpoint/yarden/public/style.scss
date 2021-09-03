@@ -1,0 +1,104 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-image: url('https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+    background-size: cover;
+    overflow-y: hidden;
+}
+
+h1 {
+    color: rgb(50, 53, 233);
+    width: 30vw;
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 2px solid rgb(131, 20, 20);
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #5465bd 0%, #C850C0 46%, #FFCC70 100%);
+    filter: drop-shadow(2px 2px 2px);
+}
+
+.svg {
+    text-align: center;
+    margin-top: 2em;
+}
+
+.search-form {
+    margin: 2em auto;
+    text-align: center;
+
+    &__input {
+        padding: .3em;
+        border: 5px solid turquoise;
+        width: 30vw;
+        text-align: center;
+    }
+}
+
+.main-form {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .3em;
+    filter: drop-shadow(2px 2px 2px);
+
+
+    & button {
+        margin: .5em;
+        background-color: #5465bd;
+        font-weight: bold;
+        color: antiquewhite;
+        padding: 0.5em;
+        cursor: pointer;
+    }
+}
+
+.booksWrapper {
+    margin-top: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .8em;
+
+    & .book {
+        padding: .8em;
+        text-align: center;
+        background-color: #FFCC70;
+        border-radius: 15%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &__name {
+            background-color: #C850C0;
+            filter: drop-shadow(2px 2px 2px);
+            padding: .2em;
+            border-radius: 5%;
+        }
+
+        &__author {
+            background-color: #5465bd;
+            color: #fff;
+            padding: .2em;
+            border-radius: 3%;
+        }
+    }
+}
+
+.not-found-message {
+    background-color: #FFCC70;
+    padding: .5em;
+    filter: drop-shadow(2px 2px 2px);
+}

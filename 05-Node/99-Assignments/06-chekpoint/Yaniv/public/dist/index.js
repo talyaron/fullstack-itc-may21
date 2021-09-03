@@ -56,10 +56,10 @@ var Books = /** @class */ (function () {
             this.books = this.books.sort(function (a, b) {
                 var aId = a.author;
                 var bId = b.author;
-                if (aId > bId) {
+                if (aId < bId) {
                     return -1;
                 }
-                if (aId < bId) {
+                if (aId > bId) {
                     return 1;
                 }
                 return 0;

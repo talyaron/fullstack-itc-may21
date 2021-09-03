@@ -93,10 +93,11 @@ button {
             justify-content: space-around;    
             
             &__item {
-                width: 200px;
+                width: 250px;
                 padding: 5px;
 
                 &--title {
+                    font-weight: bold;
                     word-wrap: break-word;
                 }
 
