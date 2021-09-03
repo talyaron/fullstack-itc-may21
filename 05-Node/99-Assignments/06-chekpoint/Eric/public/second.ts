@@ -47,7 +47,7 @@ function renderBooks(books){
     try {
         let html:string = ''
         const root = document.querySelector('#root')
-        books.users.forEach(book => {
+        books.books.forEach(book => {
             const {title, author} = book
             
             html += `<div >

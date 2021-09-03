@@ -1,4 +1,4 @@
-import { createUser, searchBooksData } from "../controllers/userControllers";
+import { createUser, getAllUsers, searchBooksData } from "../controllers/userControllers";
 import { validateDataBook } from "../middlewares/validationMiddleware";
 import { schemaBook } from "../schemas/userSchema";
 
@@ -8,6 +8,7 @@ const router = express.Router();
 
 
 router.post('/postUser',validateDataBook(schemaBook), createUser)
+.get('/getUsers',getAllUsers)
 .put('/searchBook',searchBooksData)
 
 

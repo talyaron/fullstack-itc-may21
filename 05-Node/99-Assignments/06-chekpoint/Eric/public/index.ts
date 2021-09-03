@@ -16,7 +16,10 @@ async function addBooks (ev){
         const newBook = {title:title, author:author}
         const book = await addBookAxios(newBook)
         
+       
         window.location.href = 'second.html'
+        
+
 
         ev.target.reset()
         
