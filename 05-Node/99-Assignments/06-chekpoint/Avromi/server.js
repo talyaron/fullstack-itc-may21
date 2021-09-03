@@ -19,6 +19,13 @@ app.post('/addBook', function (req, res) {
     console.log(dataBase);
     res.send(dataBase);
 });
+app.post('/searchBooks', function (req, res) {
+    var searchTerm = req.body.searchTerm;
+    var searching = new RegExp(searchTerm, 'i');
+    var filteredBooks = dataBase.filter(function (book) { return searching.test(book.title); });
+    console.log(searchTerm);
+    res.send(filteredBooks);
+});
 app.get('/getBooks', function (req, res) {
     res.send(dataBase);
 });

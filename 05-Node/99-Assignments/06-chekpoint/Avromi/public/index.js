@@ -37,25 +37,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var searchInput = document.querySelector("#searchInput");
 searchInput.addEventListener('keyup', function () { return __awaiter(_this, void 0, void 0, function () {
-    var regEx, searching_1, allUsers, filteredUsers, error_1;
+    var searchTerm, res, searchedbooks;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                regEx = searchInput.value;
-                searching_1 = new RegExp(regEx, 'i');
-                return [4 /*yield*/, getAllUsers()];
+                searchTerm = searchInput.value;
+                return [4 /*yield*/, axios.post("/searchBooks", { searchTerm: searchTerm })];
             case 1:
-                allUsers = _a.sent();
-                filteredUsers = allUsers.filter(function (elem) { return searching_1.test(elem.name); });
-                render(filteredUsers);
-                return [3 /*break*/, 3];
-            case 2:
-                error_1 = _a.sent();
-                console.error(error_1);
-                return [3 /*break*/, 3];
-            case 3:
-                ;
+                res = _a.sent();
+                searchedbooks = res.data;
+                render(searchedbooks);
                 return [2 /*return*/];
         }
     });
@@ -84,6 +75,7 @@ function getAllBooks() {
         });
     });
 }
+getAllBooks();
 function addBook(title, author) {
     return __awaiter(this, void 0, void 0, function () {
         var res, allBooks;

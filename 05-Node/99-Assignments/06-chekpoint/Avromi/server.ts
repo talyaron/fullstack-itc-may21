@@ -26,6 +26,15 @@ app.post('/addBook', (req, res) => {
     res.send(dataBase)
 });
 
+app.post('/searchBooks', (req, res) => {
+    const { searchTerm } = req.body;
+    const searching: RegExp = new RegExp(searchTerm, 'i');
+    let filteredBooks = dataBase.filter(book => searching.test(book.title))
+    console.log(searchTerm);
+  
+    res.send(filteredBooks)
+});
+
 app.get('/getBooks', (req, res) => {
     res.send(dataBase)
 });
