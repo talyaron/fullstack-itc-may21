@@ -1,0 +1,12 @@
+var express = require('express');
+var app = express();
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+var booksRoute = require('./routes/booksRoute');
+var port = process.env.PORT || 3000;
+var sendCookie = require('./middleware/sendCookie').sendCookie;
+app.use(express.static('public'));
+app.use(express.json());
+app.use(sendCookie);
+app.use('/books', booksRoute);
+app.listen(port, function () { return console.log('Server listen on port', port); });
