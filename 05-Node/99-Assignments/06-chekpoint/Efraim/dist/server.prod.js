@@ -1,0 +1,1 @@
+"use strict";var express=require("express"),app=express(),port=process.env.PORT||5e3;app.use(express.json()),app.use(express.static("public"));var bookRoute=require("./routes/bookRoute");app.use("/books",bookRoute),app.listen(port,function(){console.log("Listening on port ".concat(port,"..."))});

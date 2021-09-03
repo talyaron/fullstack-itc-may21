@@ -1,7 +1,8 @@
 "use strict";
 exports.__esModule = true;
-exports.getAllUser = exports.registerUser = void 0;
+exports.searchByFirstname = exports.editUser = exports.bringInfo = exports.deleteUsers = exports.getAllUser = exports.registerUser = void 0;
 var userModel_1 = require("../model/userModel");
+var fs = require('fs');
 var express = require("express");
 var app = express();
 var cookieParser = require("cookie-parser");
@@ -27,3 +28,34 @@ exports.getAllUser = function (req, res) {
     console.log(allUsers);
     res.send({ message: "Geting all user Information", allUsers: allUsers });
 };
+exports.deleteUsers = function (req, res) {
+    var id = req.params.id;
+    var allUser = new userModel_1.Users();
+    allUser.deleteUser(id);
+    res.send(allUser);
+};
+exports.bringInfo = function (req, res) {
+    var id = req.params.id;
+    var allProduct = userModel_1.readUsers();
+    var findProduct = allProduct.find(function (element) { return element.id === id; });
+    res.send(findProduct);
+};
+exports.editUser = function (req, res) {
+    var id = req.params.id;
+    var _a = req.body, name = _a.name, color = _a.color, image = _a.image;
+    var users = userModel_1.readUsers();
+    var findUser = users.find(function (element) { return element.id === id; });
+    findUser.name = name;
+    findUser.color = color;
+    findUser.image = image;
+    fs.writeFileSync("./db/users.json", JSON.stringify(users));
+    res.send(users);
+};
+function searchByFirstname(req, res) {
+    var name = req.body.name;
+    var allUser = new userModel_1.Users();
+    var findUsers = allUser.searchStudentsByFirstname(name);
+    console.log(findUsers);
+    res.send(findUsers);
+}
+exports.searchByFirstname = searchByFirstname;
