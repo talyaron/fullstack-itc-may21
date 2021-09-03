@@ -13,7 +13,7 @@ window.onload = setTimeout( async function getBooks(){
     const getBooks = await axios('/book/getbook')
     const books = getBooks.data;
     renderBooks(books)
-}, 400)
+}, 300)
 
 
 async function renderBooks(books){
