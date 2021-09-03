@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const allUsersJSON = path.resolve(__dirname, "./data/users.json");
 const { v4: uuidv4 } = require("uuid");
-
+const Regex = require("regex");
 
 export const readAllUsers = () => {
     try {

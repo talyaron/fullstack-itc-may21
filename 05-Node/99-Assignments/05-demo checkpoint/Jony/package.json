@@ -15,10 +15,13 @@
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^2.1.1",
     "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
     "jwt-simple": "^0.5.6",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "regex": "^0.1.1"
   },
   "devDependencies": {
     "typescript": "^4.4.2"

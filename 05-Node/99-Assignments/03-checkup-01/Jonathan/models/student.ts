@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const allStudentsJSON = path.resolve(__dirname, "./data/students.json");
 const { v4: uuidv4 } = require("uuid");
-
+// Regex = require("regex");
 
 export const readAllStudents = () => {
     try {
@@ -80,10 +80,14 @@ export class Students {
     }
 
     searchStudentsByLastName(lastname: string) {
-        const regrExp: string = `^${lastname}`
+        const regrExp: string = `^${lastname}` 
+        //[2-39] esto es que tenga el 2 al 3 pero tambien el 9
+        //[2-49-i] esto que tenga del 2 al 4 con el 9 y de a la i
+        //const regrExp: string = `[${lastname}]` //has that letters
         const searchTermReg: RegExp = new RegExp(regrExp, 'i');
         const studentsFoundByLastName = this.students.filter(student => searchTermReg.test(student.lastname))
-        return studentsFoundByLastName
+        // return studentsFoundByLastName
+        return studentsFoundByLastName.length === 0 ? this.students : studentsFoundByLastName
     }
 
     writeAllStudents() {
