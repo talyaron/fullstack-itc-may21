@@ -1,4 +1,5 @@
 async function handleSubmit(e){
+    try{
     e.preventDefault();
     let {title, author} = e.target.elements;
     title = title.value.toUpperCase();
@@ -7,17 +8,24 @@ async function handleSubmit(e){
     const newBook = {title, author};
     const response = await axios.post('/book/addbook', newBook);
     window.location.reload()
+    }catch(e){
+        console.error(e)
+    }
 }
 
 window.onload = setTimeout( async function getBooks(){
+    try{
     const getBooks = await axios('/book/getbook')
     const books = getBooks.data;
     renderBooks(books)
-}, 300)
+    }catch{
+        console.error(e)
+    }
+}, 380)
 
 
 async function renderBooks(books){
-
+    try{
     const root = document.querySelector("#tablaRender");
     let html = "";
         books.forEach((book) => {
@@ -28,11 +36,18 @@ async function renderBooks(books){
                  </tr>`;
       });
       root.innerHTML = html;
+    }catch (e) {
+        console.error(e)
     }
+}
   
 async function deleteBook(id){
+    try{
     await axios.post(`/book/delete/${id}`)
     window.location.reload()
+    }catch(e){
+        console.error(e)
+    }
 }
 
 async function searchBook(ev){
@@ -44,7 +59,6 @@ async function searchBook(ev){
           const bookArr = [bookSearch.data];
 
           for(let i = 0; i < bookArr.length; i++){
-            console.log(bookArr[i].title) 
             renderBooks(bookArr[i])
           }
 
