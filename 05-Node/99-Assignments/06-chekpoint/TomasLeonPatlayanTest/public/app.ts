@@ -54,7 +54,7 @@ async function searchByFirstname() {
         const root = document.getElementById('root');
         const searchFirstname = {
             name: inputSearch.value,
-            
+           
         };
         console.log(searchFirstname)
 
