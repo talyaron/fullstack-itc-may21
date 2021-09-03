@@ -21,7 +21,7 @@ exports.searchBookTitle = (req, res) =>{
     try {
         const {body} = req
         const {searchTerm} = body
-        const searchResults: Array<any> = searchWithRegExpTitle(searchTerm)
+        const searchResults: Array<Book> = searchWithRegExpTitle(searchTerm)
         res.send(searchResults)
     } catch (error) {
         console.log(error)
@@ -31,7 +31,7 @@ exports.searchBookAuthor = (req, res) =>{
     try {
         const {body} = req
         const {searchTerm} = body
-        const searchResults: Array<any> = searchWithRegExpAuthor(searchTerm)
+        const searchResults: Array<Book> = searchWithRegExpAuthor(searchTerm)
         res.send(searchResults)
     } catch (error) {
         console.log(error)
@@ -47,7 +47,7 @@ exports.getAllBooks = (req, res) =>{
 exports.deleteBooks = (req, res) =>{
     try {
         const { bookID } = req.params
-        const newBookList = books.books.filter(books => books.bookID != bookID)
+        const newBookList: Array<Book> = books.books.filter(books => books.bookID != bookID)
         books.books = newBookList
         res.send(books)
     } catch (error) {
