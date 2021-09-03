@@ -1,0 +1,12 @@
+var express = require('express');
+var app = express();
+var port = process.env.PORT || 3000;
+var cookieParser = require('cookie-parser');
+var path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/html')));
+app.use(cookieParser());
+app.use(express.json());
+var booksRoute = require("./routes/booksRoute");
+app.use('/books', booksRoute);
+app.listen(port, function () { return console.log('app Listening on port', port); });
