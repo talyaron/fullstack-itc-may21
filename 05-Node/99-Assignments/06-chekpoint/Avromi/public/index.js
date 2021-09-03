@@ -61,12 +61,6 @@ function handleSubmit(ev) {
     addBook(title, author);
     ev.target.reset();
 }
-// async function getAllBooks() {
-//     const res = await axios("/getBooks");
-//     const allBooks = res.data
-//     return allBooks;
-// }
-// getAllBooks()
 function addBook(title, author) {
     return __awaiter(this, void 0, void 0, function () {
         var res, allBooks;

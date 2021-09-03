@@ -22,12 +22,7 @@ function handleSubmit(ev) {
 
     ev.target.reset();
 }
-// async function getAllBooks() {
-//     const res = await axios("/getBooks");
-//     const allBooks = res.data
-//     return allBooks;
-// }
-// getAllBooks()
+
 
 
 async function addBook(title: string, author: string) {

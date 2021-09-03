@@ -38,7 +38,4 @@ app.post('/searchBooks', function (req, res) {
         console.log(error.message);
     }
 });
-// app.get('/getBooks', (req, res) => {
-//     res.send(dataBase)
-// });
 app.listen(PORT, function () { return console.log('Server listen on port', PORT); });
