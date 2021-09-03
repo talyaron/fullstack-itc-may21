@@ -22,12 +22,12 @@
     "type": "git",
     "url": "git+https://github.com/talyaron/fullstack-itc-may21.git"
   },
-  "author": "",
+  "author": "jony nisen",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/talyaron/fullstack-itc-may21/issues"
   },
   "homepage": "https://github.com/talyaron/fullstack-itc-may21#readme",
   "keywords": [],
-  "description": ""
+  "description": "checkpoint"
 }
