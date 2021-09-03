@@ -3,7 +3,7 @@ async function handleBookSubmit(ev) {
         ev.preventDefault()
         const bookName: string = ev.target.children.bookname.value
         const author: string = ev.target.children.author.value
-        const result: Array<any> = await axios.post("/books/addBook", {
+        const result = await axios.post("/books/addBook", {
             bookName: bookName,
             author: author
         })
@@ -46,7 +46,7 @@ async function renderBooks(bookarray) {
 }
 async function displayBooksOnLoad() {
     try {
-        const result: Array<any> = await axios.get("/books/getAllBooks")
+        const result = await axios.get("/books/getAllBooks")
         if (result.data.books) {
             renderBooks(result.data.books)
         }
@@ -63,7 +63,7 @@ async function searchTitleKeyUp(ev: any) {
     try {
         ev.preventDefault();
         const searchTerm: string = ev.target.value;
-        const results: Array<any> = await axios.post("/books/searchBookTitle", {
+        const results = await axios.post("/books/searchBookTitle", {
             searchTerm: searchTerm
         })
         await renderBooks(results.data)
@@ -78,7 +78,7 @@ async function searchAuthorKeyUp(ev: any) {
     try {
         ev.preventDefault();
         const searchTerm: string = ev.target.value;
-        const results: Array<any> = await axios.post("/books/searchBookAuthor", {
+        const results = await axios.post("/books/searchBookAuthor", {
             searchTerm: searchTerm
         })
         await renderBooks(results.data)
@@ -91,7 +91,7 @@ document.getElementById("searching-author").addEventListener("keyup", searchAuth
 
 async function deleteBook(bookID: string) {
     try {
-        const newBookArray: Array<any> = await axios.delete(`/books/deleteBooks/${bookID}`)
+        const newBookArray = await axios.delete(`/books/deleteBooks/${bookID}`)
         await renderBooks(newBookArray.data.books)
         alert("book deleted!")
     } catch (e) {
@@ -103,7 +103,7 @@ async function updateBook(bookID: string) {
     try {
         const newBookName: HTMLElement = document.getElementById(`${bookID}name`);
         const newBookAuthor: HTMLElement = document.getElementById(`${bookID}author`);
-        const updatedBooks: Array<any> = await axios.put(`/books/updateBook?id=${bookID}`, {
+        const updatedBooks = await axios.put(`/books/updateBook?id=${bookID}`, {
             bookName: newBookName.value,
             author: newBookAuthor.value
         })
