@@ -37,7 +37,7 @@ function validateBody(schema) {
             try {
                 var valid = ajv.validate(schema, req.body);
                 if (!valid) {
-                    res.status(400).send(ajv.errors[0]["message"]);
+                    res.status(409).send('Something is not right with the data you entered. Please verify and try again.'); // ajv.errors[0]["message"]
                     return;
                 }
                 next();
