@@ -7,6 +7,7 @@ function handleSubmit(e) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          _context.prev = 0;
           e.preventDefault();
           _e$target$elements = e.target.elements, title = _e$target$elements.title, author = _e$target$elements.author;
           title = title.value.toUpperCase();
@@ -16,42 +17,58 @@ function handleSubmit(e) {
             title: title,
             author: author
           };
-          _context.next = 8;
+          _context.next = 9;
           return regeneratorRuntime.awrap(axios.post('/book/addbook', newBook));
 
-        case 8:
+        case 9:
           response = _context.sent;
           window.location.reload();
+          _context.next = 16;
+          break;
 
-        case 10:
+        case 13:
+          _context.prev = 13;
+          _context.t0 = _context["catch"](0);
+          console.error(_context.t0);
+
+        case 16:
         case "end":
           return _context.stop();
       }
     }
-  });
+  }, null, null, [[0, 13]]);
 }
 
 window.onload = setTimeout(function getBooks() {
-  var getBooks, books;
+  var _getBooks, books;
+
   return regeneratorRuntime.async(function getBooks$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
+          _context2.prev = 0;
+          _context2.next = 3;
           return regeneratorRuntime.awrap(axios('/book/getbook'));
 
-        case 2:
-          getBooks = _context2.sent;
-          books = getBooks.data;
+        case 3:
+          _getBooks = _context2.sent;
+          books = _getBooks.data;
           renderBooks(books);
+          _context2.next = 11;
+          break;
 
-        case 5:
+        case 8:
+          _context2.prev = 8;
+          _context2.t0 = _context2["catch"](0);
+          console.error(e);
+
+        case 11:
         case "end":
           return _context2.stop();
       }
     }
-  });
-}, 300);
+  }, null, null, [[0, 8]]);
+}, 380);
 
 function renderBooks(books) {
   var root, html;
@@ -59,14 +76,18 @@ function renderBooks(books) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          root = document.querySelector("#tablaRender");
-          html = "";
-          books.forEach(function (book) {
-            html += "<tr>\n                    <th scope=\"row\">".concat(book.title, "</th>\n                     <td>").concat(book.author, "</td>\n                     <td><i onclick='deleteBook(\"").concat(book.id, "\")' class=\"fas fa-trash\"></i></td>\n                 </tr>");
-          });
-          root.innerHTML = html;
+          try {
+            root = document.querySelector("#tablaRender");
+            html = "";
+            books.forEach(function (book) {
+              html += "<tr>\n                    <th scope=\"row\">".concat(book.title, "</th>\n                     <td>").concat(book.author, "</td>\n                     <td><i onclick='deleteBook(\"").concat(book.id, "\")' class=\"fas fa-trash\"></i></td>\n                 </tr>");
+            });
+            root.innerHTML = html;
+          } catch (e) {
+            console.error(e);
+          }
 
-        case 4:
+        case 1:
         case "end":
           return _context3.stop();
       }
@@ -79,18 +100,26 @@ function deleteBook(id) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          _context4.next = 2;
+          _context4.prev = 0;
+          _context4.next = 3;
           return regeneratorRuntime.awrap(axios.post("/book/delete/".concat(id)));
 
-        case 2:
-          window.location.reload();
-
         case 3:
+          window.location.reload();
+          _context4.next = 9;
+          break;
+
+        case 6:
+          _context4.prev = 6;
+          _context4.t0 = _context4["catch"](0);
+          console.error(_context4.t0);
+
+        case 9:
         case "end":
           return _context4.stop();
       }
     }
-  });
+  }, null, null, [[0, 6]]);
 }
 
 function searchBook(ev) {
@@ -114,7 +143,6 @@ function searchBook(ev) {
           bookArr = [bookSearch.data];
 
           for (i = 0; i < bookArr.length; i++) {
-            console.log(bookArr[i].title);
             renderBooks(bookArr[i]);
           }
 
