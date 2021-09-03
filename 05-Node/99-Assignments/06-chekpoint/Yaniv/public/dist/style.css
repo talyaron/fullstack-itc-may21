@@ -84,10 +84,11 @@ button:hover {
   justify-content: space-around;
 }
 .books-main .books .book__item {
-  width: 200px;
+  width: 250px;
   padding: 5px;
 }
 .books-main .books .book__item--title {
+  font-weight: bold;
   word-wrap: break-word;
 }
 .books-main .books .book__item--author {
