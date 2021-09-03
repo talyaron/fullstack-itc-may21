@@ -63,7 +63,6 @@ var addUser = function (event) { return __awaiter(_this, void 0, void 0, functio
                 name = event.target.elements[0].value;
                 imgUrl = event.target.elements[1].value;
                 color = event.target.elements[2].value;
-                console.log(name, imgUrl, color);
                 if (!name || !imgUrl || !color)
                     throw new Error('Missing input');
                 return [4 /*yield*/, axios.post('/users/addUser', { name: name, imgUrl: imgUrl, color: color })];
@@ -74,6 +73,7 @@ var addUser = function (event) { return __awaiter(_this, void 0, void 0, functio
                 users = data.users;
                 event.target.reset();
                 renderUsers(users);
+                console.log(users);
                 return [3 /*break*/, 3];
             case 2:
                 error_2 = _b.sent();

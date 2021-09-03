@@ -9,7 +9,12 @@ async function addUserAxios(newUser) {
 }
 
 async function getUsersAxios() {
-    const response = await axios.get('/user/getUser')
+    const response = await axios.get('/user/getUsers')
+    return response
+}
+
+async function searchByFirstnameAxios(searchFirstname) {
+    const response = await axios.put('/user/searchByFirstname', searchFirstname)
     return response
 }
 

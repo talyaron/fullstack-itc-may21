@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png"/>
+    <link rel="stylesheet" href="./scss/index.min.css">
+    <title>Formulario</title>
+</head>
+
+<body class="body">
+    <a href="second.html" class = "link" disabled>Second Page</a>
+    <div class="container">
+        <form id="form" >
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" placeholder="enter the name">
+            <label for="image">Image URL:</label>
+            <input type="url" name="image" id="image" placeholder="enter the image">
+            <label for="color">Color:</label>
+            <input type="color" name="color" id="color" value="#ff0000">
+            <button type="submit">ADD USER</button>
+        </form>
+    </div>
+    <script src="./npm/users.js"></script>
+    <script src="./scripts/first.js"></script>
+</body>
+
+</html>

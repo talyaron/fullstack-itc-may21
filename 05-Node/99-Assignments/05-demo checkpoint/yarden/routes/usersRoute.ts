@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { get_users, add_user } = require('../controllers/usersController')
-// const { userSchemaAJV } = require('../schemas/userSchema')
-// const { validateBodyUser } = require('../middleware/validateBodyUser')
+import { get_users, add_user } from '../controllers/usersController';
+import { userSchemaAJV } from '../schemas/userSchema';
+import { validateBodyUser } from '../middleware/validateBodyUser';
+
 
 router
     .get('/allUsers', get_users)
-    .post('/addUser', add_user)
+    .post('/addUser', validateBodyUser(userSchemaAJV), add_user)
 
 module.exports = router

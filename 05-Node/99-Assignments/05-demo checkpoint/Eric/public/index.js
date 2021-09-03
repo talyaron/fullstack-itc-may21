@@ -35,34 +35,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var form = document.querySelector('#form');
-var body = document.querySelector('#body');
+// const body = document.querySelector('#body')  as HTMLBodyElement
 form.addEventListener('submit', addUsers);
-body.onload = getUsers;
-function getUsers() {
-    return __awaiter(this, void 0, void 0, function () {
-        var getUser, data, error, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, getUsersAxios()];
-                case 1:
-                    getUser = _a.sent();
-                    data = getUser.data, error = getUser.error;
-                    renderUsers(data.users);
-                    return [3 /*break*/, 3];
-                case 2:
-                    error_1 = _a.sent();
-                    console.error(error_1);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
-    });
-}
+// body.onload = getUsers
+// async function getUsers(){
+//     try {
+//         const getUser = await getUsersAxios()
+//         const {data, error} = getUser
+//         console.log(data);
+//         renderUsers(data.users)
+//     } catch (error) {
+//         console.error(error)
+//     }
+// }
 function addUsers(ev) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, firstname, image, color, newUser, user, error_2;
+        var _a, firstname, image, color, newUser, user, error_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -78,29 +66,35 @@ function addUsers(ev) {
                     return [4 /*yield*/, addUserAxios(newUser)];
                 case 2:
                     user = _b.sent();
-                    renderUsers(user.users);
+                    window.location.href = 'second.html';
+                    // renderUsers(user.users)
                     ev.target.reset();
                     return [3 /*break*/, 4];
                 case 3:
-                    error_2 = _b.sent();
-                    console.log(error_2);
+                    error_1 = _b.sent();
+                    console.log(error_1);
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
             }
         });
     });
 }
-function renderUsers(users) {
-    try {
-        var html_1 = '';
-        var root = document.querySelector('#root');
-        users.users.forEach(function (user) {
-            var firstname = user.firstname, image = user.image, color = user.color;
-            html_1 += "\n                    <div>\n                        \n                        <span>Firstname: " + firstname + "</span>\n                        <div>" + image + "</div>\n                        <div>" + color + "</div>\n                        \n                    </div>";
-        });
-        root.innerHTML = html_1;
-    }
-    catch (e) {
-        console.error(e);
-    }
-}
+// function renderUsers(users){
+//     try {
+//         let html:string = ''
+//         const root = document.querySelector('#root')
+//         users.users.forEach(user => {
+//             const {firstname, image, color} = user
+//             console.log(firstname, image, color);
+//             html += `<div class="card"  style="background:${color}">
+//                         <img src="${image}" style="width:50%">
+//                             <div class="container">
+//                                 <h4><b>Username: ${firstname}</b></h4>
+//                             </div>
+//                     </div>`
+//         });
+//         root.innerHTML = html
+//     } catch (e) {
+//         console.error(e);
+//     }
+// }

@@ -43,7 +43,18 @@ export class Users{
         fs.writeFileSync(allUsersJSON, JSON.stringify(this.users));
     }
  
-
+    searchStudentsByFirstname(firstname:string){
+        
+        
+            const regrExp: string = `^${firstname}`
+            const searchTermReg: RegExp = new RegExp(regrExp, "i")
+            
+            const studentsFoundByFirstname = this.users.filter(user => searchTermReg.test(user.firstname))
+            return studentsFoundByFirstname
+    
+        
+    
+    }
   
 }
 
