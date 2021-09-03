@@ -48,19 +48,19 @@ var Books = /** @class */ (function () {
             console.error(error);
         }
     };
-    Books.prototype.searchBooks = function (titleSerch, authorSerach) {
+    Books.prototype.searchBooks = function (titleSearch, authorSearch) {
         try {
             var books = JSON.parse(JSON.stringify(this.books));
-            var bookTitleRegEx_1 = new RegExp(titleSerch, 'gmi');
-            var bookAuthorRegEx_1 = new RegExp(authorSerach, 'gmi');
-            if ((titleSerch === '') && (authorSerach == '')) {
+            var bookTitleRegEx_1 = new RegExp(titleSearch, 'gmi');
+            var bookAuthorRegEx_1 = new RegExp(authorSearch, 'gmi');
+            if ((titleSearch === '') && (authorSearch == '')) {
                 return books;
             }
-            if (titleSerch !== '') {
-                books = this.books.filter(function (book) { return bookTitleRegEx_1.test(book.title); });
+            if (titleSearch !== '') {
+                books = books.filter(function (book) { return bookTitleRegEx_1.test(book.title); });
             }
-            if (authorSerach !== '') {
-                books = this.books.filter(function (book) { return bookAuthorRegEx_1.test(book.author); });
+            if (authorSearch !== '') {
+                books = books.filter(function (book) { return bookAuthorRegEx_1.test(book.author); });
             }
             return books;
         }

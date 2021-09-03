@@ -84,7 +84,8 @@ button:hover {
   justify-content: space-around;
 }
 .books-main .books .book__item {
-  padding: 5px 0;
+  width: 200px;
+  padding: 5px;
 }
 .books-main .books .book__item--title {
   word-wrap: break-word;
