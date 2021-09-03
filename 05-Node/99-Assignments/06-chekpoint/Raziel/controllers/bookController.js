@@ -1,8 +1,7 @@
 "use strict";
 exports.__esModule = true;
-exports.getAllBooks = exports.addNewBook = void 0;
+exports.searchBook = exports.getAllBooks = exports.addNewBook = void 0;
 var jwt = require('jwt-simple');
-require('dotenv').config();
 var bookModel_1 = require("../model/bookModel");
 function addNewBook(req, res) {
     try {
@@ -29,12 +28,10 @@ function getAllBooks(req, res) {
     }
 }
 exports.getAllBooks = getAllBooks;
-// export function searchBooks(req, res) {
-//     try {
-//         const allBooks = new Books();
-//         const regEx: string = searchUser.value;
-//         const searching: RegExp = new RegExp(regEx, 'gmi');
-//         const usersFiltered = allBooks.filter(book=> searching.test(book.));
-//     } catch (error) {
-//     }
-// }
+function searchBook(req, res) {
+    var books = new bookModel_1.Books();
+    var searchName = req.body.searchName;
+    var bookFound = books.searchBooks(searchName);
+    res.send({ books: bookFound });
+}
+exports.searchBook = searchBook;

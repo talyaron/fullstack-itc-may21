@@ -36,9 +36,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var createUser = document.querySelector("#formNewBook");
 createUser.addEventListener("submit", addNewBook);
+var inputSearch = document.querySelector('#search');
+function getAllBooks() {
+    return __awaiter(this, void 0, void 0, function () {
+        var getBooks, data, error, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios.get('/books/getBooks')];
+                case 1:
+                    getBooks = _a.sent();
+                    data = getBooks.data, error = getBooks.error;
+                    console.log(data);
+                    renderBooks(data);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    console.error(error_1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
 function addNewBook(ev) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, bookName, bookAuth, newBook, bookInfo, error_1;
+        var _a, bookName, bookAuth, newBook, bookInfo, error_2;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -56,33 +80,7 @@ function addNewBook(ev) {
                     bookInfo = _b.sent();
                     return [3 /*break*/, 3];
                 case 2:
-                    error_1 = _b.sent();
-                    console.error(error_1);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
-    });
-}
-function renderBooks(BooksToShow) {
-    return __awaiter(this, void 0, void 0, function () {
-        var root, html, book, error_2;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    root = document.querySelector("#root");
-                    html = "";
-                    return [4 /*yield*/, axios.get("/books/allBooks")];
-                case 1:
-                    book = _a.sent();
-                    BooksToShow.forEach(function (element) {
-                        return "<p>Book Name:" + element.bookName + "</p>\n        <p>Book Name:" + element.bookAuth + "</p> ";
-                    });
-                    root.innerHTML = html;
-                    return [3 /*break*/, 3];
-                case 2:
-                    error_2 = _a.sent();
+                    error_2 = _b.sent();
                     console.error(error_2);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
@@ -90,27 +88,40 @@ function renderBooks(BooksToShow) {
         });
     });
 }
+function renderBooks(books) {
+    try {
+        var html_1 = '';
+        var root = document.querySelector("#root");
+        books.forEach(function (book) {
+            var bookName = book.bookName, bookAuth = book.bookAuth;
+            html_1 += "<div >\n                              <h4><b>Book title: " + bookName + "</b></h4>\n                              <h4><b>Author: " + bookAuth + "</b></h4>\n\n                  </div>";
+        });
+        root.innerHTML = html_1;
+    }
+    catch (e) {
+        console.error(e);
+    }
+}
+inputSearch.onkeyup = handleSearch;
 function handleSearch() {
     return __awaiter(this, void 0, void 0, function () {
-        var searchBook, regEx, searching_1, book, bookFiltered, error_3;
+        var searchName, search, data, error, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    searchBook = document.querySelector("#search");
-                    regEx = searchBook.value;
-                    searching_1 = new RegExp(regEx, "gmi");
-                    return [4 /*yield*/, axios.get("/books/allBooks")];
+                    searchName = {
+                        handleSearch: inputSearch.value
+                    };
+                    return [4 /*yield*/, axios.put('/books/searchBook', searchName)];
                 case 1:
-                    book = _a.sent();
-                    bookFiltered = book.data.allBooks.books.filter(function (book) {
-                        return searching_1.test(book.bookName);
-                    });
-                    renderBooks(bookFiltered);
+                    search = _a.sent();
+                    data = search.data, error = search.error;
+                    console.log(data);
+                    renderBooks(data);
                     return [3 /*break*/, 3];
                 case 2:
                     error_3 = _a.sent();
-                    console.error(error_3);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }

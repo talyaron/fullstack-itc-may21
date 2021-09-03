@@ -27,7 +27,7 @@ async function searchByTitle(){
 
 
 
-body.onload = getBooks
+// body.onload = getBooks
 async function getBooks(){
     try {
         const getBook = await getBooksAxios()
@@ -50,12 +50,9 @@ function renderBooks(books){
         books.books.forEach(book => {
             const {title, author} = book
             
-            html += `<div class="card">
-                            <div class="container">
+            html += `<div >
                                 <h4><b>Book title: ${title}</b></h4>
                                 <h4><b>Author: ${author}</b></h4>
-
-                            </div>
                     </div>`
           
             

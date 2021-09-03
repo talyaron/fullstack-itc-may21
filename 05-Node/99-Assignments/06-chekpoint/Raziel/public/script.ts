@@ -1,5 +1,22 @@
 const createUser = document.querySelector("#formNewBook");
 createUser.addEventListener("submit", addNewBook);
+const inputSearch = document.querySelector('#search');
+
+
+async function getAllBooks(){
+  try {
+      const getBooks = await axios.get('/books/getBooks');
+      const {data, error} = getBooks
+      console.log(data);
+      
+      renderBooks(data)
+
+  } catch (error) {
+      console.error(error)
+      
+  }
+}
+
 
 async function addNewBook(ev) {
   try {
@@ -19,40 +36,56 @@ async function addNewBook(ev) {
   }
 }
 
-async function renderBooks(BooksToShow) {
+
+
+
+function renderBooks(books){
   try {
-    const root: HTMLElement = document.querySelector("#root");
+      let html:string = ''
+      const root: HTMLElement = document.querySelector("#root");
 
-    let html: any = "";
-    const book = await axios.get(`/books/allBooks`);
-    
+      books.forEach(book => {
+          const {bookName, bookAuth} = book
+          
+          html += `<div >
+                              <h4><b>Book title: ${bookName}</b></h4>
+                              <h4><b>Author: ${bookAuth}</b></h4>
 
-    BooksToShow.forEach((element) => {
-        return `<p>Book Name:${element.bookName}</p>
-        <p>Book Name:${element.bookAuth}</p> `;
-      })
-    
-
-    root.innerHTML = html;
-
-  } catch (error) {
-    console.error(error);
+                  </div>`
+        
+          
+      });
+      root.innerHTML = html
+      
+  } catch (e) {
+      console.error(e);
+      
   }
+
 }
 
-
+inputSearch.onkeyup = handleSearch;
 
 async function handleSearch() {
-  try {
-    const searchBook: any = document.querySelector("#search");
-    const regEx: string = searchBook.value;
-    const searching: RegExp = new RegExp(regEx, "gmi");
-    const book = await axios.get(`/books/allBooks`);
-    const bookFiltered = book.data.allBooks.books.filter((book) =>
-      searching.test(book.bookName )
-    );
-    renderBooks(bookFiltered);
-  } catch (error) {
-    console.error(error);
-  }
+
+try {
+
+  const searchName={
+    handleSearch: inputSearch.value;
+   }
+   
+      const search = await axios.put('/books/searchBook',searchName)
+    
+          const {data, error} = search
+          
+          console.log(data);
+          
+          renderBooks(data)
+  
+} catch (error) {
+  
 }
+
+
+}
+

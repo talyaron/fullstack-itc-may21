@@ -62,7 +62,7 @@ function searchByTitle() {
         });
     });
 }
-body.onload = getBooks;
+// body.onload = getBooks
 function getBooks() {
     return __awaiter(this, void 0, void 0, function () {
         var getBook, data, error, error_2;
@@ -92,7 +92,7 @@ function renderBooks(books) {
         var root = document.querySelector('#root');
         books.books.forEach(function (book) {
             var title = book.title, author = book.author;
-            html_1 += "<div class=\"card\">\n                            <div class=\"container\">\n                                <h4><b>Book title: " + title + "</b></h4>\n                                <h4><b>Author: " + author + "</b></h4>\n\n                            </div>\n                    </div>";
+            html_1 += "<div >\n                                <h4><b>Book title: " + title + "</b></h4>\n                                <h4><b>Author: " + author + "</b></h4>\n                    </div>";
         });
         root.innerHTML = html_1;
     }
