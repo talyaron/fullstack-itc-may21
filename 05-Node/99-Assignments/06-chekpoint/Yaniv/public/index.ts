@@ -34,8 +34,8 @@ class Books {
       this.books = this.books.sort((a: Book, b: Book) => {
         const aId = a.author;
         const bId = b.author;
-        if (aId > bId) {return -1;}
-        if (aId < bId) {return 1;}
+        if (aId < bId) {return -1;}
+        if (aId > bId) {return 1;}
         return 0;
       });
 
