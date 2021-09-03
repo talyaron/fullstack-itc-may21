@@ -1,0 +1,1 @@
+export const secret:string = 'A12B3C4D'
