@@ -1,5 +1,4 @@
 async function handleSubmit(e){
-    try{
     e.preventDefault();
     let {title, author} = e.target.elements;
     title = title.value.toUpperCase();
@@ -8,20 +7,13 @@ async function handleSubmit(e){
     const newBook = {title, author};
     const response = await axios.post('/book/addbook', newBook);
     window.location.reload()
-    }catch(e){
-        console.error(e)
-    }
 }
 
 window.onload = setTimeout( async function getBooks(){
-    try{
     const getBooks = await axios('/book/getbook')
     const books = getBooks.data;
     renderBooks(books)
-    }catch{
-        console.error(e)
-    }
-}, 380)
+}, 300)
 
 
 async function renderBooks(books){

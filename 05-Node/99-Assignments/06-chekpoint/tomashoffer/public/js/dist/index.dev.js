@@ -7,7 +7,6 @@ function handleSubmit(e) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
           e.preventDefault();
           _e$target$elements = e.target.elements, title = _e$target$elements.title, author = _e$target$elements.author;
           title = title.value.toUpperCase();
@@ -17,58 +16,42 @@ function handleSubmit(e) {
             title: title,
             author: author
           };
-          _context.next = 9;
+          _context.next = 8;
           return regeneratorRuntime.awrap(axios.post('/book/addbook', newBook));
 
-        case 9:
+        case 8:
           response = _context.sent;
           window.location.reload();
-          _context.next = 16;
-          break;
 
-        case 13:
-          _context.prev = 13;
-          _context.t0 = _context["catch"](0);
-          console.error(_context.t0);
-
-        case 16:
+        case 10:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 13]]);
+  });
 }
 
 window.onload = setTimeout(function getBooks() {
-  var _getBooks, books;
-
+  var getBooks, books;
   return regeneratorRuntime.async(function getBooks$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.prev = 0;
-          _context2.next = 3;
+          _context2.next = 2;
           return regeneratorRuntime.awrap(axios('/book/getbook'));
 
-        case 3:
-          _getBooks = _context2.sent;
-          books = _getBooks.data;
+        case 2:
+          getBooks = _context2.sent;
+          books = getBooks.data;
           renderBooks(books);
-          _context2.next = 11;
-          break;
 
-        case 8:
-          _context2.prev = 8;
-          _context2.t0 = _context2["catch"](0);
-          console.error(e);
-
-        case 11:
+        case 5:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 8]]);
-}, 380);
+  });
+}, 300);
 
 function renderBooks(books) {
   var root, html;
