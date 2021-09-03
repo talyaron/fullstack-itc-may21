@@ -51,7 +51,7 @@ window.onload = setTimeout(function getBooks() {
       }
     }
   });
-}, 300);
+}, 400);
 
 function renderBooks(books) {
   var root, html;
