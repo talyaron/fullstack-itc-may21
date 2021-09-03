@@ -6,8 +6,9 @@ export const schemaUsers = {
       email: { type: 'string', format: 'email' },
       password: { type: 'string', minLength: 3 },
       color: { type: 'string' },
+      image: { type: 'string' },
     },
-    required: ['name', 'email', 'password', 'color'],
+    required: ['name', 'email', 'password', 'color', 'image'],
     additionalProperties: false,
   };
 

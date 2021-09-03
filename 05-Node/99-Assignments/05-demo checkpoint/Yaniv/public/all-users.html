@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./dist/style.min.css">
-    <title>All users</title>
+    <title>Color users</title>
 </head>
 
 <body>
@@ -28,7 +28,13 @@
     </nav>
 
     <main class="main">
-        <h1 class="main__item">All users</h1>
+        <h1 class="main__item">Color users</h1>
+
+        <form class="main__item main__item--search-users" id="search-users-form">
+            <label for="searchByName">Search user by name</label>
+            <input type="search" name="searchByName" id="search-by-name" placeholder="Search user by name..." onkeyup="handleKeyUp(event)">
+            <input type="submit" value="Search" id="submit">
+        </form>
 
         <div class="main__item users">
 

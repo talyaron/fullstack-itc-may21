@@ -1,7 +1,9 @@
 "use strict";
 exports.__esModule = true;
-exports.getUsers = exports.addUser = void 0;
+exports.searchByFirstname = exports.getUsers = exports.addUser = void 0;
 var users_1 = require("../models/users");
+// const jwt = require('jwt-simple');
+// import { secret } from './secret/secret';
 var users = new users_1.Users();
 function addUser(req, res) {
     var _a = req.body, firstname = _a.firstname, image = _a.image, color = _a.color;
@@ -14,3 +16,9 @@ function getUsers(req, res) {
     res.send({ users: users });
 }
 exports.getUsers = getUsers;
+function searchByFirstname(req, res) {
+    var searchFirstname = req.body.searchFirstname;
+    var findUsers = users.searchStudentsByFirstname(searchFirstname);
+    res.send({ users: findUsers });
+}
+exports.searchByFirstname = searchByFirstname;

@@ -11,11 +11,12 @@ function readAllUsers() {
 exports.readAllUsers = readAllUsers;
 ;
 var User = /** @class */ (function () {
-    function User(name, email, password, color, id) {
+    function User(name, email, password, color, image, id) {
         (this.name = name),
             (this.email = email),
             (this.password = password),
             (this.color = color),
+            (this.image = image),
             (this.id = id);
     }
     return User;
@@ -26,11 +27,9 @@ var UserMethods = /** @class */ (function () {
         this.users = readAllUsers();
     }
     UserMethods.prototype.updateJsonUsers = function () {
-        console.log('updateJsonUsers');
         fs.writeFileSync(pathToUsersJson, JSON.stringify(this.users));
     };
     UserMethods.prototype.addUser = function (user) {
-        console.log('user:', user);
         this.users.push(user);
         this.updateJsonUsers();
     };

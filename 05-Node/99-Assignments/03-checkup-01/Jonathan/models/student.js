@@ -5,6 +5,7 @@ var fs = require("fs");
 var path = require("path");
 var allStudentsJSON = path.resolve(__dirname, "./data/students.json");
 var uuidv4 = require("uuid").v4;
+// Regex = require("regex");
 exports.readAllStudents = function () {
     try {
         var allStudents = fs.readFileSync(allStudentsJSON);
@@ -65,9 +66,13 @@ var Students = /** @class */ (function () {
     };
     Students.prototype.searchStudentsByLastName = function (lastname) {
         var regrExp = "^" + lastname;
+        //[2-39] esto es que tenga el 2 al 3 pero tambien el 9
+        //[2-49-i] esto que tenga del 2 al 4 con el 9 y de a la i
+        //const regrExp: string = `[${lastname}]` //has that letters
         var searchTermReg = new RegExp(regrExp, 'i');
         var studentsFoundByLastName = this.students.filter(function (student) { return searchTermReg.test(student.lastname); });
-        return studentsFoundByLastName;
+        // return studentsFoundByLastName
+        return studentsFoundByLastName.length === 0 ? this.students : studentsFoundByLastName;
     };
     Students.prototype.writeAllStudents = function () {
         fs.writeFileSync(allStudentsJSON, JSON.stringify(this.students));
