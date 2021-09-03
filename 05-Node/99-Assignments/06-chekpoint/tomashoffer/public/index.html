@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckPoint NODE JS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <div style="width: 60%;"class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">ADD AND SEARCH BOOKS!</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" id="searchBar" placeholder="Search" aria-label="Search">
+                </form>
+              </div>
+            </div>
+          </nav>
+
+        <form onsubmit="handleSubmit(event)">
+            <div class="mb-3">
+              <label class="form-label">Title of Book</label>
+              <input type="text" class="form-control" name="title">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Author</label>
+              <input type="text" class="form-control" name="author">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tablaRender">
+                
+             </tbody>
+          </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var express = require('express');
+var router = express.Router();
+var bookController_1 = require("../controllers/bookController");
+var validateBody_1 = require("../middleware/validateBody");
+var cookie_1 = require("../middleware/cookie");
+var Schemas = require("../schemas/bookSchemas");
+router.get('/allBooks', bookController_1.getAllBooks);
+router.post('/newBook', validateBody_1.validateBody(Schemas.bookAddSchemaFJS), cookie_1.writeBookCookie, bookController_1.addNewBook);
+module.exports = router;

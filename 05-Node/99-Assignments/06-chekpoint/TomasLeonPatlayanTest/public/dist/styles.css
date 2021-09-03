@@ -1,0 +1,52 @@
+.container {
+  width: 95%;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+legend {
+  font-size: 2rem;
+  color: grey;
+}
+
+label {
+  font-weight: 700;
+  text-transform: uppercase;
+  display: block;
+}
+
+input:not([type=submit]) {
+  padding: 1rem;
+  display: block;
+  width: 85%;
+  background-color: #fff;
+  border: 1px solid gray;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+button {
+  background-color: #71B100;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 1rem 3rem;
+  text-align: center;
+  display: inline-block;
+  border: none;
+}
+button:hover {
+  cursor: pointer;
+}
+
+#root {
+  display: flex;
+  justify-content: space-between;
+  margin: 5rem;
+}
+
+.books {
+  width: 250px;
+  height: 250px;
+  background-color: red;
+}

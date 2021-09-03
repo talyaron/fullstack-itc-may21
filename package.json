@@ -10,6 +10,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "jwt-simple": "^0.5.6",
+    "regexp": "^1.0.0",
     "uuidv4": "^6.2.12"
   },
   "name": "fullstack-itc-may21",
@@ -22,12 +23,12 @@
     "type": "git",
     "url": "git+https://github.com/talyaron/fullstack-itc-may21.git"
   },
-  "author": "",
+  "author": "jony nisen",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/talyaron/fullstack-itc-may21/issues"
   },
   "homepage": "https://github.com/talyaron/fullstack-itc-may21#readme",
   "keywords": [],
-  "description": ""
+  "description": "checkpoint"
 }
