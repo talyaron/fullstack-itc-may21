@@ -5,6 +5,7 @@ var fs = require("fs");
 var path = require("path");
 var allUsersJSON = path.resolve(__dirname, "./data/users.json");
 var uuidv4 = require("uuid").v4;
+var Regex = require("regex");
 exports.readAllUsers = function () {
     try {
         var allUsers = fs.readFileSync(allUsersJSON);
