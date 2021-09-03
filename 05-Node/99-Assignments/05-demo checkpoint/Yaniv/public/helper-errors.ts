@@ -16,6 +16,7 @@ window.axios.interceptors.response.use(function (response) {
             break;
         case 409:
             title = "Conflict";
+            if (!text) text = error.response.data;
             break;    
         case 500:
             title = "Server Request Issue";
