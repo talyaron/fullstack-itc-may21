@@ -8,15 +8,6 @@ searchInput.addEventListener('keyup', async () => {
     const res = await axios.post("/searchBooks", {searchTerm});
     const searchedbooks = res.data
     render(searchedbooks)
-    // try {
-    //     const regEx: string = searchInput.value;
-    //     const searching: RegExp = new RegExp(regEx, 'i');
-    //     let allBooks = await getAllBooks()
-    //     let filteredUsers = allBooks.filter(elem => searching.test(elem.title))
-    //     render(filteredUsers);
-    // } catch (error) {
-    //     console.error(error);
-    // };
 });
 
 const form = document.querySelector('form')
@@ -31,12 +22,12 @@ function handleSubmit(ev) {
 
     ev.target.reset();
 }
-async function getAllBooks() {
-    const res = await axios("/getBooks");
-    const allBooks = res.data
-    return allBooks;
-}
-getAllBooks()
+// async function getAllBooks() {
+//     const res = await axios("/getBooks");
+//     const allBooks = res.data
+//     return allBooks;
+// }
+// getAllBooks()
 
 
 async function addBook(title: string, author: string) {

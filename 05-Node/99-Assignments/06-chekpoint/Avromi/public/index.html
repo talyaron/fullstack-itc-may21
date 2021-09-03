@@ -11,22 +11,40 @@
 </head>
 
 <body>
-    <h2>Library</h2>
-    <form>
-        <input type="text" name="title" placeholder="Title...">
-        <input type="text" name="author" placeholder="Author...">
-        <input type="submit" value="Submit">
-    </form>
+    <nav>
+        <h2>Library</h2>
+        <div class="searchDiv">
+            <p>
+                <label>Search: </label>
+            <input type="search" name="search" id="searchInput" placeholder="Search...">
+            </p>
+        </div>
+    </nav>
+    <div class="shade">
+        <div class="blackboard">
+            <form class="form">
+                <p>
+                    <label>Title</label>
+                    <input type="text" name="title" placeholder="Title...">
+                </p>
+                <p>
+                    <label>Author: </label>
+                    <input type="text" name="author" placeholder="Author...">
+                </p>
 
-
-    <div class="searchDiv">
-        <input type="search" name="search" id="searchInput" placeholder="Search...">
+                <p class="wipeout">
+                    <input type="submit" value="Submit">
+                </p>
+            </form>
+        </div>
     </div>
+
+
 
     <div class="root"></div>
 
 
-  <script src="index.js"></script>
+    <script src="index.js"></script>
 
 </body>
 

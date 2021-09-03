@@ -13,20 +13,30 @@ var Book = /** @class */ (function () {
     return Book;
 }());
 app.post('/addBook', function (req, res) {
-    var _a = req.body, title = _a.title, author = _a.author;
-    var book = new Book(title, author);
-    dataBase.push(book);
-    console.log(dataBase);
-    res.send(dataBase);
+    try {
+        var _a = req.body, title = _a.title, author = _a.author;
+        var book = new Book(title, author);
+        dataBase.push(book);
+        console.log(dataBase);
+        res.send(dataBase);
+    }
+    catch (error) {
+        console.log(error.meesage);
+    }
 });
 app.post('/searchBooks', function (req, res) {
-    var searchTerm = req.body.searchTerm;
-    var searching = new RegExp(searchTerm, 'i');
-    var filteredBooks = dataBase.filter(function (book) { return searching.test(book.title); });
-    console.log(searchTerm);
-    res.send(filteredBooks);
+    try {
+        var searchTerm = req.body.searchTerm;
+        var searching_1 = new RegExp(searchTerm, 'i');
+        var filteredBooks = dataBase.filter(function (book) { return searching_1.test(book.title); });
+        console.log(searchTerm);
+        res.send(filteredBooks);
+    }
+    catch (error) {
+        console.log(error.message);
+    }
 });
-app.get('/getBooks', function (req, res) {
-    res.send(dataBase);
-});
+// app.get('/getBooks', (req, res) => {
+//     res.send(dataBase)
+// });
 app.listen(PORT, function () { return console.log('Server listen on port', PORT); });
