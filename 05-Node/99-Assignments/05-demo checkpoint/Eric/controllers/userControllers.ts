@@ -1,6 +1,6 @@
 import {User, Users} from '../models/users'
-// const jwt = require('jwt-simple');
-// import { secret } from './secret/secret';
+const jwt = require('jwt-simple');
+import { secret } from './secret/secret';
 
 const users = new Users()
 

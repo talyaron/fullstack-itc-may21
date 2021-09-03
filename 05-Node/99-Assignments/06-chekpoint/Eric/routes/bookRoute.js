@@ -1,0 +1,13 @@
+"use strict";
+exports.__esModule = true;
+var express = require('express');
+var router = express.Router();
+var bookControllers_1 = require("../controllers/bookControllers");
+var validationModel_1 = require("../middleware/validationModel");
+var validationSchemas_1 = require("../middleware/validationSchemas");
+var allSchemas_1 = require("../schemas/allSchemas");
+var handleCookies_1 = require("../middleware/handleCookies");
+router.post('/addBook', validationSchemas_1.validateBook(allSchemas_1.schemaBook), validationModel_1.isTitleExist, handleCookies_1.writeCookie, bookControllers_1.addBook);
+router.get('/getBooks', bookControllers_1.getBook);
+router.put('/searchByTitle', bookControllers_1.searchByTitle);
+module.exports = router;
