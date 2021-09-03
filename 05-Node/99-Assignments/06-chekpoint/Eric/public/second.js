@@ -90,7 +90,7 @@ function renderBooks(books) {
     try {
         var html_1 = '';
         var root = document.querySelector('#root');
-        books.users.forEach(function (book) {
+        books.books.forEach(function (book) {
             var title = book.title, author = book.author;
             html_1 += "<div class=\"card\">\n                            <div class=\"container\">\n                                <h4><b>Book title: " + title + "</b></h4>\n                                <h4><b>Author: " + author + "</b></h4>\n\n                            </div>\n                    </div>";
         });

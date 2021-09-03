@@ -127,7 +127,7 @@ async function refresh() {
     }
   }
   
-  const searchProduct = (ev) => {
+const searchProduct = (ev) => {
       try {
           ev.preventDefault();
           const searchBar = ev.target.parentElement.elements.searchBar.value;
