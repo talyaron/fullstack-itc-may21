@@ -35,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
+var body = document.querySelector('#body');
 var form = document.getElementById('form');
 var postBook = function (event) { return __awaiter(_this, void 0, void 0, function () {
     var name, bookName, dataBook, postUser;
@@ -54,6 +55,25 @@ var postBook = function (event) { return __awaiter(_this, void 0, void 0, functi
     });
 }); };
 form.addEventListener('submit', postBook);
+var renderUsers = function (data) { return __awaiter(_this, void 0, void 0, function () {
+    var root, getUser, users, html;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                root = document.getElementById('root');
+                return [4 /*yield*/, axios.get('/user/getUsers')];
+            case 1:
+                getUser = _a.sent();
+                users = getUser.data.users;
+                data = users;
+                html = data.map(function (element) {
+                    return "\n     <div class=\"books\">\n     <p>" + element.name + "</p>\n     <p>" + element.bookName + "</p>\n     </div>\n     \n     \n     ";
+                }).join("");
+                root.innerHTML = html;
+                return [2 /*return*/];
+        }
+    });
+}); };
 var inputSearch = document.querySelector('#search');
 function searchByFirstnameAxios(searchFirstname) {
     return __awaiter(this, void 0, void 0, function () {
@@ -71,11 +91,12 @@ function searchByFirstnameAxios(searchFirstname) {
 inputSearch.onkeyup = searchByFirstname;
 function searchByFirstname() {
     return __awaiter(this, void 0, void 0, function () {
-        var searchFirstname, getSearchByFirstname, data, error, error_1;
+        var root, searchFirstname, getSearchByFirstname, data, error, html, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
+                    root = document.getElementById('root');
                     searchFirstname = {
                         name: inputSearch.value
                     };
@@ -85,7 +106,10 @@ function searchByFirstname() {
                     getSearchByFirstname = _a.sent();
                     console.log(getSearchByFirstname);
                     data = getSearchByFirstname.data, error = getSearchByFirstname.error;
-                    console.log(data);
+                    html = data.map(function (element) {
+                        return "\n            <div class=\"books\">\n            <p>" + element.name + "</p>\n            <p>" + element.bookName + "</p>\n            </div>\n            \n            \n            ";
+                    }).join("");
+                    root.innerHTML = html;
                     return [3 /*break*/, 3];
                 case 2:
                     error_1 = _a.sent();
@@ -95,3 +119,17 @@ function searchByFirstname() {
         });
     });
 }
+var getUser = function () { return __awaiter(_this, void 0, void 0, function () {
+    var getUsers, dataUsers;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, axios.get("/user/getUsers")];
+            case 1:
+                getUsers = _a.sent();
+                dataUsers = getUsers.data.users;
+                renderUsers(dataUsers);
+                return [2 /*return*/];
+        }
+    });
+}); };
+getUser();
