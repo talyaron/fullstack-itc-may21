@@ -9,7 +9,7 @@ const userPost = async (event) => {
   const userData = { name, color, image };
   const postUser = await axios.post("/user/register", userData);
   event.target.reset()
-  window.location.href = 'users.html'
+   window.location.href = 'users.html'
   renderUser(postUser);
 };
 formPost.addEventListener("submit", userPost);
