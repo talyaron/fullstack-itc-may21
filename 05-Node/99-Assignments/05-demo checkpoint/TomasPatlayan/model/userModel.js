@@ -30,6 +30,17 @@ var Users = /** @class */ (function () {
         this.users.push(user);
         this.reWriteUserJson();
     };
+    Users.prototype.deleteUser = function (id) {
+        this.users = this.users.filter(function (element) { return element.id !== id; });
+        this.reWriteUserJson();
+    };
+    Users.prototype.searchStudentsByFirstname = function (name) {
+        var regrExp = "^" + name;
+        var searchTermReg = new RegExp(regrExp, "i");
+        var studentsFoundByFirstname = this.users.filter(function (element) { return searchTermReg.test(element.name); });
+        console.log(studentsFoundByFirstname);
+        return studentsFoundByFirstname;
+    };
     return Users;
 }());
 exports.Users = Users;
