@@ -27,6 +27,11 @@ export const createUser = (req, res) => {
   res.send(allUsers);
 };
 
+export const  getAllUsers=(req,res)=>{
+const allUsers = new Users();
+res.send(allUsers)
+}
+
 export const searchBooksData=(req,res)=>{
     const {name}= req.body;
  console.log(name)

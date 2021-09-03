@@ -1,3 +1,4 @@
+const body = document.querySelector('#body')  as HTMLBodyElement
 const form = document.getElementById('form')
 const postBook = async (event) => {
     event.preventDefault();
@@ -12,6 +13,33 @@ const postBook = async (event) => {
 }
 form.addEventListener('submit', postBook)
 
+ 
+const renderUsers =  async (data)=>{
+const root = document.getElementById('root');
+const getUser = await axios.get('/user/getUsers');
+ const {users} = getUser.data;
+ data = users;
+
+ let html = data.map((element)=>{
+     return `
+     <div class="books">
+     <p>${element.name}</p>
+     <p>${element.bookName}</p>
+     </div>
+     
+     
+     `
+ }).join("");
+ root.innerHTML = html
+
+}
+
+ 
+
+
+
+
+
 const inputSearch = document.querySelector('#search') as HTMLInputElement
 
 async function searchByFirstnameAxios(searchFirstname) {
@@ -23,8 +51,10 @@ inputSearch.onkeyup = searchByFirstname
 
 async function searchByFirstname() {
     try {
+        const root = document.getElementById('root');
         const searchFirstname = {
-            name: inputSearch.value
+            name: inputSearch.value,
+            
         };
         console.log(searchFirstname)
 
@@ -33,11 +63,29 @@ async function searchByFirstname() {
 
         const { data, error } = getSearchByFirstname
 
-        console.log(data);
-
+        let html = data.map((element)=>{
+            return `
+            <div class="books">
+            <p>${element.name}</p>
+            <p>${element.bookName}</p>
+            </div>
+            
+            
+            `
+        }).join("");
+        root.innerHTML = html
+      
+    
 
     } catch (error) {
 
     }
 
 }
+ const getUser = async () => {
+     const getUsers = await axios.get("/user/getUsers")
+     const dataUsers = getUsers.data.users;
+     renderUsers(dataUsers)
+ }
+
+ getUser()
