@@ -59,23 +59,23 @@ export class Books {
         }
     }
 
-    searchBooks(titleSerch: string, authorSerach: string) {
+    searchBooks(titleSearch: string, authorSearch: string) {
         try {
             
             let books: Array<Book> = JSON.parse(JSON.stringify(this.books));
-            const bookTitleRegEx = new RegExp(titleSerch,'gmi');
-            const bookAuthorRegEx = new RegExp(authorSerach,'gmi');
+            const bookTitleRegEx = new RegExp(titleSearch,'gmi');
+            const bookAuthorRegEx = new RegExp(authorSearch,'gmi');
 
-            if ((titleSerch === '') && (authorSerach == '')) {
+            if ((titleSearch === '') && (authorSearch == '')) {
                 return books;
             }
-
-            if (titleSerch !== '') {
-                books = this.books.filter(book => bookTitleRegEx.test(book.title));
+            
+            if (titleSearch !== '') {
+                books = books.filter(book => bookTitleRegEx.test(book.title));
             }
-
-            if (authorSerach !== '') {
-                books = this.books.filter(book => bookAuthorRegEx.test(book.author));
+            
+            if (authorSearch !== '') {
+                books = books.filter(book => bookAuthorRegEx.test(book.author));
             }
 
             return books;

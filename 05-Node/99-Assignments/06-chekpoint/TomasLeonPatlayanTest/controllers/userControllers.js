@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.searchBooksData = exports.createUser = void 0;
+exports.searchBooksData = exports.getAllUsers = exports.createUser = void 0;
 var userModel_1 = require("../models/userModel");
 var secret_1 = require("../secret/secret");
 var fs = require("fs");
@@ -24,6 +24,10 @@ exports.createUser = function (req, res) {
         maxAge: 101011010,
         httpOnly: true
     });
+    res.send(allUsers);
+};
+exports.getAllUsers = function (req, res) {
+    var allUsers = new userModel_1.Users();
     res.send(allUsers);
 };
 exports.searchBooksData = function (req, res) {
