@@ -1,0 +1,65 @@
+.my-form{
+    margin-bottom: 3rem;
+}
+.holder{
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+    &__book-card {
+        background: url("https://cdn2.vectorstock.com/i/1000x1000/56/81/blank-book-cover-template-on-grey-background-vector-20065681.jpg");
+        background-repeat: no-repeat;
+        background-size: 400px 500px;
+            width: 400px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            margin: 0.5rem;
+            align-items: center;
+            background-color: aquamarine;
+
+        &__name{
+            background-color: whitesmoke;
+            text-align: center;
+            width: 200px;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+        &__author{
+            background-color: whitesmoke;
+            width: 200px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+        &__delete{
+            width: 100px;
+            background-color: black;
+            color:white;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin: auto;
+            margin-bottom: 8rem
+        }
+        &__delete:hover, &__update:hover{
+            cursor: pointer;
+        }
+        &__update{
+            width: 100px;
+            background-color: black;
+            color:white;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin: auto;
+            margin-top: 5rem;
+        }
+    }
+}
+.title {
+    margin-top: 8rem
+}

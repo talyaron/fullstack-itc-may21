@@ -35,5 +35,32 @@ export class Users {
     this.users.push(user);
     this.reWriteUserJson();
   }
+
+  deleteUser(id){
+    this.users = this.users.filter((element)=>element.id !== id);
+    this.reWriteUserJson()
+  }
+
+  
+  searchStudentsByFirstname(name:string){
+        
+        
+    const regrExp: string = `^${name}`
+    const searchTermReg: RegExp = new RegExp(regrExp, "i")
+ 
+
+    
+    const studentsFoundByFirstname = this.users.filter((element)=>searchTermReg.test(element.name));
+
+    
+    console.log(studentsFoundByFirstname);
+ 
+    
+    return studentsFoundByFirstname
+
+
+
+}
+
   
 }
