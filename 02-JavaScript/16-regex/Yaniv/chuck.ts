@@ -17,9 +17,9 @@ console.log(findJokesStartingWithA(jokes));
 // look for jokes with the search term enterd by the user + use the dom for entering the term and showing the jokes
 
 const findJokesbySearchTerm = (chuckJokes: Array<any>, serachTerm: string) => {
-    const userRegEx = new RegExp(serachTerm,'gmi');
+    const termRegEx = new RegExp(serachTerm,'gmi');
 
-    const searchResults: Array<any> = chuckJokes.filter(chuckJoke => userRegEx.test(chuckJoke.value));
+    const searchResults: Array<any> = chuckJokes.filter(chuckJoke => termRegEx.test(chuckJoke.value));
     return searchResults;
 }
 

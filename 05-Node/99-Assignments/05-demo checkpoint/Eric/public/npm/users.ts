@@ -13,3 +13,8 @@ async function getUsersAxios() {
     return response
 }
 
+async function searchByFirstnameAxios(searchFirstname) {
+    const response = await axios.put('/user/searchByFirstname', searchFirstname)
+    return response
+}
+

@@ -34,67 +34,70 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var form = document.querySelector('#form');
-// const body = document.querySelector('#body')  as HTMLBodyElement
-form.addEventListener('submit', addUsers);
-// body.onload = getUsers
-// async function getUsers(){
-//     try {
-//         const getUser = await getUsersAxios()
-//         const {data, error} = getUser
-//         console.log(data);
-//         renderUsers(data.users)
-//     } catch (error) {
-//         console.error(error)
-//     }
-// }
-function addUsers(ev) {
+var body = document.querySelector('#body');
+var inputSearch = document.querySelector('#search');
+inputSearch.onkeyup = searchByFirstname;
+function searchByFirstname() {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, firstname, image, color, newUser, user, error_1;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var searchFirstname, getSearchByFirstname, data, error, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    ev.preventDefault();
-                    _b.label = 1;
+                    _a.trys.push([0, 2, , 3]);
+                    searchFirstname = {
+                        searchFirstname: inputSearch.value
+                    };
+                    return [4 /*yield*/, searchByFirstnameAxios(searchFirstname)];
                 case 1:
-                    _b.trys.push([1, 3, , 4]);
-                    _a = ev.target.elements, firstname = _a.firstname, image = _a.image, color = _a.color;
-                    firstname = firstname.value;
-                    image = image.value;
-                    color = color.value;
-                    newUser = { firstname: firstname, image: image, color: color };
-                    return [4 /*yield*/, addUserAxios(newUser)];
+                    getSearchByFirstname = _a.sent();
+                    data = getSearchByFirstname.data, error = getSearchByFirstname.error;
+                    console.log(data);
+                    renderUsers(data);
+                    return [3 /*break*/, 3];
                 case 2:
-                    user = _b.sent();
-                    window.location.href = 'second.html';
-                    // renderUsers(user.users)
-                    ev.target.reset();
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _b.sent();
-                    console.log(error_1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    error_1 = _a.sent();
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
-// function renderUsers(users){
-//     try {
-//         let html:string = ''
-//         const root = document.querySelector('#root')
-//         users.users.forEach(user => {
-//             const {firstname, image, color} = user
-//             console.log(firstname, image, color);
-//             html += `<div class="card"  style="background:${color}">
-//                         <img src="${image}" style="width:50%">
-//                             <div class="container">
-//                                 <h4><b>Username: ${firstname}</b></h4>
-//                             </div>
-//                     </div>`
-//         });
-//         root.innerHTML = html
-//     } catch (e) {
-//         console.error(e);
-//     }
-// }
+body.onload = getUsers;
+function getUsers() {
+    return __awaiter(this, void 0, void 0, function () {
+        var getUser, data, error, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, getUsersAxios()];
+                case 1:
+                    getUser = _a.sent();
+                    data = getUser.data, error = getUser.error;
+                    console.log(data);
+                    renderUsers(data.users);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_2 = _a.sent();
+                    console.error(error_2);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function renderUsers(users) {
+    try {
+        var html_1 = '';
+        var root = document.querySelector('#root');
+        users.users.forEach(function (user) {
+            var firstname = user.firstname, image = user.image, color = user.color;
+            console.log(firstname, image, color);
+            html_1 += "<div class=\"card\"  style=\"background:" + color + "\">\n                        <img src=\"" + image + "\" style=\"width:50%\">\n                            <div class=\"container\">\n                                <h4><b>Username: " + firstname + "</b></h4>\n                            </div>\n                    </div>";
+        });
+        root.innerHTML = html_1;
+    }
+    catch (e) {
+        console.error(e);
+    }
+}

@@ -11,8 +11,8 @@ console.log("Chuck Norris jokes starting with the letter \"a\":");
 console.log(findJokesStartingWithA(jokes));
 // look for jokes with the search term enterd by the user + use the dom for entering the term and showing the jokes
 var findJokesbySearchTerm = function (chuckJokes, serachTerm) {
-    var userRegEx = new RegExp(serachTerm, 'gmi');
-    var searchResults = chuckJokes.filter(function (chuckJoke) { return userRegEx.test(chuckJoke.value); });
+    var termRegEx = new RegExp(serachTerm, 'gmi');
+    var searchResults = chuckJokes.filter(function (chuckJoke) { return termRegEx.test(chuckJoke.value); });
     return searchResults;
 };
 var addToDom = function (searchResults) {
