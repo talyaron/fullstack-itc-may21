@@ -57,7 +57,6 @@ function handleSubmit(ev) {
     ev.preventDefault();
     var title = ev.target.elements.title.value;
     var author = ev.target.elements.author.value;
-    console.log(title);
     addBook(title, author);
     ev.target.reset();
 }

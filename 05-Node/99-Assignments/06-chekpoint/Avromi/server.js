@@ -17,7 +17,6 @@ app.post('/addBook', function (req, res) {
         var _a = req.body, title = _a.title, author = _a.author;
         var book = new Book(title, author);
         dataBase.push(book);
-        console.log(dataBase);
         res.send(dataBase);
     }
     catch (error) {
@@ -27,12 +26,22 @@ app.post('/addBook', function (req, res) {
 app.post('/searchBooks', function (req, res) {
     try {
         var searchTerm = req.body.searchTerm;
-        var searching_1 = new RegExp(searchTerm, 'i');
-        var filteredBooks = dataBase.filter(function (book) { return searching_1.test(book.title); });
-        var filterAuthor = dataBase.filter(function (book) { return searching_1.test(book.author); });
-        var finalSearchArrayResults = filteredBooks.concat(filterAuthor);
-        console.log(searchTerm);
-        res.send(finalSearchArrayResults);
+        if (searchTerm) {
+            var searching_1 = new RegExp(searchTerm, 'i');
+            var filteredBooks = dataBase.filter(function (book) { return searching_1.test(book.title); });
+            var filterAuthor = dataBase.filter(function (book) { return searching_1.test(book.author); });
+            var finalSearchArrayResults = filteredBooks.concat(filterAuthor);
+            var map = {};
+            for (var _i = 0, finalSearchArrayResults_1 = finalSearchArrayResults; _i < finalSearchArrayResults_1.length; _i++) {
+                var element = finalSearchArrayResults_1[_i];
+                map[element.id] = element;
+            }
+            var newArray = Object.values(map);
+            res.send(newArray);
+        }
+        if (!searchTerm) {
+            res.send(dataBase);
+        }
     }
     catch (error) {
         console.log(error.message);

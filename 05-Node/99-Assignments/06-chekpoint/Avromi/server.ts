@@ -24,7 +24,6 @@ app.post('/addBook', (req, res) => {
         const { title, author } = req.body;
         const book = new Book(title, author);
         dataBase.push(book);
-        console.log(dataBase);
         res.send(dataBase)
     } catch (error) {
         console.log(error.meesage);
@@ -34,12 +33,20 @@ app.post('/addBook', (req, res) => {
 app.post('/searchBooks', (req, res) => {
     try {
         const { searchTerm } = req.body;
-        const searching: RegExp = new RegExp(searchTerm, 'i');
-        let filteredBooks = dataBase.filter(book => searching.test(book.title))
-        let filterAuthor = dataBase.filter(book => searching.test(book.author))
-        let finalSearchArrayResults= filteredBooks.concat(filterAuthor)
-        console.log(searchTerm);
-        res.send(finalSearchArrayResults)
+        if (searchTerm) {
+            const searching: RegExp = new RegExp(searchTerm, 'i');
+            let filteredBooks = dataBase.filter(book => searching.test(book.title))
+            let filterAuthor = dataBase.filter(book => searching.test(book.author))
+            let finalSearchArrayResults = filteredBooks.concat(filterAuthor)
+            const map = {};
+            for (const element of finalSearchArrayResults) {
+                map[element.id] = element;
+            }
+            const newArray = Object.values(map);
+            res.send(newArray)
+        } if (!searchTerm) {
+            res.send(dataBase)
+        }
     } catch (error) {
         console.log(error.message);
     }

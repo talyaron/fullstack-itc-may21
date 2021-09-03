@@ -1,7 +1,3 @@
-
-
-
-
 const searchInput = document.querySelector("#searchInput")
 searchInput.addEventListener('keyup', async () => {
     const searchTerm = searchInput.value
@@ -17,7 +13,6 @@ function handleSubmit(ev) {
     ev.preventDefault();
     const title = ev.target.elements.title.value;
     const author = ev.target.elements.author.value;
-    console.log(title);
     addBook(title, author)
 
     ev.target.reset();
