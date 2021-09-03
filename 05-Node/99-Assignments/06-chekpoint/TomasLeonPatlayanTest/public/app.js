@@ -77,11 +77,13 @@ function searchByFirstname() {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     searchFirstname = {
-                        searchFirstname: inputSearch.value
+                        name: inputSearch.value
                     };
+                    console.log(searchFirstname);
                     return [4 /*yield*/, searchByFirstnameAxios(searchFirstname)];
                 case 1:
                     getSearchByFirstname = _a.sent();
+                    console.log(getSearchByFirstname);
                     data = getSearchByFirstname.data, error = getSearchByFirstname.error;
                     console.log(data);
                     return [3 /*break*/, 3];

@@ -1,12 +1,12 @@
 const form = document.getElementById('form')
-const postBook = async (event)=> {
-event.preventDefault();
-const name = event.target.elements.name.value;
-const bookName = event.target.elements.bookName.value;
+const postBook = async (event) => {
+    event.preventDefault();
+    const name = event.target.elements.name.value;
+    const bookName = event.target.elements.bookName.value;
 
-const dataBook ={name,bookName};
-const postUser = await axios.post('/user/postUser', dataBook)
-console.log(postUser);
+    const dataBook = { name, bookName };
+    const postUser = await axios.post('/user/postUser', dataBook)
+    console.log(postUser);
 
 
 }
@@ -21,21 +21,23 @@ async function searchByFirstnameAxios(searchFirstname) {
 
 inputSearch.onkeyup = searchByFirstname
 
-async function searchByFirstname(){
+async function searchByFirstname() {
     try {
         const searchFirstname = {
-            searchFirstname: inputSearch.value
+            name: inputSearch.value
         };
+        console.log(searchFirstname)
 
         const getSearchByFirstname = await searchByFirstnameAxios(searchFirstname)
-        
-        const {data, error} = getSearchByFirstname
-        
+        console.log(getSearchByFirstname)
+
+        const { data, error } = getSearchByFirstname
+
         console.log(data);
-        
+
 
     } catch (error) {
-        
+
     }
 
 }

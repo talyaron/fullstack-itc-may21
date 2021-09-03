@@ -28,8 +28,8 @@ export const createUser = (req, res) => {
 };
 
 export const searchBooksData=(req,res)=>{
-    const {name}= req.body
- 
+    const {name}= req.body;
+ console.log(name)
     
     const allUsers = new Users()
     const findBook = allUsers.searchBooks(name);

@@ -28,6 +28,7 @@ exports.createUser = function (req, res) {
 };
 exports.searchBooksData = function (req, res) {
     var name = req.body.name;
+    console.log(name);
     var allUsers = new userModel_1.Users();
     var findBook = allUsers.searchBooks(name);
     res.send(findBook);
