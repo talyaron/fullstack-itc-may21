@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="styles.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <title>Register books</title>
+    <link rel="shortcut icon" href="./img/bookFavicon.png" />
+</head>
+
+<body onload="renderBooks()">
+
+    <div>
+        <form class="form" id="formNewBook">
+            <h3>Register a new book</h3>
+            <div class="form__wrapper wrapper__register">
+                <label for="bookname">Bookname:</label>
+                <input type="text" name="bookname" placeholder="Enter your book name" maxlength="50" required>
+            </div>
+
+            <div class="form__wrapper wrapper__register">
+                <label for="text">Author:</label>
+                <input type="text" name="author" placeholder="Enter the author" maxlength="50" required>
+            </div>
+
+            <div class="form__wrapper wrapper__register">
+                <label for="year">Year of the book:</label>
+                <input type="number" name="year" placeholder="Enter the year of the book" min="1900" max="2021">
+            </div>
+            <input class="form__submit--newuser" type="submit" value="Register book">
+        </form>
+    </div>
+
+    <section class="section">
+        <form onkeyup="handleSearch()">
+            <input class="form__search" type="text" name="search" id="search" placeholder="Search by book name or by author" />
+        </form>
+    </section>
+
+    <div id="root"></div>
+
+    <!-- Modal to edit a task -->
+    <div id="modalBook" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <form class="formEdit" id="formEdit" onsubmit="handleEdit(event)"></form>
+        </div>
+    </div>
+
+    <script src="helperModals.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

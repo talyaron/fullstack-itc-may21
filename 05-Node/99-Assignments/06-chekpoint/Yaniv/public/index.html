@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/3d6c8f810b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./dist/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap" rel="stylesheet">
+    <title>Awesome Books Registry</title>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Awesome Books Registry</h1>
+    </header>
+    <main class="books-main">
+        <h3>Add a Book</h3>
+        <form class="add-form" id="add-book-form">
+            <input class="add-form__item add-form__item--title" type="text" placeholder="Book title here" title="2-20 characters" minlength="2" maxlength="20" name="bookTitle" id="add-book-title" required />
+            <input class="add-form__item add-form__item--author" type="text" placeholder="Book author here" title="2-40 characters, no digits or weird characters" minlength="2" maxlength="40" name="bookAuthor" id="add-book-author" required />
+            <input class="add-form__item add-form__item--submit" type="submit" id="add-book-submit" value="Add" />
+        </form>
+
+        <h3>Search Books</h3>
+        <form class="search-form" id="search-books-form">
+            <input class="search-form__item search-form__item--title" type="text" placeholder="Search by title" title="2-20 characters" minlength="2" maxlength="20" name="bookTitle" id="search-books-title" disabled />
+            <input class="search-form__item search-form__item--author" type="text" placeholder="Search by author" title="2-40 characters, no digits or weird characters" minlength="2" maxlength="40" name="bookAuthor" id="search-books-author" disabled />
+        </form>
+        <button type="button" id="reset" style="display:none">Reset</button>
+
+        <div class="headers">
+            <h3 class="headers__item headers__item--title">Title</h3>
+            <h3 class="headers__item headers__item--author">Author</h3>
+        </div>
+
+        <div class="books-main__item books-main__item--books books">
+
+        </div>
+
+    </main>
+
+    <script src="./dist/helper-errors.js"></script>
+    <script src="./dist/helpers.js"></script>
+    <script src="./dist/index.js"></script>
+</body>
+
+</html>
