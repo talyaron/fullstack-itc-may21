@@ -22,7 +22,7 @@ var Product = /** @class */ (function () {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
-        this.productImage = productImage;
+        this.productImage = (productImage) ? "images/" + productImage : 'images/cart-wp.png';
         this.inStock = inStock;
     }
     return Product;
@@ -72,9 +72,9 @@ var Store = /** @class */ (function () {
             console.error(error.message);
         }
     };
-    Store.prototype.addProduct = function (productName, productDescription, productPrice, productImage, inStock, storeUuid) {
+    Store.prototype.addProduct = function (productName, productDescription, productPrice, filename, inStock, storeUuid) {
         try {
-            var product = new Product(undefined, this.storeUuid, productName, productDescription, productPrice, productImage, inStock);
+            var product = new Product(undefined, this.storeUuid, productName, productDescription, productPrice, filename, inStock);
             this.products.push(product);
             this.updateStoreJson();
         }
@@ -82,10 +82,11 @@ var Store = /** @class */ (function () {
             console.error(error.message);
         }
     };
-    Store.prototype.editProduct = function (productUuid, productName, productDescription, productPrice, productImage, inStock) {
+    Store.prototype.editProduct = function (productUuid, productName, productDescription, productPrice, filename, inStock) {
         try {
-            var product = new Product(productUuid, this.storeUuid, productName, productDescription, productPrice, productImage, inStock);
+            var product = new Product(productUuid, this.storeUuid, productName, productDescription, productPrice, filename, inStock);
             var productIndex = this.findProductIndex(productUuid);
+            product.productImage = this.products[productIndex].productImage;
             this.products[productIndex] = product;
             this.updateStoreJson();
         }

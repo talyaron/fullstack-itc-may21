@@ -22,8 +22,8 @@ export class Product {
     productName: string;
     productDescription: string;
     productPrice: number;
-    productImage: string; // upload file
-    inStock: number; // how many in stock
+    productImage: string; // uploaded file path
+    inStock: number;
 
     constructor (productUuid: string, storeUuid: string, productName: string, productDescription: string, productPrice: number, productImage: string, inStock: number) {
         this.productUuid = (productUuid) ? productUuid : uuidv4();
@@ -31,7 +31,7 @@ export class Product {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
-        this.productImage = productImage;
+        this.productImage = (productImage) ? `images/${productImage}` : 'images/cart-wp.png';
         this.inStock = inStock;
     }
 }
@@ -94,9 +94,9 @@ export class Store {
         }
     }
 
-    addProduct(productName: string, productDescription: string, productPrice: number, productImage: string, inStock: number, storeUuid: string) {
+    addProduct(productName: string, productDescription: string, productPrice: number, filename: string, inStock: number, storeUuid: string) {
         try {
-            const product = new Product(undefined, this.storeUuid, productName, productDescription, productPrice, productImage, inStock);
+            const product = new Product(undefined, this.storeUuid, productName, productDescription, productPrice, filename, inStock);
 
             this.products.push(product);
 
@@ -107,12 +107,13 @@ export class Store {
         }
     }
 
-    editProduct(productUuid: string, productName: string, productDescription: string, productPrice: number, productImage: string, inStock: number) {
+    editProduct(productUuid: string, productName: string, productDescription: string, productPrice: number, filename: string, inStock: number) {
         try {
-            const product = new Product(productUuid, this.storeUuid, productName, productDescription, productPrice, productImage, inStock);
-
-            const productIndex: number = this.findProductIndex(productUuid);
+            const product = new Product(productUuid, this.storeUuid, productName, productDescription, productPrice, filename, inStock);
             
+            const productIndex: number = this.findProductIndex(productUuid);
+            product.productImage = this.products[productIndex].productImage;
+
             this.products[productIndex] = product;
 
             this.updateStoreJson();
