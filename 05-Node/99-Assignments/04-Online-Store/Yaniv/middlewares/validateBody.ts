@@ -1,3 +1,5 @@
+export {};
+
 const Ajv = require("ajv");
 const ajv = new Ajv();
 const addFormats = require("ajv-formats");
@@ -9,7 +11,8 @@ export function validateBody(schema) {
       try {
         const valid = ajv.validate(schema, req.body);
         if (!valid) {
-          res.status(400).send(ajv.errors[0]["message"]);
+          console.log(ajv.errors[0]["message"]);
+          res.status(409).send({ message: `The data you enter doesn't comply with the requirements:\n${ajv.errors[0]["message"]}\n\nPlease verify and try again.` });
           return;
         }
         next();

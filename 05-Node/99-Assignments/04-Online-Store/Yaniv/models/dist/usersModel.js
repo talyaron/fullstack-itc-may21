@@ -6,7 +6,7 @@ var fs = require("fs");
 var path = require("path");
 var usersJsonPath = path.resolve(__dirname, "../users.json");
 var storeJsonPath = path.resolve(__dirname, "../store.json");
-var _a = require('./storeModel'), readStoreJson = _a.readStoreJson, Product = _a.Product, Store = _a.Store;
+var _a = require('./storeModel'), Product = _a.Product, Store = _a.Store;
 var readUsersJson = function () {
     try {
         var users = fs.readFileSync(usersJsonPath);
@@ -19,8 +19,7 @@ var readUsersJson = function () {
 var CartProduct = /** @class */ (function () {
     function CartProduct(productUuid) {
         this.productUuid = productUuid;
-        this.totalPrice = 0;
-        this.quantity = 0;
+        this.quantity = 1;
     }
     return CartProduct;
 }());
@@ -54,8 +53,6 @@ var Users = /** @class */ (function () {
         try {
             var userIndex = (userUuid) ? this.users.findIndex(function (user) { return user.userUuid === userUuid; })
                 : this.users.findIndex(function (user) { return user.email === userEmail; });
-            if ((userIndex === -1) && (userUuid))
-                throw new Error("no user with uuid " + userUuid);
             return userIndex;
         }
         catch (error) {
@@ -68,9 +65,9 @@ var Users = /** @class */ (function () {
             var storeUuid = void 0;
             if (firstAdminIndex === -1) {
                 storeUuid = uuidv4(); /// if a store doesn't exist - create it
-                var store = readStoreJson();
+                var store = new Store();
                 store.storeUuid = storeUuid;
-                fs.writeFileSync(storeJsonPath, JSON.stringify(store));
+                store.updateStoreJson();
             }
             else
                 storeUuid = this.users[firstAdminIndex].stores[0]; // else - assign the existing store (currently only 1 exists)
@@ -103,25 +100,9 @@ var Users = /** @class */ (function () {
             console.error(error.message);
         }
     };
-    Users.prototype.completeCartProductDetails = function (quantity, productUuid) {
+    Users.prototype.addCartProduct = function (shopperIndex, productUuid) {
         try {
-            var store = readStoreJson();
-            var product = store.products.find(function (product) { return product.productUuid === productUuid; });
-            var productPrice = product.productPrice;
             var cartProduct = new CartProduct(productUuid);
-            cartProduct.productName = product.productName;
-            cartProduct.quantity = quantity;
-            cartProduct.totalPrice = productPrice * quantity;
-            return cartProduct;
-        }
-        catch (error) {
-            console.error(error.message);
-        }
-    };
-    Users.prototype.addCartProduct = function (shopperUuid, productUuid) {
-        try {
-            var shopperIndex = this.findUserIndex(shopperUuid, null);
-            var cartProduct = this.completeCartProductDetails(0, productUuid);
             this.users[shopperIndex].cart.push(cartProduct);
             var cartProductIndex = this.users[shopperIndex].cart.length - 1;
             this.updateUsersJson();
@@ -131,11 +112,9 @@ var Users = /** @class */ (function () {
             console.error(error.message);
         }
     };
-    Users.prototype.findCartProduct = function (shopperIndex, productUuid, mathSign) {
+    Users.prototype.findCartProduct = function (shopperIndex, productUuid) {
         try {
             var cartProductIndex = this.users[shopperIndex].cart.findIndex(function (cartProduct) { return cartProduct.productUuid === productUuid; });
-            if ((cartProductIndex === -1) && (mathSign === '+'))
-                cartProductIndex = this.addCartProduct(this.users[shopperIndex].userUuid, productUuid);
             return cartProductIndex;
         }
         catch (error) {
@@ -152,24 +131,32 @@ var Users = /** @class */ (function () {
             console.error(error.message);
         }
     };
-    Users.prototype.updateCartProductQuantity = function (shopperUuid, productUuid, mathSign) {
+    Users.prototype.updateCartProductQuantity = function (shopperUuid, productUuid, productQuantity) {
         try {
             var shopperIndex = this.findUserIndex(shopperUuid, null);
-            var cartProductIndex = this.findCartProduct(shopperIndex, productUuid, mathSign);
-            if (mathSign === '+')
-                this.users[shopperIndex].cart[cartProductIndex].quantity++;
-            else
-                this.users[shopperIndex].cart[cartProductIndex].quantity--;
-            var cartProductQuantity = this.users[shopperIndex].cart[cartProductIndex].quantity;
-            var cartProduct = void 0;
-            if (cartProductQuantity === 0)
+            var cartProductIndex = this.findCartProduct(shopperIndex, productUuid);
+            var isNew = (cartProductIndex === -1) ? true : false;
+            if (isNew)
+                cartProductIndex = this.addCartProduct(shopperIndex, productUuid);
+            var store = new Store();
+            var productIndex = store.findProductIndex(productUuid);
+            var cartQuantityChange = (isNew) ? productQuantity : productQuantity - this.users[shopperIndex].cart[cartProductIndex].quantity;
+            if (productQuantity === 0) {
+                store.products[productIndex].inStock += this.users[shopperIndex].cart[cartProductIndex].quantity;
                 this.deleteCartProduct(shopperUuid, productUuid);
-            else {
-                cartProduct = this.completeCartProductDetails(cartProductQuantity, productUuid);
-                this.users[shopperIndex].cart[cartProductIndex] = cartProduct;
             }
+            else {
+                store.products[productIndex].inStock -= cartQuantityChange;
+                this.users[shopperIndex].cart[cartProductIndex].quantity = productQuantity;
+                var cartProductQuantity = this.users[shopperIndex].cart[cartProductIndex].quantity;
+                var cartProductPrice = store.products[productIndex].productPrice;
+                var cartProductName = store.products[productIndex].productName;
+                this.users[shopperIndex].cart[cartProductIndex].totalPrice = cartProductQuantity * cartProductPrice;
+                this.users[shopperIndex].cart[cartProductIndex].productName = cartProductName;
+            }
+            store.updateStoreJson();
             this.updateUsersJson();
-            return cartProduct;
+            return this.users[shopperIndex].cart;
         }
         catch (error) {
             console.error(error.message);
@@ -187,22 +174,21 @@ var Users = /** @class */ (function () {
                     _this.users[shopperIndex].purchased[cartProductIndex].totalPrice += cartProduct.totalPrice;
                 }
             });
-            var store_1 = readStoreJson();
-            this.users[shopperIndex].cart.forEach(function (cartProduct) {
-                var productIndex = store_1.products.findIndex(function (product) { return product.productUuid === cartProduct.productUuid; });
-                store_1.products[productIndex].inStock -= cartProduct.quantity;
-            });
-            fs.writeFileSync(storeJsonPath, JSON.stringify(store_1));
+            var purchasedCartProducts = this.users[shopperIndex].cart;
+            var shopperEmail = this.users[shopperIndex].email;
+            var shopperUsername = this.users[shopperIndex].username;
+            var shopperUuid = this.users[shopperIndex].userUuid;
+            var store = new Store();
+            store.addPurchesedCart(purchasedCartProducts, shopperEmail, shopperUsername, shopperUuid);
         }
         catch (error) {
             console.error(error.message);
         }
     };
-    Users.prototype.emptyCart = function (shopperUuid /*, storeUuid: string*/) {
+    Users.prototype.emptyCart = function (userIndex /*, storeUuid: string*/) {
         try {
-            var shopperIndex = this.findUserIndex(shopperUuid, null);
-            this.updatePurcased(shopperIndex /*, storeUuid*/); // storeUuid will be used when there is more than 1 store
-            this.users[shopperIndex].cart = [];
+            this.updatePurcased(userIndex /*, storeUuid*/); // storeUuid will be used when there is more than 1 store
+            this.users[userIndex].cart = [];
             this.updateUsersJson();
         }
         catch (error) {

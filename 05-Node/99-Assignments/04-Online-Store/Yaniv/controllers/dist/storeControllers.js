@@ -2,6 +2,7 @@
 exports.__esModule = true;
 exports.deleteProduct = exports.editProduct = exports.addProduct = exports.editStoreName = exports.showProduct = exports.showProducts = exports.showStores = void 0;
 var _a = require('../../models/dist/storeModel'), Product = _a.Product, Store = _a.Store;
+var _b = require('../../models/dist/usersModel'), CartProduct = _b.CartProduct, User = _b.User, Users = _b.Users;
 exports.showStores = function (req, res) {
     try {
         var store = new Store();
@@ -15,8 +16,10 @@ exports.showStores = function (req, res) {
 exports.showProducts = function (req, res) {
     try {
         var isAdmin = req.isAdmin;
-        var storeUuid = req.params.storeUuid; // needed when database will have more than 1 store in the future
+        var storeUuid = req.params.storeUuid;
         var store = new Store();
+        if (storeUuid === 'mall')
+            store.storeName = 'Virtual Mall'; // show from all stores (needed if more than 1 store. for now only title changes)
         res.send({ store: store, isAdmin: isAdmin });
     }
     catch (error) {
@@ -26,7 +29,12 @@ exports.showProducts = function (req, res) {
 };
 exports.showProduct = function (req, res) {
     try {
-        // res.send({ showProduct:true });
+        var isAdmin = req.isAdmin, userIndex = req.userIndex, cartProductIndex = req.cartProductIndex, productIndex = req.productIndex;
+        var store = new Store();
+        var users = new Users();
+        var storeProduct = store.products[productIndex];
+        var cartProduct = ((isAdmin) || (cartProductIndex === -1)) ? undefined : users.users[userIndex].cart[cartProductIndex];
+        res.send({ storeProduct: storeProduct, cartProduct: cartProduct, isAdmin: isAdmin });
     }
     catch (error) {
         console.error(error);
@@ -44,7 +52,10 @@ exports.editStoreName = function (req, res) {
 };
 exports.addProduct = function (req, res) {
     try {
-        // res.send({ addProduct:true });
+        var _a = req.body, storeUuid = _a.storeUuid, productName = _a.productName, productDescription = _a.productDescription, productPrice = _a.productPrice, productImage = _a.productImage, productInStock = _a.productInStock;
+        var store = new Store(); // storeUuid would be used if more than 1 store
+        store.addProduct(productName, productDescription, productPrice, productImage, productInStock);
+        res.send({ store: store });
     }
     catch (error) {
         console.error(error);
@@ -53,7 +64,11 @@ exports.addProduct = function (req, res) {
 };
 exports.editProduct = function (req, res) {
     try {
-        // res.send({ editProduct:true });
+        var _a = req.body, storeUuid = _a.storeUuid, productUuid = _a.productUuid, productName = _a.productName, productDescription = _a.productDescription, productPrice = _a.productPrice, productImage = _a.productImage, productInStock = _a.productInStock;
+        var store = new Store(); // storeUuid would be used if more than 1 store
+        console.log('hi');
+        store.editProduct(productUuid, productName, productDescription, productPrice, productImage, productInStock);
+        res.send({ productUpdate: true });
     }
     catch (error) {
         console.error(error);

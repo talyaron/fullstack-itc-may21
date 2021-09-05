@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');
 
 var path = require('path');
 
-var pathToFile = path.resolve(__dirname, './public'); 
+var pathToFile = path.resolve(__dirname, './public');
 
 var express = require('express');
 

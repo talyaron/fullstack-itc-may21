@@ -1,30 +1,78 @@
-const updateQuantityAncestor: HTMLElement = document.querySelector('.products');
+let updateQuantityAncestor: HTMLElement
 
-updateQuantityAncestor.addEventListener('click', ev => updateQuantity(ev));
+if (whichHtmlFile === '/store.html') {
+  updateQuantityAncestor = document.querySelector('.products');
+  updateQuantityAncestor.addEventListener('click', ev => updateQuantity(ev));
+  updateQuantityAncestor.addEventListener('change', ev => updateQuantity(ev));
+} else {
+  updateQuantityAncestor = document.querySelector('.main');
+  updateQuantityAncestor.addEventListener('click', ev => updateQuantity(ev));
+  updateQuantityAncestor.addEventListener('change', ev => updateQuantity(ev));
+}
 
 async function updateQuantity(ev: any) {
   try {
-    if ((ev.target.className !== 'product-buttons__item product-buttons__item--cart-reduce') && (ev.target.className !== 'product-buttons__item product-buttons__item--cart-add')) return;
+    if (((ev.target.getAttribute('id') !== 'add-to-cart') && (!ev.target.classList.contains('update-cart-qunatity')) && (!ev.target.classList.contains('remove-from-cart')))
+   || ((ev.type === 'click') && (ev.target.classList.contains('update-cart-qunatity')))) return;
+
+    let productQuantity: number;
+    if (ev.target.getAttribute('id') === 'add-to-cart') productQuantity = 1;
+    else if (ev.target.classList.contains('remove-from-cart')) {
+      const cancelDelete: boolean = await swal({
+        title: `Remove from Cart`,
+        text: `Are you sure?`,
+        icon: `warning`,
+        dangerMode: true,
+        buttons: ['Nope', 'Yup'],
+    });
+      if (!cancelDelete) return;
+      productQuantity = 0;
+    }
+    else productQuantity = ev.target.valueAsNumber;
+
     const productDiv: HTMLElement = ev.target.parentElement.parentElement;
-    const productUuid: string = productDiv.getAttribute('id');
-    const productNameElement: HTMLElement = productDiv.querySelector('.product__item--name');
-    const productName: string = productNameElement.innerText;
-    const mathSign: string = ev.target.innerText;
-    const putProductQuantity = await axios.put('/user/cart', { productUuid, productName, mathSign });
-    const { productQuantity } = putProductQuantity.data;
-    const productQuantityElement: HTMLElement = productDiv.querySelector(('.product-buttons__item--cart-quantity'));
-    productQuantityElement.innerText = productQuantity;
-    renderStore(false);
+    const productUuid: string = (whichHtmlFile === '/product.html') ? productUuidParams : productDiv.getAttribute('id') ;
+
+    const updateCartProductQuantity = await axios.put('/user/cart', { productUuid, productQuantity });
+    const { cartProducts, storeProducts } = updateCartProductQuantity.data;
+
+    await renderShopperCart(cartProducts);
+    if ((ev.target.getAttribute('id') === 'add-to-cart') && (whichHtmlFile === '/store.html')) renderStoreProducts(storeProducts, cartProducts, false);
+    else if (whichHtmlFile === '/product.html') getProduct();
+    else if  (whichHtmlFile === '/cart.html') renderCartProducts(storeProducts, cartProducts);
     
   } catch (error) {
       console.error(error.message);
   }
 }
 
-async function addToCart(productUuid: string, productName: string) {
-  try {
-    console.log('hi2');
+if (whichHtmlFile === '/cart.html') {
+  const payBtn: HTMLButtonElement = document.querySelector('#pay');
+  
+  payBtn.addEventListener('click', ev=> purchaseCart(ev));
+}
 
+async function purchaseCart(ev: any) {
+  try {
+      await swal({
+        title: `Paying for Cart`,
+        text: `Do you wish to proceed?`,
+        icon: `warning`,
+        buttons: ['Nope', 'Yup'],
+      }).then(async (willPurchase) => {
+        if (willPurchase) {
+          const updateCartProductQuantity = await axios.put('/user/cart/purchase');
+          await swal({
+            title: `Congrats!`,
+            text: `You've completed the purchase`,
+            icon: `success`,
+            button: 'Cool',
+          }).then(() => {
+            window.location.href = './store.html?storeUuid=mall'
+          });
+        }
+      });
+      
   } catch (error) {
       console.error(error.message);
   }

@@ -34,49 +34,125 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var updateQuantityAncestor = document.querySelector('.products');
-updateQuantityAncestor.addEventListener('click', function (ev) { return updateQuantity(ev); });
+var updateQuantityAncestor;
+if (whichHtmlFile === '/store.html') {
+    updateQuantityAncestor = document.querySelector('.products');
+    updateQuantityAncestor.addEventListener('click', function (ev) { return updateQuantity(ev); });
+    updateQuantityAncestor.addEventListener('change', function (ev) { return updateQuantity(ev); });
+}
+else {
+    updateQuantityAncestor = document.querySelector('.main');
+    updateQuantityAncestor.addEventListener('click', function (ev) { return updateQuantity(ev); });
+    updateQuantityAncestor.addEventListener('change', function (ev) { return updateQuantity(ev); });
+}
 function updateQuantity(ev) {
     return __awaiter(this, void 0, void 0, function () {
-        var productDiv, productUuid, productNameElement, productName, mathSign, putProductQuantity, productQuantity, productQuantityElement, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var productQuantity, cancelDelete, productDiv, productUuid, updateCartProductQuantity, _a, cartProducts, storeProducts, error_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    if ((ev.target.className !== 'product-buttons__item product-buttons__item--cart-reduce') && (ev.target.className !== 'product-buttons__item product-buttons__item--cart-add'))
+                    _b.trys.push([0, 7, , 8]);
+                    if (((ev.target.getAttribute('id') !== 'add-to-cart') && (!ev.target.classList.contains('update-cart-qunatity')) && (!ev.target.classList.contains('remove-from-cart')))
+                        || ((ev.type === 'click') && (ev.target.classList.contains('update-cart-qunatity'))))
                         return [2 /*return*/];
-                    productDiv = ev.target.parentElement.parentElement;
-                    productUuid = productDiv.getAttribute('id');
-                    productNameElement = productDiv.querySelector('.product__item--name');
-                    productName = productNameElement.innerText;
-                    mathSign = ev.target.innerText;
-                    return [4 /*yield*/, axios.put('/user/cart', { productUuid: productUuid, productName: productName, mathSign: mathSign })];
+                    productQuantity = void 0;
+                    if (!(ev.target.getAttribute('id') === 'add-to-cart')) return [3 /*break*/, 1];
+                    productQuantity = 1;
+                    return [3 /*break*/, 4];
                 case 1:
-                    putProductQuantity = _a.sent();
-                    productQuantity = putProductQuantity.data.productQuantity;
-                    productQuantityElement = productDiv.querySelector(('.product-buttons__item--cart-quantity'));
-                    productQuantityElement.innerText = productQuantity;
-                    renderStore(false);
-                    return [3 /*break*/, 3];
+                    if (!ev.target.classList.contains('remove-from-cart')) return [3 /*break*/, 3];
+                    return [4 /*yield*/, swal({
+                            title: "Remove from Cart",
+                            text: "Are you sure?",
+                            icon: "warning",
+                            dangerMode: true,
+                            buttons: ['Nope', 'Yup']
+                        })];
                 case 2:
-                    error_1 = _a.sent();
+                    cancelDelete = _b.sent();
+                    if (!cancelDelete)
+                        return [2 /*return*/];
+                    productQuantity = 0;
+                    return [3 /*break*/, 4];
+                case 3:
+                    productQuantity = ev.target.valueAsNumber;
+                    _b.label = 4;
+                case 4:
+                    productDiv = ev.target.parentElement.parentElement;
+                    productUuid = (whichHtmlFile === '/product.html') ? productUuidParams : productDiv.getAttribute('id');
+                    return [4 /*yield*/, axios.put('/user/cart', { productUuid: productUuid, productQuantity: productQuantity })];
+                case 5:
+                    updateCartProductQuantity = _b.sent();
+                    _a = updateCartProductQuantity.data, cartProducts = _a.cartProducts, storeProducts = _a.storeProducts;
+                    return [4 /*yield*/, renderShopperCart(cartProducts)];
+                case 6:
+                    _b.sent();
+                    if ((ev.target.getAttribute('id') === 'add-to-cart') && (whichHtmlFile === '/store.html'))
+                        renderStoreProducts(storeProducts, cartProducts, false);
+                    else if (whichHtmlFile === '/product.html')
+                        getProduct();
+                    else if (whichHtmlFile === '/cart.html')
+                        renderCartProducts(storeProducts, cartProducts);
+                    return [3 /*break*/, 8];
+                case 7:
+                    error_1 = _b.sent();
                     console.error(error_1.message);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 8];
+                case 8: return [2 /*return*/];
             }
         });
     });
 }
-function addToCart(productUuid, productName) {
+if (whichHtmlFile === '/cart.html') {
+    var payBtn = document.querySelector('#pay');
+    payBtn.addEventListener('click', function (ev) { return purchaseCart(ev); });
+}
+function purchaseCart(ev) {
     return __awaiter(this, void 0, void 0, function () {
+        var error_2;
+        var _this = this;
         return __generator(this, function (_a) {
-            try {
-                console.log('hi2');
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, swal({
+                            title: "Paying for Cart",
+                            text: "Do you wish to proceed?",
+                            icon: "warning",
+                            buttons: ['Nope', 'Yup']
+                        }).then(function (willPurchase) { return __awaiter(_this, void 0, void 0, function () {
+                            var updateCartProductQuantity;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        if (!willPurchase) return [3 /*break*/, 3];
+                                        return [4 /*yield*/, axios.put('/user/cart/purchase')];
+                                    case 1:
+                                        updateCartProductQuantity = _a.sent();
+                                        return [4 /*yield*/, swal({
+                                                title: "Congrats!",
+                                                text: "You've completed the purchase",
+                                                icon: "success",
+                                                button: 'Cool'
+                                            }).then(function () {
+                                                window.location.href = './store.html?storeUuid=mall';
+                                            })];
+                                    case 2:
+                                        _a.sent();
+                                        _a.label = 3;
+                                    case 3: return [2 /*return*/];
+                                }
+                            });
+                        }); })];
+                case 1:
+                    _a.sent();
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_2 = _a.sent();
+                    console.error(error_2.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
-            catch (error) {
-                console.error(error.message);
-            }
-            return [2 /*return*/];
         });
     });
 }
