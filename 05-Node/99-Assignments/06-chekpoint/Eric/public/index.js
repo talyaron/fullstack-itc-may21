@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var form = document.querySelector('#form');
-form.addEventListener('submit', addBooks);
+form.addEventListener('submit', function (ev) { return addBooks(ev); });
 function addBooks(ev) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, title, author, newBook, book, error_1;
