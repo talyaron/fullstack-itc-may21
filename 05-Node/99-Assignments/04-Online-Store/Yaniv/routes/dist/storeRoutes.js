@@ -2,13 +2,18 @@
 exports.__esModule = true;
 var express = require('express');
 var router = express.Router();
-var _a = require('../../controllers/dist/storeControllers'), showStores = _a.showStores, showProducts = _a.showProducts, showProduct = _a.showProduct, editStoreName = _a.editStoreName, addProduct = _a.addProduct, editProduct = _a.editProduct, deleteProduct = _a.deleteProduct;
-var _b = require('../../middlewares/dist/userMiddlewares'), isLoggedInAndAuthenticated = _b.isLoggedInAndAuthenticated, doesUserExist = _b.doesUserExist, isAdmin = _b.isAdmin, onlyAdmin = _b.onlyAdmin;
+var multer = require('multer');
+var productSchema = require('../../schemas/dist/productSchema').productSchema;
+var uploadImage = require('../../middlewares/dist/uploadImage').uploadImage;
+var validateBody = require('../../middlewares/dist/validateBody').validateBody;
+var _a = require('../../middlewares/dist/userMiddlewares'), isLoggedInAndAuthenticated = _a.isLoggedInAndAuthenticated, doesUserExist = _a.doesUserExist, isAdmin = _a.isAdmin, onlyAdmin = _a.onlyAdmin;
+var doesProductExist = require('../../middlewares/dist/storeMiddlewares').doesProductExist;
+var _b = require('../../controllers/dist/storeControllers'), showStores = _b.showStores, showProducts = _b.showProducts, showProduct = _b.showProduct, editStoreName = _b.editStoreName, addProduct = _b.addProduct, editProduct = _b.editProduct, deleteProduct = _b.deleteProduct;
 router
-    .get('/all', isLoggedInAndAuthenticated, doesUserExist, isAdmin, showStores)
+    .get('/list', isLoggedInAndAuthenticated, doesUserExist, isAdmin, showStores)
     .get('/:storeUuid', isLoggedInAndAuthenticated, doesUserExist, isAdmin, showProducts)
-    .get('/:productUuid', isLoggedInAndAuthenticated, doesUserExist, isAdmin, showProduct)
+    .get('/product/:productUuid', isLoggedInAndAuthenticated, doesUserExist, isAdmin, doesProductExist, showProduct)
     .put('/', isLoggedInAndAuthenticated, doesUserExist, isAdmin, onlyAdmin, editStoreName)
-    .post('/:productUuid', isLoggedInAndAuthenticated, doesUserExist, isAdmin, onlyAdmin, addProduct)
-    .put('/:productUuid', isLoggedInAndAuthenticated, doesUserExist, isAdmin, onlyAdmin, editProduct)["delete"]('/:productUuid', isLoggedInAndAuthenticated, doesUserExist, isAdmin, onlyAdmin, deleteProduct);
+    .put('/product/:productUuid', isLoggedInAndAuthenticated, doesUserExist, isAdmin, onlyAdmin, uploadImage.single('productImage'), validateBody(productSchema), editProduct)
+    .post('/addProduct', isLoggedInAndAuthenticated, doesUserExist, isAdmin, onlyAdmin, uploadImage.single('productImage'), validateBody(productSchema), addProduct)["delete"]('/product/:productUuid', isLoggedInAndAuthenticated, doesUserExist, isAdmin, onlyAdmin, deleteProduct);
 module.exports = router;

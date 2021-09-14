@@ -34,32 +34,60 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var updateProductAncestor = document.querySelector('.products');
-updateProductAncestor.addEventListener('click', function (ev) { return updateProduct(ev); });
+var updateProductForm;
+var addProductForm;
+var url = new URL(window.location.href);
+var productUuidParams;
+if (whichHtmlFile === '/product.html') {
+    productUuidParams = url.searchParams.get("productUuid");
+    updateProductForm = document.querySelector('#edit-product-form');
+    updateProductForm.addEventListener('submit', function (ev) { return updateProduct(ev); });
+}
+else if (whichHtmlFile === '/store.html') {
+    addProductForm = document.querySelector('#add-product-form');
+    addProductForm.addEventListener('submit', function (ev) { return addProduct(ev); });
+}
 function updateProduct(ev) {
     return __awaiter(this, void 0, void 0, function () {
-        var productDiv, productUuid, productNameElement, productName, mathSign, putProductQuantity, productQuantity, productQuantityElement, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var _a, productName, productDescription, productPrice, productInStock, fd, imageInput, productImage, productUuid, error_1;
+        var _this = this;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    if ((ev.target.className !== 'product-buttons__item product-buttons__item--edit fas fa-edit'))
-                        return [2 /*return*/];
-                    productDiv = ev.target.parentElement.parentElement;
-                    productUuid = productDiv.getAttribute('id');
-                    productNameElement = productDiv.querySelector('.product__item--name');
-                    productName = productNameElement.innerText;
-                    mathSign = ev.target.innerText;
-                    return [4 /*yield*/, axios.put('/user/cart', { productUuid: productUuid, productName: productName, mathSign: mathSign })];
+                    _b.trys.push([0, 2, , 3]);
+                    ev.preventDefault();
+                    _a = ev.target.elements, productName = _a.productName, productDescription = _a.productDescription, productPrice = _a.productPrice, productInStock = _a.productInStock;
+                    productName = productName.value;
+                    productDescription = productDescription.value;
+                    productPrice = productPrice.valueAsNumber;
+                    productInStock = productInStock.valueAsNumber;
+                    fd = new FormData();
+                    imageInput = document.querySelector('#product-image');
+                    productImage = imageInput.files[0];
+                    if (productImage)
+                        fd.append('productImage', productImage, "" + productImage.name);
+                    fd.append('productName', productName);
+                    fd.append('productDescription', productDescription);
+                    fd.append('productPrice', productPrice);
+                    fd.append('productInStock', productInStock);
+                    fd.append('storeUuid', storeUuid);
+                    productUuid = productUuidParams;
+                    ev.target.reset();
+                    return [4 /*yield*/, axios.put("/store/product/" + productUuid, fd)];
                 case 1:
-                    putProductQuantity = _a.sent();
-                    productQuantity = putProductQuantity.data.productQuantity;
-                    productQuantityElement = productDiv.querySelector(('.product-buttons__item--cart-quantity'));
-                    productQuantityElement.innerText = productQuantity;
-                    renderStore(false);
+                    _b.sent();
+                    swal({
+                        title: 'Congrats!',
+                        text: productName + " was updated successfully!",
+                        icon: "success",
+                        button: "Cool"
+                    }).then(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                        window.location.href = "./store.html?storeUuid=" + storeUuid;
+                        return [2 /*return*/];
+                    }); }); });
                     return [3 /*break*/, 3];
                 case 2:
-                    error_1 = _a.sent();
+                    error_1 = _b.sent();
                     console.error(error_1.message);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
@@ -67,25 +95,98 @@ function updateProduct(ev) {
         });
     });
 }
-function addToCart(productUuid, productName) {
+function addProduct(ev) {
     return __awaiter(this, void 0, void 0, function () {
+        var _a, productName, productDescription, productPrice, productInStock, fd, imageInput, productImage, productUuid, addProductToStore, store, error_2;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _b.trys.push([0, 2, , 3]);
+                    ev.preventDefault();
+                    _a = ev.target.elements, productName = _a.productName, productDescription = _a.productDescription, productPrice = _a.productPrice, productInStock = _a.productInStock;
+                    productName = productName.value;
+                    productDescription = productDescription.value;
+                    productPrice = productPrice.valueAsNumber;
+                    productInStock = productInStock.valueAsNumber;
+                    fd = new FormData();
+                    imageInput = document.querySelector('#product-image');
+                    productImage = imageInput.files[0];
+                    if (productImage)
+                        fd.append('productImage', productImage, "" + productImage.name);
+                    fd.append('productName', productName);
+                    fd.append('productDescription', productDescription);
+                    fd.append('productPrice', productPrice);
+                    fd.append('productInStock', productInStock);
+                    fd.append('storeUuid', storeUuid);
+                    productUuid = productUuidParams;
+                    ev.target.reset();
+                    return [4 /*yield*/, axios.post("/store/addProduct", fd)];
+                case 1:
+                    addProductToStore = _b.sent();
+                    store = addProductToStore.data.store;
+                    swal({
+                        title: 'Congrats!',
+                        text: productName + " was added to your store!",
+                        icon: "success",
+                        button: "Cool"
+                    });
+                    renderStore(store, true);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_2 = _b.sent();
+                    console.error(error_2.message);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function deleteProduct(ev) {
+    return __awaiter(this, void 0, void 0, function () {
+        var cancelDelete, productUuid, productNameElement, productName, error_3;
         return __generator(this, function (_a) {
-            try {
-                console.log('hi2');
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, swal({
+                            title: "Delete from Store",
+                            text: "Are you sure?",
+                            icon: "warning",
+                            dangerMode: true,
+                            buttons: ['Nope', 'Yup']
+                        })];
+                case 1:
+                    cancelDelete = _a.sent();
+                    if (!cancelDelete)
+                        return [2 /*return*/];
+                    productUuid = productUuidParams;
+                    productNameElement = document.querySelector('#product-name');
+                    productName = productNameElement.innerText;
+                    return [4 /*yield*/, axios["delete"]("/store/product/" + productUuid)];
+                case 2:
+                    _a.sent();
+                    swal({
+                        title: 'Done!',
+                        text: productName + " was deleted from your store!",
+                        icon: "success",
+                        button: "Cool"
+                    }).then(function () { window.location.href = "./store.html?storeUuid=" + storeUuid; });
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_3 = _a.sent();
+                    console.error(error_3.message);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
             }
-            catch (error) {
-                console.error(error.message);
-            }
-            return [2 /*return*/];
         });
     });
 }
 var readURL = function (input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = function (e) {
-            document.querySelector('#productImg').setAttribute("src", "" + e.target.result);
-            return e.target.result;
+        reader.onload = function (ev) {
+            document.querySelector('#product-preview').setAttribute("src", "" + ev.target.result);
+            return ev.target.result;
         };
         reader.readAsDataURL(input.files[0]);
     }

@@ -1,15 +1,16 @@
 export {};
 
 const { Product, Store } = require('../../models/dist/storeModel');
+const { CartProduct, User, Users } = require('../../models/dist/usersModel');
 
-export const showStores = (req, res)=> { // stores.html
+export const showStores = (req, res)=> {
   try {
     const store = new Store();
     res.send({ storeUuid: store.storeUuid, storeName: store.storeName });
 
   } catch (error) {
     console.error(error);
-    res.status(500).send(error.message);;
+    res.status(500).send(error.message);
   }
 }
 
@@ -17,9 +18,10 @@ export const showProducts = (req, res)=> { // store.html
   try {
     const isAdmin = req.isAdmin;
 
-    const storeUuid: string = req.params.storeUuid; // needed when database will have more than 1 store in the future
-
+    const storeUuid: string = req.params.storeUuid;
     const store = new Store();
+    if (storeUuid === 'mall') store.storeName = 'Virtual Mall'; // show from all stores (needed if more than 1 store. for now only title changes)
+    
     res.send({ store, isAdmin });
 
   } catch (error) {
@@ -30,8 +32,15 @@ export const showProducts = (req, res)=> { // store.html
 
 export const showProduct = (req, res)=> { // product.html
   try {
+    const { isAdmin, userIndex, cartProductIndex, productIndex } = req;
 
-    // res.send({ showProduct:true });
+    const store = new Store();
+    const users = new Users();
+
+    const storeProduct: Product = store.products[productIndex];
+    const cartProduct: CartProduct = ((isAdmin) || (cartProductIndex === -1)) ? undefined : users.users[userIndex].cart[cartProductIndex];
+
+    res.send({ storeProduct, cartProduct, isAdmin });
 
   } catch (error) {
     console.error(error);
@@ -52,8 +61,14 @@ export const editStoreName = (req, res)=> { // store.html
 
 export const addProduct = (req, res)=> { // store.html
   try {
+    const { storeUuid, productName, productDescription, productPrice, productImage, productInStock } = req.body;
+    const store = new Store(); // storeUuid would be used if more than 1 store
 
-    // res.send({ addProduct:true });
+    const filename = (req.file) ? req.file : undefined;
+
+    store.addProduct(productName, productDescription, productPrice, filename, productInStock);
+
+    res.send({ store });
 
   } catch (error) {
     console.error(error);
@@ -64,7 +79,15 @@ export const addProduct = (req, res)=> { // store.html
 export const editProduct = (req, res)=> { // product.html
   try {
 
-    // res.send({ editProduct:true });
+    const { storeUuid, productName, productDescription, productPrice, productImage, productInStock } = req.body;
+    const store = new Store(); // storeUuid would be used if more than 1 store
+    const productUuid: string = req.params.productUuid;
+
+    const filename = (req.file) ? req.file : undefined;
+
+    store.editProduct(productUuid, productName, productDescription, productPrice, filename, productInStock);
+
+    res.send({ productUpdate: true });
 
   } catch (error) {
     console.error(error);
@@ -74,8 +97,12 @@ export const editProduct = (req, res)=> { // product.html
 
 export const deleteProduct = (req, res)=> { // store.html
   try {
+    const store = new Store(); // storeUuid would be used if more than 1 store
+    const productUuid: string = req.params.productUuid;
 
-    // res.send({ deleteProduct:true });
+    store.deleteProduct(productUuid);
+    
+    res.send({ deleteProduct:true });
 
   } catch (error) {
     console.error(error);

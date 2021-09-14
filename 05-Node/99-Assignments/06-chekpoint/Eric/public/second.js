@@ -36,36 +36,40 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var body = document.querySelector('#body');
 var inputSearch = document.querySelector('#search');
-inputSearch.onkeyup = searchByTitle;
+var allBooks;
+inputSearch.addEventListener('keydown', function (e) { return searchBooksByTitle(e); });
+function searchBooksByTitle(e) {
+    var title = inputSearch.value;
+    var author = inputSearch.value;
+    var regrExp = title + "|" + author;
+    var searchTermReg = new RegExp(regrExp, 'gim');
+    var booksFoundByTitle = allBooks.filter(function (book) {
+        return searchTermReg.test(book.title);
+    });
+    renderBooks({ books: booksFoundByTitle });
+    return booksFoundByTitle;
+}
 function searchByTitle() {
     return __awaiter(this, void 0, void 0, function () {
-        var searchTitle, getSearchByTitle, data, error, error_1;
+        var searchTitle, getSearchByTitle, data, error;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    searchTitle = {
-                        searchTitle: inputSearch.value
-                    };
-                    return [4 /*yield*/, searchByTitleAxios(searchTitle)];
-                case 1:
-                    getSearchByTitle = _a.sent();
-                    data = getSearchByTitle.data, error = getSearchByTitle.error;
-                    console.log(data);
-                    renderBooks(data);
-                    return [3 /*break*/, 3];
-                case 2:
-                    error_1 = _a.sent();
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+            try {
+                searchTitle = {
+                    searchTitle: inputSearch.value
+                };
+                getSearchByTitle = searchBooksByTitle(searchTitle);
+                data = getSearchByTitle.data, error = getSearchByTitle.error;
+                renderBooks(data);
             }
+            catch (error) { }
+            return [2 /*return*/];
         });
     });
 }
 body.onload = getBooks;
 function getBooks() {
     return __awaiter(this, void 0, void 0, function () {
-        var getBook, data, error, error_2;
+        var getBook, data, error, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +78,12 @@ function getBooks() {
                 case 1:
                     getBook = _a.sent();
                     data = getBook.data, error = getBook.error;
-                    console.log(data);
+                    allBooks = data.books.books;
                     renderBooks(data.books);
                     return [3 /*break*/, 3];
                 case 2:
-                    error_2 = _a.sent();
-                    console.error(error_2);
+                    error_1 = _a.sent();
+                    console.error(error_1);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
@@ -90,9 +94,9 @@ function renderBooks(books) {
     try {
         var html_1 = '';
         var root = document.querySelector('#root');
-        books.users.forEach(function (book) {
+        books.books.forEach(function (book) {
             var title = book.title, author = book.author;
-            html_1 += "<div class=\"card\">\n                            <div class=\"container\">\n                                <h4><b>Book title: " + title + "</b></h4>\n                                <h4><b>Author: " + author + "</b></h4>\n\n                            </div>\n                    </div>";
+            html_1 += "<div >\n                                <h4><b>Book title: " + title + "</b></h4>\n                                <h4><b>Author: " + author + "</b></h4>\n                    </div>";
         });
         root.innerHTML = html_1;
     }

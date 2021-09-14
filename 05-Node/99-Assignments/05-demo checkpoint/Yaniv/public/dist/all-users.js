@@ -72,6 +72,7 @@ var findUsersBySearchTerm = function (serachTerm) {
 };
 var usersSearchForm = document.querySelector('#search-users-form');
 usersSearchForm.addEventListener('submit', handleSubmit);
+console.log(typeof usersSearchForm);
 function handleSubmit(ev) {
     try {
         ev.preventDefault();

@@ -9,7 +9,7 @@
 * {
     font-family: 'Ubuntu', sans-serif;
     text-align: center;
-
+    scroll-behavior: smooth;
 }
 
 html,body {
@@ -54,10 +54,6 @@ a {
     }
   }
 
-  .hide {
-      display: none;
-  }
-
   .form-inputs {
     display: flex;
     flex-direction: column;
@@ -77,21 +73,19 @@ a {
     grid-template-columns: 1.5fr 0.75fr 0.75fr 0.75fr 1.25fr 1fr 2fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
-        "h1 item1 item2 item3 . h4 topright"
-        "h1 item1 item2 item3 . call botright";
+        "h1 item1 item2 item3 item4 h4 topright"
+        "h1 item1 item2 item3 item4 call botright";
 
     position: sticky;
     height: fit-content;
-    min-height: 90px;
-    height: 10vh;
-    max-height:100px;
+    height: 20vh;
     background-image: url('../images/cart-wp.png'), linear-gradient(#2c2c2c, #2c2c2c);;
     background-blend-mode: normal; 
     background-repeat: repeat;
     background-size: 200px;
     top: 0;
     color: white;
-    padding: 2.5vw;
+    padding: 0 2.5vw;
     -moz-box-shadow: inset 0 -10px 10px -10px var(--main-bg-color);
     -webkit-box-shadow: inset 0 -10px 10px -10px var(--main-bg-color);
     box-shadow: inset 0 -10px 10px -10px var(--main-bg-color);
@@ -103,7 +97,7 @@ a {
 
         &--h1 {
             grid-area: h1;
-            font-size: clamp(26px, 3vw, 40px);;
+            font-size: clamp(15px, 3vw, 25px);;
             font-weight: bold;
             text-decoration: none;
             color: white;
@@ -114,18 +108,20 @@ a {
         }
 
         &--add-product {
-            grid-area: item1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: clamp(8px, 4vw, 16px);
-            height: clamp(20px, 4vw, 40px);
+            grid-area: item2;
             width: clamp(20px, 4vw, 40px);
-            border-radius: 200px;
-            background-color: green;
-            cursor: pointer;
+            height: clamp(20px, 4vw, 40px);
+
+            img {
+                background-color: lightgreen;
+                padding: 1vw;
+                border-radius: 50px;
+                width: clamp(80%, 4vw, 100%);;
+
+                &:hover {
+                    background-color: var(--hover-bg-color);
+                }
+            }
         }
 
         &--cart {
@@ -136,9 +132,9 @@ a {
 
             img {
                 background-color: white;
-                padding: 5px;
+                padding: 1vw;
                 border-radius: 50px;
-                width: 100%;
+                width: clamp(80%, 4vw, 100%);;
 
                 &:hover {
                     background-color: var(--hover-bg-color);
@@ -146,6 +142,7 @@ a {
             }
 
             div {
+                padding-bottom: 4px;
                 background-color: orange;
                 border: 1px solid white;
                 border-radius: 2px;
@@ -162,6 +159,23 @@ a {
             }
         }
 
+        &--store {
+            grid-area: item1;
+            width: clamp(20px, 4vw, 40px);
+            height: clamp(20px, 4vw, 40px);
+
+            img {
+                background-color: white;
+                padding: 1vw;
+                border-radius: 50px;
+                width: clamp(80%, 4vw, 100%);;
+
+                &:hover {
+                    background-color: var(--hover-bg-color);
+                }
+            }
+        }
+
         &--history {
             grid-area: item2;
             width: clamp(20px, 4vw, 40px);
@@ -169,9 +183,9 @@ a {
 
             img {
                 background-color: white;
-                padding: 5px;
+                padding: 1vw;
                 border-radius: 50px;
-                width: 100%;
+                width: clamp(80%, 4vw, 100%);;
 
                 &:hover {
                     background-color: var(--hover-bg-color);
@@ -186,9 +200,26 @@ a {
 
             img {
                 background-color: white;
-                padding: 5px;
+                padding: 1vw;
                 border-radius: 50px;
-                width: 100%;
+                width: clamp(80%, 4vw, 100%);;
+
+                &:hover {
+                    background-color: var(--hover-bg-color);
+                }
+            }
+        }
+
+        &--stores-list {
+            grid-area: item4;
+            width: clamp(20px, 4vw, 40px);
+            height: clamp(20px, 4vw, 40px);
+
+            img {
+                background-color: white;
+                padding: 1vw;
+                border-radius: 50px;
+                width: clamp(80%, 4vw, 100%);;
 
                 &:hover {
                     background-color: var(--hover-bg-color);
@@ -250,6 +281,9 @@ a {
 }
 
 .main {
+    display: flex;
+    flex-direction: column;
+
     &__item {
 
         &--store-name {
@@ -267,8 +301,110 @@ a {
             box-shadow: inset 0 -10px 10px -10px var(--main-bg-color),
             inset 0 10px 10px -10px var(--main-bg-color);
         }
+
+        &--pay {
+            width: 20vw;
+            margin: 20px auto;
+            padding: 10px 0;
+        }
+    }
+
+    .product-large {
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 10px;
+        height: 60vw;
+        width: 60vw;
+        min-height: 270px;
+        min-width: 270px;
+        // max-height: 470px;
+        // max-width: 470px;
+        background-color: white;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 0.5fr 0.5fr 1fr 0.5fr 0.5fr 1fr 1fr 1fr 0.5fr;
+        grid-template-areas:
+        "title title title title"
+        "product product product product"
+        "img img img price"
+        "img img img stock"
+        "img img img quantity"
+        "desc desc desc desc"
+        "desc desc desc desc"
+        "desc desc desc desc"
+        ". submit submit .";
+    
+        &__item {
+            margin: 0 auto;
+
+            &--buttons {
+                grid-area: title;
+            }
+
+            &--title {
+                grid-area: title;
+            }
+
+            &--name {
+                grid-area: product;
+                font-size: 1rem;
+            }
+
+            &--img {
+                grid-area: img;
+                display: flex;
+                flex-direction: column;
+                
+                img,input {
+                    margin: 0 auto;
+                    font-size: clamp(8px, 2vw, 16px);
+                    border-radius: 5px;
+                    max-width: 25vw;
+                    max-height: 12.5vw;
+                }
+            }
+
+            &--description {
+                grid-area: desc;
+                text-align: left;
+                border: 1px solid black;
+                border-radius: 10px;
+                padding: 5px;
+                resize: none;
+                width: 95%;
+                height: 90%;
+            }
+
+            &--price {
+                grid-area: price;
+                
+                h3,p {
+                    margin: 0;
+                }
+            }
+
+            &--in-stock {
+                grid-area: stock;
+            }
+
+            &--quantity {
+                grid-area: quantity;
+
+                input {
+                    font-size: clamp(8px, 2vw, 16px);
+                    width: 7.5vw;
+                }
+            }
+
+            &--submit {
+                grid-area: submit;
+
+            }
+        }
     }
 }
+
 .products {
     display: flex;
     flex-wrap: wrap;
@@ -276,7 +412,21 @@ a {
     align-items: center;
     
     &__item {
+        &--headers {
+            padding: 15px 0;
+            background-color: var(--links-color);
+            color: white;
+            display: flex;
+            word-wrap: normal;
+            font-size: clamp(8px, 3vw, 16px);
+            justify-content: space-between;
+            width: 90vw;
 
+            h4 {
+                margin: 0;
+                flex: 1;
+            }
+        }
     }
 
     .product {
@@ -296,15 +446,12 @@ a {
         &__item {
             margin: 0;
 
-            &--name {
-
-            }
-
             &--img {
                 max-height: 50%;
 
                 img {
                     max-height: 100%;
+                    max-width: 100%;
                 }
             }
 
@@ -315,79 +462,136 @@ a {
                 width: 70%;
                 -webkit-box-orient: vertical;
             }
+        }
+    }
 
-            &--price {
+    .product-row {
+        margin: 0 auto;
+        padding: 0;
+        border-radius: 2px;
+        border-bottom: 3px solid lightgray;
+        height: 10vw;
+        width: 90vw;
+        font-size: clamp(10px, 2vw, 16px);
+        background-color: white;
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(6, 15vw);
+        grid-template-rows: 1fr;
+        grid-template-areas:
+        "remove- img product stock price quantity";
+    
+        &__item {
+            margin: 0 auto;
 
+            &--remove {
+                grid-area: remove-;
+                color: darkred;
+                cursor: pointer;
+
+                &:hover {
+                    color:red;
+                }
+            }
+
+            &--img {
+                grid-area: img;
+                display: flex;
+                justify-content: center;
+                
+                img {
+                    height: 7.5vw;
+                }
+            }
+
+            &--name {
+                grid-area: product;
+
+                h3 {
+                    margin: 0;
+                    width: 15vw;
+                    word-wrap: break-word;
+                }
             }
 
             &--stock {
-
+                grid-area: stock;
             }
-        }
-        
-        .product-buttons {
-            width: 70%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
 
-            &__item {
-                border: 0;
-                padding: 0;
+            &--total {
+                grid-area: price;
+            }
 
-                &--edit {
-                    cursor: pointer;
-                }
-    
-                &--delete {
-                    color: darkred;
-                    cursor: pointer;
-                }
-    
-                &--cart-add {
-                    color: white;
-                    font-weight: bold;
-                    height: 20px;
-                    width: 20px;
-                    border-radius: 20px;
-                    background-color: green;
-                    cursor: pointer;
+            &--quantity {
+                grid-area: quantity;
 
-                    &:hover {
-                        background-color: lightgreen;
-                    }
-                }
-    
-                &--cart-reduce {
-                    color: white;
-                    font-weight: bold;
-                    height: 20px;
-                    width: 20px;
-                    border-radius: 20px;
-                    background-color: darkred;
-                    cursor: pointer;
-
-                    &:hover {
-                        background-color: red;
-                    }
-
-                }
-
-                &--cart-quantity {
-                    color: white;
-                    font-weight: bold;
-                    height: 25px;
-                    width: 25px;
-                    border-radius: 2px;
-                    background-color: orange;
-                }
-
-                &:disabled {
-                    background-color: gray;
-                    color: white;
-                    cursor: not-allowed;
+                input {
+                    font-size: clamp(8px, 2vw, 16px);
+                    width: 7.5vw;
                 }
             }
         }
     }
+
+    .total {
+        padding: 0;
+        height: 5vw;
+        background-color: var(--links-color);
+        color: white;
+        word-wrap: normal;
+
+        h3 {
+            margin: 0;
+        }
+    }
+}
+
+.product-buttons {
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &__item {
+        border: 0;
+        padding: 0;
+
+        &--info {
+            color: gray;
+
+            &:hover {
+                color: lightgray;
+            }
+        }
+
+        &--cart-add {
+            color: darkgreen;
+            cursor: pointer;
+
+            &:hover {
+                color: green;
+            }
+        }
+
+        &--cart-added {
+            color: lightgreen;
+
+            &:hover {
+                color: green;
+            }
+        }
+
+        &--delete {
+            color: darkred;
+            cursor: pointer;
+
+            &:hover {
+                color:red;
+            }
+        }
+    }
+}
+
+.hide {
+    display: none;
 }

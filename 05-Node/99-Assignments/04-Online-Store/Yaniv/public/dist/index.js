@@ -55,7 +55,7 @@ function welcome() {
                         if (isAdmin_1)
                             window.location.href = "./store.html?storeUuid=" + storeUuid_1;
                         else
-                            window.location.href = './stores.html';
+                            window.location.href = './store.html?storeUuid=mall';
                     });
                     return [3 /*break*/, 3];
                 case 2:
@@ -96,7 +96,7 @@ function login(ev) {
                             icon: "success",
                             button: "Lets go"
                         })
-                            .then(function () { window.location.href = (adminLoginForm_1) ? "./store.html?storeUuid=" + storeUuid_2 : './stores.html'; });
+                            .then(function () { window.location.href = (adminLoginForm_1) ? "./store.html?storeUuid=" + storeUuid_2 : './store.html?storeUuid=mall'; });
                     }
                     else {
                         swal({

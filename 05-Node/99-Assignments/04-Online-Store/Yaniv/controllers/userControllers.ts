@@ -47,7 +47,7 @@ export function login(req, res) { // index.html
     const { userIndex, role } = req;
 
     const users = new Users();
-    const { username, userUuid, storeUuid } = users.users[userIndex];
+    const { username, userUuid, stores } = users.users[userIndex];
 
     const roleText: string = (role === 'admin') ? 'n admin' : ' shopper';
     
@@ -56,7 +56,7 @@ export function login(req, res) { // index.html
       const currentUserToken: any = jwt.sign({ userUuid }, secret, { expiresIn: 1800 });
 
       res.cookie('currentUser', currentUserToken, { maxAge: 1800000, httpOnly: true });
-      res.send({ title: `Welcome back, ${username}!`, text: `Enjoy your visit!`, storeUuid, isLoggedIn: true});
+      res.send({ title: `Welcome back, ${username}!`, text: `Enjoy your visit!`, storeUuid: stores[0], isLoggedIn: true});
     } else res.send({ title: `${username}, you are not a${roleText}!`, text: `Please use the right login form!`, isLoggedIn: false});
 
   } catch (error) {
@@ -85,30 +85,12 @@ export const details = (req, res)=> { // all htmls except for index.html,  regis
   try {
     const userIndex: string = req.userIndex;
     const isAdmin: boolean = req.isAdmin;
-    
+        
     const users = new Users();
     const user = users.users[userIndex];
-    const { username, cart, purchased } = user;
     
-    if (!isAdmin) res.send({ username, cart, purchased });
-    else res.send({ username });
+    res.send({ user, isAdmin });
 
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(error.message);
-  }
-}
-
-export function getQuantities(req, res) { // store.html + cart.html
-  try {
-    const { userIndex } = req;
-
-    const users = new Users();
-
-    const cartProducts: Array<CartProduct> = users.users[userIndex].cart;
-
-    res.send({ messege: `got all user's cart products`, cartProducts });
 
   } catch (error) {
     console.error(error);
@@ -118,13 +100,13 @@ export function getQuantities(req, res) { // store.html + cart.html
 
 export function updateQuantity(req, res) { // store.html + cart.html
   try {
-    const { productUuid, productName, mathSign } = req.body;
+    const { productUuid, productQuantity } = req.body;
     const users = new Users();
     const { userUuid } = req;
+    const cartProducts: Array<CartProduct> = users.updateCartProductQuantity(userUuid, productUuid, productQuantity);
+    const store = new Store();
 
-    const productQuantity: number = users.updateCartProductQuantity(userUuid, productUuid, mathSign);
-
-    res.send({ message: `There are now ${productQuantity} ${productName}(s) in your cart`, productQuantity});
+    res.send({ cartProducts, storeProducts: store.products });
 
   } catch (error) {
     console.error(error);
@@ -152,10 +134,9 @@ export function deleteFromCart(req, res) { // cart.html
 export function purchaseCart(req, res) { // cart.html
   try {
     const users = new Users();
-    const { userUuid } = req.userUuid;
+    const { userIndex } = req;
 
-    users.emptyCart(userUuid);
-
+    users.emptyCart(userIndex);
 
     res.send({ title: `Cart purchase completed`, purchaseCart: true});
 

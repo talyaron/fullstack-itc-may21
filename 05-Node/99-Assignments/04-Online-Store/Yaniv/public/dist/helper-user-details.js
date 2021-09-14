@@ -34,9 +34,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var whichHtmlFile = window.location.pathname;
+var storeUuid;
 function getUserDetails() {
     return __awaiter(this, void 0, void 0, function () {
-        var userDetails, _a, username, cart, purchased, usernameElement, headerTitleElement, whichHtmlFile, aOrDivPurchased, aOrDivCart, aOrDivStores, hrefPurchased, hrefCart, hrefStores, additionalHeaderElementsHtml, error_1;
+        var userDetails, _a, user, isAdmin, error_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -44,36 +46,10 @@ function getUserDetails() {
                     return [4 /*yield*/, axios.get('/user/details')];
                 case 1:
                     userDetails = _b.sent();
-                    _a = userDetails.data, username = _a.username, cart = _a.cart, purchased = _a.purchased;
-                    usernameElement = document.querySelector('.header__item--username');
-                    usernameElement.innerText = "Logged in as " + username;
-                    headerTitleElement = document.querySelector('.header__item--h1');
-                    whichHtmlFile = window.location.pathname;
-                    aOrDivPurchased = 'a';
-                    aOrDivCart = 'a';
-                    aOrDivStores = 'a';
-                    hrefPurchased = ' href="./purchased.html"';
-                    hrefCart = ' href="./cart.html"';
-                    hrefStores = ' href="./stores.html"';
-                    switch (whichHtmlFile) {
-                        case '/purchased.html':
-                            aOrDivPurchased = 'div';
-                            hrefPurchased = '';
-                            break;
-                        case '/cart.html':
-                            aOrDivCart = 'div';
-                            hrefCart = '';
-                            break;
-                        case '/stores.html':
-                            aOrDivStores = 'div';
-                            hrefStores = '';
-                            break;
-                    }
-                    additionalHeaderElementsHtml = (!cart) ?
-                        "<div class=\"header__item header__item--add-product\" title=\"Add new product\">+</div>"
-                        :
-                            "<" + aOrDivCart + hrefCart + " class=\"header__item header__item--cart\">\n            <img id=\"cart\" src=\"./images/full-cart.png\" title=\"cart\" />\n            <div id=\"in-cart\">\n                1\n            </div>\n        </" + aOrDivCart + ">\n\n        <" + aOrDivPurchased + hrefPurchased + " class=\"header__item header__item--history\">\n            <img src=\"./images/history-cart.png\" title=\"purchase history\" />\n        </" + aOrDivPurchased + ">\n        \n        <" + aOrDivStores + hrefStores + " class=\"header__item header__item--mall\">\n            <img src=\"./images/mall.png\" title=\"all stores\" />\n        </" + aOrDivStores + ">";
-                    headerTitleElement.insertAdjacentHTML("afterend", additionalHeaderElementsHtml);
+                    _a = userDetails.data, user = _a.user, isAdmin = _a.isAdmin;
+                    if (isAdmin)
+                        storeUuid = user.stores[0];
+                    renderUserDetails(user, isAdmin);
                     return [3 /*break*/, 3];
                 case 2:
                     error_1 = _b.sent();
@@ -85,15 +61,114 @@ function getUserDetails() {
     });
 }
 getUserDetails();
+var isCartEmpty = true;
+var cartProductsToRender;
+var purchasedProductsToRender;
+function renderUserDetails(user, isAdmin) {
+    try {
+        var usernameElement = document.querySelector('.header__item--username');
+        usernameElement.innerText = "Logged in as " + user.username;
+        var additionalHeaderElementsHtml = '';
+        cartProductsToRender = user.cart;
+        purchasedProductsToRender = user.purchased;
+        if (!isAdmin) {
+            renderShopperCart(cartProductsToRender);
+            isCartEmpty = (user.cart.length === 0) ? true : false;
+        }
+        else {
+            var navBar = { store: { aOrDiv: 'a', href: " href=\"./store.html?storeUuid=" + storeUuid + "\"" } };
+            var addProductHtml = '';
+            if (whichHtmlFile === '/store.html') {
+                addProductHtml = "\n                <a href=\"#add-product-form\" class=\"header__item header__item--add-product\" title=\"Add new product\">\n                    <img src=\"./images/add-product.png\" title=\"Add new product\" />\n                </a>";
+                navBar.store.aOrDiv = 'div';
+                navBar.store.href = '';
+            }
+            additionalHeaderElementsHtml = "\n            <" + navBar.store.aOrDiv + navBar.store.href + " class=\"header__item header__item--store\">\n                <img src=\"./images/store.png\" title=\"Your store\" />\n            </" + navBar.store.aOrDiv + ">\n            " + addProductHtml;
+        }
+        var headerTitleElement = document.querySelector('.header__item--h1');
+        headerTitleElement.insertAdjacentHTML("afterend", additionalHeaderElementsHtml);
+    }
+    catch (error) {
+        console.error(error.message);
+    }
+}
+function renderShopperCart(cartProducts) {
+    try {
+        var inCartSum = cartProducts.reduce(function (previousValue, currentValue) { return previousValue + currentValue.quantity; }, 0);
+        var navBar = {
+            purchased: { aOrDiv: 'a', href: ' href="./purchased.html"' },
+            cart: { aOrDiv: 'a', href: ' href="./cart.html"' },
+            storesList: { aOrDiv: 'a', href: ' href="./stores.html"' },
+            mall: { aOrDiv: 'a', href: ' href="./store.html?storeUuid=mall"' }
+        };
+        navBar.cart.innerHTML = (inCartSum > 0) ?
+            "<img id=\"cart\" src=\"./images/full-cart.png\" title=\"Cart\" />\n        <div id=\"in-cart\">\n            " + inCartSum + "\n        </div>"
+            :
+                "<img id=\"cart\" src=\"./images/empty-cart.png\" title=\"Cart\" />";
+        switch (whichHtmlFile) {
+            case '/purchased.html':
+                navBar.purchased.aOrDiv = 'div';
+                navBar.purchased.href = '';
+                break;
+            case '/cart.html':
+                navBar.cart.aOrDiv = 'div';
+                navBar.cart.href = '';
+                break;
+            case '/stores.html':
+                navBar.storesList.aOrDiv = 'div';
+                navBar.storesList.href = '';
+                break;
+            case '/store.html':
+                navBar.mall.aOrDiv = 'div';
+                navBar.mall.href = '';
+                break;
+        }
+        var shopperHeaderElementsHtml = "<" + navBar.cart.aOrDiv + navBar.cart.href + " class=\"header__item header__item--cart\">\n            " + navBar.cart.innerHTML + "\n        </" + navBar.cart.aOrDiv + ">\n\n        <" + navBar.purchased.aOrDiv + navBar.purchased.href + " class=\"header__item header__item--history\">\n            <img src=\"./images/history-cart.png\" title=\"Purchase history\" />\n        </" + navBar.purchased.aOrDiv + ">\n        \n        <" + navBar.mall.aOrDiv + navBar.mall.href + " class=\"header__item header__item--mall\">\n            <img src=\"./images/mall.png\" title=\"Virtual mall\" />\n        </" + navBar.mall.aOrDiv + ">\n        \n        <" + navBar.storesList.aOrDiv + navBar.storesList.href + " class=\"header__item header__item--stores-list\">\n            <img src=\"./images/stores-list.png\" title=\"Stores list\" />\n        </" + navBar.storesList.aOrDiv + ">";
+        var headerCartElement = document.querySelector('.header__item--cart');
+        if (headerCartElement) {
+            headerCartElement.innerHTML = "" + navBar.cart.innerHTML;
+        }
+        else {
+            var headerTitleElement = document.querySelector('.header__item--h1');
+            headerTitleElement.insertAdjacentHTML("afterend", shopperHeaderElementsHtml);
+        }
+    }
+    catch (error) {
+        console.error(error.message);
+    }
+}
 var logoutBtn = document.querySelector('#logout');
 logoutBtn.addEventListener('click', function (ev) { return logout(ev); });
 function logout(ev) {
+    try {
+        if (isCartEmpty === true) {
+            bye();
+        }
+        else {
+            swal({
+                title: "You have items in your cart!",
+                text: "What do you wanna do?",
+                buttons: ['Logout anyway', 'Go to Cart']
+            }).then(function (willGoToCart) {
+                if (willGoToCart)
+                    window.location.href = "./cart.html";
+                else {
+                    bye();
+                }
+            });
+        }
+    }
+    catch (error) {
+        console.error(error.message);
+    }
+}
+function bye() {
     var _this = this;
     try {
         swal({
             title: "Bye!",
             text: "Hope to see you again soon!",
-            buttons: ["Stay", "Byeee"],
+            buttons: ["Mmm... Stay", "Byeee"],
             dangerMode: true
         }).then(function (willLogout) { return __awaiter(_this, void 0, void 0, function () {
             var doLogout, username;
@@ -118,4 +193,10 @@ function logout(ev) {
     catch (error) {
         console.error(error.message);
     }
+}
+var asyncScripts = document.getElementsByClassName('async-script');
+for (var _i = 0, asyncScripts_1 = asyncScripts; _i < asyncScripts_1.length; _i++) {
+    var asyncScript = asyncScripts_1[_i];
+    asyncScript.setAttribute('src', asyncScript.getAttribute('data-src'));
+    asyncScript.removeAttribute('data-src');
 }

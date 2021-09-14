@@ -1,0 +1,21 @@
+{
+  "name": "examen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.dev.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "fluent-json-schema": "^3.0.1",
+    "jwt-simple": "^0.5.6",
+    "uuidv4": "^6.2.12"
+  }
+}

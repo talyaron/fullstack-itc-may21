@@ -32,7 +32,7 @@ const findUsersBySearchTerm = (serachTerm: string) => {
 
 const usersSearchForm: HTMLFormElement = document.querySelector('#search-users-form');
 usersSearchForm.addEventListener('submit', handleSubmit);
-
+console.log(typeof usersSearchForm);
 function handleSubmit(ev: any) {
     try {  
         ev.preventDefault();
