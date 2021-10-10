@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 4000;
 app.use(express.json());
 app.use(express.static('public'));
 var publicUsersRoute = require('./routes/publicUsersRoute');
